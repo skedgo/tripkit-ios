@@ -152,19 +152,8 @@ extension TKSegment: TKUISemaphoreDisplayable {
         return .headOnly
       }
     } else {
-      if let time = departureTime {
-        return .headWithTime(time, timeZone, isRealTime: timesAreRealTime)
-      } else {
-        // A segment might lose its trip, if the trip since got updated with
-        // real-time information and the segments got rebuild
-        assert(trip == nil, "Segment has a trip but no time: \(self)")
-        return .headOnly
-      }
+      return .headWithTime(departureTime, timeZone, isRealTime: timesAreRealTime)
     }
-  }
-  
-  public var bearing: NSNumber? {
-    return template?.bearing
   }
   
   public var canFlipImage: Bool {

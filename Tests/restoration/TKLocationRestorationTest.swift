@@ -14,14 +14,14 @@ import CoreLocation
 
 class TKLocationRestorationTest: XCTestCase {
     
-  func testRestoringNamedCoordinate() {
+  func testRestoringNamedCoordinate() throws {
     let namedCoordinate = TKNamedCoordinate(latitude: 10, longitude: 10, name: "Name", address: "Address")
     
-    let archiver = NSKeyedArchiver()
-    archiver.encode(namedCoordinate)
+    let archiver = NSKeyedArchiver(requiringSecureCoding: true)
+    archiver.encode(namedCoordinate, forKey: "test")
     
-    let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
-    let restored = unarchiver.decodeObject() as? TKNamedCoordinate
+    let unarchiver = try NSKeyedUnarchiver(forReadingFrom: archiver.encodedData)
+    let restored = unarchiver.decodeObject(of: TKNamedCoordinate.self, forKey: "test")
     XCTAssertNotNil(restored)
     XCTAssertEqual(restored?.coordinate.latitude, namedCoordinate.coordinate.latitude)
     XCTAssertEqual(restored?.coordinate.longitude, namedCoordinate.coordinate.longitude)
@@ -53,18 +53,18 @@ class TKLocationRestorationTest: XCTestCase {
       ]
     )
     
-    let archiver = NSKeyedArchiver()
-    archiver.encode(stop)
+    let archiver = NSKeyedArchiver(requiringSecureCoding: true)
+    archiver.encode(stop, forKey: "stop")
     
-    let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
-    let restored = unarchiver.decodeObject() as? TKStopCoordinate
+    let unarchiver = try NSKeyedUnarchiver(forReadingFrom: archiver.encodedData)
+    let restored = unarchiver.decodeObject(of: TKStopCoordinate.self, forKey: "stop")
     XCTAssertNotNil(restored)
     XCTAssertEqual(restored?.coordinate.latitude, stop.coordinate.latitude)
     XCTAssertEqual(restored?.coordinate.longitude, stop.coordinate.longitude)
     XCTAssertEqual(restored?.name, stop.name)
     XCTAssertEqual(restored?.address, stop.address)
     XCTAssertEqual(restored?.stopCode, stop.stopCode)
-    XCTAssertEqual(restored?.stopModeInfo.identifier, stop.stopModeInfo.identifier)
+    XCTAssertEqual(restored?.stopModeInfo, stop.stopModeInfo)
   }
   
   func testRestoringCarPod() throws {
@@ -110,22 +110,22 @@ class TKLocationRestorationTest: XCTestCase {
       ]
     )
     
-    let archiver = NSKeyedArchiver()
-    archiver.encode(pod)
+    let archiver = NSKeyedArchiver(requiringSecureCoding: true)
+    archiver.encode(pod, forKey: "pod")
     
-    let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
-    let restored = unarchiver.decodeObject() as? TKCarPodLocation
+    let unarchiver = try NSKeyedUnarchiver(forReadingFrom: archiver.encodedData)
+    let restored = unarchiver.decodeObject(of: TKCarPodLocation.self, forKey: "pod")
     XCTAssertNotNil(restored)
     XCTAssertEqual(restored?.coordinate.latitude, pod.coordinate.latitude)
     XCTAssertEqual(restored?.coordinate.longitude, pod.coordinate.longitude)
     XCTAssertEqual(restored?.name, pod.name)
     XCTAssertEqual(restored?.address, pod.address)
-    XCTAssertEqual(restored?.stopModeInfo.identifier, pod.stopModeInfo.identifier)
-    XCTAssertEqual(restored?.carPod.operatorInfo.name, pod.carPod.operatorInfo.name)
+    XCTAssertEqual(restored?.stopModeInfo, pod.stopModeInfo)
+    XCTAssertEqual(restored?.carPod, pod.carPod)
   }
   
   func testRestoringCarPark() throws {
-    let park = try! JSONDecoder().decode(TKCarParkLocation.self, withJSONObject: [
+    let park = try JSONDecoder().decode(TKCarParkLocation.self, withJSONObject: [
       "address": "Park Street & Pitt Street",
       "carPark": [
         "identifier": "CAR_PARK_20827842",
@@ -292,22 +292,17 @@ class TKLocationRestorationTest: XCTestCase {
       ]
     )
     
-    let archiver = NSKeyedArchiver()
-    archiver.encode(park)
+    let archiver = NSKeyedArchiver(requiringSecureCoding: true)
+    archiver.encode(park, forKey: "carpark")
     
-    let unarchiver = NSKeyedUnarchiver(forReadingWith: archiver.encodedData)
-    let restored = unarchiver.decodeObject() as? TKCarParkLocation
+    let unarchiver = try NSKeyedUnarchiver(forReadingFrom: archiver.encodedData)
+    let restored = unarchiver.decodeObject(of: TKCarParkLocation.self, forKey: "carpark")
     XCTAssertNotNil(restored)
     XCTAssertEqual(restored?.coordinate.latitude, park.coordinate.latitude)
     XCTAssertEqual(restored?.coordinate.longitude, park.coordinate.longitude)
     XCTAssertEqual(restored?.name, park.name)
     XCTAssertEqual(restored?.address, park.address)
-    XCTAssertEqual(restored?.stopModeInfo.identifier, park.stopModeInfo.identifier)
-    XCTAssertNotNil(restored?.carPark.pricingTables)
-    XCTAssertEqual(restored?.carPark.pricingTables?.count, park.carPark.pricingTables?.count)
-    XCTAssertEqual(restored?.carPark.pricingTables?.first?.entries.count, park.carPark.pricingTables?.first?.entries.count)
-    XCTAssertNotNil(restored?.carPark.openingHours)
-    XCTAssertNotNil(restored?.carPark.operatorInfo)
-    XCTAssertEqual(restored?.carPark.operatorInfo?.name, park.carPark.operatorInfo?.name)
+    XCTAssertEqual(restored?.stopModeInfo, park.stopModeInfo)
+    XCTAssertEqual(restored?.carPark, park.carPark)
   }
 }

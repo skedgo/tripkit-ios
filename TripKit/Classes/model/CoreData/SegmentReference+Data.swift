@@ -1,74 +1,122 @@
 //
-//  TKSegment+Data.swift
+//  SegmentReference+Data.swift
 //  TripKit
 //
-//  Created by Adrian Schönig on 13.07.20.
+//  Created by Adrian Schönig on 14.07.20.
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
 import Foundation
 
+extension SegmentReference: DataAttachable {}
+
+public struct BookingData: Codable, Hashable {
+  let title: String
+  
+  /// For in-app bookings using booking flow
+  let url: URL?
+  
+  /// For in-app quick bookings
+  let quickBookingsUrl: URL?
+
+  /// For in-app bookings follow-up
+  public var confirmation: TKBooking.Confirmation?
+
+  /// For bookings using external apps
+  let externalActions: [String]?
+}
+
 extension SegmentReference {
-  func decode<T>(_ type: T.Type, key: String) -> T? where T : Decodable {
-    do {
-      guard let data = dataDictionary[key] as? Data else { return nil }
-      return try JSONDecoder().decode(type, from: data)
-    } catch {
-      TKLog.info(#file) { "Decoding of \(key) failed due to: \(error)." }
-      return nil
-    }
+
+  public var bookingData: BookingData? {
+    get { decode(BookingData.self, key: "booking") }
+    set { encode(newValue, key: "booking") }
+  }
+
+  public var arrivalPlatform: String? {
+    get { decodePrimitive(String.self, key: "arrivalPlatform") }
+    set { encodePrimitive(newValue, key: "arrivalPlatform") }
+  }
+
+  public var departurePlatform: String? {
+    get { decodePrimitive(String.self, key: "departurePlatform") }
+    set { encodePrimitive(newValue, key: "departurePlatform") }
   }
   
-  func encode<T>(_ value: T, key: String) where T : Encodable {
-    do {
-      let data = dataDictionary
-      let ticketData = try JSONEncoder().encode(value)
-      data[key] = ticketData
-      self.dataDictionary = data
-    } catch {
-      TKLog.info(#file) { "Encoding of \(value) to \(key) failed due to: \(error)." }
-    }
+  var serviceStops: Int? {
+    get { decodePrimitive(Int.self, key: "serviceStops") }
+    set { encodePrimitive(newValue, key: "serviceStops") }
   }
 
-  private var dataDictionary: NSMutableDictionary {
-    get {
-      guard let data = self.data as? Data else { return NSMutableDictionary() }
+  public var sharedVehicleData: NSDictionary? {
+    get { decodeCoding(NSDictionary.self, key: "sharedVehicle") }
+    set { encodeCoding(newValue, key: "sharedVehicle") }
+  }
 
-      let dictionary: NSDictionary?
-      if #available(iOS 11.0, *) {
-        do {
-          // We have to include `NSArray` here, but not sure why; the result will
-          // definitely be a dictionary, but if we don't include it, this will
-          // fail with an error.
-          dictionary = try NSKeyedUnarchiver.unarchivedObject(ofClasses:
-            [
-              NSDictionary.self,
-              NSArray.self,
-              NSDate.self // timetable start + end date
-            ]
-            , from: data) as? NSDictionary
-        } catch {
-          TKLog.info(#file) { "Decoding new data failed due to: \(error). Data: \(String(decoding: data, as: UTF8.self))" }
-          return NSMutableDictionary()
-        }
-      } else {
-        dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSDictionary
-      }
-      
-      return dictionary.map(NSMutableDictionary.init(dictionary:)) ?? NSMutableDictionary()
+  public var ticket: TKSegment.Ticket? {
+    get { decode(TKSegment.Ticket.self, key: "ticket") }
+    set { encode(newValue, key: "ticket") }
+  }
+
+  public var ticketWebsiteURLString: String? {
+    get { decodePrimitive(String.self, key: "ticketWebsiteURL") }
+    set { encodePrimitive(newValue, key: "ticketWebsiteURL") }
+  }
+
+  public var timetableEndTime: Date? {
+    get { decodePrimitive(Date.self, key: "timetableEndTime") }
+    set { encodePrimitive(newValue, key: "timetableEndTime") }
+  }
+
+  public var timetableStartTime: Date? {
+    get { decodePrimitive(Date.self, key: "timetableStartTime") }
+    set { encodePrimitive(newValue, key: "timetableStartTime") }
+  }
+
+  @objc public var vehicleUUID: String? {
+    get { decodePrimitive(String.self, key: "vehicleUUID") }
+    set { encodePrimitive(newValue, key: "vehicleUUID") }
+  }
+}
+
+extension SegmentReference {
+  /// :nodoc:
+  @objc(_populateFromDictionary:)
+  public func populate(from dict: [String: AnyHashable]) {
+    // Public transport
+    arrivalPlatform = dict["endPlatform"] as? String
+    departurePlatform = dict["platform"] as? String
+    serviceStops = (dict["stops"] as? NSNumber)?.intValue
+    ticketWebsiteURLString = dict["ticketWebsiteURL"] as? String
+    if let ticketDict = dict["ticket"] as? [String: AnyHashable] {
+      ticket = try? JSONDecoder().decode(TKSegment.Ticket.self, withJSONObject: ticketDict)
+    }
+    if let start = dict["timetableStartTime"] as? TimeInterval {
+      timetableStartTime = Date(timeIntervalSince1970: start)
+    }
+    if let end = dict["timetableEndTime"] as? TimeInterval {
+      timetableEndTime = Date(timeIntervalSince1970: end)
     }
     
-    set {
-      if #available(iOS 11.0, *) {
-        do {
-          self.data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
-        } catch {
-          TKLog.info(#file) { "Encoding new data failed due to: \(error). Dict: \(newValue)" }
-        }
-        
-      } else {
-        self.data = NSKeyedArchiver.archivedData(withRootObject: newValue)
+    // Private transport
+    sharedVehicleData = dict["sharedVehicle"] as? NSDictionary
+    vehicleUUID = dict["vehicleUUID"] as? String
+    
+    // Special booking handling to not lose data
+    if let bookingDict = dict["booking"] as? [String: AnyHashable] {
+      do {
+        bookingData = try JSONDecoder().decode(BookingData.self, withJSONObject: bookingDict)
+      } catch {
+        TKLog.warn(#file, text: "Could not load booking data: \(error)")
+      }
+    }
+    
+    // What is this even used for?
+    if let payloads = dict["payloads"] as? [String: NSDictionary] {
+      for payload in payloads {
+        encodeCoding(payload.value, key: payload.key)
       }
     }
   }
+
 }

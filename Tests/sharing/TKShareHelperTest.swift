@@ -26,7 +26,7 @@ class TKShareHelperTest: XCTestCase {
   
   func testQueryUrlWithW3W() throws {
     guard let geocoder = geocoder else {
-      XCTFail("Could not construct TKSkedGoGeocoder. Check environment variables.")
+      try XCTSkipIf(true, "Could not construct TKSkedGoGeocoder. Check environment variables.")
       return
     }
 

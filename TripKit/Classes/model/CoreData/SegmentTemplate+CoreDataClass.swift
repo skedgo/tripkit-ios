@@ -18,10 +18,6 @@ import MapKit
 /// :nodoc:
 @objc(SegmentTemplate)
 public class SegmentTemplate: NSManagedObject {
-
-  // To not recreate this all the time
-  private var _segmentTemplateData: SegmentTemplateData?
-
 }
 
 // MARK: - Retrieving
@@ -116,90 +112,6 @@ extension SegmentTemplate {
     return TKTransportModes.modeIdentifierIsFlight(modeIdentifier)
   }
   
-}
-
-// MARK: - Computed properties (from data)
-
-struct SegmentTemplateData: Codable {
-  
-  var localCost: TKLocalCost? = nil
-  var mapTiles: TKMapTiles? = nil
-  var miniInstruction: TKMiniInstruction? = nil
-  var modeInfo: TKModeInfo? = nil
-  var turnByTurnMode: TKTurnByTurnMode? = nil
-  
-  static func from(data: Data) -> SegmentTemplateData {
-    do {
-      // The new way
-      return try JSONDecoder().decode(SegmentTemplateData.self, from: data)
-    } catch {
-      // The old way
-      var templateData = SegmentTemplateData()
-      if let dict = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: NSCoding] {
-        templateData.modeInfo = dict["modeInfo"] as? TKModeInfo
-      } else {
-        assertionFailure("Unexpected data: \(data). Error: \(error)")
-      }
-      return templateData
-    }
-  }
-}
-
-extension SegmentTemplate {
-  
-  public var localCost: TKLocalCost? {
-    get { return segmentTemplateData.localCost }
-    set { edit { $0.localCost = newValue } }
-  }
-  
-  /// The preferred map-tiles to use for this segment. `nil` if default.
-  public var mapTiles: TKMapTiles? {
-    get { return segmentTemplateData.mapTiles }
-    set { edit { $0.mapTiles = newValue} }
-  }
-  
-  var miniInstruction: TKMiniInstruction? {
-    get { return segmentTemplateData.miniInstruction }
-    set { edit { $0.miniInstruction = newValue} }
-  }
-  
-  @objc public var modeInfo: TKModeInfo? {
-    get { return segmentTemplateData.modeInfo }
-    set { edit { $0.modeInfo = newValue} }
-  }
-  
-  public var turnByTurnMode: TKTurnByTurnMode? {
-    get { return segmentTemplateData.turnByTurnMode }
-    set { edit { $0.turnByTurnMode = newValue} }
-  }
-  
-  private func edit(_ mutator: (inout SegmentTemplateData) -> Void) {
-    var data = segmentTemplateData
-    mutator(&data)
-    segmentTemplateData = data
-  }
-  
-  private var segmentTemplateData: SegmentTemplateData {
-    get {
-      if let cached = _segmentTemplateData {
-        return cached
-      } else if let data = data as? Data {
-        let parsed = SegmentTemplateData.from(data: data)
-        _segmentTemplateData = parsed
-        return parsed
-      } else {
-        return SegmentTemplateData()
-      }
-    }
-    set {
-      do {
-        _segmentTemplateData = nil
-        data = try JSONEncoder().encode(newValue) as NSObject
-      } catch {
-        data = nil
-      }
-    }
-  }
 }
 
 // MARK: - Computed properties (from flags)

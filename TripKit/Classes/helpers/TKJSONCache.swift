@@ -20,9 +20,17 @@ public class TKJSONCache: TKFileCache {
   }
   
   @objc public static func read(_ id: String, directory: TKFileCacheDirectory, subdirectory: String?) -> [String: Any]? {
-    if let data = TKFileCache.read(id, directory: directory, subdirectory: subdirectory) {
-      return NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: AnyObject]
-    } else {
+    guard let data = TKFileCache.read(id, directory: directory, subdirectory: subdirectory) else { return nil }
+    
+    do {
+      return try NSKeyedUnarchiver.unarchivedObject(ofClasses: [
+        NSArray.self,
+        NSDictionary.self,
+        NSDate.self,
+      ], from: data) as? [String: AnyObject]
+    
+    } catch {
+      assertionFailure("Error while reading: \(error)")
       return nil
     }
   }
@@ -32,8 +40,12 @@ public class TKJSONCache: TKFileCache {
   }
   
   @objc public static func save(_ id: String, dictionary: [String: Any], directory: TKFileCacheDirectory, subdirectory: String?) {
-    let data = NSKeyedArchiver.archivedData(withRootObject: dictionary)
-    TKFileCache.save(id, data: data, directory: directory, subdirectory: subdirectory)
+    do {
+      let data = try NSKeyedArchiver.archivedData(withRootObject: dictionary, requiringSecureCoding: false)
+      TKFileCache.save(id, data: data, directory: directory, subdirectory: subdirectory)
+    } catch {
+      assertionFailure("Error while saving: \(error)")
+    }
   }
 }
 

@@ -30,28 +30,18 @@ class TKMiniInstruction: NSObject, Codable, NSSecureCoding {
   
   @objc(encodeWithCoder:)
   func encode(with aCoder: NSCoder) {
-    guard let data = try? JSONEncoder().encode(self) else { return }
-    aCoder.encode(data)
+    aCoder.encode(instruction, forKey: "instruction")
+    aCoder.encode(detail, forKey: "detail")
   }
   
   @objc
   required init?(coder aDecoder: NSCoder) {
-    if let data = aDecoder.decodeData() {
-      // The new way
-      do {
-        let decoded = try JSONDecoder().decode(TKMiniInstruction.self, from: data)
-        instruction = decoded.instruction
-        detail = decoded.detail
-      } catch {
-        assertionFailure("Couldn't decode due to: \(error)")
-        return nil
-      }
-      
-    } else {
-      // For backwards compatibility
-      instruction = (aDecoder.decodeObject(forKey: "instruction") as? String) ?? ""
-      detail = aDecoder.decodeObject(forKey: "detail") as? String
+    guard let instruction = aDecoder.decodeObject(of: NSString.self, forKey: "instruction") as String? else {
+      assertionFailure()
+      return nil
     }
+    self.instruction = instruction
+    detail = aDecoder.decodeObject(of: NSString.self, forKey: "detail") as String?
   }
 
 }

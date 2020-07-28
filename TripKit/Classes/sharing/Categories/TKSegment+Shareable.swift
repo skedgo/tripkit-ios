@@ -13,10 +13,10 @@ extension TKSegment: TKURLShareable {
     get {
       let isEnd = self.order == .end
       guard
-        let coordinate = isEnd ? end?.coordinate : start?.coordinate,
-        let time = isEnd ? arrivalTime : departureTime
+        let coordinate = isEnd ? end?.coordinate : start?.coordinate
         else { return nil }
       
+      let time = isEnd ? arrivalTime : departureTime
       return TKShareHelper.createMeetURL(coordinate: coordinate, at: time)
     }
   }

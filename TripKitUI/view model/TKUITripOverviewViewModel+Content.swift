@@ -100,12 +100,12 @@ extension TKUITripOverviewViewModel {
   
   struct AlertItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.AlertItem, rhs: TKUITripOverviewViewModel.AlertItem) -> Bool {
-      return lhs.segment.alerts() == rhs.segment.alerts()
+      return lhs.segment.alerts == rhs.segment.alerts
     }
     
     var isCritical: Bool { alerts.first?.isCritical() ?? false }
     var connection: Line? = nil
-    var alerts: [Alert] { segment.alerts() }
+    var alerts: [Alert] { segment.alerts }
     
     fileprivate let segment: TKSegment
   }
@@ -177,7 +177,7 @@ extension TKUITripOverviewViewModel {
       } else if let next = next, !next.isStationary {
         var items: [TKUITripOverviewViewModel.Item] = [.moving(segment.toMoving())]
         
-        if !segment.alerts().isEmpty {
+        if !segment.alerts.isEmpty {
           items.append(.alert(segment.toAlert()))
         }
         if segment.isCanceled {
@@ -190,7 +190,7 @@ extension TKUITripOverviewViewModel {
       } else {
         var items: [TKUITripOverviewViewModel.Item] = [.moving(segment.toMoving())]
         
-        if !segment.alerts().isEmpty {
+        if !segment.alerts.isEmpty {
           items.append(.alert(segment.toAlert()))
         }
         if segment.isCanceled {
@@ -249,12 +249,12 @@ fileprivate extension TKSegment {
   
   var departureTimeInfo: TKUITripOverviewViewModel.TimeInfo? {
     guard type == .scheduled else { return nil }
-    return departureTime.flatMap { TKUITripOverviewViewModel.TimeInfo(actualTime: $0, timetableTime: self.scheduledTimetableStartTime) }
+    return TKUITripOverviewViewModel.TimeInfo(actualTime: departureTime, timetableTime: self.scheduledTimetableStartTime)
   }
   
   var arrivalTimeInfo: TKUITripOverviewViewModel.TimeInfo? {
     guard type == .scheduled else { return nil }
-    return arrivalTime.flatMap { TKUITripOverviewViewModel.TimeInfo(actualTime: $0, timetableTime: self.scheduledTimetableEndTime) }
+    return TKUITripOverviewViewModel.TimeInfo(actualTime: arrivalTime, timetableTime: self.scheduledTimetableEndTime)
   }
   
   func toTerminal(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.TerminalItem {
@@ -262,7 +262,7 @@ fileprivate extension TKSegment {
     let subtitle = platformInfo(previous: previous, next: next)
     
     return TKUITripOverviewViewModel.TerminalItem(
-      title: titleWithoutTime,
+      title: titleWithoutTime ?? "",
       subtitle: subtitle,
       time: isStart ? next?.departureTimeInfo : previous?.arrivalTimeInfo,
       timeZone: timeZone,
@@ -278,7 +278,7 @@ fileprivate extension TKSegment {
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
     assert(isStationary)
     
-    var subtitle = titleWithoutTime.trimmingCharacters(in: .whitespacesAndNewlines)
+    var subtitle = titleWithoutTime?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
     if stationaryType == .transfer {
       subtitle = "" // this is the departure, so ignore the "wait" information
     } else if stationaryType == .wait {
@@ -352,7 +352,7 @@ fileprivate extension TKSegment {
     
     let tripSegment = self as TKTripSegment
     return TKUITripOverviewViewModel.MovingItem(
-      title: titleWithoutTime,
+      title: titleWithoutTime ?? "",
       notes: notesWithoutPlatforms,
       icon: isContinuation ? nil : tripSegment.tripSegmentModeImage,
       iconURL: isContinuation ? nil : tripSegment.tripSegmentModeImageURL,

@@ -31,28 +31,22 @@ extension TKContactsManager: TKAutocompleting {
   }
   
   private static func geocode(_ contact: ContactAddress) -> Single<TKNamedCoordinate> {
-    if #available(iOS 11.0, *) {
-      return Single.create { subscriber in
-        var geocoder: CLGeocoder! = CLGeocoder()
-        geocoder!.geocodePostalAddress(contact.postalAddress) { placemarks, error in
-          if let match = placemarks?.first {
-            let result = TKNamedCoordinate(placemark: match)
-            result.name = contact.locationName
-            subscriber(.success(result))
-          } else {
-            subscriber(.error(error ?? TKGeocoderHelper.errorForNoLocationFound(forInput: contact.address)))
-          }
-        }
-        return Disposables.create {
-          geocoder = nil
+    return Single.create { subscriber in
+      var geocoder: CLGeocoder! = CLGeocoder()
+      geocoder!.geocodePostalAddress(contact.postalAddress) { placemarks, error in
+        if let match = placemarks?.first {
+          let result = TKNamedCoordinate(placemark: match)
+          result.name = contact.locationName
+          subscriber(.success(result))
+        } else {
+          subscriber(.error(error ?? TKGeocoderHelper.errorForNoLocationFound(forInput: contact.address)))
         }
       }
-    } else {
-      let named = TKNamedCoordinate(name: contact.name, address: contact.address)
-      return TKGeocoderHelper.geocodeUsingPreferredGeocoder(named, near: .world).map { _ in named }
+      return Disposables.create {
+        geocoder = nil
+      }
     }
   }
-  
 }
 
 extension TKContactsManager.ContactAddress {

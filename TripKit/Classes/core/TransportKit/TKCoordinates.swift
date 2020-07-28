@@ -47,6 +47,8 @@ open class TKModeCoordinate: TKNamedCoordinate {
     _stopModeInfo = modeInfo
   }
   
+  @objc public class override var supportsSecureCoding: Bool { return true }
+  
   public required init(from decoder: Decoder) throws {
     try super.init(from: decoder)
     isDraggable = false
@@ -59,7 +61,7 @@ open class TKModeCoordinate: TKNamedCoordinate {
     assert(!stopModeInfo.alt.isEmpty)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
+  @objc public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -99,6 +101,8 @@ public class TKStopCoordinate: TKModeCoordinate {
     case popularity
   }
   
+  @objc public class override var supportsSecureCoding: Bool { return true }
+
   public required init(from decoder: Decoder) throws {
     try super.init(from: decoder)
     isDraggable = false
@@ -113,7 +117,7 @@ public class TKStopCoordinate: TKModeCoordinate {
     }
   }
   
-  public required init?(coder aDecoder: NSCoder) {
+  @objc public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   

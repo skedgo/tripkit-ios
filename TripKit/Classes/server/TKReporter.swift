@@ -159,7 +159,7 @@ extension TKSegment {
     
     return [
       "mode": mode,
-      "duration": duration(true)
+      "duration": duration(includingContinuation: true)
     ]
     
   }

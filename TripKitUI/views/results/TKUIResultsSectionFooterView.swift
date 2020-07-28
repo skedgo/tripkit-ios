@@ -56,11 +56,7 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     contentView.addSubview(costLabel)
     
     let button = UIButton(type: .system)
-    if #available(iOS 11.0, *) {
-      button.contentHorizontalAlignment = .trailing
-    } else {
-      button.contentHorizontalAlignment = .right
-    }
+    button.contentHorizontalAlignment = .trailing
     button.setTitle("", for: .normal)
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
     button.tintColor = .tkAppTintColor
