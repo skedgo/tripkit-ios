@@ -228,7 +228,9 @@ public class TKUITripOverviewCard: TGTableCard {
     }
     
     TKUIEventCallback.handler(.cardAppeared(self))
-    TKUIEventCallback.handler(.tripSelected(trip))
+    if let controller = self.controller {
+      TKUIEventCallback.handler(.tripSelected(trip, controller: controller))
+    }
   }
   
   public override func willDisappear(animated: Bool) {

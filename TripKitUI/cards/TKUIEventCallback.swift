@@ -31,7 +31,10 @@ public struct TKUIEventCallback {
     case screenAppeared(name: String, controller: UIViewController)
     
     /// Fires whenever the details of a trip are viewed
-    case tripSelected(Trip)
+    case tripSelected(Trip, controller: TGCardViewController)
+
+    /// Fires whenever the routing results were requested and finished loading
+    case routesLoaded(TripRequest, controller: TGCardViewController)
   }
   
   private init() {}
