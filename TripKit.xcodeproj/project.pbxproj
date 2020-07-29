@@ -236,6 +236,8 @@
 		3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */; };
 		3A77B74E22F8815D0082CCAF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A77B74C22F8815D0082CCAF /* InfoPlist.strings */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
+		3A79AFF224D1C4C7008C165A /* TKTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFF124D1C4C7008C165A /* TKTimetable.swift */; };
+		3A79AFF324D1C4C7008C165A /* TKTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFF124D1C4C7008C165A /* TKTimetable.swift */; };
 		3A7C28702243E02000DA3567 /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
@@ -1136,6 +1138,7 @@
 		3A78EFC422E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		3A78EFC522E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A78EFC622E85D1500018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Shared.strings; sourceTree = "<group>"; };
+		3A79AFF124D1C4C7008C165A /* TKTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTimetable.swift; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+ToggleModes.swift"; sourceTree = "<group>"; };
@@ -2262,6 +2265,7 @@
 				3A656C4D24C9D7110027E9A6 /* TKSegment+TKTripSegment.swift */,
 				3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */,
 				3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */,
+				3A79AFF124D1C4C7008C165A /* TKTimetable.swift */,
 				3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */,
 				3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */,
 				3A462CC02076218A00AF41EF /* TKTurnByTurnMode.swift */,
@@ -3351,6 +3355,7 @@
 				3ABBDA282032132400205042 /* TKQuickBookingHelper.swift in Sources */,
 				3A73A489244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */,
 				3ABBDAC92032135400205042 /* TKCrossPlatform.swift in Sources */,
+				3A79AFF324D1C4C7008C165A /* TKTimetable.swift in Sources */,
 				3ABBDA942032134900205042 /* CLLocation+DecodePolylineString.m in Sources */,
 				3ABBDABD2032135400205042 /* TKNamedCoordinate.swift in Sources */,
 				3ABBDA602032132D00205042 /* TKDLSTable.swift in Sources */,
@@ -3838,6 +3843,7 @@
 				3AFFADFC1F069DAB00147990 /* StopVisits.swift in Sources */,
 				3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */,
 				3A5D1B5024BDE299001B1E77 /* DataAttachable.swift in Sources */,
+				3A79AFF224D1C4C7008C165A /* TKTimetable.swift in Sources */,
 				3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */,
 				3A8F61211F190CE80017ACDA /* TKLocationManager.swift in Sources */,
 				3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */,

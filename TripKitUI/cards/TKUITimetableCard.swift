@@ -348,6 +348,9 @@ public class TKUITimetableCard : TGTableCard {
     super.didAppear(animated: animated)
     
     TKUIEventCallback.handler(.cardAppeared(self))
+    if let controller = controller, let timetable = viewModel.timetable {
+      TKUIEventCallback.handler(.timetableSelected(timetable, controller: controller))
+    }
   }
   
   public override func willDisappear(animated: Bool) {

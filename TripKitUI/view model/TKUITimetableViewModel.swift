@@ -52,6 +52,10 @@ public class TKUITimetableViewModel: NSObject {
   }
   
   private init(data: DataInput, input: UIInput?) {
+    let candidateTimetable = TKTimetable(dataInput: data)
+    assert(candidateTimetable != nil, "Non-sense input provided.")
+    self.timetable = candidateTimetable
+
     departureStops = data.stops ?? []
     startDate = data.startDate
     restorationState = RestorableState(dataInput: data)
@@ -106,6 +110,8 @@ public class TKUITimetableViewModel: NSObject {
     
     next = Signal.merge(showDepartures ?? .empty(), showAlerts ?? .empty())
   }
+  
+  public let timetable: TKTimetable?
   
   public let departureStops: [TKUIStopAnnotation]
   
@@ -188,6 +194,33 @@ extension TKUITimetableViewModel {
   
 }
 
+fileprivate extension TKTimetable {
+  init?(dataInput: TKUITimetableViewModel.DataInput) {
+    let startRegion: TKRegion?
+    let type: TKTimetable.TimetableType
+    let title: String?
+    if let stops = dataInput.stops, let first = stops.first {
+      startRegion = TKRegionManager.shared.localRegions(containing: first.coordinate).first
+      if stops.count == 1 {
+        title = (first.title ?? nil)
+        type = .departures(stopCode: first.stopCode)
+      } else {
+        title = nil
+        type = .multipleDepartures(stopCodes: stops.map(\.stopCode))
+      }
+    } else if let dls = dataInput.dlsTable {
+      title = nil
+      type = .stopToStop(startStopCode: dls.startStopCode, endStopCode: dls.endStopCode, endRegion: dls.endRegion)
+      startRegion = dls.startRegion
+    } else {
+      return nil
+    }
+    guard let region = startRegion else { return nil }
+    
+    self.init(title: title ?? Loc.Timetable, type: type, region: region)
+  }
+}
+
 // MARK: - Input conversion
 
 extension TKUITimetableViewModel {
@@ -239,56 +272,6 @@ extension StopLocation {
     }
   }
   
-}
-
-
-// MARK: - User activity
-
-extension TKUITimetableViewModel {
-  static let typeIdentifier = "com.buzzhives.TripPlanner.showStopTimeTable"
-  
-  private func urlForUserActivity() -> URL? {
-    guard
-      TKShareHelper.enableSharingOfURLs,
-      let stop = restorationState?.stops?.first, // minor hack
-      let region = stop.regions.first
-      else { return nil } // minor hack
-    
-    return TKShareHelper.createStopURL(stopCode: stop.stopCode, inRegionNamed: region.name, filter: nil)
-  }
-
-  public func updateUserActivityState(_ activity: NSUserActivity) {
-    guard let url = urlForUserActivity() else { return }
-    activity.addUserInfoEntries(from: ["stopTimeTableURL": url])
-  }
-  
-  public func buildUserActivity() -> NSUserActivity? {
-    guard
-      let stop = restorationState?.stops?.first, // minor hack
-      let url = urlForUserActivity()
-      else { return nil }
-    
-    let title = stop.title ?? Loc.Timetable
-
-    let activity = NSUserActivity(activityType: TKUITimetableViewModel.typeIdentifier)
-    activity.title = title
-    activity.webpageURL = url
-    activity.userInfo = ["stopTimeTableURL": url]
-    activity.requiredUserInfoKeys = ["stopTimeTableURL"]
-
-    let attributeSet = CSSearchableItemAttributeSet(itemContentType: TKUITimetableViewModel.typeIdentifier)
-    attributeSet.title = title
-    if let image = stop.glyphImage {
-      attributeSet.thumbnailData = image.pngData()
-    }
-    activity.contentAttributeSet = attributeSet
-    
-    activity.isEligibleForSearch = true
-    activity.isEligibleForHandoff = true
-    activity.isEligibleForPublicIndexing = true
-    
-    return activity
-  }
 }
 
 // MARK: - State restoration

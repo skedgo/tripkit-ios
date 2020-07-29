@@ -35,6 +35,9 @@ public struct TKUIEventCallback {
 
     /// Fires whenever the routing results were requested and finished loading
     case routesLoaded(TripRequest, controller: TGCardViewController)
+    
+    /// Fires when a timetable is viewed
+    case timetableSelected(TKTimetable, controller: TGCardViewController)
   }
   
   private init() {}
