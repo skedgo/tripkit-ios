@@ -57,7 +57,7 @@
                              @"region"						: region.name,
                              @"serviceTripID"	    : service.code,
                              @"operator"	        : operatorName,
-                             @"embarkationDate"	  : @([date timeIntervalSince1970]),
+                             @"embarkationDate"	  : @((int) [date timeIntervalSince1970]),
                              @"encode"						: @(YES)
                              };
      

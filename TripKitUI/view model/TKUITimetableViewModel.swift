@@ -196,6 +196,7 @@ extension TKUITimetableViewModel {
 
 fileprivate extension TKTimetable {
   init?(dataInput: TKUITimetableViewModel.DataInput) {
+    assert(TKRegionManager.shared.hasRegions)
     let startRegion: TKRegion?
     let type: TKTimetable.TimetableType
     let title: String?

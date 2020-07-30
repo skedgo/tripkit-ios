@@ -9,7 +9,6 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 extension TKUITripOverviewViewModel {
   
@@ -29,24 +28,3 @@ extension TKUITripOverviewViewModel {
   
 }
 
-extension Reactive where Base == TKBuzzInfoProvider {
-  
-  fileprivate static func downloadContent(of service: Service, forEmbarkationDate date: Date, in region: TKRegion) -> Single<Void> {
-    return Single.create { subscriber in
-      var provider: TKBuzzInfoProvider! = TKBuzzInfoProvider()
-      
-      provider.downloadContent(of: service, forEmbarkationDate: date, in: region) { service, success in
-        if success {
-          subscriber(.success(()))
-        } else {
-          subscriber(.error(TKError(code: 87612, message: "Could not download service data.")))
-        }
-      }
-      
-      return Disposables.create {
-        provider = nil
-      }
-    }
-  }
-  
-}

@@ -213,17 +213,6 @@ public extension TKShareHelper {
   }
 }
 
-extension TKShareHelper.StopDetails {
-  /// Converts the stop details into a StopLocation
-  /// - parameter tripKit: TripKit's managed object context into which
-  ///                      to insert the stop location
-  public func toStopLocation(in tripKit: NSManagedObjectContext) -> StopLocation {
-    let stop = StopLocation.fetchOrInsertStop(stopCode: code, inRegion: region, in: tripKit)
-    stop.filter = filter
-    return stop
-  }
-}
-
 // MARK: - Service URLs
 
 public extension TKShareHelper {

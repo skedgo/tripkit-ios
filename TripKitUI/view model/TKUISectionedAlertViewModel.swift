@@ -27,8 +27,8 @@ class TKUISectionedAlertViewModel {
     region: TKRegion,
     searchText: Observable<String>
   ) {
-    let allRouteAlerts = TKBuzzInfoProvider
-      .rx_fetchTransitAlertMappings(forRegion: region)
+    let allRouteAlerts = TKBuzzInfoProvider.rx
+      .fetchTransitAlertMappings(forRegion: region)
       .map { TKUISectionedAlertViewModel.groupAlertMappings($0) }
     
     state = Observable.combineLatest(allRouteAlerts.asObservable(), searchText.startWith("")) { TKUISectionedAlertViewModel.buildSections(from: $0, filter: $1) }

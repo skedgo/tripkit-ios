@@ -238,6 +238,8 @@
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A79AFF224D1C4C7008C165A /* TKTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFF124D1C4C7008C165A /* TKTimetable.swift */; };
 		3A79AFF324D1C4C7008C165A /* TKTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFF124D1C4C7008C165A /* TKTimetable.swift */; };
+		3A79AFFD24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFFC24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift */; };
+		3A79AFFE24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFFC24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift */; };
 		3A7C28702243E02000DA3567 /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
@@ -1139,6 +1141,7 @@
 		3A78EFC522E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A78EFC622E85D1500018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Shared.strings; sourceTree = "<group>"; };
 		3A79AFF124D1C4C7008C165A /* TKTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTimetable.swift; sourceTree = "<group>"; };
+		3A79AFFC24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKBuzzInfoProvider+Rx.swift"; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+ToggleModes.swift"; sourceTree = "<group>"; };
@@ -2326,6 +2329,7 @@
 				3AB6C68B1D1CD08E0089F687 /* TKBuzzInfoProvider.h */,
 				3AB6C68C1D1CD08E0089F687 /* TKBuzzInfoProvider.m */,
 				3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */,
+				3A79AFFC24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift */,
 				3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */,
 				3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */,
 				3ABCA7E22254E18B0072EB25 /* TKBuzzRealTime+Rx.swift */,
@@ -3419,6 +3423,7 @@
 				3ABBDA5F2032132D00205042 /* TKColoredRoute.swift in Sources */,
 				3ABBDA692032132D00205042 /* TKTripPattern.swift in Sources */,
 				3ABBDA5C2032132D00205042 /* TKBookingTypes.swift in Sources */,
+				3A79AFFE24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift in Sources */,
 				3AEB47EA20DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */,
 				3ABBDAB32032134D00205042 /* TKNamedCoordinate+BuzzData.swift in Sources */,
 				3ABBDA732032133300205042 /* StopAPIModel.swift in Sources */,
@@ -3770,6 +3775,7 @@
 				3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */,
 				3AA03E741F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift in Sources */,
 				3AAD8816209C78E300C75B7E /* TKUserProfileHelper+Rx.swift in Sources */,
+				3A79AFFD24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift in Sources */,
 				3A7135FA2289695A00D4068E /* TKModeImageBuilder.swift in Sources */,
 				3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
 				3A096E261F20DDFB00666E59 /* TKCalendarManager.swift in Sources */,
