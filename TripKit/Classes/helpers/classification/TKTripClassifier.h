@@ -19,7 +19,6 @@
  For examples see:
  
  - `TKMetricClassifier`
- - `TKPriceTimeTripClassifier`
  */
 @protocol TKTripClassifier <NSObject>
 
@@ -32,6 +31,6 @@
 /**
  @return The classifiction of that particular trip group.
  */
-- (nullable id<NSCoding, NSObject>)classificationOfTripGroup:(nonnull TripGroup *)tripGroup;
+- (nullable NSString *)classificationOfTripGroup:(nonnull TripGroup *)tripGroup;
 
 @end
