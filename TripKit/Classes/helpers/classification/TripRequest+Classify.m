@@ -17,8 +17,8 @@
   NSSet *tripGroups = [self tripGroups];
   [classifier prepareForClassifictionOfTripGroups:tripGroups];
   for (TripGroup *group in tripGroups) {
-    id<NSCoding, NSObject> newClassification = [classifier classificationOfTripGroup:group];
-    id<NSCoding, NSObject> oldClassification = group.classification;
+    NSString *newClassification = [classifier classificationOfTripGroup:group];
+    NSString *oldClassification = group.classification;
     if (!oldClassification || ! [newClassification isEqual:oldClassification]) {
       group.classification = newClassification;
     }

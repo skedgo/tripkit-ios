@@ -58,11 +58,10 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Helpers
 #import "NSManagedObject+TKPersistence.h"
-#import "TripRequest+Classify.h"
 
 // Classification
+#import "TripRequest+Classify.h"
 #import "TKTripClassifier.h"
-#import "TKPriceTimeTripClassifier.h"
 
 // Routing
 #import "TKSettings.h"
