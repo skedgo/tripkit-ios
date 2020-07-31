@@ -69,10 +69,9 @@ extension TKShareHelper {
   @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: TKTimeType, time: Date?) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
     
-    // TODO: use format string and truncate lat/lng after 5 decimals
-    var urlString = "\(baseURL)/go?tlat=\(end.latitude)&tlng=\(end.longitude)"
+    var urlString = "\(baseURL)/go?tlat=\(degrees: end.latitude)&tlng=\(degrees: end.longitude)"
     if start.isValid {
-      urlString.append("&flat=\(start.latitude)&flng=\(start.longitude)")
+      urlString.append("&flat=\(degrees: start.latitude)&flng=\(degrees: start.longitude)")
     }
     
     if let time = time, timeType != .leaveASAP {
@@ -85,7 +84,6 @@ extension TKShareHelper {
   
 }
 
-
 // MARK: - Meet URLs
 
 extension TKShareHelper {
@@ -96,8 +94,8 @@ extension TKShareHelper {
   
   @objc public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
-    let urlString = "\(baseURL)/meet?lat=\(coordinate.latitude)&lng=\(coordinate.longitude)&at=\(Int(time.timeIntervalSince1970))"
-    return URL(string: urlString)
+    let path = "/meet?lat=\(degrees: coordinate.latitude)&lng=\(degrees: coordinate.longitude)&at=\(Int(time.timeIntervalSince1970))"
+    return URL(string: baseURL + path)
   }
   
 }
@@ -112,17 +110,8 @@ extension TKShareHelper {
 
   @objc public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
-    let escapedCode = (stopCode as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-    
-    let addendum: String
-    if let filter = filter, let escaped = (filter as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-      addendum = escaped
-    } else {
-      addendum = ""
-    }
-    
-    let urlString = "\(baseURL)/stop/\(regionName)/\(escapedCode)/\(addendum)"
-    return URL(string: urlString)
+    let path = "/stop/\(regionName)/\(escaping: stopCode)/\(escaping: filter ?? "")"
+    return URL(string: baseURL + path)
   }
   
 }
@@ -139,11 +128,22 @@ extension TKShareHelper {
   @objc
   public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
-    let escapedID = (serviceID as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-    let escapedCode = (stopCode as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-  
-    let urlString = "\(baseURL)/service/\(regionName)/\(escapedCode)/\(escapedID)"
-    return URL(string: urlString)
+    let path = "/service/\(regionName)/\(escaping: stopCode)/\(escaping: serviceID)"
+    return URL(string: baseURL + path)
   }
 
+}
+
+// MARK: - Magic
+
+fileprivate extension String.StringInterpolation {
+  mutating func appendInterpolation(degrees: CLLocationDegrees) {
+    let pruned = String(format: "%.5f", degrees)
+    appendLiteral(pruned)
+  }
+
+  mutating func appendInterpolation(escaping text: String) {
+    let escaped = (text as NSString).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    appendLiteral(escaped)
+  }
 }

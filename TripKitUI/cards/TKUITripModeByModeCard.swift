@@ -152,6 +152,11 @@ public class TKUITripModeByModeCard: TGPageCard {
     try! self.init(startingOn: first, initialPosition: initialPosition)
   }
   
+  required init?(coder: NSCoder) {
+    // Implement this to support state-restoration
+    return nil
+  }
+  
   public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     
@@ -172,11 +177,14 @@ public class TKUITripModeByModeCard: TGPageCard {
       .subscribe(onNext: { [weak self] in self?.reactToMapSelectionChange($0) })
       .disposed(by: disposeBag)
   }
-
   
-  required init?(coder: NSCoder) {
-    // Implement this to support state-restoration
-    return nil
+  public override func didAppear(animated: Bool) {
+    super.didAppear(animated: animated)
+
+    TKUIEventCallback.handler(.cardAppeared(self))
+    if let controller = self.controller {
+      TKUIEventCallback.handler(.tripSelected(viewModel.trip, controller: controller))
+    }
   }
   
   public override func didMoveToPage(index: Int) {

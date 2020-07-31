@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TripGroup : NSManagedObject
 
-@property (nonatomic, strong, nullable) id<NSCoding, NSObject> classification;
+@property (nonatomic, strong, nullable) NSString * classification;
 @property (nonatomic, strong, nullable) NSNumber * frequency;
 
 /// :nodoc:

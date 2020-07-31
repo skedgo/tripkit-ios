@@ -266,11 +266,20 @@ public class TKUIRoutingResultsCard: TGTableCard {
       .disposed(by: disposeBag)
     
     // Monitor progress (note: without this, we won't fetch!)
-    // We use this to clear errors as soon as starting a new search
     viewModel.fetchProgress
       .drive(onNext: { [weak self] progress in
-        if case .started = progress {
-          self?.clearError(in: cardView)
+        guard let self = self, let controller = self.controller else { return }
+        switch progress {
+        case .started:
+          self.clearError(in: cardView)
+
+        case .finished:
+          if let request = self.request {
+            TKUIEventCallback.handler(.routesLoaded(request, controller: controller))
+          }
+
+        default:
+          break
         }
       })
       .disposed(by: disposeBag)

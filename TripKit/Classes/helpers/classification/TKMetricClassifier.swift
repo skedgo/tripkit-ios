@@ -20,7 +20,7 @@ public class TKMetricClassifier: NSObject {
   }
   
   public static func classification(for group: TripGroup) -> Classification? {
-    guard let token = group.classification as? String else { return nil }
+    guard let token = group.classification else { return nil }
     return Classification(rawValue: token)
   }
   
@@ -63,29 +63,29 @@ extension TKMetricClassifier: TKTripClassifier {
     }
   }
   
-  public func classification(of tripGroup: TripGroup) -> (NSCoding & NSObjectProtocol)? {
+  public func classification(of tripGroup: TripGroup) -> String? {
     // TODO: Order this by what the user cares about
     // recommended > fast > cheap > healthy > easy > green
     
     guard let trip = tripGroup.representativeTrip else { return nil }
     
     if let min = weighted?.min, let max = weighted?.max, matches(min: min, max: max, value: trip.totalScore) {
-      return TKMetricClassifier.Classification.recommended.rawValue as NSString
+      return TKMetricClassifier.Classification.recommended.rawValue
     }
     if let min = durations?.min, let max = durations?.max, matches(min: min, max: max, value: trip.calculateDuration().floatValue) {
-      return TKMetricClassifier.Classification.fastest.rawValue as NSString
+      return TKMetricClassifier.Classification.fastest.rawValue
     }
     if let min = prices?.min, let max = prices?.max, matches(min: min, max: max, value: trip.totalPrice?.floatValue) {
-      return TKMetricClassifier.Classification.cheapest.rawValue as NSString
+      return TKMetricClassifier.Classification.cheapest.rawValue
     }
     if let min = calories?.min, let max = calories?.max, matches(min: min, max: max, value: trip.totalCalories * -1) { // inverted!
-      return TKMetricClassifier.Classification.healthiest.rawValue as NSString
+      return TKMetricClassifier.Classification.healthiest.rawValue
     }
     if let min = hassles?.min, let max = hassles?.max, matches(min: min, max: max, value: trip.totalHassle) {
-      return TKMetricClassifier.Classification.easiest.rawValue as NSString
+      return TKMetricClassifier.Classification.easiest.rawValue
     }
     if let min = carbons?.min, let max = carbons?.max, matches(min: min, max: max, value: trip.totalCarbon) {
-      return TKMetricClassifier.Classification.greenest.rawValue as NSString
+      return TKMetricClassifier.Classification.greenest.rawValue
     }
     return nil
   }
