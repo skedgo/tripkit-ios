@@ -48,7 +48,7 @@ public class TKUITripBoyView: UIView {
     }
   }
   
-  static func clear(from view: UIView) {
+  public static func clear(from view: UIView) {
     view.subviews
       .filter { $0 is TKUITripBoyView }
       .forEach { $0.removeFromSuperview() }

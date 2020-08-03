@@ -34,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
  * Non Core Data property
  */
 
-@property (nonatomic, weak, nullable) TripRequest *replacement;
 @property (nonatomic, assign) TKTripGroupVisibility defaultVisibility;
 
 - (BOOL)resultsInSameQueryAs:(TripRequest *)other;

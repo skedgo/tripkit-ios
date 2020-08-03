@@ -58,7 +58,7 @@ public class TKUITripOverviewCard: TGTableCard {
   ///
   /// Returning `true` will lead to that trip being displayed as usual in *another* `TKUITripOverviewCard`
   /// that gets pushed, and returning `false` will do nothing, i.e., the callback handles displaying it.
-  var selectedAlternativeTripCallback: ((Trip) -> Bool)? = nil
+  public var selectedAlternativeTripCallback: ((Trip) -> Bool)? = nil
   
   fileprivate var viewModel: TKUITripOverviewViewModel!
   private let disposeBag = DisposeBag()

@@ -30,7 +30,6 @@
 @dynamic expandForFavorite;
 @dynamic excludedStops;
 @synthesize requestedModes;
-@synthesize replacement;
 @synthesize defaultVisibility;
 @synthesize localRegions = _localRegions;
 
