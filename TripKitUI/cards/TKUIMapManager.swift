@@ -153,6 +153,9 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
+  /// Overlays on the map, which are typically routes in TripKit
+  ///
+  /// As soon as you set this, the routes will be added to the map.
   public var overlays = [MKOverlay]() {
     didSet {
       mapView?.removeOverlays(oldValue)

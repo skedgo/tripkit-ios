@@ -81,12 +81,12 @@ extension TKUISemaphoreView {
   }
 
   @objc(updateForAnnotation:)
-  public func update(for annotation: MKAnnotation) {
+  public func update(for annotation: MKAnnotation?) {
     self.update(for: annotation, heading: 0)
   }
   
   @objc(updateForAnnotation:withHeading:)
-  public func update(for annotation: MKAnnotation, heading: CLLocationDirection) {
+  public func update(for annotation: MKAnnotation?, heading: CLLocationDirection) {
     self.annotation = annotation
     
     guard let semaphorable = annotation as? TKUISemaphoreDisplayable else { return }

@@ -290,7 +290,7 @@ fileprivate extension TKUISemaphoreView {
     }
   }
   
-  func update(for annotation: MKAnnotation, heading: CLLocationDirection?) {
+  func update(for annotation: MKAnnotation?, heading: CLLocationDirection?) {
     if let heading = heading {
       update(for: annotation, heading: heading)
     } else {
