@@ -101,7 +101,7 @@ extension TKAPI {
   }
   
   /// The TripGo API-compliant dictionary representation of a vehicle
-  public struct PrivateVehicle: Codable {
+  public struct PrivateVehicle: Codable, Hashable {
     let type: PrivateVehicleType
     let UUID: String?
     let name: String?

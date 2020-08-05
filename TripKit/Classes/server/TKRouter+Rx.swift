@@ -32,16 +32,19 @@ extension TKRouter {
 
 extension Reactive where Base : TKRouter {
   
-  public func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
+  public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
     return Single.create { observer in
-      self.base.downloadTrip(url, identifier: identifier, intoTripKitContext: context) { trip in
+      var router: TKRouter! = TKRouter()
+      router.downloadTrip(url, identifier: identifier, intoTripKitContext: context) { trip in
         if let trip = trip {
           observer(.success(trip))
         } else {
           observer(.error(TKRouter.RouterError.downloadFailed))
         }
       }
-      return Disposables.create()
+      return Disposables.create {
+        router = nil
+      }
     }
   }
   
