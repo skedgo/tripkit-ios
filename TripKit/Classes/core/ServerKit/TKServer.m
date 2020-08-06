@@ -652,7 +652,11 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
       
     case TKServerTypeProduction: {
       if (region == nil || region.urls.count == 0) {
-        return [NSURL URLWithString:@"https://api.tripgo.com/v1/"];
+        if (index == 0) {
+          return [NSURL URLWithString:@"https://api.tripgo.com/v1/"];
+        } else {
+          return nil; // no fail-over
+        }
       }
       
       NSArray<NSURL *> *servers = region.urls;
