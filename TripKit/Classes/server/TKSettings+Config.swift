@@ -132,7 +132,7 @@ extension TKSettings {
   }
   
   @objc
-  public static let parserJsonVersion: Int = 11 // 13?
+  public static let parserJsonVersion: Int = 13
   
   @objc
   @available(*, unavailable, renamed: "config")
