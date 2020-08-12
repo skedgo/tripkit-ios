@@ -40,7 +40,11 @@ public class TKUIRoutingResultsCard: TKUITableCard {
 
   public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
-  var onSelection: ((Trip) -> Bool)? = nil
+  /// Set this callback to provide a custom handler for what should happen when a user selects a trip.
+  ///
+  /// If not provided, or you return `true` it will lead to the standard of pushing a `TKUITripOverviewCard`.
+  /// Returning `false` will do nothing, i.e., the callback should handle displaying the trip.
+  public var onSelection: ((Trip) -> Bool)? = nil
   
   private let destination: MKAnnotation?
   private var request: TripRequest? // also for saving
