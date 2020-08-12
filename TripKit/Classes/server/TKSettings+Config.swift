@@ -24,8 +24,8 @@ extension TKSettings {
     public let wheelchair: Bool
     public let cyclingSpeed: Speed
     public let walkingSpeed: Speed
-    public let maximumWalkingDuration: TimeInterval?
-    public let minimumTransferTime: TimeInterval?
+    public let maximumWalkingMinutes: Double?
+    public let minimumTransferMinutes: Double?
     public let emissions: [String: Float]
     public let bookingSandbox: Bool
     public let twoWayHireCostIncludesReturn: Bool
@@ -56,8 +56,8 @@ extension TKSettings {
       case cyclingSpeed
       case concession = "conc"
       case wheelchair
-      case maximumWalkingDuration = "wm"
-      case minimumTransferTime = "tt"
+      case maximumWalkingMinutes = "wm"
+      case minimumTransferMinutes = "tt"
       case emissions = "co2"
       case bookingSandbox = "bsb"
       case twoWayHireCostIncludesReturn = "2wirc"
@@ -83,15 +83,15 @@ extension TKSettings {
       walkingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportWalkSpeed)) ?? .medium
 
       if let minutes = shared.object(forKey: TKDefaultsKeyProfileTransportWalkMaxDuration) as? NSNumber {
-        maximumWalkingDuration = minutes.doubleValue * 60
+        maximumWalkingMinutes = minutes.doubleValue
       } else {
-        maximumWalkingDuration = nil
+        maximumWalkingMinutes = nil
       }
 
       if let minutes = shared.object(forKey: TKDefaultsKeyProfileTransportTransferTime) as? NSNumber {
-        minimumTransferTime = minutes.doubleValue * 60
+        minimumTransferMinutes = minutes.doubleValue
       } else {
-        minimumTransferTime = nil
+        minimumTransferMinutes = nil
       }
 
       emissions = (shared.object(forKey: TKDefaultsKeyProfileTransportEmissions) as? [String: Float]) ?? [:]
@@ -122,8 +122,8 @@ extension TKSettings {
       if !avoidModes.isEmpty { paras["avoid"] = avoidModes }
       if concession { paras["conc"] = true }
       if wheelchair { paras["wheelchair"] = true }
-      if let wm = maximumWalkingDuration { paras["wm"] = wm/60 }
-      if let tt = minimumTransferTime { paras["tt"] = tt/60 }
+      if let wm = maximumWalkingMinutes { paras["wm"] = wm }
+      if let tt = minimumTransferMinutes { paras["tt"] = tt }
       if bookingSandbox { paras["bsb"] = true }
       if !twoWayHireCostIncludesReturn { paras["2wirc"] = false }
       paras["co2"] = emissions
