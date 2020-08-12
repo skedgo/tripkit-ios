@@ -59,6 +59,9 @@ extension TKUICardActionsViewLayoutHelper: UICollectionViewDataSource {
 extension TKUICardActionsViewLayoutHelper: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    #if targetEnvironment(macCatalyst)
+    // Ignore, we'll use highlight instead
+    #else
     guard
       let cell = collectionView.cellForItem(at: indexPath) as? TKUICompactActionCell,
       let onTapHandler = cell.onTap
@@ -67,6 +70,22 @@ extension TKUICardActionsViewLayoutHelper: UICollectionViewDelegate {
     if onTapHandler(cell) {
       collectionView.reloadData()
     }
+    #endif
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+    #if targetEnvironment(macCatalyst)
+    guard
+      let cell = collectionView.cellForItem(at: indexPath) as? TKUICompactActionCell,
+      let onTapHandler = cell.onTap
+      else { return }
+    
+    if onTapHandler(cell) {
+      collectionView.reloadData()
+    }
+    #else
+    // Ignore, we'll use selected instead
+    #endif
   }
   
 }
