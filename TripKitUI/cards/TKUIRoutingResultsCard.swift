@@ -32,7 +32,7 @@ public protocol TKUIRoutingResultsCardDelegate: class {
 /// An interactive card for displaying routing results, including updating from/to location, time and selected modes.
 ///
 /// Can be used standalone or via `TKUIRoutingResultsViewController`.
-public class TKUIRoutingResultsCard: TGTableCard {
+public class TKUIRoutingResultsCard: TKUITableCard {
   
   typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>
   
@@ -60,7 +60,6 @@ public class TKUIRoutingResultsCard: TGTableCard {
   )
   
   private let showSearch = PublishSubject<Void>()
-  private let highlighted = PublishSubject<IndexPath>()
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
   private let changedModes = PublishSubject<[String]?>()
   private let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
@@ -172,22 +171,8 @@ public class TKUIRoutingResultsCard: TGTableCard {
     
     // Build the view model
     
-    let selected: Signal<TKUIRoutingResultsViewModel.Item>
-    #if targetEnvironment(macCatalyst)
-    self.clickToHighlightDoubleClickToSelect = true
-    self.handleMacSelection = highlighted.onNext
-    
-    selected = highlighted
-      .map { [unowned self] in self.dataSource[$0] }
-      .asSignal(onErrorSignalWith: .empty())
-    #else
-    selected = tableView.rx
-      .modelSelected(TKUIRoutingResultsViewModel.Item.self)
-      .asSignal()
-    #endif
-
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
-      selected: selected,
+      selected: selectedItem(in: tableView, dataSource: dataSource),
       tappedSectionButton: tappedSectionButton.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),

@@ -19,6 +19,7 @@
 		3A0B517F2240E5B6002346D6 /* TKUISegmentTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B517D2240E5B6002346D6 /* TKUISegmentTitleView.swift */; };
 		3A0B51802240E5B6002346D6 /* TKUISegmentTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B517E2240E5B6002346D6 /* TKUISegmentTitleView.xib */; };
 		3A0D46BB1FAD0EBA00B6E209 /* TKJSONSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D46BA1FAD0EBA00B6E209 /* TKJSONSanitizer.swift */; };
+		3A12367424E3DC390099D67F /* TKUITableCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A12367324E3DC390099D67F /* TKUITableCard.swift */; };
 		3A14BE2C1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A14BE2B1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift */; };
 		3A15D8DB1D9CE08D00BADBEA /* TKRoutingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */; };
 		3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */; };
@@ -924,6 +925,7 @@
 		3A0B517D2240E5B6002346D6 /* TKUISegmentTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentTitleView.swift; sourceTree = "<group>"; };
 		3A0B517E2240E5B6002346D6 /* TKUISegmentTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentTitleView.xib; sourceTree = "<group>"; };
 		3A0D46BA1FAD0EBA00B6E209 /* TKJSONSanitizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONSanitizer.swift; sourceTree = "<group>"; };
+		3A12367324E3DC390099D67F /* TKUITableCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITableCard.swift; sourceTree = "<group>"; };
 		3A14BE2B1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKQuickBookingHelper+Fake.swift"; sourceTree = "<group>"; };
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-with-stops.json"; sourceTree = "<group>"; };
@@ -2482,6 +2484,7 @@
 				3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */,
 				3AFD394320D9333500FDC7D0 /* TKUITripOverviewCard.swift */,
 				3AF5F2B820F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift */,
+				3A12367324E3DC390099D67F /* TKUITableCard.swift */,
 			);
 			path = cards;
 			sourceTree = "<group>";
@@ -3575,6 +3578,7 @@
 				3A897A22234776B0004D0281 /* UIButton+SwapImageSide.swift in Sources */,
 				3AB1CF2223AB6BA30098DA22 /* TKUINearbyMapManager.swift in Sources */,
 				3A40922522F1A24C0049AAE7 /* TKUIServiceHeaderView.swift in Sources */,
+				3A12367424E3DC390099D67F /* TKUITableCard.swift in Sources */,
 				3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */,
 				3A383CA6222FFE3200361596 /* TKUISegmentDirectionsCard.swift in Sources */,
 				3A6DF11E202C8EB80084CB2C /* UIColor+Variations.m in Sources */,

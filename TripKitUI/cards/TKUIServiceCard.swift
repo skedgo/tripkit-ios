@@ -17,7 +17,7 @@ import TGCardViewController
 /// A card that lists the route of an individual public transport
 /// service. Starts at the provided embarkation and optionally
 /// highlights where to get off.
-public class TKUIServiceCard: TGTableCard {
+public class TKUIServiceCard: TKUITableCard {
   
   typealias ServiceCardActionsView = TKUICardActionsView<TKUIServiceCard, EmbarkationPair>
   
@@ -113,11 +113,23 @@ public class TKUIServiceCard: TGTableCard {
   override public func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
 
+    // Table view configuration
+    
+    tableView.register(TKUIServiceVisitCell.nib, forCellReuseIdentifier: TKUIServiceVisitCell.reuseIdentifier)
+    
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIServiceViewModel.Section>(
+      configureCell: { ds, tv, ip, item in
+        let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
+        cell.configure(with: item)
+        return cell
+      }
+    )
+    
     // Build the view model
     
     viewModel = TKUIServiceViewModel(
       dataInput: dataInput,
-      itemSelected: tableView.rx.modelSelected(TKUIServiceViewModel.Item.self).asDriver()
+      itemSelected: selectedItem(in: tableView, dataSource: dataSource)
     )
     
     serviceMapManager.viewModel = viewModel
@@ -132,18 +144,6 @@ public class TKUIServiceCard: TGTableCard {
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }
 
-    // Table view configuration
-    
-    tableView.register(TKUIServiceVisitCell.nib, forCellReuseIdentifier: TKUIServiceVisitCell.reuseIdentifier)
-    
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIServiceViewModel.Section>(
-      configureCell: { ds, tv, ip, item in
-        let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
-        cell.configure(with: item)
-        return cell
-      }
-    )
-    
     // Bind outputs
     
     if let title = titleView {
