@@ -23,7 +23,7 @@ public protocol TKUIHomeCardSearchResultsDelegate: class {
 
 // MARK: -
 
-public class TKUIHomeCard: TGTableCard {
+public class TKUIHomeCard: TKUITableCard {
   
   public static var config = Configuration.empty
   
@@ -121,7 +121,7 @@ public class TKUIHomeCard: TGTableCard {
     
     let listInput = TKUIHomeViewModel.ListInput(
       searchText: searchTextPublisher.asObservable(),
-      selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
+      selected: selectedItem(in: tableView, dataSource: dataSource),
       accessorySelected: searchResultAccessoryTapped.asSignal(onErrorSignalWith: .empty())
     )
 

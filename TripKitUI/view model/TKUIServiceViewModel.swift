@@ -24,7 +24,7 @@ class TKUIServiceViewModel {
   /// - Parameters:
   ///   - dataInput: What to show
   ///   - itemSelected: UI input of selected item
-  init(dataInput: DataInput, itemSelected: Driver<Item>) {
+  init(dataInput: DataInput, itemSelected: Signal<Item>) {
     
     embarkationPair = (dataInput.embarkation, dataInput.disembarkation)
     
@@ -60,8 +60,8 @@ class TKUIServiceViewModel {
     self.mapContent = mapContent
     
     selectAnnotation = itemSelected
-      .withLatestFrom(mapContent) { ($0, $1) }
       .asObservable()
+      .withLatestFrom(mapContent) { ($0, $1) }
       .compactMap { $1?.findStop($0) }
       .asDriver(onErrorDriveWith: .empty())
     

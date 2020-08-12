@@ -43,7 +43,7 @@ class TKUITripsPageCard: TGPageCard {
   
 }
 
-public class TKUITripOverviewCard: TGTableCard {
+public class TKUITripOverviewCard: TKUITableCard {
   
   typealias TripOverviewCardActionsView = TKUICardActionsView<TGCard, Trip>
   
@@ -64,7 +64,6 @@ public class TKUITripOverviewCard: TGTableCard {
   private let disposeBag = DisposeBag()
   
   private let alternativesTapped = PublishSubject<IndexPath>()
-  private let highlighted = PublishSubject<IndexPath>()
   private let isVisible = BehaviorSubject<Bool>(value: false)
   
   private weak var tableView: UITableView?
@@ -140,20 +139,10 @@ public class TKUITripOverviewCard: TGTableCard {
         }
     })
     
-    let selected: Observable<TKUITripOverviewViewModel.Item>
-    #if targetEnvironment(macCatalyst)
-    self.clickToHighlightDoubleClickToSelect = true
-    self.handleMacSelection = highlighted.onNext
-    selected = highlighted
-      .map { dataSource[$0] }
-      .asObservable()
-    #else
-    selected = tableView.rx
-      .modelSelected(TKUITripOverviewViewModel.Item.self)
-      .asObservable()
-    #endif
-    
-    let mergedSelection = Observable.merge(selected, alternativesTapped.map { dataSource[$0] }).asSignal(onErrorSignalWith: .empty())
+    let mergedSelection = Observable.merge(
+        selectedItem(in: tableView, dataSource: dataSource).asObservable(),
+        alternativesTapped.map { dataSource[$0] }
+      ).asSignal(onErrorSignalWith: .empty())
     
     viewModel = TKUITripOverviewViewModel(
       trip: trip,

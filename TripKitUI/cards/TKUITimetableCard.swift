@@ -25,7 +25,7 @@ public protocol TKUITimetableCardDelegate: class {
 
 /// A card that lists all the departures from a public transport stop (or a
 /// list thereof).
-public class TKUITimetableCard : TGTableCard {
+public class TKUITimetableCard : TKUITableCard {
   
   enum Input {
     case stops([TKUIStopAnnotation])
@@ -56,7 +56,6 @@ public class TKUITimetableCard : TGTableCard {
   private let disposeBag = DisposeBag()
   private var realTimeDisposeBag = DisposeBag()
 
-  private let highlighted = PublishSubject<IndexPath>()
   private let datePublisher = PublishSubject<Date>()
   private let loadMorePublisher = PublishSubject<IndexPath>()
   private let scrollToTopPublisher = PublishSubject<Void>()
@@ -199,22 +198,8 @@ public class TKUITimetableCard : TGTableCard {
     accessoryView.searchBar.text = filter
     let filterObservable = accessoryView.searchBar.rx.text.orEmpty
     
-    let selected: Signal<TKUITimetableViewModel.Item>
-    #if targetEnvironment(macCatalyst)
-    self.clickToHighlightDoubleClickToSelect = false
-    self.handleMacSelection = highlighted.onNext
-    
-    selected = highlighted
-      .map { [unowned self] in self.dataSource[$0] }
-      .asSignal(onErrorSignalWith: .empty())
-    #else
-    selected = tableView.rx
-      .modelSelected(TKUITimetableViewModel.Item.self)
-      .asSignal()
-    #endif
-    
     let input: TKUITimetableViewModel.UIInput = (
-      selected: selected,
+      selected: selectedItem(in: tableView, dataSource: dataSource),
       showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
       filter: filterObservable.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),

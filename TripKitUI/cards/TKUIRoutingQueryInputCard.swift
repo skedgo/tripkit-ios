@@ -22,7 +22,7 @@ public protocol TKUIRoutingQueryInputCardDelegate: class {
   func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation)
 }
 
-public class TKUIRoutingQueryInputCard: TGTableCard {
+public class TKUIRoutingQueryInputCard: TKUITableCard {
   public weak var queryDelegate: TKUIRoutingQueryInputCardDelegate?
   
   private let origin: MKAnnotation?
@@ -84,7 +84,7 @@ public class TKUIRoutingQueryInputCard: TGTableCard {
       inputs: TKUIRoutingQueryInputViewModel.UIInput(
         searchText: titleView.rx.searchText.map { ($0, forced: false) },
         tappedDone: route,
-        selected: tableView.rx.modelSelected(TKUIRoutingQueryInputViewModel.Item.self).asSignal(onErrorSignalWith: .empty()),
+        selected: selectedItem(in: tableView, dataSource: dataSource),
         selectedSearchMode: titleView.rx.selectedSearchMode,
         tappedSwap: titleView.swapButton.rx.tap.asSignal()
       )
