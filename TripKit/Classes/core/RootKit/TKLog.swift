@@ -91,8 +91,9 @@ public class TKConsoleLogger: TKLogger {
   }
 
   public func output(_ level: TKLog.LogLevel, identifier: String, message: String) {
-    let message = "\(level.prefix) \(identifier): \(message)"
-    os_log("%@", log: OSLog(identifier: identifier), type: level.toOSLog, message)
+    let shortIdentifier = identifier.prefix(10).padding(toLength: 10, withPad: " ", startingAt: 0)
+    let message = "\(level.prefix) \(message)"
+    os_log("%@", log: OSLog(identifier: shortIdentifier), type: level.toOSLog, message)
   }
 }
 
@@ -114,11 +115,11 @@ public class TKLog : NSObject {
 
     var prefix: String {
       switch self {
-      case .verbose:  return "   [VERBOSE]"
-      case .debug:    return "   [DEBUG]  "
-      case .info:     return "   [INFO]   "
-      case .warning:  return "⚠️ [WARNING]"
-      case .error:    return "💥 [ERROR]  "
+      case .verbose:  return "   [VER]"
+      case .debug:    return "   [DEB]"
+      case .info:     return "   [INF]"
+      case .warning:  return "⚠️ [WAR]"
+      case .error:    return "💥 [ERR]"
       }
     }
   }

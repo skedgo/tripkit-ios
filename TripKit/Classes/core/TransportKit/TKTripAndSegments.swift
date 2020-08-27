@@ -60,10 +60,8 @@ public protocol TKTrip : NSObjectProtocol {
   /// Short title describing the trip's purpose, e.g., "To work"
   var tripPurpose: String? { get }
   
-  
   /// Whether this trip has at least one reminder and the reminder icon should be displayed.
   var hasReminder: Bool { get set }
-  
   
   /// Time zone of the arrival time, if different from `departureTimeZone`
   var arrivalTimeZone: TimeZone? { get }
@@ -148,7 +146,7 @@ public extension TKTripSegmentDisplayable {
   var tripSegmentFixedDepartureTime: Date? { nil }
   var tripSegmentTimeZone: TimeZone? { nil }
   var tripSegmentTimesAreRealTime: Bool { false }
-  var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility? { nil }
+  var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { .unknown }
 }
 
 public extension TKTripSegment {
