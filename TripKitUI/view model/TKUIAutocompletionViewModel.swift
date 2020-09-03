@@ -25,7 +25,7 @@ class TKUIAutocompletionViewModel {
     case autocompletion(AutocompletionItem)
     case action(ActionItem)
     
-   fileprivate var result: TKAutocompletionResult? {
+    fileprivate var result: TKAutocompletionResult? {
       switch self {
       case .autocompletion(let item): return item.completion
       case .action, .currentLocation: return nil
@@ -40,9 +40,10 @@ class TKUIAutocompletionViewModel {
       }
     }
     
-    fileprivate var provider: TKAutocompleting? {
+    var provider: TKAutocompleting? {
       switch self {
-      case .autocompletion, .currentLocation: return nil
+      case .currentLocation: return nil
+      case .autocompletion(let item): return item.provider
       case .action(let item): return item.provider
       }
     }
@@ -58,6 +59,7 @@ class TKUIAutocompletionViewModel {
     var subtitle: String? { completion.subtitle }
     var accessoryImage: UIImage? { includeAccessory ? completion.accessoryButtonImage : nil }
     var showFaded: Bool { completion.isInSupportedRegion?.boolValue == false }
+    var provider: TKAutocompleting? { completion.provider as? TKAutocompleting }
   }
   
   struct ActionItem {
@@ -71,7 +73,7 @@ class TKUIAutocompletionViewModel {
     }
   }
   
-  init(
+  required init(
     providers: [TKAutocompleting],
     searchText: Observable<(String, forced: Bool)>,
     selected: Signal<Item>,

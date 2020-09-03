@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)styleTableViewForTileList:(UITableView *)tableView;
 
-+ (void)styleNavigationControllerAsDark:(UINavigationController *)navigationController;
-
 @end
 
 @interface TKStyleManager (Buttons)

@@ -8,84 +8,62 @@
 
 import Foundation
 
+import TGCardViewController
+
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 public class TKUIHomeViewModel {
   
-  typealias Section = TKUIAutocompletionViewModel.Section
-  typealias Item = TKUIAutocompletionViewModel.Item
-  
-  let searchViewModel: TKUIAutocompletionViewModel
-  let nearbyViewModel: TKUINearbyViewModel
-  
-  struct ListInput {
-    var searchText: Observable<(String, forced: Bool)> = .empty()
-    var selected: Signal<Item> = .empty()
-    var accessorySelected: Signal<Item>? = nil
+  struct CardInputEvent {
+    var searchInProgress: Signal<Bool>
   }
   
-  struct MapInput {
-    var mapRect: Driver<MKMapRect> = .just(.null)
-    var selected: Signal<TKUIIdentifiableAnnotation?> = .empty()
-    var focused: Signal<MKAnnotation?> = .just(nil)
+  private(set) var componentViewModels: [TKUIHomeComponentViewModel]!
+  
+  init(componentViewModels: [TKUIHomeComponentViewModel], event: CardInputEvent) {
+    self.componentViewModels = componentViewModels
+    
+    let isSearching = event.searchInProgress
+      .startWith(false)
+      .distinctUntilChanged()
+      .asObservable()
+      .share(replay: 1, scope: .forever)
+    
+    let componentSections = componentViewModels
+      .enumerated()
+      .map { index, component in
+        component.homeCardSections(isSearching).map { (index: index, $0) }
+      }
+    let componentUpdates = Observable.merge(componentSections)
+    
+    sections = componentUpdates.scan(into: SectionContent(capacity: componentViewModels.count)) { content, update in
+        content.sections[update.index] = update.1
+      }.map { content in
+        // Only include existing sections that either have items or a header action
+        return content.sections
+          .compactMap { $0 }
+          .filter { !$0.items.isEmpty || $0.headerConfiguration?.action != nil }
+      }
+      .asDriver(onErrorJustReturn: [])
+      .startWith([])
+    
+    next = Signal.merge(componentViewModels.map(\.nextAction))
   }
   
-  init(listInput: ListInput, mapInput: MapInput = MapInput()) {
-    
-    // We use Apple & SkedGo if none is provided for autocompletion
-    let autocompleteDataProviders = TKUIHomeCard.config.autocompletionDataProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()]
-    
-    // TODO: Have a "Search here" button, too? So if the map
-    //       rect changes, we inject that, and pressing that
-    //       redoes the search?
-
-    searchViewModel = TKUIAutocompletionViewModel(
-      providers: autocompleteDataProviders,
-      searchText: listInput.searchText,
-      selected: listInput.selected,
-      accessorySelected: listInput.accessorySelected,
-      biasMapRect: mapInput.mapRect
-    )
-    
-    nearbyViewModel = TKUINearbyViewModel(
-      mapInput: TKUINearbyViewModel.MapInput(
-        mapRect: mapInput.mapRect,
-        selection: mapInput.selected,
-        focus: mapInput.focused
-      )
-    )
-
-    sections = searchViewModel.sections
-    selection = searchViewModel.selection
-    accessorySelection = searchViewModel.accessorySelection
-    triggerAction = searchViewModel.triggerAction
-    
-    // TODO: Either do something with nearbyViewModel.next,
-    //       or don't pass mapInput.selected to NearbyViewModel
-    //       and handle it directly instead.
-    
-    mapAnnotations = nearbyViewModel.mapAnnotations
-    mapOverlays = nearbyViewModel.mapOverlays
-    nextFromMap = nearbyViewModel.next
-  }
-
-  // List content
-
   let sections: Driver<[Section]>
   
-  let selection: Signal<MKAnnotation>
-  
-  let accessorySelection: Signal<MKAnnotation>
-  
-  let triggerAction: Signal<TKAutocompleting>
+  let next: Signal<TKUIHomeCardNextAction>
 
-  // Map content
+}
 
-  let mapAnnotations: Driver<[TKUIIdentifiableAnnotation]>
-  
-  let mapOverlays: Driver<[MKOverlay]>
-  
-  let nextFromMap: Signal<TKUINearbyViewModel.Next>
-
+fileprivate extension TKUIHomeViewModel {
+  struct SectionContent {
+    var sections: [Section?]
+    
+    init(capacity: Int) {
+      sections = (0..<capacity).map { _ in Optional<TKUIHomeViewModel.Section>.none }
+    }
+  }
 }

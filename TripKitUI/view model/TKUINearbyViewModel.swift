@@ -58,7 +58,7 @@ public class TKUINearbyViewModel {
   ///   - fixedLocation: Location to fix this to; if this is proivded, `mapInput.mapRect` will be ignored
   ///   - pickedModes: The selected modes (only used if `mode == nil`)
   ///   - mapCenter: The centre of the map, if the user moved it, should drive with `nil` if map is centred on the user's current location
-  public init(
+  public required init(
       limitTo mode: String? = nil,
       strictModeMatch: Bool = true,
       fixedLocation: MKAnnotation? = nil,
