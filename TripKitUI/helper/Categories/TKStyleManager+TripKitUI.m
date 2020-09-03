@@ -13,22 +13,6 @@
 #import "UIFont+CustomFonts.h"
 #import "NSString+Sizing.h"
 
-@interface UIViewController (PopoverHelpers)
-  
-- (BOOL)isLikelyInPopover;
-  
-@end
-
-@implementation UIViewController (PopoverHelpers)
-  
-- (BOOL)isLikelyInPopover
-{
-  return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && [self splitViewController] == nil;
-}
-
-@end
-
-
 @implementation TKStyleManager (TripKitUI)
 
 + (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height
@@ -113,19 +97,6 @@
   
   return gradient;
 }
-
-#pragma mark - Styling bars
-
-+ (void)styleNavigationControllerAsDark:(UINavigationController *)navigationController
-  {
-    UINavigationBar *navBar = navigationController.navigationBar;
-    
-    if (! [navigationController isLikelyInPopover]) {
-      navBar.translucent = [self globalTranslucency];
-    } else {
-      navBar.translucent = YES;
-    }
-  }
   
 @end
 

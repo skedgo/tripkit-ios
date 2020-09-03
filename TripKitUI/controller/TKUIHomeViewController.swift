@@ -10,7 +10,7 @@ import Foundation
 
 import TGCardViewController
 
-public class TKUIHomeViewController: TGCardViewController {
+open class TKUIHomeViewController: TGCardViewController {
   
   public weak var searchResultsDelegate: TKUIHomeCardSearchResultsDelegate? {
     didSet {
@@ -29,11 +29,11 @@ public class TKUIHomeViewController: TGCardViewController {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
   
-  required init?(coder: NSCoder) {
+  required public init?(coder: NSCoder) {
     super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
   }
   
-  public override func viewDidLoad() {
+  open override func viewDidLoad() {
     
     // Here, we always route from user's current location, hence
     // make sure we ask for permission.
@@ -47,7 +47,7 @@ public class TKUIHomeViewController: TGCardViewController {
     
     TKUIHomeCard.config.autocompletionDataProviders = autocompletionDataProviders
     
-    let homeCard = TKUIHomeCard(initialPosition: initialPosition)
+    let homeCard = TKUIHomeCard()
     homeCard.searchResultDelegate = searchResultsDelegate
     rootCard = homeCard
     

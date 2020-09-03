@@ -11,9 +11,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class TKUIAutocompletionResultCell: UITableViewCell {
+public class TKUIAutocompletionResultCell: UITableViewCell {
   
-  static let reuseIdentifier = "TKUIAutocompletionResultCell"
+  public static let reuseIdentifier = "TKUIAutocompletionResultCell"
   
   private var disposeBag: DisposeBag!
 

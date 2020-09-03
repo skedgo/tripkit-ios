@@ -1,0 +1,41 @@
+//
+//  TKUIHomeCard+MapManager.swift
+//  TripKitUI-iOS
+//
+//  Created by Brian Huang on 26/8/20.
+//  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
+//
+
+import Foundation
+
+import RxSwift
+import RxCocoa
+
+import TGCardViewController
+
+/// This protocol defines the requirements for any map managers that want
+/// to take control of the map in a `TKUIHomeCard`
+public protocol TKUICompatibleHomeMapManager: TGCompatibleMapManager {
+  
+  /// This returns an observable sequence that emits an element whenever an
+  /// action is triggered on the map
+  var nextFromMap: Observable<TKUIHomeCardNextAction> { get }
+  
+  /// This returns an observable sequence that emits an element whenever the
+  /// map's mapRect changes
+  var mapRect: Driver<MKMapRect> { get }
+  
+  /// This returns the map view representing the map.
+  var mapView: MKMapView? { get }
+  
+  /// This provides you an oppotunity to perform actions on the map when
+  /// a `TKUIHomeCard` appears
+  /// - Parameter appear: `true` when a home card just appeared
+  func onHomeCardAppearance(_ appear: Bool)
+  
+  /// This allows the map manager to respond to a `TKUIHomeCard`'s request
+  /// to select an annotation on the map
+  /// - Parameter annotation: The annotation to select on the map.
+  func select(_ annotation: MKAnnotation)
+  
+}

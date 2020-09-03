@@ -14,13 +14,6 @@ import RxDataSources
 
 import TGCardViewController
 
-public protocol TKUIHomeCardSearchResultsDelegate: class {
-  
-  func homeCard(_ card: TKUIHomeCard, selected searchResult: MKAnnotation)
-  
-}
-
-
 // MARK: -
 
 public class TKUIHomeCard: TKUITableCard {
@@ -29,27 +22,32 @@ public class TKUIHomeCard: TKUITableCard {
   
   public var searchResultDelegate: TKUIHomeCardSearchResultsDelegate?
   
+  private let cardWillAppearPublisher = PublishSubject<Bool>()
+  
   private let searchTextPublisher = PublishSubject<(String, forced: Bool)>()
   
   private let focusedAnnotationPublisher = PublishSubject<MKAnnotation?>()
   
-  private let searchResultAccessoryTapped = PublishSubject<TKUIAutocompletionViewModel.Item>()
+  private let cellAccessoryTappedPublisher = PublishSubject<TKUIHomeViewModel.Item>()
   
   private var viewModel: TKUIHomeViewModel!
-  
-  private let nearbyMapManager: TKUINearbyMapManager
 
   private let disposeBag = DisposeBag()
   
   private let searchBar = UISearchBar()
   
-  init(initialPosition: TGCardPosition? = nil) {
-    let mapManager = TKUINearbyMapManager()
-    self.nearbyMapManager = mapManager
-    
+  private var tableView: UITableView!
+  
+  private var dataSource: RxTableViewSectionedAnimatedDataSource<TKUIHomeViewModel.Section>!
+  
+  private let homeMapManager: TKUICompatibleHomeMapManager?
+  
+  public init(mapManager: TKUICompatibleHomeMapManager? = nil) {
+    self.homeMapManager = mapManager
+
     // Home card requires a custom title view that includes
     // a search bar only.
-    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition ?? .peaking)
+    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager)
     
     searchBar.delegate = self
   }
@@ -60,42 +58,16 @@ public class TKUIHomeCard: TKUITableCard {
   
   // MARK: - TGCard overrides
   
-  public override func willAppear(animated: Bool) {
-    // If the search text is empty when the card appears,
-    // try loading autocompletion results.
-    if let text = searchBar.text, text.isEmpty {
-      searchTextPublisher.onNext(("", forced: true))
-    }
-    
-    // Remove any focused annotation, i.e., restoring any
-    // hideen nearby annotations.
-    focusedAnnotationPublisher.onNext(nil)
-    
-    // Remove any selection on the map
-    if let selected = nearbyMapManager.mapView?.selectedAnnotations.first {
-      nearbyMapManager.mapView?.deselectAnnotation(selected, animated: true)
-    }
-    
-    super.willAppear(animated: animated)
-  }
-  
-  public override func becomeFirstResponder() -> Bool {
-    // We override this method to replicate an Apple Maps behavior.
-    // Scenario: Search for a stop, then push the timetable for it
-    // . When the timetable card is dismissed and the home card is
-    // popped back in, we not only want to show the stop appearing
-    // as a search text, but also bring up the keyboard.
-    if let text = searchBar.text, !text.isEmpty {
-      return searchBar.becomeFirstResponder()
-    } else {
-      return super.becomeFirstResponder()
-    }
-  }
-  
   public override func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
     
     requestLocationServicesIfNeeded()
+    
+    tableView.register(TKUIHomeCardSectionHeader.self, forHeaderFooterViewReuseIdentifier: "TKUIHomeCardSectionHeader")
+    
+    tableView.dataSource = nil
+    
+    self.tableView = tableView
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIHomeViewModel.Section>(
       configureCell: { [weak self] _, tv, ip, item in
@@ -104,37 +76,47 @@ public class TKUIHomeCard: TKUITableCard {
           return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
         
-        guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
-          preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
+        guard let cell = (self.viewModel.componentViewModels.compactMap { $0.cell(for: item, at: ip, in: tv) }.first) else {
+          assertionFailure(); return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
         
-        cell.configure(with: item, onAccessoryTapped: self.searchResultAccessoryTapped)
-        
         return cell
-      },
-      titleForHeaderInSection: { ds, index in
-        return ds.sectionModels[index].title
       }
     )
+    self.dataSource = dataSource
     
-    tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
+    tableView.rx.setDelegate(self)
+      .disposed(by: disposeBag)
+        
+    let builderInput = TKUIHomeCard.ComponentViewModelInput(
+      homeCardWillAppear: cardWillAppearPublisher,
+      searchText: searchTextPublisher,
+      itemSelected: selectedItem(in: tableView, dataSource: dataSource),
+      itemDeleted: tableView.rx.modelDeleted(TKUIHomeViewModel.Item.self).asSignal(),
+      itemAccessoryTapped: cellAccessoryTappedPublisher.asSignal(onErrorSignalWith: .empty()),
+      mapRect: homeMapManager?.mapRect ?? .empty()
+    )
+      
+    // The Home view model is in essence a dumb aggregator that
+    // relies on component view models to provide it with data.
+    let components: [TKUIHomeComponentViewModel] = Self.config.componentViewModelClasses
+      .map { $0.buildInstance(from: builderInput) }
     
-    let listInput = TKUIHomeViewModel.ListInput(
-      searchText: searchTextPublisher.asObservable(),
-      selected: selectedItem(in: tableView, dataSource: dataSource),
-      accessorySelected: searchResultAccessoryTapped.asSignal(onErrorSignalWith: .empty())
-    )
-
-    let mapInput = TKUIHomeViewModel.MapInput(
-      mapRect: nearbyMapManager.mapRect,
-      selected: nearbyMapManager.mapSelection,
-      focused: focusedAnnotationPublisher.asSignal(onErrorSignalWith: .empty())
+    // Component view model gets a say on what they want to do
+    // with the table view, e.g., what cells they want to use.
+    components.forEach { $0.registerCell(with: tableView) }
+    
+    // We will be hiding some sections while search in progress. The
+    // Home view model thus needs to know this event.
+    let searchInProgress = searchTextPublisher
+      .map { !$0.0.isEmpty }
+      .asSignal(onErrorJustReturn: false)
+    
+    let cardInputEvent = TKUIHomeViewModel.CardInputEvent(
+      searchInProgress: searchInProgress.startWith(false)
     )
     
-    viewModel = TKUIHomeViewModel(
-      listInput: listInput,
-      mapInput: mapInput
-    )
+    viewModel = TKUIHomeViewModel(componentViewModels: components, event: cardInputEvent)
     
     // List content
     
@@ -142,23 +124,37 @@ public class TKUIHomeCard: TKUITableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    // Map content
-
-    nearbyMapManager.viewModel = viewModel.nearbyViewModel
+    // List interaction
     
-    // Interaction
-    
-    viewModel.selection
-      .emit(onNext: { [weak self] in self?.showRoutes(to: $0) })
+    viewModel.next
+      .emit(onNext:  { [weak self] in self?.handleNext($0) })
       .disposed(by: disposeBag)
     
-    viewModel.accessorySelection
-      .emit(onNext: { [weak self] in self?.showTimetable(for: $0) })
-      .disposed(by: disposeBag)
+    // Map interaction
     
-    viewModel.nextFromMap
-      .emit(onNext:  { [weak self] in self?.handleNextFromMap($0) })
+    homeMapManager?.nextFromMap
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] in self?.handleNext($0) })
       .disposed(by: disposeBag)
+  }
+  
+  public override func willAppear(animated: Bool) {
+    // If the search text is empty when the card appears,
+    // try loading autocompletion results.
+    if let text = searchBar.text, text.isEmpty {
+      searchTextPublisher.onNext(("", forced: true))
+    }
+    
+    cardWillAppearPublisher.onNext(true)
+    
+    // Remove any focused annotation, i.e., restoring any
+    // hideen nearby annotations.
+    focusedAnnotationPublisher.onNext(nil)
+    
+    // Remove any selection on the map
+    homeMapManager?.onHomeCardAppearance(true)
+    
+    super.willAppear(animated: animated)
   }
   
   public override func didAppear(animated: Bool) {
@@ -180,7 +176,7 @@ extension TKUIHomeCard {
     
     TKLocationManager.shared.ask { (enabled) in
       guard enabled else { return }
-      self.nearbyMapManager.mapView?.userTrackingMode = .follow
+      self.homeMapManager?.mapView?.userTrackingMode = .follow
     }
   }
   
@@ -191,18 +187,32 @@ extension TKUIHomeCard {
 extension TKUIHomeCard {
   
   private func prepareForNewCard(onCompletion handler: (() -> Void)? = nil) {
+    searchBar.text = nil
     searchBar.resignFirstResponder()
-    
-    guard let text = searchBar.text, text.isEmpty else {
-      handler?()
-      return
-    }
-    
-    // If a user selects a result without typing anything in the search
-    // bar, i.e., from past searches or favorites, we put the home card
-    // back to its initial position, if provided, when it appears again
-    // . This is replicating a UX flow observed in Apple Maps.
     self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false, onCompletion: handler)
+  }
+  
+  private func handleNext(_ next: TKUIHomeCardNextAction) {
+    switch next {
+    case .present(let controller):
+      self.controller?.present(controller, animated: true)
+      
+      if let selected = tableView.indexPathForSelectedRow {
+        tableView.deselectRow(at: selected, animated: true)
+      }
+      
+    case .push(let card):
+      prepareForNewCard {
+        if self.controller?.topCard == self {
+          self.controller?.push(card)
+        } else {
+          self.controller?.swap(for: card)
+        }
+      }
+      
+    case .selectOnMap(let annotation):
+      homeMapManager?.select(annotation)
+    }
   }
   
   private func showRoutes(to destination: MKAnnotation) {
@@ -299,3 +309,30 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
 }
 
+// MARK: - Table view delegates
+
+extension TKUIHomeCard: UITableViewDelegate {
+  
+  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TKUIHomeCardSectionHeader") as? TKUIHomeCardSectionHeader else {
+      return nil
+    }
+    
+    if let configuration = dataSource.sectionModels[section].headerConfiguration {
+      header.label.text = configuration.title
+      if let action = configuration.action {
+        header.button.setTitle(action.title, for: .normal)
+        header.button.rx.tap
+          .subscribe(onNext: { [weak self] in self?.handleNext(action.handler()) })
+          .disposed(by: disposeBag)
+      }
+        
+    } else {
+      header.label.text = nil
+      header.button.setTitle(nil, for: .normal)
+    }
+    
+    return header
+  }
+  
+}
