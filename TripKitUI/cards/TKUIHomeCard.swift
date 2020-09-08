@@ -63,6 +63,10 @@ public class TKUIHomeCard: TKUITableCard {
     
     requestLocationServicesIfNeeded()
     
+    if let topItems = Self.config.topMapToolbarItems {
+      self.topMapToolBarItems = topItems
+    }
+    
     tableView.register(TKUIHomeCardSectionHeader.self, forHeaderFooterViewReuseIdentifier: "TKUIHomeCardSectionHeader")
     
     tableView.dataSource = nil

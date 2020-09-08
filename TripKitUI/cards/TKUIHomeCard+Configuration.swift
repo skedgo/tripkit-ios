@@ -36,6 +36,10 @@ public extension TKUIHomeCard {
     /// The default value is `true`
     public var requestLocationServicesOnLoad: Bool = true
     
+    /// Set this to place actionable items on the map view. Items are arranged
+    /// vertically. 
+    public var topMapToolbarItems: [UIView]?
+    
     /// Set this to add a list of autocompletion providers to use.
     ///
     /// The default providers, if none is provided, are Apple and SkedGo geocoders.
