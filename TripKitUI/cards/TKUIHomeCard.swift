@@ -42,12 +42,12 @@ public class TKUIHomeCard: TKUITableCard {
   
   private let homeMapManager: TKUICompatibleHomeMapManager?
   
-  public init(mapManager: TKUICompatibleHomeMapManager? = nil) {
+  public init(mapManager: TKUICompatibleHomeMapManager? = nil, initialPosition: TGCardPosition? = .peaking) {
     self.homeMapManager = mapManager
 
     // Home card requires a custom title view that includes
     // a search bar only.
-    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager)
+    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition)
     
     searchBar.delegate = self
   }
