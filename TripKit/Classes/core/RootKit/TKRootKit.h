@@ -9,18 +9,18 @@
 #ifndef TripKit_TKRootKit_h
 #define TripKit_TKRootKit_h
 
-#import "TKEnums.h"
-#import "TKConfig.h"
-#import "TKCrossPlatform.h"
+#import <TripKit/TKEnums.h>
+#import <TripKit/TKConfig.h>
+#import <TripKit/TKCrossPlatform.h>
 
-#import "NSDate+Helpers.h"
-#import "NSManagedObjectContext+SimpleFetch.h"
-#import "NSUserDefaults+SharedDefaults.h"
+#import <TripKit/NSDate+Helpers.h>
+#import <TripKit/NSManagedObjectContext+SimpleFetch.h>
+#import <TripKit/NSUserDefaults+SharedDefaults.h>
 
-#import "TKLocationHelper.h"
+#import <TripKit/TKLocationHelper.h>
 
-#import "TKBetaHelper.h"
+#import <TripKit/TKBetaHelper.h>
 
-#import "TKStyleManager.h"
+#import <TripKit/TKStyleManager.h>
 
 #endif

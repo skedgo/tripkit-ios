@@ -8,8 +8,8 @@
 
 #import <MapKit/MapKit.h>
 
-#import "SGDeprecatedAutocompletionDataProvider.h"
-#import "SGDeprecatedGeocoder.h"
+#import <TripKit/SGDeprecatedAutocompletionDataProvider.h>
+#import <TripKit/SGDeprecatedGeocoder.h>
 
 @class TKRegion;
 

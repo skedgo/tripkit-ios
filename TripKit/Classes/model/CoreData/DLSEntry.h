@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "StopVisits.h"
+
+#import <TripKit/StopVisits.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

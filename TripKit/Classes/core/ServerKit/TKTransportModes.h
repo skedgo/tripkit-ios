@@ -6,7 +6,7 @@
 //
 //
 
-#import "TKCrossPlatform.h"
+#import <TripKit/TKCrossPlatform.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

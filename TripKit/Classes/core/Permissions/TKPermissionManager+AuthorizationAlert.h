@@ -6,9 +6,9 @@
 //
 //
 
-#import "TKPermissionManager.h"
+#import <TripKit/TKPermissionManager.h>
 
-#import "TKCrossPlatform.h"
+#import <TripKit/TKCrossPlatform.h>
 
 #if TARGET_OS_IPHONE
 

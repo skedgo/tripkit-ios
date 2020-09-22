@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-#import "SGSearchDataSource.h"
+#import <TripKitUI/SGSearchDataSource.h>
 
 @class TKAutocompletionResult;
 @class SGAutocompletionDataSourceSwiftStorage;

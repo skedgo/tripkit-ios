@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SGDeprecatedAutocompletionDataProvider.h"
+#import <TripKit/SGDeprecatedAutocompletionDataProvider.h>
 
 @interface TKRegionAutocompleter : NSObject <SGDeprecatedAutocompletionDataProvider>
 

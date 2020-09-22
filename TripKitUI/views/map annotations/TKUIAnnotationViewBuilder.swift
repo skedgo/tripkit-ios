@@ -147,15 +147,17 @@ private extension TKUIAnnotationViewBuilder {
     if let url = glyphable.glyphImageURL {
       ImageDownloader.default.downloadImage(
         with: url,
-        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))])
-      { result in
-        guard
-          let imageResult = try? result.get(),
-          let latest = view.annotation as? TKUIGlyphableAnnotation,
-          latest.glyphImageURL == imageResult.url
-          else { return }
-        view.glyphImage = imageResult.image
-      }
+        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))],
+        completionHandler:
+          { result in
+            guard
+              let imageResult = try? result.get(),
+              let latest = view.annotation as? TKUIGlyphableAnnotation,
+              latest.glyphImageURL == imageResult.url
+            else { return }
+            view.glyphImage = imageResult.image
+          }
+      )
     }
     
     if let modeAnnotation = glyphable as? TKUIModeAnnotation {

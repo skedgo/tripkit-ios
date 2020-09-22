@@ -48,14 +48,14 @@ extension UIImageView {
       options.append(.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate)))
     }
     
-    kf.setImage(with: url, placeholder: placeholder, options: options) { result in
+    kf.setImage(with: url, placeholder: placeholder, options: options, completionHandler: { result in
       switch result {
       case .success:
         completion?(true)
       case .failure:
         completion?(false)
       }
-    }
+    })
   }
   
 }
@@ -75,14 +75,14 @@ extension UIButton {
       options.append(.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate)))
     }
     
-    kf.setImage(with: url, for: state, placeholder: placeholder, options: options) { result in
+    kf.setImage(with: url, for: state, placeholder: placeholder, options: options, completionHandler: { result in
       switch result {
       case .success:
         completion?(true)
       case .failure:
         completion?(false)
       }
-    }
+    })
   }
   
 }

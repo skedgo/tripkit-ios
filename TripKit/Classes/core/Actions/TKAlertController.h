@@ -6,7 +6,7 @@
 //
 //
 
-#import "TKCrossPlatform.h"
+#import <TripKit/TKCrossPlatform.h>
 
 #if TARGET_OS_IPHONE
 

@@ -46,6 +46,7 @@ public class TKUIHomeViewModel {
           .compactMap { $0 }
           .filter { !$0.items.isEmpty || $0.headerConfiguration?.action != nil }
       }
+      .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
       .asDriver(onErrorJustReturn: [])
       .startWith([])
     
