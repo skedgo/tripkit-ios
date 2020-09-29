@@ -47,6 +47,13 @@ class TKUIAutocompletionViewModel {
       case .action(let item): return item.provider
       }
     }
+    
+    var isAction: Bool {
+      switch self {
+      case .action: return true
+      case .autocompletion, .currentLocation: return false
+      }
+    }
   }
   
   struct AutocompletionItem {
@@ -86,22 +93,20 @@ class TKUIAutocompletionViewModel {
       .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
+      .compactMap(\.annotation)
       .asObservable()
-      .compactMap { $0.annotation }
       .flatMapLatest { $0 }
       .asSignal(onErrorSignalWith: .empty())
     
     accessorySelection = (accessorySelected  ?? .empty())
+      .compactMap(\.result)
       .asObservable()
-      .compactMap { $0.result }
-      .flatMapLatest { $0.annotation }
+      .flatMapLatest(\.annotation)
       .asSignal(onErrorSignalWith: .empty())
 
     triggerAction = selected
-      .asObservable()
-      .compactMap { $0.provider }
-      .asSignal(onErrorSignalWith: .empty())
-    
+      .filter(\.isAction)
+      .compactMap(\.provider)
   }
   
   let sections: Driver<[Section]>
