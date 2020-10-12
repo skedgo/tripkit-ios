@@ -62,7 +62,7 @@ extension TKUIAutocompletionViewModel: TKUIHomeComponentViewModel {
       let cell = tableView.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: indexPath) as? TKUIAutocompletionResultCell
       else { assertionFailure("Unable to load an instance of TKUIAutocompletionResultCell"); return nil }
     
-    cell.configure(with: autocompleteItem)    
+    cell.configure(with: autocompleteItem)
     return cell
   }
   

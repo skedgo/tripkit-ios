@@ -48,6 +48,7 @@ open class TKUIHomeViewController: TGCardViewController {
     TKUIHomeCard.config.autocompletionDataProviders = autocompletionDataProviders
     
     let homeCard = TKUIHomeCard()
+    homeCard.style = TKUICustomization.shared.cardStyle
     homeCard.searchResultDelegate = searchResultsDelegate
     rootCard = homeCard
     

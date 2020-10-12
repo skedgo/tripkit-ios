@@ -50,6 +50,7 @@ public class TKUIHomeCard: TKUITableCard {
     super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition)
     
     searchBar.delegate = self
+    searchBar.barTintColor = .tkBackground
   }
   
   required convenience init?(coder: NSCoder) {
