@@ -16,6 +16,8 @@ public enum TKUIHomeCardNextAction {
   
   case present(UIViewController)
   
-  case selectOnMap(MKAnnotation)
+  /// Use this for the home card to decide what to do when selecing the provided annotation by the provided component.
+  /// The home card will take action according to how it's `selectionMode` is set.
+  case handleSelection(MKAnnotation, component: TKUIHomeComponentViewModel)
   
 }

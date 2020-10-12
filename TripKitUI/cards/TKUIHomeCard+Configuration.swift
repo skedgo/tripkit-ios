@@ -22,6 +22,19 @@ public extension TKUIHomeCard {
     public let mapRect: Driver<MKMapRect>
   }
   
+  enum SelectionMode {
+    /// Home selection will always be passed to the home map manager, for that to handle it.
+    case selectOnMap
+    
+    /// Execute the provided callback on tap; the component will only be set if selected via
+    /// the card itself and not something on the map. The closure returns a boolean indicating
+    /// whether other annotations should be hidden when the selection is made.
+    case callback((MKAnnotation, TKUIHomeComponentViewModel?) -> Bool)
+    
+    /// Default handling shows timetable for stops and routing results for others
+    case `default`
+  }
+  
   struct Configuration {
     // We don't want this to be initialised.
     private init() {}
@@ -54,14 +67,9 @@ public extension TKUIHomeCard {
     /// to build its content
     public var componentViewModelClasses: [TKUIHomeComponentViewModel.Type] = [TKUIAutocompletionViewModel.self]
     
-    /// Set this to add a tap-action to a non-stop map annotation in the home
-    /// card. The closure returns a boolean indicating whether other annotations
-    /// should be hidden when the selection is made.
-    ///
-    /// Handler will be called when the user taps a non-stop annotation in the
-    /// map. You can, for example, use this to present a detailed view of the
-    /// location.
-    public var presentLocationHandler: ((TKUIHomeCard, TKModeCoordinate) -> Bool)?
+    /// Set this to customise what should happen if map content or an autocompletion
+    /// result is tapped (or whenever one of your component view models calls `.handleSelection`)
+    public var selectionMode: SelectionMode = .default
   }
   
 }

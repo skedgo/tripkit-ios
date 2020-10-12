@@ -51,7 +51,7 @@ extension TKUIAutocompletionViewModel: TKUIHomeComponentViewModel {
   }
   
   var nextAction: Signal<TKUIHomeCardNextAction> {
-    return selection.map { .selectOnMap($0) }
+    return selection.map { .handleSelection($0, component: self) }
   }
   
   func cell(for item: TKUIHomeViewModel.Item, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell? {

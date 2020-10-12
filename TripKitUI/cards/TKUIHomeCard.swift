@@ -215,8 +215,25 @@ extension TKUIHomeCard {
         }
       }
       
-    case .selectOnMap(let annotation):
-      homeMapManager?.select(annotation)
+    case let .handleSelection(annotation, component):
+      switch Self.config.selectionMode {
+      case .selectOnMap:
+        homeMapManager?.select(annotation)
+      case let .callback(handler):
+        if handler(annotation, component) {
+          focusedAnnotationPublisher.onNext(annotation)
+        }
+      case .default:
+        prepareForNewCard {
+          let card: TGCard
+          if let stop = annotation as? TKUIStopAnnotation {
+            card = TKUITimetableCard(stops: [stop])
+          } else {
+            card = TKUIRoutingResultsCard(destination: annotation)
+          }
+          self.controller?.push(card)
+        }
+      }
     }
   }
   
@@ -255,20 +272,6 @@ extension TKUIHomeCard {
       // This removes nearby annotations and leaves only the stop
       // visible on the map.
       self.focusedAnnotationPublisher.onNext(stop)
-    }
-  }
-  
-  private func handleTap(on location: TKModeCoordinate) {
-    guard let handler = TKUIHomeCard.config.presentLocationHandler else { return }
-    if handler(self, location) {
-      focusedAnnotationPublisher.onNext(location)
-    }
-  }
-  
-  private func handleNextFromMap(_ next: TKUINearbyViewModel.Next) {
-    switch next {
-    case .stop(let stop): showTimetable(for: stop)
-    case .location(let location): handleTap(on: location)
     }
   }
   
