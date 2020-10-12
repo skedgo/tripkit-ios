@@ -10,6 +10,10 @@ import Foundation
 
 extension Loc {
   
+  public static var SearchForDestination: String {
+    return NSLocalizedString("Search for destination", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+  
   public static var PlanATripAndItllShowUpHere: String {
     return NSLocalizedString("Plan a trip and it will show up here.", tableName: "TripKit", bundle: .tripKit, comment: "")
   }

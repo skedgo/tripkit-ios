@@ -18,7 +18,8 @@ extension TKUIAutocompletionViewModel: TKUIHomeComponentViewModel {
       providers: TKUIHomeCard.config.autocompletionDataProviders ?? [],
       searchText: inputs.searchText,
       selected: inputs.itemSelected.compactMap { $0.componentViewModelItem as? TKUIAutocompletionViewModel.Item }.asSignal(onErrorSignalWith: .empty()),
-      accessorySelected: inputs.itemAccessoryTapped.compactMap { $0.componentViewModelItem as? TKUIAutocompletionViewModel.Item }
+      accessorySelected: inputs.itemAccessoryTapped.compactMap { $0.componentViewModelItem as? TKUIAutocompletionViewModel.Item },
+      biasMapRect: inputs.mapRect
     )
   }
   
@@ -45,7 +46,8 @@ extension TKUIAutocompletionViewModel: TKUIHomeComponentViewModel {
           
           // Place them into a compatible home card section
           let configuration = searching ? nil : TKUIHomeViewModel.Section.HeaderConfiguration(title: "Search history")
-          return TKUIHomeViewModel.Section(identity: "single-autocomplete-section", items: homeCardItems, headerConfiguration: configuration)
+          let id = searching ? "single-autocomplete-section-active" : "single-autocomplete-section"
+          return TKUIHomeViewModel.Section(identity: id, items: homeCardItems, headerConfiguration: configuration)
         }
     }
   }
