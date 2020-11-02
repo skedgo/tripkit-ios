@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-#import <TripKit/TKCrossPlatform.h>
+#import "TKCrossPlatform.h"
 
 typedef NS_ENUM(NSInteger, TKAutocompletionSearchIcon) {
 	TKAutocompletionSearchIconCalendar,

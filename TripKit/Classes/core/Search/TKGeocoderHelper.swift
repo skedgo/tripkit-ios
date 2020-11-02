@@ -10,11 +10,9 @@ import RxSwift
 
 extension TKGeocoding {
   
-  public func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Bool> {
+  public func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
     
     return TKGeocoderHelper.geocode(object, using: self, near: region)
-      .map { true }
-      .catchErrorJustReturn(false)
   }
   
 }

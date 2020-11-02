@@ -13,7 +13,6 @@ import TripKit
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 public class TKUINearbyViewModel {
   
@@ -181,19 +180,3 @@ public class TKUINearbyViewModel {
   public let searchResultToShow: Driver<MKAnnotation?>
   
 }
-
-// MARK: - Helpful extensions
-
-extension Array {
-  
-  public func tk_filterDuplicates(includeElement: @escaping (_ lhs: Element, _ rhs: Element) -> Bool) -> [Element] {
-    
-    return reduce(into: []) { acc, element in
-      if nil == acc.first(where: { includeElement(element, $0) }) {
-        acc.append(element)
-      }
-    }
-    
-  }
-}
-

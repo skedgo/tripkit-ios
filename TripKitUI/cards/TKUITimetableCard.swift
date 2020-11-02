@@ -11,7 +11,6 @@ import Foundation
 import TGCardViewController
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 @available(*, unavailable, renamed: "TKUITimetableCard")
 public typealias TKUIDeparturesCard = TKUITimetableCard

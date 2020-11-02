@@ -8,7 +8,7 @@
 
 #import <EventKit/EventKit.h>
 
-#import <TripKit/TKPermissionManager+AuthorizationAlert.h>
+#import "TKPermissionManager+AuthorizationAlert.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

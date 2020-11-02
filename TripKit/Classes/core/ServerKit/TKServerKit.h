@@ -9,12 +9,12 @@
 #ifndef TripKit_TKServerKit_h
 #define TripKit_TKServerKit_h
 
-#import <TripKit/TKRootKit.h>
+#import "TKRootKit.h"
 
-#import <TripKit/TKServer.h>
+#import "TKServer.h"
 
-#import <TripKit/TKTransportModes.h>
+#import "TKTransportModes.h"
 
-#import <TripKit/CLLocation+DecodePolylineString.h>
+#import "CLLocation+DecodePolylineString.h"
 
 #endif

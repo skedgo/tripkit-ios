@@ -10,50 +10,34 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import RxDataSources
-
-/// This is the `item` that will be used in the context of
-/// `RxTableViewSectionedAnimatedDataSource`
-public protocol TKUIHomeComponentViewModelItem {
-  
-  /// This is a string that will be used by `RxTableViewSectionedAnimatedDataSource`
-  /// to determine if two items are identical when animating cells in and out of a table view.
-  var identity: String { get }
-  
-}
 
 extension TKUIHomeViewModel {
   
-  public struct Item {
-    public let componentViewModelItem: TKUIHomeComponentViewModelItem
+  enum Item {
+    case component(TKUIHomeComponentItem)
+    case search(TKUIAutocompletionViewModel.Item)
+  }
+
+  public struct HeaderConfiguration {
+    public let title: String
+    public var action: (title: String, handler: () -> TKUIHomeCardNextAction)?
     
-    public init(item: TKUIHomeComponentViewModelItem) {
-      self.componentViewModelItem = item
+    public init(title: String, action: (String, () -> TKUIHomeCardNextAction)? = nil) {
+      self.title = title
+      self.action = action
     }
   }
   
-  public struct Section {
+  struct Section {
+    let identity: String
+    var items: [Item]
+    var headerConfiguration: HeaderConfiguration?
     
-    public struct HeaderConfiguration {
-      public let title: String
-      public var action: (title: String, handler: () -> TKUIHomeCardNextAction)?
-      
-      public init(title: String, action: (String, () -> TKUIHomeCardNextAction)? = nil) {
-        self.title = title
-        self.action = action
-      }
-    }
-    
-    public let identity: String
-    public var items: [Item]
-    public var headerConfiguration: HeaderConfiguration?
-    
-    public init(identity: String, items: [Item], headerConfiguration: HeaderConfiguration? = nil) {
+    init(identity: String, items: [Item], headerConfiguration: HeaderConfiguration? = nil) {
       self.identity = identity
       self.items = items
       self.headerConfiguration = headerConfiguration
     }
-    
   }
 
 }
@@ -63,23 +47,31 @@ extension TKUIHomeViewModel {
 extension TKUIHomeViewModel.Item: Equatable {
 }
 
-public func == (lhs: TKUIHomeViewModel.Item, rhs: TKUIHomeViewModel.Item) -> Bool {
-  return lhs.componentViewModelItem.identity == rhs.componentViewModelItem.identity
+func == (lhs: TKUIHomeViewModel.Item, rhs: TKUIHomeViewModel.Item) -> Bool {
+  switch (lhs, rhs) {
+  case let (.component(left), .component(right)): return left.identity == right.identity
+  case let (.search(left), .search(right)): return left == right
+  default: return false
+  }
 }
 
 extension TKUIHomeViewModel.Item: IdentifiableType {
   
-  public typealias Identity = String
+  typealias Identity = String
   
-  public var identity: Identity { componentViewModelItem.identity }
-  
+  var identity: Identity {
+    switch self {
+    case .component(let item): return item.identity
+    case .search(let item): return item.identity
+    }
+  }
 }
 
 extension TKUIHomeViewModel.Section: AnimatableSectionModelType {
   
-  public typealias Identity = String
+  typealias Identity = String
   
-  public init(original: TKUIHomeViewModel.Section, items: [TKUIHomeViewModel.Item]) {
+  init(original: TKUIHomeViewModel.Section, items: [TKUIHomeViewModel.Item]) {
     self = original
     self.items = items
   }

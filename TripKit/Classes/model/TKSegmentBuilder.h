@@ -10,7 +10,7 @@
 @import CoreData;
 @import MapKit;
 
-#import <TripKit/TKCrossPlatform.h>
+#import "TKCrossPlatform.h"
 
 @class TKSegment;
 

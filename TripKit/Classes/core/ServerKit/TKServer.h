@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <TripKit/TKRootKit.h>
+#import "TKRootKit.h"
 
 #define kTKServerErrorTypeUser      30051
 #define kTKErrorTypeInternal  30052

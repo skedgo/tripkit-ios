@@ -9,7 +9,6 @@
 import Foundation
 
 import RxSwift
-import RxDataSources 
 
 extension TKUISegmentDirectionsViewModel {
   

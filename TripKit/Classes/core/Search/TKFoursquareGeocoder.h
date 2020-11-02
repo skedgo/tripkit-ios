@@ -6,9 +6,9 @@
 //
 //
 
-#import <TripKit/SGDeprecatedAutocompletionDataProvider.h>
+#import "SGDeprecatedAutocompletionDataProvider.h"
 
-#import <TripKit/SGDeprecatedGeocoder.h>
+#import "SGDeprecatedGeocoder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

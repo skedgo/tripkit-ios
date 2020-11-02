@@ -4,5 +4,4 @@ github "nighthawk/ASPolygonKit"
 
 # TripKitUI
 github "onevcat/Kingfisher" ~> 5.4
-github "RxSwiftCommunity/RxDataSources" ~> 4.0
 git "git@gitlab.com:SkedGo/iOS/TGCardViewController.git" "master"

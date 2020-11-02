@@ -14,7 +14,6 @@ extension TKCalendarManager: TKAutocompleting {
   
   enum AutocompletionError: Error {
     case unexpectedResultObject
-    case couldNotResolveEvent
   }
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
@@ -52,9 +51,8 @@ extension TKCalendarManager: TKAutocompleting {
       let geocoder = helperGeocoder as? TKAppleGeocoder ?? TKAppleGeocoder()
       helperGeocoder = geocoder
 
-      return geocoder
-        .geocode(annotation, near: .world)
-        .map { _ in annotation } // TODO: Only if success
+      return geocoder.geocode(annotation, near: .world)
+        .map { annotation }
     }
   }
   

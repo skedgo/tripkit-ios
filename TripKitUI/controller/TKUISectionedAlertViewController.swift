@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import RxDataSources
 import SafariServices
 
 @available(*, unavailable, renamed: "TKUISectionedAlertViewController")

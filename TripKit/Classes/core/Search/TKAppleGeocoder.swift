@@ -27,8 +27,6 @@ public class TKAppleGeocoder: NSObject {
     self.completer = MKLocalSearchCompleter()
     
     super.init()
-    
-    completer.filterType = .locationsOnly
   }
   
 }
@@ -60,6 +58,13 @@ extension TKAppleGeocoder: TKAutocompleting {
     completer.delegate = completerDelegate
     completer.region = MKCoordinateRegion(mapRect)
     completer.queryFragment = input
+    
+    if #available(iOS 13, macOS 10.15, *) {
+      completer.resultTypes = [.address, .pointOfInterest]
+    } else {
+      completer.filterType = .locationsOnly
+    }
+    
     return completerDelegate.results
       .map { $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) } }
       .take(1)

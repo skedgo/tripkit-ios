@@ -316,9 +316,4 @@ extension TKNamedCoordinate: TKGeocodable {
     _address = address
   }
   
-  public var didAttemptGeocodingBefore: Bool {
-    get { return (data["didAttemptGeocodingBefore"] as? Bool) ?? false }
-    set { data["didAttemptGeocodingBefore"] = newValue }
-  }
-  
 }
