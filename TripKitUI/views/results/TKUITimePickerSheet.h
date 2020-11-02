@@ -10,7 +10,7 @@
 
 @import TripKit;
 
-#import <TripKitUI/TKUISheet.h>
+#import "TKUISheet.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

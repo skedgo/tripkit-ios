@@ -11,7 +11,6 @@ import Foundation
 import TGCardViewController
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 #if TK_NO_MODULE
 #else
@@ -393,7 +392,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
 
 extension TKUIRoutingResultsCard {
   
-  static func cell(dataSource: RxDataSources.TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {    
+  static func cell(dataSource: TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {    
     switch item {
     case .progress:
       let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell

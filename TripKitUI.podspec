@@ -23,8 +23,6 @@ Pod::Spec.new do |s|
   s.dependency 'TGCardViewController', '>= 1.3.1'
 
   s.dependency 'Kingfisher', '~> 5.8'
-  s.dependency 'RxDataSources', '~> 4.0'
-
   
   s.source_files = [
     "TripKitUI-iOS/*.h",

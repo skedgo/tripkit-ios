@@ -9,13 +9,13 @@
 import Foundation
 import MapKit
 
-import RxDataSources
 import RxCocoa
 import RxSwift
 
 class TKUIAutocompletionViewModel {
   
   struct Section {
+    let identifier: String
     var items: [Item]
     let title: String?
   }
@@ -85,28 +85,45 @@ class TKUIAutocompletionViewModel {
     searchText: Observable<(String, forced: Bool)>,
     selected: Signal<Item>,
     accessorySelected: Signal<Item>? = nil,
+    refresh: Signal<Void> = .never(),
     biasMapRect: Driver<MKMapRect> = .just(.null)
   ) {
+    let errorPublisher = PublishSubject<Error>()
     
-    sections = TKUIAutocompletionViewModel
-      .buildSections(providers, searchText: searchText, biasMapRect: biasMapRect, includeAccessory: accessorySelected != nil)
+    sections = Self.buildSections(providers, searchText: searchText, refresh: refresh, biasMapRect: biasMapRect, includeAccessory: accessorySelected != nil)
       .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
       .compactMap(\.annotation)
       .asObservable()
-      .flatMapLatest { $0 }
+      .flatMapLatest { fetched -> Observable<MKAnnotation> in
+        return fetched
+          .asObservable()
+          .catchError { error in
+            errorPublisher.onNext(error)
+            return Observable.empty()
+        }
+      }
       .asSignal(onErrorSignalWith: .empty())
     
     accessorySelection = (accessorySelected  ?? .empty())
       .compactMap(\.result)
       .asObservable()
-      .flatMapLatest(\.annotation)
+      .flatMapLatest { result -> Observable<MKAnnotation> in
+        return result.annotation
+          .asObservable()
+          .catchError { error in
+            errorPublisher.onNext(error)
+            return Observable.empty()
+        }
+      }
       .asSignal(onErrorSignalWith: .empty())
 
     triggerAction = selected
       .filter(\.isAction)
       .compactMap(\.provider)
+    
+    error = errorPublisher.asSignal(onErrorSignalWith: .never())
   }
   
   let sections: Driver<[Section]>
@@ -115,7 +132,11 @@ class TKUIAutocompletionViewModel {
   
   let accessorySelection: Signal<MKAnnotation>
   
+  /// Fires when user taps on the "additional action" element of a `TKAutocompleting`
+  /// provider. If that's the case, you should call `triggerAdditional` on it.
   let triggerAction: Signal<TKAutocompleting>
+  
+  let error: Signal<Error>
 }
 
 
@@ -123,15 +144,20 @@ class TKUIAutocompletionViewModel {
 
 extension TKUIAutocompletionViewModel {
   
-  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<(String, forced: Bool)>, biasMapRect: Driver<MKMapRect>, includeAccessory: Bool) -> Observable<[Section]> {
+  private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<(String, forced: Bool)>, refresh: Signal<Void>, biasMapRect: Driver<MKMapRect>, includeAccessory: Bool) -> Observable<[Section]> {
     
     let additionalItems = providers
       .compactMap(ActionItem.init)
       .map { Item.action($0) }
-    let additionalSection = additionalItems.isEmpty ? [] : [Section(items: additionalItems, title: Loc.MoreResults)]
+    let additionalSection = additionalItems.isEmpty ? [] : [Section(identifier: "actions", items: additionalItems, title: Loc.MoreResults)]
+    
+    let searchTrigger: Observable<MKMapRect>
+      = Observable.combineLatest(
+        refresh.asObservable().startWith(()),
+        biasMapRect.asObservable()
+      ) { $1 }
 
-    return biasMapRect
-      .asObservable()
+    return searchTrigger
       .flatMapLatest { providers.autocomplete(searchText, mapRect: $0) }
       .map { $0.buildSections(includeAccessory: includeAccessory) + additionalSection }
   }
@@ -147,9 +173,9 @@ extension Array where Element == TKAutocompletionResult {
     }
     
     if items.isEmpty {
-      return [TKUIAutocompletionViewModel.Section(items: [.currentLocation], title: nil)]
+      return [TKUIAutocompletionViewModel.Section(identifier: "current-location", items: [.currentLocation], title: nil)]
     } else {
-      return [TKUIAutocompletionViewModel.Section(items: items, title: nil)]
+      return [TKUIAutocompletionViewModel.Section(identifier: "results", items: items, title: nil)]
     }
   }
   
@@ -194,7 +220,6 @@ extension TKUIAutocompletionViewModel.Item: IdentifiableType {
 }
 
 extension TKUIAutocompletionViewModel.Section: AnimatableSectionModelType {
-  typealias Identity = String
   typealias Item = TKUIAutocompletionViewModel.Item
   
   init(original: TKUIAutocompletionViewModel.Section, items: [Item]) {
@@ -202,7 +227,5 @@ extension TKUIAutocompletionViewModel.Section: AnimatableSectionModelType {
     self.items = items
   }
   
-  var identity: Identity {
-    return "Single section"
-  }
+  var identity: String { identifier }
 }

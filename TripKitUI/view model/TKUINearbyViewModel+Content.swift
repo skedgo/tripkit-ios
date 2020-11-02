@@ -14,7 +14,6 @@ import TripKit
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 extension TKUINearbyViewModel {
   

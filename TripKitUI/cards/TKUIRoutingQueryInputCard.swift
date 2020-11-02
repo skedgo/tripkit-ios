@@ -11,7 +11,6 @@ import Foundation
 import TGCardViewController
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 #if TK_NO_MODULE
 #else

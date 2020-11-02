@@ -7,8 +7,7 @@
 //
 
 @import CoreLocation;
-
-#import <TripKit/TKCrossPlatform.h>
+#import "TKCrossPlatform.h"
 
 typedef NS_ENUM(NSInteger, TKStyleModeIconType) {
 	TKStyleModeIconTypeListMainMode,

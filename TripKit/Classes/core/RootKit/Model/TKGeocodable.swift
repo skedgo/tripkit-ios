@@ -13,7 +13,6 @@ import CoreLocation
 public protocol TKGeocodable {
   var addressForGeocoding: String? { get }
   var needsForwardGeocoding: Bool { get }
-  var didAttemptGeocodingBefore: Bool { get set }
   func assign(_ coordinate: CLLocationCoordinate2D, forAddress: String)
 }
 

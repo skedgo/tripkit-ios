@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-#import <TripKit/TKCrossPlatform.h>
-#import <TripKit/TKVehicleType.h>
+#import "TKCrossPlatform.h"
+
+#import "TKVehicleType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

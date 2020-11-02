@@ -8,8 +8,6 @@
 
 import Foundation
 
-import RxDataSources
-
 extension TKUIServiceViewModel {
   
   /// Section in a table view

@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-#import <TripKit/TKPermissionManager.h>
-#import <TripKit/TKCrossPlatform.h>
+#import "TKPermissionManager.h"
+#import "TKCrossPlatform.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

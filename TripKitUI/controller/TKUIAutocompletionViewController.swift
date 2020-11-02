@@ -11,8 +11,6 @@ import MapKit
 
 import RxCocoa
 import RxSwift
-import RxDataSources
-
 
 public protocol TKUIAutocompletionViewControllerDelegate: class {
   func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation)
@@ -107,6 +105,10 @@ public class TKUIAutocompletionViewController: UITableViewController {
       .asObservable()
       .flatMapLatest { $0.triggerAdditional(presenter: self).asObservable() }
       .subscribe()
+      .disposed(by: disposeBag)
+    
+    viewModel.error
+      .emit(onNext: { [weak self] in self?.showErrorAsAlert($0) })
       .disposed(by: disposeBag)
     
     tableView.rx.setDelegate(self)

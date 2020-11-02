@@ -11,9 +11,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class TKUIAutocompletionResultCell: UITableViewCell {
+class TKUIAutocompletionResultCell: UITableViewCell {
   
-  public static let reuseIdentifier = "TKUIAutocompletionResultCell"
+  static let reuseIdentifier = "TKUIAutocompletionResultCell"
   
   private var disposeBag: DisposeBag!
 
@@ -31,6 +31,17 @@ public class TKUIAutocompletionResultCell: UITableViewCell {
 
 extension TKUIAutocompletionResultCell {
   
+  func configure(title: String, subtitle: String? = nil, image: UIImage? = nil) {
+    imageView?.image = image
+    imageView?.tintColor = .tkLabelPrimary
+    textLabel?.text = title
+    textLabel?.textColor = .tkLabelPrimary
+    detailTextLabel?.text = subtitle
+    detailTextLabel?.textColor = .tkLabelSecondary
+    contentView.alpha = 1
+    accessoryView = nil
+  }
+  
   func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>? = nil) {
     disposeBag = DisposeBag()
     
@@ -39,29 +50,17 @@ extension TKUIAutocompletionResultCell {
     case .action: configureAction(with: item)
     case .autocompletion: configureAutocompletion(with: item, onAccessoryTapped: onAccessoryTapped)
     }
-
   }
   
   private func configureCurrentLocation(with item: TKUIAutocompletionViewModel.Item) {
     guard case .currentLocation = item else { assertionFailure(); return }
-    
-    imageView?.image = TKAutocompletionResult.image(forType: .currentLocation)
-    imageView?.tintColor = .tkLabelPrimary
-    textLabel?.text = Loc.CurrentLocation
-    textLabel?.textColor = .tkLabelPrimary
-    detailTextLabel?.text = nil
-    accessoryView = nil
+    configure(title: Loc.CurrentLocation, image: TKAutocompletionResult.image(forType: .currentLocation))
   }
   
   private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>?) {
     guard case .autocompletion(let autocompletion) = item else { assertionFailure(); return  }
     
-    imageView?.image = autocompletion.image
-    imageView?.tintColor = .tkLabelPrimary // From SkedGo default icons
-    textLabel?.text = autocompletion.title
-    textLabel?.textColor = .tkLabelPrimary
-    detailTextLabel?.text = autocompletion.subtitle
-    detailTextLabel?.textColor = .tkLabelSecondary
+    configure(title: autocompletion.title, subtitle: autocompletion.subtitle, image: autocompletion.image)
     contentView.alpha = autocompletion.showFaded ? 0.33 : 1
     
     if let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
@@ -71,20 +70,12 @@ extension TKUIAutocompletionResultCell {
         .bind(to: target)
         .disposed(by: disposeBag)
       accessoryView = button
-    } else {
-      accessoryView = nil
     }
   }
   
   private func configureAction(with item: TKUIAutocompletionViewModel.Item) {
     guard case .action(let action) = item else { assertionFailure(); return  }
-    
-    imageView?.image = nil
-    textLabel?.text = action.title
-    textLabel?.textColor = .tkLabelPrimary
-    detailTextLabel?.text = nil
-    contentView.alpha = 1
-    accessoryView = nil
+    configure(title: action.title)
   }
   
 }

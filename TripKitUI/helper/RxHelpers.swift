@@ -10,7 +10,6 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 extension Signal where SharingStrategy == SignalSharingStrategy {
   

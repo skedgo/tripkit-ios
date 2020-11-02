@@ -9,13 +9,13 @@
 #ifndef TripKit_TKTransportKit_h
 #define TripKit_TKTransportKit_h
 
-#import <TripKit/TKServerKit.h>
+#import "TKServerKit.h"
 
 // Protocols
-#import <TripKit/TKVehicleType.h>
+#import "TKVehicleType.h"
 
 // Classes
-#import <TripKit/TKRoutePolyline.h>
-#import <TripKit/TKVehicular.h>
+#import "TKRoutePolyline.h"
+#import "TKVehicular.h"
 
 #endif

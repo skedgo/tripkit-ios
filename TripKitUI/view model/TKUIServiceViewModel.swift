@@ -10,7 +10,6 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 /// View model for displaying and interacting with an individual
 /// transport service.

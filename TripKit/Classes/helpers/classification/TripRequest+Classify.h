@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-#import <TripKit/TripRequest.h>
+#import "TripRequest.h"
 
 @protocol TKTripClassifier;
 

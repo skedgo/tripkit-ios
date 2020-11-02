@@ -10,7 +10,6 @@ import TGCardViewController
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 open class TKUITableCard: TGTableCard {
   
@@ -32,11 +31,11 @@ open class TKUITableCard: TGTableCard {
     #endif
   }
   
-  public func selectedItem<Item, Section>(in tableView: UITableView, dataSource: RxDataSources.TableViewSectionedDataSource<Section>) -> Signal<Item> where Section: SectionModelType, Item == Section.Item {
+  public func selectedItem<Item, Section>(in tableView: UITableView, dataSource: TableViewSectionedDataSource<Section>) -> Signal<Item> where Section: SectionModelType, Item == Section.Item {
     selectedItemWithSender(in: tableView, dataSource: dataSource).map { $0.0 }
   }
   
-  public func selectedItemWithSender<Item, Section>(in tableView: UITableView, dataSource: RxDataSources.TableViewSectionedDataSource<Section>) -> Signal<(Item, sender: Any?)> where Section: SectionModelType, Item == Section.Item {
+  public func selectedItemWithSender<Item, Section>(in tableView: UITableView, dataSource: TableViewSectionedDataSource<Section>) -> Signal<(Item, sender: Any?)> where Section: SectionModelType, Item == Section.Item {
     
     selectedIndex(in: tableView)
       .map { (dataSource[$0], sender: tableView.cellForRow(at: $0)) }

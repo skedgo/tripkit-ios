@@ -12,7 +12,6 @@ import TGCardViewController
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 public class TKUISegmentDirectionsCard: TGTableCard {
   

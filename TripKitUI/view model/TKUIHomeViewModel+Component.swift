@@ -11,6 +11,36 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+public struct TKUIHomeComponentInput {
+  public let homeCardWillAppear: Observable<Bool>
+  public let itemSelected: Signal<TKUIHomeComponentItem>
+  public let itemDeleted: Signal<TKUIHomeComponentItem>
+  public let mapRect: Driver<MKMapRect>
+}
+
+public struct TKUIHomeComponentContent {
+  public init(identity: String, items: [TKUIHomeComponentItem], header: TKUIHomeViewModel.HeaderConfiguration? = nil) {
+    self.identity = identity
+    self.items = items
+    self.header = header
+  }
+  
+  public let identity: String
+  public let header: TKUIHomeViewModel.HeaderConfiguration?
+  public let items: [TKUIHomeComponentItem]
+}
+
+/// This is the `item` that will be used in the context of
+/// `RxTableViewSectionedAnimatedDataSource`
+public protocol TKUIHomeComponentItem {
+  
+  /// This is a string that will be used by `RxTableViewSectionedAnimatedDataSource`
+  /// to determine if two items are identical when animating cells in and out of a table view.
+  var identity: String { get }
+  
+}
+
+
 /// This protocol defines the requirements for any view models that may display
 /// their contents in a `TKUIHomeCard`.
 public protocol TKUIHomeComponentViewModel {
@@ -18,18 +48,17 @@ public protocol TKUIHomeComponentViewModel {
   /// This builds an instance of a view model whose contents may be displayed
   /// in a `TKUIHomeCard`
   /// - Parameter inputs: The inputs from a `TKUIHomeCard`, which may be used by a component view model
-  static func buildInstance(from inputs: TKUIHomeCard.ComponentViewModelInput) -> Self
+  static func buildInstance(from inputs: TKUIHomeComponentInput) -> Self
   
-  /// This closure returns an observable sequence whose element is a model used to populate
-  /// a section of the table view in a `TKUIHomeCard`. The closure input is an observable indicating
-  /// whether the search is in progress. A component view model may use this to filter contents.
-  var homeCardSections: (Observable<Bool>) -> Observable<TKUIHomeViewModel.Section?> { get }
+  /// This closure returns an sequence whose element is a model used to populate
+  /// a section of the table view in a `TKUIHomeCard`.
+  var homeCardSection: Driver<TKUIHomeComponentContent> { get }
   
   /// This returns an action in response to selecting a row in the section returned by
-  /// `homeCardSections`.
+  /// `homeCardSection`.
   var nextAction: Signal<TKUIHomeCardNextAction> { get }
   
-  /// This returns a cell that is used to display a row in the section returned by `homeCardSections`
+  /// This returns a cell that is used to display a row in the section returned by `homeCardSection`
   /// - Parameters:
   ///   - item: The data model used to construct the cell
   ///   - indexPath: The index path at which the item is located
@@ -39,7 +68,7 @@ public protocol TKUIHomeComponentViewModel {
   /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
   /// such, it may change as other component view models are added or removed. It is best not
   /// to use the `section` property when configuring the returned cell.
-  func cell(for item: TKUIHomeViewModel.Item, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell?
+  func cell(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell?
   
   /// This provides a component view model an opportunity to register the cell class
   /// with the table view in a `TKUIHomeCard`
@@ -48,3 +77,11 @@ public protocol TKUIHomeComponentViewModel {
   
 }
 
+extension TKUIHomeViewModel.Item {
+  var componentItem: TKUIHomeComponentItem? {
+    switch self {
+    case .component(let item): return item
+    case .search: return nil
+    }
+  }
+}

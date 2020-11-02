@@ -10,7 +10,6 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 
 import TGCardViewController
 
@@ -29,6 +28,7 @@ public class TKUIHomeCard: TKUITableCard {
   private let focusedAnnotationPublisher = PublishSubject<MKAnnotation?>()
   
   private let cellAccessoryTappedPublisher = PublishSubject<TKUIHomeViewModel.Item>()
+  private let refreshPublisher = PublishSubject<Void>()
   
   private var viewModel: TKUIHomeViewModel!
 
@@ -71,23 +71,36 @@ public class TKUIHomeCard: TKUITableCard {
     }
     
     tableView.register(TKUIHomeCardSectionHeader.self, forHeaderFooterViewReuseIdentifier: "TKUIHomeCardSectionHeader")
+    tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
     tableView.dataSource = nil
     
     self.tableView = tableView
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIHomeViewModel.Section>(
-      configureCell: { [weak self] _, tv, ip, item in
+      configureCell: { [weak self] _, tv, ip, item -> UITableViewCell in
+        var fallback: UITableViewCell { UITableViewCell(style: .default, reuseIdentifier: nil) }
+        
         guard let self = self else {
           // Shouldn't but can happen on dealloc
-          return UITableViewCell(style: .default, reuseIdentifier: nil)
+          return fallback
         }
         
-        guard let cell = (self.viewModel.componentViewModels.compactMap { $0.cell(for: item, at: ip, in: tv) }.first) else {
-          assertionFailure(); return UITableViewCell(style: .default, reuseIdentifier: nil)
+        switch item {
+        case .search(let searchItem):
+          guard
+            let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell
+            else { assertionFailure("Unable to load an instance of TKUIAutocompletionResultCell"); return fallback }
+
+          cell.configure(with: searchItem)
+          return cell
+          
+        case .component(let componentItem):
+          guard let cell = self.viewModel.componentViewModels.compactMap({ $0.cell(for: componentItem, at: ip, in: tv) }).first else {
+            assertionFailure(); return fallback
+          }
+          return cell
         }
-        
-        return cell
       }
     )
     self.dataSource = dataSource
@@ -95,15 +108,13 @@ public class TKUIHomeCard: TKUITableCard {
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
         
-    let builderInput = TKUIHomeCard.ComponentViewModelInput(
+    let builderInput = TKUIHomeComponentInput(
       homeCardWillAppear: cardWillAppearPublisher,
-      searchText: searchTextPublisher,
-      itemSelected: selectedItem(in: tableView, dataSource: dataSource),
-      itemDeleted: tableView.rx.modelDeleted(TKUIHomeViewModel.Item.self).asSignal(),
-      itemAccessoryTapped: cellAccessoryTappedPublisher.asSignal(onErrorSignalWith: .empty()),
+      itemSelected: selectedItem(in: tableView, dataSource: dataSource).compactMap(\.componentItem),
+      itemDeleted: tableView.rx.modelDeleted(TKUIHomeViewModel.Item.self).asSignal().compactMap(\.componentItem),
       mapRect: homeMapManager?.mapRect ?? .empty()
     )
-      
+    
     // The Home view model is in essence a dumb aggregator that
     // relies on component view models to provide it with data.
     let components: [TKUIHomeComponentViewModel] = Self.config.componentViewModelClasses
@@ -118,12 +129,17 @@ public class TKUIHomeCard: TKUITableCard {
     let searchInProgress = searchTextPublisher
       .map { !$0.0.isEmpty }
       .asSignal(onErrorJustReturn: false)
-    
-    let cardInputEvent = TKUIHomeViewModel.CardInputEvent(
-      searchInProgress: searchInProgress.startWith(false)
+
+    let searchInput = TKUIHomeViewModel.SearchInput(
+      searchInProgress: searchInProgress.startWith(false).asDriver(onErrorJustReturn: false),
+      searchText: searchTextPublisher,
+      itemSelected: selectedItem(in: tableView, dataSource: dataSource),
+      itemAccessoryTapped: cellAccessoryTappedPublisher.asSignal(onErrorSignalWith: .empty()),
+      refresh: refreshPublisher.asSignal(onErrorSignalWith: .never()),
+      biasMapRect: homeMapManager?.mapRect ?? .empty()
     )
-    
-    viewModel = TKUIHomeViewModel(componentViewModels: components, event: cardInputEvent)
+
+    viewModel = TKUIHomeViewModel(componentViewModels: components, searchInput: searchInput)
     
     // List content
     
@@ -134,9 +150,13 @@ public class TKUIHomeCard: TKUITableCard {
     // List interaction
     
     viewModel.next
-      .emit(onNext:  { [weak self] in self?.handleNext($0) })
+      .emit(onNext: { [weak self] in self?.handleNext($0) })
       .disposed(by: disposeBag)
     
+    viewModel.error
+      .emit(onNext: { [weak self] in self?.controller?.show($0) })
+      .disposed(by: disposeBag)
+
     // Map interaction
     
     homeMapManager?.nextFromMap
@@ -200,9 +220,11 @@ extension TKUIHomeCard {
   }
   
   private func handleNext(_ next: TKUIHomeCardNextAction) {
+    guard let cardController = controller else { return }
+    
     switch next {
     case .present(let controller):
-      self.controller?.present(controller, animated: true)
+      cardController.present(controller, animated: true)
       
       if let selected = tableView.indexPathForSelectedRow {
         tableView.deselectRow(at: selected, animated: true)
@@ -210,10 +232,10 @@ extension TKUIHomeCard {
       
     case .push(let card):
       prepareForNewCard {
-        if self.controller?.topCard == self {
-          self.controller?.push(card)
+        if cardController.topCard == self {
+          cardController.push(card)
         } else {
-          self.controller?.swap(for: card)
+          cardController.swap(for: card)
         }
       }
       
@@ -233,9 +255,18 @@ extension TKUIHomeCard {
           } else {
             card = TKUIRoutingResultsCard(destination: annotation)
           }
-          self.controller?.push(card)
+          cardController.push(card)
         }
       }
+      
+    case let .handleAction(handler):
+      handler(cardController)
+        .subscribe(onSuccess: { [weak self] refresh in
+          if refresh {
+            self?.refreshPublisher.onNext(())
+          }
+        })
+        .disposed(by: disposeBag)
     }
   }
   

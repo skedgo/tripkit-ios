@@ -9,7 +9,7 @@
 @import CoreData;
 @import MapKit;
 
-#import <TripKit/TripGroup.h>
+#import "TripGroup.h"
 
 @class TKRegion, TKNamedCoordinate, Trip;
 

@@ -29,57 +29,57 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #endif
 
 // Kits
-#import <TripKit/TKRootKit.h>
-#import <TripKit/TKServerKit.h>
-#import <TripKit/TKTransportKit.h>
+#import "TKRootKit.h"
+#import "TKServerKit.h"
+#import "TKTransportKit.h"
 
 // Helpers
 #if TARGET_OS_IPHONE
-#import <TripKit/TKActions.h>
-#import <TripKit/TKAlertController.h>
+#import "TKActions.h"
+#import "TKAlertController.h"
 #endif
 
 // Headers
-#import <TripKit/TKTripKit.h>
-#import <TripKit/TKConstants.h>
+#import "TKTripKit.h"
+#import "TKConstants.h"
 
 // Core Data model classes
-#import <TripKit/TripRequest.h>
-#import <TripKit/TripGroup.h>
-#import <TripKit/Trip.h>
-#import <TripKit/DLSEntry.h>
-#import <TripKit/SegmentReference.h>
-#import <TripKit/Service.h>
-#import <TripKit/Vehicle.h>
-#import <TripKit/Alert.h>
+#import "TripRequest.h"
+#import "TripGroup.h"
+#import "Trip.h"
+#import "DLSEntry.h"
+#import "SegmentReference.h"
+#import "Service.h"
+#import "Vehicle.h"
+#import "Alert.h"
 
 // Non-core data model classes
-#import <TripKit/TKSegmentBuilder.h>
+#import "TKSegmentBuilder.h"
 
 // Helpers
-#import <TripKit/NSManagedObject+TKPersistence.h>
+#import "NSManagedObject+TKPersistence.h"
 
 // Classification
-#import <TripKit/TripRequest+Classify.h>
-#import <TripKit/TKTripClassifier.h>
+#import "TripRequest+Classify.h"
+#import "TKTripClassifier.h"
 
 // Routing
-#import <TripKit/TKSettings.h>
-#import <TripKit/TKCoreDataParserHelper.h>
-#import <TripKit/TKRoutingParser.h>
-#import <TripKit/TKRouter.h>
-#import <TripKit/TKBuzzRealTime.h>
-#import <TripKit/TKBuzzInfoProvider.h>
+#import "TKSettings.h"
+#import "TKCoreDataParserHelper.h"
+#import "TKRoutingParser.h"
+#import "TKRouter.h"
+#import "TKBuzzRealTime.h"
+#import "TKBuzzInfoProvider.h"
 
 // Search
-#import <TripKit/TKAutocompletionResult.h>
-#import <TripKit/TKSkedGoGeocoder.h>
-#import <TripKit/TKFoursquareGeocoder.h>
-#import <TripKit/TKRegionAutocompleter.h>
+#import "TKAutocompletionResult.h"
+#import "TKSkedGoGeocoder.h"
+#import "TKFoursquareGeocoder.h"
+#import "TKRegionAutocompleter.h"
 
 // Permissions
-#import <TripKit/TKCalendarManager.h>
-#import <TripKit/TKLocationManager.h>
+#import "TKCalendarManager.h"
+#import "TKLocationManager.h"
 
 // Deprecated
-#import <TripKit/SGDeprecatedAutocompletionDataProvider.h>
+#import "SGDeprecatedAutocompletionDataProvider.h"
