@@ -38,8 +38,14 @@ public protocol TKUIHomeComponentItem {
   /// to determine if two items are identical when animating cells in and out of a table view.
   var identity: String { get }
   
+  /// This will be used by `RxTableViewSectionedAnimatedDataSource` to determine
+  /// if an item at a specific index path can be edited.
+  var canEdit: Bool { get }
 }
 
+extension TKUIHomeComponentItem {
+  public var canEdit: Bool { false }
+}
 
 /// This protocol defines the requirements for any view models that may display
 /// their contents in a `TKUIHomeCard`.
@@ -74,6 +80,18 @@ public protocol TKUIHomeComponentViewModel {
   /// with the table view in a `TKUIHomeCard`
   /// - Parameter tableView: The table view with which the cell class is registered
   func registerCell(with tableView: UITableView)
+  
+  func leadingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration?
+  
+  func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration?
+  
+}
+
+extension TKUIHomeComponentViewModel {
+  
+  public func leadingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { return nil }
+  
+  public func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { return nil }
   
 }
 

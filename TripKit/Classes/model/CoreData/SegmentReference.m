@@ -25,6 +25,7 @@ typedef NSUInteger SGSegmentFlag;
 @dynamic flags;
 @dynamic index;
 @dynamic templateHashCode;
+@dynamic bookingHashCode;
 @dynamic alertHashCodes;
 @dynamic segmentTemplate;
 @dynamic data;

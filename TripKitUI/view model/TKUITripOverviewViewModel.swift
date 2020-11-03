@@ -21,16 +21,30 @@ class TKUITripOverviewViewModel {
   struct UIInput {
     var selected: Signal<Item> = .empty()
     var isVisible: Driver<Bool> = .just(true)
+    var refresh: Signal<Void> = .empty()
   }
   
   init(trip: Trip, inputs: UIInput = UIInput()) {
     self.trip = trip
     
     titles = trip.rx.titles
+    
+    let tripUpdated: Observable<Trip> = inputs.refresh.startWith(()).asObservable()
+      .flatMapLatest {
+        return TKBuzzRealTime.rx.streamUpdates(trip, active: inputs.isVisible.asObservable())
+          .startWith(trip)
+      }
+      .share(replay: 1, scope: .forever)
         
-    sections = TKBuzzRealTime.rx.streamUpdates(trip, active: inputs.isVisible.asObservable())
-      .startWith(trip)
+    sections = tripUpdated
       .map(Self.buildSections)
+      .asDriver(onErrorJustReturn: [])
+    
+    actions = tripUpdated
+      .map { updated -> [TKUITripOverviewCard.TripAction] in
+        guard let factory = TKUITripOverviewCard.config.tripActionsFactory else { return [] }
+        return factory(updated)
+      }
       .asDriver(onErrorJustReturn: [])
     
     dataSources = Driver.just(trip.tripGroup.sources)
@@ -59,6 +73,8 @@ class TKUITripOverviewViewModel {
   let titles: Driver<(title: String, subtitle: String?)>
   
   let sections: Driver<[Section]>
+  
+  let actions: Driver<[TKUITripOverviewCard.TripAction]>
   
   let dataSources: Driver<[TKAPI.DataAttribution]>
   

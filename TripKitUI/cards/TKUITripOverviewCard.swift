@@ -64,6 +64,7 @@ public class TKUITripOverviewCard: TKUITableCard {
   
   private let alternativesTapped = PublishSubject<IndexPath>()
   private let isVisible = BehaviorSubject<Bool>(value: false)
+  private let refreshContent = PublishSubject<Void>()
   
   private weak var tableView: UITableView?
 
@@ -147,7 +148,8 @@ public class TKUITripOverviewCard: TKUITableCard {
       trip: trip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
-        isVisible: isVisible.asDriver(onErrorJustReturn: true)
+        isVisible: isVisible.asDriver(onErrorJustReturn: true),
+        refresh: refreshContent.asSignal(onErrorSignalWith: .empty())
       )
     )
     
@@ -157,6 +159,13 @@ public class TKUITripOverviewCard: TKUITableCard {
 
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+    
+    viewModel.actions
+      .drive(onNext: { [weak self] actions in
+        guard let self = self else { return }
+        self.tableView?.tableHeaderView = self.buildActionsView(from: actions, trip: self.trip)
+      })
       .disposed(by: disposeBag)
     
     viewModel.dataSources
@@ -174,32 +183,6 @@ public class TKUITripOverviewCard: TKUITableCard {
     viewModel.next
       .emit(onNext: { [weak self] in self?.handle($0) })
       .disposed(by: disposeBag)
-  }
-  
-  public override func willAppear(animated: Bool) {
-    super.willAppear(animated: animated)
-    
-    guard let tv = self.tableView, tv.tableHeaderView == nil else { return }
-    
-    var actions: [TKUITripOverviewCard.TripAction] = []
-    if let factory = TKUITripOverviewCard.config.tripActionsFactory {
-      actions.append(contentsOf: factory(viewModel.trip))
-    }
-    
-    if selectedAlternativeTripCallback != nil {
-      actions.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
-        trip.request.expandForFavorite = true
-        self?.handle(.showAlternativeRoutes(trip.request))
-        return false
-      })
-    }
-    
-    guard !actions.isEmpty else { return }
-
-    let actionsView = TripOverviewCardActionsView(frame: CGRect(x: 0, y: 0, width: tv.frame.width, height: 80))
-    actionsView.configure(with: actions, model: viewModel.trip, card: self)
-    actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-    tv.tableHeaderView = actionsView
   }
   
   public override func didAppear(animated: Bool) {
@@ -223,7 +206,6 @@ public class TKUITripOverviewCard: TKUITableCard {
   
   public override func willDisappear(animated: Bool) {
     super.willDisappear(animated: animated)
-    
     isVisible.onNext(false)
   }
   
@@ -268,11 +250,13 @@ extension TKUITripOverviewCard {
     
     return cell
   }
+  
 }
 
 // MARK: - Attribution
 
 extension TKUITripOverviewCard {
+  
   private func showAttribution(for sources: [TKAPI.DataAttribution], in tableView: UITableView) {
     let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
     footer?.backgroundColor = tableView.backgroundColor
@@ -335,6 +319,38 @@ extension TKUITripOverviewCard {
       card.onSelection = selectedAlternativeTripCallback
       controller?.push(card)
     }
+  }
+  
+}
+
+// MARK: - Trip actions
+
+extension TKUITripOverviewCard {
+  
+  private func buildActionsView(from actions: [TKUITripOverviewCard.TripAction], trip: Trip) -> TripOverviewCardActionsView? {
+    var mutable = actions
+    if selectedAlternativeTripCallback != nil {
+      mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
+        trip.request.expandForFavorite = true
+        self?.handle(.showAlternativeRoutes(trip.request))
+        return false
+      })
+    }
+    
+    guard !mutable.isEmpty else { return nil }
+    
+    let actionsView = TripOverviewCardActionsView(frame: CGRect(x: 0, y: 0, width: 414, height: 80))
+    actionsView.configure(with: mutable, model: trip, card: self)
+    actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    return actionsView
+  }
+
+}
+
+extension TKUITripOverviewCard {
+  
+  public func refresh() {
+    refreshContent.onNext(())
   }
   
 }

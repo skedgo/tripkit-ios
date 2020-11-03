@@ -101,6 +101,13 @@ public class TKUIHomeCard: TKUITableCard {
           }
           return cell
         }
+        
+      }, canEditRowAtIndexPath: { (ds, ip) in
+        let item = ds[ip]
+        switch item {
+        case .search: return false
+        case .component(let componentItem): return componentItem.canEdit
+        }
       }
     )
     self.dataSource = dataSource
@@ -374,6 +381,16 @@ extension TKUIHomeCard: UITableViewDelegate {
     }
     
     return header
+  }
+  
+  public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    guard let item = self.dataSource[indexPath].componentItem else { return nil }
+    return self.viewModel.componentViewModels[indexPath.section].trailingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView)
+  }
+  
+  public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    guard let item = self.dataSource[indexPath].componentItem else { return nil }
+    return self.viewModel.componentViewModels[indexPath.section].leadingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView)
   }
   
 }

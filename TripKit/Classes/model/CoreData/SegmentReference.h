@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * templateHashCode;
+@property (nonatomic, retain, nullable) NSNumber * bookingHashCode;
 @property (nonatomic, retain, nullable) NSData * data;
 @property (nonatomic, retain, nullable) NSArray<NSNumber *> * alertHashCodes;
 @property (nonatomic, retain, nullable) SegmentTemplate *segmentTemplate;

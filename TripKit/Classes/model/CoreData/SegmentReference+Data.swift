@@ -99,6 +99,7 @@ extension SegmentReference {
     vehicleUUID = dict["vehicleUUID"] as? String
     
     // Special booking handling to not lose data
+    bookingHashCode = dict["bookingHashCode"] as? NSNumber
     if let bookingDict = dict["booking"] as? [String: AnyHashable] {
       do {
         bookingData = try JSONDecoder().decode(BookingData.self, withJSONObject: bookingDict)

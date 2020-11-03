@@ -377,7 +377,20 @@ public class TKSegment: NSObject {
   
   // MARK: - Inferred properties: Booking
   
-  private lazy var bookingData: BookingData? = reference?.bookingData
+  private lazy var bookingDataCache: (data: BookingData?, hashCode: Int?) = {
+    return (data: reference?.bookingData, hashCode: reference?.bookingHashCode?.intValue)
+  }()
+  
+  private var bookingData: BookingData? {
+    guard let newHashCode = reference?.bookingHashCode?.intValue else { return bookingDataCache.data }
+    
+    if let oldHashCode = bookingDataCache.hashCode, oldHashCode == newHashCode {
+      return bookingDataCache.data
+    } else {
+      bookingDataCache = (data: reference?.bookingData, hashCode: newHashCode)
+      return bookingDataCache.data
+    }
+  }
 
   @objc public var bookingTitle: String? { bookingData?.title }
   public var bookingInternalURL: URL? { bookingData?.url }
