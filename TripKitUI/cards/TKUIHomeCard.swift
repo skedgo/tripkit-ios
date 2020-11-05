@@ -145,7 +145,7 @@ public class TKUIHomeCard: TKUITableCard {
       itemSelected: selectedItem(in: tableView, dataSource: dataSource),
       itemAccessoryTapped: cellAccessoryTappedPublisher.asSignal(onErrorSignalWith: .empty()),
       refresh: refreshPublisher.asSignal(onErrorSignalWith: .never()),
-      biasMapRect: homeMapManager?.mapRect ?? .empty()
+      biasMapRect: homeMapManager?.mapRect.startWith(.null) ?? .just(.null)
     )
 
     viewModel = TKUIHomeViewModel(componentViewModels: components, searchInput: searchInput)

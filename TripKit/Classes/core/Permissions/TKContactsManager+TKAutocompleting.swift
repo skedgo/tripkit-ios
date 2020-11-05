@@ -30,6 +30,24 @@ extension TKContactsManager: TKAutocompleting {
     return TKContactsManager.geocode(contact).map { $0 as MKAnnotation }
   }
   
+  #if os(iOS) || os(tvOS)
+  @objc
+  public func additionalActionTitle() -> String? {
+    if isAuthorized() { return nil }
+    
+    return NSLocalizedString("Include contacts", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Button to include contacts in search, too.")
+  }
+  
+  public func triggerAdditional(presenter: UIViewController) -> Single<Bool> {
+    return Single.create { [weak self] subscriber in
+      self?.tryAuthorizationForSender(nil, in: presenter) { refresh in
+        subscriber(.success(refresh))
+      }
+      return Disposables.create()
+    }
+  }
+  #endif
+  
   private static func geocode(_ contact: ContactAddress) -> Single<TKNamedCoordinate> {
     return Single.create { subscriber in
       var geocoder: CLGeocoder! = CLGeocoder()
