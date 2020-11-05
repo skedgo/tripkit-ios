@@ -21,7 +21,7 @@ public class TKUIHomeCard: TKUITableCard {
   
   public var searchResultDelegate: TKUIHomeCardSearchResultsDelegate?
   
-  private let cardWillAppearPublisher = PublishSubject<Bool>()
+  private let cardAppearancePublisher = PublishSubject<Bool>()
   
   private let searchTextPublisher = PublishSubject<(String, forced: Bool)>()
   
@@ -116,7 +116,7 @@ public class TKUIHomeCard: TKUITableCard {
       .disposed(by: disposeBag)
         
     let builderInput = TKUIHomeComponentInput(
-      homeCardWillAppear: cardWillAppearPublisher,
+      homeCardWillAppear: cardAppearancePublisher,
       itemSelected: selectedItem(in: tableView, dataSource: dataSource).compactMap(\.componentItem),
       itemDeleted: tableView.rx.modelDeleted(TKUIHomeViewModel.Item.self).asSignal().compactMap(\.componentItem),
       mapRect: homeMapManager?.mapRect ?? .empty()
@@ -179,7 +179,7 @@ public class TKUIHomeCard: TKUITableCard {
       searchTextPublisher.onNext(("", forced: true))
     }
     
-    cardWillAppearPublisher.onNext(true)
+    cardAppearancePublisher.onNext(true)
     
     // Remove any focused annotation, i.e., restoring any
     // hideen nearby annotations.
@@ -195,6 +195,12 @@ public class TKUIHomeCard: TKUITableCard {
     super.didAppear(animated: animated)
     
     TKUIEventCallback.handler(.cardAppeared(self))
+  }
+  
+  public override func didDisappear(animated: Bool) {
+    super.didDisappear(animated: animated)
+    
+    cardAppearancePublisher.onNext(false)
   }
 }
 
