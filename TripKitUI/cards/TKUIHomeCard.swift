@@ -65,9 +65,7 @@ public class TKUIHomeCard: TKUITableCard {
     super.didBuild(tableView: tableView)
     
     tableView.keyboardDismissMode = .onDrag
-    
-    requestLocationServicesIfNeeded()
-    
+        
     if let topItems = Self.config.topMapToolbarItems {
       self.topMapToolBarItems = topItems
     }
@@ -204,24 +202,6 @@ public class TKUIHomeCard: TKUITableCard {
     
     cardAppearancePublisher.onNext(false)
   }
-}
-
-// MARK: -
-
-extension TKUIHomeCard {
-  
-  private func requestLocationServicesIfNeeded() {
-    guard
-      Self.config.requestLocationServicesOnLoad,
-      CLLocationManager.authorizationStatus() == .notDetermined
-      else { return }
-    
-    TKLocationManager.shared.ask { (enabled) in
-      guard enabled else { return }
-      self.homeMapManager?.mapView?.userTrackingMode = .follow
-    }
-  }
-  
 }
 
 // MARK: - Action on search result
