@@ -64,6 +64,8 @@ public class TKUIHomeCard: TKUITableCard {
   public override func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
     
+    tableView.keyboardDismissMode = .onDrag
+    
     requestLocationServicesIfNeeded()
     
     if let topItems = Self.config.topMapToolbarItems {
@@ -333,7 +335,8 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     searchBar.showsCancelButton = true
-    self.controller?.moveCard(to: .extended, animated: true)
+    controller?.moveCard(to: .extended, animated: true)
+    controller?.draggingCardEnabled = false
   }
   
   public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -343,11 +346,13 @@ extension TKUIHomeCard: UISearchBarDelegate {
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     clearSearchBar()
     controller?.moveCard(to: initialPosition ?? .peaking, animated: true)
+    controller?.draggingCardEnabled = true
   }
   
   public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
-    self.controller?.moveCard(to: .peaking, animated: true)
+    controller?.moveCard(to: .peaking, animated: true)
+    controller?.draggingCardEnabled = true
   }
   
   private func clearSearchBar() {
