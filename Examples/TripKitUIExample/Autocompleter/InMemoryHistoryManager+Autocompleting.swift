@@ -8,22 +8,20 @@
 
 import Foundation
 
-import RxSwift
 import TripKitUI
 
 extension InMemoryHistoryManager: TKAutocompleting {
-  
-  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+  func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     let history = input.isEmpty ? fetchDefaultHistory() : fetchHistory(matching: input)
     let results = history.compactMap { InMemoryHistoryManager.autocompletionResult(for: $0, searchText: input)}
-    return .just(results)
+    completion(.success(results))
   }
   
-  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     guard let history = result.object as? History else {
       preconditionFailure()
     }
-    return .just(history.annotation)
+    completion(.success(history.annotation))
   }
   
 }

@@ -285,6 +285,24 @@ public class TKSegment: NSObject {
     }
   }
   
+  /// Checks if one of the visited `StopVisits` objects matches the provided predicate
+  /// - Parameter predicate: Will be called for each visited
+  /// - Returns: `true` if the predicate returned `true` for any; `false` if it returned `false` for all, `nil` if visits have not been downloaded yet
+  public func usesVisit(where predicate: (StopVisits) -> Bool) -> Bool? {
+    guard isPublicTransport else { return false }
+    
+    guard let sorted = service?.sortedVisits else { return nil }
+    
+    let visits = segmentVisits
+    let visited = sorted.filter { visits[$0.stop.stopCode] == true }
+    for visit in visited {
+      if predicate(visit) {
+        return true
+      }
+    }
+    return false
+  }
+  
   @objc(shouldShowVisit:)
   public func shouldShow(_ visit: StopVisits) -> Bool {
     // commented out the following as it looks a bit
@@ -316,6 +334,19 @@ public class TKSegment: NSObject {
       guard let isContinuation = segment?.isContinuation, isContinuation else { return false }
     }
     return false
+  }
+  
+  /// Checks if segment's shape pass near a coordinate
+  /// - Parameter coordinate: A coordinate
+  /// - Parameter maximumMeters: Maximum distance to return `true`
+  /// - Returns: `true` if any of the shapes of this segment pass near the provided coordinate.
+  public func passesNear(_ coordinate: CLLocationCoordinate2D, maximumMeters: CLLocationDistance = 100) -> Bool {
+    let needle = MKMapPoint(coordinate)
+    return shapes
+      .compactMap(TKRoutePolyline.init(for:))
+      .contains {
+        $0.closestPoint(to: needle).distance < maximumMeters
+      }
   }
   
 

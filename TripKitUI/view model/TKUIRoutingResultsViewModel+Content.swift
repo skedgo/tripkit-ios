@@ -83,7 +83,7 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
+  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKUIResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
     
     let expand = inputs.tappedSectionButton
       .filter { action -> Bool in
@@ -109,7 +109,7 @@ extension TKUIRoutingResultsViewModel {
       .map(sections)
   }
   
-  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKResultsFetcher.Progress, advisory: TKAPI.Alert?) -> [Section] {
+  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKUIResultsFetcher.Progress, advisory: TKAPI.Alert?) -> [Section] {
     
     let progressIndicatorSection = Section(items: [.progress])
     let advisorySection = advisory.flatMap { Section(items: [.advisory($0)]) }

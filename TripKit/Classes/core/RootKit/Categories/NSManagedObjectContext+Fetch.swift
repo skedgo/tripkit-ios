@@ -64,6 +64,7 @@ extension NSManagedObjectContext {
     let request = NSFetchRequest<E>(entityName: String(describing: E.self))
     request.predicate = predicate
     request.fetchLimit = 1
+    request.resultType = .countResultType
     
     do {
       return try self.count(for: request) > 0

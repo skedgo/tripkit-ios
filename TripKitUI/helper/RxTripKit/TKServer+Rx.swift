@@ -11,29 +11,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-public extension TKServer {
-
-  enum HTTPMethod: String {
-    case POST = "POST"
-    case GET = "GET"
-    case DELETE = "DELETE"
-    case PUT = "PUT"
-  }
-
-  enum RepeatHandler {
-    case repeatIn(TimeInterval)
-    case repeatWithNewParameters(TimeInterval, [String: Any])
-  }
-
-  static func buildRequest(
-    _ method: TKServer.HTTPMethod,
-    path: String,
-    parameters: [String: Any] = [:],
-    region: TKRegion? = nil
-  ) -> URLRequest {
-    return shared.buildSkedGoRequest(withMethod: method.rawValue, path: path, parameters: parameters, region: region)
-  }
-}
 
 extension Reactive where Base: TKServer {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {

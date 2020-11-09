@@ -14,8 +14,6 @@
 - (BOOL)containsObjectForEntityClass:(Class)entityClass
                        withPredicate:(NSPredicate *)predOrNil
 {
-  ZAssert(self.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-
   NSString *entityName = NSStringFromClass(entityClass);
   NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                             inManagedObjectContext:self];
@@ -40,8 +38,6 @@
 - (NSArray *)fetchObjectsForEntityName:(NSString *)entityName
 											withFetchRequest:(TKFetchRequestBlock)requestBlock
 {
-  ZAssert(self.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-  
   if (!entityName) {
     ZAssert(false, @"Entity name is missing!");
     return nil;

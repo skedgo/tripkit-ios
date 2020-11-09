@@ -8,8 +8,6 @@
 
 import Foundation
 
-import RxSwift
-
 public enum TKGeocodingBackwardscompatibilityError: Error {
   case unknownError
   case couldNotCreateAnnotation
@@ -17,25 +15,22 @@ public enum TKGeocodingBackwardscompatibilityError: Error {
 
 extension SGDeprecatedAutocompletionDataProvider where Self: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
-    if let fast = self.autocompleteFast?(input, for: mapRect) {
-      return .just(fast)
+  public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
+    if let fast = autocompleteFast?(input, for: mapRect) {
+      completion(.success(fast))
     
     } else {
-      return Single.create { subscriber in
-        self.autocompleteSlowly?(input, for: mapRect) { results in
-          subscriber(.success(results ?? []))
-        }
-        return Disposables.create()
+      autocompleteSlowly?(input, for: mapRect) { results in
+        completion(.success(results ?? []))
       }
     }
   }
   
-  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     if let annotation = self.annotation?(for: result) {
-      return Single.just(annotation)
+      completion(.success(annotation))
     } else {
-      return Single.error(TKGeocodingBackwardscompatibilityError.couldNotCreateAnnotation)
+      completion(.failure(TKGeocodingBackwardscompatibilityError.couldNotCreateAnnotation))
     }
   }
   
@@ -44,15 +39,9 @@ extension SGDeprecatedAutocompletionDataProvider where Self: TKAutocompleting {
     return self.additionalActionString?()
   }
   
-  public func triggerAdditional(presenter: UIViewController) -> Single<Bool> {
-    guard let handler = additionalAction else { assertionFailure(); return .never() }
-    
-    return Single.create { subscriber in
-      handler(presenter) { refresh in
-        subscriber(.success(refresh))
-      }
-      return Disposables.create()
-    }
+  public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
+    guard let handler = additionalAction else { assertionFailure(); return }
+    handler(presenter, completion)
   }
   #endif
   

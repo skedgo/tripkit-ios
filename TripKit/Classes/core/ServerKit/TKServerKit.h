@@ -15,6 +15,4 @@
 
 #import "TKTransportModes.h"
 
-#import "CLLocation+DecodePolylineString.h"
-
 #endif

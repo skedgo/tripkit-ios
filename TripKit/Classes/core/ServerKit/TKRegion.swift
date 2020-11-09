@@ -10,8 +10,6 @@ import Foundation
 import CoreLocation
 import MapKit
 
-import ASPolygonKit
-
 enum TKRegionParserError : Error {
   case emptyPolygon
   case badTimeZoneIdentifier(String)
@@ -87,10 +85,10 @@ public class TKRegion : NSObject, Codable {
   @objc let encodedPolygon: String
   
   @objc public lazy var polygon: MKPolygon = {
-    let corners = CLLocation.decodePolyLine(self.encodedPolygon)
-    let coordinates = corners.map { $0.coordinate }
-    return MKPolygon(coordinates: coordinates, count: coordinates.count)
+    simplePolygon?.polygon ?? MKPolygon()
   }()
+  
+  private let simplePolygon: Polygon?
   
   /// - warning: Only use this for testing purposes, do not pass
   ///     instances created this way to methods that needs
@@ -103,11 +101,13 @@ public class TKRegion : NSObject, Codable {
     self.cities = cities
     self.urls = []
     self.encodedPolygon = ""
+    self.simplePolygon = nil
     self.timeZone = .current
   }
   
   fileprivate init(asInternationalNamed name: String, modes: [String]) {
     encodedPolygon        = ""
+    simplePolygon         = nil
     self.name             = name
     urls                  = []
     timeZone              = .current
@@ -117,7 +117,9 @@ public class TKRegion : NSObject, Codable {
   
   @objc(containsCoordinate:)
   public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
-    return polygon.contains(coordinate)
+    guard let polygon = simplePolygon else { return false }
+    let point = Point(ll: (coordinate.latitude, coordinate.longitude))
+    return polygon.contains(point, onLine: false)
   }
   
   
@@ -155,6 +157,8 @@ public class TKRegion : NSObject, Codable {
     } else {
       throw TKRegionParserError.badTimeZoneIdentifier(identifier)
     }
+    
+    simplePolygon = Polygon(encodedPolygon: encodedPolygon)
     
     super.init()
     

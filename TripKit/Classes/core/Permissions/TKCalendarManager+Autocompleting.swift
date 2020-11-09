@@ -8,29 +8,28 @@
 
 import Foundation
 
-import RxSwift
-
 extension TKCalendarManager: TKAutocompleting {
   
   enum AutocompletionError: Error {
     case unexpectedResultObject
   }
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+  public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
     let events = input.isEmpty
       ? fetchDefaultEvents()
       : fetchEvents(matching: input)
     
     let results = events.compactMap { TKCalendarManager.autocompletionResult(for: $0, search: input) }
-    return .just(results)
+    completion(.success(results))
   }
   
-  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     
     guard let event = result.object as? EKEvent else {
       assertionFailure("Unexpected object: \(result.object).")
-      return .error(AutocompletionError.unexpectedResultObject)
+      completion(.failure(AutocompletionError.unexpectedResultObject))
+      return
     }
     
     let annotation = TKNamedCoordinate(event)
@@ -45,14 +44,14 @@ extension TKCalendarManager: TKAutocompleting {
     annotation.sortScore = 85
     
     if annotation.coordinate.isValid {
-      return .just(annotation)
+      completion(.success(annotation))
     } else {
 
       let geocoder = helperGeocoder as? TKAppleGeocoder ?? TKAppleGeocoder()
       helperGeocoder = geocoder
-
-      return geocoder.geocode(annotation, near: .world)
-        .map { annotation }
+      geocoder.geocode(annotation, near: .world) { result in
+        completion(result.map { annotation })
+      }
     }
   }
   
@@ -64,13 +63,8 @@ extension TKCalendarManager: TKAutocompleting {
     return NSLocalizedString("Include events", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Button to include events in search, too.")
   }
   
-  public func triggerAdditional(presenter: UIViewController) -> Single<Bool> {
-    return Single.create { [weak self] subscriber in
-      self?.tryAuthorizationForSender(nil, in: presenter) { refresh in
-        subscriber(.success(refresh))
-      }
-      return Disposables.create()
-    }
+  public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
+    tryAuthorizationForSender(nil, in: presenter, completion: completion)
   }
   #endif
   

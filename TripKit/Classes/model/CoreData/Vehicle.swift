@@ -8,8 +8,6 @@
 
 import Foundation
 
-import RxSwift
-
 extension Vehicle {
   
   public static func components(from data: Data) -> [[TKAPI.VehicleComponents]]? {
@@ -59,19 +57,6 @@ extension Vehicle {
   public var averageOccupancy: (TKAPI.VehicleOccupancy, title: String)? {
     return TKAPI.VehicleOccupancy.average(in: components)
   }
-}
-
-extension Reactive where Base: Vehicle {
-  
-  public var components: Observable<([[TKAPI.VehicleComponents]], Date)> {
-    return observeWeakly(NSData.self, "componentsData")
-      .map { [weak base] _ in
-        let components = base?.components ?? [[]]
-        let date = base?.lastUpdate ?? Date()
-        return (components, date)
-      }
-  }
-  
 }
 
 // MARK: - MKAnnotation

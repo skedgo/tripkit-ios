@@ -6,13 +6,10 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
-import RxSwift
-
 extension TKGeocoding {
   
-  public func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
-    
-    return TKGeocoderHelper.geocode(object, using: self, near: region)
+  public func geocode(_ object: TKGeocodable, near region: MKMapRect, completion: @escaping (Result<Void, Error>) -> Void) {
+    TKGeocoderHelper.geocode(object, using: self, near: region, completion: completion)
   }
   
 }
@@ -40,20 +37,21 @@ public class TKGeocoderHelper: NSObject {
     return NSError(code: 64720, message: message)
   }
   
-  public class func geocodeUsingPreferredGeocoder(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
-    return self.geocode(object, using: preferredGeocoder, near: region)
-  }
-  
-  public class func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect) -> Single<Void> {
+  public class func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect, completion: @escaping (Result<Void, Error>) -> Void) {
     
     guard let address = object.addressForGeocoding, !address.isEmpty else {
-      return .error(GeocodingError.missingAddress)
+      completion(.failure(GeocodingError.missingAddress))
+      return
     }
     
-    return geocoder.geocode(address, near: region)
-      .map { results in
+    return geocoder.geocode(address, near: region) { result in
+      switch result {
+      case .failure(let error):
+        completion(.failure(error))
+      case .success(let results):
         guard let best = TKGeocoderHelper.pickBest(from: results) else {
-          throw GeocodingError.serverFoundNoMatch(address)
+          completion(.failure(GeocodingError.serverFoundNoMatch(address)))
+          return
         }
         
 
@@ -68,8 +66,9 @@ public class TKGeocoderHelper: NSObject {
         // the coordinate.
         object.assign(best.coordinate, forAddress: address)
         
-        return ()
+        completion(.success(()))
       }
+    }
   }
   
   @objc(pickBestFromResults:)
@@ -149,7 +148,7 @@ extension Array where Element : TKNamedCoordinate {
   /// the preferred elements.
   ///
   /// - SeeAlso: `shouldMerge` and `preferred`
-  func mergeWithPreferences(_ other: [Element]) -> [Element] {
+  public func mergeWithPreferences(_ other: [Element]) -> [Element] {
     if other.isEmpty {
       return self
     }

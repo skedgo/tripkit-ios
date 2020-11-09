@@ -8,21 +8,15 @@
 
 import Foundation
 
-import RxSwift
-
 extension SGDeprecatedGeocoder {
   
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
+  public func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     
-    return Single.create { subscriber in
-      self.geocodeString(input, nearRegion: mapRect, success: { _, coordinates in
-        subscriber(.success(coordinates))
-      }, failure: { input, error in
-        subscriber(.error(error ?? TKGeocoderHelper.GeocodingError.serverFoundNoMatch(input)))
-      })
-      return Disposables.create()
-    }
-    
+    geocodeString(input, nearRegion: mapRect, success: { _, coordinates in
+      completion(.success(coordinates))
+    }, failure: { input, error in
+      completion(.failure(error ?? TKGeocoderHelper.GeocodingError.serverFoundNoMatch(input)))
+    })
   }
   
 }

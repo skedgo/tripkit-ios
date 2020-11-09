@@ -286,7 +286,7 @@ fileprivate class FakeAutocompleter: TKAutocompleting {
     "Ho Chi Minh City"
   ]
   
-  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+  func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     let results = Self.cities
       .filter { $0.starts(with: input) || input.isEmpty }
       .map { name -> TKAutocompletionResult in
@@ -298,15 +298,14 @@ fileprivate class FakeAutocompleter: TKAutocompleting {
         result.score = 100 - (Self.cities.firstIndex(of: name) ?? 100)
         return result
       }
-    
-    return .just(results)
+    completion(.success(results))
   }
   
-  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     let annotation = MKPointAnnotation()
     annotation.title = result.title
     annotation.coordinate = kCLLocationCoordinate2DInvalid
-    return .just(annotation)
+    completion(.success(annotation))
   }
 
 }

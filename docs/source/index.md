@@ -25,10 +25,9 @@ Then run `carthage update` and add the desired framework to your project as desc
 When doing so, you'll need to add the respective dependencies:
 
 - TripKit / TripKitInterApp:
-    - ASPolygonKit
-    - RxSwift (+ RxCocoa + RxRelay)
+    - *none*
 - TripKitUI:
-    - Those of TripKit, plus:
+    - RxSwift (+ RxCocoa + RxRelay)
     - Kingfisher
     - RxDataSources (+ Differentiator)
     - [TGCardViewController](https://gitlab.com/SkedGo/iOS/tripgo-cards-ios)
