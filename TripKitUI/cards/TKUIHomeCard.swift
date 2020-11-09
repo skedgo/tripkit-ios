@@ -376,12 +376,16 @@ extension TKUIHomeCard: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     guard let item = self.dataSource[indexPath].componentItem else { return nil }
-    return self.viewModel.componentViewModels[indexPath.section].trailingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView)
+    let configurations = self.viewModel.componentViewModels.compactMap { $0.trailingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView) }
+    assert(configurations.count == 1, "Two component view models handle the same item?")
+    return configurations.first
   }
   
   public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     guard let item = self.dataSource[indexPath].componentItem else { return nil }
-    return self.viewModel.componentViewModels[indexPath.section].leadingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView)
+    let configurations = self.viewModel.componentViewModels.compactMap{ $0.leadingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView) }
+    assert(configurations.count == 1, "Two component view models handle the same item")
+    return configurations.first
   }
   
 }
