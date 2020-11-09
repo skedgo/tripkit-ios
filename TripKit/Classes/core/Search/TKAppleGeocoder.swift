@@ -8,8 +8,6 @@
 
 import Foundation
 
-import RxSwift
-
 @available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
 public typealias SGAppleGeocoder = TKAppleGeocoder
 
@@ -35,16 +33,23 @@ public class TKAppleGeocoder: NSObject {
 
 extension TKAppleGeocoder: TKGeocoding {
   
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
+  public func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     
     let fullString = TKLocationHelper.expandAbbreviation(inAddressString: input)
     
     let request = MKLocalSearch.Request()
     request.naturalLanguageQuery = fullString
     request.region = MKCoordinateRegion(mapRect)
-    return MKLocalSearch(request: request).rx
-      .start()
-      .map { $0.map { TKNamedCoordinate($0, forInput: input, near: request.region) } }
+    
+    MKLocalSearch(request: request).start { results, error in
+      if let error = error {
+        completion(.failure(error))
+      } else {
+        let mapItems = results?.mapItems ?? []
+        let coordinates = mapItems.map { TKNamedCoordinate($0, forInput: input, near: request.region) }
+        completion(.success(coordinates))
+      }
+    }
   }
   
 }
@@ -53,8 +58,14 @@ extension TKAppleGeocoder: TKGeocoding {
 
 extension TKAppleGeocoder: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
-    completerDelegate = LocalSearchCompleterDelegate()
+  public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
+    
+    completerDelegate = LocalSearchCompleterDelegate { results in
+      completion(results.map {
+        $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) }
+      })
+    }
+    
     completer.delegate = completerDelegate
     completer.region = MKCoordinateRegion(mapRect)
     completer.queryFragment = input
@@ -64,27 +75,23 @@ extension TKAppleGeocoder: TKAutocompleting {
     } else {
       completer.filterType = .locationsOnly
     }
-    
-    return completerDelegate.results
-      .map { $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) } }
-      .take(1)
-      .asSingle()
   }
   
-  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
-    guard let completion = result.object as? MKLocalSearchCompletion else {
-      return Single.error(GeocoderError.unexpectedResult)
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+    guard let searchCompletion = result.object as? MKLocalSearchCompletion else {
+      completion(.failure(GeocoderError.unexpectedResult))
+      return
     }
-    let request = MKLocalSearch.Request(completion: completion)
-    return MKLocalSearch(request: request).rx
-      .start()
-      .map {
-        if let first = $0.first {
-          return TKNamedCoordinate(first)
-        } else {
-          throw TKAppleGeocoder.GeocoderError.noMatchingMapItemFound
-        }
+    let request = MKLocalSearch.Request(completion: searchCompletion)
+    MKLocalSearch(request: request).start { results, error in
+      if let error = error {
+        completion(.failure(error))
+      } else if let first = results?.mapItems.first {
+        completion(.success(TKNamedCoordinate(first)))
+      } else {
+        completion(.failure(GeocoderError.noMatchingMapItemFound))
       }
+    }
   }
   
 }
@@ -93,14 +100,18 @@ extension TKAppleGeocoder: TKAutocompleting {
 
 fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleterDelegate {
   
-  let results = PublishSubject<[MKLocalSearchCompletion]>()
+  let handler: (Result<[MKLocalSearchCompletion], Error>) -> Void
+  
+  init(handler: @escaping (Result<[MKLocalSearchCompletion], Error>) -> Void) {
+    self.handler = handler
+  }
   
   func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-    results.onNext(completer.results)
+    handler(.success(completer.results))
   }
   
   func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-    results.onNext([])
+    handler(.failure(error))
   }
   
 }
@@ -132,23 +143,3 @@ extension TKNamedCoordinate {
   }
   
 }
-
-extension Reactive where Base: MKLocalSearch {
-  
-  public func start() -> Single<[MKMapItem]> {
-    return Single.create { subscriber in
-      self.base.start { results, error in
-        if let error = error {
-          subscriber(.error(error))
-        } else {
-          subscriber(.success(results?.mapItems ?? []))
-        }
-      }
-      return Disposables.create {
-        self.base.cancel()
-      }
-    }
-  }
-  
-}
-

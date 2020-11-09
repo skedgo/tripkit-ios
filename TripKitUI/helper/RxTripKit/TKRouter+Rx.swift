@@ -15,19 +15,6 @@ extension TKRouter {
     case downloadFailed
     case noTripFound
   }
-  
-  /// :nodoc:
-  @objc(mergeQueryItems:)
-  public static func merge(items: Set<URLQueryItem>) -> [String: Any] {
-    return Dictionary(grouping: items, by: \.name)
-      .compactMapValues { list -> Any? in
-        if list.count == 1, let first = list.first {
-          return first.value
-        } else {
-          return list.map(\.value)
-        }
-      }
-  }
 }
 
 extension Reactive where Base : TKRouter {

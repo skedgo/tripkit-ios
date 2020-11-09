@@ -1,15 +1,117 @@
 //
-//  Array+TKAutocompleting.swift
-//  TripKit-iOS
+//  TKGeocoding+Rx.swift
+//  TripKitUI-iOS
 //
-//  Created by Adrian Schönig on 05.07.18.
-//  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
+//  Created by Adrian Schönig on 01.11.20.
+//  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
 import Foundation
 
 import RxSwift
 import RxCocoa
+
+public extension TKGeocoding {
+  
+  /// Called to geocode a particular input.
+  ///
+  /// - Parameters:
+  ///   - input: Query typed by the user
+  ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
+  /// - Returns: Single-observable with the geocoding results for the query.
+  func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
+    return Single.create { subscriber in
+      self.geocode(input, near: mapRect) { result in
+        switch result {
+        case .success(let coordinates):
+          subscriber(.success(coordinates))
+        case .failure(let error):
+          subscriber(.error(error))
+        }
+      }
+      return Disposables.create()
+    }
+  }
+  
+  func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
+    return TKGeocoderHelper.rx.geocode(object, using: self, near: region)
+  }
+}
+
+public extension TKAutocompleting {
+  
+  /// Called whenever a user types a character. You can assume this is already throttled.
+  ///
+  /// - Parameters:
+  ///   - input: Query fragment typed by user
+  ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
+  /// - Returns: Autocompletion results for query fragment. Should fire with empty result or error out if nothing found. Needs to complete.
+  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+    return Single.create { subscriber in
+      self.autocomplete(input, near: mapRect) { result in
+        switch result {
+        case .success(let results):
+          subscriber(.success(results))
+        case .failure(let error):
+          subscriber(.error(error))
+        }
+      }
+      return Disposables.create()
+    }
+  }
+  
+  /// Called to fetch the annotation for a previously returned autocompletion result
+  ///
+  /// - Parameter result: The result for which to fetch the annotation
+  /// - Returns: Single-observable with the annotation for the result. Can error out if an unknown
+  ///     result was passed in.
+  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+    return Single.create { subscriber in
+      self.annotation(for: result) { result in
+        switch result {
+        case .success(let annotation):
+          subscriber(.success(annotation))
+        case .failure(let error):
+          subscriber(.error(error))
+        }
+      }
+      return Disposables.create()
+    }
+  }
+  
+  func triggerAdditional(presenter: UIViewController) -> Single<Bool> {
+    return Single.create { subscriber in
+      self.triggerAdditional(presenter: presenter) { refresh in
+        subscriber(.success(refresh))
+      }
+      return Disposables.create()
+    }
+
+  }
+
+}
+
+public extension Reactive where Base == TKGeocoderHelper {
+  
+  static func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect) -> Single<Void> {
+    return Single.create { subscriber in
+      TKGeocoderHelper.geocode(object, using: geocoder, near: region) { result in
+        switch result {
+        case .success: subscriber(.success(()))
+        case .failure(let error): subscriber(.error(error))
+        }
+      }
+      return Disposables.create()
+    }
+  }
+  
+  static func geocodeUsingPreferredGeocoder(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
+    return self.geocode(object, using: TKGeocoderHelper.preferredGeocoder, near: region)
+  }
+  
+}
+
+// MARK: - Supercharging
 
 public extension Array where Element == TKAutocompleting {
   
@@ -69,7 +171,7 @@ extension ObservableType {
       let merged = Observable.merge(observables)
         .scan(into: []) { $0.append(contentsOf: $1) }
         .map { $0.sorted(by: comparer) }
-        .share()
+        .share(replay: 1, scope: .forever)
       
       // ... This represents 1.: What are the best X results when the timer first?
       let timeOut = Observable<Int>.timer(cutOff, scheduler: SharingScheduler.make())
@@ -110,3 +212,27 @@ extension TKAutocompletionResult: Comparable {
     return lhs.compare(rhs) == .orderedAscending
   }
 }
+
+
+// MARK: - Helpers
+
+extension Reactive where Base: MKLocalSearch {
+  
+  public func start() -> Single<[MKMapItem]> {
+    return Single.create { subscriber in
+      self.base.start { results, error in
+        if let error = error {
+          subscriber(.error(error))
+        } else {
+          subscriber(.success(results?.mapItems ?? []))
+        }
+      }
+      return Disposables.create {
+        self.base.cancel()
+      }
+    }
+  }
+  
+}
+
+

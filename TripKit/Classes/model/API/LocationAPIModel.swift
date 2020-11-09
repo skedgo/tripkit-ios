@@ -133,7 +133,7 @@ extension TKAPI {
     
     /// The polygon defining the parking area as an encoded polyline.
     ///
-    /// See `CLLocation.decodePolyLine`
+    /// See `CLLocationCoordinate2D.decodePolyline`
     public let encodedParkingArea: String?
     
     public let entrances: [Entrance]?
@@ -274,7 +274,7 @@ extension TKAPI {
     /// This is optional as some on-street parking isn't defined by a line,
     /// but by an area. See `encodedPolygon`
     ///
-    /// See `CLLocation.decodePolyLine`
+    /// See `CLLocationCoordinate2D.decodePolyline`
     public let encodedPolyline: String?
 
     /// The polygon defining the parking area as an encoded polyline.
@@ -282,7 +282,7 @@ extension TKAPI {
     /// This is optional as most on-street parking isn't defined by an area,
     /// but by a line. See `encodedPolyline`
     ///
-    /// See `CLLocation.decodePolyLine`
+    /// See `CLLocationCoordinate2D.decodePolyline`
     public let encodedPolygon: String?
     
     public var hasRealTime: Bool {

@@ -8,22 +8,20 @@
 
 import Foundation
 
-import RxSwift
 import TripKitUI
 
 extension InMemoryFavoriteManager: TKAutocompleting {
-  
-  func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+  func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     let favorites = input.isEmpty ? fetchDefaultFavorites() : fetchFavorite(matching: input)
     let results = favorites.compactMap { InMemoryFavoriteManager.autocompletionResult(for: $0, searchText: input) }
-    return .just(results)
+    completion(.success(results))
   }
   
-  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     guard let favorite = result.object as? Favorite else {
       preconditionFailure()
     }
-    return .just(favorite.annotation)
+    completion(.success(favorite.annotation))
   }
   
 }

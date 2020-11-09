@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxTest
 
-@testable import TripKit
+@testable import TripKitUI
 
 fileprivate let 💥 = [-1]
 

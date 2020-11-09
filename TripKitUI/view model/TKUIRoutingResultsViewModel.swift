@@ -105,7 +105,7 @@ public class TKUIRoutingResultsViewModel {
     request = requestToShow
       .asDriver(onErrorDriveWith: .empty())
     
-    let progress: Driver<TKResultsFetcher.Progress>
+    let progress: Driver<TKUIResultsFetcher.Progress>
     if skipRequest {
       progress = .just(.finished)
     } else {
@@ -235,7 +235,7 @@ public class TKUIRoutingResultsViewModel {
   /// Progress of fetching the routing results
   ///
   /// - warning: Subscribe to this, otherwise you won't get any results at all.
-  let fetchProgress: Driver<TKResultsFetcher.Progress>
+  let fetchProgress: Driver<TKUIResultsFetcher.Progress>
   
   /// Status of real-time update
   ///

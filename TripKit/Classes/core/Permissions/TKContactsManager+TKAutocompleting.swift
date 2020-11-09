@@ -9,25 +9,44 @@
 import Foundation
 import CoreLocation
 
-import RxSwift
+extension TKContactsManager {
+  
+  private func fetchContacts(searchString: String, kind: TKContactsManager.AddressKind? = nil, completion: @escaping (Result<[TKContactsManager.ContactAddress], Error>) -> Void) {
+    queue.async {
+      completion(Result {
+        try self.fetchContacts(searchString: searchString, kind: kind)
+      })
+    }
+  }
+  
+}
 
 // MARK: - TKAutocompleting
 
 extension TKContactsManager: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
-    guard !input.isEmpty else { return .just([]) }
+  public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
-    return rx.fetchContacts(searchString: input)
-      .map { $0.map { $0.toResult(provider: self, search: input) } }
+    guard !input.isEmpty else {
+      completion(.success([]))
+      return
+    }
+    
+    fetchContacts(searchString: input) { result in
+      completion(result.map {
+        $0.map { $0.toResult(provider: self, search: input) }
+      })
+    }
   }
   
-  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     guard let contact = result.object as? TKContactsManager.ContactAddress else {
       preconditionFailure("Unexpected object. We require `result.object` to be `TKContactsManager.ContactAddress`, but got: \(result.object)")
     }
     
-    return TKContactsManager.geocode(contact).map { $0 as MKAnnotation }
+    Self.geocode(contact) { result in
+      completion(result.map { $0 as MKAnnotation })
+    }
   }
   
   #if os(iOS) || os(tvOS)
@@ -38,30 +57,20 @@ extension TKContactsManager: TKAutocompleting {
     return NSLocalizedString("Include contacts", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Button to include contacts in search, too.")
   }
   
-  public func triggerAdditional(presenter: UIViewController) -> Single<Bool> {
-    return Single.create { [weak self] subscriber in
-      self?.tryAuthorizationForSender(nil, in: presenter) { refresh in
-        subscriber(.success(refresh))
-      }
-      return Disposables.create()
-    }
+  public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
+    tryAuthorizationForSender(nil, in: presenter, completion: completion)
   }
   #endif
   
-  private static func geocode(_ contact: ContactAddress) -> Single<TKNamedCoordinate> {
-    return Single.create { subscriber in
-      var geocoder: CLGeocoder! = CLGeocoder()
-      geocoder!.geocodePostalAddress(contact.postalAddress) { placemarks, error in
-        if let match = placemarks?.first {
-          let result = TKNamedCoordinate(placemark: match)
-          result.name = contact.locationName
-          subscriber(.success(result))
-        } else {
-          subscriber(.error(error ?? TKGeocoderHelper.errorForNoLocationFound(forInput: contact.address)))
-        }
-      }
-      return Disposables.create {
-        geocoder = nil
+  private static func geocode(_ contact: ContactAddress, completion: @escaping (Result<TKNamedCoordinate, Error>) -> Void) {
+    let geocoder = CLGeocoder()
+    geocoder.geocodePostalAddress(contact.postalAddress) { placemarks, error in
+      if let match = placemarks?.first {
+        let result = TKNamedCoordinate(placemark: match)
+        result.name = contact.locationName
+        completion(.success(result))
+      } else {
+        completion(.failure(error ?? TKGeocoderHelper.errorForNoLocationFound(forInput: contact.address)))
       }
     }
   }
@@ -100,16 +109,34 @@ extension Optional {
 
 extension TKContactsManager: TKGeocoding {
   
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
-    guard !input.isEmpty else { return .just([]) }
+  public func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
+    guard !input.isEmpty else {
+      completion(.success([]))
+      return
+    }
     
-    return rx.fetchContacts(searchString: input)
-      .asObservable()
-      .flatMapLatest { contacts -> Observable<[TKNamedCoordinate]> in
-        let geocoded = contacts.map { TKContactsManager.geocode($0).asObservable() }
-        return Observable.combineLatest(geocoded)
+    func geocodeNext(in contacts: [TKContactsManager.ContactAddress], soFar: [TKNamedCoordinate]) {
+      if let next = contacts.first {
+        Self.geocode(next) { result in
+          var acc = soFar
+          if let next = try? result.get() {
+            acc.append(next)
+          }
+          geocodeNext(in: Array(contacts.dropFirst()), soFar: acc)
+        }
+      } else {
+        completion(.success(soFar))
       }
-      .asSingle()
+    }
+    
+    fetchContacts(searchString: input) { result in
+      switch result {
+      case .failure(let error):
+        completion(.failure(error))
+      case .success(let contacts):
+        geocodeNext(in: contacts, soFar: [])
+      }
+    }
   }
   
 }

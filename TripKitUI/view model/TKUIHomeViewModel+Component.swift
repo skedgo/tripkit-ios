@@ -114,7 +114,6 @@ public protocol TKUIHomeComponentViewModel {
   /// such, it may change as other component view models are added or removed. It is best not
   /// to use the `section` property when configuring the returned cell.
   func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration?
-  
 }
 
 extension TKUIHomeComponentViewModel {

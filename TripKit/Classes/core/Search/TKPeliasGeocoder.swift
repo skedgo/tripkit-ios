@@ -8,8 +8,6 @@
 import Foundation
 import MapKit
 
-import RxSwift
-
 @available(*, unavailable, renamed: "TKPeliasGeocoder")
 public typealias TKMapZenGeocoder = TKPeliasGeocoder
 
@@ -19,26 +17,29 @@ public class TKPeliasGeocoder: NSObject {
     super.init()
   }
   
-  private enum Result {
-    case success([TKNamedCoordinate])
-    case failure(Error?)
-  }
-  
-  private func hitSearch(_ components: URLComponents?) -> Single<[TKNamedCoordinate]> {
+  private func hitSearch(_ components: URLComponents?, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     
     guard let url = components?.url else {
-      assertionFailure("Couldn't construct MapZen query URL. Check the code.")
-      return .just([])
+      assertionFailure("Couldn't construct Pelias query URL. Check the code.")
+      completion(.success([]))
+      return
     }
     
     var request = URLRequest(url: url)
     request.addValue(TKServer.shared.apiKey, forHTTPHeaderField: "X-TripGo-Key")
     
-    return URLSession.shared.rx.data(request: request)
-      .map { data in
-        return try TKPeliasGeocoder.parse(data: data)
+    let dataTask = URLSession.shared.dataTask(with: request) { data, _, error in
+      if let error = error {
+        completion(.failure(error))
+      } else if let data = data {
+        let result = Result { try TKPeliasGeocoder.parse(data: data) }
+        completion(result)
+      } else {
+        assertionFailure("No data nor error received.")
+        completion(.success([]))
       }
-      .asSingle()
+    }
+    dataTask.resume()
   }
   
   private static func parse(data: Data) throws -> [TKNamedCoordinate] {
@@ -52,10 +53,11 @@ public class TKPeliasGeocoder: NSObject {
 
 extension TKPeliasGeocoder: TKGeocoding {
   
-  public func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
+  public func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     
     guard !input.isEmpty else {
-      return .just([])
+      completion(.success([]))
+      return
     }
     
     let region = MKCoordinateRegion(mapRect)
@@ -66,21 +68,23 @@ extension TKPeliasGeocoder: TKGeocoding {
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
     ]
     
-    return hitSearch(components)
-      .map { coordinates in
+    hitSearch(components) { result in
+      completion(result.map { coordinates in
         coordinates.forEach { $0.setScore(searchTerm: input, near: region) }
         return TKGeocoderHelper.mergedAndPruned(coordinates, withMaximum: 10)
-      }
+      })
+    }
   }
   
 }
 
 extension TKPeliasGeocoder: TKAutocompleting {
   
-  public func autocomplete(_ input: String, near mapRect: MKMapRect) -> Single<[TKAutocompletionResult]> {
+  public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
 
     guard !input.isEmpty else {
-      return .just([])
+      completion(.success([]))
+      return
     }
 
     let region = MKCoordinateRegion(mapRect)
@@ -91,8 +95,8 @@ extension TKPeliasGeocoder: TKAutocompleting {
       URLQueryItem(name: "focus.point.lon", value: String(region.center.longitude)),
     ]
     
-    return hitSearch(components)
-      .map { coordinates in
+    hitSearch(components) { result in
+      completion(result.map { coordinates in
         coordinates.forEach { $0.setScore(searchTerm: input, near: region) }
         
         // Pelias likes coming back with similar locations near each
@@ -101,12 +105,13 @@ extension TKPeliasGeocoder: TKAutocompleting {
         let unique = clusters.compactMap(TKNamedCoordinate.namedCoordinate(for:))
         let pruned = TKGeocoderHelper.mergedAndPruned(unique, withMaximum: 7)
         return pruned.map(TKAutocompletionResult.init)
-      }
+      })
+    }
   }
   
-  public func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
     guard let coordinate = result.object as? TKNamedCoordinate else { preconditionFailure() }
-    return .just(coordinate)
+    completion(.success(coordinate))
   }
   
 }

@@ -216,7 +216,6 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
                              withIntermediateDirectories:YES
                                               attributes:nil
                                                    error:&error];
-    ZAssert(error == nil, @"Couldn't create directory! Error: %@. File: %@", error, storeURL);
     
     if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
       // otherwise, kill it

@@ -1,4 +1,3 @@
 git "git@gitlab.com:SkedGo/iOS/TGCardViewController.git" "f7d3fee230e17dd3bf55817f92f9907f2843af97"
 github "ReactiveX/RxSwift" "5.1.1"
-github "nighthawk/ASPolygonKit" "0.2.1"
 github "onevcat/Kingfisher" "5.15.7"

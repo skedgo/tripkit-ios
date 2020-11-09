@@ -85,15 +85,20 @@ public extension TKLogger {
 public class TKConsoleLogger: TKLogger {
   
   public let level: TKLog.LogLevel
+  public let subsystem: String
 
-  public init(level: TKLog.LogLevel) {
+  public init(level: TKLog.LogLevel, subsystem: String? = nil ) {
     self.level = level
+    self.subsystem = subsystem
+      ?? Bundle.main.bundleIdentifier
+      ?? "com.skedgo.TripKit"
   }
 
   public func output(_ level: TKLog.LogLevel, identifier: String, message: String) {
     let shortIdentifier = identifier.prefix(10).padding(toLength: 10, withPad: " ", startingAt: 0)
     let message = "\(level.prefix) \(message)"
-    os_log("%@", log: OSLog(identifier: shortIdentifier), type: level.toOSLog, message)
+    let log = OSLog(subsystem: subsystem, category: shortIdentifier)
+    os_log("%@", log: log, type: level.toOSLog, message)
   }
 }
 
@@ -192,14 +197,6 @@ extension TKLog.LogLevel {
     case .warning: return .default
     case .error: return .error
     }
-  }
-  
-}
-
-extension OSLog {
-  
-  public convenience init(identifier: String) {
-    self.init(subsystem: Bundle.main.bundleIdentifier!, category: identifier)
   }
   
 }

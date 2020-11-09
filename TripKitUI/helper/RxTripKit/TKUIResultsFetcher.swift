@@ -1,5 +1,5 @@
 //
-//  TKResultsFetcher.swift
+//  TKUIResultsFetcher.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 10/4/17.
@@ -16,7 +16,7 @@ import RxSwift
 /// the user's current location, and handles being hit multiple
 /// times with different requests by only returning results from the
 /// last requested query.
-public class TKResultsFetcher {
+public class TKUIResultsFetcher {
   
   /// The progress of a single routing fetch request
   public enum Progress: Equatable {
@@ -111,10 +111,10 @@ fileprivate extension TripRequest {
   func override(currentLocation: CLLocation) {
     let placeholder = TKLocationManager.shared.currentLocation
     if fromLocation === placeholder {
-      fromLocation = TKResultsFetcher.replacementHandler(currentLocation)
+      fromLocation = TKUIResultsFetcher.replacementHandler(currentLocation)
     }
     if toLocation === placeholder {
-      toLocation = TKResultsFetcher.replacementHandler(currentLocation)
+      toLocation = TKUIResultsFetcher.replacementHandler(currentLocation)
     }
   }
   
@@ -128,7 +128,7 @@ fileprivate class CountHolder {
 
 fileprivate extension Reactive where Base : TKRouter {
   
-  static func multiFetchRequest(for request: TripRequest, modes: [String]?, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil, baseURL: URL? = nil) -> Observable<TKResultsFetcher.Progress> {
+  static func multiFetchRequest(for request: TripRequest, modes: [String]?, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil, baseURL: URL? = nil) -> Observable<TKUIResultsFetcher.Progress> {
     
     var router: TKRouter! = TKRouter()
     if let baseURL = baseURL {

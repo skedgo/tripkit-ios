@@ -255,7 +255,8 @@ extension TKOnStreetParkingLocation: TKDisplayableRoute {
   
   public var routePath: [Any] {
     guard let polyline = parking.encodedPolyline else { return [] }
-    return CLLocation.decodePolyLine(polyline)
+    let coordinates = CLLocationCoordinate2D.decodePolyline(polyline)
+    return coordinates.map { CLLocation(latitude: $0.latitude, longitude: $0.longitude) }
   }
   
   public var selectionIdentifier: String? {

@@ -8,8 +8,6 @@
 
 import Foundation
 
-import RxSwift
-
 // MARK: - Fetcher methods
 
 extension TKBuzzInfoProvider {
@@ -144,8 +142,8 @@ extension TKBuzzInfoProvider {
     let server: String?
   }
   
-  struct AlertsTransitResponse: Codable {
-    let alerts: [TKAPI.AlertMapping]
+  public struct AlertsTransitResponse: Codable {
+    public let alerts: [TKAPI.AlertMapping]
   }
   
 }

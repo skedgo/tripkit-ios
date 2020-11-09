@@ -23,7 +23,6 @@
   NSParameterAssert(completion);
   
   ZAssert(service.managedObjectContext.parentContext != nil || [NSThread isMainThread], @"Not on the right thread!");
-  
 
   ZAssert(service.managedObjectContext, @"Service with a context needed.");
   
