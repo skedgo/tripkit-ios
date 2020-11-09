@@ -81,8 +81,38 @@ public protocol TKUIHomeComponentViewModel {
   /// - Parameter tableView: The table view with which the cell class is registered
   func registerCell(with tableView: UITableView)
   
+  /// This gives a component view model an opportunity to specify what actions to display with
+  /// a home card component item when the leading edge of the cell corresponding to the item
+  /// is swiped
+  /// - Parameters:
+  ///   - item: The data model representing the cell whose leading edge is swiped
+  ///   - indexPath: The index path at which the item is located
+  ///   - tableView: The table view in which the item is displayed
+  ///
+  /// Typical, this method should only return an action configuration if the component view model
+  /// is able to handle the incoming `item`.
+  ///
+  /// The `section` property of the `indexPath` parameter corresponds to the position of the
+  /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
+  /// such, it may change as other component view models are added or removed. It is best not
+  /// to use the `section` property when configuring the returned cell.
   func leadingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration?
   
+  /// This gives a component view model an opportunity to specify what actions to display with
+  /// a home card component item when the trailing edge of the cell corresponding to the item
+  /// is swiped.
+  /// - Parameters:
+  ///   - item: The data model representing the cell whose trailing edge is swiped
+  ///   - indexPath: The index path at which the item is located
+  ///   - tableView: The table view in which the item is displayed
+  ///
+  /// Typical, this method should only return an action configuration if the component view model
+  /// is able to handle the incoming `item`.
+  ///
+  /// The `section` property of the `indexPath` parameter corresponds to the position of the
+  /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
+  /// such, it may change as other component view models are added or removed. It is best not
+  /// to use the `section` property when configuring the returned cell.
   func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration?
   
 }
