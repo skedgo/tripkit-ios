@@ -35,7 +35,7 @@ build_ios_ui:
   stage: build
   script:
     - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS
+    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: 
@@ -51,7 +51,7 @@ build_ios_interapp:
   stage: build
   script:
     - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS
+    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key: 
@@ -69,7 +69,7 @@ build_mac_base:
     - mv Cartfile.resolved Cartfile.resolved.ios
     - mv Cartfile.resolved.macos Cartfile.resolved
     - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform macOS
+    - carthage bootstrap --cache-builds --platform macOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c && exit ${PIPESTATUS[0]}
     - mv Cartfile.resolved Cartfile.resolved.macos
     - mv Cartfile.resolved.ios Cartfile.resolved
@@ -87,7 +87,7 @@ build_tripkitui_example:
   stage: examples
   script:
     - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS
+    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c && exit ${PIPESTATUS[0]}
   cache:
     key:
@@ -104,7 +104,7 @@ build_minimap_example:
   script:
     - cd Examples/MiniMap
     - pod install
-    - xcodebuild build -workspace MiniMap.xcworkspace -scheme MiniMap ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+    - xcodebuild build -workspace MiniMap.xcworkspace -scheme MiniMap | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   cache:
     key:
       files:
@@ -156,7 +156,7 @@ pages_dryrun:
     - brew install sourcekitten
   script:
     - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS
+    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - ./docs.sh
   cache:
     key:

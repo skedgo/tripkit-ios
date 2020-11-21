@@ -1,3 +1,3 @@
-git "git@gitlab.com:SkedGo/iOS/TGCardViewController.git" "f7d3fee230e17dd3bf55817f92f9907f2843af97"
+git "git@gitlab.com:SkedGo/iOS/TGCardViewController.git" "31f23135903552bf6f20964f0c204a3fb1cb384a"
 github "ReactiveX/RxSwift" "5.1.1"
 github "onevcat/Kingfisher" "5.15.7"

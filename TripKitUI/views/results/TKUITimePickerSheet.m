@@ -44,7 +44,7 @@
     if (! time) {
       time = [NSDate date];
     }
-    self.timePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    
     self.timePicker.timeZone = timeZone;
     self.timePicker.date     = time;
     [self setSelectedTimeType:timeType];
@@ -190,6 +190,11 @@
   self.backgroundColor = UIColor.tkBackground;
   
   UIDatePicker *timePicker = [[UIDatePicker alloc] init];
+  timePicker.datePickerMode = UIDatePickerModeDateAndTime;
+  if (@available(iOS 14, *)) {
+    timePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    [timePicker sizeToFit];
+  }
   timePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * -31]; // 1 month ago
   timePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 31]; // 1 month
   timePicker.locale = [TKStyleManager applicationLocale]; // Set the 24h setting
