@@ -15,7 +15,7 @@ import TGCardViewController
 
 // MARK: -
 
-public class TKUIHomeCard: TKUITableCard {
+open class TKUIHomeCard: TKUITableCard {
   
   public static var config = Configuration.empty
   
@@ -32,7 +32,7 @@ public class TKUIHomeCard: TKUITableCard {
   
   private var viewModel: TKUIHomeViewModel!
 
-  private let disposeBag = DisposeBag()
+  public let disposeBag = DisposeBag()
   
   private let searchBar = UISearchBar()
   
@@ -55,13 +55,13 @@ public class TKUIHomeCard: TKUITableCard {
     searchBar.delegate = self
   }
   
-  required convenience init?(coder: NSCoder) {
+  required convenience public init?(coder: NSCoder) {
     self.init()
   }
   
   // MARK: - TGCard overrides
   
-  public override func didBuild(tableView: UITableView) {
+  open override func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
     
     tableView.keyboardDismissMode = .onDrag
@@ -172,7 +172,7 @@ public class TKUIHomeCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
-  public override func willAppear(animated: Bool) {
+  open override func willAppear(animated: Bool) {
     // If the search text is empty when the card appears,
     // try loading autocompletion results.
     if let text = searchBar.text, text.isEmpty {
@@ -191,13 +191,13 @@ public class TKUIHomeCard: TKUITableCard {
     super.willAppear(animated: animated)
   }
   
-  public override func didAppear(animated: Bool) {
+  open override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
     TKUIEventCallback.handler(.cardAppeared(self))
   }
   
-  public override func didDisappear(animated: Bool) {
+  open override func didDisappear(animated: Bool) {
     super.didDisappear(animated: animated)
     
     cardAppearancePublisher.onNext(false)
