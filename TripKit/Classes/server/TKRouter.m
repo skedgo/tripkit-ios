@@ -556,11 +556,9 @@ forTripKitContext:(NSManagedObjectContext *)tripKitContext
   }];
   self.isActive = NO;
   
-  dispatch_async(dispatch_get_main_queue(), ^{
-		if (failure) {
-			failure(error, self.modeIdentifiers);
-		}
-  });
+  if (failure) {
+    failure(error, self.modeIdentifiers);
+  }
 }
 
 - (void)parseJSON:(id)json
