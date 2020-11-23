@@ -44,6 +44,77 @@ public extension TKShareHelper {
     public var additional: [URLQueryItem] = []
   }
   
+  /// Extracts the query details from a TripGo API-compatible deep link
+  /// - parameter url: TripGo API-compatible deep link
+  /// - parameter geocoder: Geocoder used for filling in missing information
+  static func queryDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) -> Result<QueryDetails, Error> {
+    
+    guard
+      let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
+      let items = components.queryItems
+      else { return .failure(ExtractionError.invalidURL) }
+    
+    // get the input from the query
+    var tlat, tlng: Double?
+    var name: String?
+    var flat, flng: Double?
+    var type: Int?
+    var time: Date?
+    var modes: [String] = .init()
+    for item in items {
+      guard let value = item.value, !value.isEmpty else { continue }
+      switch item.name {
+      case "tlat":  tlat = Double(value)
+      case "tlng":  tlng = Double(value)
+      case "tname": name = value
+      case "flat":  flat = Double(value)
+      case "flng":  flng = Double(value)
+      case "type":  type = Int(value)
+      case "time":
+        guard let date = TKParserHelper.parseDate(value) else { continue }
+        time = date
+      case "modes", "mode":
+        modes.append(value)
+      default:
+        continue
+      }
+    }
+    
+    func coordinate(lat: Double?, lng: Double?) -> CLLocationCoordinate2D {
+      if let lat = lat, let lng = lng {
+        return CLLocationCoordinate2D(latitude: lat, longitude: lng)
+      } else {
+        return kCLLocationCoordinate2DInvalid
+      }
+    }
+    
+    // we need a to coordinate OR a name
+    let to = coordinate(lat: tlat, lng: tlng)
+    guard to.isValid else {
+      return .failure(ExtractionError.missingNecessaryInformation)
+    }
+    
+    // we're good to go, construct the time and from info
+    let timeType: QueryDetails.Time
+    if let type = type {
+      switch (type, time != nil) {
+      case (1, true): timeType = .leaveAfter(time!)
+      case (2, true): timeType = .arriveBy(time!)
+      default:        timeType = .leaveASAP
+      }
+    } else {
+      timeType = .leaveASAP
+    }
+    let from = coordinate(lat: flat, lng: flng)
+    return .success(QueryDetails(
+      start: from.isValid ? from : nil,
+      end: to,
+      title: name,
+      timeType: timeType,
+      modes: modes
+    ))
+  }
+  
 }
 
 extension TKShareHelper.QueryDetails {
