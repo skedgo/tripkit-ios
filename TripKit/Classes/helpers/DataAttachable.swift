@@ -53,8 +53,8 @@ extension DataAttachable {
   }
   
   func decodeCoding<T>(_ type: T.Type, key: String) -> T? where T : NSCoding {
-    guard let data = dataDictionary[key] as? Data else { return nil }
-    return data as? T
+    guard let data = dataDictionary[key] as? T else { return nil }
+    return data
   }
   
   func encodeCoding<T>(_ value: T?, key: String) where T : NSCoding {
