@@ -45,16 +45,16 @@ public class TKUIRoutingResultsViewModel {
     droppedPin: Signal<CLLocationCoordinate2D>  // => call dropPin()
   )
   
-  public convenience init(destination: MKAnnotation, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
+  public convenience init(destination: MKAnnotation, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     let builder = RouteBuilder(destination: destination)
     self.init(builder: builder, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  public convenience init(request: TripRequest, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
+  public convenience init(request: TripRequest, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     self.init(builder: request.builder, initialRequest: request, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, limitTo modes: [String]? = nil, inputs: UIInput, mapInput: MapInput) {
+  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     let builderChangedWithID = Self.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
 

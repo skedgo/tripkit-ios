@@ -321,7 +321,7 @@ class TKRouterTest: TKTestCase {
     
     // 2. Retrieve from cache
     let expectation = self.expectation(description: "Trip downloaded from cache")
-    let router = TKRouter()
+    let router = TKTripFetcher()
     router.downloadTrip(URL(string: "http://example.com/")!, identifier: identifier, intoTripKitContext: self.tripKitContext) { trip in
       XCTAssertNotNil(trip)
       expectation.fulfill()

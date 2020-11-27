@@ -117,6 +117,17 @@
   }];
 }
 
+- (NSArray<Trip *>*)parseAndAddResult:(NSDictionary *)json
+                           forRequest:(TripRequest *)request
+                              merging:(BOOL)mergeWithExistingTrips
+{
+  return [self parseAndAddResult:json
+                      forRequest:request
+                     orTripGroup:nil
+                    orUpdateTrip:nil
+    allowDuplicatingExistingTrip:!mergeWithExistingTrips];
+}
+
 - (void)parseAndAddResult:(NSDictionary *)keyToTripGroups
      withSegmentTemplates:(NSArray *)segmentTemplatesJson
                 andAlerts:(nullable NSArray *)alertJson

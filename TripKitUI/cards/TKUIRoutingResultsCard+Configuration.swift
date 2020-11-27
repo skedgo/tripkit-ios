@@ -44,7 +44,7 @@ public extension TKUIRoutingResultsCard {
     /// presented
     ///
     /// Defaults to nil, which means the SDK will read from `TKUserProfile`
-    public var limitToModes: [String]? = nil
+    public var limitToModes: Set<String>? = nil
     
     /// Set this to add a button for a trip group
     ///

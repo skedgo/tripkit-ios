@@ -71,26 +71,26 @@ class ViewController: NSViewController {
       TKTransportModeIdentifierRegularPublicTransport
     ]
     
-    let request = TripRequest.insert(from: from, to: to, for: nil, timeType: .leaveASAP, into: TripKit.shared.tripKitContext)
+    let query = TKRouter.RoutingQuery(
+      from: from, to: to, at: .leaveASAP, modes: [
+      "pt_pub"], context: TripKit.shared.tripKitContext
+    )
     
-    router.fetchTrips(for: request, success: { request, modes in
-      guard let trip = request.trips.first else {
-        print("Nothing found for \(modes)")
-        return
-      }
-      
-      for segment in trip.segments {
-        guard segment.hasVisibility(.onMap) else { continue }
-        self.mapView.addAnnotation(segment)
-        for shape in segment.shapes {
-          guard let polyline = TKRoutePolyline(for: shape) else { continue }
-          self.mapView.addOverlay(polyline)
+    router.fetchBestTrip(for: query) { result in
+      switch result {
+      case .success(let trip):
+        for segment in trip.segments {
+          guard segment.hasVisibility(.onMap) else { continue }
+          self.mapView.addAnnotation(segment)
+          for shape in segment.shapes {
+            guard let polyline = TKRoutePolyline(for: shape) else { continue }
+            self.mapView.addOverlay(polyline)
+          }
         }
+      case .failure(let error):
+        print("Error \(error)")
       }
-      
-    }, failure: { error, modes in
-      print("Error \(error) for \(modes)")
-    })
+    }
   }
 
 }

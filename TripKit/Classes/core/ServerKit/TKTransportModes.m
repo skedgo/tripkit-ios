@@ -148,49 +148,6 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
   }
 }
 
-+ (NSSet *)groupedModeIdentifiers:(NSArray *)modeIdentifiers
-               includeGroupForAll:(BOOL)addAllGroup
-{
-  // first we group the identifiers
-  NSMutableSet *groupedModes = [NSMutableSet setWithCapacity:modeIdentifiers.count + 1];
-  TKRegionManager *regionMan = TKRegionManager.shared;
-  NSMutableSet *processedModes = [NSMutableSet setWithCapacity:modeIdentifiers.count];
-  BOOL includesWalkOnly = false;
-  for (NSString *identifier in modeIdentifiers) {
-    if ([processedModes containsObject:identifier]) {
-      continue; // added it already
-    } if ([identifier isEqualToString:TKTransportModeIdentifierFlight] && modeIdentifiers.count > 1) {
-      continue; // don't add flights by themselves
-    } if ([identifier isEqualToString:TKTransportModeIdentifierWalking] || [identifier isEqualToString:TKTransportModeIdentifierWheelchair]) {
-      includesWalkOnly = true;
-    }
-    
-    NSMutableSet *group = [NSMutableSet setWithObject:identifier];
-    NSSet *implied = [NSSet setWithArray:[regionMan impliedModeIdentifiers:identifier]];
-    [group unionSet:implied];
-    
-    // see if we can merge this into an existing group
-    if ([processedModes intersectsSet:group]) {
-      for (NSMutableSet *existingGroup in groupedModes) {
-        if ([existingGroup intersectsSet:group]) {
-          [existingGroup unionSet:group];
-          break;
-        }
-      }
-    } else {
-      [groupedModes addObject:group];
-    }
-
-    [processedModes unionSet:group];
-  }
-  
-  if (addAllGroup && modeIdentifiers.count > 1 + (includesWalkOnly ? 1 : 0)) {
-    [groupedModes addObject:modeIdentifiers];
-  }
-  
-  return groupedModes;
-}
-
 + (BOOL)modeIdentifierIsPublicTransport:(NSString *)modeIdentifier
 {
   return [modeIdentifier hasPrefix:@"pt_"];

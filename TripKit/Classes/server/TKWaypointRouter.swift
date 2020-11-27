@@ -298,14 +298,12 @@ extension TKWaypointRouter {
       region: region,
       into: context,
       parserHandler: { json, parser in
-        parser.parseAndAddResult(json, for: request, merging: false) { trips in
-          if let trip = trips.first {
-            completion(.success(trip))
-          } else {
-            completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
-          }
+        let trips = parser.parseAndAddResult(json, for: request, merging: false)
+        if let trip = trips.first {
+          completion(.success(trip))
+        } else {
+          completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
         }
-        
       },
       errorHandler: { error in
         completion(.failure(error))
