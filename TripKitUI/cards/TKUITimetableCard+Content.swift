@@ -101,25 +101,26 @@ extension StopVisits {
   }
   
   fileprivate func buildLineText() -> String? {
-    var text = ""
-    
-    // platforms
-    if let standName = stop.shortName?.trimmingCharacters(in: .whitespaces), !standName.isEmpty {
-      if !text.isEmpty {
-        text += " ⋅ "
-      }
-      text += standName
+    let combined = [platformText, directionText].compactMap { $0 }.joined(separator: " ⋅ ")
+    return combined.isEmpty ? nil : combined
+  }
+  
+  private var platformText: String? {
+    if let start = self.startPlatform, !start.isEmpty {
+      return start
+    } else if let standName = stop.shortName?.trimmingCharacters(in: .whitespaces), !standName.isEmpty {
+      return standName
+    } else {
+      return nil
     }
-    
-    // direction
+  }
+  
+  private var directionText: String? {
     if let direction = service.direction?.trimmingCharacters(in: .whitespaces), !direction.isEmpty {
-      if !text.isEmpty {
-        text += " ⋅ "
-      }
-      text += direction
+      return direction
+    } else {
+      return nil
     }
-    
-    return text.isEmpty ? nil : text
   }
   
 }

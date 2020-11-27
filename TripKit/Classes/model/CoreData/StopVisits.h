@@ -49,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain, nullable) NSDate * originalTime;
 
 /// :nodoc:
+@property (nonatomic, retain, nullable) NSData * data;
+
+/// :nodoc:
 @property (nonatomic, retain) NSNumber * flags;
 
 @property (nonatomic, retain) NSNumber * index;

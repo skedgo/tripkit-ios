@@ -22,6 +22,7 @@
 
 @dynamic arrival;
 @dynamic bearing;
+@dynamic data;
 @dynamic departure;
 @dynamic originalTime;
 @dynamic flags;

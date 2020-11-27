@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B28" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="action" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSDictionary"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -144,6 +144,7 @@
     <entity name="StopVisits" representedClassName="StopVisits" syncable="YES">
         <attribute name="arrival" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="bearing" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
+        <attribute name="data" optional="YES" attributeType="Binary"/>
         <attribute name="departure" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="NO"/>
@@ -255,7 +256,7 @@
         <element name="Service" positionX="317.046875" positionY="215.6796875" width="128" height="28"/>
         <element name="Shape" positionX="637" positionY="531" width="128" height="193"/>
         <element name="StopLocation" positionX="-117.2578125" positionY="330.36328125" width="128" height="28"/>
-        <element name="StopVisits" positionX="124" positionY="243" width="128" height="223"/>
+        <element name="StopVisits" positionX="124" positionY="243" width="128" height="224"/>
         <element name="Trip" positionX="315" positionY="-252" width="128" height="418"/>
         <element name="TripGroup" positionX="99" positionY="-186" width="128" height="178"/>
         <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="208"/>

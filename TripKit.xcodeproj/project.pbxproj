@@ -301,6 +301,8 @@
 		3A79AFF324D1C4C7008C165A /* TKTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFF124D1C4C7008C165A /* TKTimetable.swift */; };
 		3A79B00024D303B7008C165A /* TKSecureTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFFF24D303B7008C165A /* TKSecureTransformers.swift */; };
 		3A79B00124D303B7008C165A /* TKSecureTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79AFFF24D303B7008C165A /* TKSecureTransformers.swift */; };
+		3A7A279A2570C78200A02D92 /* StopVisits+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A27992570C78200A02D92 /* StopVisits+Data.swift */; };
+		3A7A279B2570C78200A02D92 /* StopVisits+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A27992570C78200A02D92 /* StopVisits+Data.swift */; };
 		3A7C28702243E02000DA3567 /* TKModeInfo+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */; };
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
@@ -1216,6 +1218,7 @@
 		3A79AFF124D1C4C7008C165A /* TKTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTimetable.swift; sourceTree = "<group>"; };
 		3A79AFFC24D2C522008C165A /* TKBuzzInfoProvider+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKBuzzInfoProvider+Rx.swift"; sourceTree = "<group>"; };
 		3A79AFFF24D303B7008C165A /* TKSecureTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSecureTransformers.swift; sourceTree = "<group>"; };
+		3A7A27992570C78200A02D92 /* StopVisits+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StopVisits+Data.swift"; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+ToggleModes.swift"; sourceTree = "<group>"; };
@@ -2475,6 +2478,7 @@
 				3AB6C6741D1CD08E0089F687 /* StopVisits.h */,
 				3AB6C6751D1CD08E0089F687 /* StopVisits.m */,
 				3AFFADFB1F069DAB00147990 /* StopVisits.swift */,
+				3A7A27992570C78200A02D92 /* StopVisits+Data.swift */,
 				3AB6C6761D1CD08E0089F687 /* Trip.h */,
 				3AB6C6771D1CD08E0089F687 /* Trip.m */,
 				3AFFAC5E1F068B6100147990 /* Trip.swift */,
@@ -3466,6 +3470,7 @@
 				3ABBDA342032132400205042 /* TKSettings.m in Sources */,
 				D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */,
 				3ABBDA8C2032134000205042 /* TKTripAndSegments.swift in Sources */,
+				3A7A279B2570C78200A02D92 /* StopVisits+Data.swift in Sources */,
 				3ABBDAD72032135A00205042 /* MapKit+Extensions.swift in Sources */,
 				3ABBDABA2032134D00205042 /* TKGeoJSON+NamedCoordinate.swift in Sources */,
 				3ABBDA462032132D00205042 /* Service.m in Sources */,
@@ -3991,6 +3996,7 @@
 				3AA39ACF1F7A63BB0066CC94 /* MapKit+Extensions.swift in Sources */,
 				3AFFABD21F06854F00147990 /* TKAnnotations.swift in Sources */,
 				3AFFAE041F06B91300147990 /* StopVisits+Shareable.swift in Sources */,
+				3A7A279A2570C78200A02D92 /* StopVisits+Data.swift in Sources */,
 				3AFFABA21F06854F00147990 /* NSString+Sizing.m in Sources */,
 				3AB6C6DF1D1CD08E0089F687 /* Service.m in Sources */,
 				3AFFABB11F06854F00147990 /* TKConfig.m in Sources */,

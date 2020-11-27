@@ -40,6 +40,12 @@ extension TKAPI {
     public let endTime: TimeInterval?
     public let endStopCode: String?
     
+    // platform information, both real-time and static
+    public let startPlatform: String?
+    public let endPlatform: String?
+    public let timetableStartPlatform: String?
+    public let timetableEndPlatform: String?
+    
     private enum CodingKeys: String, CodingKey {
       case serviceTripID
       case operatorID
@@ -67,6 +73,11 @@ extension TKAPI {
       case startTime
       case endTime
       case endStopCode
+      
+      case startPlatform
+      case endPlatform
+      case timetableStartPlatform
+      case timetableEndPlatform
     }
   }
   

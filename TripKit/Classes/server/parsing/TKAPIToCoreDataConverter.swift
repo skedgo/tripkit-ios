@@ -140,6 +140,10 @@ extension Service {
       visit.originalTime = Date(timeIntervalSince1970: timetable)
     }
     
+    visit.startPlatform = model.startPlatform
+    visit.endPlatform = model.endPlatform
+    visit.timetableStartPlatform = model.timetableStartPlatform
+    visit.timetableEndPlatform = model.timetableEndPlatform
     visit.searchString = model.searchString
     visit.service = self
     visit.stop = stop
