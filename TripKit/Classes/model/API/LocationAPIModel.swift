@@ -181,6 +181,7 @@ extension TKAPI {
     public let operatorInfo: TKAPI.CompanyInfo
     public let vehicleType: SharedVehicleType
     public let source: TKAPI.DataAttribution?
+    public let deepLink: URL?
 
     public let name: String?
     public let isAvailable: Bool?
@@ -198,6 +199,7 @@ extension TKAPI {
       case batteryLevel
       case batteryRange
       case lastUpdate
+      case deepLink
     }
     
     public var hasRealTime: Bool { true }

@@ -323,7 +323,6 @@ extension TKCarRentalLocation: TKDeepLinkable {
 }
 
 extension TKFreeFloatingVehicleLocation: TKDeepLinkable {
-  public var downloadLink: URL? {
-    return vehicle.operatorInfo.appInfo?.downloadURL
-  }
+  public var deepLink: URL? { vehicle.deepLink }
+  public var downloadLink: URL? { vehicle.operatorInfo.appInfo?.downloadURL }
 }
