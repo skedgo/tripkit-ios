@@ -27,10 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
                   merging:(BOOL)mergeWithExistingTrips
                completion:(void (^)(NSArray<Trip *> *addedTrips))completion;
 
-- (void)parseAndAddResult:(NSDictionary *)json
-               forRequest:(TripRequest *)request
-                  merging:(BOOL)mergeWithExistingTrips
-               completion:(void (^)(NSArray<Trip *> *addedTrips))completion;
+- (NSArray<Trip *>*)parseAndAddResult:(NSDictionary *)json
+                           forRequest:(TripRequest *)request
+                              merging:(BOOL)mergeWithExistingTrips;
 
 /**
  Parses the specified content and inserts it into the the parser's context.

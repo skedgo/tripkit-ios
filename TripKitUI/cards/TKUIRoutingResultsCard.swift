@@ -368,7 +368,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     // Note: Only gets modes if picker is visible
     let modes = modePicker?.pickedModes.map { $0.identifier }
     
-    let url = TKRouter.url(forRoutingRequest: request, withModeIdentifiers: modes.flatMap(Set.init))
+    let url = TKRouter.routingRequestURL(for: request, modes: modes.flatMap(Set.init))
     UIPasteboard.general.string = url
   }
   

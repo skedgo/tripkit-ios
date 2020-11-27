@@ -195,7 +195,7 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetch(for request: Observable<TripRequest>, limitTo modes: [String]? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
+  static func fetch(for request: Observable<TripRequest>, limitTo modes: Set<String>? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
     return request
       .filter { $0.managedObjectContext != nil }
       .flatMapLatest { request -> Observable<TKUIResultsFetcher.Progress> in

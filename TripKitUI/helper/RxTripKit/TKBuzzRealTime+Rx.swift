@@ -54,7 +54,7 @@ extension Reactive where Base: TKBuzzRealTime {
       return .just((trip, false))
     }
     
-    var helper: TKRouter! = TKRouter()
+    var helper: TKTripFetcher! = TKTripFetcher()
     return Single.create { subscriber in
       helper.update(trip) { newTrip, didUpdate in
         subscriber(.success((newTrip, didUpdate)))

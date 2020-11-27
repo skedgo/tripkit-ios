@@ -95,7 +95,7 @@
 {
   NSSet *regions = [self touchedRegions];
   if (regions.count == 1) {
-    return [[[regions anyObject] modeIdentifiers] allObjects];
+    return [[regions anyObject] modeIdentifiers];
   }
   
   NSMutableSet *modes = [NSMutableSet set];

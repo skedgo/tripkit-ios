@@ -57,17 +57,6 @@ FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierWheelchair;
 + (TKImage *)imageForModeIdentifier:(NSString *)modeIdentifier;
 
 /**
- Groups the mode identifiers
- 
- @param modeIdentifiers A set of all the identifiers to be grouped
- @param addAllGroup     If an extra group which has all the identifiers should be added
- 
- @return A set of a set of mode identifiers
- */
-+ (NSSet<NSSet<NSString *> *> *)groupedModeIdentifiers:(NSArray<NSString *> *)modeIdentifiers
-                                    includeGroupForAll:(BOOL)addAllGroup;
-
-/**
  @return The generic mode identifier part, e.g., `pt_pub` for `pt_pub_bus`,
     which can be used as routing input
  */

@@ -53,7 +53,7 @@ public class TKUIResultsFetcher {
   ///   - classifier: Optional classifier, see `TKTripClassifier` for more
   /// - Returns: Stream of fetching the results, multiple call backs as different
   ///     modes are fetched.
-  public static func streamTrips(for request: TripRequest, modes: [String]? = nil, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil, baseURL: URL? = nil) -> Observable<Progress> {
+  public static func streamTrips(for request: TripRequest, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, baseURL: URL? = nil) -> Observable<Progress> {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
@@ -81,7 +81,7 @@ public class TKUIResultsFetcher {
       .flatMapLatest { request -> Observable<Progress> in
         return TKRouter.rx.multiFetchRequest(
           for: request, modes: modes,
-          classifier: classifier, additionalParameters: additionalParameters,
+          classifier: classifier,
           baseURL: baseURL
         )
       }
@@ -128,13 +128,12 @@ fileprivate class CountHolder {
 
 fileprivate extension Reactive where Base : TKRouter {
   
-  static func multiFetchRequest(for request: TripRequest, modes: [String]?, classifier: TKTripClassifier? = nil, additionalParameters: [URLQueryItem]? = nil, baseURL: URL? = nil) -> Observable<TKUIResultsFetcher.Progress> {
+  static func multiFetchRequest(for request: TripRequest, modes: Set<String>?, classifier: TKTripClassifier? = nil, baseURL: URL? = nil) -> Observable<TKUIResultsFetcher.Progress> {
     
     var router: TKRouter! = TKRouter()
     if let baseURL = baseURL {
       router.server = TKRoutingServer(baseURL: baseURL)
     }
-    router.additionalParameters = additionalParameters.flatMap(Set.init)
     
     return Observable.create { observer in
       
@@ -145,10 +144,11 @@ fileprivate extension Reactive where Base : TKRouter {
         classifier: classifier,
         progress: { progress in
           observer.onNext(.partial(completed: Int(progress), total: holder.count))
-        }, completion: { _, error in
-          if let error = error {
+        }, completion: { result in
+          switch result {
+          case .failure(let error):
             observer.onError(error)
-          } else {
+          case .success:
             observer.onNext(.finished)
             observer.onCompleted()
           }
