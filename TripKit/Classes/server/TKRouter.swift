@@ -11,8 +11,16 @@ import Foundation
 /// A TKRouter calculates trips for routing requests, it talks to TripGo's `routing.json` API.
 @objc
 public class TKRouter: NSObject {
-  public enum RoutingError: Error {
+  public enum RoutingError: Error, LocalizedError {
+    case invalidRequest(String)
     case noTripFound
+    
+    public var errorDescription: String? {
+      switch self {
+      case .invalidRequest(let text): return text
+      case .noTripFound: return Loc.NoRoutesFound
+      }
+    }
   }
   
   public struct RoutingQuery {
@@ -163,6 +171,7 @@ extension TKRouter {
     }
     
     guard let context = request.context else {
+      completion(.failure(RoutingError.invalidRequest("Could not access CoreData storage")))
       return 0
     }
 
@@ -170,6 +179,11 @@ extension TKRouter {
     self.isActive = true
 
     let enabledModes = modes ?? request.modes
+    guard !enabledModes.isEmpty else {
+      completion(.failure(RoutingError.invalidRequest("No modes enabled")))
+      return 0
+    }
+    
     let groupedIdentifier = TKTransportModes.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
     
     var tripRequest: TripRequest! = nil
