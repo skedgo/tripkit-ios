@@ -11,7 +11,7 @@ import Foundation
 extension NSManagedObjectContext {
   public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, relationshipKeyPathsForPrefetching: [String]? = nil, fetchLimit: Int? = nil) -> [E] {
     
-    let request = NSFetchRequest<E>(entityName: String(describing: E.self))
+    let request = entity.fetchRequest()
     request.predicate = predicate
     request.sortDescriptors = sortDescriptors
     request.relationshipKeyPathsForPrefetching = relationshipKeyPathsForPrefetching
@@ -25,6 +25,14 @@ extension NSManagedObjectContext {
     
     do {
       return try self.fetch(request)
+        .compactMap {
+          if let correct = $0 as? E {
+            return correct
+          } else {
+            assertionFailure("Fetch did something weird and returned \($0). We expected an \(E.self).")
+            return nil
+          }
+        }
     } catch {
       TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return []
@@ -33,12 +41,20 @@ extension NSManagedObjectContext {
   
   public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [E] {
     
-    let request = NSFetchRequest<E>(entityName: String(describing: E.self))
+    let request = entity.fetchRequest()
     request.predicate = predicate
     request.sortDescriptors = sortDescriptors
     
     do {
       return try self.fetch(request)
+        .compactMap {
+          if let correct = $0 as? E {
+            return correct
+          } else {
+            assertionFailure("Fetch did something weird and returned \($0). We expected an \(E.self).")
+            return nil
+          }
+        }
     } catch {
       TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return []
@@ -47,12 +63,21 @@ extension NSManagedObjectContext {
   
   public func fetchUniqueObject<E: NSManagedObject>(_ entity: E.Type, predicate: NSPredicate? = nil) -> E? {
     
-    let request = NSFetchRequest<E>(entityName: String(describing: E.self))
+    let request = entity.fetchRequest()
     request.predicate = predicate
     request.fetchLimit = 1
     
     do {
-      return try self.fetch(request).first
+      return try self.fetch(request)
+        .compactMap {
+          if let correct = $0 as? E {
+            return correct
+          } else {
+            assertionFailure("Fetch did something weird and returned \($0). We expected an \(E.self).")
+            return nil
+          }
+        }
+        .first
     } catch {
       TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return nil
@@ -61,7 +86,7 @@ extension NSManagedObjectContext {
   
   public func containsObject<E: NSManagedObject>(_ entity: E.Type, predicate: NSPredicate? = nil) -> Bool {
     
-    let request = NSFetchRequest<E>(entityName: String(describing: E.self))
+    let request = entity.fetchRequest()
     request.predicate = predicate
     request.fetchLimit = 1
     request.resultType = .countResultType
