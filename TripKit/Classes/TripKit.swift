@@ -12,6 +12,12 @@ public enum TripKit {
   
   public static let shared = TKTripKit.__sharedInstance()
   
+  public static let model: NSManagedObjectModel = {
+    let bundle = Bundle(for: TKTripKit.self)
+    let modelURL = bundle.url(forResource: "TripKitModel", withExtension: "momd")!
+    return NSManagedObjectModel(contentsOf: modelURL)!
+  }()
+  
   public static var apiKey: String {
     get {
       return TKServer.shared.apiKey
@@ -85,5 +91,10 @@ extension TKTripKit {
   @objc
   public static func setAPIKey(_ key: String) {
     TripKit.apiKey = key
+  }
+  
+  @objc
+  public static var tripKitModel: NSManagedObjectModel {
+    TripKit.model
   }
 }
