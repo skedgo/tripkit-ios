@@ -58,8 +58,11 @@ extension TKRegion.RoutingMode {
 
 fileprivate extension TKRegionManager {
   func buildRoutingMode(modeIdentifier: String) -> TKRegion.RoutingMode? {
-    guard let title = title(forModeIdentifier: modeIdentifier) else {
-      TKLog.debug("TKRegion", text: "A mode without a title in regions.json: \(modeIdentifier)")
+    guard
+      let title = title(forModeIdentifier: modeIdentifier),
+      let localImageName = TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
+    else {
+      TKLog.debug("TKRegion", text: "A mode without a title or local image in regions.json: \(modeIdentifier)")
       return nil
     }
     
@@ -69,7 +72,7 @@ fileprivate extension TKRegionManager {
       subtitle: subtitle(forModeIdentifier: modeIdentifier),
       website: websiteURL(forModeIdentifier: modeIdentifier),
       color: color(forModeIdentifier: modeIdentifier),
-      localImageName: TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier),
+      localImageName: localImageName,
       remoteImageName: remoteImageName(forModeIdentifier: modeIdentifier),
       remoteImageIsTemplate: false,
       remoteImageIsBranding: true

@@ -34,14 +34,14 @@ import RxSwift
       return Observable.create { observer in
         
         // configure the request
-        let request = NSFetchRequest<E>(entityName: String(describing: E.self))
+        let request = entity.fetchRequest()
         request.predicate  = predicate
         request.sortDescriptors = sortDescriptors
         request.relationshipKeyPathsForPrefetching = relationshipKeyPathsForPrefetching
         request.resultType = NSFetchRequestResultType.managedObjectResultType
 
         // hang on to these, so that we can release them in the disposable
-        var controller: NSFetchedResultsController<E>?
+        var controller: NSFetchedResultsController<NSFetchRequestResult>?
         var delegate: FetchedResultsControllerDelegateProxy<E>?
         
         // set up the work and delegate forwarding messages to the delegate proxy
@@ -55,7 +55,8 @@ import RxSwift
         }
         
         // we start with the current objects or an empty list
-        observer.onNext(controller!.fetchedObjects ?? [])
+        let fetched = controller!.fetchedObjects ?? []
+        observer.onNext(fetched.compactMap { $0 as? E })
         
         // clean-up
         return Disposables.create() {

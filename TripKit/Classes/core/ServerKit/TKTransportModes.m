@@ -112,8 +112,7 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
     } else if ([modeIdentifier hasPrefix:@"in_"]) {
       return @"aeroplane";
     } else {
-      ZAssert(false, @"Don't even have fall back!");
-      return @"car";
+      return nil; // probably a stationary ID
     }
   }
 }

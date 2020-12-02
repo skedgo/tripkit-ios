@@ -136,7 +136,6 @@ fileprivate extension Reactive where Base : TKRouter {
     }
     
     return Observable.create { observer in
-      
       var holder: CountHolder! = CountHolder()
       let count = router.multiFetchTrips(
         for: request,

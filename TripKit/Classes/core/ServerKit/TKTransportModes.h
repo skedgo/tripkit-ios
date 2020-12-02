@@ -49,7 +49,7 @@ FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierWheelchair;
 /**
  @return mode-related part of the image name
  */
-+ (NSString *)modeImageNameForModeIdentifier:(NSString *)modeIdentifier;
++ (nullable NSString *)modeImageNameForModeIdentifier:(NSString *)modeIdentifier;
 
 /**
  @return image that stands for the specified transport mode identifier

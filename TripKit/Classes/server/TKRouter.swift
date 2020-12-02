@@ -420,6 +420,10 @@ extension TKRouter {
   }
   
   private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+
+    // Mark as active early, to make sure we pass on errors
+    self.isActive = true
+    
     // sanity checks
     guard request.from.coordinate.isValid else {
       return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "Start location could not be determined. Please try again or select manually."), completion: completion)
@@ -431,9 +435,6 @@ extension TKRouter {
     let server = self.server ?? .shared
     server.requireRegions { [weak self] error in
       guard let self = self else { return }
-      
-      // Mark as active early, to make sure we pass on errors
-      self.isActive = true
       
       if let error = error {
         return self.handleError(error, completion: completion)
