@@ -57,14 +57,14 @@ public class TKRouter: NSObject {
   /// - Parameters:
   ///   - request: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
-  public func fetchTrips(for request: TripRequest, completion: @escaping (Result<Void, Error>) -> Void) {
+  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
     guard !request.isDeleted else {
       let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
       completion(.failure(error))
       return
     }
     
-    return fetchTrips(for: request, bestOnly: false) {
+    return fetchTrips(for: request, bestOnly: false, additional: additional) {
       let result = $0.map { _ in }
       completion(result)
     }
@@ -75,7 +75,7 @@ public class TKRouter: NSObject {
   ///   - query: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
   public func fetchTrips(for query: RoutingQuery, completion: @escaping (Result<TripRequest, Error>) -> Void) {
-    return fetchTrips(for: query, bestOnly: false, completion: completion)
+    return fetchTrips(for: query, bestOnly: false, additional: nil, completion: completion)
   }
 
   /// Kicks off the server request to fetch the best trip matching the request and the enabled
@@ -94,7 +94,7 @@ public class TKRouter: NSObject {
       tripRequest.expandForFavorite = true
     }
 
-    return fetchTrips(for: request, bestOnly: true) { result in
+    return fetchTrips(for: request, bestOnly: true, additional: nil) { result in
       completion(result.flatMap { request in
         if let trip = request.trips.first {
           return .success(trip)
@@ -166,7 +166,7 @@ extension TKRouter {
     
     let includesAllModes = request.additional.contains { $0.name == "allModes" }
     if includesAllModes {
-      fetchTrips(for: request, bestOnly: false, completion: completion)
+      fetchTrips(for: request, bestOnly: false, additional: nil, completion: completion)
       return 1
     }
     
@@ -210,7 +210,7 @@ extension TKRouter {
       worker.server = server
       worker.modeIdentifiers = modeGroup
       
-      worker.fetchTrips(for: tripRequest) { [weak self] result in
+      worker.fetchTrips(for: tripRequest, additional: request.additional) { [weak self] result in
         guard let self = self else { return }
         
         self.finishedWorkers += 1
@@ -380,14 +380,14 @@ extension TripRequest: TKRouterRequestable {
 extension TKRouter {
   
   public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil) -> String? {
-    let paras = requestParameters(for: request, modeIdentifiers: modes)
+    let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil)
     let baseURL = TKServer.shared.fallbackBaseURL()
     let fullURL = baseURL.appendingPathComponent("routing.json")
     let request = TKServer.getRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
     return request.url?.absoluteString
   }
   
-  private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem> = [], bestOnly: Bool = false) -> [String: Any] {
+  private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, bestOnly: Bool = false) -> [String: Any] {
     var paras = TKSettings.config
     paras["modes"] = modeIdentifiers?.sorted()
     paras["from"] = TKParserHelper.requestString(for: request.from)
@@ -407,7 +407,8 @@ extension TKRouter {
       paras["includeStops"] = true
     }
     
-    let fromQueryItems = Dictionary(grouping: additional, by: \.name)
+    let additionalItems = additional ?? request.additional
+    let fromQueryItems = Dictionary(grouping: additionalItems, by: \.name)
       .compactMapValues { list -> Any? in
         if list.count == 1, let first = list.first {
           return first.value
@@ -419,7 +420,7 @@ extension TKRouter {
     return paras
   }
   
-  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, completion: @escaping (Result<TripRequest, Error>) -> Void) {
 
     // Mark as active early, to make sure we pass on errors
     self.isActive = true
@@ -448,7 +449,12 @@ extension TKRouter {
           completion: completion)
       }
       
-      let paras = Self.requestParameters(for: request, modeIdentifiers: self.modeIdentifiers, bestOnly: bestOnly)
+      let paras = Self.requestParameters(
+        for: request,
+        modeIdentifiers: self.modeIdentifiers,
+        additional: additional,
+        bestOnly: bestOnly
+      )
       server.hitSkedGo(
         withMethod: "GET",
         path: "routing.json",
