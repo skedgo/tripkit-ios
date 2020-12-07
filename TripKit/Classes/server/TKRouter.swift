@@ -389,7 +389,8 @@ extension TKRouter {
   
   private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, bestOnly: Bool = false) -> [String: Any] {
     var paras = TKSettings.config
-    paras["modes"] = modeIdentifiers?.sorted()
+    let modes = modeIdentifiers ?? request.modes
+    paras["modes"] = modes.sorted()
     paras["from"] = TKParserHelper.requestString(for: request.from)
     paras["to"] = TKParserHelper.requestString(for: request.to)
     
