@@ -85,7 +85,7 @@ extension SegmentReference {
   public func populate(from dict: [String: AnyHashable]) {
     // Public transport
     arrivalPlatform = dict["endPlatform"] as? String
-    departurePlatform = dict["platform"] as? String
+    departurePlatform = dict["startPlatform"] as? String
     serviceStops = (dict["stops"] as? NSNumber)?.intValue
     ticketWebsiteURLString = dict["ticketWebsiteURL"] as? String
     if let ticketDict = dict["ticket"] as? [String: AnyHashable] {
