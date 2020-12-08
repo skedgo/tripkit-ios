@@ -37,7 +37,9 @@ public extension TKShareHelper {
     }
     
     public var start: CLLocationCoordinate2D? = nil
+    public var startName: String? = nil
     public var end: CLLocationCoordinate2D
+    public var endName: String? = nil
     public var title: String? = nil
     public var timeType: Time = .leaveASAP
     public var modes: [String] = []
