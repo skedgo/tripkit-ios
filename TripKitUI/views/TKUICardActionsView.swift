@@ -153,7 +153,7 @@ extension TKUICardActionsView {
         widthConstraint.isActive = true
       }
       
-      if index == actions.count - 1, actions.count > 1 {
+      if index == actions.count - 1 {
         actionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
       }
       
