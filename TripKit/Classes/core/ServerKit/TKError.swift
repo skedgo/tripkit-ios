@@ -76,10 +76,11 @@ public class TKError: NSError {
   
   @objc
   class func error(fromJSON dictionary: [String: Any], domain: String) -> TKError? {
-    guard let errorInfo = dictionary["error"] as? String,
+    guard
+      let errorInfo = dictionary["error"] as? String,
       let isUserError = dictionary["usererror"] as? Bool
-      else {
-        return nil
+    else {
+      return nil
     }
     
     var code = Int(isUserError ? kTKServerErrorTypeUser : kTKErrorTypeInternal)
@@ -87,16 +88,17 @@ public class TKError: NSError {
       code = errorCode
     }
     
-    let userInfo = [ NSLocalizedDescriptionKey: errorInfo ]
+    var userInfo: [String: Any] = [NSLocalizedDescriptionKey: errorInfo]
+    if let isUserError = dictionary["usererror"] as? Bool {
+      userInfo["TKIsUserError"] = isUserError
+    }
     
     let error: TKError
-    
     if isUserError {
       error = TKUserError(domain: domain, code: code, userInfo: userInfo)
     } else {
       error = TKServerError(domain: domain, code: code, userInfo: userInfo)
     }
-    
     error.title = dictionary["title"] as? String
     error.recovery = try? JSONDecoder().decode(TKErrorRecovery.self, withJSONObject: dictionary)
     
@@ -105,7 +107,11 @@ public class TKError: NSError {
   
   @objc
   public var isUserError: Bool {
-    return code >= 400 && code < 500
+    if let userError = userInfo["TKIsUserError"] as? Bool {
+      return userError
+    } else {
+      return code >= 400 && code < 500
+    }
   }
   
 }
