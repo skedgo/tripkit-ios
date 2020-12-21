@@ -18,10 +18,11 @@ extension TKUITimetableViewModel {
     public var items: [Item]
     
     public var title: String {
-      guard
-        !Calendar.current.isDateInToday(date),
-        let timeZone = items.first?.dataModel.stop.region?.timeZone
-        else { return "" }
+      let timeZone = items.first?.dataModel.stop.timeZone ?? .current
+      var calendar = Calendar.current
+      calendar.timeZone = timeZone
+      
+      guard !calendar.isDateInToday(date) else { return "" }
 
       return TKStyleManager.dateString(date, for: timeZone)
     }

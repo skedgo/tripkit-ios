@@ -86,7 +86,6 @@ extension StopLocation: TKUIModeAnnotation {
 
 extension StopLocation: TKUIStopAnnotation {}
 
-
 // MARK: - StopVisits
 
 // MARK: TKUIModeAnnotation

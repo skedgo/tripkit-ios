@@ -40,7 +40,8 @@ public extension TKUIModeAnnotation {
 
 @objc
 public protocol TKUIStopAnnotation: TKUIModeAnnotation {
-  var stopCode: String { get }  
+  var stopCode: String { get }
+  var timeZone: TimeZone? { get }
 }
 
 @available(*, unavailable, renamed: "TKUIImageAnnotation")

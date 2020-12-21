@@ -9,6 +9,10 @@
 import Foundation
 
 extension StopLocation {
+  @objc public var timeZone: TimeZone? {
+    location?.timeZone ?? region?.timeZone
+  }
+  
   @objc public var region: TKRegion? {
     if let name = regionName {
       return TKRegionManager.shared.localRegion(named: name)

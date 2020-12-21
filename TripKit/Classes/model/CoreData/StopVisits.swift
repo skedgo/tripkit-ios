@@ -17,14 +17,10 @@ extension StopVisits {
   }
   
   @objc
-  public var timeZone: TimeZone {
-    return stop.region?.timeZone ?? .current
-  }
+  public var timeZone: TimeZone { stop.timeZone ?? .current }
   
   @objc
-  public var frequency: NSNumber? {
-    return service.frequency
-  }
+  public var frequency: NSNumber? { service.frequency }
   
   public var timing: TKServiceTiming {
     get {

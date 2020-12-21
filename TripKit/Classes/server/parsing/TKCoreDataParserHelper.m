@@ -194,7 +194,6 @@
                                                       atLocation:coordinate
                                               intoTripKitContext:context];
         stop.shortName = stopDict[@"shortName"];
-        
         stop.wheelchairAccessible = stopDict[@"wheelchairAccessible"];
         
         ZAssert(! visit.stop || visit.stop == stop, @"We shouldn't have a stop already! %@", visit.stop);

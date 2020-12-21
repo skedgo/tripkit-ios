@@ -228,7 +228,10 @@ extension TKUITimetableViewModel {
   
   static func timeZone(from data: DataInput) -> TimeZone {
     if let stops = data.stops, let first = stops.first {
-      return TKRegionManager.shared.timeZone(for: first.coordinate) ?? .current
+      return
+        first.timeZone
+          ?? TKRegionManager.shared.timeZone(for: first.coordinate)
+          ?? .current
       
     } else if let dlsTable = data.dlsTable {
       return dlsTable.startRegion.timeZone

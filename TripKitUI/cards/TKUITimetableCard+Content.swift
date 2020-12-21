@@ -60,7 +60,7 @@ extension StopVisits {
       text += Loc.Every(repetition: freqString)
       
       if let start = start, let end = end {
-        let timeZone = stop.region?.timeZone ?? .current
+        let timeZone = stop.timeZone
         text += " \(spacer) "
         text += TKStyleManager.timeString(start, for: timeZone)
         text += " - "
@@ -69,7 +69,7 @@ extension StopVisits {
 
       
     case .timetabled(let arrival, let departure):
-      let timeZone = stop.region?.timeZone
+      let timeZone = stop.timeZone
       
       var departureString = ""
       if let departureDate = departure {
