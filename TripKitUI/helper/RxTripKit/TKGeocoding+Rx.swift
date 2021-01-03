@@ -133,6 +133,7 @@ public extension Array where Element == TKAutocompleting {
         let autocompletions = self.map { provider in
           provider
             .autocomplete(input.0, near: mapRect)
+            .catchErrorJustReturn([])
             .map { results -> [TKAutocompletionResult] in
               results.forEach { $0.provider = provider as AnyObject }
               return results
