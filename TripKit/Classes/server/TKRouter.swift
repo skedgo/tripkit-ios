@@ -52,6 +52,7 @@ public class TKRouter: NSObject {
   private var lastWorkerError: Error? = nil
   private var workers: [Set<String>: TKRouter] = [:]
   private var finishedWorkers: UInt = 0
+  private var workerQueue: DispatchQueue?
   
   /// The main method to call to have the router calculate trips.
   /// - Parameters:
@@ -106,6 +107,14 @@ public class TKRouter: NSObject {
   }
   
   public func cancelRequests() {
+    if let queue = workerQueue {
+      queue.async(execute: cancelRequestsWorker)
+    } else {
+      cancelRequestsWorker()
+    }
+  }
+  
+  private func cancelRequestsWorker() {
     workers.map(\.value).forEach { $0.cancelRequests() }
     self.workers = [:]
     self.finishedWorkers = 0
@@ -163,6 +172,16 @@ extension TKRouter {
   }
   
   private func multiFetchTrips(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
+    let queue = DispatchQueue(label: "com.skedgo.TripKit.multi-fetch-worker")
+    self.workerQueue = queue
+    var count: UInt = 0
+    queue.sync {
+      count = self.multiFetchTripsWorker(request: request, modes: modes, classifier: classifier, progress: progress, on: queue, completion: completion)
+    }
+    return count
+  }
+    
+  private func multiFetchTripsWorker(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, on queue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
     
     let includesAllModes = request.additional.contains { $0.name == "allModes" }
     if includesAllModes {
@@ -174,9 +193,6 @@ extension TKRouter {
       completion(.failure(RoutingError.invalidRequest("Could not access CoreData storage")))
       return 0
     }
-
-    cancelRequests()
-    self.isActive = true
 
     let enabledModes = modes ?? request.modes
     guard !enabledModes.isEmpty else {
@@ -200,43 +216,58 @@ extension TKRouter {
     // we'll adjust the visibility in the completion block
     tripRequest.defaultVisibility = .hidden
     
-    for modeGroup in groupedIdentifier {
-      if self.workers[modeGroup] != nil {
-        continue
-      }
+    queue.async {
+      self.cancelRequestsWorker()
+      self.isActive = true
       
-      let worker = TKRouter()
-      workers[modeGroup] = worker
-      worker.server = server
-      worker.modeIdentifiers = modeGroup
-      
-      worker.fetchTrips(for: tripRequest, additional: request.additional) { [weak self] result in
-        guard let self = self else { return }
+      for modeGroup in groupedIdentifier {
+        if self.workers[modeGroup] != nil {
+          continue
+        }
         
-        self.finishedWorkers += 1
-        progress?(self.finishedWorkers)
+        let worker = TKRouter()
+        self.workers[modeGroup] = worker
+        worker.server = self.server
+        worker.modeIdentifiers = modeGroup
         
-        switch result {
-        case .failure(let error):
-          self.handleMultiFetchResult(.failure(error), modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
+        worker.fetchTrips(for: tripRequest, additional: request.additional) { [weak self] result in
+          guard let self = self else { return }
           
-        case .success:
-          if modes == nil {
-            // We get the minimized and hidden modes here in the completion block
-            // since they might have changed while waiting for results
-            let minimized = TKUserProfileHelper.minimizedModeIdentifiers
-            let hidden = TKUserProfileHelper.hiddenModeIdentifiers
-            tripRequest.adjustVisibility(forMinimizedModeIdentifiers: minimized, hiddenModeIdentifiers: hidden)
-          } else {
-            tripRequest.adjustVisibility(forMinimizedModeIdentifiers: [], hiddenModeIdentifiers: [])
+          // Switch to update our internals in a thread-safe manner
+          queue.async {
+            self.finishedWorkers += 1
+            progress?(self.finishedWorkers)
+            
+            switch result {
+            case .failure(let error):
+              self.handleMultiFetchResult(.failure(error), modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
+              
+            case .success:
+              // Classifiers will likely heavily read from the trips, so
+              // we need to switch
+              context.perform {
+                if modes == nil {
+                  // We get the minimized and hidden modes here in the completion block
+                  // since they might have changed while waiting for results
+                  let minimized = TKUserProfileHelper.minimizedModeIdentifiers
+                  let hidden = TKUserProfileHelper.hiddenModeIdentifiers
+                  tripRequest.adjustVisibility(forMinimizedModeIdentifiers: minimized, hiddenModeIdentifiers: hidden)
+                } else {
+                  tripRequest.adjustVisibility(forMinimizedModeIdentifiers: [], hiddenModeIdentifiers: [])
+                }
+                
+                // Updating classifications before making results visible
+                if let classifier = classifier {
+                  tripRequest.updateTripGroupClassifications(using: classifier)
+                }
+                
+                // Then back to worker queue to update internals
+                queue.async {
+                  self.handleMultiFetchResult(result, modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
+                }
+              }
+            }
           }
-          
-          // Updating classifications before making results visible
-          if let classifier = classifier {
-            tripRequest.updateTripGroupClassifications(using: classifier)
-          }
-          
-          self.handleMultiFetchResult(result, modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
         }
       }
     }
@@ -253,10 +284,12 @@ extension TKRouter {
     
     if workers.isEmpty {
       // Only show an error if we found nothing
-      if request.trips.isEmpty, let error = self.lastWorkerError {
-        completion(.failure(error))
-      } else {
-        completion(.success(request))
+      request.context?.perform {
+        if request.trips.isEmpty, let error = self.lastWorkerError {
+          completion(.failure(error))
+        } else {
+          completion(.success(request))
+        }
       }
     }
   }
