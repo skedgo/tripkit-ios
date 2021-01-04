@@ -278,7 +278,6 @@ public class TKSegment: NSObject {
   public func uses(_ visit: StopVisits) -> Bool {
     if let visits = _segmentVisits {
       let visitInfo = visits[visit.stop.stopCode]
-      assert(visitInfo != nil, "Asked for unrelated stop. Not recommended.")
       return visitInfo ?? false
     } else {
       return true // be optimistic while we haven't loaded the details yet

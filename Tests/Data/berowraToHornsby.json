@@ -22,7 +22,7 @@
             {
               "durationString": "13 mins",
               "endTime": 1474443720,
-              "platform": "Platform 2",
+              "startPlatform": "Platform 2",
               "segmentTemplateHashCode": -912034213,
               "serviceColor": {
                 "blue": 0,

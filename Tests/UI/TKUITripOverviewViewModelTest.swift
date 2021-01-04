@@ -22,7 +22,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     let trip = self.trip(fromFilename: "routing-pt-realtime")
     let viewModel = TKUITripOverviewViewModel(trip: trip)
     
-    let sections = try XCTUnwrap( viewModel.sections.toBlocking().first())
+    let sections = try XCTUnwrap(viewModel.sections.toBlocking().first())
     let departure = try XCTUnwrap(sections.first?.items.first)
     guard case let .terminal(item) = departure else { return XCTFail() }
     
@@ -37,7 +37,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     let trip = self.trip(fromFilename: "routing-pt-realtime")
     let viewModel = TKUITripOverviewViewModel(trip: trip)
     
-    let items = try XCTUnwrap( viewModel.sections.toBlocking().first()?.first?.items)
+    let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 9)
     
     let subtitles = items.subtitles
@@ -56,11 +56,26 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     }
   }
   
+  func testSubtitlesWithPlatformInformationAtInterchanges() throws {
+    let trip = self.trip(fromFilename: "routing-pt-platforms")
+    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    
+    let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
+    XCTAssertEqual(items.count, 11)
+    
+    let subtitles = items.subtitles
+    XCTAssertEqual(subtitles, [
+      "Platform 4",
+      "Platform 3\nPlatform 1",
+      "Platform 1"
+    ])
+  }
+  
   func testContinuation() throws {
     let trip = self.trip(fromFilename: "routing-pt-continuation")
     let viewModel = TKUITripOverviewViewModel(trip: trip)
     
-    let items = try XCTUnwrap( viewModel.sections.toBlocking().first()?.first?.items)
+    let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 5)
     
     // Platform only in subtitles (but not at continuation itself!)
@@ -97,7 +112,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
     let trip = self.trip(fromFilename: "routing-pt-realtime")
     let viewModel = TKUITripOverviewViewModel(trip: trip)
     
-    let items = try XCTUnwrap( viewModel.sections.toBlocking().first()?.first?.items)
+    let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 9)
     
     // Should only display the times of PT segments, and then
@@ -153,10 +168,10 @@ extension Array where Element == TKUITripOverviewViewModel.Section.Item {
     compactMap { item -> String? in
       switch item {
       case .moving, .alert, .impossible: return nil
-      case .stationary(let item): return item.subtitle
+      case .stationary(let item): return [item.subtitle, item.endSubtitle].compactMap { $0 }.joined(separator: "\n")
       case .terminal(let item): return item.subtitle
       }
-    }
+    }.filter { !$0.isEmpty }
   }
   
   var timeInfos: [TKUITripOverviewViewModel.TimeInfo] {

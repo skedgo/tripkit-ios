@@ -62,6 +62,7 @@ extension TKUITripOverviewViewModel {
   struct StationaryItem: Equatable {
     let title: String
     let subtitle: String?
+    let endSubtitle: String?
     
     let startTime: TimeInfo?
     let endTime: TimeInfo?
@@ -212,13 +213,13 @@ fileprivate extension TKSegment {
   /// - [xt] Ignore simple 'wait' text
   /// - [x ] Make sure durations make sense and add up
   /// - [ ] Fix size of data attribution => @Brian
-  /// - [ ] Test changing at a station/platform
+  /// - [xt] Test changing at a station/platform
   /// - [xt] Test continuation
-  /// - [ ] Test impossible segment, due to time overlap
-  /// - [ ] Test impossible segment, due to cancelled services]
+  /// - [xt] Test impossible segment, due to time overlap
+  /// - [xt] Test impossible segment, due to cancelled services]
   /// - [ ] Test frequency-based trip
   
-  func platformInfo(previous: TKSegment? = nil, next: TKSegment?) -> String? {
+  func platformInfo(previous: TKSegment? = nil, next: TKSegment?) -> (String?, String?) {
     
     func toPlatform(_ code: String) -> String? {
       // TODO: Instead tweak backend to provide these
@@ -228,21 +229,24 @@ fileprivate extension TKSegment {
 
     if isTerminal {
       if order == .start, let segment = next {
-        return segment.scheduledStartPlatform.flatMap(toPlatform)
+        return (segment.scheduledStartPlatform.flatMap(toPlatform), nil)
       } else if order == .end, let segment = previous {
-        return segment.scheduledEndPlatform.flatMap(toPlatform)
+        return (segment.scheduledEndPlatform.flatMap(toPlatform), nil)
       } else {
-        return nil
+        return (nil, nil)
       }
       
     } else if type == .scheduled, !(next?.isContinuation == true) {
-      return scheduledEndPlatform.flatMap(toPlatform)
+      // Scheduled to something that's not a continuation
+      return (scheduledEndPlatform.flatMap(toPlatform), nil)
     
     } else if let next = next, next.type == .scheduled, !next.isContinuation {
-      return next.scheduledStartPlatform.flatMap(toPlatform)
+      let endOfThis = scheduledEndPlatform.flatMap(toPlatform) ?? previous?.scheduledEndPlatform.flatMap(toPlatform)
+      let startOfNext = next.scheduledStartPlatform.flatMap(toPlatform)
+      return (endOfThis, startOfNext)
     
     } else {
-      return nil
+      return (nil, nil)
     }
   }
   
@@ -262,7 +266,7 @@ fileprivate extension TKSegment {
     
     return TKUITripOverviewViewModel.TerminalItem(
       title: titleWithoutTime ?? "",
-      subtitle: subtitle,
+      subtitle: subtitle.0 ?? subtitle.1,
       time: isStart ? next?.departureTimeInfo : previous?.arrivalTimeInfo,
       timeZone: timeZone,
       timesAreFixed: trip.departureTimeIsFixed,
@@ -277,24 +281,41 @@ fileprivate extension TKSegment {
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
     assert(isStationary)
     
-    var subtitle = titleWithoutTime?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-    if stationaryType == .transfer {
-      subtitle = "" // this is the departure, so ignore the "wait" information
-    } else if stationaryType == .wait {
-      subtitle.append(" · ")
-      subtitle.append(arrivalTime.durationSince(departureTime))
-    }
-
-    if let platformInfo = platformInfo(previous: previous, next: next) {
-      if !subtitle.isEmpty {
-        subtitle += "\n"
+    let platforms = platformInfo(previous: previous, next: next)
+    var subtitle: String
+    var endSubtitle: String?
+    if stationaryType == .transfer, let previous = previous, previous.isPublicTransport {
+      // We ignore the title provided by backend, but we guarantee we
+      // show both dots by having both start and end
+      subtitle = platforms.0 ?? ""
+      endSubtitle = platforms.1 ?? ""
+    
+    } else {
+      if stationaryType == .transfer {
+        subtitle = "" // this is the departure, so ignore the "wait" information
+      } else {
+        subtitle = titleWithoutTime?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
       }
-      subtitle += platformInfo
+      endSubtitle = nil
+      
+      if stationaryType == .wait {
+        if !subtitle.isEmpty {
+          subtitle.append(" · ")
+        }
+        subtitle.append(arrivalTime.durationSince(departureTime))
+      }
+      if let platform = platforms.0 ?? platforms.1 {
+        if !subtitle.isEmpty {
+          subtitle += "\n"
+        }
+        subtitle += platform
+      }
     }
     
     return TKUITripOverviewViewModel.StationaryItem(
       title: (start?.title ?? nil) ?? Loc.Location,
       subtitle: subtitle,
+      endSubtitle: endSubtitle,
       startTime: previous?.arrivalTimeInfo,
       endTime: next?.departureTimeInfo,
       timeZone: timeZone,
@@ -310,9 +331,11 @@ fileprivate extension TKSegment {
   func toStationaryBridge(to next: TKSegment) -> TKUITripOverviewViewModel.StationaryItem {
     assert(!isStationary && !next.isStationary)
     
+    let subtitles = platformInfo(next: next)
     return TKUITripOverviewViewModel.StationaryItem(
       title: (next.start?.title ?? end?.title ?? nil) ?? Loc.Location,
-      subtitle: platformInfo(next: next),
+      subtitle: subtitles.0 ?? subtitles.1,
+      endSubtitle: nil,
       startTime: next.isContinuation ? nil : arrivalTimeInfo,
       endTime: next.isContinuation ? nil : next.departureTimeInfo,
       timeZone: timeZone,

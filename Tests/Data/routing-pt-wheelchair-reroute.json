@@ -106,7 +106,7 @@
                                 }
                             },
                             "id": "gG196YTq",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -368196986,
@@ -167,7 +167,7 @@
                                 }
                             },
                             "id": "G1ZROnV8",
-                            "platform": "Platform 7",
+                            "startPlatform": "Platform 7",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 1048730071,
@@ -249,7 +249,7 @@
                                 }
                             },
                             "id": "krXoW62F",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -71357195,
@@ -310,7 +310,7 @@
                                 }
                             },
                             "id": "X4HRMeoH",
-                            "platform": "Platform 6",
+                            "startPlatform": "Platform 6",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 1020134772,
@@ -392,7 +392,7 @@
                                 }
                             },
                             "id": "c2D15ikY",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -368196986,
@@ -453,7 +453,7 @@
                                 }
                             },
                             "id": "1yfSgz2X",
-                            "platform": "Platform 7",
+                            "startPlatform": "Platform 7",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 1048725421,
@@ -535,7 +535,7 @@
                                 }
                             },
                             "id": "8LyBASiA",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -71357195,
@@ -596,7 +596,7 @@
                                 }
                             },
                             "id": "iABCioF5",
-                            "platform": "Platform 6",
+                            "startPlatform": "Platform 6",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 1020134772,
@@ -678,7 +678,7 @@
                                 }
                             },
                             "id": "5rNxj0iY",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -71357195,
@@ -739,7 +739,7 @@
                                 }
                             },
                             "id": "Iy3LVccX",
-                            "platform": "Platform 8",
+                            "startPlatform": "Platform 8",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 189715824,
@@ -821,7 +821,7 @@
                                 }
                             },
                             "id": "dIdrKEG8",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -71357195,
@@ -882,7 +882,7 @@
                                 }
                             },
                             "id": "cyCpLq0a",
-                            "platform": "Platform 7",
+                            "startPlatform": "Platform 7",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 1049604736,
@@ -964,7 +964,7 @@
                                 }
                             },
                             "id": "Wqm96kzM",
-                            "platform": "Platform 1",
+                            "startPlatform": "Platform 1",
                             "routeDirection": 1,
                             "routeId": "APS_2a",
                             "segmentTemplateHashCode": -71357195,
@@ -1025,7 +1025,7 @@
                                 }
                             },
                             "id": "fCfmSswW",
-                            "platform": "Platform 8",
+                            "startPlatform": "Platform 8",
                             "routeDirection": 0,
                             "routeId": "BMT_1",
                             "segmentTemplateHashCode": 189715824,

@@ -45,7 +45,7 @@
                 }
               },
               "id": "lNPrPxG0",
-              "platform": "Platform 1",
+              "startPlatform": "Platform 1",
               "routeDirection": 1,
               "routeId": "NSN_2a",
               "segmentTemplateHashCode": -1203388427,
@@ -81,7 +81,7 @@
                 }
               },
               "id": "tCsENgPm",
-              "platform": "Platform 1",
+              "startPlatform": "Platform 1",
               "routeDirection": 0,
               "routeId": "WST_1a",
               "segmentTemplateHashCode": -121734334,

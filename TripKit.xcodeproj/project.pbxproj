@@ -188,6 +188,9 @@
 		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
 		3A54757E21C15A4800748EB6 /* TKUICircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */; };
 		3A54758021C15C1E00748EB6 /* TripKitUIUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0DC202C8EB80084CB2C /* TripKitUIUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A5A39A925A2AB86005DC1AE /* routing-pt-platforms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A39A825A2AB86005DC1AE /* routing-pt-platforms.json */; };
+		3A5A39B725A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A39B525A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift */; };
+		3A5A39B825A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A39B625A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.xib */; };
 		3A5D1B4D24BDE216001B1E77 /* Trip+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D1B4C24BDE216001B1E77 /* Trip+Data.swift */; };
 		3A5D1B4E24BDE216001B1E77 /* Trip+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D1B4C24BDE216001B1E77 /* Trip+Data.swift */; };
 		3A5D1B5024BDE299001B1E77 /* DataAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D1B4F24BDE299001B1E77 /* DataAttachable.swift */; };
@@ -1093,6 +1096,9 @@
 		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICircleAnnotationView.swift; sourceTree = "<group>"; };
 		3A5709C322EF27A900E1EBBC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		3A5A39A825A2AB86005DC1AE /* routing-pt-platforms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-pt-platforms.json"; sourceTree = "<group>"; };
+		3A5A39B525A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentStationaryDoubleCell.swift; sourceTree = "<group>"; };
+		3A5A39B625A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentStationaryDoubleCell.xib; sourceTree = "<group>"; };
 		3A5D1B4C24BDE216001B1E77 /* Trip+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+Data.swift"; sourceTree = "<group>"; };
 		3A5D1B4F24BDE299001B1E77 /* DataAttachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAttachable.swift; sourceTree = "<group>"; };
 		3A5D1B5224BDE43D001B1E77 /* SegmentReference+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentReference+Data.swift"; sourceTree = "<group>"; };
@@ -1887,6 +1893,8 @@
 				3A6E7D3F20EFBD4800013253 /* TKUISegmentMovingCell.xib */,
 				3A26E1B220EFAFBD00FE4DDD /* TKUISegmentStationaryCell.swift */,
 				3A26E1B320EFAFBD00FE4DDD /* TKUISegmentStationaryCell.xib */,
+				3A5A39B525A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift */,
+				3A5A39B625A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.xib */,
 				3A3658802062892100D8645C /* TKUITrainOccupancyView.swift */,
 			);
 			path = "trip overview";
@@ -2268,16 +2276,17 @@
 				D37222FC241B65E100CC83F0 /* routing-bus+scooter.json */,
 				3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */,
 				3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */,
+				D31C0D58249C81F400F3EC06 /* routing-goget-park.json */,
 				3AA3CEA5202CD4D100E54859 /* routing-goget.json */,
 				3ADD3B9D2358BDA900CD4713 /* routing-motorbike.json */,
 				3A201F2523BB9D0100763948 /* routing-pt-cancelled.json */,
 				3AD5324F239825AC00E8EC0C /* routing-pt-continuation.json */,
 				3A8A542F2397FB69006A390F /* routing-pt-impossible.json */,
 				3AA3CEA9202CD4D100E54859 /* routing-pt-oldish.json */,
+				3A5A39A825A2AB86005DC1AE /* routing-pt-platforms.json */,
 				3A8A54312397FBB7006A390F /* routing-pt-realtime.json */,
 				D336994A24612DCE00958C23 /* routing-pt-wheelchair-reroute.json */,
 				D37222FB241B65E100CC83F0 /* routing-scooters.json */,
-				D31C0D58249C81F400F3EC06 /* routing-goget-park.json */,
 				3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */,
 				3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */,
 			);
@@ -3259,6 +3268,7 @@
 				D372268C2345A8E500DBCFC8 /* TKUIResultsTitleView.xib in Resources */,
 				3A7377CF23226921004C91CC /* TKUIExtendedActionView.xib in Resources */,
 				3A0B51802240E5B6002346D6 /* TKUISegmentTitleView.xib in Resources */,
+				3A5A39B825A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.xib in Resources */,
 				3A201F2123BB86A600763948 /* TKUISegmentImpossibleCell.xib in Resources */,
 				D38FB46423A1B86D00325F72 /* TKUIProgressCell.xib in Resources */,
 				3A682F1F20F3F8A900E05195 /* TKUIRoutingSupportView.xib in Resources */,
@@ -3301,6 +3311,7 @@
 				3AA3CEC6202CD4D100E54859 /* hornsbyToSkedGo.json in Resources */,
 				3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */,
 				3ADD3B9F2358BDAF00CD4713 /* routing-motorbike.json in Resources */,
+				3A5A39A925A2AB86005DC1AE /* routing-pt-platforms.json in Resources */,
 				3A201F2623BB9D0200763948 /* routing-pt-cancelled.json in Resources */,
 				3AA3CECF202CD4D100E54859 /* alertsTransit.json in Resources */,
 				D336994D24612DD500958C23 /* routing-pt-wheelchair-reroute.json in Resources */,
@@ -3758,6 +3769,7 @@
 				3A34286F254ED69500D71039 /* TKUserProfileHelper+Rx.swift in Sources */,
 				3A8FAB7020D3E512005D4C73 /* TKUITripCell+Formatter.swift in Sources */,
 				3AFD394720D9333500FDC7D0 /* TKUITripOverviewViewModel.swift in Sources */,
+				3A5A39B725A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift in Sources */,
 				3A1AAB3822BE199A000ED3CC /* UIImage+Variations.m in Sources */,
 				3A2CAB94253DA84F007BB48B /* DataSources.swift in Sources */,
 				3A2CAB90253DA84F007BB48B /* AnimationConfiguration.swift in Sources */,

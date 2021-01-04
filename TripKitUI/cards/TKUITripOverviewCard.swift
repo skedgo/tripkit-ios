@@ -118,6 +118,7 @@ public class TKUITripOverviewCard: TKUITableCard {
     self.tableView = tableView
     
     tableView.register(TKUISegmentStationaryCell.nib, forCellReuseIdentifier: TKUISegmentStationaryCell.reuseIdentifier)
+    tableView.register(TKUISegmentStationaryDoubleCell.nib, forCellReuseIdentifier: TKUISegmentStationaryDoubleCell.reuseIdentifier)
     tableView.register(TKUISegmentMovingCell.nib, forCellReuseIdentifier: TKUISegmentMovingCell.reuseIdentifier)
     tableView.register(TKUISegmentAlertCell.nib, forCellReuseIdentifier: TKUISegmentAlertCell.reuseIdentifier)
     tableView.register(TKUISegmentImpossibleCell.nib, forCellReuseIdentifier: TKUISegmentImpossibleCell.reuseIdentifier)
@@ -129,7 +130,11 @@ public class TKUITripOverviewCard: TKUITableCard {
         case .terminal(let item):
           return self.terminalCell(for: item, tableView: tv, indexPath: ip)
         case .stationary(let item):
-          return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
+          if item.endSubtitle != nil {
+            return TKUITripOverviewCard.stationaryDoubleCell(for: item, tableView: tv, indexPath: ip)
+          } else {
+            return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
+          }
         case .moving(let item):
           return self.movingCell(for: item, tableView: tv, indexPath: ip)
         case .alert(let item):
@@ -226,7 +231,13 @@ extension TKUITripOverviewCard {
     cell.configure(with: stationary)
     return cell
   }
-  
+
+  private static func stationaryDoubleCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryDoubleCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryDoubleCell else { preconditionFailure() }
+    cell.configure(with: stationary)
+    return cell
+  }
+
   private func alertCell(for alertItem: TKUITripOverviewViewModel.AlertItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentAlertCell.reuseIdentifier, for: indexPath) as? TKUISegmentAlertCell else { preconditionFailure() }
     cell.configure(with: alertItem)    
