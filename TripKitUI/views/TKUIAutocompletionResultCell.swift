@@ -20,7 +20,8 @@ class TKUIAutocompletionResultCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
 
-    backgroundColor = .tkBackground
+    // Shouldn't have its own background color
+    backgroundColor = .clear
   }
   
   required init?(coder aDecoder: NSCoder) {
