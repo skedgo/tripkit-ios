@@ -154,20 +154,21 @@ extension TKUIRoutingResultsViewModel {
       return distance < 50
     }
     
-    var origin: Observable<CLLocationCoordinate2D> = .empty()
-    var destination: Observable<CLLocationCoordinate2D> = .empty()
+    var origin: Observable<(RouteBuilder, id: String)> = .empty()
+    var destination: Observable<(RouteBuilder, id: String)> = .empty()
     if let asObject = builder.origin {
-      origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
+      origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate", options: [.new])
         .compactMap { [weak asObject] _ in asObject?.coordinate }
         .distinctUntilChanged(isCloseEnough)
+        .map { _ in (builder, Self.buildId(for: builder)) }
     }
     if let asObject = builder.destination {
-      destination = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
+      destination = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate", options: [.new])
         .compactMap { [weak asObject] _ in asObject?.coordinate }
         .distinctUntilChanged(isCloseEnough)
+        .map { _ in (builder, Self.buildId(for: builder)) }
     }
     return Observable.merge(origin, destination)
-      .map { _ in (builder, Self.buildId(for: builder)) }
   }
   
 }
