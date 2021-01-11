@@ -61,6 +61,11 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
       .disposed(by: disposeBag)
   }
   
+  override open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+    TKUIMapManagerHelper.adjustZOrder(views)
+    super.mapView(mapView, didAdd: views)
+  }
+  
   override public func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
     let builder = super.annotationBuilder(for: annotation, in: mapView)
     if let visit = annotation as? StopVisits {

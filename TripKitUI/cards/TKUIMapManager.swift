@@ -73,10 +73,10 @@ open class TKUIMapManager: TGMapManager {
   /// @default: TKUIAnnotationViewBuilder
   public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKUIAnnotationViewBuilder) = TKUIAnnotationViewBuilder.init
   
+  static var tileOverlays: [String: MKTileOverlay] = [:]
+  
   /// Callback that fires when attributions need to be displayed. In particular when using `tiles`.
   public var attributionDisplayer: (([TKAPI.DataAttribution], _ sender: UIView) -> Void)? = nil
-  
-  static var tileOverlays: [String: MKTileOverlay] = [:]
   
   /// Whether to show the coverage polygon which greys out areas outside the coverage
   open var showOverlayPolygon = false
@@ -434,8 +434,6 @@ extension TKUIMapManager {
   }
   
   open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-    TKUIMapManagerHelper.adjustZOrder(views)
-
     // animations
     let animatedIDs = animatedAnnotations.identities
     let viewsToAnimate = views.filter {
