@@ -161,9 +161,10 @@ private extension TKUIAnnotationViewBuilder {
     }
     
     if let modeAnnotation = glyphable as? TKUIModeAnnotation {
-      view.clusteringIdentifier = enableClustering && modeAnnotation.priority.rawValue < 500
+      view.clusteringIdentifier =
+        enableClustering && modeAnnotation.priority.rawValue < 500
         ? modeAnnotation.clusterIdentifier : nil
-      view.displayPriority = modeAnnotation.priority
+      view.displayPriority = asTravelled ? modeAnnotation.priority : .defaultLow
     }
     
     return view

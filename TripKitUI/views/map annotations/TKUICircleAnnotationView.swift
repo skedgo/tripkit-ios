@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-public class TKUICircleAnnotationView: MKAnnotationView {
+open class TKUICircleAnnotationView: MKAnnotationView {
   private enum Constants {
     static let circleSize: CGFloat   = 12.0
     static let smallFactor: CGFloat  = 0.8
@@ -33,7 +33,7 @@ public class TKUICircleAnnotationView: MKAnnotationView {
     backgroundColor = .clear
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
