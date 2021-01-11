@@ -569,6 +569,7 @@ typedef NSUInteger SGTripFlag;
 - (NSDictionary *)accessibleCostValues:(BOOL)includeTime
 {
 	NSMutableDictionary *values = [NSMutableDictionary dictionaryWithCapacity:3];
+  values[@(TKTripCostTypeScore)] = [@(self.totalScore) toScoreString];
   if (includeTime) {
     NSString *durationString = [self durationString];
     if (durationString) {
