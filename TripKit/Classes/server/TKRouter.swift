@@ -247,13 +247,12 @@ extension TKRouter {
               // we need to switch
               context.perform {
                 if modes == nil {
-                  // We get the minimized and hidden modes here in the completion block
+                  // We get hidden modes here in the completion block
                   // since they might have changed while waiting for results
-                  let minimized = TKUserProfileHelper.minimizedModeIdentifiers
                   let hidden = TKUserProfileHelper.hiddenModeIdentifiers
-                  tripRequest.adjustVisibility(forMinimizedModeIdentifiers: minimized, hiddenModeIdentifiers: hidden)
+                  tripRequest.adjustVisibility(forHiddenModeIdentifiers: hidden)
                 } else {
-                  tripRequest.adjustVisibility(forMinimizedModeIdentifiers: [], hiddenModeIdentifiers: [])
+                  tripRequest.adjustVisibility(forHiddenModeIdentifiers: [])
                 }
                 
                 // Updating classifications before making results visible

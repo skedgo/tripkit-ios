@@ -41,8 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) TripGroup *lastSelection;
 @property (nonatomic, strong, nullable) Trip *preferredTrip;
 
-- (void)adjustVisibilityForMinimizedModeIdentifiers:(NSSet *)minimized
-                              hiddenModeIdentifiers:(NSSet *)hidden;
+- (void)adjustVisibilityForHiddenModeIdentifiers:(NSSet *)hidden;
 
 /**
  @return The region the complete trip takes place in. Can be international if it spanning more than one region.

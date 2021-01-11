@@ -13,7 +13,6 @@ public class TKUserProfileHelper: NSObject {
   public enum DefaultsKey: String {
     case onWheelchair = "profileOnWheelchair"
     case sortedEnabled = "profileSortedModeIdentifiers"
-    case minimized = "profileMinimizedModeIdentifiers"
     case hidden = "profileHiddenModeIdentifiers"
     case disliked = "profileDislikedTransitMode"
   }
@@ -42,7 +41,7 @@ public class TKUserProfileHelper: NSObject {
   //MARK: - Transport modes
   
   /// Overwrites user preferences for each non-nil value.
-  @objc public class func updateTransportModesWithEnabledOrder(_ enabled: [Identifier]?, minimized: Set<Identifier>?, hidden: Set<Identifier>?)
+  @objc public class func updateTransportModesWithEnabledOrder(_ enabled: [Identifier]?, hidden: Set<Identifier>?)
   {
     let shared = UserDefaults.shared
     if let enabled = enabled {
@@ -53,23 +52,12 @@ public class TKUserProfileHelper: NSObject {
         showWheelchairInformation = false
       }
     }
-    if let minimized = minimized {
-      shared.set(Array(minimized), forKey: DefaultsKey.minimized.rawValue)
-    }
     if let hidden = hidden {
       shared.set(Array(hidden), forKey: DefaultsKey.hidden.rawValue)
       if hidden.contains(TKTransportModeIdentifierWheelchair) {
         showWheelchairInformation = false
       }
     }
-  }
-  
-  @objc public class func modeIdentifierIsMinimized(_ modeIdentifier: Identifier) -> Bool {
-    return minimizedModeIdentifiers.contains(modeIdentifier)
-  }
-  
-  @objc public class func setModeIdentifier(_ modeIdentifier: Identifier, toMinimized minimized: Bool) {
-    update(minimizedModeIdentifiers, forKey: .minimized, modeIdentifier: modeIdentifier, include: minimized)
   }
   
   @objc public class func modeIdentifierIsHidden(_ modeIdentifier: Identifier) -> Bool {
@@ -106,18 +94,8 @@ public class TKUserProfileHelper: NSObject {
 
   @objc public class func maximizedModeIdentifiers(_ available: [Identifier]) -> Set<Identifier> {
     let hidden = hiddenModeIdentifiers
-    let minimized = minimizedModeIdentifiers
-    let ordered = available.filter { !hidden.contains($0) && !minimized.contains($0) }
+    let ordered = available.filter { !hidden.contains($0) }
     return Set(ordered)
-  }
-  
-  
-  @objc public class var minimizedModeIdentifiers: Set<Identifier> {
-    if let minimized = UserDefaults.shared.object(forKey: DefaultsKey.minimized.rawValue) as? [Identifier] {
-      return Set(minimized)
-    } else {
-      return [TKTransportModeIdentifierMotorbike, TKTransportModeIdentifierTaxi, TKTransportModeIdentifierWalking]
-    }
   }
   
   @objc public class var hiddenModeIdentifiers: Set<Identifier> {
@@ -128,11 +106,6 @@ public class TKUserProfileHelper: NSObject {
     }
   }
 
-  @objc public class var hiddenAndMinimizedModeIdentifiers: Set<Identifier> {
-    return minimizedModeIdentifiers.union(hiddenModeIdentifiers)
-  }
-
-  
   //MARK: - Preferred transit modes
   
   @objc public class func transitModeIsPreferred(_ identifier: Identifier) -> Bool {

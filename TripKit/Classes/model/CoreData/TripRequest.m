@@ -137,11 +137,9 @@
   }
 }
 
-- (void)adjustVisibilityForMinimizedModeIdentifiers:(NSSet * __nonnull)minimized
-                              hiddenModeIdentifiers:(NSSet * __nonnull)hidden
+- (void)adjustVisibilityForHiddenModeIdentifiers:(NSSet * __nonnull)hidden
 {
   NSSet *allGroups = [self tripGroups];
-  NSMutableDictionary *minimizedModeIdentifierSetToTripGroups = [NSMutableDictionary dictionaryWithCapacity:allGroups.count];
   for (TripGroup *group in allGroups) {
     NSSet *groupModeIdentifiers = [group usedModeIdentifiers];
     
@@ -149,28 +147,10 @@
       // if any mode is hidden, hide the whole group
       group.visibility = TKTripGroupVisibilityHidden;
       
-    } else if ([TKModeHelper modes:minimized contain:groupModeIdentifiers]) {
-      id key = groupModeIdentifiers;
-      NSMutableArray *groups = [minimizedModeIdentifierSetToTripGroups objectForKey:key];
-      if (! groups) {
-        groups = [NSMutableArray arrayWithCapacity:5];
-        minimizedModeIdentifierSetToTripGroups[key] = groups;
-      }
-      [groups addObject:group];
     } else {
       group.visibility = TKTripGroupVisibilityFull;
     }
   }
-  
-  NSArray *sorters = [self sortDescriptorsAccordingToSelectedOrder];
-  [minimizedModeIdentifierSetToTripGroups enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableArray *groups, BOOL *stopOuter) {
-#pragma unused(key,stopOuter)
-    NSArray *sorted = [groups sortedArrayUsingDescriptors:sorters];
-    [sorted enumerateObjectsUsingBlock:^(TripGroup *tripGroup, NSUInteger index, BOOL *stopInner) {
-#pragma unused(stopInner)
-      tripGroup.visibility = (index == 0) ? TKTripGroupVisibilityMini : TKTripGroupVisibilityHidden;
-    }];
-  }];
 }
 
 - (TripGroup *)lastSelection

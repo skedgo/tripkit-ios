@@ -12,14 +12,13 @@ import RxSwift
 
 extension Reactive where Base == TKUserProfileHelper {
   
-  public static var hiddenAndMinimizedModeIdentifiers: Observable<Set<TKUserProfileHelper.Identifier>> {
+  public static var hiddenModeIdentifiers: Observable<Set<TKUserProfileHelper.Identifier>> {
     let hidden = UserDefaults.shared.rx.observe([TKUserProfileHelper.Identifier].self, TKUserProfileHelper.DefaultsKey.hidden.rawValue)
-    let minimized = UserDefaults.shared.rx.observe([TKUserProfileHelper.Identifier].self, TKUserProfileHelper.DefaultsKey.minimized.rawValue)
     
-    return Observable.merge(hidden, minimized)
+    return hidden
       .startWith([])
       .map { _ in
-        TKUserProfileHelper.hiddenAndMinimizedModeIdentifiers
+        TKUserProfileHelper.hiddenModeIdentifiers
       }
   }
   
