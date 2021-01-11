@@ -12,7 +12,7 @@ extension TKSettings {
   
   private enum DefaultsKey: String {
     case sortIndex = "internalSortIndex"
-    case ignoreCostToReturnCarHireVehicle = "profileTransportIgnoreCostToReturnCarHireVehicle"
+    case includeCostToReturnCarHireVehicle = "profileTransportIncludeCostToReturnCarHireVehicle"
   }
   
   @objc public static var sortOrder: TKTripCostType {
@@ -25,13 +25,13 @@ extension TKSettings {
     }
   }
   
-  /// Determine whether two-way-hire vehicles, such as pod-based car-share, should ignore the cost of returning the car-hire vehicle to its pick-up location. By default this is set to `false` and the cost of returning the vehicle to its pick-up location will be added to all one-way trips. Set this to `true` if the cost of the trip should only include the cost that's attributed to this trip and ignore the unavoidable additional cost for returning the vehicle to its pick-up location.
-  @objc public static var ignoreCostToReturnCarHireVehicle: Bool {
+  /// Determine whether two-way-hire vehicles, such as pod-based car-share, should include the cost of returning the car-hire vehicle to its pick-up location. By default this is set to `false` and the cost of the trip only include the cost that's attributed to this trip and ignore the unavoidable additional cost for returning the vehicle to its pick-up location. Set this to `true` if the cost of returning the vehicle to its pick-up location should be added to all one-way trips.
+  @objc public static var includeCostToReturnCarHireVehicle: Bool {
     get {
-      return UserDefaults.shared.bool(forKey: DefaultsKey.ignoreCostToReturnCarHireVehicle.rawValue)
+      return UserDefaults.shared.bool(forKey: DefaultsKey.includeCostToReturnCarHireVehicle.rawValue)
     }
     set {
-      UserDefaults.shared.set(newValue, forKey: DefaultsKey.ignoreCostToReturnCarHireVehicle.rawValue)
+      UserDefaults.shared.set(newValue, forKey: DefaultsKey.includeCostToReturnCarHireVehicle.rawValue)
     }
   }
   

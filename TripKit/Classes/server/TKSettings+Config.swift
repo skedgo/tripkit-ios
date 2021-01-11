@@ -77,7 +77,7 @@ extension TKSettings {
       avoidModes = TKUserProfileHelper.dislikedTransitModes
       concession = shared.bool(forKey: TKDefaultsKeyProfileTransportConcessionPricing)
       wheelchair = TKUserProfileHelper.showWheelchairInformation
-      twoWayHireCostIncludesReturn = !TKSettings.ignoreCostToReturnCarHireVehicle
+      twoWayHireCostIncludesReturn = TKSettings.includeCostToReturnCarHireVehicle
       
       cyclingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportCyclingSpeed)) ?? .medium
       walkingSpeed = Speed(apiValue: shared.object(forKey: TKDefaultsKeyProfileTransportWalkSpeed)) ?? .medium
@@ -118,6 +118,7 @@ extension TKSettings {
         "wp": "(\(weights[.money] ?? 1.0),\(weights[.carbon] ?? 1.0),\(weights[.time] ?? 1.0),\(weights[.hassle] ?? 1.0))",
         "cs": cyclingSpeed.apiValue,
         "ws": walkingSpeed.apiValue,
+        "2wirc": twoWayHireCostIncludesReturn
       ]
       if !avoidModes.isEmpty { paras["avoid"] = avoidModes }
       if concession { paras["conc"] = true }
@@ -125,8 +126,7 @@ extension TKSettings {
       if let wm = maximumWalkingMinutes { paras["wm"] = wm }
       if let tt = minimumTransferMinutes { paras["tt"] = tt }
       if bookingSandbox { paras["bsb"] = true }
-      if !twoWayHireCostIncludesReturn { paras["2wirc"] = false }
-      paras["co2"] = emissions
+      paras["co2"] = emissions.isEmpty ? nil : emissions
       return paras
     }
   }
