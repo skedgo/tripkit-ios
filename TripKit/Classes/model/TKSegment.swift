@@ -276,12 +276,14 @@ public class TKSegment: NSObject {
   
   @objc(usesVisit:)
   public func uses(_ visit: StopVisits) -> Bool {
-    if let visits = _segmentVisits {
-      let visitInfo = visits[visit.stop.stopCode]
-      return visitInfo ?? false
-    } else {
-      return true // be optimistic while we haven't loaded the details yet
-    }
+    guard let service = self.service else { return false }
+    
+    // be optimistic, if we haven't yet loaded the details as we shouldn't
+    // have any un-travelled bits then
+    guard service.hasServiceData else { return true }
+    
+    let visitInfo = segmentVisits[visit.stop.stopCode]
+    return visitInfo ?? false
   }
   
   /// Checks if one of the visited `StopVisits` objects matches the provided predicate
