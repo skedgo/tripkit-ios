@@ -75,8 +75,8 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: Constraint.leading).isActive = true
     label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: Constraint.top).isActive = true
     wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: Constraint.bottom).isActive = true
-    label.trailingAnchor.constraint(greaterThanOrEqualTo: button.leadingAnchor, constant: Constraint.trailing).isActive = true
     
+    button.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: Constraint.trailing).isActive = true
     wrapper.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: Constraint.trailing).isActive = true
     button.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
     button.heightAnchor.constraint(equalToConstant: Constraint.buttonHeight).isActive = true
