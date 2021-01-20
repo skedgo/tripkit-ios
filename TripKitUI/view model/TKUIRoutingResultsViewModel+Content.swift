@@ -94,7 +94,7 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildSections(_ groups: Observable<[TripGroup]>, inputs: UIInput, progress: Observable<TKUIResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
+  static func buildSections(_ groups: Observable<([TripGroup], mutable: Bool)>, inputs: UIInput, progress: Observable<TKUIResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
     
     let expand = inputs.tappedSectionButton
       .filter { action -> Bool in
