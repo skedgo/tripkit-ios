@@ -66,20 +66,31 @@ extension TKUIRoutingResultsViewModel {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetchTripGroups(_ requests: Observable<TripRequest>) -> Observable<[TripGroup]> {
-    return requests.flatMapLatest { request -> Observable<[TripGroup]> in
+  static func fetchTripGroups(_ requests: Observable<(TripRequest, mutable: Bool)>) -> Observable<([TripGroup], mutable: Bool)> {
+    return requests.flatMapLatest { tuple -> Observable<([TripGroup], mutable: Bool)> in
+      let request = tuple.0
       guard let context = request.managedObjectContext else {
-        return .just([])
+        return .just(([], mutable: tuple.mutable))
+      }
+      
+      let predicate: NSPredicate
+      if tuple.mutable {
+        // user can hide them, filter by visibility
+        predicate = NSPredicate(format: "request = %@ AND visibilityRaw != %@", request, NSNumber(value: TKTripGroupVisibility.hidden.rawValue))
+      } else {
+        // user can't show/hide them; show all
+        predicate = NSPredicate(format: "request = %@", request)
       }
       
       return context.rx
         .fetchObjects(
           TripGroup.self,
           sortDescriptors: [NSSortDescriptor(key: "visibleTrip.totalScore", ascending: true)],
-          predicate: NSPredicate(format: "request = %@ AND visibilityRaw != %@", request, NSNumber(value: TKTripGroupVisibility.hidden.rawValue)),
+          predicate: predicate,
           relationshipKeyPathsForPrefetching: ["visibleTrip", "visibleTrip.segmentReferences"]
         )
         .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+        .map { ($0, mutable: tuple.mutable) }
     }
   }
   
@@ -109,12 +120,12 @@ extension TKUIRoutingResultsViewModel {
       .map(sections)
   }
   
-  private static func sections(for groups: [TripGroup], sortBy: TKTripCostType, expand: TripGroup?, progress: TKUIResultsFetcher.Progress, advisory: TKAPI.Alert?) -> [Section] {
+  private static func sections(for groups: ([TripGroup], mutable: Bool), sortBy: TKTripCostType, expand: TripGroup?, progress: TKUIResultsFetcher.Progress, advisory: TKAPI.Alert?) -> [Section] {
     
     let progressIndicatorSection = Section(items: [.progress])
     let advisorySection = advisory.flatMap { Section(items: [.advisory($0)]) }
     
-    guard let first = groups.first else {
+    guard let first = groups.0.first else {
       if case .finished = progress {
         return []
       } else {
@@ -124,7 +135,7 @@ extension TKUIRoutingResultsViewModel {
     }
     
     let groupSorters = first.request.sortDescriptors(withPrimary: sortBy)
-    let byScoring = (groups as NSArray)
+    let byScoring = (groups.0 as NSArray)
       .sortedArray(using: groupSorters)
       .compactMap { $0 as? TripGroup }
     
@@ -138,7 +149,7 @@ extension TKUIRoutingResultsViewModel {
       let items = (Array(group.trips) as NSArray)
         .sortedArray(using: tripSorters)
         .compactMap { $0 as? Trip }
-        .compactMap { Item(trip: $0, in: group) }
+        .compactMap { Item(trip: $0, in: group, filter: groups.mutable) }
       
       let show: [Item]
       let action: SectionAction?
@@ -212,16 +223,12 @@ extension TKUIRoutingResultsViewModel {
     /// A regular/expanded trip
     case trip(Trip)
     
-    /// A minimised trip
-    case nano(Trip)
-    
     case progress
     
     case advisory(TKAPI.Alert)
     
     var trip: Trip? {
       switch self {
-      case .nano(let trip): return trip
       case .trip(let trip): return trip
       case .progress, .advisory: return nil
       }
@@ -230,7 +237,7 @@ extension TKUIRoutingResultsViewModel {
     var alert: TKAPI.Alert? {
       switch self {
       case .advisory(let alert): return alert
-      case .nano, .trip, .progress: return nil
+      case .trip, .progress: return nil
       }
     }
 
@@ -292,11 +299,12 @@ extension TKMetricClassifier.Classification {
 
 extension TKUIRoutingResultsViewModel.Item {
   
-  fileprivate init?(trip: Trip, in group: TripGroup) {
+  fileprivate init?(trip: Trip, in group: TripGroup, filter: Bool) {
+    guard filter else { self = .trip(trip); return }
+    
     switch group.visibility {
     case .hidden: return nil
-    case .mini:   self = .nano(trip)
-    case .full:   self = .trip(trip)
+    case .full, .mini:   self = .trip(trip)
     }
   }
   
@@ -339,7 +347,6 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
 public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
-  case (.nano(let left), .nano(let right)): return left.objectID == right.objectID
   case (.progress, .progress): return true
   case (.advisory(let left), .advisory(let right)): return left.hashCode == right.hashCode
   default: return false
@@ -351,8 +358,7 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
   public typealias Identity = String
   public var identity: Identity {
     switch self {
-    case .trip(let trip),
-         .nano(let trip): return trip.objectID.uriRepresentation().absoluteString
+    case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .progress: return "progress_indicator"
     case .advisory: return "advisory" // should only ever have one
     }

@@ -92,9 +92,9 @@ public class TKUIRoutingResultsViewModel {
     let requestToShow = requestChanged.map(\.0)
     let updateableRequest = requestChanged.compactMap { $0.1 == true ? $0.0 : nil }
 
-    let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestToShow)
+    let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestChanged)
       .share(replay: 1, scope: .forever)
-      .distinctUntilChanged()
+      .distinctUntilChanged { $0.0 == $1.0 }
     
     let builderChanged = builderChangedWithID.map(\.0)
 
@@ -117,7 +117,7 @@ public class TKUIRoutingResultsViewModel {
     
     let advisory = Self.fetchAdvisory(for: requestToShow)
 
-    realTimeUpdate = Self.fetchRealTimeUpdates(for: tripGroupsChanged)
+    realTimeUpdate = Self.fetchRealTimeUpdates(for: tripGroupsChanged.map(\.0))
       .asDriver(onErrorDriveWith: .empty())
 
     sections = Self.buildSections(tripGroupsChanged, inputs: inputs, progress: progress.asObservable(), advisory: advisory)
@@ -137,7 +137,7 @@ public class TKUIRoutingResultsViewModel {
       .map { $0.timeString }
       .asDriver(onErrorDriveWith: .empty())
     
-    let availableFromRequest: Observable<AvailableModes> = requestToShow
+    let availableFromRequest: Observable<AvailableModes> = requestChanged
       .compactMap(Self.buildAvailableModes)
       .distinctUntilChanged { $0.available == $1.available } // ignore any `enabled` changes in the mean-time
     
@@ -169,7 +169,10 @@ public class TKUIRoutingResultsViewModel {
       .distinctUntilChanged { $0 === $1 }
       .asDriver(onErrorDriveWith: .empty())
 
-    mapRoutes = Observable.combineLatest(tripGroupsChanged, mapInput.tappedMapRoute.startOptional().asObservable())
+    mapRoutes = Observable.combineLatest(
+        tripGroupsChanged.map(\.0),
+        mapInput.tappedMapRoute.startOptional().asObservable()
+      )
       .map(Self.buildMapContent)
       .asDriver(onErrorDriveWith: .empty())
 
@@ -267,7 +270,7 @@ extension TKUIRoutingResultsViewModel {
     init?(selection: Item) {
       switch selection {
       case .advisory(let alert): self = .showAlert(alert)
-      case .nano(let trip), .trip(let trip): self = .showTrip(trip)
+      case .trip(let trip): self = .showTrip(trip)
       default: return nil
       }
     }

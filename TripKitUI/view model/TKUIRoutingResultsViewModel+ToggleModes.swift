@@ -21,23 +21,31 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildAvailableModes(for request: TripRequest?) -> AvailableModes? {
+  static func buildAvailableModes(for request: TripRequest, mutable: Bool) -> AvailableModes? {
     
-    let regions = [request?.startRegion(), request?.endRegion(), request?.spanningRegion()].compactMap { $0 }
+    let regions = [request.startRegion(), request.endRegion(), request.spanningRegion()].compactMap { $0 }
     let all = TKRegionManager.sortedModes(in: regions)
       
-    let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
-    var newEnabled = Set(enabled)
+    let enabledModes: Set<String>
+    if mutable {
+      let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
+      var newEnabled = Set(enabled)
+      
+      if TKUserProfileHelper.showWheelchairInformation {
+        newEnabled.insert(TKTransportModeIdentifierWheelchair)
+        newEnabled.remove(TKTransportModeIdentifierWalking)
+      } else {
+        newEnabled.insert(TKTransportModeIdentifierWalking)
+        newEnabled.remove(TKTransportModeIdentifierWheelchair)
+      }
+      enabledModes = newEnabled
     
-    if TKUserProfileHelper.showWheelchairInformation {
-      newEnabled.insert(TKTransportModeIdentifierWheelchair)
-      newEnabled.remove(TKTransportModeIdentifierWalking)
     } else {
-      newEnabled.insert(TKTransportModeIdentifierWalking)
-      newEnabled.remove(TKTransportModeIdentifierWheelchair)
+      // Make sure we enable all the modes, to not hide any results
+      enabledModes = request.trips.reduce(into: Set()) { $0.formUnion($1.usedModeIdentifiers()) }
     }
     
-    return AvailableModes(available: all, enabled: newEnabled)
+    return AvailableModes(available: all, enabled: enabledModes)
   }
   
   static func updateAvailableModes(enabled: [String]?, request: TripRequest?) -> AvailableModes? {
