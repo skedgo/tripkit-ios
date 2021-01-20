@@ -8,6 +8,8 @@
 
 import UIKit
 
+import RxSwift
+
 class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   
   private enum Constraint {
@@ -21,6 +23,8 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   @IBOutlet weak var label: UILabel!
   @IBOutlet weak var button: UIButton!
   
+  var disposeBag = DisposeBag()
+  
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
     didInit()
@@ -28,6 +32,13 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    label.text = nil
+    button.setTitle(nil, for: .normal)
+    disposeBag = DisposeBag()
   }
   
   private func didInit() {
