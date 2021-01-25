@@ -266,7 +266,7 @@ extension TKMetricClassifier.Classification {
   var icon: UIImage? {
     switch self {
     case .cheapest: return .badgeMoney
-    case .easiest: return .badgeLeaf
+    case .easiest: return .badgeLike
     case .fastest: return .badgeLightning
     case .greenest: return .badgeLeaf
     case .healthiest: return .badgeHeart
