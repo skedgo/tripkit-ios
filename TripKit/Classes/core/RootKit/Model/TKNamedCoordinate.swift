@@ -234,7 +234,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
       _placemark = aDecoder.decodeObject(of: CLPlacemark.self, forKey: "placemark")
       isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
       isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
-      data = aDecoder.decodeObject(of: [NSDictionary.self], forKey: "data") as? [String: Any] ?? [:]
+      data = aDecoder.decodeObject(of: [NSDictionary.self, NSArray.self], forKey: "data") as? [String: Any] ?? [:]
     }
   }
   
