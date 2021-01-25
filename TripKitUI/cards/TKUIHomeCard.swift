@@ -363,7 +363,7 @@ extension TKUIHomeCard: UITableViewDelegate {
         header.button.setTitle(action.title, for: .normal)
         header.button.rx.tap
           .subscribe(onNext: { [weak self] in self?.handleNext(action.handler()) })
-          .disposed(by: disposeBag)
+          .disposed(by: header.disposeBag)
       }
         
     } else {
