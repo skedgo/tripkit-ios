@@ -133,7 +133,7 @@ public class TKUITripOverviewCard: TKUITableCard {
           if item.endSubtitle != nil {
             return TKUITripOverviewCard.stationaryDoubleCell(for: item, tableView: tv, indexPath: ip)
           } else {
-            return TKUITripOverviewCard.stationaryCell(for: item, tableView: tv, indexPath: ip)
+            return stationaryCell(for: item, tableView: tv, indexPath: ip)
           }
         case .moving(let item):
           return self.movingCell(for: item, tableView: tv, indexPath: ip)
@@ -226,9 +226,9 @@ extension TKUITripOverviewCard {
     return cell
   }
 
-  private static func stationaryCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+  private func stationaryCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
-    cell.configure(with: stationary)
+    cell.configure(with: stationary, for: self)
     return cell
   }
 

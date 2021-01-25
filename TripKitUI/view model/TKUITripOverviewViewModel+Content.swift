@@ -60,6 +60,10 @@ extension TKUITripOverviewViewModel {
   }
   
   struct StationaryItem: Equatable {
+    static func == (lhs: TKUITripOverviewViewModel.StationaryItem, rhs: TKUITripOverviewViewModel.StationaryItem) -> Bool {
+      return lhs.segment == rhs.segment
+    }
+    
     let title: String
     let subtitle: String?
     let endSubtitle: String?
@@ -73,7 +77,8 @@ extension TKUITripOverviewViewModel {
     let topConnection: Line?
     let bottomConnection: Line?
     
-    fileprivate let segment: TKSegment
+    let actions: [TKUICardAction<TKUITripOverviewCard, TKSegment>]
+    let segment: TKSegment
   }
   
   struct MovingItem: Equatable {
@@ -323,6 +328,7 @@ fileprivate extension TKSegment {
       isContinuation: false,
       topConnection: previous?.line,
       bottomConnection: next?.line,
+      actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],
       segment: self
     )
   }
@@ -343,6 +349,7 @@ fileprivate extension TKSegment {
       isContinuation: next.isContinuation,
       topConnection: line,
       bottomConnection: next.line,
+      actions: [], // no actions for bridges
       segment: next.isContinuation ? self : next // Since this is marking the
                     // start of "next", it makes most sense to display that
                     // when tapping on it (unless it's a continuation)

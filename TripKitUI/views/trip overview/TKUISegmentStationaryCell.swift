@@ -194,7 +194,7 @@ extension TKUITripOverviewViewModel.TimeInfo {
 
 extension TKUISegmentStationaryCell {
   
-  func configure(with item: TKUITripOverviewViewModel.StationaryItem) {
+  func configure(with item: TKUITripOverviewViewModel.StationaryItem, for card: TKUITripOverviewCard) {
     let startText = item.startTime?.timeString(for: item.timeZone)
     let endText = item.endTime?.timeString(for: item.timeZone)
 
@@ -239,7 +239,8 @@ extension TKUISegmentStationaryCell {
     bottomLine.backgroundColor = item.bottomConnection?.color
     bottomLine.isHidden = item.bottomConnection?.color == nil
 
-    buttonStackView.resetViews([])
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
+    buttonStackView.resetViews(buttons)
   }
   
   func configure(with item: TKUITripOverviewViewModel.TerminalItem, for card: TKUITripOverviewCard) {
