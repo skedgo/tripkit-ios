@@ -46,7 +46,8 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   public var onSelection: ((Trip) -> Bool)? = nil
   
   private let destination: MKAnnotation?
-  private var request: TripRequest? // also for saving
+  private var request: TripRequest? // Updated for debugging purposes
+  private let editable: Bool
 
   private var viewModel: TKUIRoutingResultsViewModel!
   let disposeBag = DisposeBag()
@@ -82,6 +83,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   public init(destination: MKAnnotation, zoomToDestination: Bool = true, initialPosition: TGCardPosition? = nil) {
     self.destination = destination
     self.request = nil
+    self.editable = true
     
     let mapManager = Self.config.mapManagerFactory(destination, zoomToDestination)
     
@@ -106,9 +108,10 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     didInit()
   }
   
-  public init(request: TripRequest) {
+  public init(request: TripRequest, editable: Bool = true) {
     self.destination = nil
     self.request = request
+    self.editable = editable
     
     let mapManager = Self.config.mapManagerFactory(request.toLocation, true)
     
@@ -195,7 +198,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     if let destination = self.destination {
       viewModel = TKUIRoutingResultsViewModel(destination: destination, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
-      viewModel = TKUIRoutingResultsViewModel(request: request, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(request: request, editable: editable, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else {
       preconditionFailure()
     }

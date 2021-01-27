@@ -16,11 +16,11 @@ public struct TKTimetable {
     case stopToStop(startStopCode: String, endStopCode: String, endRegion: TKRegion)
   }
 
-  public let title: String
+  public let title: String?
   public let type: TimetableType
   public let region: TKRegion
 
-  public init(title: String, type: TKTimetable.TimetableType, region: TKRegion) {
+  public init(title: String? = nil, type: TKTimetable.TimetableType, region: TKRegion) {
     self.title = title
     self.type = type
     self.region = region

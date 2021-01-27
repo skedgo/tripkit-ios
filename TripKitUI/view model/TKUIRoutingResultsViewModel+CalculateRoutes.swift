@@ -196,10 +196,14 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetch(for request: Observable<TripRequest>, limitTo modes: Set<String>? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
+  static func fetch(for request: Observable<TripRequest>, skipInitial: Bool, limitTo modes: Set<String>? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
     return request
       .filter { $0.managedObjectContext != nil }
       .flatMapLatest { request -> Observable<TKUIResultsFetcher.Progress> in
+        if skipInitial, request.hasTrips(), !request.expandForFavorite {
+          return .just(.finished)
+        }
+        
         if let restricted = modes, !Set(restricted).isSubset(of: Set(request.spanningRegion().modeIdentifiers)) {
           assertionFailure("Try to limit search results to modes that are not supported in the region.")
         }
@@ -207,6 +211,11 @@ extension TKUIRoutingResultsViewModel {
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKUIResultsFetcher
           .streamTrips(for: request, modes: modes, classifier: TKMetricClassifier())
+          .do(onNext: { progress in
+            if progress == .finished {
+              try? request.managedObjectContext?.save()
+            }
+          })
           .catchError { error in
             errorPublisher.onNext(error)
             return .just(.finished)

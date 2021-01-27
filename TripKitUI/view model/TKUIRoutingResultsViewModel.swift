@@ -47,14 +47,14 @@ public class TKUIRoutingResultsViewModel {
   
   public convenience init(destination: MKAnnotation, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     let builder = RouteBuilder(destination: destination)
-    self.init(builder: builder, limitTo: modes, inputs: inputs, mapInput: mapInput)
+    self.init(builder: builder, editable: false, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  public convenience init(request: TripRequest, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
-    self.init(builder: request.builder, initialRequest: request, limitTo: modes, inputs: inputs, mapInput: mapInput)
+  public convenience init(request: TripRequest, editable: Bool, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+    self.init(builder: request.builder, initialRequest: request, editable: editable, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+  private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, editable: Bool, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     let builderChangedWithID = Self.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
 
@@ -67,13 +67,14 @@ public class TKUIRoutingResultsViewModel {
 
     // Whenever the builder is changing, i.e., when the user changes the inputs,
     // we generate a new request. However, we don't do this if the got
-    // provided with a request and `expandForFavorite` is not set; in that
+    // provided with a request and set to `editable == false`; in that
     // case we just display the results.
     let requestChanged: Observable<(TripRequest, mutable: Bool)>
     let skipRequest: Bool
-    if let request = initialRequest, request.tripGroups?.isEmpty == false, request.expandForFavorite == false {
+    if !editable, let request = initialRequest, request.tripGroups?.isEmpty == false {
       requestChanged = .just( (request, mutable: false) )
       skipRequest = true
+    
     } else {
       requestChanged = Observable.merge(
         originOrDestinationChanged,
@@ -109,8 +110,12 @@ public class TKUIRoutingResultsViewModel {
     if skipRequest {
       progress = .just(.finished)
     } else {
-      progress = Self
-        .fetch(for: updateableRequest, limitTo: modes, errorPublisher: errorPublisher)
+      progress = Self.fetch(
+          for: updateableRequest,
+          skipInitial: initialRequest != nil,
+          limitTo: modes,
+          errorPublisher: errorPublisher
+        )
         .asDriver(onErrorDriveWith: .empty())
     }
     fetchProgress = progress
