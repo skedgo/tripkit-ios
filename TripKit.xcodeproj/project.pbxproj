@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -251,10 +251,6 @@
 		3A6DF127202C8EB80084CB2C /* UIColor+Variations.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF12A202C8EB80084CB2C /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */; };
 		3A6DF12B202C8EB80084CB2C /* UIView+BearingRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */; };
-		3A6DF12E202C8EB80084CB2C /* TKUIStyledButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A6DF12F202C8EB80084CB2C /* TKUIStyledLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */; };
-		3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */; };
-		3A6DF131202C8EB80084CB2C /* TKUIStyledLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A6DF137202C8EB80084CB2C /* TripKitUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DB202C8EB80084CB2C /* TripKitUI.xcassets */; };
 		3A6DF139202C8EB80084CB2C /* TKUIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */; };
 		3A6DF13A202C8EB80084CB2C /* TripKitUIBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DF0DF202C8EB80084CB2C /* TripKitUIBundle.swift */; };
@@ -308,6 +304,12 @@
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
 		3A7E613B208A09070008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
+		3A81791725C6533B00E15553 /* Kingfisher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81791625C6532C00E15553 /* Kingfisher.xcframework */; };
+		3A81792525C6536B00E15553 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81792425C6536200E15553 /* RxCocoa.xcframework */; };
+		3A81792625C6536B00E15553 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81792225C6536100E15553 /* RxRelay.xcframework */; };
+		3A81792725C6536B00E15553 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81792325C6536100E15553 /* RxSwift.xcframework */; };
+		3A817D6325C6897C00E15553 /* TKUIStyledLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817D6225C6897C00E15553 /* TKUIStyledLabel.swift */; };
+		3A817D7525C68B8700E15553 /* TKUIStyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817D7425C68B8700E15553 /* TKUIStyledButton.swift */; };
 		3A846B5F256F5655004D1FED /* TKTripFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6901D1CD08E0089F687 /* TKTripFetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A846B65256F5655004D1FED /* TKTripFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6901D1CD08E0089F687 /* TKTripFetcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A84A05A22F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */; };
@@ -686,8 +688,6 @@
 		3AE04BE61DEE392800462CB3 /* TKTripPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */; };
 		3AE09B9E20BC1C24004BF42B /* routing-drive-park-walk-train.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */; };
 		3AE09BA020BC1C7E004BF42B /* service-for-park-ride.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */; };
-		3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E3202DE32D0007B49B /* RxBlocking.framework */; };
-		3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE194E4202DE32E0007B49B /* RxTest.framework */; };
 		3AE6077920FF4BB7006D59B0 /* TKPeliasTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6077820FF4BB7006D59B0 /* TKPeliasTitleTest.swift */; };
 		3AE6077B20FF4C1E006D59B0 /* pelias-au.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077A20FF4C1E006D59B0 /* pelias-au.json */; };
 		3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077C20FF4F63006D59B0 /* pelias-de.json */; };
@@ -1171,10 +1171,6 @@
 		3A6DF0C9202C8EB80084CB2C /* UIColor+Variations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Variations.h"; sourceTree = "<group>"; };
 		3A6DF0CC202C8EB80084CB2C /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
 		3A6DF0CD202C8EB80084CB2C /* UIView+BearingRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BearingRotation.m"; sourceTree = "<group>"; };
-		3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIStyledButton.h; sourceTree = "<group>"; };
-		3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIStyledLabel.m; sourceTree = "<group>"; };
-		3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKUIStyledButton.m; sourceTree = "<group>"; };
-		3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKUIStyledLabel.h; sourceTree = "<group>"; };
 		3A6DF0DB202C8EB80084CB2C /* TripKitUI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TripKitUI.xcassets; sourceTree = "<group>"; };
 		3A6DF0DC202C8EB80084CB2C /* TripKitUIUmbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripKitUIUmbrella.h; sourceTree = "<group>"; };
 		3A6DF0DE202C8EB80084CB2C /* TKUIAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAlertViewController.swift; sourceTree = "<group>"; };
@@ -1224,6 +1220,12 @@
 		3A79AFFF24D303B7008C165A /* TKSecureTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSecureTransformers.swift; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
+		3A81791625C6532C00E15553 /* Kingfisher.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Kingfisher.xcframework; path = ../../Carthage/Build/Kingfisher.xcframework; sourceTree = "<group>"; };
+		3A81792225C6536100E15553 /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = ../../Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
+		3A81792325C6536100E15553 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = ../../Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		3A81792425C6536200E15553 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = ../../Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
+		3A817D6225C6897C00E15553 /* TKUIStyledLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStyledLabel.swift; sourceTree = "<group>"; };
+		3A817D7425C68B8700E15553 /* TKUIStyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStyledButton.swift; sourceTree = "<group>"; };
 		3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+ToggleModes.swift"; sourceTree = "<group>"; };
 		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+TKAlert.swift"; sourceTree = "<group>"; };
@@ -1444,8 +1446,6 @@
 		3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripPattern.swift; sourceTree = "<group>"; };
 		3AE09B9D20BC1C24004BF42B /* routing-drive-park-walk-train.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-drive-park-walk-train.json"; sourceTree = "<group>"; };
 		3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "service-for-park-ride.json"; sourceTree = "<group>"; };
-		3AE194E3202DE32D0007B49B /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
-		3AE194E4202DE32E0007B49B /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		3AE4276F22AF97B70081DC1E /* TKLocationTypes+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKLocationTypes+Rx.swift"; sourceTree = "<group>"; };
 		3AE6077820FF4BB7006D59B0 /* TKPeliasTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPeliasTitleTest.swift; sourceTree = "<group>"; };
 		3AE6077A20FF4C1E006D59B0 /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
@@ -1650,6 +1650,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A81792525C6536B00E15553 /* RxCocoa.xcframework in Frameworks */,
+				3A81792625C6536B00E15553 /* RxRelay.xcframework in Frameworks */,
+				3A81792725C6536B00E15553 /* RxSwift.xcframework in Frameworks */,
+				3A81791725C6533B00E15553 /* Kingfisher.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1672,8 +1676,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */,
-				3AE194E5202DE32E0007B49B /* RxBlocking.framework in Frameworks */,
-				3AE194E6202DE32E0007B49B /* RxTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2057,10 +2059,8 @@
 				3A65B92D22F5C3E9001ACDEB /* TKUIModePicker+RoutingMode.swift */,
 				3A65B92922F5ADCC001ACDEB /* TKUIModePicker+TKModeInfo.swift */,
 				3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */,
-				3A6DF0D1202C8EB80084CB2C /* TKUIStyledButton.h */,
-				3A6DF0D3202C8EB80084CB2C /* TKUIStyledButton.m */,
-				3A6DF0D4202C8EB80084CB2C /* TKUIStyledLabel.h */,
-				3A6DF0D2202C8EB80084CB2C /* TKUIStyledLabel.m */,
+				3A817D7425C68B8700E15553 /* TKUIStyledButton.swift */,
+				3A817D6225C6897C00E15553 /* TKUIStyledLabel.swift */,
 				3A40923322F34B950049AAE7 /* TKUIStyleKit.swift */,
 				3AFCE27222E7115700090933 /* TKUITripBoyView.swift */,
 				3AFCE27022E7115700090933 /* TKUITripBoyView.xib */,
@@ -2847,8 +2847,10 @@
 		BF0D12F3CE39D82551585DB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AE194E3202DE32D0007B49B /* RxBlocking.framework */,
-				3AE194E4202DE32E0007B49B /* RxTest.framework */,
+				3A81791625C6532C00E15553 /* Kingfisher.xcframework */,
+				3A81792425C6536200E15553 /* RxCocoa.xcframework */,
+				3A81792225C6536100E15553 /* RxRelay.xcframework */,
+				3A81792325C6536100E15553 /* RxSwift.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2928,13 +2930,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6DF12E202C8EB80084CB2C /* TKUIStyledButton.h in Headers */,
 				3A6DF11A202C8EB80084CB2C /* TKUISemaphoreView.h in Headers */,
 				3A4664972328EA1F00EFDBB6 /* SGAutocompletionDataSource.h in Headers */,
 				3A6DF088202C8DA30084CB2C /* TripKitUI.h in Headers */,
 				3A6DF11C202C8EB80084CB2C /* UIFont+CustomFonts.h in Headers */,
 				3AFD397120D93D9800FDC7D0 /* TKUITimePickerSheet.h in Headers */,
-				3A6DF131202C8EB80084CB2C /* TKUIStyledLabel.h in Headers */,
 				3A54758021C15C1E00748EB6 /* TripKitUIUmbrella.h in Headers */,
 				3A6DF14E202C8EB80084CB2C /* TKUIPulsingAnnotationView.h in Headers */,
 				3A6DF121202C8EB80084CB2C /* UIView+BearingRotation.h in Headers */,
@@ -3620,10 +3620,10 @@
 				3A25C97024CEE6250007E46C /* TKUIEventCallback.swift in Sources */,
 				3A383CB3223018E300361596 /* TKSegment+AccessoryViews.swift in Sources */,
 				3AF5F2B920F0081F003AAEBA /* TKUITripOverviewCard+Configuration.swift in Sources */,
+				3A817D7525C68B8700E15553 /* TKUIStyledButton.swift in Sources */,
 				D335907421EF604100CB57E3 /* TKStyleManager+TripKitUI.swift in Sources */,
 				3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */,
 				3A40922C22F1E27B0049AAE7 /* TKUIServiceHeaderMiniView.swift in Sources */,
-				3A6DF130202C8EB80084CB2C /* TKUIStyledButton.m in Sources */,
 				3A6DF117202C8EB80084CB2C /* TKUITripSegmentsView.m in Sources */,
 				D3F9C30C243ADACE00B30937 /* TKUICardActionsViewLayoutHelper.swift in Sources */,
 				D38FB46323A1B86D00325F72 /* TKUIProgressCell.swift in Sources */,
@@ -3731,11 +3731,11 @@
 				3A2CABA6253DA84F007BB48B /* Optional+Extensions.swift in Sources */,
 				3ABA3CCC224B5834006AD17D /* MKOverlay+NSCoding.m in Sources */,
 				3A8FAB6D20D3E28B005D4C73 /* TKUITripCell.swift in Sources */,
+				3A817D6325C6897C00E15553 /* TKUIStyledLabel.swift in Sources */,
 				D36157F024FCAF1600B88CD0 /* TKUIHomeViewModel+Next.swift in Sources */,
 				3ACF471F2297F9F10096860D /* TKUIServiceCard.swift in Sources */,
 				3A6DF150202C8EB80084CB2C /* TKUIMapManagerHelper.swift in Sources */,
 				3A6DF147202C8EB80084CB2C /* TKUIEmptyAlertView.swift in Sources */,
-				3A6DF12F202C8EB80084CB2C /* TKUIStyledLabel.m in Sources */,
 				D3BC6732238F71700042EFD9 /* TKUIHomeViewController.swift in Sources */,
 				3ACF472A2297FA080096860D /* TKUIServiceViewModel.swift in Sources */,
 				D3FBAD3024E0DBC300A59E37 /* TKUIHomeCardSectionHeader.swift in Sources */,
@@ -4430,8 +4430,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CARTHAGE_PLATFORM = iOS;
-				"CARTHAGE_PLATFORM[sdk=macosx*]" = macCatalyst;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -4464,10 +4462,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_PLATFORM)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -4483,10 +4478,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -4505,8 +4497,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CARTHAGE_PLATFORM = iOS;
-				"CARTHAGE_PLATFORM[sdk=macosx*]" = macCatalyst;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -4539,10 +4529,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_PLATFORM)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -4553,10 +4540,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = TripKit;

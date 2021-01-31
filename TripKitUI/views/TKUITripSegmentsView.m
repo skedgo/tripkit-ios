@@ -17,7 +17,6 @@
 #endif
 
 
-#import "TKUIStyledLabel.h"
 #import "UIColor+Variations.h"
 #import "TKStyleManager+TripKitUI.h"
 #import "UIView+Helpers.h"

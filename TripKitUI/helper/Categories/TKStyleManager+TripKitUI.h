@@ -12,38 +12,7 @@
 @import TripKit;
 #endif
 
-@interface TKStyleManager (TripKitUI)
-
 NS_ASSUME_NONNULL_BEGIN
-
-#pragma mark - Default styles
-
-+ (void)addLightStatusBarGradientLayerToView:(UIView *)view belowView:(UIView *)anotherView height:(CGFloat)height;
-
-+ (void)removeGradientLayerFromView:(UIView *)view;
-
-+ (void)addDefaultShadow:(UIView *)view;
-
-+ (void)addDefaultOutline:(UIView *)view;
-
-+ (void)addDefaultButtonOutline:(UIButton *)button cornerRadius:(CGFloat)radius;
-
-+ (void)addDefaultButtonOutline:(UIButton *)button outlineColor:(UIColor *)color cornerRadius:(CGFloat)radius;
-
-+ (UIColor *)backgroundColorForTileList DEPRECATED_MSG_ATTRIBUTE("Use UIColor.tkBackgroundBelowTile");
-
-+ (UIColor *)cellSelectionBackgroundColor DEPRECATED_MSG_ATTRIBUTE("Use UIColor.tkBackroundSelected");
-
-+ (void)styleTableViewForTileList:(UITableView *)tableView;
-
-@end
-
-@interface TKStyleManager (Buttons)
-
-+ (UIButton *)mapCheckmarkButton:(BOOL)selected;
-+ (UIButton *)roundedFloatingButtonWithTitle:(NSString *)title;
-
-@end
 
 @interface TKStyleManager (Fonts)
 
@@ -78,8 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter size: Font size desired
 /// - Returns: A semibold font with custom font face.
 + (UIFont *)mediumSystemFontWithSize:(CGFloat)size NS_SWIFT_NAME(mediumSystemFont(size:));
-
-+ (UIFont *)systemFontWithTextStyle:(NSString *)style __attribute__((deprecated("Use `customFontWithTextStyle` instead"))) NS_SWIFT_NAME(systemFont(textStyle:));
 
 @end
 

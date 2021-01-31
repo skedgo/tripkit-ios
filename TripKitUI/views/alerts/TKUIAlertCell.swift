@@ -39,7 +39,7 @@ class TKUIAlertCell: UITableViewCell {
     
     contentWrapper.layer.cornerRadius = 4
     contentWrapper.backgroundColor = .tkBackgroundTile
-    TKStyleManager.addDefaultOutline(contentWrapper)
+    TKStyleManager.addDefaultOutline(to: contentWrapper)
     
     separator.backgroundColor = .tkSeparator
     

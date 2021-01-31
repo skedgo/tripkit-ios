@@ -11,6 +11,20 @@ import Foundation
 // MARK: - Default Styles
 
 extension TKStyleManager {
+  
+  @objc(addDefaultShadow:)
+  public static func addDefaultShadow(to view: UIView) {
+    view.layer.shadowOpacity = 0.2
+    view.layer.shadowOffset = .init(width: 0, height: 0)
+    view.layer.shadowRadius = 1
+  }
+
+  @objc(addDefaultOutline:)
+  public static func addDefaultOutline(to view: UIView) {
+    view.layer.borderColor = UIColor.tkSeparator.cgColor
+    view.layer.borderWidth = 0.5
+  }
+
 
   @objc(styleSearchBar:includingBackground:)
   public static func style(_ searchBar: UISearchBar, includingBackground: Bool = false) {
