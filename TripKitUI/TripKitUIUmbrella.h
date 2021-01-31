@@ -29,9 +29,4 @@
 #import "TKUIVehicleView.h"
 #import "TKUIPulsingAnnotationView.h"
 
-// Deprecated things
-#import "SGAutocompletionDataSource.h"
-#import "SGSearchDataSource.h"
-
-
 #endif /* TripKitUI_h */
