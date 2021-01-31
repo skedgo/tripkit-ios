@@ -711,9 +711,13 @@ private extension TKUIRoutingResultsCard {
 
 extension TKUIRoutingResultsCard: TKUITimePickerSheetDelegate {
   
+  public func timePicker(_ picker: TKUITimePickerSheet, pickedDate: Date, for type: TKTimeType) {
+    // We use the select action + dismissal instead
+  }
+  
   public func timePickerRequestsResign(_ pickerSheet: TKUITimePickerSheet) {
     func onDismissal() {
-      let selection = TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: pickerSheet.selectedTimeType(), date: pickerSheet.selectedDate())
+      let selection = TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: pickerSheet.selectedTimeType, date: pickerSheet.selectedDate)
       self.changedTime.onNext(selection)
     }
     

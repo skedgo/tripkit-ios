@@ -13,7 +13,6 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
-#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 
@@ -179,7 +178,7 @@
 {
   UIView *overlay = [[UIView alloc] initWithFrame:frame];
 	overlay.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-  overlay.backgroundColor = UIColor.tkSheetOverlay;
+  overlay.backgroundColor = self.overlayColor;
   overlay.alpha = 0.0;
   UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedOverlay:)];
   [overlay addGestureRecognizer:tapGesture];

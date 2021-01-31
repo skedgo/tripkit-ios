@@ -14,6 +14,7 @@ public class TKUISheetViewController: UIViewController {
   @objc
   public init(sheet: TKUISheet) {
     super.init(nibName: nil, bundle: nil)
+    sheet.overlayColor = .tkSheetOverlay
     self.view = sheet
   }
   

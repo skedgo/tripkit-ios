@@ -13,7 +13,6 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
-#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 
@@ -40,7 +39,7 @@
 
 @end
 
-@interface TKUITripSegmentsView ()
+@interface _TKUITripSegmentsView ()
 
 @property (nonatomic, assign) CGSize desiredSize;
 
@@ -52,7 +51,7 @@
 
 @end
 
-@implementation TKUITripSegmentsView
+@implementation _TKUITripSegmentsView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -73,8 +72,6 @@
 }
 
 - (void)didInit {
-  self.darkTextColor = UIColor.tkLabelPrimary;
-  self.lightTextColor = UIColor.tkLabelSecondary;
   self.segmentIndexToSelect = -1;
 }
 
@@ -205,7 +202,7 @@
         brandImageView = [[UIImageView alloc] initWithFrame:brandFrame];
         brandImageView.autoresizingMask = mask;
         brandImageView.alpha = alpha;
-        [brandImageView setImageWithURL:modeImageURL];
+        [self prepare:brandImageView imageURL:modeImageURL asTemplate:false placeholder:nil completion:nil];
         newFrame = brandFrame;
         
       } else {
@@ -218,7 +215,7 @@
           modeCircleBackground.alpha = alpha;
           [self addSubview:modeCircleBackground];
         }
-        [modeImageView setImageWithURL:modeImageURL asTemplate:asTemplate placeholderImage:image completionHandler:^(BOOL succeed) {
+        [self prepare:modeImageView imageURL:modeImageURL asTemplate:asTemplate placeholder:image completion:^(BOOL succeed) {
           if (!succeed) {
             [modeCircleBackground removeFromSuperview];
           }
@@ -270,7 +267,7 @@
     
     UIImageView *modeTitleAccessoryImageView = nil;
     if (allowTitles && self.allowWheelchairIcon) {
-      modeTitleAccessoryImageView = [TKUISemaphoreView accessibilityImageViewForDisplayable:segment];
+      modeTitleAccessoryImageView = [self accessibilityImageViewForDisplayable:segment];
     }
     
     NSString *modeSubtitle = nil;
@@ -285,7 +282,7 @@
       }
 
       if ([segment tripSegmentTimesAreRealTime]) {
-        [modeSubtitleAccessoryImageViews addObject:[[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES tintColor:UIColor.tkLabelSecondary]];
+        [modeSubtitleAccessoryImageViews addObject:[self realTimeAccessoryImageAnimated:YES tintColor:self.lightTextColor]];
       }
 
       NSString *subtitleText = [segment tripSegmentModeSubtitle];
@@ -312,7 +309,7 @@
       }
       
       CGRect rect = CGRectMake(x + 2, y, modeTitleSize.width, modeTitleSize.height);
-      TKUIStyledLabel *titleLabel = [[TKUIStyledLabel alloc] initWithFrame:rect];
+      UILabel *titleLabel = [self styledLabelWithFrame:rect];
       titleLabel.font = modeTitleFont;
       titleLabel.text = modeTitle;
       titleLabel.textColor = self.colorCodingTransitIcon ? self.lightTextColor : self.darkTextColor;
@@ -359,10 +356,10 @@
       CGFloat y = (maxHeight - modeSubtitleSize.height - modeTitleSize.height) / 2 + modeTitleSize.height;
       
       CGRect rect = CGRectMake(x + 2, y, modeSubtitleSize.width, modeSubtitleSize.height);
-      TKUIStyledLabel *subtitleLabel = [[TKUIStyledLabel alloc] initWithFrame:rect];
+      UILabel *subtitleLabel = [self styledLabelWithFrame:rect];
       subtitleLabel.font = modeSubtitleFont;
       subtitleLabel.text = modeSubtitle;
-      subtitleLabel.textColor = UIColor.tkLabelSecondary;
+      subtitleLabel.textColor = self.lightTextColor;
       subtitleLabel.alpha = modeImageView.alpha;
       [self addSubview:subtitleLabel];
       
@@ -419,7 +416,7 @@
   if (self.isCanceled) {
     CGFloat lineHeight = 1;
     UIView *strikethrough = [[UIView alloc] initWithFrame:CGRectMake(0, (maxHeight - lineHeight) / 2, nextX, lineHeight)];
-    strikethrough.backgroundColor = UIColor.tkLabelPrimary;
+    strikethrough.backgroundColor = self.darkTextColor;
     [self addSubview:strikethrough];
   }
   
@@ -463,6 +460,32 @@
   return index;
 }
 
+#pragma mark - For subclasses to implement
+
+- (void)prepare:(nonnull UIImageView *)imageView
+       imageURL:(nonnull NSURL *)imageURL
+     asTemplate:(BOOL)asTemplate
+    placeholder:(nullable UIImage *)placeholder
+     completion:(void (^ __nullable)(BOOL finished)) completion
+{
+  completion(NO);
+}
+
+- (nonnull UIImageView *)realTimeAccessoryImageAnimated:(BOOL)animated
+                                              tintColor:(nonnull UIColor *)tintColor
+{
+  return nil;
+}
+
+- (nullable UIImageView *)accessibilityImageViewForDisplayable:(nonnull id<TKTripSegmentDisplayable>)displayable
+{
+  return nil;
+}
+
+- (nonnull UILabel *)styledLabelWithFrame:(CGRect)frame
+{
+  return [[UILabel alloc] initWithFrame:frame];
+}
 
 
 #pragma mark - Private helpers

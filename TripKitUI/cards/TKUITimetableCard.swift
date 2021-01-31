@@ -402,9 +402,13 @@ private extension TKUITimetableCard {
 
 extension TKUITimetableCard: TKUITimePickerSheetDelegate {
   
+  public func timePicker(_ picker: TKUITimePickerSheet, pickedDate: Date, for type: TKTimeType) {
+    // We use the select action instead
+  }
+  
   public func timePickerRequestsResign(_ pickerSheet: TKUITimePickerSheet) {
     controller?.dismiss(animated: true) {
-      self.datePublisher.onNext(pickerSheet.selectedDate())
+      self.datePublisher.onNext(pickerSheet.selectedDate)
     }
   }
   

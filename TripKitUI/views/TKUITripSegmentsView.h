@@ -8,13 +8,9 @@
 
 @import UIKit;
 
-#ifndef TK_NO_MODULE
-
-#endif
-
 @protocol TKTripSegmentDisplayable;
 
-@interface TKUITripSegmentsView : UIView
+@interface _TKUITripSegmentsView : UIView
 
 @property (nonatomic, assign) BOOL tiny;
 
@@ -61,6 +57,21 @@ Whether to show wheelchair accessibility and inaccessibility icons
 - (void)selectSegmentAtIndex:(NSInteger)index NS_SWIFT_NAME(select(segmentAtIndex:));
 
 - (NSInteger)segmentIndexAtX:(CGFloat)x NS_SWIFT_NAME(segmentIndex(atX:));
+
+// MARK: Helpers
+
+- (void)prepare:(nonnull UIImageView *)imageView
+       imageURL:(nonnull NSURL *)imageURL
+     asTemplate:(BOOL)asTemplate
+    placeholder:(nullable UIImage *)placeholder
+     completion:(void (^ __nullable)(BOOL finished)) completion;
+
+- (nonnull UIImageView *)realTimeAccessoryImageAnimated:(BOOL)animated
+                                              tintColor:(nonnull UIColor *)tintColor;
+
+- (nullable UIImageView *)accessibilityImageViewForDisplayable:(nonnull id<TKTripSegmentDisplayable>)displayable;
+
+- (nonnull UILabel *)styledLabelWithFrame:(CGRect)frame;
 
 @end
 

@@ -13,7 +13,6 @@
 #import "TripKit/TripKit-Swift.h"
 #else
 @import TripKit;
-#import "TripKitUI/TripKitUI-Swift.h"
 #endif
 
 #import "TKUISemaphoreView.h"
@@ -21,78 +20,15 @@
 #import "TKStyleManager+TripKitUI.h"
 #import "UIView+BearingRotation.h"
 
-@interface TKUISemaphoreView ()
+@interface _TKUISemaphoreView ()
 
-@property (nonatomic, strong) UIImageView *headImageView;
-@property (nonatomic, strong) UIImageView *modeImageView;
 @property (nonatomic, strong) UIImageView *timeImageView;
-@property (nonatomic, strong) UIImageView *shadowImageView;
-@property (nonatomic, strong) UIView *wrapper;
 
 @property (nonatomic, assign) SGSemaphoreLabel label;
-@property (nonatomic, assign) BOOL isFlipped;
 
 @end
 
-@implementation TKUISemaphoreView
-
-- (id)initWithAnnotation:(id<MKAnnotation>)annotation
-         reuseIdentifier:(NSString *)reuseIdentifier
-{
-  return [self initWithAnnotation:annotation
-                  reuseIdentifier:reuseIdentifier
-                      withHeading:0];
-}
-
-- (id)initWithAnnotation:(id<MKAnnotation>)annotation
-				 reuseIdentifier:(NSString *)reuseIdentifier
-						 withHeading:(CLLocationDirection)heading
-{
-  self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
-  if (self) {
-    // Initialisation
-
-#define SEMAPHORE_HEAD_SIZE         48 // size of the head images
-#define SEMAPHORE_WIDTH             SEMAPHORE_HEAD_SIZE
-#define SEMAPHORE_HEIGHT            58 // bottom of semaphore to top of head
-#define SEMAPHORE_BASE_HEAD_OVERLAP 18
-    
-    self.frame = CGRectMake(0, 0, SEMAPHORE_WIDTH, SEMAPHORE_HEIGHT);
-//    self.centerOffset = CGPointMake(0, self.frame.size.height * -0.5);
-		
-		self.wrapper = [[UIView alloc] initWithFrame:self.frame];
-		self.wrapper.backgroundColor = [UIColor clearColor];
-		[self addSubview:self.wrapper];
-    
-    UIImage *baseImage = [TripKitUIBundle imageNamed:@"map-pin-base"];
-    UIImageView *base = [[UIImageView alloc] initWithImage:baseImage];
-    CGPoint center = base.center;
-    center.x += 16;
-    center.y += SEMAPHORE_HEAD_SIZE - SEMAPHORE_BASE_HEAD_OVERLAP;
-    base.center = center;
-    [self.wrapper addSubview:base];
-		
-    [self updateForAnnotation:annotation
-                  withHeading:heading];
-
-    self.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
-  }
-  return self;  
-}
-
-- (void)setAnnotation:(id<MKAnnotation>)annotation
-{
-	// stop observing the old
-  BOOL didChange = (annotation != self.annotation);
-	
-	// set the new
-	[super setAnnotation:annotation];
-	
-	// observe the new
-  if (didChange) {
-    [self observe:annotation];
-	}
-}
+@implementation _TKUISemaphoreView
 
 - (void)setTiny:(BOOL)tiny
 {
@@ -119,22 +55,13 @@
 
 - (void)prepareForReuse
 {
-	self.isFlipped = NO;
 	self.tiny = NO;
 	
-  self.objcDisposeBag = [[TKUIObjCDisposeBag alloc] init];
-  
 	[self setTimeFlagOnSide:SGSemaphoreLabelDisabled withTime:nil isRealTime:NO atTimeZone:nil orFrequency:nil];
 	
   [_headImageView removeFromSuperview];
   self.headImageView = nil;
   
-  [_modeImageView removeFromSuperview];
-  self.modeImageView = nil;
-  
-  [_shadowImageView removeFromSuperview];
-  self.shadowImageView = nil;
-	
   self.label = SGSemaphoreLabelDisabled;
 }
 
@@ -152,20 +79,9 @@
   [self setTimeFlagOnSide:side withTime:timeStamp isRealTime:isRealTime atTimeZone:timezone orFrequency:nil];
 }
 
-- (void)flipHead:(BOOL)flip {
-  if (flip) {
-    if (NO == self.isFlipped) {
-      //          float w =  self.frame.size.width / 2 - self.modeImageView.image.size.width / 2;
-      //          self.modeImageView.transform = CGAffineTransformMake(-1.0, 0.0, 0.0, 1.0, w, 0.0);
-      self.modeImageView.transform = CGAffineTransformScale(self.modeImageView.transform, -1, 1);
-      self.isFlipped = YES;
-    }
-  } else {
-    if (self.isFlipped) {
-      self.modeImageView.transform = CGAffineTransformIdentity;
-      self.isFlipped = NO;
-    }
-  }
+- (nullable UIImage *)accessoryImageViewForRealTime:(BOOL)isRealTime
+                                      showFrequency:(BOOL)showFrequency {
+  return nil;
 }
 
 #pragma mark - Private methods
@@ -199,6 +115,7 @@
 #define TIME_LABEL_VERTICAL_PADDING 4
 #define TIME_LABEL_HORIZONTAL_PADDING 10
 #define TIME_LABEL_HEAD_OVERLAP 18
+#define SEMAPHORE_HEAD_SIZE 48 // should match Swift
     
     NSInteger frequencyInt = freq.integerValue;
     BOOL showFrequency = (frequencyInt > 0);
@@ -221,8 +138,7 @@
                             limitedToNumberOfLines:1].size;
     
     // Prepare background
-    UIImage *background = [TripKitUIBundle imageNamed:@"map-pin-time"];
-    self.timeImageView = [[UIImageView alloc] initWithImage:background];
+    self.timeImageView = [[UIImageView alloc] initWithImage:self.timeBackgroundImage];
     
     // Determine sizing
     CGFloat timeViewHeight = textSize.height + TIME_LABEL_VERTICAL_PADDING * 2;
@@ -235,17 +151,7 @@
     }
     
     // Add image if necessary
-    UIImageView *accessoryImageView = nil;
-    
-    if (isRealTime) {
-      accessoryImageView = [[UIImageView alloc] initAsRealTimeAccessoryImageAnimated:YES
-                                                                           tintColor:[UIColor whiteColor]];
-    }
-    if (accessoryImageView == nil && showFrequency) {
-      accessoryImageView = [[UIImageView alloc] initWithImage:[TripKitUIBundle imageNamed:@"repeat_icon"]];
-    }
-    
-    
+    UIImageView *accessoryImageView = [self accessoryImageViewForRealTime:isRealTime showFrequency:showFrequency];
     if (accessoryImageView) {
       // place it
       CGSize size = accessoryImageView.image.size;
@@ -274,65 +180,6 @@
     [_timeImageView addSubview:timeLabel];
     [self.wrapper insertSubview:_timeImageView belowSubview:self.headImageView];
   }
-}
-
-- (void)setHeadWithImage:(UIImage *)image
-                imageURL:(NSURL *)imageURL
-         imageIsTemplate:(BOOL)asTemplate
-							forBearing:(NSNumber *)bearing
-							andHeading:(CLLocationDirection)heading
-									 inRed:(BOOL)red
-						canFlipImage:(BOOL)canFlipImage
-{
-  UIImage *headImage;
-  UIColor *headTintColor;
-  if (nil != bearing) {
-    headImage = TKUISemaphoreView.pointerImage;
-    headTintColor = TKUISemaphoreView.headTintColor;
-  } else {
-    if (red) {
-      headImage = [TripKitUIBundle imageNamed:@"map-pin-head-red"];
-      headTintColor = [UIColor whiteColor];
-    } else {
-      headImage = TKUISemaphoreView.headImage;
-      headTintColor = TKUISemaphoreView.headTintColor;
-    }
-  }
-  
-	CLLocationDirection totalBearing = bearing.floatValue - heading;
-	
-  self.headImageView = [[UIImageView alloc] initWithImage:headImage];
-  self.headImageView.frame = CGRectMake((CGRectGetWidth(self.frame) - headImage.size.width) / 2, 0, headImage.size.width, headImage.size.height);
-  
-  if (nil != bearing) {
-		[self.headImageView rotateForBearing:(CGFloat) totalBearing];
-  }
-  
-  [self.wrapper addSubview:self.headImageView];
-  
-  // Add the mode image
-  self.modeImageView = [[UIImageView alloc] initWithImage:image];
-  _modeImageView.frame = CGRectMake((CGRectGetWidth(self.frame) - image.size.width) / 2,
-                                    (headImage.size.height - image.size.height) / 2,
-                                    image.size.width,
-                                    image.size.height);
-  self.modeImageView.tintColor = headTintColor;
-  
-  if (imageURL) {
-    [self.modeImageView setImageWithURL:imageURL asTemplate:asTemplate placeholderImage:image];
-  }
-  
-	self.isFlipped = NO;
-	if (canFlipImage) {
-		if (totalBearing > 180.0f || totalBearing < 0) {
-			//		float w =  self.frame.size.width / 2 - image.size.width / 2;
-			//		self.modeImageView.transform = CGAffineTransformMake(-1.0, 0.0, 0.0, 1.0, w, 0.0);
-			self.modeImageView.transform = CGAffineTransformScale(self.modeImageView.transform, -1, 1);
-			self.isFlipped = YES;
-		}
-	}
-  
-  [self.wrapper addSubview:_modeImageView];
 }
 
 @end

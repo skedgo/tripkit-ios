@@ -20,38 +20,27 @@ typedef NS_ENUM(NSInteger, SGSemaphoreLabel) {
   SGSemaphoreLabelOnRight
 };
 
-@class TKUIObjCDisposeBag;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TKUISemaphoreView : MKAnnotationView
+@interface _TKUISemaphoreView : MKAnnotationView
 
+@property (nonatomic, strong) UIView *wrapper;
 @property (nonatomic, readonly) SGSemaphoreLabel label;
-@property (nonatomic, readonly) UIImageView *headImageView;
-@property (nonatomic, strong) TKUIObjCDisposeBag *objcDisposeBag;
+@property (nonatomic, strong, nullable) UIImageView *headImageView;
+
+// Mark configuration
 
 @property (nonatomic, assign) BOOL tiny;
 
-// Initialisers
+@property (nonatomic, readonly, nullable) UIImage *timeBackgroundImage;
 
-- (id)initWithAnnotation:(id<MKAnnotation>)annotation
-				 reuseIdentifier:(nullable NSString *)reuseIdentifier
-						 withHeading:(CLLocationDirection)heading;
+- (nullable UIImageView *)accessoryImageViewForRealTime:(BOOL)isRealTime
+                                          showFrequency:(BOOL)showFrequency;
 
 // Helpers
 
-- (void)setHeadWithImage:(nullable UIImage *)image
-                imageURL:(nullable NSURL *)imageURL
-         imageIsTemplate:(BOOL)asTemplate
-              forBearing:(nullable NSNumber *)bearing
-							andHeading:(CLLocationDirection)heading
-                   inRed:(BOOL)red
-						canFlipImage:(BOOL)canFlipImage;
-
 - (void)setFrequency:(NSInteger)frequency
               onSide:(SGSemaphoreLabel)side;
-
-- (void)flipHead:(BOOL)isFlipped;
 
 - (void)setTime:(nullable NSDate *)timeStamp
      isRealTime:(BOOL)isRealTime

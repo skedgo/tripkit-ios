@@ -21,7 +21,7 @@ public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation {
   var selectionIdentifier: String? { get }
 }
 
-extension TKUISemaphoreView {
+public class TKUISemaphoreView: _TKUISemaphoreView {
   public enum Mode: Equatable {
     case headWithTime(Date, TimeZone, isRealTime: Bool)
     case headWithFrequency(minutes: Int)
@@ -31,20 +31,79 @@ extension TKUISemaphoreView {
     /// `TKUISemaphoreView` rather than just a flat image.
     case none
   }
+  
+  private var disposeBag = DisposeBag()
+  private var isFlipped = false
+  
+  private weak var modeImageView: UIImageView!
+  
+  public init(annotation: MKAnnotation, reuseIdentifier: String?, withHeading heading: CLLocationDirection = 0) {
+    
+    super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+    
+    let headSize = 48 // size of the head images
+    let width = headSize
+    let height = 58 // bottom of semaphore to top of head
+    let baseHeadOverlap = 18
+    
+    frame = .init(x: 0, y: 0, width: width, height: height)
+    
+    wrapper = UIView(frame: frame)
+    wrapper.backgroundColor = .clear
+    addSubview(wrapper)
+    
+    let base = UIImageView(image: TripKitUIBundle.imageNamed("map-pin-base"))
+    base.center.x += 16
+    base.center.y += CGFloat(headSize - baseHeadOverlap)
+    wrapper.addSubview(base)
+    
+    update(for: annotation, heading: heading)
+    
+    layer.anchorPoint = .init(x: 0.5, y: 1)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  public override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    disposeBag = .init()
+    isFlipped = false
+    modeImageView?.removeFromSuperview()
+    modeImageView = nil
+  }
+  
+  public override var annotation: MKAnnotation? {
+    didSet {
+      if let new = annotation, new !== oldValue {
+        observe(new)
+      }
+    }
+  }
+  
+  public override var timeBackgroundImage: UIImage? {
+    TripKitUIBundle.imageNamed("map-pin-time")
+  }
+  
+  public override func accessoryImageView(forRealTime isRealTime: Bool, showFrequency: Bool) -> UIImageView? {
+    if isRealTime {
+      return UIImageView(asRealTimeAccessoryImageAnimated: true, tintColor: .white)
+    } else if showFrequency {
+      return UIImageView(image: TripKitUIBundle.imageNamed("repeat_icon"))
+    } else {
+      return nil
+    }
+  }
 }
 
 // MARK:
 
 extension TKUISemaphoreView {
   
-  @objc(canDisplayAnnotation:)
-  public static func canDisplay(_ annotation: MKAnnotation) -> Bool {
-    return annotation is TKUISemaphoreDisplayable
-  }
-  
-  @objc
-  public func observe(_ annotation: MKAnnotation) {
-    self.objcDisposeBag = TKUIObjCDisposeBag()
+  private func observe(_ annotation: MKAnnotation) {
+    self.disposeBag = .init()
     
     guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
 
@@ -52,18 +111,9 @@ extension TKUISemaphoreView {
       .filter { $0.object is TKUISemaphoreDisplayable }
       .map { ($0.object as? TKUISemaphoreDisplayable)?.semaphoreMode }
       .bind(to: rx.mode)
-      .disposed(by: objcDisposeBag.disposeBag)
+      .disposed(by: disposeBag)
   }
 
-  @objc
-  static func isRealTime(_ annotation: MKAnnotation) -> Bool {
-    if let displayable = annotation as? TKUISemaphoreDisplayable, case .headWithTime(_, _, let isRealTime) = displayable.semaphoreMode {
-      return isRealTime
-    } else {
-      return false
-    }
-  }
-  
   /// :nodoc:
   @objc(accessibilityImageViewForDisplayable:)
   public static func accessibilityImageView(for displayable: TKTripSegmentDisplayable) -> UIImageView? {
@@ -80,13 +130,11 @@ extension TKUISemaphoreView {
     return imageView
   }
 
-  @objc(updateForAnnotation:)
   public func update(for annotation: MKAnnotation?) {
     self.update(for: annotation, heading: 0)
   }
   
-  @objc(updateForAnnotation:withHeading:)
-  public func update(for annotation: MKAnnotation?, heading: CLLocationDirection) {
+  func update(for annotation: MKAnnotation?, heading: CLLocationDirection) {
     self.annotation = annotation
     
     guard let semaphorable = annotation as? TKUISemaphoreDisplayable else { return }
@@ -98,7 +146,58 @@ extension TKUISemaphoreView {
     let terminal = semaphorable.isTerminal
     let canFlip = imageURL == nil && semaphorable.canFlipImage == true
     
-    setHeadWith(image, imageURL: imageURL, imageIsTemplate: asTemplate, forBearing: bearing, andHeading: heading, inRed: terminal, canFlipImage: canFlip)
+    let headImage: UIImage
+    let headTintColor: UIColor
+    if bearing != nil {
+      headImage = Self.pointerImage
+      headTintColor = Self.headTintColor
+    } else if terminal {
+      headImage = TripKitUIBundle.imageNamed("map-pin-head-red")
+      headTintColor = .white
+    } else {
+      headImage = Self.headImage
+      headTintColor = Self.headTintColor
+    }
+    
+    let totalBearing: CLLocationDirection = (bearing?.doubleValue ?? 0) - heading
+    let headImageView = UIImageView(image: headImage)
+    headImageView.frame = .init(
+      x: (frame.width - headImage.size.width) / 2,
+      y: 0,
+      width: headImage.size.width,
+      height: headImage.size.height
+    )
+    
+    if bearing != nil {
+      headImageView.rotate(bearing: CGFloat(totalBearing))
+    }
+    
+    wrapper.addSubview(headImageView)
+    self.headImageView = headImageView
+    
+    // Add the mode image
+    if let image = image {
+      let modeImageView = UIImageView(image: image)
+      modeImageView.frame = .init(
+        x: (frame.width - image.size.width) / 2,
+        y: (headImage.size.height - image.size.height) / 2,
+        width: image.size.width,
+        height: image.size.height
+      )
+      modeImageView.tintColor = headTintColor
+
+      modeImageView.setImage(with: imageURL, asTemplate: asTemplate, placeholder: image)
+      
+      if canFlip, totalBearing > 180 || totalBearing < 0 {
+        modeImageView.transform = modeImageView.transform.scaledBy(x: -1, y: 1)
+        isFlipped = true
+      } else {
+        isFlipped = false
+      }
+      
+      wrapper.addSubview(modeImageView)
+      self.modeImageView = modeImageView
+    }
   }
   
   public func updateSelection(for identifier: String?) {
@@ -109,16 +208,14 @@ extension TKUISemaphoreView {
     alpha = selected ? 1 : 0.3
   }
   
-  @objc(rotateHeadForMagneticHeading:)
-  public func rotateHead(magneticHeading: CLLocationDirection) {
+  func rotateHead(magneticHeading: CLLocationDirection) {
     guard let bearing = (annotation as? TKUISemaphoreDisplayable)?.bearing?.floatValue else { return }
     updateHead(magneticHeading: magneticHeading, bearing: CLLocationDirection(bearing))
   }
   
 
-  @objc(updateHeadForMagneticHeading:andBearing:)
-  public func updateHead(magneticHeading: CLLocationDirection, bearing: CLLocationDirection) {
-    headImageView.update(magneticHeading: CGFloat(magneticHeading), bearing: CGFloat(bearing))
+  func updateHead(magneticHeading: CLLocationDirection, bearing: CLLocationDirection) {
+    headImageView?.update(magneticHeading: CGFloat(magneticHeading), bearing: CGFloat(bearing))
     
     guard let displayable = (annotation as? TKUISemaphoreDisplayable) else { return }
     if displayable.canFlipImage && displayable.imageURL == nil {
@@ -127,6 +224,16 @@ extension TKUISemaphoreView {
       self.flipHead(flip)
     } else {
       self.flipHead(false)
+    }
+  }
+  
+  private func flipHead(_ flip: Bool) {
+    if flip, !isFlipped {
+      modeImageView.transform = modeImageView.transform.scaledBy(x: -1, y: 1)
+      isFlipped = true
+    } else if !flip, isFlipped {
+      modeImageView.transform = .identity
+      isFlipped = false
     }
   }
   
@@ -140,15 +247,12 @@ extension TKUISemaphoreView {
   @objc public static var customHeadImage: UIImage? = nil
   @objc public static var customPointerImage: UIImage? = nil
 
-  @objc
-  public static var headTintColor: UIColor {
+  static var headTintColor: UIColor {
     // This doesn't adjust to dark-mode on purpose as the head-image isn't ready for that yet
     return customHeadTintColor ?? .black
   }
-
   
-  @objc
-  public static var headImage: UIImage {
+  static var headImage: UIImage {
     if let custom = customHeadImage {
       return custom
     } else {
@@ -156,8 +260,7 @@ extension TKUISemaphoreView {
     }
   }
 
-  @objc
-  public static var pointerImage: UIImage {
+  static var pointerImage: UIImage {
     if let custom = customPointerImage {
       return custom
     } else {

@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIButton *floatingButton;
 
+@property (nonatomic, strong) UIColor *overlayColor;
+
 - (void)showWithOverlayInView:(UIView *)inView;
 
 - (void)showWithOverlayInView:(UIView *)inView
