@@ -23,8 +23,10 @@ public protocol TKUITimePickerSheetDelegate: class {
 
 public class TKUITimePickerSheet: TKUISheet {
   
+  @objc
   public var selectAction: (TKTimeType, Date) -> Void = { _, _ in }
   
+  @objc
   public weak var delegate: TKUITimePickerSheetDelegate?
   
   public var selectedDate: Date {
@@ -68,10 +70,12 @@ public class TKUITimePickerSheet: TKUISheet {
   private weak var timeTypeSelector: UISegmentedControl!
   private weak var doneSelector: UISegmentedControl!
 
+  @objc
   public convenience init(date: Date, timeZone: TimeZone) {
     self.init(date: date, showTime: false, timeType: .none, timeZone: timeZone)
   }
   
+  @objc
   public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone) {
     self.init(date: time, showTime: true, timeType: timeType, timeZone: timeZone)
   }
