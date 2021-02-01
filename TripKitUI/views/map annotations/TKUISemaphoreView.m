@@ -17,7 +17,6 @@
 
 #import "TKUISemaphoreView.h"
 
-#import "TKStyleManager+TripKitUI.h"
 #import "UIView+BearingRotation.h"
 
 @interface _TKUISemaphoreView ()

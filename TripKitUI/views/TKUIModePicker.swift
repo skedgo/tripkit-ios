@@ -364,7 +364,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
 
 extension TKUIModePicker {
   private static func styleModeButton(_ button: UIButton, selected: Bool) {
-    button.backgroundColor    = selected ? .tkBackground : .tripgoLabelQuarternary
+    button.backgroundColor    = selected ? .tkBackground : .tkLabelQuarternary
     button.tintColor          = .tkLabelPrimary
     button.alpha              = selected ? 1 : 0.2
   }

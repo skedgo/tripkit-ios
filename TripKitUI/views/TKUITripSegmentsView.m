@@ -17,7 +17,6 @@
 
 
 #import "UIColor+Variations.h"
-#import "TKStyleManager+TripKitUI.h"
 #import "UIView+Helpers.h"
 
 #define SEGMENT_ITEM_ALPHA_SELECTED   1

@@ -11,6 +11,7 @@ import Foundation
 extension TKImage {
   
   @objc public static let iconSearchTimetable = named("icon-search-timetable")
+  @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
 
   @objc public static let iconPin = named("icon-pin")
   

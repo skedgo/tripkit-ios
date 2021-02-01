@@ -11,8 +11,6 @@ import UIKit
 
 extension UIImage {
 
-  @objc public static let backgroundNavSecondary = named("bg-nav-secondary")
-
   public static let iconAlert = named("icon-alert")
   public static let iconCross = named("icon-cross")
 

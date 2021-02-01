@@ -14,8 +14,6 @@
 #import "UIImage+Variations.h"
 #import "UIView+BearingRotation.h"
 #import "UIView+Helpers.h"
-#import "TKStyleManager+TripKitUI.h"
-#import "UIFont+CustomFonts.h"
 #import "UIImage+Variations.h"
 
 // TransportKitUI
