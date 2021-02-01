@@ -26,11 +26,11 @@ open class TKUIHomeViewController: TGCardViewController {
   public init(initialPosition: TGCardPosition? = nil) {
     self.initialPosition = initialPosition
     
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
   }
   
   required public init?(coder: NSCoder) {
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
   }
   
   open override func viewDidLoad() {

@@ -26,7 +26,7 @@ public class TKUITripOverviewViewController: TGCardViewController {
   ///
   /// - Parameter destination: The trip object, e.g., previously calculated via `TKRouter`
   public init(trip: Trip) {
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
     
     let tripCard = TKUITripOverviewCard(trip: trip)
     tripCard.style = TKUICustomization.shared.cardStyle

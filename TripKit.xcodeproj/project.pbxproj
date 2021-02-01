@@ -40,6 +40,9 @@
 		3A1F72BB25C7D81900C72CEE /* TKStyleManager+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F72BA25C7D81900C72CEE /* TKStyleManager+UIKit.swift */; };
 		3A1F72C325C7D89A00C72CEE /* UIColor+TripKitDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F72C125C7D89A00C72CEE /* UIColor+TripKitDefault.swift */; };
 		3A1F72C425C7D89A00C72CEE /* UIColor+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F72C225C7D89A00C72CEE /* UIColor+TripKit.swift */; };
+		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
+		3A1F72E825C7E5E400C72CEE /* KingfisherStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72E725C7E5E400C72CEE /* KingfisherStatic */; };
+		3A1F72F125C7E63400C72CEE /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72F025C7E63400C72CEE /* TGCardViewController */; };
 		3A201F2123BB86A600763948 /* TKUISegmentImpossibleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */; };
 		3A201F2223BB86A600763948 /* TKUISegmentImpossibleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */; };
 		3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */; };
@@ -302,10 +305,6 @@
 		3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */; };
 		3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
 		3A7E613B208A09070008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */; };
-		3A81791725C6533B00E15553 /* Kingfisher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81791625C6532C00E15553 /* Kingfisher.xcframework */; };
-		3A81792525C6536B00E15553 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81792425C6536200E15553 /* RxCocoa.xcframework */; };
-		3A81792625C6536B00E15553 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81792225C6536100E15553 /* RxRelay.xcframework */; };
-		3A81792725C6536B00E15553 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A81792325C6536100E15553 /* RxSwift.xcframework */; };
 		3A817D6325C6897C00E15553 /* TKUIStyledLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817D6225C6897C00E15553 /* TKUIStyledLabel.swift */; };
 		3A817D7525C68B8700E15553 /* TKUIStyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817D7425C68B8700E15553 /* TKUIStyledButton.swift */; };
 		3A817D9225C690DC00E15553 /* TKUITimePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817D9125C690DC00E15553 /* TKUITimePickerSheet.swift */; };
@@ -1214,10 +1213,6 @@
 		3A79AFFF24D303B7008C165A /* TKSecureTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSecureTransformers.swift; sourceTree = "<group>"; };
 		3A7E61362089E5AD0008AAE4 /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
 		3A7E6138208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKCalendarManager+Autocompleting.swift"; sourceTree = "<group>"; };
-		3A81791625C6532C00E15553 /* Kingfisher.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Kingfisher.xcframework; path = ../../Carthage/Build/Kingfisher.xcframework; sourceTree = "<group>"; };
-		3A81792225C6536100E15553 /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = ../../Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
-		3A81792325C6536100E15553 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = ../../Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
-		3A81792425C6536200E15553 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = ../../Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		3A817D6225C6897C00E15553 /* TKUIStyledLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStyledLabel.swift; sourceTree = "<group>"; };
 		3A817D7425C68B8700E15553 /* TKUIStyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStyledButton.swift; sourceTree = "<group>"; };
 		3A817D9125C690DC00E15553 /* TKUITimePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITimePickerSheet.swift; sourceTree = "<group>"; };
@@ -1642,10 +1637,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A81792525C6536B00E15553 /* RxCocoa.xcframework in Frameworks */,
-				3A81792625C6536B00E15553 /* RxRelay.xcframework in Frameworks */,
-				3A81792725C6536B00E15553 /* RxSwift.xcframework in Frameworks */,
-				3A81791725C6533B00E15553 /* Kingfisher.xcframework in Frameworks */,
+				3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */,
+				3A1F72E825C7E5E400C72CEE /* KingfisherStatic in Frameworks */,
+				3A1F72F125C7E63400C72CEE /* TGCardViewController in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2301,7 +2295,6 @@
 				3AA3CE82202CD4D100E54859 /* Tests */,
 				3ACF46FE2297EC820096860D /* Examples */,
 				3AB6C6211D1CD0060089F687 /* Products */,
-				BF0D12F3CE39D82551585DB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2832,17 +2825,6 @@
 			path = TransportKit;
 			sourceTree = "<group>";
 		};
-		BF0D12F3CE39D82551585DB6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3A81791625C6532C00E15553 /* Kingfisher.xcframework */,
-				3A81792425C6536200E15553 /* RxCocoa.xcframework */,
-				3A81792225C6536100E15553 /* RxRelay.xcframework */,
-				3A81792325C6536100E15553 /* RxSwift.xcframework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		D314109B2395E779009498C5 /* Autocompleter */ = {
 			isa = PBXGroup;
 			children = (
@@ -3037,6 +3019,11 @@
 				3A6DF154202C90D80084CB2C /* PBXTargetDependency */,
 			);
 			name = "TripKitUI-iOS";
+			packageProductDependencies = (
+				3A1F72D225C7E54800C72CEE /* RxCocoa */,
+				3A1F72E725C7E5E400C72CEE /* KingfisherStatic */,
+				3A1F72F025C7E63400C72CEE /* TGCardViewController */,
+			);
 			productName = "TripKitUI-iOS";
 			productReference = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */;
 			productType = "com.apple.product-type.framework";
@@ -3185,6 +3172,11 @@
 				nb,
 			);
 			mainGroup = 3AB6C6161D1CD0060089F687;
+			packageReferences = (
+				3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				3A1F72EF25C7E63400C72CEE /* XCRemoteSwiftPackageReference "TGCardViewController" */,
+			);
 			productRefGroup = 3AB6C6211D1CD0060089F687 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -4227,7 +4219,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CARTHAGE_PLATFORM[sdk=macosx*]" = Mac;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -4264,7 +4255,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CARTHAGE_PLATFORM[sdk=macosx*]" = Mac;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -4598,10 +4588,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = JFT62W5LA3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4624,10 +4610,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = JFT62W5LA3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4779,6 +4761,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
+		3A1F72EF25C7E63400C72CEE /* XCRemoteSwiftPackageReference "TGCardViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitlab.com/SkedGo/iOS/TGCardViewController.git";
+			requirement = {
+				branch = spm;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A1F72D225C7E54800C72CEE /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		3A1F72E725C7E5E400C72CEE /* KingfisherStatic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherStatic;
+		};
+		3A1F72F025C7E63400C72CEE /* TGCardViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A1F72EF25C7E63400C72CEE /* XCRemoteSwiftPackageReference "TGCardViewController" */;
+			productName = TGCardViewController;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3A462CD020762FB400AF41EF /* TripKitModel.xcdatamodeld */ = {

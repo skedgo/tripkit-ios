@@ -52,7 +52,7 @@ public class TKUITimetableViewController: TGCardViewController {
   ///   from any child stops (e.g., platforms)
   ///   - filter: An optional string used to filter the resulting departures
   public init(stop: TKUIStopAnnotation, filter: String? = nil) {
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
     
     let timetableCard = TKUITimetableCard(stops: [stop])
     timetableCard.style = TKUICustomization.shared.cardStyle
@@ -71,7 +71,7 @@ public class TKUITimetableViewController: TGCardViewController {
   ///       want connections
   ///   - startDate: Optional date of first connection, defaults to current time
   public init(dlsTable: TKDLSTable, startDate: Date = Date()) {
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
     
     let timetableCard = TKUITimetableCard(dlsTable: dlsTable, startDate: startDate)
     timetableCard.style = TKUICustomization.shared.cardStyle

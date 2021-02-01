@@ -38,7 +38,7 @@ public class TKUIRoutingResultsViewController: TGCardViewController {
   ///
   /// - Parameter destination: Destination of the trip
   public init(destination: MKAnnotation) {
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
 
     let resultsCard = TKUIRoutingResultsCard(destination: destination)
     resultsCard.style = TKUICustomization.shared.cardStyle
@@ -54,7 +54,7 @@ public class TKUIRoutingResultsViewController: TGCardViewController {
   /// - Parameter request: The trip request object, which should be instatiated
   ///     using `TripRequest.insert(...)`
   public init(request: TripRequest) {
-    super.init(nibName: "TGCardViewController", bundle: Bundle(for: TGCardViewController.self))
+    super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
 
     let resultsCard = TKUIRoutingResultsCard(request: request)
     resultsCard.style = TKUICustomization.shared.cardStyle
