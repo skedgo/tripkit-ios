@@ -10,21 +10,11 @@
 
 #define SGSimilarLocationDegreeDifference 0.000025
 
-#import "TripKit/TripKit-Swift.h"
-
-
 @implementation TKLocationHelper
 
 + (NSString *)addressForPlacemark:(CLPlacemark *)placemark
 {
   ZAssert(nil != placemark, @"Placemark can't be nil.");
-  
-  NSString *postalAddress = [TKAddressFormatter singleLineAddressStringForPlacemark:placemark];
-  if (postalAddress != nil) {
-    return postalAddress;
-  }
-  
-  // Deprecated fall-back using Australian standard
   
   NSMutableString* string = [[NSMutableString alloc] init];
   

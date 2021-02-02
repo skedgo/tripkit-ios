@@ -8,7 +8,13 @@
 
 #import "TKBuzzRealTime.h"
 
+@import CoreData;
+
 #import <TripKit/TripKit-Swift.h>
+
+#import "DLSEntry.h"
+#import "Service.h"
+#import "TKTripFetcher.h"
 
 @interface TKBuzzRealTime ()
 
@@ -176,7 +182,7 @@
    ^(id responseObject) {
      [context performBlock:^{
        [TKBuzzRealTime updateObjects:servicesLookupDict
-              withResponseObject:responseObject];
+                  withResponseObject:responseObject];
        success(services);
      }];
    }
@@ -292,14 +298,14 @@
       if (visit) {
         visit.departure = departure;
         [visit triggerRealTimeKVO];
-        service.realTime = YES;
+        service.isRealTime = YES;
 
       } else if (dls) {
         NSTimeInterval previousDuration = [dls.arrival timeIntervalSinceDate:dls.departure];
         dls.departure = departure;
         NSDate *arrival = [TKParserHelper parseDate:serviceDict[@"endTime"]];
         dls.arrival = arrival ?: [dls.departure dateByAddingTimeInterval:previousDuration];
-        service.realTime = YES;
+        service.isRealTime = YES;
       }
 			
 		} else {
@@ -309,7 +315,7 @@
 			NSArray *stops                  = serviceDict[@"stops"];
 			if (! stops)
 				continue;
-      service.realTime = YES;
+      service.isRealTime = YES;
 
       NSMutableDictionary *arrivals   = [NSMutableDictionary dictionaryWithCapacity:stops.count];
 			NSMutableDictionary *departures = [NSMutableDictionary dictionaryWithCapacity:stops.count];

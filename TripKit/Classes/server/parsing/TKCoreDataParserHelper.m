@@ -116,7 +116,7 @@
       [currentService _setWheelchairAccessibility: shapeDict[@"wheelchairAccessible"]];
     }
     if ([shapeDict[@"bicycleAccessible"] boolValue]) {
-      currentService.bicycleAccessible = true;
+      currentService.isBicycleAccessible = true;
     }
     
     if (previousService != currentService) {
@@ -124,7 +124,7 @@
     }
     
     if (clearRealTime) {
-      [currentService setRealTime:NO];
+      [currentService setIsRealTime:NO];
     }
     
     // create the new shape
@@ -218,17 +218,17 @@
 {
   // update the real-time status
   if ([realTimeStatus isEqualToString:@"IS_REAL_TIME"]) {
-    service.realTime        = YES;
-    service.realTimeCapable = YES;
-    service.canceled        = NO;
+    service.isRealTime        = YES;
+    service.isRealTimeCapable = YES;
+    service.isCanceled        = NO;
   } else if ([realTimeStatus isEqualToString:@"CAPABLE"]) {
-    service.realTime        = NO;
-    service.realTimeCapable = YES;
-    service.canceled        = NO;
+    service.isRealTime        = NO;
+    service.isRealTimeCapable = YES;
+    service.isCanceled        = NO;
   } else if ([realTimeStatus isEqualToString:@"CANCELLED"]) {
-    service.realTime        = NO;
-    service.realTimeCapable = YES;
-    service.canceled        = YES;
+    service.isRealTime        = NO;
+    service.isRealTimeCapable = YES;
+    service.isCanceled        = YES;
   }
 }
 

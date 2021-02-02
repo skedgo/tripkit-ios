@@ -9,7 +9,7 @@
 @import CoreData;
 @import CoreLocation;
 
-@class Service, StopLocation, TKNamedCoordinate;
+@class TKNamedCoordinate;
 
 typedef NS_CLOSED_ENUM(NSInteger, TKAlertSeverity) {
   TKAlertSeverityInfo = -1,
@@ -37,18 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Non core-data properties
 @property (nonatomic, assign) TKAlertSeverity alertSeverity;
-@property (nonatomic, readonly, nullable) NSURL *imageURL;
 
 + (nullable instancetype)fetchAlertWithHashCode:(NSNumber *)hashCode
                                inTripKitContext:(NSManagedObjectContext *)tripKitContext;
-
-+ (NSArray<Alert *> *)fetchAlertsWithHashCodes:(NSArray *)hashCodes
-                              inTripKitContext:(NSManagedObjectContext *)tripKitContext
-                          sortedByDistanceFrom:(CLLocationCoordinate2D)coordinate;
-
-+ (NSArray<Alert *> *)fetchAlertsForService:(Service *)service;
-
-+ (NSArray<Alert *> *)fetchAlertsForStopLocation:(StopLocation *)stopLocation;
 
 @end
 

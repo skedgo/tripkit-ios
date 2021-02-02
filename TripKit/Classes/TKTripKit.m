@@ -8,6 +8,10 @@
 
 #import "TKTripKit.h"
 
+#import "NSUserDefaults+SharedDefaults.h"
+#import "TKConfig.h"
+#import "TKServer.h"
+
 #import <TripKit/TripKit-Swift.h>
 
 NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification";
@@ -91,13 +95,13 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   if (appGroupName != nil) {
     directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroupName];
     if (directory == nil) {
-      [TKLog warn:@"TKTripKit" text:[NSString stringWithFormat:@"Can't load container directory for app group (%@)! Check your settings.", appGroupName]];
+      ZAssert(false, @"Can't load container directory for app group (%@)! Check your settings.", appGroupName);
     }
   }
   if (nil == directory) {
     directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     if (directory == nil) {
-      [TKLog error:@"TKTripKit" text:[NSString stringWithFormat:@"Can't find local directory for TripKit!"]];
+      ZAssert(false, @"Can't find local directory for TripKit!");
     }
   }
   return directory;
@@ -170,9 +174,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     return _persistentStoreCoordinator;
   }
   
-  [TKLog debug:@"TKTripKit" text:@"Setting up TripKit store..."];
   if (! [self didResetToday]) {
-    [TKLog info:@"TKTripKit" text:@"Clearing cache as we didn't reset today yet."];
     [self removeLocalFiles];
   }
   NSDate *lastResetDate = [[NSUserDefaults sharedDefaults] objectForKey:@"TripKitLastResetDate"];
@@ -188,7 +190,6 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   ZAssert(storeURL, @"Can't initialise without a storeURL!");
   if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
     // if it failed, delete the file
-    [TKLog warn:@"TKTripKit" text:@"Deleting previous persistent store as lightweight migration failed."];
     [self removeLocalFiles];
     
     // let's try again. this time there's no file. so it has to succeed
@@ -199,12 +200,10 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     
     if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
       // otherwise, kill it
-      ZAssert(false, @"That doesn't make sense. There's no file! Error: %@. File: %@", error, storeURL);
-      [TKLog error:@"TKTripKit" text:[NSString stringWithFormat:@"Unresolved migration error %@, %@", error, [error userInfo]]];
+      ZAssert(false, @"Unresolved migration error: %@. File: %@", error, storeURL);
     }
   }
   
-  [TKLog debug:@"TKTripKit" text:@"TripKit store set up."];
   return _persistentStoreCoordinator;
 }
 

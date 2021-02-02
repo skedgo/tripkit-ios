@@ -9,8 +9,8 @@
 #import "TKSettings.h"
 
 #import "TKBetaHelper.h"
-
-#import <TripKit/TripKit-Swift.h>
+#import "TKConstants.h"
+#import "NSUserDefaults+SharedDefaults.h"
 
 @implementation TKSettings
 

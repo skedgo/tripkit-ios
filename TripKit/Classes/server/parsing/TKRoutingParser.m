@@ -8,6 +8,8 @@
 
 #import "TKRoutingParser.h"
 
+@import CoreData;
+
 #import <TripKit/TripKit-Swift.h>
 
 @interface TKRoutingParser ()

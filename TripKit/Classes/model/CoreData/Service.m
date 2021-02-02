@@ -12,103 +12,11 @@
 
 #import "TripKit/TripKit-Swift.h"
 
-enum {
-  SGServiceFlagRealTime               = 1 << 0,
-  SGServiceFlagRealTimeCapable        = 1 << 1,
-  SGServiceFlagCanceled               = 1 << 2,
-  SGServiceFlagBicycleAccessible      = 1 << 3,
-  SGServiceFlagWheelchairAccessible   = 1 << 4,
-  SGServiceFlagWheelchairInaccessible = 1 << 5,
-};
-typedef NSUInteger SGServiceFlag;
-
-@interface Service ()
-
-@property (nonatomic, copy) NSArray *alerts;
-
-@end
 
 @implementation Service
 
 @synthesize sortedVisits = _sortedVisits;
-@synthesize alerts = _alerts;
 @synthesize isRequestingServiceData;
-
-- (Alert *)sampleAlert
-{
-  return [self.alerts firstObject];
-}
-
-- (NSArray<Alert *> *)allAlerts
-{
-  return self.alerts;
-}
-
-- (BOOL)isRealTime
-{
-  return 0 != (self.flags & SGServiceFlagRealTime);
-}
-
-- (void)setRealTime:(BOOL)realTime
-{
-	[self setFlag:SGServiceFlagRealTime to:realTime];
-}
-
-- (BOOL)isRealTimeCapable
-{
-  return 0 != (self.flags & SGServiceFlagRealTimeCapable);
-}
-
-- (void)setRealTimeCapable:(BOOL)realTimeCapable
-{
-	[self setFlag:SGServiceFlagRealTimeCapable to:realTimeCapable];
-}
-
-- (BOOL)isCanceled
-{
-  return 0 != (self.flags & SGServiceFlagCanceled);
-}
-
-- (void)setCanceled:(BOOL)canceled
-{
-	[self setFlag:SGServiceFlagCanceled to:canceled];
-}
-
-- (BOOL)isBicycleAccessible
-{
-  return 0 != (self.flags & SGServiceFlagBicycleAccessible);
-}
-
-- (void)setBicycleAccessible:(BOOL)bicycleAccessible
-{
-  [self setFlag:SGServiceFlagBicycleAccessible to:bicycleAccessible];
-}
-
-- (BOOL)isWheelchairAccessible
-{
-  return 0 != (self.flags & SGServiceFlagWheelchairAccessible);
-}
-
-- (void)setWheelchairAccessible:(BOOL)wheelchairAccessible
-{
-  [self setFlag:SGServiceFlagWheelchairAccessible to:wheelchairAccessible];
-  if (wheelchairAccessible) {
-    [self setFlag:SGServiceFlagWheelchairInaccessible to:false];
-  }
-}
-
-- (BOOL)isWheelchairInaccessible
-{
-  return 0 != (self.flags & SGServiceFlagWheelchairInaccessible);
-}
-
-- (void)setWheelchairInaccessible:(BOOL)wheelchairInaccessible
-{
-  [self setFlag:SGServiceFlagWheelchairInaccessible to:wheelchairInaccessible];
-  if (wheelchairInaccessible) {
-    [self setFlag:SGServiceFlagWheelchairAccessible to:false];
-  }
-}
 
 - (void)setLineName:(NSString *)lineName
 {
@@ -277,15 +185,6 @@ typedef NSUInteger SGServiceFlag;
 
 #pragma mark - Private methods
 
-- (void)setFlag:(SGServiceFlag)flag to:(BOOL)value
-{
-	NSInteger flags = self.flags;
-	if (value) {
-		self.flags = flags | flag;
-	} else {
-		self.flags = flags & ~flag;
-	}
-}
 
 + (NSUInteger)indexForSplittingWaypoints:(NSArray <id<MKAnnotation>> *)waypoints
 																 atVisit:(StopVisits *)split
@@ -335,19 +234,6 @@ typedef NSUInteger SGServiceFlag;
 }
 
 #pragma mark - Lazy accessors
-
-- (NSArray *)alerts
-{
-  if (!_alerts) {
-    NSArray *hasCodes = self.alertHashCodes;
-    if (hasCodes.count == 0) {
-      _alerts = @[];
-    } else {
-      _alerts = [Alert fetchAlertsForService:self];
-    }
-  }
-  return _alerts;
-}
 
 - (NSArray *)sortedVisits
 {

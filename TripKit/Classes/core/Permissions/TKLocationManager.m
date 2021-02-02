@@ -11,7 +11,6 @@
 @import MapKit;
 
 #import "TKTripKit.h"
-#import "TripKit/TripKit-Swift.h"
 
 #import "TKAutocompletionResult.h"
 
@@ -31,7 +30,7 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 
 @property (copy, nonatomic) TKPermissionCompletionBlock completionBlock;
 @property (nonatomic, strong) CLLocation *bestLocationFix;
-@property (nonatomic, strong) TKNamedCoordinate *currentLocationPlaceholder;
+@property (nonatomic, strong) id<MKAnnotation> currentLocationPlaceholder;
 
 @property (nonatomic, strong) NSMutableDictionary *subscriberBlocks;
 @property (nonatomic, strong) NSMutableSet        *fetchTimers;
@@ -103,7 +102,10 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 - (id<MKAnnotation>)currentLocationPlaceholder
 {
   if (! _currentLocationPlaceholder) {
-    _currentLocationPlaceholder = [[TKNamedCoordinate alloc] initWithName:Loc.CurrentLocation address:nil];
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = kCLLocationCoordinate2DInvalid;
+    annotation.title = NSLocalizedStringFromTableInBundle(@"Current Location", @"Shared", [TKTripKit bundle], "Title for user's current location");
+    _currentLocationPlaceholder = annotation;
   }
   return _currentLocationPlaceholder;
 }
@@ -276,8 +278,8 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 		success(self.bestLocationFix);
 	} else if (failure) {
     NSDictionary *info = @{
-                           NSLocalizedDescriptionKey: NSLocalizedStringFromTableInBundle(@"Could not determine your current location.", @"Shared", [TKStyleManager bundle], @"Error title when GPS failed."),
-                           NSLocalizedRecoverySuggestionErrorKey: NSLocalizedStringFromTableInBundle(@"Please try again or set your location manually.", @"Shared", [TKStyleManager bundle], @"Error recovery suggestion when GPS fails."),
+                           NSLocalizedDescriptionKey: NSLocalizedStringFromTableInBundle(@"Could not determine your current location.", @"Shared", [TKTripKit bundle], @"Error title when GPS failed."),
+                           NSLocalizedRecoverySuggestionErrorKey: NSLocalizedStringFromTableInBundle(@"Please try again or set your location manually.", @"Shared", [TKTripKit bundle], @"Error recovery suggestion when GPS fails."),
                            };
 		NSError *error = [NSError errorWithDomain:@"SkedGo-Shared"
                                          code:198364

@@ -350,7 +350,7 @@ extension TKUITimetableViewModel {
     
     var seenHashCodes = Set<Int>()
     let alerts = stops
-      .flatMap { $0.alertsIncludingChildren }
+      .flatMap { $0.alertsIncludingChildren() }
       .filter { seenHashCodes.insert($0.hashCode.intValue).inserted }
       .map { $0 as TKAlert }
     
@@ -361,9 +361,15 @@ extension TKUITimetableViewModel {
 
 extension StopLocation {
   
-  fileprivate var alertsIncludingChildren: [Alert] {
-    let childAlerts = children?.flatMap { $0.alertsIncludingChildren }
-    return Alert.fetchAlerts(for: self) + (childAlerts ?? [])
+  fileprivate func alertsIncludingChildren() -> [Alert] {
+    guard let context = managedObjectContext else { return [] }
+    let hashCodes = alertHashCodes ?? []
+    var alerts = hashCodes.compactMap { Alert.fetch(withHashCode: $0, inTripKitContext: context) }
+    if let children = children {
+      alerts += children.flatMap { $0.alertsIncludingChildren() }
+    }
+    return alerts
+      .sorted { $0.severity.intValue > $1.severity.intValue }
   }
   
 }

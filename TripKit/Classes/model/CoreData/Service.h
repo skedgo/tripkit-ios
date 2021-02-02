@@ -19,23 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields + methods
 
-@property (nonatomic, assign, getter = isRealTime) BOOL realTime;
-@property (nonatomic, assign, getter = isRealTimeCapable) BOOL realTimeCapable;
-@property (nonatomic, assign, getter = isCanceled) BOOL canceled;
-@property (nonatomic, assign, getter = isBicycleAccessible) BOOL bicycleAccessible;
-
-/// :nodoc:
-@property (nonatomic, assign, getter = isWheelchairAccessible) BOOL wheelchairAccessible;
-/// :nodoc:
-@property (nonatomic, assign, getter = isWheelchairInaccessible) BOOL wheelchairInaccessible;
-
 @property (nonatomic, strong) NSArray<StopVisits *> *sortedVisits;
 @property (nonatomic, copy, nullable) NSString *lineName;
 @property (nonatomic, copy, nullable) NSString *direction;
-
-- (nullable Alert *)sampleAlert;
-
-- (NSArray<Alert *> *)allAlerts;
 
 - (NSString *)title;
 

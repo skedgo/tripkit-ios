@@ -8,9 +8,8 @@
 
 #import "TKAlertController.h"
 
+#import "TKTripKit.h"
 #import "TKStyleManager.h"
-
-#import "TripKit/TripKit-Swift.h"
 
 #if TARGET_OS_IPHONE
 
@@ -64,12 +63,12 @@
 
 + (NSString *)alertTitle
 {
-  return Loc.Alert;
+  return NSLocalizedStringFromTableInBundle(@"Alert", @"Shared", [TKTripKit bundle], "Default title for alert view");
 }
 
 + (NSString *)cancelTitle
 {
-  return Loc.OK;
+  return NSLocalizedStringFromTableInBundle(@"OK", @"Shared", [TKTripKit bundle], "OK action");
 }
 
 @end

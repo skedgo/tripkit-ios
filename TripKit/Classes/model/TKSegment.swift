@@ -216,7 +216,10 @@ public class TKSegment: NSObject {
       let context = reference.managedObjectContext,
       let start = start?.coordinate
     else { return [] }
-    return Alert.fetchAlerts(withHashCodes: hashCodes, inTripKitContext: context, sortedByDistanceFrom: start)
+    
+    return hashCodes
+      .compactMap { Alert.fetch(withHashCode: $0, inTripKitContext: context) }
+      .sortedByDistance(from: start)
   }()
   
   public lazy var turnByTurnMode: TKTurnByTurnMode? = template?.turnByTurnMode
@@ -441,6 +444,20 @@ extension TKSegment: MKAnnotation {
 }
 
 // MARK: - Helper methods
+
+extension Array where Element == Alert {
+  fileprivate func sortedByDistance(from: CLLocationCoordinate2D) -> [Alert] {
+    tk_filterDuplicates { $0.hashCode == $1.hashCode }
+      .sorted {
+        if let first = $0.location?.coordinate.distance(from: from), let second = $1.location?.coordinate.distance(from: from) {
+          return first < second
+        } else {
+          // If at least one doesn't have a location prefer the one which does not have one.
+          return $0.location == nil
+        }
+      }
+  }
+}
 
 extension TKSegment {
   

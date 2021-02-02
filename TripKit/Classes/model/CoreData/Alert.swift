@@ -15,6 +15,10 @@ extension Alert {
     static let excludingStopsFromRouting: String = "excludedStopCodes"
   }
   
+  public var imageURL: URL? {
+    remoteIcon.flatMap { TKServer.imageURL(iconFileNamePart: $0, iconType: .alert) }
+  }
+  
   @objc public var infoIconType: TKInfoIconType {
     switch alertSeverity {
     case .info, .warning: return .warning

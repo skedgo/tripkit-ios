@@ -62,9 +62,76 @@ extension Service: TKRealTimeUpdatable {
   }
 }
 
-// MARK: - Helpers
+// MARK: - Flag accessors
 
 extension Service {
+  
+  struct Flag: OptionSet {
+    static let realTime               = Flag(rawValue: 1 << 0)
+    static let realTimeCapable        = Flag(rawValue: 1 << 1)
+    static let canceled               = Flag(rawValue: 1 << 2)
+    static let bicycleAccessible      = Flag(rawValue: 1 << 3)
+    static let wheelchairAccessible   = Flag(rawValue: 1 << 4)
+    static let wheelchairInaccessible = Flag(rawValue: 1 << 5)
+    
+    let rawValue: Int16
+  }
+  
+  private func set(_ flag: Flag, to value: Bool) {
+    if value {
+      flags = Flag(rawValue: flags).intersection(flag).rawValue
+    } else {
+      flags = Flag(rawValue: flags).subtracting(flag).rawValue
+    }
+  }
+  
+  @objc
+  public var isRealTime: Bool {
+    get { Flag(rawValue: flags).contains(.realTime) }
+    set { set(.realTime, to: newValue) }
+  }
+
+  @objc
+  public var isRealTimeCapable: Bool {
+    get { Flag(rawValue: flags).contains(.realTimeCapable) }
+    set { set(.realTimeCapable, to: newValue) }
+  }
+
+  @objc
+  public var isCanceled: Bool {
+    get { Flag(rawValue: flags).contains(.canceled) }
+    set { set(.canceled, to: newValue) }
+  }
+
+  @objc
+  public var isBicycleAccessible: Bool {
+    get { Flag(rawValue: flags).contains(.bicycleAccessible) }
+    set { set(.bicycleAccessible, to: newValue) }
+  }
+  
+  var isWheelchairAccessible: Bool {
+    get { Flag(rawValue: flags).contains(.wheelchairAccessible) }
+    set { set(.wheelchairAccessible, to: newValue) }
+  }
+
+  var isWheelchairInaccessible: Bool {
+    get { Flag(rawValue: flags).contains(.wheelchairInaccessible) }
+    set { set(.wheelchairInaccessible, to: newValue) }
+  }
+
+
+}
+
+// MARK: - Accessors
+
+extension Service {
+  
+  public func allAlerts() -> [Alert] {
+    guard let hashCodes = alertHashCodes, let context = managedObjectContext else { return [] }
+    return hashCodes
+      .compactMap { Alert.fetch(withHashCode: $0, inTripKitContext: context) }
+      .sorted { $0.severity.intValue > $1.severity.intValue }
+  }
   
   @objc public var region: TKRegion? {
     if let visit = visits?.first {

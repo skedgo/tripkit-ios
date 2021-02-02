@@ -9,9 +9,9 @@
 #import "TKCalendarManager.h"
 
 #import "TKTripKit.h"
-#import "TripKit/TripKit-Swift.h"
-
+#import "TKStyleManager.h"
 #import "TKAutocompletionResult.h"
+#import "NSDate+Helpers.h"
 
 typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
 
@@ -192,7 +192,7 @@ typedef void (^SGCalendarResultsBlock)(NSString *string, NSArray *results);
 
 - (NSString *)authorizationAlertText
 {
-  return NSLocalizedStringFromTableInBundle(@"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature.", @"Shared", [TKStyleManager bundle], @"Calendar authorisation needed text");
+  return NSLocalizedStringFromTableInBundle(@"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature.", @"Shared", [TKTripKit bundle], @"Calendar authorisation needed text");
 }
 
 @end

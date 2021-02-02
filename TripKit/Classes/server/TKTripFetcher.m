@@ -101,14 +101,7 @@
         }
       }];
     } else if (! error) {
-        // No new data (but also no error
-      [TKLog debug:NSStringFromClass([self class]) block:^NSString * _Nonnull{
-        __block NSString *result = nil;
-        [trip.managedObjectContext performBlockAndWait:^{
-          result = [NSString stringWithFormat:@"No update for trip (%ld): %@", (long)trip.tripGroup.visibility, [trip debugString]];
-        }];
-        return result;
-      }];
+      // No new data (but also no error)
       if (completion) {
         completion(trip, NO);
       }
@@ -176,8 +169,6 @@
       [paras setValue:@(YES) forKey:pair[0]];
     } else if (pair.count == 2) {
       [paras setValue:pair[1] forKey:pair[0]];
-    } else {
-      [TKLog info:@"TKRouter" text:[NSString stringWithFormat:@"Unknown option: %@", option]];
     }
   }
   

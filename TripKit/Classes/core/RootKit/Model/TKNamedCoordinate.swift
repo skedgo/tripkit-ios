@@ -29,7 +29,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
       // this will call the lazy placemark getter, which will set the address
       guard _address == nil, let placemark = self.placemark else { return _address }
       
-      _address = TKLocationHelper.address(for: placemark)
+      _address = placemark.address()
       return _address
     }
     set {
@@ -52,7 +52,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
       guard let placemark = placemarks?.first else { return }
       
       self._placemark = placemark
-      self._address = TKLocationHelper.address(for: placemark)
+      self._address = placemark.address()
       
       // KVO
       if self.name != nil {
@@ -105,7 +105,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   @objc public init(placemark: CLPlacemark) {
     coordinate = placemark.location?.coordinate ?? kCLLocationCoordinate2DInvalid
     name = TKLocationHelper.name(from: placemark)
-    _address = TKLocationHelper.address(for: placemark)
+    _address = placemark.address()
     _placemark = placemark
   }
   
@@ -253,6 +253,13 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     aCoder.encode(data, forKey: "data")
   }
 
+}
+
+fileprivate extension CLPlacemark {
+  func address() -> String? {
+    TKAddressFormatter.singleLineAddress(for: self)
+      ?? TKLocationHelper.address(for: self) // Deprecated fall-back using Australian standard
+  }
 }
 
 extension TKNamedCoordinate {

@@ -9,7 +9,6 @@
 #import "NSUserDefaults+SharedDefaults.h"
 
 #import "TKConfig.h"
-#import "TripKit/TripKit-Swift.h"
 
 @implementation NSUserDefaults (SharedDefaults)
 

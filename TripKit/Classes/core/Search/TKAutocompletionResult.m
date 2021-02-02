@@ -10,7 +10,6 @@
 
 #import "TKRootKit.h"
 #import "TKTripKit.h"
-#import "TripKit/TripKit-Swift.h"
 
 @implementation NSString (Matches)
 

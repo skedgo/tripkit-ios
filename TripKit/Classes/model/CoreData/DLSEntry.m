@@ -8,7 +8,8 @@
 
 #import "DLSEntry.h"
 
-#import <TripKit/TripKit-Swift.h>
+#import "NSManagedObjectContext+SimpleFetch.h"
+#import "TKEnums.h"
 
 @implementation DLSEntry
 

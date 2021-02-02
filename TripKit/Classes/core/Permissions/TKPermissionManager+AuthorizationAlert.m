@@ -8,10 +8,8 @@
 
 #import "TKPermissionManager+AuthorizationAlert.h"
 
+#import "TKTripKit.h"
 #import "TKActions.h"
-#import "TKStyleManager.h"
-
-#import "TripKit/TripKit-Swift.h"
 
 #if TARGET_OS_IPHONE
 
@@ -67,7 +65,7 @@
       break;
       
     case TKAuthorizationStatusRestricted:
-      message = NSLocalizedStringFromTableInBundle(@"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.", @"Shared", [TKStyleManager bundle], @"Authorization restricted alert message");
+      message = NSLocalizedStringFromTableInBundle(@"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.", @"Shared", [TKTripKit bundle], @"Authorization restricted alert message");
       break;
       
     default:
@@ -76,15 +74,15 @@
   }
   
   
-  TKActions *alert = [[TKActions alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Authorisation needed", @"Shared", [TKStyleManager bundle], @"Authorisation needed title")];
+  TKActions *alert = [[TKActions alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Authorisation needed", @"Shared", [TKTripKit bundle], @"Authorisation needed title")];
   alert.message = message;
 
   if (self.openSettingsHandler) {
     alert.hasCancel = YES;
-    [alert addAction:Loc.OpenSettings handler:self.openSettingsHandler];
+    [alert addAction:NSLocalizedStringFromTableInBundle(@"Open Settings", @"Shared", [TKTripKit bundle], "Button that goes to the Setting's app") handler:self.openSettingsHandler];
   } else {
     alert.hasCancel = NO;
-    [alert addAction:Loc.OK handler:nil];
+    [alert addAction:NSLocalizedStringFromTableInBundle(@"OK", @"Shared", [TKTripKit bundle], "OK action") handler:nil];
   }
   
   // make sure to to show this on the main thread
