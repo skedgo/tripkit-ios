@@ -47,7 +47,8 @@ extension TKRoutingParser {
       return false
     }
     
-    if let start = start, let named = TKNamedCoordinate.namedCoordinate(for: start) {
+    if let start = start, start.coordinate.isValid {
+      let named = TKNamedCoordinate.namedCoordinate(for: start)
       request.fromLocation = named
     } else if let json = queryJSON?["from"] as? [String: Any], let from = TKParserHelper.namedCoordinate(for: json) {
       request.fromLocation = from
@@ -56,7 +57,8 @@ extension TKRoutingParser {
       guard let start = segment.start?.coordinate else { return false }
       request.fromLocation = TKNamedCoordinate(coordinate: start)
     }
-    if let end = end, let named = TKNamedCoordinate.namedCoordinate(for: end) {
+    if let end = end, end.coordinate.isValid {
+      let named = TKNamedCoordinate.namedCoordinate(for: end)
       request.toLocation = named
     } else if let json = queryJSON?["to"] as? [String: Any], let to = TKParserHelper.namedCoordinate(for: json) {
       request.toLocation = to

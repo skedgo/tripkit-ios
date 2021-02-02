@@ -104,16 +104,14 @@ public class TKUIResultsFetcher {
 fileprivate extension TripRequest {
   
   var usesCurrentLocation: Bool {
-    let placeholder = TKLocationManager.shared.currentLocation
-    return fromLocation === placeholder || toLocation === placeholder
+    !fromLocation.coordinate.isValid || !toLocation.coordinate.isValid
   }
   
   func override(currentLocation: CLLocation) {
-    let placeholder = TKLocationManager.shared.currentLocation
-    if fromLocation === placeholder {
+    if !fromLocation.coordinate.isValid {
       fromLocation = TKUIResultsFetcher.replacementHandler(currentLocation)
     }
-    if toLocation === placeholder {
+    if !toLocation.coordinate.isValid {
       toLocation = TKUIResultsFetcher.replacementHandler(currentLocation)
     }
   }

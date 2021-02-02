@@ -46,7 +46,8 @@ public class TKParserHelper: NSObject {
   @objc(requestStringForAnnotation:)
   public class func requestString(for annotation: MKAnnotation) -> String {
     
-    guard let named = TKNamedCoordinate.namedCoordinate(for: annotation), let address = named.address else {
+    let named = TKNamedCoordinate.namedCoordinate(for: annotation)
+    guard annotation.coordinate.isValid, let address = named.address else {
       return requestString(for: annotation.coordinate)
     }
     
@@ -63,10 +64,11 @@ public class TKParserHelper: NSObject {
   
   @objc(dictionaryForAnnotation:)
   public class func dictionary(for annotation: MKAnnotation) -> [AnyHashable: Any] {
-    guard let named = TKNamedCoordinate.namedCoordinate(for: annotation) else {
+    guard annotation.coordinate.isValid else {
       return dictionary(for: annotation.coordinate)
     }
     
+    let named = TKNamedCoordinate.namedCoordinate(for: annotation)
     var dict = dictionary(for: annotation.coordinate)
     dict["name"] = named.name
     dict["address"] = named.address

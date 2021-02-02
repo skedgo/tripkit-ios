@@ -76,18 +76,13 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   @objc public var isSuburb: Bool = false
   
-  /// - note: Fails if annotation does not have a valid coordinate.
   @objc(namedCoordinateForAnnotation:)
-  public static func namedCoordinate(for annotation: MKAnnotation) -> TKNamedCoordinate? {
+  public static func namedCoordinate(for annotation: MKAnnotation) -> TKNamedCoordinate {
     if let named = annotation as? TKNamedCoordinate {
       return named
     }
     
     let coordinate = annotation.coordinate
-    guard coordinate.isValid else {
-      return nil
-    }
-    
     if let name = annotation.title ?? nil,
        let address = annotation.subtitle ?? nil {
       return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address)

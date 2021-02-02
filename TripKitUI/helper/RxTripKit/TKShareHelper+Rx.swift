@@ -197,10 +197,7 @@ extension MKAnnotation {
       return .just(self)
     }
     
-    guard let geocodable = TKNamedCoordinate.namedCoordinate(for: self) else {
-      return .error(TKShareHelper.ExtractionError.invalidCoordinate)
-    }
-    
+    let geocodable = TKNamedCoordinate.namedCoordinate(for: self)
     return TKGeocoderHelper.rx.geocode(geocodable, using: geocoder, near: .world)
       .asObservable()
       .compactMap { [weak self] _ in self }

@@ -80,8 +80,8 @@ extension TripRequest {
   public static func insert(from start: MKAnnotation, to end: MKAnnotation, for time: Date?, timeType: TKTimeType, into context: NSManagedObjectContext) -> TripRequest {
     
     let request = insertEmpty(into: context)
-    request.fromLocation = TKNamedCoordinate.namedCoordinate(for: start)!
-    request.toLocation = TKNamedCoordinate.namedCoordinate(for: end)!
+    request.fromLocation = TKNamedCoordinate.namedCoordinate(for: start)
+    request.toLocation = TKNamedCoordinate.namedCoordinate(for: end)
     
     request.setTime(time, for: timeType)
     if timeType == .leaveASAP {

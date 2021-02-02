@@ -13,10 +13,11 @@ extension TKSegment {
   public func insertRequestStartingHere() -> TripRequest {
     guard
       let start = start,
-      let departure = TKNamedCoordinate.namedCoordinate(for: start),
+      start.coordinate.isValid,
       let moc = trip.managedObjectContext
       else { preconditionFailure() }
     
+    let departure = TKNamedCoordinate.namedCoordinate(for: start)
     return TripRequest.insert(
       from: departure, to: trip.request.toLocation,
       for: departureTime, timeType: .leaveAfter,
