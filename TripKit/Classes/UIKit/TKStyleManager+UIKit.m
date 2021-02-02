@@ -6,7 +6,7 @@
 //
 //
 
-#if TARGET_OS_IPHONE
+//#if TARGET_OS_IPHONE
 
 #import "TKStyleManager+UIKit.h"
 
@@ -64,4 +64,4 @@
 
 @end
 
-#endif
+//#endif

@@ -37,7 +37,11 @@ public class TKUISemaphoreView: _TKUISemaphoreView {
   
   private weak var modeImageView: UIImageView!
   
-  public init(annotation: MKAnnotation, reuseIdentifier: String?, withHeading heading: CLLocationDirection = 0) {
+  public convenience override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+    self.init(annotation: annotation, reuseIdentifier: reuseIdentifier, withHeading: 0)
+  }
+  
+  public init(annotation: MKAnnotation?, reuseIdentifier: String?, withHeading heading: CLLocationDirection = 0) {
     
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     
