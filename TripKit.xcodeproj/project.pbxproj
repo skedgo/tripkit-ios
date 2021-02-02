@@ -43,6 +43,31 @@
 		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
 		3A1F72E825C7E5E400C72CEE /* KingfisherStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72E725C7E5E400C72CEE /* KingfisherStatic */; };
 		3A1F72F125C7E63400C72CEE /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72F025C7E63400C72CEE /* TGCardViewController */; };
+		3A1F741525C8F56200C72CEE /* HotObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73F525C8F56200C72CEE /* HotObservable.swift */; };
+		3A1F741625C8F56200C72CEE /* TestableObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73F625C8F56200C72CEE /* TestableObservable.swift */; };
+		3A1F741725C8F56200C72CEE /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73F725C8F56200C72CEE /* Recorded+Event.swift */; };
+		3A1F741825C8F56200C72CEE /* Any+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73F825C8F56200C72CEE /* Any+Equatable.swift */; };
+		3A1F741925C8F56200C72CEE /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73FB25C8F56200C72CEE /* Bag.swift */; };
+		3A1F741A25C8F56200C72CEE /* Event+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73FC25C8F56200C72CEE /* Event+Equatable.swift */; };
+		3A1F741B25C8F56200C72CEE /* TestableObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73FD25C8F56200C72CEE /* TestableObserver.swift */; };
+		3A1F741C25C8F56200C72CEE /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73FE25C8F56200C72CEE /* Subscription.swift */; };
+		3A1F741D25C8F56200C72CEE /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F73FF25C8F56200C72CEE /* Deprecated.swift */; };
+		3A1F741E25C8F56200C72CEE /* Recorded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740025C8F56200C72CEE /* Recorded.swift */; };
+		3A1F741F25C8F56200C72CEE /* XCTest+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740125C8F56200C72CEE /* XCTest+Rx.swift */; };
+		3A1F742025C8F56200C72CEE /* ColdObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740225C8F56200C72CEE /* ColdObservable.swift */; };
+		3A1F742225C8F56200C72CEE /* RxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740425C8F56200C72CEE /* RxTest.swift */; };
+		3A1F742325C8F56200C72CEE /* TestSchedulerVirtualTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740625C8F56200C72CEE /* TestSchedulerVirtualTimeConverter.swift */; };
+		3A1F742425C8F56200C72CEE /* TestScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740725C8F56200C72CEE /* TestScheduler.swift */; };
+		3A1F742525C8F56200C72CEE /* Platform.Darwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740A25C8F56200C72CEE /* Platform.Darwin.swift */; };
+		3A1F742625C8F56200C72CEE /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740B25C8F56200C72CEE /* AtomicInt.swift */; };
+		3A1F742725C8F56200C72CEE /* Platform.Linux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740C25C8F56200C72CEE /* Platform.Linux.swift */; };
+		3A1F742825C8F56200C72CEE /* RecursiveLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740D25C8F56200C72CEE /* RecursiveLock.swift */; };
+		3A1F742A25C8F56200C72CEE /* BlockingObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F740F25C8F56200C72CEE /* BlockingObservable.swift */; };
+		3A1F742B25C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F741025C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift */; };
+		3A1F742C25C8F56300C72CEE /* RunLoopLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F741125C8F56200C72CEE /* RunLoopLock.swift */; };
+		3A1F742D25C8F56300C72CEE /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F741225C8F56200C72CEE /* Resources.swift */; };
+		3A1F742F25C8F56300C72CEE /* BlockingObservable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F741425C8F56200C72CEE /* BlockingObservable+Operators.swift */; };
+		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A201F2123BB86A600763948 /* TKUISegmentImpossibleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */; };
 		3A201F2223BB86A600763948 /* TKUISegmentImpossibleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */; };
 		3A201F2423BB931A00763948 /* TKSegment+AlternativeRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */; };
@@ -974,6 +999,30 @@
 		3A1F72BA25C7D81900C72CEE /* TKStyleManager+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKStyleManager+UIKit.swift"; sourceTree = "<group>"; };
 		3A1F72C125C7D89A00C72CEE /* UIColor+TripKitDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TripKitDefault.swift"; sourceTree = "<group>"; };
 		3A1F72C225C7D89A00C72CEE /* UIColor+TripKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TripKit.swift"; sourceTree = "<group>"; };
+		3A1F73F525C8F56200C72CEE /* HotObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotObservable.swift; sourceTree = "<group>"; };
+		3A1F73F625C8F56200C72CEE /* TestableObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObservable.swift; sourceTree = "<group>"; };
+		3A1F73F725C8F56200C72CEE /* Recorded+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recorded+Event.swift"; sourceTree = "<group>"; };
+		3A1F73F825C8F56200C72CEE /* Any+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Any+Equatable.swift"; sourceTree = "<group>"; };
+		3A1F73FB25C8F56200C72CEE /* Bag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
+		3A1F73FC25C8F56200C72CEE /* Event+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+Equatable.swift"; sourceTree = "<group>"; };
+		3A1F73FD25C8F56200C72CEE /* TestableObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObserver.swift; sourceTree = "<group>"; };
+		3A1F73FE25C8F56200C72CEE /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		3A1F73FF25C8F56200C72CEE /* Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
+		3A1F740025C8F56200C72CEE /* Recorded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorded.swift; sourceTree = "<group>"; };
+		3A1F740125C8F56200C72CEE /* XCTest+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Rx.swift"; sourceTree = "<group>"; };
+		3A1F740225C8F56200C72CEE /* ColdObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColdObservable.swift; sourceTree = "<group>"; };
+		3A1F740425C8F56200C72CEE /* RxTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTest.swift; sourceTree = "<group>"; };
+		3A1F740625C8F56200C72CEE /* TestSchedulerVirtualTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSchedulerVirtualTimeConverter.swift; sourceTree = "<group>"; };
+		3A1F740725C8F56200C72CEE /* TestScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScheduler.swift; sourceTree = "<group>"; };
+		3A1F740A25C8F56200C72CEE /* Platform.Darwin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Darwin.swift; sourceTree = "<group>"; };
+		3A1F740B25C8F56200C72CEE /* AtomicInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
+		3A1F740C25C8F56200C72CEE /* Platform.Linux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Linux.swift; sourceTree = "<group>"; };
+		3A1F740D25C8F56200C72CEE /* RecursiveLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveLock.swift; sourceTree = "<group>"; };
+		3A1F740F25C8F56200C72CEE /* BlockingObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingObservable.swift; sourceTree = "<group>"; };
+		3A1F741025C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+Blocking.swift"; sourceTree = "<group>"; };
+		3A1F741125C8F56200C72CEE /* RunLoopLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopLock.swift; sourceTree = "<group>"; };
+		3A1F741225C8F56200C72CEE /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		3A1F741425C8F56200C72CEE /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
 		3A201F1F23BB86A500763948 /* TKUISegmentImpossibleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentImpossibleCell.xib; sourceTree = "<group>"; };
 		3A201F2023BB86A600763948 /* TKUISegmentImpossibleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentImpossibleCell.swift; sourceTree = "<group>"; };
 		3A201F2323BB931A00763948 /* TKSegment+AlternativeRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+AlternativeRoutes.swift"; sourceTree = "<group>"; };
@@ -1661,6 +1710,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */,
 				3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1690,6 +1740,85 @@
 				3A1F729A25C7D6AD00C72CEE /* UIFont+CustomFonts.m */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		3A1F73F325C8F56200C72CEE /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F73F425C8F56200C72CEE /* RxTest */,
+				3A1F740825C8F56200C72CEE /* RxBlocking */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		3A1F73F425C8F56200C72CEE /* RxTest */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F73F525C8F56200C72CEE /* HotObservable.swift */,
+				3A1F73F625C8F56200C72CEE /* TestableObservable.swift */,
+				3A1F73F725C8F56200C72CEE /* Recorded+Event.swift */,
+				3A1F73F825C8F56200C72CEE /* Any+Equatable.swift */,
+				3A1F73F925C8F56200C72CEE /* Platform */,
+				3A1F73FC25C8F56200C72CEE /* Event+Equatable.swift */,
+				3A1F73FD25C8F56200C72CEE /* TestableObserver.swift */,
+				3A1F73FE25C8F56200C72CEE /* Subscription.swift */,
+				3A1F73FF25C8F56200C72CEE /* Deprecated.swift */,
+				3A1F740025C8F56200C72CEE /* Recorded.swift */,
+				3A1F740125C8F56200C72CEE /* XCTest+Rx.swift */,
+				3A1F740225C8F56200C72CEE /* ColdObservable.swift */,
+				3A1F740425C8F56200C72CEE /* RxTest.swift */,
+				3A1F740525C8F56200C72CEE /* Schedulers */,
+			);
+			path = RxTest;
+			sourceTree = "<group>";
+		};
+		3A1F73F925C8F56200C72CEE /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F73FA25C8F56200C72CEE /* DataStructures */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		3A1F73FA25C8F56200C72CEE /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F73FB25C8F56200C72CEE /* Bag.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		3A1F740525C8F56200C72CEE /* Schedulers */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F740625C8F56200C72CEE /* TestSchedulerVirtualTimeConverter.swift */,
+				3A1F740725C8F56200C72CEE /* TestScheduler.swift */,
+			);
+			path = Schedulers;
+			sourceTree = "<group>";
+		};
+		3A1F740825C8F56200C72CEE /* RxBlocking */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F740925C8F56200C72CEE /* Platform */,
+				3A1F740F25C8F56200C72CEE /* BlockingObservable.swift */,
+				3A1F741025C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift */,
+				3A1F741125C8F56200C72CEE /* RunLoopLock.swift */,
+				3A1F741225C8F56200C72CEE /* Resources.swift */,
+				3A1F741425C8F56200C72CEE /* BlockingObservable+Operators.swift */,
+			);
+			path = RxBlocking;
+			sourceTree = "<group>";
+		};
+		3A1F740925C8F56200C72CEE /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F740A25C8F56200C72CEE /* Platform.Darwin.swift */,
+				3A1F740B25C8F56200C72CEE /* AtomicInt.swift */,
+				3A1F740C25C8F56200C72CEE /* Platform.Linux.swift */,
+				3A1F740D25C8F56200C72CEE /* RecursiveLock.swift */,
+			);
+			path = Platform;
 			sourceTree = "<group>";
 		};
 		3A21A4B12069057D005F411D /* UI */ = {
@@ -2159,6 +2288,7 @@
 		3AA3CE82202CD4D100E54859 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3A1F73F325C8F56200C72CEE /* vendor */,
 				3AA3CE9E202CD4D100E54859 /* Data */,
 				3AA3CE93202CD4D100E54859 /* parsing */,
 				3AA3CE87202CD4D100E54859 /* restoration */,
@@ -3072,7 +3202,6 @@
 				3AB6C6261D1CD0060089F687 /* Sources */,
 				3AB6C6271D1CD0060089F687 /* Frameworks */,
 				3AB6C6281D1CD0060089F687 /* Resources */,
-				3AE194E7202DE35E0007B49B /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3082,6 +3211,8 @@
 				3AB6C62D1D1CD0060089F687 /* PBXTargetDependency */,
 			);
 			name = TripKitTests;
+			packageProductDependencies = (
+			);
 			productName = TripKitTests;
 			productReference = 3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -3093,7 +3224,6 @@
 				3ACF479D229EEDFE0096860D /* Sources */,
 				3ACF479E229EEDFE0096860D /* Frameworks */,
 				3ACF479F229EEDFE0096860D /* Resources */,
-				3ACF47C0229EF0C40096860D /* Copy Carthage Frameworks */,
 				3A1777AE232C17560093D495 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -3332,61 +3462,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3ACF47C0229EF0C40096860D /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_PLATFORM)/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_PLATFORM)/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_PLATFORM)/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_PLATFORM)/TGCardViewController.framework",
-				"$(SRCROOT)/Carthage/Build/$(CARTHAGE_PLATFORM)/RxRelay.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TGCardViewController.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		3AE194E7202DE35E0007B49B /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/TGCardViewController.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxTest.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TGCardViewController.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A6DF06B202C8C6E0084CB2C /* Sources */ = {
@@ -4037,31 +4112,55 @@
 			files = (
 				3AA3CEB1202CD4D100E54859 /* TKLocationRestorationTest.swift in Sources */,
 				3AA3CEBB202CD4D100E54859 /* TKBookingDecodingTest.swift in Sources */,
+				3A1F741725C8F56200C72CEE /* Recorded+Event.swift in Sources */,
 				3AA3CEB8202CD4D100E54859 /* TKRouterTest.swift in Sources */,
+				3A1F741C25C8F56200C72CEE /* Subscription.swift in Sources */,
 				3AA3CEBC202CD4D100E54859 /* TKJSONSanitizerTest.swift in Sources */,
 				3AA3CEB5202CD4D100E54859 /* TKGeocoderTest.swift in Sources */,
 				3AA3CEB2202CD4D100E54859 /* TKGeoJSONTest.swift in Sources */,
+				3A1F741525C8F56200C72CEE /* HotObservable.swift in Sources */,
+				3A1F742225C8F56200C72CEE /* RxTest.swift in Sources */,
 				3AA3CEBD202CD4D100E54859 /* TKPolylineDecoderTest.swift in Sources */,
+				3A1F742425C8F56200C72CEE /* TestScheduler.swift in Sources */,
 				3A65B93322F5E32E001ACDEB /* TKUIModePickerTest.swift in Sources */,
 				3AA800FD218743BC008CFB6D /* TKBookingAvailabilityTest.swift in Sources */,
 				3AA3CEB9202CD4D100E54859 /* TKAlertModelTest.swift in Sources */,
 				3AA3CEB7202CD4D100E54859 /* TKWaypointRouterTest.swift in Sources */,
+				3A1F742F25C8F56300C72CEE /* BlockingObservable+Operators.swift in Sources */,
 				3A218773228C5B7500B44B96 /* TKAutocompletionRaceTest.swift in Sources */,
+				3A1F741925C8F56200C72CEE /* Bag.swift in Sources */,
 				3AE6077920FF4BB7006D59B0 /* TKPeliasTitleTest.swift in Sources */,
 				3AA3CEC2202CD4D100E54859 /* TKDeparturesModelTest.swift in Sources */,
 				3AA3CEB4202CD4D100E54859 /* TKAutocompletionResultTest.m in Sources */,
+				3A1F741A25C8F56200C72CEE /* Event+Equatable.swift in Sources */,
+				3A1F741F25C8F56200C72CEE /* XCTest+Rx.swift in Sources */,
+				3A1F742D25C8F56300C72CEE /* Resources.swift in Sources */,
 				3A8A542923955B71006A390F /* TKUITripOverviewViewModelTest.swift in Sources */,
+				3A1F742725C8F56200C72CEE /* Platform.Linux.swift in Sources */,
 				3A4A180D22BCCC8800CAFEC0 /* TKUIPolylineRendererStabilityTest.swift in Sources */,
 				3AA3CEB0202CD4D100E54859 /* TKShareHelperTest.swift in Sources */,
+				3A1F742B25C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift in Sources */,
+				3A1F742825C8F56200C72CEE /* RecursiveLock.swift in Sources */,
 				3AC01ADE2360435600B54484 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */,
+				3A1F741D25C8F56200C72CEE /* Deprecated.swift in Sources */,
 				3AA3CEC0202CD4D100E54859 /* TKBuzzInfoProviderTest.swift in Sources */,
+				3A1F742A25C8F56200C72CEE /* BlockingObservable.swift in Sources */,
+				3A1F742525C8F56200C72CEE /* Platform.Darwin.swift in Sources */,
 				3A21A4B32069057D005F411D /* TKUISectionedAlertsTest.swift in Sources */,
 				3AA3CEB3202CD4D100E54859 /* TKAnnotationClusterer.swift in Sources */,
 				3AA3CEBF202CD4D100E54859 /* TKRegionManagerTest.swift in Sources */,
+				3A1F741E25C8F56200C72CEE /* Recorded.swift in Sources */,
+				3A1F741B25C8F56200C72CEE /* TestableObserver.swift in Sources */,
 				3AA3CEB6202CD4D100E54859 /* TKTestCase.swift in Sources */,
+				3A1F741625C8F56200C72CEE /* TestableObservable.swift in Sources */,
+				3A1F742C25C8F56300C72CEE /* RunLoopLock.swift in Sources */,
 				3AA3CEBE202CD4D100E54859 /* TKLocationInfoTest.swift in Sources */,
+				3A1F742625C8F56200C72CEE /* AtomicInt.swift in Sources */,
+				3A1F741825C8F56200C72CEE /* Any+Equatable.swift in Sources */,
 				3AA3CEBA202CD4D100E54859 /* TKModeHelperTest.swift in Sources */,
+				3A1F742325C8F56200C72CEE /* TestSchedulerVirtualTimeConverter.swift in Sources */,
 				3A25C95724CB02490007E46C /* TKSettingsTest.swift in Sources */,
+				3A1F742025C8F56200C72CEE /* ColdObservable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

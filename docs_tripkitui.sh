@@ -4,7 +4,7 @@
 (
   sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKitUI-iOS -sdk iphonesimulator > docs/jazzy-temp.TKUISwift.json
 
-  # This isn't quite working yet
+  # This isn't quite working yet, but we don't have much Objective-C left anyway
 #   sourcekitten doc --objc $(pwd)/TripKitUI/TripKitUIUmbrella.h \
 #       -- -x objective-c  -isysroot $(xcrun --show-sdk-path --sdk iphonesimulator) \
 #       -I $(pwd)/TripKitUI/deprecated \

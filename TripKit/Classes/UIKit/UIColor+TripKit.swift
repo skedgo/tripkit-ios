@@ -6,6 +6,8 @@
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
+
 import Foundation
 
 extension UIColor {
@@ -80,3 +82,5 @@ extension UIColor {
   @objc public static var tkNeutral5: UIColor = .tripgoNeutral5
   
 }
+
+#endif

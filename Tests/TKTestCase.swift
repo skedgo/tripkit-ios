@@ -11,7 +11,6 @@ import XCTest
 import CoreData
 
 import RxSwift
-import RxBlocking
 
 @testable import TripKit
 

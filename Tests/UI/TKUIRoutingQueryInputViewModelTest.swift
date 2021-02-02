@@ -11,9 +11,6 @@ import XCTest
 import RxSwift
 import RxCocoa
 
-import RxTest
-import RxBlocking
-
 @testable import TripKitUI
 
 class TKUIRoutingQueryInputViewModelTest: XCTestCase {

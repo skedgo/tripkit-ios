@@ -6,6 +6,8 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
+
 import UIKit
 
 // MARK: - Default Styles
@@ -151,3 +153,4 @@ extension TKStyleManager {
   
 }
 
+#endif

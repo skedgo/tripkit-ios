@@ -8,8 +8,6 @@
 
 import XCTest
 
-import RxBlocking
-
 @testable import TripKit
 
 class TKShareHelperTest: XCTestCase {

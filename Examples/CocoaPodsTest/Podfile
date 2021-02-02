@@ -1,6 +1,9 @@
 platform :ios, '12.4'
 use_frameworks!
 
+# While this isn't yet released...
+pod 'TGCardViewController', :git => 'https://gitlab.com/SkedGo/iOS/TGCardViewController.git', :branch => 'spm'
+
 target 'CocoaPodsTest' do
   pod 'TripKit', :path => '../../'
   pod 'TripKitUI', :path => '../../'

@@ -6,6 +6,8 @@
 //
 //
 
+#if TARGET_OS_IPHONE
+
 #import "UIFont+CustomFonts.h"
 
 #import "TKConfig.h"
@@ -46,3 +48,5 @@
 }
 
 @end
+
+#endif

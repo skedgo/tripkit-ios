@@ -10,7 +10,6 @@ import XCTest
 
 import RxSwift
 import RxCocoa
-import RxTest
 
 @testable import TripKitUI
 

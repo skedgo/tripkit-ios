@@ -6,6 +6,8 @@
 //
 //
 
+#if TARGET_OS_IPHONE
+
 @import UIKit;
 
 #import "TKStyleManager.h"
@@ -49,3 +51,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

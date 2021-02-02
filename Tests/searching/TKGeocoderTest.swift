@@ -10,7 +10,6 @@ import XCTest
 import MapKit
 
 import RxSwift
-import RxBlocking
 
 @testable import TripKit
 

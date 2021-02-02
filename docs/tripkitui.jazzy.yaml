@@ -3,7 +3,7 @@ author_url: https://skedgo.com
 title: SkedGo's TripKit iOS - TripKitUI iOS
 theme: fullwidth
 output: source/TripKitUI
-hide_documentation_coverage: true # falsely reports 100%
+hide_documentation_coverage: false
 
 module: TripKitUI
 podspec: ../TripKitUI.podspec
@@ -11,8 +11,15 @@ podspec: ../TripKitUI.podspec
 exclude:
   - /*/TripKitUI/helper/Categories/*
   - /*/TripKitUI/view model/*
+  - /*/TripKitUI/vendor/Differentiator/*
+  - /*/TripKitUI/vendor/RxDataSources/*
 
 custom_categories:
+  - name: Home
+    children:
+      - TKUIHomeViewController
+      - TKUIHomeCard
+      - TKUIHomeCardSearchResultsDelegate
   - name: Trip Planning
     children:
       - TKUIRoutingResultsViewController
@@ -21,11 +28,11 @@ custom_categories:
       - TKUIRoutingResultsCardDelegate
       - TKUIRoutingQueryInputCard
       - TKUIRoutingQueryInputCardDelegate
+      - TKUITripOverviewViewController
       - TKUITripOverviewCard
       - TKUITripModeByModeViewController
       - TKUITripModeByModeViewControllerDelegate
       - TKUITripModeByModeCard
-      - TKUITripModeByModeCardDelegate
       - TKUITripModeByModePageBuilder
   - name: Timetables
     children:
@@ -38,3 +45,8 @@ custom_categories:
     children:
       - TKUIAutocompletionViewController
       - TKUIAutocompletionViewControllerDelegate
+  - name: Notable Classes
+    children:
+      - TKUICardAction
+      - TKUICustomization
+      - TKUIMapManager

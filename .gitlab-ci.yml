@@ -14,17 +14,8 @@ before_script:
 build_ios_base:
   stage: build
   script:
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS
     - xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
   retry: 1
-  cache:
-    key:
-      files:
-        - Cartfile.resolved
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   artifacts:
     paths:
     - build/reports/tests.html
@@ -34,68 +25,28 @@ build_ios_base:
 build_ios_ui:
   stage: build
   script:
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-  cache:
-    key: 
-      files:
-        - Cartfile.resolved
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   tags:
     - ios
 
 build_ios_interapp:
   stage: build
   script:
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-  cache:
-    key: 
-      files:
-        - Cartfile.resolved
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   tags:
     - ios
 
 build_mac_base:
   stage: build
   script:
-    - mv Cartfile.resolved Cartfile.resolved.ios
-    - mv Cartfile.resolved.macos Cartfile.resolved
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform macOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS" | xcpretty -c && exit ${PIPESTATUS[0]}
-    - mv Cartfile.resolved Cartfile.resolved.macos
-    - mv Cartfile.resolved.ios Cartfile.resolved
-  cache:
-    key:
-      files:
-        - Cartfile.resolved.macos
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   tags:
     - ios
 
 build_tripkitui_example:
   stage: examples
   script:
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c && exit ${PIPESTATUS[0]}
-  cache:
-    key:
-      files:
-        - Cartfile.resolved
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   tags:
     - ios
 
@@ -114,21 +65,22 @@ build_minimap_example:
   tags:
     - ios
 
-build_cocoapodstest_example:
-  stage: examples
-  script:
-    - cd Examples/CocoaPodsTest
-    - pod install
-    - xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-  retry: 1
-  cache:
-    key:
-      files:
-        - Examples/MiniMap/Podfile.lock
-    paths:
-      - Examples/CocoaPodsTest/Pods
-  tags:
-    - ios
+    ### Not yet compatible with the switch of TripKitUI to SPM
+# build_cocoapodstest_example:
+#   stage: examples
+#   script:
+#     - cd Examples/CocoaPodsTest
+#     - pod install
+#     - xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+#   retry: 1
+#   cache:
+#     key:
+#       files:
+#         - Examples/MiniMap/Podfile.lock
+#     paths:
+#       - Examples/CocoaPodsTest/Pods
+#   tags:
+#     - ios
 
 # code_quality:
 #   stage: deploy
@@ -155,16 +107,7 @@ pages_dryrun:
   before_script:
     - brew install sourcekitten
   script:
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS --no-use-binaries
     - ./docs.sh
-  cache:
-    key:
-      files:
-        - Cartfile.resolved
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   tags:
     - ios
   artifacts:
@@ -178,16 +121,7 @@ pages:
   before_script:
     - brew install sourcekitten
   script:
-    - export XCODE_XCCONFIG_FILE=$(pwd)/carthage.xcconfig
-    - carthage bootstrap --cache-builds --platform iOS
     - ./docs.sh
-  cache:
-    key:
-      files:
-        - Cartfile.resolved
-    paths:
-      - Carthage/Build
-      - Carthage/Checkouts
   tags:
     - ios
   artifacts:
