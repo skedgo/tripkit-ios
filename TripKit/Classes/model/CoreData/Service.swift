@@ -79,7 +79,7 @@ extension Service {
   
   private func set(_ flag: Flag, to value: Bool) {
     if value {
-      flags = Flag(rawValue: flags).intersection(flag).rawValue
+      flags = Flag(rawValue: flags).union(flag).rawValue
     } else {
       flags = Flag(rawValue: flags).subtracting(flag).rawValue
     }
