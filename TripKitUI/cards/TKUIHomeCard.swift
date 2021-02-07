@@ -235,6 +235,15 @@ extension TKUIHomeCard {
       }
       
     case let .handleSelection(annotation, component):
+      if let city = annotation as? TKRegion.City {
+        clearSearchBar()
+        
+        controller?.moveCard(to: .collapsed, animated: true)
+        
+        homeMapManager?.zoom(to: city, animated: true)
+        return
+      }
+      
       switch Self.config.selectionMode {
       case .selectOnMap:
         homeMapManager?.select(annotation)

@@ -25,13 +25,13 @@ public protocol TKUICompatibleHomeMapManager: TGCompatibleMapManager {
   /// map's mapRect changes
   var mapRect: Driver<MKMapRect> { get }
   
-  /// This returns the map view representing the map.
-  var mapView: MKMapView? { get }
-  
   /// This provides you an oppotunity to perform actions on the map when
   /// a `TKUIHomeCard` appears
   /// - Parameter appear: `true` when a home card just appeared
   func onHomeCardAppearance(_ appear: Bool)
+  
+  /// This is called when the user searches for and selects a city
+  func zoom(to city: TKRegion.City, animated: Bool)
   
   /// This allows the map manager to respond to a `TKUIHomeCard`'s request
   /// to select an annotation on the map

@@ -33,7 +33,13 @@ extension TKUIHomeViewModel {
     }
     
     let nextFromSelection = searchViewModel.selection
-      .map { TKUIHomeCardNextAction.push(TKUIRoutingResultsCard(destination: $0)) }
+      .map { annotation -> TKUIHomeCardNextAction in
+        if let city = annotation as? TKRegion.City {
+          return .handleSelection(city, component: nil)
+        } else {
+          return .push(TKUIRoutingResultsCard(destination: annotation))
+        }
+      }
     
     let nextFromAccessory = searchViewModel.accessorySelection
       .map { annotation -> TKUIHomeCardNextAction in
