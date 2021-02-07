@@ -36,6 +36,7 @@ class TKUIRoutingQueryInputViewModel {
     
     let autocompletionModel = TKUIAutocompletionViewModel(
       providers: providers,
+      includeCurrentLocation: true,
       searchText: inputs.searchText.startWith(("", forced: false)),
       selected: inputs.selected,
       biasMapRect: .just(biasMapRect)
