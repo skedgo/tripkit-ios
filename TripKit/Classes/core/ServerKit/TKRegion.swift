@@ -184,7 +184,7 @@ public class TKRegion : NSObject, Codable {
 public class TKInternationalRegion : TKRegion {
   
   fileprivate init() {
-    var modes = [
+    let modes = [
       TKTransportModeIdentifierFlight,
       TKTransportModeIdentifierRegularPublicTransport,
       TKTransportModeIdentifierCar,

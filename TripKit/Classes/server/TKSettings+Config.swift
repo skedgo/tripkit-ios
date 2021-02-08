@@ -103,7 +103,7 @@ extension TKSettings {
         bookingSandbox = true // Default to sandbox while developing
       }
       #else
-      if TKBetaHelper.isBeta(), shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+      if shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
         bookingSandbox = true
       } else {
         bookingSandbox = false

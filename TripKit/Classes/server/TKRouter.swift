@@ -428,11 +428,11 @@ extension TKRouter {
     
     switch request.at {
     case .arriveBy(let arrival):
-      paras["arriveBefore"] = arrival.timeIntervalSince1970
+      paras["arriveBefore"] = Int(arrival.timeIntervalSince1970)
     case .leaveAfter(let departure):
-      paras["departAfter"] = departure.timeIntervalSince1970
+      paras["departAfter"] = Int(departure.timeIntervalSince1970)
     case .leaveASAP:
-      paras["departAfter"] = Date().timeIntervalSince1970
+      paras["departAfter"] = Int(Date().timeIntervalSince1970)
     }
     
     if bestOnly {
