@@ -8,7 +8,6 @@
 
 #import "TKSettings.h"
 
-#import "TKBetaHelper.h"
 #import "TKConstants.h"
 #import "NSUserDefaults+SharedDefaults.h"
 

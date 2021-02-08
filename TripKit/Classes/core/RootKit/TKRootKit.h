@@ -19,8 +19,6 @@
 
 #import "TKLocationHelper.h"
 
-#import "TKBetaHelper.h"
-
 #import "TKStyleManager.h"
 
 #endif

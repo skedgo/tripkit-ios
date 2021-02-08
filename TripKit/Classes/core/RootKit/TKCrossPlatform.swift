@@ -37,9 +37,6 @@ public typealias SGAlert = TKAlertController
 public typealias SGActions = TKActions
 #endif
 
-@available(*, unavailable, renamed: "TKBetaHelper")
-public typealias SGKBetaHelper = TKBetaHelper
-
 @available(*, unavailable, renamed: "TKConfig")
 public typealias SGKConfig = TKConfig
 

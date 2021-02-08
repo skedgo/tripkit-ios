@@ -20,20 +20,10 @@ typedef void (^TKServerFullSuccessBlock)(NSInteger status, NSDictionary<NSString
 typedef void (^TKServerFailureBlock)(NSError *error);
 typedef void (^TKServerGenericBlock)(NSInteger status, NSDictionary<NSString *, id> *headers, id _Nullable responseObject, NSData * _Nullable data, NSError * _Nullable error);
 
-typedef NS_ENUM(NSInteger, TKServerType) {
-  TKServerTypeProduction = 0,
-  TKServerTypeBeta,
-  TKServerTypeLocal
-};
-
 /// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyUserToken;
 /// :nodoc:
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyServerType;
-/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
-/// :nodoc:
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 
 @class TKRegion;
 
@@ -50,9 +40,9 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 
 + (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL paras:(nullable NSDictionary *)paras;
 
-+ (NSString *)developmentServer;
++ (nullable NSString *)developmentServer;
 
-+ (void)updateDevelopmentServer:(NSString *)server;
++ (void)updateDevelopmentServer:(nullable NSString *)server;
 
 + (nullable NSString *)xTripGoVersion;
 
@@ -61,8 +51,6 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileEnableFlights;
 + (nullable NSString *)userToken;
 
 + (void)updateUserToken:(nullable NSString *)userToken;
-
-@property (nonatomic, assign) TKServerType _serverType;
 
 @property (nonatomic, copy) NSString *APIKey;
 

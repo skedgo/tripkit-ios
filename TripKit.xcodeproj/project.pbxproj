@@ -607,8 +607,6 @@
 		3ABBDABE2032135400205042 /* TKSortableAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB501F06854F00147990 /* TKSortableAnnotation.swift */; };
 		3ABBDABF2032135400205042 /* TKLocationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB511F06854F00147990 /* TKLocationHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAC02032135400205042 /* TKLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB521F06854F00147990 /* TKLocationHelper.m */; };
-		3ABBDAC22032135400205042 /* TKBetaHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB531F06854F00147990 /* TKBetaHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDAC32032135400205042 /* TKBetaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB541F06854F00147990 /* TKBetaHelper.m */; };
 		3ABBDAC42032135400205042 /* TKConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB551F06854F00147990 /* TKConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAC52032135400205042 /* TKConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB561F06854F00147990 /* TKConfig.m */; };
 		3ABBDAC62032135400205042 /* TKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E211F20DC5D00666E59 /* TKConfig.swift */; };
@@ -784,8 +782,6 @@
 		3AFFABAB1F06854F00147990 /* TKSortableAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB501F06854F00147990 /* TKSortableAnnotation.swift */; };
 		3AFFABAC1F06854F00147990 /* TKLocationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB511F06854F00147990 /* TKLocationHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABAD1F06854F00147990 /* TKLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB521F06854F00147990 /* TKLocationHelper.m */; };
-		3AFFABAE1F06854F00147990 /* TKBetaHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB531F06854F00147990 /* TKBetaHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFABAF1F06854F00147990 /* TKBetaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB541F06854F00147990 /* TKBetaHelper.m */; };
 		3AFFABB01F06854F00147990 /* TKConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB551F06854F00147990 /* TKConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABB11F06854F00147990 /* TKConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB561F06854F00147990 /* TKConfig.m */; };
 		3AFFABB31F06854F00147990 /* TKCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB581F06854F00147990 /* TKCrossPlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1572,8 +1568,6 @@
 		3AFFAB501F06854F00147990 /* TKSortableAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSortableAnnotation.swift; sourceTree = "<group>"; };
 		3AFFAB511F06854F00147990 /* TKLocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKLocationHelper.h; sourceTree = "<group>"; };
 		3AFFAB521F06854F00147990 /* TKLocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKLocationHelper.m; sourceTree = "<group>"; };
-		3AFFAB531F06854F00147990 /* TKBetaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBetaHelper.h; sourceTree = "<group>"; };
-		3AFFAB541F06854F00147990 /* TKBetaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBetaHelper.m; sourceTree = "<group>"; };
 		3AFFAB551F06854F00147990 /* TKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKConfig.h; sourceTree = "<group>"; };
 		3AFFAB561F06854F00147990 /* TKConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKConfig.m; sourceTree = "<group>"; };
 		3AFFAB581F06854F00147990 /* TKCrossPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKCrossPlatform.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -2855,8 +2849,6 @@
 				3AFFAB351F06854F00147990 /* Categories */,
 				3AFFAB4D1F06854F00147990 /* Model */,
 				3AFFAB4C1F06854F00147990 /* Loc.swift */,
-				3AFFAB531F06854F00147990 /* TKBetaHelper.h */,
-				3AFFAB541F06854F00147990 /* TKBetaHelper.m */,
 				3AFFAB551F06854F00147990 /* TKConfig.h */,
 				3AFFAB561F06854F00147990 /* TKConfig.m */,
 				3A096E211F20DC5D00666E59 /* TKConfig.swift */,
@@ -2990,7 +2982,6 @@
 				3ABBDABF2032135400205042 /* TKLocationHelper.h in Headers */,
 				3ABBDA762032133900205042 /* TKTripClassifier.h in Headers */,
 				3ABBDB142032189200205042 /* TripKit.h in Headers */,
-				3ABBDAC22032135400205042 /* TKBetaHelper.h in Headers */,
 				3ABBDAD12032135400205042 /* TKRootKit.h in Headers */,
 				3ABBDA642032132D00205042 /* TKSegmentBuilder.h in Headers */,
 				3ABBDA3A2032132D00205042 /* Alert.h in Headers */,
@@ -3055,7 +3046,6 @@
 			files = (
 				3A846B5F256F5655004D1FED /* TKTripFetcher.h in Headers */,
 				3AFFABCC1F06854F00147990 /* TKServer.h in Headers */,
-				3AFFABAE1F06854F00147990 /* TKBetaHelper.h in Headers */,
 				3AB6C6E41D1CD08E0089F687 /* StopVisits.h in Headers */,
 				3AB6C6FD1D1CD08E0089F687 /* TKBuzzRealTime.h in Headers */,
 				3AFFABAC1F06854F00147990 /* TKLocationHelper.h in Headers */,
@@ -3579,7 +3569,6 @@
 				3ABBDAC62032135400205042 /* TKConfig.swift in Sources */,
 				3ABBDA4C2032132D00205042 /* StopLocation.swift in Sources */,
 				3ABBDA6C2032133300205042 /* BaseAPIModels.swift in Sources */,
-				3ABBDAC32032135400205042 /* TKBetaHelper.m in Sources */,
 				3ABBDA512032132D00205042 /* Trip.m in Sources */,
 				3ABBDA182032132400205042 /* TKAPIToCoreDataConverter.swift in Sources */,
 				3ABBDA832032134000205042 /* TKAnnotations.swift in Sources */,
@@ -3921,7 +3910,6 @@
 				3AD62B8E2243964C00069F4E /* TKModeInfo+Image.swift in Sources */,
 				3AA03E6E1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m in Sources */,
 				3A3C9BA61F751FC300C8D476 /* API.swift in Sources */,
-				3AFFABAF1F06854F00147990 /* TKBetaHelper.m in Sources */,
 				3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */,
 				3AEB47E920DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */,
 				3AFFABAA1F06854F00147990 /* TKNamedCoordinate.swift in Sources */,

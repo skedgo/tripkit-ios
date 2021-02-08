@@ -23,7 +23,6 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 @property (nonatomic, strong) NSOperationQueue* skedGoQueryQueue;
 @property (nonatomic, copy)   NSArray<NSBundle *>* fileBundles;
 
-@property (nonatomic, assign) TKServerType lastServerType;
 @property (nonatomic, strong) NSString* lastDevelopmentServer;
 
 @end
@@ -70,20 +69,33 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 }
 
 + (NSString *)developmentServer {
-  NSString *customised = [[NSUserDefaults sharedDefaults] stringForKey:TKDefaultsKeyDevelopmentServer];
-  return customised ?: @"http://localhost:8080/satapp-debug/";
+  return [[NSUserDefaults sharedDefaults] stringForKey:TKDefaultsKeyDevelopmentServer];
 }
 
 + (void)updateDevelopmentServer:(NSString *)server {
-  if (server.length == 0) {
+  NSString *previously = [self developmentServer];
+
+  NSString *newValue = server;
+  if (newValue.length == 0) {
+    newValue = nil;
     [[NSUserDefaults sharedDefaults] removeObjectForKey:TKDefaultsKeyDevelopmentServer];
-    return;
+  } else {
+    if (![newValue hasSuffix:@"/"]) {
+      newValue = [newValue stringByAppendingString:@"/"];
+    }
+    [[NSUserDefaults sharedDefaults] setObject:newValue forKey:TKDefaultsKeyDevelopmentServer];
   }
   
-  if (![server hasSuffix:@"/"]) {
-    server = [server stringByAppendingString:@"/"];
+  if ((newValue == nil && previously != nil)
+      || (newValue != nil && previously == nil)
+      || ![newValue isEqualToString:previously]) {
+    
+    // User tokens are bound to servers, so clear those, too.
+    [TKServer updateUserToken:nil];
+    
+    // trigger updates
+    [TKServer.sharedInstance updateRegionsForced:NO];
   }
-  [[NSUserDefaults sharedDefaults] setObject:server forKey:TKDefaultsKeyDevelopmentServer];
 }
 
 #pragma mark - Network requests
@@ -300,35 +312,6 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 
 #pragma mark - Settings
 
-/**
- * This method is only used is non-production mode when the user
- * is switching servers.
- */
-- (void)updateFromSettings
-{
-  TKServerType currentType = [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyServerType];
-  NSString *developmentServer = [TKServer developmentServer];
-
-  // This method gets called tons of times, but we only want to clear existing
-  // regions if and only if user has changed server type in the Beta build.
-  if (currentType != self.lastServerType
-      || (currentType == TKServerTypeLocal && ![developmentServer isEqualToString:self.lastDevelopmentServer])) {
-    
-    // Clearing regions below will trigger a user defaults update, so we make sure we ignore it
-    self.lastServerType = currentType;
-    self.lastDevelopmentServer = developmentServer;
-    
-    // We're caching the server, so override the cache
-    TKServer.serverType = currentType;
-    
-    // User tokens are bound to servers, so clear those, too.
-    [TKServer updateUserToken:nil];
-    
-    // trigger updates
-    [self updateRegionsForced:NO];
-  }
-}
-
 - (void)updateRegionsForced:(BOOL)forceUpdate
 {
   // load all the regions
@@ -339,21 +322,10 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                 completion:(nullable void (^)(BOOL success, NSError *error))completion
 {
   NSString *regionsURLString;
-  switch ([TKServer serverType]) {
-    case TKServerTypeProduction:
-      regionsURLString = @"https://api.tripgo.com/v1/regions.json";
-      break;
-      
-    case TKServerTypeBeta:
-    {
-      NSString *baseString = [[TKConfig sharedInstance] betaServerBaseURL];
-      regionsURLString = [baseString stringByAppendingString:@"regions.json"];
-      break;
-    }
-
-    case TKServerTypeLocal:
-      regionsURLString = [[TKServer developmentServer] stringByAppendingString:@"regions.json"];
-      break;
+  if ([TKServer developmentServer]) {
+    regionsURLString = [[TKServer developmentServer] stringByAppendingString:@"regions.json"];
+  } else {
+    regionsURLString = @"https://api.tripgo.com/v1/regions.json";
   }
   
   NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -398,17 +370,6 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
   self = [super init];
   
   if (self) {
-    if ([TKBetaHelper isBeta]) {
-      // this only applies in DEBUG mode when the UI has elements to switching the backend server
-      // listen to future changes
-      NSUserDefaults *sharedDefaults = [NSUserDefaults sharedDefaults];
-      [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(updateFromSettings)
-                                                   name:NSUserDefaultsDidChangeNotification
-                                                 object:sharedDefaults];
-    }
-    
-    self.lastServerType = [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyServerType];
     self.lastDevelopmentServer = [TKServer developmentServer];
     
     self.skedGoQueryQueue = [[NSOperationQueue alloc] init];
@@ -640,41 +601,32 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
 
 - (nullable NSURL *)baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index
 {
-  switch ([TKServer serverType]) {
-    case TKServerTypeLocal: {
-      return index == 0 ? [NSURL URLWithString:[TKServer developmentServer] ] : nil;
-    }
-
-    case TKServerTypeBeta: {
-      NSString *baseURL = [[TKConfig sharedInstance] betaServerBaseURL];
-      return index == 0 ? [NSURL URLWithString:baseURL] : nil;
-    }
-      
-    case TKServerTypeProduction: {
-      if (region == nil || region.urls.count == 0) {
-        if (index == 0) {
-          return [NSURL URLWithString:@"https://api.tripgo.com/v1/"];
-        } else {
-          return nil; // no fail-over
-        }
-      }
-      
-      NSArray<NSURL *> *servers = region.urls;
-      if (servers.count <= index) {
-        return nil;
-      }
-      
-      NSURL *url = [servers objectAtIndex:index];
-      NSString *urlString = url.absoluteString;
-      
-      if (urlString.length > 0 && [urlString characterAtIndex:urlString.length - 1] != '/') {
-        urlString = [urlString stringByAppendingString:@"/"];
-        url = [NSURL URLWithString:urlString];
-      }
-      
-      return url;
+  if ([TKServer developmentServer]) {
+    return index == 0 ? [NSURL URLWithString:[TKServer developmentServer] ] : nil;
+  }
+    
+  if (region == nil || region.urls.count == 0) {
+    if (index == 0) {
+      return [NSURL URLWithString:@"https://api.tripgo.com/v1/"];
+    } else {
+      return nil; // no fail-over
     }
   }
+  
+  NSArray<NSURL *> *servers = region.urls;
+  if (servers.count <= index) {
+    return nil;
+  }
+  
+  NSURL *url = [servers objectAtIndex:index];
+  NSString *urlString = url.absoluteString;
+  
+  if (urlString.length > 0 && [urlString characterAtIndex:urlString.length - 1] != '/') {
+    urlString = [urlString stringByAppendingString:@"/"];
+    url = [NSURL URLWithString:urlString];
+  }
+  
+  return url;
 }
 
 - (NSURL *)fallbackBaseURL

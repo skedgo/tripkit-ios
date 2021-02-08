@@ -185,13 +185,11 @@ public class TKInternationalRegion : TKRegion {
   
   fileprivate init() {
     var modes = [
+      TKTransportModeIdentifierFlight,
       TKTransportModeIdentifierRegularPublicTransport,
       TKTransportModeIdentifierCar,
       TKTransportModeIdentifierMotorbike,
     ]
-    if UserDefaults.shared.bool(forKey: TKDefaultsKeyProfileEnableFlights) {
-      modes = [TKTransportModeIdentifierFlight] + modes
-    }
     super.init(asInternationalNamed: "International", modes: modes)
   }
   
