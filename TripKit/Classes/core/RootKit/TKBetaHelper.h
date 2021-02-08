@@ -12,6 +12,4 @@
 
 + (BOOL)isBeta;
 
-+ (BOOL)isDev;
-
 @end

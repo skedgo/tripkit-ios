@@ -408,7 +408,7 @@ NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
                                                  object:sharedDefaults];
     }
     
-    self.lastServerType = [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyServerType];;
+    self.lastServerType = [[NSUserDefaults sharedDefaults] integerForKey:TKDefaultsKeyServerType];
     self.lastDevelopmentServer = [TKServer developmentServer];
     
     self.skedGoQueryQueue = [[NSOperationQueue alloc] init];

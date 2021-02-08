@@ -76,10 +76,11 @@ extension TKUITripCell {
     @objc
     public func costString(costs: [NSNumber: String]) -> NSAttributedString {
       let attributed = NSMutableAttributedString()
-      if TKBetaHelper.isDev() {
-        append(costs[.score], to: attributed, color: costColor)
-        append(" ⋅ ", to: attributed, color: costColor)
-      }
+      #if DEBUG
+      append(costs[.score], to: attributed, color: costColor)
+      append(" ⋅ ", to: attributed, color: costColor)
+      #endif
+      
       if let price = costs[.price] {
         append(price, to: attributed, color: costColor)
         append(" ⋅ ", to: attributed, color: costColor)

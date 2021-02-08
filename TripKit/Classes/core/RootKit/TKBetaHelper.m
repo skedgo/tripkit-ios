@@ -19,14 +19,4 @@
 #endif
 }
 
-+ (BOOL)isDev
-{
-#ifdef DEBUG
-  return YES;
-#else
-  return NO;
-#endif
-}
-
-
 @end
