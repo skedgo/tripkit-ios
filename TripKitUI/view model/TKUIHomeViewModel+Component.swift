@@ -114,14 +114,34 @@ public protocol TKUIHomeComponentViewModel {
   /// such, it may change as other component view models are added or removed. It is best not
   /// to use the `section` property when configuring the returned cell.
   func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration?
+  
+  /// This gives a component view model an opportunity to specify what actions to display with
+  /// a home card component item when the context menu of the cell corresponding to the item
+  /// is triggered.
+  /// - Parameters:
+  ///   - item: The data model representing the cell whose context menu was triggered
+  ///   - indexPath: The index path at which the item is located
+  ///   - tableView: The table view in which the item is displayed
+  ///
+  /// Typical, this method should only return an action configuration if the component view model
+  /// is able to handle the incoming `item`.
+  ///
+  /// The `section` property of the `indexPath` parameter corresponds to the position of the
+  /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
+  /// such, it may change as other component view models are added or removed. It is best not
+  /// to use the `section` property when configuring the returned cell.
+  @available(iOS 13.0, *)
+  func contextMenuConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UIContextMenuConfiguration?
 }
 
 extension TKUIHomeComponentViewModel {
   
-  public func leadingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { return nil }
+  public func leadingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { nil }
   
-  public func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { return nil }
+  public func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { nil }
   
+  @available(iOS 13.0, *)
+  public func contextMenuConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UIContextMenuConfiguration? { nil }
 }
 
 extension TKUIHomeViewModel.Item {

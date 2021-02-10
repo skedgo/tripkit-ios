@@ -97,7 +97,7 @@ open class TKUIHomeCard: TKUITableCard {
           
         case .component(let componentItem):
           guard let cell = self.viewModel.componentViewModels.compactMap({ $0.cell(for: componentItem, at: ip, in: tv) }).first else {
-            assertionFailure(); return fallback
+            assertionFailure("No component returned a cell for \(componentItem) at \(ip)."); return fallback
           }
           return cell
         }
@@ -386,14 +386,22 @@ extension TKUIHomeCard: UITableViewDelegate {
   public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     guard let item = self.dataSource[indexPath].componentItem else { return nil }
     let configurations = self.viewModel.componentViewModels.compactMap { $0.trailingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView) }
-    assert(configurations.count == 1, "Two component view models handle the same item?")
+    assert(configurations.count <= 1, "Two component view models handle the same item?")
     return configurations.first
   }
   
   public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     guard let item = self.dataSource[indexPath].componentItem else { return nil }
-    let configurations = self.viewModel.componentViewModels.compactMap{ $0.leadingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView) }
-    assert(configurations.count == 1, "Two component view models handle the same item")
+    let configurations = self.viewModel.componentViewModels.compactMap { $0.leadingSwipeActionsConfiguration(for: item, at: indexPath, in: tableView) }
+    assert(configurations.count <= 1, "Two component view models handle the same item")
+    return configurations.first
+  }
+  
+  @available(iOS 13.0, *)
+  public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    guard let item = self.dataSource[indexPath].componentItem else { return nil }
+    let configurations = self.viewModel.componentViewModels.compactMap { $0.contextMenuConfiguration(for: item, at: indexPath, in: tableView) }
+    assert(configurations.count <= 1, "Two component view models handle the same item")
     return configurations.first
   }
   

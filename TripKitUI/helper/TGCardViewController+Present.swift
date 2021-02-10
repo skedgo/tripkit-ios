@@ -17,12 +17,12 @@ extension TGCardViewController {
     dismiss(animated: true)
   }
   
-  public func present(_ controller: UIViewController, inNavigator: Bool, preferredStyle: UIModalPresentationStyle = .popover, sender: Any? = nil) {
+  public func present(_ controller: UIViewController, inNavigator: Bool, includeDone: Bool = true, preferredStyle: UIModalPresentationStyle = .popover, sender: Any? = nil) {
     
     let presentee = inNavigator ? UINavigationController(rootViewController: controller) : controller
     let actualStyle = (sender is UIView || sender is UIBarButtonItem) ? preferredStyle : .formSheet
     
-    if inNavigator && actualStyle != .popover {
+    if inNavigator && actualStyle != .popover, includeDone {
       let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissNavigator))
       controller.navigationItem.leftBarButtonItem = doneButton
     }

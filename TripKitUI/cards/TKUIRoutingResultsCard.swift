@@ -311,7 +311,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     // Search places
     
-    
     let searchTriggers = [
         showSearch,
         titleView?.locationTapped.asObservable().map { _ in }
@@ -404,7 +403,7 @@ extension TKUIRoutingResultsCard {
       
     case .trip(let trip):
       let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
-      tripCell.configure(TKUITripCell.Model(trip))
+      tripCell.configure(trip)
       tripCell.separatorView.isHidden = !(dataSource.sectionModels[indexPath.section].items.count > 1)
       #if targetEnvironment(macCatalyst)
       tripCell.accessoryType = .disclosureIndicator
@@ -418,6 +417,12 @@ extension TKUIRoutingResultsCard {
     }
   }
   
+}
+
+extension TKUITripCell {
+  public func configure(_ trip: Trip) {
+    configure(.init(trip))
+  }
 }
 
 extension TKUITripCell.Model {
