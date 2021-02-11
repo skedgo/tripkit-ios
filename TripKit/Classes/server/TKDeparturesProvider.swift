@@ -87,7 +87,7 @@ extension TKDeparturesProvider {
     var pairIdentifieres = Set<String>()
     for embarkation in departures.embarkationStops {
       guard let startStop = candidates[embarkation.stopCode]?.first else {
-        TKLog.info("TKDeparturesProvider", text: "Got an embarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
+        TKLog.info("Got an embarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
         continue
       }
       
@@ -95,7 +95,7 @@ extension TKDeparturesProvider {
         guard
           let endStopCode = serviceModel.endStopCode,
           let endStop = candidates[endStopCode]?.first else {
-            TKLog.info("TKDeparturesProvider", text: "Got an disembarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
+            TKLog.info("Got an disembarkation but no stop to add it to: \(embarkation). Stops: \(candidates)")
             continue
         }
         

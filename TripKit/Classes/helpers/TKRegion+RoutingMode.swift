@@ -62,7 +62,7 @@ fileprivate extension TKRegionManager {
       let title = title(forModeIdentifier: modeIdentifier),
       let localImageName = TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
     else {
-      TKLog.debug("TKRegion", text: "A mode without a title or local image in regions.json: \(modeIdentifier)")
+      TKLog.debug("A mode without a title or local image in regions.json: \(modeIdentifier)")
       return nil
     }
     

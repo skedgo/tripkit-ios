@@ -104,7 +104,7 @@ extension SegmentReference {
       do {
         bookingData = try JSONDecoder().decode(BookingData.self, withJSONObject: bookingDict)
       } catch {
-        TKLog.warn(#file, text: "Could not load booking data: \(error)")
+        TKLog.warn("Could not load booking data: \(error)")
       }
     }
     

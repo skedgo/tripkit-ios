@@ -95,7 +95,13 @@ public class TKConsoleLogger: TKLogger {
   }
 
   public func output(_ level: TKLog.LogLevel, identifier: String, message: String) {
-    let shortIdentifier = identifier.prefix(10).padding(toLength: 10, withPad: " ", startingAt: 0)
+    let smartIdentifier: String
+    if (identifier as NSString).lastPathComponent.count > 0 {
+      smartIdentifier = (identifier as NSString).lastPathComponent
+    } else {
+      smartIdentifier = identifier
+    }
+    let shortIdentifier = smartIdentifier.prefix(10).padding(toLength: 10, withPad: " ", startingAt: 0)
     let message = "\(level.prefix) \(message)"
     let log = OSLog(subsystem: subsystem, category: shortIdentifier)
     os_log("%@", log: log, type: level.toOSLog, message)
@@ -144,14 +150,26 @@ public class TKLog : NSObject {
     log(identifier, level: .info, block: text)
   }
   
+  public class func info(identifier: String? = nil, _ message: @autoclosure () -> String, file: StaticString = #filePath) {
+    log(identifier ?? file.description, level: .info, block: message)
+  }
+  
   @objc(debug:block:)
   public class func debug(_ identifier: String, text: @autoclosure () -> String) {
     log(identifier, level: .debug, block: text)
   }
-  
+
+  public class func debug(identifier: String? = nil, _ message: @autoclosure () -> String, file: StaticString = #filePath) {
+    log(identifier ?? file.description, level: .debug, block: message)
+  }
+
   @objc(verbose:block:)
   public class func verbose(_ identifier: String, text: @autoclosure () -> String) {
     log(identifier, level: .verbose, block: text)
+  }
+
+  public class func verbose(identifier: String? = nil, _ message: @autoclosure () -> String, file: StaticString = #filePath) {
+    log(identifier ?? file.description, level: .verbose, block: message)
   }
   
   @objc
@@ -159,9 +177,17 @@ public class TKLog : NSObject {
     log(identifier, level: .error) { message }
   }
   
-  @objc
+  public class func error(identifier: String? = nil, _ message: @autoclosure () -> String, file: StaticString = #filePath) {
+    log(identifier ?? file.description, level: .error, block: message)
+  }
+  
+  @objc(warn:text:)
   public class func warn(_ identifier: String, text message: String) {
     log(identifier, level: .warning) { message }
+  }
+  
+  public class func warn(identifier: String? = nil, _ message: @autoclosure () -> String, file: StaticString = #filePath) {
+    log(identifier ?? file.description, level: .warning, block: message)
   }
   
   @objc(info:text:)

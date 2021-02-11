@@ -40,10 +40,10 @@ public class TKReporter {
       
       TKServer.post(url, paras: paras) { _, _, _, _, error in
         if let error = error {
-          TKLog.debug("TKReporter", text: "Planned trip encountered error: \(error)")
+          TKLog.debug("Planned trip encountered error: \(error)")
           completion?(false)
         } else {
-          TKLog.debug("TKReporter", text: "Planned trip reported successfully")
+          TKLog.debug("Planned trip reported successfully")
           completion?(true)
         }
       }
@@ -66,9 +66,9 @@ public class TKReporter {
     
     TKServer.post(url, paras: paras) { _, _, _, _, error in
       if let error = error {
-        TKLog.debug("TKReporter", text: "Progress post encountered error: \(error)")
+        TKLog.debug("Progress post encountered error: \(error)")
       } else {
-        TKLog.debug("TKReporter", text: "Progress posted successfully")
+        TKLog.debug("Progress posted successfully")
       }
     }
   }

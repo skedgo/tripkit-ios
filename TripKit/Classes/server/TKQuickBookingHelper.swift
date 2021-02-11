@@ -102,7 +102,7 @@ public enum TKQuickBookingHelper {
     TKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
       guard let array = response as? [[String: Any]], !array.isEmpty else {
         let error = error ?? NSError(code: 67123, message: "Expected an array, but got: \(String(describing: response))")
-        TKLog.warn("TKQuickBookingHelper", text: "Invalid server response: \(error)")
+        TKLog.warn("Invalid server response: \(error)")
         completion(nil, error)
         return
       }
@@ -112,7 +112,7 @@ public enum TKQuickBookingHelper {
         let bookings = try JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
         completion(bookings, nil)
       } catch {
-        TKLog.warn("TKQuickBookingHelper", text: "Could not parse quick bookings due to \(error)")
+        TKLog.warn("Could not parse quick bookings due to \(error)")
         completion(nil, error)
       }
     }

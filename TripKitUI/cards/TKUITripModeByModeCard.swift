@@ -367,7 +367,7 @@ extension TKUITripModeByModeCard {
         newCard.style = self.style
         controller?.swap(for: newCard, animated: true)
       } catch {
-        TKLog.warn("TKUITripModeByModeCard", text: "Could not rebuild due to \(error)")
+        TKLog.warn("Could not rebuild due to \(error)")
       }
     }
   }

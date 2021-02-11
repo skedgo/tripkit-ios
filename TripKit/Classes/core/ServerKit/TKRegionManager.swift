@@ -115,7 +115,7 @@ extension TKRegionManager {
       NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
 
     } catch {
-      TKLog.warn("TKRegionManager", text: "Failed to parse regions: \(error)")
+      TKLog.warn("Failed to parse regions: \(error)")
     }
   }
   

@@ -168,7 +168,7 @@ extension TKServer {
       region: region,
       success: { _, _, data in
         guard let data = data else {
-          TKLog.debug("TKBuzzInfoProvider", text: "Empty response when fetching \(path), paras: \(parameters ?? [:])")
+          TKLog.debug("Empty response when fetching \(path), paras: \(parameters ?? [:])")
           completion(nil)
           return
         }
@@ -179,12 +179,12 @@ extension TKServer {
           let result = try decoder.decode(type, from: data)
           completion(result)
         } catch {
-          TKLog.debug("TKBuzzInfoProvider", text: "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])")
+          TKLog.debug("Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])")
           completion(nil)
         }
     },
       failure: { error in
-        TKLog.debug("TKBuzzInfoProvider", text: "Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])")
+        TKLog.debug("Encountered \(error), when fetching \(path), paras: \(parameters ?? [:])")
         completion(nil)
     })
   }

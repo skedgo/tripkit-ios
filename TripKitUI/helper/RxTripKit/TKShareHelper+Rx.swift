@@ -46,7 +46,7 @@ public extension TKShareHelper {
       case "modes", "mode":
         modes.append(value)
       default:
-//        TKLog.debug("TKShareHelper", text: "Ignoring \(item.name)=\(value)")
+        TKLog.verbose("Ignoring \(item.name)=\(value)")
         continue
       }
     }

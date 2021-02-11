@@ -97,7 +97,7 @@ extension Trip: TKTrip {
       for segment in segments where segment.templateHashCode == hash {
         return segment
       }
-      TKLog.warn("Trip", text: "Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
+      TKLog.warn("Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
     }
     
     let inferred = inferMainSegment()

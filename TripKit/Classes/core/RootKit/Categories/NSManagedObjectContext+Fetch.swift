@@ -34,7 +34,7 @@ extension NSManagedObjectContext {
           }
         }
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
+      TKLog.error("Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return []
     }
   }
@@ -56,7 +56,7 @@ extension NSManagedObjectContext {
           }
         }
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
+      TKLog.error("Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return []
     }
   }
@@ -79,7 +79,7 @@ extension NSManagedObjectContext {
         }
         .first
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
+      TKLog.error("Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return nil
     }
   }
@@ -94,7 +94,7 @@ extension NSManagedObjectContext {
     do {
       return try self.count(for: request) > 0
     } catch {
-      TKLog.error("NSManagedObjectContext+Fetch", text: "Failed with error: \(error). Please file a bug with steps to reproduce this.")
+      TKLog.error("Failed with error: \(error). Please file a bug with steps to reproduce this.")
       return false
     }
   }

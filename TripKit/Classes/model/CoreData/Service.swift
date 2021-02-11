@@ -180,7 +180,7 @@ extension Service {
       return segment.segmentTemplate?.modeInfo
     }
 
-    TKLog.info("Service", text: "Got no mode, visits or segments!")
+    TKLog.info("Got no mode, visits or segments!")
     return nil
   }
 
