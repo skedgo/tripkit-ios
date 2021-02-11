@@ -518,7 +518,7 @@ extension TKRouter {
     guard isActive else { return }
     
     isActive = false
-    TKLog.debug("TKRouter") { "Request failed with error: \(error)"}
+    TKLog.debug("TKRouter", text: "Request failed with error: \(error)")
     completion(.failure(error))
   }
   
@@ -540,11 +540,11 @@ extension TKRouter {
       do {
         try context.save()
         
-        TKLog.verbose("TKRouter") { "Parsing \(request)" }
+        TKLog.verbose("TKRouter", text: "Parsing \(request)")
         let parser = TKRoutingParser(tripKitContext: context)
         parser.parseAndAddResult(json, for: request, merging: true)
         
-        TKLog.verbose("TKRouter") { "Saving parsed result for \(request)" }
+        TKLog.verbose("TKRouter", text: "Saving parsed result for \(request)")
         try context.save()
         
         completion(.success(request))

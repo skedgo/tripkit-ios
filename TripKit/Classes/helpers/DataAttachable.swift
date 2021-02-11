@@ -18,7 +18,7 @@ extension DataAttachable {
       guard let data = dataDictionary[key] as? Data else { return nil }
       return try JSONDecoder().decode(type, from: data)
     } catch {
-      TKLog.info(#file) { "Decoding of \(key) failed due to: \(error)." }
+      TKLog.info(#file, text: "Decoding of \(key) failed due to: \(error).")
       return nil
     }
   }
@@ -34,7 +34,7 @@ extension DataAttachable {
       }
       self.dataDictionary = data
     } catch {
-      TKLog.info(#file) { "Encoding of \(String(describing: value)) to \(key) failed due to: \(error)." }
+      TKLog.info(#file, text: "Encoding of \(String(describing: value)) to \(key) failed due to: \(error).")
     }
   }
   
@@ -80,7 +80,7 @@ extension DataAttachable {
           from: data) as? NSDictionary
         return dictionary.map(NSMutableDictionary.init(dictionary:)) ?? NSMutableDictionary()
       } catch {
-        TKLog.info(#file) { "Decoding new data failed due to: \(error). Data: \(String(decoding: data, as: UTF8.self))" }
+        TKLog.info(#file, text: "Decoding new data failed due to: \(error). Data: \(String(decoding: data, as: UTF8.self))")
         return NSMutableDictionary()
       }
     }
@@ -89,7 +89,7 @@ extension DataAttachable {
       do {
         self.data = try NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
       } catch {
-        TKLog.info(#file) { "Encoding new data failed due to: \(error). Dict: \(newValue)" }
+        TKLog.info(#file, text: "Encoding new data failed due to: \(error). Dict: \(newValue)")
       }
     }
   }

@@ -139,19 +139,19 @@ public class TKLog : NSObject {
     #endif
   }()
   
-  @objc
-  public class func info(_ identifier: String, block: () -> String) {
-    log(identifier, level: .info, block: block)
+  @objc(info:block:)
+  public class func info(_ identifier: String, text: @autoclosure () -> String) {
+    log(identifier, level: .info, block: text)
   }
   
-  @objc
-  public class func debug(_ identifier: String, block: () -> String) {
-    log(identifier, level: .debug, block: block)
+  @objc(debug:block:)
+  public class func debug(_ identifier: String, text: @autoclosure () -> String) {
+    log(identifier, level: .debug, block: text)
   }
   
-  @objc
-  public class func verbose(_ identifier: String, block: () -> String) {
-    log(identifier, level: .verbose, block: block)
+  @objc(verbose:block:)
+  public class func verbose(_ identifier: String, text: @autoclosure () -> String) {
+    log(identifier, level: .verbose, block: text)
   }
   
   @objc
@@ -164,18 +164,18 @@ public class TKLog : NSObject {
     log(identifier, level: .warning) { message }
   }
   
-  @objc
-  public class func info(_ identifier: String, text message: String) {
+  @objc(info:text:)
+  public class func _info(_ identifier: String, text message: String) {
     log(identifier, level: .info) { message }
   }
   
-  @objc
-  public class func debug(_ identifier: String, text message: String) {
+  @objc(debug:text:)
+  public class func _debug(_ identifier: String, text message: String) {
     log(identifier, level: .debug) { message }
   }
   
-  @objc
-  public class func verbose(_ identifier: String, text message: String) {
+  @objc(verbose:text:)
+  public class func _verbose(_ identifier: String, text message: String) {
     log(identifier, level: .verbose) { message }
   }
   
