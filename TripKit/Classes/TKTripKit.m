@@ -53,6 +53,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 - (void)reset
 {
+  [TKLog debug:@"TKTripKit" text:@"Reseting TripKit."];
+  
   _tripKitContext = nil;
   _persistentStoreCoordinator = nil;
   [self.inMemoryCache removeAllObjects];
@@ -161,6 +163,8 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
     _tripKitContext.persistentStoreCoordinator = coordinator;
     _tripKitContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
   }
+  
+  [TKLog debug:@"TKTripKit" text:@"TripKit context initialised"];
   return _tripKitContext;
 }
 
@@ -175,6 +179,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   }
   
   if (! [self didResetToday]) {
+    [TKLog debug:@"TKTripKit" text:@"Reseting TripKit as it wasn't reset today."];
     [self removeLocalFiles];
   }
   NSDate *lastResetDate = [[NSUserDefaults sharedDefaults] objectForKey:@"TripKitLastResetDate"];
@@ -190,6 +195,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   ZAssert(storeURL, @"Can't initialise without a storeURL!");
   if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
     // if it failed, delete the file
+    [TKLog debug:@"TKTripKit" text:@"Reseting TripKit due to failed migration."];
     [self removeLocalFiles];
     
     // let's try again. this time there's no file. so it has to succeed
