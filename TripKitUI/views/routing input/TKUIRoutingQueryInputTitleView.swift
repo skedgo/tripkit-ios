@@ -156,18 +156,11 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
     typed.onNext(searchText)
   }
   
-}
-
-// MARK: - UITextFieldDelegate
-
-extension TKUIRoutingQueryInputTitleView: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    _ = self.resignFirstResponder()
-    
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     self.route.onNext(())
-    
-    return false
+    searchBar.resignFirstResponder()
   }
+  
 }
 
 // MARK: - Animations
