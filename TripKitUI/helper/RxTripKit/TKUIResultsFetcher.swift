@@ -138,7 +138,8 @@ fileprivate extension Reactive where Base : TKRouter {
         for: request,
         modes: modes,
         classifier: classifier,
-        progress: { progress in
+        progress: { [weak holder] progress in
+          guard let holder = holder else { return }
           observer.onNext(.partial(completed: Int(progress), total: holder.count))
         }, completion: { result in
           switch result {
