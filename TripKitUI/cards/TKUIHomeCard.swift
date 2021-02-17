@@ -115,7 +115,6 @@ open class TKUIHomeCard: TKUITableCard {
     let builderInput = TKUIHomeComponentInput(
       homeCardWillAppear: cardAppearancePublisher,
       itemSelected: selectedItem(in: tableView, dataSource: dataSource).compactMap(\.componentItem),
-      itemDeleted: tableView.rx.modelDeleted(TKUIHomeViewModel.Item.self).asSignal().compactMap(\.componentItem),
       mapRect: homeMapManager?.mapRect ?? .empty()
     )
     

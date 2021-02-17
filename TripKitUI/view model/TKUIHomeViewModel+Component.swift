@@ -14,7 +14,6 @@ import RxCocoa
 public struct TKUIHomeComponentInput {
   public let homeCardWillAppear: Observable<Bool>
   public let itemSelected: Signal<TKUIHomeComponentItem>
-  public let itemDeleted: Signal<TKUIHomeComponentItem>
   public let mapRect: Driver<MKMapRect>
 }
 
@@ -92,6 +91,8 @@ public protocol TKUIHomeComponentViewModel {
   /// Typical, this method should only return an action configuration if the component view model
   /// is able to handle the incoming `item`.
   ///
+  /// - warning: This is only called if your item returns `true` to `canEdit`
+  ///
   /// The `section` property of the `indexPath` parameter corresponds to the position of the
   /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
   /// such, it may change as other component view models are added or removed. It is best not
@@ -108,6 +109,8 @@ public protocol TKUIHomeComponentViewModel {
   ///
   /// Typical, this method should only return an action configuration if the component view model
   /// is able to handle the incoming `item`.
+  ///
+  /// - warning: This is only called if your item returns `true` to `canEdit`
   ///
   /// The `section` property of the `indexPath` parameter corresponds to the position of the
   /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
