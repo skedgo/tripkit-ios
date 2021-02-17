@@ -34,7 +34,7 @@ open class TKUIHomeCard: TKUITableCard {
 
   public let disposeBag = DisposeBag()
   
-  private let searchBar = UISearchBar()
+  private let headerView: TKUIHomeHeaderView
   
   private var tableView: UITableView!
   
@@ -44,15 +44,12 @@ open class TKUIHomeCard: TKUITableCard {
   
   public init(mapManager: TKUICompatibleHomeMapManager? = nil, initialPosition: TGCardPosition? = .peaking) {
     self.homeMapManager = mapManager
+    self.headerView = TKUIHomeHeaderView()
 
-    // Home card requires a custom title view that includes
-    // a search bar only.
-    super.init(title: .custom(searchBar, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition)
+    super.init(title: .custom(headerView, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition)
     
-    searchBar.placeholder = Loc.SearchForDestination
-    searchBar.tintColor = .tkAppTintColor
-    searchBar.barTintColor = .tkBackground
-    searchBar.delegate = self
+    headerView.searchBar.placeholder = Loc.SearchForDestination
+    headerView.searchBar.delegate = self
   }
   
   required convenience public init?(coder: NSCoder) {
@@ -163,6 +160,10 @@ open class TKUIHomeCard: TKUITableCard {
     viewModel.error
       .emit(onNext: { [weak self] in self?.controller?.show($0) })
       .disposed(by: disposeBag)
+    
+    headerView.directionsButton?.rx.tap.asSignal()
+      .emit(onNext: { [weak self] in self?.showQueryInput() })
+      .disposed(by: disposeBag)
 
     // Map interaction
     
@@ -175,7 +176,7 @@ open class TKUIHomeCard: TKUITableCard {
   open override func willAppear(animated: Bool) {
     // If the search text is empty when the card appears,
     // try loading autocompletion results.
-    if let text = searchBar.text, text.isEmpty {
+    if let text = headerView.searchBar.text, text.isEmpty {
       searchTextPublisher.onNext(("", forced: true))
     }
     
@@ -209,8 +210,8 @@ open class TKUIHomeCard: TKUITableCard {
 extension TKUIHomeCard {
   
   private func prepareForNewCard(onCompletion handler: (() -> Void)? = nil) {
-    searchBar.text = nil
-    searchBar.resignFirstResponder()
+    headerView.searchBar.text = nil
+    headerView.searchBar.resignFirstResponder()
     self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false, onCompletion: handler)
   }
   
@@ -274,6 +275,13 @@ extension TKUIHomeCard {
     }
   }
   
+  private func showQueryInput() {
+    let mapRect = (homeMapManager as? TKUIMapManager)?.mapView?.visibleMapRect ?? .world
+    let queryInputCard = TKUIRoutingQueryInputCard(biasMapRect: mapRect)
+    queryInputCard.queryDelegate = self
+    handleNext(.push(queryInputCard))
+  }
+  
   private func showRoutes(to destination: MKAnnotation) {
     prepareForNewCard { [weak self] in
       guard let self = self else { return }
@@ -314,6 +322,16 @@ extension TKUIHomeCard {
   
 }
 
+extension TKUIHomeCard: TKUIRoutingQueryInputCardDelegate {
+  public func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation) {
+    let request = TripRequest.insert(from: origin, to: destination, for: nil, timeType: .leaveASAP, into: TripKit.shared.tripKitContext)
+    let routingResultsCard = TKUIRoutingResultsCard(request: request)
+    
+    // We don't want the query input card anymore as it's accessible from the results card
+    controller?.swap(for: routingResultsCard, animated: true)
+  }
+}
+
 // MARK: - Search bar
 
 extension TKUIHomeCard: UISearchBarDelegate {
@@ -324,6 +342,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     searchBar.showsCancelButton = true
+    headerView.directionsButton?.isHidden = true
     controller?.moveCard(to: .extended, animated: true)
     controller?.draggingCardEnabled = false
   }
@@ -334,25 +353,27 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     clearSearchBar()
+    headerView.directionsButton?.isHidden = false
     controller?.moveCard(to: initialPosition ?? .peaking, animated: true)
     controller?.draggingCardEnabled = true
   }
   
   public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
+    headerView.directionsButton?.isHidden = false
     controller?.moveCard(to: .peaking, animated: true)
     controller?.draggingCardEnabled = true
   }
   
   private func clearSearchBar() {
     // Clear the text on search bar
-    searchBar.text = ""
+    headerView.searchBar.text = ""
     
     // Clear the results
     searchTextPublisher.onNext(("", forced: false))
     
     // Dismiss the keyboard
-    searchBar.resignFirstResponder()
+    headerView.searchBar.resignFirstResponder()
   }
   
 }
