@@ -55,6 +55,7 @@ public class TKUIRoutingResultsViewModel {
   }
   
   private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, editable: Bool, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+    
     let builderChangedWithID = Self.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
 
@@ -81,10 +82,11 @@ public class TKUIRoutingResultsViewModel {
         builderChangedWithID
           .debounce(.seconds(1), scheduler: MainScheduler.instance)
       )
-        .distinctUntilChanged { $0.1 == $1.1 }
-        .map { $0.0.generateRequest() }
-        .startWith(initialRequest)
-        .compactMap { $0 }
+        .distinctUntilChanged { $0.1 == $1.1 } // only generate a new request object if necessary
+        .map { ($0.0.generateRequest(), $0.1) }
+        .startWith( (initialRequest, initialRequest.map { Self.buildId(for: $0.builder) } ) )
+        .distinctUntilChanged { $0.1 == $1.1 } // ignore duplicated request objects (happens when initialRequest != nil)
+        .compactMap { $0.0 }
         .map { ($0, mutable: true) }
         .share(replay: 1, scope: .forever)
       skipRequest = false
