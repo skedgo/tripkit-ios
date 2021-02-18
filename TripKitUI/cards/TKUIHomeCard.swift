@@ -218,8 +218,8 @@ extension TKUIHomeCard {
     guard let cardController = controller else { return }
     
     switch next {
-    case .present(let controller):
-      cardController.present(controller, animated: true)
+    case .present(let content, let inNavigator):
+      cardController.present(content, inNavigator: inNavigator)
       
       if let selected = tableView.indexPathForSelectedRow {
         tableView.deselectRow(at: selected, animated: true)
