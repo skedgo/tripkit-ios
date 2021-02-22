@@ -6,11 +6,9 @@
 //
 //
 
-#import <TargetConditionals.h>
+#import "UIFont+CustomFonts.h"
 
 #if TARGET_OS_IPHONE
-
-#import "UIFont+CustomFonts.h"
 
 #import "TKConfig.h"
 

@@ -6,7 +6,7 @@
 //
 //
 
-#import <TargetConditionals.h>
+#import "TKCrossPlatform.h"
 
 #if TARGET_OS_IPHONE
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <TargetConditionals.h>
 
 //! Project version number for TripKit.
 /// :nodoc:

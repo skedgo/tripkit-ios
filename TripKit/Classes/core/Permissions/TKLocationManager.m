@@ -8,6 +8,8 @@
 
 #import "TKLocationManager.h"
 
+#import "TKCrossPlatform.h"
+
 @import MapKit;
 
 #import "TKTripKit.h"
