@@ -22,13 +22,12 @@ open class TKUIHomeCard: TKUITableCard {
   public var searchResultDelegate: TKUIHomeCardSearchResultsDelegate?
   
   private let cardAppearancePublisher = PublishSubject<Bool>()
-  
   private let searchTextPublisher = PublishSubject<(String, forced: Bool)>()
-  
   private let focusedAnnotationPublisher = PublishSubject<MKAnnotation?>()
-  
   private let cellAccessoryTappedPublisher = PublishSubject<TKUIHomeViewModel.Item>()
   private let refreshPublisher = PublishSubject<Void>()
+  private let actionTriggered = PublishSubject<TKUIHomeCard.ComponentAction>()
+  let customizationTriggered = PublishSubject<[TKUIHomeCard.CustomizedItem]>()
   
   private var viewModel: TKUIHomeViewModel!
 
@@ -142,7 +141,12 @@ open class TKUIHomeCard: TKUITableCard {
       biasMapRect: homeMapManager?.mapRect.startWith(.null) ?? .just(.null)
     )
 
-    viewModel = TKUIHomeViewModel(componentViewModels: components, searchInput: searchInput)
+    viewModel = TKUIHomeViewModel(
+      componentViewModels: components,
+      actionInput: actionTriggered.asSignal(onErrorSignalWith: .empty()),
+      customizationInput: customizationTriggered.asSignal(onErrorSignalWith: .empty()),
+      searchInput: searchInput
+    )
     
     // List content
     
@@ -168,7 +172,7 @@ open class TKUIHomeCard: TKUITableCard {
     
     homeMapManager?.nextFromMap
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self] in self?.handleNext($0) })
+      .subscribe(onNext: { [weak self] in self?.actionTriggered.onNext($0) })
       .disposed(by: disposeBag)
   }
   
@@ -214,16 +218,19 @@ extension TKUIHomeCard {
     self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false, onCompletion: handler)
   }
   
-  private func handleNext(_ next: TKUIHomeCardNextAction) {
+  private func handleNext(_ next: TKUIHomeViewModel.NextAction) {
     guard let cardController = controller else { return }
     
-    switch next {
-    case .present(let content, let inNavigator):
-      cardController.present(content, inNavigator: inNavigator)
-      
+    func dismissSelection() {
       if let selected = tableView.indexPathForSelectedRow {
         tableView.deselectRow(at: selected, animated: true)
       }
+    }
+    
+    switch next {
+    case .present(let controller, let inNavigator):
+      cardController.present(controller, inNavigator: inNavigator)
+      dismissSelection()
       
     case .push(let card):
       prepareForNewCard {
@@ -234,6 +241,11 @@ extension TKUIHomeCard {
         }
       }
       
+    case .showCustomizer(let items):
+      guard #available(iOS 13.0, *) else { return assertionFailure() }
+      showCustomizer(items: items)
+      dismissSelection()
+
     case let .handleSelection(annotation, component):
       if let city = annotation as? TKRegion.City {
         clearSearchBar()
@@ -391,7 +403,7 @@ extension TKUIHomeCard: UITableViewDelegate {
       if let action = configuration.action {
         header.button.setTitle(action.title, for: .normal)
         header.button.rx.tap
-          .subscribe(onNext: { [weak self] in self?.handleNext(action.handler()) })
+          .subscribe(onNext: { [weak self] in self?.actionTriggered.onNext(action.handler()) })
           .disposed(by: header.disposeBag)
       }
         

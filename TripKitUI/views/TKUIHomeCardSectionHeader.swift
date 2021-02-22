@@ -42,14 +42,19 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   }
   
   private func didInit() {
+    
     let wrapper = UIView()
+    #if targetEnvironment(macCatalyst)
     wrapper.backgroundColor = .clear
+    #else
+    wrapper.backgroundColor = .tkBackground
+    #endif
     wrapper.translatesAutoresizingMaskIntoConstraints = false
     
     let label = UILabel()
     label.textAlignment = .left
-    label.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    label.textColor = .tkLabelPrimary
+    label.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
+    label.textColor = .tkLabelSecondary
     label.translatesAutoresizingMaskIntoConstraints = false
     self.label = label
     wrapper.addSubview(label)
@@ -66,7 +71,7 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     contentView.addSubview(wrapper)
     NSLayoutConstraint.activate([
       wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor),
+      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
       wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
       wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
     ])

@@ -254,6 +254,12 @@ extension Loc {
     return String(format: format, NSNumber(value: visible), NSNumber(value: all))
   }
   
+  // MARK: - Home
+  public static var CustomizeHome: String {
+    return NSLocalizedString("Customise home", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to customise the home card")
+  }
+  
+  
   // MARK: - Autocompletion
   
   @objc

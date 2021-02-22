@@ -26,30 +26,39 @@ public class TKUIHomeViewModel {
   
   private(set) var componentViewModels: [TKUIHomeComponentViewModel]!
   
-  init(componentViewModels: [TKUIHomeComponentViewModel], searchInput: SearchInput) {
+  init(
+    componentViewModels: [TKUIHomeComponentViewModel],
+    actionInput: Signal<TKUIHomeCard.ComponentAction>,
+    customizationInput: Signal<[TKUIHomeCard.CustomizedItem]>,
+    searchInput: SearchInput
+  ) {
     
     // When not searching
     
     self.componentViewModels = componentViewModels
     
-    let componentSections = componentViewModels
-      .enumerated()
-      .map { index, component in
-        component.homeCardSection.map { (index: index, TKUIHomeViewModel.Section($0)) }
-      }
-    let componentUpdates = Driver.merge(componentSections).asObservable()
+    let fullContent = Self.fullContent(for: componentViewModels)
     
-    let baseContent = componentUpdates.scan(into: SectionContent(capacity: componentViewModels.count)) { content, update in
-        content.sections[update.index] = update.1
-      }.map { content in
-        // Only include existing sections that either have items or a header action
-        return content.sections
-          .compactMap { $0 }
-          .filter { !$0.items.isEmpty || $0.headerConfiguration?.action != nil }
+    let startCustomization: [TKUIHomeCard.CustomizedItem] =
+      componentViewModels.compactMap { component in
+        component.customizerItem.map { .init(fromUserDefaultsWithId: component.identity, item: $0) }
       }
-      .throttle(.milliseconds(500), latest: true, scheduler: MainScheduler.instance)
-      .asDriver(onErrorJustReturn: [])
-      .startWith([])
+    
+    let customization = customizationInput
+      .asObservable()
+      .startWith(startCustomization)
+
+    let baseContent = Self.customizedContent(full: fullContent, customization: customization)
+    
+    let componentNext = Self.buildNext(
+      for: Signal.merge(componentViewModels.map(\.nextAction)),
+      customization: customization
+    )
+
+    let actionNext = Self.buildNext(
+      for: actionInput,
+      customization: customization
+    )
     
     // When searching
 
@@ -64,30 +73,22 @@ public class TKUIHomeViewModel {
       .asDriver(onErrorJustReturn: false)
     
     sections = Driver.combineLatest(baseContent, searchContent.startWith([]), isSearching) { $2 ? $1 : $0 }
-    next = Signal.merge(componentViewModels.map(\.nextAction) + [searchNext])
+    next = Signal.merge(componentNext, actionNext, searchNext)
     error = searchError
   }
   
   let sections: Driver<[Section]>
   
-  let next: Signal<TKUIHomeCardNextAction>
+  let next: Signal<NextAction>
   
   let error: Signal<Error>
 }
 
-fileprivate extension TKUIHomeViewModel {
-  struct SectionContent {
-    var sections: [Section?]
-    
-    init(capacity: Int) {
-      sections = (0..<capacity).map { _ in Optional<TKUIHomeViewModel.Section>.none }
-    }
-  }
-}
+
 
 extension TKUIHomeViewModel.Section {
-  init(_ content: TKUIHomeComponentContent) {
-    self.identity = content.identity
+  init(_ content: TKUIHomeComponentContent, identity: String) {
+    self.identity = identity
     self.headerConfiguration = content.header
     self.items = content.items.map { .component($0) }
   }
