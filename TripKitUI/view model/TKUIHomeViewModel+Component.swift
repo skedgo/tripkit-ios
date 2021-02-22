@@ -163,6 +163,8 @@ public protocol TKUIHomeComponentViewModel {
 
 extension TKUIHomeComponentViewModel {
   
+  public var nextAction: Signal<TKUIHomeCard.ComponentAction> { .empty() }
+  
   public func leadingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { nil }
   
   public func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { nil }
