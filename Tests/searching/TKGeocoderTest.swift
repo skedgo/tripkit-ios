@@ -23,7 +23,9 @@ class TKGeocoderTest: XCTestCase {
   override func setUpWithError() throws {
     try super.setUpWithError()
     
-    TKServer.serverType = .production
+    if TKServer.developmentServer() != nil {
+      TKServer.updateDevelopmentServer(nil) // make sure to hit production
+    }
     
     geocoder = try aggregateGeocoder()
   }
