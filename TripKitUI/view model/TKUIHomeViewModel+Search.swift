@@ -13,7 +13,7 @@ import RxCocoa
 
 extension TKUIHomeViewModel {
   
-  static func searchContent(for searchInput: SearchInput) -> (Driver<[Section]>, Signal<TKUIHomeCardNextAction>, Signal<Error>) {
+  static func searchContent(for searchInput: SearchInput) -> (Driver<[Section]>, Signal<NextAction>, Signal<Error>) {
     
     // We use Apple & SkedGo if none is provided for autocompletion
     let autocompleteDataProviders = TKUIHomeCard.config.autocompletionDataProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()]
@@ -33,7 +33,7 @@ extension TKUIHomeViewModel {
     }
     
     let nextFromSelection = searchViewModel.selection
-      .map { annotation -> TKUIHomeCardNextAction in
+      .map { annotation -> NextAction in
         if let city = annotation as? TKRegion.City {
           return .handleSelection(city, component: nil)
         } else {
@@ -42,7 +42,7 @@ extension TKUIHomeViewModel {
       }
     
     let nextFromAccessory = searchViewModel.accessorySelection
-      .map { annotation -> TKUIHomeCardNextAction in
+      .map { annotation -> NextAction in
         switch annotation {
         case let stop as TKUIStopAnnotation: return .push(TKUITimetableCard(stops: [stop]))
         default:
@@ -53,7 +53,7 @@ extension TKUIHomeViewModel {
     
     let nextFromAction = searchViewModel.triggerAction
       .map { provider in
-        TKUIHomeCardNextAction.handleAction(handler: { controller in
+        NextAction.handleAction(handler: { controller in
           provider.triggerAdditional(presenter: controller)
         })
       }

@@ -19,7 +19,7 @@ public protocol TKUICompatibleHomeMapManager: TGCompatibleMapManager {
   
   /// This returns an observable sequence that emits an element whenever an
   /// action is triggered on the map
-  var nextFromMap: Observable<TKUIHomeCardNextAction> { get }
+  var nextFromMap: Observable<TKUIHomeCard.ComponentAction> { get }
   
   /// This returns an observable sequence that emits an element whenever the
   /// map's mapRect changes

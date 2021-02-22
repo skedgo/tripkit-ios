@@ -57,7 +57,8 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
       providers: [FakeAutocompleter()]
     )
 
-    let items = try XCTUnwrap(try viewModel.sections.toBlocking().first()?.first?.items)
+    let sections = try XCTUnwrap(try viewModel.sections.toBlocking().first())
+    let items = try XCTUnwrap(sections.first(where: { $0.identifier == "results"})?.items)
     XCTAssertEqual(items.count, FakeAutocompleter.cities.count)
     XCTAssertEqual(items.map { $0.title }, FakeAutocompleter.cities)
     

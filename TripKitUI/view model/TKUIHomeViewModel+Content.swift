@@ -20,9 +20,9 @@ extension TKUIHomeViewModel {
 
   public struct HeaderConfiguration {
     public let title: String
-    public var action: (title: String, handler: () -> TKUIHomeCardNextAction)?
+    public var action: (title: String, handler: () -> TKUIHomeCard.ComponentAction)?
     
-    public init(title: String, action: (String, () -> TKUIHomeCardNextAction)? = nil) {
+    public init(title: String, action: (String, () -> TKUIHomeCard.ComponentAction)? = nil) {
       self.title = title
       self.action = action
     }
@@ -39,7 +39,70 @@ extension TKUIHomeViewModel {
       self.headerConfiguration = headerConfiguration
     }
   }
+}
 
+// MARK: - Build
+
+extension TKUIHomeViewModel {
+  
+  /// Builds the full and non-customized content
+  static func fullContent(for components: [TKUIHomeComponentViewModel]) -> Driver<[TKUIHomeViewModel.Section]> {
+    
+    let componentSections = components
+      .map { component in
+        component.homeCardSection.map { Section($0, identity: component.identity) }
+      }
+      .enumerated()
+      .map { index, driver in
+        return driver.map { (index: index, $0) }
+      }
+    
+    let componentUpdates = Driver.merge(componentSections).asObservable()
+    
+    return componentUpdates.scan(into: SectionContent(capacity: componentSections.count)) { content, update in
+        content.sections[update.index] = update.1
+      }.map { content in
+        // Only include existing sections that either have items or a header action
+        return content.sections
+          .compactMap { $0 }
+          .filter { !$0.items.isEmpty || $0.headerConfiguration?.action != nil }
+      }
+      .throttle(.milliseconds(500), latest: true, scheduler: MainScheduler.instance)
+      .asDriver(onErrorJustReturn: [])
+      .startWith([])
+
+  }
+  
+  private struct SectionContent {
+    var sections: [Section?]
+    
+    init(capacity: Int) {
+      sections = (0..<capacity).map { _ in Optional<TKUIHomeViewModel.Section>.none }
+    }
+  }
+  
+  /// Takes the full content, applies the user's customization and provides back the filtered sections
+  static func customizedContent(full: Driver<[TKUIHomeViewModel.Section]>, customization: Observable<[TKUIHomeCard.CustomizedItem]>) -> Driver<[TKUIHomeViewModel.Section]> {
+    
+    return Driver.combineLatest(full, customization.asDriver(onErrorJustReturn: [])) { full, customization -> [TKUIHomeViewModel.Section] in
+      
+      return full
+        .filter { candidate in
+          customization.first { $0.id == candidate.identity }?.isEnabled ?? true
+        }
+        .sorted { first, second in
+          let firstIndex = customization.firstIndex { $0.id == first.identity }
+          let secondIndex = customization.firstIndex { $0.id == second.identity }
+          if let first = firstIndex, let second = secondIndex {
+            return first < second
+          } else if firstIndex == nil {
+            return false
+          } else {
+            return true
+          }
+        }
+    }
+  }
 }
 
 // MARK: - RxDataSources

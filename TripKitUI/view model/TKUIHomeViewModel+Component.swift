@@ -18,13 +18,11 @@ public struct TKUIHomeComponentInput {
 }
 
 public struct TKUIHomeComponentContent {
-  public init(identity: String, items: [TKUIHomeComponentItem], header: TKUIHomeViewModel.HeaderConfiguration? = nil) {
-    self.identity = identity
+  public init(items: [TKUIHomeComponentItem], header: TKUIHomeViewModel.HeaderConfiguration? = nil) {
     self.items = items
     self.header = header
   }
   
-  public let identity: String
   public let header: TKUIHomeViewModel.HeaderConfiguration?
   public let items: [TKUIHomeComponentItem]
 }
@@ -46,14 +44,40 @@ extension TKUIHomeComponentItem {
   public var canEdit: Bool { false }
 }
 
+/// The representation of an home card component for the customizer
+public struct TKUIHomeCardCustomizerItem {
+  public init(name: String, icon: UIImage, canBeHidden: Bool = true) {
+    self.name = name
+    self.icon = icon
+    self.canBeHidden = canBeHidden
+  }
+  
+  /// User-friendly name of this section.
+  public let name: String
+
+  /// Icon for this section.
+  public let icon: UIImage
+
+  /// Whether the user should should be allowed to hide this in the customizer. Defaults to `true`.
+  public var canBeHidden: Bool = true
+}
+
 /// This protocol defines the requirements for any view models that may display
 /// their contents in a `TKUIHomeCard`.
 public protocol TKUIHomeComponentViewModel {
-  
+
   /// This builds an instance of a view model whose contents may be displayed
   /// in a `TKUIHomeCard`
   /// - Parameter inputs: The inputs from a `TKUIHomeCard`, which may be used by a component view model
   static func buildInstance(from inputs: TKUIHomeComponentInput) -> Self
+
+  /// A unique identifier for this component
+  var identity: String { get }
+  
+  /// How this component should appear in the card customizer
+  ///
+  /// Return `nil` if it should not be included in the customizer
+  var customizerItem: TKUIHomeCardCustomizerItem? { get }
   
   /// This closure returns an sequence whose element is a model used to populate
   /// a section of the table view in a `TKUIHomeCard`.
@@ -61,7 +85,7 @@ public protocol TKUIHomeComponentViewModel {
   
   /// This returns an action in response to selecting a row in the section returned by
   /// `homeCardSection`.
-  var nextAction: Signal<TKUIHomeCardNextAction> { get }
+  var nextAction: Signal<TKUIHomeCard.ComponentAction> { get }
   
   /// This returns a cell that is used to display a row in the section returned by `homeCardSection`
   /// - Parameters:
