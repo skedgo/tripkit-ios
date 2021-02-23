@@ -23,6 +23,12 @@ public protocol TKUITimePickerSheetDelegate: class {
 
 public class TKUITimePickerSheet: TKUISheet {
   
+  fileprivate enum Mode {
+    case date
+    case time
+    case timeWithType(TKTimeType)
+  }
+  
   @objc
   public var selectAction: (TKTimeType, Date) -> Void = { _, _ in }
   
@@ -40,6 +46,8 @@ public class TKUITimePickerSheet: TKUISheet {
   
   public var selectedTimeType: TKTimeType {
     get {
+      guard case .timeWithType = mode else { return .none }
+      
       switch timeTypeSelector?.selectedSegmentIndex {
       case 0: return .leaveASAP
       case 1: return .leaveAfter
@@ -65,6 +73,7 @@ public class TKUITimePickerSheet: TKUISheet {
     }
   }
   
+  private let mode: Mode
   private var didSetTime: Bool
   private weak var timePicker: UIDatePicker!
   private weak var timeTypeSelector: UISegmentedControl!
@@ -72,16 +81,17 @@ public class TKUITimePickerSheet: TKUISheet {
 
   @objc
   public convenience init(date: Date, timeZone: TimeZone) {
-    self.init(date: date, showTime: false, timeType: .none, timeZone: timeZone)
+    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone)
   }
   
   @objc
   public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone) {
-    self.init(date: time, showTime: true, timeType: timeType, timeZone: timeZone)
+    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone)
   }
   
-  private init(date: Date, showTime: Bool, timeType: TKTimeType, timeZone: TimeZone) {
+  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone) {
     didSetTime = false
+    self.mode = mode
 
     super.init(frame: .init(origin: .zero, size: .init(width: 320, height: 116)))
     
@@ -111,13 +121,20 @@ public class TKUITimePickerSheet: TKUISheet {
     self.timePicker = timePicker
     
     let selector: UISegmentedControl! // as `timeTypeSelector` is weak
-    if timeType != .none {
+    switch mode {
+    case .timeWithType(let timeType):
+      assert(timeType != .none)
       selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
       selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
       self.timeTypeSelector = selector
       
       // this sets the selected section index
       self.selectedTimeType = timeType
+
+    case .time, .date:
+      selector = UISegmentedControl(items: [Loc.Now])
+      selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
+      self.timeTypeSelector = selector
     }
     
     // Yes, a segmented control with one element. This is for consistent styling.
@@ -165,8 +182,13 @@ public class TKUITimePickerSheet: TKUISheet {
   
   @objc
   func timeSelectorChanged(sender: Any) {
-    if selectedTimeType == .leaveASAP {
+    switch mode {
+    case .date, .time:
       nowButtonPressed(sender: sender)
+    case .timeWithType where selectedTimeType == .leaveASAP:
+      nowButtonPressed(sender: sender)
+    case .timeWithType:
+      break // do nothing
     }
   }
 

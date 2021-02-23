@@ -30,6 +30,10 @@ class TKUIRoutingQueryInputTitleView: UIView {
 
   @IBOutlet weak var buttonLine: UIView!
   
+  // This is a hack to only start switching first responder when the view
+  // did appear.
+  var didAppear: Bool = false
+  
   private var isAnimatingSwap: Bool = false
   private var onSwapCompletion: (() -> Void)? = nil
   
@@ -220,8 +224,10 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     return Binder(self.base) { view, mode in
       view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
       view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
-      
-      view.becomeFirstResponder(mode: mode)
+
+      if view.didAppear {
+        view.becomeFirstResponder(mode: mode)
+      }
     }
   }
   

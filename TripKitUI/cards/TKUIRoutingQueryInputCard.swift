@@ -106,12 +106,13 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     // Only become first responder once we appeared and after a brief delay,
-    // as immediately on `didAppear` doesn't work in testing on iOS 13.
+    // as immediately on `didAppear` doesn't work in testing on iOS 13+14.
     didAppear
       .delay(.milliseconds(100), scheduler: MainScheduler.instance)
       .withLatestFrom(viewModel.activeMode)
       .subscribe(onNext: { [weak self] mode in
         guard let self = self else { return }
+        self.titleView.didAppear = true
         self.titleView.becomeFirstResponder(mode: mode)
       })
     .disposed(by: disposeBag)

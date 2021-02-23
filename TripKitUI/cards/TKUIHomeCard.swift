@@ -286,7 +286,8 @@ extension TKUIHomeCard {
     }
   }
   
-  private func showQueryInput() {
+  /// Pushes the routing query input card and handles its response.
+  public func showQueryInput() {
     let mapRect = (homeMapManager as? TKUIMapManager)?.mapView?.visibleMapRect ?? .world
     let queryInputCard = TKUIRoutingQueryInputCard(biasMapRect: mapRect)
     queryInputCard.queryDelegate = self
