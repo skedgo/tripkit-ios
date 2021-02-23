@@ -48,6 +48,9 @@ class TKUICompactActionCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    isAccessibilityElement = true
+    accessibilityTraits.insert(.button)
+    
     contentView.backgroundColor = .clear
     
     imageWrapper.layer.cornerRadius = imageWrapper.bounds.width * 0.5

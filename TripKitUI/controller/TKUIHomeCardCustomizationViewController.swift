@@ -101,6 +101,12 @@ fileprivate class DataSource: RxTableViewSectionedReloadDataSource<TKUIHomeCardC
     cell.stateImageView.image = item.isEnabled
       ? UIImage(systemName: "checkmark.circle.fill")
       : UIImage(systemName: "circle")
+    
+    if item.isEnabled {
+      cell.accessibilityTraits.insert(.selected)
+    } else {
+      cell.accessibilityTraits.remove(.selected)
+    }
 
     cell.titleLabel.text = item.title
     

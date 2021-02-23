@@ -42,7 +42,6 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   }
   
   private func didInit() {
-    
     let wrapper = UIView()
     #if targetEnvironment(macCatalyst)
     wrapper.backgroundColor = .clear
@@ -66,6 +65,9 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     button.translatesAutoresizingMaskIntoConstraints = false
     self.button = button
     wrapper.addSubview(button)
+    
+    // Override default order that'd start with the button
+    accessibilityElements = [label, button]
     
     // Wrapper to content view
     contentView.addSubview(wrapper)

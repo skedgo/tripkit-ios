@@ -481,7 +481,7 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
 
     let section = dataSource.sectionModels[section]
     footerView.attributedCost = formatter.costString(costs: section.costs)
-    footerView.accessibilityLabel = formatter.costAccessibilityLabel(costs: section.costs)
+    footerView.costLabel.accessibilityLabel = formatter.costAccessibilityLabel(costs: section.costs)
     
     if let buttonContent = section.action {
       footerView.button.isHidden = false

@@ -367,5 +367,11 @@ extension TKUIModePicker {
     button.backgroundColor    = selected ? .tkBackground : .tkLabelQuarternary
     button.tintColor          = .tkLabelPrimary
     button.alpha              = selected ? 1 : 0.2
+    
+    if selected {
+      button.accessibilityTraits.insert(.selected)
+    } else {
+      button.accessibilityTraits.remove(.selected)
+    }
   }
 }

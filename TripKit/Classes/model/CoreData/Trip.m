@@ -505,6 +505,7 @@ typedef NSUInteger SGTripFlag;
   }
   sTripAccessibilityDateFormatter.timeZone = timeZone;
 	
+  // Read out the segments first
   BOOL separateByComma = NO;
   for (TKSegment *segment in [self segmentsWithVisibility:TKTripSegmentVisibilityInSummary]) {
     if (separateByComma) {
@@ -526,7 +527,10 @@ typedef NSUInteger SGTripFlag;
   
   NSString *arrival = [sTripAccessibilityDateFormatter stringFromDate:[self arrivalTime]];
 
+  // Read out trip times
   [accessibleLabel appendString:@"; "];
+  [accessibleLabel appendString:Loc.Trip];
+  [accessibleLabel appendString:@" "];
   if ([self departureTimeIsFixed]) {
     NSString *departureTime = [sTripAccessibilityDateFormatter stringFromDate:[self departureTime]];
     
@@ -535,11 +539,9 @@ typedef NSUInteger SGTripFlag;
     [accessibleLabel appendString:[Loc Arrives:arrival capitalize:NO]];
     [accessibleLabel appendString:@"; "];
     [accessibleLabel appendString:[self durationString]];
-    [accessibleLabel appendFormat:@"; %@", [self durationString]];
   } else {
     [accessibleLabel appendString:[self durationString]];
     [accessibleLabel appendString:@"; "];
-
     [accessibleLabel appendString:[Loc ArriveAtDate:arrival]];
   }
   
