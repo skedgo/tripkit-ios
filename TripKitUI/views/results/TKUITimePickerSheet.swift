@@ -126,7 +126,6 @@ public class TKUITimePickerSheet: TKUISheet {
       assert(timeType != .none)
       selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
       selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
-      self.timeTypeSelector = selector
       
       // this sets the selected section index
       self.selectedTimeType = timeType
@@ -134,18 +133,16 @@ public class TKUITimePickerSheet: TKUISheet {
     case .time, .date:
       selector = UISegmentedControl(items: [Loc.Now])
       selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
-      self.timeTypeSelector = selector
     }
     
     // Yes, a segmented control with one element. This is for consistent styling.
     let doneSelector = UISegmentedControl(items: [Loc.Done])
     doneSelector.addTarget(self, action: #selector(doneButtonPressed(sender:)), for: .valueChanged)
-    self.doneSelector = doneSelector
     
     let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: timePicker.frame.width, height: 44))
     toolbar.autoresizingMask = .flexibleWidth
     toolbar.items = [
-      timeTypeSelector.map(UIBarButtonItem.init(customView:)),
+      selector.map(UIBarButtonItem.init(customView:)),
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
       UIBarButtonItem(customView: doneSelector)
     ].compactMap { $0 }
@@ -153,6 +150,9 @@ public class TKUITimePickerSheet: TKUISheet {
     toolbar.backgroundColor = self.backgroundColor
     addSubview(toolbar)
     
+    self.timeTypeSelector = selector
+    self.doneSelector = doneSelector
+
     self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: timePicker.frame.height + toolbar.frame.height)
   }
   
