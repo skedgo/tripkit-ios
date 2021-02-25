@@ -222,6 +222,11 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     // Note: explicitly reset to say we know that we'll override this with Rx
     tableView.dataSource = nil
     
+    // Set this immediately before we get sections, to make sure we
+    // size all the footers and headers correctly
+    tableView.rx.setDelegate(self)
+      .disposed(by: disposeBag)
+
     // Bind outputs
     
     viewModel.sections
@@ -304,9 +309,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     viewModel.next
       .emit(onNext: { [weak self] in self?.navigate(to: $0) })
-      .disposed(by: disposeBag)
-    
-    tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
     
     // Search places
