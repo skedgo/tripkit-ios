@@ -52,7 +52,11 @@ public extension TKUIHomeCard {
     /// Set this to specify what view model classes can be used by the home card
     /// to build its content
     public var componentViewModelClasses: [TKUIHomeComponentViewModel.Type] = []
-    
+
+    /// Set this to `true` if your components aren't customizable and they should always be ordered
+    /// as defined in `componentViewModelClasses`.
+    public var ignoreComponentCustomization: Bool = false
+
     /// Set this to customise what should happen if map content or an autocompletion
     /// result is tapped (or whenever one of your component view models calls `.handleSelection`)
     public var selectionMode: SelectionMode = .default

@@ -84,6 +84,8 @@ extension TKUIHomeViewModel {
   /// Takes the full content, applies the user's customization and provides back the filtered sections
   static func customizedContent(full: Driver<[TKUIHomeViewModel.Section]>, customization: Observable<[TKUIHomeCard.CustomizedItem]>) -> Driver<[TKUIHomeViewModel.Section]> {
     
+    guard !TKUIHomeCard.config.ignoreComponentCustomization else { return full }
+    
     return Driver.combineLatest(full, customization.asDriver(onErrorJustReturn: [])) { full, customization -> [TKUIHomeViewModel.Section] in
       
       return full
