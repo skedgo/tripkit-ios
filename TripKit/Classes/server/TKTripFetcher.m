@@ -50,7 +50,7 @@
      }];
   };
   
-  [self hitURLForTripDownload:url completion:
+  [self hitURLForTripDownload:url includeStops:YES completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
      if (JSON) {
        [TKJSONCache save:identifier dictionary:JSON directory:directory subdirectory:nil];
@@ -81,7 +81,7 @@
     return;
   }
   
-  [self hitURLForTripDownload:updateURL completion:^(NSURL *shareURL, id JSON, NSError *error) {
+  [self hitURLForTripDownload:updateURL includeStops:NO completion:^(NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(shareURL)
     if (JSON) {
       [self parseJSON:JSON updatingTrip:trip completion:^(Trip * _Nullable updatedTrip) {
@@ -123,6 +123,7 @@
         completion:(void(^)(NSURL *URL, Trip * __nullable trip, NSError * __nullable error))completion
 {
   [self hitURLForTripDownload:URL
+                 includeStops:NO
                    completion:
    ^(NSURL *shareURL, id JSON, NSError *error) {
 #pragma unused(shareURL)
@@ -146,7 +147,9 @@
 
 #pragma mark - Private methods
 
-- (void)hitURLForTripDownload:(NSURL *)url completion:(void (^)(NSURL *shareURL, id JSON, NSError *error))completion
+- (void)hitURLForTripDownload:(NSURL *)url
+                 includeStops:(BOOL)includeStops
+                   completion:(void (^)(NSURL *shareURL, id JSON, NSError *error))completion
 {
   NSURL *baseURL;
   if ([url.scheme isEqualToString:@"file"]) {
@@ -170,6 +173,10 @@
     } else if (pair.count == 2) {
       [paras setValue:pair[1] forKey:pair[0]];
     }
+  }
+  
+  if (includeStops) {
+    [paras setValue:@(YES) forKey:@"includeStops"];
   }
   
   // Hit it
