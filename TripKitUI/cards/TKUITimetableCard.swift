@@ -19,7 +19,11 @@ public typealias TKUIDeparturesCard = TKUITimetableCard
 public typealias TKUIDeparturesCardDelegate = TKUITimetableCardDelegate
 
 public protocol TKUITimetableCardDelegate: class {
+  
   func timetableCard(_ card: TKUITimetableCard, selectedDeparture: StopVisits)
+  
+  func timetableCard(_ card: TKUITimetableCard, for segment: TKSegment, requestedUpdateFor newTrip: Trip)
+  
 }
 
 /// A card that lists all the departures from a public transport stop (or a

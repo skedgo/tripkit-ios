@@ -35,6 +35,7 @@ public extension TKUITripOverviewCard {
         assertionFailure(); return
       }
       let pageCard = try! TKUITripModeByModeCard(startingOn: segment, mapManager: mapManager)
+      pageCard.modeByModeDelegate = card
       card.controller?.push(pageCard)
     }
     

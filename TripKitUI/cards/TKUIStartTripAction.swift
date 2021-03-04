@@ -57,6 +57,7 @@ public extension TKUITripOverviewCard {
         modeByModeCard = TKUITripModeByModeCard(trip: trip)
       }
       modeByModeCard.tripStartedHandler = actionHandler
+      modeByModeCard.modeByModeDelegate = card as? TKUITripOverviewCard
       
       controller.push(modeByModeCard)
       
