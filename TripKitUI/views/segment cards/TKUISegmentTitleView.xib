@@ -10,11 +10,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="VGo-lB-GoV" customClass="TKUISegmentTitleView" customModule="TripKitUI" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3c-vY-icO">
-                    <rect key="frame" x="16" y="12" width="40" height="40"/>
+                    <rect key="frame" x="16" y="13.5" width="40" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r1s-7w-aJM" userLabel="Mode Icon">
                             <rect key="frame" x="5" y="5" width="30" height="30"/>
@@ -39,22 +39,22 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="25R-dz-Nwr">
-                    <rect key="frame" x="64" y="8" width="109.5" height="48"/>
+                    <rect key="frame" x="64" y="8" width="109.5" height="50.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Walk" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" userLabel="Title" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="109.5" height="20.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="109.5" height="21.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <color key="textColor" red="0.097280979160000003" green="0.090294875199999999" blue="0.23543129860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Towards Mona Vale" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccR-Sw-Z6F" userLabel="Subtitle" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="20.5" width="109.5" height="14.5"/>
+                            <rect key="frame" x="0.0" y="21.5" width="109.5" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXs-Kz-Uqb" userLabel="Subsubtitle" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="35" width="109.5" height="13"/>
+                            <rect key="frame" x="0.0" y="36" width="109.5" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -69,29 +69,56 @@
                     </constraints>
                     <state key="normal" title="Close"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-sU-BPC">
+                    <rect key="frame" x="16" y="66.5" width="343" height="1"/>
+                    <color key="backgroundColor" red="0.37647058820000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Rx9-yd-Kx9"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kza-s5-XB7" userLabel="Accessory wrapper">
+                    <rect key="frame" x="16" y="75.5" width="343" height="73.5"/>
+                    <color key="backgroundColor" red="0.37647058820000001" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="73.5" id="RVb-NX-9Uo"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Kza-s5-XB7" secondAttribute="trailing" constant="16" id="8CN-ou-743"/>
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="25R-dz-Nwr" secondAttribute="trailing" constant="6" id="BVD-7f-ftn"/>
                 <constraint firstItem="d3c-vY-icO" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="FCh-Zb-LLX"/>
-                <constraint firstItem="25R-dz-Nwr" firstAttribute="centerY" secondItem="r1s-7w-aJM" secondAttribute="centerY" id="JLz-kF-s3X"/>
+                <constraint firstItem="b5B-sU-BPC" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="KIB-bO-yTX"/>
                 <constraint firstAttribute="trailing" secondItem="nv4-5c-QYr" secondAttribute="trailing" constant="4" id="Rsk-yV-HSc"/>
-                <constraint firstItem="d3c-vY-icO" firstAttribute="centerY" secondItem="VGo-lB-GoV" secondAttribute="centerY" id="Vgf-oY-gsO"/>
+                <constraint firstItem="b5B-sU-BPC" firstAttribute="top" secondItem="25R-dz-Nwr" secondAttribute="bottom" constant="8" id="UDm-sk-ZNb"/>
+                <constraint firstAttribute="trailing" secondItem="b5B-sU-BPC" secondAttribute="trailing" constant="16" id="Yni-86-k0C"/>
+                <constraint firstItem="Kza-s5-XB7" firstAttribute="top" secondItem="b5B-sU-BPC" secondAttribute="bottom" constant="8" id="Zi8-qg-neq"/>
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="-11" id="cHF-lK-bN8"/>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="dgy-wO-cUf"/>
+                <constraint firstItem="d3c-vY-icO" firstAttribute="centerY" secondItem="25R-dz-Nwr" secondAttribute="centerY" id="hrR-Hi-97A"/>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="leading" secondItem="d3c-vY-icO" secondAttribute="trailing" constant="8" id="lwa-cr-4JX"/>
+                <constraint firstItem="Kza-s5-XB7" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="sjc-ZR-Frc"/>
+                <constraint firstAttribute="bottom" secondItem="Kza-s5-XB7" secondAttribute="bottom" constant="8" id="v0T-be-kMO"/>
                 <constraint firstItem="d3c-vY-icO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="xhn-mz-HK7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="actionsWrapper" destination="Kza-s5-XB7" id="IvP-Kt-UyS"/>
+                <outlet property="actionsWrapperBottomConstraint" destination="v0T-be-kMO" id="FIP-I6-TPs"/>
+                <outlet property="actionsWrapperHeightConstraint" destination="RVb-NX-9Uo" id="t2X-Kb-SVh"/>
                 <outlet property="dismissButton" destination="nv4-5c-QYr" id="ECc-j4-pAD"/>
                 <outlet property="modeIcon" destination="r1s-7w-aJM" id="nZA-ZT-ukc"/>
                 <outlet property="modeWrapper" destination="d3c-vY-icO" id="E7X-UG-4om"/>
+                <outlet property="separator" destination="b5B-sU-BPC" id="WmA-gD-fAA"/>
+                <outlet property="separatorHeightConstraint" destination="Rx9-yd-Kx9" id="K0A-iy-ufG"/>
+                <outlet property="separatorToActionsWrapperConstraint" destination="Zi8-qg-neq" id="5Bj-47-W4E"/>
+                <outlet property="separatorToLabelStackConstraint" destination="UDm-sk-ZNb" id="4YC-9t-J4A"/>
                 <outlet property="subsubtitleLabel" destination="LXs-Kz-Uqb" id="oyk-ES-VSm"/>
                 <outlet property="subtitleLabel" destination="ccR-Sw-Z6F" id="gSY-nL-Ofu"/>
                 <outlet property="titleLabel" destination="wEO-Bf-P7i" id="dxg-Tr-QWO"/>
             </connections>
-            <point key="canvasLocation" x="81" y="-694"/>
+            <point key="canvasLocation" x="80.799999999999997" y="-652.62368815592208"/>
         </view>
     </objects>
 </document>
