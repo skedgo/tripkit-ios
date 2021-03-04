@@ -175,9 +175,7 @@
     }
   }
   
-  if (includeStops) {
-    [paras setValue:@(YES) forKey:@"includeStops"];
-  }
+  [paras setValue:@(YES) forKey:@"includeStops"];
   
   // Hit it
   [TKServer GET:baseURL paras:paras completion:
