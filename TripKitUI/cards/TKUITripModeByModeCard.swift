@@ -12,6 +12,12 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
+public protocol TKUITripModeByModeCardDelegate {
+
+  func modeByModeCard(_ card: TKUITripModeByModeCard, updatedTrip trip: Trip)
+  
+}
+
 public class TKUITripModeByModeCard: TGPageCard {
   
   public typealias TripStartedActionHandler = (TKUITripModeByModeCard, Trip) -> Void
@@ -67,6 +73,8 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// trip whose segments are presented by the mode by mode card.
   public var tripStartedHandler: TripStartedActionHandler?
     
+  public var modeByModeDelegate: TKUITripModeByModeCardDelegate?
+  
   private let viewModel: TKUITripModeByModeViewModel
   
   private let segmentCards: [SegmentCardsInfo]
@@ -166,6 +174,7 @@ public class TKUITripModeByModeCard: TGPageCard {
       .drive(onNext: { [unowned self] progress in
         guard case .updated(let updatedTrip) = progress else { return }
         self.reflectUpdates(of: updatedTrip)
+        self.modeByModeDelegate?.modeByModeCard(self, updatedTrip: updatedTrip)
       })
       .disposed(by: disposeBag)
     
@@ -365,6 +374,7 @@ extension TKUITripModeByModeCard {
           mapManager: mapManager as? TKUITripMapManager
         )
         newCard.style = self.style
+        newCard.modeByModeDelegate = self.modeByModeDelegate
         controller?.swap(for: newCard, animated: true)
       } catch {
         TKLog.warn("Could not rebuild due to \(error)")

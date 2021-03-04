@@ -334,6 +334,16 @@ extension TKUITripOverviewCard {
   
 }
 
+// MARK: - Mode-by-mode updates
+
+extension TKUITripOverviewCard: TKUITripModeByModeCardDelegate {
+  
+  public func modeByModeCard(_ card: TKUITripModeByModeCard, updatedTrip trip: Trip) {
+    refreshContent.onNext(())
+  }
+  
+}
+
 // MARK: - Trip actions
 
 extension TKUITripOverviewCard {
@@ -356,12 +366,4 @@ extension TKUITripOverviewCard {
     return actionsView
   }
 
-}
-
-extension TKUITripOverviewCard {
-  
-  public func refresh() {
-    refreshContent.onNext(())
-  }
-  
 }
