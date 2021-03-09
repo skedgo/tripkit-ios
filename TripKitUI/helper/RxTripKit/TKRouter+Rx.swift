@@ -32,6 +32,18 @@ extension Reactive where Base : TKTripFetcher {
       }
     }
   }
+  
+  public static func update(_ trip: Trip) -> Single<Bool> {
+    return Single.create { observer in
+      var fetcher: TKTripFetcher! = TKTripFetcher()
+      fetcher.update(trip) { _, updated in
+        observer(.success(updated))
+      }
+      return Disposables.create {
+        fetcher = nil
+      }
+    }
+  }
 }
  
 extension Reactive where Base : TKRouter {
