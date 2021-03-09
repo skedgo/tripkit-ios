@@ -15,48 +15,45 @@ import RxCocoa
 /// transport service.
 class TKUIServiceViewModel {
   
-  typealias DataInput = (
-    embarkation: StopVisits,
-    disembarkation: StopVisits?
-  )
+  enum DataInput {
+    case visits(embarkation: StopVisits, disembarkation: StopVisits? = nil)
+    case segment(TKSegment)
+  }
   
   /// - Parameters:
   ///   - dataInput: What to show
   ///   - itemSelected: UI input of selected item
   init(dataInput: DataInput, itemSelected: Signal<Item>) {
     
-    embarkationPair = (dataInput.embarkation, dataInput.disembarkation)
-    
     let errorPublisher = PublishSubject<Error>()
     
-    let realTimeUpdate = TKUIServiceViewModel.fetchRealTimeUpdates(embarkation: dataInput.embarkation)
-      .asDriver(onErrorJustReturn: .idle)
-    self.realTimeUpdate = realTimeUpdate
+    let withEmbarkation = Self.getEmbarkation(for: dataInput)
+      .asObservable()
+      .share(replay: 1, scope: .forever)
+    
+    let realTimeUpdate =
+      withEmbarkation
+      .flatMapLatest { TKUIServiceViewModel.fetchRealTimeUpdates(embarkation: $0.0) }
+    self.realTimeUpdate = realTimeUpdate.asDriver(onErrorJustReturn: .idle)
     
     let withNewRealTime = realTimeUpdate
       .filter { if case .updated = $0 { return true } else { return false } }
       .startWith(.updated(()))
       .map { _ in }
     
-    let withContent = TKUIServiceViewModel
-      .fetchServiceContent(embarkation: dataInput.embarkation)
-      .map { (dataInput.embarkation, dataInput.disembarkation) } // match input to `build*` methods
-      .asDriver(onErrorRecover: { error in
-        errorPublisher.onNext(error)
-        return .empty()
-      })
-
     header = withNewRealTime
       .asObservable()
-      .compactMap { TKUIDepartureCellContent.build(embarkation: dataInput.embarkation, disembarkation: dataInput.disembarkation) }
+      .withLatestFrom(withEmbarkation)
+      .compactMap(TKUIDepartureCellContent.build)
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = Driver.combineLatest(withNewRealTime, withContent) { $1 }
+    sections = Observable.combineLatest(withNewRealTime, withEmbarkation) { $1 }
       .map(TKUIServiceViewModel.buildSections)
+      .asDriver(onErrorJustReturn: [])
     
     // Map content doesn't change with real-time
-    let mapContent = withContent.map(TKUIServiceViewModel.buildMapContent)
-    self.mapContent = mapContent
+    let mapContent = withEmbarkation.map(TKUIServiceViewModel.buildMapContent)
+    self.mapContent = mapContent.asDriver(onErrorJustReturn: nil)
     
     selectAnnotation = itemSelected
       .asObservable()
@@ -66,8 +63,6 @@ class TKUIServiceViewModel {
     
     error = errorPublisher.asDriver(onErrorRecover: { Driver.just($0) })
   }
-  
-  let embarkationPair: TKUIServiceCard.EmbarkationPair
   
   /// Title view with details about the embarkation.
   /// Can change with real-time data.
@@ -92,6 +87,30 @@ class TKUIServiceViewModel {
   
   /// User-relevant errors, e.g., if service content couldn't get downloaded
   let error: Driver<Error>
+  
+}
+
+extension TKUIServiceViewModel {
+  
+  private static func getEmbarkation(for input: DataInput) -> Single<(StopVisits, StopVisits?)> {
+    switch input {
+    case .visits(let embarkation, let disembarkation):
+      return .just((embarkation, disembarkation))
+    case .segment(let segment):
+      guard let service = segment.service else {
+        assertionFailure("Used an incompatible segment")
+        return .never()
+      }
+      
+      if service.hasServiceData, let embarkation = segment.embarkation {
+        return .just((embarkation, segment.disembarkation))
+      
+      } else {
+        return TKBuzzInfoProvider.rx.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: segment.startRegion!)
+          .map { (segment.embarkation!, segment.disembarkation) }
+      }
+    }
+  }
   
 }
 

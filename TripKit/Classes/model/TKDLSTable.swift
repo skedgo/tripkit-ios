@@ -22,6 +22,7 @@ public class TKDLSTable: NSObject {
     let endSegment = segment.finalSegmentIncludingContinuation()
     
     guard
+      segment.isPublicTransport,
       let request = segment.trip?.request,
       let moc = request.managedObjectContext,
       let start = segment.scheduledStartStopCode,

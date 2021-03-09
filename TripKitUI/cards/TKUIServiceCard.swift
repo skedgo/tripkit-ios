@@ -40,8 +40,24 @@ public class TKUIServiceCard: TKUITableCard {
   /// - Parameters:
   ///   - embarkation: Where to get onto the service
   ///   - disembarkation: Where to get off the service (optional)
-  public init(titleView: (UIView, UIButton)? = nil, embarkation: StopVisits, disembarkation: StopVisits? = nil, reusing: TKUITripMapManager? = nil) {
-    dataInput = (embarkation, disembarkation)
+  public convenience init(titleView: (UIView, UIButton)? = nil, embarkation: StopVisits, disembarkation: StopVisits? = nil, reusing: TKUITripMapManager? = nil) {
+    self.init(titleView: titleView, dataInput: .visits(embarkation: embarkation, disembarkation: disembarkation), reusing: reusing)
+  }
+  
+  /// Configures a new instance that will fetch the service details for the provided public transport segment
+  /// and the show them in the list and on the map.
+  ///
+  /// - Note: When initialised this `config.serviceActionsFactory` is not used.
+  ///
+  /// - Parameters:
+  ///   - segment: A public transport segment. Will not work when provided with a different type of segment.
+  public convenience init(titleView: (UIView, UIButton)? = nil, publicTransportSegment segment: TKSegment, reusing: TKUITripMapManager? = nil) {
+    assert(segment.isPublicTransport)
+    self.init(titleView: titleView, dataInput: .segment(segment), reusing: reusing)
+  }
+  
+  private init(titleView: (UIView, UIButton)? = nil, dataInput: TKUIServiceViewModel.DataInput, reusing: TKUITripMapManager? = nil) {
+    self.dataInput = dataInput
     
     let title: CardTitle
     if let view = titleView {
@@ -72,22 +88,7 @@ public class TKUIServiceCard: TKUITableCard {
   }
   
   required convenience public init?(coder: NSCoder) {
-    // TODO: Not yet implemented
-    return nil
-
-//    guard let embarkation: StopVisits = coder.decodeManaged(forKey: "embarkation", in: TripKit.shared.tripKitContext) else {
-//      return nil
-//    }
-//    let disembarkation: StopVisits? = coder.decodeManaged(forKey: "disembarkation", in: TripKit.shared.tripKitContext)
-//    self.init(embarkation: embarkation, disembarkation: disembarkation)
-//
-//    didInit()
-  }
-  
-  override public func encode(with aCoder: NSCoder) {
-    // TODO: Not yet implemented
-//    aCoder.encodeManaged(dataInput.embarkation, forKey: "embarkation")
-//    aCoder.encodeManaged(dataInput.disembarkation, forKey: "disembarkation")
+    return nil // not supported
   }
   
   private func didInit() {
@@ -135,10 +136,11 @@ public class TKUIServiceCard: TKUITableCard {
     
     // Setting up actions view
     
-    if let titleView = self.titleView, let factory = Self.config.serviceActionsFactory {
-      let actions = factory(viewModel.embarkationPair)
+    if let titleView = self.titleView, let factory = Self.config.serviceActionsFactory, case let .visits(embarkation, disembarkation) = dataInput {
+      let pair: TKUIServiceCard.EmbarkationPair = (embarkation, disembarkation)
+      let actions = factory(pair)
       let actionsView = ServiceCardActionsView()
-      actionsView.configure(with: actions, model: viewModel.embarkationPair, card: self)
+      actionsView.configure(with: actions, model: pair, card: self)
       actionsView.hideSeparator = true
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }

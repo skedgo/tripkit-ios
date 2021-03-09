@@ -396,7 +396,9 @@ public class TKSegment: NSObject {
   @objc public lazy var smsNumber: String? = template?.smsNumber
 
   @objc public var embarkation: StopVisits? {
-    return service?.sortedVisits.first { visit in
+    guard let service = service else { return nil }
+    guard service.hasServiceData else { return service.visits?.first }
+    return service.sortedVisits.first { visit in
       return self.segmentVisits[visit.stop.stopCode] == true
     }
   }
