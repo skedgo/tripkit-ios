@@ -103,11 +103,11 @@ extension TKUIServiceViewModel {
       }
       
       if service.hasServiceData, let embarkation = segment.embarkation {
-        return .just((embarkation, segment.disembarkation))
+        return .just((embarkation, segment.finalSegmentIncludingContinuation().disembarkation))
       
       } else {
         return TKBuzzInfoProvider.rx.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: segment.startRegion!)
-          .map { (segment.embarkation!, segment.disembarkation) }
+          .map { (segment.embarkation!, segment.finalSegmentIncludingContinuation().disembarkation) }
       }
     }
   }
