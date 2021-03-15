@@ -31,8 +31,7 @@ class TKUIServiceViewModel {
       .asObservable()
       .share(replay: 1, scope: .forever)
     
-    let realTimeUpdate =
-      withEmbarkation
+    let realTimeUpdate = withEmbarkation
       .flatMapLatest { TKUIServiceViewModel.fetchRealTimeUpdates(embarkation: $0.0) }
     self.realTimeUpdate = realTimeUpdate.asDriver(onErrorJustReturn: .idle)
     
@@ -95,7 +94,13 @@ extension TKUIServiceViewModel {
   private static func getEmbarkation(for input: DataInput) -> Single<(StopVisits, StopVisits?)> {
     switch input {
     case .visits(let embarkation, let disembarkation):
-      return .just((embarkation, disembarkation))
+      if embarkation.service.hasServiceData {
+        return .just((embarkation, disembarkation))
+      } else {
+        return TKBuzzInfoProvider.rx.downloadContent(of: embarkation.service, forEmbarkationDate: embarkation.departure ?? Date(), in: embarkation.service.region!)
+          .map { (embarkation, disembarkation) }
+      }
+      
     case .segment(let segment):
       guard let service = segment.service else {
         assertionFailure("Used an incompatible segment")
