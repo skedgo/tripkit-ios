@@ -43,9 +43,11 @@ extension TKAPI {
   public struct AppInfo: Codable, Hashable {
     public let name: String?
     public let downloadURL: URL?
+    public let deepLink: URL?
     
     public enum CodingKeys: String, CodingKey {
       case name
+      case deepLink
       case downloadURL = "appURLiOS"
     }
   }
