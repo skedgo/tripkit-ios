@@ -31,7 +31,7 @@ extension Reactive where Base: TKServer {
     return Single.create { subscriber in
       self.base.requireRegions { error in
         guard error == nil else {
-          subscriber(.error(error!))
+          subscriber(.failure(error!))
           return
         }
         subscriber(.success(()))

@@ -6,6 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !os(watchOS)
 import RxSwift
 import XCTest
 /**
@@ -19,7 +20,7 @@ Event is considered equal if:
 - parameter lhs: first set of events.
 - parameter lhs: second set of events.
 */
-public func XCTAssertEqual<Element: Equatable>(_ lhs: [Event<Element>], _ rhs: [Event<Element>], file: StaticString = #filePath, line: UInt = #line) {
+public func XCTAssertEqual<Element: Equatable>(_ lhs: [Event<Element>], _ rhs: [Event<Element>], file: StaticString = #file, line: UInt = #line) {
     let leftEquatable = lhs.map { AnyEquatable(target: $0, comparer: ==) }
     let rightEquatable = rhs.map { AnyEquatable(target: $0, comparer: ==) }
     #if os(Linux)
@@ -45,7 +46,33 @@ public func XCTAssertEqual<Element: Equatable>(_ lhs: [Event<Element>], _ rhs: [
  - parameter lhs: first set of events.
  - parameter lhs: second set of events.
  */
-public func XCTAssertEqual<Element: Equatable>(_ lhs: [SingleEvent<Element>], _ rhs: [SingleEvent<Element>], file: StaticString = #filePath, line: UInt = #line) {
+public func XCTAssertEqual<Element: Equatable>(_ lhs: [SingleEvent<Element>], _ rhs: [SingleEvent<Element>], file: StaticString = #file, line: UInt = #line) {
+    let leftEquatable = lhs.map { AnyEquatable(target: try? $0.get(), comparer: ==) }
+    let rightEquatable = rhs.map { AnyEquatable(target: try? $0.get(), comparer: ==) }
+    #if os(Linux)
+        XCTAssertEqual(leftEquatable, rightEquatable)
+    #else
+        XCTAssertEqual(leftEquatable, rightEquatable, file: file, line: line)
+    #endif
+    if leftEquatable == rightEquatable {
+        return
+    }
+
+    printSequenceDifferences(lhs.map { try? $0.get() }, rhs.map { try? $0.get() }, ==)
+}
+
+/**
+ Asserts two lists of events are equal.
+
+ Event is considered equal if:
+ * `Next` events are equal if they have equal corresponding elements.
+ * `Error` events are equal if errors have same domain and code for `NSError` representation and have equal descriptions.
+ * `Completed` events are always equal.
+
+ - parameter lhs: first set of events.
+ - parameter lhs: second set of events.
+ */
+public func XCTAssertEqual<Element: Equatable>(_ lhs: [MaybeEvent<Element>], _ rhs: [MaybeEvent<Element>], file: StaticString = #file, line: UInt = #line) {
     let leftEquatable = lhs.map { AnyEquatable(target: $0, comparer: ==) }
     let rightEquatable = rhs.map { AnyEquatable(target: $0, comparer: ==) }
     #if os(Linux)
@@ -71,33 +98,7 @@ public func XCTAssertEqual<Element: Equatable>(_ lhs: [SingleEvent<Element>], _ 
  - parameter lhs: first set of events.
  - parameter lhs: second set of events.
  */
-public func XCTAssertEqual<Element: Equatable>(_ lhs: [MaybeEvent<Element>], _ rhs: [MaybeEvent<Element>], file: StaticString = #filePath, line: UInt = #line) {
-    let leftEquatable = lhs.map { AnyEquatable(target: $0, comparer: ==) }
-    let rightEquatable = rhs.map { AnyEquatable(target: $0, comparer: ==) }
-    #if os(Linux)
-        XCTAssertEqual(leftEquatable, rightEquatable)
-    #else
-        XCTAssertEqual(leftEquatable, rightEquatable, file: file, line: line)
-    #endif
-    if leftEquatable == rightEquatable {
-        return
-    }
-
-    printSequenceDifferences(lhs, rhs, ==)
-}
-
-/**
- Asserts two lists of events are equal.
-
- Event is considered equal if:
- * `Next` events are equal if they have equal corresponding elements.
- * `Error` events are equal if errors have same domain and code for `NSError` representation and have equal descriptions.
- * `Completed` events are always equal.
-
- - parameter lhs: first set of events.
- - parameter lhs: second set of events.
- */
-public func XCTAssertEqual(_ lhs: [CompletableEvent], _ rhs: [CompletableEvent], file: StaticString = #filePath, line: UInt = #line) {
+public func XCTAssertEqual(_ lhs: [CompletableEvent], _ rhs: [CompletableEvent], file: StaticString = #file, line: UInt = #line) {
     let leftEquatable = lhs.map { AnyEquatable(target: $0, comparer: ==) }
     let rightEquatable = rhs.map { AnyEquatable(target: $0, comparer: ==) }
     #if os(Linux)
@@ -125,7 +126,7 @@ Event is considered equal if:
 - parameter lhs: first set of events.
 - parameter lhs: second set of events.
 */
-public func XCTAssertEqual<Element: Equatable>(_ lhs: [Recorded<Event<Element>>], _ rhs: [Recorded<Event<Element>>], file: StaticString = #filePath, line: UInt = #line) {
+public func XCTAssertEqual<Element: Equatable>(_ lhs: [Recorded<Event<Element>>], _ rhs: [Recorded<Event<Element>>], file: StaticString = #file, line: UInt = #line) {
     let leftEquatable = lhs.map { AnyEquatable(target: $0, comparer: ==) }
     let rightEquatable = rhs.map { AnyEquatable(target: $0, comparer: ==) }
     #if os(Linux)
@@ -154,7 +155,7 @@ public func XCTAssertEqual<Element: Equatable>(_ lhs: [Recorded<Event<Element>>]
  - parameter lhs: first set of events.
  - parameter lhs: second set of events.
  */
-public func XCTAssertEqual<Element: Equatable>(_ lhs: [Recorded<Event<Element?>>], _ rhs: [Recorded<Event<Element?>>], file: StaticString = #filePath, line: UInt = #line) {
+public func XCTAssertEqual<Element: Equatable>(_ lhs: [Recorded<Event<Element?>>], _ rhs: [Recorded<Event<Element?>>], file: StaticString = #file, line: UInt = #line) {
     let leftEquatable = lhs.map { AnyEquatable(target: $0, comparer: ==) }
     let rightEquatable = rhs.map { AnyEquatable(target: $0, comparer: ==) }
     #if os(Linux)
@@ -179,7 +180,7 @@ public func XCTAssertEqual<Element: Equatable>(_ lhs: [Recorded<Event<Element?>>
  - parameter stream: Array of recorded events.
  - parameter elements: Array of expected elements.
 */
-public func XCTAssertRecordedElements<Element: Equatable>(_ stream: [Recorded<Event<Element>>], _ elements: [Element], file: StaticString = #filePath, line: UInt = #line) {
+public func XCTAssertRecordedElements<Element: Equatable>(_ stream: [Recorded<Event<Element>>], _ elements: [Element], file: StaticString = #file, line: UInt = #line) {
 
     if let stopEvent = stream.first(where: { $0.value.isStopEvent }) {
         #if os(Linux)
@@ -230,3 +231,4 @@ func printSequenceDifferences<Element>(_ lhs: [Element], _ rhs: [Element], _ equ
         print("rhs[\(index + shortest)]:\n    \(element)")
     }
 }
+#endif

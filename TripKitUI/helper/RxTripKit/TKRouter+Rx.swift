@@ -24,7 +24,7 @@ extension Reactive where Base : TKTripFetcher {
         if let trip = trip {
           observer(.success(trip))
         } else {
-          observer(.error(TKTripFetcher.FetchError.downloadFailed))
+          observer(.failure(TKTripFetcher.FetchError.downloadFailed))
         }
       }
       return Disposables.create {
@@ -56,7 +56,7 @@ extension Reactive where Base : TKRouter {
       router.fetchBestTrip(for: request) { result in
         switch result {
         case .failure(let error):
-          subscriber(.error(error))
+          subscriber(.failure(error))
         case .success(let trip):
           subscriber(.success(trip))
         }

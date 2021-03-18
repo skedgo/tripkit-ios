@@ -100,7 +100,7 @@ class TKUIAutocompletionViewModel {
       .flatMapLatest { fetched -> Observable<MKAnnotation> in
         return fetched
           .asObservable()
-          .catchError { error in
+          .catch { error in
             errorPublisher.onNext(error)
             return Observable.empty()
         }
@@ -113,7 +113,7 @@ class TKUIAutocompletionViewModel {
       .flatMapLatest { result -> Observable<MKAnnotation> in
         return result.annotation
           .asObservable()
-          .catchError { error in
+          .catch { error in
             errorPublisher.onNext(error)
             return Observable.empty()
         }

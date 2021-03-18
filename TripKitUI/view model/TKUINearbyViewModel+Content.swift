@@ -112,7 +112,7 @@ extension TKUINearbyViewModel {
             strictModeMatch: strictModeMatch
           )
           .asObservable()
-          .catchError { error in
+        .catch { error in
             errorPublisher.onNext(error)
             return .just([])
           }

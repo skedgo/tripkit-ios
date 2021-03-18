@@ -32,13 +32,13 @@ extension TKUIServiceViewModel {
         if success {
           subscriber(.success(()))
         } else {
-          subscriber(.error(FetchError.couldNotFetchServiceContent))
+          subscriber(.failure(FetchError.couldNotFetchServiceContent))
         }
       }
       return Disposables.create {
         infoProvider = nil
       }
-    }.observeOn(MainScheduler.instance)
+    }.observe(on: MainScheduler.instance)
     
   }
   
@@ -81,7 +81,7 @@ extension Reactive where Base: TKBuzzRealTime {
           subscriber(.success(()))
         },
         failure: { error in
-          subscriber(.error(error ?? TKUIServiceViewModel.FetchError.unknownError))
+          subscriber(.failure(error ?? TKUIServiceViewModel.FetchError.unknownError))
         }
       )
       return Disposables.create()
