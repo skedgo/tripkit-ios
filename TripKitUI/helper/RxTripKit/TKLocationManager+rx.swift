@@ -37,7 +37,7 @@ public extension Reactive where Base : TKLocationManager {
       self.base.fetchCurrentLocation(within: seconds, success: { (location) in
         observer(.success(location))
       }, failure: { (error) in
-        observer(.error(error))
+        observer(.failure(error))
       })
       
       return Disposables.create()

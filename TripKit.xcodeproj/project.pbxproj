@@ -1765,20 +1765,20 @@
 		3A1F73F425C8F56200C72CEE /* RxTest */ = {
 			isa = PBXGroup;
 			children = (
-				3A1F73F525C8F56200C72CEE /* HotObservable.swift */,
-				3A1F73F625C8F56200C72CEE /* TestableObservable.swift */,
-				3A1F73F725C8F56200C72CEE /* Recorded+Event.swift */,
 				3A1F73F825C8F56200C72CEE /* Any+Equatable.swift */,
-				3A1F73F925C8F56200C72CEE /* Platform */,
-				3A1F73FC25C8F56200C72CEE /* Event+Equatable.swift */,
-				3A1F73FD25C8F56200C72CEE /* TestableObserver.swift */,
-				3A1F73FE25C8F56200C72CEE /* Subscription.swift */,
-				3A1F73FF25C8F56200C72CEE /* Deprecated.swift */,
-				3A1F740025C8F56200C72CEE /* Recorded.swift */,
-				3A1F740125C8F56200C72CEE /* XCTest+Rx.swift */,
 				3A1F740225C8F56200C72CEE /* ColdObservable.swift */,
+				3A1F73FF25C8F56200C72CEE /* Deprecated.swift */,
+				3A1F73FC25C8F56200C72CEE /* Event+Equatable.swift */,
+				3A1F73F525C8F56200C72CEE /* HotObservable.swift */,
+				3A1F73F925C8F56200C72CEE /* Platform */,
+				3A1F740025C8F56200C72CEE /* Recorded.swift */,
+				3A1F73F725C8F56200C72CEE /* Recorded+Event.swift */,
 				3A1F740425C8F56200C72CEE /* RxTest.swift */,
 				3A1F740525C8F56200C72CEE /* Schedulers */,
+				3A1F73FE25C8F56200C72CEE /* Subscription.swift */,
+				3A1F73F625C8F56200C72CEE /* TestableObservable.swift */,
+				3A1F73FD25C8F56200C72CEE /* TestableObserver.swift */,
+				3A1F740125C8F56200C72CEE /* XCTest+Rx.swift */,
 			);
 			path = RxTest;
 			sourceTree = "<group>";
@@ -1811,12 +1811,12 @@
 		3A1F740825C8F56200C72CEE /* RxBlocking */ = {
 			isa = PBXGroup;
 			children = (
-				3A1F740925C8F56200C72CEE /* Platform */,
 				3A1F740F25C8F56200C72CEE /* BlockingObservable.swift */,
-				3A1F741025C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift */,
-				3A1F741125C8F56200C72CEE /* RunLoopLock.swift */,
-				3A1F741225C8F56200C72CEE /* Resources.swift */,
 				3A1F741425C8F56200C72CEE /* BlockingObservable+Operators.swift */,
+				3A1F741025C8F56200C72CEE /* ObservableConvertibleType+Blocking.swift */,
+				3A1F740925C8F56200C72CEE /* Platform */,
+				3A1F741225C8F56200C72CEE /* Resources.swift */,
+				3A1F741125C8F56200C72CEE /* RunLoopLock.swift */,
 			);
 			path = RxBlocking;
 			sourceTree = "<group>";
@@ -4897,7 +4897,7 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 6.1.0;
 			};
 		};
 		3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {

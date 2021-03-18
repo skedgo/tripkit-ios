@@ -171,7 +171,7 @@ open class TKUIHomeCard: TKUITableCard {
     // Map interaction
     
     homeMapManager?.nextFromMap
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] in self?.actionTriggered.onNext($0) })
       .disposed(by: disposeBag)
   }

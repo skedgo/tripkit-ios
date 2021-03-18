@@ -20,7 +20,7 @@ extension Reactive where Base == TKBuzzInfoProvider {
         if success {
           subscriber(.success(()))
         } else {
-          subscriber(.error(TKError(code: 87612, message: "Could not download service data.")))
+          subscriber(.failure(TKError(code: 87612, message: "Could not download service data.")))
         }
       }
       

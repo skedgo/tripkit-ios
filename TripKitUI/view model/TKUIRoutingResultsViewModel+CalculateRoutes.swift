@@ -216,7 +216,7 @@ extension TKUIRoutingResultsViewModel {
               try? request.managedObjectContext?.save()
             }
           })
-          .catchError { error in
+          .catch { error in
             errorPublisher.onNext(error)
             return .just(.finished)
           }
@@ -273,7 +273,7 @@ extension TripRequest {
       originObservable = .just(from)
     } else {
       originObservable = geocode(self.fromLocation, retryLimit: 5, delay: 5)
-        .catchErrorJustReturn(nil)
+        .catchAndReturn(nil)
         .startWith(nil)
     }
     
@@ -282,7 +282,7 @@ extension TripRequest {
       destinationObservable = .just(to)
     } else {
       destinationObservable = geocode(self.toLocation, retryLimit: 5, delay: 5)
-        .catchErrorJustReturn(nil)
+        .catchAndReturn(nil)
         .startWith(nil)
     }
     
@@ -293,7 +293,7 @@ extension TripRequest {
     return CLGeocoder().rx
     .reverseGeocode(namedCoordinate: location)
     .asObservable()
-    .retryWhen { errors in
+      .retry { errors in
       return errors.enumerated().flatMap { (index, error) -> Observable<Int> in
         guard index < retryLimit else { throw error }
         return Observable<Int>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
@@ -390,7 +390,7 @@ extension Reactive where Base: CLGeocoder {
       let geocoder = CLGeocoder()
       geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
         if let error = error {
-          single(.error(error))
+          single(.failure(error))
         } else {
           single(.success(placemarks?.first?.name))
         }

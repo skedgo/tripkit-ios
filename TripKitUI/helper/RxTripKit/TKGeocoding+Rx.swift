@@ -26,7 +26,7 @@ public extension TKGeocoding {
         case .success(let coordinates):
           subscriber(.success(coordinates))
         case .failure(let error):
-          subscriber(.error(error))
+          subscriber(.failure(error))
         }
       }
       return Disposables.create()
@@ -53,7 +53,7 @@ public extension TKAutocompleting {
         case .success(let results):
           subscriber(.success(results))
         case .failure(let error):
-          subscriber(.error(error))
+          subscriber(.failure(error))
         }
       }
       return Disposables.create()
@@ -72,7 +72,7 @@ public extension TKAutocompleting {
         case .success(let annotation):
           subscriber(.success(annotation))
         case .failure(let error):
-          subscriber(.error(error))
+          subscriber(.failure(error))
         }
       }
       return Disposables.create()
@@ -98,7 +98,7 @@ public extension Reactive where Base == TKGeocoderHelper {
       TKGeocoderHelper.geocode(object, using: geocoder, near: region) { result in
         switch result {
         case .success: subscriber(.success(()))
-        case .failure(let error): subscriber(.error(error))
+        case .failure(let error): subscriber(.failure(error))
         }
       }
       return Disposables.create()
@@ -133,7 +133,7 @@ public extension Array where Element == TKAutocompleting {
         let autocompletions = self.map { provider in
           provider
             .autocomplete(input.0, near: mapRect)
-            .catchErrorJustReturn([])
+            .catchAndReturn([])
             .map { results -> [TKAutocompletionResult] in
               results.forEach { $0.provider = provider as AnyObject }
               return results
@@ -167,7 +167,7 @@ extension ObservableType {
       //    => This means that if 2 fires before 1, then we only take 2
       
       let observables = collection
-        .map { $0.catchErrorJustReturn([]) }
+        .map { $0.catchAndReturn([]) }
       
       let merged = Observable.merge(observables)
         .scan(into: []) { $0.append(contentsOf: $1) }
@@ -177,7 +177,7 @@ extension ObservableType {
       // ... This represents 1.: What are the best X results when the timer first?
       let timeOut = Observable<Int>.timer(cutOff, scheduler: SharingScheduler.make())
       let fast = merged
-        .takeUntil(timeOut)
+        .take(until: timeOut)
         .takeLast(1)
         .map { Array($0.prefix(fastSpots)) }
       
@@ -223,7 +223,7 @@ extension Reactive where Base: MKLocalSearch {
     return Single.create { subscriber in
       self.base.start { results, error in
         if let error = error {
-          subscriber(.error(error))
+          subscriber(.failure(error))
         } else {
           subscriber(.success(results?.mapItems ?? []))
         }
