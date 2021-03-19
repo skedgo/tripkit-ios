@@ -96,9 +96,11 @@ extension TKUIServiceViewModel {
     case .visits(let embarkation, let disembarkation):
       if embarkation.service.hasServiceData {
         return .just((embarkation, disembarkation))
-      } else {
-        return TKBuzzInfoProvider.rx.downloadContent(of: embarkation.service, forEmbarkationDate: embarkation.departure ?? Date(), in: embarkation.service.region!)
+      } else if let region = embarkation.service.region {
+        return TKBuzzInfoProvider.rx.downloadContent(of: embarkation.service, forEmbarkationDate: embarkation.departure ?? Date(), in: region)
           .map { (embarkation, disembarkation) }
+      } else {
+        return .error(NSError(code: 57123, message: "Could not find region for service '\(embarkation.service.code)'."))
       }
       
     case .segment(let segment):
@@ -110,9 +112,11 @@ extension TKUIServiceViewModel {
       if service.hasServiceData, let embarkation = segment.embarkation {
         return .just((embarkation, segment.finalSegmentIncludingContinuation().disembarkation))
       
-      } else {
-        return TKBuzzInfoProvider.rx.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: segment.startRegion!)
+      } else if let region = segment.startRegion {
+        return TKBuzzInfoProvider.rx.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: region)
           .map { (segment.embarkation!, segment.finalSegmentIncludingContinuation().disembarkation) }
+      } else {
+        return .error(NSError(code: 57123, message: "Could not find region for segment '\(segment.description)'."))
       }
     }
   }

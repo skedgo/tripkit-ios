@@ -82,11 +82,9 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKCalendarManager.h"
 #import "TKLocationManager.h"
 
-#if TARGET_OS_IPHONE
 // UI
 #import "TKStyleManager+UIKit.h"
 #import "UIFont+CustomFonts.h"
-#endif
 
 // Deprecated
 #import "SGDeprecatedAutocompletionDataProvider.h"
