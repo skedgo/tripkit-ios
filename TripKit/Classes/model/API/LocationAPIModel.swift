@@ -195,11 +195,33 @@ extension TKAPI {
       case vehicleType
       case source
       case name
-      case isAvailable
+      case isAvailable = "available"
       case batteryLevel
       case batteryRange
       case lastUpdate
-      case deepLink
+      case deepLink = "deepLinks"
+    }
+    
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      identifier = try container.decode(String.self, forKey: .identifier)
+      operatorInfo = try container.decode(TKAPI.CompanyInfo.self, forKey: .operatorInfo)
+      vehicleType = try container.decode(SharedVehicleType.self, forKey: .vehicleType)
+      source = try? container.decode(TKAPI.DataAttribution.self, forKey: .source)
+      
+      if let deepLinkDict = try? container.decode([String: String].self, forKey: .deepLink),
+         let link = deepLinkDict["ios"],
+         let linkURL = URL(string: link) {
+        deepLink = linkURL
+      } else {
+        deepLink = nil
+      }
+      
+      name = try? container.decode(String.self, forKey: .name)
+      isAvailable = try? container.decode(Bool.self, forKey: .isAvailable)
+      batteryLevel = try? container.decode(Int.self, forKey: .batteryLevel)
+      batteryRange = try? container.decode(Int.self, forKey: .batteryRange)
+      lastUpdate = try? container.decode(TimeInterval.self, forKey: .lastUpdate)
     }
     
     public var hasRealTime: Bool { true }
