@@ -58,12 +58,13 @@ public class TKUINearbyViewModel {
   ///   - pickedModes: The selected modes (only used if `mode == nil`)
   ///   - mapCenter: The centre of the map, if the user moved it, should drive with `nil` if map is centred on the user's current location
   public required init(
-      limitTo mode: String? = nil,
-      strictModeMatch: Bool = true,
-      fixedLocation: MKAnnotation? = nil,
-      cardInput: ListInput = ListInput(),
-      mapInput: MapInput = MapInput()
-    ) {
+    limitTo mode: String? = nil,
+    strictModeMatch: Bool = true,
+    fixedLocation: MKAnnotation? = nil,
+    selectedLocationID: String? = nil,
+    cardInput: ListInput = ListInput(),
+    mapInput: MapInput = MapInput()
+  ) {
 
     // Where we'll pass on any errors
     let errorPublisher = PublishSubject<Error>()
@@ -119,7 +120,7 @@ public class TKUINearbyViewModel {
       .asDriver(onErrorJustReturn: [])
     
     self.sections = filteredNearby
-      .map { Self.buildSections(content: $0, deviceLocation: deviceLocation, deviceHeading: deviceHeading) }
+      .map { Self.buildSections(content: $0, deviceLocation: deviceLocation, deviceHeading: deviceHeading, selectedLocationID: selectedLocationID) }
       .startWith( [.empty] )
 
     self.mapAnnotationToSelect = cardInput.selection
