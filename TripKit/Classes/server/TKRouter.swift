@@ -185,6 +185,7 @@ extension TKRouter {
     
     let includesAllModes = request.additional.contains { $0.name == "allModes" }
     if includesAllModes {
+      modeIdentifiers = modes ?? request.modes
       fetchTrips(for: request, bestOnly: false, additional: nil, completion: completion)
       return 1
     }
