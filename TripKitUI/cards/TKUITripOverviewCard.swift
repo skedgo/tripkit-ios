@@ -166,19 +166,6 @@ public class TKUITripOverviewCard: TKUITableCard {
       .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: disposeBag)
     
-    viewModel.actions
-      .drive(onNext: { [weak self] actions in
-        guard let self = self else { return }
-        self.tableView?.tableHeaderView = self.buildActionsView(from: actions, trip: self.trip)
-      })
-      .disposed(by: disposeBag)
-    
-    viewModel.dataSources
-      .drive(onNext: { [weak self] sources in
-        self?.showAttribution(for: sources, in: tableView)
-      })
-      .disposed(by: disposeBag)
-    
     viewModel.refreshMap
       .emit(onNext: { [weak self] in
         (self?.mapManager as? TKUITripMapManager)?.updateTrip()
@@ -187,6 +174,27 @@ public class TKUITripOverviewCard: TKUITableCard {
 
     viewModel.next
       .emit(onNext: { [weak self] in self?.handle($0) })
+      .disposed(by: disposeBag)
+    
+    // We check if the view is visible before showing attribution
+    // and card actions view, otherwise we'd get AL warnings due
+    // to the table view hasn't had the correct size when the card's
+    // `didBuild(tableView:cardView)` is called.
+    
+    isVisible.asDriver(onErrorJustReturn: true)
+      .withLatestFrom(viewModel.actions) { (visible: $0, actions: $1) }
+      .drive(onNext: { [weak self] inputs in
+        guard let self = self, inputs.visible else { return }
+        tableView.tableHeaderView = self.buildActionsView(from: inputs.actions, trip: self.trip)
+      })
+      .disposed(by: disposeBag)
+    
+    isVisible.asDriver(onErrorJustReturn: true)
+      .withLatestFrom(viewModel.dataSources) { (visible: $0, dataSources: $1) }
+      .drive(onNext: { [weak self] input in
+        guard let self = self, input.visible else { return }
+        self.showAttribution(for: input.dataSources, in: tableView)
+      })
       .disposed(by: disposeBag)
   }
   

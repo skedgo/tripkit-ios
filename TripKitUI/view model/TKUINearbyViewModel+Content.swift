@@ -112,7 +112,7 @@ extension TKUINearbyViewModel {
             strictModeMatch: strictModeMatch
           )
           .asObservable()
-        .catch { error in
+          .catch { error in
             errorPublisher.onNext(error)
             return .just([])
           }
@@ -137,7 +137,7 @@ extension TKUINearbyViewModel {
     }
   }
   
-  static func buildSections(content: ViewContent, deviceLocation: Observable<CLLocation>, deviceHeading: Observable<CLLocationDirection>) -> [Section] {
+  static func buildSections(content: ViewContent, deviceLocation: Observable<CLLocation>, deviceHeading: Observable<CLLocationDirection>, selectedLocationID: String? = nil) -> [Section] {
     
     // The items also get the device location and heading so that the UI can update accordingly
     // *even if* the number of items or their sort order isn't changing.
@@ -154,6 +154,12 @@ extension TKUINearbyViewModel {
         return $0.title < $1.title
       }
     }
+    
+    // If user selected one from the nearby card, let's move the item to the top.
+    if let selected = selectedLocationID, let selectedIndex = items.firstIndex(where: { $0.modeCoordinate.locationID == selected} ) {
+      items.swapAt(0, selectedIndex)
+    }
+    
     return [Section(items:items)]
   }
   
