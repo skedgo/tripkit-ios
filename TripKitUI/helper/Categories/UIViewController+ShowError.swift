@@ -11,15 +11,15 @@ import UIKit
 import TGCardViewController
 
 extension UIViewController {
-  public func showErrorAsAlert(_ error: Error) {
-    let alertController = UIAlertController(title: Loc.Error, message: error.localizedDescription, preferredStyle: .alert)
+  public func showErrorAsAlert(_ error: Error, title: String? = nil) {
+    let alertController = UIAlertController(title: title ?? Loc.Error, message: error.localizedDescription, preferredStyle: .alert)
     alertController.addAction(UIAlertAction(title: Loc.OK, style: .cancel, handler: nil))
     present(alertController, animated: true)
   }
 }
 
 extension TGCardViewController {
-  public func show(_ error: Error) {
-    self.showErrorAsAlert(error)
+  public func show(_ error: Error, title: String? = nil) {
+    self.showErrorAsAlert(error, title: title)
   }
 }
