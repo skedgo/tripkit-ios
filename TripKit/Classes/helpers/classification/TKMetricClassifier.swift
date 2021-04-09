@@ -24,12 +24,29 @@ public class TKMetricClassifier: NSObject {
     return Classification(rawValue: token)
   }
   
-  private var weighted: (min: Float?, max: Float?)?
-  private var prices: (min: Float?, max: Float?)?
-  private var hassles: (min: Float, max: Float)?
-  private var durations: (min: Float, max: Float)?
-  private var calories: (min: Float, max: Float)?
-  private var carbons: (min: Float, max: Float)?
+  private struct MetricRange {
+    var best: Trip?
+    var min: Float? // min => best trip
+    var max: Float? // max => worst trip
+  }
+  
+  private var ranges: [Classification: MetricRange] = [:]
+  
+  @discardableResult
+  private func register(_ trip: Trip, classification: Classification) -> Bool {
+    guard let value = trip.value(for: classification) else { return false }
+    
+    var range = ranges[classification] ?? .init()
+    if value < range.min ?? .infinity {
+      range.min = value
+      range.best = trip
+    }
+    if value > range.max ?? .leastNormalMagnitude {
+      range.max = value
+    }
+    ranges[classification] = range
+    return true
+  }
 }
 
 extension TKMetricClassifier: TKTripClassifier {
@@ -38,28 +55,29 @@ extension TKMetricClassifier: TKTripClassifier {
     let trips = tripGroups.compactMap(\.representativeTrip)
     var anyHaveUnknownCost = false
     for trip in trips {
-      if let price = trip.totalPrice?.floatValue {
-        prices = (min(prices?.min ?? .infinity, price), max(prices?.max ?? .leastNormalMagnitude, price))
-      } else {
+      if !register(trip, classification: .cheapest) {
         anyHaveUnknownCost = true
       }
       
-      weighted = (min(weighted?.min ?? .infinity, trip.totalScore),
-                  max(weighted?.max ?? .leastNormalMagnitude, trip.totalScore))
-      hassles = (min(hassles?.min ?? .infinity, trip.totalHassle),
-                 max(hassles?.max ?? .leastNormalMagnitude, trip.totalHassle))
-      durations = (min(durations?.min ?? .infinity, trip.calculateDuration().floatValue),
-                   max(durations?.max ?? .leastNormalMagnitude, trip.calculateDuration().floatValue))
-      
-      // inverted!
-      calories = (min(calories?.min ?? .infinity, trip.totalCalories * -1),
-                  max(calories?.max ?? .leastNormalMagnitude, trip.totalCalories * -1))
-      
-      carbons = (min(carbons?.min ?? .infinity, trip.totalCarbon),
-                 max(carbons?.max ?? .leastNormalMagnitude, trip.totalCarbon))
+      register(trip, classification: .recommended)
+      register(trip, classification: .easiest)
+      register(trip, classification: .fastest)
+      register(trip, classification: .greenest)
+      register(trip, classification: .healthiest)
     }
+    
+    // Recommended trip defines the max on everything else
+    if let recommended = ranges[.recommended]?.best {
+      ranges[.cheapest]?.max = recommended.value(for: .cheapest)
+      ranges[.easiest]?.max = recommended.value(for: .easiest)
+      ranges[.fastest]?.max = recommended.value(for: .fastest)
+      ranges[.greenest]?.max = recommended.value(for: .greenest)
+      ranges[.healthiest]?.max = recommended.value(for: .healthiest)
+    }
+    
+    // No 'Cheapest' tag if we don't know the price of some trip.
     if anyHaveUnknownCost {
-      prices = nil
+      ranges[.cheapest] = nil
     }
   }
   
@@ -69,36 +87,63 @@ extension TKMetricClassifier: TKTripClassifier {
     
     guard let trip = tripGroup.representativeTrip else { return nil }
     
-    if let min = weighted?.min, let max = weighted?.max, matches(min: min, max: max, value: trip.totalScore) {
+    if matches(trip, classification: .recommended) {
       return TKMetricClassifier.Classification.recommended.rawValue
     }
-    if let min = durations?.min, let max = durations?.max, matches(min: min, max: max, value: trip.calculateDuration().floatValue) {
+    if matches(trip, classification: .fastest) {
       return TKMetricClassifier.Classification.fastest.rawValue
     }
-    if let min = prices?.min, let max = prices?.max, matches(min: min, max: max, value: trip.totalPrice?.floatValue) {
+    if matches(trip, classification: .cheapest) {
       return TKMetricClassifier.Classification.cheapest.rawValue
     }
-    if let min = calories?.min, let max = calories?.max, matches(min: min, max: max, value: trip.totalCalories * -1) { // inverted!
+    if matches(trip, classification: .healthiest) {
       return TKMetricClassifier.Classification.healthiest.rawValue
     }
-    if let min = hassles?.min, let max = hassles?.max, matches(min: min, max: max, value: trip.totalHassle) {
+    if matches(trip, classification: .easiest) {
       return TKMetricClassifier.Classification.easiest.rawValue
     }
-    if let min = carbons?.min, let max = carbons?.max, matches(min: min, max: max, value: trip.totalCarbon) {
+    if matches(trip, classification: .greenest) {
       return TKMetricClassifier.Classification.greenest.rawValue
     }
     return nil
   }
+
+  private func matches(_ trip: Trip, classification: Classification) -> Bool {
+    guard
+      let min = ranges[classification]?.min, let max = ranges[classification]?.max,
+      let value = trip.value(for: classification)
+    else { return false }
+    
+    guard min == value else { return false }
+    
+    // max has to be more than 25% of min, i.e., don't give the label
+    // if everything is so clsoe
+    return max > min * 1.25
+  }
+
   
   private func matches(min: Float, max: Float, value: Float?) -> Bool {
     guard let value = value else { return false }
-    guard min == value else { return false}
+    guard min == value else { return false }
     
     // max has to be more than 25% of min, i.e., don't give the label
     // if everything is so clsoe
     return max > min * 1.25
   }
   
+}
+
+fileprivate extension Trip {
+  func value(for classification: TKMetricClassifier.Classification) -> Float? {
+    switch classification {
+    case .cheapest: return totalPrice?.floatValue
+    case .recommended: return totalScore
+    case .fastest: return calculateDuration().floatValue
+    case .easiest: return totalHassle
+    case .healthiest: return totalCalories * -1 // inverted!
+    case .greenest: return totalCarbon
+    }
+  }
 }
 
 fileprivate extension TripGroup {
