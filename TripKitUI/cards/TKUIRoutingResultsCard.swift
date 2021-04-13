@@ -526,7 +526,7 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     return headerView
   }
   
-  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+  public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
     let section = dataSource.sectionModels[section]
     if section.badge?.footerContent == nil {
       return 16

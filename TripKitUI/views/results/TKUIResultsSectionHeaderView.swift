@@ -73,7 +73,9 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     badgeIcon.contentMode = .scaleAspectFit
     badgeIcon.tintColor = .tkFilledButtonTextColor
     badgeIcon.widthAnchor.constraint(equalToConstant: 16).isActive = true
-    badgeIcon.heightAnchor.constraint(equalToConstant: 16).isActive = true
+    let heightConstraint = badgeIcon.heightAnchor.constraint(equalToConstant: 16)
+    heightConstraint.priority = UILayoutPriority(rawValue: 999)
+    heightConstraint.isActive = true
     badgeIcon.translatesAutoresizingMaskIntoConstraints = false
     self.badgeIcon = badgeIcon
     wrapper.addSubview(badgeIcon)
