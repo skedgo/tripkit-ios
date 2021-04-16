@@ -135,6 +135,7 @@ private extension TKUIAnnotationViewBuilder {
     if let marker = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
       view = marker
       view.annotation = glyphable
+      view.alpha = 1
     } else {
       view = MKMarkerAnnotationView(annotation: glyphable, reuseIdentifier: identifier)
     }
@@ -182,6 +183,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIVehicleAnnotationView {
       vehicleView = recycled
       vehicleView.annotation = vehicle
+      vehicleView.alpha = 1
     } else {
       vehicleView = TKUIVehicleAnnotationView(with: vehicle, reuseIdentifier: identifier)
     }
@@ -219,6 +221,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     let semaphoreView: TKUISemaphoreView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUISemaphoreView {
       semaphoreView = recycled
+      semaphoreView.alpha = 1
       semaphoreView.update(for: annotation, heading: heading)
     } else {
       semaphoreView = TKUISemaphoreView(annotation: annotation, reuseIdentifier: identifier, heading: heading)
@@ -313,6 +316,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     let circleView: TKUICircleAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUICircleAnnotationView {
       circleView = recycled
+      circleView.alpha = 1
       circleView.annotation = annotation
     } else {
       circleView = TKUICircleAnnotationView(annotation: annotation, drawLarge: asLarge, reuseIdentifier: identifier)
@@ -353,12 +357,12 @@ fileprivate extension TKUIAnnotationViewBuilder {
     let modeView: TKUIModeAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIModeAnnotationView {
       modeView = recycled
+      modeView.alpha = 1
       modeView.annotation = modeAnnotation
     } else {
       modeView = TKUIModeAnnotationView(annotation: modeAnnotation, reuseIdentifier: identifier)
     }
     
-    modeView.alpha = 1
     modeView.leftCalloutAccessoryView = nil
     modeView.rightCalloutAccessoryView = nil
     modeView.canShowCallout = annotation.title != nil
@@ -378,12 +382,12 @@ fileprivate extension TKUIAnnotationViewBuilder {
     let imageView: TKUIImageAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUIImageAnnotationView {
       imageView = recycled
+      imageView.alpha = 1
       imageView.annotation = image
     } else {
       imageView = TKUIImageAnnotationView(annotation: image, reuseIdentifier: identifier)
     }
     
-    imageView.alpha = 1
     imageView.leftCalloutAccessoryView = nil
     imageView.rightCalloutAccessoryView = nil
     imageView.canShowCallout = annotation.title != nil
@@ -433,7 +437,6 @@ public extension TKUIAnnotationViewBuilder {
         bearing = 0
       }
       semaphore.updateHead(magneticHeading: heading, bearing: bearing)
-      
     }
     
   }
