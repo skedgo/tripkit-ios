@@ -61,7 +61,10 @@ public class TKUIAutocompletionViewController: UITableViewController {
         guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
           preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
         }
-        cell.configure(with: item, onAccessoryTapped: self.showAccessoryButtons ? self.accessoryTapped : nil)
+        cell.configure(
+          with: item,
+          onAccessoryTapped: self.showAccessoryButtons ? { self.accessoryTapped.onNext($0) } : nil
+        )
         return cell
       },
       titleForHeaderInSection: { ds, index in

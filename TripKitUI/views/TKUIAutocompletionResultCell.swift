@@ -43,7 +43,7 @@ extension TKUIAutocompletionResultCell {
     accessoryView = nil
   }
   
-  func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>? = nil) {
+  func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: ((TKUIAutocompletionViewModel.Item) -> Void)? = nil) {
     disposeBag = DisposeBag()
     
     switch item {
@@ -58,7 +58,7 @@ extension TKUIAutocompletionResultCell {
     configure(title: Loc.CurrentLocation, image: TKAutocompletionResult.image(forType: .currentLocation))
   }
   
-  private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: PublishSubject<TKUIAutocompletionViewModel.Item>?) {
+  private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: ((TKUIAutocompletionViewModel.Item) -> Void)?) {
     guard case .autocompletion(let autocompletion) = item else { assertionFailure(); return  }
     
     configure(title: autocompletion.title, subtitle: autocompletion.subtitle, image: autocompletion.image)
@@ -68,7 +68,7 @@ extension TKUIAutocompletionResultCell {
       let button = TKStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
       button.rx.tap
         .map { _ in item }
-        .bind(to: target)
+        .subscribe(onNext: target)
         .disposed(by: disposeBag)
       accessoryView = button
     }

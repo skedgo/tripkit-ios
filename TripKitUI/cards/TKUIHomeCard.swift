@@ -24,7 +24,7 @@ open class TKUIHomeCard: TKUITableCard {
   private let cardAppearancePublisher = PublishSubject<Bool>()
   private let searchTextPublisher = PublishSubject<(String, forced: Bool)>()
   private let focusedAnnotationPublisher = PublishSubject<MKAnnotation?>()
-  private let cellAccessoryTappedPublisher = PublishSubject<TKUIHomeViewModel.Item>()
+  private let cellAccessoryTapped = PublishSubject<TKUIHomeViewModel.Item>()
   private let refreshPublisher = PublishSubject<Void>()
   private let actionTriggered = PublishSubject<TKUIHomeCard.ComponentAction>()
   let customizationTriggered = PublishSubject<[TKUIHomeCard.CustomizedItem]>()
@@ -88,7 +88,10 @@ open class TKUIHomeCard: TKUITableCard {
             let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell
             else { assertionFailure("Unable to load an instance of TKUIAutocompletionResultCell"); return fallback }
 
-          cell.configure(with: searchItem)
+          cell.configure(
+            with: searchItem,
+            onAccessoryTapped: { self.cellAccessoryTapped.onNext(.search($0)) }
+          )
           return cell
           
         case .component(let componentItem):
@@ -136,7 +139,7 @@ open class TKUIHomeCard: TKUITableCard {
       searchInProgress: searchInProgress.startWith(false).asDriver(onErrorJustReturn: false),
       searchText: searchTextPublisher,
       itemSelected: selectedItem(in: tableView, dataSource: dataSource),
-      itemAccessoryTapped: cellAccessoryTappedPublisher.asSignal(onErrorSignalWith: .empty()),
+      itemAccessoryTapped: cellAccessoryTapped.asSignal(onErrorSignalWith: .empty()),
       refresh: refreshPublisher.asSignal(onErrorSignalWith: .never()),
       biasMapRect: homeMapManager?.mapRect.startWith(.null) ?? .just(.null)
     )
