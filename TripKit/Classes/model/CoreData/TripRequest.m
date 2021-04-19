@@ -137,22 +137,6 @@
   }
 }
 
-- (void)adjustVisibilityForHiddenModeIdentifiers:(NSSet * __nonnull)hidden
-{
-  NSSet *allGroups = [self tripGroups];
-  for (TripGroup *group in allGroups) {
-    NSSet *groupModeIdentifiers = [group usedModeIdentifiers];
-    
-    if ([TKModeHelper modes:hidden contain:groupModeIdentifiers]) {
-      // if any mode is hidden, hide the whole group
-      group.visibility = TKTripGroupVisibilityHidden;
-      
-    } else {
-      group.visibility = TKTripGroupVisibilityFull;
-    }
-  }
-}
-
 - (TripGroup *)lastSelection
 {
 	return self.preferredGroup;
@@ -185,20 +169,6 @@
 - (BOOL)hasTrips
 {
   return self.tripGroups.count > 0;
-}
-
-- (BOOL)priceInformationAvailable
-{
-  if (! [self hasTrips]) {
-    return YES;
-  }
-  
-  for (Trip *trip in self.trips) {
-    if (trip.totalPrice) {
-      return YES;
-    }
-  }
-  return NO;
 }
 
 - (NSString *)debugString

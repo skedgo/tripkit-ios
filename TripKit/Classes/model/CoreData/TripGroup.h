@@ -15,7 +15,6 @@
 
 typedef NS_CLOSED_ENUM(NSInteger, TKTripGroupVisibility) {
 	TKTripGroupVisibilityFull = 0,
-  TKTripGroupVisibilityMini = 1,
   TKTripGroupVisibilityHidden = 2,
 };
 

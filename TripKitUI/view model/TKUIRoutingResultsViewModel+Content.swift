@@ -304,7 +304,7 @@ extension TKUIRoutingResultsViewModel.Item {
     
     switch group.visibility {
     case .hidden: return nil
-    case .full, .mini:   self = .trip(trip)
+    case .full:   self = .trip(trip)
     }
   }
   

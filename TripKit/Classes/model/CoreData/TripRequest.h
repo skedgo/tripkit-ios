@@ -41,8 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) TripGroup *lastSelection;
 @property (nonatomic, strong, nullable) Trip *preferredTrip;
 
-- (void)adjustVisibilityForHiddenModeIdentifiers:(NSSet *)hidden;
-
 /**
  @return The region the complete trip takes place in. Can be international if it spanning more than one region.
  */
@@ -67,11 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)timeSorterTitle;
 
 - (BOOL)hasTrips;
-
-/**
- @return If any trip has pricing information. Also returns `YES` if there are no trips.
- */
-- (BOOL)priceInformationAvailable;
 
 - (NSString *)debugString;
 

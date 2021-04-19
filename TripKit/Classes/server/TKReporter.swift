@@ -138,7 +138,6 @@ extension TKTripGroupVisibility {
   fileprivate var apiString: String {
     switch self {
     case .full: return "full"
-    case .mini: return "minimized"
     case .hidden: return "hidden"
     }
   }

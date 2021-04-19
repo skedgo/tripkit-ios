@@ -139,7 +139,6 @@ extension TKRouter {
   ///
   /// - Parameters:
   ///   - request: The request specifying the query
-  ///   - modes: The modes to enable. If set to `nil` then it'll use the modes as set in the user defaults (see `TKUserProfileHelper` for more)
   ///   - classifier: Optional classifier to assign `TripGroup`'s `classification`
   ///   - progress: Optional progress callback executed when each request finished, with the number of completed requests passed to the block.
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
@@ -251,9 +250,9 @@ extension TKRouter {
                   // We get hidden modes here in the completion block
                   // since they might have changed while waiting for results
                   let hidden = TKUserProfileHelper.hiddenModeIdentifiers
-                  tripRequest.adjustVisibility(forHiddenModeIdentifiers: hidden)
+                  tripRequest.adjustVisibility(hiddenIdentifiers: hidden)
                 } else {
-                  tripRequest.adjustVisibility(forHiddenModeIdentifiers: [])
+                  tripRequest.adjustVisibility(hiddenIdentifiers: [])
                 }
                 
                 // Updating classifications before making results visible
@@ -294,6 +293,20 @@ extension TKRouter {
     }
   }
   
+}
+
+extension TripRequest {
+  fileprivate func adjustVisibility(hiddenIdentifiers: Set<String>) {
+    for group in tripGroups ?? [] {
+      let groupIdentifiers = group.usedModeIdentifiers()
+      if TKModeHelper.modesContain(hiddenIdentifiers, groupIdentifiers) {
+        // if any mode is hidden, hide the whole group
+        group.visibility = .hidden
+      } else {
+        group.visibility = .full
+      }
+    }
+  }
 }
 
 extension TKTransportModes {
