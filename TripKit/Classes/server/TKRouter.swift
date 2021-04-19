@@ -144,7 +144,7 @@ extension TKRouter {
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
   /// - returns: The number of requests sent. This will match the number of times `progress` is called.
   public func multiFetchTrips(for query: RoutingQuery, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
-    return multiFetchTrips(request: query, classifier: classifier, progress: progress, completion: completion)
+    return multiFetchTrips(request: query, modes: query.modes, classifier: classifier, progress: progress, completion: completion)
   }
   
   /// Kicks off the required server requests asynchronously to the servers. As they
