@@ -459,8 +459,11 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           tripGroup.request = request;
         }
         
-        // always update the visiblity
-        tripGroup.visibility = request.defaultVisibility;
+        if (!insertIntoGroup) {
+          // update the visibility if we are not inserting the new
+          // trips into an existing trip group
+          tripGroup.visibility = request.defaultVisibility;
+        }
         
         // always update frequency + sources (if there are any)
         tripGroup.frequency = tripGroupDict[@"frequency"] ?: tripGroup.frequency;
