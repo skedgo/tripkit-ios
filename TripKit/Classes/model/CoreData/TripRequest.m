@@ -30,7 +30,6 @@
 @dynamic expandForFavorite;
 @dynamic excludedStops;
 @synthesize requestedModes;
-@synthesize defaultVisibility;
 @synthesize localRegions = _localRegions;
 
 #pragma mark - Public methods

@@ -44,7 +44,8 @@
                                   forRequest:request
                                  orTripGroup:nil
                                 orUpdateTrip:nil
-                allowDuplicatingExistingTrip:YES];
+                allowDuplicatingExistingTrip:YES
+                                  visibility:TKTripGroupVisibilityFull];
     if (added.count == 0) {
       return;
     }
@@ -68,7 +69,8 @@
                                   forRequest:request
                                  orTripGroup:nil
                                 orUpdateTrip:nil
-                allowDuplicatingExistingTrip:YES];
+                allowDuplicatingExistingTrip:YES
+                                  visibility:TKTripGroupVisibilityFull];
     if (added.count == 0) {
       [self.context deleteObject:request];
       [TKLog warn:@"TKRoutingParser" text:[NSString stringWithFormat:@"Error parsing request: %@", json]];
@@ -99,7 +101,8 @@
                                    forRequest:nil
                                   orTripGroup:group
                                  orUpdateTrip:nil
-                 allowDuplicatingExistingTrip:!mergeWithExistingTrips];
+                 allowDuplicatingExistingTrip:!mergeWithExistingTrips
+                                   visibility:TKTripGroupVisibilityFull];
     completion(result);
   }];
 }
@@ -114,7 +117,8 @@
                                    forRequest:request
                                   orTripGroup:nil
                                  orUpdateTrip:nil
-                 allowDuplicatingExistingTrip:!mergeWithExistingTrips];
+                 allowDuplicatingExistingTrip:!mergeWithExistingTrips
+                                   visibility:TKTripGroupVisibilityFull];
     completion(result);
   }];
 }
@@ -122,12 +126,14 @@
 - (NSArray<Trip *>*)parseAndAddResult:(NSDictionary *)json
                            forRequest:(TripRequest *)request
                               merging:(BOOL)mergeWithExistingTrips
+                           visibility:(TKTripGroupVisibility)visibility
 {
   return [self parseAndAddResult:json
                       forRequest:request
                      orTripGroup:nil
                     orUpdateTrip:nil
-    allowDuplicatingExistingTrip:!mergeWithExistingTrips];
+    allowDuplicatingExistingTrip:!mergeWithExistingTrips
+                      visibility:visibility];
 }
 
 - (void)parseAndAddResult:(NSDictionary *)keyToTripGroups
@@ -150,7 +156,8 @@
                                                       forRequest:request
                                                      orTripGroup:nil
                                                     orUpdateTrip:nil
-                                    allowDuplicatingExistingTrip:YES];
+                                    allowDuplicatingExistingTrip:YES
+                                                      visibility:TKTripGroupVisibilityFull];
        if (newTrips.count > 0) {
          keyToTrips[key] = newTrips;
        }
@@ -168,7 +175,8 @@
                  forRequest:nil
                 orTripGroup:nil
                orUpdateTrip:trip
-allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
+allowDuplicatingExistingTrip:YES // we don't actually create a duplicate
+                 visibility:TKTripGroupVisibilityFull];
     completion(trip);
   }];
 }
@@ -182,6 +190,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                    orTripGroup:(nullable TripGroup *)insertIntoGroup
                   orUpdateTrip:(nullable Trip *)tripToUpdate
   allowDuplicatingExistingTrip:(BOOL)allowDuplicates
+                    visibility:(TKTripGroupVisibility)visibility
 
 {
   NSString *error = json[@"error"];
@@ -199,7 +208,8 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                                     forRequest:request
                                    orTripGroup:insertIntoGroup
                                   orUpdateTrip:tripToUpdate
-                  allowDuplicatingExistingTrip:allowDuplicates];
+                  allowDuplicatingExistingTrip:allowDuplicates
+                                    visibility:visibility];
 }
 
 - (NSArray *)parseAndAddResultWithTripGroups:(NSArray *)tripGroupsArray
@@ -209,6 +219,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
                                  orTripGroup:(nullable TripGroup *)insertIntoGroup
                                 orUpdateTrip:(nullable Trip *)tripToUpdate
                 allowDuplicatingExistingTrip:(BOOL)allowDuplicates
+                                  visibility:(TKTripGroupVisibility)visibility
 {
   ZAssert(self.context, @"Managed object context required!");
     
@@ -459,11 +470,7 @@ allowDuplicatingExistingTrip:YES]; // we don't actually create a duplicate
           tripGroup.request = request;
         }
         
-        if (!insertIntoGroup) {
-          // update the visibility if we are not inserting the new
-          // trips into an existing trip group
-          tripGroup.visibility = request.defaultVisibility;
-        }
+        tripGroup.visibility = visibility;
         
         // always update frequency + sources (if there are any)
         tripGroup.frequency = tripGroupDict[@"frequency"] ?: tripGroup.frequency;

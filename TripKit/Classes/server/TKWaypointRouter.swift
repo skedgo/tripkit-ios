@@ -298,7 +298,7 @@ extension TKWaypointRouter {
       region: region,
       into: context,
       parserHandler: { json, parser in
-        let trips = parser.parseAndAddResult(json, for: request, merging: false)
+        let trips = parser.parseAndAddResult(json, for: request, merging: false, visibility: .full)
         if let trip = trips.first {
           completion(.success(trip))
         } else {

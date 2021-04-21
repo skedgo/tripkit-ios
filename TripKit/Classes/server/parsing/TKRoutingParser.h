@@ -8,7 +8,9 @@
 
 #import <MapKit/MapKit.h>
 
-@class TripRequest, TripGroup, Trip;
+#import "TripGroup.h" // TKTripGroupVisibility
+
+@class TripRequest, Trip;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<Trip *>*)parseAndAddResult:(NSDictionary *)json
                            forRequest:(TripRequest *)request
-                              merging:(BOOL)mergeWithExistingTrips;
+                              merging:(BOOL)mergeWithExistingTrips
+                           visibility:(TKTripGroupVisibility)visibility;
 
 /**
  Parses the specified content and inserts it into the the parser's context.

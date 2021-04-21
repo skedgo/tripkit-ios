@@ -58,14 +58,14 @@ public class TKRouter: NSObject {
   /// - Parameters:
   ///   - request: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
-  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
+  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TKTripGroupVisibility = .full, completion: @escaping (Result<Void, Error>) -> Void) {
     guard !request.isDeleted else {
       let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
       completion(.failure(error))
       return
     }
     
-    return fetchTrips(for: request, bestOnly: false, additional: additional) {
+    return fetchTrips(for: request, bestOnly: false, additional: additional, visibility: visibility) {
       let result = $0.map { _ in }
       completion(result)
     }
@@ -213,9 +213,6 @@ extension TKRouter {
       }
     }
 
-    // we'll adjust the visibility in the completion block
-    tripRequest.defaultVisibility = .hidden
-    
     queue.async {
       self.cancelRequestsWorker()
       self.isActive = true
@@ -230,7 +227,8 @@ extension TKRouter {
         worker.server = self.server
         worker.modeIdentifiers = modeGroup
         
-        worker.fetchTrips(for: tripRequest, additional: request.additional) { [weak self] result in
+        // Hidden as we'll adjust the visibility in the completion block
+        worker.fetchTrips(for: tripRequest, additional: request.additional, visibility: .hidden) { [weak self] result in
           guard let self = self else { return }
           
           // Switch to update our internals in a thread-safe manner
@@ -467,7 +465,7 @@ extension TKRouter {
     return paras
   }
   
-  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TKTripGroupVisibility = .full, completion: @escaping (Result<TripRequest, Error>) -> Void) {
 
     // Mark as active early, to make sure we pass on errors
     self.isActive = true
@@ -511,7 +509,7 @@ extension TKRouter {
         success: { [weak self] _, response, _ in
           guard let self = self else { return }
           let tripRequest = request.toTripRequest()
-          self.parseJSON(response, for: tripRequest, completion: completion)
+          self.parseJSON(response, for: tripRequest, visibility: visibility, completion: completion)
           
         }, failure: { [weak self] error in
           self?.handleError(error, completion: completion)
@@ -536,7 +534,7 @@ extension TKRouter {
     completion(.failure(error))
   }
   
-  private func parseJSON(_ json: Any?, for request: TripRequest, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func parseJSON(_ json: Any?, for request: TripRequest, visibility: TKTripGroupVisibility, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
     
     if let error = TKError.error(fromJSON: json, statusCode: 200) {
@@ -556,7 +554,7 @@ extension TKRouter {
         
         TKLog.verbose("Parsing \(request)")
         let parser = TKRoutingParser(tripKitContext: context)
-        parser.parseAndAddResult(json, for: request, merging: true)
+        parser.parseAndAddResult(json, for: request, merging: true, visibility: visibility)
         
         TKLog.verbose("Saving parsed result for \(request)")
         try context.save()
