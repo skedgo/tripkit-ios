@@ -38,8 +38,10 @@ NSString *const TKTransportModeIdentifierTaxi                      = @"ps_tax";
 NSString *const TKTransportModeIdentifierAutoRickshaw              = @"ps_ars";
 NSString *const TKTransportModeIdentifierCar                       = @"me_car";
 NSString *const TKTransportModeIdentifierMotorbike                 = @"me_mot";
-NSString *const TKTransportModeIdentifierBicycle                   = @"cy_bic";
-NSString *const TKTransportModeIdentifierBikeShare                 = @"cy_bic-s";
+NSString *const TKTransportModeIdentifierBicycle                   = @"me_mic_bic";
+NSString *const TKTransportModeIdentifierBikeShare                 = @"me_mic-s_bic";
+NSString *const TKTransportModeIdentifierDeprecatedBicycle         = @"cy_bic";
+NSString *const TKTransportModeIdentifierDeprecatedBikeShare       = @"cy_bic-s";
 NSString *const TKTransportModeIdentifierWalking                   = @"wa_wal";
 NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
 
@@ -66,9 +68,9 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
     return @"public-transport";
   } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierOnDemand]) {
     return @"shuttlebus";
-  } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierBicycle]) {
+  } else if ([modeIdentifier isEqualToString:TKTransportModeIdentifierBicycle] || [typeString isEqualToString:TKTransportModeIdentifierDeprecatedBicycle]) {
     return @"bicycle";
-  } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierBicycleShare]) {
+  } else if ([modeIdentifier isEqualToString:TKTransportModeIdentifierBikeShare] || [typeString isEqualToString:TKTransportModeIdentifierDeprecatedBikeShare]) {
     return @"bicycle-share";
   } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierCar]) {
     return @"car";
