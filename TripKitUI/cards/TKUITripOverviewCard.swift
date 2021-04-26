@@ -48,7 +48,7 @@ public class TKUITripOverviewCard: TKUITableCard {
   
   public static var config = Configuration.empty
   
-  private let trip: Trip
+  private let initialTrip: Trip
   private let index: Int? // for restoring
   private var zoomToTrip: Bool = false // for restoring
 
@@ -64,12 +64,18 @@ public class TKUITripOverviewCard: TKUITableCard {
   
   private let alternativesTapped = PublishSubject<IndexPath>()
   private let isVisible = BehaviorSubject<Bool>(value: false)
-  private let refreshContent = PublishSubject<Void>()
+  
+  // The trip being presented may be changing as a result of user actions
+  // in the MxM card, e.g., selecting a different departures , therefore,
+  // we model it as an observable sequence.
+  private let presentedTripPublisher = PublishSubject<Trip>()
   
   private weak var tableView: UITableView?
+  
+  var tripMapManager: TKUITripMapManager? { mapManager as? TKUITripMapManager }
 
   public init(trip: Trip, index: Int? = nil) {
-    self.trip = trip
+    self.initialTrip = trip
     self.index = index
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
@@ -96,7 +102,9 @@ public class TKUITripOverviewCard: TKUITableCard {
   }
   
   public override func encode(with aCoder: NSCoder) {
-    aCoder.encode(TKUITripOverviewViewModel.save(trip: viewModel.trip), forKey: "viewModel")
+    if let trip = tripMapManager?.trip {
+      aCoder.encode(TKUITripOverviewViewModel.save(trip: trip), forKey: "viewModel")
+    }
 
     if let index = index {
       aCoder.encode(index, forKey: "index")
@@ -144,17 +152,20 @@ public class TKUITripOverviewCard: TKUITableCard {
         }
     })
     
+    let presentedTrip = presentedTripPublisher
+        .asInfallible(onErrorFallbackTo: .just(initialTrip))
+        .startWith(initialTrip)
+    
     let mergedSelection = Observable.merge(
         selectedItem(in: tableView, dataSource: dataSource).asObservable(),
         alternativesTapped.map { dataSource[$0] }
       ).asSignal(onErrorSignalWith: .empty())
     
     viewModel = TKUITripOverviewViewModel(
-      trip: trip,
+      presentedTrip: presentedTrip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
-        isVisible: isVisible.asDriver(onErrorJustReturn: true),
-        refresh: refreshContent.asSignal(onErrorSignalWith: .empty())
+        isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
     
@@ -167,8 +178,8 @@ public class TKUITripOverviewCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     viewModel.refreshMap
-      .emit(onNext: { [weak self] in
-        (self?.mapManager as? TKUITripMapManager)?.updateTrip()
+      .emit(onNext: { [weak tripMapManager] trip in
+        tripMapManager?.refresh(with: trip)
       })
       .disposed(by: disposeBag)
 
@@ -182,18 +193,30 @@ public class TKUITripOverviewCard: TKUITableCard {
     // `didBuild(tableView:cardView)` is called.
     
     isVisible.asDriver(onErrorJustReturn: true)
-      .withLatestFrom(viewModel.actions) { (visible: $0, actions: $1) }
-      .drive(onNext: { [weak self] inputs in
-        guard let self = self, inputs.visible else { return }
-        tableView.tableHeaderView = self.buildActionsView(from: inputs.actions, trip: self.trip)
+      .filter { $0 }
+      .withLatestFrom(viewModel.actions)
+      .drive(onNext: { [weak self] actions in
+        tableView.tableHeaderView = self?.buildActionsView(from: actions.0, trip: actions.1)
       })
       .disposed(by: disposeBag)
     
     isVisible.asDriver(onErrorJustReturn: true)
-      .withLatestFrom(viewModel.dataSources) { (visible: $0, dataSources: $1) }
-      .drive(onNext: { [weak self] input in
-        guard let self = self, input.visible else { return }
-        self.showAttribution(for: input.dataSources, in: tableView)
+      .filter { $0 }
+      .withLatestFrom(viewModel.dataSources)
+      .drive(onNext: { [weak self] dataSources in
+        self?.showAttribution(for: dataSources, in: tableView)
+      })
+      .disposed(by: disposeBag)
+    
+    isVisible
+      .filter { $0 }
+      .withLatestFrom(viewModel.refreshMap)
+      .withUnretained(self)
+      .subscribe(onNext: { owner, trip in
+        TKUICustomization.shared.feedbackActiveItemHandler?(trip)
+        if let controller = owner.controller {
+          TKUIEventCallback.handler(.tripSelected(trip, controller: controller))
+        }
       })
       .disposed(by: disposeBag)
   }
@@ -202,19 +225,15 @@ public class TKUITripOverviewCard: TKUITableCard {
     super.didAppear(animated: animated)
    
     isVisible.onNext(true)
-    TKUICustomization.shared.feedbackActiveItemHandler?(viewModel.trip)
     
     if zoomToTrip {
-      (mapManager as? TKUITripMapManager)?.showTrip(animated: animated)
+      tripMapManager?.showTrip(animated: animated)
       zoomToTrip = false
     } else {
-      (mapManager as? TKUITripMapManager)?.deselectSegment(animated: animated)
+      tripMapManager?.deselectSegment(animated: animated)
     }
     
     TKUIEventCallback.handler(.cardAppeared(self))
-    if let controller = self.controller {
-      TKUIEventCallback.handler(.tripSelected(trip, controller: controller))
-    }
   }
   
   public override func willDisappear(animated: Bool) {
@@ -347,7 +366,7 @@ extension TKUITripOverviewCard {
 extension TKUITripOverviewCard: TKUITripModeByModeCardDelegate {
   
   public func modeByModeCard(_ card: TKUITripModeByModeCard, updatedTrip trip: Trip) {
-    refreshContent.onNext(())
+    presentedTripPublisher.onNext(trip)
   }
   
 }

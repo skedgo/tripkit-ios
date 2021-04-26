@@ -21,9 +21,9 @@ public protocol TKUITripMapManagerType: TGCompatibleMapManager {}
 
 public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
-  public let trip: Trip
+  private(set) var trip: Trip
   
-  private let disposeBag = DisposeBag()
+  private var disposeBag = DisposeBag()
   
   fileprivate weak var selectedSegment: TKSegment? {
     didSet {
@@ -61,6 +61,16 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
       .disposed(by: disposeBag)
   }
   
+  
+  public override func cleanUp(_ mapView: MKMapView, animated: Bool) {
+    super.cleanUp(mapView, animated: animated)
+    
+    // Reset the dispose bag, if this is not done, then any observable
+    // subscriptions happen during `takeCharge` will trigger multiple
+    // times.
+    disposeBag = DisposeBag()
+  }
+  
   override open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
     TKUIMapManagerHelper.adjustZOrder(views)
     super.mapView(mapView, didAdd: views)
@@ -95,7 +105,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     mapView?.selectAnnotation(segment, animated: animated)
   }
   
-  public func updateTrip() {
+  public func refresh(with trip: Trip) {
+    self.trip = trip
     removeTrip()
     add(trip)
   }
@@ -105,6 +116,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
 // MARK: Adding trips to the map
 
 private extension TKUITripMapManager {
+  
   func removeTrip() {
     self.overlays = []
     self.annotations = []
@@ -170,4 +182,5 @@ private extension TKUITripMapManager {
       self.dynamicAnnotations = dynamicAnnotations
     }
   }
+  
 }

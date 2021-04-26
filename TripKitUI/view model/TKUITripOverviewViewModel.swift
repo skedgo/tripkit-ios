@@ -21,18 +21,36 @@ class TKUITripOverviewViewModel {
   struct UIInput {
     var selected: Signal<Item> = .empty()
     var isVisible: Driver<Bool> = .just(true)
-    var refresh: Signal<Void> = .empty()
   }
   
-  init(trip: Trip, inputs: UIInput = UIInput()) {
-    self.trip = trip
+  init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput()) {
     
-    titles = trip.rx.titles
+    titles = presentedTrip
+      .asDriver(onErrorDriveWith: .empty())
+      .flatMapLatest { $0.rx.titles }
     
-    let tripUpdated: Observable<Trip> = inputs.refresh.startWith(()).asObservable()
+    dataSources = presentedTrip
+      .asDriver(onErrorDriveWith: .empty())
+      .map { $0.tripGroup.sources }
+    
+    let tripChanged: Observable<Trip> = presentedTrip
+      .asObservable()
+      .distinctUntilChanged { $0.persistentId() == $1.persistentId() }
+    
+    let servicesFetched = presentedTrip
+      .asObservable()
+      .flatMapLatest { trip in
+        Self.fetchContentOfServices(in: trip).map { trip }
+      }
+
+    refreshMap = Observable.merge(tripChanged, servicesFetched)
+      .asSignal(onErrorSignalWith: .empty())
+    
+    let tripUpdated: Observable<Trip> = presentedTrip
+      .asObservable()
       .flatMapLatest {
-        return TKBuzzRealTime.rx.streamUpdates(trip, active: inputs.isVisible.asObservable())
-          .startWith(trip)
+        return TKBuzzRealTime.rx.streamUpdates($0, active: inputs.isVisible.asObservable())
+          .startWith($0)
       }
       .share(replay: 1, scope: .forever)
         
@@ -41,16 +59,10 @@ class TKUITripOverviewViewModel {
       .asDriver(onErrorJustReturn: [])
     
     actions = tripUpdated
-      .map { updated -> [TKUITripOverviewCard.TripAction] in
-        guard let factory = TKUITripOverviewCard.config.tripActionsFactory else { return [] }
-        return factory(updated)
+      .map { updated -> ([TKUITripOverviewCard.TripAction], Trip) in
+        (TKUITripOverviewCard.config.tripActionsFactory?(updated) ?? [], updated)
       }
-      .asDriver(onErrorJustReturn: [])
-    
-    dataSources = Driver.just(trip.tripGroup.sources)
-    
-    refreshMap = Self.fetchContentOfServices(in: trip)
-      .asSignal(onErrorSignalWith: .empty())
+      .asDriver(onErrorDriveWith: .never())
     
     next = inputs.selected.compactMap { item -> Next? in
         switch item {
@@ -66,24 +78,33 @@ class TKUITripOverviewViewModel {
           return .handleSelection(segment)
         }
       }
+    
   }
-  
-  let trip: Trip
   
   let titles: Driver<(title: String, subtitle: String?)>
   
   let sections: Driver<[Section]>
   
-  let actions: Driver<[TKUITripOverviewCard.TripAction]>
+  let actions: Driver<([TKUITripOverviewCard.TripAction], Trip)>
   
   let dataSources: Driver<[TKAPI.DataAttribution]>
   
-  let refreshMap: Signal<Void>
+  let refreshMap: Signal<Trip>
   
   let next: Signal<Next>
+  
+}
+
+extension TKUITripOverviewViewModel {
+  
+  convenience init(initialTrip: Trip) {
+    self.init(presentedTrip: .just(initialTrip))
+  }
+  
 }
 
 fileprivate extension Reactive where Base == Trip {
+  
   static func titles(for trip: Trip) -> (title: String, subtitle: String?) {
     let timeTitles = trip.timeTitles(capitalize: true)
     return (
@@ -97,6 +118,7 @@ fileprivate extension Reactive where Base == Trip {
       .map { [unowned base] _ in Self.titles(for: base) }
       .asDriver(onErrorDriveWith: .empty())
   }
+  
 }
 
 // MARK: - Navigation

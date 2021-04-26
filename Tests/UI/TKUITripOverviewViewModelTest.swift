@@ -17,7 +17,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
 
   func testFirstSegmentWhenStartingAtStation() throws {
     let trip = self.trip(fromFilename: "routing-pt-realtime")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let sections = try XCTUnwrap(viewModel.sections.toBlocking().first())
     let departure = try XCTUnwrap(sections.first?.items.first)
@@ -32,7 +32,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
   
   func testSubtitlesWithPlatformInformation() throws {
     let trip = self.trip(fromFilename: "routing-pt-realtime")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 9)
@@ -55,7 +55,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
   
   func testSubtitlesWithPlatformInformationAtInterchanges() throws {
     let trip = self.trip(fromFilename: "routing-pt-platforms")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 11)
@@ -70,7 +70,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
   
   func testContinuation() throws {
     let trip = self.trip(fromFilename: "routing-pt-continuation")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 5)
@@ -107,7 +107,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
 
   func testTripWithRealTime() throws {
     let trip = self.trip(fromFilename: "routing-pt-realtime")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 9)
@@ -138,7 +138,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
   
   func testImpossibleTripDueToDelay() throws {
     let trip = self.trip(fromFilename: "routing-pt-impossible")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 10)
@@ -149,7 +149,7 @@ class TKUITripOverviewViewModelTest: TKTestCase {
 
   func testImpossibleTripDueToCancellation() throws {
     let trip = self.trip(fromFilename: "routing-pt-cancelled")
-    let viewModel = TKUITripOverviewViewModel(trip: trip)
+    let viewModel = TKUITripOverviewViewModel(initialTrip: trip)
     
     let items = try XCTUnwrap(viewModel.sections.toBlocking().first()?.first?.items)
     XCTAssertEqual(items.count, 10)
