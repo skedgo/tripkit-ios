@@ -13,27 +13,10 @@ public extension TKModeInfo {
     if let color = color {
       return color
     }
-    
-    switch identifier {
-    case "pt_pub_airport"?:       return #colorLiteral(red: 0.2317194939, green: 0.6177652478, blue: 0.553303957, alpha: 1)
-    case "pt_pub_bus"?:           return #colorLiteral(red: 0.002927262336, green: 0.7073513269, blue: 0.3884637356, alpha: 1)
-    case "pt_pub_cablecar"?:      return #colorLiteral(red: 0.8554401994, green: 0.353838861, blue: 0.2938257158, alpha: 1)
-    case "pt_pub_ferry"?:         return #colorLiteral(red: 0.3107161224, green: 0.6154219508, blue: 0.8482584953, alpha: 1)
-    case "pt_pub_funiculur"?:     return #colorLiteral(red: 0.4495800138, green: 0.6648783088, blue: 0.9513805509, alpha: 1)
-    case "pt_pub_monorail"?:      return #colorLiteral(red: 0.8942372203, green: 0.7542654276, blue: 0.08317423612, alpha: 1)
-    case "pt_pub_subway"?:        return #colorLiteral(red: 0.6042864919, green: 0.3401404023, blue: 0.6175028682, alpha: 1)
-    case "pt_pub_train"?:         return #colorLiteral(red: 0.3985300958, green: 0.3960455656, blue: 0.6988547444, alpha: 1)
-    case "pt_pub_tram"?:          return #colorLiteral(red: 0.9164136648, green: 0.6101632714, blue: 0.2767356038, alpha: 1)
-
-//    case "bicycle-share"?: return #colorLiteral(red: 0.5058823529, green: 0.5019607843, blue: 0.7333333333, alpha: 1)
-//    case "car-share"?:     return #colorLiteral(red: 0.5058823529, green: 0.5019607843, blue: 0.7333333333, alpha: 1)
-//    case "parking"?:     return #colorLiteral(red: 0.5058823529, green: 0.5019607843, blue: 0.7333333333, alpha: 1)
-//    case "taxi"?:     return #colorLiteral(red: 0.5058823529, green: 0.5019607843, blue: 0.7333333333, alpha: 1)
-
-    default:
-      print("Default colour missing for: \(String(describing: identifier))")
+    guard let identifier = identifier else {
       return nil
     }
+    return TKTransportModes.color(for: identifier)
   }
 }
 
