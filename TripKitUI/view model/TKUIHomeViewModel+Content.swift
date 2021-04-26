@@ -114,7 +114,7 @@ extension TKUIHomeViewModel.Item: Equatable {
 
 func == (lhs: TKUIHomeViewModel.Item, rhs: TKUIHomeViewModel.Item) -> Bool {
   switch (lhs, rhs) {
-  case let (.component(left), .component(right)): return left.identity == right.identity
+  case let (.component(left), .component(right)): return left.identity == right.identity && left.equalityToken == right.equalityToken
   case let (.search(left), .search(right)): return left == right
   default: return false
   }

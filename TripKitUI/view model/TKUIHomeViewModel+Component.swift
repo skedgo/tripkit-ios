@@ -35,13 +35,17 @@ public protocol TKUIHomeComponentItem {
   /// to determine if two items are identical when animating cells in and out of a table view.
   var identity: String { get }
   
+  /// Pseudo-equality, used to determine if an item has changed. Defaults to just `identity`.
+  var equalityToken: String { get }
+  
   /// This will be used by `RxTableViewSectionedAnimatedDataSource` to determine
-  /// if an item at a specific index path can be edited.
+  /// if an item at a specific index path can be edited. Defaults to `false`.
   var canEdit: Bool { get }
 }
 
 extension TKUIHomeComponentItem {
   public var canEdit: Bool { false }
+  public var equalityToken: String { identity }
 }
 
 /// The representation of an home card component for the customizer
