@@ -14,7 +14,7 @@ public protocol TKURLShareable {
 }
 
 @objc
-public protocol TKURLSavable: class, TKURLShareable {
+public protocol TKURLSavable: TKURLShareable {
   var shareURL: URL? { get set }
   var saveURL: URL? { get }
 }

@@ -17,7 +17,7 @@ import RxCocoa
   import TripKit
 #endif
 
-public protocol TKUIRoutingQueryInputCardDelegate: class {
+public protocol TKUIRoutingQueryInputCardDelegate: AnyObject {
   func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation)
 }
 

@@ -10,7 +10,7 @@ import Foundation
 
 /// This protocol defines the method you can use to receive message related to
 /// the search functionality provided in a `TKUIHomeCard`
-public protocol TKUIHomeCardSearchResultsDelegate: class {
+public protocol TKUIHomeCardSearchResultsDelegate: AnyObject {
   
   /// This tells the delegate that a search result is selected
   /// - Parameters:

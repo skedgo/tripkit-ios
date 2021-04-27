@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TKUICardActionsViewLayoutHelperDelegate: class {
+protocol TKUICardActionsViewLayoutHelperDelegate: AnyObject {
   
   func numberOfActionsToDisplay(in collectionView: UICollectionView) -> Int
   

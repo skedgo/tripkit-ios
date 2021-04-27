@@ -12,7 +12,7 @@ import MapKit
 import RxCocoa
 import RxSwift
 
-public protocol TKUIAutocompletionViewControllerDelegate: class {
+public protocol TKUIAutocompletionViewControllerDelegate: AnyObject {
   func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation)
 
   func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation)

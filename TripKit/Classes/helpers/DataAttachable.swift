@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DataAttachable: class {
+protocol DataAttachable: AnyObject {
   var data: Data? { get set }
 }
 

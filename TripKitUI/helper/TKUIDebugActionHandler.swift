@@ -10,6 +10,6 @@ import Foundation
 
 /// :nodoc:
 @objc
-public protocol TKUIDebugActionHandler: class {
+public protocol TKUIDebugActionHandler: AnyObject {
   @objc func debugActionCopyPrimaryRequest(_ sender: AnyObject?)
 }

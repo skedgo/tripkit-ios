@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 @available(iOS 13.0, *)
-protocol TKUIHomeCardCustomizationViewControllerDelegate: class {
+protocol TKUIHomeCardCustomizationViewControllerDelegate: AnyObject {
   func customizer(_ controller: TKUIHomeCardCustomizationViewController, completed items: [TKUIHomeCard.CustomizedItem])
 }
 

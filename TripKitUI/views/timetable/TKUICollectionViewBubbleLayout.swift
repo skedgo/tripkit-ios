@@ -11,7 +11,7 @@
 
 import UIKit
 
-protocol TKUICollectionViewBubbleLayoutDelegate: class {
+protocol TKUICollectionViewBubbleLayoutDelegate: AnyObject {
   func collectionView(_ collectionView: UICollectionView, itemSizeAt indexPath: IndexPath) -> CGSize
 }
 

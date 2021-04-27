@@ -18,7 +18,7 @@ public typealias TKUIDeparturesCard = TKUITimetableCard
 @available(*, unavailable, renamed: "TKUITimetableCardDelegate")
 public typealias TKUIDeparturesCardDelegate = TKUITimetableCardDelegate
 
-public protocol TKUITimetableCardDelegate: class {
+public protocol TKUITimetableCardDelegate: AnyObject {
   
   func timetableCard(_ card: TKUITimetableCard, selectedDeparture: StopVisits)
   

@@ -24,7 +24,7 @@ public typealias TKUIResultsCard = TKUIRoutingResultsCard
 public typealias TKUIResultsCardDelegate = TKUIRoutingResultsCardDelegate
 
 
-public protocol TKUIRoutingResultsCardDelegate: class {
+public protocol TKUIRoutingResultsCardDelegate: AnyObject {
   func resultsCard(_ card: TKUIRoutingResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
 }
 

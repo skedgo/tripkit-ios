@@ -11,7 +11,7 @@ import UIKit
 import TripKit
 
 @objc
-public protocol TKUITimePickerSheetDelegate: class {
+public protocol TKUITimePickerSheetDelegate: AnyObject {
 
   @objc(timePicker:pickedDate:forType:)
   func timePicker(_ picker: TKUITimePickerSheet, pickedDate: Date, for type: TKTimeType)
