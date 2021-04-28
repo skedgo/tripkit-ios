@@ -28,6 +28,7 @@ open class TKModeCoordinate: TKNamedCoordinate {
   public init(modeInfo: TKModeInfo, coordinate: CLLocationCoordinate2D) {
     super.init(coordinate: coordinate)
     _stopModeInfo = modeInfo
+    data["sg_modeInfo"] = try? JSONEncoder().encodeJSONObject(modeInfo)
   }
   
   @objc public class override var supportsSecureCoding: Bool { return true }
@@ -86,6 +87,15 @@ public class TKStopCoordinate: TKModeCoordinate {
   
   @objc public class override var supportsSecureCoding: Bool { return true }
 
+  public init(_ stop: TKAPI.Stop) {
+    super.init(modeInfo: stop.modeInfo, coordinate: .init(latitude: stop.lat, longitude: stop.lng))
+    isDraggable = false
+    stopCode = stop.code
+    services = stop.services
+    stopShortName = stop.shortName
+    stopSortScore = stop.popularity
+  }
+  
   public required init(from decoder: Decoder) throws {
     try super.init(from: decoder)
     isDraggable = false
