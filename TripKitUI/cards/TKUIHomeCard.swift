@@ -27,7 +27,6 @@ open class TKUIHomeCard: TKUITableCard {
   private let cellAccessoryTapped = PublishSubject<TKUIHomeViewModel.Item>()
   private let refreshPublisher = PublishSubject<Void>()
   private let actionTriggered = PublishSubject<TKUIHomeCard.ComponentAction>()
-  let customizationTriggered = PublishSubject<[TKUIHomeCard.CustomizedItem]>()
   
   private var viewModel: TKUIHomeViewModel!
 
@@ -147,7 +146,6 @@ open class TKUIHomeCard: TKUITableCard {
     viewModel = TKUIHomeViewModel(
       componentViewModels: components,
       actionInput: actionTriggered.asSignal(onErrorSignalWith: .empty()),
-      customizationInput: customizationTriggered.asSignal(onErrorSignalWith: .empty()),
       searchInput: searchInput
     )
     

@@ -29,7 +29,6 @@ public class TKUIHomeViewModel {
   init(
     componentViewModels: [TKUIHomeComponentViewModel],
     actionInput: Signal<TKUIHomeCard.ComponentAction>,
-    customizationInput: Signal<[TKUIHomeCard.CustomizedItem]>,
     searchInput: SearchInput
   ) {
     
@@ -39,25 +38,28 @@ public class TKUIHomeViewModel {
     
     let fullContent = Self.fullContent(for: componentViewModels)
     
-    let startCustomization: [TKUIHomeCard.CustomizedItem] =
-      componentViewModels.compactMap { component in
-        component.customizerItem.map { .init(fromUserDefaultsWithId: component.identity, item: $0) }
-      }
-    
-    let customization = customizationInput
-      .asObservable()
-      .startWith(startCustomization)
+    let customizationFromDefaults =
+      NotificationCenter.default.rx.notification(.TKUIHomeComponentsCustomized)
+        .map { _ in }
+        .startWith(())
+        .map { () -> [TKUIHomeCard.CustomizedItem] in
+          let unsorted = componentViewModels.compactMap { component in
+            component.customizerItem.map { TKUIHomeCard.CustomizedItem(fromUserDefaultsWithId: component.identity, item: $0) }
+          }
+          return TKUIHomeCard.sortedAsInDefaults(unsorted)
+        }
+        .share(replay: 1, scope: .whileConnected)
 
-    let baseContent = Self.customizedContent(full: fullContent, customization: customization)
+    let baseContent = Self.customizedContent(full: fullContent, customization: customizationFromDefaults)
     
     let componentNext = Self.buildNext(
       for: Signal.merge(componentViewModels.map(\.nextAction)),
-      customization: customization
+      customization: customizationFromDefaults
     )
 
     let actionNext = Self.buildNext(
       for: actionInput,
-      customization: customization
+      customization: customizationFromDefaults
     )
     
     // When searching

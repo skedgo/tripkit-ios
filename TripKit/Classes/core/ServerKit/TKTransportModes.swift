@@ -44,4 +44,32 @@ public extension TKTransportModes {
     }
 
   }
+  
+  static func title(for modeIdentifier: String) -> String? {
+    if let known = TKRegionManager.shared.title(forModeIdentifier: modeIdentifier) {
+      return known
+    } else {
+      switch modeIdentifier {
+      case "in_air",
+           "pt_pub_airport":    return "Plane"
+      case "pt_pub_bus":        return "Bus"
+      case "pt_pub_coach":      return "Coach"
+      case "pt_pub_train":      return "Train"
+      case "pt_pub_subway":     return "Subway"
+      case "pt_pub_tram":       return "Tram"
+      case "pt_pub_ferry":      return "Ferry"
+      case "pt_pub_cablecar":   return "Cable car"
+      case "pt_pub_funicular":  return "Funicular"
+      case "pt_pub_monorail":   return "Monorail"
+      case "ps_tax":            return "Taxi"
+      case "me_car":            return Loc.VehicleTypeCar
+      case "me_car-s":          return "Car-share"
+      case "me_mot":            return Loc.VehicleTypeMotorbike
+      case "me_mic_bic":        return Loc.VehicleTypeBicycle
+      case "wa_wal":            return "Walking"
+      default: return nil
+      }
+    }
+
+  }
 }

@@ -8,6 +8,13 @@
 
 import Foundation
 
+extension Notification.Name {
+  
+  static let TKUIHomeComponentsCustomized = Notification.Name("TKUIHomeComponentsCustomized")
+
+}
+
+
 extension TKUIHomeCard {
   struct CustomizedItem {
     init(fromUserDefaultsWithId id: String, item: TKUIHomeCardCustomizerItem) {
@@ -20,9 +27,26 @@ extension TKUIHomeCard {
     let item: TKUIHomeCardCustomizerItem
     var isEnabled: Bool
     
-    func save() {
+    fileprivate func save() {
       UserDefaults.standard.set(!isEnabled, forKey: "home-hide.\(id)")
     }
+  }
+  
+  static func hideComponent(id: String) {
+    UserDefaults.standard.set(true, forKey: "home-hide.\(id)")
+    NotificationCenter.default.post(name: .TKUIHomeComponentsCustomized, object: nil)
+  }
+  
+  static func sortedAsInDefaults(_ items: [CustomizedItem]) -> [CustomizedItem] {
+    guard let preferred = UserDefaults.standard.array(forKey: "home-order") as? [String] else { return items }
+    return items.sorted { one, two in
+      (preferred.firstIndex(of: one.id) ?? 0) < (preferred.firstIndex(of: two.id) ?? 0)
+    }
+  }
+  
+  static func saveSorting(ids: [String]) {
+    UserDefaults.standard.set(ids, forKey: "home-order")
+    NotificationCenter.default.post(name: .TKUIHomeComponentsCustomized, object: nil)
   }
 }
 
@@ -47,8 +71,7 @@ extension TKUIHomeCard: TKUIHomeCardCustomizationViewControllerDelegate {
     guard let controller = self.controller else { return assertionFailure() }
     
     items.forEach { $0.save() }
-    
-    customizationTriggered.onNext(items)
+    TKUIHomeCard.saveSorting(ids: items.map(\.id)) // this notifies, too
     
     controller.dismiss(animated: true)
   }

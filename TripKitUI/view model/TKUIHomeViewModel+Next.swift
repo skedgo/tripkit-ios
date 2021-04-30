@@ -31,6 +31,10 @@ extension TKUIHomeCard {
     /// individual home card components.
     @available(iOS 13.0, *)
     case showCustomizer
+
+    /// Hides the home card component of the matching identifier.
+    @available(iOS 13.0, *)
+    case hideSection(identifier: String)
   }
 }
 
@@ -58,12 +62,12 @@ extension TKUIHomeViewModel {
   static func buildNext(for componentActions: Signal<TKUIHomeCard.ComponentAction>, customization: Observable<[TKUIHomeCard.CustomizedItem]>) -> Signal<NextAction> {
     componentActions.asObservable()
       .withLatestFrom(customization) { ($0, $1) }
-      .map(Self.buildNext(for:customization:))
+      .compactMap(Self.buildNext(for:customization:))
       .asSignal(onErrorSignalWith: .empty())
   }
 
   
-  static func buildNext(for componentAction: TKUIHomeCard.ComponentAction, customization: [TKUIHomeCard.CustomizedItem]) -> NextAction {
+  static func buildNext(for componentAction: TKUIHomeCard.ComponentAction, customization: [TKUIHomeCard.CustomizedItem]) -> NextAction? {
     switch componentAction {
     case let .push(card): return .push(card)
     case let .present(controller, inNavigator): return .present(controller, inNavigationController: inNavigator)
@@ -72,6 +76,10 @@ extension TKUIHomeViewModel {
     case .showCustomizer:
       guard #available(iOS 13.0, *) else { preconditionFailure() }
       return .showCustomizer(customization)
+      
+    case .hideSection(let identifier):
+      TKUIHomeCard.hideComponent(id: identifier)
+      return nil
     }
   }
   
