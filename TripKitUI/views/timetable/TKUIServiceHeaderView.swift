@@ -129,7 +129,7 @@ class TKUIServiceHeaderView: UIView {
       .startWith(0)
       .subscribe(onNext: { [weak self] _ in
         let duration = Date.durationString(forSeconds: lastUpdated.timeIntervalSinceNow * -1)
-        let updatedTitle = Loc.UpdatedAg(duration: duration)
+        let updatedTitle = Loc.UpdatedAgo(duration: duration)
         self?.occupancyUpdatedLabel.text = Loc.LastUpdated(date: updatedTitle)
       })
       .disposed(by: disposeBag)
