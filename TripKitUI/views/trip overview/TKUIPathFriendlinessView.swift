@@ -175,7 +175,7 @@ public class TKUIPathFriendlinessView: UIView {
         (Loc.FriendlyPath, friendly),
         (Loc.UnfriendlyPath, unfriendly),
         (Loc.Dismount, dismount),
-        (Loc.UnknownPathFriendliness, unknown),
+        (Loc.Unknown, unknown),
       ]
       .filter { $0.1 > 0.5 }
       .map { ($0.0, distanceFormatter.string(fromDistance: $0.1)) }
