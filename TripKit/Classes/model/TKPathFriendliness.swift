@@ -28,7 +28,7 @@ public enum TKPathFriendliness {
     case .friendly:   return Loc.FriendlyPath
     case .unfriendly: return Loc.UnfriendlyPath
     case .dismount:   return Loc.Dismount
-    case .unknown:    return Loc.UnknownPathFriendliness
+    case .unknown:    return Loc.Unknown
     }
   }
 }

@@ -94,8 +94,8 @@ extension Loc {
     return NSLocalizedString("Dismount", tableName: "TripKit", bundle: .tripKit, comment: "Indicating a path requires you to dismount and push your bicycle")
   }
   
-  public static var UnknownPathFriendliness: String {
-    return NSLocalizedString("Unknown", tableName: "TripKit", bundle: .tripKit, comment: "Indicating the wheelchair/cycling friendliness of a path is unknown")
+  public static var Unknown: String {
+    return NSLocalizedString("Unknown", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for something unknown/unspecified")
   }
   
   

@@ -29,7 +29,7 @@ public class Loc : NSObject {
   
   @objc
   public static var OK: String {
-    return NSLocalizedString("OK", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Ok action")
+    return NSLocalizedString("OK", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "OK action")
   }
   
   @objc

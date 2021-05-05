@@ -57,7 +57,7 @@ extension TKAPI.VehicleOccupancy {
   
   public var localizedTitle: String {
     switch self {
-    case .unknown: return NSLocalizedString("Unknown", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indicator for something unknown/unspecified'")
+    case .unknown: return Loc.Unknown
     case .empty: return NSLocalizedString("Empty", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train is empty'")
     case .manySeatsAvailable: return NSLocalizedString("Many seats available", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train has many seats available'")
     case .fewSeatsAvailable: return NSLocalizedString("Few seats available", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "As in 'this bus/train has few seats available'")
