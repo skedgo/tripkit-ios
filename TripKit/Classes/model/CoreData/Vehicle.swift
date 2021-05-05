@@ -104,8 +104,7 @@ extension Vehicle : MKAnnotation {
       let format = NSLocalizedString("Vehicle %@ updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle 'x' updated. (old key: VehicleCalledUpdated)")
       return String(format: format, label, duration)
     } else {
-      let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated. (old key: VehicleUpdated)")
-      return String(format: format, duration)
+      return Loc.UpdatedAgo(duration: duration)
     }
   }
   

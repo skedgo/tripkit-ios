@@ -206,6 +206,11 @@ extension Loc {
     }
   }
   
+  public static func UpdatedAgo(duration: String) -> String {
+    let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated. (old key: VehicleUpdated)")
+    return String(format: format, duration)
+  }
+  
 }
 
 // MARK: - Segment instructions

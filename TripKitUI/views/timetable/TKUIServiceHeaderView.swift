@@ -129,8 +129,7 @@ class TKUIServiceHeaderView: UIView {
       .startWith(0)
       .subscribe(onNext: { [weak self] _ in
         let duration = Date.durationString(forSeconds: lastUpdated.timeIntervalSinceNow * -1)
-        let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated. (old key: VehicleUpdated)")
-        let updatedTitle = String(format: format, duration)
+        let updatedTitle = Loc.UpdatedAg(duration: duration)
         self?.occupancyUpdatedLabel.text = Loc.LastUpdated(date: updatedTitle)
       })
       .disposed(by: disposeBag)
