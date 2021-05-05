@@ -14,24 +14,8 @@ extension Loc {
     return NSLocalizedString("Search for destination", tableName: "TripKit", bundle: .tripKit, comment: "")
   }
   
-  public static var PlanATripAndItllShowUpHere: String {
-    return NSLocalizedString("Plan a trip and it will show up here.", tableName: "TripKit", bundle: .tripKit, comment: "")
-  }
-  
   public static var LoadingDotDotDot: String {
     return NSLocalizedString("Loading…", tableName: "TripKit", bundle: .tripKit, comment: "Indicating when something is loading")
-  }
-  
-  public static var BusyGettingYourTrip: String {
-    return NSLocalizedString("We are busy getting your upcoming trip. Please wait...", tableName: "TripKit", bundle: .tripKit, comment: "")
-  }
-  
-  public static var LeaveIn: String {
-    return NSLocalizedString("Leave in", tableName: "TripKit", bundle: .tripKit, comment: "Title for when to depart. Countdown to departure will be displayed below.")
-  }
-  
-  public static var ArriveIn: String {
-    return NSLocalizedString("Arrive in", tableName: "TripKit", bundle: .tripKit, comment: "Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.")
   }
   
   public static var Expand: String {
@@ -107,10 +91,6 @@ extension Loc {
     return NSLocalizedString("No routes found.", tableName: "TripKit", bundle: .tripKit, comment: "Error title when routing produced no results (but no specific error was returned from routing).")
   }
   
-  public static var PleaseAdjustYourQuery: String {
-    return NSLocalizedString("Please adjust your query and try again.", tableName: "TripKit", bundle: .tripKit, comment: "Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).")
-  }
-
   public static var BadgeEasiest: String {
     return NSLocalizedString("Easiest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Easiest")
   }
@@ -232,17 +212,6 @@ extension Loc {
   public static func Ago(duration: String) -> String {
     let format = NSLocalizedString("%@ ago", tableName: "TripKit", bundle: .tripKit, comment: "Title for something that happened a certain timeframe ago, e.g., '5 mins ago'")
     return String(format: format, duration)
-  }
-  
-  
-  @objc public static var HasReminder: String {
-    return NSLocalizedString("Has reminder", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Accessibility annotation for trips which have a reminder set.")
-  }
-  
-  @objc(ToArrival:)
-  public static func To(arrival: String) -> String {
-    let format = NSLocalizedString("to %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "to %date. (old key: DateToFormat)")
-    return String(format: format, arrival)
   }
   
   @objc public static var Checkmark: String {

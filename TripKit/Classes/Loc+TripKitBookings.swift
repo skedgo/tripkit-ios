@@ -20,10 +20,6 @@ extension Loc {
     return NSLocalizedString("Don't have an account?", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Option for users if they don't yet have a SkedGo account")
   }
 
-  @objc public static var Authentication: String {
-    return NSLocalizedString("Authentication", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Source where the account was derived, e.g., Facebook")
-  }
-
   @objc public static var SignOut: String {
     return NSLocalizedString("Sign out", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Instruction for signing out user account")
   }
@@ -62,18 +58,6 @@ extension Loc {
     return NSLocalizedString("Updating trip", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that shows app is updating trip after user finalised bookings")
   }
 
-  @objc public static var ValuesMissing: String {
-    return NSLocalizedString("Values missing from required fields.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that informs users that some values are missing from the required fields in a booking form.")
-  }
-  
-  @objc public static var YouNeedToAgreeToTheBookingTerms: String {
-    return NSLocalizedString("You need to agree to the booking terms and conditions.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that informs users that T&C must be agreed before booking can be made.")
-  }
-  
-  @objc public static var YouNeedToAgreeToTheInsuranceTerms: String {
-    return NSLocalizedString("You need to agree to the insurance terms and conditions.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Message that informs users that T&C for insurance must be agreed before booking can be made.")
-  }
-  
   @objc public static var JohnAppleseed: String {
     return NSLocalizedString("John Appleseed", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Name placeholder text")
   }

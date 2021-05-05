@@ -14,20 +14,12 @@ extension Loc {
     return NSLocalizedString("Trip", tableName: "TripKit", bundle: .tripKit, comment: "Title for a trip")
   }
 
-  @objc public static var NoPlannedTrips: String {
-    return NSLocalizedString("No planned trips", tableName: "TripKit", bundle: .tripKit, comment: "Indicating no trips have been planned within the next 24 hrs")
-  }
-  
   @objc public static var OpeningHours: String {
     return NSLocalizedString("Opening Hours", tableName: "TripKit", bundle: .tripKit, comment: "Title for opening hours")
   }
   
   @objc public static var PublicHoliday: String {
     return NSLocalizedString("Public holiday", tableName: "TripKit", bundle: .tripKit, comment: "")
-  }
-  
-  public static var Show: String {
-    return NSLocalizedString("Show", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that, when tapped, shows something, e.g., a list of alert")
   }
   
   // MARK: - Vehicles and transport modes
@@ -165,11 +157,6 @@ extension Loc {
     return String(format: format, from)
   }
 
-  public static var FromCurrentLocation: String {
-    return NSLocalizedString("From current location", tableName: "TripKit", bundle: .tripKit, comment: "")
-  }
-
-  
   @objc(ToLocation:)
   public static func To(location to: String) -> String {
     let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: .tripKit, comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")
@@ -281,10 +268,6 @@ extension Loc {
     return NSLocalizedString("Alerts", tableName: "TripKit", bundle: .tripKit, comment: "")
   }
 
-  public static var MoreInfo: String {
-    return NSLocalizedString("More info", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Title of button to get more details about an alert")
-  }
-  
   public static var WeWillKeepYouUpdated: String {
     return NSLocalizedString("We'll keep you updated with the latest transit alerts here", tableName: "TripKit", bundle: .tripKit, comment: "")
   }
