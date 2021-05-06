@@ -1,7 +1,7 @@
 /* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
 "%@ ago" = "vor %@";
 
-/* Number of alerts, in this case, there are multiple (plural) */
+/* Number of alerts, in this case, there are multiple (plural */
 "%@ alerts" = "%@ Warnungen";
 
 /* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
@@ -52,6 +52,9 @@
 /* Instruction to follow unnamed street */
 "Along unnamed street" = "Entlang unbenannter Straße";
 
+/* Action button title to see alternative options for the case where you cant make the next connection */
+"Alternative routes" = "Alternative Routen";
+
 /* apple maps directions action */
 "Apple Maps" = "Apple Karten";
 
@@ -59,8 +62,14 @@
 "Arrival" = "Ankunft";
 
 /* Prefix for selected 'arrive by' time
-   Single line instruction to arrive */
+ Single line instruction to arrive */
 "Arrive" = "Ankunft";
+
+/* The place of arrival. */
+"Arrive %@" = "Ankunft %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the arrival time. (old key: ArrivalLocationTime) */
+"Arrive %@ at %@" = "Ankunft %1$@ um %2$@";
 
 /* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
 "Arrive at %@" = "Ankunft um %@";
@@ -74,11 +83,13 @@
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Ankunft";
 
+/* Used when the trip does not end at the requested location, but nearby. The '%@' will be replaced with requested destination location. */
+"Arrive near %@" = "Ankunft nahe %@";
+
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "um %@";
 
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)
-   Filler for a service running at time, e.g., 'At 11:56am' */
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Bei %@";
 
 /* Text for vehicle of type: Bicycle */
@@ -102,8 +113,14 @@
 /* Trip badge: Cheapest */
 "Cheapest" = "Günstig";
 
+/* Accessibility title for button that points up to collapse a section */
+"Collapse" = "Einklappen";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Haltestelle konnte nicht gefunden werden.";
+
+/* Title for button to customise the home card */
+"Customise home" = "Anpassen";
 
 /* Text for attributing data sources. The list of providers will be used instead of '%@' */
 "Data provided by %@" = "Daten von %@";
@@ -111,11 +128,17 @@
 /* Title for screen showing data providers */
 "Data Providers" = "Datenanbieter";
 
+/* Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location. */
+"Depart near %@" = "Abfahrt nahe %@";
+
 /* Departure time sorter title */
 "Departure" = "Abfahrt";
 
 /* Destination of the bus */
 "Direction" = "Richtung";
+
+/* Status indicator that a mode is not enabled */
+"Disabled" = "Deaktiviert";
 
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Abmelden";
@@ -135,11 +158,17 @@
 /* As in 'this bus/train is empty' */
 "Empty" = "Leer";
 
+/* Status indicator that a mode is enabled */
+"Enabled" = "Aktiviert";
+
 /* Placeholder name for destination (then replaced with address or name) */
 "End location" = "Zielort";
 
 /* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
 "Every %@" = "Alle %@";
+
+/* Accessibility title for button that points down to expand a section */
+"Expand" = "Ausklappen";
 
 /* Action title to extend an existing booking */
 "Extend" = "Verlängern";
@@ -159,9 +188,6 @@
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Von %@";
 
-/* No comment provided by engineer. */
-"From current location" = "Von aktuellem Standort";
-
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Voll";
 
@@ -176,6 +202,9 @@
 
 /* Instruction to get a service towards provided destination */
 "Get on service to %@" = "Einsteigen in Richtung %@";
+
+/* Title of button to start a trip */
+"Go" = "Los";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch nehmen";
@@ -214,7 +243,7 @@
 "Kick Scooter" = "Scooter";
 
 /* Prefix for selected 'leave after' time
-   Single line instruction to leave */
+ Single line instruction to leave */
 "Leave" = "Abfahrt";
 
 /* The place of departure. (old key: LeaveLocation) */
@@ -235,6 +264,9 @@
 /* No comment provided by engineer. */
 "Leave now" = "Jetzt";
 
+/* Title of button to show fewer results */
+"Less" = "Weniger";
+
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Wenige Stehplätze";
 
@@ -246,6 +278,12 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Viele Plätze verfügbar";
+
+/* No comment provided by engineer. */
+"Map by %@" = "Karte von %@";
+
+/* Title of button to show additional results */
+"More" = "Mehr";
 
 /* Title of button to get more details about an alert */
 "More info" = "Mehr Infos";
@@ -280,6 +318,9 @@
 /* Title for button that opens an external app. */
 "Open app" = "App öffnen";
 
+/* Action button title for opening something in another app. Tapping this button will show a list of app names. */
+"Open in…" = "Öffnen in…";
+
 /* Title for opening hours */
 "Opening Hours" = "Öffnungszeiten";
 
@@ -291,9 +332,6 @@
 
 /* Title of page to plan a trip */
 "Plan Trip" = "Trip planen";
-
-/* Error recovery suggestion for when routing produced no results (but no specific error was returned from routing). */
-"Please adjust your query and try again." = "Bitte passe deine Suche an und probiere noch einmal.";
 
 /* No comment provided by engineer. */
 "Powered by" = "Powered by";
@@ -313,14 +351,32 @@
 /* Title for button that allows users to request support */
 "Request support" = "Support-Anfrage";
 
+/* Action button title to plan a route */
+"Route" = "Route";
+
+/* No comment provided by engineer. */
+"Routing between these locations is not yet supported." = "Routing zwischen diesen Orten wird noch nicht unterstützt.";
+
 /* Error message if interregional routing isn't yet supported */
 "Routing from %@ to %@ is not yet supported" = "Routen von %1$@ nach %2$@ werden noch nicht unterstützt";
+
+/* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
+"Scheduled" = "Geplant";
+
+/* No comment provided by engineer. */
+"Search for destination" = "Suche nach Reiseziel";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.";
 
 /* Send SMS action button */
 "Send SMS" = "SMS senden";
+
+/* Title for displaying the details of a public transport service (i.e., a specific departure of a specific route) */
+"Service" = "Service";
+
+/* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
+"Service has been cancelled." = "Fällt aus.";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Setup";
@@ -334,7 +390,7 @@
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Nur noch Stehplätze";
 
-/* Title of button to start a trip */
+/* Title of button to start a trip (primarily after pausing) */
 "Start" = "Abfahrt";
 
 /* Placeholder name for origin (then replaced with address or name) */
@@ -367,6 +423,9 @@
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
 "Unknown" = "Unbekannt";
 
+/* Title for button that unlocks a shared vehicle. */
+"Unlock" = "Entsperren";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Aktualisiert vor %@";
 
@@ -381,4 +440,7 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Wir halten dich hier mit den neuesten Warnungen auf dem Laufenden";
+
+/* Alert if service running late/early, meaning that the user might not make the next service */
+"You might not make this transfer." = "Anschluss wird ggf. nicht erreicht.";
 

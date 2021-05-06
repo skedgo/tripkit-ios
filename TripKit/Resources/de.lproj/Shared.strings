@@ -1,7 +1,7 @@
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
 "'%@' not found." = "‘%@' nicht gefunden.";
 
-/* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
 "%@'s" = "%@s";
 
 /* '%@' will be replaced with the person's name */
@@ -22,7 +22,7 @@
 /* Default title for alert view */
 "Alert" = "Warnung";
 
-/* Indicator that an event is all-day, or that something is open all-day */
+/* Indicator that an event is all-day */
 "all-day" = "ganztägig";
 
 /* Option for users if they already owned a SkedGo account */
@@ -166,7 +166,7 @@
 /* Include contacts. */
 "Include contacts" = "Kontakte durchsuchen";
 
-/* Button to include events in search, too. */
+/* Include events. */
 "Include events" = "Kalendar durchsuchen";
 
 /* Instant results proposal */
@@ -214,7 +214,7 @@
 /* Next action */
 "Next" = "Weiter";
 
-/* No comment provided by engineer. */
+/* Indicator for no carbon emissions */
 "No CO₂" = "Kein CO₂";
 
 /* Indicator for wheelchair not accessible services */
@@ -303,6 +303,9 @@
 
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'…" = "'%@' suchen…";
+
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "Sichere Passwörter sind mindestens fünf Zeichen lang und enthalten sowohl Zahlen als auch Symbole";
 
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Gesendet";
