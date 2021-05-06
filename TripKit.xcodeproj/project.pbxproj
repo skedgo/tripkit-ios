@@ -323,7 +323,6 @@
 		3A73A49024409A9200EB74E5 /* TKSegment+Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A48E24409A9200EB74E5 /* TKSegment+Ticket.swift */; };
 		3A7636F921F9F04700639155 /* TKUIAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636F821F9F04700639155 /* TKUIAnnotations.swift */; };
 		3A7636FB21F9F28200639155 /* TKUIAnnotations+TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */; };
-		3A77B74E22F8815D0082CCAF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A77B74C22F8815D0082CCAF /* InfoPlist.strings */; };
 		3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A787EC31D38F646009F9A18 /* TKJSONCache.swift */; };
 		3A794B5B25DE25B3000128FA /* TKUIHomeCustomizerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A794B5925DE25B3000128FA /* TKUIHomeCustomizerCell.swift */; };
 		3A794B5C25DE25B3000128FA /* TKUIHomeCustomizerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A794B5A25DE25B3000128FA /* TKUIHomeCustomizerCell.xib */; };
@@ -1079,7 +1078,6 @@
 		3A2CAB8D253DA84F007BB48B /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
 		3A2CAB8E253DA84F007BB48B /* AnimatableSectionModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSectionModelType.swift; sourceTree = "<group>"; };
 		3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
-		3A2EC07722CB76C500601A64 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocodingResultScorer.swift; sourceTree = "<group>"; };
 		3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLSEntry.swift; sourceTree = "<group>"; };
 		3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRenderer.swift; sourceTree = "<group>"; };
@@ -1115,7 +1113,6 @@
 		3A38622D2292D61100C8E704 /* TKImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKImageBuilder.swift; sourceTree = "<group>"; };
 		3A38695620EB6C2400B0A82D /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
 		3A39757C22857D750094F883 /* TKUIModeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIModeAnnotationView.swift; sourceTree = "<group>"; };
-		3A3AEBB522EF25DD006BA5E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		3A3C9BA51F751FC300C8D476 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesAPIModel.swift; sourceTree = "<group>"; };
 		3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPIModel.swift; sourceTree = "<group>"; };
@@ -1151,7 +1148,6 @@
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
 		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICircleAnnotationView.swift; sourceTree = "<group>"; };
-		3A5709C322EF27A900E1EBBC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		3A5A39A825A2AB86005DC1AE /* routing-pt-platforms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-pt-platforms.json"; sourceTree = "<group>"; };
 		3A5A39B525A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentStationaryDoubleCell.swift; sourceTree = "<group>"; };
 		3A5A39B625A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUISegmentStationaryDoubleCell.xib; sourceTree = "<group>"; };
@@ -1159,14 +1155,10 @@
 		3A5D1B4F24BDE299001B1E77 /* DataAttachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAttachable.swift; sourceTree = "<group>"; };
 		3A5D1B5224BDE43D001B1E77 /* SegmentReference+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentReference+Data.swift"; sourceTree = "<group>"; };
 		3A5D1B5824BDF08C001B1E77 /* SegmentTemplate+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+Data.swift"; sourceTree = "<group>"; };
-		3A5EC03F22D5ECD100187551 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
-		3A5EC04022D5ECD100187551 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
-		3A5EC04122D5ECD100187551 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		3A5EC04222D5ECD100187551 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Shared.strings; sourceTree = "<group>"; };
 		3A5EC04322D5ECD100187551 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A5EF193235F50C2001B4177 /* TKUIRoutingQueryInputCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputCard.swift; sourceTree = "<group>"; };
 		3A5EF196235F51C5001B4177 /* TKUIRoutingQueryInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputViewModel.swift; sourceTree = "<group>"; };
-		3A5F9A2422D5E60700B72957 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; };
 		3A63A88520B74C13007B8D46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A88820B74C19007B8D46 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A63A88920B74C1B007B8D46 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
@@ -1261,10 +1253,7 @@
 		3A73A48E24409A9200EB74E5 /* TKSegment+Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+Ticket.swift"; sourceTree = "<group>"; };
 		3A7636F821F9F04700639155 /* TKUIAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAnnotations.swift; sourceTree = "<group>"; };
 		3A7636FA21F9F28200639155 /* TKUIAnnotations+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIAnnotations+TripKit.swift"; sourceTree = "<group>"; };
-		3A77B74D22F8815D0082CCAF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		3A77B75822F8815D0082CCAF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		3A787EC31D38F646009F9A18 /* TKJSONCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
-		3A78EFC422E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Main.strings; sourceTree = "<group>"; };
 		3A78EFC522E85D1400018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A78EFC622E85D1500018696 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Shared.strings; sourceTree = "<group>"; };
 		3A794B5925DE25B3000128FA /* TKUIHomeCustomizerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeCustomizerCell.swift; sourceTree = "<group>"; };
@@ -1377,6 +1366,7 @@
 		3AA80DA822679CDE00D7A781 /* TKWebActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKWebActionHandler.swift; sourceTree = "<group>"; };
 		3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGCardView+Rx.swift"; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursAPIModel.swift; sourceTree = "<group>"; };
+		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAPIModel.swift; sourceTree = "<group>"; };
 		3AAD8815209C78E300C75B7E /* TKUserProfileHelper+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUserProfileHelper+Rx.swift"; sourceTree = "<group>"; };
 		3AB1CF1A23AB6B930098DA22 /* TKUINearbyViewModel+Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKUINearbyViewModel+Content.swift"; sourceTree = "<group>"; };
@@ -1447,7 +1437,6 @@
 		3AC01AE22360932100B54484 /* TKUIRoutingQueryInputTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TKUIRoutingQueryInputTitleView.swift; path = "../routing input/TKUIRoutingQueryInputTitleView.swift"; sourceTree = "<group>"; };
 		3AC01AE5236095AB00B54484 /* TKUIRoutingQueryInputTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIRoutingQueryInputTitleView.xib; sourceTree = "<group>"; };
 		3AC17E9C207F548E0006794F /* TKImage+TripKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKImage+TripKit.swift"; sourceTree = "<group>"; };
-		3AC3B70822D5EBFF00B48575 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Main.strings; sourceTree = "<group>"; };
 		3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouter.swift; sourceTree = "<group>"; };
 		3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKPeliasGeocoder.swift; sourceTree = "<group>"; };
 		3AC9A0AD1F682B6E0050217E /* TKGeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoJSON.swift; sourceTree = "<group>"; };
@@ -1457,7 +1446,6 @@
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
 		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3ACF47092297EC820096860D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3ACF470B2297EC820096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3ACF470C2297EC820096860D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ACF470D2297EC820096860D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACF470E2297EC820096860D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -1512,7 +1500,6 @@
 		3AEB47EB20DCE48500F9DF83 /* RxHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
 		3AF05CF723FEFF550043B2EB /* TKUIDebugActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDebugActionHandler.swift; sourceTree = "<group>"; };
 		3AF05CFA23FF0EF40043B2EB /* TKLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLog.swift; sourceTree = "<group>"; };
-		3AF2F6F622EF27EC00559D19 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingTypes.swift; sourceTree = "<group>"; };
 		3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationTypes.swift; sourceTree = "<group>"; };
 		3AF5F2AE20EFF7BD003AAEBA /* TKUIAttributionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUIAttributionCell.xib; sourceTree = "<group>"; };
@@ -2749,7 +2736,6 @@
 				3ACF47AA229EEDFF0096860D /* Assets.xcassets */,
 				3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */,
 				3ACF47AF229EEDFF0096860D /* Info.plist */,
-				3A77B74C22F8815D0082CCAF /* InfoPlist.strings */,
 				3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */,
 			);
 			path = TripKitUIExample;
@@ -3482,7 +3468,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */,
-				3A77B74E22F8815D0082CCAF /* InfoPlist.strings in Resources */,
 				3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */,
 				3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */,
 			);
@@ -4282,19 +4267,10 @@
 			name = TripKit.strings;
 			sourceTree = "<group>";
 		};
-		3A77B74C22F8815D0082CCAF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A77B74D22F8815D0082CCAF /* zh-Hant */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		3ACF470A2297EC820096860D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3ACF470B2297EC820096860D /* Base */,
-				3A5EC03F22D5ECD100187551 /* sv */,
+				3AACB4942643771300DE5665 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -4303,15 +4279,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				3ACF47A8229EEDFE0096860D /* Base */,
-				3A2EC07722CB76C500601A64 /* de */,
-				3A5F9A2422D5E60700B72957 /* fi */,
-				3AC3B70822D5EBFF00B48575 /* da */,
-				3A5EC04022D5ECD100187551 /* sv */,
-				3A78EFC422E85D1400018696 /* nb */,
-				3A3AEBB522EF25DD006BA5E6 /* es */,
-				3A5709C322EF27A900E1EBBC /* it */,
-				3AF2F6F622EF27EC00559D19 /* zh-Hans */,
-				3A77B75822F8815D0082CCAF /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -4320,7 +4287,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				3ACF47AD229EEDFF0096860D /* Base */,
-				3A5EC04122D5ECD100187551 /* sv */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
