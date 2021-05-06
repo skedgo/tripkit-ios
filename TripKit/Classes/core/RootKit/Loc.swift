@@ -58,11 +58,6 @@ public class Loc : NSObject {
   }
   
   @objc
-  public static var Loading: String {
-    return NSLocalizedString("Loading", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title on the button that indicates to the user that booking is in progressing")
-  }
-  
-  @objc
   public static var Next: String {
     return NSLocalizedString("Next", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Next action")
   }
