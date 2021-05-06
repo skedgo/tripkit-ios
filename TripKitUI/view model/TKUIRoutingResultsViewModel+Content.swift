@@ -159,7 +159,7 @@ extension TKUIRoutingResultsViewModel {
       
       } else if items.count > 2, expand == group {
         show = items
-        action = (title: "Less", payload: .collapse) // TODO: Localise
+        action = (title: Loc.Less, payload: .collapse)
       
       } else if items.count > 2 {
         let good = items
@@ -170,7 +170,7 @@ extension TKUIRoutingResultsViewModel {
         } else {
           show = Array(good.prefix(2))
         }
-      action = (title: "More", payload: .expand(group)) // TODO: Localise
+        action = (title: Loc.More, payload: .expand(group))
 
       } else {
         show = items

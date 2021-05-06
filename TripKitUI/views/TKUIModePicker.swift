@@ -270,7 +270,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     statusLabel.backgroundColor = .clear
     statusLabel.textColor = enabled ? .tkStateSuccess : .tkStateError
     statusLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
-    statusLabel.text = enabled ? "Enabled" : "Disabled" // TODO: Localise
+    statusLabel.text = enabled ? Loc.Enabled : Loc.Disabled
     statusLabel.translatesAutoresizingMaskIntoConstraints = false
     wrapper.addSubview(statusLabel)
     

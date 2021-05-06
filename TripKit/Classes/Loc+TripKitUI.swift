@@ -91,6 +91,22 @@ extension Loc {
     return NSLocalizedString("No routes found.", tableName: "TripKit", bundle: .tripKit, comment: "Error title when routing produced no results (but no specific error was returned from routing).")
   }
   
+  public static var Less: String {
+    return NSLocalizedString("Less", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to show fewer results")
+  }
+
+  public static var More: String {
+    return NSLocalizedString("More", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to show additional results")
+  }
+
+  public static var Enabled: String {
+    return NSLocalizedString("Enabled", tableName: "TripKit", bundle: .tripKit, comment: "Status indicator that a mode is enabled")
+  }
+
+  public static var Disabled: String {
+    return NSLocalizedString("Disabled", tableName: "TripKit", bundle: .tripKit, comment: "Status indicator that a mode is not enabled")
+  }
+
   public static var BadgeEasiest: String {
     return NSLocalizedString("Easiest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Easiest")
   }
