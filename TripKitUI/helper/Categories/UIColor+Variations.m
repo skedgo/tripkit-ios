@@ -50,17 +50,6 @@
 												 alpha:alpha];
 }
 
-- (UIColor *)invert
-{
-  CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;
-	[self extractRed:&red green:&green blue:&blue alpha:&alpha];
-	
-	return [UIColor colorWithRed:1 - red
-												 green:1 - green
-													blue:1 - blue
-												 alpha:alpha];
-}
-
 - (BOOL)isDark
 {
   CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;

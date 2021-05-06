@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIColor *)darkerColorByPercentage:(CGFloat)percentToBlack;
 
-- (UIColor *)invert;
-
 - (BOOL)isDark;
 
 @end

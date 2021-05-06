@@ -11,10 +11,7 @@
 
 // Categories
 #import "UIColor+Variations.h"
-#import "UIImage+Variations.h"
 #import "UIView+BearingRotation.h"
-#import "UIView+Helpers.h"
-#import "UIImage+Variations.h"
 
 // TransportKitUI
 #import "TKUISemaphoreView.h"

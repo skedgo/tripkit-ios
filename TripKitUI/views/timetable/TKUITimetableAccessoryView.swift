@@ -81,7 +81,7 @@ class TKUITimetableAccessoryView: UIView {
   }
   
   func setCustomActions(_ actions: [TKUITimetableCard.Action], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
-    customActionView.removeAllSubviews()
+    customActionView.subviews.forEach { $0.removeFromSuperview() }
     
     // We deal with empty actions separately here, since it's best to
     // deactivate constraints first before activating. Otherwise, AL

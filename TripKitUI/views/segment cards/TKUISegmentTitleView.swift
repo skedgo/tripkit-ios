@@ -71,7 +71,7 @@ public class TKUISegmentTitleView: UIView {
   }
   
   public func setCustomActions(_ actions: [TKUISegmentTitleView.Action], for model: TKSegment, card: TGCard) {
-    actionsWrapper.removeAllSubviews()
+    actionsWrapper.subviews.forEach { $0.removeFromSuperview() }
     
     if actions.isEmpty {
       showActionsWrapper(false)

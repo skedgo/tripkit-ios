@@ -17,7 +17,6 @@
 
 
 #import "UIColor+Variations.h"
-#import "UIView+Helpers.h"
 
 #define SEGMENT_ITEM_ALPHA_SELECTED   1
 #define SEGMENT_ITEM_ALPHA_DESELECTED 0.25
@@ -120,7 +119,10 @@
   }
   
   // clean up cells
-  [self removeAllSubviews];
+  NSArray *subviewCopy = [[self subviews] copy];
+  for (UIView *view in subviewCopy) {
+    [view removeFromSuperview];
+  }
 	
 #define PADDING 12
   CGFloat padding = PADDING * (self.tiny ? 0.6f : 1.0f);

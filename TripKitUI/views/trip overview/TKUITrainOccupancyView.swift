@@ -58,7 +58,7 @@ public class TKUITrainOccupancyView: UIView {
   
   private func updateStack() {
     stack.arrangedSubviews.forEach(stack.removeArrangedSubview)
-    stack.removeAllSubviews()
+    stack.subviews.forEach { $0.removeFromSuperview() }
     
     for outer in occupancies {
       for (index, inner) in outer.enumerated() {

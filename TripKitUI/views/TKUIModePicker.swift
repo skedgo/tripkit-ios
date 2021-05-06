@@ -100,7 +100,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     guard visibleModes.count > 0 else { return }
     
     // Clean up
-    removeAllSubviews()
+    subviews.forEach { $0.removeFromSuperview() }
     
     // This is a "row" of mode icons.
     var currentModeButtonStackView: UIStackView?

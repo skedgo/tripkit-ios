@@ -34,13 +34,40 @@ public extension UIImageView {
       var image3 = TripKitUIBundle.imageNamed("icon-signal-bars3")
       
       if let tintColor = tintColor {
-        image1 = image1.tk_image(withTintColor: tintColor)
-        image2 = image2.tk_image(withTintColor: tintColor)
-        image3 = image3.tk_image(withTintColor: tintColor)
+        image1 = image1.applying(tintColor: tintColor)
+        image2 = image2.applying(tintColor: tintColor)
+        image3 = image3.applying(tintColor: tintColor)
       }
       return [image1, image2, image3, image3, image3, image3, image3, image3]
     } else {
       return [TripKitUIBundle.imageNamed("icon-signal-bars3")]
     }
+  }
+}
+
+extension UIImage {
+  func applying(tintColor: UIColor) -> UIImage {
+    let drawRect = CGRect(origin: .zero, size: size)
+    UIGraphicsBeginImageContextWithOptions(drawRect.size, false, 0)
+    guard
+      let context = UIGraphicsGetCurrentContext(),
+      let cgImage = self.cgImage
+    else { return self }
+    
+    context.translateBy(x: 0, y: size.height)
+    context.scaleBy(x: 1, y: -1)
+    
+    // draw original image
+    context.setBlendMode(.normal)
+    context.draw(cgImage, in: drawRect)
+    
+    // draw color atop
+    context.setFillColor(tintColor.cgColor)
+    context.setBlendMode(.sourceAtop)
+    context.fill(drawRect)
+    
+    let tinted = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return tinted ?? self
   }
 }

@@ -38,7 +38,7 @@ enum TKUISegmentCellHelper {
 extension UIStackView {
   func resetViews(_ views: [UIView]) {
     arrangedSubviews.forEach(removeArrangedSubview)
-    removeAllSubviews()
+    subviews.forEach { $0.removeFromSuperview() }
     views.forEach(addArrangedSubview)
     isHidden = views.isEmpty
   }
