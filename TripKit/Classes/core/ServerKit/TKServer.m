@@ -12,10 +12,8 @@
 
 #import "TKServerKit.h"
 
-NSString *const TKDefaultsKeyServerType              = @"internalServerType";
 NSString *const TKDefaultsKeyDevelopmentServer       = @"developmentServer";
 NSString *const TKDefaultsKeyUserToken               = @"userToken";
-NSString *const TKDefaultsKeyProfileEnableFlights    = @"profileEnableFlights";
 
 
 @interface TKServer ()
