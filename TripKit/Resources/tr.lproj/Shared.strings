@@ -1,0 +1,408 @@
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' için bilgi bulunamadı.";
+
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Home" = "%@ kişisinin evi";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Work" = "%@ kişisinin iş yeri";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu tekrarlar";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Bu özelliğe erişim cihazınız için sınırlandırılmıştır. Lütfen Ayarlar uygulamasını kontrol edin > Genel > Kısıtlamalar veya cihaz sağlayıcınıza sorun.";
+
+/* Accessibility label for action button */
+"Action" = "Aksiyon";
+
+/* Default title for alert view */
+"Alert" = "Uyarı";
+
+/* Indicator that an event is all-day */
+"all-day" = "tüm gün";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "Zaten bir hesabınız var mı?";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "Zaten hesabınız mı var? Oturum açın";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "%@ varılacak";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "Kimlik Doğrulama";
+
+/* Authorisation needed title */
+"Authorisation needed" = "Yetkilendirme gerekli";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "Geri";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "Bisiklet";
+
+/* Cancel action */
+"Cancel" = "İptal";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "İptal edildi";
+
+/* Type of vehicle : car */
+"Car" = "Araba";
+
+/* Instruction for changing password */
+"Change" = "Değiştir";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "İzleme seçeneklerini değiştir";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "Onay işareti";
+
+/* Close action */
+"Close" = "Kapat";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "Onayla";
+
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "Şifreyi onayla";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "Destek ekibiyle iletişime geçin";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "Geçerli konumunuz belirlenemedi.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "Desteklenen bölgeler TripGo sunucusundan indirilemedi. Lütfen daha sonra tekrar deneyiniz.";
+
+/* Current city */
+"Current City" = "Mevcut Şehir";
+
+/* Title for user's current location */
+"Current Location" = "Mevcut Konum";
+
+/* Class of errors usually originated from databases */
+"Data Error" = "Veri hatası";
+
+/* Delete action */
+"Delete" = "Sil";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "%@ kalkacak";
+
+/* Sort by distance */
+"Distance" = "Mesafe";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "Bir hesabınız yok mu?";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "Hesabınız yok mu? Kaydolun";
+
+/* Done action */
+"Done" = "Tamam";
+
+/* Drop new pin */
+"Drop new pin" = "Yeni iğne bırak";
+
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "Hesabı Düzenle";
+
+/* For email address */
+"Email" = "E-Posta";
+
+/* Short indicator of end-time */
+"ends at %@" = "%@ bitecek";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "Yeni şifrenizi girin";
+
+/* Describing any generic/unclassified errors */
+"Error" = "Hata";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "Her %@'da";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "Her gün";
+
+/* Email placeholder text */
+"example@example.com" = "örnek@örnek.com";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "Gönderme başarısız";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "İsim";
+
+/* Reminder to leave preference */
+"For when to leave" = "Ne zaman ayrılanacak";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "Güvenliğiniz için lütfen mevcut şifrenizi girin.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "Parolayı unuttum";
+
+/* Free as in beer */
+"Free" = "Ücretsiz";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "Bir yükseltme al";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "Hatırlatıcı var";
+
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "Şifrenizi değiştirmek için önce e-postanızı doğrulamanız gerekir. Lütfen size gönderilen bağlantıyı takip edin veya aşağıdan bir tane daha isteyin.";
+
+/* Include contacts. */
+"Include contacts" = "Kişileri dahil et";
+
+/* Include events. */
+"Include events" = "Etkinlikleri dahil et";
+
+/* Instant results proposal */
+"Instant results" = "Anlık sonuçlar";
+
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "Şifrenin nasıl sıfırlanacağı ile ilgili talimatlar yukarıdaki e-posta adresine gönderildi.";
+
+/* Name placeholder text */
+"John Appleseed" = "İsim Başlığı";
+
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "Soyisim";
+
+/* Last updated at %date */
+"Last updated: %@" = "Son güncelleme: %@";
+
+/* Title of button to perform some action at a later time */
+"Later" = "Daha sonra";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "Yükleniyor";
+
+/* Title for unnamed location */
+"Location" = "Konum";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Bu özelliği kullanmak için konum servisleri gerekir. Lütfen Ayarlar uygulamasına gidin > Gizlilik > Konum Servisleri, açık olduklarından emin olun ve bu uygulamayı yetkilendirin.";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "Geziden birkaç dakika önce";
+
+/* More results proposal */
+"More results" = "Daha fazla sonuç";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "Motorsiklet";
+
+/* Title for name of something (or someone) */
+"Name" = "İsim";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "Hiçbir zaman";
+
+/* Next action */
+"Next" = "İleri";
+
+/* Indicator for no carbon emissions */
+"No CO₂" = "CO₂ yok";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "Tekerlekli sandalye ile ulaşılamaz";
+
+/* Countdown cell 'now' indicator */
+"Now" = "Şimdi";
+
+/* Ok action */
+"OK" = "Tamam";
+
+/* Open in Safari action */
+"Open in Safari" = "Safari'de Aç";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "Ayarları Aç";
+
+/* No comment provided by engineer. */
+"Password" = "Şifre";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Lütfen kayıtlı e-posta adresinizi giriniz. Parolanızı nasıl sıfırlayacağınızla ilgili talimatları size göndereceğiz";
+
+/* Please select a location prompt */
+"Please select a location" = "Lütfen bir yer seçin";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "Lütfen tekrar deneyin veya konumunuzu manuel olarak ayarlayın.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "Lütfen konumu doğrulayın";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more…" = "Daha fazla bilgi için 'ara' tuşuna basın…";
+
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "Birincil e-posta hesabınızda ayarlanmadı. Lütfen destek için bizimle iletişime geçin";
+
+/* No comment provided by engineer. */
+"Read more…" = "Devamını oku…";
+
+/* Indicator for real-time information */
+"Real-time" = "Gerçek zamanlı";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "Referans Kodu (İsteğe Bağlı)";
+
+/* Action title to add/remove reminder */
+"Reminder" = "Hatırlatıcı";
+
+/* Repeats daily */
+"Repeats daily" = "Günlük tekrarlar";
+
+/* Repeats monthly */
+"Repeats monthly" = "Aylık tekrarlar";
+
+/* Repeats weekly */
+"Repeats weekly" = "Haftalık tekrarlar";
+
+/* Repeats yearly */
+"Repeats yearly" = "Yıllık tekrarlar";
+
+/* Button title to report a problem */
+"Report Problem" = "Sorunu Bildir";
+
+/* Give users an option to rece */
+"Resend verification email" = "Doğrulama e-postasını tekrar gönder";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "Parolayı sıfırla";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "Yeniden dene";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "Puan";
+
+/* Empty search bar placeholder */
+"Search" = "Ara";
+
+/* No comment provided by engineer. */
+"Search for a city" = "Bir şehir için ara";
+
+/* No comment provided by engineer. */
+"Search Results" = "Arama Sonuçları";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'…" = "'%@' için aranıyor…";
+
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "Güvenli şifreler en az beş karakter uzunluğundadır ve sayılar ve simgeler içerir";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "Gönder";
+
+/* Class of errors generated by our servers */
+"Server Error" = "Sunucu hatası";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "Sunucu yanıtı veri içermiyor";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "%2$@ taşıma modunda %1$@ gösteriliyor";
+
+/* Title of page or button to sign in */
+"Sign in" = "Oturum aç";
+
+/* Instruction for signing out user account */
+"Sign out" = "Oturumu Kapat";
+
+/* Title of page or button to sign up */
+"Sign up" = "Kaydol";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "%@ Başlatılıyor";
+
+/* Short indicator of start-time */
+"starts at %@" = "%@ başlayacak";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "Konum ayarlamak için dokunun";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "Şifre alanı boş olamaz.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "Girdiğiniz kullanıcı adı veya şifre yanlış.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "%@'da";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "İzleme - kapalı";
+
+/* user location button - follow */
+"Tracking - on" = "İzleme - açık";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "İzleme - başlık ile açık";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "%@ değerine kadar";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "Güncelle";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "Seyahat güncelleniyor";
+
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "sunucu yanıtında userToken eksik";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "Zorunlu alanlarda eksik değerler.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "Doğrulama";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "Parolayı doğrula";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "Hafta içleri";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "Hafta sonları";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "Tekerlekli sandalye erişilebilirliği bilinmiyor";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "Tekerlekli sandalye ile ulaşılabilir";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "Bir sorun bildirmek ister misiniz?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "Rezervasyon şart ve koşullarını kabul etmeniz gerekir.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "Sigorta şart ve koşullarını kabul etmeniz gerekir.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "Daha önce bu uygulamanın takviminize erişimini reddettiniz. Lütfen Ayarlar uygulamasına gidin > Gizlilik > Takvim ve bu özelliği kullanmak için bu uygulamayı yetkilendirin.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Daha önce bu uygulamanın rehberinize erişmesini reddettiniz. Lütfen Ayarlar uygulamasına gidin > Gizlilik > Rehber ve bu uygulamayı kullanması için bu uygulamayı yetkilendirin.";
+

@@ -1,0 +1,446 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ önce";
+
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ uyarı";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%2$@ den %1$@";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ döngüsü dostu";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "Her %2$@'da %1$@";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "%@ daha";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ durak";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ w/o trafik";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ tekerlekli sandalye dostu";
+
+/* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
+"%1$@ early" = "%1$@ erken";
+
+/* Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
+"%1$@ early (%2$@ service)" = "%1$@ erken (%2$@ servis)";
+
+/* Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' */
+"%1$@ late" = "%1$@ geç";
+
+/* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
+"%1$@ late (%2$@ service)" = "%1$@ erken (%2$@ servis)";
+
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1 uyarı";
+
+/* Number of stops before you get off a stop, if there's just 1 stop. */
+"1 stop" = "1 durak";
+
+/* No comment provided by engineer. */
+"Alerts" = "Uyarılar";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "%@ boyunca";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "Adsız cadde boyunca";
+
+/* Action button title to see alternative options for the case where you cant make the next connection */
+"Alternative routes" = "Alternatif güzergahlar";
+
+/* apple maps directions action */
+"Apple Maps" = "Apple Haritalar";
+
+/* Arrival time sorter title */
+"Arrival" = "Varış";
+
+/* Prefix for selected 'arrive by' time
+ Single line instruction to arrive */
+"Arrive" = "Ulaş";
+
+/* The place of arrival. */
+"Arrive %@" = "Varış %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the arrival time. (old key: ArrivalLocationTime) */
+"Arrive %@ at %@" = "%1$@ %2$@ varılacak";
+
+/* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
+"Arrive at %@" = "%@ varıldı";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
+"Arrive at %@ at %@" = "%1$@ %2$@ varıldı";
+
+/* Arrive before button */
+"Arrive by" = "Yolu ile varılacak";
+
+/* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
+"Arrive in" = "Varış içinde";
+
+/* Used when the trip does not end at the requested location, but nearby. The '%@' will be replaced with requested destination location. */
+"Arrive near %@" = "%@ varılacak";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "%@'da";
+
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
+"At %@" = "%@";
+
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "Bisiklet";
+
+/* Action title to make a booking */
+"Book" = "Rezerve et";
+
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "%@ ile rezervasyon yap";
+
+/* No comment provided by engineer. */
+"Call" = "Ara";
+
+/* Action title to make a call to service/company named '@%' */
+"Call %@" = "%@ arayın";
+
+/* Text for vehicle of type: Car */
+"Car" = "Araba";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "En ucuz";
+
+/* Accessibility title for button that points up to collapse a section */
+"Collapse" = "Daralt";
+
+/* Error title when server could not find a given transit stop. */
+"Could not find transit stop." = "Aktarma durağı bulunamadı.";
+
+/* Title for button to customise the home card */
+"Customise home" = "Customise home";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "%@ tarafından sağlanan veriler";
+
+/* Title for screen showing data providers */
+"Data Providers" = "Veri Sağlayıcıları";
+
+/* Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location. */
+"Depart near %@" = "Yakınında %@ kalkacak";
+
+/* Departure time sorter title */
+"Departure" = "Kalkış";
+
+/* Destination of the bus */
+"Direction" = "Yön";
+
+/* Status indicator that a mode is not enabled */
+"Disabled" = "Disabled";
+
+/* To disconnect/unlink from a service provider, e.g., Uber */
+"Disconnect" = "Bağlantıyı kes";
+
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "Reddet";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "İnme";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "E-Bike";
+
+/* Trip badge: Easiest */
+"Easiest" = "En kolay";
+
+/* As in 'this bus/train is empty' */
+"Empty" = "Boş";
+
+/* Status indicator that a mode is enabled */
+"Enabled" = "Enabled";
+
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "Bitiş konumu";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "Her %@'da";
+
+/* Accessibility title for button that points down to expand a section */
+"Expand" = "Genişlet";
+
+/* Action title to extend an existing booking */
+"Extend" = "Uzat";
+
+/* Trip badge: Fastest */
+"Fastest" = "En hızlı";
+
+/* As in 'this bus/train has few seats available' */
+"Few seats available" = "Birkaç koltuk mevcut";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "%@ için";
+
+/* Indicating a path is wheelchair/cycyling friendly */
+"Friendly" = "Arkadaş canlısı";
+
+/* Departure location. (old key: PrimaryLocationStart) */
+"From %@" = "%@ Kaynağından";
+
+/* As in 'this bus/train is full and likely can't accept further passengers' */
+"Full" = "Dolu";
+
+/* Action title get/download app of name '@%' */
+"Get %@" = "%@ al";
+
+/* Title for button to get/download an external app. */
+"Get app" = "Uygulamayı indirin";
+
+/* Action button title for getting turn-by-turn directions */
+"Get directions" = "Yol tarifi al";
+
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "%@ servis alın";
+
+/* Title of button to start a trip */
+"Go" = "Git";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch'de bir Taksi bul";
+
+/* google maps directions action */
+"Google Maps" = "Google Haritalar";
+
+/* Trip badge: Greenest */
+"Greenest" = "En yeşil";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "Sağlıklı";
+
+/* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
+"I'll arrive at %@ at %@" = "%1$@ 'a %2$@' dan varacağım";
+
+/* Indication of an activity. (old key: ActivityIndication) */
+"I'll take a %@ at %@ from %@." = "%3$@ 'de %2$@ için %1$@ alacağım.";
+
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "%2$@ için %1$@ alacağım.";
+
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "%@ içinde";
+
+/* %@ is replaced with app name */
+"In the meantime, let's keep exploring %@ and enjoy your trips" = "Bu arada %@'yu keşfetmeye devam edin ve seyahatlerinizin tadını çıkarın";
+
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo'da bir Taksi bul";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "Anlık sonuçlar";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "Kick Scooter";
+
+/* Prefix for selected 'leave after' time
+ Single line instruction to leave */
+"Leave" = "Ayrıl";
+
+/* The place of departure. (old key: LeaveLocation) */
+"Leave %@" = "%@ konumundan ayrıl";
+
+/* The place of departure with time. (old key: LeaveLocationTime) */
+"Leave %@ at %@" = "%2$@ %1$@ ayrılın";
+
+/* Leave after button */
+"Leave at" = "Konumunda ayrıl";
+
+/* Time departure. (old key: LeaveTime) */
+"Leave at %@" = "%@ konumundan ayrıl";
+
+/* Title for when to depart. Countdown to departure will be displayed below. */
+"Leave in" = "Ayrıldın";
+
+/* No comment provided by engineer. */
+"Leave now" = "Şimdi ayrıl";
+
+/* Title of button to show fewer results */
+"Less" = "Less";
+
+/* As in 'this bus/train is so full, there's only limited standing room' */
+"Limited standing room only" = "Sadece sınırlı oturma yeri";
+
+/* No comment provided by engineer. */
+"Live traffic" = "Canlı trafik";
+
+/* Indicating when something is loading */
+"Loading…" = "Yükleniyor…";
+
+/* As in 'this bus/train has many seats available' */
+"Many seats available" = "Birçok koltuk mevcut";
+
+/* No comment provided by engineer. */
+"Map by %@" = "Map by %@";
+
+/* Title of button to show additional results */
+"More" = "More";
+
+/* Title of button to get more details about an alert */
+"More info" = "Daha fazla bilgi";
+
+/* 'More results' section in autocompletion */
+"More results" = "Daha fazla sonuç";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "Moto Scooter";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "Motorsiklet";
+
+/* Indicating no trips have been planned within the next 24 hrs */
+"No planned trips" = "Planlanmış yolculuk yok";
+
+/* Indicator to show when a service does not have real-time data (even though we usually get it for services like this.) */
+"No real-time available" = "Gerçek zamanlısı mevcut değil";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "Hiçbir güzergah bulunamadı.";
+
+/* As in 'this bus/train is full and definitely not accepting further passengers' */
+"Not accepting passengers" = "Yolcu kabul etmiyor";
+
+/* Indicator to show when a service is on time according to real-time data. */
+"On time" = "Zamanında";
+
+/* Action title open app of name '@%' */
+"Open %@" = "%@ açın";
+
+/* Title for button that opens an external app. */
+"Open app" = "Uygulamayı aç";
+
+/* Action button title for opening something in another app. Tapping this button will show a list of app names. */
+"Open in…" = "Open in…";
+
+/* Title for opening hours */
+"Opening Hours" = "Açılış saatleri";
+
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "Yeni bir gezi planla";
+
+/* No comment provided by engineer. */
+"Plan a trip and it will show up here." = "Bir gezi planlayın ve burada görünecek.";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "Seyahat Planı";
+
+/* No comment provided by engineer. */
+"Powered by" = "Destekleyen";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "%@ tarafından desteklenmektedir";
+
+/* No comment provided by engineer. */
+"Public holiday" = "Resmi tatil";
+
+/* No comment provided by engineer. */
+"Real-time" = "Gerçek zamanlı";
+
+/* Trip badge: Recommended */
+"Recommended" = "Tavsiye edilen";
+
+/* Title for button that allows users to request support */
+"Request support" = "Destek talebi";
+
+/* Action button title to plan a route */
+"Route" = "Güzergah";
+
+/* No comment provided by engineer. */
+"Routing between these locations is not yet supported." = "Bu konumlar arasında güzergah henüz desteklenmiyor.";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "%1$@ %2$@ için güzergah henüz desteklenmiyor";
+
+/* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
+"Scheduled" = "Zamanlandı";
+
+/* No comment provided by engineer. */
+"Search for destination" = "Search for destination";
+
+/* Error recovery suggestion for when when server could not find a given transit stop. */
+"Search for this stop again or try again later.." = "Bu durağı tekrar arayın veya daha sonra tekrar deneyin..";
+
+/* Send SMS action button */
+"Send SMS" = "SMS gönder";
+
+/* Title for displaying the details of a public transport service (i.e., a specific departure of a specific route) */
+"Service" = "Hizmet";
+
+/* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
+"Service has been cancelled." = "Hizmet iptal edildi.";
+
+/* Set up to connect/link to a service provider, e.g., Uber */
+"Setup" = "Kurulum";
+
+/* Title for button that, when tapped, shows something, e.g., a list of alert */
+"Show" = "Göster";
+
+/* Show website action button */
+"Show website" = "Web sitesini göster";
+
+/* As in 'this bus/train is fairly full and has standing room only' */
+"Standing room only" = "Sadece ayakta bulunan yer";
+
+/* Title of button to start a trip (primarily after pausing) */
+"Start" = "Başlangıç";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "Başlangıç konumu";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "SUV";
+
+/* Title of button to access timetable */
+"Timetable" = "Masa saati";
+
+/* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
+"To %@" = "%@";
+
+/* Title for button to access transport modes */
+"Transport" = "Aktarım";
+
+/* Title for a trip */
+"Trip" = "Yolculuk";
+
+/* Title for trip of provided index */
+"Trip %@" = "%@ yolculuğu";
+
+/* Title of page that shows routing results */
+"Trips" = "Geziler";
+
+/* Indicating a path is wheelchair/cycyling unfriendly */
+"Unfriendly" = "Dostça olmayan";
+
+/* Indicating the wheelchair/cycling friendliness of a path is unknown */
+"Unknown" = "Bilinmiyor";
+
+/* Title for button that unlocks a shared vehicle. */
+"Unlock" = "Unlock";
+
+/* Vehicle updated. (old key: VehicleUpdated) */
+"Updated %@ ago" = "%@ önce güncellendi";
+
+/* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
+"Vehicle %@ updated %@ ago" = "%1$@ aracı %2$@ önce güncellendi";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Araçlar";
+
+/* No comment provided by engineer. */
+"We are busy getting your upcoming trip. Please wait..." = "Yaklaşan seyahatinizi almakla meşgulüz. Lütfen bekleyiniz...";
+
+/* No comment provided by engineer. */
+"We'll keep you updated with the latest transit alerts here" = "En yeni aktarım uyarılarıyla sizi güncel tutacağız";
+
+/* Alert if service running late/early, meaning that the user might not make the next service */
+"You might not make this transfer." = "Bu aktarımı yapamazsınız.";
+

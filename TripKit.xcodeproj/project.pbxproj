@@ -1367,6 +1367,8 @@
 		3AA923F520DA7CDA00EBDDC6 /* TGCardView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGCardView+Rx.swift"; sourceTree = "<group>"; };
 		3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursAPIModel.swift; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3AACB4B626439FF700DE5665 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Shared.strings; sourceTree = "<group>"; };
+		3AACB4B726439FF700DE5665 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAPIModel.swift; sourceTree = "<group>"; };
 		3AAD8815209C78E300C75B7E /* TKUserProfileHelper+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUserProfileHelper+Rx.swift"; sourceTree = "<group>"; };
 		3AB1CF1A23AB6B930098DA22 /* TKUINearbyViewModel+Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKUINearbyViewModel+Content.swift"; sourceTree = "<group>"; };
@@ -3312,6 +3314,7 @@
 				da,
 				sv,
 				nb,
+				tr,
 			);
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			packageReferences = (
@@ -4263,6 +4266,7 @@
 				3A63A89320B74C2C007B8D46 /* da */,
 				3A5EC04322D5ECD100187551 /* sv */,
 				3A78EFC522E85D1400018696 /* nb */,
+				3AACB4B726439FF700DE5665 /* tr */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
@@ -4309,6 +4313,7 @@
 				3AFFAB221F0684B900147990 /* da */,
 				3A5EC04222D5ECD100187551 /* sv */,
 				3A78EFC622E85D1500018696 /* nb */,
+				3AACB4B626439FF700DE5665 /* tr */,
 			);
 			name = Shared.strings;
 			sourceTree = "<group>";
