@@ -265,7 +265,7 @@
 "Leave now" = "Partir ahora";
 
 /* Title of button to show fewer results */
-"Less" = "Less";
+"Less" = "Menos";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Solo espacio de pie limiado";
@@ -283,7 +283,7 @@
 "Map by %@" = "Mapa por %@";
 
 /* Title of button to show additional results */
-"More" = "More";
+"More" = "Más";
 
 /* Title of button to get more details about an alert */
 "More info" = "Más información";
