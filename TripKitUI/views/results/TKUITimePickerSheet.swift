@@ -128,6 +128,7 @@ public class TKUITimePickerSheet: TKUISheet {
       selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
       
       // this sets the selected section index
+      self.timeTypeSelector = selector
       self.selectedTimeType = timeType
 
     case .time, .date:
