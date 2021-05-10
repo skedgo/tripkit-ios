@@ -213,10 +213,9 @@ open class TKUIHomeCard: TKUITableCard {
 
 extension TKUIHomeCard {
   
-  private func prepareForNewCard(onCompletion handler: (() -> Void)? = nil) {
+  private func exitSearchMode() {
     headerView.searchBar.text = nil
     headerView.searchBar.resignFirstResponder()
-    self.controller?.moveCard(to: initialPosition ?? .peaking, animated: false, onCompletion: handler)
   }
   
   private func handleNext(_ next: TKUIHomeViewModel.NextAction) {
@@ -234,12 +233,11 @@ extension TKUIHomeCard {
       dismissSelection()
       
     case .push(let card):
-      prepareForNewCard {
-        if cardController.topCard == self {
-          cardController.push(card)
-        } else {
-          cardController.swap(for: card)
-        }
+      exitSearchMode()
+      if cardController.topCard == self {
+        cardController.push(card)
+      } else {
+        cardController.swap(for: card)
       }
       
     case .showCustomizer(let items):
@@ -265,15 +263,14 @@ extension TKUIHomeCard {
           focusedAnnotationPublisher.onNext(annotation)
         }
       case .default:
-        prepareForNewCard {
-          let card: TGCard
-          if let stop = annotation as? TKUIStopAnnotation {
-            card = TKUITimetableCard(stops: [stop])
-          } else {
-            card = TKUIRoutingResultsCard(destination: annotation)
-          }
-          cardController.push(card)
+        exitSearchMode()
+        let card: TGCard
+        if let stop = annotation as? TKUIStopAnnotation {
+          card = TKUITimetableCard(stops: [stop])
+        } else {
+          card = TKUIRoutingResultsCard(destination: annotation)
         }
+        cardController.push(card)
       }
       
     case let .handleAction(handler):
@@ -296,41 +293,36 @@ extension TKUIHomeCard {
   }
   
   private func showRoutes(to destination: MKAnnotation) {
-    prepareForNewCard { [weak self] in
-      guard let self = self else { return }
-      
-      // We push the routing card. To replicate Apple Maps, we put
-      // the routing card at the peaking position when it's pushed.
-      let routingResultCard = TKUIRoutingResultsCard(destination: destination)
-      self.controller?.push(routingResultCard)
-      
-      self.searchResultDelegate?.homeCard(self, selected: destination)
-    }
+    exitSearchMode()
+    
+    // We push the routing card. To replicate Apple Maps, we put
+    // the routing card at the peaking position when it's pushed.
+    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
+    controller?.push(routingResultCard)
+    
+    searchResultDelegate?.homeCard(self, selected: destination)
   }
   
   private func showTimetable(for annotation: MKAnnotation) {
     guard let stop = annotation as? TKUIStopAnnotation else { return }
-    
-    prepareForNewCard { [weak self] in
-      guard let self = self else { return }
-      
-      // We push the timetable card. To replicate Apple Maps, we put
-      // the timetable card at the peaking position when it's pushed.
-      let timetableCard = TKUITimetableCard(stops: [stop], reusing: (self.mapManager as? TKUIMapManager), initialPosition: .peaking)
-      if self.controller?.topCard is TKUITimetableCard {
-        // If we are already showing a timetable card,
-        // instead of pushing another one, we swap it
-        self.controller?.swap(for: timetableCard, animated: true)
-      } else {
-        self.controller?.push(timetableCard)
-      }
-      
-      self.searchResultDelegate?.homeCard(self, selected: stop)
-      
-      // This removes nearby annotations and leaves only the stop
-      // visible on the map.
-      self.focusedAnnotationPublisher.onNext(stop)
+    exitSearchMode()
+
+    // We push the timetable card. To replicate Apple Maps, we put
+    // the timetable card at the peaking position when it's pushed.
+    let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
+    if controller?.topCard is TKUITimetableCard {
+      // If we are already showing a timetable card,
+      // instead of pushing another one, we swap it
+      controller?.swap(for: timetableCard, animated: true)
+    } else {
+      controller?.push(timetableCard)
     }
+    
+    searchResultDelegate?.homeCard(self, selected: stop)
+    
+    // This removes nearby annotations and leaves only the stop
+    // visible on the map.
+    focusedAnnotationPublisher.onNext(stop)
   }
   
 }
