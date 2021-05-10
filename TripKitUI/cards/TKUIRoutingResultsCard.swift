@@ -422,21 +422,21 @@ extension TKUIRoutingResultsCard {
 }
 
 extension TKUITripCell {
-  public func configure(_ trip: Trip, allowFading: Bool = true) {
-    configure(.init(trip, allowFading: allowFading))
+  public func configure(_ trip: Trip, allowFading: Bool = true, isArriveBefore: Bool? = nil) {
+    configure(.init(trip, allowFading: allowFading, isArriveBefore: isArriveBefore))
   }
 }
 
 extension TKUITripCell.Model {
 
-  init(_ trip: Trip, allowFading: Bool) {
+  init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool?) {
     self.init(
       departure: trip.departureTime,
       arrival: trip.arrivalTime,
       departureTimeZone: trip.departureTimeZone,
       arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
       focusOnDuration: !trip.departureTimeIsFixed,
-      isArriveBefore: trip.isArriveBefore,
+      isArriveBefore: isArriveBefore ?? trip.isArriveBefore,
       showFaded: allowFading && trip.showFaded,
       isCancelled: trip.isCanceled,
       segments: trip.segments(with: .inSummary),
