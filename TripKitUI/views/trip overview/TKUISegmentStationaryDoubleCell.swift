@@ -10,6 +10,8 @@ import UIKit
 
 import RxSwift
 
+import TripKit
+
 class TKUISegmentStationaryDoubleCell: UITableViewCell {
   
   @IBOutlet weak var timeLabel: UILabel!

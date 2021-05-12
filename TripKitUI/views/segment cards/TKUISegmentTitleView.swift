@@ -9,8 +9,9 @@
 import UIKit
 
 import RxSwift
-
 import TGCardViewController
+
+import TripKit
 
 public class TKUISegmentTitleView: UIView {
   

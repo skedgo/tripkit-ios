@@ -10,9 +10,11 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension Reactive where Base: Vehicle {
   
-  public var components: Observable<([[TKAPI.VehicleComponents]], Date)> {
+  var components: Observable<([[TKAPI.VehicleComponents]], Date)> {
     return observeWeakly(NSData.self, "componentsData")
       .map { [weak base] _ in
         let components = base?.components ?? [[]]

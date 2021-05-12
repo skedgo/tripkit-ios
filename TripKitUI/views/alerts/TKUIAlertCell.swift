@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 
+import TripKit
+
 class TKUIAlertCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!
@@ -26,7 +28,7 @@ class TKUIAlertCell: UITableViewCell {
   private var disposeBag = DisposeBag()
   var tappedOnLink = PublishSubject<URL>()
   
-  @objc var alert: TKAlert? {
+  var alert: TKAlert? {
     didSet {
       updateContent()
     }

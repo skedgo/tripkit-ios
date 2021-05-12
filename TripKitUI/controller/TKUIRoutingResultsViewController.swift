@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import MapKit
 
 import TGCardViewController
+
+import TripKit
 
 @available(*, unavailable, renamed: "TKUIRoutingResultsViewController")
 public typealias TKUIRoutesViewController = TKUIRoutingResultsViewController

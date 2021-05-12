@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKUIRoutingResultsViewModel {
   
   struct AvailableModes: Equatable {

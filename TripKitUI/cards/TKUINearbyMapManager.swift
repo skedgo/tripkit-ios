@@ -12,6 +12,8 @@ import MapKit
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 public class TKUINearbyMapManager: TKUIMapManager {
   
   public weak var viewModel: TKUINearbyViewModel?

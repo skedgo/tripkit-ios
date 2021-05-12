@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKUIServiceViewModel {
   
   /// Section in a table view

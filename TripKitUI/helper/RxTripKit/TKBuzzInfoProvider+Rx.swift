@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension Reactive where Base == TKBuzzInfoProvider {
   
   public static func downloadContent(of service: Service, forEmbarkationDate date: Date, in region: TKRegion) -> Single<Void> {

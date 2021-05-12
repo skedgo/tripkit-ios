@@ -8,12 +8,13 @@
 
 import Foundation
 
-import TGCardViewController
-
 import RxSwift
 import RxCocoa
+import TGCardViewController
 
-public class TKUIHomeViewModel {
+import TripKit
+
+class TKUIHomeViewModel {
   
   struct SearchInput {
     var searchInProgress: Driver<Bool>
@@ -85,8 +86,6 @@ public class TKUIHomeViewModel {
   
   let error: Signal<Error>
 }
-
-
 
 extension TKUIHomeViewModel.Section {
   init(_ content: TKUIHomeComponentContent, identity: String) {

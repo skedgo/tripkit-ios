@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 class TKUISectionedAlertViewModel {
   
   enum State {

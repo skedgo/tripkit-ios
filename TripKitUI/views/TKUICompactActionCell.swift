@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUICompactActionCell: UICollectionViewCell {
 
   @IBOutlet private weak var imageWrapper: UIView!

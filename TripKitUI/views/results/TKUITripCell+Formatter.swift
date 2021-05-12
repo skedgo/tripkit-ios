@@ -8,25 +8,24 @@
 
 import Foundation
 
+import TripKit
+
 extension TKUITripCell {
   
-  @objc(TKUITripCellFormatter)
-  public class Formatter: NSObject {
-    @objc public var primaryFont: UIFont?
-    @objc public var primaryColor: UIColor = .tkLabelPrimary
+  class Formatter: NSObject {
+    var primaryFont: UIFont?
+    var primaryColor: UIColor = .tkLabelPrimary
     
-    @objc public var secondaryFont: UIFont?
-    @objc public var secondaryColor: UIColor = .tkLabelSecondary
+    var secondaryFont: UIFont?
+    var secondaryColor: UIColor = .tkLabelSecondary
     
-    @objc public var costColor: UIColor = .tkLabelSecondary
+    var costColor: UIColor = .tkLabelSecondary
     
-    @objc
-    public override init() {
+    override init() {
       super.init()
     }
     
-    @objc
-    public func timeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
+    func timeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
       
       let titles = Trip.timeTitles(departure: departure, arrival: arrival, departureTimeZone: departureTimeZone, arrivalTimeZone: arrivalTimeZone, focusOnDuration: focusOnDuration, isArriveBefore: isArriveBefore)
       
@@ -36,7 +35,7 @@ extension TKUITripCell {
       return attributed
     }
     
-    public func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
+    func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
       let attributes = [
         NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .body),
         NSAttributedString.Key.foregroundColor: UIColor.tkLabelPrimary
@@ -52,7 +51,7 @@ extension TKUITripCell {
       }
     }
     
-    public func secondaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
+    func secondaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
       let attributes = [
           NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .subheadline),
           NSAttributedString.Key.foregroundColor: UIColor.tkLabelSecondary
@@ -73,8 +72,7 @@ extension TKUITripCell {
       }
     }
     
-    @objc
-    public func costString(costs: [NSNumber: String]) -> NSAttributedString {
+    func costString(costs: [NSNumber: String]) -> NSAttributedString {
       let attributed = NSMutableAttributedString()
       #if DEBUG
       append(costs[.score], to: attributed, color: costColor)
@@ -91,7 +89,7 @@ extension TKUITripCell {
       return attributed
     }
     
-    public func costAccessibilityLabel(costs: [NSNumber: String]) -> String {
+    func costAccessibilityLabel(costs: [NSNumber: String]) -> String {
       return [
           costs[.price],
           costs[.calories],

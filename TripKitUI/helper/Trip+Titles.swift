@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension Trip {
   
   func timeTitles(capitalize: Bool) -> (title: String, subtitle: String) {

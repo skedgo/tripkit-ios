@@ -8,6 +8,8 @@
 
 import TGCardViewController
 
+import TripKit
+
 public extension TKUITripOverviewCard {
   
   typealias TripAction = TKUICardAction<TGCard, Trip>

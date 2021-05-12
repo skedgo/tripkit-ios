@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIExtendedActionView: UIView {
 
   @IBOutlet weak var imageView: UIImageView!
@@ -62,7 +64,7 @@ class TKUIExtendedActionView: UIView {
       layer.borderWidth = 0
       layer.borderColor = nil
       
-      let textColor: UIColor = tintColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
+      let textColor: UIColor = tintColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       imageView.tintColor = textColor
       label.textColor = textColor
     } else {

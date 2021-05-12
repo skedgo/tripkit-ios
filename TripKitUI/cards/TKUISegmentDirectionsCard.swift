@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import class MapKit.MKDistanceFormatter
 
 import TGCardViewController
 
 import RxSwift
 import RxCocoa
+
+import TripKit
 
 public class TKUISegmentDirectionsCard: TGTableCard {
   

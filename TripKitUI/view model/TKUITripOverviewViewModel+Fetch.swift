@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension TKUITripOverviewViewModel {
   
   static func fetchContentOfServices(in trip: Trip) -> Observable<Void> {

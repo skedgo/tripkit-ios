@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 // MARK: - Fetching service content
 
 extension TKUIServiceViewModel {

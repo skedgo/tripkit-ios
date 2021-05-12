@@ -7,16 +7,14 @@
 //
 
 import Foundation
+import MapKit
 
 import TGCardViewController
 import RxSwift
 import RxCocoa
 import Kingfisher
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
 public protocol TKUIIdentifiableAnnotation: MKAnnotation {
   var identity: String? { get }

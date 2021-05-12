@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUISegmentAlertCell: UITableViewCell {
   
   @IBOutlet private weak var contentWrapper: UIView!

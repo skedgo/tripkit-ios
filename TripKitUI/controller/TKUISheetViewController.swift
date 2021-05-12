@@ -29,7 +29,7 @@ public class TKUISheetViewController: UIViewController {
   public override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     
-    sheet?.doneButtonPressed(nil)
+    sheet?.removeOverlay(animated: animated)
   }
   
   public override var preferredContentSize: CGSize {

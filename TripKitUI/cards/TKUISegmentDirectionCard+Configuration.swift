@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 public extension TKUISegmentDirectionsCard {
   
   typealias Action = TKUICardAction<TKUISegmentDirectionsCard, TKSegment>

@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension Reactive where Base == TKUserProfileHelper {
   
   public static var hiddenModeIdentifiers: Observable<Set<TKUserProfileHelper.Identifier>> {

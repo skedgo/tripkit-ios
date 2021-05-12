@@ -13,6 +13,8 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 class TKUIResultsTitleView: UIView {
   
   @IBOutlet weak var originLabel: UILabel!

@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import MapKit
 
 import TGCardViewController
+import TripKit
 import TripKitUI
 import TripKitInterApp
 

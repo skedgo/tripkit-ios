@@ -9,6 +9,8 @@
 import Foundation
 import CoreGraphics
 
+import TripKit
+
 open class TKUIPolylineRenderer: MKPolylineRenderer {
   
   public enum SelectionMode {

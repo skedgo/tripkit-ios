@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 public class TKUITripCell: UITableViewCell {
 
   public static let nib = UINib(nibName: "TKUITripCell", bundle: Bundle(for: TKUITripCell.self))
@@ -87,7 +89,7 @@ public class TKUITripCell: UITableViewCell {
     subtitleLabel.attributedText = formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
     segmentView.isCanceled = model.isCancelled
-    segmentView.configure(forSegments: model.segments, allowSubtitles: true, allowInfoIcons: true)
+    segmentView.configure(model.segments)
     
     let alpha: CGFloat = model.showFaded ? 0.2 : 1
     titleLabel.alpha = alpha

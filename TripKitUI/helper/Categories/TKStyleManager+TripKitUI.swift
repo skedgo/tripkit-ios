@@ -8,25 +8,25 @@
 
 import Foundation
 
-
+import TripKit
 
 // MARK: - Times
 
 extension TKStyleManager {
   
-  public enum CountdownMode {
+  enum CountdownMode {
     case now
     case upcoming
     case inPast
   }
   
-  public struct Countdown {
-    public let number: String
-    public let unit: String
+  struct Countdown {
+    let number: String
+    let unit: String
     
-    public let durationText: String
-    public let accessibilityLabel: String
-    public let mode: CountdownMode
+    let durationText: String
+    let accessibilityLabel: String
+    let mode: CountdownMode
   }
   
   /// Determines how a countdown for a specific departure should be displayed.
@@ -40,7 +40,7 @@ extension TKStyleManager {
   ///   - minutes: Actual departure time in minutes from now
   ///   - fuzzifyMinutes: Whether the texts should be pessimistic
   /// - Returns: Structure with duration string, accessory label and mode
-  public static func departure(forMinutes minutes: Int, fuzzifyMinutes: Bool = true) -> Countdown {
+  static func departure(forMinutes minutes: Int, fuzzifyMinutes: Bool = true) -> Countdown {
     let absoluteMinutes = abs(minutes)
     let effectiveMinutes = fuzzifyMinutes ? fuzzifiedMinutes(minutes) : minutes
     
@@ -103,18 +103,15 @@ extension TKStyleManager {
     )
   }
   
-  @objc
-  public static func departureString(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> String {
+  static func departureString(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> String {
     return departure(forMinutes: minutes, fuzzifyMinutes: fuzzifyMinutes).durationText
   }
 
-  @objc
-  public static func departureAccessibilityLabel(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> String {
+  static func departureAccessibilityLabel(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> String {
     return departure(forMinutes: minutes, fuzzifyMinutes: fuzzifyMinutes).accessibilityLabel
   }
 
-  @objc
-  public static func departureIsNow(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> Bool {
+  static func departureIsNow(forMinutes minutes: Int, fuzzifyMinutes: Bool) -> Bool {
     return departure(forMinutes: minutes, fuzzifyMinutes: fuzzifyMinutes).mode == .now
   }
   

@@ -7,9 +7,21 @@
 //
 
 import Foundation
+import MapKit
 
 import RxSwift
 import RxCocoa
+
+public struct TKUIHomeHeaderConfiguration {
+  public let title: String
+  public var action: (title: String, handler: () -> TKUIHomeCard.ComponentAction)?
+  
+  public init(title: String, action: (String, () -> TKUIHomeCard.ComponentAction)? = nil) {
+    self.title = title
+    self.action = action
+  }
+}
+
 
 public struct TKUIHomeComponentInput {
   public let homeCardWillAppear: Observable<Bool>
@@ -18,12 +30,12 @@ public struct TKUIHomeComponentInput {
 }
 
 public struct TKUIHomeComponentContent {
-  public init(items: [TKUIHomeComponentItem], header: TKUIHomeViewModel.HeaderConfiguration? = nil) {
+  public init(items: [TKUIHomeComponentItem], header: TKUIHomeHeaderConfiguration? = nil) {
     self.items = items
     self.header = header
   }
   
-  public let header: TKUIHomeViewModel.HeaderConfiguration?
+  public let header: TKUIHomeHeaderConfiguration?
   public let items: [TKUIHomeComponentItem]
 }
 

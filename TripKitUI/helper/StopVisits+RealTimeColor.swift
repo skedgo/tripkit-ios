@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKStopVisitRealTime {
   var color: UIColor {
     switch self {

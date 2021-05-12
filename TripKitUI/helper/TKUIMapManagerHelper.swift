@@ -7,24 +7,18 @@
 //
 
 import Foundation
-
 import CoreLocation
+import MapKit
 
-@available(*, unavailable, renamed: "TKUIMapManagerHelper")
-public typealias MapManagerHelper = TKUIMapManagerHelper
+import TripKit
 
-public class TKUIMapManagerHelper: NSObject {
+class TKUIMapManagerHelper: NSObject {
   
   private override init() {
     super.init()
   }
   
-  @objc(sortOverlays:)
-  public static func _objcSort(_ overlays: [MKOverlay]) -> [MKOverlay] {
-    return self.sort(overlays)
-  }
-
-  public static func sort<T: MKOverlay>(_ overlays: [T]) -> [T] {
+  static func sort<T: MKOverlay>(_ overlays: [T]) -> [T] {
     return overlays.sorted { one, two -> Bool in
       
       guard
@@ -42,8 +36,7 @@ public class TKUIMapManagerHelper: NSObject {
     
   }
   
-  @objc(adjustZOrderOfAnnotationsViews:)
-  public static func adjustZOrder(_ annotationsViews: [MKAnnotationView]) {
+  static func adjustZOrder(_ annotationsViews: [MKAnnotationView]) {
     
     let sorted = annotationsViews.sorted { one, two -> Bool in
       
@@ -65,7 +58,7 @@ public class TKUIMapManagerHelper: NSObject {
     sorted.forEach { $0.superview?.bringSubviewToFront($0) }
   }
   
-  public static func shapeAnnotations(for segment: TKSegment)
+  static func shapeAnnotations(for segment: TKSegment)
     -> (points: [MKAnnotation], overlays: [MKOverlay], requestVisits: Bool)?
   {
     guard !segment.isStationary else { return nil }
@@ -108,7 +101,7 @@ public class TKUIMapManagerHelper: NSObject {
   /// Annotations to display for this segment *in addition to* the annotations from the segment itself,
   /// (i.e., in addition to the segment itself as long as its content such as stop visits, alerts and real-time
   /// vehicles). These are typically the query's from and to location if the trip starts away from the query.
-  public static func additionalMapAnnotations(for segment: TKSegment) -> [MKAnnotation] {
+  static func additionalMapAnnotations(for segment: TKSegment) -> [MKAnnotation] {
     if segment.order == .start, !segment.matchesQuery(), let from = segment.trip?.request.fromLocation {
       return [TKUIRoutingQueryAnnotation(at: from, isStart: true)]
     } else if segment.order == .end, !segment.matchesQuery(), let to = segment.trip?.request.toLocation {

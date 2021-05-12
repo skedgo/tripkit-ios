@@ -7,10 +7,9 @@
 
 import UIKit
 
-@available(*, unavailable, renamed: "TKUIPathFriendlinessView")
-public typealias TKPathFriendlinessView = TKUIPathFriendlinessView
+import TripKit
 
-public class TKUIPathFriendlinessView: UIView {
+class TKUIPathFriendlinessView: UIView {
   
   // Bar chart
   @IBOutlet weak var friendlyBarView: UIView!
@@ -39,23 +38,23 @@ public class TKUIPathFriendlinessView: UIView {
   @IBOutlet weak var unfriendlyToDismountSpacingConstraint: NSLayoutConstraint!
   @IBOutlet weak var dismountToUnknownSpacingConstraint: NSLayoutConstraint!
   
-  public var segment: TKSegment? {
+  var segment: TKSegment? {
     didSet {
       update()
     }
   }
   
-  public typealias PathFriedliness = (friendly: CGFloat, unfriendly: CGFloat, dismount: CGFloat, unknown: CGFloat)
+  typealias PathFriedliness = (friendly: CGFloat, unfriendly: CGFloat, dismount: CGFloat, unknown: CGFloat)
   
-  public override init(frame: CGRect) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
-  public override func awakeFromNib() {
+  override func awakeFromNib() {
     super.awakeFromNib()
     
     friendlyLegendLabel.text   = TKPathFriendliness.friendly.title
@@ -188,7 +187,7 @@ public class TKUIPathFriendlinessView: UIView {
 
 extension TKUIPathFriendlinessView {
   
-  public static func newInstance() -> TKUIPathFriendlinessView {
+  static func newInstance() -> TKUIPathFriendlinessView {
     return Bundle.tripKitUI.loadNibNamed("TKUIPathFriendlinessView", owner: self, options: nil)?.first as! TKUIPathFriendlinessView
   }
   

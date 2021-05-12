@@ -10,10 +10,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.
 public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation {
-  var semaphoreMode: TKUISemaphoreView.Mode { get }
+  var semaphoreMode: TKUISemaphoreView.Mode? { get }
   var bearing: NSNumber? { get }
   var canFlipImage: Bool { get }
   var imageIsTemplate: Bool { get }
@@ -21,16 +23,22 @@ public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation {
   var selectionIdentifier: String? { get }
 }
 
-public class TKUISemaphoreView: _TKUISemaphoreView {
+public class TKUISemaphoreView: MKAnnotationView {
+  public enum LabelSide {
+    case onLeft
+    case onRight
+  }
+  
   public enum Mode: Equatable {
     case headWithTime(Date, TimeZone, isRealTime: Bool)
     case headWithFrequency(minutes: Int)
     case headOnly
-
-    /// Whether this point should ideally be displayed using the style of
-    /// `TKUISemaphoreView` rather than just a flat image.
-    case none
   }
+  
+  private let wrapper: UIView!
+  private var headImageView: UIImageView?
+  private var timeImageView: UIImageView?
+  fileprivate var label: LabelSide? = nil
   
   private var disposeBag = DisposeBag()
   private var isFlipped = false
@@ -42,18 +50,18 @@ public class TKUISemaphoreView: _TKUISemaphoreView {
   }
   
   public init(annotation: MKAnnotation?, reuseIdentifier: String?, withHeading heading: CLLocationDirection = 0) {
-    
-    super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-    
     let headSize = 48 // size of the head images
     let width = headSize
     let height = 58 // bottom of semaphore to top of head
     let baseHeadOverlap = 18
     
-    frame = .init(x: 0, y: 0, width: width, height: height)
-    
+    let frame = CGRect(x: 0, y: 0, width: width, height: height)
     wrapper = UIView(frame: frame)
     wrapper.backgroundColor = .clear
+
+    super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+
+    self.frame = frame
     addSubview(wrapper)
     
     let base = UIImageView(image: TripKitUIBundle.imageNamed("map-pin-base"))
@@ -71,12 +79,18 @@ public class TKUISemaphoreView: _TKUISemaphoreView {
   }
   
   public override func prepareForReuse() {
-    super.prepareForReuse()
-    
+    configure(.headOnly, side: .onLeft)
     disposeBag = .init()
     isFlipped = false
     modeImageView?.removeFromSuperview()
     modeImageView = nil
+    headImageView?.removeFromSuperview()
+    headImageView = nil
+    timeImageView?.removeFromSuperview()
+    timeImageView = nil
+    label = nil
+
+    super.prepareForReuse()
   }
   
   public override var annotation: MKAnnotation? {
@@ -87,18 +101,79 @@ public class TKUISemaphoreView: _TKUISemaphoreView {
     }
   }
   
-  public override var timeBackgroundImage: UIImage? {
-    TripKitUIBundle.imageNamed("map-pin-time")
-  }
-  
-  public override func accessoryImageView(forRealTime isRealTime: Bool, showFrequency: Bool) -> UIImageView? {
-    if isRealTime {
-      return UIImageView(asRealTimeAccessoryImageAnimated: true, tintColor: .white)
-    } else if showFrequency {
-      return UIImageView(image: TripKitUIBundle.imageNamed("repeat_icon"))
-    } else {
-      return nil
+  func configure(_ mode: Mode?, side: LabelSide) {
+    guard let headImageView = self.headImageView else { return assertionFailure() }
+    
+    timeImageView?.removeFromSuperview()
+    timeImageView = nil
+
+    // disable the label and the side, if there's no time
+    switch mode {
+    case .headOnly, nil: label = nil
+    case .headWithFrequency, .headWithTime: label = side
     }
+    
+    guard label != nil, let mode = mode else { return }
+    
+    let timeLabel = UILabel()
+    timeLabel.backgroundColor = .clear
+    timeLabel.font = TKStyleManager.systemFont(size: 14)
+    timeLabel.textColor = .white
+    
+    let headSize: CGFloat = 48 // size of the head images
+    let verticalPadding: CGFloat = 4
+    let horizontalPadding: CGFloat = 10
+    let baseHeadOverlap: CGFloat = 18
+
+    let accessoryImageView: UIImageView?
+    switch mode {
+    case let .headWithFrequency(frequency):
+      timeLabel.text = Date.durationString(forMinutes: frequency)
+      accessoryImageView = UIImageView(image: TripKitUIBundle.imageNamed("repeat_icon"))
+    case let .headWithTime(time, timeZone, isRealTime):
+      timeLabel.text = TKStyleManager.timeString(time, for: timeZone)
+      accessoryImageView = isRealTime ? UIImageView(asRealTimeAccessoryImageAnimated: true, tintColor: .white) : nil
+    case .headOnly:
+      timeLabel.text = ""
+      return
+    }
+    
+    let textSize = timeLabel.textRect(forBounds: .init(x: 0, y: 0, width: 80, height: CGFloat.greatestFiniteMagnitude), limitedToNumberOfLines: 1).size
+    
+    let timeImageView = UIImageView(image: TripKitUIBundle.imageNamed("map-pin-time"))
+    self.timeImageView = timeImageView
+    
+    let timeViewHeight = textSize.height + verticalPadding * 2
+    var timeViewWidth = textSize.width + baseHeadOverlap + horizontalPadding * 2
+    var timeViewX = label == .onLeft ? -(textSize.width + horizontalPadding) : baseHeadOverlap
+    var timeLabelX = horizontalPadding
+    if label == .onRight {
+      timeLabelX += baseHeadOverlap
+    }
+    
+    if let imageView = accessoryImageView, let image = imageView.image {
+      var imageViewX = horizontalPadding
+      if label == .onRight {
+        imageViewX += baseHeadOverlap
+      }
+      imageView.frame.origin.x = imageViewX
+      imageView.frame.origin.y = (timeViewHeight - image.size.height) / 2
+      
+      // make space for the image
+      let space = image.size.width + horizontalPadding / 3
+      timeViewWidth += space
+      timeLabelX += space
+      if label == .onLeft {
+        timeViewX -= space
+      }
+      timeImageView.addSubview(imageView)
+    }
+    
+    timeLabel.frame.origin.x = timeLabelX
+    timeLabel.frame.origin.y = verticalPadding
+    timeImageView.frame = .init(x: timeViewX, y: (headSize - timeViewWidth) / 2, width: timeViewWidth, height: timeViewHeight)
+    timeImageView.addSubview(timeLabel)
+    wrapper.insertSubview(timeImageView, belowSubview: headImageView)
   }
 }
 
@@ -204,7 +279,7 @@ extension TKUISemaphoreView {
     }
   }
   
-  public func updateSelection(for identifier: String?) {
+  func updateSelection(for identifier: String?) {
     guard let displayable = annotation as? TKUISemaphoreDisplayable else { return }
     guard let target = identifier else { alpha = 1; return }
     
@@ -247,16 +322,16 @@ extension TKUISemaphoreView {
 
 extension TKUISemaphoreView {
   
-  @objc public static var customHeadTintColor: UIColor? = nil
-  @objc public static var customHeadImage: UIImage? = nil
-  @objc public static var customPointerImage: UIImage? = nil
+  public static var customHeadTintColor: UIColor? = nil
+  public static var customHeadImage: UIImage? = nil
+  public static var customPointerImage: UIImage? = nil
 
-  static var headTintColor: UIColor {
+  private static var headTintColor: UIColor {
     // This doesn't adjust to dark-mode on purpose as the head-image isn't ready for that yet
     return customHeadTintColor ?? .black
   }
   
-  static var headImage: UIImage {
+  private static var headImage: UIImage {
     if let custom = customHeadImage {
       return custom
     } else {
@@ -264,7 +339,7 @@ extension TKUISemaphoreView {
     }
   }
 
-  static var pointerImage: UIImage {
+  private static var pointerImage: UIImage {
     if let custom = customPointerImage {
       return custom
     } else {
@@ -278,11 +353,7 @@ extension Reactive where Base == TKUISemaphoreView {
   
   var mode: Binder<TKUISemaphoreView.Mode?> {
     return Binder(self.base) { semaphore, mode in
-      if case .headWithTime(let time, let timeZone, let realTime)? = mode {
-        semaphore.setTime(time, isRealTime: realTime, in: timeZone, onSide: semaphore.label)
-      } else {
-        semaphore.setTime(nil, isRealTime: false, in: .current, onSide: semaphore.label)
-      }
+      semaphore.configure(mode, side: semaphore.label ?? .onLeft)
     }
   }
  

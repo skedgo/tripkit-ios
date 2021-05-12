@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIHomeCustomizerCell: UITableViewCell {
 
   @IBOutlet weak var stateImageView: UIImageView!

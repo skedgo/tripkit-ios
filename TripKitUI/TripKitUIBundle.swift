@@ -59,21 +59,19 @@ extension UIImage {
   }
 }
 
-
-/// :nodoc:
-public class TripKitUIBundle: NSObject {
-  @objc public static func optionalImageNamed(_ name: String) -> UIImage? {
+class TripKitUIBundle: NSObject {
+  static func optionalImageNamed(_ name: String) -> UIImage? {
     return UIImage(named: name, in: .tripKitUI, compatibleWith: nil)
   }
 
-  @objc public static func imageNamed(_ name: String) -> UIImage {
+  static func imageNamed(_ name: String) -> UIImage {
     guard let image = optionalImageNamed(name) else {
       preconditionFailure()
     }
     return image
   }
   
-  @objc public static func bundle() -> Bundle {
+  fileprivate static func bundle() -> Bundle {
     return Bundle(for: self)
   }
   

@@ -10,6 +10,8 @@ import Foundation
 
 import TGCardViewController
 
+import TripKit
+
 public protocol TKUITripOverviewViewControllerDelegate: TGCardViewControllerDelegate {
   func tripOverview(_ controller: TKUITripOverviewViewController, selected trip: Trip)
 }

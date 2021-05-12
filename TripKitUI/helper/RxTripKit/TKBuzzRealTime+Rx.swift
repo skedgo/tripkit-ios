@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension Reactive where Base: TKBuzzRealTime {
   
   /// Stream real-time updates for the trip

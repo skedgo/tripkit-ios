@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
 
   static let forSizing: TKUIResultsSectionHeaderView = {

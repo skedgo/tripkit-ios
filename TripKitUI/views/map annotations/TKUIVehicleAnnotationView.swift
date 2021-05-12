@@ -11,10 +11,9 @@ import Foundation
 import RxSwift
 import MapKit
 
-@available(*, unavailable, renamed: "TKUIVehicleAnnotationView")
-public typealias TKVehicleAnnotationView = TKUIVehicleAnnotationView
+import TripKit
 
-public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
+class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   
   private weak var vehicleShape: TKUIVehicleView?
   private weak var vehicleImageView: UIImageView?
@@ -26,7 +25,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   
   private let disposeBag = DisposeBag()
   
-  override public var annotation: MKAnnotation? {
+  override var annotation: MKAnnotation? {
     didSet {
       updated(with: annotation)
     }
@@ -34,18 +33,18 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   
   // MARK: -
   
-  @objc public init(with annotation: MKAnnotation?, reuseIdentifier: String?) {
+  init(with annotation: MKAnnotation?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     updated(with: annotation)
   }
   
-  required public init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   // MARK: - UI Update
   
-  @objc public func aged(by factor: CGFloat) {
+  func aged(by factor: CGFloat) {
     wrapper.alpha = 1 - factor
     
     if factor > 0.9 {
@@ -75,8 +74,6 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     frame = CGRect(x: 0, y: 0, width: 44, height: 44)
     backgroundColor = UIColor.clear
     isOpaque = false
-    
-    showDot = false
     
     // The wrapper
     let wrapper = UIView(frame: frame)
@@ -153,7 +150,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   
   // MARK: - Orientation.
   
-  @objc public func rotateVehicle(bearingAngle: CLLocationDirection) {
+  func rotateVehicle(bearingAngle: CLLocationDirection) {
     vehicleShape?.setNeedsDisplay()
     vehicleImageView?.setNeedsDisplay()
     
@@ -168,7 +165,7 @@ public class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     }
   }
   
-  @objc public func rotateVehicle(headingAngle: CLLocationDirection, bearingAngle: CLLocationDirection) {
+  func rotateVehicle(headingAngle: CLLocationDirection, bearingAngle: CLLocationDirection) {
     rotateVehicle(bearingAngle: bearingAngle - headingAngle)
   }
   

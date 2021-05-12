@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import MapKit
+
+import TripKit
 
 class TKUIRoutingQueryAnnotation: NSObject, MKAnnotation {
   let title: String?

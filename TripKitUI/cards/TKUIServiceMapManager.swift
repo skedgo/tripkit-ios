@@ -12,6 +12,8 @@ import MapKit
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 class TKUIServiceMapManager: TKUIMapManager {
   
   weak var viewModel: TKUIServiceViewModel?

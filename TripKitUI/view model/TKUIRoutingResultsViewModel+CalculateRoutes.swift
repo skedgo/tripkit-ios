@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension TKUIRoutingResultsViewModel {
   
   public struct RouteBuilder: Codable {
@@ -371,7 +373,7 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 // MARK: - RxDataSources protocol conformance
 
 extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable {
-  public static func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingResultsViewModel.RouteBuilder) -> Bool {
+  static func ==(lhs: TKUIRoutingResultsViewModel.RouteBuilder, rhs: TKUIRoutingResultsViewModel.RouteBuilder) -> Bool {
     return lhs.time == rhs.time
       && lhs.origin === rhs.origin
       && lhs.destination === rhs.destination

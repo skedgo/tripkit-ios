@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIGroupedAlertCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!
@@ -19,7 +21,7 @@ class TKUIGroupedAlertCell: UITableViewCell {
   @IBOutlet weak var alertCountLabel: UILabel!
   
   static var nib: UINib {
-    return UINib(nibName: "TKUIGroupedAlertCell", bundle: TripKitUIBundle.bundle())
+    return UINib(nibName: "TKUIGroupedAlertCell", bundle: Bundle.tripKitUI)
   }
   
   static var cellReuseIdentifier: String {

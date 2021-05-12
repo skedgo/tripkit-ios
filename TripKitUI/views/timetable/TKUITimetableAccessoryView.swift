@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUITimetableAccessoryView: UIView {
   
   typealias TimetableCardActionsView = TKUICardActionsView<TKUITimetableCard, [TKUIStopAnnotation]>
@@ -145,7 +147,7 @@ extension TKUIServiceNumberCell {
     numberLabel.text = line.text
     
     if let serviceColor = line.color {
-      numberLabel.textColor = serviceColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
+      numberLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       wrapperView.backgroundColor = serviceColor
     } else {
       numberLabel.textColor = .tkBackground

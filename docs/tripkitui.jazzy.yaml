@@ -10,7 +10,6 @@ podspec: ../TripKitUI.podspec
 
 exclude:
   - /*/TripKitUI/helper/Categories/*
-  - /*/TripKitUI/view model/*
   - /*/TripKitUI/vendor/Differentiator/*
   - /*/TripKitUI/vendor/RxDataSources/*
 

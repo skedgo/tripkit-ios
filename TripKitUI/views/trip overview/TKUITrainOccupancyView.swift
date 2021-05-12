@@ -8,21 +8,20 @@
 
 import Foundation
 
-@available(*, unavailable, renamed: "TKUITrainOccupancyView")
-public typealias TKTrainOccupancyView = TKUITrainOccupancyView
+import TripKit
 
-public class TKUITrainOccupancyView: UIView {
+class TKUITrainOccupancyView: UIView {
   
   private weak var stack: UIStackView!
   
   // MARK: - Initialisers
   
-  public override init(frame: CGRect) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
     didInit()
   }
   
-  public required init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     didInit()
   }
@@ -50,7 +49,7 @@ public class TKUITrainOccupancyView: UIView {
   
   // Configuring with content
   
-  public var occupancies: [[TKAPI.VehicleOccupancy]] = [[]] {
+  var occupancies: [[TKAPI.VehicleOccupancy]] = [[]] {
     didSet {
       self.updateStack()
     }

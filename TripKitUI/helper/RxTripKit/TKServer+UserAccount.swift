@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension Reactive where Base == TKServer {
   
   /// Sign the user in using a token from CloudKit, returning

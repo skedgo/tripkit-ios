@@ -8,19 +8,21 @@
 
 import UIKit
 
-public class TKUIRoutingSupportView: UIView {
+import TripKit
+
+class TKUIRoutingSupportView: UIView {
   
   @IBOutlet weak var textLabel: UILabel!
   @IBOutlet weak var imageView: UIImageView!
-  @IBOutlet public internal(set) weak var requestSupportButton: UIButton!
-  @IBOutlet public internal(set) weak var planNewTripButton: UIButton!
+  @IBOutlet weak var requestSupportButton: UIButton!
+  @IBOutlet weak var planNewTripButton: UIButton!
   
   @IBOutlet weak var requestSupportButtonTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var requestSupportButtonHeightConstraint: NSLayoutConstraint!
   
   // MARK: - Factory
   
-  public static func makeView(with message: NSAttributedString, allowRoutingRequest: Bool) -> TKUIRoutingSupportView {
+  static func makeView(with message: NSAttributedString, allowRoutingRequest: Bool) -> TKUIRoutingSupportView {
     guard let supportView = Bundle(for: self).loadNibNamed(String(describing: self), owner: self, options: nil)?.first as? TKUIRoutingSupportView else {
       preconditionFailure("Unable to load view from nib")
     }

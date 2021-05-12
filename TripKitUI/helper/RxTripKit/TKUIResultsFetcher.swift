@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 /// Fetches trips for a request
 ///
 /// Also takes care of localising the user, if the query involves

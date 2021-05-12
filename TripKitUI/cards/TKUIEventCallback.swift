@@ -10,6 +10,9 @@ import Foundation
 
 import TGCardViewController
 
+import TripKit
+
+
 /// This struct provides a single `handler` which is called when certain user events fire from the user
 /// interacting with the TripKitUI SDK.
 ///

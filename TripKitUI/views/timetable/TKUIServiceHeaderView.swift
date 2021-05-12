@@ -11,6 +11,8 @@ import UIKit
 import RxSwift
 import TGCardViewController
 
+import TripKit
+
 class TKUIServiceHeaderView: UIView {
   @IBOutlet weak var accessibilityWrapper: UIView!
   @IBOutlet weak var accessibilityImageView: UIImageView!

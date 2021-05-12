@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 public extension TKGeocoding {
   
   /// Called to geocode a particular input.

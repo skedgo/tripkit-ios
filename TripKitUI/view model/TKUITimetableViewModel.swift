@@ -12,9 +12,11 @@ import CoreSpotlight
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 /// View model for displaying and interacting with public
 /// transport departures from an stop (or list thereof).
-public class TKUITimetableViewModel: NSObject {
+class TKUITimetableViewModel: NSObject {
   
   enum Constants {
     static let minutesToFetchBeforeNow = 15
@@ -30,7 +32,7 @@ public class TKUITimetableViewModel: NSObject {
     groupStops: Bool
   )
   
-  public typealias UIInput = (
+  typealias UIInput = (
     selected: Signal<Item>,
     showAlerts: Signal<Item>,
     filter: Driver<String>,
@@ -39,15 +41,15 @@ public class TKUITimetableViewModel: NSObject {
     loadMoreAfter: Signal<Item>
   )
   
-  public convenience init(restoredState: RestorableState, input: UIInput) {
+  convenience init(restoredState: RestorableState, input: UIInput) {
     self.init(data: (stops: restoredState.stops, dlsTable: nil, startDate: nil, selectedServiceID: nil, groupStops: restoredState.groupStops), input: input)
   }
 
-  public convenience init(stops: [TKUIStopAnnotation], groupStops: Bool = false, input: UIInput?) {
+  convenience init(stops: [TKUIStopAnnotation], groupStops: Bool = false, input: UIInput?) {
     self.init(data: (stops: stops, dlsTable: nil, startDate: nil, selectedServiceID:nil, groupStops: groupStops), input: input)
   }
   
-  public convenience init(dlsTable: TKDLSTable, startDate: Date?, selectedServiceID: String? = nil, input: UIInput?) {
+  convenience init(dlsTable: TKDLSTable, startDate: Date?, selectedServiceID: String? = nil, input: UIInput?) {
     self.init(data: (stops: nil, dlsTable: dlsTable, startDate: startDate, selectedServiceID: selectedServiceID, groupStops: false), input: input)
   }
   
@@ -111,49 +113,49 @@ public class TKUITimetableViewModel: NSObject {
     next = Signal.merge(showDepartures ?? .empty(), showAlerts ?? .empty())
   }
   
-  public let timetable: TKTimetable?
+  let timetable: TKTimetable?
   
-  public let departureStops: [TKUIStopAnnotation]
+  let departureStops: [TKUIStopAnnotation]
   
   private let restorationState: RestorableState?
   
   private let startDate: Date?
   
-  public let timeZone: TimeZone
+  let timeZone: TimeZone
   
-  public let titles: Driver<(title: String, subtitle: String?)>
+  let titles: Driver<(title: String, subtitle: String?)>
   
-  public let time: Driver<Date>
+  let time: Driver<Date>
   
-  public let timeTitle: Driver<String>
+  let timeTitle: Driver<String>
   
   let lines: Driver<[TKUITimetableAccessoryView.Line]>
     
-  public let sections: Driver<[Section]>
+  let sections: Driver<[Section]>
   
-  public let selectedItem: Driver<Item?>
+  let selectedItem: Driver<Item?>
 
-  public let embarkationStopAlerts: Driver<[TKAlert]>
+  let embarkationStopAlerts: Driver<[TKAlert]>
   
   /// Status of real-time update
   ///
   /// - note: Real-updates are only enabled while you're connected
   ///         to this driver.
-  public let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
+  let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
   
   /// User-relevant errors, e.g., if departures couldn't get downloaded
-  public let error: Signal<Error>
+  let error: Signal<Error>
   
   // Actions to take
   
-  public let next: Signal<Next>
+  let next: Signal<Next>
 }
 
 // MARK: - Navigation
 
 extension TKUITimetableViewModel {
   
-  public enum Next {
+  enum Next {
     case departure(StopVisits)
     case alerts([TKAlert])
   }
@@ -164,7 +166,7 @@ extension TKUITimetableViewModel {
 
 extension TKUITimetableViewModel {
 
-  public func topIndexPath(in sections: [Section]) -> IndexPath? {
+  func topIndexPath(in sections: [Section]) -> IndexPath? {
     let targetTimeInterval: TimeInterval
     if let start = startDate {
       targetTimeInterval = start.timeIntervalSinceNow
@@ -188,7 +190,7 @@ extension TKUITimetableViewModel {
 
 extension TKUITimetableViewModel {
   
-  public func stopVisits(for items: [Item]) -> [StopVisits] {
+  func stopVisits(for items: [Item]) -> [StopVisits] {
     return items.map { $0.dataModel }
   }
   
@@ -281,7 +283,7 @@ extension StopLocation {
 // MARK: - State restoration
 
 extension TKUITimetableViewModel {
-  public struct RestorableState: Codable {
+  struct RestorableState: Codable {
     let stops: [TKStopCoordinate]?
     let groupStops: Bool
     
@@ -292,11 +294,11 @@ extension TKUITimetableViewModel {
     // When this is done, also fix up `init?(dataInput: TKUITimetableViewModel.DataInput)`
   }
 
-  public func save() throws -> Data {
+  func save() throws -> Data {
     return try JSONEncoder().encode(restorationState)
   }
   
-  public static func restoredState(from data: Data) -> RestorableState? {
+  static func restoredState(from data: Data) -> RestorableState? {
     let state = try? JSONDecoder().decode(RestorableState.self, from: data)
     if let stops = state?.stops, !stops.isEmpty {
       return state

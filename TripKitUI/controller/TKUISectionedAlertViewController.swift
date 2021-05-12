@@ -7,8 +7,11 @@
 //
 
 import UIKit
-import RxSwift
 import SafariServices
+
+import RxSwift
+
+import TripKit
 
 @available(*, unavailable, renamed: "TKUISectionedAlertViewController")
 public typealias TKSectionedAlertViewController = TKUISectionedAlertViewController

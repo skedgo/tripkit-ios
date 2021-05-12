@@ -10,26 +10,28 @@ import UIKit
 
 import RxSwift
 
-public struct TKUIDepartureCellContent {
-  public var placeholderImage: UIImage? = nil
-  public var imageURL: URL?
-  public var imageIsTemplate: Bool
-  public var imageTintColor: UIColor?
-  public var modeName: String
+import TripKit
+
+struct TKUIDepartureCellContent {
+  var placeholderImage: UIImage? = nil
+  var imageURL: URL?
+  var imageIsTemplate: Bool
+  var imageTintColor: UIColor?
+  var modeName: String
   
-  public var serviceShortName: String?
-  public var serviceColor: UIColor?
-  public var serviceIsCanceled: Bool
+  var serviceShortName: String?
+  var serviceColor: UIColor?
+  var serviceIsCanceled: Bool
 
-  public var accessibilityLabel: String?
-  public var accessibilityTimeText: String?
-  public var timeText: NSAttributedString
-  public var lineText: String?
+  var accessibilityLabel: String?
+  var accessibilityTimeText: String?
+  var timeText: NSAttributedString
+  var lineText: String?
 
-  public var approximateTimeToDepart: Date?
-  public var wheelchairAccessibility: TKWheelchairAccessibility
-  public var alerts: [Alert]
-  public var vehicleComponents: Observable<([[TKAPI.VehicleComponents]], Date)>?
+  var approximateTimeToDepart: Date?
+  var wheelchairAccessibility: TKWheelchairAccessibility
+  var alerts: [Alert]
+  var vehicleComponents: Observable<([[TKAPI.VehicleComponents]], Date)>?
 }
 
 class TKUIDepartureCell: UITableViewCell {
@@ -59,9 +61,9 @@ class TKUIDepartureCell: UITableViewCell {
     }
   }
   
-  public var disposeBag = DisposeBag()
+  var disposeBag = DisposeBag()
 
-  public override func awakeFromNib() {
+  override func awakeFromNib() {
     super.awakeFromNib()
 
     backgroundColor = .tkBackground
@@ -87,7 +89,7 @@ class TKUIDepartureCell: UITableViewCell {
     }
   }
   
-  public override func prepareForReuse() {
+  override func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
   }
@@ -108,7 +110,7 @@ extension TKUIDepartureCell {
     
     serviceShortNameLabel.text = dataSource.serviceShortName
     let serviceColor = dataSource.serviceColor ?? .tkLabelPrimary
-    let textColor: UIColor = serviceColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
+    let textColor: UIColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
     serviceShortNameLabel.textColor = textColor
     serviceColorView.backgroundColor = serviceColor
     

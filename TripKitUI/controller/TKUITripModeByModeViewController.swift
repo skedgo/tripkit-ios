@@ -10,6 +10,8 @@ import Foundation
 
 import TGCardViewController
 
+import TripKit
+
 public protocol TKUITripModeByModeViewControllerDelegate: TGCardViewControllerDelegate {
 }
 

@@ -12,11 +12,7 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
-
+import TripKit
 
 class TKUITripsPageCard: TGPageCard {
   

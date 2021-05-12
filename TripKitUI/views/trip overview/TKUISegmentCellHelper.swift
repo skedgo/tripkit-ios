@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 enum TKUISegmentCellHelper {
   
   static func buildView(for action: TKUICardAction<TKUITripOverviewCard, TKSegment>, model: TKSegment, for card: TKUITripOverviewCard, tintColor: UIColor, disposeBag: DisposeBag) -> UIView {

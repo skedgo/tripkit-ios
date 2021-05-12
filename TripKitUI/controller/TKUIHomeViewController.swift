@@ -10,6 +10,8 @@ import Foundation
 
 import TGCardViewController
 
+import TripKit
+
 open class TKUIHomeViewController: TGCardViewController {
   
   public weak var searchResultsDelegate: TKUIHomeCardSearchResultsDelegate? {

@@ -11,6 +11,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
 
 extension Reactive where Base: TKServer {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {

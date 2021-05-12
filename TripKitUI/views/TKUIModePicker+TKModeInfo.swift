@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKModeInfo: TKUIModePickerItem {
   public var imageURLIsTemplate: Bool { return remoteImageIsTemplate }
   public var imageTextRepresentation: String { return alt }

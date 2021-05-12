@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import TripKit
 @testable import TripKitUI
 
 fileprivate func enabledModes(_ enabled: [String], allow candidate: String?) -> Bool {

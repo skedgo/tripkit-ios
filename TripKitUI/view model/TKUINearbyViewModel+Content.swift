@@ -7,13 +7,12 @@
 //
 
 import Foundation
-
 import MapKit
-
-import TripKit
 
 import RxSwift
 import RxCocoa
+
+import TripKit
 
 extension TKUINearbyViewModel {
   

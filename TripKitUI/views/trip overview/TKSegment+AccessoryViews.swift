@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 extension TKSegment {
   
   /// Builds recommended accessory views to show for this segment in a detail
@@ -19,7 +21,7 @@ extension TKSegment {
   /// - `TKUIPathFriendlinessView`
   ///
   /// - Returns: List of accessory view instances; can be empty
-  public func buildAccessoryViews() -> [UIView] {
+  func buildAccessoryViews() -> [UIView] {
     
     var accessoryViews: [UIView] = []
     

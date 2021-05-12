@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension Alert: TKAlert {
   public var infoURL: URL? { url.flatMap(URL.init) }
   public var icon: TKImage? { TKInfoIcon.image(for: infoIconType, usage: .normal) }

@@ -12,10 +12,7 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
 public protocol TKUIRoutingQueryInputCardDelegate: AnyObject {
   func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation)

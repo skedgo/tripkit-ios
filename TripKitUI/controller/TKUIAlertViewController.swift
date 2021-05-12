@@ -11,12 +11,9 @@ import SafariServices
 
 import RxSwift
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
-@objc public protocol TKAlert {
+protocol TKAlert {
   var title: String? { get }
   var icon: TKImage? { get }
   var iconURL: URL? { get }
@@ -60,22 +57,19 @@ extension TKAlertAPIAlertClassWrapper: TKAlert {
 
 // MARK: -
 
-@available(*, unavailable, renamed: "TKUIAlertViewController")
-public typealias TKAlertViewController = TKUIAlertViewController
-
-public class TKUIAlertViewController: UITableViewController {
+class TKUIAlertViewController: UITableViewController {
   
-  @objc public weak var alertControllerDelegate: TKUIAlertViewControllerDelegate?
+  weak var alertControllerDelegate: TKUIAlertViewControllerDelegate?
   
   private weak var emptyAlertView: TKUIEmptyAlertView?
   
   private let disposeBag = DisposeBag()
   
-  public func setAlerts(_ alerts: [TKAPI.Alert]) {
+  func setAlerts(_ alerts: [TKAPI.Alert]) {
     self.alerts = alerts.map(TKAlertAPIAlertClassWrapper.init)
   }
   
-  public var alerts: [TKAlert] = [] {
+  var alerts: [TKAlert] = [] {
     didSet {
       sortedAlerts = alerts
         .sorted(by: {
@@ -102,7 +96,7 @@ public class TKUIAlertViewController: UITableViewController {
   
   // MARK: - View lifecycle
   
-  override public func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
     
     self.title = Loc.Alerts
@@ -114,7 +108,7 @@ public class TKUIAlertViewController: UITableViewController {
     tableView.separatorStyle = .none
   }
   
-  public override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     if let navigator = navigationController,
@@ -124,7 +118,7 @@ public class TKUIAlertViewController: UITableViewController {
     }
   }
   
-  public override func viewDidAppear(_ animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
     TKUIEventCallback.handler(.screenAppeared(name: "Alerts", controller: self))
@@ -136,15 +130,15 @@ public class TKUIAlertViewController: UITableViewController {
   
   // MARK: - UITableViewDataSource
   
-  override public func numberOfSections(in tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return sortedAlerts.count
   }
   
-  override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard indexPath.row < sortedAlerts.count else {
       preconditionFailure("Index path refers to a non-existent alert")
     }
@@ -168,13 +162,13 @@ public class TKUIAlertViewController: UITableViewController {
   
   // MARK: - Table view delegate
   
-  override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.row < sortedAlerts.count else {
       return
     }
     
     let alert = sortedAlerts[indexPath.row]
-    alertControllerDelegate?.alertViewController?(self, didSelectAlert: alert)
+    alertControllerDelegate?.alertViewController(self, didSelectAlert: alert)
   }
   
   // MARK: - Auxiliary view
@@ -197,8 +191,8 @@ public class TKUIAlertViewController: UITableViewController {
 
 // MARK: - Protocol
 
-@objc public protocol TKUIAlertViewControllerDelegate {
+protocol TKUIAlertViewControllerDelegate: AnyObject {
   
-  @objc optional func alertViewController(_ controller: TKUIAlertViewController, didSelectAlert alert: TKAlert)
+  func alertViewController(_ controller: TKUIAlertViewController, didSelectAlert alert: TKAlert)
   
 }

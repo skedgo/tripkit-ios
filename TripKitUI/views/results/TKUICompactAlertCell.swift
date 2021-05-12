@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUICompactAlertCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUICompactAlertCell"

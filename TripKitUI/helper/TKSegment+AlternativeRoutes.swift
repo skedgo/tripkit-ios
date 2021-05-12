@@ -8,9 +8,11 @@
 
 import Foundation
 
+import TripKit
+
 extension TKSegment {
  
-  public func insertRequestStartingHere() -> TripRequest {
+  func insertRequestStartingHere() -> TripRequest {
     guard
       let start = start,
       start.coordinate.isValid,

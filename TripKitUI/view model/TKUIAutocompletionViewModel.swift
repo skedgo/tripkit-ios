@@ -12,6 +12,8 @@ import MapKit
 import RxCocoa
 import RxSwift
 
+import TripKit
+
 class TKUIAutocompletionViewModel {
   
   struct Section {

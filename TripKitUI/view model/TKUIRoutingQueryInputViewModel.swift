@@ -11,10 +11,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
 class TKUIRoutingQueryInputViewModel {
   

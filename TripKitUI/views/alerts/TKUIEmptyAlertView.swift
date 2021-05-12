@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIEmptyAlertView: UIView {
   
   @IBOutlet weak var imageView: UIImageView!
@@ -25,7 +27,7 @@ class TKUIEmptyAlertView: UIView {
   // MARK: - Creating view
   
   static func makeView() -> TKUIEmptyAlertView {
-    let bundle = TripKitUIBundle.bundle()
+    let bundle = Bundle.tripKitUI
     return bundle.loadNibNamed(String(describing: self), owner: self, options: nil)!.first as! TKUIEmptyAlertView
   }
   

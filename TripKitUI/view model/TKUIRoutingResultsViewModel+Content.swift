@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 // MARK: - List content
 
 extension TKUIRoutingResultsViewModel {
@@ -21,37 +23,14 @@ extension TKUIRoutingResultsViewModel {
 
 extension TKUIRoutingResultsViewModel {
 
-  /// An item to be displayed on the map
-  public struct MapRouteItem {
-    fileprivate let trip: Trip
-    
-    public let polyline: TKRoutePolyline
-    public let selectionIdentifier: String
-    
-    init?(_ trip: Trip) {
-      self.trip = trip
-      self.selectionIdentifier = trip.objectID.uriRepresentation().absoluteString
-      
-      let displayableShapes = trip.segments
-        .compactMap { $0.shapes.isEmpty ? nil : $0.shapes }   // Only include those with shapes
-        .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
-      
-      let route = displayableShapes
-        .reduce(into: TKColoredRoute(path: [], identifier: selectionIdentifier)) { $0.append($1.sortedCoordinates ?? []) }
-      
-      guard let polyline = TKRoutePolyline(for: route) else { return nil }
-      self.polyline = polyline
-    }
-  }
-
-  public typealias MapContent = (all: [MapRouteItem], selection: MapRouteItem?)
+  typealias MapContent = (all: [TKUIRoutingResultsMapRouteItem], selection: TKUIRoutingResultsMapRouteItem?)
 
   
 }
 
 extension TKUIRoutingResultsViewModel {
   
-  static func buildMapContent(all groups: [TripGroup], selection: MapRouteItem?) -> MapContent {
+  static func buildMapContent(all groups: [TripGroup], selection: TKUIRoutingResultsMapRouteItem?) -> MapContent {
     let routeItems = groups.compactMap { $0.preferredRoute }
     let selectedTripGroup = selection?.trip.tripGroup
       ?? groups.first?.request.preferredGroup
@@ -218,7 +197,7 @@ extension Trip {
 extension TKUIRoutingResultsViewModel {
   
   /// An item in a section on the results screen
-  public enum Item {
+  enum Item {
     
     /// A regular/expanded trip
     case trip(Trip)
@@ -243,21 +222,21 @@ extension TKUIRoutingResultsViewModel {
 
   }
   
-  public enum ActionPayload {
+  enum ActionPayload {
     case expand(TripGroup)
     case collapse
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
   }
   
-  public typealias SectionAction = (title: String, payload: ActionPayload)
+  typealias SectionAction = (title: String, payload: ActionPayload)
   
   /// A section on the results screen, which consists of various sorted items
-  public struct Section {
-    public var items: [Item]
+  struct Section {
+    var items: [Item]
     
-    public var badge: TKMetricClassifier.Classification? = nil
+    var badge: TKMetricClassifier.Classification? = nil
     var costs: [NSNumber: String] = [:]
-    public var action: SectionAction? = nil
+    var action: SectionAction? = nil
   }
 }
 
@@ -312,20 +291,20 @@ extension TKUIRoutingResultsViewModel.Item {
 
 // MARK: - Map content
 
-public func ==(lhs: TKUIRoutingResultsViewModel.MapRouteItem, rhs: TKUIRoutingResultsViewModel.MapRouteItem) -> Bool {
+public func ==(lhs: TKUIRoutingResultsMapRouteItem, rhs: TKUIRoutingResultsMapRouteItem) -> Bool {
   return lhs.trip.objectID == rhs.trip.objectID
 }
-extension TKUIRoutingResultsViewModel.MapRouteItem: Equatable { }
+extension TKUIRoutingResultsMapRouteItem: Equatable { }
 
 extension TripGroup {
-  fileprivate var preferredRoute: TKUIRoutingResultsViewModel.MapRouteItem? {
+  fileprivate var preferredRoute: TKUIRoutingResultsMapRouteItem? {
     guard let trip = visibleTrip else { return nil }
-    return TKUIRoutingResultsViewModel.MapRouteItem(trip)
+    return TKUIRoutingResultsMapRouteItem(trip)
   }
 }
 
 extension Array where Element == TKUIRoutingResultsViewModel.Section {
-  func find(_ mapRoute: TKUIRoutingResultsViewModel.MapRouteItem?) -> TKUIRoutingResultsViewModel.Item? {
+  func find(_ mapRoute: TKUIRoutingResultsMapRouteItem?) -> TKUIRoutingResultsViewModel.Item? {
     guard let mapRoute = mapRoute else { return nil }
     for section in self {
       for item in section.items {
@@ -344,7 +323,7 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
 
 // MARK: - RxDataSources protocol conformance
 
-public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
+func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.progress, .progress): return true
@@ -355,8 +334,8 @@ public func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsVie
 extension TKUIRoutingResultsViewModel.Item: Equatable { }
 
 extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
-  public typealias Identity = String
-  public var identity: Identity {
+  typealias Identity = String
+  var identity: Identity {
     switch self {
     case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .progress: return "progress_indicator"
@@ -366,15 +345,15 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
 }
 
 extension TKUIRoutingResultsViewModel.Section: AnimatableSectionModelType {
-  public typealias Identity = String
-  public typealias Item = TKUIRoutingResultsViewModel.Item
+  typealias Identity = String
+  typealias Item = TKUIRoutingResultsViewModel.Item
   
-  public init(original: TKUIRoutingResultsViewModel.Section, items: [TKUIRoutingResultsViewModel.Item]) {
+  init(original: TKUIRoutingResultsViewModel.Section, items: [TKUIRoutingResultsViewModel.Item]) {
     self = original
     self.items = items
   }
   
-  public var identity: Identity {
+  var identity: Identity {
     let itemIdentity = items.first?.identity ?? "Empty"
     return itemIdentity + (action?.title ?? "")
   }

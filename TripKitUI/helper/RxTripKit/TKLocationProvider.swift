@@ -11,6 +11,8 @@ import CoreLocation
 
 import RxSwift
 
+import TripKit
+
 public enum TKLocationProvider {
   
   public enum Error: Swift.Error {

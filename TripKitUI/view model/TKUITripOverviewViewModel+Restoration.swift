@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKUITripOverviewViewModel {
   
   private struct RestorationInfo: Codable {

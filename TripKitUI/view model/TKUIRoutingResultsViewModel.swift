@@ -11,24 +11,21 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
-public class TKUIRoutingResultsViewModel {
+class TKUIRoutingResultsViewModel {
   
-  public enum SearchMode {
+  enum SearchMode {
     case origin
     case destination
   }
   
-  public struct SearchResult {
+  struct SearchResult {
     let mode: SearchMode
     let location: MKAnnotation
   }
 
-  public typealias UIInput = (
+  typealias UIInput = (
     selected: Signal<Item>,                     // => do .next
     tappedSectionButton: Signal<ActionPayload>, // => section action
     tappedDate: Signal<Void>,                   // => return which date to show
@@ -40,17 +37,17 @@ public class TKUIRoutingResultsViewModel {
     changedSearch: Signal<SearchResult>
   )
   
-  public typealias MapInput = (
-    tappedMapRoute: Signal<MapRouteItem>,
+  typealias MapInput = (
+    tappedMapRoute: Signal<TKUIRoutingResultsMapRouteItem>,
     droppedPin: Signal<CLLocationCoordinate2D>  // => call dropPin()
   )
   
-  public convenience init(destination: MKAnnotation, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+  convenience init(destination: MKAnnotation, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     let builder = RouteBuilder(destination: destination)
     self.init(builder: builder, editable: false, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
-  public convenience init(request: TripRequest, editable: Bool, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+  convenience init(request: TripRequest, editable: Bool, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
     self.init(builder: request.builder, initialRequest: request, editable: editable, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
@@ -251,15 +248,15 @@ public class TKUIRoutingResultsViewModel {
   ///
   /// - note: Real-updates are only enabled while you're connected
   ///         to this driver.
-  public let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
+  let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
   
   let error: Signal<Error>
   
-  public let originAnnotation: Driver<MKAnnotation?>
+  let originAnnotation: Driver<MKAnnotation?>
 
-  public let destinationAnnotation: Driver<MKAnnotation?>
+  let destinationAnnotation: Driver<MKAnnotation?>
   
-  public let mapRoutes: Driver<MapContent>
+  let mapRoutes: Driver<MapContent>
   
   let next: Signal<Next>
 }

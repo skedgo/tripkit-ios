@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import MapKit
 
 import RxSwift
 import RxCocoa
+
+import TripKit
 
 public extension TKUIHomeCard {
   

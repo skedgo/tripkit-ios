@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 public extension TKUIServiceCard {
   
   typealias EmbarkationPair = (embarkation: StopVisits, disembarkation: StopVisits?)

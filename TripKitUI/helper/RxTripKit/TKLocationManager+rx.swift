@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 public extension Reactive where Base : TKLocationManager {
   
   /// Fetches the user's current location and fires observable

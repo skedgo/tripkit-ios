@@ -11,20 +11,37 @@ import MapKit
 
 import RxSwift
 import RxCocoa
-
 import TGCardViewController
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
+
+/// An item to be displayed on the map
+public struct TKUIRoutingResultsMapRouteItem {
+  let trip: Trip
+  
+  public let polyline: TKRoutePolyline
+  public let selectionIdentifier: String
+  
+  init?(_ trip: Trip) {
+    self.trip = trip
+    self.selectionIdentifier = trip.objectID.uriRepresentation().absoluteString
+    
+    let displayableShapes = trip.segments
+      .compactMap { $0.shapes.isEmpty ? nil : $0.shapes }   // Only include those with shapes
+      .flatMap { $0.filter { $0.routeIsTravelled } } // Flat list of travelled shapes
+    
+    let route = displayableShapes
+      .reduce(into: TKColoredRoute(path: [], identifier: selectionIdentifier)) { $0.append($1.sortedCoordinates ?? []) }
+    
+    guard let polyline = TKRoutePolyline(for: route) else { return nil }
+    self.polyline = polyline
+  }
+}
 
 public protocol TKUIRoutingResultsMapManagerType: TGCompatibleMapManager {
-  var viewModel: TKUIRoutingResultsViewModel? { get set }
-  
   var droppedPin: Signal<CLLocationCoordinate2D> { get }
   
-  var selectedMapRoute: Signal<TKUIRoutingResultsViewModel.MapRouteItem> { get }
+  var selectedMapRoute: Signal<TKUIRoutingResultsMapRouteItem> { get }
 }
 
 class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManagerType {
@@ -50,8 +67,8 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
   }
 
   private var tapRecognizer = UITapGestureRecognizer()
-  private var selectedRoutePublisher = PublishSubject<TKUIRoutingResultsViewModel.MapRouteItem>()
-  var selectedMapRoute: Signal<TKUIRoutingResultsViewModel.MapRouteItem> {
+  private var selectedRoutePublisher = PublishSubject<TKUIRoutingResultsMapRouteItem>()
+  var selectedMapRoute: Signal<TKUIRoutingResultsMapRouteItem> {
     return selectedRoutePublisher.asSignal(onErrorSignalWith: .empty())
   }
 
@@ -80,13 +97,13 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
     }
   }
   
-  fileprivate var selectedRoute: TKUIRoutingResultsViewModel.MapRouteItem? {
+  fileprivate var selectedRoute: TKUIRoutingResultsMapRouteItem? {
     didSet {
       selectionIdentifier = selectedRoute?.selectionIdentifier
     }
   }
   
-  private var allRoutes: [TKUIRoutingResultsViewModel.MapRouteItem] = [] {
+  private var allRoutes: [TKUIRoutingResultsMapRouteItem] = [] {
     didSet {
       guard let mapView = mapView else { return }
       
@@ -175,7 +192,7 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
     super.cleanUp(mapView, animated: animated)
   }
   
-  private func closestRoute(to coordinate: CLLocationCoordinate2D) -> TKUIRoutingResultsViewModel.MapRouteItem? {
+  private func closestRoute(to coordinate: CLLocationCoordinate2D) -> TKUIRoutingResultsMapRouteItem? {
     let mapPoint = MKMapPoint(coordinate)
     return allRoutes
       .filter { $0 != selectedRoute }
@@ -183,7 +200,7 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
   }
 }
 
-extension TKUIRoutingResultsViewModel.MapRouteItem {
+extension TKUIRoutingResultsMapRouteItem {
   fileprivate func distance(to mapPoint: MKMapPoint) -> CLLocationDistance {
     return polyline.closestPoint(to: mapPoint).distance
   }

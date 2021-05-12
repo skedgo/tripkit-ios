@@ -11,13 +11,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 extension TKUITimetableViewModel {
   
-  public struct Section {
+  struct Section {
     let date: Date
-    public var items: [Item]
+    var items: [Item]
     
-    public var title: String {
+    var title: String {
       let timeZone = items.first?.dataModel.stop.timeZone ?? .current
       var calendar = Calendar.current
       calendar.timeZone = timeZone
@@ -28,10 +30,10 @@ extension TKUITimetableViewModel {
     }
   }
   
-  public struct Item {
+  struct Item {
     let dataModel: StopVisits
-    public let contentModel: TKUIDepartureCellContent
-    public let isSelected: Bool
+    let contentModel: TKUIDepartureCellContent
+    let isSelected: Bool
   }
 
 }
@@ -384,30 +386,30 @@ extension Array where Element == TKUITimetableViewModel.Section {
 
 extension TKUITimetableViewModel.Item: Equatable {
   
-  public static func ==(lhs: TKUITimetableViewModel.Item, rhs: TKUITimetableViewModel.Item) -> Bool {
+  static func ==(lhs: TKUITimetableViewModel.Item, rhs: TKUITimetableViewModel.Item) -> Bool {
     return lhs.dataModel.objectID == rhs.dataModel.objectID
   }
   
 }
 
 extension TKUITimetableViewModel.Item: IdentifiableType {
-  public typealias Identity = NSManagedObjectID
+  typealias Identity = NSManagedObjectID
   
-  public var identity: Identity {
+  var identity: Identity {
     return dataModel.objectID
   }
 }
 
 extension TKUITimetableViewModel.Section: AnimatableSectionModelType {
-  public typealias Item = TKUITimetableViewModel.Item
-  public typealias Identity = Date
+  typealias Item = TKUITimetableViewModel.Item
+  typealias Identity = Date
   
-  public init(original: TKUITimetableViewModel.Section, items: [Item]) {
+  init(original: TKUITimetableViewModel.Section, items: [Item]) {
     self = original
     self.items = items
   }
   
-  public var identity: Identity {
+  var identity: Identity {
     return date
   }
 }

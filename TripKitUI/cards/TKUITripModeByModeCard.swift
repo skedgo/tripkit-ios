@@ -12,6 +12,8 @@ import RxSwift
 import RxCocoa
 import TGCardViewController
 
+import TripKit
+
 public protocol TKUITripModeByModeCardDelegate {
 
   func modeByModeCard(_ card: TKUITripModeByModeCard, updatedTrip trip: Trip)
@@ -202,7 +204,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     guard let cardsInfo = SegmentCardsInfo.cardsInfo(ofCardAtIndex: index, in: segmentCards)
       else { assertionFailure(); return }
     let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= cardsInfo.segmentIndex } // segment on card might not be in header
-    headerSegmentsView?.select(segmentAtIndex: selectedHeaderIndex ?? 0)
+    headerSegmentsView?.selectSegment(atIndex: selectedHeaderIndex ?? 0)
     
     if let segment = tripMapManager.trip.segments.first(where: { Self.config.builder.cardIdentifier(for: $0) == cardsInfo.segmentIdentifier }) {
       let offset = index - cardsInfo.cardsRange.lowerBound
@@ -254,8 +256,8 @@ extension TKUITripModeByModeCard {
     let segmentsView = TKUITripSegmentsView(frame: .zero)
     segmentsView.darkTextColor  = .tkLabelPrimary
     segmentsView.lightTextColor = .tkLabelSecondary
-    segmentsView.configure(forSegments: segments, allowSubtitles: true, allowInfoIcons: false)
-    segmentsView.select(segmentAtIndex: selectedHeaderIndex ?? 0)
+    segmentsView.configure(segments, allowInfoIcons: false)
+    segmentsView.selectSegment(atIndex: selectedHeaderIndex ?? 0)
 
     let tapper = UITapGestureRecognizer(target: self, action: #selector(segmentTapped))
     segmentsView.addGestureRecognizer(tapper)
@@ -356,7 +358,7 @@ extension TKUITripModeByModeCard {
     
     if segmentsMatch(cardSegments) {
       // Update segment view in header
-      headerSegmentsView?.configure(forSegments: trip.headerSegments, allowSubtitles: true, allowInfoIcons: false)
+      headerSegmentsView?.configure(trip.headerSegments, allowInfoIcons: false)
       
       // Update ETA in header
       headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)

@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 extension TKUIHomeViewModel {
   
   static func searchContent(for searchInput: SearchInput) -> (Driver<[Section]>, Signal<NextAction>, Signal<Error>) {

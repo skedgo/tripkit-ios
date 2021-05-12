@@ -10,8 +10,9 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-
 import TGCardViewController
+
+import TripKit
 
 /// A card that lists the route of an individual public transport
 /// service. Starts at the provided embarkation and optionally

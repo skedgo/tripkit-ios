@@ -10,6 +10,8 @@ import UIKit
 
 import RxSwift
 
+import TripKit
+
 class TKUISegmentMovingCell: UITableViewCell {
   @IBOutlet weak var modeWrapper: UIView!
   @IBOutlet weak var modeImage: UIImageView!
@@ -70,7 +72,7 @@ extension TKUISegmentMovingCell {
   func configure(with item: TKUITripOverviewViewModel.MovingItem, for card: TKUITripOverviewCard) {
     let hasLine = item.connection?.color != nil
     let modeImageColor: UIColor
-    switch item.connection?.color?.isDark() {
+    switch item.connection?.color?.isDark {
     case .some(true): modeImageColor = .tkLabelOnDark
     case .some(false): modeImageColor = .tkLabelOnLight
     case nil: modeImageColor = .tkLabelPrimary

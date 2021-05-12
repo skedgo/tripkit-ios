@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIAttributionCell: UITableViewCell {
   
   @IBOutlet weak var titleTextView: UITextView!

@@ -12,10 +12,7 @@ import MapKit
 import RxSwift
 import TGCardViewController
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
 public protocol TKUITripMapManagerType: TGCompatibleMapManager {}
 

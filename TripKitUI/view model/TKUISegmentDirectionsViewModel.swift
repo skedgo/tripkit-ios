@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 class TKUISegmentDirectionsViewModel {
   
   static func canShowInstructions(for segment: TKSegment) -> Bool {

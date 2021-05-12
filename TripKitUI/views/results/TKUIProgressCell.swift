@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 public class TKUIProgressCell: UITableViewCell {
   
   @IBOutlet weak var spinner: UIActivityIndicatorView!

@@ -9,6 +9,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension TKDeparturesProvider {
   
   enum InputError: Error {

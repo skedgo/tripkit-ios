@@ -10,12 +10,7 @@ import TripKit
 
 extension TKSegment {
   
-  @objc(annotationsToZoomToOnMap)
-  public func _annotationsToZoomToOnMap() -> [MKAnnotation] {
-    return self.annotationsToZoomToOnMap(mode: nil)
-  }
-  
-  public func annotationsToZoomToOnMap(mode: TKUISegmentMode? = nil) -> [MKAnnotation] {
+  func annotationsToZoomToOnMap(mode: TKUISegmentMode? = nil) -> [MKAnnotation] {
     let mode = mode ?? defaultMode
     switch mode {
     case .getReady:  return annotationsForEmbarking()

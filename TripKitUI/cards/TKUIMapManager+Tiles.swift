@@ -8,6 +8,8 @@
 
 import MapKit
 
+import TripKit
+
 /// Tiles that can be used on a `TKUIMapManager`
 public protocol TKUIMapTiles {
   

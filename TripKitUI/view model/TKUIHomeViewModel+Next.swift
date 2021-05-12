@@ -8,9 +8,11 @@
 
 import Foundation
 
-import TGCardViewController
 import RxSwift
 import struct RxCocoa.Signal
+import TGCardViewController
+
+import TripKit
 
 @available(*, unavailable, renamed: "TKUIHomeCard.ComponentAction")
 public typealias TKUIHomeCardNextAction = TKUIHomeCard.ComponentAction

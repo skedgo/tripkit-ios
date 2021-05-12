@@ -12,6 +12,8 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 extension TKUIRoutingResultsCard {
   
   func show(

@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKRegion.RoutingMode: TKUIModePickerItem {
   public var imageURLIsTemplate: Bool { return remoteImageIsTemplate }
   public var imageTextRepresentation: String { return title }

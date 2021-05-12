@@ -9,6 +9,8 @@
 import Foundation
 import RxSwift
 
+import TripKit
+
 extension TKUIRoutingResultsViewModel {
   
   static func fetchAdvisory(for request: Observable<TripRequest>) -> Observable<TKAPI.Alert?> {

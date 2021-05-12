@@ -8,12 +8,12 @@
 
 import Foundation
 
-import TGCardViewController
 import RxSwift
 import RxCocoa
+import TGCardViewController
 
 extension Reactive where Base: TGCardView {
-  public var titles: Binder<(title: String, subtitle: String?)> {
+  var titles: Binder<(title: String, subtitle: String?)> {
     return Binder(self.base) { view, titles in
       view.updateDefaultTitle(title: titles.title, subtitle: titles.subtitle)
     }

@@ -9,8 +9,9 @@
 import UIKit
 
 import RxSwift
-
 import TGCardViewController
+
+import TripKit
 
 class TKUIServiceTitleView: UIView {
 
@@ -65,7 +66,7 @@ extension TKUIServiceTitleView {
     serviceShortNameLabel.text = model.serviceShortName
 
     if let serviceColor = model.serviceColor {
-      serviceShortNameLabel.textColor = serviceColor.isDark() ? .tkLabelOnDark : .tkLabelOnLight
+      serviceShortNameLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       serviceColorView.backgroundColor = serviceColor
     } else {
       serviceShortNameLabel.textColor = .tkBackground

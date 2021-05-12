@@ -8,15 +8,17 @@
 
 import UIKit
 
+import TripKit
+
 extension TKUIRoutingSupportView {
   
-  public static func clear(from view: UIView) {
+  static func clear(from view: UIView) {
     view.subviews
       .filter { $0 is TKUIRoutingSupportView }
       .forEach { $0.removeFromSuperview() }
   }
 
-  public static func show(
+  static func show(
     with error: Error,
     for request: TripRequest? = nil,
     in view: UIView,

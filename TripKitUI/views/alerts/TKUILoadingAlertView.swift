@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 class TKUILoadingAlertView: UIView {
   
   @IBOutlet weak var textLabel: UILabel!
@@ -16,7 +18,7 @@ class TKUILoadingAlertView: UIView {
   // MARK: - Constructor
   
   static func newInstance() -> TKUILoadingAlertView {
-    let bundle = TripKitUIBundle.bundle()
+    let bundle = Bundle.tripKitUI
     let instance = bundle.loadNibNamed("TKUILoadingAlertView", owner: self, options: nil)?.first as! TKUILoadingAlertView
     instance.textLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     return instance

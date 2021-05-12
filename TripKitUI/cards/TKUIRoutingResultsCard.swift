@@ -12,10 +12,7 @@ import TGCardViewController
 import RxSwift
 import RxCocoa
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
 @available(*, unavailable, renamed: "TKUIRoutingResultsCard")
 public typealias TKUIResultsCard = TKUIRoutingResultsCard
@@ -203,7 +200,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       preconditionFailure()
     }
     self.viewModel = viewModel
-    mapManager.viewModel = viewModel
+    (mapManager as? TKUIRoutingResultsMapManager)?.viewModel = viewModel
     
     // Table view configuration
     

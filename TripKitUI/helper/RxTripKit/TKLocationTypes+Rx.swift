@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension Reactive where Base : TKBikePodLocation {
   public var bikePod: Observable<TKAPI.BikePodInfo> {
     return base.rx

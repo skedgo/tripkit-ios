@@ -10,6 +10,8 @@ import UIKit
 
 import TGCardViewController
 
+import TripKit
+
 extension UIViewController {
   public func showErrorAsAlert(_ error: Error, title: String? = nil) {
     let alertController = UIAlertController(title: title ?? Loc.Error, message: error.localizedDescription, preferredStyle: .alert)

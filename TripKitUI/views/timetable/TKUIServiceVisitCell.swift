@@ -8,8 +8,9 @@
 
 import UIKit
 
-@objc
-public class TKUIServiceVisitCell: UITableViewCell {
+import TripKit
+
+class TKUIServiceVisitCell: UITableViewCell {
 
   @IBOutlet weak var timeStack: UIStackView!
   @IBOutlet weak var arrivalTimeLabel: UILabel!
@@ -30,34 +31,30 @@ public class TKUIServiceVisitCell: UITableViewCell {
   @IBOutlet weak var outerDot: UIView!
   @IBOutlet weak var innerDot: UIView!
   
-  @objc
-  public static let nib = UINib(nibName: "TKUIServiceVisitCell", bundle: Bundle(for: TKUIServiceVisitCell.self))
+  static let nib = UINib(nibName: "TKUIServiceVisitCell", bundle: Bundle(for: TKUIServiceVisitCell.self))
   
-  @objc
-  public static let reuseIdentifier = "TKUIServiceVisitCell"
+  static let reuseIdentifier = "TKUIServiceVisitCell"
   
-  @objc
-  public var isFirstStop: Bool = false {
+  var isFirstStop: Bool = false {
     didSet {
       topLine.isHidden = isFirstStop
     }
   }
   
-  @objc
-  public var isLastStop: Bool = false {
+  var isLastStop: Bool = false {
     didSet {
       bottomLine.isHidden = isLastStop
     }
   }
   
-  public var enableReminder = false {
+  var enableReminder = false {
     didSet {
       setReminderButton.isHidden = !enableReminder
       stopWrapperStack.spacing = enableReminder ? 8 : 0
     }
   }
   
-  override public func awakeFromNib() {
+  override func awakeFromNib() {
     super.awakeFromNib()
     
     backgroundColor = .tkBackground
@@ -66,18 +63,18 @@ public class TKUIServiceVisitCell: UITableViewCell {
     innerDot.layer.cornerRadius = innerDot.frame.width / 2
   }
   
-  override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
+  override func setHighlighted(_ highlighted: Bool, animated: Bool) {
     // Not calling super to not override line colors
     UIView.animate(withDuration: animated ? 0.25 : 0) {
       self.contentView.backgroundColor = highlighted ? .tkBackgroundSelected : .tkBackground
     }
   }
   
-  override public func setSelected(_ selected: Bool, animated: Bool) {
+  override func setSelected(_ selected: Bool, animated: Bool) {
     setHighlighted(selected, animated: animated);
   }
   
-  public override func prepareForReuse() {
+  override func prepareForReuse() {
     super.prepareForReuse()
     topLine.isHidden = false
     bottomLine.isHidden = false
@@ -200,8 +197,7 @@ extension TKUIServiceVisitCell {
     outerDot.backgroundColor = dotColor
   }
   
-  @objc
-  public func configure(with visit: StopVisits, embarkOn embarkation: StopVisits, disembarkOn disembarkation: StopVisits?) {
+  func configure(with visit: StopVisits, embarkOn embarkation: StopVisits, disembarkOn disembarkation: StopVisits?) {
     
     var isVisited: Bool
     let isBefore = visit.compare(embarkation) == .orderedAscending

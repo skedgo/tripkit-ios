@@ -7,10 +7,12 @@
 //
 
 import XCTest
+import MapKit
 
 import RxSwift
 import RxCocoa
 
+@testable import TripKit
 @testable import TripKitUI
 
 class TKUIRoutingQueryInputViewModelTest: XCTestCase {

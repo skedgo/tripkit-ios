@@ -6,7 +6,7 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Foundation
+import MapKit
 
 /// This protocol defines the method you can use to receive message related to
 /// the search functionality provided in a `TKUIHomeCard`

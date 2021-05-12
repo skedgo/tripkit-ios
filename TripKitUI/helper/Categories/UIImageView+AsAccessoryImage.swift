@@ -8,9 +8,10 @@
 
 import UIKit
 
-/// :nodoc:
-public extension UIImageView {
-  @objc convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
+import TripKit
+
+extension UIImageView {
+  convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
     self.init()
     
     let images = UIImageView.realTimeAccessoryImage(animated, tintColor: tintColor)

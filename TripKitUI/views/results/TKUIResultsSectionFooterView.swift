@@ -10,6 +10,8 @@ import UIKit
 
 import RxSwift
 
+import TripKit
+
 class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
   
   static let forSizing: TKUIResultsSectionFooterView = {

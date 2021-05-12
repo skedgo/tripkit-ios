@@ -8,10 +8,11 @@
 
 import UIKit
 
-import TGCardViewController
-
 import RxSwift
 import RxCocoa
+import TGCardViewController
+
+import TripKit
 
 class TKUIRoutingQueryInputTitleView: UIView {
   

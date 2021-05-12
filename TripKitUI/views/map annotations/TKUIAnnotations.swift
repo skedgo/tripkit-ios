@@ -6,10 +6,11 @@
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Foundation
-
 import CoreLocation
 import MapKit
+
+import TripKit
+
 
 /// For displaying an annotation in a `MKMarkerAnnotationView`
 public protocol TKUIGlyphableAnnotation: MKAnnotation {

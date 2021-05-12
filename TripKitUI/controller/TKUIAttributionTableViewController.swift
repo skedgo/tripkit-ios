@@ -8,6 +8,8 @@
 
 import UIKit
 
+import TripKit
+
 public class TKUIAttributionTableViewController: UITableViewController {
   
   /// Called when the user taps on an item in the attribution view, and

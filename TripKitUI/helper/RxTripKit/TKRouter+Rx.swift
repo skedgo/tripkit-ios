@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension TKTripFetcher {
   enum FetchError : Error {
     case downloadFailed

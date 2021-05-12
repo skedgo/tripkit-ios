@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 extension TKUITripOverviewViewModel {
   
   struct Section {

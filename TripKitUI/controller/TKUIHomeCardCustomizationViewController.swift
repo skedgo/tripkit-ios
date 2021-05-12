@@ -11,6 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+import TripKit
+
 @available(iOS 13.0, *)
 protocol TKUIHomeCardCustomizationViewControllerDelegate: AnyObject {
   func customizer(_ controller: TKUIHomeCardCustomizationViewController, completed items: [TKUIHomeCard.CustomizedItem])

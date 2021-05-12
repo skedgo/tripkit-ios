@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 // MARK: - Real-time updates
 
 extension TKUIRoutingResultsViewModel {

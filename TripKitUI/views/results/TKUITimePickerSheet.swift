@@ -10,13 +10,10 @@ import UIKit
 
 import TripKit
 
-@objc
 public protocol TKUITimePickerSheetDelegate: AnyObject {
 
-  @objc(timePicker:pickedDate:forType:)
   func timePicker(_ picker: TKUITimePickerSheet, pickedDate: Date, for type: TKTimeType)
 
-  @objc
   func timePickerRequestsResign(_ picker: TKUITimePickerSheet)
 
 }
@@ -29,10 +26,8 @@ public class TKUITimePickerSheet: TKUISheet {
     case timeWithType(TKTimeType)
   }
   
-  @objc
   public var selectAction: (TKTimeType, Date) -> Void = { _, _ in }
   
-  @objc
   public weak var delegate: TKUITimePickerSheetDelegate?
   
   public var selectedDate: Date {
@@ -79,12 +74,10 @@ public class TKUITimePickerSheet: TKUISheet {
   private weak var timeTypeSelector: UISegmentedControl!
   private weak var doneSelector: UISegmentedControl!
 
-  @objc
   public convenience init(date: Date, timeZone: TimeZone) {
     self.init(date: date, showTime: false, mode: .date, timeZone: timeZone)
   }
   
-  @objc
   public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone) {
     self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone)
   }
@@ -161,7 +154,7 @@ public class TKUITimePickerSheet: TKUISheet {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public override func tappedOverlay(_ sender: Any!) {
+  public override func tappedOverlay(_ sender: Any) {
     if didSetTime {
       selectAction(selectedTimeType, selectedDate)
       selectAction = { _, _ in }
@@ -198,7 +191,7 @@ public class TKUITimePickerSheet: TKUISheet {
     selectAction(.leaveASAP, .init())
     selectAction = { _, _ in }
     
-    if isBeingOverlaid() {
+    if isBeingOverlaid {
       tappedOverlay(sender)
     } else if let delegate = delegate {
       delegate.timePickerRequestsResign(self)
@@ -211,7 +204,7 @@ public class TKUITimePickerSheet: TKUISheet {
   func doneButtonPressed(sender: Any) {
     doneSelector.selectedSegmentIndex = -1
     
-    if isBeingOverlaid() {
+    if isBeingOverlaid {
       tappedOverlay(sender)
     } else if let delegate = delegate {
       delegate.timePickerRequestsResign(self)

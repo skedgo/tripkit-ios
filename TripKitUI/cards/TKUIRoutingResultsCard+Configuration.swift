@@ -10,6 +10,8 @@ import Foundation
 
 import TGCardViewController
 
+import TripKit
+
 public extension TKUIRoutingResultsCard {
   
   typealias TripGroupAction = TKUICardAction<TKUIRoutingResultsCard, TripGroup>

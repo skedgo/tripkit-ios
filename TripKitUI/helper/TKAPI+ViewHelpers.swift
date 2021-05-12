@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKAPI.VehicleOccupancy {
   
   /// A small icon showing 4 people, where some of them are drawn in the "occupied color",

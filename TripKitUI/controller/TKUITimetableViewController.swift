@@ -10,6 +10,8 @@ import UIKit
 
 import TGCardViewController
 
+import TripKit
+
 @available(*, unavailable, renamed: "TKUITimetableViewController")
 public typealias TKUIDeparturesViewController = TKUITimetableViewController
 

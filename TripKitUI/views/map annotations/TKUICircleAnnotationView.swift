@@ -41,7 +41,7 @@ open class TKUICircleAnnotationView: MKAnnotationView {
     guard let context = UIGraphicsGetCurrentContext() else { return }
     
     let fillColor = self.circleColor ?? .black
-    let borderColor = self.borderColor ?? fillColor.darkerColor(byPercentage: 0.75)
+    let borderColor = self.borderColor ?? fillColor.darkerColor(percentage: 0.75)
     let lineWidth = Constants.lineWidth * (isLarge ? 1 : Constants.smallFactor)
     let lineOffset = lineWidth / 2
     

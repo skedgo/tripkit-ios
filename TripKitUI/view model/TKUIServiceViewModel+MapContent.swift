@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import MapKit
+
+import TripKit
 
 protocol TKUIServiceMapContentVisited {
   var color: UIColor { get }
@@ -151,7 +154,7 @@ extension TKUIServiceViewModel.ServiceEmbarkation: TKUIModeAnnotation {
 }
 
 extension TKUIServiceViewModel.ServiceEmbarkation: TKUISemaphoreDisplayable {
-  var semaphoreMode: TKUISemaphoreView.Mode {
+  var semaphoreMode: TKUISemaphoreView.Mode? {
     switch (visit.timing, action) {
     case (.frequencyBased(let frequency, _, _, _), .embark):
       return .headWithFrequency(minutes: Int(frequency / 60))

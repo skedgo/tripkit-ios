@@ -8,10 +8,7 @@
 
 import UIKit
 
-#if TK_NO_MODULE
-#else
-  import TripKit
-#endif
+import TripKit
 
 extension TKAPI.VehicleOccupancy {
   
@@ -39,23 +36,20 @@ extension TKAPI.VehicleOccupancy {
   
 }
 
-@available(*, unavailable, renamed: "TKUIOccupancyView")
-public typealias TKOccupancyView = TKUIOccupancyView
-
-public class TKUIOccupancyView: UIView {
+class TKUIOccupancyView: UIView {
   
-  public weak var icon: UIImageView!
-  public weak var label: UILabel!
+  weak var icon: UIImageView!
+  weak var label: UILabel!
   private var heightConstraint: NSLayoutConstraint!
   
   // MARK: - Initialisers
   
-  public override init(frame: CGRect) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
     didInit()
   }
   
-  public required init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     didInit()
   }
@@ -97,12 +91,12 @@ public class TKUIOccupancyView: UIView {
 
 extension TKUIOccupancyView {
   
-  public enum Purpose {
+  enum Purpose {
     case occupancy(TKAPI.VehicleOccupancy, title: String, simple: Bool = false)
     case wheelchair(TKWheelchairAccessibility)
   }
   
-  public convenience init(with purpose: Purpose) {
+  convenience init(with purpose: Purpose) {
     self.init()
     
     isAccessibilityElement = true

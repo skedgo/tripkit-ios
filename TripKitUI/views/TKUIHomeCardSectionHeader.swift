@@ -10,6 +10,8 @@ import UIKit
 
 import RxSwift
 
+import TripKit
+
 class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   
   private enum Constraint {

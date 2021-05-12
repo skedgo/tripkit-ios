@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 // MARK: - TKModeCoordinate
 
 // MARK: TKUIModeAnnotation
@@ -107,7 +109,7 @@ extension StopVisits: TKUISemaphoreDisplayable {
     return nil
   }
   
-  public var semaphoreMode: TKUISemaphoreView.Mode {
+  public var semaphoreMode: TKUISemaphoreView.Mode? {
     return .none
   }
   
@@ -143,7 +145,7 @@ extension TKSegment: TKUISemaphoreDisplayable {
     }
   }
   
-  public var semaphoreMode: TKUISemaphoreView.Mode {
+  public var semaphoreMode: TKUISemaphoreView.Mode? {
     if let frequency = self.frequency?.intValue {
       if !isTerminal {
         return .headWithFrequency(minutes: frequency)

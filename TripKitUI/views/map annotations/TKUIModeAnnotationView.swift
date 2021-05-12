@@ -9,6 +9,8 @@
 import Foundation
 import MapKit
 
+import TripKit
+
 /// A annotation to display transport locations on the map.
 ///
 /// Uses the mode icon in the centre, coloured circle around it. Also works with

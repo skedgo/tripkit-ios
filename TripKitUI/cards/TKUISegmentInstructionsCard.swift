@@ -8,10 +8,11 @@
 
 import Foundation
 
-import TGCardViewController
-
 import RxSwift
 import RxCocoa
+import TGCardViewController
+
+import TripKit
 
 public class TKUISegmentInstructionCard: TGPlainCard {
 

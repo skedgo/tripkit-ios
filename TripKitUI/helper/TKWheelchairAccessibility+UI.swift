@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 extension TKWheelchairAccessibility {
   func showInUI() -> Bool {
     return self == .notAccessible
