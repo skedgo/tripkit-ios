@@ -66,8 +66,7 @@ class TKTestCase: XCTestCase {
           for segment in trip.segments {
             if let service = segment.service {
               let serviceJson: [String: Any] = try! self.contentFromJSON(named: serviceFilename)
-              let provider = TKBuzzInfoProvider()
-              provider.addContent(to: service, fromResponse: serviceJson)
+              TKBuzzInfoProvider.addContent(from: serviceJson, to: service)
               break
             }
           }

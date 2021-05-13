@@ -455,8 +455,6 @@
 		3AB6C6ED1D1CD08E0089F687 /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C67D1D1CD08E0089F687 /* Vehicle.m */; };
 		3AB6C6F61D1CD08E0089F687 /* TKSegmentBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C6F71D1CD08E0089F687 /* TKSegmentBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */; };
-		3AB6C6FA1D1CD08E0089F687 /* TKBuzzInfoProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C68B1D1CD08E0089F687 /* TKBuzzInfoProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68C1D1CD08E0089F687 /* TKBuzzInfoProvider.m */; };
 		3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */; };
 		3AB6C6FD1D1CD08E0089F687 /* TKBuzzRealTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */; };
@@ -484,8 +482,6 @@
 		3ABBDA162032131E00205042 /* TKTripKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6A71D1CD08E0089F687 /* TKTripKit.m */; };
 		3ABBDA172032131E00205042 /* TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E231F20DD5300666E59 /* TripKit.swift */; };
 		3ABBDA182032132400205042 /* TKAPIToCoreDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */; };
-		3ABBDA192032132400205042 /* TKBuzzInfoProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C68B1D1CD08E0089F687 /* TKBuzzInfoProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA1A2032132400205042 /* TKBuzzInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68C1D1CD08E0089F687 /* TKBuzzInfoProvider.m */; };
 		3ABBDA1B2032132400205042 /* TKBuzzInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */; };
 		3ABBDA1C2032132400205042 /* TKBuzzRealTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA1D2032132400205042 /* TKBuzzRealTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */; };
@@ -561,8 +557,6 @@
 		3ABBDA832032134000205042 /* TKAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB791F06854F00147990 /* TKAnnotations.swift */; };
 		3ABBDA842032134000205042 /* TKInfoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7B1F06854F00147990 /* TKInfoIcon.swift */; };
 		3ABBDA872032134000205042 /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */; };
-		3ABBDA882032134000205042 /* TKRoutePolyline.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB7F1F06854F00147990 /* TKRoutePolyline.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA892032134000205042 /* TKRoutePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB801F06854F00147990 /* TKRoutePolyline.m */; };
 		3ABBDA8A2032134000205042 /* TKRoutePolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */; };
 		3ABBDA8B2032134000205042 /* TKTransportKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB821F06854F00147990 /* TKTransportKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA8C2032134000205042 /* TKTripAndSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */; };
@@ -805,8 +799,6 @@
 		3AFFABD31F06854F00147990 /* TKCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7A1F06854F00147990 /* TKCoordinates.swift */; };
 		3AFFABD41F06854F00147990 /* TKInfoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7B1F06854F00147990 /* TKInfoIcon.swift */; };
 		3AFFABD71F06854F00147990 /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */; };
-		3AFFABD81F06854F00147990 /* TKRoutePolyline.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB7F1F06854F00147990 /* TKRoutePolyline.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFFABD91F06854F00147990 /* TKRoutePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB801F06854F00147990 /* TKRoutePolyline.m */; };
 		3AFFABDA1F06854F00147990 /* TKRoutePolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */; };
 		3AFFABDB1F06854F00147990 /* TKTransportKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB821F06854F00147990 /* TKTransportKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABDC1F06854F00147990 /* TKTripAndSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */; };
@@ -1373,8 +1365,6 @@
 		3AB6C67D1D1CD08E0089F687 /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
 		3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKSegmentBuilder.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKSegmentBuilder.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		3AB6C68B1D1CD08E0089F687 /* TKBuzzInfoProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBuzzInfoProvider.h; sourceTree = "<group>"; };
-		3AB6C68C1D1CD08E0089F687 /* TKBuzzInfoProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBuzzInfoProvider.m; sourceTree = "<group>"; };
 		3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBuzzInfoProvider.swift; sourceTree = "<group>"; };
 		3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBuzzRealTime.h; sourceTree = "<group>"; };
 		3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBuzzRealTime.m; sourceTree = "<group>"; };
@@ -1573,8 +1563,6 @@
 		3AFFAB7A1F06854F00147990 /* TKCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKCoordinates.swift; sourceTree = "<group>"; };
 		3AFFAB7B1F06854F00147990 /* TKInfoIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKInfoIcon.swift; sourceTree = "<group>"; };
 		3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKModeHelper.swift; sourceTree = "<group>"; };
-		3AFFAB7F1F06854F00147990 /* TKRoutePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRoutePolyline.h; sourceTree = "<group>"; };
-		3AFFAB801F06854F00147990 /* TKRoutePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRoutePolyline.m; sourceTree = "<group>"; };
 		3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TKRoutePolyline.swift; sourceTree = "<group>"; };
 		3AFFAB821F06854F00147990 /* TKTransportKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTransportKit.h; sourceTree = "<group>"; };
 		3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripAndSegments.swift; sourceTree = "<group>"; };
@@ -2586,8 +2574,6 @@
 			isa = PBXGroup;
 			children = (
 				3A462CD9207638DB00AF41EF /* parsing */,
-				3AB6C68B1D1CD08E0089F687 /* TKBuzzInfoProvider.h */,
-				3AB6C68C1D1CD08E0089F687 /* TKBuzzInfoProvider.m */,
 				3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */,
 				3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */,
 				3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */,
@@ -2912,8 +2898,6 @@
 				3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */,
 				3AFFAB781F06854F00147990 /* TKModeInfo.swift */,
 				3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */,
-				3AFFAB7F1F06854F00147990 /* TKRoutePolyline.h */,
-				3AFFAB801F06854F00147990 /* TKRoutePolyline.m */,
 				3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */,
 				3AFFAB821F06854F00147990 /* TKTransportKit.h */,
 				3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */,
@@ -2957,7 +2941,6 @@
 				3ABBDA562032132D00205042 /* TripRequest.h in Headers */,
 				3ABBDAF32032136100205042 /* TKLocationManager.h in Headers */,
 				3A38621E228F2F9C00C8E704 /* SGDeprecatedGeocoder.h in Headers */,
-				3ABBDA882032134000205042 /* TKRoutePolyline.h in Headers */,
 				3ABBDA8B2032134000205042 /* TKTransportKit.h in Headers */,
 				3ABBDA332032132400205042 /* TKSettings.h in Headers */,
 				3A1107BF26033503004C7AB5 /* UIFont+CustomFonts.h in Headers */,
@@ -2985,7 +2968,6 @@
 				3ABBDA992032134900205042 /* TKServer.h in Headers */,
 				3ABBDA1C2032132400205042 /* TKBuzzRealTime.h in Headers */,
 				3ABBDA132032131E00205042 /* TKConstants.h in Headers */,
-				3ABBDA192032132400205042 /* TKBuzzInfoProvider.h in Headers */,
 				3ABBDAA62032134D00205042 /* TKAutocompletionResult.h in Headers */,
 				3ABBDAB42032134D00205042 /* TKRegionAutocompleter.h in Headers */,
 				3ABBDA9D2032134900205042 /* TKTransportModes.h in Headers */,
@@ -3035,7 +3017,6 @@
 				3AFFABB31F06854F00147990 /* TKCrossPlatform.h in Headers */,
 				3AB6C6E81D1CD08E0089F687 /* TripGroup.h in Headers */,
 				3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */,
-				3AB6C6FA1D1CD08E0089F687 /* TKBuzzInfoProvider.h in Headers */,
 				3AB6C6CD1D1CD08E0089F687 /* TripRequest+Classify.h in Headers */,
 				3AB6C6D41D1CD08E0089F687 /* Alert.h in Headers */,
 				3AA03E6D1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h in Headers */,
@@ -3065,7 +3046,6 @@
 				3AFFABBE1F06854F00147990 /* TKRootKit.h in Headers */,
 				3AB6C6D81D1CD08E0089F687 /* DLSEntry.h in Headers */,
 				3AFFABBF1F06854F00147990 /* TKStyleManager.h in Headers */,
-				3AFFABD81F06854F00147990 /* TKRoutePolyline.h in Headers */,
 				3AFFAB871F06854F00147990 /* TKActions.h in Headers */,
 				3AFFABB51F06854F00147990 /* TKEnums.h in Headers */,
 				3AFFABDE1F06854F00147990 /* TKVehicular.h in Headers */,
@@ -3441,7 +3421,6 @@
 				3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
 				3A386221228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift in Sources */,
 				3ABBDADD2032135A00205042 /* NSError+customError.swift in Sources */,
-				3ABBDA1A2032132400205042 /* TKBuzzInfoProvider.m in Sources */,
 				3A38622522929C0800C8E704 /* TKContactsManager.swift in Sources */,
 				3AFD397E20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */,
 				3A656C4F24C9D7110027E9A6 /* TKSegment+TKTripSegment.swift in Sources */,
@@ -3610,7 +3589,6 @@
 				3ABBDA872032134000205042 /* TKModeHelper.swift in Sources */,
 				3ABBDA4F2032132D00205042 /* StopVisits.swift in Sources */,
 				3ABBDAA72032134D00205042 /* TKAutocompletionResult.m in Sources */,
-				3ABBDA892032134000205042 /* TKRoutePolyline.m in Sources */,
 				3A2AF56E24BCA0020020D1DE /* TKMapTiles.swift in Sources */,
 				3ABBDAB72032134D00205042 /* TKAnnotationClusterer.swift in Sources */,
 				3A3428DD254EEE8100D71039 /* Geometry.swift in Sources */,
@@ -3907,7 +3885,6 @@
 				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
 				3AF05CFB23FF0EF40043B2EB /* TKLog.swift in Sources */,
 				3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */,
-				3AB6C6FB1D1CD08E0089F687 /* TKBuzzInfoProvider.m in Sources */,
 				3AB6C6D51D1CD08E0089F687 /* Alert.m in Sources */,
 				3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */,
 				3AFFABC01F06854F00147990 /* TKStyleManager.m in Sources */,
@@ -3925,7 +3902,6 @@
 				3AB6C6E51D1CD08E0089F687 /* StopVisits.m in Sources */,
 				3AA03E691F0BC9DB00C6B337 /* TKAutocompletionResult.m in Sources */,
 				3A73A479243F767700EB74E5 /* StopLocation+CoreDataClass.swift in Sources */,
-				3AFFABD91F06854F00147990 /* TKRoutePolyline.m in Sources */,
 				3A73A48F24409A9200EB74E5 /* TKSegment+Ticket.swift in Sources */,
 				3AFFABAD1F06854F00147990 /* TKLocationHelper.m in Sources */,
 				3A63E1252636A3F600CC09DA /* TKTransportModes.swift in Sources */,

@@ -70,7 +70,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKRoutingParser.h"
 #import "TKTripFetcher.h"
 #import "TKBuzzRealTime.h"
-#import "TKBuzzInfoProvider.h"
 
 // Search
 #import "TKAutocompletionResult.h"

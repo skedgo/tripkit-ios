@@ -18,7 +18,7 @@
 
 @interface TKBuzzRealTime ()
 
-@property (nonatomic, strong) TKTripFetcher *helperRouter;
+@property (nonatomic, strong) TKTripFetcher *tripFetcher;
 
 @end
 
@@ -37,7 +37,7 @@
     return;
   }
 
-  [self.helperRouter updateTrip:trip
+  [self.tripFetcher updateTrip:trip
              completionWithFlag:
    ^(Trip * updatedTrip, BOOL wasUpdated) {
      if (updatedTrip == trip) {
@@ -356,12 +356,12 @@
 
 #pragma mark - Lazy accessors
 
-- (TKTripFetcher *)helperRouter
+- (TKTripFetcher *)tripFetcher
 {
-  if (!_helperRouter) {
-    _helperRouter = [[TKTripFetcher alloc] init];
+  if (!_tripFetcher) {
+    _tripFetcher = [[TKTripFetcher alloc] init];
   }
-  return _helperRouter;
+  return _tripFetcher;
 }
 
 @end

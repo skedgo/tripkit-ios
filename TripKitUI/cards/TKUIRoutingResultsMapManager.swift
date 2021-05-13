@@ -33,7 +33,7 @@ public struct TKUIRoutingResultsMapRouteItem {
     let route = displayableShapes
       .reduce(into: TKColoredRoute(path: [], identifier: selectionIdentifier)) { $0.append($1.sortedCoordinates ?? []) }
     
-    guard let polyline = TKRoutePolyline(for: route) else { return nil }
+    guard let polyline = TKRoutePolyline(route: route) else { return nil }
     self.polyline = polyline
   }
 }

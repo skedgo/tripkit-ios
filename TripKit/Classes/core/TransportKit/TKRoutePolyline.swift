@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 // MARK: - TKDisplayableRoute, the input
 
@@ -61,7 +62,35 @@ extension MKGeodesicPolyline : TKDisplayableRoute {
   
 }
 
-// MARK: - Deprectations
+public class TKRoutePolyline : MKPolyline {
+  public var route: TKDisplayableRoute!
+  
+  public var selectionIdentifier: String?
+  
+  public convenience init?(route: TKDisplayableRoute) {
+    let pathpoints = route.routePath
+    guard !pathpoints.isEmpty else { return nil }
+    
+    let coordinates = pathpoints.compactMap { obj -> CLLocationCoordinate2D? in
+      switch obj {
+      case let coordinate as CLLocationCoordinate2D: return coordinate
+      case let location as CLLocation: return location.coordinate
+      case let annotation as MKAnnotation: return annotation.coordinate
+      default: return nil
+      }
+    }
+    
+    self.init(coordinates: coordinates, count: coordinates.count)
 
-@available(*, unavailable, renamed: "TKDisplayableRoute")
-public typealias STKDisplayableRoute = TKDisplayableRoute
+    self.route = route
+  }
+  
+  
+  /// - Returns: A geodesic polyline connecting the annotations
+  public static func geodesicPolyline(annotations: [MKAnnotation]) -> MKGeodesicPolyline? {
+    guard !annotations.isEmpty else { return nil }
+    
+    let coordinates = annotations.map(\.coordinate)
+    return MKGeodesicPolyline(coordinates: coordinates, count: coordinates.count)
+  }
+}

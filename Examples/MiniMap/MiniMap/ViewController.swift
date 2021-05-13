@@ -83,7 +83,7 @@ class ViewController: NSViewController {
           guard segment.hasVisibility(.onMap) else { continue }
           self.mapView.addAnnotation(segment)
           for shape in segment.shapes {
-            guard let polyline = TKRoutePolyline(for: shape) else { continue }
+            guard let polyline = TKRoutePolyline(route: shape) else { continue }
             self.mapView.addOverlay(polyline)
           }
         }

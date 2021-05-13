@@ -15,7 +15,6 @@
 #import "TKVehicleType.h"
 
 // Classes
-#import "TKRoutePolyline.h"
 #import "TKVehicular.h"
 
 #endif

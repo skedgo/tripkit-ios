@@ -347,7 +347,7 @@ public class TKSegment: NSObject {
   public func passesNear(_ coordinate: CLLocationCoordinate2D, maximumMeters: CLLocationDistance = 100) -> Bool {
     let needle = MKMapPoint(coordinate)
     return shapes
-      .compactMap(TKRoutePolyline.init(for:))
+      .compactMap { TKRoutePolyline(route: $0) }
       .contains {
         $0.closestPoint(to: needle).distance < maximumMeters
       }

@@ -96,21 +96,6 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
                     success:(TKServerFullSuccessBlock)success
                     failure:(TKServerFailureBlock)failure;
 
-- (void)hitSkedGoWithMethod:(NSString *)method
-                       path:(NSString *)path
-                 parameters:(nullable NSDictionary<NSString *, id> *)parameters
-                    headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-                 customData:(nullable NSData*)customData
-                     region:(nullable TKRegion *)region
-             callbackOnMain:(BOOL)callbackOnMain
-                    success:(TKServerFullSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure;
-
-- (nullable id)initiateSyncRequestWithMethod:(NSString *)method
-                                        path:(NSString *)path
-                                  parameters:(nullable NSDictionary<NSString *, id>  *)parameters
-                                      region:(nullable TKRegion *)region DEPRECATED_ATTRIBUTE;
-
 - (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
                                           path:(NSString *)path
                                     parameters:(nullable NSDictionary<NSString *, id> *)parameters

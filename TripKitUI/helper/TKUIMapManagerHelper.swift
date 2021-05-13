@@ -92,7 +92,7 @@ class TKUIMapManagerHelper: NSObject {
   {
     guard
       let start = segment.start, let end = segment.end,
-      let polyline = TKRoutePolyline.geodesicPolyline(for: [start, end])
+      let polyline = TKRoutePolyline.geodesicPolyline(annotations: [start, end])
       else { return nil }
       
     return ([], [polyline], false)

@@ -29,17 +29,14 @@ extension TKUIServiceViewModel {
     }
     
     return Single.create { subscriber in
-      var infoProvider: TKBuzzInfoProvider! = TKBuzzInfoProvider()
-      infoProvider.downloadContent(of: embarkation.service, forEmbarkationDate: embarkation.timeForServerRequests, in: embarkation.stop.region) { service, success in
+      TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.timeForServerRequests, region: embarkation.stop.region) { service, success in
         if success {
           subscriber(.success(()))
         } else {
           subscriber(.failure(FetchError.couldNotFetchServiceContent))
         }
       }
-      return Disposables.create {
-        infoProvider = nil
-      }
+      return Disposables.create()
     }.observe(on: MainScheduler.instance)
     
   }

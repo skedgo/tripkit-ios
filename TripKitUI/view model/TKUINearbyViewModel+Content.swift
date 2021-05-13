@@ -61,7 +61,7 @@ extension TKUINearbyViewModel {
     var overlays: [MKOverlay] {
       return locations
         .compactMap { $0 as? TKDisplayableRoute }
-        .compactMap { TKRoutePolyline(for: $0) }
+        .compactMap { TKRoutePolyline(route: $0) }
     }
     
   }
