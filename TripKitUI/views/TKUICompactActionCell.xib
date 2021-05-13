@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,26 +19,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1L-Ir-ZXi">
-                        <rect key="frame" x="35" y="0.0" width="36" height="36"/>
+                        <rect key="frame" x="31" y="0.0" width="44" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2FT-0J-Gik">
-                                <rect key="frame" x="6" y="6" width="24" height="24"/>
+                                <rect key="frame" x="10" y="10" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2FT-0J-Gik" secondAttribute="height" multiplier="1:1" id="Bbb-cg-d9v"/>
                                     <constraint firstAttribute="width" constant="24" id="Pps-Q6-7I6"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="2FT-0J-Gik" firstAttribute="centerY" secondItem="l1L-Ir-ZXi" secondAttribute="centerY" id="5fN-qm-Yi8"/>
-                            <constraint firstAttribute="width" constant="36" id="AWO-qR-cqg"/>
+                            <constraint firstAttribute="width" constant="44" id="AWO-qR-cqg"/>
                             <constraint firstAttribute="width" secondItem="l1L-Ir-ZXi" secondAttribute="height" multiplier="1:1" id="Lcr-Wo-wMY"/>
                             <constraint firstItem="2FT-0J-Gik" firstAttribute="centerX" secondItem="l1L-Ir-ZXi" secondAttribute="centerX" id="T81-57-XE1"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwC-OB-6xU">
-                        <rect key="frame" x="6" y="40" width="94" height="24"/>
+                        <rect key="frame" x="6" y="48" width="94" height="16"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -64,4 +65,9 @@
             <point key="canvasLocation" x="75.362318840579718" y="39.508928571428569"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
