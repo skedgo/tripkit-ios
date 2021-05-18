@@ -35,6 +35,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
     self.annotation = annotation
     self.mapView = mapView
     self.asLarge = annotation is StopVisits
+    self.heading = mapView.camera.heading
     
     // TODO: Then also handle `regionDidChangeAnimated` as in RMM
     
@@ -235,7 +236,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
     if let bearing = bearing, let heading = heading {
       return (bearing - heading) > 180 ? .onRight : .onLeft
     } else {
-      return .onLeft
+      return .defaultDirection
     }
   }
 

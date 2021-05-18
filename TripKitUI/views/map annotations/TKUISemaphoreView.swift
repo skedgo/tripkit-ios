@@ -27,6 +27,13 @@ public class TKUISemaphoreView: MKAnnotationView {
   public enum LabelSide {
     case onLeft
     case onRight
+    
+    public static var defaultDirection: LabelSide {
+      switch Locale.current.languageCode.map({ Locale.lineDirection(forLanguage: $0) }) {
+      case .rightToLeft: return .onLeft
+      default: return .onRight
+      }
+    }
   }
   
   public enum Mode: Equatable {
@@ -79,7 +86,7 @@ public class TKUISemaphoreView: MKAnnotationView {
   }
   
   public override func prepareForReuse() {
-    configure(.headOnly, side: .onLeft)
+    configure(.headOnly, side: .defaultDirection)
     disposeBag = .init()
     isFlipped = false
     modeImageView?.removeFromSuperview()
@@ -171,7 +178,8 @@ public class TKUISemaphoreView: MKAnnotationView {
     
     timeLabel.frame.origin.x = timeLabelX
     timeLabel.frame.origin.y = verticalPadding
-    timeImageView.frame = .init(x: timeViewX, y: (headSize - timeViewWidth) / 2, width: timeViewWidth, height: timeViewHeight)
+    timeLabel.frame.size = textSize
+    timeImageView.frame = .init(x: timeViewX, y: (headSize - timeViewHeight) / 2, width: timeViewWidth, height: timeViewHeight)
     timeImageView.addSubview(timeLabel)
     wrapper.insertSubview(timeImageView, belowSubview: headImageView)
   }
@@ -353,7 +361,7 @@ extension Reactive where Base == TKUISemaphoreView {
   
   var mode: Binder<TKUISemaphoreView.Mode?> {
     return Binder(self.base) { semaphore, mode in
-      semaphore.configure(mode, side: semaphore.label ?? .onLeft)
+      semaphore.configure(mode, side: semaphore.label ?? .defaultDirection)
     }
   }
  
