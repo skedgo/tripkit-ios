@@ -14,13 +14,17 @@ class TKUIHomeHeaderView: UIView {
   var directionsButton: UIButton?
   
   private var stackView: UIStackView!
+  
+  private let hasGrabHandle: Bool
 
-  init() {
+  init(hasGrabHandle: Bool) {
+    self.hasGrabHandle = hasGrabHandle
     super.init(frame: .zero)
     didInit()
   }
   
   required init?(coder: NSCoder) {
+    self.hasGrabHandle = true
     super.init(coder: coder)
     didInit()
   }
@@ -48,7 +52,7 @@ class TKUIHomeHeaderView: UIView {
     
     NSLayoutConstraint.activate([
       stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      stackView.topAnchor.constraint(equalTo: topAnchor, constant: -10), // negative spacer to minimise gap to grab handle
+      stackView.topAnchor.constraint(equalTo: topAnchor, constant: hasGrabHandle ? -10 : 0), // negative spacer to minimise gap to grab handle
       trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
       bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
     ])

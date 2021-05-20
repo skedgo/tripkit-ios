@@ -44,7 +44,15 @@ open class TKUIHomeCard: TKUITableCard {
   
   public init(mapManager: TKUICompatibleHomeMapManager? = nil, initialPosition: TGCardPosition? = .peaking) {
     self.homeMapManager = mapManager
-    self.headerView = TKUIHomeHeaderView()
+    
+    let hasGrabHandle: Bool
+    #if targetEnvironment(macCatalyst)
+    hasGrabHandle = false
+    #else
+    hasGrabHandle = true
+    #endif
+    
+    self.headerView = TKUIHomeHeaderView(hasGrabHandle: hasGrabHandle)
 
     super.init(title: .custom(headerView, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition)
     
