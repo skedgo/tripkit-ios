@@ -14,7 +14,6 @@ class TKUIResultsAccessoryView: UIView {
 
   @IBOutlet weak var timeButton: UIButton!
   @IBOutlet weak var transportButton: UIButton!
-  @IBOutlet weak var separator: UIView!
   
   static func instantiate() -> TKUIResultsAccessoryView {
     let bundle = Bundle(for: self)
@@ -28,24 +27,24 @@ class TKUIResultsAccessoryView: UIView {
     super.awakeFromNib()
     
     backgroundColor = UIColor.tkAppTintColor.withAlphaComponent(0.12)
-    separator.backgroundColor = .tkSeparatorSubtle
     
     timeButton.setTitle(nil, for: .normal)
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     timeButton.tintColor = .tkAppTintColor
-    timeButton.setImage(.iconChevronDown, for: .normal)
-    timeButton.switchImageToOtherSide()
     
-    transportButton.setTitle(Loc.Transport, for: .normal)
+    transportButton.setTitle(" \(Loc.Transport)", for: .normal)
     transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     transportButton.tintColor = .tkAppTintColor
-    transportButton.setImage(.iconChevronDown, for: .normal)
-    transportButton.switchImageToOtherSide()
+
+    if #available(iOS 13.0, *) {
+      let config = UIImage.SymbolConfiguration(pointSize: 10)
+      timeButton.setImage(.init(systemName: "clock", withConfiguration: config), for: .normal)
+      transportButton.setImage(.init(systemName: "ellipsis.circle", withConfiguration: config), for: .normal)
+    }
   }
   
   func hideTransportButton() {
     transportButton.isHidden = true
-    separator.isHidden = true
   }
   
 }

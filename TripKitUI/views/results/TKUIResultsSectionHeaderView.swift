@@ -59,14 +59,16 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
   }
   
   private func didInit() {
+    contentView.backgroundColor = .tkBackgroundGrouped
+    
     let wrapper = UIView()
-    wrapper.backgroundColor = .tkBackgroundBelowTile
+    wrapper.backgroundColor = .tkBackground
     wrapper.translatesAutoresizingMaskIntoConstraints = false
     self.wrapper = wrapper
     contentView.addSubview(wrapper)
     NSLayoutConstraint.activate([
       wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
       contentView.bottomAnchor.constraint(equalTo: wrapper.bottomAnchor, constant: 0),
       contentView.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: 0)
     ])

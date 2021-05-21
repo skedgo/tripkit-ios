@@ -251,6 +251,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .disposed(by: disposeBag)
 
     viewModel.timeTitle
+      .map { " \($0) "} // padding :(
       .drive(accessoryView.timeButton.rx.title())
       .disposed(by: disposeBag)
     

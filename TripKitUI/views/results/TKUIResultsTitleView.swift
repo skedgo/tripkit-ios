@@ -20,19 +20,13 @@ class TKUIResultsTitleView: UIView {
   @IBOutlet weak var originLabel: UILabel!
   @IBOutlet weak var destinationLabel: UILabel!
   @IBOutlet weak var dismissButton: UIButton!
-  @IBOutlet weak var originButton: UIButton!
-  @IBOutlet weak var originButtonBackground: UIView!
   
   @IBOutlet private weak var topLevelStack: UIStackView!
   @IBOutlet private weak var accessoryViewContainer: UIView!
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
   
-  var enableTappingLocation: Bool = true {
-    didSet {
-      originButton.isEnabled = enableTappingLocation
-    }
-  }
+  var enableTappingLocation: Bool = true
   
   private let locationSearchPublisher = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
   var locationTapped: Signal<TKUIRoutingResultsViewModel.SearchMode> {
@@ -85,11 +79,7 @@ class TKUIResultsTitleView: UIView {
     originLabel.isUserInteractionEnabled = true
     originLabel.addGestureRecognizer(originLabelTapper)
     
-    originButton.tintColor = .tkAppTintColor
-    originButton.accessibilityLabel = Loc.StartLocation
-    originButtonBackground.backgroundColor = UIColor.tkAppTintColor.withAlphaComponent(0.12)
-    
-    destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
+    destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title3)
     destinationLabel.textColor = .tkLabelPrimary
     let destinationTapper = UITapGestureRecognizer(target: self, action: #selector(destinationLabelTapped))
     destinationTapper.delegate = self

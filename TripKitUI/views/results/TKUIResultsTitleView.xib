@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,7 +37,7 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88I-7o-sPz">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88I-7o-sPz">
                                     <rect key="frame" x="327" y="-11" width="44" height="44"/>
                                     <accessibility key="accessibilityConfiguration" label="Close"/>
                                     <constraints>
@@ -46,41 +46,12 @@
                                     </constraints>
                                     <state key="normal" title="Close"/>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eeI-TK-YqT">
-                                    <rect key="frame" x="61.5" y="30" width="20" height="20"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="TFj-dL-xZw"/>
-                                        <constraint firstAttribute="width" constant="20" id="vsu-mr-Ltb"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTz-uu-ici">
-                                    <rect key="frame" x="49.5" y="18" width="44" height="44"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="SqI-Su-eMs"/>
-                                        <constraint firstAttribute="width" constant="44" id="laK-bx-kbx"/>
-                                    </constraints>
-                                    <state key="normal" image="chevron-right"/>
-                                    <connections>
-                                        <action selector="originLabelTapped" destination="tl6-Gv-m1x" eventType="touchUpInside" id="8hV-sr-9pp"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="RTz-uu-ici" firstAttribute="leading" secondItem="vmK-Ou-na6" secondAttribute="trailing" constant="-6" id="8H3-mo-nbT"/>
                                 <constraint firstItem="88I-7o-sPz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kdn-Jf-NxY" secondAttribute="trailing" constant="8" id="BEJ-Qf-nnu"/>
                                 <constraint firstItem="NF7-bE-gIz" firstAttribute="leading" secondItem="ICE-3N-AiH" secondAttribute="leading" constant="16" id="Fwc-Km-buL"/>
                                 <constraint firstItem="NF7-bE-gIz" firstAttribute="top" secondItem="ICE-3N-AiH" secondAttribute="top" id="LkO-vZ-d07"/>
-                                <constraint firstItem="RTz-uu-ici" firstAttribute="centerY" secondItem="vmK-Ou-na6" secondAttribute="centerY" id="PCv-DM-ySi"/>
-                                <constraint firstItem="eeI-TK-YqT" firstAttribute="centerY" secondItem="RTz-uu-ici" secondAttribute="centerY" id="WwG-Fx-rrE"/>
                                 <constraint firstAttribute="bottom" secondItem="NF7-bE-gIz" secondAttribute="bottom" id="cFq-Wa-THZ"/>
-                                <constraint firstItem="eeI-TK-YqT" firstAttribute="centerX" secondItem="RTz-uu-ici" secondAttribute="centerX" id="d23-PY-JjK"/>
-                                <constraint firstItem="88I-7o-sPz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RTz-uu-ici" secondAttribute="trailing" constant="8" symbolic="YES" id="i04-Ec-vId"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b37-CC-w2q">
@@ -95,6 +66,7 @@
                     </subviews>
                 </stackView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Qdg-sH-Hxe"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="zUI-JE-7Nv" firstAttribute="leading" secondItem="tl6-Gv-m1x" secondAttribute="leading" id="2eC-Sz-esY"/>
@@ -106,13 +78,10 @@
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="Qdg-sH-Hxe"/>
             <connections>
                 <outlet property="accessoryViewContainer" destination="wVw-MU-IHq" id="IbM-WR-LGz"/>
                 <outlet property="destinationLabel" destination="Kdn-Jf-NxY" id="GJR-GX-frB"/>
                 <outlet property="dismissButton" destination="88I-7o-sPz" id="rff-vn-tPJ"/>
-                <outlet property="originButton" destination="RTz-uu-ici" id="dqj-bX-Pj9"/>
-                <outlet property="originButtonBackground" destination="eeI-TK-YqT" id="eh8-fw-oIg"/>
                 <outlet property="originLabel" destination="vmK-Ou-na6" id="t3Y-Gg-AY3"/>
                 <outlet property="topLevelStack" destination="zUI-JE-7Nv" id="7zd-zR-WFO"/>
                 <outlet property="topLevelStackBottomSpacing" destination="jM5-Kn-XF3" id="GRX-7r-2I4"/>
@@ -120,7 +89,4 @@
             <point key="canvasLocation" x="12.318840579710146" y="-184.48660714285714"/>
         </view>
     </objects>
-    <resources>
-        <image name="chevron-right" width="16" height="16"/>
-    </resources>
 </document>
