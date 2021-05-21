@@ -79,6 +79,7 @@ open class TKUIHomeCard: TKUITableCard {
     tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
     tableView.dataSource = nil
+    tableView.tableFooterView = UIView() // no trailing separators
     
     self.tableView = tableView
     

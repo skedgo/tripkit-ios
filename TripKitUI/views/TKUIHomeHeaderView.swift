@@ -36,22 +36,43 @@ class TKUIHomeHeaderView: UIView {
     searchBar.searchBarStyle = .minimal
     
     let directionsButton: UIButton?
+    let stackedViews: [UIView]
     if #available(iOS 14.0, *) {
       directionsButton = UIButton(type: .custom)
+      directionsButton?.translatesAutoresizingMaskIntoConstraints = false
       directionsButton!.setImage(UIImage(systemName: "arrow.triangle.turn.up.right.diamond.fill"), for: .normal)
-      directionsButton!.widthAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+      directionsButton!.tintColor = .white
+      directionsButton!.backgroundColor = .tkAppTintColor
+      directionsButton!.layer.cornerRadius = 16
+      
+      let directionsWrapper = UIView()
+      directionsWrapper.backgroundColor = .clear
+      directionsWrapper.translatesAutoresizingMaskIntoConstraints = false
+      
+      directionsWrapper.addSubview(directionsButton!)
+      NSLayoutConstraint.activate([
+        directionsWrapper.widthAnchor.constraint(equalToConstant: 44),
+        directionsButton!.widthAnchor.constraint(equalToConstant: 32),
+        directionsButton!.heightAnchor.constraint(equalTo: directionsButton!.widthAnchor),
+        directionsWrapper.centerYAnchor.constraint(equalTo: directionsButton!.centerYAnchor),
+        directionsWrapper.centerXAnchor.constraint(equalTo: directionsButton!.centerXAnchor),
+      ])
+      
+      stackedViews = [searchBar, directionsWrapper]
     } else {
       directionsButton = nil // would be easy to add with right icon
+      stackedViews = [searchBar]
     }
     
-    let stackView = UIStackView(arrangedSubviews: [searchBar, directionsButton].compactMap { $0 })
+    let stackView = UIStackView(arrangedSubviews: stackedViews)
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .horizontal
+    stackView.spacing = 0
     
     addSubview(stackView)
     
     NSLayoutConstraint.activate([
-      stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
       stackView.topAnchor.constraint(equalTo: topAnchor, constant: hasGrabHandle ? -10 : 0), // negative spacer to minimise gap to grab handle
       trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
       bottomAnchor.constraint(equalTo: stackView.bottomAnchor),

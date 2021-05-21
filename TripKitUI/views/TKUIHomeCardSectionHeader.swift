@@ -15,9 +15,9 @@ import TripKit
 class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   
   private enum Constraint {
-    static let top: CGFloat = 8.0
+    static let top: CGFloat = 16.0
     static let leading: CGFloat = 16.0
-    static let bottom: CGFloat = 8.0
+    static let bottom: CGFloat = 16.0
     static let trailing: CGFloat = 16.0
     static let buttonHeight: CGFloat = 44.0
   }
@@ -72,6 +72,12 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     accessibilityElements = [label, button]
     
     // Wrapper to content view
+    #if targetEnvironment(macCatalyst)
+    contentView.backgroundColor = .clear
+    #else
+    contentView.backgroundColor = .tkBackgroundGrouped
+    #endif
+
     contentView.addSubview(wrapper)
     NSLayoutConstraint.activate([
       wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
