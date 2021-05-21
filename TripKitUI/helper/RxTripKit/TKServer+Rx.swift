@@ -71,7 +71,7 @@ extension Reactive where Base: TKServer {
   /// - parameter headers: Additional headers to add to the request
   /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
   /// - parameter repeatHandler: Implement and return a non-negative time interval from this handler to fire the Observable again, or `nil` to stop firing.
-  /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`.
+  /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`. Note: This will be called on a background thread.
   public func stream(
     _ method: TKServer.HTTPMethod,
     path: String,

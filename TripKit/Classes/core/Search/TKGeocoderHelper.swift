@@ -45,28 +45,30 @@ public class TKGeocoderHelper: NSObject {
     }
     
     return geocoder.geocode(address, near: region) { result in
-      switch result {
-      case .failure(let error):
-        completion(.failure(error))
-      case .success(let results):
-        guard let best = TKGeocoderHelper.pickBest(from: results) else {
-          completion(.failure(GeocodingError.serverFoundNoMatch(address)))
-          return
-        }
-        
+      DispatchQueue.main.async {
+        switch result {
+        case .failure(let error):
+          completion(.failure(error))
+        case .success(let results):
+          guard let best = TKGeocoderHelper.pickBest(from: results) else {
+            completion(.failure(GeocodingError.serverFoundNoMatch(address)))
+            return
+          }
+          
 
-        // The objects stored in the objectsToBeGeocoded dictionary do
-        // not have coordinate values assigned (e.g., a location from
-        // contact), therefore, we need to manually set them afterwards.
-        // Also, as part of the method call, another reverse geocoding
-        // operation is performed on an Apple geocoder. This is because
-        // the coordinate from the "bestMatch" object may not match the
-        // address originally stored in the "geocodableObject", hence,
-        // the reverse geocoding returns the updated address matching
-        // the coordinate.
-        object.assign(best.coordinate, forAddress: address)
-        
-        completion(.success(()))
+          // The objects stored in the objectsToBeGeocoded dictionary do
+          // not have coordinate values assigned (e.g., a location from
+          // contact), therefore, we need to manually set them afterwards.
+          // Also, as part of the method call, another reverse geocoding
+          // operation is performed on an Apple geocoder. This is because
+          // the coordinate from the "bestMatch" object may not match the
+          // address originally stored in the "geocodableObject", hence,
+          // the reverse geocoding returns the updated address matching
+          // the coordinate.
+          object.assign(best.coordinate, forAddress: address)
+          
+          completion(.success(()))
+        }
       }
     }
   }

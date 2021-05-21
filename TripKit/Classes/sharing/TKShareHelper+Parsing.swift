@@ -124,6 +124,8 @@ extension TKShareHelper.QueryDetails {
   /// - parameter tripKit: TripKit's managed object context into which
   ///                      to insert the request
   public func toTripRequest(in tripKit: NSManagedObjectContext = TripKit.shared.tripKitContext) -> TripRequest {
+    assert(tripKit.parent != nil || Thread.isMainThread)
+    
     let from, to: MKAnnotation
     if let start = start, start.isValid {
       from = TKNamedCoordinate(coordinate: start)

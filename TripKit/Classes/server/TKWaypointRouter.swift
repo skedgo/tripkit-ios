@@ -341,22 +341,18 @@ extension TKWaypointRouter {
       path: "waypoint.json",
       parameters: waypointParas,
       region: region,
-      callbackOnMain: false,
+      callbackOnMain: true, // we parse on main
       success: { status, response, _ in
         guard let json = response as? [AnyHashable: Any] else {
           errorHandler(nil ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
           return
         }
         
-        context.perform {
-          let parser = TKRoutingParser(tripKitContext: context)
-          parserHandler(json, parser)
-        }
+        let parser = TKRoutingParser(tripKitContext: context)
+        parserHandler(json, parser)
       },
-      failure: { (error: Swift.Error?) -> Void in
-        context.perform {
-          errorHandler(error ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
-        }
+      failure: { error in
+        errorHandler(error ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
       }
     )
   }

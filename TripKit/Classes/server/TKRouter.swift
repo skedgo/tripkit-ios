@@ -371,6 +371,9 @@ public protocol TKRouterRequestable {
 
 extension TKRouter.RoutingQuery: TKRouterRequestable {
   public func toTripRequest() -> TripRequest {
+    guard let context = context else { preconditionFailure() }
+    assert(context.parent != nil || Thread.isMainThread)
+    
     let timeType: TKTimeType
     let date: Date?
     switch at {
@@ -389,7 +392,7 @@ extension TKRouter.RoutingQuery: TKRouterRequestable {
       from: from,
       to: to,
       for: date, timeType: timeType,
-      into: context!
+      into: context
     )
   }
 }
@@ -505,7 +508,7 @@ extension TKRouter {
         path: "routing.json",
         parameters: paras,
         region: region,
-        callbackOnMain: false,
+        callbackOnMain: true, // we parse on main
         success: { [weak self] _, response, _ in
           guard let self = self else { return }
           let tripRequest = request.toTripRequest()
@@ -548,10 +551,7 @@ extension TKRouter {
     context.perform { [weak self] in
       guard let self = self else { return }
       
-      // make sure that the parent context is saved
       do {
-        try context.save()
-        
         TKLog.verbose("Parsing \(request)")
         let parser = TKRoutingParser(tripKitContext: context)
         parser.parseAndAddResult(json, for: request, merging: true, visibility: visibility)
@@ -559,11 +559,15 @@ extension TKRouter {
         TKLog.verbose("Saving parsed result for \(request)")
         try context.save()
         
-        completion(.success(request))
+        DispatchQueue.main.async {
+          completion(.success(request))
+        }
 
       } catch {
-        assertionFailure("Error saving: \(error)")
-        self.handleError(error, completion: completion)
+        DispatchQueue.main.async {
+          assertionFailure("Error saving: \(error)")
+          self.handleError(error, completion: completion)
+        }
       }
 
     }
