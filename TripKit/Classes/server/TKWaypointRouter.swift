@@ -352,7 +352,7 @@ extension TKWaypointRouter {
         parserHandler(json, parser)
       },
       failure: { error in
-        errorHandler(error ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
+        errorHandler(error)
       }
     )
   }

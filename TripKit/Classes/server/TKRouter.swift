@@ -58,14 +58,16 @@ public class TKRouter: NSObject {
   /// - Parameters:
   ///   - request: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
-  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TKTripGroupVisibility = .full, completion: @escaping (Result<Void, Error>) -> Void) {
+  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TKTripGroupVisibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
     guard !request.isDeleted else {
-      let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
-      completion(.failure(error))
+      callbackQueue.async {
+        let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
+        completion(.failure(error))
+      }
       return
     }
     
-    return fetchTrips(for: request, bestOnly: false, additional: additional, visibility: visibility) {
+    return fetchTrips(for: request, bestOnly: false, additional: additional, visibility: visibility, callbackQueue: callbackQueue) {
       let result = $0.map { _ in }
       completion(result)
     }
@@ -209,7 +211,7 @@ extension TKRouter {
         try context.save()
       } catch {
         assertionFailure()
-        return handleError(error, completion: completion)
+        return handleError(error, callbackQueue: queue, completion: completion)
       }
     }
 
@@ -228,40 +230,37 @@ extension TKRouter {
         worker.modeIdentifiers = modeGroup
         
         // Hidden as we'll adjust the visibility in the completion block
-        worker.fetchTrips(for: tripRequest, additional: request.additional, visibility: .hidden) { [weak self] result in
+        worker.fetchTrips(for: tripRequest, additional: request.additional, visibility: .hidden, callbackQueue: queue) { [weak self] result in
           guard let self = self else { return }
           
-          // Switch to update our internals in a thread-safe manner
-          queue.async {
-            self.finishedWorkers += 1
-            progress?(self.finishedWorkers)
+          self.finishedWorkers += 1
+          progress?(self.finishedWorkers)
+          
+          switch result {
+          case .failure(let error):
+            self.handleMultiFetchResult(.failure(error), modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
             
-            switch result {
-            case .failure(let error):
-              self.handleMultiFetchResult(.failure(error), modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
+          case .success:
+            // Classifiers will likely heavily read from the trips, so
+            // we need to switch
+            context.perform {
+              if modes == nil {
+                // We get hidden modes here in the completion block
+                // since they might have changed while waiting for results
+                let hidden = TKUserProfileHelper.hiddenModeIdentifiers
+                tripRequest.adjustVisibility(hiddenIdentifiers: hidden)
+              } else {
+                tripRequest.adjustVisibility(hiddenIdentifiers: [])
+              }
               
-            case .success:
-              // Classifiers will likely heavily read from the trips, so
-              // we need to switch
-              context.perform {
-                if modes == nil {
-                  // We get hidden modes here in the completion block
-                  // since they might have changed while waiting for results
-                  let hidden = TKUserProfileHelper.hiddenModeIdentifiers
-                  tripRequest.adjustVisibility(hiddenIdentifiers: hidden)
-                } else {
-                  tripRequest.adjustVisibility(hiddenIdentifiers: [])
-                }
-                
-                // Updating classifications before making results visible
-                if let classifier = classifier {
-                  tripRequest.updateTripGroupClassifications(using: classifier)
-                }
-                
-                // Then back to worker queue to update internals
-                queue.async {
-                  self.handleMultiFetchResult(result, modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
-                }
+              // Updating classifications before making results visible
+              if let classifier = classifier {
+                tripRequest.updateTripGroupClassifications(using: classifier)
+              }
+              
+              // Then back to worker queue to update internals
+              queue.async {
+                self.handleMultiFetchResult(result, modes: worker.modeIdentifiers, request: tripRequest, completion: completion)
               }
             }
           }
@@ -372,7 +371,6 @@ public protocol TKRouterRequestable {
 extension TKRouter.RoutingQuery: TKRouterRequestable {
   public func toTripRequest() -> TripRequest {
     guard let context = context else { preconditionFailure() }
-    assert(context.parent != nil || Thread.isMainThread)
     
     let timeType: TKTimeType
     let date: Date?
@@ -468,17 +466,17 @@ extension TKRouter {
     return paras
   }
   
-  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TKTripGroupVisibility = .full, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TKTripGroupVisibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
 
     // Mark as active early, to make sure we pass on errors
     self.isActive = true
     
     // sanity checks
     guard request.from.coordinate.isValid else {
-      return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "Start location could not be determined. Please try again or select manually."), completion: completion)
+      return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "Start location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
     }
     guard request.to.coordinate.isValid else {
-      return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "End location could not be determined. Please try again or select manually."), completion: completion)
+      return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "End location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
     }
     
     let server = self.server ?? .shared
@@ -486,7 +484,7 @@ extension TKRouter {
       guard let self = self else { return }
       
       if let error = error {
-        return self.handleError(error, completion: completion)
+        return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
       }
       
       // we are guaranteed to have regions
@@ -494,6 +492,7 @@ extension TKRouter {
         return self.handleError(
           NSError(code: 1001, // matches server
                   message: Loc.RoutingBetweenTheseLocationsIsNotYetSupported),
+          callbackQueue: callbackQueue,
           completion: completion)
       }
       
@@ -508,14 +507,21 @@ extension TKRouter {
         path: "routing.json",
         parameters: paras,
         region: region,
-        callbackOnMain: true, // we parse on main
+        callbackOnMain: false,
         success: { [weak self] _, response, _ in
           guard let self = self else { return }
-          let tripRequest = request.toTripRequest()
-          self.parseJSON(response, for: tripRequest, visibility: visibility, completion: completion)
+          if let context = request.context {
+            context.perform {
+              let tripRequest = request.toTripRequest()
+              self.parseJSON(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+            }
+          } else {
+            let tripRequest = request.toTripRequest()
+            self.parseJSON(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+          }
           
         }, failure: { [weak self] error in
-          self?.handleError(error, completion: completion)
+          self?.handleError(error, callbackQueue: callbackQueue, completion: completion)
         }
       )
     }
@@ -528,24 +534,26 @@ extension TKRouter {
 
 extension TKRouter {
 
-  private func handleError(_ error: Error, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func handleError(_ error: Error, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     // Ignore outdated request errors
     guard isActive else { return }
     
     isActive = false
     TKLog.debug("Request failed with error: \(error)")
-    completion(.failure(error))
+    callbackQueue.async {
+      completion(.failure(error))
+    }
   }
   
-  private func parseJSON(_ json: Any?, for request: TripRequest, visibility: TKTripGroupVisibility, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func parseJSON(_ json: Any?, for request: TripRequest, visibility: TKTripGroupVisibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
     
     if let error = TKError.error(fromJSON: json, statusCode: 200) {
-      return handleError(error, completion: completion)
+      return handleError(error, callbackQueue: callbackQueue, completion: completion)
     }
     
     guard let json = json as? [AnyHashable: Any] else {
-      return handleError(NSError(code: Int(kTKErrorTypeInternal), message: "Invalid response received from server. Please try again."), completion: completion)
+      return handleError(NSError(code: Int(kTKErrorTypeInternal), message: "Invalid response received from server. Please try again."), callbackQueue: callbackQueue, completion: completion)
     }
 
     context.perform { [weak self] in
@@ -558,16 +566,13 @@ extension TKRouter {
         
         TKLog.verbose("Saving parsed result for \(request)")
         try context.save()
-        
-        DispatchQueue.main.async {
+        callbackQueue.async {
           completion(.success(request))
         }
 
       } catch {
-        DispatchQueue.main.async {
-          assertionFailure("Error saving: \(error)")
-          self.handleError(error, completion: completion)
-        }
+        assertionFailure("Error saving: \(error)")
+        self.handleError(error, callbackQueue: callbackQueue, completion: completion)
       }
 
     }
