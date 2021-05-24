@@ -26,6 +26,8 @@ extension Shape {
     @NSManaged public var services: Set<Service>?
     @NSManaged public var template: SegmentTemplate?
     @NSManaged public var visits: Set<StopVisits>?
+  
+    @NSManaged public var data: Data?
 
 }
 

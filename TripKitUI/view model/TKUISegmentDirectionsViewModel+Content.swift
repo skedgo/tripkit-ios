@@ -18,12 +18,13 @@ extension TKUISegmentDirectionsViewModel {
     var items: [Item]
   }
   
-  struct Item: Equatable {
+  struct Item {
     fileprivate let index: Int
     
     let streetName: String?
     let image: UIImage?
     var distance: CLLocationDistance?
+    let bubbles: [(String, UIColor)]
     
     /// Localised textual instruction for following this street for the
     /// relevant distance (i.e., using current street name).
@@ -58,7 +59,8 @@ fileprivate extension TKUISegmentDirectionsViewModel.Item {
       index: index,
       streetName: streetName,
       image: shape.instruction?.image,
-      distance: shape.metres?.doubleValue
+      distance: shape.metres?.doubleValue,
+      bubbles: shape.roadTags?.map { ($0.localized, $0.safety.color) } ?? []
     )
   }
   
@@ -66,7 +68,10 @@ fileprivate extension TKUISegmentDirectionsViewModel.Item {
     // LATER: This will need fixing when we add other things, such as turn
     //        indicator or friendliness
     
-    guard other.streetName == streetName else { return false }
+    guard
+      other.streetName == streetName,
+      Set(other.bubbles.map(\.0)) == Set(bubbles.map(\.0))
+    else { return false }
     if let old = distance, let new = other.distance {
       distance = old + new
     } else {
@@ -113,6 +118,17 @@ fileprivate extension Shape.Instruction {
 }
   
 // MARK: - RxDataSource protocol conformance
+
+extension TKUISegmentDirectionsViewModel.Item: Equatable {
+  static func ==(lhs: Self, rhs: Self) -> Bool {
+    return lhs.index == rhs.index
+      && lhs.streetName == rhs.streetName
+      && lhs.image == rhs.image
+      && lhs.distance == rhs.distance
+      && lhs.bubbles.count == rhs.bubbles.count
+  }
+}
+
 
 extension TKUISegmentDirectionsViewModel.Item: IdentifiableType {
   typealias Identity = Int

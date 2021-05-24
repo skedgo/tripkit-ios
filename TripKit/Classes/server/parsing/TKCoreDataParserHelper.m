@@ -135,8 +135,10 @@
     shape.isDismount = [shapeDict[@"dismount"] boolValue];
     shape.isHop = [shapeDict[@"hop"] boolValue];
     shape.metres = shapeDict[@"metres"];
+    shape.cyclingNetwork = shapeDict[@"cyclingNetwork"];
     [shape setSafety: shapeDict[@"safe"]];
     [shape _setInstruction: shapeDict[@"instruction"]];
+    [shape _setRoadTags: shapeDict[@"roadTags"]];
     
     NSNumber *rawTravelled = shapeDict[@"travelled"];
     if (rawTravelled) {

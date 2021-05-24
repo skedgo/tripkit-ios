@@ -60,6 +60,8 @@ public class TKUISegmentDirectionsCard: TGTableCard {
 
     viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     
+    tableView.register(TKUISegmentDirectionCell.nib, forCellReuseIdentifier: TKUISegmentDirectionCell.reuseIdentifier)
+    
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)
     
     viewModel.sections
@@ -95,22 +97,21 @@ extension TKUISegmentDirectionsCard {
   
   static func configureCell(dataSource: TableViewSectionedDataSource<TKUISegmentDirectionsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUISegmentDirectionsViewModel.Item) -> UITableViewCell {
 
-    let identifier = "TurnByTurnInstructionCell"
-    let cell = tableView.dequeueReusableCell(withIdentifier: identifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: identifier)
+    let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentDirectionCell.reuseIdentifier, for: indexPath) as! TKUISegmentDirectionCell
 
-    cell.backgroundColor = .tkBackground
-    cell.imageView?.image = item.image
-    cell.textLabel?.textColor = .tkLabelPrimary
+    cell.iconView?.image = item.image
+    cell.durationLabel?.textColor = .tkLabelPrimary
 
     if let distance = item.distance {
       let distanceFormatter = MKDistanceFormatter()
       distanceFormatter.unitStyle = .abbreviated
-      
-      cell.textLabel?.text = distanceFormatter.string(fromDistance: distance)
+      cell.durationLabel?.text = distanceFormatter.string(fromDistance: distance)
     }
     
-    cell.detailTextLabel?.textColor = .tkLabelSecondary
-    cell.detailTextLabel?.text = item.streetInstruction
+    cell.nameLabel?.textColor = .tkLabelSecondary
+    cell.nameLabel?.text = item.streetInstruction
+    
+    cell.setBubbles(item.bubbles)
     
     return cell
   }
