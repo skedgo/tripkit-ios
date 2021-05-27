@@ -84,7 +84,7 @@ extension Shape {
   }
   
   @objc(_setRoadTags:)
-  func _setRoadTags(from strings: [String]?) {
+  public func _setRoadTags(from strings: [String]?) {
     roadTags = strings?
       .compactMap(RoadTag.init(rawValue:))
       .sorted {
