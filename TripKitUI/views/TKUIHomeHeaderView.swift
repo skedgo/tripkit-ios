@@ -14,6 +14,7 @@ class TKUIHomeHeaderView: UIView {
   var directionsButton: UIButton?
   
   private var stackView: UIStackView!
+  private var directionsWrapper: UIView?
   
   private let hasGrabHandle: Bool
 
@@ -27,6 +28,10 @@ class TKUIHomeHeaderView: UIView {
     self.hasGrabHandle = true
     super.init(coder: coder)
     didInit()
+  }
+  
+  func hideDirectionButton(_ hide: Bool) {
+    directionsWrapper?.isHidden = hide
   }
   
   private func didInit() {
@@ -48,6 +53,7 @@ class TKUIHomeHeaderView: UIView {
       let directionsWrapper = UIView()
       directionsWrapper.backgroundColor = .clear
       directionsWrapper.translatesAutoresizingMaskIntoConstraints = false
+      self.directionsWrapper = directionsWrapper
       
       directionsWrapper.addSubview(directionsButton!)
       NSLayoutConstraint.activate([
@@ -85,7 +91,6 @@ class TKUIHomeHeaderView: UIView {
     // Styling
     searchBar.tintColor = .tkAppTintColor
     searchBar.barTintColor = .tkBackground
-
   }
   
 }

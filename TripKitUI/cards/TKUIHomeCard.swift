@@ -358,7 +358,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     searchBar.showsCancelButton = true
-    headerView.directionsButton?.isHidden = true
+    headerView.hideDirectionButton(true)
     controller?.moveCard(to: .extended, animated: true)
     controller?.draggingCardEnabled = false
   }
@@ -369,14 +369,14 @@ extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     clearSearchBar()
-    headerView.directionsButton?.isHidden = false
+    headerView.hideDirectionButton(false)
     controller?.moveCard(to: initialPosition ?? .peaking, animated: true)
     controller?.draggingCardEnabled = true
   }
   
   public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
-    headerView.directionsButton?.isHidden = false
+    headerView.hideDirectionButton(false)
     controller?.moveCard(to: .peaking, animated: true)
     controller?.draggingCardEnabled = true
   }
