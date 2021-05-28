@@ -77,18 +77,22 @@ extension SegmentTemplate {
   }
 
   @objc public var isWalking: Bool {
+    guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsWalking(modeIdentifier)
   }
 
   @objc public var isWheelchair: Bool {
+    guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
   }
   
   @objc public var isCycling: Bool {
+    guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsCycling(modeIdentifier)
   }
   
   @objc public var isDriving: Bool {
+    guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsDriving(modeIdentifier)
   }
   
@@ -105,10 +109,12 @@ extension SegmentTemplate {
   }
   
   @objc public var isSharedVehicle: Bool {
+    guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsSharedVehicle(modeIdentifier)
   }
   
   @objc public var isFlight: Bool {
+    guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsFlight(modeIdentifier)
   }
   
