@@ -11,7 +11,7 @@ import Foundation
 /// Small helper that summarises the input required to build a timetable. See `TKUITimetableCard`.
 public struct TKTimetable {
   public enum TimetableType {
-    case departures(stopCode: String)
+    case departures(stopCode: String, stop: MKAnnotation? = nil)
     case multipleDepartures(stopCodes: [String])
     case stopToStop(startStopCode: String, endStopCode: String, endRegion: TKRegion)
   }

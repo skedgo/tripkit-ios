@@ -206,7 +206,7 @@ fileprivate extension TKTimetable {
       startRegion = TKRegionManager.shared.localRegions(containing: first.coordinate).first
       if stops.count == 1 {
         title = (first.title ?? nil)
-        type = .departures(stopCode: first.stopCode)
+        type = .departures(stopCode: first.stopCode, stop: first)
       } else {
         title = nil
         type = .multipleDepartures(stopCodes: stops.map(\.stopCode))
