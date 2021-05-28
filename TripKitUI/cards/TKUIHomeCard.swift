@@ -411,6 +411,7 @@ extension TKUIHomeCard: UITableViewDelegate {
           .subscribe(onNext: { [weak self] in self?.actionTriggered.onNext(action.handler()) })
           .disposed(by: header.disposeBag)
       }
+      header.minimize = false
         
     } else {
       header.label.text = nil
