@@ -415,6 +415,7 @@ extension TKUIHomeCard: UITableViewDelegate {
     } else {
       header.label.text = nil
       header.button.setTitle(nil, for: .normal)
+      header.minimize = true
     }
     
     return header

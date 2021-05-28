@@ -25,7 +25,17 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   @IBOutlet weak var label: UILabel!
   @IBOutlet weak var button: UIButton!
   
+  private var labelTopSpaceConstraint: NSLayoutConstraint!
+  private var labelBottomSpaceConstraint: NSLayoutConstraint!
+  
   var disposeBag = DisposeBag()
+  
+  var minimize: Bool = false {
+    didSet {
+      labelTopSpaceConstraint.constant = minimize ? 0 : Constraint.top
+      labelBottomSpaceConstraint.constant =  minimize ? 0 : Constraint.bottom
+    }
+  }
   
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
@@ -88,8 +98,12 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     
     // Label and button to wrapper
     label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: Constraint.leading).isActive = true
-    label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: Constraint.top).isActive = true
-    wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: Constraint.bottom).isActive = true
+    let labelTopSpaceConstraint = label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: Constraint.top)
+    labelTopSpaceConstraint.isActive = true
+    self.labelTopSpaceConstraint = labelTopSpaceConstraint
+    let labelBottomSpaceConstraint = wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: Constraint.bottom)
+    labelBottomSpaceConstraint.isActive = true
+    self.labelBottomSpaceConstraint = labelBottomSpaceConstraint
     
     button.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: Constraint.trailing).isActive = true
     wrapper.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: Constraint.trailing).isActive = true
