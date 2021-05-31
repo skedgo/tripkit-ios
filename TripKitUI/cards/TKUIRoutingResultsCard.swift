@@ -574,6 +574,11 @@ private extension TKUIRoutingResultsCard {
       return
     }
     
+    // Make sure mode picker is visible
+    if let controller = controller, controller.cardPosition == .collapsed {
+      controller.moveCard(to: .extended, animated: true)
+    }
+    
     let modePicker: RoutingModePicker
     let scrollToPicker: Bool
     

@@ -88,9 +88,10 @@ class TKUIHomeViewModel {
 }
 
 extension TKUIHomeViewModel.Section {
-  init(_ content: TKUIHomeComponentContent, identity: String) {
+  init?(_ content: TKUIHomeComponentContent, identity: String) {
+    guard let items = content.items else { return nil }
     self.identity = identity
     self.headerConfiguration = content.header
-    self.items = content.items.map { .component($0) }
+    self.items = items.map { .component($0) }
   }
 }

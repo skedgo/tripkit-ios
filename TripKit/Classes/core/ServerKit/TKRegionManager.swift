@@ -240,7 +240,7 @@ extension TKRegionManager {
     return sortedFlattenedModes(all)
   }
   
-  public static func sortedFlattenedModes(_ modes: [[TKRegion.RoutingMode]]) -> [TKRegion.RoutingMode] {
+  static func sortedFlattenedModes(_ modes: [[TKRegion.RoutingMode]]) -> [TKRegion.RoutingMode] {
     guard let first = modes.first else { return [] }
     
     var added = Set<String>()

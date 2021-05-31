@@ -79,6 +79,7 @@ extension TKDeparturesProvider {
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
         return try decoder.decode(TKAPI.Departures.self, from: data)
     }
   }
@@ -134,6 +135,7 @@ extension TKDeparturesProvider {
       .map { _, _, data in
         guard let data = data else { throw OutputError.noDataReturn }
         let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
         return try decoder.decode(TKAPI.Departures.self, from: data)
     }
   }

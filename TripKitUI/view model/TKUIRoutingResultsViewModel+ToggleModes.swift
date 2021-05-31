@@ -23,10 +23,14 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildAvailableModes(for request: TripRequest, mutable: Bool) -> AvailableModes? {
-    
+  private static func modes(for request: TripRequest) -> [TKRegion.RoutingMode] {
     let regions = [request.startRegion(), request.endRegion(), request.spanningRegion()].compactMap { $0 }
-    let all = TKRegionManager.sortedModes(in: regions)
+    return TKRegionManager.sortedModes(in: regions)
+
+  }
+  
+  static func buildAvailableModes(for request: TripRequest, mutable: Bool) -> AvailableModes? {
+    let all = modes(for: request)
       
     let enabledModes: Set<String>
     if mutable {
@@ -51,7 +55,7 @@ extension TKUIRoutingResultsViewModel {
   }
   
   static func updateAvailableModes(enabled: [String]?, request: TripRequest?) -> AvailableModes? {
-    guard let enabled = enabled, let all = request?.spanningRegion().routingModes else { return nil }
+    guard let enabled = enabled, let all = request.map(Self.modes(for:)) else { return nil }
 
     // check this first, in case that TKUserProfileHelper messes with it
     let oldWheelchairOn = TKUserProfileHelper.showWheelchairInformation

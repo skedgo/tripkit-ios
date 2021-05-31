@@ -30,13 +30,13 @@ public struct TKUIHomeComponentInput {
 }
 
 public struct TKUIHomeComponentContent {
-  public init(items: [TKUIHomeComponentItem], header: TKUIHomeHeaderConfiguration? = nil) {
+  public init(items: [TKUIHomeComponentItem]?, header: TKUIHomeHeaderConfiguration? = nil) {
     self.items = items
     self.header = header
   }
   
   public let header: TKUIHomeHeaderConfiguration?
-  public let items: [TKUIHomeComponentItem]
+  public let items: [TKUIHomeComponentItem]?
 }
 
 /// This is the `item` that will be used in the context of
@@ -97,6 +97,9 @@ public protocol TKUIHomeComponentViewModel {
   
   /// This closure returns an sequence whose element is a model used to populate
   /// a section of the table view in a `TKUIHomeCard`.
+  ///
+  /// You can hide a section dynamically by using `items == nil`. A section with empty
+  /// items will still show just its header.
   var homeCardSection: Driver<TKUIHomeComponentContent> { get }
   
   /// This returns an action in response to selecting a row in the section returned by

@@ -28,16 +28,16 @@ extension TKAPI {
     
     // real-time information
     public let realTimeStatus: RealTimeStatus?
-    public let realTimeDeparture: TimeInterval?
-    public let realTimeArrival: TimeInterval?
+    public let realTimeDeparture: Date?
+    public let realTimeArrival: Date?
     public let primaryVehicle: Vehicle?
     public let alternativeVehicles: [Vehicle]?
 
     // static information about the departure
     public let frequency: Int?
     public let searchString: String?
-    public let startTime: TimeInterval?
-    public let endTime: TimeInterval?
+    public let startTime: Date?
+    public let endTime: Date?
     public let endStopCode: String?
     
     private enum CodingKeys: String, CodingKey {

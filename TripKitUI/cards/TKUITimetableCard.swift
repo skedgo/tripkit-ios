@@ -269,6 +269,30 @@ public class TKUITimetableCard : TKUITableCard {
           self.showTimePicker(date: date, sender: sender)
         })
         .disposed(by: disposeBag)
+      
+      accessoryView.searchBar.rx.textDidBeginEditing
+        .subscribe(onNext: { [unowned self] _ in
+          self.controller?.moveCard(to: .extended, animated: true)
+          self.controller?.draggingCardEnabled = false
+        })
+        .disposed(by: disposeBag)
+
+      accessoryView.searchBar.rx.textDidEndEditing
+        .subscribe(onNext: { [unowned self] _ in
+          self.controller?.draggingCardEnabled = true
+        })
+        .disposed(by: disposeBag)
+
+      if #available(iOS 13.0, *) {
+        accessoryView.searchBar.searchTextField.rx.observe(\.isFirstResponder)
+          .subscribe(onNext: { [unowned self] _ in
+            self.controller?.draggingCardEnabled = true
+          })
+          .disposed(by: disposeBag)
+      }
+      
+      accessoryView.searchBar.rx.setDelegate(self)
+        .disposed(by: disposeBag)
     }
     
     // TODO: Add viewModel.embarkationStopAlerts
@@ -310,10 +334,10 @@ public class TKUITimetableCard : TKUITableCard {
       .disposed(by: disposeBag)
     
     filterObservable
-    .subscribe(onNext: { [weak self] in
-      self?.filterUpdatedHandler?($0)
-    })
-    .disposed(by: disposeBag)
+      .subscribe(onNext: { [weak self] in
+        self?.filterUpdatedHandler?($0)
+      })
+      .disposed(by: disposeBag)
 
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
@@ -350,6 +374,14 @@ public class TKUITimetableCard : TKUITableCard {
   }
 }
 
+
+extension TKUITimetableCard: UISearchBarDelegate {
+  
+  public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
+}
 
 // MARK: - Navigation
 

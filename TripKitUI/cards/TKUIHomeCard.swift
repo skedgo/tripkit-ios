@@ -227,6 +227,7 @@ extension TKUIHomeCard {
   private func exitSearchMode() {
     headerView.searchBar.text = nil
     headerView.searchBar.resignFirstResponder()
+    headerView.hideDirectionButton(false)
   }
   
   private func handleNext(_ next: TKUIHomeViewModel.NextAction) {
