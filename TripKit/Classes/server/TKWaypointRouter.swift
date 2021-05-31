@@ -312,7 +312,7 @@ extension TKWaypointRouter {
   }
   
   /// For calculating a trip and adding it as a stand-alone trip / request to TripKit
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func fetchTrip(waypointParas: [String: Any], region: TKRegion? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
     
     fetchTrip(
       waypointParas: waypointParas,
@@ -333,7 +333,7 @@ extension TKWaypointRouter {
     )
   }
 
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error) -> Void) {
+  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion?, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error) -> Void) {
     
     let server = TKServer.shared
     server.hitSkedGo(
