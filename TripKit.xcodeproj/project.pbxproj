@@ -3066,9 +3066,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A6DF075202C8C6E0084CB2C /* Build configuration list for PBXNativeTarget "TripKit-macOS" */;
 			buildPhases = (
+				3A6DF06D202C8C6E0084CB2C /* Headers */,
 				3A6DF06B202C8C6E0084CB2C /* Sources */,
 				3A6DF06C202C8C6E0084CB2C /* Frameworks */,
-				3A6DF06D202C8C6E0084CB2C /* Headers */,
 				3A6DF06E202C8C6E0084CB2C /* Resources */,
 			);
 			buildRules = (
@@ -3084,9 +3084,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A6DF089202C8DA30084CB2C /* Build configuration list for PBXNativeTarget "TripKitUI-iOS" */;
 			buildPhases = (
+				3A6DF081202C8DA30084CB2C /* Headers */,
 				3A6DF07F202C8DA30084CB2C /* Sources */,
 				3A6DF080202C8DA30084CB2C /* Frameworks */,
-				3A6DF081202C8DA30084CB2C /* Headers */,
 				3A6DF082202C8DA30084CB2C /* Resources */,
 			);
 			buildRules = (
@@ -3108,9 +3108,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A6DF16C202C97F70084CB2C /* Build configuration list for PBXNativeTarget "TripKitInterApp-iOS" */;
 			buildPhases = (
+				3A6DF164202C97F60084CB2C /* Headers */,
 				3A6DF162202C97F60084CB2C /* Sources */,
 				3A6DF163202C97F60084CB2C /* Frameworks */,
-				3A6DF164202C97F60084CB2C /* Headers */,
 				3A6DF165202C97F60084CB2C /* Resources */,
 			);
 			buildRules = (
@@ -3127,9 +3127,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AB6C6341D1CD0060089F687 /* Build configuration list for PBXNativeTarget "TripKit-iOS" */;
 			buildPhases = (
+				3AB6C61D1D1CD0060089F687 /* Headers */,
 				3AB6C61B1D1CD0060089F687 /* Sources */,
 				3AB6C61C1D1CD0060089F687 /* Frameworks */,
-				3AB6C61D1D1CD0060089F687 /* Headers */,
 				3AB6C61E1D1CD0060089F687 /* Resources */,
 			);
 			buildRules = (
