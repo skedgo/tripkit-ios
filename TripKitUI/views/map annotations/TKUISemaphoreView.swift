@@ -163,6 +163,7 @@ public class TKUISemaphoreView: MKAnnotationView {
       if label == .onRight {
         imageViewX += baseHeadOverlap
       }
+      imageView.frame.size = image.size
       imageView.frame.origin.x = imageViewX
       imageView.frame.origin.y = (timeViewHeight - image.size.height) / 2
       
