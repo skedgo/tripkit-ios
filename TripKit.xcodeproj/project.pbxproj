@@ -706,6 +706,11 @@
 		3AE6077B20FF4C1E006D59B0 /* pelias-au.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077A20FF4C1E006D59B0 /* pelias-au.json */; };
 		3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077C20FF4F63006D59B0 /* pelias-de.json */; };
 		3AE6077F20FF4F64006D59B0 /* pelias-us.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6077D20FF4F64006D59B0 /* pelias-us.json */; };
+		3AE642C52669D94000D55785 /* ASPolygonKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE642C42669D94000D55785 /* ASPolygonKitTests.swift */; };
+		3AE642CB2669D94500D55785 /* polygons-tripgo-170217.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE642C72669D94500D55785 /* polygons-tripgo-170217.json */; };
+		3AE642CC2669D94500D55785 /* polygons-uk-170217.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE642C82669D94500D55785 /* polygons-uk-170217.json */; };
+		3AE642CD2669D94500D55785 /* polygons-scandinavia-170217.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE642C92669D94500D55785 /* polygons-scandinavia-170217.json */; };
+		3AE642CE2669D94500D55785 /* polygons-ch-170224.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AE642CA2669D94500D55785 /* polygons-ch-170224.json */; };
 		3AE9F75524B4B9C00076ADC1 /* TKUIMapManager+Tiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9F75424B4B9C00076ADC1 /* TKUIMapManager+Tiles.swift */; };
 		3AEB47E920DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */; };
 		3AEB47EA20DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */; };
@@ -1460,6 +1465,11 @@
 		3AE6077A20FF4C1E006D59B0 /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
 		3AE6077C20FF4F63006D59B0 /* pelias-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-de.json"; sourceTree = "<group>"; };
 		3AE6077D20FF4F64006D59B0 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
+		3AE642C42669D94000D55785 /* ASPolygonKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPolygonKitTests.swift; sourceTree = "<group>"; };
+		3AE642C72669D94500D55785 /* polygons-tripgo-170217.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "polygons-tripgo-170217.json"; sourceTree = "<group>"; };
+		3AE642C82669D94500D55785 /* polygons-uk-170217.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "polygons-uk-170217.json"; sourceTree = "<group>"; };
+		3AE642C92669D94500D55785 /* polygons-scandinavia-170217.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "polygons-scandinavia-170217.json"; sourceTree = "<group>"; };
+		3AE642CA2669D94500D55785 /* polygons-ch-170224.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "polygons-ch-170224.json"; sourceTree = "<group>"; };
 		3AE9F75424B4B9C00076ADC1 /* TKUIMapManager+Tiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIMapManager+Tiles.swift"; sourceTree = "<group>"; };
 		3AEB43EB1F757C1E00FA3289 /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
 		3AEB47E820DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMultiPoint+ClosestPoint.swift"; sourceTree = "<group>"; };
@@ -2253,6 +2263,7 @@
 				3A1F73F325C8F56200C72CEE /* vendor */,
 				3AA3CE9E202CD4D100E54859 /* Data */,
 				3AA3CE93202CD4D100E54859 /* parsing */,
+				3AE642C22669D92200D55785 /* polygon */,
 				3AA3CE87202CD4D100E54859 /* restoration */,
 				3AA3CE90202CD4D100E54859 /* routing */,
 				3AA3CE89202CD4D100E54859 /* searching */,
@@ -2689,6 +2700,26 @@
 				3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */,
 			);
 			path = TripKitUIExample;
+			sourceTree = "<group>";
+		};
+		3AE642C22669D92200D55785 /* polygon */ = {
+			isa = PBXGroup;
+			children = (
+				3AE642C62669D94500D55785 /* data */,
+				3AE642C42669D94000D55785 /* ASPolygonKitTests.swift */,
+			);
+			path = polygon;
+			sourceTree = "<group>";
+		};
+		3AE642C62669D94500D55785 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				3AE642C72669D94500D55785 /* polygons-tripgo-170217.json */,
+				3AE642C82669D94500D55785 /* polygons-uk-170217.json */,
+				3AE642C92669D94500D55785 /* polygons-scandinavia-170217.json */,
+				3AE642CA2669D94500D55785 /* polygons-ch-170224.json */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		3AEBBB0D20F4F3440035096F /* deprecated */ = {
@@ -3364,6 +3395,7 @@
 				3AE6077B20FF4C1E006D59B0 /* pelias-au.json in Resources */,
 				D37222FD241B65E100CC83F0 /* routing-scooters.json in Resources */,
 				3AA3CEC5202CD4D100E54859 /* regionInfo-Sydney.json in Resources */,
+				3AE642CD2669D94500D55785 /* polygons-scandinavia-170217.json in Resources */,
 				3AA3CEC6202CD4D100E54859 /* hornsbyToSkedGo.json in Resources */,
 				3AE6077E20FF4F64006D59B0 /* pelias-de.json in Resources */,
 				3ADD3B9F2358BDAF00CD4713 /* routing-motorbike.json in Resources */,
@@ -3374,6 +3406,7 @@
 				3A15DDCA2271A6C7001AC0F5 /* routing-with-stops.json in Resources */,
 				3AA3CECB202CD4D100E54859 /* berowraToHornsby.json in Resources */,
 				D31C0D5B249C89F300F3EC06 /* routing-goget-park.json in Resources */,
+				3AE642CE2669D94500D55785 /* polygons-ch-170224.json in Resources */,
 				3AA3CECC202CD4D100E54859 /* locationInfo-bikePod.json in Resources */,
 				3AF6FDF0204436D4003BA786 /* regionInfo-multi.json in Resources */,
 				3AD53251239825AC00E8EC0C /* routing-pt-continuation.json in Resources */,
@@ -3386,7 +3419,9 @@
 				3A38695720EB6C2400B0A82D /* routing-cycle-train-cycle.json in Resources */,
 				3A6DAED92040985B009282FE /* regionInfo-Nuremberg.json in Resources */,
 				3AA3CECA202CD4D100E54859 /* regions.json in Resources */,
+				3AE642CB2669D94500D55785 /* polygons-tripgo-170217.json in Resources */,
 				D3D5060624A02FFE0067C648 /* location-carParks.json in Resources */,
+				3AE642CC2669D94500D55785 /* polygons-uk-170217.json in Resources */,
 				3AE6077F20FF4F64006D59B0 /* pelias-us.json in Resources */,
 				3A17E60022B7DC33005318D5 /* locationInfo-onStreetParking.json in Resources */,
 				3A7E61372089E5AD0008AAE4 /* locationInfo-carRental-days.json in Resources */,
@@ -4065,6 +4100,7 @@
 				3A1F741725C8F56200C72CEE /* Recorded+Event.swift in Sources */,
 				3AA3CEB8202CD4D100E54859 /* TKRouterTest.swift in Sources */,
 				3A1F741C25C8F56200C72CEE /* Subscription.swift in Sources */,
+				3AE642C52669D94000D55785 /* ASPolygonKitTests.swift in Sources */,
 				3AA3CEBC202CD4D100E54859 /* TKJSONSanitizerTest.swift in Sources */,
 				3AA3CEB5202CD4D100E54859 /* TKGeocoderTest.swift in Sources */,
 				3AA3CEB2202CD4D100E54859 /* TKGeoJSONTest.swift in Sources */,
