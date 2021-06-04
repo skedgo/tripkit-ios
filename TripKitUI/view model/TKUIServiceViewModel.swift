@@ -116,7 +116,10 @@ extension TKUIServiceViewModel {
       
       } else if let region = segment.startRegion {
         return TKBuzzInfoProvider.rx.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: region)
-          .map { (segment.embarkation!, segment.finalSegmentIncludingContinuation().disembarkation) }
+          .map {
+            guard let embarkation = segment.embarkation else { throw NSError(code: 57124, message: "Could not download details for '\(segment.description)'.") }
+            return (embarkation, segment.finalSegmentIncludingContinuation().disembarkation)
+          }
       } else {
         return .error(NSError(code: 57123, message: "Could not find region for segment '\(segment.description)'."))
       }

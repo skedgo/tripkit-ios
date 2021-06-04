@@ -20,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark CoreData
 
-@property (nonatomic, retain) NSDate * startTime;
-@property (nonatomic, retain) NSDate * endTime;
+@property (nonatomic, retain, null_resettable) NSDate * startTime;
+@property (nonatomic, retain, null_resettable) NSDate * endTime;
 @property (nonatomic, strong) NSNumber * flags;
 @property (nonatomic, retain) NSNumber * index;
 @property (nonatomic, retain) NSNumber * templateHashCode;
