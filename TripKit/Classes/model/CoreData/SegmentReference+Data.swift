@@ -24,6 +24,9 @@ public struct BookingData: Codable, Hashable {
 
   /// For bookings using external apps
   let externalActions: [String]?
+  
+  /// For virtual bookings, e.g., PT booking (GoCard) for ODIN
+  let virtualBookingUrl: URL?
 }
 
 extension SegmentReference {
