@@ -72,14 +72,19 @@ extension TKRoutingParser {
       request.departureTime = leaveAfter
       request.type = .leaveAfter
     }
-    
     if let arriveBy = arriveBy {
       request.arrivalTime = arriveBy
       request.type = .arriveBefore // can overwrite leave after
     }
     
     if arriveBy == nil && leaveAfter == nil {
-      if let trip = request.trips.first {
+      if let depart = queryJSON?["depart"] as? String, let time = ISO8601DateFormatter().date(from: depart) {
+        request.departureTime = time
+        request.type = .leaveAfter
+      } else if let arrive = queryJSON?["arrive"] as? String, let time = ISO8601DateFormatter().date(from: arrive) {
+        request.arrivalTime = time
+        request.type = .arriveBefore
+      } else if let trip = request.trips.first {
         let firstRegular = matchingSegment(in: trip, order: .regular, first: true)
         request.departureTime = firstRegular.departureTime
         request.type = .leaveAfter
