@@ -24,7 +24,7 @@ public protocol TKUITimetableCardDelegate: AnyObject {
   
   func timetableCard(_ card: TKUITimetableCard, selectedDeparture: StopVisits)
   
-  func timetableCard(_ card: TKUITimetableCard, for segment: TKSegment, requestedUpdateFor newTrip: Trip)
+  func timetableCard(_ card: TKUITimetableCard, forSegmentAtIndex index: Int, updatedWithTrip newTrip: Trip)
   
 }
 
