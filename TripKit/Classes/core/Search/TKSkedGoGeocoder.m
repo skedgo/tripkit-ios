@@ -159,7 +159,6 @@
   NSString *urlString  = aChoice[@"URL"];
   result.url           = urlString ? [NSURL URLWithString:urlString] : nil;
   result.phone         = aChoice[@"phone"];
-  result.reviewSummary = [aChoice[@"reviewSummaries"] firstObject];
 
   result.what3words         = aChoice[@"w3w"];
   result.what3wordsInfoURL  = aChoice[@"w3wInfoURL"];

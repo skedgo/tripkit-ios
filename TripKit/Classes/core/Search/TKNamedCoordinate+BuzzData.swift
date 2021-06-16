@@ -9,12 +9,7 @@
 import Foundation
 
 public extension TKNamedCoordinate {
-  
-  @objc var reviewSummary: [String: Any]? {
-    get { return data["reviewSummary"] as? [String: Any] }
-    set { data["reviewSummary"] = newValue }
-  }
-  
+
   @objc var what3words: String? {
     get { return data["what3words"] as? String }
     set { data["what3words"] = newValue }
