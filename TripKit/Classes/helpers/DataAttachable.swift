@@ -75,6 +75,9 @@ extension DataAttachable {
             NSDictionary.self,
             NSArray.self,
             NSMutableData.self,
+            NSData.self,
+            NSString.self,
+            NSNumber.self,
             NSDate.self // timetable start + end date
           ],
           from: data) as? NSDictionary
