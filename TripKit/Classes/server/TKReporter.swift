@@ -24,7 +24,7 @@ public class TKReporter {
     UserDefaults.standard.set(url, forKey: key)
     
     var paras = userInfo
-    paras["choiceSet"] = trip.request.choiceSet
+    paras["choiceSet"] = trip.request.buildChoiceSet(selected: trip)
     
     if includeUserID {
       paras["userToken"] = TKServer.userToken()
@@ -52,14 +52,12 @@ public class TKReporter {
     
   }
   
-  
   public static func reportProgress(for trip: Trip, locations: [CLLocation]) {
-    
     guard
       let urlString = trip.progressURLString,
       let url = URL(string: urlString) else { return }
     
-    let samples = locations.map { $0.progressDict }
+    let samples = locations.map(\.progressDict)
     let paras = [
       "samples": samples
     ]
@@ -93,7 +91,6 @@ extension CLLocation {
 
 extension TripRequest {
   
-  
   /// Choice set information for this request
   ///
   /// What's in it:
@@ -104,18 +101,19 @@ extension TripRequest {
   /// - Overview of segments
   ///   - mode
   ///   - duration
-  fileprivate var choiceSet: [[String: Any]] {
-    return sortedVisibleTrips().map { $0.choiceSetEntry }
+  fileprivate func buildChoiceSet(selected: Trip) -> [[String: Any]] {
+    sortedVisibleTrips().map { trip in
+      trip.choiceSetEntry(isSelected: trip == selected)
+    }
   }
   
 }
 
 extension Trip {
   
-  fileprivate var choiceSetEntry: [String: Any] {
-    
+  fileprivate func choiceSetEntry(isSelected: Bool) -> [String: Any] {
     var entry: [String: Any] = [
-      "selected": tripGroup == request.preferredGroup,
+      "selected": isSelected,
       "visibility": tripGroup.visibility.apiString,
       "score": totalScore,
       "hassle": totalHassle,
@@ -128,7 +126,6 @@ extension Trip {
 
     entry["price"] = totalPrice?.floatValue
     return entry
-    
   }
   
 }
@@ -160,8 +157,6 @@ extension TKSegment {
       "mode": mode,
       "duration": duration(includingContinuation: true)
     ]
-    
   }
   
 }
-
