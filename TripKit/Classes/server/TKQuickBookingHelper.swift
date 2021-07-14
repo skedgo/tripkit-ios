@@ -23,6 +23,8 @@ public struct TKQuickBooking: Codable, Hashable {
   /// Localised description
   public let subtitle: String?
   
+  public var input: [TKBooking.BookingInput]
+  
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
   public let bookingURL: URL
 
@@ -67,6 +69,7 @@ public struct TKQuickBooking: Codable, Hashable {
   private enum CodingKeys: String, CodingKey {
     case title
     case subtitle
+    case input
     case imageURL
     case bookingTitle
     case bookingURL
