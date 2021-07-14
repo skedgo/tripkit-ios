@@ -983,6 +983,8 @@
 		3A15D8DA1D9CE08D00BADBEA /* TKRoutingParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRoutingParser.swift; sourceTree = "<group>"; };
 		3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-with-stops.json"; sourceTree = "<group>"; };
 		3A15DDCB2271E4DB001AC0F5 /* TKCoreDataParserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKCoreDataParserHelper.swift; sourceTree = "<group>"; };
+		3A16A0BB269E6E770007449F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Shared.strings; sourceTree = "<group>"; };
+		3A16A0BC269E6E770007449F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3A17E5FF22B7DC33005318D5 /* locationInfo-onStreetParking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "locationInfo-onStreetParking.json"; sourceTree = "<group>"; };
 		3A1F729125C7D66900C72CEE /* TKStyleManager+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TKStyleManager+UIKit.h"; sourceTree = "<group>"; };
 		3A1F729225C7D66A00C72CEE /* TKStyleManager+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TKStyleManager+UIKit.m"; sourceTree = "<group>"; };
@@ -3278,6 +3280,7 @@
 				sv,
 				nb,
 				tr,
+				ja,
 			);
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			packageReferences = (
@@ -4229,6 +4232,7 @@
 				3A5EC04322D5ECD100187551 /* sv */,
 				3A78EFC522E85D1400018696 /* nb */,
 				3AACB4B726439FF700DE5665 /* tr */,
+				3A16A0BC269E6E770007449F /* ja */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
@@ -4276,6 +4280,7 @@
 				3A5EC04222D5ECD100187551 /* sv */,
 				3A78EFC622E85D1500018696 /* nb */,
 				3AACB4B626439FF700DE5665 /* tr */,
+				3A16A0BB269E6E770007449F /* ja */,
 			);
 			name = Shared.strings;
 			sourceTree = "<group>";

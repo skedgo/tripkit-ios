@@ -1,0 +1,408 @@
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' が見つかりませんでした。";
+
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@の";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Home" = "%@ の家";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Work" = "%@ の仕事";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu 繰り返し";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "この機能へのアクセスは、お使いのデバイスに制限されています。設定アプリを確認してください > 一般 > 制限またはデバイス プロバイダーに問い合わせてください。";
+
+/* Accessibility label for action button */
+"Action" = "行動";
+
+/* Default title for alert view */
+"Alert" = "警告";
+
+/* Indicator that an event is all-day */
+"all-day" = "終日";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "すでにアカウントをお持ちですか？";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "アカウントを既にお持ちですか。サインイン";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "%@ に到着します。";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "認証";
+
+/* Authorisation needed title */
+"Authorisation needed" = "必要な承認";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "戻る";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "自転車";
+
+/* Cancel action */
+"Cancel" = "取り消し";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "キャンセルされました。";
+
+/* Type of vehicle : car */
+"Car" = "車";
+
+/* Instruction for changing password */
+"Change" = "変更";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "変更の追跡オプション";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "チェック マーク";
+
+/* Close action */
+"Close" = "閉じる";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "確認します。";
+
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "パスワード確認";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "サポートに連絡";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "あなたの現在位置を特定できませんでした。";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "TripGo のサーバーからダウンロードが サポートされていない可能性があります。後でもう一度試してください。";
+
+/* Current city */
+"Current City" = "現在の市";
+
+/* Title for user's current location */
+"Current Location" = "現在の場所";
+
+/* Class of errors usually originated from databases */
+"Data Error" = "データエラー";
+
+/* Delete action */
+"Delete" = "削除";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "%@ を出発します。";
+
+/* Sort by distance */
+"Distance" = "距離";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "アカウントがありますか？";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "アカウントを持っていますか・サインアップ";
+
+/* Done action */
+"Done" = "行われます";
+
+/* Drop new pin */
+"Drop new pin" = "新しいピンをドロップしてください";
+
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "アカウントの編集";
+
+/* For email address */
+"Email" = "電子メール";
+
+/* Short indicator of end-time */
+"ends at %@" = "%@ で終了";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "新しいパスワードを入力してください";
+
+/* Describing any generic/unclassified errors */
+"Error" = "エラー";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "すべての %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "毎日";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "送信されませんでした";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "姓";
+
+/* Reminder to leave preference */
+"For when to leave" = "いつ出発しますか";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "セキュリティのため、パスワードを再入力してください。";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "パスワードをお忘れの場合";
+
+/* Free as in beer */
+"Free" = "無料";
+
+/* No comment provided by engineer. */
+"Getting a lift" = "エレベータに乗る";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "リマインダーあり";
+
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "パスワードを変更するには、最初にメールアドレスを確認する必要があります。送信されたリンクを確認するか、以下の別のリンクをリクエストしてください。";
+
+/* Include contacts. */
+"Include contacts" = "連絡先を含める";
+
+/* Include events. */
+"Include events" = "イベントを含める";
+
+/* Instant results proposal */
+"Instant results" = "簡易結果";
+
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "パスワードのリセット方法については、上記のメールアドレスに送信されています。";
+
+/* Name placeholder text */
+"John Appleseed" = "ジョン・アップルシード";
+
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "姓";
+
+/* Last updated at %date */
+"Last updated: %@" = "最終更新日：%@";
+
+/* Title of button to perform some action at a later time */
+"Later" = "後で";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "読み込み";
+
+/* Title for unnamed location */
+"Location" = "場所";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "位置情報サービスは、この機能を使用する必要があります。設定アプリにアクセスしてください > プライバシー > ロケーション サービスをオンにし、このアプリを承認確認します。";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "トリップの数分前";
+
+/* More results proposal */
+"More results" = "その他の結果";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "バイク";
+
+/* Title for name of something (or someone) */
+"Name" = "名前";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "指定なし";
+
+/* Next action */
+"Next" = "進む";
+
+/* Indicator for no carbon emissions */
+"No CO₂" = "CO₂無し";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "車椅子対応不可";
+
+/* Countdown cell 'now' indicator */
+"Now" = "今";
+
+/* Ok action */
+"OK" = "わかりました";
+
+/* Open in Safari action */
+"Open in Safari" = "Safariで開く";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "設定を開く";
+
+/* No comment provided by engineer. */
+"Password" = "パスワード";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "登録したメールアドレスを入力してください。パスワードをリセットする手順を送信します";
+
+/* Please select a location prompt */
+"Please select a location" = "場所を選択してください。";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "もう一度やり直してください。もしくは、手動で場所を設定してください。";
+
+/* Please verify the location prompt */
+"Please verify the location" = "場所を確認してください。";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more…" = "詳細については '検索' を押してください…";
+
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "プライマリメールがアカウントに設定されていません。サポートについてはお問い合わせください";
+
+/* No comment provided by engineer. */
+"Read more…" = "詳細…";
+
+/* Indicator for real-time information */
+"Real-time" = "リアルタイム";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "紹介コード（オプション）";
+
+/* Action title to add/remove reminder */
+"Reminder" = "アラーム";
+
+/* Repeats daily */
+"Repeats daily" = "毎日繰り返す";
+
+/* Repeats monthly */
+"Repeats monthly" = "毎月繰り返す";
+
+/* Repeats weekly */
+"Repeats weekly" = "毎週繰り返します。";
+
+/* Repeats yearly */
+"Repeats yearly" = "毎年繰り返す";
+
+/* Button title to report a problem */
+"Report Problem" = "問題を報告";
+
+/* Give users an option to rece */
+"Resend verification email" = "確認メールを再送信する";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "パスワードをリセットする";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "再試行";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "スコア";
+
+/* Empty search bar placeholder */
+"Search" = "検索";
+
+/* No comment provided by engineer. */
+"Search for a city" = "都市を検索";
+
+/* No comment provided by engineer. */
+"Search Results" = "検索結果";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'…" = "%@ を検索しています…";
+
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "安全なパスワードは少なくとも5文字以上で、数字と記号を含みます";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "送信済み";
+
+/* Class of errors generated by our servers */
+"Server Error" = "サーバーにエラーが発生しました";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "サーバーの応答にデータが含まれていません";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "%2$@ 個中 %1$@ 個の輸送モードを表示";
+
+/* Title of page or button to sign in */
+"Sign in" = "サインイン";
+
+/* Instruction for signing out user account */
+"Sign out" = "サインアウト";
+
+/* Title of page or button to sign up */
+"Sign up" = "新規登録";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "%@日から開始";
+
+/* Short indicator of start-time */
+"starts at %@" = "%@ が始まります";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "タップして場所を設定";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "パスワードを入力してください。";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "ユーザー名またはパスワードが正しくありません。";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "%@ に";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "追跡 - オフ";
+
+/* user location button - follow */
+"Tracking - on" = "追跡 - オン";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "追跡 - 見出し付きでオン";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "%@ まで";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "更新";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "旅行の更新";
+
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "サーバーの応答にuserTokenがありません";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "必須項目に入力してください。";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "確認する";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "パスワードの確認";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "平日";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "週末";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "車椅子のアクセシビリティは不明です";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "車椅子可";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "問題を報告しますか?";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "ご予約の契約条件に同意する必要があります。";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "保険約款に同意する必要があります。";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "あなたは以前、あなたのカレンダーにこのアプリのアクセスを拒否されました。設定アプリにアクセスしてい > プライバシー > カレンダーに、この機能を使用するこのアプリを承認してください。";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "あなたは以前、あなたの連絡先にこのアプリのアクセスを拒否されました。設定アプリにアクセスして > プライバシー > 連絡先に、この機能を使用するこのアプリを承認してください。";
+

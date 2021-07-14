@@ -32,6 +32,7 @@ public class TKUIProgressCell: UITableViewCell {
     
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary
+    titleLabel.text = Loc.LoadingDotDotDot
   }
   
   public override func prepareForReuse() {
