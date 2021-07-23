@@ -51,7 +51,7 @@ extension SegmentReference {
     set { encodePrimitive(newValue, key: "serviceStops") }
   }
 
-  public var sharedVehicleData: NSDictionary? {
+  var sharedVehicleData: NSDictionary? {
     get { decodeCoding(NSDictionary.self, key: "sharedVehicle") }
     set { encodeCoding(newValue, key: "sharedVehicle") }
   }
@@ -79,6 +79,20 @@ extension SegmentReference {
   @objc public var vehicleUUID: String? {
     get { decodePrimitive(String.self, key: "vehicleUUID") }
     set { encodePrimitive(newValue, key: "vehicleUUID") }
+  }
+  
+  public func sharedVehicle() -> TKAPI.SharedVehicleInfo? {
+    guard let data = sharedVehicleData else { return nil }
+    
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    do {
+      return try decoder.decode(TKAPI.SharedVehicleInfo.self, withJSONObject: data)
+    } catch {
+      TKLog.debug("Couldn't decode shared vehicle data due to \(error)")
+      return nil
+    }
+
   }
 }
 

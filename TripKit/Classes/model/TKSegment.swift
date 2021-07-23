@@ -438,7 +438,7 @@ public class TKSegment: NSObject {
   
   // MARK: - Inferred properties: Shared vehicles
   
-  public lazy var sharedVehicleData: NSDictionary? = reference?.sharedVehicleData
+  public lazy var sharedVehicle: TKAPI.SharedVehicleInfo? = reference?.sharedVehicle()
 }
 
 extension TKSegment: MKAnnotation {
@@ -591,22 +591,6 @@ extension TKSegment {
       return false
     }
   }
-  
-  /// - Parameter vehicles: List of the user's vehicles
-  /// - Returns: The used vehicle (if there are any) in SkedGo API-compatible form
-  @objc public func usedVehicle(fromAll vehicles: [TKVehicular]) -> [AnyHashable: Any]? {
-    if template?.isSharedVehicle == true {
-      return reference?.sharedVehicleData as? [AnyHashable: Any]
-    }
-    
-    if let vehicle = reference?.vehicle(fromAllVehicles: vehicles) {
-      let model = vehicle.toModel()
-      return (try? JSONEncoder().encodeJSONObject(model)) as? [AnyHashable: Any]
-    } else {
-      return nil
-    }
-  }
-  
   
   /// The private vehicle type used by this segment (if any)
   @objc public var privateVehicleType: TKVehicleType {

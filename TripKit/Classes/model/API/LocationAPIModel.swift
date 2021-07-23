@@ -15,14 +15,6 @@ protocol RealTimeUpdatable {
 
 extension TKAPI {
   
-  public enum SharedVehicleType: String, Codable {
-    case bike = "BIKE"
-    case pedelec = "PEDELEC"
-    case kickScooter = "KICK_SCOOTER"
-    case motoScooter = "MOTO_SCOOTER"
-    case car = "CAR"
-  }
-  
   public struct BikePodInfo: Codable, Hashable, RealTimeUpdatable {
     // static information
     public let identifier: String
@@ -34,7 +26,7 @@ extension TKAPI {
     public let inService: Bool
     public let availableBikes: Int?
     public let totalSpaces: Int?
-    public let lastUpdate: TimeInterval?
+    public let lastUpdate: Date?
     
     
     private enum CodingKeys: String, CodingKey {
@@ -74,7 +66,7 @@ extension TKAPI {
     public let availableVehicles: Int?
     public let availableChargingSpaces: Int?
     public let totalSpaces: Int?
-    public let lastUpdate: TimeInterval?
+    public let lastUpdate: Date?
 
     private enum CodingKeys: String, CodingKey {
       case identifier
@@ -141,7 +133,7 @@ extension TKAPI {
     public let pricingTables: [TKAPI.PricingTable]?
     public let availableSpaces: Int?
     public let totalSpaces: Int?
-    public let lastUpdate: TimeInterval?
+    public let lastUpdate: Date?
 
     private enum CodingKeys: String, CodingKey {
       case identifier
@@ -176,37 +168,68 @@ extension TKAPI {
   @available(*, unavailable, renamed: "SharedVehicleInfo")
   public typealias FreeFloatingVehicleInfo = SharedVehicleInfo
 
+  public enum VehicleFormFactor: String, Codable {
+    case bicycle = "BICYCLE"
+    case car = "CAR"
+    case scooter = "SCOOTER"
+    case moped = "MOPED"
+    case other = "OTHER"
+  }
+
+  public enum VehiclePropulsionType: String, Codable {
+    case human = "HUMAN"
+    case electric = "ELECTRIC"
+    case electricAssist = "ELECTRIC_ASSIST"
+    case combustion = "COMBUSTION"
+  }
+
+  public struct VehicleTypeInfo: Codable, Hashable {
+    public let name: String?
+    public let formFactor: VehicleFormFactor
+    public let propulsionType: VehiclePropulsionType?
+    public let maxRangeMeters: Int?
+  }
+  
   public struct SharedVehicleInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
+    public let name: String?
+
     public let operatorInfo: TKAPI.CompanyInfo
-    public let vehicleType: SharedVehicleType
+    public let vehicleType: VehicleTypeInfo
     public let source: TKAPI.DataAttribution?
     public let deepLink: URL?
 
-    public let name: String?
-    public let isAvailable: Bool?
+    public let licensePlate: String?
+    public let isDisabled: Bool
+    public let isReserved: Bool?
+    
     public let batteryLevel: Int? // percentage, i.e., 0-100
-    public let batteryRange: Int? // kilometres
-    public let lastUpdate: TimeInterval?
+    public let currentRange: CLLocationDistance? // metres
+    public let lastReported: Date?
     
     private enum CodingKeys: String, CodingKey {
       case identifier
-      case operatorInfo = "operator"
-      case vehicleType
-      case source
       case name
-      case isAvailable = "available"
       case batteryLevel
-      case batteryRange
-      case lastUpdate
-      case deepLink = "deepLinks"
+      case operatorInfo = "operator"
+      case licensePlate
+      case vehicleType = "vehicleTypeInfo"
+      case isDisabled = "disabled"
+      case isReserved = "reserved"
+      case lastReported
+      case currentRange = "currentRangeMeters"
+
+      case source // NOT DOCUMENTED
+      case deepLink = "deepLinks" // NOT DOCUMENTED
     }
     
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       identifier = try container.decode(String.self, forKey: .identifier)
       operatorInfo = try container.decode(TKAPI.CompanyInfo.self, forKey: .operatorInfo)
-      vehicleType = try container.decode(SharedVehicleType.self, forKey: .vehicleType)
+      vehicleType = try container.decode(VehicleTypeInfo.self, forKey: .vehicleType)
+      isDisabled = try container.decode(Bool.self, forKey: .isDisabled)
+
       source = try? container.decode(TKAPI.DataAttribution.self, forKey: .source)
       
       if let deepLinkDict = try? container.decode([String: String].self, forKey: .deepLink),
@@ -218,13 +241,16 @@ extension TKAPI {
       }
       
       name = try? container.decode(String.self, forKey: .name)
-      isAvailable = try? container.decode(Bool.self, forKey: .isAvailable)
+      licensePlate = try? container.decode(String.self, forKey: .licensePlate)
+      isReserved = try? container.decode(Bool.self, forKey: .isReserved)
       batteryLevel = try? container.decode(Int.self, forKey: .batteryLevel)
-      batteryRange = try? container.decode(Int.self, forKey: .batteryRange)
-      lastUpdate = try? container.decode(TimeInterval.self, forKey: .lastUpdate)
+      currentRange = try? container.decode(CLLocationDistance.self, forKey: .currentRange)
+      lastReported = try? container.decode(Date.self, forKey: .lastReported)
     }
     
     public var hasRealTime: Bool { true }
+    
+    public var isAvailable: Bool { !isDisabled && (isReserved != true) }
   }
   
   public struct OnStreetParkingInfo: Codable, Hashable, RealTimeUpdatable {
@@ -291,7 +317,7 @@ extension TKAPI {
     public let totalSpaces: Int?
     public let occupiedSpaces: Int?
     public let parkingVacancy: Vacancy?
-    public let lastUpdate: TimeInterval?
+    public let lastUpdate: Date?
 
     /// The polyline defining the parking area along the street as an encoded polyline.
     ///
