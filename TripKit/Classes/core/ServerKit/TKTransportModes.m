@@ -68,9 +68,9 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
     return @"public-transport";
   } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierOnDemand]) {
     return @"shuttlebus";
-  } else if ([modeIdentifier isEqualToString:TKTransportModeIdentifierBicycle] || [typeString isEqualToString:TKTransportModeIdentifierDeprecatedBicycle]) {
+  } else if ([modeIdentifier isEqualToString:TKTransportModeIdentifierBicycle] || [modeIdentifier isEqualToString:TKTransportModeIdentifierDeprecatedBicycle]) {
     return @"bicycle";
-  } else if ([modeIdentifier isEqualToString:TKTransportModeIdentifierBikeShare] || [typeString isEqualToString:TKTransportModeIdentifierDeprecatedBikeShare]) {
+  } else if ([modeIdentifier isEqualToString:TKTransportModeIdentifierBikeShare] || [modeIdentifier isEqualToString:TKTransportModeIdentifierDeprecatedBikeShare]) {
     return @"bicycle-share";
   } else if ([typeString isEqualToString:kSGTransportModeTypeIdentifierCar]) {
     return @"car";
