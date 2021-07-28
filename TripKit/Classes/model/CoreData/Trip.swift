@@ -45,8 +45,8 @@ extension Trip {
   }
   
   private var isExpensive: Bool {
+    let segment = mainSegment()
     guard
-      let segment = mainSegment() as? TKSegment,
       let identifier = segment.modeIdentifier
       else { return false }
     return TKTransportModes.modeIdentifierIsExpensive(identifier)
@@ -87,11 +87,9 @@ extension Trip {
 }
 
 
-// MARK: - TKTrip
-
-extension Trip: TKTrip {
+extension Trip {
   
-  @objc public func mainSegment() -> TKTripSegment {
+  public func mainSegment() -> TKSegment {
     let hash = mainSegmentHashCode
     if hash > 0 {
       for segment in segments where segment.templateHashCode == hash {
@@ -100,34 +98,30 @@ extension Trip: TKTrip {
       TKLog.warn("Warning: The main segment hash code should be the hash code of one of the segments. Hash code is: \(hash)")
     }
     
-    let inferred = inferMainSegment()
-    assert(inferred != nil)
-    return inferred ?? segments(with: .inSummary).first!
+    return segments(with: .inSummary).first!
   }
   
-  public func segments(with type: TKTripSegmentVisibility) -> [TKTripSegment] {
+  @objc(segmentsWithVisibility:)
+  public func segments(with type: TKTripSegmentVisibility) -> [TKSegment] {
     let filtered = segments.filter { $0.hasVisibility(type) }
     return filtered.isEmpty ? segments : filtered
   }
   
-  public var costValues: [NSNumber : String] {
+  /// Mapping of boxed `TKTripCostType` to strings of their values.
+  @objc public var costValues: [NSNumber : String] {
     return accessibleCostValues()
+  }
+  
+  @objc public var departureTimeZone: TimeZone {
+    return request.departureTimeZone() ?? .current
+  }
+  
+  @objc public var arrivalTimeZone: TimeZone? {
+    return request.arrivalTimeZone()
   }
   
   public var isArriveBefore: Bool {
     return request.type == .arriveBefore
-  }
-  
-  public var departureTimeZone: TimeZone {
-    return request.departureTimeZone() ?? .current
-  }
-  
-  public var arrivalTimeZone: TimeZone? {
-    return request.arrivalTimeZone()
-  }
-  
-  public var tripPurpose: String? {
-    return request.purpose
   }
   
 }
@@ -179,7 +173,7 @@ extension Trip: TKRealTimeUpdatable {
     }
     
     public func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-      return tripPurpose ?? Loc.Trip
+      return request.purpose ?? Loc.Trip
     }
     
   }

@@ -31,6 +31,7 @@
 
 @property (nonatomic, assign) BOOL departureTimeIsFixed;
 
+/// Whether this trip has at least one reminder and the reminder icon should be displayed.
 @property (nonatomic, assign) BOOL hasReminder;
 
 @property (nonatomic, assign) BOOL missedBookingWindow;
@@ -67,10 +68,6 @@
 /* Returns all associated segment in their correct order.
  */
 @property (nonnull, readonly) NSArray<TKSegment *> *segments;
-
-/* The first major segment of the trip, according to segment properties (use mainSegment() instead)
- */
-- (nullable TKSegment *)inferMainSegment;
 
 /* Call this before changing the segments of a trip.
  */

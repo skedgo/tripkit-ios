@@ -403,25 +403,6 @@ typedef NSUInteger SGTripFlag;
 	return NO;
 }
 
-- (TKSegment *)inferMainSegment
-{
-  // Deprecated. Shouldn't be used anymore.
-  TKSegment *mainSegment = nil;
-  for (TKSegment * segment in self.segments) {
-    if (YES == [segment isStationary])
-      continue;
-    if (mainSegment == nil)
-      mainSegment = segment;
-    else if (! [segment isWalking] && [mainSegment isWalking])
-      mainSegment = segment;
-    else if ([segment isWalking] && ! [mainSegment isWalking])
-      continue;
-    else if ([segment.departureTime timeIntervalSinceDate:mainSegment.departureTime] < 0)
-      mainSegment = segment;
-  }
-  return mainSegment;
-}
-
 - (BOOL)allowImpossibleSegments
 {
   // we allow impossible segments if there's any public transport, we could be

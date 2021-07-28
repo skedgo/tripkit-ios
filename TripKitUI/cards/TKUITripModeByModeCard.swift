@@ -114,7 +114,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     self.tripMapManager = tripMapManager
     
     let builder = TKUITripModeByModeCard.config.builder
-    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
+    let cardSegments = trip.segments(with: .inDetails)
     self.segmentCards = cardSegments.reduce( ([SegmentCardsInfo](), 0) ) { previous, segment in
       let identifier: String
       if let id = builder.cardIdentifier(for: segment) {
@@ -232,7 +232,7 @@ public class TKUITripModeByModeCard: TGPageCard {
 
 fileprivate extension Trip {
   var headerSegments: [TKSegment] {
-    return segments(with: .inSummary).compactMap { $0 as? TKSegment }
+    return segments(with: .inSummary)
   }
 }
 
@@ -354,7 +354,7 @@ extension TKUITripModeByModeCard {
   private func reflectUpdates(of trip: Trip) {
     assert(trip == tripMapManager.trip, "Uh-oh, trip changed!")
     
-    let cardSegments = trip.segments(with: .inDetails).compactMap { $0 as? TKSegment }
+    let cardSegments = trip.segments(with: .inDetails)
     
     if segmentsMatch(cardSegments) {
       // Update segment view in header

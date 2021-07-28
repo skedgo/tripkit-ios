@@ -76,7 +76,7 @@ public class TKUITripCell: UITableViewCell {
     let isArriveBefore: Bool
     let showFaded: Bool
     let isCancelled: Bool
-    let segments: [TKTripSegmentDisplayable]
+    let segments: [TKUITripSegmentDisplayable]
     var action: String?
     var accessibilityLabel: String?
   }

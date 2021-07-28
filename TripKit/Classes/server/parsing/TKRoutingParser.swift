@@ -13,11 +13,11 @@ extension TKRoutingParser {
   @objc public static func matchingSegment(in trip: Trip, order: TKSegmentOrdering, first: Bool) -> TKSegment {
     
     var match: TKSegment? = nil
-    for segment in (trip as TKTrip).segments(with: .inDetails) {
-      if let tks = segment as? TKSegment, tks.order == order {
-        match = tks
+    for segment in trip.segments(with: .inDetails) {
+      if segment.order == order {
+        match = segment
         if first {
-          break;
+          break
         }
       }
     }

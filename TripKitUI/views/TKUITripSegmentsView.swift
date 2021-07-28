@@ -42,7 +42,7 @@ public class TKUITripSegmentsView : UIView {
     super.init(coder: coder)
   }
   
-  public func configure(_ segments: [TKTripSegmentDisplayable], allowSubtitles: Bool = true, allowInfoIcons: Bool = true) {
+  public func configure(_ segments: [TKUITripSegmentDisplayable], allowSubtitles: Bool = true, allowInfoIcons: Bool = true) {
     configure(segments, allowTitles: allowSubtitles, allowSubtitles: allowSubtitles, allowInfoIcons: allowInfoIcons)
   }
   
@@ -94,7 +94,7 @@ public class TKUITripSegmentsView : UIView {
   private var segmentXValues: [CGFloat] = []
   private var segmentIndexToSelect: Int? = nil
   
-  private func configure(_ segments: [TKTripSegmentDisplayable], allowTitles: Bool, allowSubtitles: Bool, allowInfoIcons: Bool) {
+  private func configure(_ segments: [TKUITripSegmentDisplayable], allowTitles: Bool, allowSubtitles: Bool, allowInfoIcons: Bool) {
     if !didLayoutSubviews {
       // When calling `configureForSegments` before `layoutSubviews` was called
       // the frame information of this view is most likely not yet what it'll

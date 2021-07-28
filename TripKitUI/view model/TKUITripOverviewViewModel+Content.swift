@@ -146,10 +146,7 @@ extension TKUITripOverviewViewModel {
   static func buildSections(for trip: Trip) -> [Section] {
     // TODO: Split by date
     
-    let segments = trip
-      .segments(with: .inDetails)
-      .compactMap { $0 as? TKSegment }
-    
+    let segments = trip.segments(with: .inDetails)
     let items = segments
       .enumerated()
       .flatMap { (tuple) -> [TKUITripOverviewViewModel.Item] in
@@ -381,14 +378,13 @@ fileprivate extension TKSegment {
       accessories.append(.pathFriendliness(self))
     }
     
-    let tripSegment = self as TKTripSegment
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime ?? "",
       notes: notesWithoutPlatforms,
-      icon: isContinuation ? nil : tripSegment.tripSegmentModeImage,
-      iconURL: isContinuation ? nil : tripSegment.tripSegmentModeImageURL,
-      iconIsTemplate: tripSegment.tripSegmentModeImageIsTemplate,
-      iconIsBranding: tripSegment.tripSegmentModeImageIsBranding,
+      icon: isContinuation ? nil : tripSegmentModeImage,
+      iconURL: isContinuation ? nil : tripSegmentModeImageURL,
+      iconIsTemplate: tripSegmentModeImageIsTemplate,
+      iconIsBranding: tripSegmentModeImageIsBranding,
       connection: line,
       actions: TKUITripOverviewCard.config.segmentActionsfactory?(self) ?? [],
       accessories: accessories,

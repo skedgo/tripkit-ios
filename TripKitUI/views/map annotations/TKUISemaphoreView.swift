@@ -202,9 +202,7 @@ extension TKUISemaphoreView {
       .disposed(by: disposeBag)
   }
 
-  /// :nodoc:
-  @objc(accessibilityImageViewForDisplayable:)
-  public static func accessibilityImageView(for displayable: TKTripSegmentDisplayable) -> UIImageView? {
+  static func accessibilityImageView(for displayable: TKUITripSegmentDisplayable) -> UIImageView? {
     let accessibility = displayable.tripSegmentWheelchairAccessibility
     
     // Not using `accessibility.showInUI()` as it's a bit much to show the

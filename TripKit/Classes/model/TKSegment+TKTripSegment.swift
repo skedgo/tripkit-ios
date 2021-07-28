@@ -8,10 +8,11 @@
 
 import Foundation
 
-// MARK: - TKTripSegment
+// MARK: - TKUITripSegmentDisplayable
 
-extension TKSegment: TKTripSegment {
+extension TKSegment {
   
+  @objc
   public var tripSegmentModeTitle: String? {
     return TKSegmentBuilder._tripSegmentModeTitle(of: self)
   }
@@ -28,10 +29,6 @@ extension TKSegment: TKTripSegment {
     return image()
   }
   
-  public var tripSegmentModeInfo: TKModeInfo? {
-    return modeInfo
-  }
-  
   public var tripSegmentInstruction: String {
     guard let rawString = template?.miniInstruction?.instruction else { return "" }
     let mutable = NSMutableString(string: rawString)
@@ -39,6 +36,7 @@ extension TKSegment: TKTripSegment {
     return mutable as String
   }
   
+  /// A short detail expanding on `tripSegmentInstruction`.
   public var tripSegmentDetail: String? {
     if let rawString = template?.miniInstruction?.detail {
       let mutable = NSMutableString(string: rawString)

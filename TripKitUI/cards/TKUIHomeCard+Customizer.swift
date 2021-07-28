@@ -32,7 +32,7 @@ extension TKUIHomeCard {
     }
   }
   
-  static func hideComponent(id: String) {
+  public static func hideComponent(id: String) {
     UserDefaults.standard.set(true, forKey: "home-hide.\(id)")
     NotificationCenter.default.post(name: .TKUIHomeComponentsCustomized, object: nil)
   }
