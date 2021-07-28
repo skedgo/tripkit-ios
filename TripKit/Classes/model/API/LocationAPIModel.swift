@@ -222,8 +222,8 @@ extension TKAPI {
       case currentRange = "currentRangeMeters"
 
       case imageURL // NOT DOCUMENTED
-      case details = "description" // NOT DOCUMENTED
-      case source // NOT DOCUMENTED
+      case details = "description"
+      case source
       case deepLink = "deepLinks" // NOT DOCUMENTED
     }
     
