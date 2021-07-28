@@ -4,41 +4,111 @@
         "availabilities": [
             {
                 "car": {
-                    "fuelType": "PETROL",
+                    "disabled": false,
+                    "vehicleTypeInfo": {
+                        "formFactor": "CAR",
+                        "name": "Car",
+                        "propulsionType": "COMBUSTION"
+                    },
                     "identifier": "1219",
                     "licensePlate": "CO33DH",
+                    "operator": {
+                        "color": {
+                            "blue": 106,
+                            "green": 63,
+                            "red": 0
+                        },
+                        "name": "GoGet",
+                        "website": "https://www.goget.com.au"
+                    },
                     "name": "Kermit the Yaris"
                 }
             },
             {
                 "car": {
-                    "fuelType": "PETROL",
+                    "disabled": false,
+                    "vehicleTypeInfo": {
+                        "formFactor": "CAR",
+                        "name": "Car",
+                        "propulsionType": "COMBUSTION"
+                    },
                     "identifier": "1070",
                     "licensePlate": "CL82MI",
+                    "operator": {
+                        "color": {
+                            "blue": 106,
+                            "green": 63,
+                            "red": 0
+                        },
+                        "name": "GoGet",
+                        "website": "https://www.goget.com.au"
+                    },
                     "name": "Yogie the Yaris"
                 }
             },
             {
                 "car": {
-                    "fuelType": "PETROL",
+                    "disabled": false,
+                    "vehicleTypeInfo": {
+                        "formFactor": "CAR",
+                        "name": "Car",
+                        "propulsionType": "COMBUSTION"
+                    },
                     "identifier": "866",
                     "licensePlate": "CU79GO",
+                    "operator": {
+                        "color": {
+                            "blue": 106,
+                            "green": 63,
+                            "red": 0
+                        },
+                        "name": "GoGet",
+                        "website": "https://www.goget.com.au"
+                    },
                     "name": "Carleton the Sportage"
                 }
             },
             {
                 "car": {
-                    "fuelType": "PETROL",
+                    "disabled": false,
+                    "vehicleTypeInfo": {
+                        "formFactor": "CAR",
+                        "name": "Car",
+                        "propulsionType": "COMBUSTION"
+                    },
                     "identifier": "32",
                     "licensePlate": "CM56ZY",
+                    "operator": {
+                        "color": {
+                            "blue": 106,
+                            "green": 63,
+                            "red": 0
+                        },
+                        "name": "GoGet",
+                        "website": "https://www.goget.com.au"
+                    },
                     "name": "Titouan the Yaris"
                 }
             },
             {
                 "car": {
-                    "fuelType": "PETROL",
+                    "disabled": false,
+                    "vehicleTypeInfo": {
+                        "formFactor": "CAR",
+                        "name": "Car",
+                        "propulsionType": "COMBUSTION"
+                    },
                     "identifier": "1723",
                     "licensePlate": "DYB74D",
+                    "operator": {
+                        "color": {
+                            "blue": 106,
+                            "green": 63,
+                            "red": 0
+                        },
+                        "name": "GoGet",
+                        "website": "https://www.goget.com.au"
+                    },
                     "name": "Wolfgang the BMW Convertible"
                 }
             }
@@ -63,33 +133,103 @@
         },
         "vehicles": [
             {
-                "fuelType": "PETROL",
+                "disabled": false,
+                "vehicleTypeInfo": {
+                    "formFactor": "CAR",
+                    "name": "Car",
+                    "propulsionType": "COMBUSTION"
+                },
                 "identifier": "1219",
                 "licensePlate": "CO33DH",
+                "operator": {
+                    "color": {
+                        "blue": 106,
+                        "green": 63,
+                        "red": 0
+                    },
+                    "name": "GoGet",
+                    "website": "https://www.goget.com.au"
+                },
                 "name": "Kermit the Yaris"
             },
             {
-                "fuelType": "PETROL",
+                "disabled": false,
+                "vehicleTypeInfo": {
+                    "formFactor": "CAR",
+                    "name": "Car",
+                    "propulsionType": "COMBUSTION"
+                },
                 "identifier": "1070",
                 "licensePlate": "CL82MI",
+                "operator": {
+                    "color": {
+                        "blue": 106,
+                        "green": 63,
+                        "red": 0
+                    },
+                    "name": "GoGet",
+                    "website": "https://www.goget.com.au"
+                },
                 "name": "Yogie the Yaris"
             },
             {
-                "fuelType": "PETROL",
+                "disabled": false,
+                "vehicleTypeInfo": {
+                    "formFactor": "CAR",
+                    "name": "Car",
+                    "propulsionType": "COMBUSTION"
+                },
                 "identifier": "866",
                 "licensePlate": "CU79GO",
+                "operator": {
+                    "color": {
+                        "blue": 106,
+                        "green": 63,
+                        "red": 0
+                    },
+                    "name": "GoGet",
+                    "website": "https://www.goget.com.au"
+                },
                 "name": "Carleton the Sportage"
             },
             {
-                "fuelType": "PETROL",
+                "disabled": false,
+                "vehicleTypeInfo": {
+                    "formFactor": "CAR",
+                    "name": "Car",
+                    "propulsionType": "COMBUSTION"
+                },
                 "identifier": "32",
                 "licensePlate": "CM56ZY",
+                "operator": {
+                    "color": {
+                        "blue": 106,
+                        "green": 63,
+                        "red": 0
+                    },
+                    "name": "GoGet",
+                    "website": "https://www.goget.com.au"
+                },
                 "name": "Titouan the Yaris"
             },
             {
-                "fuelType": "PETROL",
+                "disabled": false,
+                "vehicleTypeInfo": {
+                    "formFactor": "CAR",
+                    "name": "Car",
+                    "propulsionType": "COMBUSTION"
+                },
                 "identifier": "1723",
                 "licensePlate": "DYB74D",
+                "operator": {
+                    "color": {
+                        "blue": 106,
+                        "green": 63,
+                        "red": 0
+                    },
+                    "name": "GoGet",
+                    "website": "https://www.goget.com.au"
+                },
                 "name": "Wolfgang the BMW Convertible"
             }
         ]

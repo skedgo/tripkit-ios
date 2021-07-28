@@ -122,7 +122,7 @@
                            "appURLAndroid":"https://play.google.com/store/apps/details?id=com.goget&hl=en",
                            "appURLiOS":"https://itunes.apple.com/au/app/goget/id917053598"
                         },
-                        "available":false,
+                        "disabled":false,
                         "bookingTitle":"Book with GoGet",
                         "bookingURL":"https://app.goget.com.au/bookings/day.php",
                         "fuelType":"PETROL",
@@ -136,6 +136,15 @@
                         },
                         "licensePlate":"CO14MZ",
                         "name":"Leia the RAV4",
+                        "operator": {
+                          "color": {
+                              "blue": 106,
+                              "green": 63,
+                              "red": 0
+                          },
+                          "name": "GoGet",
+                          "website": "https://www.goget.com.au"
+                        },
                         "provider":"GOG",
                         "rate":{
                            "rates":[

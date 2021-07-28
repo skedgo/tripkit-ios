@@ -193,11 +193,13 @@ extension TKAPI {
   public struct SharedVehicleInfo: Codable, Hashable, RealTimeUpdatable {
     public let identifier: String
     public let name: String?
+    public let details: String?
 
     public let operatorInfo: TKAPI.CompanyInfo
     public let vehicleType: VehicleTypeInfo
     public let source: TKAPI.DataAttribution?
     public let deepLink: URL?
+    public let imageURL: URL?
 
     public let licensePlate: String?
     public let isDisabled: Bool
@@ -219,6 +221,8 @@ extension TKAPI {
       case lastReported
       case currentRange = "currentRangeMeters"
 
+      case imageURL // NOT DOCUMENTED
+      case details = "description" // NOT DOCUMENTED
       case source // NOT DOCUMENTED
       case deepLink = "deepLinks" // NOT DOCUMENTED
     }
@@ -241,6 +245,8 @@ extension TKAPI {
       }
       
       name = try? container.decode(String.self, forKey: .name)
+      details = try? container.decode(String.self, forKey: .details)
+      imageURL = try? container.decode(URL.self, forKey: .imageURL)
       licensePlate = try? container.decode(String.self, forKey: .licensePlate)
       isReserved = try? container.decode(Bool.self, forKey: .isReserved)
       batteryLevel = try? container.decode(Int.self, forKey: .batteryLevel)

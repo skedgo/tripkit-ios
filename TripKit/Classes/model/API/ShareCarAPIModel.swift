@@ -12,17 +12,6 @@ import Foundation
 
 extension TKAPI {
   
-  public struct SharedCar : Codable, Hashable {
-    public let identifier: String?
-    public let name: String?
-    public let description: String?
-    public let licensePlate: String?
-    public let engineType: String?
-    public let fuelType: String? // Could be enum instead
-    public let fuelLevel: Int?
-    public let imageURL: String?
-  }
-  
   public struct BookingAvailability: Codable, Hashable {
     public enum Status: String, Codable {
       case available = "AVAILABLE"
@@ -59,7 +48,7 @@ extension TKAPI {
   }
   
   public struct CarAvailability: Codable, Hashable {
-    public let car: SharedCar
+    public let car: SharedVehicleInfo
     public let availability: BookingAvailability?
     public let bookingURL: URL?
     public let appInfo: AppInfo?
