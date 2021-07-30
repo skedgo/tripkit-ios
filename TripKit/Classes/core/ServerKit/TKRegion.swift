@@ -125,7 +125,23 @@ public class TKRegion : NSObject, Codable {
   
   @objc(intersectsMapRect:)
   public func intersects(_ mapRect: MKMapRect) -> Bool {
-    return polygon.intersects(mapRect)
+    // Fast check, based on bounding boxes
+    guard polygon.intersects(mapRect) else { return false }
+    
+    // Detailed check on actual polygon
+    guard let simplePolygon = simplePolygon else { return true }
+    
+    let needle = Polygon(
+      pairs: [
+        MKMapPoint(x: mapRect.minX, y: mapRect.minY),
+        MKMapPoint(x: mapRect.minX, y: mapRect.maxY),
+        MKMapPoint(x: mapRect.maxX, y: mapRect.maxY),
+        MKMapPoint(x: mapRect.maxX, y: mapRect.minY),
+      ]
+      .map(\.coordinate)
+      .map { ($0.latitude, $0.longitude) }
+    )
+    return simplePolygon.contains(needle) || simplePolygon.intersects(needle)
   }
   
   // MARK: Codable
