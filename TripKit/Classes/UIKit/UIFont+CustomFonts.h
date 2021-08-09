@@ -6,11 +6,9 @@
 //
 //
 
-#import "TKCrossPlatform.h"
-
-#if TARGET_OS_IPHONE
-
 @import UIKit;
+
+#import "TKCrossPlatform.h"
 
 @interface UIFont (CustomFonts)
 
@@ -25,5 +23,3 @@
 + (void)printIncludedCustomFontsByNames;
 
 @end
-
-#endif

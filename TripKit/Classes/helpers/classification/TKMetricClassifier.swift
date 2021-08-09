@@ -51,7 +51,7 @@ public class TKMetricClassifier: NSObject {
 
 extension TKMetricClassifier: TKTripClassifier {
   
-  public func prepareForClassifiction(of tripGroups: Set<TripGroup>) {
+  public func prepareForClassification(of tripGroups: Set<TripGroup>) {
     let trips = tripGroups.compactMap(\.representativeTrip)
     var anyHaveUnknownCost = false
     for trip in trips {

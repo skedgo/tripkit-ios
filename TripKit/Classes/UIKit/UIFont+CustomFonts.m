@@ -7,9 +7,6 @@
 //
 
 #import "UIFont+CustomFonts.h"
-
-#if TARGET_OS_IPHONE
-
 #import "TKConfig.h"
 
 @implementation UIFont (CustomFonts)
@@ -48,5 +45,3 @@
 }
 
 @end
-
-#endif

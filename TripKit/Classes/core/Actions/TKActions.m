@@ -7,14 +7,10 @@
 //
 
 #import "TKActions.h"
-
 #import "TKTripKit.h"
-
 #import "TKStyleManager.h"
 
-#if TARGET_OS_IPHONE
-
-@interface SGAction : NSObject
+@interface TKAction : NSObject
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) TKActionBlock handler;
@@ -24,12 +20,12 @@
 
 @end
 
-@implementation SGAction
+@implementation TKAction
 
 + (instancetype)actionWithTitle:(NSString *)title
                         handler:(TKActionBlock)handler
 {
-  SGAction *action = [[self alloc] init];
+  TKAction *action = [[self alloc] init];
   action.title = title;
   action.handler = handler;
   return action;
@@ -69,7 +65,7 @@
 
 - (void)addAction:(NSString *)title handler:(TKActionBlock)handler
 {
-  [self.actions addObject:[SGAction actionWithTitle:title handler:handler]];
+  [self.actions addObject:[TKAction actionWithTitle:title handler:handler]];
 }
 
 - (void)setTextFieldWithValue:(NSString *)value handler:(TKActionTextfieldBlock)handler
@@ -85,7 +81,7 @@
   UIAlertController *alerter = [UIAlertController alertControllerWithTitle:self.title
                                                                    message:self.message
                                                             preferredStyle:self.type];
-  for (SGAction *action in self.actions) {
+  for (TKAction *action in self.actions) {
     [alerter addAction:[UIAlertAction actionWithTitle:action.title
                                                 style:UIAlertActionStyleDefault
                                               handler:
@@ -131,5 +127,3 @@
 }
 
 @end
-
-#endif

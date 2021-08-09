@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EventKit
 
 extension TKCalendarManager: TKAutocompleting {
   
@@ -40,7 +41,7 @@ extension TKCalendarManager: TKAutocompleting {
     annotation.eventEndTime   = event.endDate
 
     // Name it after the event, not the event's location
-    annotation.name = TKCalendarManager.titleString(for: event)
+    annotation.name = TKCalendarManager.title(for: event)
     annotation.sortScore = 85
     
     if annotation.coordinate.isValid {
@@ -64,7 +65,7 @@ extension TKCalendarManager: TKAutocompleting {
   }
   
   public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
-    tryAuthorizationForSender(nil, in: presenter, completion: completion)
+    tryAuthorization(in: presenter, completion: completion)
   }
   #endif
   
@@ -80,7 +81,7 @@ extension TKCalendarManager {
     guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: now)
       else { assertionFailure(); return [] }
     
-    return fetchEventsBetweenDate(now, andEnd: tomorrow, fromCalendars:nil)
+    return fetchEvents(start: now, end: tomorrow)
       .filter { !$0.isAllDay }
   }
  
@@ -90,7 +91,7 @@ extension TKCalendarManager {
 
     let result = TKAutocompletionResult()
     result.object = event
-    result.title = TKCalendarManager.titleString(for: event)
+    result.title = TKCalendarManager.title(for: event)
     result.subtitle = location
     result.image = TKAutocompletionResult.image(forType: .calendar)
     

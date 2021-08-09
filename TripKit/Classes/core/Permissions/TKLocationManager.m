@@ -16,18 +16,12 @@
 
 #import "TKAutocompletionResult.h"
 
-NSString *const TKLocationManagerBackgroundUpdatesEnabled = @"TKLocationManagerBackgroundUpdatesEnabled";
-
 NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManagerFoundLocationNotification";
 
 @interface TKLocationManager ()
 
 @property (nonatomic, strong) CLLocationManager *coreLocationManager;
-@property (nonatomic, strong) NSMutableArray *mostRecentlyEnteredRegions;
-@property (nonatomic, strong) NSMutableArray *regionsWithFiredGPSNotif;
-@property (nonatomic, strong) NSMutableDictionary *monitorBlocks;
 
-@property (nonatomic, assign) BOOL wasGpsActive;
 @property (nonatomic, assign) CLLocationDistance distanceFilter;
 
 @property (copy, nonatomic) TKPermissionCompletionBlock completionBlock;
@@ -51,11 +45,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
   return _sharedObject;
 }
 
-- (BOOL)showBackgroundTrackingOption
-{
-  return [self.coreLocationManager respondsToSelector:@selector(requestAlwaysAuthorization)];
-}
-
 - (id)init
 {
   self = [super init];
@@ -76,12 +65,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 									 name:UIApplicationWillEnterForegroundNotification
 								 object:nil];
 #endif
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [center addObserver:self
-               selector:@selector(userDefaultsDidChange:)
-                   name:NSUserDefaultsDidChangeNotification
-                 object:userDefaults];
   }
   return self;
 }
@@ -175,7 +158,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 	} else {
     // make sure we are updating
     [self.coreLocationManager startUpdatingLocation];
-    self.wasGpsActive = YES;
     
 		// schedule a timer
 		NSDictionary *userInfo;
@@ -207,7 +189,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 	
 	// make sure we are updating
 	[self.coreLocationManager startUpdatingLocation];
-	self.wasGpsActive = YES;
 }
 
 - (void)unsubscribeFromLocationUpdates:(id<NSCopying>)subscriber
@@ -253,10 +234,8 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 - (void)considerStoppingToUpdateLocation
 {
 	if (self.subscriberBlocks.count == 0
-			&& self.fetchTimers.count == 0
-			&& self.mostRecentlyEnteredRegions.count == 0) {
+			&& self.fetchTimers.count == 0) {
 		[self.coreLocationManager stopUpdatingLocation];
-		self.wasGpsActive = NO;
 	}
 }
 
@@ -302,77 +281,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 }
 
 
-#pragma mark - Region monitoring related methods
-
-- (void)resetMonitoredRegions
-{
-	if ([self.coreLocationManager.monitoredRegions count]) {
-		for (CLRegion *aRegion in self.coreLocationManager.monitoredRegions) {
-			[self.coreLocationManager stopMonitoringForRegion:aRegion];
-			[self.monitorBlocks removeObjectForKey:aRegion.identifier];
-		}
-	}
-	
-	if (self.monitorBlocks.count == 0) {
-		self.monitorBlocks = nil;
-	}
-}
-
-- (void)monitorRegion:(CLRegion *)region
-						inContext:(NSManagedObjectContext *)context
-					 onApproach:(TKLocationManagerMonitorBlock)block
-{
-#pragma unused(context)
-	[self.monitorBlocks setObject:block forKey:region.identifier];
-	
-	[self.coreLocationManager startMonitoringForRegion:region];
-}
-
-- (void)stopMonitoringCoordinate:(CLLocationCoordinate2D)coordinate
-											withRadius:(CLLocationDistance)radius
-									 AndIdentifier:(NSString *)identifier
-{
-	// Region to stop monitoring.
-	CLRegion *region = [[CLCircularRegion alloc] initWithCenter:coordinate
-                                                       radius:radius
-                                                   identifier:identifier];
-	
-	// Unregister the region with the location manager.
-	[self.coreLocationManager stopMonitoringForRegion:region];
-	
-	// Remove the reference to the block dictionary.
-	if ([self.monitorBlocks objectForKey:identifier] == nil) {
-		// Region crossing has occured and dealt with.
-		return;
-	} else {
-		// Region pcrossing has been detected, but user is yet to
-		// actually enter the region, i.e., the standard location
-		// service is yet to affirm the user is within the region.
-		[self.monitorBlocks removeObjectForKey:identifier];
-		if ([self.monitorBlocks count] == 0) {
-			self.monitorBlocks = nil;
-		}
-				
-		NSMutableArray *regionsToBeRemoved = [NSMutableArray array];
-		
-		for (CLRegion *aRegion in self.mostRecentlyEnteredRegions) {
-			// This check is needed as the region object generated at the
-			// start of this method call possesses different address than
-			// the region object residing in the mostRecentlyEnteredREgions
-			// array.
-			if ([aRegion.identifier isEqualToString:region.identifier]) {
-				[regionsToBeRemoved addObject:aRegion];
-			}
-		}
-		
-		[self.mostRecentlyEnteredRegions removeObjectsInArray:regionsToBeRemoved];
-		
-		if (self.mostRecentlyEnteredRegions.count == 0) {
-			self.mostRecentlyEnteredRegions = nil;
-			[self considerStoppingToUpdateLocation];
-		}
-	}
-}
 
 #pragma mark - Notifications
 
@@ -390,16 +298,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 {
 #pragma unused(notification)
 	[self tellAllFetchers];
-}
-
-- (void)userDefaultsDidChange:(NSNotification *)notification
-{
-#pragma unused(notification)
-#if TARGET_OS_IPHONE
-  if ([[NSUserDefaults standardUserDefaults] boolForKey:TKLocationManagerBackgroundUpdatesEnabled]) {
-    [self.coreLocationManager requestAlwaysAuthorization];
-  }
-#endif
 }
 
 #pragma mark - CLLocationManagerDelegate methods
@@ -447,55 +345,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
 #pragma unused(manager)
   CLLocation *newLocation = [locations lastObject];
   
-	// region monitoring stuff
-  if (newLocation.horizontalAccuracy < 500.0 && [self location:newLocation isInTheLastSeconds:60]) {
-		// This block of codes activates standard location service to
-		// solve the arruacy problem, which arises from the use of
-		// region monitoring API.
-		
-		NSArray *regionsToRaiseNotif = [self.mostRecentlyEnteredRegions copy];
-		
-		for (CLCircularRegion *aRegion in regionsToRaiseNotif) {
-			NSString *narrowIdentifier = [aRegion.identifier stringByAppendingString:@"-narrower"];
-			CLCircularRegion *narrowRegion = [[CLCircularRegion alloc] initWithCenter:aRegion.center
-                                                                         radius:500
-                                                                     identifier:narrowIdentifier];
-			
-			// check if the new location lies inside the region.
-			if ([narrowRegion containsCoordinate:newLocation.coordinate]) {
-				
-				// user is notified of the region crossing, so remove the region from the array.
-				[self.regionsWithFiredGPSNotif addObject:aRegion];
-				[self.mostRecentlyEnteredRegions removeObject:aRegion];
-				if (self.mostRecentlyEnteredRegions.count == 0) {
-					// users are notified of all region crossings.
-					self.mostRecentlyEnteredRegions = nil;
-					
-					// we want to stop the location services once we've entered the last region.
-					// note that this might interfere with other view controllers using the GPS.
-					[self considerStoppingToUpdateLocation];
-				}
-				
-				// region is approaching, execute the approaching block.
-				TKLocationManagerMonitorBlock block = [self.monitorBlocks objectForKey:aRegion.identifier];
-				// user is notified of the region crossing, so remove the block from the dictionary
-				[self.monitorBlocks removeObjectForKey:aRegion.identifier];
-				if (self.monitorBlocks.count == 0) {
-					self.monitorBlocks = nil;
-				}
-
-				if (nil == block) {
-//					NSLog(@"Trying to execute region monitoring block, but didn't find one (we probably just executed it): %@", aRegion.identifier);
-					continue;
-				}
-				// now execute the block (which might trigger getting a new location again, so we do this last).
-				block(aRegion);
-			}
-		}
-	}
-	
-	// standard current location stuff
-	
 	// can we ignore the new location?
 	// we do so if the one is still recent, new one is not more accurate and too close to old => ignore
 	if (self.bestLocationFix
@@ -527,41 +376,9 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
     if (location) {
       [self locationManager:_coreLocationManager didUpdateLocations:@[location]];
     }
-    
-    // Reset monitored regions
-    for (CLRegion *monitored in [_coreLocationManager monitoredRegions]) {
-      [_coreLocationManager stopMonitoringForRegion:monitored];
-    }
   }
 	return _coreLocationManager;
 }
-
-- (NSMutableArray *)mostRecentlyEnteredRegions
-{
-	if (_mostRecentlyEnteredRegions == nil) {
-		_mostRecentlyEnteredRegions = [NSMutableArray array];
-	}
-	return _mostRecentlyEnteredRegions;
-}
-
-- (NSMutableArray *)regionsWithFiredGPSNotif
-{
-	if (_regionsWithFiredGPSNotif == nil) {
-		_regionsWithFiredGPSNotif = [NSMutableArray array];
-	}
-	
-	return _regionsWithFiredGPSNotif;
-}
-
-- (NSMutableDictionary *)monitorBlocks
-{
-	if (_monitorBlocks == nil) {
-    _monitorBlocks = [NSMutableDictionary dictionary];
-	}
-	return _monitorBlocks;
-}
-
-#pragma mark - Private methods for testing purposes.
 
 - (void)tellAllFetchers
 {

@@ -37,7 +37,6 @@ custom_categories:
       - TKAppleGeocoder
       - TKCalendarManager
       - TKContactsManager
-      - TKFoursquareGeocoder
       - TKPeliasGeocoder
       - TKRegionAutocompleter
       - TKSkedGoGeocoder

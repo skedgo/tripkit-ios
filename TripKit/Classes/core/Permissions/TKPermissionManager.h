@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^TKPermissionCompletionBlock)(BOOL enabled);
 typedef void(^TKPermissionsOpenSettingsHandler)(void);
 
-typedef NS_ENUM(NSInteger, TKAuthorizationStatus) {
+typedef NS_CLOSED_ENUM(NSInteger, TKAuthorizationStatus) {
   TKAuthorizationStatusNotDetermined = 0,
   TKAuthorizationStatusRestricted,
   TKAuthorizationStatusDenied,

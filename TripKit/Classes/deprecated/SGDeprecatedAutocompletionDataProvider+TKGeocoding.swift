@@ -48,5 +48,3 @@ extension SGDeprecatedAutocompletionDataProvider where Self: TKAutocompleting {
 }
 
 extension TKSkedGoGeocoder: TKAutocompleting { }
-extension TKFoursquareGeocoder: TKAutocompleting { }
-extension TKRegionAutocompleter: TKAutocompleting { }

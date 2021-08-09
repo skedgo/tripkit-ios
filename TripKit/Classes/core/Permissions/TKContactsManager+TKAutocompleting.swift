@@ -58,7 +58,7 @@ extension TKContactsManager: TKAutocompleting {
   }
   
   public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
-    tryAuthorizationForSender(nil, in: presenter, completion: completion)
+    tryAuthorization(in: presenter, completion: completion)
   }
   #endif
   

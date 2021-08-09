@@ -21,6 +21,11 @@ Pod::Spec.new do |s|
     "TripKit/TripKit.h",
     "TripKit/Classes/**/*.{h,m,swift}"
   ]
+  s.osx.exclude_files = [
+    "TripKit/Classes/core/Actions/TKActions.{h,m}",
+    "TripKit/Classes/UIKit/TKStyleManager+UIKit.{h,m}",
+    "TripKit/Classes/UIKit/UIFont+CustomFonts.{h,m}",
+  ]
 
   s.resources    = [
     "TripKit/Resources/*.lproj",

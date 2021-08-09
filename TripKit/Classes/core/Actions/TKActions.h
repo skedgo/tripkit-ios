@@ -7,12 +7,9 @@
 // Helper class for defining actions as pairs of title => block, to configure
 // action sheets.
 
-
 #import "TKCrossPlatform.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-#if TARGET_OS_IPHONE
 
 typedef void(^TKActionBlock)(void);
 typedef void(^TKActionTextfieldBlock)(NSString *value);
@@ -45,7 +42,5 @@ typedef void(^TKActionTextfieldBlock)(NSString *value);
          inController:(UIViewController *)controller;
 
 @end
-
-#endif
 
 NS_ASSUME_NONNULL_END

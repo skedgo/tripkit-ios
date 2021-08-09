@@ -21,5 +21,4 @@ extension SGDeprecatedGeocoder {
   
 }
 
-extension TKFoursquareGeocoder: TKGeocoding {}
 extension TKSkedGoGeocoder: TKGeocoding {}

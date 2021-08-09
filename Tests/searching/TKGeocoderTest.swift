@@ -105,18 +105,6 @@ class TKGeocoderTest: XCTestCase {
       try XCTSkipIf(true, "TripGo API key missing. Check environment variable 'TRIPGO_API_KEY'.")
     }
     
-    if let clientID = env["FOURSQUARE_CLIENT_ID"], !clientID.isEmpty,
-       let clientSecret = env["FOURSQUARE_CLIENT_SECRET"], !clientSecret.isEmpty {
-      let foursquare = TKFoursquareGeocoder(
-        clientID: clientID,
-        clientSecret: clientSecret
-      )
-      geocoders.append(foursquare)
-    } else {
-      try XCTSkipIf(true, "Could not construct Foursquare geocoder. Check environment variables 'FOURSQUARE_CLIENT_ID' and 'FOURSQUARE_CLIENT_SECRET'.")
-    }
-
-    
     return TKAggregateGeocoder(geocoders: geocoders)
   }
 }

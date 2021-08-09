@@ -93,7 +93,7 @@ public class TKContactsManager: TKPermissionManager {
     return true
   }
 
-  override public func ask(forPermission completion: @escaping TKPermissionCompletionBlock) {
+  override public func ask(forPermission completion: @escaping (Bool) -> Void) {
     store.requestAccess(for: .contacts) { granted, _ in
       completion(granted)
     }

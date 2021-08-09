@@ -12,21 +12,14 @@
 #import "TKPermissionManager.h"
 #import "TKCrossPlatform.h"
 
-
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^TKLocationManagerMonitorBlock)(CLRegion * region);
 typedef void (^TKLocationManagerLocationBlock)(CLLocation * location);
 typedef void (^TKLocationManagerFailureBlock)(NSError * error);
-
-/// :nodoc:
-FOUNDATION_EXPORT NSString *const TKLocationManagerBackgroundUpdatesEnabled;
 
 @interface TKLocationManager : TKPermissionManager <CLLocationManagerDelegate>
 
 + (TKLocationManager *)sharedInstance NS_REFINED_FOR_SWIFT;
-
-- (BOOL)showBackgroundTrackingOption;
 
 #pragma mark - Helpers
 
@@ -60,25 +53,6 @@ FOUNDATION_EXPORT NSString *const TKLocationManagerBackgroundUpdatesEnabled;
 
 - (void)unsubscribeFromLocationUpdates:(id<NSCopying>)subscriber;
 
-- (void)considerStoppingToUpdateLocation; // for subclasses only!
-
-/**
- * Tells the location manager to execute the provided block
- * when the device gets close to the specified coordinate.
- */
-- (void)monitorRegion:(CLRegion *)region
-						inContext:(NSManagedObjectContext *)context
-					 onApproach:(TKLocationManagerMonitorBlock)block;
-
-/**
- * Tells the location manager to stop monitoring the region
- * associated with the given coordinate, radius and identifier.
- */
-- (void)stopMonitoringCoordinate:(CLLocationCoordinate2D)coordinate
-											withRadius:(CLLocationDistance)radius
-									 AndIdentifier:(NSString *)identifier;
-
-- (void)resetMonitoredRegions;
 
 @end
 

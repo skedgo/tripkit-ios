@@ -37,7 +37,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 // Helpers
 #if TARGET_OS_IPHONE
 #import "TKActions.h"
-#import "TKAlertController.h"
 #endif
 
 // Headers
@@ -60,10 +59,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 // Helpers
 #import "NSManagedObject+TKPersistence.h"
 
-// Classification
-#import "TripRequest+Classify.h"
-#import "TKTripClassifier.h"
-
 // Routing
 #import "TKSettings.h"
 #import "TKCoreDataParserHelper.h"
@@ -74,16 +69,15 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 // Search
 #import "TKAutocompletionResult.h"
 #import "TKSkedGoGeocoder.h"
-#import "TKFoursquareGeocoder.h"
-#import "TKRegionAutocompleter.h"
 
 // Permissions
-#import "TKCalendarManager.h"
 #import "TKLocationManager.h"
 
 // UI
+#if TARGET_OS_IPHONE
 #import "TKStyleManager+UIKit.h"
 #import "UIFont+CustomFonts.h"
+#endif
 
 // Deprecated
 #import "SGDeprecatedAutocompletionDataProvider.h"
