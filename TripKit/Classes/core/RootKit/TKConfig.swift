@@ -27,6 +27,10 @@ extension TKConfig {
     guard let urlString = configuration["OAuthCallbackURL"] as? String else { return nil }
     return URL(string: urlString)
   }
+  
+  public var attributionRequired: Bool {
+    return configuration["AttributionRequired"] as? Bool ?? true
+  }
 
   /// URL (including scheme and domain) used when constructing share URLs
   ///

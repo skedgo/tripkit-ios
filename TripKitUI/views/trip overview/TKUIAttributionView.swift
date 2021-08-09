@@ -60,9 +60,6 @@ public class TKUIAttributionView: UIView {
     addSubview(textView)
     title = textView
     
-    textView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    textView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-    
     let imageView = UIImageView()
     imageView.backgroundColor = .clear
     imageView.contentMode = .scaleAspectFit
@@ -70,15 +67,16 @@ public class TKUIAttributionView: UIView {
     addSubview(imageView)
     logo = imageView
     
-    imageView.leadingAnchor.constraint(equalTo: textView.trailingAnchor).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 4).isActive = true
     imageView.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
-    imageView.heightAnchor.constraint(equalTo: textView.heightAnchor).isActive = true
-    imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+    imageView.topAnchor.constraint(equalTo: topAnchor, constant: 24).isActive = true
+    imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
     
     switch contentAlignment {
     case .leading:
-      textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-      trailingAnchor.constraint(greaterThanOrEqualTo: imageView.trailingAnchor, constant: 8).isActive = true
+      textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+      trailingAnchor.constraint(greaterThanOrEqualTo: imageView.trailingAnchor, constant: 16).isActive = true
     case .trailing:
       textView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
       trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8).isActive = true
@@ -91,15 +89,22 @@ public class TKUIAttributionView: UIView {
   
   // MARK: - Creating view
   
-  public static func newView(title: String, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording) -> TKUIAttributionView {
+  public static func newView(title: String, icon: UIImage? = nil, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording) -> TKUIAttributionView {
     let view = TKUIAttributionView(contentAlignment: alignment)
     
-    if let iconURL = iconURL {
+    if let icon = icon {
+      // Powered by `provider` where provider logo is used.
+      // Provider logo is provided locally, e.g., TripGo.
+      view.title.text = Loc.PoweredBy
+      view.logo.image = icon
+      view.title.isUserInteractionEnabled = false
+      view.title.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
+    } else if let iconURL = iconURL {
       // Powered by `provider` where provider logo is used.
       view.title.text = Loc.PoweredBy
       view.logo.setImage(with: iconURL)
       view.title.isUserInteractionEnabled = false
-      view.title.font = TKStyleManager.customFont(forTextStyle: .footnote)
+      view.title.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
 
     } else {
       // Powered by `provider`, where provider is a text.
@@ -111,7 +116,7 @@ public class TKUIAttributionView: UIView {
       }
       
       let attributedTitle = NSMutableAttributedString(string: plain)
-      attributedTitle.addAttribute(.font, value: TKStyleManager.customFont(forTextStyle: .footnote), range: NSRange(location: 0, length: plain.count))
+      attributedTitle.addAttribute(.font, value: TKStyleManager.semiboldCustomFont(forTextStyle: .footnote), range: NSRange(location: 0, length: plain.count))
       attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkLabelSecondary, range: NSRange(location: 0, length: plain.count))
       
       let range = (plain as NSString).range(of: title)

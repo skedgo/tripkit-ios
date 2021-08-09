@@ -266,12 +266,14 @@ public class TKUIRoutingResultsCard: TKUITableCard {
         switch progress {
         case .started:
           self.clearError(in: cardView)
+          self.showTripGoAttribution(in: tableView)
 
         case .finished:
           if let request = self.request {
             TKUIEventCallback.handler(.routesLoaded(request, controller: controller))
           }
-
+          self.showTripGoAttribution(in: tableView)
+          
         default:
           break
         }
@@ -755,6 +757,21 @@ extension TKUIRoutingResultsCard {
   
   public func refreshForUpdatedModes() {
     changedModes.onNext(nil)
+  }
+  
+}
+
+// MARK: - TripGo attribution
+
+extension TKUIRoutingResultsCard {
+  
+  func showTripGoAttribution(in tableView: UITableView) {
+    guard TKConfig.shared.attributionRequired else { return }
+    let logo = TKImage(named: "logo-tripgo", in: .tripKitUI, compatibleWith: nil)
+    let footer = TKUIAttributionView.newView(title: "TripGo", icon: logo, iconURL: nil, url: URL(string: "https://www.skedgo.com"), alignment: .leading, wording: .poweredBy)
+    footer.frame.size.width = tableView.frame.width
+    footer.frame.size.height = footer.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    tableView.tableFooterView = footer
   }
   
 }
