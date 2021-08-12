@@ -235,6 +235,23 @@ class TKRouterTest: TKTestCase {
     try self.tripKitContext.save()
   }
   
+  func testParsingRouteGetsWalks() throws {
+    let request = try self.request(fromFilename: "routing-walk")
+
+    XCTAssertNotNil(request)
+    XCTAssertEqual(request.tripGroups?.count, 1)
+    XCTAssertEqual(request.trips.count, 1)
+
+    let walkGroup = try XCTUnwrap(request.tripGroups?.first)
+    let walkTrip = try XCTUnwrap(walkGroup.trips.first)
+    XCTAssertEqual(walkTrip.segments.count, 3)
+    XCTAssertNotNil(walkTrip.segments[1].shapes)
+    XCTAssertEqual(walkTrip.segments[1].shapes.count, 4)
+    
+    // Make sure CoreData is happy
+    try self.tripKitContext.save()
+  }
+  
   func testTripCache() throws {
     let identifier = "Test"
     let directory = TKFileCacheDirectory.documents // where TKRouter keeps its trips

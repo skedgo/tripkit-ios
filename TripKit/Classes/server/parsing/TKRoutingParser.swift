@@ -381,16 +381,18 @@ public final class TKRoutingParser {
           }
 
           let existingSimilarTrip = allowDuplicates
-            ? Trip.findSimilarTrip(to: trip, inList: previousTrips as NSFastEnumeration)
-            : nil
-          if existingSimilarTrip == nil {
-            addedTrips.append(trip)
-            tripsToReturn.append(trip)
-          } else if let similar = existingSimilarTrip {
+            ? nil
+            : Trip.findSimilarTrip(to: trip, inList: previousTrips as NSFastEnumeration)
+          if let similar = existingSimilarTrip {
             // remember group, but don't add it
             existingGroup = similar.tripGroup
             tripsToReturn.append(similar)
-            context.delete(trip)
+            if similar != trip {
+              context.delete(trip)
+            }
+          } else {
+            addedTrips.append(trip)
+            tripsToReturn.append(trip)
           }
         }
         

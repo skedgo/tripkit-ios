@@ -727,6 +727,7 @@
 		3AF7AFC7244F2AA400E8A831 /* TKUICompactAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7AFC5244F2AA400E8A831 /* TKUICompactAlertCell.swift */; };
 		3AF7AFCB244F2EE400E8A831 /* TKUIRoutingResultsViewModel+Advisory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7AFCA244F2EE400E8A831 /* TKUIRoutingResultsViewModel+Advisory.swift */; };
 		3AF7AFD424506E6500E8A831 /* TKUITripOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7AFD224506E6400E8A831 /* TKUITripOverviewViewController.swift */; };
+		3AF83FE626C4ECC900C86CAF /* routing-walk.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AF83FE526C4ECC900C86CAF /* routing-walk.json */; };
 		3AF94B121F0BF79800500940 /* TKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B111F0BF79800500940 /* TKSettings.swift */; };
 		3AF94B1F1F0BFB9E00500940 /* Shape+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */; };
 		3AF94B201F0BFB9E00500940 /* Shape+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */; };
@@ -1484,6 +1485,7 @@
 		3AF7AFC5244F2AA400E8A831 /* TKUICompactAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICompactAlertCell.swift; sourceTree = "<group>"; };
 		3AF7AFCA244F2EE400E8A831 /* TKUIRoutingResultsViewModel+Advisory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+Advisory.swift"; sourceTree = "<group>"; };
 		3AF7AFD224506E6400E8A831 /* TKUITripOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewViewController.swift; sourceTree = "<group>"; };
+		3AF83FE526C4ECC900C86CAF /* routing-walk.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-walk.json"; sourceTree = "<group>"; };
 		3AF94B111F0BF79800500940 /* TKSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSettings.swift; sourceTree = "<group>"; };
 		3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -2371,6 +2373,7 @@
 				3A8A54312397FBB7006A390F /* routing-pt-realtime.json */,
 				D336994A24612DCE00958C23 /* routing-pt-wheelchair-reroute.json */,
 				D37222FB241B65E100CC83F0 /* routing-scooters.json */,
+				3AF83FE526C4ECC900C86CAF /* routing-walk.json */,
 				3A15DDC92271A6C7001AC0F5 /* routing-with-stops.json */,
 				3AE09B9F20BC1C7E004BF42B /* service-for-park-ride.json */,
 			);
@@ -3391,6 +3394,7 @@
 				3AA3CEC3202CD4D100E54859 /* hornsbyToSkedGoService.json in Resources */,
 				3A6DAEDA2040985B009282FE /* regionInfo-Vancouver.json in Resources */,
 				3AA3CECD202CD4D100E54859 /* routing-pt-oldish.json in Resources */,
+				3AF83FE626C4ECC900C86CAF /* routing-walk.json in Resources */,
 				D37222FE241B65E100CC83F0 /* routing-bus+scooter.json in Resources */,
 				3AA3CECE202CD4D100E54859 /* departures-parentStop.json in Resources */,
 				3A38695720EB6C2400B0A82D /* routing-cycle-train-cycle.json in Resources */,

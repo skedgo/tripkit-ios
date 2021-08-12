@@ -308,13 +308,13 @@ extension Shape {
           }
           assert((visit.stop as StopLocation?) != nil, "Visit needs a stop!")
         }
-        
-        added.append(shape)
-        if let previous = previous, let current = current, current != previous {
-          index = 0
-        }
-        previous = current
       }
+        
+      added.append(shape)
+      if let previous = previous, let current = current, current != previous {
+        index = 0
+      }
+      previous = current
     }
     
     return added

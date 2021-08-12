@@ -185,6 +185,7 @@ extension TKAPI {
       case mapTiles
       case mini
       case turnByTurn = "turn-by-turn"
+      case streets
       case stopCode
       case endStopCode
       case operatorName = "operator"

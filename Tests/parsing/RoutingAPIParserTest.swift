@@ -29,6 +29,7 @@ class RoutingAPIParserTest: XCTestCase {
       "routing-pt-realtime",
       "routing-pt-wheelchair-reroute",
       "routing-scooters",
+      "routing-walk",
       "routing-with-stops",
     ]
     
@@ -53,6 +54,14 @@ class RoutingAPIParserTest: XCTestCase {
         
       }(), "Parsing failed for \(name)")
     }
+  }
+  
+  func testWalkingShapes() throws {
+    let data = try dataFromJSON(named: "routing-walk")
+    let parsed = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: data)
+    let template = try XCTUnwrap(parsed.segmentTemplates?.first)
+    
+    XCTAssertEqual(template.streets?.count, 4)
   }
   
   func testKnownInstruction() throws {
