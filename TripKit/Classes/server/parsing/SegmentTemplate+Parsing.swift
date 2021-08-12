@@ -10,73 +10,60 @@ import Foundation
 
 extension SegmentTemplate {
   
-  @objc(insertNewTemplateFromDictionary:forService:relativeTime:intoContext:)
   @discardableResult
-  public static func insertNewTemplate(
-    from dict: [String: Any],
+  static func insertNewTemplate(
+    from model: TKAPI.SegmentTemplate,
     for service: Service?,
     relativeTime: Date?,
     into context: NSManagedObjectContext
   ) -> SegmentTemplate? {
     
     // Only show relevant segments
-    let visibility = segmentVisibilityType(from: dict)
+    let visibility = model.visibility
     guard visibility != .hidden else { return nil }
      
-    // Make sure we got good data
-    guard
-      let segmentType = segmentType(from: dict)
-      else {
-        assertionFailure("Segment dictionary is missing critical information")
-        return nil
-      }
+    let segmentType = model.type
     
     let template = SegmentTemplate(context: context)
     
-    template.action = dict["action"] as? String
-    template.visibility = NSNumber(value: visibility.rawValue)
-    template.segmentType = NSNumber(value: segmentType.rawValue)
-    template.hashCode = dict["hashCode"] as? NSNumber
-    template.bearing = dict["travelDirection"] as? NSNumber
+    template.action = model.action
+    template.visibility = NSNumber(value: visibility.tkVisibility.rawValue)
+    template.segmentType = NSNumber(value: segmentType.tkType.rawValue)
+    template.hashCode = NSNumber(value: model.hashCode)
+    template.bearing = model.bearing.map(NSNumber.init)
     
-    template.localCost        = TKLocalCost.newInstance(from: dict["localCost"] as? [String: Any])
-    template.mapTiles         = TKMapTiles.newInstance(from: dict["mapTiles"] as? [String: Any])
-    template.modeIdentifier   = dict["modeIdentifier"] as? String
-    template.modeInfo         = TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
-    template.miniInstruction  = TKMiniInstruction.instruction(for: dict["mini"] as? [String: Any])
-    template.turnByTurnMode   = TKTurnByTurnMode(rawValue: dict["turn-by-turn"] as? String ?? "")
+    template.localCost        = model.localCost
+    template.mapTiles         = model.mapTiles
+    template.modeIdentifier   = model.modeIdentifier
+    template.modeInfo         = model.modeInfo
+    template.miniInstruction  = model.mini
+    template.turnByTurnMode   = model.turnByTurn
     
-    template.notesRaw         = dict["notes"] as? String
-    template.smsMessage       = dict["smsMessage"] as? String
-    template.smsNumber        = dict["smsNumber"] as? String
-    template.durationWithoutTraffic = dict["durationWithoutTraffic"] as? NSNumber
-    template.metres           = dict["metres"] as? NSNumber
-    template.metresFriendly   = dict["metresSafe"] as? NSNumber
-    template.metresUnfriendly = dict["metresUnsafe"] as? NSNumber
-    template.metresDismount   = dict["metresDismount"] as? NSNumber
+    template.notesRaw         = model.notes
+    template.durationWithoutTraffic = model.durationWithoutTraffic.map(NSNumber.init)
+    template.metres           = model.metres.map(NSNumber.init)
+    template.metresFriendly   = model.metresSafe.map(NSNumber.init)
+    template.metresUnfriendly = model.metresUnsafe.map(NSNumber.init)
+    template.metresDismount   = model.metresDismount.map(NSNumber.init)
     
-    if (segmentType == .scheduled) {
-      template.scheduledStartStopCode = dict["stopCode"] as? String
-      template.scheduledEndStopCode   = dict["endStopCode"] as? String
-      
-      service?.operatorName = dict["operator"] as? String
-      service?.operatorID = dict["operatorID"] as? String
-    }
+    template.scheduledStartStopCode = model.stopCode
+    template.scheduledEndStopCode = model.endStopCode
+
+    // These are not on the template!
+    service?.operatorName = model.operatorName
+    service?.operatorID = model.operatorID
     
-    // additional info
-    template.isContinuation   = dict["isContinuation"] as? Bool ?? false
-    template.hasCarParks    = dict["hasCarParks"] as? Bool ?? false
+    template.isContinuation = model.isContinuation
+    template.hasCarParks = model.hasCarParks
     
     if template.isStationary {
       // stationary segments just have a single location
-      let locationDict = (dict["location"] as? [String: Any]) ?? [:]
-      let location = TKParserHelper.namedCoordinate(for: locationDict)
-      template.startLocation = location
-      template.endLocation = location
+      template.startLocation = model.location
+      template.endLocation = model.location
     
     } else {
       let shapes = insertNewShapes(
-        from: dict,
+        from: model,
         for: service, relativeTime: relativeTime,
         modeInfo: template.modeInfo, context: context
       )
@@ -99,81 +86,44 @@ extension SegmentTemplate {
         }
       }
       
-      let startDict = dict["from"] as? [String: Any]
-      let endDict = dict["to"] as? [String: Any]
-      if start == nil, let locationDict = startDict  {
-        start = TKParserHelper.namedCoordinate(for: locationDict)
-        assert(start != nil, "Got no start waypoint")
-      }
-      if end == nil, let locationDict = endDict {
-        end = TKParserHelper.namedCoordinate(for: locationDict)
-        assert(end != nil, "Got no start waypoint")
-      }
-      
-      start?.address = startDict?["address"] as? String
+      start = start ?? model.from
+      start?.address = model.from?.address
+      end = end ?? model.to
+      end?.address = model.to?.address
       template.startLocation = start
-
-      end?.address = endDict?["address"] as? String
       template.endLocation = end
     }
     
     return template
   }
   
-  @objc(insertNewShapesFromDictionary:forService:relativeTime:modeInfo:intoContext:)
   @discardableResult
-  public static func insertNewShapes(
-    from dict: [String: Any],
+  static func insertNewShapes(
+    from model: TKAPI.SegmentTemplate,
     for service: Service?,
     relativeTime: Date?,
     modeInfo: TKModeInfo?,
-    context: NSManagedObjectContext?
+    context: NSManagedObjectContext
   ) -> [Shape] {
     
-    // all the waypoints should be in 'shapes', but we
-    // also support older 'streets' and 'line', e.g.,
-    // for testing
-    let shapesArray = (dict["shapes"] as? [[String: Any]])
-      ?? (dict["streets"] as? [[String: Any]])
-      ?? (dict["line"] as? [[String: Any]])
-      ?? []
     
-    let modeInfo = modeInfo ?? TKModeInfo.modeInfo(for: dict["modeInfo"] as? [String: Any])
-    
-    let shapes = TKCoreDataParserHelper.insertNewShapes(
-      shapesArray, for: service, relativeTime: relativeTime,
-      with: modeInfo, orTripKitContext: context,
+    let shapes = Shape.insertNewShapes(
+      from:  model.shapes ?? model.streets ?? [], // PT uses `shapes`, non-PT uses `streets`
+      for: service,
+      relativeTime: relativeTime,
+      modeInfo: modeInfo ?? model.modeInfo,
+      context: context,
       clearRealTime: false // we get real-time data here, no need to clear status
     )
     
     shapes
       .flatMap { $0.services ?? [] }
       .forEach { service in
-        service.operatorID = dict["operatorID"] as? String
-        service.operatorName = dict["operator"] as? String
+        service.operatorID = model.operatorID
+        service.operatorName = model.operatorName
       }
     
     return shapes
-  }
-  
-  private static func segmentVisibilityType(from dict: [String: Any]) -> TKTripSegmentVisibility {
-    switch dict["visibility"] as? String {
-    case "in summary"?: return .inSummary
-    case "on map"?: return .onMap
-    case "in details"?: return .inDetails
-    default: return .hidden
-    }
-  }
-  
-  private static func segmentType(from dict: [String: Any]) -> TKSegmentType? {
-    switch dict["type"] as? String {
-    case "scheduled"?: return .scheduled
-    case "unscheduled"?: return .unscheduled
-    case "stationary"?: return .stationary
-    default:
-      assertionFailure("Encountered unknown segment type: \(String(describing: dict["type"]))")
-      return nil
-    }
   }
   
 }

@@ -14,39 +14,8 @@
 
 #import "DLSEntry.h"
 #import "Service.h"
-#import "TKTripFetcher.h"
-
-@interface TKBuzzRealTime ()
-
-@property (nonatomic, strong) TKTripFetcher *tripFetcher;
-
-@end
 
 @implementation TKBuzzRealTime
-
-- (void)updateTrip:(Trip *)trip
-           success:(void (^)(Trip *trip, BOOL tripUpdated))success
-           failure:(void (^)(NSError *error))failure {
-  if (trip == nil) {
-    ZAssert(false, @"Don't call this without a trip");
-    return;
-  }
-  
-  if (trip.request == nil) {
-    [TKLog debug:@"TKBuzzRealTime" text:[NSString stringWithFormat:@"Not updating trip as it doesn't have a request (anymore): %@", trip]];
-    return;
-  }
-
-  [self.tripFetcher updateTrip:trip
-             completionWithFlag:
-   ^(Trip * updatedTrip, BOOL wasUpdated) {
-     if (updatedTrip == trip) {
-       success(trip, wasUpdated);
-     } else {
-       failure(nil);
-     }
-  }];
-}
 
 + (void)updateDLSEntries:(NSSet<DLSEntry *> *)entries
                 inRegion:(TKRegion *)region
@@ -352,16 +321,6 @@
 			}
 		}
 	}
-}
-
-#pragma mark - Lazy accessors
-
-- (TKTripFetcher *)tripFetcher
-{
-  if (!_tripFetcher) {
-    _tripFetcher = [[TKTripFetcher alloc] init];
-  }
-  return _tripFetcher;
 }
 
 @end

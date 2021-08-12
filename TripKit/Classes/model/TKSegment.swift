@@ -392,8 +392,6 @@ public class TKSegment: NSObject {
   @objc public lazy var scheduledTimetableStartTime: Date? = reference?.timetableStartTime
   @objc public lazy var scheduledTimetableEndTime: Date? = reference?.timetableEndTime
   @objc public lazy var ticketWebsiteURLString: String? = reference?.ticketWebsiteURLString
-  @objc public lazy var smsMessage: String? = template?.smsNumber
-  @objc public lazy var smsNumber: String? = template?.smsNumber
 
   @objc public var embarkation: StopVisits? {
     guard let service = service else { return nil }
@@ -438,7 +436,7 @@ public class TKSegment: NSObject {
   
   // MARK: - Inferred properties: Shared vehicles
   
-  public lazy var sharedVehicle: TKAPI.SharedVehicleInfo? = reference?.sharedVehicle()
+  public lazy var sharedVehicle: TKAPI.SharedVehicleInfo? = reference?.sharedVehicle
 }
 
 extension TKSegment: MKAnnotation {

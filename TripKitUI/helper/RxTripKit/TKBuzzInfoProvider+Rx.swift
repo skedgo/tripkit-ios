@@ -44,14 +44,9 @@ extension Reactive where Base == TKBuzzInfoProvider {
     ]
     
     return TKServer.shared.rx
-      .hit(.GET, path: "alerts/transit.json", parameters: paras, region: region)
-      .map { (_, _, data) -> [TKAPI.AlertMapping] in
-        guard let data = data else { return [] }
-        let decoder = JSONDecoder()
-        // This will need adjusting down the track (when using ISO8601)
-        decoder.dateDecodingStrategy = .secondsSince1970
-        let response = try decoder.decode(TKBuzzInfoProvider.AlertsTransitResponse.self, from: data)
-        return response.alerts
+      .hit(TKBuzzInfoProvider.AlertsTransitResponse.self, path: "alerts/transit.json", parameters: paras, region: region)
+      .map { _, _, model in
+        model.alerts
       }
   }
   

@@ -21,17 +21,3 @@ public class TKMapTiles: NSObject, Codable {
   public let sources: [TKAPI.DataAttribution]
   
 }
-
-extension TKMapTiles {
-  
-  /// Creating a new instance from a JSON object.
-  ///
-  /// - Parameter json: JSON object, typically obtained from server response
-  /// - Returns: A new `TKMapTiles` instance.
-  public static func newInstance(from json: [String: Any]?) -> TKMapTiles? {
-    guard let json = json else { return nil }
-    let decoder = JSONDecoder()
-    return try? decoder.decode(TKMapTiles.self, withJSONObject: json)
-  }
-  
-}

@@ -262,24 +262,22 @@ extension TKWaypointRouter {
       return
     }
     
-    fetchTrip(
+    fetchAndParse(
       waypointParas: waypointParas,
       region: region,
-      into: context,
-      parserHandler: { json, parser in
-        parser.parseAndAddResult(json, into: tripGroup, merging: false) { trips in
-          if let trip = trips.first {
-            completion(.success(trip))
-          } else {
-            completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
-          }
+      into: context
+    ) { _, _, result in
+      do {
+        let response = try result.get()
+        TKRoutingParser.add(response, to: tripGroup, merge: false) { parserResult in
+          completion(Result {
+            try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
+          })
         }
-
-      },
-      errorHandler: { error in
+      } catch {
         completion(.failure(error))
       }
-    )
+    }
   }
   
   /// For calculating a trip and adding it to an existing request
@@ -293,67 +291,54 @@ extension TKWaypointRouter {
       return
     }
     
-    fetchTrip(
+    fetchAndParse(
       waypointParas: waypointParas,
       region: region,
-      into: context,
-      parserHandler: { json, parser in
-        let trips = parser.parseAndAddResult(json, for: request, merging: false, visibility: .full)
-        if let trip = trips.first {
-          completion(.success(trip))
-        } else {
-          completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
+      into: context
+    ) { _, _, result in
+      do {
+        let response = try result.get()
+        TKRoutingParser.add(response, to: request, merge: false) { parserResult in
+          completion(Result {
+            try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
+          })
         }
-      },
-      errorHandler: { error in
+      } catch {
         completion(.failure(error))
       }
-    )
+    }
   }
   
   /// For calculating a trip and adding it as a stand-alone trip / request to TripKit
   public static func fetchTrip(waypointParas: [String: Any], region: TKRegion? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    fetchTrip(
+    fetchAndParse(
       waypointParas: waypointParas,
       region: region,
-      into: context,
-      parserHandler: { (json, parser) in
-        parser.parseAndAddResult(json) { request in
-          if let trip = request?.trips.first {
-            completion(.success(trip))
-          } else {
-            completion(.failure(TKWaypointRouter.WaypointError.fetchedResultsButGotNoTrip))
-          }
+      into: context
+    ) { _, _, result in
+      do {
+        let response = try result.get()
+        TKRoutingParser.add(response, into: context) { parserResult in
+          completion(Result {
+            try parserResult.get().trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
+          })
         }
-      },
-      errorHandler: { error in
+      } catch {
         completion(.failure(error))
       }
-    )
+    }
   }
 
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion?, into context: NSManagedObjectContext, parserHandler: @escaping ([AnyHashable: Any], TKRoutingParser) -> Void, errorHandler: @escaping (Error) -> Void) {
+  private static func fetchAndParse(waypointParas: [String: Any], region: TKRegion?, into context: NSManagedObjectContext, handler: @escaping (Int?, [String: Any], Result<TKAPI.RoutingResponse, Error>) -> Void) {
     
-    let server = TKServer.shared
-    server.hitSkedGo(
-      withMethod: "POST",
-      path: "waypoint.json",
+    TKServer.shared.hit(
+      TKAPI.RoutingResponse.self,
+      .POST, path: "waypoint.json",
       parameters: waypointParas,
       region: region,
       callbackOnMain: true, // we parse on main
-      success: { status, response, _ in
-        guard let json = response as? [AnyHashable: Any] else {
-          errorHandler(nil ?? TKWaypointRouter.WaypointError.serverFailedWithUnknownError)
-          return
-        }
-        
-        let parser = TKRoutingParser(tripKitContext: context)
-        parserHandler(json, parser)
-      },
-      failure: { error in
-        errorHandler(error)
-      }
+      completion: handler
     )
   }
   

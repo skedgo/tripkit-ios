@@ -20,13 +20,6 @@ public protocol TKRealTimeUpdatable {
   
   /// Whether the particular objects should be updated at all
   @objc var wantsRealTimeUpdates: Bool { get }
-  
-  /// The object that should be updated. Needs to be something that our
-  /// real-time updater can understand, e.g., a Trip, a Service, a DLS entry,
-  /// a StopVisit.
-  @objc var objectForRealTimeUpdates: Any { get }
-  
-  @objc var regionForRealTimeUpdates: TKRegion { get }
 }
 
 extension TKRealTimeUpdatable {

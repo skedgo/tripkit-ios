@@ -25,13 +25,9 @@ extension TKBuzzInfoProvider {
     }
     
     return TKServer.shared.rx
-      .hit(.GET, path: "locationInfo.json", parameters: paras, region: region)
-      .map { _, _, data -> [TKAPI.CarAvailability] in
-        guard let data = data else { return [] }
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let info = try decoder.decode(TKAPI.LocationInfo.self, from: data)
-        return info.carPod?.availabilities ?? []
+      .hit(TKAPI.LocationInfo.self, path: "locationInfo.json", parameters: paras, region: region)
+      .map { _, _, model in
+        model.carPod?.availabilities ?? []
       }
   }
   

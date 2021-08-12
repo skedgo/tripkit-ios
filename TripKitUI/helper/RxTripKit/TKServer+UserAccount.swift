@@ -51,13 +51,8 @@ extension Reactive where Base == TKServer {
   
   private func signIn(token: String, endpoint: String) -> Single<String> {
     let urlFriendly = token.replacingOccurrences(of: "_", with: "")
-    return hit(.POST, path: "account/\(endpoint)/\(urlFriendly)")
-      .map { _, _, data in
-        guard let data = data, let response = try? JSONDecoder().decode(SignInResponse.self, from: data) else {
-          throw TKError.error(withCode: 1301, userInfo: [ NSLocalizedDescriptionKey: "Cannot find a valid token" ])
-        }
-        return response.userToken
-    }
+    return hit(SignInResponse.self, .POST, path: "account/\(endpoint)/\(urlFriendly)")
+      .map(\.2.userToken)
   }
   
   /// Fetches all server-side data for a user, returning it as raw data, which
@@ -67,23 +62,23 @@ extension Reactive where Base == TKServer {
   ///
   /// - Returns: Data, if any was available
   public func downloadUserData() -> Single<Data> {
-    return hit(.GET, path: "data/user/gdpr")
-      .map { status, _, data in
-        if let data = data {
+    hit(path: "data/user/gdpr")
+      .map {
+        if let data = $0.2 {
           return data
         } else {
-          throw TKError.error(withCode: 16523, userInfo: [ NSLocalizedDescriptionKey: "No server-side data" ])
+          throw TKServer.ServerError.noData
         }
-    }
+      }
   }
   
   /// Deletes all server-side data for a user, and also signs them out by
   /// resetting the user token
   public func deleteUserDataAndSignOut() -> Single<Void> {
-    return hit(.DELETE, path: "data/user/gdpr")
+    hit(.DELETE, path: "data/user/gdpr")
       .map { status, _, _ in
         if status != 200 {
-          throw TKError.error(withCode: 16524, userInfo: [ NSLocalizedDescriptionKey: "Couldn't delete account. Status: \(status)" ])
+          throw TKError.error(withCode: 16524, userInfo: [ NSLocalizedDescriptionKey: "Couldn't delete account. Status: \(String(describing: status))" ])
         } else {
           TKServer.updateUserToken(nil)
         }

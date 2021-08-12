@@ -41,11 +41,11 @@ extension StopLocation {
     stopModeInfo = model.modeInfo
     
     var addedStop = false
-    if let newChildren = model.children {
+    if !model.children.isEmpty {
       let lookup = Dictionary(grouping: children ?? []) {
         $0.stopCode
       }
-      for newChild in newChildren {
+      for newChild in model.children {
         if let oldChild = lookup[newChild.code]?.first {
           addedStop = oldChild.update(from: newChild) || addedStop
         } else {
@@ -93,7 +93,7 @@ extension Service {
     wheelchairAccessibility = TKWheelchairAccessibility(bool: model.wheelchairAccessible)
     
     isBicycleAccessible = model.bicycleAccessible ?? false
-    alertHashCodes = model.alertHashCodes?.map { NSNumber(value: $0) }
+    alertHashCodes = model.alertHashCodes.map(NSNumber.init)
     
     adjustRealTimeStatus(for: model.realTimeStatus ?? .incapable)
     addVehicles(primary: model.primaryVehicle, alternatives: model.alternativeVehicles)
@@ -150,7 +150,7 @@ extension Service {
     return visit
   }
   
-  func addVehicles(primary: TKAPI.Vehicle?, alternatives: [TKAPI.Vehicle]?) {
+  func addVehicles(primary: TKAPI.Vehicle?, alternatives: [TKAPI.Vehicle]) {
     guard let context = managedObjectContext else { return }
 
     if let primary = primary {
@@ -164,7 +164,7 @@ extension Service {
       self.isCanceled = false
     }
     
-    if let alternatives = alternatives {
+    if !alternatives.isEmpty {
       for model in alternatives {
         let existing = vehicleAlternatives?.first { $0.identifier == model.id }
         if let vehicle = existing {
@@ -189,7 +189,7 @@ extension TKAPIToCoreDataConverter {
       primary = model
     }
     
-    var alternatives: [TKAPI.Vehicle]? = nil
+    var alternatives: [TKAPI.Vehicle] = []
     if let array = alternativeVehicles, let model = try? decoder.decode([TKAPI.Vehicle].self, withJSONObject: array) {
       alternatives = model
     }
@@ -197,6 +197,188 @@ extension TKAPIToCoreDataConverter {
     service.addVehicles(primary: primary, alternatives: alternatives)
   }
   
+}
+
+// MARK: - Shapes
+
+extension Shape {
+  
+  @discardableResult
+  static func insertNewShapes(from model: [TKAPI.SegmentShape], for service: Service?, relativeTime: Date? = nil, modeInfo: TKModeInfo?, context: NSManagedObjectContext? = nil, clearRealTime: Bool) -> [Shape] {
+    
+    guard let context = context ?? service?.managedObjectContext else {
+      assertionFailure("Insert into where exactly...?")
+      return []
+    }
+    
+    var added: [Shape] = []
+    var groupCount = 0
+    var index = 0
+    var previous: Service? = nil
+    
+    for apiShape in model {
+      guard !apiShape.encodedWaypoints.isEmpty else { continue }
+      
+      // Populating the service as we go
+      let current: Service?
+      if let code = apiShape.serviceTripID, let previous = previous, previous.code != code {
+        if let requested = service, code == requested.code {
+          current = requested
+        } else {
+          current = Service.fetchOrInsert(code: code, in: context)
+        }
+      } else if let requested = service {
+        current = requested
+      } else {
+        current = nil
+      }
+      if let service = current {
+        service.code = apiShape.serviceTripID ?? service.code
+        service.color = apiShape.serviceColor?.color ?? service.color
+        service.frequency = apiShape.frequency.map(NSNumber.init) ?? service.frequency
+        service.lineName = apiShape.lineName ?? service.lineName
+        service.direction = apiShape.direction ?? service.direction
+        service.number = apiShape.number ?? service.number
+        service.modeInfo = modeInfo ?? apiShape.modeInfo ?? service.modeInfo
+        service.wheelchairAccessibility = TKWheelchairAccessibility(bool: apiShape.wheelchairAccessible)
+        service.isBicycleAccessible = apiShape.bicycleAccessible
+        
+        if previous != service {
+          service.progenitor = previous
+        }
+        if clearRealTime {
+          service.isRealTime = false
+        }
+      }
+      
+      // New shape, also for non-PT
+      let shape = Shape(context: context)
+      shape.index = Int16(groupCount)
+      groupCount += 1
+      shape.title = apiShape.name
+      shape.encodedWaypoints = apiShape.encodedWaypoints
+      shape.isDismount = apiShape.dismount
+      shape.isHop = apiShape.hop
+      shape.metres = apiShape.metres.map(NSNumber.init)
+      shape.setSafety(apiShape.safe)
+      shape.instruction = apiShape.instruction?.tkInstruction
+      shape.roadTags = apiShape.roadTags
+      shape.travelled = apiShape.travelled
+      
+      if apiShape.travelled {
+        // we only associate the travelled section here, which isn't great
+        // but better than only associating the last one...
+        current?.shape = shape
+      }
+      
+      // add the stops
+      if let service = current {
+        // remember the existing visits
+        var existingVisitsByCode: [String: StopVisits] = [:]
+        let visits = (current?.visits ?? []).filter { !($0 is DLSEntry) }
+        for visit in visits {
+          existingVisitsByCode[visit.stop.stopCode] = visit
+        }
+        
+        for apiStop in apiShape.stops {
+          let visit: StopVisits
+          if let existing = existingVisitsByCode[apiStop.code] {
+            visit = existing
+          } else {
+            visit = StopVisits(context: context)
+            visit.service = service
+          }
+          visit.index = NSNumber(value: index)
+          index += 1
+          
+          visit.update(from: apiStop, relativeTime: relativeTime)
+          
+          // hook-up to shape
+          visit.addShapesObject(shape)
+          
+          if !existingVisitsByCode.keys.contains(apiStop.code) {
+            // We added a new visit; we used to use `fetchOrInsert` but the
+            // duplicate checking is remarkably slow :-(
+            let coordinate = TKNamedCoordinate(latitude: apiStop.lat, longitude: apiStop.lng, name: apiStop.name, address: nil)
+            let stop = StopLocation.insertStop(stopCode: apiStop.code, modeInfo: modeInfo, at: coordinate, in: context)
+            stop.shortName = apiStop.shortName
+            stop.wheelchairAccessible = apiStop.wheelchairAccessible.map(NSNumber.init)
+            assert((visit.stop as StopLocation?) == nil || visit.stop == stop, "We shouldn't have a stop already!")
+            visit.stop = stop
+          }
+          assert((visit.stop as StopLocation?) != nil, "Visit needs a stop!")
+        }
+        
+        added.append(shape)
+        if let previous = previous, let current = current, current != previous {
+          index = 0
+        }
+        previous = current
+      }
+    }
+    
+    return added
+  }
+  
+}
+
+extension TKAPI.ShapeInstruction {
+  fileprivate var tkInstruction: Shape.Instruction {
+    switch self {
+    case .headTowards: return .headTowards
+    case .continueStraight: return .continueStraight
+    case .turnSlightyLeft: return .turnSlightyLeft
+    case .turnLeft: return .turnLeft
+    case .turnSharplyLeft: return .turnSharplyLeft
+    case .turnSlightlyRight: return .turnSlightlyRight
+    case .turnRight: return .turnRight
+    case .turnSharplyRight: return .turnSharplyRight
+    }
+  }
+}
+
+// MARK: - Stop Visits
+
+extension StopVisits {
+  func update(from model: TKAPI.ShapeStop, relativeTime: Date?) {
+    precondition((service as Service?) != nil)
+    precondition((index as NSNumber?) != nil)
+    precondition(index.intValue >= 0)
+    
+    // when we re-use an existing visit, we need to be conservative
+    // as to not overwrite a previous arrival/departure with a new 'nil'
+    // value. this can happen, say, with the 555 loop where 'circular quay'
+    // is both the first and last stop. we don't want to overwrite the
+    // initial departure with the nil value when the service gets back there
+    // at the end of its loop.
+    if let bearing = model.bearing {
+      self.bearing = NSNumber(value: bearing)
+    }
+    
+    if let arrival = model.arrival {
+      self.arrival = arrival
+    } else if let offset = model.relativeArrival, let arrival = relativeTime?.addingTimeInterval(offset) {
+      self.arrival = arrival
+    }
+
+    if let departure = model.departure {
+      self.departure = departure
+    } else if let offset = model.relativeDeparture, let departure = relativeTime?.addingTimeInterval(offset) {
+      self.departure = departure
+    }
+
+    guard arrival != nil || departure != nil else {
+      return
+    }
+    
+    triggerRealTimeKVO()
+      
+    // keep original time before we touch it with real-time data
+    originalTime = departure ?? arrival
+
+    // frequency-based entries don't have times, so they don't have a region-day either
+    adjustRegionDay()
+  }
 }
 
 // MARK: - Alerts
@@ -241,7 +423,6 @@ extension Alert {
   
 }
 
-/// :nodoc:
 extension TKAPIToCoreDataConverter {
   
   static func updateOrAddAlerts(_ alerts: [TKAPI.Alert]?, in context: NSManagedObjectContext) {
@@ -257,14 +438,6 @@ extension TKAPIToCoreDataConverter {
     }
   }
   
-  @objc(updateOrAddAlerts:inTripKitContext:)
-  public static func updateOrAddAlerts(from array: [[String: Any]]?, in context: NSManagedObjectContext) {
-    guard let array = array else { return }
-    let decoder = JSONDecoder()
-    let model = try? decoder.decode([TKAPI.Alert].self, withJSONObject: array)
-    self.updateOrAddAlerts(model, in: context)
-  }
-  
 }
 
 // MARK: - Vehicles
@@ -272,12 +445,12 @@ extension TKAPIToCoreDataConverter {
 /// :nodoc:
 extension Vehicle {
   
-  fileprivate convenience init(from model: TKAPI.Vehicle, into context: NSManagedObjectContext) {
+  public convenience init(from model: TKAPI.Vehicle, into context: NSManagedObjectContext) {
     self.init(context: context)
     update(with: model)
   }
   
-  fileprivate func update(with model: TKAPI.Vehicle) {
+  func update(with model: TKAPI.Vehicle) {
     identifier = model.id
     label = model.label
     icon = model.icon?.absoluteString
@@ -296,33 +469,6 @@ extension Vehicle {
     }
   }
   
-  fileprivate convenience init(dict: [String: Any], into context: NSManagedObjectContext) throws {
-    let decoder = JSONDecoder()
-    let model = try decoder.decode(TKAPI.Vehicle.self, withJSONObject: dict)
-    self.init(from: model, into: context)
-  }
-  
-  fileprivate func update(with dict: [String: Any]) throws {
-    let decoder = JSONDecoder()
-    let model = try decoder.decode(TKAPI.Vehicle.self, withJSONObject: dict)
-    update(with: model)
-  }
-  
-}
-
-/// :nodoc:
-extension TKAPIToCoreDataConverter {
-
-  @objc(insertNewVehicle:inTripKitContext:)
-  public static func insertNewVehicle(from dict: [String: Any], into context: NSManagedObjectContext) -> Vehicle? {
-    return try? Vehicle(dict: dict, into: context)
-  }
-  
-  
-  @objc(updateVehicle:fromDictionary:)
-  public static func update(vehicle: Vehicle, from dict: [String: Any]) {
-    try? vehicle.update(with: dict)
-  }
 }
 
 // MARK: - Private vehicles

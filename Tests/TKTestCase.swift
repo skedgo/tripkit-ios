@@ -10,8 +10,6 @@ import UIKit
 import XCTest
 import CoreData
 
-import RxSwift
-
 @testable import TripKit
 
 extension XCTestCase {
@@ -53,30 +51,27 @@ class TKTestCase: XCTestCase {
     super.tearDown()
     tripKitContext = nil
   }
+  
+  func request(fromFilename filename: String) throws -> TripRequest {
+    let data = try self.dataFromJSON(named: filename)
+    let response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: data)
+    return try TKRoutingParser.addBlocking(response, into: tripKitContext)
+  }
 
-  func trip(fromFilename filename: String, serviceFilename: String? = nil) -> Trip {
-    
-    let observable = Observable<Trip>.create { observer in
-      let tripJson: [String: Any] = try! self.contentFromJSON(named: filename)
-      let parser = TKRoutingParser(tripKitContext: self.tripKitContext)
-      parser.parseAndAddResult(tripJson) { request in
-        guard let trip = request?.tripGroups?.first?.visibleTrip else { preconditionFailure() }
-        
-        if let serviceFilename = serviceFilename {
-          for segment in trip.segments {
-            if let service = segment.service {
-              let serviceJson: [String: Any] = try! self.contentFromJSON(named: serviceFilename)
-              TKBuzzInfoProvider.addContent(from: serviceJson, to: service)
-              break
-            }
-          }
+  func trip(fromFilename filename: String, serviceFilename: String? = nil) throws -> Trip {
+    let trip = try request(fromFilename: filename).tripGroups!.first!.visibleTrip!
+
+    if let serviceFilename = serviceFilename {
+      for segment in trip.segments {
+        if let service = segment.service {
+          let data = try self.dataFromJSON(named: serviceFilename)
+          let response = try JSONDecoder().decode(TKAPI.ServiceResponse.self, from: data)
+          TKBuzzInfoProvider.addContent(from: response, to: service)
+          break
         }
-        observer.onNext(trip)
-        observer.onCompleted()
       }
-      return Disposables.create()
     }
-    return try! observable.toBlocking().first()!
+    return trip
   }
   
   func testThatEnvironmentWorks() {

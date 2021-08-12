@@ -49,21 +49,18 @@ extension Reactive where Base: TKBuzzRealTime {
   ///
   /// - Parameter trip: The trip to update
   ///
-  /// - returns: One-off callback with the update, indicatating if the trip got updated. Note that the `Trip` object returned in the callback will always be the same object provided to the method, i.e., trips are updated in-place.
+  /// - returns: One-off callback with the update. Note that the `Trip` object returned in the callback will always be the same object provided to the method, i.e., trips are updated in-place.
   public static func update(_ trip: Trip) -> Single<(Trip, didUpdate: Bool)> {
     guard trip.wantsRealTimeUpdates else {
       TKLog.debug("Don't bother calling this for trips that don't want updates")
       return .just((trip, false))
     }
     
-    var helper: TKTripFetcher! = TKTripFetcher()
     return Single.create { subscriber in
-      helper.update(trip) { newTrip, didUpdate in
-        subscriber(.success((newTrip, didUpdate)))
+      TKTripFetcher.update(trip) { result in
+        subscriber(result.map { ($0.0, $0.didUpdate)} )
       }
-      return Disposables.create {
-        helper = nil
-      }
+      return Disposables.create()
     }
   }
   

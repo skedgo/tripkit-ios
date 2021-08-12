@@ -502,28 +502,30 @@ extension TKRouter {
         additional: additional,
         bestOnly: bestOnly
       )
-      server.hitSkedGo(
-        withMethod: "GET",
-        path: "routing.json",
-        parameters: paras,
-        region: region,
-        callbackOnMain: false,
-        success: { [weak self] _, response, _ in
-          guard let self = self else { return }
+      
+      server.hit(TKAPI.RoutingResponse.self,
+                 path: "routing.json",
+                 parameters: paras,
+                 region: region,
+                 callbackOnMain: false
+      ) { [weak self] _, _, result in
+        guard let self = self else { return }
+        switch result {
+        case .success(let response):
           if let context = request.context {
             context.perform {
               let tripRequest = request.toTripRequest()
-              self.parseJSON(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+              self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
             }
           } else {
             let tripRequest = request.toTripRequest()
-            self.parseJSON(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+            self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
           }
           
-        }, failure: { [weak self] error in
-          self?.handleError(error, callbackQueue: callbackQueue, completion: completion)
+        case .failure(let error):
+          self.handleError(error, callbackQueue: callbackQueue, completion: completion)
         }
-      )
+      }
     }
   }
   
@@ -545,36 +547,21 @@ extension TKRouter {
     }
   }
   
-  private func parseJSON(_ json: Any?, for request: TripRequest, visibility: TKTripGroupVisibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func parse(_ response: TKAPI.RoutingResponse, for request: TripRequest, visibility: TKTripGroupVisibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
     
-    if let error = TKError.error(fromJSON: json, statusCode: 200) {
-      return handleError(error, callbackQueue: callbackQueue, completion: completion)
-    }
-    
-    guard let json = json as? [AnyHashable: Any] else {
-      return handleError(NSError(code: Int(kTKErrorTypeInternal), message: "Invalid response received from server. Please try again."), callbackQueue: callbackQueue, completion: completion)
-    }
-
-    context.perform { [weak self] in
-      guard let self = self else { return }
-      
+    TKLog.verbose("Parsing \(request)")
+    TKRoutingParser.add(response, to: request, merge: true, visibility: visibility) { _ in
       do {
-        TKLog.verbose("Parsing \(request)")
-        let parser = TKRoutingParser(tripKitContext: context)
-        parser.parseAndAddResult(json, for: request, merging: true, visibility: visibility)
-        
         TKLog.verbose("Saving parsed result for \(request)")
         try context.save()
         callbackQueue.async {
           completion(.success(request))
         }
-
       } catch {
         assertionFailure("Error saving: \(error)")
         self.handleError(error, callbackQueue: callbackQueue, completion: completion)
       }
-
     }
   }
   

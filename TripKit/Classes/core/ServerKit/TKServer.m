@@ -11,10 +11,10 @@
 #import "TripKit/TripKit-Swift.h"
 
 #import "TKServerKit.h"
+#import "NSUserDefaults+SharedDefaults.h"
 
 NSString *const TKDefaultsKeyDevelopmentServer       = @"developmentServer";
 NSString *const TKDefaultsKeyUserToken               = @"userToken";
-
 
 @interface TKServer ()
 
@@ -24,11 +24,6 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
 @end
 
 @implementation TKServer
-
-- (void)dealloc
-{
-  [[NSNotificationCenter  defaultCenter] removeObserver:self];
-}
 
 #pragma mark - Public methods
 
@@ -96,53 +91,23 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
 
 #pragma mark - Network requests
 
-+ (id)syncURL:(NSURL *)url timeout:(NSTimeInterval)seconds
++ (void)_hitURL:(NSURL *)url
+         method:(NSString *)method
+     parameters:(nullable NSDictionary<NSString *, id> *)parameters
+     completion:(TKServerGenericBlock)completion
 {
-  dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-  [TKLog debug:@"TKServer" block:^NSString * _Nonnull{
-    return [NSString stringWithFormat:@"Hitting URL: %@", url];
-  }];
-  
-  __block id object;
-  [self GET:url paras:nil completion:
-   ^(NSInteger status, NSDictionary<NSString *,id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status, headers, data)
-     if (! error) {
-       // success
-       if (semaphore != NULL) {
-         object = responseObject;
-         dispatch_semaphore_signal(semaphore);
-       }
-     } else {
-       // failure
-       if (semaphore != NULL) {
-         object = error;
-         dispatch_semaphore_signal(semaphore);
-       }
-     }
-
-   }];
-  
-  dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, (int64_t) seconds * NSEC_PER_SEC);
-  dispatch_semaphore_wait(semaphore, timeout);
-  semaphore = NULL;
-  
-  return object;
+  NSURLRequest *request;
+  if ([method isEqual:@"GET"]) {
+    request = [self GETRequestWithSkedGoHTTPHeadersForURL:url paras:parameters];
+  } else {
+    request = [self POSTLikeRequestWithSkedGoHTTPHeadersForURL:url method:method paras:parameters headers:nil];
+  }
+  [self hitRequest:request parseJSON:NO completion:completion];
 }
 
-+ (void)GET:(NSURL *)URL paras:(nullable NSDictionary *)paras completion:(TKServerGenericBlock)completion
-{
-  NSURLRequest *request = [self GETRequestWithSkedGoHTTPHeadersForURL:URL paras:paras];
-  [self hitRequest:request completion:completion];
-}
-
-+ (void)POST:(NSURL *)URL paras:(nullable NSDictionary *)paras completion:(TKServerGenericBlock)completion
-{
-  NSURLRequest *request = [self POSTLikeRequestWithSkedGoHTTPHeadersForURL:URL method:@"POST" paras:paras headers:nil];
-  [self hitRequest:request completion:completion];
-}
-
-+ (void)hitRequest:(NSURLRequest *)request completion:(TKServerGenericBlock)completion
++ (void)hitRequest:(NSURLRequest *)request
+         parseJSON:(BOOL)parseJSON
+        completion:(TKServerGenericBlock)completion
 {
   NSUUID *requestUUID = [NSUUID UUID];
   [TKLog log:@"TKServer" request:request UUID:requestUUID];
@@ -175,7 +140,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                                     // empty response is not an error
                                     completion(status, headers, nil, nil, nil);
                                     
-                                  } else {
+                                  } else if (parseJSON) {
                                     NSError *parserError = nil;
                                     id responseObject = [NSJSONSerialization JSONObjectWithData:data
                                                                                         options:0
@@ -191,25 +156,11 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                                       [TKLog warn:@"TKServer" text:[NSString stringWithFormat:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]]];
                                       completion(status, headers, nil, nil, parserError);
                                     }
+                                  } else {
+                                    completion(status, headers, nil, data, nil);
                                   }
                                 }];
   [task resume];
-}
-
-- (void)hitSkedGoWithMethod:(NSString *)method
-                       path:(NSString *)path
-                 parameters:(nullable NSDictionary *)parameters
-                     region:(nullable TKRegion *)region
-                    success:(TKServerSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure
-{
-  [self hitSkedGoWithMethod:method
-                       path:path
-                 parameters:parameters
-                     region:region
-             callbackOnMain:YES
-                    success:success
-                    failure:failure];
 }
 
 - (void)hitSkedGoWithMethod:(NSString *)method
@@ -220,26 +171,28 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                     success:(TKServerSuccessBlock)success
                     failure:(TKServerFailureBlock)failure
 {
-  [self hitSkedGoWithMethod:method
-                       path:path
-                 parameters:parameters
-                    headers:nil
-                     region:region
-             callbackOnMain:callbackOnMain
-                    success:^(NSInteger status, NSDictionary<NSString *,id> * _Nonnull headers, id  _Nullable responseObject, NSData * _Nullable data) {
-                      success(status, responseObject, data);
-                    }
-                    failure:failure];
+  [self _hitSkedGoWithMethod:method
+                        path:path
+                  parameters:parameters
+                     headers:nil
+                      region:region
+              callbackOnMain:callbackOnMain
+                   parseJSON:YES
+                     success:^(NSInteger status, NSDictionary<NSString *,id> * _Nonnull headers, id  _Nullable responseObject, NSData * _Nullable data) {
+    success(status, responseObject, data);
+  }
+                     failure:failure];
 }
 
-- (void)hitSkedGoWithMethod:(NSString *)method
-                       path:(NSString *)path
-                 parameters:(nullable NSDictionary *)parameters
-                    headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-                     region:(nullable TKRegion *)region
-             callbackOnMain:(BOOL)callbackOnMain
-                    success:(TKServerFullSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure
+- (void)_hitSkedGoWithMethod:(NSString *)method
+                        path:(NSString *)path
+                  parameters:(nullable NSDictionary *)parameters
+                     headers:(nullable NSDictionary<NSString *, NSString *> *)headers
+                      region:(nullable TKRegion *)region
+              callbackOnMain:(BOOL)callbackOnMain
+                   parseJSON:(BOOL)parseJSON
+                     success:(TKServerFullSuccessBlock)success
+                     failure:(TKServerFailureBlock)failure
 {
   [self.skedGoQueryQueue addOperationWithBlock:^{
     [self initiateDataTaskWithMethod:method
@@ -249,6 +202,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                            forRegion:region
                          backupIndex:0
                       callbackOnMain:callbackOnMain
+                           parseJSON:parseJSON
                              success:success
                              failure:failure
                       previousStatus:0
@@ -335,6 +289,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                          forRegion:(nullable TKRegion *)region
                        backupIndex:(NSInteger)backupIndex
                     callbackOnMain:(BOOL)callbackOnMain
+                         parseJSON:(BOOL)parseJSON
                            success:(TKServerFullSuccessBlock)success
                            failure:(TKServerFailureBlock)failure
                     previousStatus:(NSInteger)previousStatus
@@ -347,7 +302,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   ZAssert([[NSOperationQueue currentQueue] isEqual:self.skedGoQueryQueue], @"Should start async data tasks on dedicated queue as we're modifying local variables.");
 #endif
   
-  NSURL *baseURL = [self baseURLForRegion:region index:backupIndex];
+  NSURL *baseURL = [self _baseURLForRegion:region index:backupIndex];
   if (! baseURL) {
     // don't have that many servers
     if (! previousError) {
@@ -382,6 +337,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                              forRegion:region
                            backupIndex:backupIndex + 1
                         callbackOnMain:callbackOnMain
+                             parseJSON:parseJSON
                                success:success
                                failure:failure
                         previousStatus:status
@@ -394,6 +350,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   
   // hit the main client
   [TKServer hitRequest:request
+             parseJSON:parseJSON
              completion:
    ^(NSInteger status, NSDictionary<NSString *,id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
      NSError *serverError = error ?: [TKError errorFromJSON:responseObject statusCode:status];
@@ -429,12 +386,12 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
 }
 
 - (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
-      path:(NSString *)path
-parameters:(nullable NSDictionary<NSString *, id> *)parameters
-    region:(nullable TKRegion *)region
+                                          path:(NSString *)path
+                                    parameters:(nullable NSDictionary<NSString *, id> *)parameters
+                                        region:(nullable TKRegion *)region
 {
   return [TKServer buildSkedGoRequestWithMethod:method
-                                        baseURL:[self baseURLForRegion:region index:0]
+                                        baseURL:[self _baseURLForRegion:region index:0]
                                            path:path
                                      parameters:parameters
                                         headers:nil
@@ -442,11 +399,11 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
 }
 
 + (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
-   baseURL:(NSURL *)baseURL
-      path:(NSString *)path
-parameters:(nullable NSDictionary<NSString *, id> *)parameters
-   headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-    region:(nullable TKRegion *)region
+                                       baseURL:(NSURL *)baseURL
+                                          path:(NSString *)path
+                                    parameters:(nullable NSDictionary<NSString *, id> *)parameters
+                                       headers:(nullable NSDictionary<NSString *, NSString *> *)headers
+                                        region:(nullable TKRegion *)region
 {
 
   NSURLRequest *request = nil;
@@ -509,7 +466,7 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
 
 #pragma mark - Server & Base URL
 
-- (nullable NSURL *)baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index
+- (nullable NSURL *)_baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index
 {
   if ([TKServer developmentServer]) {
     return index == 0 ? [NSURL URLWithString:[TKServer developmentServer] ] : nil;
@@ -541,7 +498,7 @@ parameters:(nullable NSDictionary<NSString *, id> *)parameters
 
 - (NSURL *)fallbackBaseURL
 {
-  return [self baseURLForRegion:nil index:0];
+  return [self _baseURLForRegion:nil index:0];
 }
 
 - (void)registerFileBundle:(NSBundle *)bundle {

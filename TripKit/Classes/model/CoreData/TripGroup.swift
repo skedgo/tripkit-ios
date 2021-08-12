@@ -19,6 +19,14 @@ extension TripGroup {
         return try? decoder.decode(TKAPI.DataAttribution.self, withJSONObject: rawSource)
       }
     }
+    set {
+      do {
+        let encoded = try JSONEncoder().encodeJSONObject(newValue)
+        self.sourcesRaw = (encoded as? [NSCoding & NSObjectProtocol]) ?? []
+      } catch {
+        TKLog.warn("Error saving sources: \(error)")
+      }
+    }
   }
   
 }

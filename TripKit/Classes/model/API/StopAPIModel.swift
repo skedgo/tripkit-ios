@@ -28,7 +28,6 @@ extension TKAPI {
       case zoneID
     }
 
-
     public let code: String
     public let lat: CLLocationDegrees
     public let lng: CLLocationDegrees
@@ -43,10 +42,10 @@ extension TKAPI {
     
     public let wheelchairAccessible: Bool?
 
-    public let children: [Stop]?
+    @DefaultEmptyArray public var children: [Stop]
     public let modeInfo: TKModeInfo
     
-    public let alertHashCodes: [Int]?
+    @DefaultEmptyArray public var alertHashCodes: [Int]
   }
   
 }

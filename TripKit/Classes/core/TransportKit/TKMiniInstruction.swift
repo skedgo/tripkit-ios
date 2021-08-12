@@ -17,12 +17,6 @@ class TKMiniInstruction: NSObject, Codable, NSSecureCoding {
     case detail = "description"
   }
   
-  static func instruction(for json: [String: Any]?) -> TKMiniInstruction? {
-    guard let json = json else { return nil }
-    let decoder = JSONDecoder()
-    return try? decoder.decode(TKMiniInstruction.self, withJSONObject: json)
-  }
-  
   // MARK: NSSecure coding
   
   @objc

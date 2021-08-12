@@ -96,6 +96,13 @@ public class TKStopCoordinate: TKModeCoordinate {
     stopSortScore = stop.popularity
   }
   
+  init(_ stop: TKAPI.ShapeStop, modeInfo: TKModeInfo) {
+    super.init(modeInfo: modeInfo, coordinate: .init(latitude: stop.lat, longitude: stop.lng))
+    isDraggable = false
+    stopCode = stop.code
+    stopShortName = stop.shortName
+  }
+  
   public required init(from decoder: Decoder) throws {
     try super.init(from: decoder)
     isDraggable = false

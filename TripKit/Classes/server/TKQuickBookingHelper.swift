@@ -91,33 +91,22 @@ public enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public static func fetchQuickBookings(for segment: TKSegment, completion: @escaping ([TKQuickBooking]?, Error?) -> Void) {
+  public static func fetchQuickBookings(for segment: TKSegment, completion: @escaping (Result<[TKQuickBooking], Error>) -> Void) {
     if let stored = segment.storedQuickBookings {
-      completion(stored, nil)
+      completion(.success(stored))
       return
     }
     
     guard let bookingsURL = segment.bookingQuickInternalURL else {
-      completion([], nil)
+      completion(.success([]))
       return
     }
     
-    TKServer.get(bookingsURL, paras: nil) { _, _, response, _, error in
-      guard let array = response as? [[String: Any]], !array.isEmpty else {
-        let error = error ?? NSError(code: 67123, message: "Expected an array, but got: \(String(describing: response))")
-        TKLog.warn("Invalid server response: \(error)")
-        completion(nil, error)
-        return
+    TKServer.hit([TKQuickBooking].self, url: bookingsURL) { _, _, result in
+      if let bookings = try? result.get() {
+        segment.storeQuickBookings(bookings)
       }
-      
-      segment.storeQuickBookings(fromArray: array)
-      do {
-        let bookings = try JSONDecoder().decode([TKQuickBooking].self, withJSONObject: array)
-        completion(bookings, nil)
-      } catch {
-        TKLog.warn("Could not parse quick bookings due to \(error)")
-        completion(nil, error)
-      }
+      completion(result)
     }
   }
 
@@ -128,8 +117,8 @@ extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
-         let cached = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) {
-        return try? JSONDecoder().decode([TKQuickBooking].self, withJSONObject: cached)
+         let cached = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) as? NSData {
+        return try? JSONDecoder().decode([TKQuickBooking].self, from: cached as Data)
       } else {
         return nil
       }
@@ -171,10 +160,15 @@ extension TKSegment {
     }
   }
   
-  public func storeQuickBookings(fromArray array: [[String: Any]]) {
+  public func storeQuickBookings(_ bookings: [TKQuickBooking]) {
     guard let key = cacheKey() else { return }
     
-    TripKit.shared.inMemoryCache().setObject(array as AnyObject, forKey: key as AnyObject)
+    do {
+      let encoded = try JSONEncoder().encode(bookings)
+      TripKit.shared.inMemoryCache().setObject(encoded as NSData, forKey: key as AnyObject)
+    } catch {
+      TKLog.warn("Couldn't encode quick bookings: \(error)")
+    }
   }
   
 }

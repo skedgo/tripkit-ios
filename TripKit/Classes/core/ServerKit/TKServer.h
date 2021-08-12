@@ -32,12 +32,6 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
 
 + (TKServer *)sharedInstance NS_REFINED_FOR_SWIFT;
 
-+ (nullable id)syncURL:(NSURL *)url timeout:(NSTimeInterval)seconds;
-
-+ (void)GET:(NSURL *)url paras:(nullable NSDictionary<NSString *, id>  *)paras completion:(TKServerGenericBlock)completion;
-
-+ (void)POST:(NSURL *)url paras:(nullable NSDictionary<NSString *, id>  *)paras completion:(TKServerGenericBlock)completion;
-
 + (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL paras:(nullable NSDictionary *)paras;
 
 + (nullable NSString *)developmentServer;
@@ -45,8 +39,6 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
 + (void)updateDevelopmentServer:(nullable NSString *)server;
 
 + (nullable NSString *)xTripGoVersion;
-
-+ (NSMutableDictionary *)SkedGoHTTPHeaders;
 
 + (nullable NSString *)userToken;
 
@@ -59,7 +51,7 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
 - (NSURL *)fallbackBaseURL;
 
 /// :nodoc:
-- (nullable NSURL *)baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index;
+- (nullable NSURL *)_baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index;
 
 /**
  Fetched the list of regions and updates `TKRegionManager`'s cache
@@ -76,30 +68,27 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
                        path:(NSString *)path
                  parameters:(nullable NSDictionary<NSString *, id> *)parameters
                      region:(nullable TKRegion *)region
-                    success:(TKServerSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure;
-
-- (void)hitSkedGoWithMethod:(NSString *)method
-                       path:(NSString *)path
-                 parameters:(nullable NSDictionary<NSString *, id> *)parameters
-                     region:(nullable TKRegion *)region
              callbackOnMain:(BOOL)callbackOnMain
                     success:(TKServerSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure;
+                    failure:(TKServerFailureBlock)failure NS_REFINED_FOR_SWIFT;
 
-- (void)hitSkedGoWithMethod:(NSString *)method
-                       path:(NSString *)path
-                 parameters:(nullable NSDictionary<NSString *, id> *)parameters
-                    headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-                     region:(nullable TKRegion *)region
-             callbackOnMain:(BOOL)callbackOnMain
-                    success:(TKServerFullSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure;
+/// :nodoc:
+- (void)_hitSkedGoWithMethod:(NSString *)method
+                        path:(NSString *)path
+                  parameters:(nullable NSDictionary<NSString *, id> *)parameters
+                     headers:(nullable NSDictionary<NSString *, NSString *> *)headers
+                      region:(nullable TKRegion *)region
+              callbackOnMain:(BOOL)callbackOnMain
+                   parseJSON:(BOOL)parseJSON
+                     success:(TKServerFullSuccessBlock)success
+                     failure:(TKServerFailureBlock)failure NS_REFINED_FOR_SWIFT;
 
-- (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
-                                          path:(NSString *)path
-                                    parameters:(nullable NSDictionary<NSString *, id> *)parameters
-                                        region:(nullable TKRegion *)region;
+/// :nodoc:
++ (void)_hitURL:(NSURL *)url
+         method:(NSString *)method
+     parameters:(nullable NSDictionary<NSString *, id> *)parameters
+     completion:(TKServerGenericBlock)completion NS_REFINED_FOR_SWIFT;
+
 @end
 
 NS_ASSUME_NONNULL_END

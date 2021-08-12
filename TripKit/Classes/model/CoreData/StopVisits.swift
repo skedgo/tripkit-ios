@@ -169,22 +169,12 @@ extension StopVisits: MKAnnotation {
   
 }
 
-
-
 // MARK: - TKRealTimeUpdatable
 
 /// :nodoc:
 extension StopVisits: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
     return service.wantsRealTimeUpdates
-  }
-  
-  public var objectForRealTimeUpdates: Any {
-    return self
-  }
-  
-  public var regionForRealTimeUpdates: TKRegion {
-    return stop.region ?? .international
   }
 }
 

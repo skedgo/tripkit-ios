@@ -64,17 +64,9 @@ public enum TKLocationProvider {
     paras["modes"] = modes
     
     return TKServer.shared.rx
-      .hit(.GET, path: "locations.json", parameters: paras, region: region)
-      .map { _, _, data -> [TKModeCoordinate] in
-        let decoder = JSONDecoder()
-        guard
-          let data = data,
-          let response = try? decoder.decode(TKAPI.LocationsResponse.self, from: data)
-        else {
-          throw Error.serverReturnedBadFormat
-        }
-        
-        return response.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
+      .hit(TKAPI.LocationsResponse.self, path: "locations.json", parameters: paras, region: region)
+      .map { _, _, model in
+        model.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
       }
   }
   

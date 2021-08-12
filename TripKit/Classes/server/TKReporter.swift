@@ -38,16 +38,16 @@ public class TKReporter {
       
       UserDefaults.standard.removeObject(forKey: key)
       
-      TKServer.post(url, paras: paras) { _, _, _, _, error in
-        if let error = error {
-          TKLog.debug("Planned trip encountered error: \(error)")
-          completion?(false)
-        } else {
+      TKServer.hit(.POST, url: url, parameters: paras) { _, _, result in
+        switch result {
+        case .success:
           TKLog.debug("Planned trip reported successfully")
           completion?(true)
+        case .failure(let error):
+          TKLog.debug("Planned trip encountered error: \(error)")
+          completion?(false)
         }
       }
-  
     }
     
   }
@@ -62,11 +62,12 @@ public class TKReporter {
       "samples": samples
     ]
     
-    TKServer.post(url, paras: paras) { _, _, _, _, error in
-      if let error = error {
-        TKLog.debug("Progress post encountered error: \(error)")
-      } else {
+    TKServer.hit(.POST, url: url, parameters: paras) { _, _, result in
+      switch result {
+      case .success:
         TKLog.debug("Progress posted successfully")
+      case .failure(let error):
+        TKLog.debug("Progress post encountered error: \(error)")
       }
     }
   }

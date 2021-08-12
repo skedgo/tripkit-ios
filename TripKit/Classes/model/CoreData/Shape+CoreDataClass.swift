@@ -101,9 +101,8 @@ public class Shape: NSManagedObject {
     }
   }
   
-  @objc
-  public func setSafety(_ value: NSNumber?) {
-    switch value?.boolValue {
+  func setSafety(_ bool: Bool?) {
+    switch bool {
     case true?:
       set(.isSafe, to: true)
       set(.isNotSafe, to: false)

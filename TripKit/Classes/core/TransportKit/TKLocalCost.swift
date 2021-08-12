@@ -37,20 +37,6 @@ public class TKLocalCost: NSObject, Codable {
   
 }
 
-extension TKLocalCost {
-  
-  /// Creating a new instance from a JSON object.
-  ///
-  /// - Parameter json: JSON object, typically obtained from server response
-  /// - Returns: A new `TKLocalCost` instance.
-  public static func newInstance(from json: [String: Any]?) -> TKLocalCost? {
-    guard let json = json else { return nil }
-    let decoder = JSONDecoder()
-    return try? decoder.decode(TKLocalCost.self, withJSONObject: json)
-  }
-  
-}
-
 public enum TKLocalCostAccuracy: String {
   
   case internalEstimate = "internal_estimate"

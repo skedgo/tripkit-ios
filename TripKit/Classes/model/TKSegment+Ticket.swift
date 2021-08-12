@@ -11,7 +11,7 @@ import Foundation
 extension TKSegment {
   
   /// Ticket information, for public transport segments
-  public struct Ticket: Codable {
+  public struct Ticket: Codable, Hashable {
     /// User-friendly name of the ticket
     public let name: String
     
@@ -19,7 +19,8 @@ extension TKSegment {
     public let fareID: String?
     
     /// Cost of the ticket, in the currency of the trip
-    public let cost: Decimal
+    /// `nil` for re-used tickets
+    public let cost: Decimal?
   }
 
   /// The ticket of this segment

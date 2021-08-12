@@ -62,9 +62,8 @@ extension TKDeparturesProvider {
     // to them, too
     TKAPIToCoreDataConverter.updateOrAddAlerts(departures.alerts, in: context)
     departures.stops?.forEach {
-      guard let hashCodes = $0.alertHashCodes else {
-        return
-      }
+      let hashCodes = $0.alertHashCodes
+      guard !hashCodes.isEmpty else { return }
       lookup[$0.code]?.forEach { $0.alertHashCodes = hashCodes.map(NSNumber.init) }
     }
     

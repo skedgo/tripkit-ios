@@ -42,6 +42,96 @@ extension Reactive where Base: TKServer {
     }
     
   }
+  
+  public static func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
+    return Single.create { single in
+      Base.hit(method, url: url, parameters: parameters) { code, responseHeader, result in
+        single(result.map { (code, responseHeader, $0) })
+      }
+      return Disposables.create()
+    }
+  }
+
+  public static func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: TKServer.HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any] = [:]
+    ) -> Single<(Int, [String: Any], Model)>
+  {
+    Single.create { subscriber in
+      TKServer.hit(type, url: url, parameters: parameters) { status, headers, result in
+        subscriber(result.map { (status, headers, $0) })
+      }
+      return Disposables.create()
+    }
+  }
+  
+  public func hit(
+    _ method: TKServer.HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any] = [:],
+    headers: [String: String] = [:],
+    region: TKRegion? = nil
+    ) -> Single<(Int?, [String: Any], Data?)>
+  {
+    Single.create { subscriber in
+      base.hit(method, path: path, parameters: parameters, headers: headers, region: region
+      ) { status, headers, result in
+        subscriber(.success((status, headers, try? result.get())))
+      }
+      return Disposables.create()
+    }
+  }
+  
+  public func stream(
+    _ method: TKServer.HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any] = [:],
+    headers: [String: String] = [:],
+    region: TKRegion? = nil,
+    repeatHandler: ((Int?, Data?) -> TKServer.RepeatHandler?)? = nil
+    ) -> Observable<(Int?, [String: Any], Data?)>
+  {
+    
+    return Observable.create { subscriber in
+      let stopper = Stopper()
+      
+      self.hit(
+        method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        repeatHandler: { code, responseHeaders, result in
+          if stopper.stop {
+            // we got discarded
+            return nil
+          }
+          
+          let hitAgain: TKServer.RepeatHandler?
+          let model = try? result.get()
+          if let repeatHandler = repeatHandler {
+            hitAgain = repeatHandler(code, model)
+          } else {
+            hitAgain = nil
+          }
+          
+          subscriber.onNext((code, responseHeaders, model))
+          
+          if hitAgain == nil {
+            subscriber.onCompleted()
+          }
+          
+          return hitAgain
+        }
+      )
+      
+      return Disposables.create() {
+        stopper.stop = true
+      }
+    }
+  }
 
   /// Hit a SkedGo endpoint, using a variety of options
   ///
@@ -51,15 +141,23 @@ extension Reactive where Base: TKServer {
   /// - parameter headers: Additional headers to add to the request
   /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
   /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`.
-  public func hit(
-    _ method: TKServer.HTTPMethod,
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: TKServer.HTTPMethod = .GET,
     path: String,
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
     region: TKRegion? = nil
-    ) -> Single<(Int, [String: Any], Data?)>
+    ) -> Single<(Int?, [String: Any], Model)>
   {
-    return stream(method, path: path, parameters: parameters, headers: headers, region: region, repeatHandler: nil)
+    return stream(type, method, path: path, parameters: parameters, headers: headers, region: region, repeatHandler: nil)
+      .map {
+        if let model = $0.2 {
+          return ($0.0, $0.1, model)
+        } else {
+          throw TKServer.ServerError.noData
+        }
+      }
       .asSingle()
   }
   
@@ -72,108 +170,104 @@ extension Reactive where Base: TKServer {
   /// - parameter region: The region for which to hit a server. In most cases, you want to set this as not every SkedGo server has data for every region.
   /// - parameter repeatHandler: Implement and return a non-negative time interval from this handler to fire the Observable again, or `nil` to stop firing.
   /// - returns: An observable with the status code, headers and data from hitting the endpoint, all status and data will be the same as the last call to the `repeatHandler`. Note: This will be called on a background thread.
-  public func stream(
-    _ method: TKServer.HTTPMethod,
+  public func stream<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: TKServer.HTTPMethod = .GET,
     path: String,
     parameters: [String: Any] = [:],
     headers: [String: String] = [:],
     region: TKRegion? = nil,
-    repeatHandler: ((Int, Data?) -> TKServer.RepeatHandler?)? = nil
-    ) -> Observable<(Int, [String: Any], Data?)>
+    repeatHandler: ((Int?, Model?) -> TKServer.RepeatHandler?)? = nil
+    ) -> Observable<(Int?, [String: Any], Model?)>
   {
-    
-    return Observable.create { subscriber in
-      let stopper = Stopper()
-      
-      self.hitSkedGo(
-        method: method,
-        path: path,
-        parameters: parameters,
-        headers: headers,
-        region: region,
-        repeatHandler: { code, responseHeaders, data in
-          if stopper.stop {
-            // we got discarded
-            return nil
-          }
-          
-          let hitAgain: TKServer.RepeatHandler?
-          if let repeatHandler = repeatHandler {
-            hitAgain = repeatHandler(code, data)
-          } else {
-            hitAgain = nil
-          }
-          
-          subscriber.onNext((code, responseHeaders, data))
-          
-          if hitAgain == nil {
-            subscriber.onCompleted()
-          }
-          
-          return hitAgain
-        }, errorHandler: { error in
-          subscriber.onError(error)
-        }
-      )
-      
-      return Disposables.create() {
-        stopper.stop = true
-      }
+    let stream: Observable<(Int?, [String: Any], Data?)> = stream(
+      method,
+      path: path,
+      parameters: parameters,
+      headers: headers,
+      region: region
+    ) { status, maybeData in
+      repeatHandler?(status, maybeData.flatMap { try? JSONDecoder().decode(Model.self, from: $0) })
+    }
+    return stream.map { status, header, maybeData in
+      (status, headers, maybeData.flatMap { try? JSONDecoder().decode(Model.self, from: $0) })
     }
   }
   
-  private func hitSkedGo(
-      method: TKServer.HTTPMethod,
+  private func hit<Model: Decodable>(
+      _ type: Model.Type,
+      _ method: TKServer.HTTPMethod = .GET,
       path: String,
       parameters: [String: Any] = [:],
       headers: [String: String] = [:],
       region: TKRegion? = nil,
-      repeatHandler: @escaping (Int, [String: Any], Data?) -> TKServer.RepeatHandler?,
-      errorHandler: @escaping (Error) -> ()
+      repeatHandler: @escaping (Int?, [String: Any], Result<Model, Error>) -> TKServer.RepeatHandler?
     ) {
 
-    self.base.hitSkedGo(
-      withMethod: method.rawValue,
+    hit(
+      method,
       path: path,
       parameters: parameters,
       headers: headers,
       region: region,
-      callbackOnMain: false,
-      success: { code, responseHeaders, response, data in
-        if let hitAgain = repeatHandler(code, responseHeaders, data) {
-          // These are the variables that control how a request is repeated
-          // 1. retryIn: tells us when we can try again, in seconds.
-          // 2. newParameters: tells us when we do retry, what parameters to use. This
-          //    may be different from the original request.
-          let retryIn: TimeInterval
-          let newParameters: [String : Any]
-          
-          switch hitAgain {
-          case .repeatIn(let seconds):
-            retryIn = seconds
-            newParameters = parameters
-          case .repeatWithNewParameters(let seconds, let paras):
-            retryIn = seconds
-            newParameters = paras
-          }
-          
-          if retryIn > 0 {
-            let queue = DispatchQueue.global(qos: .userInitiated)
-            queue.asyncAfter(deadline: DispatchTime.now() + retryIn) {
-              self.hitSkedGo(
-                method: method,
-                path: path,
-                parameters: newParameters,
-                headers: headers,
-                region: region,
-                repeatHandler: repeatHandler,
-                errorHandler: errorHandler
-              )
-            }
+      repeatHandler: { status, headers, dataResult in
+        repeatHandler(status, headers, Result {
+          let data = try dataResult.get()
+          return try JSONDecoder().decode(Model.self, from: data)
+        })
+      }
+    )
+  }
+  
+  private func hit(
+      _ method: TKServer.HTTPMethod = .GET,
+      path: String,
+      parameters: [String: Any] = [:],
+      headers: [String: String] = [:],
+      region: TKRegion? = nil,
+      repeatHandler: @escaping (Int?, [String: Any], Result<Data, Error>) -> TKServer.RepeatHandler?
+    ) {
+
+    self.base.hit(
+      method,
+      path: path,
+      parameters: parameters,
+      headers: headers,
+      region: region,
+      callbackOnMain: false
+    ) { status, responseHeaders, result in
+      if let hitAgain = repeatHandler(status, responseHeaders, result) {
+        // These are the variables that control how a request is repeated
+        // 1. retryIn: tells us when we can try again, in seconds.
+        // 2. newParameters: tells us when we do retry, what parameters to use. This
+        //    may be different from the original request.
+        let retryIn: TimeInterval
+        let newParameters: [String : Any]
+        
+        switch hitAgain {
+        case .repeatIn(let seconds):
+          retryIn = seconds
+          newParameters = parameters
+        case .repeatWithNewParameters(let seconds, let paras):
+          retryIn = seconds
+          newParameters = paras
+        }
+        
+        if retryIn > 0 {
+          let queue = DispatchQueue.global(qos: .userInitiated)
+          queue.asyncAfter(deadline: DispatchTime.now() + retryIn) {
+            self.hit(
+              method,
+              path: path,
+              parameters: newParameters,
+              headers: headers,
+              region: region,
+              repeatHandler: repeatHandler
+            )
           }
         }
-      },
-      failure: errorHandler)
+      }
+    }
   }
 }
 

@@ -82,16 +82,5 @@ extension Shape {
     get { decode([RoadTag].self, key: "roadTags") }
     set { encode(newValue, key: "roadTags") }
   }
-  
-  @objc(_setRoadTags:)
-  public func _setRoadTags(from strings: [String]?) {
-    roadTags = strings?
-      .compactMap(RoadTag.init(rawValue:))
-      .sorted {
-        $0.safety != $1.safety
-          ? $0.safety < $1.safety
-          : $0.localized < $1.localized
-      }
-  }
 
 }

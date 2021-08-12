@@ -12,38 +12,21 @@ import RxSwift
 
 import TripKit
 
-extension TKTripFetcher {
-  enum FetchError : Error {
-    case downloadFailed
-  }
-}
-
-extension Reactive where Base : TKTripFetcher {
+extension TKTripFetcher: ReactiveCompatible {}
+extension Reactive where Base == TKTripFetcher {
   public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
     return Single.create { observer in
-      var fetcher: TKTripFetcher! = TKTripFetcher()
-      fetcher.downloadTrip(url, identifier: identifier, intoTripKitContext: context) { trip in
-        if let trip = trip {
-          observer(.success(trip))
-        } else {
-          observer(.failure(TKTripFetcher.FetchError.downloadFailed))
-        }
-      }
-      return Disposables.create {
-        fetcher = nil
-      }
+      TKTripFetcher.downloadTrip(url, identifier: identifier, into: context, completion: observer)
+      return Disposables.create()
     }
   }
   
-  public static func update(_ trip: Trip) -> Single<Bool> {
+  public static func update(_ trip: Trip, url: URL? = nil, aborter: @escaping ((URL) -> Bool) = { _ in false }) -> Single<Bool> {
     return Single.create { observer in
-      var fetcher: TKTripFetcher! = TKTripFetcher()
-      fetcher.update(trip) { _, updated in
-        observer(.success(updated))
+      TKTripFetcher.update(trip, url: url, aborter: aborter) { result in
+        observer(result.map(\.didUpdate))
       }
-      return Disposables.create {
-        fetcher = nil
-      }
+      return Disposables.create()
     }
   }
 }

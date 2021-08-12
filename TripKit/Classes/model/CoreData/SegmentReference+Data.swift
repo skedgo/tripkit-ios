@@ -51,9 +51,9 @@ extension SegmentReference {
     set { encodePrimitive(newValue, key: "serviceStops") }
   }
 
-  var sharedVehicleData: NSDictionary? {
-    get { decodeCoding(NSDictionary.self, key: "sharedVehicle") }
-    set { encodeCoding(newValue, key: "sharedVehicle") }
+  var sharedVehicle: TKAPI.SharedVehicleInfo? {
+    get { decode(TKAPI.SharedVehicleInfo.self, key: "sharedVehicle") }
+    set { encode(newValue, key: "sharedVehicle") }
   }
 
   public var ticket: TKSegment.Ticket? {
@@ -80,56 +80,28 @@ extension SegmentReference {
     get { decodePrimitive(String.self, key: "vehicleUUID") }
     set { encodePrimitive(newValue, key: "vehicleUUID") }
   }
-  
-  public func sharedVehicle() -> TKAPI.SharedVehicleInfo? {
-    guard let data = sharedVehicleData else { return nil }
-    
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .iso8601
-    do {
-      return try decoder.decode(TKAPI.SharedVehicleInfo.self, withJSONObject: data)
-    } catch {
-      TKLog.debug("Couldn't decode shared vehicle data due to \(error)")
-      return nil
-    }
 
-  }
 }
 
 extension SegmentReference {
-  /// :nodoc:
-  @objc(_populateFromDictionary:)
-  public func populate(from dict: [String: AnyHashable]) {
+  func populate(from api: TKAPI.SegmentReference) {
     // Public transport
-    arrivalPlatform = dict["endPlatform"] as? String
-    departurePlatform = dict["startPlatform"] as? String
-    serviceStops = (dict["stops"] as? NSNumber)?.intValue
-    ticketWebsiteURLString = dict["ticketWebsiteURL"] as? String
-    if let ticketDict = dict["ticket"] as? [String: AnyHashable] {
-      ticket = try? JSONDecoder().decode(TKSegment.Ticket.self, withJSONObject: ticketDict)
-    }
-    timetableStartTime = TKParserHelper.parseDate(dict["timetableStartTime"])
-    timetableEndTime = TKParserHelper.parseDate(dict["timetableEndTime"])
+    departurePlatform = api.startPlatform
+    arrivalPlatform = api.endPlatform
+    serviceStops = api.serviceStops
+    ticketWebsiteURLString = api.ticketWebsite?.absoluteString
+    ticket = api.ticket
+    timetableStartTime = api.timetableStartTime
+    timetableEndTime = api.timetableEndTime
     
     // Private transport
-    sharedVehicleData = dict["sharedVehicle"] as? NSDictionary
-    vehicleUUID = dict["vehicleUUID"] as? String
+    sharedVehicle = api.sharedVehicle
+    vehicleUUID = api.vehicleUUID
     
-    // Special booking handling to not lose data
-    bookingHashCode = dict["bookingHashCode"] as? NSNumber
-    if let bookingDict = dict["booking"] as? [String: AnyHashable] {
-      do {
-        bookingData = try JSONDecoder().decode(BookingData.self, withJSONObject: bookingDict)
-      } catch {
-        TKLog.warn("Could not load booking data: \(error)")
-      }
-    }
-    
-    // What is this even used for?
-    if let payloads = dict["payloads"] as? [String: NSDictionary] {
-      for payload in payloads {
-        encodeCoding(payload.value, key: payload.key)
-      }
+    // Special handling to not lose booking data
+    bookingHashCode = api.bookingHashCode.map(NSNumber.init)
+    if let booking = api.booking {
+      bookingData = booking
     }
   }
 

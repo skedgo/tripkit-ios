@@ -35,11 +35,11 @@ extension TKDeparturesProvider {
       .asSingle()
   }
     
-  public class func streamDepartures(forStopCodes stopCodes: [String], limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, TKAPI.Departures) -> TimeInterval?)? = nil) -> Observable<TKAPI.Departures> {
+  public class func streamDepartures(forStopCodes stopCodes: [String], limit: Int = 10, in region: TKRegion, repeatHandler: ((Int?, TKAPI.Departures) -> TimeInterval?)? = nil) -> Observable<TKAPI.Departures> {
     return streamDepartures(forStopCodes: stopCodes, fromDate: nil, limit: limit, in: region, repeatHandler: repeatHandler)
   }
   
-  private class func streamDepartures(forStopCodes stopCodes: [String], fromDate: Date?, limit: Int = 10, in region: TKRegion, repeatHandler: ((Int, TKAPI.Departures) -> TimeInterval?)?) -> Observable<TKAPI.Departures> {
+  private class func streamDepartures(forStopCodes stopCodes: [String], fromDate: Date?, limit: Int = 10, in region: TKRegion, repeatHandler: ((Int?, TKAPI.Departures) -> TimeInterval?)?) -> Observable<TKAPI.Departures> {
     
     assert(repeatHandler == nil || fromDate == nil, "Don't set both `fromDate` and the `repeatHandler`. It doesn't make sense to repeat, if you fix the departure time.")
     
@@ -58,30 +58,27 @@ extension TKDeparturesProvider {
     }
     
     return TKServer.shared.rx
-      .stream(.POST, path: "departures.json", parameters: paras, region: region) { status, data in
+      .stream(TKAPI.Departures.self, .POST, path: "departures.json", parameters: paras, region: region) { status, model in
         guard fromDate == nil else {
           return nil // No result change, no need to repeat
         }
         
-        if case 400..<500 = status {
+        if case 400..<500 = status ?? 0 {
           return nil // Client-side errors; hitting again won't help
         }
 
         guard
           let repeatHandler = repeatHandler,
-          let data = data,
-          let departures = try? JSONDecoder().decode(TKAPI.Departures.self, from: data),
-          let timeInterval = repeatHandler(status, departures)
+          let model = model,
+          let timeInterval = repeatHandler(status, model)
           else { return nil }
 
         return .repeatIn(timeInterval)
       }
-      .map { _, _, data in
-        guard let data = data else { throw OutputError.noDataReturn }
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        return try decoder.decode(TKAPI.Departures.self, from: data)
-    }
+      .map { _, _, model in
+        guard let model = model else { throw OutputError.noDataReturn }
+        return model
+      }
   }
   
   public class func downloadDepartures(for stops: [StopLocation], fromDate: Date, limit: Int = 10) -> Single<Bool> {
@@ -131,13 +128,8 @@ extension TKDeparturesProvider {
     let paras: [String: Any] = TKDeparturesProvider.queryParameters(for: table, fromDate: fromDate, limit: limit)
     
     return TKServer.shared.rx
-      .hit(.POST, path: "departures.json", parameters: paras, region: table.startRegion)
-      .map { _, _, data in
-        guard let data = data else { throw OutputError.noDataReturn }
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        return try decoder.decode(TKAPI.Departures.self, from: data)
-    }
+      .hit(TKAPI.Departures.self, .POST, path: "departures.json", parameters: paras, region: table.startRegion)
+      .map(\.2)
   }
   
   public class func downloadDepartures(for table: TKDLSTable, fromDate: Date, limit: Int = 10) -> Single<Set<String>> {

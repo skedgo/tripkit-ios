@@ -126,7 +126,6 @@ extension Trip {
   
 }
 
-
 // MARK: - TKRealTimeUpdatable
 
 /// :nodoc:
@@ -138,14 +137,6 @@ extension Trip: TKRealTimeUpdatable {
     
     guard updateURLString != nil else { return false }
     return wantsRealTimeUpdates(forStart: departureTime, end: arrivalTime, forPreplanning: true)
-  }
-  
-  public var objectForRealTimeUpdates: Any {
-    return self
-  }
-  
-  public var regionForRealTimeUpdates: TKRegion {
-    return request.startRegion() ?? .international
   }
 }
 

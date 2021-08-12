@@ -22,7 +22,7 @@ class TKWaypointRouterTest: TKTestCase {
   
   func testGettingOnLate() throws {
     // Homesby to Rocks, walking to Waitara
-    let trip = self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
+    let trip = try self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
     
     let trainSegment = trip.segments[2]
     let service = trainSegment.service!
@@ -56,7 +56,7 @@ class TKWaypointRouterTest: TKTestCase {
   
   func testGettingOffEarly() throws {
     // Homesby to Rocks, walking from Milson's Point
-    let trip = self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
+    let trip = try self.trip(fromFilename: "hornsbyToSkedGo", serviceFilename: "hornsbyToSkedGoService")
     
     let trainSegment = trip.segments[2]
     let service = trainSegment.service!
@@ -90,7 +90,7 @@ class TKWaypointRouterTest: TKTestCase {
   
   func testAddingWalkAtStart() throws {
     // Berowra to Hornsby, hike to Mt Kuring-Gai
-    let trip = self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
+    let trip = try self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
     
     let trainSegment = trip.segments[1]
     let service = trainSegment.service!
@@ -128,12 +128,12 @@ class TKWaypointRouterTest: TKTestCase {
   
   func testAddingWalkAtEnd() throws {
     // Berowra to Hornsby, hike from Asquith
-    let trip = self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
+    let trip = try self.trip(fromFilename: "berowraToHornsby", serviceFilename: "berowraToHornsbyService")
     
     let trainSegment = trip.segments[1]
     let service = trainSegment.service!
     
-    let asquith = (service.visits?.first { $0.stop.name!.contains("Asquith") })!
+    let asquith = try XCTUnwrap(service.visits?.first { $0.stop.name!.contains("Asquith") })
     
     let builder = WaypointParasBuilder()
     let paras = try builder.build(moving: trainSegment, to: asquith, atStart: false)
@@ -165,7 +165,7 @@ class TKWaypointRouterTest: TKTestCase {
   }
   
   func testChangingEmbarkationWhenDriving() throws {
-    let trip = self.trip(fromFilename: "routing-drive-park-walk-train", serviceFilename: "service-for-park-ride")
+    let trip = try self.trip(fromFilename: "routing-drive-park-walk-train", serviceFilename: "service-for-park-ride")
     // start - drive - park - walk - train - walk - transfer - bus - walk - end
     
     let trainSegment = trip.segments[4]
@@ -193,7 +193,7 @@ class TKWaypointRouterTest: TKTestCase {
   }
   
   func testChangingParkWhenDrivingGoGet() throws {
-    let trip = self.trip(fromFilename: "routing-goget-park")
+    let trip = try self.trip(fromFilename: "routing-goget-park")
     // collect - GoGet - find parking
     
     let driveGoGetSegment = trip.segments[1]
@@ -225,7 +225,7 @@ class TKWaypointRouterTest: TKTestCase {
   }
   
   func testChangingVehicleWhenDrivingGoGet() throws {
-    let trip = self.trip(fromFilename: "routing-goget-park")
+    let trip = try self.trip(fromFilename: "routing-goget-park")
     // collect - GoGet - find parking
     
     let driveGoGetSegment = trip.segments[1]
@@ -255,14 +255,6 @@ class TKWaypointRouterTest: TKTestCase {
     let vehicleLocation = CLLocation(latitude: vehicle.coordinate.latitude, longitude: vehicle.coordinate.longitude)
     XCTAssertLessThan(startLocation.distance(from: vehicleLocation), 50)
   }
-
-//  func testChangeTripWithTwoService() {
-//    XCTFail()
-//  }
-
-//  func testChangeTripAfterServiceIdChange() {
-//    XCTFail()
-//  }
 
 }
 

@@ -52,14 +52,6 @@ extension Service: TKRealTimeUpdatable {
     
     return wantsRealTimeUpdates(forStart: departure, end: arrival, forPreplanning: false)
   }
-  
-  public var objectForRealTimeUpdates: Any {
-    return self
-  }
-  
-  public var regionForRealTimeUpdates: TKRegion {
-    return region ?? .international
-  }
 }
 
 // MARK: - Flag accessors
