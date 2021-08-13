@@ -6,9 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/NSUserDefaults+SharedDefaults.h>
+#import <TripKitObjc/TKConfig.h>
+#else
 #import "NSUserDefaults+SharedDefaults.h"
-
 #import "TKConfig.h"
+#endif
 
 @implementation NSUserDefaults (SharedDefaults)
 

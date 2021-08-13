@@ -14,6 +14,10 @@ import TGCardViewController
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIRoutingQueryInputTitleView: UIView {
   
   static func newInstance() -> TKUIRoutingQueryInputTitleView {

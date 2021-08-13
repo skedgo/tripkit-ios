@@ -10,6 +10,10 @@ import Foundation
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension Trip {
   
   func timeTitles(capitalize: Bool) -> (title: String, subtitle: String) {

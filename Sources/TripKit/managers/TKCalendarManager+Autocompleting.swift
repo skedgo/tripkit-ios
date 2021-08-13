@@ -8,6 +8,11 @@
 
 import Foundation
 import EventKit
+import MapKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 extension TKCalendarManager: TKAutocompleting {
   

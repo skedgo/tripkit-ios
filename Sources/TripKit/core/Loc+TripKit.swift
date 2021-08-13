@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension Loc {
   
   @objc public static var Trip: String {

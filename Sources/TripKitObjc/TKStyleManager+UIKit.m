@@ -6,8 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKStyleManager+UIKit.h>
+#import <TripKitObjc/UIFont+CustomFonts.h>
+#else
 #import "TKStyleManager+UIKit.h"
-#import "UIFont+CustomFonts.h"
+#import "UIFont+CustomFonts.h" // for bundle
+#endif
 
 @implementation TKStyleManager (Fonts)
 

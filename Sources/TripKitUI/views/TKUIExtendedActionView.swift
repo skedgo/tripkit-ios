@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIExtendedActionView: UIView {
 
   @IBOutlet weak var imageView: UIImageView!

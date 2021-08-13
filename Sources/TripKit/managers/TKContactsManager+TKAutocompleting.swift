@@ -8,6 +8,11 @@
 
 import Foundation
 import CoreLocation
+import MapKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 extension TKContactsManager {
   

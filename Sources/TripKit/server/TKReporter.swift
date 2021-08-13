@@ -7,8 +7,11 @@
 //
 
 import Foundation
-
 import CoreLocation
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 public class TKReporter {
   

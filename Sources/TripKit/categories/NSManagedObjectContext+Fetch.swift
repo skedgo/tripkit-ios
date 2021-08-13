@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension NSManagedObjectContext {
   public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, relationshipKeyPathsForPrefetching: [String]? = nil, fetchLimit: Int? = nil) -> [E] {

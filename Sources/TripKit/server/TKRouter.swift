@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import MapKit
+import CoreData
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 /// A TKRouter calculates trips for routing requests, it talks to TripGo's `routing.json` API.
 @objc

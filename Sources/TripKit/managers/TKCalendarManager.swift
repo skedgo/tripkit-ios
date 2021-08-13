@@ -9,6 +9,10 @@
 import Foundation
 import EventKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public class TKCalendarManager: TKPermissionManager {
   
   @objc(sharedInstance)

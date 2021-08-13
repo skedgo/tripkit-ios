@@ -6,9 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKTransportModes.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
 #import "TKTransportModes.h"
-
 #import "TKStyleManager.h"
+#endif
 
 // all of these need to be unique
 static NSString* const kSGTransportModeTypeIdentifierFlight         = @"air";

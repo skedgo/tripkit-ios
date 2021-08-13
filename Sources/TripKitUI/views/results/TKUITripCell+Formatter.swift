@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 extension TKUITripCell {
   

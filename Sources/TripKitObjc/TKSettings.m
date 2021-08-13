@@ -6,10 +6,15 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/NSUserDefaults+SharedDefaults.h>
+#import <TripKitObjc/TKSettings.h>
+#import <TripKitObjc/TKConstants.h>
+#else
 #import "TKSettings.h"
-
 #import "TKConstants.h"
 #import "NSUserDefaults+SharedDefaults.h"
+#endif
 
 @implementation TKSettings
 

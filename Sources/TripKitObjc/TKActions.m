@@ -6,8 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKActions.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
 #import "TKActions.h"
 #import "TKStyleManager.h"
+#endif
 
 @interface TKAction : NSObject
 

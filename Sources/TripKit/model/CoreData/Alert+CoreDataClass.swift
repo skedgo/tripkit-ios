@@ -9,6 +9,11 @@
 
 import Foundation
 import CoreData
+import MapKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 @objc(Alert)
 public class Alert: NSManagedObject {

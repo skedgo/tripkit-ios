@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIGroupedAlertCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!

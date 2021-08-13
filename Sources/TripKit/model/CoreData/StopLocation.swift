@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 extension StopLocation {
   @objc public var timeZone: TimeZone? {

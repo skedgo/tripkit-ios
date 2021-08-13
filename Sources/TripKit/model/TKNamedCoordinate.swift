@@ -9,6 +9,10 @@
 import Foundation
 import MapKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
   
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {

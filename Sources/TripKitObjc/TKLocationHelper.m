@@ -8,7 +8,11 @@
 
 #import "TKMacro.h"
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKLocationHelper.h>
+#else
 #import "TKLocationHelper.h"
+#endif
 
 #define SGSimilarLocationDegreeDifference 0.000025
 

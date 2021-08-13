@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import MapKit
+import UIKit
 
 import RxSwift
 import RxCocoa
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.

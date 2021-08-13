@@ -10,6 +10,14 @@
 import Foundation
 import CoreData
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
+#if os(iOS)
+import UIKit
+#endif
+
 @objc(Trip)
 public class Trip: NSManagedObject {
   private var _sortedSegments: [TKSegment]? = nil

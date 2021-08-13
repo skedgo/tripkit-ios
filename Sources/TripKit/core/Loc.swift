@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public class Loc : NSObject {
   
   fileprivate override init() { super.init() }

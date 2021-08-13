@@ -6,7 +6,11 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKCrossPlatform.h>
+#else
 #import "TKCrossPlatform.h"
+#endif
 
 @interface NSString (Sizing)
 

@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public class TKUIAttributionView: UIView {
   
   public enum Alignment {

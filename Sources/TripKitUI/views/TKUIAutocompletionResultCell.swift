@@ -13,6 +13,10 @@ import RxCocoa
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIAutocompletionResultCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUIAutocompletionResultCell"

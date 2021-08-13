@@ -8,10 +8,15 @@
 
 #import "TKMacro.h"
 
-#import "TKServer.h"
-
-#import "TKStyleManager.h"
+#if SWIFT_PACKAGE
+#import <TripKitObjc/NSUserDefaults+SharedDefaults.h>
+#import <TripKitObjc/TKServer.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
 #import "NSUserDefaults+SharedDefaults.h"
+#import "TKServer.h"
+#import "TKStyleManager.h"
+#endif
 
 NSString *const TKDefaultsKeyUserToken               = @"userToken";
 

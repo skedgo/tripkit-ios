@@ -8,6 +8,7 @@
 
 import Foundation
 import class MapKit.MKDistanceFormatter
+import UIKit
 
 import TGCardViewController
 

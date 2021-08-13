@@ -10,6 +10,10 @@
 
 import UIKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 // MARK: - Default Styles
 
 extension TKStyleManager {

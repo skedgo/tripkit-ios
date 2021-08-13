@@ -6,6 +6,13 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
+import Foundation
+import MapKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension TKGeocoding {
   
   public func geocode(_ object: TKGeocodable, near region: MKMapRect, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -32,7 +39,7 @@ public class TKGeocoderHelper: NSObject {
   
   @objc(errorForNoLocationFoundForInput:)
   public static func errorForNoLocationFound(forInput input: String) -> Error {
-    let format = NSLocalizedString("'%@' not found.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Error when location search for %input was not successful. (old key: RequestErrorFormat)")
+    let format = NSLocalizedString("'%@' not found.", tableName: "Shared", bundle: .tripKit, comment: "Error when location search for %input was not successful. (old key: RequestErrorFormat)")
     let message = String(format: format, input)
     return NSError(code: 64720, message: message)
   }

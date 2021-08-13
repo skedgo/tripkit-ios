@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension TKSettings {
   
   private enum DefaultsKey: String {

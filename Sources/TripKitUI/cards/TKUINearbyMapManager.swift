@@ -14,6 +14,10 @@ import RxCocoa
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public class TKUINearbyMapManager: TKUIMapManager {
   
   public weak var viewModel: TKUINearbyViewModel?

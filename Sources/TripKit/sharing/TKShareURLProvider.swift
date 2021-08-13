@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public protocol TKURLShareable {
   var shareURL: URL? { get }
 }
@@ -24,6 +28,8 @@ extension TKAPI {
 }
 
 #if os(iOS)
+
+import UIKit
 
 public class TKShareURLProvider: UIActivityItemProvider {
   

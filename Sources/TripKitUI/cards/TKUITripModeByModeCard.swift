@@ -7,12 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
 import RxSwift
 import RxCocoa
 import TGCardViewController
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 public protocol TKUITripModeByModeCardDelegate {
 

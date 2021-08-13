@@ -13,6 +13,10 @@ import RxSwift
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public enum TKLocationProvider {
   
   public enum Error: Swift.Error {

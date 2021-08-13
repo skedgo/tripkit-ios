@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
 
   static let forSizing: TKUIResultsSectionHeaderView = {

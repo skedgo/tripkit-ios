@@ -12,6 +12,10 @@ import RxSwift
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUISegmentStationaryCell: UITableViewCell {
   
   @IBOutlet weak var timeStack: UIStackView!

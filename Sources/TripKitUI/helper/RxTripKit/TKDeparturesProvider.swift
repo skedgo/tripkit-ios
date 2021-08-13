@@ -11,6 +11,10 @@ import RxSwift
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension TKDeparturesProvider {
   
   enum InputError: Error {

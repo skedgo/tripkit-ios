@@ -6,6 +6,9 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
+import Foundation
+import MapKit
+
 @available(*, unavailable, renamed: "TKAggregateGeocoder")
 public typealias SGAggregateGeocoder = TKAggregateGeocoder
 

@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   

@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import CoreData
 
 import RxSwift
 import RxCocoa
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 extension TKUITimetableViewModel {
   

@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public struct TKQuickBookingPrice: Hashable {
   /// Price in local currency, typically not in smallest unit, but dollars
   public let localCost: Float

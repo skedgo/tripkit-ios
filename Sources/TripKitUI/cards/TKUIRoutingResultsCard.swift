@@ -7,12 +7,17 @@
 //
 
 import Foundation
+import MapKit
 
 import TGCardViewController
 import RxSwift
 import RxCocoa
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 @available(*, unavailable, renamed: "TKUIRoutingResultsCard")
 public typealias TKUIResultsCard = TKUIRoutingResultsCard

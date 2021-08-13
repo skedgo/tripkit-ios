@@ -6,12 +6,20 @@
 //
 //
 
-#import "TKMacro.h"
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKTripKit.h>
+#import <TripKitObjc/NSUserDefaults+SharedDefaults.h>
+#import <TripKitObjc/TKConfig.h>
+#import <TripKitObjc/TKServer.h>
+#else
 #import "TKTripKit.h"
-
 #import "NSUserDefaults+SharedDefaults.h"
 #import "TKConfig.h"
 #import "TKServer.h"
+#endif
+
+#import "TKMacro.h"
+
 
 NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification";
 

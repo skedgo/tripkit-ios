@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 /// Small helper that summarises the input required to build a timetable. See `TKUITimetableCard`.
 public struct TKTimetable {

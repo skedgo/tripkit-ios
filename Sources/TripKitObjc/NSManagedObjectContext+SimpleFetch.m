@@ -7,7 +7,12 @@
 //
 
 #import "TKMacro.h"
+
+#if SWIFT_PACKAGE
+#import <TripKitObjc/NSManagedObjectContext+SimpleFetch.h>
+#else
 #import "NSManagedObjectContext+SimpleFetch.h"
+#endif
 
 @implementation NSManagedObjectContext(SimpleFetch)
 

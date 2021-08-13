@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension TKUIRoutingSupportView {
   
   static func clear(from view: UIView) {

@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import MapKit
 
 import RxSwift
 import RxCocoa
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 class TKUIRoutingQueryInputViewModel {
   

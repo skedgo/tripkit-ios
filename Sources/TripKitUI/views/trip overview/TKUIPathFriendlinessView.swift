@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 class TKUIPathFriendlinessView: UIView {
   

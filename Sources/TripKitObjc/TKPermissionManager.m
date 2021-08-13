@@ -6,7 +6,11 @@
 //  Copyright (c) 2012 Adrian Schoenig. All rights reserved.
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKPermissionManager.h>
+#else
 #import "TKPermissionManager.h"
+#endif
 
 NSString *const TKPermissionsChangedNotification =  @"kTKPermissionsChangedNotification";
 

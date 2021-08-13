@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 /**
  `TKServer` subclass that is forced to hit the provided `baseURL` for SkedGo calls.
  */

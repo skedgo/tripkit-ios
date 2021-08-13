@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import CoreLocation
 
 import RxSwift
 import RxCocoa
 
 import TripKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 public extension Reactive where Base : TKLocationManager {
   

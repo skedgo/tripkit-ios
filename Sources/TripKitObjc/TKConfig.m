@@ -6,7 +6,11 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKConfig.h>
+#else
 #import "TKConfig.h"
+#endif
 
 @interface TKConfig ()
 

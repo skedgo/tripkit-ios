@@ -10,6 +10,10 @@ import XCTest
 
 @testable import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKSettingsTest: XCTestCase {
   
   override func setUp() {

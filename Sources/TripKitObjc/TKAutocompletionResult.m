@@ -6,9 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKAutocompletionResult.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
 #import "TKAutocompletionResult.h"
-
 #import "TKStyleManager.h"
+#endif
 
 @implementation NSString (Matches)
 

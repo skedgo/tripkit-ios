@@ -15,6 +15,10 @@ import RxCocoa
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIResultsTitleView: UIView {
   
   @IBOutlet weak var originLabel: UILabel!

@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUISegmentAlertCell: UITableViewCell {
   
   @IBOutlet private weak var contentWrapper: UIView!

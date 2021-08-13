@@ -8,9 +8,13 @@
 
 #import "TKMacro.h"
 
-#import "TKStyleManager.h"
-
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKConfig.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
 #import "TKConfig.h"
+#import "TKStyleManager.h"
+#endif
 
 @implementation TKStyleManager
 

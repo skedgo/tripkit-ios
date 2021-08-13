@@ -13,6 +13,10 @@ import TGCardViewController
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUIServiceTitleView: UIView {
 
   @IBOutlet weak var serviceTitleLabel: TKUIStyledLabel!

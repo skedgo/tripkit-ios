@@ -8,7 +8,11 @@
 
 import UIKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#else
 import class TripKit.TKStyleManager
+#endif
 
 class TKUISegmentDirectionCell: UITableViewCell {
   

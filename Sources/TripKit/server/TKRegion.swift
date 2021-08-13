@@ -10,6 +10,10 @@ import Foundation
 import CoreLocation
 import MapKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 enum TKRegionParserError : Error {
   case emptyPolygon
   case badTimeZoneIdentifier(String)

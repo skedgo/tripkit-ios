@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import MapKit
 
 @testable import TripKit
 @testable import TripKitUI

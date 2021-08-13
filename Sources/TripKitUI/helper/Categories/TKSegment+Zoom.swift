@@ -6,6 +6,8 @@
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
 //
 
+import MapKit
+
 import TripKit
 
 extension TKSegment {

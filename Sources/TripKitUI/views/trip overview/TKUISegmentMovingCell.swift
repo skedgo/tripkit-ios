@@ -12,6 +12,10 @@ import RxSwift
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 class TKUISegmentMovingCell: UITableViewCell {
   @IBOutlet weak var modeWrapper: UIView!
   @IBOutlet weak var modeImage: UIImageView!

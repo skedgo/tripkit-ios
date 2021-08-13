@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public protocol TKUITimePickerSheetDelegate: AnyObject {
 
   func timePicker(_ picker: TKUITimePickerSheet, pickedDate: Date, for type: TKTimeType)

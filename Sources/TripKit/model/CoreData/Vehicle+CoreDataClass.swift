@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import MapKit
 
 @objc(Vehicle)
 public class Vehicle: NSManagedObject {
@@ -113,7 +114,7 @@ extension Vehicle : MKAnnotation {
     
     let duration = Date.durationString(forSeconds: -seconds)
     if let label = self.label, (1...20).contains(label.utf16.count) {
-      let format = NSLocalizedString("Vehicle %@ updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle 'x' updated. (old key: VehicleCalledUpdated)")
+      let format = NSLocalizedString("Vehicle %@ updated %@ ago", tableName: "TripKit", bundle: .tripKit, comment: "Vehicle 'x' updated. (old key: VehicleCalledUpdated)")
       return String(format: format, label, duration)
     } else {
       return Loc.UpdatedAgo(duration: duration)

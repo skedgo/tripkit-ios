@@ -7,7 +7,12 @@
 //
 
 #import "TKMacro.h"
+
+#if SWIFT_PACKAGE
+#import <TripKitObjc/NSManagedObject+TKPersistence.h>
+#else
 #import "NSManagedObject+TKPersistence.h"
+#endif
 
 @implementation NSManagedObject (TKPersistence)
 

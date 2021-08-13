@@ -12,6 +12,10 @@ import TGCardViewController
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 open class TKUIHomeViewController: TGCardViewController {
   
   public weak var searchResultsDelegate: TKUIHomeCardSearchResultsDelegate? {

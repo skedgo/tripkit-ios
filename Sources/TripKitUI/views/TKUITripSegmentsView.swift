@@ -10,6 +10,10 @@ import UIKit
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public class TKUITripSegmentsView : UIView {
   
   /// Whether the trip should be shown as cancelled, i.e., with a line through it

@@ -6,8 +6,11 @@
 //  Copyright 2011 SkedGo. All rights reserved.
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/NSDate+Helpers.h>
+#else
 #import "NSDate+Helpers.h"
-
+#endif
 
 @implementation NSDate(Helpers)
 

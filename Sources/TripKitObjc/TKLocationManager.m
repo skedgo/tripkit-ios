@@ -6,14 +6,21 @@
 //
 //
 
-#import "TKMacro.h"
-#import "TKLocationManager.h"
-
 @import MapKit;
 
+#import "TKMacro.h"
+
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKLocationManager.h>
+#import <TripKitObjc/TKAutocompletionResult.h>
+#import <TripKitObjc/TKCrossPlatform.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
+#import "TKLocationManager.h"
 #import "TKAutocompletionResult.h"
 #import "TKCrossPlatform.h"
-#import "TKStyleManager.h" // for bundle
+#import "TKStyleManager.h"  // for bundle
+#endif
 
 NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManagerFoundLocationNotification";
 

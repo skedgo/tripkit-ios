@@ -6,8 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/UIFont+CustomFonts.h>
+#import <TripKitObjc/TKConfig.h>
+#else
 #import "UIFont+CustomFonts.h"
 #import "TKConfig.h"
+#endif
 
 @implementation UIFont (CustomFonts)
 

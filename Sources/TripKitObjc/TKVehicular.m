@@ -6,9 +6,13 @@
 //
 //
 
+#if SWIFT_PACKAGE
+#import <TripKitObjc/TKVehicular.h>
+#import <TripKitObjc/TKStyleManager.h>
+#else
 #import "TKVehicular.h"
-
 #import "TKStyleManager.h" // for bundle
+#endif
 
 @implementation TKVehicularHelper
 

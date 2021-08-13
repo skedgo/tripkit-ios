@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "state": {
+          "branch": null,
+          "revision": "d06df9adf50ed8cde5786d935836a5f445f780ba",
+          "version": "6.3.1"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "7c17a6ccca06b5c107cfa4284e634562ddaf5951",
+          "version": "6.2.0"
+        }
+      },
+      {
+        "package": "TGCardViewController",
+        "repositoryURL": "https://gitlab.com/SkedGo/iOS/TGCardViewController.git",
+        "state": {
+          "branch": "spm",
+          "revision": "f0c43e3ee29b92649d31a417bde9c859fe4115a5",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

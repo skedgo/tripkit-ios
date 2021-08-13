@@ -8,6 +8,10 @@
 import Foundation
 import MapKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 @available(*, unavailable, renamed: "TKPeliasGeocoder")
 public typealias TKMapZenGeocoder = TKPeliasGeocoder
 

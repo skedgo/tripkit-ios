@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(iOS) || os(tvOS)
+import UIKit
+#endif
+
 extension Shape: DataAttachable {}
 
 extension Shape {

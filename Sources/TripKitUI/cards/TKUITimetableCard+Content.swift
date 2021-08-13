@@ -12,6 +12,10 @@ import RxSwift
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension TKUIDepartureCellContent {
   
   static func build(embarkation: StopVisits, disembarkation: StopVisits? = nil) -> TKUIDepartureCellContent? {

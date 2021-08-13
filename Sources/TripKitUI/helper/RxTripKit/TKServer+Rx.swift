@@ -13,6 +13,10 @@ import RxCocoa
 
 import TripKit
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 extension Reactive where Base: TKRegionManager {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {
     return requireRegions()
@@ -39,9 +43,6 @@ extension Reactive where Base: TKRegionManager {
 
 
 extension Reactive where Base: TKServer {
-  
-
-  
   
   public static func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
     return Single.create { single in

@@ -7,6 +7,11 @@
 //
 
 import Foundation
+import MapKit
+
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
 
 public class TKRegionAutocompleter: TKAutocompleting {
   public init() {

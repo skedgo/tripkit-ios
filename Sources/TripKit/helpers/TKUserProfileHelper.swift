@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import TripKitObjc
+#endif
+
 public class TKUserProfileHelper: NSObject {
   
   public enum DefaultsKey: String {
