@@ -19,7 +19,7 @@ extension NSError {
     let dict = [
       NSLocalizedDescriptionKey: message
     ]
-    let domain = (Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String) ?? "com.skedgo.shared-ios"
+    let domain = (Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String) ?? "com.skedgo.tripkit-ios"
     self.init(domain: domain, code: code, userInfo: dict)
   }
   

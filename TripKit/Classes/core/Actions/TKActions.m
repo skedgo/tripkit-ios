@@ -7,7 +7,6 @@
 //
 
 #import "TKActions.h"
-#import "TKTripKit.h"
 #import "TKStyleManager.h"
 
 @interface TKAction : NSObject
@@ -100,7 +99,7 @@
     }];
     
     __weak UIAlertController* weakAlerter = alerter;
-    [alerter addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTableInBundle(@"Done", @"Shared", [TKTripKit bundle], "Done action")
+    [alerter addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTableInBundle(@"Done", @"Shared", [TKStyleManager bundle], "Done action")
                                                 style:UIAlertActionStyleDefault handler:
                         ^(UIAlertAction * _Nonnull action) {
       __strong UIAlertController *strongAlerter = weakAlerter;
@@ -112,7 +111,7 @@
   }
   
   if (self.hasCancel) {
-    [alerter addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"Shared", [TKTripKit bundle], "Cancel action") style:UIAlertActionStyleCancel handler:nil]];
+    [alerter addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", @"Shared", [TKStyleManager bundle], "Cancel action") style:UIAlertActionStyleCancel handler:nil]];
   }
   
   if ([sender isKindOfClass:[UIBarButtonItem class]]) {

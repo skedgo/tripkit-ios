@@ -85,7 +85,7 @@ extension TKDeparturesProvider {
     
     let stopCodes = stops.map { $0.stopCode }
     
-    return TKServer.shared.rx
+    return TKRegionManager.shared.rx
       .requireRegions()
       .flatMap { Void -> Single<TKAPI.Departures> in
         guard let region = stops.first?.region else {
@@ -134,7 +134,7 @@ extension TKDeparturesProvider {
   
   public class func downloadDepartures(for table: TKDLSTable, fromDate: Date, limit: Int = 10) -> Single<Set<String>> {
     
-    return TKServer.shared.rx
+    return TKRegionManager.shared.rx
       .requireRegions()
       .flatMap { Void -> Single<TKAPI.Departures> in
         return TKDeparturesProvider.fetchDepartures(for: table, fromDate: fromDate, limit: limit)

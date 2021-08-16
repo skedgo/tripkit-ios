@@ -8,8 +8,7 @@
 
 #import "TKTransportModes.h"
 
-#import "TKRootKit.h"
-
+#import "TKStyleManager.h"
 
 // all of these need to be unique
 static NSString* const kSGTransportModeTypeIdentifierFlight         = @"air";

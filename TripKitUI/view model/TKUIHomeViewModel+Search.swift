@@ -18,7 +18,7 @@ extension TKUIHomeViewModel {
   static func searchContent(for searchInput: SearchInput) -> (Driver<[Section]>, Signal<NextAction>, Signal<Error>) {
     
     // We use Apple & SkedGo if none is provided for autocompletion
-    let autocompleteDataProviders = TKUIHomeCard.config.autocompletionDataProviders ?? [TKAppleGeocoder(), TKSkedGoGeocoder()]
+    let autocompleteDataProviders = TKUIHomeCard.config.autocompletionDataProviders ?? [TKAppleGeocoder(), TKTripGoGeocoder()]
     
     let searchViewModel = TKUIAutocompletionViewModel(
       providers: autocompleteDataProviders,

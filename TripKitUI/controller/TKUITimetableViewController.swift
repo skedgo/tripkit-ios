@@ -47,7 +47,7 @@ public class TKUITimetableViewController: TGCardViewController {
   ///
   /// Make sure that the stop provides the correct region and stop code, or
   /// otherwise you'll get a blank view. Best to use stop annotations provided
-  /// from TripKit, e.g., from `TKSkedGoGeocoder`.
+  /// from TripKit, e.g., from `TKTripGoGeocoder`.
   ///
   /// - Parameters:
   ///   - stop: The stop for which to show departures, includes departures

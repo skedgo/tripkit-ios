@@ -33,9 +33,9 @@ public class TKSegment: NSObject {
   
   @objc public private(set) var trip: Trip! // practically nonnull, but can be nulled due to weak reference
   let reference: SegmentReference?
-  var template: SegmentTemplate? { reference?.template() }
+  var template: SegmentTemplate? { reference?.template }
   
-  private lazy var primaryLocationString: String? = TKSegmentBuilder._buildPrimaryLocationString(for: self)
+  private lazy var primaryLocationString: String? = buildPrimaryLocationString()
   
   // MARK: - Initialisation
   
@@ -52,13 +52,12 @@ public class TKSegment: NSObject {
     super.init()
   }
 
-  @objc(initWithReference:forTrip:)
-  public init(reference: SegmentReference, trip: Trip) {
+  init(reference: SegmentReference, trip: Trip) {
     self.order = .regular
     self.trip = trip
     self.reference = reference
     
-    let template = reference.template()
+    let template = reference.template
     assert(template != nil, "Template missing for \(reference)")
     assert(template?.start != nil, "Template is missing start: \(String(describing: template))")
     assert(template?.end != nil, "Template is missing end: \(String(describing: template))")
@@ -148,9 +147,8 @@ public class TKSegment: NSObject {
   @objc public var singleLineInstruction: String? {
     if let instruction = _singleLineInstruction { return instruction }
     
-    var isTimeDependent: ObjCBool = false
-    let newString = TKSegmentBuilder._buildSingleLineInstruction(for: self, includingTime: true, includingPlatform: false, isTimeDependent: &isTimeDependent)
-    if isTimeDependent.boolValue {
+    let (newString, isTimeDependent) = buildSingleLineInstruction(includingTime: true, includingPlatform: false)
+    if isTimeDependent {
       // Don't cache, just return, as instructions are dynamic
       return newString
     } else {
@@ -164,9 +162,8 @@ public class TKSegment: NSObject {
   public var singleLineInstructionWithoutTime: String? {
     if let instruction = _singleLineInstructionWithoutTime { return instruction }
     
-    var isTimeDependent: ObjCBool = false
-    let newString = TKSegmentBuilder._buildSingleLineInstruction(for: self, includingTime: false, includingPlatform: false, isTimeDependent: &isTimeDependent)
-    if isTimeDependent.boolValue {
+    let (newString, isTimeDependent) = buildSingleLineInstruction(includingTime: false, includingPlatform: false)
+    if isTimeDependent {
       // Don't cache, just return, as instructions are dynamic
       return newString
     } else {
@@ -180,9 +177,7 @@ public class TKSegment: NSObject {
     if let notes = _notes { return notes }
     guard let rawString = template?.notesRaw, !rawString.isEmpty else { return nil }
     
-    let mutable = NSMutableString(string: rawString)
-    let isTimeDependent = TKSegmentBuilder._fill(inTemplates: mutable, for: self, inTitle: false, includingTime: true, includingPlatform: true)
-    let newNotes = mutable as String
+    let (newNotes, isTimeDependent) = fillTemplates(input: rawString, inTitle: false, includingTime: true, includingPlatform: true)
     if isTimeDependent {
       return newNotes
     } else {
@@ -196,9 +191,7 @@ public class TKSegment: NSObject {
     if let notesWithoutPlatforms = _notesWithoutPlatforms { return notesWithoutPlatforms }
     guard let rawString = template?.notesRaw, !rawString.isEmpty else { return nil }
     
-    let mutable = NSMutableString(string: rawString)
-    let isTimeDependent = TKSegmentBuilder._fill(inTemplates: mutable, for: self, inTitle: false, includingTime: true, includingPlatform: false)
-    let newNotes = mutable as String
+    let (newNotes, isTimeDependent) = fillTemplates(input: rawString, inTitle: false, includingTime: false, includingPlatform: false)
     if isTimeDependent {
       return newNotes
     } else {
@@ -218,7 +211,7 @@ public class TKSegment: NSObject {
     else { return [] }
     
     return hashCodes
-      .compactMap { Alert.fetch(withHashCode: $0, inTripKitContext: context) }
+      .compactMap { Alert.fetch(hashCode: $0, in: context) }
       .sortedByDistance(from: start)
   }()
   
@@ -272,7 +265,7 @@ public class TKSegment: NSObject {
   /// Dictionary of stop code to bool of which stops along a service this segment is travelling along.
   private var segmentVisits: [String: Bool] {
     if let existing = _segmentVisits { return existing }
-    _segmentVisits = TKSegmentBuilder._buildSegmentVisits(for: self)?.mapValues { $0.boolValue }
+    _segmentVisits = buildSegmentVisits()
     return _segmentVisits ?? [:]
   }
   private var _segmentVisits: [String: Bool]? = nil
@@ -307,7 +300,6 @@ public class TKSegment: NSObject {
     return false
   }
   
-  @objc(shouldShowVisit:)
   public func shouldShow(_ visit: StopVisits) -> Bool {
     // commented out the following as it looks a bit
     // weird if when we have bus => walk => bus and
@@ -413,16 +405,16 @@ public class TKSegment: NSObject {
   // MARK: - Inferred properties: Booking
   
   private lazy var bookingDataCache: (data: BookingData?, hashCode: Int?) = {
-    return (data: reference?.bookingData, hashCode: reference?.bookingHashCode?.intValue)
+    return (data: reference?.bookingData, hashCode: reference.map { Int($0.bookingHashCode) } )
   }()
   
   private var bookingData: BookingData? {
-    guard let newHashCode = reference?.bookingHashCode?.intValue else { return bookingDataCache.data }
+    guard let newHashCode = reference?.bookingHashCode else { return bookingDataCache.data }
     
     if let oldHashCode = bookingDataCache.hashCode, oldHashCode == newHashCode {
       return bookingDataCache.data
     } else {
-      bookingDataCache = (data: reference?.bookingData, hashCode: newHashCode)
+      bookingDataCache = (data: reference?.bookingData, hashCode: Int(newHashCode))
       return bookingDataCache.data
     }
   }
@@ -494,7 +486,7 @@ extension TKSegment {
 extension TKSegment {
   
   public var index: Int {
-    return reference?.index.intValue ?? -1
+    reference.map { Int($0.index) } ?? -1
   }
   
   @objc
@@ -603,10 +595,10 @@ extension TKSegment {
   }
   
   /// - Parameter vehicle: Vehicle to assign to this segment. Only takes affect if its of a compatible type.
-  @objc public func assignVehicle(_ vehicle: TKVehicular?) {
+  public func assign(_ vehicle: TKVehicular?) {
     guard privateVehicleType == vehicle?.vehicleType() else { return }
     
-    reference?.setVehicle(vehicle)
+    reference?.assign(vehicle)
   }
   
 }

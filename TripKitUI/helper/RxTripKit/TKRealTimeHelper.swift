@@ -25,7 +25,7 @@ public enum TKRealTimeHelper {
       .filter { TKUITripModeByModeCard.config.builder.shouldUpdate(trip: trip, counter: $0.counter) && !$0.pause }
       .flatMapLatest { _ -> Observable<TKRealTimeUpdateProgress<Trip>> in
         let previousURLString = trip.updateURLString
-        return TKBuzzRealTime.rx.update(trip)
+        return TKRealTimeFetcher.rx.update(trip)
           .map { ($1 && $0.updateURLString == previousURLString) ? .idle : .updated($0) }
           .asObservable()
           .startWith(.updating)

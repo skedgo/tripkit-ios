@@ -59,8 +59,7 @@ public class TKUIResultsFetcher {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
-      request.timeType = NSNumber(value: TKTimeType.leaveAfter.rawValue)
-      request.departureTime = Date()
+      request.setTime(Date(), for: .leaveAfter)
     }
     
     // 1. Fetch current location if necessary

@@ -69,7 +69,7 @@ class TKUIRoutingResultsViewModel {
     // case we just display the results.
     let requestChanged: Observable<(TripRequest, mutable: Bool)>
     let skipRequest: Bool
-    if !editable, let request = initialRequest, request.tripGroups?.isEmpty == false {
+    if !editable, let request = initialRequest, !request.tripGroups.isEmpty {
       requestChanged = .just( (request, mutable: false) )
       skipRequest = true
     
@@ -196,7 +196,7 @@ class TKUIRoutingResultsViewModel {
     let modeInput = Observable.combineLatest(requestToShow, builderChanged)
     let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
-        let modes = tuple.0.applicableModeIdentifiers()
+        let modes = tuple.0.applicableModeIdentifiers
         let region = Self.regionForModes(for: tuple.1)
         return Next.presentModeConfigurator(modes: modes, region: region)
       }

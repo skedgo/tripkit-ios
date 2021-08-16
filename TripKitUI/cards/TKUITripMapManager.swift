@@ -76,7 +76,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   override public func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
     let builder = super.annotationBuilder(for: annotation, in: mapView)
     if let visit = annotation as? StopVisits {
-      let isVisited = trip.usesVisit(visit)
+      let isVisited = trip.uses(visit)
       builder.drawCircleAsTravelled(isVisited)
     }
     return builder

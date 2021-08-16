@@ -18,8 +18,7 @@ public class TKRoutingServer: TKServer {
     self.baseURL = baseURL
   }
   
-  public override func _baseURL(for region: TKRegion?, index: UInt) -> URL? {
-    guard index == 0 else { return nil }
-    return self.baseURL
+  public override func baseURLs(for region: TKRegion?) -> [URL] {
+    [baseURL]
   }
 }

@@ -34,7 +34,7 @@ public enum TKLocationProvider {
   /// - Returns: Observable of fetched locations; always returns empty array for international region; can error out
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true) -> Single<[TKModeCoordinate]> {
     
-    return TKServer.shared.rx
+    return TKRegionManager.shared.rx
       .requireRegion(center)
       .flatMap { region in
         TKLocationProvider.fetchLocations(

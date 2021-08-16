@@ -11,7 +11,7 @@ import Foundation
 extension Trip: DataAttachable {}
 
 extension Trip {
-  @objc public var bundleId: String? {
+  public var bundleId: String? {
     get { decodePrimitive(String.self, key: "bundleId") }
     set { encodePrimitive(newValue, key: "bundleId") }
   }

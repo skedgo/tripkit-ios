@@ -72,7 +72,7 @@ extension TKUITripCell {
       }
     }
     
-    func costString(costs: [NSNumber: String]) -> NSAttributedString {
+    func costString(costs: [TKTripCostType: String]) -> NSAttributedString {
       let attributed = NSMutableAttributedString()
       #if DEBUG
       append(costs[.score], to: attributed, color: costColor)
@@ -89,7 +89,7 @@ extension TKUITripCell {
       return attributed
     }
     
-    func costAccessibilityLabel(costs: [NSNumber: String]) -> String {
+    func costAccessibilityLabel(costs: [TKTripCostType: String]) -> String {
       return [
           costs[.price],
           costs[.calories],
@@ -115,14 +115,6 @@ extension TKUITripCell {
       let addition = NSAttributedString(string: string, attributes: attributes)
       attributed.append(addition)
     }
-  }
-  
-}
-
-fileprivate extension Dictionary where Key == NSNumber {
-  
-  subscript(cost: TKTripCostType) -> Value? {
-    return self[NSNumber(value: cost.rawValue)]
   }
   
 }

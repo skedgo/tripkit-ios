@@ -32,13 +32,15 @@ extension XCTestCase {
 
 class TKTestCase: XCTestCase {
   
+  static let model = TripKit.loadModel()
+
   var tripKitContext: NSManagedObjectContext!
   
   override func setUp() {
     super.setUp()
     
     // TripKit context
-    let model = TripKit.model
+    let model = TKTestCase.model
     let tripKitCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
     _ = try! tripKitCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
     let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -59,7 +61,7 @@ class TKTestCase: XCTestCase {
   }
 
   func trip(fromFilename filename: String, serviceFilename: String? = nil) throws -> Trip {
-    let trip = try request(fromFilename: filename).tripGroups!.first!.visibleTrip!
+    let trip = try request(fromFilename: filename).tripGroups.first!.visibleTrip!
 
     if let serviceFilename = serviceFilename {
       for segment in trip.segments {

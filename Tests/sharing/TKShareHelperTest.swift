@@ -12,11 +12,11 @@ import XCTest
 
 class TKShareHelperTest: XCTestCase {
   
-  let geocoder: TKSkedGoGeocoder? = {
+  let geocoder: TKTripGoGeocoder? = {
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
-      return TKSkedGoGeocoder()
+      return TKTripGoGeocoder()
     } else {
       return nil
     }
@@ -24,7 +24,7 @@ class TKShareHelperTest: XCTestCase {
   
   func testQueryUrlWithW3W() throws {
     guard let geocoder = geocoder else {
-      try XCTSkipIf(true, "Could not construct TKSkedGoGeocoder. Check environment variables.")
+      try XCTSkipIf(true, "Could not construct TKTripGoGeocoder. Check environment variables.")
       return
     }
 

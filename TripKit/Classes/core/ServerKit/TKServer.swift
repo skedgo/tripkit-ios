@@ -13,7 +13,7 @@ extension TKServer {
   public static let shared = TKServer.__sharedInstance()
   
   public static func imageURL(iconFileNamePart: String, iconType: TKStyleModeIconType? = nil) -> URL? {
-    let regionsURLString = TKServer.developmentServer() ?? "https://api.tripgo.com/v1"
+    let regionsURLString = TKServer.developmentServer ?? "https://api.tripgo.com/v1"
     
     let isPNG: Bool
     let fileNamePrefix: String
@@ -76,6 +76,33 @@ extension TKServer {
     return URL(string: urlString)
   }
   
+  public static var developmentServer: String? {
+    get {
+      UserDefaults.shared.string(forKey: "developmentServer")
+    }
+    set {
+      let oldValue = developmentServer
+      if var newValue = newValue, !newValue.isEmpty {
+        if !newValue.hasSuffix("/") {
+          newValue.append("/")
+        }
+        UserDefaults.shared.set(newValue, forKey: "developmentServer")
+      } else {
+        UserDefaults.shared.removeObject(forKey: "developmentServer")
+      }
+      
+      if newValue != oldValue {
+        // User tokens are bound to servers, so we clear that, too
+        TKServer.updateUserToken(nil)
+        TKRegionManager.shared.updateRegions()
+      }
+    }
+  }
+  
+  public static var fallbackBaseURL: URL {
+    developmentServer.flatMap(URL.init) ?? URL(string: "https://api.tripgo.com/v1/")!
+  }
+  
 }
 
 extension TKServer {
@@ -95,6 +122,17 @@ extension TKServer {
     case repeatIn(TimeInterval)
     case repeatWithNewParameters(TimeInterval, [String: Any])
   }
+  
+  @objc // so that subclasses can override
+  func baseURLs(for region: TKRegion?) -> [URL] {
+    if let dev = Self.developmentServer.flatMap(URL.init) {
+      return [dev]
+    } else if let urls = region?.urls, !urls.isEmpty {
+      return urls
+    } else {
+      return [URL(string: "https://api.tripgo.com/v1/")!]
+    }
+  }
 
   public func hit<Model: Decodable>(
     _ type: Model.Type,
@@ -106,23 +144,18 @@ extension TKServer {
     callbackOnMain: Bool = true,
     completion: @escaping (Int?, [String: Any], Result<Model, Error>) -> Void
   ) {
-    ___hitSkedGo(
-      withMethod: method.rawValue,
+    hitSkedGo(
+      method: method,
       path: path,
       parameters: parameters,
       headers: headers,
       region: region,
-      callbackOnMain: callbackOnMain,
-      parseJSON: false,
-      success: { status, headers, _, data in
-        completion(status, headers, Result {
-          try JSONDecoder().decode(Model.self, from: data.orThrow(ServerError.noData))
-        })
-      },
-      failure: { error in
-        completion(nil, [:], .failure(error))
-      }
-    )
+      callbackOnMain: callbackOnMain
+    ) { status, header, result in
+      completion(status, header, Result {
+        try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+      })
+    }
   }
   
   public func hit(
@@ -134,21 +167,18 @@ extension TKServer {
     callbackOnMain: Bool = true,
     completion: @escaping (Int?, [String: Any], Result<Data, Error>) -> Void
   ) {
-    ___hitSkedGo(
-      withMethod: method.rawValue,
+    hitSkedGo(
+      method: method,
       path: path,
       parameters: parameters,
       headers: headers,
       region: region,
-      callbackOnMain: callbackOnMain,
-      parseJSON: false,
-      success: { status, headers, _, data in
-        completion(status, headers, Result { try data.orThrow(ServerError.noData) })
-      },
-      failure: { error in
-        completion(nil, [:], .failure(error))
-      }
-    )
+      callbackOnMain: callbackOnMain
+    ) { status, header, result in
+      completion(status, header, Result {
+        try result.get().orThrow(ServerError.noData)
+      })
+    }
   }
   
   public static func hit<Model: Decodable>(
@@ -158,16 +188,12 @@ extension TKServer {
     parameters: [String: Any]? = nil,
     completion: @escaping (Int, [String: Any], Result<Model, Error>) -> Void
   ) {
-    ___hit(url,
-          method: method.rawValue,
-          parameters: parameters)
-    { status, headers, _, data, error in
+    hit(method: method,
+        url: url,
+        parameters: parameters)
+    { status, headers, result in
       completion(status, headers, Result {
-        if let error = error {
-          throw error
-        } else {
-          return try JSONDecoder().decode(Model.self, from: data.orThrow(ServerError.noData))
-        }
+        try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
       })
     }
   }
@@ -178,16 +204,12 @@ extension TKServer {
     parameters: [String: Any]? = nil,
     completion: @escaping (Int, [String: Any], Result<Data, Error>) -> Void
   ) {
-    ___hit(url,
-          method: method.rawValue,
-          parameters: parameters)
-    { status, headers, _, data, error in
+    hit(method: method,
+        url: url,
+        parameters: parameters)
+    { status, headers, result in
       completion(status, headers, Result {
-        if let error = error {
-          throw error
-        } else {
-          return try data.orThrow(ServerError.noData)
-        }
+        try result.get().orThrow(ServerError.noData)
       })
     }
   }
@@ -234,4 +256,63 @@ extension TKServer {
     }
   }
 
+}
+
+// MARK: - Calling to Objective-C
+
+extension TKServer {
+  
+  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, region: TKRegion?, callbackOnMain: Bool = true, completion: @escaping (Int?, [String: Any], Result<Data?, Error>) -> Void) {
+    ___hitSkedGo(
+      withMethod: method.rawValue,
+      path: path,
+      parameters: parameters,
+      headers: headers,
+      baseURLs: NSMutableArray(array: baseURLs(for: region)),
+      callbackOnMain: callbackOnMain,
+      info: { uuid, request, response, data, error in
+        if let response = response {
+          TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
+        } else {
+          TKLog.log("TKServer", request: request, uuid: uuid)
+        }
+      },
+      success: { status, headers, data in
+        if let error = TKError.error(from: data, statusCode: status) {
+          completion(status, headers, .failure(error))
+        } else {
+          completion(status, headers, .success(data))
+        }
+        
+      },
+      failure: { error in
+        completion(nil, [:], .failure(error))
+      }
+    )
+  }
+  
+  private static func hit(method: HTTPMethod, url: URL, parameters: [String: Any]?, completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
+    ___hit(
+      url,
+      method: method.rawValue,
+      parameters: parameters,
+      info: { uuid, request, response, data, error in
+        if let response = response {
+          TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
+        } else {
+          TKLog.log("TKServer", request: request, uuid: uuid)
+        }
+      },
+      completion: { status, headers, data, error in
+        completion(status, headers, Result {
+          if let error = error ?? TKError.error(from: data, statusCode: status) {
+            throw error
+          } else {
+            return data
+          }
+        })
+      }
+    )
+  }
+  
 }

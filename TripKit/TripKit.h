@@ -21,51 +21,35 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Dependencies
 
-#if TARGET_OS_IPHONE
-@import QuartzCore;
-@import CoreImage;
-@import UIKit;
-#else
-@import AppKit;
-#endif
+#import "TKTripKit.h"
 
-// Kits
-#import "TKRootKit.h"
-#import "TKServerKit.h"
-#import "TKTransportKit.h"
+// Basics
+#import "TKEnums.h"
+#import "TKConfig.h"
+#import "TKCrossPlatform.h"
+#import "TKConstants.h"
+
+// Server logic
+#import "TKServer.h"
+#import "TKTransportModes.h"
+#import "TKAutocompletionResult.h"
 
 // Helpers
 #if TARGET_OS_IPHONE
 #import "TKActions.h"
 #endif
 
-// Headers
-#import "TKTripKit.h"
-#import "TKConstants.h"
-
-// Core Data model classes
-#import "TripRequest.h"
-#import "TripGroup.h"
-#import "Trip.h"
-#import "DLSEntry.h"
-#import "SegmentReference.h"
-#import "Service.h"
-#import "Vehicle.h"
-#import "Alert.h"
-
-// Non-core data model classes
-#import "TKSegmentBuilder.h"
-
 // Helpers
+#import "NSDate+Helpers.h"
 #import "NSManagedObject+TKPersistence.h"
+#import "NSManagedObjectContext+SimpleFetch.h"
+#import "NSUserDefaults+SharedDefaults.h"
 
-// Routing
+#import "TKLocationHelper.h"
+#import "TKStyleManager.h"
 #import "TKSettings.h"
-#import "TKBuzzRealTime.h"
-
-// Search
-#import "TKAutocompletionResult.h"
-#import "TKSkedGoGeocoder.h"
+#import "TKVehicular.h"
+#import "TKVehicleType.h"
 
 // Permissions
 #import "TKLocationManager.h"
@@ -75,6 +59,3 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKStyleManager+UIKit.h"
 #import "UIFont+CustomFonts.h"
 #endif
-
-// Deprecated
-#import "SGDeprecatedAutocompletionDataProvider.h"

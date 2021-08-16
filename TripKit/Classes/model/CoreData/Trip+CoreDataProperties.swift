@@ -2,8 +2,8 @@
 //  Trip+CoreDataProperties.swift
 //  TripKit
 //
-//  Created by Adrian Schönig on 09.04.20.
-//  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
+//  Created by Adrian Schönig on 12/8/21.
+//  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 //
 
@@ -21,20 +21,18 @@ extension Trip {
     @NSManaged public var budgetPoints: NSNumber?
     @NSManaged public var currencyCode: String?
 
-    /// :nodoc:
-    @NSManaged public var data: Data? // Data with an encoded dictionary
+    @NSManaged var data: Data? // Data with an encoded dictionary
 
     @NSManaged public var departureTime: Date
 
-    /// :nodoc:
-    @NSManaged public var flags: Int16
+    @NSManaged var flags: Int16
     @NSManaged public var logURLString: String?
-    @NSManaged public var mainSegmentHashCode: Int32
+    @NSManaged var mainSegmentHashCode: Int32
     @NSManaged public var minutes: Int16 // cache for sorting
     @NSManaged public var plannedURLString: String?
     @NSManaged public var progressURLString: String?
-    @NSManaged public var saveURLString: String?
-    @NSManaged public var shareURLString: String?
+    @NSManaged var saveURLString: String?
+    @NSManaged var shareURLString: String?
     @NSManaged public var temporaryURLString: String?
     @NSManaged public var totalCalories: Float
     @NSManaged public var totalCarbon: Float
@@ -44,10 +42,9 @@ extension Trip {
     @NSManaged public var totalScore: Float
     @NSManaged public var totalWalking: Float
     @NSManaged public var updateURLString: String?
-    @NSManaged public var representedGroup: TripGroup?
+    @NSManaged var representedGroup: TripGroup?
 
-    /// :nodoc:
-    @NSManaged public var segmentReferences: NSSet?
+    @NSManaged var segmentReferences: Set<SegmentReference>?
 
     @NSManaged public var tripGroup: TripGroup
 
@@ -57,15 +54,15 @@ extension Trip {
 extension Trip {
 
     @objc(addSegmentReferencesObject:)
-    @NSManaged public func addToSegmentReferences(_ value: SegmentReference)
+    @NSManaged func addToSegmentReferences(_ value: SegmentReference)
 
     @objc(removeSegmentReferencesObject:)
-    @NSManaged public func removeFromSegmentReferences(_ value: SegmentReference)
+    @NSManaged func removeFromSegmentReferences(_ value: SegmentReference)
 
     @objc(addSegmentReferences:)
-    @NSManaged public func addToSegmentReferences(_ values: NSSet)
+    @NSManaged func addToSegmentReferences(_ values: NSSet)
 
     @objc(removeSegmentReferences:)
-    @NSManaged public func removeFromSegmentReferences(_ values: NSSet)
+    @NSManaged func removeFromSegmentReferences(_ values: NSSet)
 
 }

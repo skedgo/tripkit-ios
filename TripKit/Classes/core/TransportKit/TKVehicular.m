@@ -8,8 +8,7 @@
 
 #import "TKVehicular.h"
 
-#import "TKTripKit.h"
-#import "TKTransportKit.h"
+#import "TKStyleManager.h" // for bundle
 
 @implementation TKVehicularHelper
 
@@ -30,16 +29,16 @@
 {
   switch (vehicleType) {
     case TKVehicleType_Bicycle:
-      return NSLocalizedStringFromTableInBundle(@"Bicycle", @"Shared", [TKTripKit bundle], "Text for vehicle of type: Bicycle");
+      return NSLocalizedStringFromTableInBundle(@"Bicycle", @"Shared", [TKStyleManager bundle], "Text for vehicle of type: Bicycle");
       
     case TKVehicleType_Car:
-      return NSLocalizedStringFromTableInBundle(@"Car", @"Shared", [TKTripKit bundle], "Text for vehicle of type: Car");
+      return NSLocalizedStringFromTableInBundle(@"Car", @"Shared", [TKStyleManager bundle], "Text for vehicle of type: Car");
       
     case TKVehicleType_Motorbike:
-      return NSLocalizedStringFromTableInBundle(@"Motorbike", @"Shared", [TKTripKit bundle], "Text for vehicle of type: Motorbike");
+      return NSLocalizedStringFromTableInBundle(@"Motorbike", @"Shared", [TKStyleManager bundle], "Text for vehicle of type: Motorbike");
       
     case TKVehicleType_SUV:
-      return NSLocalizedStringFromTableInBundle(@"SUV", @"Shared", [TKTripKit bundle], "Text for vehicle of type: SUV");
+      return NSLocalizedStringFromTableInBundle(@"SUV", @"Shared", [TKStyleManager bundle], "Text for vehicle of type: SUV");
 
     case TKVehicleType_None:
       return nil;

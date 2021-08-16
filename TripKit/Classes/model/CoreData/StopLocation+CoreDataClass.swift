@@ -79,7 +79,7 @@ public class StopLocation: NSManagedObject {
   func departuresPredicate(from date: Date?) -> NSPredicate? {
     guard let date = date else { return nil }
     let stops = stopsToMatchTo()
-    return StopVisits.departuresPredicate(forStops: stops, from: date, filter: self.filter)
+    return StopVisits.departuresPredicate(stops: stops, from: date, filter: self.filter ?? "")
   }
   
   /// Stops to for displaying a timetable for this stop – includes its children

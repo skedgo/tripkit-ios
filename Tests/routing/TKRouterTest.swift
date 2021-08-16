@@ -30,7 +30,7 @@ class TKRouterTest: TKTestCase {
     let request = try self.request(fromFilename: "routing-pt-oldish")
     
     // Evaluating the returned response
-    XCTAssertEqual(request.tripGroups?.count, 3)
+    XCTAssertEqual(request.tripGroups.count, 3)
     XCTAssertEqual(request.trips.count, 4 + 4 + 4)
     for trip in request.trips {
       XCTAssertGreaterThan(trip.segments.count, 0)
@@ -62,8 +62,8 @@ class TKRouterTest: TKTestCase {
     let request = try self.request(fromFilename: "routing-goget")
 
     XCTAssertNotNil(request)
-    XCTAssertEqual(request.tripGroups?.count, 1)
-    XCTAssertEqual(request.tripGroups?.first?.sources.count, 3)
+    XCTAssertEqual(request.tripGroups.count, 1)
+    XCTAssertEqual(request.tripGroups.first?.sources.count, 3)
     XCTAssertEqual(request.trips.count, 1)
     
     let trip = try XCTUnwrap(request.trips.first)
@@ -96,10 +96,10 @@ class TKRouterTest: TKTestCase {
     let request = try self.request(fromFilename: "routing-cycle-train-cycle")
 
     XCTAssertNotNil(request)
-    XCTAssertEqual(request.tripGroups?.count, 5)
+    XCTAssertEqual(request.tripGroups.count, 5)
     XCTAssertEqual(request.trips.count, 33)
 
-    let cycleGroup = try XCTUnwrap(request.tripGroups?.first { $0.trips.contains(where: { $0.usedModeIdentifiers().contains("cy_bic") }) })
+    let cycleGroup = try XCTUnwrap(request.tripGroups.first { $0.trips.contains(where: { $0.usedModeIdentifiers.contains("cy_bic") }) })
     XCTAssertEqual(cycleGroup.sources.count, 3)
 
     let cycleTrip = try XCTUnwrap(cycleGroup.trips.min { $0.totalScore < $1.totalScore })
@@ -122,7 +122,7 @@ class TKRouterTest: TKTestCase {
     let request = try self.request(fromFilename: "routing-with-stops")
 
     XCTAssertNotNil(request)
-    XCTAssertEqual(request.tripGroups?.count, 1)
+    XCTAssertEqual(request.tripGroups.count, 1)
     XCTAssertEqual(request.trips.count, 16)
     
     for trip in request.trips {
@@ -138,13 +138,13 @@ class TKRouterTest: TKTestCase {
       }
     }
     
-    if let best = request.tripGroups?.first?.visibleTrip, let bestService = best.segments[2].service {
+    if let best = request.tripGroups.first?.visibleTrip, let bestService = best.segments[2].service {
       XCTAssertEqual(best.totalScore, 29.8, accuracy: 0.1)
       XCTAssertEqual(bestService.code, "847016")
       
       XCTAssertEqual(bestService.visits?.count, 27)
       XCTAssertEqual(bestService.sortedVisits.count, 27)
-      XCTAssertEqual(bestService.sortedVisits.map { $0.index.intValue }, (0...26).map { $0 })
+      XCTAssertEqual(bestService.sortedVisits.map { $0.index }, (0...26).map { $0 })
       
       XCTAssertEqual(bestService.sortedVisits.map { $0.stop.stopCode },
                      ["202634",
@@ -199,7 +199,7 @@ class TKRouterTest: TKTestCase {
     XCTAssertEqual(queryToDistance, 0, accuracy: 10)
 
     // basic trip properties
-    XCTAssertEqual(request.tripGroups?.count, 1)
+    XCTAssertEqual(request.tripGroups.count, 1)
     XCTAssertEqual(request.trips.count, 1)
     let trip = try XCTUnwrap(request.trips.first)
     XCTAssertEqual(trip.totalScore, 64, accuracy: 0.1)
@@ -239,10 +239,10 @@ class TKRouterTest: TKTestCase {
     let request = try self.request(fromFilename: "routing-walk")
 
     XCTAssertNotNil(request)
-    XCTAssertEqual(request.tripGroups?.count, 1)
+    XCTAssertEqual(request.tripGroups.count, 1)
     XCTAssertEqual(request.trips.count, 1)
 
-    let walkGroup = try XCTUnwrap(request.tripGroups?.first)
+    let walkGroup = try XCTUnwrap(request.tripGroups.first)
     let walkTrip = try XCTUnwrap(walkGroup.trips.first)
     XCTAssertEqual(walkTrip.segments.count, 3)
     XCTAssertNotNil(walkTrip.segments[1].shapes)

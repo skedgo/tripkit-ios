@@ -33,7 +33,7 @@ extension TKUIServiceViewModel {
     let timeZone: TimeZone
     
     /// Real-time satatus of the departure
-    let realTimeStatus: TKStopVisitRealTime
+    let realTimeStatus: StopVisits.RealTime
     
     /// Whether this stop is at or after disembarkation, and, optionally,
     /// at or before the disembarkation
@@ -82,9 +82,9 @@ extension Service {
 extension TKUIServiceViewModel.Item {
   fileprivate init(_ visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
     
-    var isVisited = visit.index.intValue >= embarkation.index.intValue
+    var isVisited = visit >= embarkation
     if let disembarkation = disembarkation, isVisited {
-      isVisited = visit.index.intValue <= disembarkation.index.intValue
+      isVisited = visit <= disembarkation
     }
     
     // Important to use service from `embarkation`, not the one from `visit`,

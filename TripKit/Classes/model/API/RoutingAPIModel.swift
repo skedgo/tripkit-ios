@@ -71,7 +71,7 @@ extension TKAPI {
     @ISO8601OrSecondsSince1970 public var endTime: Date
     @DefaultFalse public var timesAreRealTime: Bool
     @DefaultEmptyArray public var alertHashCodes: [Int]
-    public var booking: BookingData?
+    var booking: BookingData?
     public var bookingHashCode: Int?
     
     // Public transport

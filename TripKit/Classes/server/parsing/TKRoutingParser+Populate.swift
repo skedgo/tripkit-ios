@@ -88,7 +88,7 @@ extension TKRoutingParser {
       }
     }
     
-    request.tripGroups?.first?.adjustVisibleTrip()
+    request.tripGroups.first?.adjustVisibleTrip()
     return true
   }
   

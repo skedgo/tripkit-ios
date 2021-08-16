@@ -338,7 +338,7 @@ extension TKUIMapManager {
     
     for vehicle in vehicles {
       // Trigger KVO for the sub-title update which has the countdown
-      vehicle.setSubtitle(nil)
+      vehicle.triggerRealTimeKVO()
       
       if let view = mapView.view(for: vehicle) as? TKUIVehicleAnnotationView {
         // Fade in/out according to age

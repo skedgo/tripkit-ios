@@ -142,10 +142,8 @@ extension Shape {
   
 }
 
-
 extension Shape {
-  @objc(fetchTravelledShapeForTemplate:atStart:)
-  public static func fetchTravelledShape(for template: SegmentTemplate, atStart: Bool) -> Shape? {
+  static func fetchTravelledShape(for template: SegmentTemplate, atStart: Bool) -> Shape? {
     
     let predicate = NSPredicate(format: "template = %@ AND travelled = 1", template)
     let sorter = NSSortDescriptor(key: "index", ascending: atStart)

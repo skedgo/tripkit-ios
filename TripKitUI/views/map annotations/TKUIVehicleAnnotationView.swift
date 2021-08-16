@@ -85,7 +85,7 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     
     let serviceColor = vehicle.serviceColor ?? .tkLabelPrimary
     
-    var vehicleView: UIView?
+    let vehicleView: UIView
     
     if let iconUrlString = vehicle.icon, let url = TKServer.imageURL(iconFileNamePart: iconUrlString, iconType: .vehicle) {
       let vehicleImageView = UIImageView(frame: vehicleRect)
@@ -93,18 +93,14 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
       vehicleImageView.setImage(with: url)
       vehicleView = vehicleImageView
       self.vehicleImageView = vehicleImageView
-    }
-    
-    if vehicleView == nil {
+    } else {
       let vehicleShape = TKUIVehicleView(frame: vehicleRect, color: serviceColor)
-      
       vehicleView = vehicleShape
       self.vehicleShape = vehicleShape
     }
     
-    // Here, we are guaranteed to have non-nil vehicle view
-    vehicleView!.alpha = vehicle.displayAsPrimary ? 1 : 0.66
-    wrapper.addSubview(vehicleView!)
+    vehicleView.alpha = 1
+    wrapper.addSubview(vehicleView)
     
     // The label
     var rect = vehicleRect.insetBy(dx: 2, dy: 2)

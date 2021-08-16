@@ -10,7 +10,7 @@ import Foundation
 
 extension SegmentReference: DataAttachable {}
 
-public struct BookingData: Codable, Hashable {
+struct BookingData: Codable, Hashable {
   let title: String
   
   /// For in-app bookings using booking flow
@@ -20,7 +20,7 @@ public struct BookingData: Codable, Hashable {
   let quickBookingsUrl: URL?
 
   /// For in-app bookings follow-up
-  public var confirmation: TKBooking.Confirmation?
+  var confirmation: TKBooking.Confirmation?
 
   /// For bookings using external apps
   let externalActions: [String]?
@@ -31,17 +31,17 @@ public struct BookingData: Codable, Hashable {
 
 extension SegmentReference {
 
-  public var bookingData: BookingData? {
+  var bookingData: BookingData? {
     get { decode(BookingData.self, key: "booking") }
     set { encode(newValue, key: "booking") }
   }
 
-  public var arrivalPlatform: String? {
+  var arrivalPlatform: String? {
     get { decodePrimitive(String.self, key: "arrivalPlatform") }
     set { encodePrimitive(newValue, key: "arrivalPlatform") }
   }
 
-  public var departurePlatform: String? {
+  var departurePlatform: String? {
     get { decodePrimitive(String.self, key: "departurePlatform") }
     set { encodePrimitive(newValue, key: "departurePlatform") }
   }
@@ -56,27 +56,27 @@ extension SegmentReference {
     set { encode(newValue, key: "sharedVehicle") }
   }
 
-  public var ticket: TKSegment.Ticket? {
+  var ticket: TKSegment.Ticket? {
     get { decode(TKSegment.Ticket.self, key: "ticket") }
     set { encode(newValue, key: "ticket") }
   }
 
-  public var ticketWebsiteURLString: String? {
+  var ticketWebsiteURLString: String? {
     get { decodePrimitive(String.self, key: "ticketWebsiteURL") }
     set { encodePrimitive(newValue, key: "ticketWebsiteURL") }
   }
 
-  public var timetableEndTime: Date? {
+  var timetableEndTime: Date? {
     get { decodePrimitive(Date.self, key: "timetableEndTime") }
     set { encodePrimitive(newValue, key: "timetableEndTime") }
   }
 
-  public var timetableStartTime: Date? {
+  var timetableStartTime: Date? {
     get { decodePrimitive(Date.self, key: "timetableStartTime") }
     set { encodePrimitive(newValue, key: "timetableStartTime") }
   }
 
-  @objc public var vehicleUUID: String? {
+  @objc var vehicleUUID: String? {
     get { decodePrimitive(String.self, key: "vehicleUUID") }
     set { encodePrimitive(newValue, key: "vehicleUUID") }
   }
@@ -85,7 +85,7 @@ extension SegmentReference {
 
 extension SegmentReference {
   func populate(from api: TKAPI.SegmentReference) {
-    // Public transport
+    // transport
     departurePlatform = api.startPlatform
     arrivalPlatform = api.endPlatform
     serviceStops = api.serviceStops
@@ -99,7 +99,7 @@ extension SegmentReference {
     vehicleUUID = api.vehicleUUID
     
     // Special handling to not lose booking data
-    bookingHashCode = api.bookingHashCode.map(NSNumber.init)
+    bookingHashCode = Int32(api.bookingHashCode ?? 0)
     if let booking = api.booking {
       bookingData = booking
     }

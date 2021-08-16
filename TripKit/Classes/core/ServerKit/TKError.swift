@@ -29,39 +29,20 @@ class TKUserError: TKError {
 class TKServerError: TKError {
 }
 
-public struct TKErrorRecovery: Codable {
-  public enum Option: String, Codable {
-    case back   = "BACK"
-    case retry  = "RETRY"
-    case abort  = "ABORT"
-  }
-  
-  private enum CodingKeys: String, CodingKey {
-    case title = "recoveryTitle"
-    case url
-    case option = "recovery"
-  }
-  
-  public let title: String?
-  public let url: URL?
-  public let option: Option?
-}
-
 public class TKError: NSError {
   @objc public var title: String?
-  public var recovery: TKErrorRecovery?
+  public var details: TKAPI.ServerError?
   
   @objc
   public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> TKError {
     return TKError(domain: "com.skedgo.serverkit", code: code, userInfo: dict)
   }
   
-  @objc
-  public class func error(fromJSON json: Any?, statusCode: Int) -> TKError? {
-    if let dict = json as? [String: Any] {
+  public class func error(from data: Data?, statusCode: Int) -> TKError? {
+    if let data = data {
       // If there was a response body, we used that to see if it's an error
       // returned from the API.
-      return TKError.error(fromJSON: dict, domain: "com.skedgo.serverkit")
+      return TKError.error(from: data, domain: "com.skedgo.serverkit")
       
     } else {
       // Otherwise we check if the status code is indicating an error
@@ -74,34 +55,27 @@ public class TKError: NSError {
     }
   }
   
-  @objc
-  class func error(fromJSON dictionary: [String: Any], domain: String) -> TKError? {
-    guard
-      let errorInfo = dictionary["error"] as? String,
-      let isUserError = dictionary["usererror"] as? Bool
-    else {
-      return nil
-    }
+  class func error(from data: Data, domain: String) -> TKError? {
+    guard let parsed = try? JSONDecoder().decode(TKAPI.ServerError.self, from: data) else { return nil }
     
-    var code = Int(isUserError ? kTKServerErrorTypeUser : kTKErrorTypeInternal)
-    if let errorCode = dictionary["errorCode"] as? Int {
+    var code = Int(parsed.isUserError ? kTKServerErrorTypeUser : kTKErrorTypeInternal)
+    if let errorCode = parsed.errorCode {
       code = errorCode
     }
     
-    var userInfo: [String: Any] = [NSLocalizedDescriptionKey: errorInfo]
-    if let isUserError = dictionary["usererror"] as? Bool {
-      userInfo["TKIsUserError"] = isUserError
-    }
+    let userInfo: [String: Any] = [
+      NSLocalizedDescriptionKey: parsed.errorMessage,
+      "TKIsUserError": parsed.isUserError
+    ]
     
     let error: TKError
-    if isUserError {
+    if parsed.isUserError {
       error = TKUserError(domain: domain, code: code, userInfo: userInfo)
     } else {
       error = TKServerError(domain: domain, code: code, userInfo: userInfo)
     }
-    error.title = dictionary["title"] as? String
-    error.recovery = try? JSONDecoder().decode(TKErrorRecovery.self, withJSONObject: dictionary)
-    
+    error.title = parsed.title
+    error.details = parsed
     return error
   }
   
@@ -116,3 +90,30 @@ public class TKError: NSError {
   
 }
 
+extension TKAPI {
+  public struct ServerError: Codable {
+    public let errorMessage: String
+    public let isUserError: Bool
+    public let errorCode: Int?
+    public let title: String?
+    public let recovery: String?
+    public let url: URL?
+    public let option: Option?
+
+    public enum Option: String, Codable {
+      case back   = "BACK"
+      case retry  = "RETRY"
+      case abort  = "ABORT"
+    }
+        
+    enum CodingKeys: String, CodingKey {
+      case errorMessage = "error"
+      case isUserError = "usererror"
+      case errorCode
+      case title
+      case recovery = "recoveryTitle"
+      case url
+      case option = "recovery"
+    }
+  }
+}

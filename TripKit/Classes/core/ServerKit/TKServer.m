@@ -8,12 +8,9 @@
 
 #import "TKServer.h"
 
-#import "TripKit/TripKit-Swift.h"
-
-#import "TKServerKit.h"
+#import "TKStyleManager.h"
 #import "NSUserDefaults+SharedDefaults.h"
 
-NSString *const TKDefaultsKeyDevelopmentServer       = @"developmentServer";
 NSString *const TKDefaultsKeyUserToken               = @"userToken";
 
 @interface TKServer ()
@@ -59,41 +56,12 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   }
 }
 
-+ (NSString *)developmentServer {
-  return [[NSUserDefaults sharedDefaults] stringForKey:TKDefaultsKeyDevelopmentServer];
-}
-
-+ (void)updateDevelopmentServer:(NSString *)server {
-  NSString *previously = [self developmentServer];
-
-  NSString *newValue = server;
-  if (newValue.length == 0) {
-    newValue = nil;
-    [[NSUserDefaults sharedDefaults] removeObjectForKey:TKDefaultsKeyDevelopmentServer];
-  } else {
-    if (![newValue hasSuffix:@"/"]) {
-      newValue = [newValue stringByAppendingString:@"/"];
-    }
-    [[NSUserDefaults sharedDefaults] setObject:newValue forKey:TKDefaultsKeyDevelopmentServer];
-  }
-  
-  if ((newValue == nil && previously != nil)
-      || (newValue != nil && previously == nil)
-      || ![newValue isEqualToString:previously]) {
-    
-    // User tokens are bound to servers, so clear those, too.
-    [TKServer updateUserToken:nil];
-    
-    // trigger updates
-    [TKServer.sharedInstance updateRegionsForced:NO];
-  }
-}
-
 #pragma mark - Network requests
 
 + (void)_hitURL:(NSURL *)url
          method:(NSString *)method
      parameters:(nullable NSDictionary<NSString *, id> *)parameters
+           info:(TKServerInfoBlock)info
      completion:(TKServerGenericBlock)completion
 {
   NSURLRequest *request;
@@ -102,95 +70,16 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   } else {
     request = [self POSTLikeRequestWithSkedGoHTTPHeadersForURL:url method:method paras:parameters headers:nil];
   }
-  [self hitRequest:request parseJSON:NO completion:completion];
-}
-
-+ (void)hitRequest:(NSURLRequest *)request
-         parseJSON:(BOOL)parseJSON
-        completion:(TKServerGenericBlock)completion
-{
-  NSUUID *requestUUID = [NSUUID UUID];
-  [TKLog log:@"TKServer" request:request UUID:requestUUID];
-  
-  NSURLSession *defaultSession = [NSURLSession sharedSession];
-  NSURLSessionDataTask *task = [defaultSession dataTaskWithRequest:request
-                                                 completionHandler:
-                                ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                  [TKLog log:@"TKServer"
-                                    response:response
-                                        data:data
-                                     orError:error
-                                  forRequest:request
-                                        UUID:requestUUID];
-    
-                                  NSInteger status = 0;
-                                  NSDictionary *headers = nil;
-                                  if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                    status = httpResponse.statusCode;
-                                    headers = httpResponse.allHeaderFields;
-                                  } else {
-                                    headers = @{};
-                                  }
-                                  
-                                  if (error) {
-                                    completion(status, headers, nil, nil, error);
-                                    
-                                  } else if (data.length == 0) {
-                                    // empty response is not an error
-                                    completion(status, headers, nil, nil, nil);
-                                    
-                                  } else if (parseJSON) {
-                                    NSError *parserError = nil;
-                                    id responseObject = [NSJSONSerialization JSONObjectWithData:data
-                                                                                        options:0
-                                                                                          error:&parserError];
-                                    if (responseObject) {
-                                      TKError *serverError = [TKError errorFromJSON:responseObject statusCode:status];
-                                      if (serverError != nil) {
-                                        completion(status, headers, nil, nil,  serverError);
-                                      } else {
-                                        completion(status, headers, responseObject, data, nil);
-                                      }
-                                    } else {
-                                      [TKLog warn:@"TKServer" text:[NSString stringWithFormat:@"Could not parse: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]]];
-                                      completion(status, headers, nil, nil, parserError);
-                                    }
-                                  } else {
-                                    completion(status, headers, nil, data, nil);
-                                  }
-                                }];
-  [task resume];
-}
-
-- (void)hitSkedGoWithMethod:(NSString *)method
-                       path:(NSString *)path
-                 parameters:(nullable NSDictionary<NSString *, id> *)parameters
-                     region:(nullable TKRegion *)region
-             callbackOnMain:(BOOL)callbackOnMain
-                    success:(TKServerSuccessBlock)success
-                    failure:(TKServerFailureBlock)failure
-{
-  [self _hitSkedGoWithMethod:method
-                        path:path
-                  parameters:parameters
-                     headers:nil
-                      region:region
-              callbackOnMain:callbackOnMain
-                   parseJSON:YES
-                     success:^(NSInteger status, NSDictionary<NSString *,id> * _Nonnull headers, id  _Nullable responseObject, NSData * _Nullable data) {
-    success(status, responseObject, data);
-  }
-                     failure:failure];
+  [self hitRequest:request info:info completion:completion];
 }
 
 - (void)_hitSkedGoWithMethod:(NSString *)method
                         path:(NSString *)path
                   parameters:(nullable NSDictionary *)parameters
                      headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-                      region:(nullable TKRegion *)region
+                    baseURLs:(NSMutableArray<NSURL *> *)baseURLs
               callbackOnMain:(BOOL)callbackOnMain
-                   parseJSON:(BOOL)parseJSON
+                        info:(TKServerInfoBlock)info
                      success:(TKServerFullSuccessBlock)success
                      failure:(TKServerFailureBlock)failure
 {
@@ -199,72 +88,16 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                                 path:path
                           parameters:parameters
                              headers:headers
-                           forRegion:region
-                         backupIndex:0
+                            baseURLs:baseURLs
                       callbackOnMain:callbackOnMain
-                           parseJSON:parseJSON
+                                info:info
                              success:success
                              failure:failure
                       previousStatus:0
                      previousHeaders:@{}
-                    previousResponse:nil
                         previousData:nil
                        previousError:nil];
   }];
-}
-
-
-#pragma mark - Settings
-
-- (void)updateRegionsForced:(BOOL)forceUpdate
-{
-  // load all the regions
-  [self fetchRegionsForced:forceUpdate completion:nil];
-}
-
-- (void)fetchRegionsForced:(BOOL)forced
-                completion:(nullable void (^)(BOOL success, NSError *error))completion
-{
-  NSString *regionsURLString;
-  if ([TKServer developmentServer]) {
-    regionsURLString = [[TKServer developmentServer] stringByAppendingString:@"regions.json"];
-  } else {
-    regionsURLString = @"https://api.tripgo.com/v1/regions.json";
-  }
-  
-  NSMutableDictionary *paras = [NSMutableDictionary dictionaryWithCapacity:2];
-  paras[@"v"] = @2;
-  if (!forced) {
-    [paras setValue:[TKRegionManager.shared regionsHash] forKey:@"hashCode"];
-  }
-  
-  [TKServer POST:[NSURL URLWithString:regionsURLString]
-            paras:paras
-       completion:
-   ^(NSInteger status, NSDictionary<NSString *, id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-#pragma unused(status, headers, responseObject)
-     if (data) {
-       [TKRegionManager.shared updateRegionsFromData:data];
-       
-       if ([TKRegionManager.shared hasRegions]) {
-         if (completion) {
-           completion(YES, nil);
-         }
-       } else {
-         NSString *message = NSLocalizedStringFromTableInBundle(@"Could not download supported regions from TripGo's server. Please try again later.", @"Shared", [TKStyleManager bundle], "Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions)");
-         NSError *userError = [NSError errorWithCode:kTKServerErrorTypeUser  message:message];
-         if (completion) {
-           completion(NO, userError);
-         }
-       }
-       
-     } else if (error) {
-       [TKLog warn:@"TKServer" text:[NSString stringWithFormat:@"Couldn't fetch regions. Error: %@", error]];
-       if (completion) {
-         completion(NO, error);
-       }
-     }
-   }];
 }
 
 #pragma mark - Private methods
@@ -286,15 +119,13 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                               path:(NSString *)path
                         parameters:(nullable NSDictionary *)parameters
                            headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-                         forRegion:(nullable TKRegion *)region
-                       backupIndex:(NSInteger)backupIndex
+                          baseURLs:(NSMutableArray<NSURL *> *)baseURLs
                     callbackOnMain:(BOOL)callbackOnMain
-                         parseJSON:(BOOL)parseJSON
+                              info:(TKServerInfoBlock)info
                            success:(TKServerFullSuccessBlock)success
                            failure:(TKServerFailureBlock)failure
                     previousStatus:(NSInteger)previousStatus
                    previousHeaders:(NSDictionary *)previousHeaders
-                  previousResponse:(nullable id)previousResponse
                       previousData:(nullable NSData *)previousData
                      previousError:(nullable NSError *)previousError
 {
@@ -302,16 +133,17 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   ZAssert([[NSOperationQueue currentQueue] isEqual:self.skedGoQueryQueue], @"Should start async data tasks on dedicated queue as we're modifying local variables.");
 #endif
   
-  NSURL *baseURL = [self _baseURLForRegion:region index:backupIndex];
+  NSURL *baseURL = [baseURLs lastObject];
+  
   if (! baseURL) {
     // don't have that many servers
     if (! previousError) {
       if (callbackOnMain) {
         dispatch_async(dispatch_get_main_queue(), ^{
-          success(previousStatus, previousHeaders, previousResponse, previousData);
+          success(previousStatus, previousHeaders, previousData);
         });
       } else {
-        success(previousStatus, previousHeaders, previousResponse, previousData);
+        success(previousStatus, previousHeaders, previousData);
       }
     } else {
       if (callbackOnMain) {
@@ -324,25 +156,24 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
     }
     return;
   }
-  
-  NSURLRequest *request = [TKServer buildSkedGoRequestWithMethod:method baseURL:baseURL path:path parameters:parameters headers:headers region:region];
+
+  [baseURLs removeLastObject];
+  NSURLRequest *request = [TKServer buildSkedGoRequestWithMethod:method baseURL:baseURL path:path parameters:parameters headers:headers];
   
   // Backup handler
-  void (^failOverBlock)(NSInteger, NSDictionary<NSString *, id> *,  id, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, id responseObject, NSData *data, NSError *error) {
+  void (^failOverBlock)(NSInteger, NSDictionary<NSString *, id> *, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, NSData *data, NSError *error) {
     [self.skedGoQueryQueue addOperationWithBlock:^{
       [self initiateDataTaskWithMethod:method
                                   path:path
                             parameters:parameters
                                headers:headers
-                             forRegion:region
-                           backupIndex:backupIndex + 1
+                              baseURLs:baseURLs
                         callbackOnMain:callbackOnMain
-                             parseJSON:parseJSON
+                                  info:info
                                success:success
                                failure:failure
                         previousStatus:status
                        previousHeaders:headers
-                      previousResponse:responseObject
                           previousData:data
                          previousError:error];
     }];
@@ -350,15 +181,13 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   
   // hit the main client
   [TKServer hitRequest:request
-             parseJSON:parseJSON
+                  info:info
              completion:
-   ^(NSInteger status, NSDictionary<NSString *,id> *headers, id _Nullable responseObject, NSData *data, NSError * _Nullable error) {
-     NSError *serverError = error ?: [TKError errorFromJSON:responseObject statusCode:status];
+   ^(NSInteger status, NSDictionary<NSString *,id> *headers, NSData *data, NSError * _Nullable error) {
+     NSError *serverError = error;
      if (serverError) {
        BOOL isUserError = NO;
-       if ([serverError isKindOfClass:[TKError class]]) {
-         isUserError = [(TKError *)serverError isUserError];
-       }
+       #warning TODO: Re-instate no failover on user error?
        if (isUserError) {
          if (callbackOnMain) {
            dispatch_async(dispatch_get_main_queue(), ^{
@@ -370,32 +199,56 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
        }
        
        if (! isUserError) {
-         failOverBlock(status, headers, responseObject, data, error);
+         failOverBlock(status, headers, data, error);
        }
        
      } else {
        if (callbackOnMain) {
          dispatch_async(dispatch_get_main_queue(), ^{
-           success(status, headers, responseObject, data);
+           success(status, headers, data);
          });
        } else {
-         success(status, headers, responseObject, data);
+         success(status, headers, data);
        }
      }
    }];
 }
 
-- (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
-                                          path:(NSString *)path
-                                    parameters:(nullable NSDictionary<NSString *, id> *)parameters
-                                        region:(nullable TKRegion *)region
++ (void)hitRequest:(NSURLRequest *)request
+              info:(TKServerInfoBlock)info
+        completion:(TKServerGenericBlock)completion
 {
-  return [TKServer buildSkedGoRequestWithMethod:method
-                                        baseURL:[self _baseURLForRegion:region index:0]
-                                           path:path
-                                     parameters:parameters
-                                        headers:nil
-                                         region:region];
+  NSUUID *requestUUID = [NSUUID UUID];
+  info(requestUUID, request, nil, nil, nil);
+  
+  NSURLSession *defaultSession = [NSURLSession sharedSession];
+  NSURLSessionDataTask *task = [defaultSession dataTaskWithRequest:request
+                                                 completionHandler:
+                                ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                  info(requestUUID, request, response, data, error);
+    
+                                  NSInteger status = 0;
+                                  NSDictionary *headers = nil;
+                                  if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                    status = httpResponse.statusCode;
+                                    headers = httpResponse.allHeaderFields;
+                                  } else {
+                                    headers = @{};
+                                  }
+                                  
+                                  if (error) {
+                                    completion(status, headers, nil, error);
+                                    
+                                  } else if (data.length == 0) {
+                                    // empty response is not an error
+                                    completion(status, headers, nil, nil);
+                                    
+                                  } else {
+                                    completion(status, headers, data, nil);
+                                  }
+                                }];
+  [task resume];
 }
 
 + (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
@@ -403,7 +256,6 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
                                           path:(NSString *)path
                                     parameters:(nullable NSDictionary<NSString *, id> *)parameters
                                        headers:(nullable NSDictionary<NSString *, NSString *> *)headers
-                                        region:(nullable TKRegion *)region
 {
 
   NSURLRequest *request = nil;
@@ -440,65 +292,6 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   } else {
     return nil;
   }
-}
-
-#pragma mark - Regions
-
-- (void)requireRegions:(void(^)(NSError *error))completion
-{
-  if (! completion) {
-    ZAssert(false, @"Completion block required.");
-    return;
-  }
-  
-  if ([TKRegionManager.shared hasRegions]) {
-    // we have regions
-    completion(nil);
-    
-  } else {
-    [self fetchRegionsForced:NO
-                  completion:^(BOOL success, NSError *error) {
-#pragma unused(success)
-                    completion(error);
-                  }];
-  }
-}
-
-#pragma mark - Server & Base URL
-
-- (nullable NSURL *)_baseURLForRegion:(nullable TKRegion *)region index:(NSUInteger)index
-{
-  if ([TKServer developmentServer]) {
-    return index == 0 ? [NSURL URLWithString:[TKServer developmentServer] ] : nil;
-  }
-    
-  if (region == nil || region.urls.count == 0) {
-    if (index == 0) {
-      return [NSURL URLWithString:@"https://api.tripgo.com/v1/"];
-    } else {
-      return nil; // no fail-over
-    }
-  }
-  
-  NSArray<NSURL *> *servers = region.urls;
-  if (servers.count <= index) {
-    return nil;
-  }
-  
-  NSURL *url = [servers objectAtIndex:index];
-  NSString *urlString = url.absoluteString;
-  
-  if (urlString.length > 0 && [urlString characterAtIndex:urlString.length - 1] != '/') {
-    urlString = [urlString stringByAppendingString:@"/"];
-    url = [NSURL URLWithString:urlString];
-  }
-  
-  return url;
-}
-
-- (NSURL *)fallbackBaseURL
-{
-  return [self _baseURLForRegion:nil index:0];
 }
 
 - (void)registerFileBundle:(NSBundle *)bundle {

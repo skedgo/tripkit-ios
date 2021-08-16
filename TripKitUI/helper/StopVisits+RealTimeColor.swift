@@ -10,10 +10,10 @@ import Foundation
 
 import TripKit
 
-extension TKStopVisitRealTime {
+extension StopVisits.RealTime {
   var color: UIColor {
     switch self {
-      case .cancelled: return .tkStateError
+      case .canceled: return .tkStateError
       case .early, .late: return .tkStateWarning
       case .onTime: return .tkStateSuccess
       case .notApplicable, .notAvailable: return .tkLabelSecondary

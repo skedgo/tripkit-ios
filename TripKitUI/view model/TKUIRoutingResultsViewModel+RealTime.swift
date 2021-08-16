@@ -19,7 +19,7 @@ extension TKUIRoutingResultsViewModel {
   static func fetchRealTimeUpdates(for tripGroups: Observable<[TripGroup]>) -> Observable<TKRealTimeUpdateProgress<Void>> {
     return Observable<Int>.interval(.seconds(30), scheduler: MainScheduler.instance)
       .withLatestFrom(tripGroups)
-      .flatMapLatest(TKBuzzRealTime.rx.update)
+      .flatMapLatest(TKRealTimeFetcher.rx.update)
       .startWith(.idle)
   }
   

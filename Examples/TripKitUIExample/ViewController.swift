@@ -72,7 +72,7 @@ class MainViewController: UITableViewController {
 extension MainViewController {
 
   func showSearch() {
-    // We include TKSkedGoGeocoder here which will provide public transport
+    // We include TKTripGoGeocoder here which will provide public transport
     // locations. This requires also a bias map rect, as this only searches on
     // a per-city level.
     guard let randomCity = TKRegionManager.shared.regions.randomElement()?.cities.first else {
@@ -80,7 +80,7 @@ extension MainViewController {
       return
     }
     
-    let resultsController = TKUIAutocompletionViewController(providers: [TKSkedGoGeocoder()])
+    let resultsController = TKUIAutocompletionViewController(providers: [TKTripGoGeocoder()])
     resultsController.biasMapRect = randomCity.centerBiasedMapRect
 
     resultsController.delegate = self
@@ -192,7 +192,7 @@ extension MainViewController {
     let homeController = TKUIHomeViewController()
     homeController.autocompletionDataProviders = [
       TKAppleGeocoder(),
-      TKSkedGoGeocoder(),
+      TKTripGoGeocoder(),
       InMemoryFavoriteManager.shared
 //      InMemoryHistoryManager.shared
     ]

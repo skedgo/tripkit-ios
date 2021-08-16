@@ -149,11 +149,11 @@ public extension TKSegment {
 }
 
 /// :nodoc:
-public extension SegmentReference {
+extension SegmentReference {
   
-  internal(set) var wheelchairAccessibility: TKWheelchairAccessibility {
+  var wheelchairAccessibility: TKWheelchairAccessibility {
     get {
-      switch (isWheelchairAccessible, isWheelchairInaccessible) {
+      switch (wheelchairAccessible, wheelchairInaccessible) {
       case (false, false): return .unknown
       case (true, false): return .accessible
       case (false, true): return .notAccessible
@@ -167,14 +167,14 @@ public extension SegmentReference {
     set {
       switch newValue {
       case .accessible:
-        isWheelchairAccessible = true
-        isWheelchairInaccessible = false
+        wheelchairAccessible = true
+        wheelchairInaccessible = false
       case .notAccessible:
-        isWheelchairAccessible = false
-        isWheelchairInaccessible = true
+        wheelchairAccessible = false
+        wheelchairInaccessible = true
       case .unknown:
-        isWheelchairAccessible = false
-        isWheelchairInaccessible = false
+        wheelchairAccessible = false
+        wheelchairInaccessible = false
       }
     }
   }

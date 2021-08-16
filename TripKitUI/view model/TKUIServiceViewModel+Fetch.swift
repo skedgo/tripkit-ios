@@ -18,13 +18,10 @@ extension TKUIServiceViewModel {
   
   enum FetchError: Error {
     case couldNotFetchServiceContent
-    case unknownError
   }
   
   static func fetchServiceContent(embarkation: StopVisits) -> Single<Void> {
-    
-    let service = embarkation.service
-    guard !service.hasServiceData else {
+    guard let service = embarkation.service, !service.hasServiceData else {
       return .just((), scheduler: MainScheduler.instance)
     }
     
@@ -38,7 +35,6 @@ extension TKUIServiceViewModel {
       }
       return Disposables.create()
     }.observe(on: MainScheduler.instance)
-    
   }
   
 }
@@ -55,7 +51,7 @@ extension TKUIServiceViewModel {
       .interval(realTimeRefreshInterval, scheduler: MainScheduler.instance)
       .startWith(0) // update immediately
       .flatMapLatest { _ -> Observable<TKRealTimeUpdateProgress<Void>> in
-        return TKBuzzRealTime.rx
+        return TKRealTimeFetcher.rx
           .update(embarkation: embarkation)
           .asObservable()
           .map { _ in .updated(()) }
@@ -65,7 +61,7 @@ extension TKUIServiceViewModel {
   }
 }
 
-extension Reactive where Base: TKBuzzRealTime {
+extension Reactive where Base: TKRealTimeFetcher {
   
   static func update(embarkation: StopVisits) -> Single<Void> {
     guard let region = embarkation.stop.region else {
@@ -73,16 +69,9 @@ extension Reactive where Base: TKBuzzRealTime {
     }
     
     return Single.create { subscriber in
-      TKBuzzRealTime.update(
-        [embarkation.service],
-        in: region,
-        success: { _ in
-          subscriber(.success(()))
-        },
-        failure: { error in
-          subscriber(.failure(error ?? TKUIServiceViewModel.FetchError.unknownError))
-        }
-      )
+      TKRealTimeFetcher.update([embarkation.service], in: region) { result in
+        subscriber(result.map { _ in } )
+      }
       return Disposables.create()
     }
     

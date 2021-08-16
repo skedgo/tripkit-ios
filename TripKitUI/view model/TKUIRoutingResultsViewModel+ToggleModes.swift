@@ -24,7 +24,7 @@ extension TKUIRoutingResultsViewModel {
   }
   
   private static func modes(for request: TripRequest) -> [TKRegion.RoutingMode] {
-    let regions = [request.startRegion(), request.endRegion(), request.spanningRegion()].compactMap { $0 }
+    let regions = [request.startRegion, request.endRegion, request.spanningRegion].compactMap { $0 }
     return TKRegionManager.sortedModes(in: regions)
 
   }
@@ -48,7 +48,7 @@ extension TKUIRoutingResultsViewModel {
     
     } else {
       // Make sure we enable all the modes, to not hide any results
-      enabledModes = request.trips.reduce(into: Set()) { $0.formUnion($1.usedModeIdentifiers()) }
+      enabledModes = request.trips.reduce(into: Set()) { $0.formUnion($1.usedModeIdentifiers) }
     }
     
     return AvailableModes(available: all, enabled: enabledModes)

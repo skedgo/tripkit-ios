@@ -85,7 +85,7 @@ class TKUIServiceVisitCell: UITableViewCell {
 }
 
 extension TKUIServiceVisitCell {
-  func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool, realTime: TKStopVisitRealTime) {
+  func setTiming(_ timing: TKServiceTiming, timeZone: TimeZone, isVisited: Bool, realTime: StopVisits.RealTime) {
     
     let textColor: UIColor = isVisited ? realTime.color : .tkLabelTertiary
 
@@ -200,10 +200,9 @@ extension TKUIServiceVisitCell {
   func configure(with visit: StopVisits, embarkOn embarkation: StopVisits, disembarkOn disembarkation: StopVisits?) {
     
     var isVisited: Bool
-    let isBefore = visit.compare(embarkation) == .orderedAscending
-    if isBefore {
+    if visit < embarkation {
       isVisited = false
-    } else if let disembarkation = disembarkation, visit.compare(disembarkation) == .orderedDescending {
+    } else if let disembarkation = disembarkation, visit > disembarkation {
       isVisited = false
     } else {
       isVisited = true

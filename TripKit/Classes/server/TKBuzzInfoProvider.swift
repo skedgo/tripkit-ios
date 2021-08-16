@@ -17,8 +17,8 @@ public enum TKBuzzInfoProvider {
     guard !service.isRequestingServiceData else { return }
     
     service.isRequestingServiceData = true
-    TKServer.shared.requireRegions { error in
-      if let error = error {
+    TKRegionManager.shared.requireRegions { result in
+      if case .failure(let error) = result {
         TKLog.warn("Error fetching regions: \(error)")
         service.isRequestingServiceData = false
         completion(service, false)

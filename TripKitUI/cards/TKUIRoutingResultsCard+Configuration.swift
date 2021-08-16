@@ -69,8 +69,8 @@ public extension TKUIRoutingResultsCard {
     /// An optional list of autocompletion data providers. This list will be used by an instance of
     /// `TKUILocationSearchViewController`, which is presented when users click on
     /// the origin or destination labels. If none was provided, the `TKAppleGeocoder` and
-    /// `TKSkedGoGeocoder` will be used
-    public var autocompletionDataProviders: [TKAutocompleting] = [TKAppleGeocoder(), TKSkedGoGeocoder()]
+    /// `TKTripGoGeocoder` will be used
+    public var autocompletionDataProviders: [TKAutocompleting] = [TKAppleGeocoder(), TKTripGoGeocoder()]
   }
 
 }

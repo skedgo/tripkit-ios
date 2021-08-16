@@ -28,7 +28,7 @@ custom_categories:
   - name: Trip Planning
     children:
       - TKRouter
-      - TKBuzzRealTime
+      - TKRealTimeFetcher
       - TKWaypointRouter
       - TKTripClassifier
       - TKMetricClassifier
@@ -39,7 +39,7 @@ custom_categories:
       - TKContactsManager
       - TKPeliasGeocoder
       - TKRegionAutocompleter
-      - TKSkedGoGeocoder
+      - TKTripGoGeocoder
       - TKAggregateGeocoder
   - name: POIs + Timetables
     children:

@@ -23,8 +23,8 @@ class TKGeocoderTest: XCTestCase {
   override func setUpWithError() throws {
     try super.setUpWithError()
     
-    if TKServer.developmentServer() != nil {
-      TKServer.updateDevelopmentServer(nil) // make sure to hit production
+    if TKServer.developmentServer != nil {
+      TKServer.developmentServer = nil // make sure to hit production
     }
     
     geocoder = try aggregateGeocoder()
@@ -99,7 +99,7 @@ class TKGeocoderTest: XCTestCase {
     let env = ProcessInfo.processInfo.environment
     if let apiKey = env["TRIPGO_API_KEY"], !apiKey.isEmpty {
       TripKit.apiKey = apiKey
-      geocoders.append(TKSkedGoGeocoder())
+      geocoders.append(TKTripGoGeocoder())
       geocoders.append(TKPeliasGeocoder())
     } else {
       try XCTSkipIf(true, "TripGo API key missing. Check environment variable 'TRIPGO_API_KEY'.")

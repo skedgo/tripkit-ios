@@ -47,10 +47,10 @@ extension TKUIServiceViewModel {
 extension TKUIServiceViewModel {
   
   static func buildMapContent(for embarkation: StopVisits, disembarkation: StopVisits?) -> MapContent? {
+    guard let service = embarkation.service else { return nil }
     
-    let service = embarkation.service
     let shapes = service.includingContinuations
-      .flatMap { $0.shapes(forEmbarkation: embarkation, disembarkingAt: disembarkation) }
+      .flatMap { $0.shapes(embarkation: embarkation, disembarkation: disembarkation) }
     let vehicles = [service].compactMap { $0.vehicle } + Array(service.vehicleAlternatives ?? [])
     
     let stops = service.visitsIncludingContinuation()
@@ -87,9 +87,9 @@ extension TKUIServiceViewModel {
     init(visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
       self.visit = visit
       
-      if visit.compare(embarkation) == .orderedAscending {
+      if visit < embarkation {
         isVisited = false
-      } else if let disembarkation = disembarkation, visit.compare(disembarkation) == .orderedDescending {
+      } else if let disembarkation = disembarkation, visit > disembarkation {
         isVisited = false
       } else {
         isVisited = true

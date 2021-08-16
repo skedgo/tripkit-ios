@@ -131,7 +131,7 @@ extension Trip {
   
 }
 
-extension TKTripGroupVisibility {
+extension TripGroup.Visibility {
   
   fileprivate var apiString: String {
     switch self {

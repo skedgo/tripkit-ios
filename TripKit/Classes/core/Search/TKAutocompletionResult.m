@@ -8,8 +8,7 @@
 
 #import "TKAutocompletionResult.h"
 
-#import "TKRootKit.h"
-#import "TKTripKit.h"
+#import "TKStyleManager.h"
 
 @implementation NSString (Matches)
 

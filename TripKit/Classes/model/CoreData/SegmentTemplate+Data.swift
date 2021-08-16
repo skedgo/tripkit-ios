@@ -11,13 +11,13 @@ import Foundation
 extension SegmentTemplate: DataAttachable {}
 
 extension SegmentTemplate {
-  public var localCost: TKLocalCost? {
+  var localCost: TKLocalCost? {
     get { decode(TKLocalCost.self, key: "localCost") }
     set { encode(newValue, key: "localCost") }
   }
 
   /// The preferred map-tiles to use for this segment. `nil` if default.
-  public var mapTiles: TKMapTiles? {
+  var mapTiles: TKMapTiles? {
     get { decode(TKMapTiles.self, key: "mapTiles") }
     set { encode(newValue, key: "mapTiles") }
   }
@@ -27,12 +27,12 @@ extension SegmentTemplate {
     set { encode(newValue, key: "miniInstruction") }
   }
 
-  @objc public var modeInfo: TKModeInfo? {
+  @objc var modeInfo: TKModeInfo? {
     get { decode(TKModeInfo.self, key: "modeInfo") }
     set { encode(newValue, key: "modeInfo") }
   }
 
-  public var turnByTurnMode: TKTurnByTurnMode? {
+  var turnByTurnMode: TKTurnByTurnMode? {
     get { decodePrimitive(TKTurnByTurnMode.self, key: "turnByTurnMode") }
     set { encodePrimitive(newValue, key: "turnByTurnMode") }
   }

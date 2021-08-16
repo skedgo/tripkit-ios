@@ -33,7 +33,7 @@ public enum TKLocationRealTime {
   }
   
   public static func streamRealTime(for location: TKNamedCoordinate) -> Observable<TKAPI.LocationInfo> {
-    return TKServer.shared.rx
+    return TKRegionManager.shared.rx
       .requireRegion(location.coordinate)
       .asObservable()
       .flatMapLatest {

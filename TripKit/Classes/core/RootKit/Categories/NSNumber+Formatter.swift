@@ -19,7 +19,6 @@ extension NSNumber {
     return formatter
   }()
   
-  @objc(toMoneyStringWithCurrencyCode:)
   public func toMoneyString(currencyCode: String) -> String {
     let formatter = Self.formatter
     formatter.numberStyle = .currency
@@ -30,7 +29,6 @@ extension NSNumber {
     return formatter.string(from: self)!
   }
   
-  @objc
   public func toCarbonString() -> String {
     guard floatValue > 0 else {
       return NSLocalizedString("No CO₂", tableName: "Shared", bundle: .tripKit, comment: "Indicator for no carbon emissions")
@@ -45,8 +43,7 @@ extension NSNumber {
     return NSString(format: "%@kg CO₂", formatter.string(from: self)!) as String
   }
   
-  @objc
-  public func toScoreString() -> String {
+  func toScoreString() -> String {
     let formatter = Self.formatter
     formatter.numberStyle = .currency
     formatter.currencyCode = nil

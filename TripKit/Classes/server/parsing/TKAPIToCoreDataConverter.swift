@@ -129,7 +129,6 @@ extension Service {
     // Prefer real-time data all fall back to timetable data
     if let departure = (model.realTimeDeparture ?? model.startTime) {
       visit.departure = departure
-      visit.triggerRealTimeKVO()
     }
     if let arrival = (model.realTimeArrival ?? model.endTime) {
       visit.arrival = arrival
@@ -146,6 +145,10 @@ extension Service {
     
     // need to do this after setting stop
     visit.adjustRegionDay()
+
+    // do this last, as it can trigger other things are the visit
+    // would not be consistent earlier.
+    visit.triggerRealTimeKVO()
     
     return visit
   }
@@ -288,13 +291,13 @@ extension Shape {
             visit = StopVisits(context: context)
             visit.service = service
           }
-          visit.index = NSNumber(value: index)
+          visit.index = Int16(index)
           index += 1
           
           visit.update(from: apiStop, relativeTime: relativeTime)
           
           // hook-up to shape
-          visit.addShapesObject(shape)
+          shape.addToVisits(visit)
           
           if !existingVisitsByCode.keys.contains(apiStop.code) {
             // We added a new visit; we used to use `fetchOrInsert` but the
@@ -343,7 +346,7 @@ extension StopVisits {
   func update(from model: TKAPI.ShapeStop, relativeTime: Date?) {
     precondition((service as Service?) != nil)
     precondition((index as NSNumber?) != nil)
-    precondition(index.intValue >= 0)
+    precondition(index >= 0)
     
     // when we re-use an existing visit, we need to be conservative
     // as to not overwrite a previous arrival/departure with a new 'nil'
@@ -389,7 +392,7 @@ extension Alert {
   convenience init(from model: TKAPI.Alert, into context: NSManagedObjectContext) {
     self.init(context: context)
     
-    hashCode = NSNumber(value: model.hashCode)
+    hashCode = Int32(model.hashCode)
     title = model.title
     startTime = model.fromDate
     endTime = model.toDate
@@ -429,7 +432,7 @@ extension TKAPIToCoreDataConverter {
     guard let alerts = alerts else { return }
     for alertModel in alerts {
       // first we check if have the alert already
-      if let existing = Alert.fetch(withHashCode: NSNumber(value: alertModel.hashCode), inTripKitContext: context) {
+      if let existing = Alert.fetch(hashCode: NSNumber(value: alertModel.hashCode), in: context) {
     
         existing.update(from: alertModel)
       } else {
@@ -462,8 +465,8 @@ extension Vehicle {
       lastUpdate = Date()
     }
     
-    latitude = NSNumber(value: model.location.lat)
-    longitude = NSNumber(value: model.location.lng)
+    latitude = model.location.lat
+    longitude = model.location.lng
     if let bearing = model.location.bearing {
       self.bearing = NSNumber(value: bearing)
     }

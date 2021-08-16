@@ -46,7 +46,7 @@ class TKUITripOverviewViewModel {
     let tripUpdated: Observable<Trip> = presentedTrip
       .asObservable()
       .flatMapLatest {
-        return TKBuzzRealTime.rx.streamUpdates($0, active: inputs.isVisible.asObservable())
+        return TKRealTimeFetcher.rx.streamUpdates($0, active: inputs.isVisible.asObservable())
           .startWith($0)
       }
       .share(replay: 1, scope: .forever)

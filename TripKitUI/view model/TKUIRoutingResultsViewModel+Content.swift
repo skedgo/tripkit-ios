@@ -55,7 +55,7 @@ extension TKUIRoutingResultsViewModel {
       let predicate: NSPredicate
       if tuple.mutable {
         // user can hide them, filter by visibility
-        predicate = NSPredicate(format: "request = %@ AND visibilityRaw != %@", request, NSNumber(value: TKTripGroupVisibility.hidden.rawValue))
+        predicate = NSPredicate(format: "request = %@ AND visibilityRaw != %@", request, NSNumber(value: TripGroup.Visibility.hidden.rawValue))
       } else {
         // user can't show/hide them; show all
         predicate = NSPredicate(format: "request = %@", request)
@@ -174,7 +174,7 @@ extension TKUIRoutingResultsViewModel {
 
 extension TripRequest {
   var includedTransportModes: String {
-    let all = spanningRegion().modeIdentifiers
+    let all = spanningRegion.modeIdentifiers
     let visible = Set(all).subtracting(TKUserProfileHelper.hiddenModeIdentifiers)
     return Loc.Showing(visible.count, ofTransportModes: all.count)
   }
@@ -190,7 +190,7 @@ extension Trip {
   var showFaded: Bool {
     return missedBookingWindow     // shuttle, etc., departing too soon
       || isCanceled
-      || calculateOffset() < -1  // doesn't match query
+      || calculateOffset() < -60  // doesn't match query
   }
 }
 
@@ -235,7 +235,7 @@ extension TKUIRoutingResultsViewModel {
     var items: [Item]
     
     var badge: TKMetricClassifier.Classification? = nil
-    var costs: [NSNumber: String] = [:]
+    var costs: [TKTripCostType: String] = [:]
     var action: SectionAction? = nil
   }
 }

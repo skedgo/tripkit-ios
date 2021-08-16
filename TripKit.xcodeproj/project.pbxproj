@@ -113,13 +113,10 @@
 		3A2CABA9253DA84F007BB48B /* AnimatableSectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2CAB8E253DA84F007BB48B /* AnimatableSectionModelType.swift */; };
 		3A2D06EC1F83DE4B002DA194 /* TKAnnotationClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */; };
 		3A2F25D41F699C32007D3767 /* TKGeocodingResultScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */; };
-		3A2F65B020E0EECC006FE49D /* DLSEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */; };
-		3A2F65B120E0EECC006FE49D /* DLSEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */; };
 		3A309215224DFAE2005D7E76 /* TKUIPolylineRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */; };
-		3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD721DC2DC77003B158B /* Vehicle.swift */; };
 		3A32CD751DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */; };
 		3A32CD791DC2EBC4003B158B /* LocationAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */; };
-		3A32CD7B1DC2EC4F003B158B /* RegionAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */; };
+		3A32CD7B1DC2EC4F003B158B /* RegionInfoAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* RegionInfoAPIModel.swift */; };
 		3A34278E254E9B1700D71039 /* Array+Duplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34278D254E9B1700D71039 /* Array+Duplicates.swift */; };
 		3A34278F254E9B1700D71039 /* Array+Duplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A34278D254E9B1700D71039 /* Array+Duplicates.swift */; };
 		3A34280A254EC7CF00D71039 /* TKUIResultsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD396920D93B0900FDC7D0 /* TKUIResultsFetcher.swift */; };
@@ -166,10 +163,6 @@
 		3A383CB3223018E300361596 /* TKSegment+AccessoryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A383CB2223018E300361596 /* TKSegment+AccessoryViews.swift */; };
 		3A383CB92231464500361596 /* TKUITripModeByModeCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */; };
 		3A383CBB22315A4D00361596 /* TKUITripOverviewViewModel+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A383CBA22315A4D00361596 /* TKUITripOverviewViewModel+Fetch.swift */; };
-		3A38621D228F2F9C00C8E704 /* SGDeprecatedGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A38621C228F2F9C00C8E704 /* SGDeprecatedGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A38621E228F2F9C00C8E704 /* SGDeprecatedGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A38621C228F2F9C00C8E704 /* SGDeprecatedGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A386220228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38621F228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift */; };
-		3A386221228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38621F228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift */; };
 		3A38622422929C0800C8E704 /* TKContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38622322929C0800C8E704 /* TKContactsManager.swift */; };
 		3A38622522929C0800C8E704 /* TKContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38622322929C0800C8E704 /* TKContactsManager.swift */; };
 		3A38622A2292C47F00C8E704 /* TKContactsManager+TKAutocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3862292292C47F00C8E704 /* TKContactsManager+TKAutocompleting.swift */; };
@@ -212,7 +205,6 @@
 		3A506B3123200457003DD234 /* TKUIStartTripAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A506B3023200457003DD234 /* TKUIStartTripAction.swift */; };
 		3A51402E1DEE62EE002DB39F /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
-		3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
 		3A54757E21C15A4800748EB6 /* TKUICircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */; };
 		3A5A39A925A2AB86005DC1AE /* routing-pt-platforms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A39A825A2AB86005DC1AE /* routing-pt-platforms.json */; };
 		3A5A39B725A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A39B525A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift */; };
@@ -308,10 +300,6 @@
 		3A73A477243F767700EB74E5 /* StopLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46E243F767600EB74E5 /* StopLocation+CoreDataProperties.swift */; };
 		3A73A478243F767700EB74E5 /* StopLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46C243F767600EB74E5 /* StopLocation+CoreDataClass.swift */; };
 		3A73A479243F767700EB74E5 /* StopLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46C243F767600EB74E5 /* StopLocation+CoreDataClass.swift */; };
-		3A73A480243F902300EB74E5 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */; };
-		3A73A481243F902400EB74E5 /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */; };
-		3A73A488244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */; };
-		3A73A489244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */; };
 		3A73A48B244068BC00EB74E5 /* NSNumber+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A48A244068BC00EB74E5 /* NSNumber+Formatter.swift */; };
 		3A73A48C244068BC00EB74E5 /* NSNumber+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A48A244068BC00EB74E5 /* NSNumber+Formatter.swift */; };
 		3A73A48F24409A9200EB74E5 /* TKSegment+Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A48E24409A9200EB74E5 /* TKSegment+Ticket.swift */; };
@@ -333,7 +321,6 @@
 		3A817D9225C690DC00E15553 /* TKUITimePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817D9125C690DC00E15553 /* TKUITimePickerSheet.swift */; };
 		3A817DA825C6C1E800E15553 /* TKUITripSegmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A817DA725C6C1E800E15553 /* TKUITripSegmentsView.swift */; };
 		3A84A05A22F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */; };
-		3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
 		3A879AE720CFD93700107D58 /* Alert+TKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */; };
 		3A897A0F2344E457004D0281 /* StopVisits+RealTimeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */; };
 		3A897A1F2347356C004D0281 /* TKUIResultsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */; };
@@ -349,8 +336,6 @@
 		3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */; };
 		3A92205F205FCBFF004E6C34 /* TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */; };
 		3A922060205FCBFF004E6C34 /* TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */; };
-		3A922062205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */; };
-		3A922063205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */; };
 		3A977A0D246BF734000AD7F1 /* TKRoutingServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A977A0C246BF734000AD7F1 /* TKRoutingServer.swift */; };
 		3A977A0E246BF734000AD7F1 /* TKRoutingServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A977A0C246BF734000AD7F1 /* TKRoutingServer.swift */; };
 		3A98A5B325E38A94003346CD /* TKStyleManager+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F72BA25C7D81900C72CEE /* TKStyleManager+UIKit.swift */; };
@@ -360,19 +345,15 @@
 		3A9E0F8F25DDE15100E10244 /* TKUIHomeCardCustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E0F8E25DDE15100E10244 /* TKUIHomeCardCustomizationViewController.swift */; };
 		3A9E0FA025DE002200E10244 /* TKUIHomeCardCustomizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E0F9F25DE002200E10244 /* TKUIHomeCardCustomizationViewModel.swift */; };
 		3A9E0FA725DE1CCB00E10244 /* TKUIHomeCard+Customizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E0FA625DE1CCB00E10244 /* TKUIHomeCard+Customizer.swift */; };
-		3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6D61DE79FA700DB4647 /* Alert.swift */; };
 		3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */; };
 		3AA03D8B1F0B79D400C6B337 /* TKShareURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */; };
 		3AA03E5C1F0BC9DB00C6B337 /* TKLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E391F0BC9DB00C6B337 /* TKLocationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E5D1F0BC9DB00C6B337 /* TKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E3A1F0BC9DB00C6B337 /* TKLocationManager.m */; };
 		3AA03E601F0BC9DB00C6B337 /* TKPermissionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E3D1F0BC9DB00C6B337 /* TKPermissionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E611F0BC9DB00C6B337 /* TKPermissionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E3E1F0BC9DB00C6B337 /* TKPermissionManager.m */; };
-		3AA03E651F0BC9DB00C6B337 /* SGDeprecatedAutocompletionDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E431F0BC9DB00C6B337 /* SGDeprecatedAutocompletionDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E681F0BC9DB00C6B337 /* TKAutocompletionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E461F0BC9DB00C6B337 /* TKAutocompletionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA03E691F0BC9DB00C6B337 /* TKAutocompletionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E471F0BC9DB00C6B337 /* TKAutocompletionResult.m */; };
 		3AA03E6C1F0BC9DB00C6B337 /* TKGeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E4A1F0BC9DB00C6B337 /* TKGeocoderHelper.swift */; };
-		3AA03E6D1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E4B1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AA03E6E1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E4C1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m */; };
 		3AA03E741F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E521F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift */; };
 		3AA03E751F0BC9DB00C6B337 /* TKNamedCoordinate+BuzzData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E531F0BC9DB00C6B337 /* TKNamedCoordinate+BuzzData.swift */; };
 		3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */; };
@@ -422,6 +403,8 @@
 		3AABDD9F1DF7D2E30044A05B /* OpeningHoursAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */; };
 		3AAD87F7209B02B900C75B7E /* VehicleAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */; };
 		3AAD87F8209B02B900C75B7E /* VehicleAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */; };
+		3AAE440426C39CD700E45D20 /* LatestAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE440326C39CD700E45D20 /* LatestAPIModel.swift */; };
+		3AAE440526C39CD700E45D20 /* LatestAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE440326C39CD700E45D20 /* LatestAPIModel.swift */; };
 		3AB1CF1D23AB6B930098DA22 /* TKUINearbyViewModel+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CF1A23AB6B930098DA22 /* TKUINearbyViewModel+Content.swift */; };
 		3AB1CF1E23AB6B930098DA22 /* TKUINearbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CF1C23AB6B930098DA22 /* TKUINearbyViewModel.swift */; };
 		3AB1CF2223AB6BA30098DA22 /* TKUINearbyMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1CF1F23AB6BA30098DA22 /* TKUINearbyMapManager.swift */; };
@@ -430,29 +413,7 @@
 		3AB6C6CF1D1CD08E0089F687 /* NSManagedObject+TKPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C65D1D1CD08E0089F687 /* NSManagedObject+TKPersistence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C6D01D1CD08E0089F687 /* NSManagedObject+TKPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C65E1D1CD08E0089F687 /* NSManagedObject+TKPersistence.m */; };
 		3AB6C6D31D1CD08E0089F687 /* TKUserProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6611D1CD08E0089F687 /* TKUserProfileHelper.swift */; };
-		3AB6C6D41D1CD08E0089F687 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6641D1CD08E0089F687 /* Alert.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6D51D1CD08E0089F687 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6651D1CD08E0089F687 /* Alert.m */; };
-		3AB6C6D81D1CD08E0089F687 /* DLSEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6681D1CD08E0089F687 /* DLSEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6D91D1CD08E0089F687 /* DLSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6691D1CD08E0089F687 /* DLSEntry.m */; };
-		3AB6C6DA1D1CD08E0089F687 /* SegmentReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C66A1D1CD08E0089F687 /* SegmentReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C66B1D1CD08E0089F687 /* SegmentReference.m */; };
-		3AB6C6DE1D1CD08E0089F687 /* Service.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C66E1D1CD08E0089F687 /* Service.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6DF1D1CD08E0089F687 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C66F1D1CD08E0089F687 /* Service.m */; };
-		3AB6C6E41D1CD08E0089F687 /* StopVisits.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6741D1CD08E0089F687 /* StopVisits.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6E51D1CD08E0089F687 /* StopVisits.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6751D1CD08E0089F687 /* StopVisits.m */; };
-		3AB6C6E61D1CD08E0089F687 /* Trip.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6761D1CD08E0089F687 /* Trip.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6E71D1CD08E0089F687 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6771D1CD08E0089F687 /* Trip.m */; };
-		3AB6C6E81D1CD08E0089F687 /* TripGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6781D1CD08E0089F687 /* TripGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6E91D1CD08E0089F687 /* TripGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6791D1CD08E0089F687 /* TripGroup.m */; };
-		3AB6C6EA1D1CD08E0089F687 /* TripRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C67A1D1CD08E0089F687 /* TripRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C67B1D1CD08E0089F687 /* TripRequest.m */; };
-		3AB6C6EC1D1CD08E0089F687 /* Vehicle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C67C1D1CD08E0089F687 /* Vehicle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6ED1D1CD08E0089F687 /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C67D1D1CD08E0089F687 /* Vehicle.m */; };
-		3AB6C6F61D1CD08E0089F687 /* TKSegmentBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6F71D1CD08E0089F687 /* TKSegmentBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */; };
 		3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */; };
-		3AB6C6FD1D1CD08E0089F687 /* TKBuzzRealTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */; };
 		3AB6C7051D1CD08E0089F687 /* TKQuickBookingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6961D1CD08E0089F687 /* TKQuickBookingHelper.swift */; };
 		3AB6C70F1D1CD08E0089F687 /* TKSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6A01D1CD08E0089F687 /* TKSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB6C7101D1CD08E0089F687 /* TKSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6A11D1CD08E0089F687 /* TKSettings.m */; };
@@ -473,8 +434,6 @@
 		3ABBDA172032131E00205042 /* TripKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E231F20DD5300666E59 /* TripKit.swift */; };
 		3ABBDA182032132400205042 /* TKAPIToCoreDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */; };
 		3ABBDA1B2032132400205042 /* TKBuzzInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */; };
-		3ABBDA1C2032132400205042 /* TKBuzzRealTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA1D2032132400205042 /* TKBuzzRealTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */; };
 		3ABBDA282032132400205042 /* TKQuickBookingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6961D1CD08E0089F687 /* TKQuickBookingHelper.swift */; };
 		3ABBDA292032132400205042 /* TKQuickBookingHelper+Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A14BE2B1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift */; };
 		3ABBDA2D2032132400205042 /* TKReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */; };
@@ -483,40 +442,13 @@
 		3ABBDA342032132400205042 /* TKSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6A11D1CD08E0089F687 /* TKSettings.m */; };
 		3ABBDA352032132400205042 /* TKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B111F0BF79800500940 /* TKSettings.swift */; };
 		3ABBDA392032132400205042 /* TKWaypointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4DD101DEE32C80026B238 /* TKWaypointRouter.swift */; };
-		3ABBDA3A2032132D00205042 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6641D1CD08E0089F687 /* Alert.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA3B2032132D00205042 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6651D1CD08E0089F687 /* Alert.m */; };
-		3ABBDA3C2032132D00205042 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FF6D61DE79FA700DB4647 /* Alert.swift */; };
-		3ABBDA3F2032132D00205042 /* DLSEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6681D1CD08E0089F687 /* DLSEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA402032132D00205042 /* DLSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6691D1CD08E0089F687 /* DLSEntry.m */; };
-		3ABBDA412032132D00205042 /* SegmentReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C66A1D1CD08E0089F687 /* SegmentReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA422032132D00205042 /* SegmentReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C66B1D1CD08E0089F687 /* SegmentReference.m */; };
-		3ABBDA452032132D00205042 /* Service.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C66E1D1CD08E0089F687 /* Service.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA462032132D00205042 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C66F1D1CD08E0089F687 /* Service.m */; };
-		3ABBDA472032132D00205042 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		3ABBDA482032132D00205042 /* Shape+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */; };
 		3ABBDA492032132D00205042 /* Shape+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */; };
 		3ABBDA4C2032132D00205042 /* StopLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADFF1F06B1D000147990 /* StopLocation.swift */; };
-		3ABBDA4D2032132D00205042 /* StopVisits.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6741D1CD08E0089F687 /* StopVisits.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA4E2032132D00205042 /* StopVisits.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6751D1CD08E0089F687 /* StopVisits.m */; };
-		3ABBDA4F2032132D00205042 /* StopVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADFB1F069DAB00147990 /* StopVisits.swift */; };
-		3ABBDA502032132D00205042 /* Trip.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6761D1CD08E0089F687 /* Trip.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA512032132D00205042 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6771D1CD08E0089F687 /* Trip.m */; };
-		3ABBDA522032132D00205042 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC5E1F068B6100147990 /* Trip.swift */; };
-		3ABBDA532032132D00205042 /* TripGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6781D1CD08E0089F687 /* TripGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA542032132D00205042 /* TripGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6791D1CD08E0089F687 /* TripGroup.m */; };
-		3ABBDA552032132D00205042 /* TripGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84F00D1F77021200B2F9A0 /* TripGroup.swift */; };
-		3ABBDA562032132D00205042 /* TripRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C67A1D1CD08E0089F687 /* TripRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA572032132D00205042 /* TripRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C67B1D1CD08E0089F687 /* TripRequest.m */; };
-		3ABBDA582032132D00205042 /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5140301DEE62FA002DB39F /* TripRequest.swift */; };
-		3ABBDA592032132D00205042 /* Vehicle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C67C1D1CD08E0089F687 /* Vehicle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA5A2032132D00205042 /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C67D1D1CD08E0089F687 /* Vehicle.m */; };
-		3ABBDA5B2032132D00205042 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD721DC2DC77003B158B /* Vehicle.swift */; };
 		3ABBDA5C2032132D00205042 /* TKBookingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2611E04CA7C00A2EEC6 /* TKBookingTypes.swift */; };
 		3ABBDA5F2032132D00205042 /* TKColoredRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B231F0C061500500940 /* TKColoredRoute.swift */; };
 		3ABBDA602032132D00205042 /* TKDLSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */; };
 		3ABBDA612032132D00205042 /* TKLocationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF3F2631E04CA8C00A2EEC6 /* TKLocationTypes.swift */; };
-		3ABBDA642032132D00205042 /* TKSegmentBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDA652032132D00205042 /* TKSegmentBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */; };
 		3ABBDA662032132D00205042 /* TKSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51402D1DEE62EE002DB39F /* TKSegment.swift */; };
 		3ABBDA692032132D00205042 /* TKTripPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */; };
 		3ABBDA6A2032133300205042 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA51F751FC300C8D476 /* API.swift */; };
@@ -526,7 +458,7 @@
 		3ABBDA6E2032133300205042 /* LocationAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */; };
 		3ABBDA6F2032133300205042 /* OpeningHoursAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */; };
 		3ABBDA702032133300205042 /* PricingTableAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */; };
-		3ABBDA712032133300205042 /* RegionAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */; };
+		3ABBDA712032133300205042 /* RegionInfoAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32CD7A1DC2EC4F003B158B /* RegionInfoAPIModel.swift */; };
 		3ABBDA722032133300205042 /* ServiceAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */; };
 		3ABBDA732032133300205042 /* StopAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */; };
 		3ABBDA792032133900205042 /* NSBundle+ProductName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA801461F388E2F00D5E31F /* NSBundle+ProductName.swift */; };
@@ -540,7 +472,6 @@
 		3ABBDA842032134000205042 /* TKInfoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7B1F06854F00147990 /* TKInfoIcon.swift */; };
 		3ABBDA872032134000205042 /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */; };
 		3ABBDA8A2032134000205042 /* TKRoutePolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */; };
-		3ABBDA8B2032134000205042 /* TKTransportKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB821F06854F00147990 /* TKTransportKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA8C2032134000205042 /* TKTripAndSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */; };
 		3ABBDA8D2032134000205042 /* TKVehicleType.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB841F06854F00147990 /* TKVehicleType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA8E2032134000205042 /* TKVehicular.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB851F06854F00147990 /* TKVehicular.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -552,16 +483,12 @@
 		3ABBDA992032134900205042 /* TKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB721F06854F00147990 /* TKServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA9A2032134900205042 /* TKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB731F06854F00147990 /* TKServer.m */; };
 		3ABBDA9B2032134900205042 /* TKServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A096E1D1F20DAD500666E59 /* TKServer.swift */; };
-		3ABBDA9C2032134900205042 /* TKServerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB741F06854F00147990 /* TKServerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA9D2032134900205042 /* TKTransportModes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB751F06854F00147990 /* TKTransportModes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDA9E2032134900205042 /* TKTransportModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB761F06854F00147990 /* TKTransportModes.m */; };
 		3ABBDA9F2032134900205042 /* TKRegionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB711F06854F00147990 /* TKRegionManager.swift */; };
-		3ABBDAA32032134D00205042 /* SGDeprecatedAutocompletionDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E431F0BC9DB00C6B337 /* SGDeprecatedAutocompletionDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAA62032134D00205042 /* TKAutocompletionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E461F0BC9DB00C6B337 /* TKAutocompletionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAA72032134D00205042 /* TKAutocompletionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E471F0BC9DB00C6B337 /* TKAutocompletionResult.m */; };
 		3ABBDAAA2032134D00205042 /* TKGeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E4A1F0BC9DB00C6B337 /* TKGeocoderHelper.swift */; };
-		3ABBDAAB2032134D00205042 /* TKSkedGoGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA03E4B1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ABBDAAC2032134D00205042 /* TKSkedGoGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E4C1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m */; };
 		3ABBDAB22032134D00205042 /* TKNamedCoordinate+Attribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E521F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift */; };
 		3ABBDAB32032134D00205042 /* TKNamedCoordinate+BuzzData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA03E531F0BC9DB00C6B337 /* TKNamedCoordinate+BuzzData.swift */; };
 		3ABBDAB72032134D00205042 /* TKAnnotationClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */; };
@@ -581,7 +508,6 @@
 		3ABBDAC92032135400205042 /* TKCrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB591F06854F00147990 /* TKCrossPlatform.swift */; };
 		3ABBDACA2032135400205042 /* TKEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB5A1F06854F00147990 /* TKEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDACE2032135400205042 /* TKObjcDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB5E1F06854F00147990 /* TKObjcDateHelper.swift */; };
-		3ABBDAD12032135400205042 /* TKRootKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB631F06854F00147990 /* TKRootKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAD22032135400205042 /* TKStyleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB641F06854F00147990 /* TKStyleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ABBDAD32032135400205042 /* TKStyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB651F06854F00147990 /* TKStyleManager.m */; };
 		3ABBDAD42032135400205042 /* TKStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B211F0BFDEF00500940 /* TKStyleManager.swift */; };
@@ -728,6 +654,18 @@
 		3AF7AFCB244F2EE400E8A831 /* TKUIRoutingResultsViewModel+Advisory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7AFCA244F2EE400E8A831 /* TKUIRoutingResultsViewModel+Advisory.swift */; };
 		3AF7AFD424506E6500E8A831 /* TKUITripOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF7AFD224506E6400E8A831 /* TKUITripOverviewViewController.swift */; };
 		3AF83FE626C4ECC900C86CAF /* routing-walk.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AF83FE526C4ECC900C86CAF /* routing-walk.json */; };
+		3AF83FF926C4FAD800C86CAF /* Alert+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FE926C4FAD800C86CAF /* Alert+CoreDataClass.swift */; };
+		3AF83FFA26C4FAD800C86CAF /* Alert+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FE926C4FAD800C86CAF /* Alert+CoreDataClass.swift */; };
+		3AF83FFB26C4FAD800C86CAF /* Alert+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEA26C4FAD800C86CAF /* Alert+CoreDataProperties.swift */; };
+		3AF83FFC26C4FAD800C86CAF /* Alert+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEA26C4FAD800C86CAF /* Alert+CoreDataProperties.swift */; };
+		3AF8401A26C4FC5700C86CAF /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */; };
+		3AF8401B26C4FC5800C86CAF /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */; };
+		3AF8401C26C4FC6500C86CAF /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */; };
+		3AF8401D26C4FC6600C86CAF /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */; };
+		3AF8402426C4FF6B00C86CAF /* DLSEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEF26C4FAD800C86CAF /* DLSEntry+CoreDataProperties.swift */; };
+		3AF8402526C4FF6B00C86CAF /* DLSEntry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEE26C4FAD800C86CAF /* DLSEntry+CoreDataClass.swift */; };
+		3AF8402826C4FF6C00C86CAF /* DLSEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEF26C4FAD800C86CAF /* DLSEntry+CoreDataProperties.swift */; };
+		3AF8402926C4FF6C00C86CAF /* DLSEntry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEE26C4FAD800C86CAF /* DLSEntry+CoreDataClass.swift */; };
 		3AF94B121F0BF79800500940 /* TKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B111F0BF79800500940 /* TKSettings.swift */; };
 		3AF94B1F1F0BFB9E00500940 /* Shape+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */; };
 		3AF94B201F0BFB9E00500940 /* Shape+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */; };
@@ -752,6 +690,46 @@
 		3AFD397E20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD397C20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift */; };
 		3AFD398220D9510F00FDC7D0 /* TKUICustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */; };
 		3AFD70BD1E558BC800F6B06F /* PricingTableAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */; };
+		3AFF4DE726C5047100D71394 /* SegmentReference+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF726C4FAD800C86CAF /* SegmentReference+CoreDataClass.swift */; };
+		3AFF4DE826C5047100D71394 /* SegmentReference+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF826C4FAD800C86CAF /* SegmentReference+CoreDataProperties.swift */; };
+		3AFF4DE926C5047100D71394 /* SegmentReference+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF726C4FAD800C86CAF /* SegmentReference+CoreDataClass.swift */; };
+		3AFF4DEA26C5047100D71394 /* SegmentReference+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF826C4FAD800C86CAF /* SegmentReference+CoreDataProperties.swift */; };
+		3AFF4DEB26C5093B00D71394 /* Vehicle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF526C4FAD800C86CAF /* Vehicle+CoreDataClass.swift */; };
+		3AFF4DEC26C5093B00D71394 /* Vehicle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF626C4FAD800C86CAF /* Vehicle+CoreDataProperties.swift */; };
+		3AFF4DED26C5093B00D71394 /* Vehicle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF526C4FAD800C86CAF /* Vehicle+CoreDataClass.swift */; };
+		3AFF4DEE26C5093B00D71394 /* Vehicle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF626C4FAD800C86CAF /* Vehicle+CoreDataProperties.swift */; };
+		3AFF4DEF26C5377A00D71394 /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF026C4FAD800C86CAF /* Service+CoreDataClass.swift */; };
+		3AFF4DF026C5377B00D71394 /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF026C4FAD800C86CAF /* Service+CoreDataClass.swift */; };
+		3AFF4DF226C5387F00D71394 /* Service+Visits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4DF126C5387F00D71394 /* Service+Visits.swift */; };
+		3AFF4DF326C5387F00D71394 /* Service+Visits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4DF126C5387F00D71394 /* Service+Visits.swift */; };
+		3AFF4DF426C5CCFA00D71394 /* StopVisits+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEB26C4FAD800C86CAF /* StopVisits+CoreDataClass.swift */; };
+		3AFF4DF526C5CCFA00D71394 /* StopVisits+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEC26C4FAD800C86CAF /* StopVisits+CoreDataProperties.swift */; };
+		3AFF4DF626C5CCFB00D71394 /* StopVisits+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEB26C4FAD800C86CAF /* StopVisits+CoreDataClass.swift */; };
+		3AFF4DF726C5CCFB00D71394 /* StopVisits+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FEC26C4FAD800C86CAF /* StopVisits+CoreDataProperties.swift */; };
+		3AFF4DF826C5D7F400D71394 /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FED26C4FAD800C86CAF /* Trip+CoreDataClass.swift */; };
+		3AFF4DF926C5D7F500D71394 /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FED26C4FAD800C86CAF /* Trip+CoreDataClass.swift */; };
+		3AFF4DFB26C5DE8300D71394 /* SegmentReference+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4DFA26C5DE8300D71394 /* SegmentReference+Flags.swift */; };
+		3AFF4DFC26C5DE8300D71394 /* SegmentReference+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4DFA26C5DE8300D71394 /* SegmentReference+Flags.swift */; };
+		3AFF4DFF26C5DEC600D71394 /* SegmentTemplate+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4DFE26C5DEC600D71394 /* SegmentTemplate+Flags.swift */; };
+		3AFF4E0026C5DEC600D71394 /* SegmentTemplate+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4DFE26C5DEC600D71394 /* SegmentTemplate+Flags.swift */; };
+		3AFF4E0226C5DFAA00D71394 /* Trip+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E0126C5DFAA00D71394 /* Trip+Flags.swift */; };
+		3AFF4E0326C5DFAA00D71394 /* Trip+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E0126C5DFAA00D71394 /* Trip+Flags.swift */; };
+		3AFF4E0626C5F56000D71394 /* TripGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF426C4FAD800C86CAF /* TripGroup+CoreDataProperties.swift */; };
+		3AFF4E0726C5F56000D71394 /* TripGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF426C4FAD800C86CAF /* TripGroup+CoreDataProperties.swift */; };
+		3AFF4E0826C5F56700D71394 /* TripGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF326C4FAD800C86CAF /* TripGroup+CoreDataClass.swift */; };
+		3AFF4E0926C5F56700D71394 /* TripGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF326C4FAD800C86CAF /* TripGroup+CoreDataClass.swift */; };
+		3AFF4E0A26C6003B00D71394 /* TripRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF226C4FAD800C86CAF /* TripRequest+CoreDataProperties.swift */; };
+		3AFF4E0B26C6003C00D71394 /* TripRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF226C4FAD800C86CAF /* TripRequest+CoreDataProperties.swift */; };
+		3AFF4E0C26C6003F00D71394 /* TripRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF126C4FAD800C86CAF /* TripRequest+CoreDataClass.swift */; };
+		3AFF4E0D26C6003F00D71394 /* TripRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF83FF126C4FAD800C86CAF /* TripRequest+CoreDataClass.swift */; };
+		3AFF4E0F26C6091C00D71394 /* TKTripGoGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E0E26C6091C00D71394 /* TKTripGoGeocoder.swift */; };
+		3AFF4E1026C6091C00D71394 /* TKTripGoGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E0E26C6091C00D71394 /* TKTripGoGeocoder.swift */; };
+		3AFF4E1C26C60A5E00D71394 /* GeocodeAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E1B26C60A5E00D71394 /* GeocodeAPIModel.swift */; };
+		3AFF4E1D26C60A5E00D71394 /* GeocodeAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E1B26C60A5E00D71394 /* GeocodeAPIModel.swift */; };
+		3AFF4E2A26C627A800D71394 /* RegionsAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E2926C627A800D71394 /* RegionsAPIModel.swift */; };
+		3AFF4E2B26C627A800D71394 /* RegionsAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E2926C627A800D71394 /* RegionsAPIModel.swift */; };
+		3AFF4E2D26C6295100D71394 /* TKServer+Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E2C26C6295100D71394 /* TKServer+Regions.swift */; };
+		3AFF4E2E26C6295100D71394 /* TKServer+Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF4E2C26C6295100D71394 /* TKServer+Regions.swift */; };
 		3AFFAB161F06849500147990 /* Shared.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AFFAB141F06849500147990 /* Shared.strings */; };
 		3AFFAB241F0684CC00147990 /* TripKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFFAB231F0684CC00147990 /* TripKit.xcassets */; };
 		3AFFAB871F06854F00147990 /* TKActions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB271F06854F00147990 /* TKActions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -780,7 +758,6 @@
 		3AFFABB41F06854F00147990 /* TKCrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB591F06854F00147990 /* TKCrossPlatform.swift */; };
 		3AFFABB51F06854F00147990 /* TKEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB5A1F06854F00147990 /* TKEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABB91F06854F00147990 /* TKObjcDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB5E1F06854F00147990 /* TKObjcDateHelper.swift */; };
-		3AFFABBE1F06854F00147990 /* TKRootKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB631F06854F00147990 /* TKRootKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABBF1F06854F00147990 /* TKStyleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB641F06854F00147990 /* TKStyleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABC01F06854F00147990 /* TKStyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB651F06854F00147990 /* TKStyleManager.m */; };
 		3AFFABC51F06854F00147990 /* TKNamedCoordinate+SVKRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB6B1F06854F00147990 /* TKNamedCoordinate+SVKRegion.swift */; };
@@ -790,7 +767,6 @@
 		3AFFABCB1F06854F00147990 /* TKRegionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB711F06854F00147990 /* TKRegionManager.swift */; };
 		3AFFABCC1F06854F00147990 /* TKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB721F06854F00147990 /* TKServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABCD1F06854F00147990 /* TKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB731F06854F00147990 /* TKServer.m */; };
-		3AFFABCE1F06854F00147990 /* TKServerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB741F06854F00147990 /* TKServerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABCF1F06854F00147990 /* TKTransportModes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB751F06854F00147990 /* TKTransportModes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABD01F06854F00147990 /* TKTransportModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB761F06854F00147990 /* TKTransportModes.m */; };
 		3AFFABD11F06854F00147990 /* TKModeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB781F06854F00147990 /* TKModeInfo.swift */; };
@@ -799,13 +775,10 @@
 		3AFFABD41F06854F00147990 /* TKInfoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7B1F06854F00147990 /* TKInfoIcon.swift */; };
 		3AFFABD71F06854F00147990 /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */; };
 		3AFFABDA1F06854F00147990 /* TKRoutePolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */; };
-		3AFFABDB1F06854F00147990 /* TKTransportKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB821F06854F00147990 /* TKTransportKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABDC1F06854F00147990 /* TKTripAndSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */; };
 		3AFFABDD1F06854F00147990 /* TKVehicleType.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB841F06854F00147990 /* TKVehicleType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABDE1F06854F00147990 /* TKVehicular.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFFAB851F06854F00147990 /* TKVehicular.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFFABDF1F06854F00147990 /* TKVehicular.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAB861F06854F00147990 /* TKVehicular.m */; };
-		3AFFAC5F1F068B6100147990 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAC5E1F068B6100147990 /* Trip.swift */; };
-		3AFFADFC1F069DAB00147990 /* StopVisits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADFB1F069DAB00147990 /* StopVisits.swift */; };
 		3AFFADFE1F06AFDD00147990 /* TKShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADFD1F06AFDD00147990 /* TKShareHelper.swift */; };
 		3AFFAE001F06B1D000147990 /* StopLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFADFF1F06B1D000147990 /* StopLocation.swift */; };
 		3AFFAE021F06B85F00147990 /* StopLocation+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE011F06B85F00147990 /* StopLocation+Shareable.swift */; };
@@ -813,7 +786,6 @@
 		3AFFAE061F06B97300147990 /* TKSegment+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE051F06B97300147990 /* TKSegment+Shareable.swift */; };
 		3AFFAE081F06BA1500147990 /* Trip+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE071F06BA1500147990 /* Trip+Shareable.swift */; };
 		3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */; };
-		3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFAE0B1F06BCF200147990 /* Service.swift */; };
 		D3049DFD224C49E600CB59D1 /* TKUIDepartureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3049DFB224C49E600CB59D1 /* TKUIDepartureCell.swift */; };
 		D3049DFE224C49E600CB59D1 /* TKUIDepartureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3049DFC224C49E600CB59D1 /* TKUIDepartureCell.xib */; };
 		D31410992395DFE7009498C5 /* ExampleCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31410982395DFE7009498C5 /* ExampleCustomizer.swift */; };
@@ -1056,12 +1028,10 @@
 		3A2CAB8E253DA84F007BB48B /* AnimatableSectionModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSectionModelType.swift; sourceTree = "<group>"; };
 		3A2D06EB1F83DE4B002DA194 /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
 		3A2F25D31F699C32007D3767 /* TKGeocodingResultScorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocodingResultScorer.swift; sourceTree = "<group>"; };
-		3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLSEntry.swift; sourceTree = "<group>"; };
 		3A309214224DFAE2005D7E76 /* TKUIPolylineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRenderer.swift; sourceTree = "<group>"; };
-		3A32CD721DC2DC77003B158B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Vehicle.swift; sourceTree = "<group>"; };
 		3A32CD741DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAPIToCoreDataConverter.swift; sourceTree = "<group>"; };
 		3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAPIModel.swift; sourceTree = "<group>"; };
-		3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionAPIModel.swift; sourceTree = "<group>"; };
+		3A32CD7A1DC2EC4F003B158B /* RegionInfoAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionInfoAPIModel.swift; sourceTree = "<group>"; };
 		3A34278D254E9B1700D71039 /* Array+Duplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Duplicates.swift"; sourceTree = "<group>"; };
 		3A342863254ECA0500D71039 /* TKGeocoding+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKGeocoding+Rx.swift"; sourceTree = "<group>"; };
 		3A34287A254ED72900D71039 /* Vehicle+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vehicle+Rx.swift"; sourceTree = "<group>"; };
@@ -1083,8 +1053,6 @@
 		3A383CB2223018E300361596 /* TKSegment+AccessoryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSegment+AccessoryViews.swift"; sourceTree = "<group>"; };
 		3A383CB82231464500361596 /* TKUITripModeByModeCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripModeByModeCard+Configuration.swift"; sourceTree = "<group>"; };
 		3A383CBA22315A4D00361596 /* TKUITripOverviewViewModel+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripOverviewViewModel+Fetch.swift"; sourceTree = "<group>"; };
-		3A38621C228F2F9C00C8E704 /* SGDeprecatedGeocoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGDeprecatedGeocoder.h; sourceTree = "<group>"; };
-		3A38621F228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGDeprecatedGeocoder+TKGeocoding.swift"; sourceTree = "<group>"; };
 		3A38622322929C0800C8E704 /* TKContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKContactsManager.swift; sourceTree = "<group>"; };
 		3A3862292292C47F00C8E704 /* TKContactsManager+TKAutocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKContactsManager+TKAutocompleting.swift"; sourceTree = "<group>"; };
 		3A38622D2292D61100C8E704 /* TKImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKImageBuilder.swift; sourceTree = "<group>"; };
@@ -1123,7 +1091,6 @@
 		3A506B3023200457003DD234 /* TKUIStartTripAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStartTripAction.swift; sourceTree = "<group>"; };
 		3A51402C1DEE62EE002DB39F /* TKDLSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDLSTable.swift; sourceTree = "<group>"; };
 		3A51402D1DEE62EE002DB39F /* TKSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSegment.swift; sourceTree = "<group>"; };
-		3A5140301DEE62FA002DB39F /* TripRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		3A54757D21C15A4800748EB6 /* TKUICircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICircleAnnotationView.swift; sourceTree = "<group>"; };
 		3A5A39A825A2AB86005DC1AE /* routing-pt-platforms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-pt-platforms.json"; sourceTree = "<group>"; };
 		3A5A39B525A2B9A6005DC1AE /* TKUISegmentStationaryDoubleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISegmentStationaryDoubleCell.swift; sourceTree = "<group>"; };
@@ -1237,7 +1204,6 @@
 		3A817D9125C690DC00E15553 /* TKUITimePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITimePickerSheet.swift; sourceTree = "<group>"; };
 		3A817DA725C6C1E800E15553 /* TKUITripSegmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripSegmentsView.swift; sourceTree = "<group>"; };
 		3A84A05922F9A68A0005D0B4 /* TKUIRoutingResultsViewModel+ToggleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+ToggleModes.swift"; sourceTree = "<group>"; };
-		3A84F00D1F77021200B2F9A0 /* TripGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripGroup.swift; sourceTree = "<group>"; };
 		3A879AE420CFD90C00107D58 /* Alert+TKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+TKAlert.swift"; sourceTree = "<group>"; };
 		3A897A0E2344E457004D0281 /* StopVisits+RealTimeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StopVisits+RealTimeColor.swift"; sourceTree = "<group>"; };
 		3A897A1C2347356C004D0281 /* TKUIResultsSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIResultsSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -1251,7 +1217,6 @@
 		3A8FAB7120D3F433005D4C73 /* TKUITripCell+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripCell+Rx.swift"; sourceTree = "<group>"; };
 		3A92205B205FC87C004E6C34 /* TKAppleGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAppleGeocoder.swift; sourceTree = "<group>"; };
 		3A92205E205FCBFF004E6C34 /* TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeocoding.swift; sourceTree = "<group>"; };
-		3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift"; sourceTree = "<group>"; };
 		3A932EAF23BF3721004AA154 /* TKRouter+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKRouter+Rx.swift"; sourceTree = "<group>"; };
 		3A932EB323BF3E67004AA154 /* Trip Planning.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Trip Planning.md"; sourceTree = "<group>"; };
 		3A94672A1D62B08400EEB667 /* TKLocationRealTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRealTime.swift; sourceTree = "<group>"; };
@@ -1260,7 +1225,6 @@
 		3A9E0F8E25DDE15100E10244 /* TKUIHomeCardCustomizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeCardCustomizationViewController.swift; sourceTree = "<group>"; };
 		3A9E0F9F25DE002200E10244 /* TKUIHomeCardCustomizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIHomeCardCustomizationViewModel.swift; sourceTree = "<group>"; };
 		3A9E0FA625DE1CCB00E10244 /* TKUIHomeCard+Customizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeCard+Customizer.swift"; sourceTree = "<group>"; };
-		3A9FF6D61DE79FA700DB4647 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Alert.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3A9FF6DA1DE79FC400DB4647 /* TKReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKReporter.swift; sourceTree = "<group>"; };
 		3AA03D8A1F0B79D400C6B337 /* TKShareURLProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareURLProvider.swift; sourceTree = "<group>"; };
 		3AA03E391F0BC9DB00C6B337 /* TKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKLocationManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1268,12 +1232,9 @@
 		3AA03E3D1F0BC9DB00C6B337 /* TKPermissionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPermissionManager.h; sourceTree = "<group>"; };
 		3AA03E3E1F0BC9DB00C6B337 /* TKPermissionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPermissionManager.m; sourceTree = "<group>"; };
 		3AA03E401F0BC9DB00C6B337 /* TKAggregateGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAggregateGeocoder.swift; sourceTree = "<group>"; };
-		3AA03E431F0BC9DB00C6B337 /* SGDeprecatedAutocompletionDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDeprecatedAutocompletionDataProvider.h; sourceTree = "<group>"; };
 		3AA03E461F0BC9DB00C6B337 /* TKAutocompletionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKAutocompletionResult.h; sourceTree = "<group>"; };
 		3AA03E471F0BC9DB00C6B337 /* TKAutocompletionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKAutocompletionResult.m; sourceTree = "<group>"; };
 		3AA03E4A1F0BC9DB00C6B337 /* TKGeocoderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGeocoderHelper.swift; sourceTree = "<group>"; };
-		3AA03E4B1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSkedGoGeocoder.h; sourceTree = "<group>"; };
-		3AA03E4C1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKSkedGoGeocoder.m; sourceTree = "<group>"; };
 		3AA03E521F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKNamedCoordinate+Attribution.swift"; sourceTree = "<group>"; };
 		3AA03E531F0BC9DB00C6B337 /* TKNamedCoordinate+BuzzData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKNamedCoordinate+BuzzData.swift"; sourceTree = "<group>"; };
 		3AA39AC41F7A35B60066CC94 /* Codable+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Helpers.swift"; sourceTree = "<group>"; };
@@ -1330,6 +1291,7 @@
 		3AACB4B726439FF700DE5665 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleAPIModel.swift; sourceTree = "<group>"; };
 		3AAD8815209C78E300C75B7E /* TKUserProfileHelper+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUserProfileHelper+Rx.swift"; sourceTree = "<group>"; };
+		3AAE440326C39CD700E45D20 /* LatestAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestAPIModel.swift; sourceTree = "<group>"; };
 		3AB1CF1A23AB6B930098DA22 /* TKUINearbyViewModel+Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKUINearbyViewModel+Content.swift"; sourceTree = "<group>"; };
 		3AB1CF1C23AB6B930098DA22 /* TKUINearbyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUINearbyViewModel.swift; sourceTree = "<group>"; };
 		3AB1CF1F23AB6BA30098DA22 /* TKUINearbyMapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUINearbyMapManager.swift; sourceTree = "<group>"; };
@@ -1342,29 +1304,7 @@
 		3AB6C65D1D1CD08E0089F687 /* NSManagedObject+TKPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+TKPersistence.h"; sourceTree = "<group>"; };
 		3AB6C65E1D1CD08E0089F687 /* NSManagedObject+TKPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+TKPersistence.m"; sourceTree = "<group>"; };
 		3AB6C6611D1CD08E0089F687 /* TKUserProfileHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUserProfileHelper.swift; sourceTree = "<group>"; };
-		3AB6C6641D1CD08E0089F687 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Alert.h; sourceTree = "<group>"; };
-		3AB6C6651D1CD08E0089F687 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Alert.m; sourceTree = "<group>"; };
-		3AB6C6681D1CD08E0089F687 /* DLSEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSEntry.h; sourceTree = "<group>"; };
-		3AB6C6691D1CD08E0089F687 /* DLSEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSEntry.m; sourceTree = "<group>"; };
-		3AB6C66A1D1CD08E0089F687 /* SegmentReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentReference.h; sourceTree = "<group>"; };
-		3AB6C66B1D1CD08E0089F687 /* SegmentReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentReference.m; sourceTree = "<group>"; };
-		3AB6C66E1D1CD08E0089F687 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Service.h; sourceTree = "<group>"; };
-		3AB6C66F1D1CD08E0089F687 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
-		3AB6C6741D1CD08E0089F687 /* StopVisits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StopVisits.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		3AB6C6751D1CD08E0089F687 /* StopVisits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StopVisits.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		3AB6C6761D1CD08E0089F687 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Trip.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		3AB6C6771D1CD08E0089F687 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Trip.m; sourceTree = "<group>"; };
-		3AB6C6781D1CD08E0089F687 /* TripGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripGroup.h; sourceTree = "<group>"; };
-		3AB6C6791D1CD08E0089F687 /* TripGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripGroup.m; sourceTree = "<group>"; };
-		3AB6C67A1D1CD08E0089F687 /* TripRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TripRequest.h; sourceTree = "<group>"; };
-		3AB6C67B1D1CD08E0089F687 /* TripRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripRequest.m; sourceTree = "<group>"; };
-		3AB6C67C1D1CD08E0089F687 /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Vehicle.h; sourceTree = "<group>"; };
-		3AB6C67D1D1CD08E0089F687 /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
-		3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKSegmentBuilder.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKSegmentBuilder.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBuzzInfoProvider.swift; sourceTree = "<group>"; };
-		3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKBuzzRealTime.h; sourceTree = "<group>"; };
-		3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKBuzzRealTime.m; sourceTree = "<group>"; };
 		3AB6C6961D1CD08E0089F687 /* TKQuickBookingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKQuickBookingHelper.swift; sourceTree = "<group>"; };
 		3AB6C6A01D1CD08E0089F687 /* TKSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSettings.h; sourceTree = "<group>"; };
 		3AB6C6A11D1CD08E0089F687 /* TKSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSettings.m; sourceTree = "<group>"; };
@@ -1486,6 +1426,22 @@
 		3AF7AFCA244F2EE400E8A831 /* TKUIRoutingResultsViewModel+Advisory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIRoutingResultsViewModel+Advisory.swift"; sourceTree = "<group>"; };
 		3AF7AFD224506E6400E8A831 /* TKUITripOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewViewController.swift; sourceTree = "<group>"; };
 		3AF83FE526C4ECC900C86CAF /* routing-walk.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routing-walk.json"; sourceTree = "<group>"; };
+		3AF83FE926C4FAD800C86CAF /* Alert+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FEA26C4FAD800C86CAF /* Alert+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3AF83FEB26C4FAD800C86CAF /* StopVisits+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StopVisits+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FEC26C4FAD800C86CAF /* StopVisits+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StopVisits+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3AF83FED26C4FAD800C86CAF /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FEE26C4FAD800C86CAF /* DLSEntry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DLSEntry+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FEF26C4FAD800C86CAF /* DLSEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DLSEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3AF83FF026C4FAD800C86CAF /* Service+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FF126C4FAD800C86CAF /* TripRequest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripRequest+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FF226C4FAD800C86CAF /* TripRequest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripRequest+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3AF83FF326C4FAD800C86CAF /* TripGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripGroup+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FF426C4FAD800C86CAF /* TripGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripGroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3AF83FF526C4FAD800C86CAF /* Vehicle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FF626C4FAD800C86CAF /* Vehicle+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3AF83FF726C4FAD800C86CAF /* SegmentReference+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentReference+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AF83FF826C4FAD800C86CAF /* SegmentReference+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentReference+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3AF94B111F0BF79800500940 /* TKSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSettings.swift; sourceTree = "<group>"; };
 		3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1510,6 +1466,14 @@
 		3AFD398120D9510F00FDC7D0 /* TKUICustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUICustomization.swift; sourceTree = "<group>"; };
 		3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricingTableAPIModel.swift; sourceTree = "<group>"; };
 		3AFF209A1D1CD4F0008BCD9F /* TripKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripKit-Prefix.pch"; sourceTree = "<group>"; };
+		3AFF4DF126C5387F00D71394 /* Service+Visits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+Visits.swift"; sourceTree = "<group>"; };
+		3AFF4DFA26C5DE8300D71394 /* SegmentReference+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentReference+Flags.swift"; sourceTree = "<group>"; };
+		3AFF4DFE26C5DEC600D71394 /* SegmentTemplate+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentTemplate+Flags.swift"; sourceTree = "<group>"; };
+		3AFF4E0126C5DFAA00D71394 /* Trip+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+Flags.swift"; sourceTree = "<group>"; };
+		3AFF4E0E26C6091C00D71394 /* TKTripGoGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripGoGeocoder.swift; sourceTree = "<group>"; };
+		3AFF4E1B26C60A5E00D71394 /* GeocodeAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeAPIModel.swift; sourceTree = "<group>"; };
+		3AFF4E2926C627A800D71394 /* RegionsAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsAPIModel.swift; sourceTree = "<group>"; };
+		3AFF4E2C26C6295100D71394 /* TKServer+Regions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKServer+Regions.swift"; sourceTree = "<group>"; };
 		3AFFAB151F06849500147990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFFAB171F06849D00147990 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFFAB181F0684A400147990 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Shared.strings"; sourceTree = "<group>"; };
@@ -1552,7 +1516,6 @@
 		3AFFAB591F06854F00147990 /* TKCrossPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TKCrossPlatform.swift; sourceTree = "<group>"; };
 		3AFFAB5A1F06854F00147990 /* TKEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEnums.h; sourceTree = "<group>"; };
 		3AFFAB5E1F06854F00147990 /* TKObjcDateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKObjcDateHelper.swift; sourceTree = "<group>"; };
-		3AFFAB631F06854F00147990 /* TKRootKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKRootKit.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3AFFAB641F06854F00147990 /* TKStyleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TKStyleManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3AFFAB651F06854F00147990 /* TKStyleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKStyleManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3AFFAB6B1F06854F00147990 /* TKNamedCoordinate+SVKRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKNamedCoordinate+SVKRegion.swift"; sourceTree = "<group>"; };
@@ -1562,7 +1525,6 @@
 		3AFFAB711F06854F00147990 /* TKRegionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRegionManager.swift; sourceTree = "<group>"; };
 		3AFFAB721F06854F00147990 /* TKServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKServer.h; sourceTree = "<group>"; };
 		3AFFAB731F06854F00147990 /* TKServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKServer.m; sourceTree = "<group>"; };
-		3AFFAB741F06854F00147990 /* TKServerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKServerKit.h; sourceTree = "<group>"; };
 		3AFFAB751F06854F00147990 /* TKTransportModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTransportModes.h; sourceTree = "<group>"; };
 		3AFFAB761F06854F00147990 /* TKTransportModes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTransportModes.m; sourceTree = "<group>"; };
 		3AFFAB781F06854F00147990 /* TKModeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKModeInfo.swift; sourceTree = "<group>"; };
@@ -1571,13 +1533,10 @@
 		3AFFAB7B1F06854F00147990 /* TKInfoIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKInfoIcon.swift; sourceTree = "<group>"; };
 		3AFFAB7E1F06854F00147990 /* TKModeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKModeHelper.swift; sourceTree = "<group>"; };
 		3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TKRoutePolyline.swift; sourceTree = "<group>"; };
-		3AFFAB821F06854F00147990 /* TKTransportKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTransportKit.h; sourceTree = "<group>"; };
 		3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTripAndSegments.swift; sourceTree = "<group>"; };
 		3AFFAB841F06854F00147990 /* TKVehicleType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVehicleType.h; sourceTree = "<group>"; };
 		3AFFAB851F06854F00147990 /* TKVehicular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKVehicular.h; sourceTree = "<group>"; };
 		3AFFAB861F06854F00147990 /* TKVehicular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKVehicular.m; sourceTree = "<group>"; };
-		3AFFAC5E1F068B6100147990 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		3AFFADFB1F069DAB00147990 /* StopVisits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopVisits.swift; sourceTree = "<group>"; };
 		3AFFADFD1F06AFDD00147990 /* TKShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareHelper.swift; sourceTree = "<group>"; };
 		3AFFADFF1F06B1D000147990 /* StopLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopLocation.swift; sourceTree = "<group>"; };
 		3AFFAE011F06B85F00147990 /* StopLocation+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StopLocation+Shareable.swift"; sourceTree = "<group>"; };
@@ -1585,7 +1544,6 @@
 		3AFFAE051F06B97300147990 /* TKSegment+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKSegment+Shareable.swift"; sourceTree = "<group>"; };
 		3AFFAE071F06BA1500147990 /* Trip+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trip+Shareable.swift"; sourceTree = "<group>"; };
 		3AFFAE091F06BA3700147990 /* TripRequest+Shareable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TripRequest+Shareable.swift"; sourceTree = "<group>"; };
-		3AFFAE0B1F06BCF200147990 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D3049DFB224C49E600CB59D1 /* TKUIDepartureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIDepartureCell.swift; sourceTree = "<group>"; };
 		D3049DFC224C49E600CB59D1 /* TKUIDepartureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIDepartureCell.xib; sourceTree = "<group>"; };
 		D31410982395DFE7009498C5 /* ExampleCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCustomizer.swift; sourceTree = "<group>"; };
@@ -1927,17 +1885,20 @@
 				3A3C9BA51F751FC300C8D476 /* API.swift */,
 				3A3C9BB71F75346400C8D476 /* BaseAPIModels.swift */,
 				3A3C9BA71F751FF200C8D476 /* DeparturesAPIModel.swift */,
+				D3BC460C2288F39800590403 /* EventAPIModel.swift */,
+				3AFF4E1B26C60A5E00D71394 /* GeocodeAPIModel.swift */,
+				3AAE440326C39CD700E45D20 /* LatestAPIModel.swift */,
 				3A32CD781DC2EBC4003B158B /* LocationAPIModel.swift */,
 				3AABDD9E1DF7D2E30044A05B /* OpeningHoursAPIModel.swift */,
 				3AFD70BC1E558BC800F6B06F /* PricingTableAPIModel.swift */,
-				3A32CD7A1DC2EC4F003B158B /* RegionAPIModel.swift */,
+				3A32CD7A1DC2EC4F003B158B /* RegionInfoAPIModel.swift */,
+				3AFF4E2926C627A800D71394 /* RegionsAPIModel.swift */,
 				3ABC3D4D26BD5E180064D99A /* RoutingAPIModel.swift */,
 				3A3C9BA81F751FF300C8D476 /* ServiceAPIModel.swift */,
 				3AA800EF2187079C008CFB6D /* ShareCarAPIModel.swift */,
 				3A3C9BB51F752F9900C8D476 /* StopAPIModel.swift */,
 				D337467D208D5D980045B0C3 /* UserAPIModel.swift */,
 				3AAD87F6209B02B900C75B7E /* VehicleAPIModel.swift */,
-				D3BC460C2288F39800590403 /* EventAPIModel.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -2252,8 +2213,7 @@
 				3AA03E531F0BC9DB00C6B337 /* TKNamedCoordinate+BuzzData.swift */,
 				3AC9A0AC1F682B6E0050217E /* TKPeliasGeocoder.swift */,
 				3ABC3D2526BCEF490064D99A /* TKRegionAutocompleter.swift */,
-				3AA03E4B1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h */,
-				3AA03E4C1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m */,
+				3AFF4E0E26C6091C00D71394 /* TKTripGoGeocoder.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -2470,7 +2430,6 @@
 				3AB6C68A1D1CD08E0089F687 /* server */,
 				3AB6C6451D1CD08E0089F687 /* sharing */,
 				3A1F728F25C7D5E700C72CEE /* UIKit */,
-				3AEBBB0D20F4F3440035096F /* deprecated */,
 				3A69C4021DEEB43700872FD1 /* Loc+TripKit.swift */,
 				3A6DAECE20402622009282FE /* Loc+TripKitBookings.swift */,
 				3A6DAED020402686009282FE /* Loc+TripKitInterApp.swift */,
@@ -2534,8 +2493,6 @@
 				3A71F15C2423053200527935 /* TKSegment+StationaryType.swift */,
 				3A73A48E24409A9200EB74E5 /* TKSegment+Ticket.swift */,
 				3A656C4D24C9D7110027E9A6 /* TKSegment+TKTripSegment.swift */,
-				3AB6C6861D1CD08E0089F687 /* TKSegmentBuilder.h */,
-				3AB6C6871D1CD08E0089F687 /* TKSegmentBuilder.m */,
 				3A79AFF124D1C4C7008C165A /* TKTimetable.swift */,
 				3ADDD2C823B200A1005A4406 /* TKWheelchairAccessibility.swift */,
 				3AE04BE31DEE392800462CB3 /* TKTripPattern.swift */,
@@ -2547,45 +2504,39 @@
 		3AB6C6631D1CD08E0089F687 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3AB6C6641D1CD08E0089F687 /* Alert.h */,
-				3AB6C6651D1CD08E0089F687 /* Alert.m */,
-				3A9FF6D61DE79FA700DB4647 /* Alert.swift */,
-				3AB6C6681D1CD08E0089F687 /* DLSEntry.h */,
-				3AB6C6691D1CD08E0089F687 /* DLSEntry.m */,
-				3A2F65AF20E0EECC006FE49D /* DLSEntry.swift */,
-				3AB6C66A1D1CD08E0089F687 /* SegmentReference.h */,
-				3AB6C66B1D1CD08E0089F687 /* SegmentReference.m */,
+				3AF83FE926C4FAD800C86CAF /* Alert+CoreDataClass.swift */,
+				3AF83FEA26C4FAD800C86CAF /* Alert+CoreDataProperties.swift */,
+				3AF83FEE26C4FAD800C86CAF /* DLSEntry+CoreDataClass.swift */,
+				3AF83FEF26C4FAD800C86CAF /* DLSEntry+CoreDataProperties.swift */,
+				3AF83FF726C4FAD800C86CAF /* SegmentReference+CoreDataClass.swift */,
+				3AF83FF826C4FAD800C86CAF /* SegmentReference+CoreDataProperties.swift */,
 				3A5D1B5224BDE43D001B1E77 /* SegmentReference+Data.swift */,
+				3AFF4DFA26C5DE8300D71394 /* SegmentReference+Flags.swift */,
 				D3FC1F13207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift */,
 				D3FC1F12207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift */,
 				3A5D1B5824BDF08C001B1E77 /* SegmentTemplate+Data.swift */,
-				3AB6C66E1D1CD08E0089F687 /* Service.h */,
-				3AB6C66F1D1CD08E0089F687 /* Service.m */,
-				3AFFAE0B1F06BCF200147990 /* Service.swift */,
+				3AFF4DFE26C5DEC600D71394 /* SegmentTemplate+Flags.swift */,
+				3AF83FF026C4FAD800C86CAF /* Service+CoreDataClass.swift */,
 				3A73A46D243F767600EB74E5 /* Service+CoreDataProperties.swift */,
+				3AFF4DF126C5387F00D71394 /* Service+Visits.swift */,
 				3AF94B1D1F0BFB9D00500940 /* Shape+CoreDataClass.swift */,
 				3AF94B1E1F0BFB9E00500940 /* Shape+CoreDataProperties.swift */,
 				3AF4A19A265B60B300C63694 /* Shape+Data.swift */,
 				3AFFADFF1F06B1D000147990 /* StopLocation.swift */,
 				3A73A46C243F767600EB74E5 /* StopLocation+CoreDataClass.swift */,
 				3A73A46E243F767600EB74E5 /* StopLocation+CoreDataProperties.swift */,
-				3AB6C6741D1CD08E0089F687 /* StopVisits.h */,
-				3AB6C6751D1CD08E0089F687 /* StopVisits.m */,
-				3AFFADFB1F069DAB00147990 /* StopVisits.swift */,
-				3AB6C6761D1CD08E0089F687 /* Trip.h */,
-				3AB6C6771D1CD08E0089F687 /* Trip.m */,
-				3AFFAC5E1F068B6100147990 /* Trip.swift */,
+				3AF83FEB26C4FAD800C86CAF /* StopVisits+CoreDataClass.swift */,
+				3AF83FEC26C4FAD800C86CAF /* StopVisits+CoreDataProperties.swift */,
+				3AF83FED26C4FAD800C86CAF /* Trip+CoreDataClass.swift */,
 				3A73A46A243F767500EB74E5 /* Trip+CoreDataProperties.swift */,
 				3A5D1B4C24BDE216001B1E77 /* Trip+Data.swift */,
-				3AB6C6781D1CD08E0089F687 /* TripGroup.h */,
-				3AB6C6791D1CD08E0089F687 /* TripGroup.m */,
-				3A84F00D1F77021200B2F9A0 /* TripGroup.swift */,
-				3AB6C67A1D1CD08E0089F687 /* TripRequest.h */,
-				3AB6C67B1D1CD08E0089F687 /* TripRequest.m */,
-				3A5140301DEE62FA002DB39F /* TripRequest.swift */,
-				3AB6C67C1D1CD08E0089F687 /* Vehicle.h */,
-				3AB6C67D1D1CD08E0089F687 /* Vehicle.m */,
-				3A32CD721DC2DC77003B158B /* Vehicle.swift */,
+				3AFF4E0126C5DFAA00D71394 /* Trip+Flags.swift */,
+				3AF83FF326C4FAD800C86CAF /* TripGroup+CoreDataClass.swift */,
+				3AF83FF426C4FAD800C86CAF /* TripGroup+CoreDataProperties.swift */,
+				3AF83FF126C4FAD800C86CAF /* TripRequest+CoreDataClass.swift */,
+				3AF83FF226C4FAD800C86CAF /* TripRequest+CoreDataProperties.swift */,
+				3AF83FF526C4FAD800C86CAF /* Vehicle+CoreDataClass.swift */,
+				3AF83FF626C4FAD800C86CAF /* Vehicle+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -2595,8 +2546,6 @@
 			children = (
 				3A462CD9207638DB00AF41EF /* parsing */,
 				3AB6C68D1D1CD08E0089F687 /* TKBuzzInfoProvider.swift */,
-				3AB6C68E1D1CD08E0089F687 /* TKBuzzRealTime.h */,
-				3AB6C68F1D1CD08E0089F687 /* TKBuzzRealTime.m */,
 				3A3428A6254EE52C00D71039 /* TKDeparturesProvider.swift */,
 				3AB6C6961D1CD08E0089F687 /* TKQuickBookingHelper.swift */,
 				3A14BE2B1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift */,
@@ -2724,17 +2673,6 @@
 			path = data;
 			sourceTree = "<group>";
 		};
-		3AEBBB0D20F4F3440035096F /* deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				3AA03E431F0BC9DB00C6B337 /* SGDeprecatedAutocompletionDataProvider.h */,
-				3A922061205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift */,
-				3A38621C228F2F9C00C8E704 /* SGDeprecatedGeocoder.h */,
-				3A38621F228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift */,
-			);
-			path = deprecated;
-			sourceTree = "<group>";
-		};
 		3AFD393B20D9333500FDC7D0 /* cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -2860,7 +2798,6 @@
 				3AFFAB5A1F06854F00147990 /* TKEnums.h */,
 				3AF05CFA23FF0EF40043B2EB /* TKLog.swift */,
 				3AFFAB5E1F06854F00147990 /* TKObjcDateHelper.swift */,
-				3AFFAB631F06854F00147990 /* TKRootKit.h */,
 				3AFFAB641F06854F00147990 /* TKStyleManager.h */,
 				3AFFAB651F06854F00147990 /* TKStyleManager.m */,
 				3AF94B211F0BFDEF00500940 /* TKStyleManager.swift */,
@@ -2916,7 +2853,7 @@
 				3AFFAB721F06854F00147990 /* TKServer.h */,
 				3AFFAB731F06854F00147990 /* TKServer.m */,
 				3A096E1D1F20DAD500666E59 /* TKServer.swift */,
-				3AFFAB741F06854F00147990 /* TKServerKit.h */,
+				3AFF4E2C26C6295100D71394 /* TKServer+Regions.swift */,
 				3AFFAB751F06854F00147990 /* TKTransportModes.h */,
 				3AFFAB761F06854F00147990 /* TKTransportModes.m */,
 				3A63E1242636A3F600CC09DA /* TKTransportModes.swift */,
@@ -2937,7 +2874,6 @@
 				3AFFAB781F06854F00147990 /* TKModeInfo.swift */,
 				3AD62B8D2243964C00069F4E /* TKModeInfo+Image.swift */,
 				3AFFAB811F06854F00147990 /* TKRoutePolyline.swift */,
-				3AFFAB821F06854F00147990 /* TKTransportKit.h */,
 				3AFFAB831F06854F00147990 /* TKTripAndSegments.swift */,
 				3AFFAB841F06854F00147990 /* TKVehicleType.h */,
 				3AFFAB851F06854F00147990 /* TKVehicular.h */,
@@ -2964,44 +2900,27 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ABBDAA32032134D00205042 /* SGDeprecatedAutocompletionDataProvider.h in Headers */,
-				3ABBDA452032132D00205042 /* Service.h in Headers */,
 				3ABBDA8E2032134000205042 /* TKVehicular.h in Headers */,
-				3ABBDA502032132D00205042 /* Trip.h in Headers */,
 				3ABBDAE52032135A00205042 /* NSString+Sizing.h in Headers */,
 				3ABBDA7A2032133900205042 /* NSManagedObject+TKPersistence.h in Headers */,
-				3ABBDA592032132D00205042 /* Vehicle.h in Headers */,
 				3ABBDAD22032135400205042 /* TKStyleManager.h in Headers */,
 				3ABBDAC82032135400205042 /* TKCrossPlatform.h in Headers */,
-				3ABBDA562032132D00205042 /* TripRequest.h in Headers */,
 				3ABBDAF32032136100205042 /* TKLocationManager.h in Headers */,
-				3A38621E228F2F9C00C8E704 /* SGDeprecatedGeocoder.h in Headers */,
-				3ABBDA8B2032134000205042 /* TKTransportKit.h in Headers */,
 				3ABBDA332032132400205042 /* TKSettings.h in Headers */,
 				3ABBDABF2032135400205042 /* TKLocationHelper.h in Headers */,
 				3ABBDB142032189200205042 /* TripKit.h in Headers */,
-				3ABBDAD12032135400205042 /* TKRootKit.h in Headers */,
-				3ABBDA642032132D00205042 /* TKSegmentBuilder.h in Headers */,
-				3ABBDA3A2032132D00205042 /* Alert.h in Headers */,
 				3ABBDA8D2032134000205042 /* TKVehicleType.h in Headers */,
 				3ABBDADF2032135A00205042 /* NSManagedObjectContext+SimpleFetch.h in Headers */,
 				3ABBDAC42032135400205042 /* TKConfig.h in Headers */,
 				3ABBDAF82032136100205042 /* TKPermissionManager.h in Headers */,
 				3ABBDA152032131E00205042 /* TKTripKit.h in Headers */,
-				3ABBDA532032132D00205042 /* TripGroup.h in Headers */,
-				3ABBDA9C2032134900205042 /* TKServerKit.h in Headers */,
 				3ABBDACA2032135400205042 /* TKEnums.h in Headers */,
-				3ABBDA412032132D00205042 /* SegmentReference.h in Headers */,
 				3ABBDADB2032135A00205042 /* NSDate+Helpers.h in Headers */,
 				3ABBDAE72032135A00205042 /* NSUserDefaults+SharedDefaults.h in Headers */,
-				3ABBDA3F2032132D00205042 /* DLSEntry.h in Headers */,
 				3ABBDA992032134900205042 /* TKServer.h in Headers */,
-				3ABBDA1C2032132400205042 /* TKBuzzRealTime.h in Headers */,
 				3ABBDA132032131E00205042 /* TKConstants.h in Headers */,
 				3ABBDAA62032134D00205042 /* TKAutocompletionResult.h in Headers */,
 				3ABBDA9D2032134900205042 /* TKTransportModes.h in Headers */,
-				3ABBDAAB2032134D00205042 /* TKSkedGoGeocoder.h in Headers */,
-				3ABBDA4D2032132D00205042 /* StopVisits.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3026,42 +2945,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AFFABCC1F06854F00147990 /* TKServer.h in Headers */,
-				3AB6C6E41D1CD08E0089F687 /* StopVisits.h in Headers */,
-				3AB6C6FD1D1CD08E0089F687 /* TKBuzzRealTime.h in Headers */,
 				3AFFABAC1F06854F00147990 /* TKLocationHelper.h in Headers */,
 				3AFFABA31F06854F00147990 /* NSUserDefaults+SharedDefaults.h in Headers */,
-				3AB6C6DE1D1CD08E0089F687 /* Service.h in Headers */,
 				3AB6C7151D1CD08E0089F687 /* TKTripKit.h in Headers */,
 				3AB6C6CF1D1CD08E0089F687 /* NSManagedObject+TKPersistence.h in Headers */,
-				3AB6C6DA1D1CD08E0089F687 /* SegmentReference.h in Headers */,
 				3AFFABDD1F06854F00147990 /* TKVehicleType.h in Headers */,
-				3AFFABCE1F06854F00147990 /* TKServerKit.h in Headers */,
-				3A38621D228F2F9C00C8E704 /* SGDeprecatedGeocoder.h in Headers */,
-				3AB6C6EC1D1CD08E0089F687 /* Vehicle.h in Headers */,
 				3AFFABB31F06854F00147990 /* TKCrossPlatform.h in Headers */,
-				3AB6C6E81D1CD08E0089F687 /* TripGroup.h in Headers */,
 				3A6DF152202C8F9A0084CB2C /* TripKit.h in Headers */,
-				3AB6C6D41D1CD08E0089F687 /* Alert.h in Headers */,
-				3AA03E6D1F0BC9DB00C6B337 /* TKSkedGoGeocoder.h in Headers */,
 				3A1F729325C7D66A00C72CEE /* TKStyleManager+UIKit.h in Headers */,
-				3AFFABDB1F06854F00147990 /* TKTransportKit.h in Headers */,
-				3AA03E651F0BC9DB00C6B337 /* SGDeprecatedAutocompletionDataProvider.h in Headers */,
 				3AFFABA11F06854F00147990 /* NSString+Sizing.h in Headers */,
-				3AB6C6EA1D1CD08E0089F687 /* TripRequest.h in Headers */,
 				3AFFABCF1F06854F00147990 /* TKTransportModes.h in Headers */,
-				3AB6C6E61D1CD08E0089F687 /* Trip.h in Headers */,
 				3AB6C70F1D1CD08E0089F687 /* TKSettings.h in Headers */,
 				3AA03E681F0BC9DB00C6B337 /* TKAutocompletionResult.h in Headers */,
 				3AFFAB971F06854F00147990 /* NSDate+Helpers.h in Headers */,
 				3AA03E601F0BC9DB00C6B337 /* TKPermissionManager.h in Headers */,
 				3AFFABB01F06854F00147990 /* TKConfig.h in Headers */,
-				3AB6C6F61D1CD08E0089F687 /* TKSegmentBuilder.h in Headers */,
 				3AA03E5C1F0BC9DB00C6B337 /* TKLocationManager.h in Headers */,
 				3A1F729D25C7D6AD00C72CEE /* UIFont+CustomFonts.h in Headers */,
 				3AB6C7131D1CD08E0089F687 /* TKConstants.h in Headers */,
 				3AFFAB9B1F06854F00147990 /* NSManagedObjectContext+SimpleFetch.h in Headers */,
-				3AFFABBE1F06854F00147990 /* TKRootKit.h in Headers */,
-				3AB6C6D81D1CD08E0089F687 /* DLSEntry.h in Headers */,
 				3AFFABBF1F06854F00147990 /* TKStyleManager.h in Headers */,
 				3AFFAB871F06854F00147990 /* TKActions.h in Headers */,
 				3AFFABB51F06854F00147990 /* TKEnums.h in Headers */,
@@ -3432,41 +3334,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF8401B26C4FC5800C86CAF /* Trip+CoreDataProperties.swift in Sources */,
 				3ABBDA822032134000205042 /* TKModeInfo.swift in Sources */,
 				3ABBDABB2032134D00205042 /* TKPeliasGeocoder.swift in Sources */,
 				3ABC3D4F26BD5E180064D99A /* RoutingAPIModel.swift in Sources */,
+				3AFF4E0326C5DFAA00D71394 /* Trip+Flags.swift in Sources */,
 				3ABBDA842032134000205042 /* TKInfoIcon.swift in Sources */,
 				3A485671254C17B9007EC550 /* TKSettings+Config.swift in Sources */,
 				3ABBDA982032134900205042 /* TKRegion.swift in Sources */,
+				3AFF4DE926C5047100D71394 /* SegmentReference+CoreDataClass.swift in Sources */,
 				3A36354922968C1500C527FF /* TKAddressFormatter.swift in Sources */,
 				3ABBDA9B2032134900205042 /* TKServer.swift in Sources */,
 				3AC17E9E207F548E0006794F /* TKImage+TripKit.swift in Sources */,
+				3AFF4E0026C5DEC600D71394 /* SegmentTemplate+Flags.swift in Sources */,
 				3ABBDA702032133300205042 /* PricingTableAPIModel.swift in Sources */,
 				3ABBDA492032132D00205042 /* Shape+CoreDataProperties.swift in Sources */,
 				3A92205D205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
-				3A386221228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift in Sources */,
 				3ABBDADD2032135A00205042 /* NSError+customError.swift in Sources */,
 				3A38622522929C0800C8E704 /* TKContactsManager.swift in Sources */,
+				3AAE440526C39CD700E45D20 /* LatestAPIModel.swift in Sources */,
 				3AFD397E20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */,
 				3A656C4F24C9D7110027E9A6 /* TKSegment+TKTripSegment.swift in Sources */,
 				3A98A5B325E38A94003346CD /* TKStyleManager+UIKit.swift in Sources */,
+				3AFF4DFC26C5DE8300D71394 /* SegmentReference+Flags.swift in Sources */,
 				3A71F15E2423053200527935 /* TKSegment+StationaryType.swift in Sources */,
 				3AAD87F8209B02B900C75B7E /* VehicleAPIModel.swift in Sources */,
 				3ABBDA482032132D00205042 /* Shape+CoreDataClass.swift in Sources */,
-				3ABBDA422032132D00205042 /* SegmentReference.m in Sources */,
 				3AF4A19C265B60B300C63694 /* Shape+Data.swift in Sources */,
 				3ABBDABE2032135400205042 /* TKSortableAnnotation.swift in Sources */,
-				3ABBDA402032132D00205042 /* DLSEntry.m in Sources */,
 				3ABBDAB82032134D00205042 /* TKGeocodingResultScorer.swift in Sources */,
 				3A79B00124D303B7008C165A /* TKSecureTransformers.swift in Sources */,
 				3ABBDAC02032135400205042 /* TKLocationHelper.m in Sources */,
 				3ABBDAD42032135400205042 /* TKStyleManager.swift in Sources */,
 				3A3428DB254EEE8100D71039 /* CLLocationCoordinate2D+DecodePolylineString.swift in Sources */,
+				3AFF4DF826C5D7F400D71394 /* Trip+CoreDataClass.swift in Sources */,
 				3ABC3D4926BD299A0064D99A /* TKRealTimeFetcher.swift in Sources */,
 				3ABBDA1B2032132400205042 /* TKBuzzInfoProvider.swift in Sources */,
 				3A462CC22076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */,
 				3ABBDA2D2032132400205042 /* TKReporter.swift in Sources */,
+				3AFF4DF726C5CCFB00D71394 /* StopVisits+CoreDataProperties.swift in Sources */,
 				3A664CEE26C10F30002165CD /* DefaultLossyArray.swift in Sources */,
+				3AFF4DED26C5093B00D71394 /* Vehicle+CoreDataClass.swift in Sources */,
 				3A98A5BF25E38A9F003346CD /* UIColor+TripKitDefault.swift in Sources */,
 				3ABBDAD52032135A00205042 /* Codable+Helpers.swift in Sources */,
 				3ABBDA292032132400205042 /* TKQuickBookingHelper+Fake.swift in Sources */,
@@ -3475,68 +3383,65 @@
 				3ABBDA392032132400205042 /* TKWaypointRouter.swift in Sources */,
 				3AED3B3926C206E400E8DA6B /* TKRoutingParser.swift in Sources */,
 				3ABBDA9A2032134900205042 /* TKServer.m in Sources */,
+				3AFF4DF626C5CCFB00D71394 /* StopVisits+CoreDataClass.swift in Sources */,
 				3A5D1B5424BDE43D001B1E77 /* SegmentReference+Data.swift in Sources */,
-				3ABBDA3B2032132D00205042 /* Alert.m in Sources */,
 				3A3428D7254EEE8100D71039 /* Polygon.swift in Sources */,
 				3ABBDABC2032135400205042 /* TKGeocodable.swift in Sources */,
+				3AFF4E2E26C6295100D71394 /* TKServer+Regions.swift in Sources */,
 				3ABC3D4C26BD2C250064D99A /* TKTripFetcher.swift in Sources */,
 				3ABBDA952032134900205042 /* TKNamedCoordinate+SVKRegion.swift in Sources */,
 				3ABBDA662032132D00205042 /* TKSegment.swift in Sources */,
 				3A04C9AC206D39320015D9E5 /* TKPathFriendliness.swift in Sources */,
 				3ABBDAE82032135A00205042 /* NSUserDefaults+SharedDefaults.m in Sources */,
-				3A73A481243F902400EB74E5 /* Trip+CoreDataProperties.swift in Sources */,
-				3ABBDA572032132D00205042 /* TripRequest.m in Sources */,
 				3ABBDAE92032135A00205042 /* NSUserDefaults+SharedDefaults.swift in Sources */,
-				3ABBDA1D2032132400205042 /* TKBuzzRealTime.m in Sources */,
-				3ABBDA582032132D00205042 /* TripRequest.swift in Sources */,
 				3ABBDADA2032135A00205042 /* NSDate+Formatting.swift in Sources */,
 				3AA800F12187079C008CFB6D /* ShareCarAPIModel.swift in Sources */,
 				3A6DAED220403CF7009282FE /* Loc+TripKitInterApp.swift in Sources */,
-				3ABBDA652032132D00205042 /* TKSegmentBuilder.m in Sources */,
 				3ABBDA342032132400205042 /* TKSettings.m in Sources */,
 				D337467F208D5DA90045B0C3 /* UserAPIModel.swift in Sources */,
 				3ABBDA8C2032134000205042 /* TKTripAndSegments.swift in Sources */,
+				3AFF4E1D26C60A5E00D71394 /* GeocodeAPIModel.swift in Sources */,
 				3ABBDAD72032135A00205042 /* MapKit+Extensions.swift in Sources */,
 				3ABBDABA2032134D00205042 /* TKGeoJSON+NamedCoordinate.swift in Sources */,
-				3ABBDA462032132D00205042 /* Service.m in Sources */,
 				3ABBDA6F2032133300205042 /* OpeningHoursAPIModel.swift in Sources */,
 				3ABBDB0B2032137600205042 /* TKShareHelper.swift in Sources */,
 				3ABBDA7B2032133900205042 /* NSManagedObject+TKPersistence.m in Sources */,
 				3ABBDA352032132400205042 /* TKSettings.swift in Sources */,
 				3ABBDB062032137600205042 /* StopLocation+Shareable.swift in Sources */,
 				3AF05CFC23FF0EF40043B2EB /* TKLog.swift in Sources */,
-				3ABBDA712032133300205042 /* RegionAPIModel.swift in Sources */,
+				3ABBDA712032133300205042 /* RegionInfoAPIModel.swift in Sources */,
 				3ABBDAED2032135A00205042 /* Loc.swift in Sources */,
 				D3957CDD21ACB32000238420 /* TKLocalCost.swift in Sources */,
-				3ABBDA5B2032132D00205042 /* Vehicle.swift in Sources */,
 				3ABBDB0C2032137600205042 /* TKShareHelper+Parsing.swift in Sources */,
 				3AFCD53120DA716600B78FCD /* TKMetricClassifier.swift in Sources */,
 				3A7135FB2289695A00D4068E /* TKModeImageBuilder.swift in Sources */,
 				3ABBDAF42032136100205042 /* TKLocationManager.m in Sources */,
-				3ABBDA5A2032132D00205042 /* Vehicle.m in Sources */,
 				3ABBDAD32032135400205042 /* TKStyleManager.m in Sources */,
 				3ABBDA6B2032133300205042 /* AlertAPIModels.swift in Sources */,
 				3A5D1B5124BDE299001B1E77 /* DataAttachable.swift in Sources */,
 				3A40923C22F353AE0049AAE7 /* API+ViewHelpers.swift in Sources */,
 				3ABBDAB92032134D00205042 /* TKGeoJSON.swift in Sources */,
 				3ABC3D2726BCF7EB0064D99A /* TKTripClassifier.swift in Sources */,
+				3AFF4DEE26C5093B00D71394 /* Vehicle+CoreDataProperties.swift in Sources */,
 				3ABBDB082032137600205042 /* TKSegment+Shareable.swift in Sources */,
 				3ABBDB072032137600205042 /* StopVisits+Shareable.swift in Sources */,
 				3ABBDA142032131E00205042 /* TKConstants.m in Sources */,
 				3A98A5B925E38A9B003346CD /* UIColor+TripKit.swift in Sources */,
 				3ABBDA8F2032134000205042 /* TKVehicular.m in Sources */,
+				3AFF4E0D26C6003F00D71394 /* TripRequest+CoreDataClass.swift in Sources */,
 				3A664CF126C1128A002165CD /* DefaultNil.swift in Sources */,
 				3ABBDA282032132400205042 /* TKQuickBookingHelper.swift in Sources */,
 				3A3428D5254EEE8100D71039 /* QuickLookable.swift in Sources */,
 				3A3428A8254EE52C00D71039 /* TKDeparturesProvider.swift in Sources */,
-				3A73A489244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */,
 				3ABBDAC92032135400205042 /* TKCrossPlatform.swift in Sources */,
 				3A79AFF324D1C4C7008C165A /* TKTimetable.swift in Sources */,
 				3A664CDE26C10C7E002165CD /* DefaultCodable.swift in Sources */,
 				3ABBDABD2032135400205042 /* TKNamedCoordinate.swift in Sources */,
 				3ABBDA602032132D00205042 /* TKDLSTable.swift in Sources */,
+				3AFF4E0926C5F56700D71394 /* TripGroup+CoreDataClass.swift in Sources */,
 				3A462CC52076254C00AF41EF /* TKMiniInstruction.swift in Sources */,
-				3ABBDA542032132D00205042 /* TripGroup.m in Sources */,
+				3AFF4E0B26C6003C00D71394 /* TripRequest+CoreDataProperties.swift in Sources */,
+				3AF83FFA26C4FAD800C86CAF /* Alert+CoreDataClass.swift in Sources */,
 				3A34278F254E9B1700D71039 /* Array+Duplicates.swift in Sources */,
 				3A3428BD254EE75C00D71039 /* TKAggregateGeocoder.swift in Sources */,
 				3ABBDA962032134900205042 /* TKError.swift in Sources */,
@@ -3547,27 +3452,27 @@
 				3A922060205FCBFF004E6C34 /* TKGeocoding.swift in Sources */,
 				3A5D1B4E24BDE216001B1E77 /* Trip+Data.swift in Sources */,
 				3ABBDAC62032135400205042 /* TKConfig.swift in Sources */,
+				3AFF4DF326C5387F00D71394 /* Service+Visits.swift in Sources */,
 				3A664CE226C10C7E002165CD /* DefaultFalse.swift in Sources */,
 				3ABBDA4C2032132D00205042 /* StopLocation.swift in Sources */,
 				3ABBDA6C2032133300205042 /* BaseAPIModels.swift in Sources */,
-				3ABBDA512032132D00205042 /* Trip.m in Sources */,
 				3ABBDA182032132400205042 /* TKAPIToCoreDataConverter.swift in Sources */,
 				3ABBDA832032134000205042 /* TKAnnotations.swift in Sources */,
 				3ABBDA972032134900205042 /* TKParserHelper.swift in Sources */,
 				3ABC3D2826BCF7EB0064D99A /* TripRequest+Classify.swift in Sources */,
-				3ABBDAAC2032134D00205042 /* TKSkedGoGeocoder.m in Sources */,
 				3AED3B3626C2026700E8DA6B /* ISO8601OrSecondsSince1970.swift in Sources */,
 				3ABBDA612032132D00205042 /* TKLocationTypes.swift in Sources */,
 				3ABBDACE2032135400205042 /* TKObjcDateHelper.swift in Sources */,
 				3ABBDA9F2032134900205042 /* TKRegionManager.swift in Sources */,
+				3AF83FFC26C4FAD800C86CAF /* Alert+CoreDataProperties.swift in Sources */,
 				3ABBDB092032137600205042 /* Trip+Shareable.swift in Sources */,
 				3ABBDA812032133900205042 /* TKUserProfileHelper.swift in Sources */,
 				3A462CD820762FB400AF41EF /* TripKitModel.xcdatamodeld in Sources */,
 				3ABBDADC2032135A00205042 /* NSDate+Helpers.m in Sources */,
 				3A6DAED620404374009282FE /* Loc+TripKitUI.swift in Sources */,
 				3ABC3D3026BD05840064D99A /* TKPermissionManager+AuthorizationAlert.swift in Sources */,
-				3ABBDA522032132D00205042 /* Trip.swift in Sources */,
 				3ABBDAF52032136100205042 /* TKLocationManager.swift in Sources */,
+				3AF8402926C4FF6C00C86CAF /* DLSEntry+CoreDataClass.swift in Sources */,
 				3ABC3D2926BCF7EF0064D99A /* TKRegionAutocompleter.swift in Sources */,
 				3ABBDA122032131E00205042 /* Loc+TripKit.swift in Sources */,
 				3A664CE426C10C7E002165CD /* DefaultTrue.swift in Sources */,
@@ -3576,7 +3481,9 @@
 				3ABBDB0A2032137600205042 /* TripRequest+Shareable.swift in Sources */,
 				3ABBDAE62032135A00205042 /* NSString+Sizing.m in Sources */,
 				3A977A0E246BF734000AD7F1 /* TKRoutingServer.swift in Sources */,
+				3AF8402826C4FF6C00C86CAF /* DLSEntry+CoreDataProperties.swift in Sources */,
 				3ABBDA0D2032119300205042 /* TKCoordinates.swift in Sources */,
+				3AFF4DEF26C5377A00D71394 /* Service+CoreDataClass.swift in Sources */,
 				3A63E1262636A3F700CC09DA /* TKTransportModes.swift in Sources */,
 				3ABBDA7C2032133900205042 /* TKJSONCache.swift in Sources */,
 				3ABBDAB22032134D00205042 /* TKNamedCoordinate+Attribution.swift in Sources */,
@@ -3584,11 +3491,11 @@
 				3ABBDA722032133300205042 /* ServiceAPIModel.swift in Sources */,
 				3AD8F19420E0E90F00E82E2E /* TKRealTime.swift in Sources */,
 				3ABBDAC52032135400205042 /* TKConfig.m in Sources */,
+				3AFF4DEA26C5047100D71394 /* SegmentReference+CoreDataProperties.swift in Sources */,
 				3ABBDA172032131E00205042 /* TripKit.swift in Sources */,
 				3ABBDA9E2032134900205042 /* TKTransportModes.m in Sources */,
 				3A3428D9254EEE8100D71039 /* MKPolygon+Union.swift in Sources */,
 				3ABBDAAA2032134D00205042 /* TKGeocoderHelper.swift in Sources */,
-				3ABBDA472032132D00205042 /* Service.swift in Sources */,
 				3ABBDAD62032135A00205042 /* Date+Helpers.swift in Sources */,
 				3ABBDA8A2032134000205042 /* TKRoutePolyline.swift in Sources */,
 				3A462CC8207626D400AF41EF /* SegmentTemplate+Parsing.swift in Sources */,
@@ -3596,17 +3503,20 @@
 				3ABBDB0D2032137600205042 /* TKShareURLProvider.swift in Sources */,
 				3ABBDA5F2032132D00205042 /* TKColoredRoute.swift in Sources */,
 				3ABBDA692032132D00205042 /* TKTripPattern.swift in Sources */,
+				3AFF4E1026C6091C00D71394 /* TKTripGoGeocoder.swift in Sources */,
 				3ABBDA5C2032132D00205042 /* TKBookingTypes.swift in Sources */,
 				3AEB47EA20DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */,
 				3ABBDAB32032134D00205042 /* TKNamedCoordinate+BuzzData.swift in Sources */,
 				3A34289F254EE46800D71039 /* TKRouter.swift in Sources */,
 				3ABBDA732032133300205042 /* StopAPIModel.swift in Sources */,
+				3AF8401D26C4FC6600C86CAF /* Service+CoreDataProperties.swift in Sources */,
 				D3FC1F15207B3D1D00D39DF9 /* SegmentTemplate+CoreDataProperties.swift in Sources */,
 				3ABBDA792032133900205042 /* NSBundle+ProductName.swift in Sources */,
 				3ABBDA162032131E00205042 /* TKTripKit.m in Sources */,
+				3AFF4E0626C5F56000D71394 /* TripGroup+CoreDataProperties.swift in Sources */,
+				3AFF4E2B26C627A800D71394 /* RegionsAPIModel.swift in Sources */,
 				3A5D1B5A24BDF08C001B1E77 /* SegmentTemplate+Data.swift in Sources */,
 				3A7C28702243E02000DA3567 /* TKModeInfo+Image.swift in Sources */,
-				3ABBDA3C2032132D00205042 /* Alert.swift in Sources */,
 				3A73A476243F767700EB74E5 /* StopLocation+CoreDataProperties.swift in Sources */,
 				3ABBDA322032132400205042 /* TKRoutingParser+Populate.swift in Sources */,
 				3ABBDA7D2032133900205042 /* TKJSONSanitizer.swift in Sources */,
@@ -3616,20 +3526,15 @@
 				3ABBDAF92032136100205042 /* TKPermissionManager.m in Sources */,
 				D3FC1F17207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift in Sources */,
 				3ABBDA872032134000205042 /* TKModeHelper.swift in Sources */,
-				3ABBDA4F2032132D00205042 /* StopVisits.swift in Sources */,
 				3ABBDAA72032134D00205042 /* TKAutocompletionResult.m in Sources */,
 				3A2AF56E24BCA0020020D1DE /* TKMapTiles.swift in Sources */,
 				3ABBDAB72032134D00205042 /* TKAnnotationClusterer.swift in Sources */,
 				3A3428DD254EEE8100D71039 /* Geometry.swift in Sources */,
 				3A7E613B208A09070008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */,
-				3A922063205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */,
 				3A65B93022F5C4BC001ACDEB /* TKRegion+RoutingMode.swift in Sources */,
-				3ABBDA4E2032132D00205042 /* StopVisits.m in Sources */,
 				3ABBDAF22032136100205042 /* TKCalendarManager.swift in Sources */,
 				3ABBDA6D2032133300205042 /* DeparturesAPIModel.swift in Sources */,
-				3A2F65B120E0EECC006FE49D /* DLSEntry.swift in Sources */,
 				3ABBDAE02032135A00205042 /* NSManagedObjectContext+SimpleFetch.m in Sources */,
-				3ABBDA552032132D00205042 /* TripGroup.swift in Sources */,
 				3ADDD2CA23B200A1005A4406 /* TKWheelchairAccessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3877,31 +3782,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AB6C6E71D1CD08E0089F687 /* Trip.m in Sources */,
 				3AF94B241F0C061500500940 /* TKColoredRoute.swift in Sources */,
-				3AFFAC5F1F068B6100147990 /* Trip.swift in Sources */,
+				3AFF4DEB26C5093B00D71394 /* Vehicle+CoreDataClass.swift in Sources */,
 				3A462CC42076254C00AF41EF /* TKMiniInstruction.swift in Sources */,
 				3A3428DC254EEE8100D71039 /* Geometry.swift in Sources */,
 				3A664CE126C10C7E002165CD /* DefaultFalse.swift in Sources */,
+				3AF8401A26C4FC5700C86CAF /* Trip+CoreDataProperties.swift in Sources */,
 				3A462CD720762FB400AF41EF /* TripKitModel.xcdatamodeld in Sources */,
 				3A664CEA26C10D68002165CD /* LossyArray.swift in Sources */,
 				3A69C4031DEEB43700872FD1 /* Loc+TripKit.swift in Sources */,
 				3AB6C7051D1CD08E0089F687 /* TKQuickBookingHelper.swift in Sources */,
 				3AFFAB881F06854F00147990 /* TKActions.m in Sources */,
 				3AFFABDF1F06854F00147990 /* TKVehicular.m in Sources */,
-				3A32CD7B1DC2EC4F003B158B /* RegionAPIModel.swift in Sources */,
+				3A32CD7B1DC2EC4F003B158B /* RegionInfoAPIModel.swift in Sources */,
 				3AFFAE001F06B1D000147990 /* StopLocation.swift in Sources */,
 				3A6DAED120402686009282FE /* Loc+TripKitInterApp.swift in Sources */,
 				3AC4DD131DEE32C80026B238 /* TKWaypointRouter.swift in Sources */,
 				3AA801471F388E2F00D5E31F /* NSBundle+ProductName.swift in Sources */,
 				3AF94B221F0BFDEF00500940 /* TKStyleManager.swift in Sources */,
 				3A3428D4254EEE8100D71039 /* QuickLookable.swift in Sources */,
+				3AF8402526C4FF6B00C86CAF /* DLSEntry+CoreDataClass.swift in Sources */,
 				3AFFABB91F06854F00147990 /* TKObjcDateHelper.swift in Sources */,
 				3AD62B8E2243964C00069F4E /* TKModeInfo+Image.swift in Sources */,
-				3AA03E6E1F0BC9DB00C6B337 /* TKSkedGoGeocoder.m in Sources */,
 				3ABC3D2226BCED730064D99A /* TKTripClassifier.swift in Sources */,
 				3A3C9BA61F751FC300C8D476 /* API.swift in Sources */,
-				3AB6C6EB1D1CD08E0089F687 /* TripRequest.m in Sources */,
 				3AEB47E920DC2EE300F9DF83 /* MKMultiPoint+ClosestPoint.swift in Sources */,
 				3AFFABAA1F06854F00147990 /* TKNamedCoordinate.swift in Sources */,
 				D37EF6D821A7BCE80062288E /* TKLocalCost.swift in Sources */,
@@ -3910,20 +3814,18 @@
 				3AF4A19B265B60B300C63694 /* Shape+Data.swift in Sources */,
 				3A65B92F22F5C4BC001ACDEB /* TKRegion+RoutingMode.swift in Sources */,
 				3AFFABD41F06854F00147990 /* TKInfoIcon.swift in Sources */,
-				3A32CD731DC2DC77003B158B /* Vehicle.swift in Sources */,
 				D337467E208D5D980045B0C3 /* UserAPIModel.swift in Sources */,
 				3AB6C6D31D1CD08E0089F687 /* TKUserProfileHelper.swift in Sources */,
 				3AB6C6D01D1CD08E0089F687 /* NSManagedObject+TKPersistence.m in Sources */,
 				3AFFAE061F06B97300147990 /* TKSegment+Shareable.swift in Sources */,
 				3A664CF026C1128A002165CD /* DefaultNil.swift in Sources */,
+				3AFF4DF526C5CCFA00D71394 /* StopVisits+CoreDataProperties.swift in Sources */,
 				3A14BE2C1F8F8047008B1B54 /* TKQuickBookingHelper+Fake.swift in Sources */,
-				3AB6C6FE1D1CD08E0089F687 /* TKBuzzRealTime.m in Sources */,
 				3AF05CFB23FF0EF40043B2EB /* TKLog.swift in Sources */,
 				3A096E2E1F20E3D400666E59 /* NSUserDefaults+SharedDefaults.swift in Sources */,
-				3AB6C6D51D1CD08E0089F687 /* Alert.m in Sources */,
-				3AB6C6DB1D1CD08E0089F687 /* SegmentReference.m in Sources */,
 				3AFFABC01F06854F00147990 /* TKStyleManager.m in Sources */,
 				3A2AF56D24BCA0020020D1DE /* TKMapTiles.swift in Sources */,
+				3AFF4E0826C5F56700D71394 /* TripGroup+CoreDataClass.swift in Sources */,
 				3AFFABCB1F06854F00147990 /* TKRegionManager.swift in Sources */,
 				3AA03E751F0BC9DB00C6B337 /* TKNamedCoordinate+BuzzData.swift in Sources */,
 				3ABC3D2426BCEE160064D99A /* TripRequest+Classify.swift in Sources */,
@@ -3934,18 +3836,18 @@
 				3AFFABD31F06854F00147990 /* TKCoordinates.swift in Sources */,
 				3A462CC12076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */,
 				3A9FF6DB1DE79FC400DB4647 /* TKReporter.swift in Sources */,
-				3AB6C6E51D1CD08E0089F687 /* StopVisits.m in Sources */,
 				3AA03E691F0BC9DB00C6B337 /* TKAutocompletionResult.m in Sources */,
 				3A73A479243F767700EB74E5 /* StopLocation+CoreDataClass.swift in Sources */,
 				3A73A48F24409A9200EB74E5 /* TKSegment+Ticket.swift in Sources */,
 				3AFFABAD1F06854F00147990 /* TKLocationHelper.m in Sources */,
 				3A63E1252636A3F600CC09DA /* TKTransportModes.swift in Sources */,
+				3AFF4E0226C5DFAA00D71394 /* Trip+Flags.swift in Sources */,
 				3AF94B201F0BFB9E00500940 /* Shape+CoreDataProperties.swift in Sources */,
-				3A73A480243F902300EB74E5 /* Trip+CoreDataProperties.swift in Sources */,
 				3AFD397D20D9472E00FDC7D0 /* TKRegionOverlayHelper.swift in Sources */,
 				3A5D1B4D24BDE216001B1E77 /* Trip+Data.swift in Sources */,
 				3AFFABAB1F06854F00147990 /* TKSortableAnnotation.swift in Sources */,
 				3A3428A7254EE52C00D71039 /* TKDeparturesProvider.swift in Sources */,
+				3AFF4E0726C5F56000D71394 /* TripGroup+CoreDataProperties.swift in Sources */,
 				3A3C9BA91F751FF300C8D476 /* DeparturesAPIModel.swift in Sources */,
 				3AFFABA41F06854F00147990 /* NSUserDefaults+SharedDefaults.m in Sources */,
 				3A92205F205FCBFF004E6C34 /* TKGeocoding.swift in Sources */,
@@ -3954,9 +3856,11 @@
 				3A1F72BB25C7D81900C72CEE /* TKStyleManager+UIKit.swift in Sources */,
 				3AD8F19320E0E90F00E82E2E /* TKRealTime.swift in Sources */,
 				3A5D1B5924BDF08C001B1E77 /* SegmentTemplate+Data.swift in Sources */,
-				3A84F00E1F77021200B2F9A0 /* TripGroup.swift in Sources */,
+				3AFF4E2A26C627A800D71394 /* RegionsAPIModel.swift in Sources */,
 				3A71F15D2423053200527935 /* TKSegment+StationaryType.swift in Sources */,
 				3AFFAB921F06854F00147990 /* Date+Helpers.swift in Sources */,
+				3AF83FFB26C4FAD800C86CAF /* Alert+CoreDataProperties.swift in Sources */,
+				3AFF4DF926C5D7F500D71394 /* Trip+CoreDataClass.swift in Sources */,
 				3AFFABC81F06854F00147990 /* TKRegion.swift in Sources */,
 				3AA03E611F0BC9DB00C6B337 /* TKPermissionManager.m in Sources */,
 				3AFFABDC1F06854F00147990 /* TKTripAndSegments.swift in Sources */,
@@ -3974,31 +3878,31 @@
 				3AC9A0AF1F682B6E0050217E /* TKGeoJSON.swift in Sources */,
 				3A664CDF26C10C7E002165CD /* DefaultEmptyArray.swift in Sources */,
 				3AFD70BD1E558BC800F6B06F /* PricingTableAPIModel.swift in Sources */,
+				3AFF4DFF26C5DEC600D71394 /* SegmentTemplate+Flags.swift in Sources */,
 				3A34278E254E9B1700D71039 /* Array+Duplicates.swift in Sources */,
 				3AFFABD11F06854F00147990 /* TKModeInfo.swift in Sources */,
 				3AA03E5D1F0BC9DB00C6B337 /* TKLocationManager.m in Sources */,
 				3AFFABD71F06854F00147990 /* TKModeHelper.swift in Sources */,
+				3AFF4DE826C5047100D71394 /* SegmentReference+CoreDataProperties.swift in Sources */,
 				3AFFAB991F06854F00147990 /* NSError+customError.swift in Sources */,
-				3AB6C6F71D1CD08E0089F687 /* TKSegmentBuilder.m in Sources */,
-				3AB6C6ED1D1CD08E0089F687 /* Vehicle.m in Sources */,
 				3A04C9AB206D39320015D9E5 /* TKPathFriendliness.swift in Sources */,
 				3A51402F1DEE62EE002DB39F /* TKSegment.swift in Sources */,
 				3AFFABB41F06854F00147990 /* TKCrossPlatform.swift in Sources */,
-				3A9FF6D71DE79FA700DB4647 /* Alert.swift in Sources */,
 				3A096E221F20DC5D00666E59 /* TKConfig.swift in Sources */,
 				3A096E241F20DD5300666E59 /* TripKit.swift in Sources */,
 				3AC17E9D207F548E0006794F /* TKImage+TripKit.swift in Sources */,
 				3A0D46BB1FAD0EBA00B6E209 /* TKJSONSanitizer.swift in Sources */,
 				3AF3F2621E04CA7C00A2EEC6 /* TKBookingTypes.swift in Sources */,
-				3A73A488244052E300EB74E5 /* Service+CoreDataProperties.swift in Sources */,
 				3A656C5524C9D7BF0027E9A6 /* TKSegment+Alerts.swift in Sources */,
-				3A922062205FCEB9004E6C34 /* SGDeprecatedAutocompletionDataProvider+TKGeocoding.swift in Sources */,
 				3A1F729C25C7D6AD00C72CEE /* UIFont+CustomFonts.m in Sources */,
 				3AB6C6FC1D1CD08E0089F687 /* TKBuzzInfoProvider.swift in Sources */,
+				3AFF4E1C26C60A5E00D71394 /* GeocodeAPIModel.swift in Sources */,
 				3AA03E741F0BC9DB00C6B337 /* TKNamedCoordinate+Attribution.swift in Sources */,
 				3A7135FA2289695A00D4068E /* TKModeImageBuilder.swift in Sources */,
 				3ABC3D4E26BD5E180064D99A /* RoutingAPIModel.swift in Sources */,
 				3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
+				3AFF4E0A26C6003B00D71394 /* TripRequest+CoreDataProperties.swift in Sources */,
+				3AFF4DFB26C5DE8300D71394 /* SegmentReference+Flags.swift in Sources */,
 				3AED3B3826C206E400E8DA6B /* TKRoutingParser.swift in Sources */,
 				3A096E261F20DDFB00666E59 /* TKCalendarManager.swift in Sources */,
 				D3BC460D2288F39800590403 /* EventAPIModel.swift in Sources */,
@@ -4009,9 +3913,12 @@
 				3A36354822968C1500C527FF /* TKAddressFormatter.swift in Sources */,
 				3ABC3D2F26BD05840064D99A /* TKPermissionManager+AuthorizationAlert.swift in Sources */,
 				3A32CD751DC2DC8D003B158B /* TKAPIToCoreDataConverter.swift in Sources */,
+				3AFF4DF026C5377B00D71394 /* Service+CoreDataClass.swift in Sources */,
+				3AF8402426C4FF6B00C86CAF /* DLSEntry+CoreDataProperties.swift in Sources */,
 				3AFCD53020DA716600B78FCD /* TKMetricClassifier.swift in Sources */,
+				3AFF4DE726C5047100D71394 /* SegmentReference+CoreDataClass.swift in Sources */,
+				3AFF4E0C26C6003F00D71394 /* TripRequest+CoreDataClass.swift in Sources */,
 				3AB6C7161D1CD08E0089F687 /* TKTripKit.m in Sources */,
-				3A5140311DEE62FA002DB39F /* TripRequest.swift in Sources */,
 				3AA03E6C1F0BC9DB00C6B337 /* TKGeocoderHelper.swift in Sources */,
 				3ABA055D1F604551009D0FE9 /* TKShareHelper+Parsing.swift in Sources */,
 				3ABC3D4B26BD2C250064D99A /* TKTripFetcher.swift in Sources */,
@@ -4031,32 +3938,31 @@
 				3AFFABD21F06854F00147990 /* TKAnnotations.swift in Sources */,
 				3AFFAE041F06B91300147990 /* StopVisits+Shareable.swift in Sources */,
 				3AFFABA21F06854F00147990 /* NSString+Sizing.m in Sources */,
-				3AB6C6DF1D1CD08E0089F687 /* Service.m in Sources */,
 				3AFFABB11F06854F00147990 /* TKConfig.m in Sources */,
 				3A2D06EC1F83DE4B002DA194 /* TKAnnotationClusterer.swift in Sources */,
 				3AFFABA81F06854F00147990 /* Loc.swift in Sources */,
 				3AFFABCD1F06854F00147990 /* TKServer.m in Sources */,
 				3A656C4E24C9D7110027E9A6 /* TKSegment+TKTripSegment.swift in Sources */,
-				3AFFAE0C1F06BCF200147990 /* Service.swift in Sources */,
 				3AAD87F7209B02B900C75B7E /* VehicleAPIModel.swift in Sources */,
 				3A40923B22F353AE0049AAE7 /* API+ViewHelpers.swift in Sources */,
+				3AAE440426C39CD700E45D20 /* LatestAPIModel.swift in Sources */,
 				3AC9A0AE1F682B6E0050217E /* TKPeliasGeocoder.swift in Sources */,
+				3AF83FF926C4FAD800C86CAF /* Alert+CoreDataClass.swift in Sources */,
 				3AFFADFE1F06AFDD00147990 /* TKShareHelper.swift in Sources */,
 				3A1F72C425C7D89A00C72CEE /* UIColor+TripKit.swift in Sources */,
-				3A386220228F303D00C8E704 /* SGDeprecatedGeocoder+TKGeocoding.swift in Sources */,
+				3AFF4E0F26C6091C00D71394 /* TKTripGoGeocoder.swift in Sources */,
 				3A38622A2292C47F00C8E704 /* TKContactsManager+TKAutocompleting.swift in Sources */,
-				3AB6C6E91D1CD08E0089F687 /* TripGroup.m in Sources */,
 				3A6DAED5204040B2009282FE /* Loc+TripKitUI.swift in Sources */,
-				3AB6C6D91D1CD08E0089F687 /* DLSEntry.m in Sources */,
 				3AED3B3526C2026700E8DA6B /* ISO8601OrSecondsSince1970.swift in Sources */,
 				3AFFABC61F06854F00147990 /* TKError.swift in Sources */,
 				3AB6C7141D1CD08E0089F687 /* TKConstants.m in Sources */,
 				3A787EC41D38F646009F9A18 /* TKJSONCache.swift in Sources */,
 				3A79B00024D303B7008C165A /* TKSecureTransformers.swift in Sources */,
+				3AF8401C26C4FC6500C86CAF /* Service+CoreDataProperties.swift in Sources */,
 				3AABDD9F1DF7D2E30044A05B /* OpeningHoursAPIModel.swift in Sources */,
 				3A1F72C325C7D89A00C72CEE /* UIColor+TripKitDefault.swift in Sources */,
+				3AFF4E2D26C6295100D71394 /* TKServer+Regions.swift in Sources */,
 				3A3428BE254EE75D00D71039 /* TKAggregateGeocoder.swift in Sources */,
-				3A2F65B020E0EECC006FE49D /* DLSEntry.swift in Sources */,
 				3A1F729425C7D66A00C72CEE /* TKStyleManager+UIKit.m in Sources */,
 				3A977A0D246BF734000AD7F1 /* TKRoutingServer.swift in Sources */,
 				3AFFAB981F06854F00147990 /* NSDate+Helpers.m in Sources */,
@@ -4064,15 +3970,16 @@
 				3AD1DEA61F83FAFD00F2860E /* TKGeoJSON+NamedCoordinate.swift in Sources */,
 				3AFFAE021F06B85F00147990 /* StopLocation+Shareable.swift in Sources */,
 				3A7E6139208A08BB0008AAE4 /* TKCalendarManager+Autocompleting.swift in Sources */,
+				3AFF4DF426C5CCFA00D71394 /* StopVisits+CoreDataClass.swift in Sources */,
 				3A664CED26C10F30002165CD /* DefaultLossyArray.swift in Sources */,
 				D3FC1F16207B3D1D00D39DF9 /* SegmentTemplate+CoreDataClass.swift in Sources */,
 				3AFFABC71F06854F00147990 /* TKParserHelper.swift in Sources */,
-				3AFFADFC1F069DAB00147990 /* StopVisits.swift in Sources */,
 				3A3C9BB81F75346400C8D476 /* BaseAPIModels.swift in Sources */,
 				3A5D1B5024BDE299001B1E77 /* DataAttachable.swift in Sources */,
 				3A79AFF224D1C4C7008C165A /* TKTimetable.swift in Sources */,
 				3AA39AC51F7A35B60066CC94 /* Codable+Helpers.swift in Sources */,
 				3A8F61211F190CE80017ACDA /* TKLocationManager.swift in Sources */,
+				3AFF4DEC26C5093B00D71394 /* Vehicle+CoreDataProperties.swift in Sources */,
 				3A6DAECF20402622009282FE /* Loc+TripKitBookings.swift in Sources */,
 				3A3428DA254EEE8100D71039 /* CLLocationCoordinate2D+DecodePolylineString.swift in Sources */,
 				3A656C5E24CAF8640027E9A6 /* TKSettings+Config.swift in Sources */,
@@ -4080,6 +3987,7 @@
 				3A656C5224C9D7670027E9A6 /* TKSegment+Images.swift in Sources */,
 				3AFFAE0A1F06BA3700147990 /* TripRequest+Shareable.swift in Sources */,
 				3AB6C7101D1CD08E0089F687 /* TKSettings.m in Sources */,
+				3AFF4DF226C5387F00D71394 /* Service+Visits.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

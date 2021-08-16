@@ -138,7 +138,7 @@ fileprivate extension Trip {
     switch classification {
     case .cheapest: return totalPrice?.floatValue
     case .recommended: return totalScore
-    case .fastest: return calculateDuration().floatValue
+    case .fastest: return Float(minutes)
     case .easiest: return totalHassle
     case .healthiest: return totalCalories * -1 // inverted!
     case .greenest: return totalCarbon

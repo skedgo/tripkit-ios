@@ -8,6 +8,8 @@
 
 import Foundation
 
+import CoreData
+
 public final class TKRoutingParser {
   
   private init() {}
@@ -60,7 +62,7 @@ public final class TKRoutingParser {
     return try result.orThrow(ParserError.didNotFinish).get()
   }
   
-  static func add(_ response: TKAPI.RoutingResponse, to request: TripRequest, merge: Bool, visibility: TKTripGroupVisibility = .full, completion: @escaping (Result<[Trip], Error>) -> Void) {
+  static func add(_ response: TKAPI.RoutingResponse, to request: TripRequest, merge: Bool, visibility: TripGroup.Visibility = .full, completion: @escaping (Result<[Trip], Error>) -> Void) {
     guard let context = request.managedObjectContext else {
       assertionFailure("Request's context went missing.")
       completion(.success([]))
@@ -152,7 +154,7 @@ public final class TKRoutingParser {
     mode: ParseMode,
     context: NSManagedObjectContext,
     allowDuplicates: Bool,
-    visibility: TKTripGroupVisibility
+    visibility: TripGroup.Visibility
   ) throws -> [Trip] {
     
     if let error = response.error {
@@ -197,7 +199,7 @@ public final class TKRoutingParser {
     mode: ParseMode,
     context: NSManagedObjectContext,
     allowDuplicates: Bool,
-    visibility: TKTripGroupVisibility
+    visibility: TripGroup.Visibility
   ) throws -> [Trip] {
     
     let request = mode.request
@@ -206,7 +208,7 @@ public final class TKRoutingParser {
     }
 
     // We want to maintain these and reset to it at the very end
-    let originalVisibility: TKTripGroupVisibility
+    let originalVisibility: TripGroup.Visibility
     switch mode {
     case .update(let trip): originalVisibility = trip.tripGroup.visibility
     default: originalVisibility = .full
@@ -237,8 +239,8 @@ public final class TKRoutingParser {
         switch mode {
         case .update(let existing):
           trip = existing
-          if let references = existing.segmentReferences as? Set<SegmentReference> {
-            unmatchedSegmentReferencesByHashCode = Dictionary(uniqueKeysWithValues: references.map { ($0.templateHashCode.intValue, $0) })
+          if let references = existing.segmentReferences {
+            unmatchedSegmentReferencesByHashCode = Dictionary(uniqueKeysWithValues: references.map { ($0.templateHashCode?.intValue ?? 0, $0) })
           }
         case .addTo, .appendTo:
           trip = Trip(context: context)
@@ -322,7 +324,7 @@ public final class TKRoutingParser {
             service.number = apiReference.number ?? service.number
             reference.service = service
             
-            reference.isBicycleAccessible = apiReference.bicycleAccessible
+            reference.bicycleAccessible = apiReference.bicycleAccessible
             reference.wheelchairAccessibility = TKWheelchairAccessibility(bool: apiReference.wheelchairAccessible)
             
             // If we have any time-tabled service, the whole trip is timetabled
@@ -359,7 +361,7 @@ public final class TKRoutingParser {
             SegmentTemplate.insertNewShapes(from: apiTemplate, for: service, relativeTime: reference.startTime, modeInfo: modeInfo, context: context)
           }
           
-          reference.index = NSNumber(value: index)
+          reference.index = Int16(index)
           reference.trip = trip
         }
         
@@ -382,7 +384,7 @@ public final class TKRoutingParser {
 
           let existingSimilarTrip = allowDuplicates
             ? nil
-            : Trip.findSimilarTrip(to: trip, inList: previousTrips as NSFastEnumeration)
+            : Trip.findSimilarTrip(to: trip, in: previousTrips)
           if let similar = existingSimilarTrip {
             // remember group, but don't add it
             existingGroup = similar.tripGroup

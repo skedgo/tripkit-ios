@@ -10,7 +10,7 @@ import Foundation
 
 extension TripRequest {
   public func updateTripGroupClassifications(using classifier: TKTripClassifier) {
-    guard let groups = self.tripGroups else { return }
+    let groups = self.tripGroups
     classifier.prepareForClassification(of: groups)
     for group in groups {
       let newClassification = classifier.classification(of: group)

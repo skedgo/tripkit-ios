@@ -12,7 +12,8 @@ import RxSwift
 
 import TripKit
 
-extension Reactive where Base: TKBuzzRealTime {
+extension TKRealTimeFetcher: ReactiveCompatible {}
+extension Reactive where Base: TKRealTimeFetcher {
   
   /// Stream real-time updates for the trip
   ///
@@ -38,7 +39,7 @@ extension Reactive where Base: TKBuzzRealTime {
       .map { _ in trip }
       .filter { $0.managedObjectContext != nil && $0.wantsRealTimeUpdates }
       .flatMapLatest(Self.update)
-      .filter { $1 }
+      .filter(\.1)
       .map { trip, _ in trip }
   }
   
@@ -71,11 +72,11 @@ extension Reactive where Base: TKBuzzRealTime {
   /// - returns: Progress of the update, but it won't indicate which trips did get updated
   public static func update(tripGroups: [TripGroup]) -> Observable<TKRealTimeUpdateProgress<Void>> {
     let trips = tripGroups
-      .compactMap { $0.visibleTrip }
-      .filter { $0.wantsRealTimeUpdates }
+      .compactMap(\.visibleTrip)
+      .filter(\.wantsRealTimeUpdates)
     
     let individualUpdates = trips
-      .map(TKBuzzRealTime.rx.update)
+      .map(update)
       .map { $0.asObservable() }
     
     return Observable

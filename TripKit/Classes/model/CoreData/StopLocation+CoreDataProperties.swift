@@ -43,16 +43,16 @@ extension StopLocation {
 extension StopLocation {
 
     @objc(addChildrenObject:)
-    @NSManaged public func addToChildren(_ value: StopLocation)
+    @NSManaged func addToChildren(_ value: StopLocation)
 
     @objc(removeChildrenObject:)
-    @NSManaged public func removeFromChildren(_ value: StopLocation)
+    @NSManaged func removeFromChildren(_ value: StopLocation)
 
     @objc(addChildren:)
-    @NSManaged public func addToChildren(_ values: NSSet)
+    @NSManaged func addToChildren(_ values: NSSet)
 
     @objc(removeChildren:)
-    @NSManaged public func removeFromChildren(_ values: NSSet)
+    @NSManaged func removeFromChildren(_ values: NSSet)
 
 }
 
@@ -60,16 +60,16 @@ extension StopLocation {
 extension StopLocation {
 
     @objc(addEndVisitsObject:)
-    @NSManaged public func addToEndVisits(_ value: DLSEntry)
+    @NSManaged func addToEndVisits(_ value: DLSEntry)
 
     @objc(removeEndVisitsObject:)
-    @NSManaged public func removeFromEndVisits(_ value: DLSEntry)
+    @NSManaged func removeFromEndVisits(_ value: DLSEntry)
 
     @objc(addEndVisits:)
-    @NSManaged public func addToEndVisits(_ values: NSSet)
+    @NSManaged func addToEndVisits(_ values: NSSet)
 
     @objc(removeEndVisits:)
-    @NSManaged public func removeFromEndVisits(_ values: NSSet)
+    @NSManaged func removeFromEndVisits(_ values: NSSet)
 
 }
 
@@ -77,15 +77,15 @@ extension StopLocation {
 extension StopLocation {
 
     @objc(addVisitsObject:)
-    @NSManaged public func addToVisits(_ value: StopVisits)
+    @NSManaged func addToVisits(_ value: StopVisits)
 
     @objc(removeVisitsObject:)
-    @NSManaged public func removeFromVisits(_ value: StopVisits)
+    @NSManaged func removeFromVisits(_ value: StopVisits)
 
     @objc(addVisits:)
-    @NSManaged public func addToVisits(_ values: NSSet)
+    @NSManaged func addToVisits(_ values: NSSet)
 
     @objc(removeVisits:)
-    @NSManaged public func removeFromVisits(_ values: NSSet)
+    @NSManaged func removeFromVisits(_ values: NSSet)
 
 }

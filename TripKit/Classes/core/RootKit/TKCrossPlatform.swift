@@ -19,35 +19,3 @@ import Foundation
   public typealias TKImage = NSImage
   public typealias TKFont  = NSFont
 #endif
-
-@available(*, unavailable, renamed: "TKColor")
-public typealias SGKColor = TKImage
-
-@available(*, unavailable, renamed: "TKImage")
-public typealias SGKImage = TKImage
-
-@available(*, unavailable, renamed: "TKFont")
-public typealias SGKFont = TKFont
-
-#if os(iOS) || os(tvOS)
-@available(*, unavailable, renamed: "TKActions")
-public typealias SGActions = TKActions
-#endif
-
-@available(*, unavailable, renamed: "TKConfig")
-public typealias SGKConfig = TKConfig
-
-@available(*, unavailable, renamed: "TKLog")
-public typealias SGKLog = TKLog
-
-@available(*, unavailable, renamed: "TKTimeType")
-public typealias SGTimeType = TKTimeType
-
-@available(*, unavailable, renamed: "TKGrouping")
-public typealias SGKGrouping = TKGrouping
-
-@available(*, unavailable, renamed: "TKStyleManager")
-public typealias SGStyleManager = TKStyleManager
-
-@available(*, unavailable, renamed: "TKRouter")
-public typealias TKBuzzRouter = TKRouter

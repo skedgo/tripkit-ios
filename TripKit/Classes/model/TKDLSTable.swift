@@ -33,7 +33,7 @@ public class TKDLSTable: NSObject {
     
     startStopCode = start
     endStopCode = end
-    pairIdentifiers = segment.trip?.tripGroup.pairIdentifiers(forPublicSegment: segment)
+    pairIdentifiers = segment.trip?.tripGroup.cachedPairIdentifier(for: segment)
     startRegion = segment.startRegion ?? .international
     endRegion = endSegment.endRegion  ?? .international
     tripKitContext = moc

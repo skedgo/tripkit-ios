@@ -8,7 +8,7 @@
 
 #import "TKStyleManager.h"
 
-#import "TKRootKit.h"
+#import "TKConfig.h"
 
 @implementation TKStyleManager
 

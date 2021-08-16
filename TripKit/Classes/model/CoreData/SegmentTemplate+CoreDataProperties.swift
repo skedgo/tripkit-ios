@@ -12,34 +12,34 @@ import CoreData
 
 extension SegmentTemplate {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<SegmentTemplate> {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<SegmentTemplate> {
         return NSFetchRequest<SegmentTemplate>(entityName: "SegmentTemplate")
     }
 
-    @NSManaged public var action: String?
-    @NSManaged public var bearing: NSNumber?
-    @NSManaged public var data: Data? // NSData (previously NSDictionary / NSMutableDictionary)
-    @NSManaged public var durationWithoutTraffic: NSNumber?
-    @NSManaged public var endLocation: NSObject?
-    @NSManaged public var flags: NSNumber?
-    @NSManaged public var hashCode: NSNumber?
-    @NSManaged public var metres: NSNumber?
-    @NSManaged public var metresDismount: NSNumber?
-    @NSManaged public var metresFriendly: NSNumber?
-    @NSManaged public var metresUnfriendly: NSNumber?
-    @NSManaged public var modeIdentifier: String!
-    @NSManaged public var notesRaw: String?
-    @NSManaged public var scheduledEndStopCode: String?
-    @NSManaged public var scheduledStartStopCode: String?
-    @NSManaged public var segmentType: NSNumber?
-    @NSManaged public var smsMessage: String?
-    @NSManaged public var smsNumber: String?
-    @NSManaged public var startLocation: NSObject?
-    @NSManaged public var visibility: NSNumber?
-    @NSManaged public var references: NSSet?
+    @NSManaged var action: String?
+    @NSManaged var bearing: NSNumber?
+    @NSManaged var data: Data? // NSData (previously NSDictionary / NSMutableDictionary)
+    @NSManaged var durationWithoutTraffic: NSNumber?
+    @NSManaged var endLocation: NSObject?
+    @NSManaged var flags: NSNumber?
+    @NSManaged var hashCode: NSNumber?
+    @NSManaged var metres: NSNumber?
+    @NSManaged var metresDismount: NSNumber?
+    @NSManaged var metresFriendly: NSNumber?
+    @NSManaged var metresUnfriendly: NSNumber?
+    @NSManaged var modeIdentifier: String!
+    @NSManaged var notesRaw: String?
+    @NSManaged var scheduledEndStopCode: String?
+    @NSManaged var scheduledStartStopCode: String?
+    @NSManaged var segmentType: NSNumber?
+    @NSManaged var smsMessage: String?
+    @NSManaged var smsNumber: String?
+    @NSManaged var startLocation: NSObject?
+    @NSManaged var visibility: NSNumber?
+    @NSManaged var references: NSSet?
   
     /// Shapes define a sequence of waypoints. A segment can have a couple of those, e.g., a number of streets, or a bus line for which only a part is travelled along.
-    @NSManaged public var shapes: NSSet?
+    @NSManaged var shapes: NSSet?
 
 }
 
@@ -47,16 +47,16 @@ extension SegmentTemplate {
 extension SegmentTemplate {
 
     @objc(addReferencesObject:)
-    @NSManaged public func addToReferences(_ value: SegmentReference)
+    @NSManaged func addToReferences(_ value: SegmentReference)
 
     @objc(removeReferencesObject:)
-    @NSManaged public func removeFromReferences(_ value: SegmentReference)
+    @NSManaged func removeFromReferences(_ value: SegmentReference)
 
     @objc(addReferences:)
-    @NSManaged public func addToReferences(_ values: NSSet)
+    @NSManaged func addToReferences(_ values: NSSet)
 
     @objc(removeReferences:)
-    @NSManaged public func removeFromReferences(_ values: NSSet)
+    @NSManaged func removeFromReferences(_ values: NSSet)
 
 }
 
@@ -64,15 +64,15 @@ extension SegmentTemplate {
 extension SegmentTemplate {
 
     @objc(addShapesObject:)
-    @NSManaged public func addToShapes(_ value: Shape)
+    @NSManaged func addToShapes(_ value: Shape)
 
     @objc(removeShapesObject:)
-    @NSManaged public func removeFromShapes(_ value: Shape)
+    @NSManaged func removeFromShapes(_ value: Shape)
 
     @objc(addShapes:)
-    @NSManaged public func addToShapes(_ values: NSSet)
+    @NSManaged func addToShapes(_ values: NSSet)
 
     @objc(removeShapes:)
-    @NSManaged public func removeFromShapes(_ values: NSSet)
+    @NSManaged func removeFromShapes(_ values: NSSet)
 
 }

@@ -20,7 +20,7 @@ public class TKRegionManager: NSObject {
   @objc
   public static let UpdatedRegionsNotification = NSNotification.Name.TKRegionManagerUpdatedRegions
   
-  private var response: RegionsResponse? {
+  private var response: TKAPI.RegionsResponse? {
     didSet {
       _requiredForModes = nil
     }
@@ -35,7 +35,13 @@ public class TKRegionManager: NSObject {
   
   public func loadRegionsFromCache() {
     guard let data = TKRegionManager.readLocalCache() else { return }
-    updateRegions(from: data)
+    do {
+      let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
+      updateRegions(from: response)
+    } catch {
+      assertionFailure()
+      TKLog.warn("Couldn't load regions from cache: \(error)")
+    }
   }
   
   @objc public var hasRegions: Bool {
@@ -57,66 +63,25 @@ public class TKRegionManager: NSObject {
   
 }
 
-// MARK: - Parsing
-
-struct RegionsResponse: Codable {
-  let modes: [String: ModeDetails]?
-  let regions: [TKRegion]?
-  let hashCode: Int
-}
-
-struct ModeDetails: Codable {
-  private enum CodingKeys: String, CodingKey {
-    case title
-    case subtitle
-    case websiteURL = "URL"
-    case rgbColor = "color"
-    case required
-    case implies
-    case icon
-    case isTemplate
-    case vehicleIcon
-  }
-  
-  let title: String
-  let subtitle: String?
-  let websiteURL: URL?
-  let rgbColor: TKAPI.RGBColor
-  let required: Bool?
-  let implies: [String]?
-  let icon: String?
-  let isTemplate: Bool?
-  let vehicleIcon: String?
-  
-  var color: TKColor {
-    return rgbColor.color
-  }
-}
-
 // MARK: - Updating regions data
 
 extension TKRegionManager {
 
-  @objc(updateRegionsFromData:)
-  public func updateRegions(from data: Data) {
-    do {
-      let response = try JSONDecoder().decode(RegionsResponse.self, from: data)
-      
-      // Silently ignore if region didn't change
-      guard response.modes != nil, response.regions != nil else {
-        // This asset isn't valid, due to race conditions
-        // assert(self.response?.hashCode == response.hashCode)
-        return
-      }
-      
-      self.response = response
-      TKRegionManager.saveToCache(data)
-      
-      NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
-
-    } catch {
-      TKLog.warn("Failed to parse regions: \(error)")
+  func updateRegions(from response: TKAPI.RegionsResponse) {
+    // Silently ignore obviously bad data
+    guard response.modes != nil, response.regions != nil else {
+      // This asset isn't valid, due to race conditions
+      // assert(self.response?.hashCode == response.hashCode)
+      return
     }
+    
+    self.response = response
+    
+    if let encoded = try? JSONEncoder().encode(response) {
+      TKRegionManager.saveToCache(encoded)
+    }
+    
+    NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
   }
   
   public static var cacheURL: URL {

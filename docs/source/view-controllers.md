@@ -99,7 +99,7 @@ The [`TKUIAutocompletionViewController`](TripKitUI/Classes/TKUIAutocompletionVie
 
 The following data sources are included in TripKit:
 
-- [`TKSkedGoGeocoder`](TripKit/Classes/TKSkedGoGeocoder.html) for public transport stops and stations
+- [`TKTripGoGeocoder`](TripKit/Classes/TKTripGoGeocoder.html) for public transport stops and stations
 - [`TKAppleGeocoder`](TripKit/Classes/TKAppleGeocoder.html) for addresses and POIs provided by Apple Maps
 - [`TKPeliasGeocoder`](TripKit/Classes/TKPeliasGeocoder.html) for use with any Pelias-powered geocoder
 - [`TKCalendarManager`](TripKit/Classes/TKCalendarManager.html) for searching the user's calendar for events with locations

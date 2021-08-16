@@ -70,13 +70,12 @@ extension TKUITimetableViewModel {
   /// - Returns: Observable of departures, firing depending on input
   private static func departures(for data: DataInput, input: UIInput?) -> Observable<[StopVisits]> {
     
-    let relevantInput: Observable<(filter: String?, date: Date?)>
+    let relevantInput: Observable<(filter: String, date: Date?)>
     
     let filterSteam = input?.filter
-      .map { $0 as String? }
-      .startWith(nil)
+      .startWith("")
       .asObservable()
-      ?? .just(nil)
+      ?? .just("")
     
     let dateStream = input?.date
       .map { $0 as Date? }
@@ -106,16 +105,16 @@ extension TKUITimetableViewModel {
     }
   }
   
-  private static func stopVisits(for stops: [StopLocation], filter: String?, date: Date?) -> Observable<[StopVisits]> {
+  private static func stopVisits(for stops: [StopLocation], filter: String = "", date: Date?) -> Observable<[StopVisits]> {
     
     let earliestDate = date ?? Date(timeIntervalSinceNow: TimeInterval(-60 * Constants.minutesToFetchBeforeNow))
     
     let stopsToMatch = stops.flatMap { $0.stopsToMatchTo() }
-    let predicate = StopVisits.departuresPredicate(forStops: stopsToMatch, from: earliestDate, filter: filter)
+    let predicate = StopVisits.departuresPredicate(stops: stopsToMatch, from: earliestDate, filter: filter)
     
     return TripKit.shared.tripKitContext.rx.fetchObjects(
       StopVisits.self,
-      sortDescriptors: StopVisits.defaultSortDescriptors(),
+      sortDescriptors: StopVisits.defaultSortDescriptors,
       predicate: predicate,
       relationshipKeyPathsForPrefetching: ["service"]
     )
@@ -127,12 +126,12 @@ extension TKUITimetableViewModel {
     
     let earliestDate = date ?? Date(timeIntervalSinceNow: TimeInterval(-60 * Constants.minutesToFetchBeforeNow))
     
-    let predicate = DLSEntry.departuresPredicate(forPairs: pairs, from: earliestDate, filter: nil)
+    let predicate = DLSEntry.departuresPredicate(pairs: pairs, from: earliestDate)
     
     return TripKit.shared.tripKitContext.rx
       .fetchObjects(
         DLSEntry.self,
-        sortDescriptors: StopVisits.defaultSortDescriptors(),
+        sortDescriptors: StopVisits.defaultSortDescriptors,
         predicate: predicate,
         relationshipKeyPathsForPrefetching: ["service"]
       )
@@ -159,7 +158,7 @@ extension TKUITimetableViewModel {
   static func extractLines(from visits: [StopVisits]) -> [TKUITimetableAccessoryView.Line] {
     var lines: Set<TKUITimetableAccessoryView.Line> = []
     for visit in visits {
-      guard let text = visit.service.shortIdentifier() else { continue }
+      guard let text = visit.service.shortIdentifier else { continue }
       let line = TKUITimetableAccessoryView.Line(text: text, color: visit.service.color)
       lines.insert(line)
     }
@@ -244,7 +243,7 @@ extension TKUITimetableViewModel {
       return relevantInput
         .flatMapLatest { date, rebuild -> Observable<FetchResult> in
           if rebuild {
-            DLSEntry.clearAllEntries(inTripKitContext: TripKit.shared.tripKitContext)
+            DLSEntry.clearAllEntries(in: TripKit.shared.tripKitContext)
           }
           let downloadDate = date ?? Date(timeIntervalSinceNow: TimeInterval(-60 * Constants.minutesToFetchBeforeNow))
           return TKDeparturesProvider
@@ -276,7 +275,7 @@ extension TKUITimetableViewModel {
       .withLatestFrom(departures)
       .flatMapLatest { departures -> Observable<TKRealTimeUpdateProgress<Void>> in
         guard let region = departures.first?.stop.region else { return .empty() }
-        return TKBuzzRealTime.rx
+        return TKRealTimeFetcher.rx
           .update(departures: departures, in: region)
           .asObservable()
           .map { _ in .updated(()) }
@@ -293,35 +292,24 @@ extension TKUITimetableViewModel {
   }
 }
 
-extension Reactive where Base: TKBuzzRealTime {
+extension Reactive where Base: TKRealTimeFetcher {
   
   static func update(departures: [StopVisits], in region: TKRegion) -> Single<[StopVisits]> {
     
     let dlsEntries = departures.compactMap({ $0 as? DLSEntry })
     if !dlsEntries.isEmpty {
       return Single.create { subscriber in
-        TKBuzzRealTime.updateDLSEntries(
-          Set(dlsEntries),
-          in: region,
-          success: { updatedDepartures in
-            let asVisits = updatedDepartures.map { $0 as StopVisits }
-            subscriber(.success(asVisits))
-        }, failure: { error in
-          subscriber(.failure(error ?? TKUITimetableViewModel.FetchError.unknownError))
-        })
+        TKRealTimeFetcher.update(Set(dlsEntries), in: region) { result in
+          subscriber(result.map { $0.map { $0 as StopVisits }})
+        }
         return Disposables.create()
       }
       
     } else {
       return Single.create { subscriber in
-        TKBuzzRealTime.updateEmbarkations(
-          Set(departures),
-          in: region,
-          success: { updatedDepartures in
-            subscriber(.success(Array(updatedDepartures)))
-        }, failure: { error in
-          subscriber(.failure(error ?? TKUITimetableViewModel.FetchError.unknownError))
-        })
+        TKRealTimeFetcher.update(Set(departures), in: region) { result in
+          subscriber(result.map { Array($0)} )
+        }
         return Disposables.create()
       }
     }
@@ -345,7 +333,7 @@ extension TKUITimetableViewModel {
     var seenHashCodes = Set<Int>()
     let alerts = stops
       .flatMap { $0.alertsIncludingChildren() }
-      .filter { seenHashCodes.insert($0.hashCode.intValue).inserted }
+      .filter { seenHashCodes.insert(Int($0.hashCode)).inserted }
       .map { $0 as TKAlert }
     
     return alerts
@@ -358,12 +346,12 @@ extension StopLocation {
   fileprivate func alertsIncludingChildren() -> [Alert] {
     guard let context = managedObjectContext else { return [] }
     let hashCodes = alertHashCodes ?? []
-    var alerts = hashCodes.compactMap { Alert.fetch(withHashCode: $0, inTripKitContext: context) }
+    var alerts = hashCodes.compactMap { Alert.fetch(hashCode: $0, in: context) }
     if let children = children {
       alerts += children.flatMap { $0.alertsIncludingChildren() }
     }
     return alerts
-      .sorted { $0.severity.intValue > $1.severity.intValue }
+      .sorted { $0.severity > $1.severity }
   }
   
 }

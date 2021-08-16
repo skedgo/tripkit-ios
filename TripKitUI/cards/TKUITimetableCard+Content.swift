@@ -33,7 +33,7 @@ extension TKUIDepartureCellContent {
       imageIsTemplate: service.modeImageIsTemplate,
       imageTintColor: TKUICustomization.shared.colorCodeTransitIcons ? serviceColor : nil,
       modeName: service.modeTitle ?? "",
-      serviceShortName: service.shortIdentifier(),
+      serviceShortName: service.shortIdentifier,
       serviceColor: serviceColor,
       serviceIsCanceled: service.isCanceled,
       accessibilityLabel: embarkation.accessibilityDescription(includeRealTime: true),
@@ -52,8 +52,13 @@ extension TKUIDepartureCellContent {
 // MARK: -
 extension StopVisits {
   
+  /// Time to count down to in a departures timetable. This is `nil` for frequency-based services, or if this is the final arrival at a stop.
+  var countdownDate: Date? {
+    service.frequency == nil ? departure : nil
+  }
+  
   fileprivate func buildTimeText(spacer: String = "·") -> NSAttributedString {
-    var text = realTimeInformation(false) + " \(spacer) "
+    var text = realTimeInformation(withOriginalTime: false) + " \(spacer) "
     
     // Frequency based service
     switch timing {

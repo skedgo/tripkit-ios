@@ -62,8 +62,8 @@ extension TKWaypointRouter {
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
   public static func fetchNextTrip(after trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    TKServer.shared.requireRegions { error in
-      guard let region = trip.request.startRegion() else {
+    TKRegionManager.shared.requireRegions { error in
+      guard let region = trip.request.startRegion else {
         completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
@@ -138,12 +138,12 @@ extension TKWaypointRouter {
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
   public static func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    TKServer.shared.requireRegions { error in
-      if let error = error {
+    TKRegionManager.shared.requireRegions { result in
+      if case .failure(let error) = result {
         completion(.failure(error))
         return
       }
-      guard let region = segment.trip.request.startRegion() else {
+      guard let region = segment.trip.request.startRegion else {
         completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
@@ -172,12 +172,12 @@ extension TKWaypointRouter {
   
   public static func fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    TKServer.shared.requireRegions { error in
-      if let error = error {
+    TKRegionManager.shared.requireRegions { result in
+      if case .failure(let error) = result {
         completion(.failure(error))
         return
       }
-      guard let region = segment.trip.request.startRegion() else {
+      guard let region = segment.trip.request.startRegion else {
         completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
@@ -203,13 +203,13 @@ extension TKWaypointRouter {
 extension TKWaypointRouter {
   
   public static func fetchTrip(byMoving segment: TKSegment, to location: TKModeCoordinate, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
-    TKServer.shared.requireRegions { error in
-      if let error = error {
+    TKRegionManager.shared.requireRegions { result in
+      if case .failure(let error) = result {
         completion(.failure(error))
         return
       }
       
-      guard let region = segment.trip.request.startRegion() else {
+      guard let region = segment.trip.request.startRegion else {
         completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
         return
       }
@@ -573,7 +573,7 @@ class WaypointParasBuilder {
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
-    var nonSharingModes = trip.usedModeIdentifiers()
+    var nonSharingModes = trip.usedModeIdentifiers
     nonSharingModes.remove(sharingMode)
     if nonSharingModes.isEmpty {
       nonSharingModes.insert("wa_wal")
@@ -621,7 +621,7 @@ class WaypointParasBuilder {
       "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
     ]
     
-    var nonSharingModes = trip.usedModeIdentifiers()
+    var nonSharingModes = trip.usedModeIdentifiers
     nonSharingModes.remove(sharingMode)
     if nonSharingModes.isEmpty {
       nonSharingModes.insert("wa_wal")

@@ -13,7 +13,7 @@ import RxCocoa
 
 import TripKit
 
-extension Reactive where Base: TKServer {
+extension Reactive where Base: TKRegionManager {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {
     return requireRegions()
       .map {
@@ -27,21 +27,21 @@ extension Reactive where Base: TKServer {
         TKRegionManager.shared.region(containing: coordinateRegion)
       }
   }
-
+  
   public func requireRegions() -> Single<Void> {
     return Single.create { subscriber in
-      self.base.requireRegions { error in
-        guard error == nil else {
-          subscriber(.failure(error!))
-          return
-        }
-        subscriber(.success(()))
-      }
-      
+      self.base.requireRegions(completion: subscriber)
       return Disposables.create()
     }
     
   }
+}
+
+
+extension Reactive where Base: TKServer {
+  
+
+  
   
   public static func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
     return Single.create { single in

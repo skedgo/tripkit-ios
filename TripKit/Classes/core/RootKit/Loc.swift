@@ -77,62 +77,69 @@ public class Loc : NSObject {
     return NSLocalizedString("Name", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for name of something (or someone)")
   }
   
-  @objc
   public static var RealTime: String {
     return NSLocalizedString("Real-time", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for real-time information")
   }
   
-  @objc
-  public static var SearchForACity: String {
-    return NSLocalizedString("Search for a city", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
+  public static var LiveTraffic: String {
+    return NSLocalizedString("Live traffic", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for real-time information")
   }
   
-  @objc
   public static var WheelchairAccessible: String {
     return NSLocalizedString("Wheelchair accessible", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for wheelchair accessible services")
   }
   
-  @objc
   public static var WheelchairNotAccessible: String {
     return NSLocalizedString("Not wheelchair accessible", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for wheelchair not accessible services")
   }
 
-  @objc
   public static var WheelchairAccessibilityUnknown: String {
     return NSLocalizedString("Wheelchair accessibility unknown", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for unknow if service or station is wheelchair accessible or not")
   }
 
-  @objc
   public static var ContactSupport: String {
     return NSLocalizedString("Contact support", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Title for button that allows users to contact our support team to help resolve some error in the app.")
   }
   
-  @objc
-  public static var Action: String {
-    return NSLocalizedString("Action", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Accessibility label for action button")
-  }
-  
-  @objc
-  public static var ReadMore: String {
-    return NSLocalizedString("Read more…", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "")
-  }
-  
-  @objc public static var AllDay: String {
+  public static var AllDay: String {
     return NSLocalizedString("all-day", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator that an event is all-day, or that something is open all-day")
   }
 
-  @objc public static var Scheduled: String {
+  public static var Scheduled: String {
     return NSLocalizedString("Scheduled", tableName: "TripKit", bundle: .tripKit, comment: "Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available.")
   }
 
-  @objc public static var Cancelled: String {
+  public static var Cancelled: String {
     return NSLocalizedString("Cancelled", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Label for when a service is cancelled.")
   }
 
-  @objc public static var NoRealTimeAvailable: String {
+  public static var NoRealTimeAvailable: String {
     return NSLocalizedString("No real-time available", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show when a service does not have real-time data (even though we usually get it for services like this.)")
   }
 
+  public static var OnTime: String {
+    return NSLocalizedString("On time", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show when a service is on time according to real-time data.")
+  }
+  
+  public static func LateService(minutes: Int, service: String?) -> String {
+    if let service = service {
+      let format = NSLocalizedString("%1$@ late (%2$@ service)", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').")
+      return String(format: format, minutes, service)
+    } else {
+      let format = NSLocalizedString("%1$@ late", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'.")
+      return String(format: format, minutes)
+    }
+  }
+  
+  public static func EarlyService(minutes: Int, service: String?) -> String {
+    if let service = service {
+      let format = NSLocalizedString("%1$@ early (%2$@ service)", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').")
+      return String(format: format, minutes, service)
+    } else {
+      let format = NSLocalizedString("%1$@ early", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.")
+      return String(format: format, minutes)
+    }
+  }
 
   // MARK: - Reminders
   
@@ -269,4 +276,14 @@ public class Loc : NSObject {
     return String(format: format, keyword)
   }
   
+  public static func PercentCycleFriendly(_ percentage: String) -> String {
+    let format = NSLocalizedString("%@ cycle friendly", tableName: "TripKit", bundle: TKStyleManager.bundle(), comment: "Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.")
+    return String(format: format, percentage)
+  }
+
+  public static func PercentWheelchairFriendly(_ percentage: String) -> String {
+    let format = NSLocalizedString("%@ wheelchair friendly", tableName: "TripKit", bundle: TKStyleManager.bundle(), comment: "Indicator for how wheelchair-friendly a wheelchair route is. Placeholder will get replaced with '75%'.")
+    return String(format: format, percentage)
+  }
+
 }

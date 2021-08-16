@@ -4,4 +4,4 @@ Refer to the following classes:
 
 - For A-to-B multi-modal routing: `TKRouter`
 - Routing with waypoints: `TKWaypointRouter`
-- Real-time updates: `TKBuzzRealTime`
+- Real-time updates: `TKRealTimeFetcher`

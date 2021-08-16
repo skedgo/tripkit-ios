@@ -148,8 +148,8 @@ public enum TKTripFetcher {
       completion(Result {
         let request = try result.get()
         try context.save()
-        request.lastSelection = request.tripGroups?.first
-        request.lastSelection?.adjustVisibleTrip()
+        request.preferredGroup = request.tripGroups.first
+        request.preferredGroup?.adjustVisibleTrip()
         return try request.preferredTrip.orThrow(FetcherError.noTrip)
       })
     }

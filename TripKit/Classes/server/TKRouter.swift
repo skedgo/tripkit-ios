@@ -58,7 +58,7 @@ public class TKRouter: NSObject {
   /// - Parameters:
   ///   - request: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
-  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TKTripGroupVisibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
+  public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
     guard !request.isDeleted else {
       callbackQueue.async {
         let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
@@ -294,8 +294,8 @@ extension TKRouter {
 
 extension TripRequest {
   fileprivate func adjustVisibility(hiddenIdentifiers: Set<String>) {
-    for group in tripGroups ?? [] {
-      let groupIdentifiers = group.usedModeIdentifiers()
+    for group in tripGroups {
+      let groupIdentifiers = group.usedModeIdentifiers
       if TKModeHelper.modesContain(hiddenIdentifiers, groupIdentifiers) {
         // if any mode is hidden, hide the whole group
         group.visibility = .hidden
@@ -401,7 +401,7 @@ extension TripRequest: TKRouterRequestable {
   public var to: MKAnnotation { toLocation }
   
   public var modes: Set<String> {
-    return Set(applicableModeIdentifiers())
+    return Set(applicableModeIdentifiers)
       .subtracting(TKUserProfileHelper.hiddenModeIdentifiers)
     
   }
@@ -415,7 +415,7 @@ extension TripRequest: TKRouterRequestable {
   }
   
   public var additional: Set<URLQueryItem> {
-    let exclusionItems = excludedStops.map { URLQueryItem(name: "avoidStops", value: $0) }
+    let exclusionItems = (excludedStops ?? []).map { URLQueryItem(name: "avoidStops", value: $0) }
     return Set(exclusionItems)
   }
   
@@ -426,7 +426,7 @@ extension TKRouter {
   
   public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil) -> String? {
     let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil)
-    let baseURL = TKServer.shared.fallbackBaseURL()
+    let baseURL = TKServer.fallbackBaseURL
     let fullURL = baseURL.appendingPathComponent("routing.json")
     let request = TKServer.getRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
     return request.url?.absoluteString
@@ -466,7 +466,7 @@ extension TKRouter {
     return paras
   }
   
-  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TKTripGroupVisibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
 
     // Mark as active early, to make sure we pass on errors
     self.isActive = true
@@ -479,11 +479,10 @@ extension TKRouter {
       return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "End location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
     }
     
-    let server = self.server ?? .shared
-    server.requireRegions { [weak self] error in
+    TKRegionManager.shared.requireRegions { [weak self] result in
       guard let self = self else { return }
-      
-      if let error = error {
+
+      if case .failure(let error) = result {
         return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
       }
       
@@ -503,6 +502,7 @@ extension TKRouter {
         bestOnly: bestOnly
       )
       
+      let server = self.server ?? .shared
       server.hit(TKAPI.RoutingResponse.self,
                  path: "routing.json",
                  parameters: paras,
@@ -547,7 +547,7 @@ extension TKRouter {
     }
   }
   
-  private func parse(_ response: TKAPI.RoutingResponse, for request: TripRequest, visibility: TKTripGroupVisibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func parse(_ response: TKAPI.RoutingResponse, for request: TripRequest, visibility: TripGroup.Visibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
     
     TKLog.verbose("Parsing \(request)")

@@ -202,11 +202,11 @@ extension TKUIRoutingResultsViewModel {
     return request
       .filter { $0.managedObjectContext != nil }
       .flatMapLatest { request -> Observable<TKUIResultsFetcher.Progress> in
-        if skipInitial, request.hasTrips(), !request.expandForFavorite {
+        if skipInitial, request.hasTrips, !request.expandForFavorite {
           return .just(.finished)
         }
         
-        if let restricted = modes, !Set(restricted).isSubset(of: Set(request.spanningRegion().modeIdentifiers)) {
+        if let restricted = modes, !Set(restricted).isSubset(of: Set(request.spanningRegion.modeIdentifiers)) {
           assertionFailure("Try to limit search results to modes that are not supported in the region.")
         }
         
