@@ -48,10 +48,10 @@ extension InMemoryFavoriteManager {
     result.object = favorite
     result.title = title
     result.subtitle = favorite.annotation.subtitle ?? nil
-    result.image = TKAutocompletionResult.image(forType: .favourite)
+    result.image = TKAutocompletionResult.image(for: .favorite)
     
     if favorite.annotation is TKUIStopAnnotation {
-      result.accessoryButtonImage = TKStyleManager.imageNamed("icon-search-timetable")
+      result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
     }
     
     if searchText.isEmpty {

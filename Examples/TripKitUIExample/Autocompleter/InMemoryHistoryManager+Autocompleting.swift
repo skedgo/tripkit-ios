@@ -52,10 +52,10 @@ extension InMemoryHistoryManager {
     result.object = history
     result.title = title
     result.subtitle = history.annotation.subtitle ?? nil
-    result.image = TKAutocompletionResult.image(forType: .history)
+    result.image = TKAutocompletionResult.image(for: .history)
     
     if history.annotation is TKUIStopAnnotation {
-      result.accessoryButtonImage = TKStyleManager.imageNamed("icon-search-timetable")
+      result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
     }
     
     if searchText.isEmpty {
