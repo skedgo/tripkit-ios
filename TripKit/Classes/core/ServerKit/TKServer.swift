@@ -221,10 +221,11 @@ extension TKServer {
     timeout: DispatchTimeInterval
   ) throws -> Data {
     
-    let semaphore = DispatchSemaphore(value: 1)
+    let semaphore = DispatchSemaphore(value: 0)
     var dataResult: Result<Data, Error>? = nil
     hit(url: url, parameters: parameters) { _, _, result in
       dataResult = result
+      semaphore.signal()
     }
     _ = semaphore.wait(timeout: .now() + .seconds(10))
     return try dataResult.orThrow(ServerError.noData).get()
