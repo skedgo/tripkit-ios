@@ -107,7 +107,8 @@ pages_dryrun:
   before_script:
     - brew install sourcekitten
   script:
-    - ./Scripts/docs.sh
+    - cd Scripts
+    - ./docs.sh
   tags:
     - ios
   artifacts:
@@ -121,7 +122,8 @@ pages:
   before_script:
     - brew install sourcekitten
   script:
-    - ./Scripts/docs.sh
+    - cd Scripts
+    - ./docs.sh
   tags:
     - ios
   artifacts:
