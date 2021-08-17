@@ -133,7 +133,7 @@ extension TripRequest {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .short
-    formatter.locale = TKStyleManager.applicationLocale()
+    formatter.locale = .current
     formatter.doesRelativeDateFormatting = true
     formatter.timeZone = timeZone
     

@@ -45,6 +45,7 @@ public extension TKTransportModes {
 
   }
   
+  /// Image that stands for the specified transport mode identifier
   static func title(for modeIdentifier: String) -> String? {
     if let known = TKRegionManager.shared.title(forModeIdentifier: modeIdentifier) {
       return known
@@ -71,5 +72,11 @@ public extension TKTransportModes {
       }
     }
 
+  }
+  
+  @objc(imageForModeIdentifier:)
+  static func image(for modeIdentifier: String) -> TKImage? {
+    guard let part = self.modeImageName(forModeIdentifier: modeIdentifier) else { return nil }
+    return TKStyleManager.image(named: "icon-mode-\(part)")
   }
 }

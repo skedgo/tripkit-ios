@@ -107,7 +107,7 @@ public class TKUITimePickerSheet: TKUISheet {
       timePicker.maximumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * 31)
     }
     
-    timePicker.locale = TKStyleManager.applicationLocale() // set 24h setting
+    timePicker.locale = .current // set 24h setting
     timePicker.autoresizingMask = .flexibleWidth
     timePicker.addTarget(self, action: #selector(timePickerChanged(sender:)), for: .valueChanged)
     self.addSubview(timePicker)

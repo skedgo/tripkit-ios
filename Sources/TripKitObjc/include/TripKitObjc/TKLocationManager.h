@@ -26,10 +26,6 @@ typedef void (^TKLocationManagerFailureBlock)(NSError * error);
 - (BOOL)annotationIsCurrentLocation:(id<MKAnnotation>)currentLocation
                       orCloseEnough:(BOOL)closeEnough;
 
-- (TKImage *)imageForAnnotation:(id<MKAnnotation>)annotation;
-
-- (nullable TKImage *)accessoryImageForAnnotation:(id<MKAnnotation>)annotation;
-
 #pragma mark - Fetching locations
 
 - (id<MKAnnotation>)currentLocationPlaceholder NS_REFINED_FOR_SWIFT;

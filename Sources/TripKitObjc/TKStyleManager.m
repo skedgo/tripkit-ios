@@ -30,11 +30,6 @@
   //  return [TKColor redColor];
 }
 
-+ (NSLocale *)applicationLocale
-{
-  return [NSLocale currentLocale];
-}
-
 #if TARGET_OS_IPHONE
 + (UIButton *)cellAccessoryButtonWithImage:(TKImage *)image
                                     target:(id)target
@@ -52,23 +47,6 @@
   return button;
 }
 #endif
-
-+ (TKImage *)imageNamed:(NSString *)name
-{
-  TKImage *image = [self optionalImageNamed:name];
-  ZAssert(image, @"Image named '%@' not found", name);
-  return image;
-}
-
-+ (TKImage *)optionalImageNamed:(NSString *)name
-{
-  NSBundle *bundle = [self bundle];
-#if TARGET_OS_IPHONE
-  return [TKImage imageNamed:name inBundle:bundle compatibleWithTraitCollection:nil];
-#else
-  return [bundle imageForResource:name];
-#endif
-}
 
 + (NSBundle *)bundle
 {
@@ -97,7 +75,7 @@ NSString * const kTimeOnlyDateFormatterKey = @"TimeOnlyDateFormatterKey";
 		timeOnlyFormatter = [[NSDateFormatter alloc] init];
 		timeOnlyFormatter.dateStyle = NSDateFormatterNoStyle;
 		timeOnlyFormatter.timeStyle = NSDateFormatterShortStyle;
-		timeOnlyFormatter.locale    = [TKStyleManager applicationLocale];
+		timeOnlyFormatter.locale    = [NSLocale currentLocale];
     [threadDictionary setObject:timeOnlyFormatter forKey:kTimeOnlyDateFormatterKey];
 	}
 	
@@ -127,7 +105,7 @@ NSString * const kDateOnlyDateFormatterKey = @"DateOnlyDateFormatterKey";
 		dateOnlyFormatter.dateStyle = NSDateFormatterFullStyle;
 		dateOnlyFormatter.timeStyle = NSDateFormatterNoStyle;
 		dateOnlyFormatter.doesRelativeDateFormatting = YES;
-		dateOnlyFormatter.locale    = [TKStyleManager applicationLocale];
+		dateOnlyFormatter.locale    = [NSLocale currentLocale];
 		[threadDictionary setObject:dateOnlyFormatter forKey:kDateOnlyDateFormatterKey];
 	}
 	
@@ -155,7 +133,7 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
   
   formatter.timeStyle = showTime ? NSDateFormatterShortStyle : NSDateFormatterNoStyle;
   formatter.dateStyle = showDate ? NSDateFormatterMediumStyle : NSDateFormatterNoStyle;
-  formatter.locale    = [TKStyleManager applicationLocale];
+  formatter.locale    = [NSLocale currentLocale];
 	
 	if (nil != timeZone) {
 		formatter.timeZone = timeZone;
@@ -191,7 +169,7 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
 		[threadDictionary setObject:formatter forKey:kDateTimeDateFormatterKey];
 	}
   
-  formatter.locale    = [TKStyleManager applicationLocale];
+  formatter.locale    = [NSLocale currentLocale];
   if (format) {
     formatter.dateFormat = format;
   } else {

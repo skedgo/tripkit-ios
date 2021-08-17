@@ -21,8 +21,6 @@ typedef NS_ENUM(NSInteger, TKStyleModeIconType) {
 NS_ASSUME_NONNULL_BEGIN
 @interface TKStyleManager : NSObject
 
-+ (NSLocale *)applicationLocale;
-
 + (TKColor *)darkTextColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
 
 + (TKColor *)lightTextColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
@@ -34,8 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 #pragma mark - Image names
-
-+ (TKImage *)imageNamed:(NSString *)name NS_REFINED_FOR_SWIFT; // Wrong bundle for Swift!
 
 + (NSBundle *)bundle NS_REFINED_FOR_SWIFT; // Wrong bundle for Swift!
 

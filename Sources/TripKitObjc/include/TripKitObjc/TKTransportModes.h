@@ -52,11 +52,6 @@ FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierWheelchair;
 + (nullable NSString *)modeImageNameForModeIdentifier:(NSString *)modeIdentifier;
 
 /**
- @return image that stands for the specified transport mode identifier
- */
-+ (TKImage *)imageForModeIdentifier:(NSString *)modeIdentifier;
-
-/**
  @return The generic mode identifier part, e.g., `pt_pub` for `pt_pub_bus`,
     which can be used as routing input
  */

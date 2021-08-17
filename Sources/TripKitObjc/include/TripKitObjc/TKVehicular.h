@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-#import "TKCrossPlatform.h"
-
 #import "TKVehicleType.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -43,31 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
  @note Getting a lift instances don't have a UUID
  */
 - (nullable NSString *)vehicleUUID;
-
-@end
-
-
-@interface TKVehicularHelper : NSObject
-
-/**
- @return Converts the vehicle type string back to a vehicle type
- */
-+ (TKVehicleType)vehicleTypeForString:(NSString *)vehicleTypeString;
-
-/**
- @return The vehicle type as a human-readable string.
- */
-+ (nullable NSString *)stringForVehicleType:(TKVehicleType)vehicleType;
-
-/**
- @return The vehicle type as an icon.
- */
-+ (nullable TKImage *)iconForVehicle:(id<TKVehicular>)vehicle;
-
-/**
- @return Vehicles name if there's one, otherwise it's type to a string
- */
-+ (nullable NSString *)titleForVehicle:(id<TKVehicular>)vehicle;
 
 @end
 

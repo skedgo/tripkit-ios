@@ -120,16 +120,6 @@ NSString *const TKTransportModeIdentifierWheelchair                = @"wa_whe";
   }
 }
 
-+ (TKImage *)imageForModeIdentifier:(NSString *)modeIdentifier
-{
-  NSString *part = [self modeImageNameForModeIdentifier:modeIdentifier];
-  if (part) {
-    return [TKStyleManager imageNamed:[NSString stringWithFormat:@"icon-mode-%@", part]];
-  } else {
-    return nil;
-  }
-}
-
 + (NSString *)modeTypeIdentifier:(NSString *)modeIdentifier
 {
   NSArray *components = [modeIdentifier componentsSeparatedByString:@"_"];
