@@ -1,0 +1,3666 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 14,
+      "symbol": "UIImage.iconAlert",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 15,
+      "symbol": "UIImage.iconCross",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 26,
+      "symbol": "UIImage.badgeCheck",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 27,
+      "symbol": "UIImage.badgeHeart",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 28,
+      "symbol": "UIImage.badgeLeaf",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 29,
+      "symbol": "UIImage.badgeLightning",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 30,
+      "symbol": "UIImage.badgeLike",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 31,
+      "symbol": "UIImage.badgeMoney",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 35,
+      "symbol": "UIImage.iconAlternative",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 36,
+      "symbol": "UIImage.iconArrowUp",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 37,
+      "symbol": "UIImage.iconShowPassword",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 38,
+      "symbol": "UIImage.iconHidePassword",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 39,
+      "symbol": "UIImage.iconShare",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 41,
+      "symbol": "UIImage.iconChevronDown",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 42,
+      "symbol": "UIImage.iconChevronTimetable",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/TripKitUIBundle.swift",
+      "line": 79,
+      "symbol": "Bundle.tripKitUI",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUICardAction.swift",
+      "line": 21,
+      "symbol": "TKUICardAction.init(title:icon:style:handler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUICardAction.swift",
+      "line": 39,
+      "symbol": "TKUICardAction.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUICardActionStyle.swift",
+      "line": 11,
+      "symbol": "TKUICardActionStyle",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIComposingMapManager.swift",
+      "line": 14,
+      "symbol": "TKUIComposingMapManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard+Configuration.swift",
+      "line": 19,
+      "symbol": "TKUIHomeCard.SelectionMode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard+Configuration.swift",
+      "line": 32,
+      "symbol": "TKUIHomeCard.Configuration",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 17,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 20,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 20,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 22,
+      "symbol": "TKUIHomeCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 24,
+      "symbol": "TKUIHomeCard.searchResultDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 35,
+      "symbol": "TKUIHomeCard.disposeBag",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 45,
+      "symbol": "TKUIHomeCard.init(mapManager:initialPosition:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 63,
+      "symbol": "TKUIHomeCard.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 225,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 342,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 343,
+      "symbol": "TKUIHomeCard.routingQueryInput(card:selectedOrigin:destination:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 354,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 356,
+      "symbol": "TKUIHomeCard.searchBar(_:textDidChange:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 360,
+      "symbol": "TKUIHomeCard.searchBarTextDidBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 367,
+      "symbol": "TKUIHomeCard.searchBarTextDidEndEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 371,
+      "symbol": "TKUIHomeCard.searchBarCancelButtonClicked(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 378,
+      "symbol": "TKUIHomeCard.searchBarSearchButtonClicked(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 400,
+      "symbol": "TKUIHomeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 402,
+      "symbol": "TKUIHomeCard.tableView(_:viewForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 426,
+      "symbol": "TKUIHomeCard.tableView(_:trailingSwipeActionsConfigurationForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 433,
+      "symbol": "TKUIHomeCard.tableView(_:leadingSwipeActionsConfigurationForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIHomeCard.swift",
+      "line": 441,
+      "symbol": "TKUIHomeCard.tableView(_:contextMenuConfigurationForRowAt:point:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 19,
+      "symbol": "TKUIIdentifiableAnnotation",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 20,
+      "symbol": "TKUIIdentifiableAnnotation.identity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 29,
+      "symbol": "TKNamedCoordinate.identity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 125,
+      "symbol": "TKUIMapManager.selectionMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 230,
+      "symbol": "TKUIMapManager.reactToNewEdgePadding(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 252,
+      "symbol": "TKUIMapManager.annotationBuilder(for:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 434,
+      "symbol": "TKUIMapManager.mapView(_:didAdd:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 456,
+      "symbol": "TKUIMapManager.mapView(_:viewFor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 466,
+      "symbol": "TKUIMapManager.mapView(_:rendererFor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 510,
+      "symbol": "TKUIMapManager.mapView(_:regionDidChangeAnimated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIMapManager.swift",
+      "line": 514,
+      "symbol": "TKUIMapManager.mapView(_:didSelect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 17,
+      "symbol": "TKUINearbyMapManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 19,
+      "symbol": "TKUINearbyMapManager.viewModel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 21,
+      "symbol": "TKUINearbyMapManager.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 31,
+      "symbol": "TKUINearbyMapManager.mapCenter",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 35,
+      "symbol": "TKUINearbyMapManager.mapRect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 41,
+      "symbol": "TKUINearbyMapManager.mapSelection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 45,
+      "symbol": "TKUINearbyMapManager.searchResult",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 171,
+      "symbol": "TKUINearbyMapManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 173,
+      "symbol": "TKUINearbyMapManager.mapView(_:didChange:animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 177,
+      "symbol": "TKUINearbyMapManager.mapView(_:regionDidChangeAnimated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUINearbyMapManager.swift",
+      "line": 183,
+      "symbol": "TKUINearbyMapManager.mapView(_:didSelect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 17,
+      "symbol": "TKUIRoutingQueryInputCardDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 18,
+      "symbol": "TKUIRoutingQueryInputCardDelegate.routingQueryInput(card:selectedOrigin:destination:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 21,
+      "symbol": "TKUIRoutingQueryInputCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 22,
+      "symbol": "TKUIRoutingQueryInputCard.queryDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 35,
+      "symbol": "TKUIRoutingQueryInputCard.init(origin:destination:biasMapRect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 145,
+      "symbol": "TKUIRoutingQueryInputCard.keyCommands",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 161,
+      "symbol": "TKUIRoutingQueryInputCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 163,
+      "symbol": "TKUIRoutingQueryInputCard.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
+      "line": 167,
+      "symbol": "TKUIRoutingQueryInputCard.scrollViewDidScroll(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard+Configuration.swift",
+      "line": 17,
+      "symbol": "TKUIRoutingResultsCard.TripGroupAction",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 24,
+      "symbol": "TKUIRoutingResultsCardDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 25,
+      "symbol": "TKUIRoutingResultsCardDelegate.resultsCard(_:requestsModePickerWithModes:for:sender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 35,
+      "symbol": "TKUIRoutingResultsCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 37,
+      "symbol": "TKUIRoutingResultsCard.resultsDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 108,
+      "symbol": "TKUIRoutingResultsCard.init(request:editable:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 136,
+      "symbol": "TKUIRoutingResultsCard.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 166,
+      "symbol": "TKUIRoutingResultsCard.encode(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 343,
+      "symbol": "TKUIRoutingResultsCard.keyCommands",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 354,
+      "symbol": "TKUIRoutingResultsCard.canPerformAction(_:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 367,
+      "symbol": "TKUIRoutingResultsCard.debugActionCopyPrimaryRequest(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 423,
+      "symbol": "TKUITripCell.configure(_:allowFading:isArriveBefore:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 468,
+      "symbol": "TKUIRoutingResultsCard.tableView(_:viewForFooterInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 502,
+      "symbol": "TKUIRoutingResultsCard.tableView(_:heightForFooterInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 512,
+      "symbol": "TKUIRoutingResultsCard.tableView(_:viewForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 527,
+      "symbol": "TKUIRoutingResultsCard.tableView(_:estimatedHeightForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 542,
+      "symbol": "TKUIRoutingResultsCard.tableView(_:contextMenuConfigurationForRowAt:point:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 683,
+      "symbol": "TKUIRoutingResultsCard.routingQueryInput(card:selectedOrigin:destination:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 728,
+      "symbol": "TKUIRoutingResultsCard.timePicker(_:pickedDate:for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 732,
+      "symbol": "TKUIRoutingResultsCard.timePickerRequestsResign(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsCard.swift",
+      "line": 756,
+      "symbol": "TKUIRoutingResultsCard.refreshForUpdatedModes()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsMapManager.swift",
+      "line": 22,
+      "symbol": "TKUIRoutingResultsMapRouteItem.polyline",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsMapManager.swift",
+      "line": 23,
+      "symbol": "TKUIRoutingResultsMapRouteItem.selectionIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsMapManager.swift",
+      "line": 41,
+      "symbol": "TKUIRoutingResultsMapManagerType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsMapManager.swift",
+      "line": 42,
+      "symbol": "TKUIRoutingResultsMapManagerType.droppedPin",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIRoutingResultsMapManager.swift",
+      "line": 44,
+      "symbol": "TKUIRoutingResultsMapManagerType.selectedMapRoute",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentDirectionCard+Configuration.swift",
+      "line": 15,
+      "symbol": "TKUISegmentDirectionsCard.Action",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
+      "line": 13,
+      "symbol": "TKUISegmentDirectionsCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
+      "line": 19,
+      "symbol": "TKUISegmentDirectionsCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
+      "line": 23,
+      "symbol": "TKUISegmentDirectionsCard.canShowInstructions(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
+      "line": 27,
+      "symbol": "TKUISegmentDirectionsCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentInstructionsCard.swift",
+      "line": 17,
+      "symbol": "TKUISegmentInstructionCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUISegmentInstructionsCard.swift",
+      "line": 31,
+      "symbol": "TKUISegmentInstructionCard.init(for:mapManager:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard+Configuration.swift",
+      "line": 15,
+      "symbol": "TKUIServiceCard.EmbarkationPair",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard+Configuration.swift",
+      "line": 17,
+      "symbol": "TKUIServiceCard.Configuration",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard+Configuration.swift",
+      "line": 22,
+      "symbol": "TKUIServiceCard.Configuration.serviceActionsFactory",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard.swift",
+      "line": 24,
+      "symbol": "TKUIServiceCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard.swift",
+      "line": 91,
+      "symbol": "TKUIServiceCard.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard.swift",
+      "line": 260,
+      "symbol": "TKUIServiceCard.tableView(_:viewForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard.swift",
+      "line": 264,
+      "symbol": "TKUIServiceCard.tableView(_:heightForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIServiceCard.swift",
+      "line": 269,
+      "symbol": "TKUIServiceCard.scrollViewShouldScrollToTop(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUIStartTripAction.swift",
+      "line": 46,
+      "symbol": "TKUITripOverviewCard.buildStartTripAction(actionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITableCard.swift",
+      "line": 14,
+      "symbol": "TKUITableCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITableCard.swift",
+      "line": 26,
+      "symbol": "TKUITableCard.selectedIndex(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITableCard.swift",
+      "line": 34,
+      "symbol": "TKUITableCard.selectedItem(in:dataSource:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITableCard.swift",
+      "line": 38,
+      "symbol": "TKUITableCard.selectedItemWithSender(in:dataSource:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard+Configuration.swift",
+      "line": 14,
+      "symbol": "TKUITimetableCard.Action",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 23,
+      "symbol": "TKUITimetableCardDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 25,
+      "symbol": "TKUITimetableCardDelegate.timetableCard(_:selectedDeparture:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 27,
+      "symbol": "TKUITimetableCardDelegate.timetableCard(_:for:requestedUpdateFor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 41,
+      "symbol": "TKUITimetableCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 125,
+      "symbol": "TKUITimetableCard.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 156,
+      "symbol": "TKUITimetableCard.encode(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 165,
+      "symbol": "TKUITimetableCard.visibleDepartures()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 380,
+      "symbol": "TKUITimetableCard.searchBarSearchButtonClicked(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 443,
+      "symbol": "TKUITimetableCard.timePicker(_:pickedDate:for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 447,
+      "symbol": "TKUITimetableCard.timePickerRequestsResign(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 472,
+      "symbol": "TKUITimetableCard.scrollViewDidScroll(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITimetableCard.swift",
+      "line": 488,
+      "symbol": "TKUITimetableCard.scrollViewShouldScrollToTop(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 17,
+      "symbol": "TKUITripMapManagerType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 19,
+      "symbol": "TKUITripMapManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 31,
+      "symbol": "TKUITripMapManager.annotationsToZoomToOnTakingCharge",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 35,
+      "symbol": "TKUITripMapManager.init(trip:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 71,
+      "symbol": "TKUITripMapManager.mapView(_:didAdd:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 76,
+      "symbol": "TKUITripMapManager.annotationBuilder(for:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 85,
+      "symbol": "TKUITripMapManager.showTrip(animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 90,
+      "symbol": "TKUITripMapManager.deselectSegment(animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 94,
+      "symbol": "TKUITripMapManager.show(_:animated:mode:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripMapManager.swift",
+      "line": 105,
+      "symbol": "TKUITripMapManager.refresh(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard+Configuration.swift",
+      "line": 16,
+      "symbol": "TKUITripModeByModePageBuilder",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard+Configuration.swift",
+      "line": 45,
+      "symbol": "TKUIDefaultPageBuilder",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard+Configuration.swift",
+      "line": 47,
+      "symbol": "TKUIDefaultPageBuilder.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 17,
+      "symbol": "TKUITripModeByModeCardDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 19,
+      "symbol": "TKUITripModeByModeCardDelegate.modeByModeCard(_:updatedTrip:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 23,
+      "symbol": "TKUITripModeByModeCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 25,
+      "symbol": "TKUITripModeByModeCard.TripStartedActionHandler",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 71,
+      "symbol": "TKUITripModeByModeCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 73,
+      "symbol": "TKUITripModeByModeCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 78,
+      "symbol": "TKUITripModeByModeCard.modeByModeDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 155,
+      "symbol": "TKUITripModeByModeCard.init(mapManager:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 160,
+      "symbol": "TKUITripModeByModeCard.init(trip:initialPosition:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 216,
+      "symbol": "TKUITripModeByModeCard.offsetToReach(mode:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard+Configuration.swift",
+      "line": 15,
+      "symbol": "TKUITripOverviewCard.TripAction",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard+Configuration.swift",
+      "line": 16,
+      "symbol": "TKUITripOverviewCard.SegmentAction",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 13,
+      "symbol": "TKUITripOverviewCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 41,
+      "symbol": "TKUITripOverviewCard",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 44,
+      "symbol": "TKUITripOverviewCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 45,
+      "symbol": "TKUITripOverviewCard.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 73,
+      "symbol": "TKUITripOverviewCard.init(trip:index:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 82,
+      "symbol": "TKUITripOverviewCard.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 100,
+      "symbol": "TKUITripOverviewCard.encode(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 362,
+      "symbol": "TKUITripOverviewCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 364,
+      "symbol": "TKUITripOverviewCard.modeByModeCard(_:updatedTrip:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/Alert+TKAlert.swift",
+      "line": 14,
+      "symbol": "Alert.infoURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/Alert+TKAlert.swift",
+      "line": 15,
+      "symbol": "Alert.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/Alert+TKAlert.swift",
+      "line": 16,
+      "symbol": "Alert.iconURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/Alert+TKAlert.swift",
+      "line": 17,
+      "symbol": "Alert.lastUpdated",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/Alert+TKAlert.swift",
+      "line": 18,
+      "symbol": "Alert.isCritical()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 13,
+      "symbol": "TKUIAttributionTableViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 22,
+      "symbol": "TKUIAttributionTableViewController.attributions",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 24,
+      "symbol": "TKUIAttributionTableViewController.init(attributions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 31,
+      "symbol": "TKUIAttributionTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 45,
+      "symbol": "TKUIAttributionTableViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 59,
+      "symbol": "TKUIAttributionTableViewController.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 63,
+      "symbol": "TKUIAttributionTableViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 67,
+      "symbol": "TKUIAttributionTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAttributionTableViewController.swift",
+      "line": 73,
+      "symbol": "TKUIAttributionTableViewController.tableView(_:accessoryButtonTappedForRowWith:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 17,
+      "symbol": "TKUIAutocompletionViewControllerDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 18,
+      "symbol": "TKUIAutocompletionViewControllerDelegate.autocompleter(_:didSelect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 20,
+      "symbol": "TKUIAutocompletionViewControllerDelegate.autocompleter(_:didSelectAccessoryFor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 31,
+      "symbol": "TKUIAutocompletionViewController.providers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 33,
+      "symbol": "TKUIAutocompletionViewController.delegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 35,
+      "symbol": "TKUIAutocompletionViewController.showAccessoryButtons",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 37,
+      "symbol": "TKUIAutocompletionViewController.biasMapRect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 45,
+      "symbol": "TKUIAutocompletionViewController.init(providers:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 50,
+      "symbol": "TKUIAutocompletionViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 54,
+      "symbol": "TKUIAutocompletionViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 126,
+      "symbol": "TKUIAutocompletionViewController.scrollViewDidScroll(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIAutocompletionViewController.swift",
+      "line": 137,
+      "symbol": "TKUIAutocompletionViewController.updateSearchResults(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 15,
+      "symbol": "TKUIHomeViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 17,
+      "symbol": "TKUIHomeViewController.searchResultsDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 24,
+      "symbol": "TKUIHomeViewController.autocompletionDataProviders",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 26,
+      "symbol": "TKUIHomeViewController.initialPosition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 28,
+      "symbol": "TKUIHomeViewController.init(initialPosition:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 34,
+      "symbol": "TKUIHomeViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIHomeViewController.swift",
+      "line": 38,
+      "symbol": "TKUIHomeViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIRoutingResultsViewController.swift",
+      "line": 22,
+      "symbol": "TKUIRoutingResultsViewControllerDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUIRoutingResultsViewController.swift",
+      "line": 67,
+      "symbol": "TKUIRoutingResultsViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 19,
+      "symbol": "TKUISectionedAlertViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 40,
+      "symbol": "TKUISectionedAlertViewController.newInstance(region:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 48,
+      "symbol": "TKUISectionedAlertViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 109,
+      "symbol": "TKUISectionedAlertViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 178,
+      "symbol": "TKUISectionedAlertViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 180,
+      "symbol": "TKUISectionedAlertViewController.tableView(_:viewForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 190,
+      "symbol": "TKUISectionedAlertViewController.scrollViewDidScroll(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 198,
+      "symbol": "TKUISectionedAlertViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 200,
+      "symbol": "TKUISectionedAlertViewController.searchBarTextDidBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 204,
+      "symbol": "TKUISectionedAlertViewController.searchBarTextDidEndEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 208,
+      "symbol": "TKUISectionedAlertViewController.searchBarSearchButtonClicked(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 212,
+      "symbol": "TKUISectionedAlertViewController.searchBarCancelButtonClicked(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISectionedAlertViewController.swift",
+      "line": 218,
+      "symbol": "TKUISectionedAlertViewController.searchBar(_:textDidChange:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISheetViewController.swift",
+      "line": 12,
+      "symbol": "TKUISheetViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISheetViewController.swift",
+      "line": 15,
+      "symbol": "TKUISheetViewController.init(sheet:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISheetViewController.swift",
+      "line": 25,
+      "symbol": "TKUISheetViewController.sheet",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISheetViewController.swift",
+      "line": 29,
+      "symbol": "TKUISheetViewController.viewDidDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUISheetViewController.swift",
+      "line": 35,
+      "symbol": "TKUISheetViewController.preferredContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITimetableViewController.swift",
+      "line": 21,
+      "symbol": "TKUITimetableViewControllerDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITimetableViewController.swift",
+      "line": 44,
+      "symbol": "TKUITimetableViewController.timetableDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITimetableViewController.swift",
+      "line": 83,
+      "symbol": "TKUITimetableViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripModeByModeViewController.swift",
+      "line": 15,
+      "symbol": "TKUITripModeByModeViewControllerDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripModeByModeViewController.swift",
+      "line": 18,
+      "symbol": "TKUITripModeByModeViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripModeByModeViewController.swift",
+      "line": 20,
+      "symbol": "TKUITripModeByModeViewController.init(trip:initialPosition:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripModeByModeViewController.swift",
+      "line": 28,
+      "symbol": "TKUITripModeByModeViewController.init(startingOn:mode:initialPosition:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripModeByModeViewController.swift",
+      "line": 36,
+      "symbol": "TKUITripModeByModeViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripOverviewViewController.swift",
+      "line": 15,
+      "symbol": "TKUITripOverviewViewControllerDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripOverviewViewController.swift",
+      "line": 16,
+      "symbol": "TKUITripOverviewViewControllerDelegate.tripOverview(_:selected:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/controller/TKUITripOverviewViewController.swift",
+      "line": 43,
+      "symbol": "TKUITripOverviewViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/NSManagedObjectContext+Rx.swift",
+      "line": 32,
+      "symbol": "Reactive.fetchObjects(_:sortDescriptors:predicate:relationshipKeyPathsForPrefetching:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKAvailabilityFetcher.swift",
+      "line": 17,
+      "symbol": "TKBuzzInfoProvider.fetchVehicleAvailabilities(locationId:in:start:end:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKAvailabilityFetcher.swift",
+      "line": 38,
+      "symbol": "TKBuzzInfoProvider.fetchVehicleAvailabilities(locationId:in:filter:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKBuzzInfoProvider+Rx.swift",
+      "line": 19,
+      "symbol": "Reactive.downloadContent(of:forEmbarkationDate:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKBuzzInfoProvider+Rx.swift",
+      "line": 40,
+      "symbol": "Reactive.fetchTransitAlertMappings(forRegion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKDeparturesProvider.swift",
+      "line": 33,
+      "symbol": "TKDeparturesProvider.fetchDepartures(forStopCodes:fromDate:limit:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKDeparturesProvider.swift",
+      "line": 38,
+      "symbol": "TKDeparturesProvider.streamDepartures(forStopCodes:limit:in:repeatHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKDeparturesProvider.swift",
+      "line": 87,
+      "symbol": "TKDeparturesProvider.downloadDepartures(for:fromDate:limit:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKDeparturesProvider.swift",
+      "line": 117,
+      "symbol": "TKDeparturesProvider.queryParameters(for:fromDate:limit:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKDeparturesProvider.swift",
+      "line": 129,
+      "symbol": "TKDeparturesProvider.fetchDepartures(for:fromDate:limit:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKDeparturesProvider.swift",
+      "line": 143,
+      "symbol": "TKDeparturesProvider.downloadDepartures(for:fromDate:limit:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
+      "line": 38,
+      "symbol": "TKGeocoding.geocode(_:near:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
+      "line": 84,
+      "symbol": "TKAutocompleting.triggerAdditional(presenter:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
+      "line": 98,
+      "symbol": "Reactive.geocode(_:using:near:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
+      "line": 110,
+      "symbol": "Reactive.geocodeUsingPreferredGeocoder(_:near:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
+      "line": 224,
+      "symbol": "Reactive.start()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationManager+rx.swift",
+      "line": 114,
+      "symbol": "Reactive.tryAuthorization()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationProvider.swift",
+      "line": 16,
+      "symbol": "TKLocationProvider",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationProvider.swift",
+      "line": 18,
+      "symbol": "TKLocationProvider.Error",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationProvider.swift",
+      "line": 19,
+      "symbol": "TKLocationProvider.Error.serverReturnedBadFormat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationProvider.swift",
+      "line": 51,
+      "symbol": "TKLocationProvider.fetchLocations(center:radius:limit:modes:strictModeMatch:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationRealTime.swift",
+      "line": 15,
+      "symbol": "TKLocationRealTime",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationRealTime.swift",
+      "line": 17,
+      "symbol": "TKLocationRealTime.fetchLocationInfo(locationID:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationRealTime.swift",
+      "line": 24,
+      "symbol": "TKLocationRealTime.streamRealTime(for:fetchOnlyOn:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationRealTime.swift",
+      "line": 35,
+      "symbol": "TKLocationRealTime.streamRealTime(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationTypes+Rx.swift",
+      "line": 16,
+      "symbol": "Reactive.bikePod",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationTypes+Rx.swift",
+      "line": 24,
+      "symbol": "Reactive.carPod",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationTypes+Rx.swift",
+      "line": 32,
+      "symbol": "Reactive.carPark",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKLocationTypes+Rx.swift",
+      "line": 40,
+      "symbol": "Reactive.vehicle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKRouter+Rx.swift",
+      "line": 22,
+      "symbol": "Reactive.downloadTrip(_:identifier:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKRouter+Rx.swift",
+      "line": 38,
+      "symbol": "Reactive.update(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKRouter+Rx.swift",
+      "line": 52,
+      "symbol": "Reactive.fetchBestTrip(for:modes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
+      "line": 17,
+      "symbol": "Reactive.requireRegion(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
+      "line": 24,
+      "symbol": "Reactive.requireRegion(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
+      "line": 31,
+      "symbol": "Reactive.requireRegions()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKShareHelper+Rx.swift",
+      "line": 105,
+      "symbol": "TKShareHelper.meetingDetails(for:using:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKShareHelper+Rx.swift",
+      "line": 138,
+      "symbol": "TKShareHelper.stopDetails(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKShareHelper+Rx.swift",
+      "line": 156,
+      "symbol": "TKShareHelper.serviceDetails(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/RxTripKit/TKUserProfileHelper+Rx.swift",
+      "line": 17,
+      "symbol": "Reactive.hiddenModeIdentifiers",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/TGCardViewController+Present.swift",
+      "line": 20,
+      "symbol": "TGCardViewController.present(_:inNavigator:includeDone:preferredStyle:sender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/TKAPI+ViewHelpers.swift",
+      "line": 40,
+      "symbol": "TKAPI.Alert.Severity.textColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/TKAPI+ViewHelpers.swift",
+      "line": 48,
+      "symbol": "TKAPI.Alert.Severity.backgroundColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/helper/TKAPI+ViewHelpers.swift",
+      "line": 56,
+      "symbol": "TKAPI.Alert.Severity.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 15,
+      "symbol": "TKUIHomeHeaderConfiguration",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 16,
+      "symbol": "TKUIHomeHeaderConfiguration.title",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 17,
+      "symbol": "TKUIHomeHeaderConfiguration.action",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 19,
+      "symbol": "TKUIHomeHeaderConfiguration.init(title:action:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 26,
+      "symbol": "TKUIHomeComponentInput",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 27,
+      "symbol": "TKUIHomeComponentInput.homeCardWillAppear",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 28,
+      "symbol": "TKUIHomeComponentInput.itemSelected",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 29,
+      "symbol": "TKUIHomeComponentInput.mapRect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 32,
+      "symbol": "TKUIHomeComponentContent",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 33,
+      "symbol": "TKUIHomeComponentContent.init(items:header:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 38,
+      "symbol": "TKUIHomeComponentContent.header",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 39,
+      "symbol": "TKUIHomeComponentContent.items",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
+      "line": 65,
+      "symbol": "TKUIHomeCardCustomizerItem.init(name:icon:canBeHidden:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Next.swift",
+      "line": 24,
+      "symbol": "TKUIHomeCard.ComponentAction.push(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Next.swift",
+      "line": 26,
+      "symbol": "TKUIHomeCard.ComponentAction.present(_:inNavigationController:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIHomeViewModel+Next.swift",
+      "line": 41,
+      "symbol": "TKUIHomeCard.ComponentAction.success",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 21,
+      "symbol": "TKUINearbyViewModel.Item.modeCoordinate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 23,
+      "symbol": "TKUINearbyViewModel.Item.title",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 24,
+      "symbol": "TKUINearbyViewModel.Item.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 25,
+      "symbol": "TKUINearbyViewModel.Item.iconURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 26,
+      "symbol": "TKUINearbyViewModel.Item.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 28,
+      "symbol": "TKUINearbyViewModel.Item.subtitle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 29,
+      "symbol": "TKUINearbyViewModel.Item.distance",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 30,
+      "symbol": "TKUINearbyViewModel.Item.heading",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 32,
+      "symbol": "TKUINearbyViewModel.Item.mapAnnotation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 41,
+      "symbol": "TKUINearbyViewModel.Section.header",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 225,
+      "symbol": "CLLocationCoordinate2D.bearing(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 261,
+      "symbol": "TKOnStreetParkingLocation.routePath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 267,
+      "symbol": "TKOnStreetParkingLocation.selectionIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 271,
+      "symbol": "TKOnStreetParkingLocation.routeColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 284,
+      "symbol": "TKOnStreetParkingLocation.routeDashPattern",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 285,
+      "symbol": "TKOnStreetParkingLocation.routeIsTravelled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 299,
+      "symbol": "TKUINearbyViewModel.Item.Identity",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 301,
+      "symbol": "TKUINearbyViewModel.Item.identity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 308,
+      "symbol": "TKUINearbyViewModel.Section.Item",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 309,
+      "symbol": "TKUINearbyViewModel.Section.Identity",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 311,
+      "symbol": "TKUINearbyViewModel.Section.init(original:items:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
+      "line": 316,
+      "symbol": "TKUINearbyViewModel.Section.identity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 17,
+      "symbol": "TKUINearbyViewModel",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 17,
+      "symbol": "TKUINearbyViewModel",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 19,
+      "symbol": "TKUINearbyViewModel.Next",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 20,
+      "symbol": "TKUINearbyViewModel.Next.stop(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 21,
+      "symbol": "TKUINearbyViewModel.Next.location(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 24,
+      "symbol": "TKUINearbyViewModel.ListInput",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 25,
+      "symbol": "TKUINearbyViewModel.ListInput.pickedModes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 26,
+      "symbol": "TKUINearbyViewModel.ListInput.selection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 27,
+      "symbol": "TKUINearbyViewModel.ListInput.searchResult",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 29,
+      "symbol": "TKUINearbyViewModel.ListInput.init(pickedModes:selection:searchResult:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 36,
+      "symbol": "TKUINearbyViewModel.MapInput",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 37,
+      "symbol": "TKUINearbyViewModel.MapInput.mapRect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 38,
+      "symbol": "TKUINearbyViewModel.MapInput.selection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 39,
+      "symbol": "TKUINearbyViewModel.MapInput.focus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 41,
+      "symbol": "TKUINearbyViewModel.MapInput.init(mapRect:selection:focus:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 156,
+      "symbol": "TKUINearbyViewModel.limitToMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 158,
+      "symbol": "TKUINearbyViewModel.fixedLocation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 163,
+      "symbol": "TKUINearbyViewModel.availableModes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 165,
+      "symbol": "TKUINearbyViewModel.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 167,
+      "symbol": "TKUINearbyViewModel.sections",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 169,
+      "symbol": "TKUINearbyViewModel.mapAnnotations",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 171,
+      "symbol": "TKUINearbyViewModel.mapOverlays",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUINearbyViewModel.swift",
+      "line": 175,
+      "symbol": "TKUINearbyViewModel.next",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
+      "line": 17,
+      "symbol": "TKUIRoutingResultsViewModel.RouteBuilder",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
+      "line": 23,
+      "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
+      "line": 54,
+      "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time.leaveASAP",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
+      "line": 55,
+      "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time.leaveAfter(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
+      "line": 56,
+      "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time.arriveBefore(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
+      "line": 375,
+      "symbol": "TKUIRoutingResultsViewModel.RouteBuilder",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/view model/TKUIRoutingResultsViewModel+Content.swift",
+      "line": 294,
+      "symbol": "==(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUICardActionsView.swift",
+      "line": 13,
+      "symbol": "TKUICardActionsView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUICardActionsView.swift",
+      "line": 15,
+      "symbol": "TKUICardActionsView.showActionTitleInCompactLayout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUICardActionsView.swift",
+      "line": 19,
+      "symbol": "TKUICardActionsView.hideSeparator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUICardActionsView.swift",
+      "line": 31,
+      "symbol": "TKUICardActionsView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUICardActionsView.swift",
+      "line": 35,
+      "symbol": "TKUICardActionsView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUICardActionsView.swift",
+      "line": 39,
+      "symbol": "TKUICardActionsView.configure(with:model:card:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIModePicker.swift",
+      "line": 58,
+      "symbol": "TKUIModePicker.containerView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIModePicker.swift",
+      "line": 350,
+      "symbol": "TKUIModePicker.rx_pickedModes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIPolylineRenderer.swift",
+      "line": 14,
+      "symbol": "TKUIPolylineRenderer",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIPolylineRenderer.swift",
+      "line": 16,
+      "symbol": "TKUIPolylineRenderer.SelectionMode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIPolylineRenderer.swift",
+      "line": 17,
+      "symbol": "TKUIPolylineRenderer.SelectionMode.thickWithSelectionColor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIPolylineRenderer.swift",
+      "line": 18,
+      "symbol": "TKUIPolylineRenderer.SelectionMode.regularWithNormalColor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIPolylineRenderer.swift",
+      "line": 75,
+      "symbol": "TKUIPolylineRenderer.init(polyline:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIPolylineRenderer.swift",
+      "line": 108,
+      "symbol": "TKUIPolylineRenderer.draw(_:zoomScale:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIStyledLabel.swift",
+      "line": 13,
+      "symbol": "TKUIStyledLabel",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIStyledLabel.swift",
+      "line": 14,
+      "symbol": "TKUIStyledLabel.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUIStyledLabel.swift",
+      "line": 19,
+      "symbol": "TKUIStyledLabel.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 11,
+      "symbol": "TKUITripBoyView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 16,
+      "symbol": "TKUITripBoyView.actionButton",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 17,
+      "symbol": "TKUITripBoyView.retryButton",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 19,
+      "symbol": "TKUITripBoyView.newInstance()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 24,
+      "symbol": "TKUITripBoyView.configure(title:description:actionTitle:isHappy:allowRetry:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 51,
+      "symbol": "TKUITripBoyView.clear(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripBoyView.swift",
+      "line": 58,
+      "symbol": "TKUITripBoyView.show(error:title:in:aboveSubview:actionTitle:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 13,
+      "symbol": "TKUITripSegmentsView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 37,
+      "symbol": "TKUITripSegmentsView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 41,
+      "symbol": "TKUITripSegmentsView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 45,
+      "symbol": "TKUITripSegmentsView.configure(_:allowSubtitles:allowInfoIcons:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 49,
+      "symbol": "TKUITripSegmentsView.selectSegment(atIndex:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 61,
+      "symbol": "TKUITripSegmentsView.segmentIndex(atX:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 65,
+      "symbol": "TKUITripSegmentsView.intrinsicContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/TKUITripSegmentsView.swift",
+      "line": 74,
+      "symbol": "TKUITripSegmentsView.layoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 19,
+      "symbol": "TKUIAnnotationViewBuilder",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 30,
+      "symbol": "TKUIAnnotationViewBuilder.annotation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 31,
+      "symbol": "TKUIAnnotationViewBuilder.mapView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 34,
+      "symbol": "TKUIAnnotationViewBuilder.init(for:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 46,
+      "symbol": "TKUIAnnotationViewBuilder.drawCircleAsTravelled(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 52,
+      "symbol": "TKUIAnnotationViewBuilder.circleColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 58,
+      "symbol": "TKUIAnnotationViewBuilder.drawCircleAsLarge(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 64,
+      "symbol": "TKUIAnnotationViewBuilder.drawImageAnnotationAsCircle(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 70,
+      "symbol": "TKUIAnnotationViewBuilder.withAlpha(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 76,
+      "symbol": "TKUIAnnotationViewBuilder.withHeading(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 82,
+      "symbol": "TKUIAnnotationViewBuilder.enableClustering(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 88,
+      "symbol": "TKUIAnnotationViewBuilder.preferMarker(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 95,
+      "symbol": "TKUIAnnotationViewBuilder.build()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 408,
+      "symbol": "TKUIAnnotationViewBuilder",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
+      "line": 410,
+      "symbol": "TKUIAnnotationViewBuilder.update(annotationView:forHeading:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 18,
+      "symbol": "TKModeCoordinate.modeInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 27,
+      "symbol": "TKModeCoordinate.glyphColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 31,
+      "symbol": "TKModeCoordinate.glyphImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 40,
+      "symbol": "TKModeCoordinate.glyphImageURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 45,
+      "symbol": "TKModeCoordinate.glyphImageIsTemplate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 64,
+      "symbol": "Alert.image",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 77,
+      "symbol": "StopLocation.modeInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 82,
+      "symbol": "StopLocation.clusterIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 96,
+      "symbol": "StopVisits.modeInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 100,
+      "symbol": "StopVisits.clusterIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 108,
+      "symbol": "StopVisits.selectionIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 112,
+      "symbol": "StopVisits.semaphoreMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 116,
+      "symbol": "StopVisits.canFlipImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 120,
+      "symbol": "StopVisits.isTerminal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 131,
+      "symbol": "TKSegment.clusterIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 139,
+      "symbol": "TKSegment.selectionIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 148,
+      "symbol": "TKSegment.semaphoreMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 160,
+      "symbol": "TKSegment.canFlipImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 165,
+      "symbol": "TKSegment.isTerminal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 173,
+      "symbol": "TKRegion.City.image",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
+      "line": 174,
+      "symbol": "TKRegion.City.imageURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 17,
+      "symbol": "TKUIGlyphableAnnotation.glyphColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 18,
+      "symbol": "TKUIGlyphableAnnotation.glyphImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 19,
+      "symbol": "TKUIGlyphableAnnotation.glyphImageURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 20,
+      "symbol": "TKUIGlyphableAnnotation.glyphImageIsTemplate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 25,
+      "symbol": "TKUIImageAnnotation.image",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 26,
+      "symbol": "TKUIImageAnnotation.imageURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 32,
+      "symbol": "TKUIModeAnnotation.modeInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 33,
+      "symbol": "TKUIModeAnnotation.clusterIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 37,
+      "symbol": "TKUIModeAnnotation.image",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 38,
+      "symbol": "TKUIModeAnnotation.imageURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 39,
+      "symbol": "TKUIModeAnnotation.imageIsTemplate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 43,
+      "symbol": "TKUIStopAnnotation",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 44,
+      "symbol": "TKUIStopAnnotation.stopCode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 45,
+      "symbol": "TKUIStopAnnotation.timeZone",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 12,
+      "symbol": "TKUICircleAnnotationView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 19,
+      "symbol": "TKUICircleAnnotationView.isLarge",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 21,
+      "symbol": "TKUICircleAnnotationView.circleColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 22,
+      "symbol": "TKUICircleAnnotationView.borderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 23,
+      "symbol": "TKUICircleAnnotationView.isFaded",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 25,
+      "symbol": "TKUICircleAnnotationView.init(annotation:drawLarge:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 36,
+      "symbol": "TKUICircleAnnotationView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 40,
+      "symbol": "TKUICircleAnnotationView.draw(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIImageAnnotationView.swift",
+      "line": 20,
+      "symbol": "TKUIImageAnnotationView.init(annotation:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIImageAnnotationView.swift",
+      "line": 31,
+      "symbol": "TKUIImageAnnotationView.annotation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIModeAnnotationView.swift",
+      "line": 20,
+      "symbol": "TKUIModeAnnotationView.defaultSize",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIModeAnnotationView.swift",
+      "line": 27,
+      "symbol": "TKUIModeAnnotationView.init(annotation:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUIModeAnnotationView.swift",
+      "line": 40,
+      "symbol": "TKUIModeAnnotationView.annotation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 18,
+      "symbol": "TKUISemaphoreDisplayable.semaphoreMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 19,
+      "symbol": "TKUISemaphoreDisplayable.bearing",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 20,
+      "symbol": "TKUISemaphoreDisplayable.canFlipImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 21,
+      "symbol": "TKUISemaphoreDisplayable.imageIsTemplate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 22,
+      "symbol": "TKUISemaphoreDisplayable.isTerminal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 23,
+      "symbol": "TKUISemaphoreDisplayable.selectionIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 26,
+      "symbol": "TKUISemaphoreView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 27,
+      "symbol": "TKUISemaphoreView.LabelSide",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 28,
+      "symbol": "TKUISemaphoreView.LabelSide.onLeft",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 29,
+      "symbol": "TKUISemaphoreView.LabelSide.onRight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 31,
+      "symbol": "TKUISemaphoreView.LabelSide.defaultDirection",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 39,
+      "symbol": "TKUISemaphoreView.Mode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 40,
+      "symbol": "TKUISemaphoreView.Mode.headWithTime(_:_:isRealTime:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 41,
+      "symbol": "TKUISemaphoreView.Mode.headWithFrequency(minutes:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 42,
+      "symbol": "TKUISemaphoreView.Mode.headOnly",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 55,
+      "symbol": "TKUISemaphoreView.init(annotation:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 59,
+      "symbol": "TKUISemaphoreView.init(annotation:reuseIdentifier:withHeading:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 88,
+      "symbol": "TKUISemaphoreView.prepareForReuse()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 103,
+      "symbol": "TKUISemaphoreView.annotation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 191,
+      "symbol": "TKUISemaphoreView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 221,
+      "symbol": "TKUISemaphoreView.update(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 332,
+      "symbol": "TKUISemaphoreView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 334,
+      "symbol": "TKUISemaphoreView.customHeadTintColor",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 335,
+      "symbol": "TKUISemaphoreView.customHeadImage",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 336,
+      "symbol": "TKUISemaphoreView.customPointerImage",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUIProgressCell.swift",
+      "line": 13,
+      "symbol": "TKUIProgressCell",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUIProgressCell.swift",
+      "line": 18,
+      "symbol": "TKUIProgressCell.nib",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUIProgressCell.swift",
+      "line": 20,
+      "symbol": "TKUIProgressCell.reuseIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUIProgressCell.swift",
+      "line": 22,
+      "symbol": "TKUIProgressCell.awakeFromNib()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUIProgressCell.swift",
+      "line": 37,
+      "symbol": "TKUIProgressCell.prepareForReuse()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 13,
+      "symbol": "TKUISheet",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 15,
+      "symbol": "TKUISheet.overlayColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 19,
+      "symbol": "TKUISheet.isBeingOverlaid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 21,
+      "symbol": "TKUISheet.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 25,
+      "symbol": "TKUISheet.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 29,
+      "symbol": "TKUISheet.showWithOverlay(in:below:hiding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUISheet.swift",
+      "line": 75,
+      "symbol": "TKUISheet.removeOverlay(animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 13,
+      "symbol": "TKUITimePickerSheetDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 15,
+      "symbol": "TKUITimePickerSheetDelegate.timePicker(_:pickedDate:for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 17,
+      "symbol": "TKUITimePickerSheetDelegate.timePickerRequestsResign(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 21,
+      "symbol": "TKUITimePickerSheet",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 29,
+      "symbol": "TKUITimePickerSheet.selectAction",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 31,
+      "symbol": "TKUITimePickerSheet.delegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 33,
+      "symbol": "TKUITimePickerSheet.selectedDate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 42,
+      "symbol": "TKUITimePickerSheet.selectedTimeType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 77,
+      "symbol": "TKUITimePickerSheet.init(date:timeZone:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 81,
+      "symbol": "TKUITimePickerSheet.init(time:timeType:timeZone:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITimePickerSheet.swift",
+      "line": 157,
+      "symbol": "TKUITimePickerSheet.tappedOverlay(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 13,
+      "symbol": "TKUITripCell",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 15,
+      "symbol": "TKUITripCell.nib",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 17,
+      "symbol": "TKUITripCell.reuseIdentifier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 31,
+      "symbol": "TKUITripCell.awakeFromNib()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 55,
+      "symbol": "TKUITripCell.setSelected(_:animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 60,
+      "symbol": "TKUITripCell.setHighlighted(_:animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/results/TKUITripCell.swift",
+      "line": 422,
+      "symbol": "TKUITripCell",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentMode.swift",
+      "line": 11,
+      "symbol": "TKUISegmentMode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentMode.swift",
+      "line": 12,
+      "symbol": "TKUISegmentMode.getReady",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentMode.swift",
+      "line": 13,
+      "symbol": "TKUISegmentMode.onSegment",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView+TKSegment.swift",
+      "line": 17,
+      "symbol": "TKUISegmentTitleView.configure(for:preferredTitle:mode:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 15,
+      "symbol": "TKUISegmentTitleView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 16,
+      "symbol": "TKUISegmentTitleView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 18,
+      "symbol": "TKUISegmentTitleView.Action",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 32,
+      "symbol": "TKUISegmentTitleView.dismissButton",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 42,
+      "symbol": "TKUISegmentTitleView.newInstance()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 46,
+      "symbol": "TKUISegmentTitleView.awakeFromNib()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 74,
+      "symbol": "TKUISegmentTitleView.setCustomActions(_:for:card:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/segment cards/TKUISegmentTitleView.swift",
+      "line": 97,
+      "symbol": "TKUISegmentTitleView.applyStyleToCloseButton(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 13,
+      "symbol": "TKUIAttributionView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 15,
+      "symbol": "TKUIAttributionView.Alignment",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 16,
+      "symbol": "TKUIAttributionView.Alignment.leading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 17,
+      "symbol": "TKUIAttributionView.Alignment.trailing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 18,
+      "symbol": "TKUIAttributionView.Alignment.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 21,
+      "symbol": "TKUIAttributionView.Wording",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 22,
+      "symbol": "TKUIAttributionView.Wording.poweredBy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 23,
+      "symbol": "TKUIAttributionView.Wording.dataProvidedBy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 24,
+      "symbol": "TKUIAttributionView.Wording.mapBy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 27,
+      "symbol": "TKUIAttributionView.title",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 28,
+      "symbol": "TKUIAttributionView.logo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 30,
+      "symbol": "TKUIAttributionView.contentAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 32,
+      "symbol": "TKUIAttributionView.init(contentAlignment:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 38,
+      "symbol": "TKUIAttributionView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 43,
+      "symbol": "TKUIAttributionView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 94,
+      "symbol": "TKUIAttributionView.newView(title:iconURL:url:alignment:wording:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 133,
+      "symbol": "TKUIAttributionView.newView(_:wording:fitsIn:alignment:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/TripKitUI/views/trip overview/TKUIAttributionView.swift",
+      "line": 148,
+      "symbol": "TKUIAttributionView.newView(_:wording:fitsIn:alignment:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/adrian/SkedGo/tripgo-ios/Libraries/TripKit/docs"
+}

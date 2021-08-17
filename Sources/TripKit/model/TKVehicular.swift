@@ -8,8 +8,9 @@
 
 import Foundation
 
-@objc
-public class TKVehicularHelper: NSObject {
+/// :nodoc:
+@objc(TKVehicularHelper)
+public class _TKVehicularHelper: NSObject {
   
   private override init() {
     super.init()

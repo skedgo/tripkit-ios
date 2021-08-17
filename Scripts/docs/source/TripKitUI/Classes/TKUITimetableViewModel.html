@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TKUITimetableViewModel Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/TKUITimetableViewModel" class="dashAnchor"></a>
+
+    <a title="TKUITimetableViewModel Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          SkedGo&#39;s TripKit iOS - TripKitUI iOS
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">TripKitUI Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      TKUITimetableViewModel Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Trip%20Planning.html">Trip Planning</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewController.html">TKUIRoutingResultsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Trip%20Planning.html#/s:9TripKitUI40TKUIRoutingResultsViewControllerDelegateP">TKUIRoutingResultsViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsCard.html">TKUIRoutingResultsCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsCard/SupportType.html">– SupportType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIRoutingResultsCardDelegate.html">TKUIRoutingResultsCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingQueryInputCard.html">TKUIRoutingQueryInputCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIRoutingQueryInputCardDelegate.html">TKUIRoutingQueryInputCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard.html">TKUITripOverviewCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripModeByModeViewController.html">TKUITripModeByModeViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Trip%20Planning.html#/s:9TripKitUI014TKUITripModeByE22ViewControllerDelegateP">TKUITripModeByModeViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripModeByModeCard.html">TKUITripModeByModeCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripModeByModeCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUITripModeByModeCardDelegate.html">TKUITripModeByModeCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUITripModeByModePageBuilder.html">TKUITripModeByModePageBuilder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Timetables.html">Timetables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableViewController.html">TKUITimetableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Timetables.html#/s:9TripKitUI35TKUITimetableViewControllerDelegateP">TKUITimetableViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableCard.html">TKUITimetableCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUITimetableCardAction.html">TKUITimetableCardAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUITimetableCardDelegate.html">TKUITimetableCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIServiceCard.html">TKUIServiceCard</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Search.html">Search</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAutocompletionViewController.html">TKUIAutocompletionViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIAutocompletionViewControllerDelegate.html">TKUIAutocompletionViewControllerDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Classes.html">Other Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAlertInfoView.html">TKUIAlertInfoView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAlertViewController.html">TKUIAlertViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAnnotationViewBuilder.html">TKUIAnnotationViewBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAttributionTableViewController.html">TKUIAttributionTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAttributionView.html">TKUIAttributionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAttributionView/Alignment.html">– Alignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIAttributionView/Wording.html">– Wording</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUICircleAnnotationView.html">TKUICircleAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIComposingMapManager.html">TKUIComposingMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUICustomization.html">TKUICustomization</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIDefaultPageBuilder.html">TKUIDefaultPageBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIHomeCard.html">TKUIHomeCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIHomeCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIHomeViewController.html">TKUIHomeViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Classes.html#/s:9TripKitUI17TKUIHomeViewModelC">TKUIHomeViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIImageAnnotationView.html">TKUIImageAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIMapButtonView.html">TKUIMapButtonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIMapButtonView/Alignment.html">– Alignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIMapManager.html">TKUIMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIMapManagerHelper.html">TKUIMapManagerHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIModeAnnotationView.html">TKUIModeAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIModePicker.html">TKUIModePicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyMapManager.html">TKUINearbyMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyViewModel.html">TKUINearbyViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyViewModel/Next.html">– Next</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyViewModel/ListInput.html">– ListInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyViewModel/MapInput.html">– MapInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyViewModel/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUINearbyViewModel/Section.html">– Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIObjCDisposeBag.html">TKUIObjCDisposeBag</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIOccupancyView.html">TKUIOccupancyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIOccupancyView/Purpose.html">– Purpose</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIPathFriendlinessView.html">TKUIPathFriendlinessView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIPolylineRenderer.html">TKUIPolylineRenderer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIPolylineRenderer/SelectionMode.html">– SelectionMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIProgressCell.html">TKUIProgressCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel.html">TKUIRoutingResultsViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel/SearchMode.html">– SearchMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel.html#/s:9TripKitUI27TKUIRoutingResultsViewModelC12SearchResultV">– SearchResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel/RouteBuilder.html">– RouteBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel/MapRouteItem.html">– MapRouteItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingResultsViewModel/Section.html">– Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIRoutingSupportView.html">TKUIRoutingSupportView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUISectionedAlertViewController.html">TKUISectionedAlertViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUISegmentDirectionsCard.html">TKUISegmentDirectionsCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUISegmentInstructionCard.html">TKUISegmentInstructionCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUISegmentTitleView.html">TKUISegmentTitleView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIServiceVisitCell.html">TKUIServiceVisitCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUISheetViewController.html">TKUISheetViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableViewModel.html">TKUITimetableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableViewModel/Section.html">– Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableViewModel/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableViewModel/Next.html">– Next</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITimetableViewModel.html#/s:9TripKitUI22TKUITimetableViewModelC15RestorableStateV">– RestorableState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITrainOccupancyView.html">TKUITrainOccupancyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripBoyView.html">TKUITripBoyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripCell.html">TKUITripCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripCell/Formatter.html">– Formatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripMapManager.html">TKUITripMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripsPageCard.html">TKUITripsPageCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUIVehicleAnnotationView.html">TKUIVehicleAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TripKitUIBundle.html">TripKitUIBundle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKUISegmentMode.html">TKUISegmentMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKUIWheelchairAccessibility.html">TKUIWheelchairAccessibility</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Alert.html">Alert</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Notification.html">Notification</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Notification/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Reactive.html">Reactive</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SGAutocompletionDataSource.html">SGAutocompletionDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SGAutocompletionDataSource/Selection.html">– Selection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StopLocation.html">StopLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StopVisits.html">StopVisits</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TGCardViewController.html">TGCardViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKModeCoordinate.html">TKModeCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKModeInfo.html">TKModeInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKNamedCoordinate.html">TKNamedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKOnStreetParkingLocation.html">TKOnStreetParkingLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKRegion.html">TKRegion</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKRegion/RoutingMode.html">– RoutingMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKRegion/City.html">– City</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKSegment.html">TKSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/c:@M@TripKit@objc(cs)TKStopCoordinate">TKStopCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKStyleManager.html">TKStyleManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKStyleManager/CountdownMode.html">– CountdownMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKStyleManager/Countdown.html">– Countdown</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/TKUIAutocompletionViewModel">TKUIAutocompletionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/TKUISectionedAlertViewModel">TKUISectionedAlertViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/TKUISegmentDirectionsViewModel">TKUISegmentDirectionsViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKUISemaphoreView.html">TKUISemaphoreView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/TKUISemaphoreView/Mode.html">– Mode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/TKUIServiceViewModel">TKUIServiceViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/TKUITripOverviewViewModel">TKUITripOverviewViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIButton.html">UIButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIImageView.html">UIImageView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Functions.html">Other Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Functions.html#/s:9TripKitUI2eeoiySbAA27TKUIRoutingResultsViewModelC12MapRouteItemV_AFtF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Functions.html#/s:9TripKitUI2eeoiySbAA27TKUIRoutingResultsViewModelC12RouteBuilderV_AFtF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Functions.html#/s:9TripKitUI2eeoiySbAA27TKUIRoutingResultsViewModelC4ItemO_AFtF">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Protocols.html">Other Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKAlert.html">TKAlert</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIAlertViewControllerDelegate.html">TKUIAlertViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIAttributionTableViewControllerDelegate.html">TKUIAttributionTableViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIEventTrackable.html">TKUIEventTrackable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIGlyphableAnnotation.html">TKUIGlyphableAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIHomeCardSearchResultsDelegate.html">TKUIHomeCardSearchResultsDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIIdentifiableAnnotation.html">TKUIIdentifiableAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIImageAnnotation.html">TKUIImageAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIModeAnnotation.html">TKUIModeAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIModePickerItem.html">TKUIModePickerItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIRoutingResultsMapManagerType.html">TKUIRoutingResultsMapManagerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUISemaphoreDisplayable.html">TKUISemaphoreDisplayable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUIStopAnnotation.html">TKUIStopAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Protocols.html#/s:9TripKitUI22TKUITripMapManagerTypeP">TKUITripMapManagerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUITripOverviewCardAction.html">TKUITripOverviewCardAction</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Structs.html">Other Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKUIDepartureCellContent.html">TKUIDepartureCellContent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKUIStartTripAction.html">TKUIStartTripAction</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>TKUITimetableViewModel</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TKUITimetableViewModel</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>View model for displaying and interacting with public
+transport departures from an stop (or list thereof).</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC7UIInputa"></a>
+                    <a name="//apple_ref/swift/Alias/UIInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC7UIInputa">UIInput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">UIInput</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="nv">selected</span><span class="p">:</span> <span class="kt">Signal</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Item.html">Item</a></span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nv">showAlerts</span><span class="p">:</span> <span class="kt">Signal</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Item.html">Item</a></span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nv">filter</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nv">date</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nv">refresh</span><span class="p">:</span> <span class="kt">Signal</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nv">loadMoreAfter</span><span class="p">:</span> <span class="kt">Signal</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Item.html">Item</a></span><span class="o">&gt;</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC13restoredState5inputA2C010RestorableH0V_7RxCocoa14SharedSequenceVyAH21SignalSharingStrategyVAC4ItemVG8selected_AO10showAlertsAJyAH06DriverpQ0VSSG6filterAJyAS10Foundation4DateVG4dateAJyALytG7refreshAO13loadMoreAfterttcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(restoredState:input:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC13restoredState5inputA2C010RestorableH0V_7RxCocoa14SharedSequenceVyAH21SignalSharingStrategyVAC4ItemVG8selected_AO10showAlertsAJyAH06DriverpQ0VSSG6filterAJyAS10Foundation4DateVG4dateAJyALytG7refreshAO13loadMoreAfterttcfc">init(restoredState:input:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">restoredState</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html#/s:9TripKitUI22TKUITimetableViewModelC15RestorableStateV">RestorableState</a></span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html#/s:9TripKitUI22TKUITimetableViewModelC7UIInputa">UIInput</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC5stops10groupStops5inputACSayAA18TKUIStopAnnotation_pG_Sb7RxCocoa14SharedSequenceVyAI21SignalSharingStrategyVAC4ItemVG8selected_AP10showAlertsAKyAI06DriverrS0VSSG6filterAKyAT10Foundation4DateVG4dateAKyAMytG7refreshAP13loadMoreAftertSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(stops:groupStops:input:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC5stops10groupStops5inputACSayAA18TKUIStopAnnotation_pG_Sb7RxCocoa14SharedSequenceVyAI21SignalSharingStrategyVAC4ItemVG8selected_AP10showAlertsAKyAI06DriverrS0VSSG6filterAKyAT10Foundation4DateVG4dateAKyAMytG7refreshAP13loadMoreAftertSgtcfc">init(stops:groupStops:input:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">stops</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKUIStopAnnotation.html">TKUIStopAnnotation</a></span><span class="p">],</span> <span class="nv">groupStops</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html#/s:9TripKitUI22TKUITimetableViewModelC7UIInputa">UIInput</a></span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC8dlsTable9startDate17selectedServiceID5inputAC0aB010TKDLSTableC_10Foundation0J0VSgSSSg7RxCocoa14SharedSequenceVyAP21SignalSharingStrategyVAC4ItemVG0K0_AW10showAlertsARyAP06DrivervW0VSSG6filterARyA_AMG4dateARyATytG7refreshAW13loadMoreAftertSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dlsTable:startDate:selectedServiceID:input:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC8dlsTable9startDate17selectedServiceID5inputAC0aB010TKDLSTableC_10Foundation0J0VSgSSSg7RxCocoa14SharedSequenceVyAP21SignalSharingStrategyVAC4ItemVG0K0_AW10showAlertsARyAP06DrivervW0VSSG6filterARyA_AMG4dateARyATytG7refreshAW13loadMoreAftertSgtcfc">init(dlsTable:startDate:selectedServiceID:input:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dlsTable</span><span class="p">:</span> <span class="kt">TKDLSTable</span><span class="p">,</span> <span class="nv">startDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?,</span> <span class="nv">selectedServiceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html#/s:9TripKitUI22TKUITimetableViewModelC7UIInputa">UIInput</a></span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC14departureStopsSayAA18TKUIStopAnnotation_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/departureStops" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC14departureStopsSayAA18TKUIStopAnnotation_pGvp">departureStops</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">departureStops</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKUIStopAnnotation.html">TKUIStopAnnotation</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC8timeZone10Foundation04TimeH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/timeZone" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC8timeZone10Foundation04TimeH0Vvp">timeZone</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">timeZone</span><span class="p">:</span> <span class="kt">TimeZone</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC6titles7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSS5title_SSSg8subtitletGvp"></a>
+                    <a name="//apple_ref/swift/Property/titles" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC6titles7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSS5title_SSSg8subtitletGvp">titles</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">titles</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subtitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC4time7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyV10Foundation4DateVGvp"></a>
+                    <a name="//apple_ref/swift/Property/time" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC4time7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyV10Foundation4DateVGvp">time</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">time</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC9timeTitle7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSSGvp"></a>
+                    <a name="//apple_ref/swift/Property/timeTitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC9timeTitle7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSSGvp">timeTitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">timeTitle</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC8sections7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSayAC7SectionVGGvp"></a>
+                    <a name="//apple_ref/swift/Property/sections" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC8sections7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSayAC7SectionVGGvp">sections</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sections</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Section.html">Section</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC12selectedItem7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVAC0H0VSgGvp"></a>
+                    <a name="//apple_ref/swift/Property/selectedItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC12selectedItem7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVAC0H0VSgGvp">selectedItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">selectedItem</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Item.html">Item</a></span><span class="p">?</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC21embarkationStopAlerts7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSayAA7TKAlert_pGGvp"></a>
+                    <a name="//apple_ref/swift/Property/embarkationStopAlerts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC21embarkationStopAlerts7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyVSayAA7TKAlert_pGGvp">embarkationStopAlerts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">embarkationStopAlerts</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Protocols/TKAlert.html">TKAlert</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC14realTimeUpdate7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyV0aB006TKRealhI8ProgressOyytGGvp"></a>
+                    <a name="//apple_ref/swift/Property/realTimeUpdate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC14realTimeUpdate7RxCocoa14SharedSequenceVyAE21DriverSharingStrategyV0aB006TKRealhI8ProgressOyytGGvp">realTimeUpdate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Status of real-time update</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Real-updates are only enabled while you&rsquo;re connected
+    to this driver.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">realTimeUpdate</span><span class="p">:</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">TKRealTimeUpdateProgress</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC5error7RxCocoa14SharedSequenceVyAE21SignalSharingStrategyVs5Error_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/error" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC5error7RxCocoa14SharedSequenceVyAE21SignalSharingStrategyVs5Error_pGvp">error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>User-relevant errors, e.g., if departures couldn&rsquo;t get downloaded</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Signal</span><span class="o">&lt;</span><span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC4next7RxCocoa14SharedSequenceVyAE21SignalSharingStrategyVAC4NextOGvp"></a>
+                    <a name="//apple_ref/swift/Property/next" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC4next7RxCocoa14SharedSequenceVyAE21SignalSharingStrategyVAC4NextOGvp">next</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">next</span><span class="p">:</span> <span class="kt">Signal</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Next.html">Next</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC7SectionV"></a>
+                    <a name="//apple_ref/swift/Struct/Section" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC7SectionV">Section</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="../Classes/TKUITimetableViewModel/Section.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Section</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html">TKUITimetableViewModel</a></span><span class="o">.</span><span class="kt">Section</span><span class="p">:</span> <span class="kt">AnimatableSectionModelType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC4ItemV"></a>
+                    <a name="//apple_ref/swift/Struct/Item" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC4ItemV">Item</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="../Classes/TKUITimetableViewModel/Item.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Item</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html">TKUITimetableViewModel</a></span><span class="o">.</span><span class="kt">Item</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html">TKUITimetableViewModel</a></span><span class="o">.</span><span class="kt">Item</span><span class="p">:</span> <span class="kt">IdentifiableType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Navigation"></a>
+                <a name="//apple_ref/swift/Section/Navigation" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Navigation"></a>
+                  <h3 class="section-name"><p>Navigation</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC4NextO"></a>
+                    <a name="//apple_ref/swift/Enum/Next" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC4NextO">Next</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="../Classes/TKUITimetableViewModel/Next.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Next</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Scrolling%20to%20base%20date"></a>
+                <a name="//apple_ref/swift/Section/Scrolling to base date" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Scrolling%20to%20base%20date"></a>
+                  <h3 class="section-name"><p>Scrolling to base date</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC12topIndexPath2in10Foundation0hI0VSgSayAC7SectionVG_tF"></a>
+                    <a name="//apple_ref/swift/Method/topIndexPath(in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC12topIndexPath2in10Foundation0hI0VSgSayAC7SectionVG_tF">topIndexPath(in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">topIndexPath</span><span class="p">(</span><span class="k">in</span> <span class="nv">sections</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Section.html">Section</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Sharing"></a>
+                <a name="//apple_ref/swift/Section/Sharing" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Sharing"></a>
+                  <h3 class="section-name"><p>Sharing</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC10stopVisits3forSaySo04StopH0CGSayAC4ItemVG_tF"></a>
+                    <a name="//apple_ref/swift/Method/stopVisits(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC10stopVisits3forSaySo04StopH0CGSayAC4ItemVG_tF">stopVisits(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stopVisits</span><span class="p">(</span><span class="k">for</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/TKUITimetableViewModel/Item.html">Item</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">StopVisits</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/User%20activity"></a>
+                <a name="//apple_ref/swift/Section/User activity" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/User%20activity"></a>
+                  <h3 class="section-name"><p>User activity</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC23updateUserActivityStateyySo06NSUserI0CF"></a>
+                    <a name="//apple_ref/swift/Method/updateUserActivityState(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC23updateUserActivityStateyySo06NSUserI0CF">updateUserActivityState(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateUserActivityState</span><span class="p">(</span><span class="n">_</span> <span class="nv">activity</span><span class="p">:</span> <span class="kt">NSUserActivity</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC17buildUserActivitySo06NSUserI0CSgyF"></a>
+                    <a name="//apple_ref/swift/Method/buildUserActivity()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC17buildUserActivitySo06NSUserI0CSgyF">buildUserActivity()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">buildUserActivity</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">NSUserActivity</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/State%20restoration"></a>
+                <a name="//apple_ref/swift/Section/State restoration" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/State%20restoration"></a>
+                  <h3 class="section-name"><p>State restoration</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC15RestorableStateV"></a>
+                    <a name="//apple_ref/swift/Struct/RestorableState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC15RestorableStateV">RestorableState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RestorableState</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC4save10Foundation4DataVyKF"></a>
+                    <a name="//apple_ref/swift/Method/save()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC4save10Foundation4DataVyKF">save()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">save</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITimetableViewModelC13restoredState4fromAC010RestorableH0VSg10Foundation4DataV_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/restoredState(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITimetableViewModelC13restoredState4fromAC010RestorableH0VSg10Foundation4DataV_tFZ">restoredState(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">restoredState</span><span class="p">(</span><span class="n">from</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKUITimetableViewModel.html#/s:9TripKitUI22TKUITimetableViewModelC15RestorableStateV">RestorableState</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://skedgo.com" target="_blank" rel="external">SkedGo</a>. All rights reserved. (Last updated: 2020-02-12)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

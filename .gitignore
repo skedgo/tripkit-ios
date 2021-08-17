@@ -19,6 +19,8 @@ DerivedData
 .DS_Store
 xcshareddata
 
+.swiftpm
+
 # Carthage
 /Carthage
 /TripKit.framework.zip
