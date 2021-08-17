@@ -170,6 +170,6 @@ extension TKSegment: TKUISemaphoreDisplayable {
 // MARK: - TKRegion.City
 
 extension TKRegion.City: TKUIImageAnnotation {
-  public var image: TKImage? { return TKStyleManager.imageNamed("icon-map-info-city") }
+  public var image: TKImage? { return TKStyleManager.image(named: "icon-map-info-city") }
   public var imageURL: URL? { return nil }
 }

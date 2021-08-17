@@ -35,13 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Image names
 
-+ (TKImage *)activityImage:(NSString *)partial;
++ (TKImage *)imageNamed:(NSString *)name NS_REFINED_FOR_SWIFT; // Wrong bundle for Swift!
 
-+ (TKImage *)imageNamed:(NSString *)name;
-
-+ (nullable TKImage *)optionalImageNamed:(NSString *)name;
-
-+ (NSBundle *)bundle;
++ (NSBundle *)bundle NS_REFINED_FOR_SWIFT; // Wrong bundle for Swift!
 
 #pragma mark - Date formatting
 

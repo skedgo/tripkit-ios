@@ -133,7 +133,7 @@ extension TKAutocompletionResult {
     subtitle = coordinate.subtitle
     object = coordinate
     score = coordinate.sortScore
-    image = TKAutocompletionResult.image(forType: .pin)
+    image = TKAutocompletionResult.image(for: .pin)
     isInSupportedRegion = NSNumber(value: TKRegionManager.shared.coordinateIsPartOfAnyRegion(coordinate.coordinate))
   }
 

@@ -11,21 +11,9 @@
 
 #import "TKCrossPlatform.h"
 
-typedef NS_ENUM(NSInteger, TKAutocompletionSearchIcon) {
-	TKAutocompletionSearchIconCalendar,
-	TKAutocompletionSearchIconCity,
-	TKAutocompletionSearchIconContact,
-	TKAutocompletionSearchIconCurrentLocation,
-	TKAutocompletionSearchIconFavourite,
-	TKAutocompletionSearchIconHistory,
-	TKAutocompletionSearchIconPin,
-};
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TKAutocompletionResult : NSObject
-
-+ (TKImage *)imageForType:(TKAutocompletionSearchIcon)type;
 
 + (NSUInteger)scoreBasedOnDistanceFromCoordinate:(CLLocationCoordinate2D)coordinate
                                         toRegion:(MKCoordinateRegion)coordinateRegion

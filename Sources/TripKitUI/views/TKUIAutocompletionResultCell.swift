@@ -57,7 +57,7 @@ extension TKUIAutocompletionResultCell {
   
   private func configureCurrentLocation(with item: TKUIAutocompletionViewModel.Item) {
     guard case .currentLocation = item else { assertionFailure(); return }
-    configure(title: Loc.CurrentLocation, image: TKAutocompletionResult.image(forType: .currentLocation))
+    configure(title: Loc.CurrentLocation, image: TKAutocompletionResult.image(for: .currentLocation))
   }
   
   private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: ((TKUIAutocompletionViewModel.Item) -> Void)?) {

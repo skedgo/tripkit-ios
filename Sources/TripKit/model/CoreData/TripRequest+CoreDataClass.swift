@@ -113,7 +113,7 @@ extension TripRequest {
     
     switch timeType {
     case .leaveASAP:
-      return NSLocalizedString("Leave now", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "")
+      return NSLocalizedString("Leave now", tableName: "TripKit", bundle: .tripKit, comment: "")
 
     case .none:
       return ""

@@ -55,7 +55,7 @@ extension TKContactsManager: TKAutocompleting {
   public func additionalActionTitle() -> String? {
     if isAuthorized() { return nil }
     
-    return NSLocalizedString("Include contacts", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Button to include contacts in search, too.")
+    return NSLocalizedString("Include contacts", tableName: "Shared", bundle: .tripKit, comment: "Button to include contacts in search, too.")
   }
   
   public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
@@ -83,7 +83,7 @@ extension TKContactsManager.ContactAddress {
     result.object = self
     result.title = locationName
     result.subtitle = address
-    result.image = image ?? TKAutocompletionResult.image(forType: .contact)
+    result.image = image ?? TKAutocompletionResult.image(for: .contact)
     result.provider = provider as AnyObject
     
     let nameScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: search, candidate: name)

@@ -32,7 +32,7 @@ public class TKRegionAutocompleter: TKAutocompleting {
         }
       }
     
-    let image = TKAutocompletionResult.image(forType: .city)
+    let image = TKAutocompletionResult.image(for: .city)
     let results = scoredMatches.map { tuple -> TKAutocompletionResult in
       let result = TKAutocompletionResult()
       result.object = tuple.0

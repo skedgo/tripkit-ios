@@ -14,8 +14,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.4'
   s.requires_arc = true
   
-  s.prefix_header_file = "prefix.pch"
-
   s.frameworks = ['UIKit', 'MapKit']
 
   s.dependency 'TripKit', "~> #{s.version}"
@@ -27,12 +25,11 @@ Pod::Spec.new do |s|
   s.dependency 'Kingfisher', '~> 5.8'
   
   s.source_files = [
-    "TripKitUI-iOS/*.h",
-    "TripKitUI/**/*.{h,m,swift}"
+    "Sources/TripKitUI/**/*.swift"
   ]
   s.resources    = [
-    "TripKitUI/TripKitUI.xcassets",
-    "TripKitUI/**/*.xib"
+    "Sources/TripKitUI/Resources/TripKitUI.xcassets",
+    "Sources/TripKitUI/**/*.xib"
   ]
 
 end

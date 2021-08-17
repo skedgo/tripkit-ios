@@ -298,7 +298,7 @@ extension StopVisits: TKRealTimeUpdatable {
       
       if case .timetabled(_, let maybeDeparture) = timing, let departure = maybeDeparture {
         let departureTime = TKStyleManager.timeString(departure, for: timeZone)
-        let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity. (old key: ActivityIndication)")
+        let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: .tripKit, comment: "Indication of an activity. (old key: ActivityIndication)")
         return String(format: format,
                       service.shortIdentifier ?? "",
                       departureTime,
@@ -306,7 +306,7 @@ extension StopVisits: TKRealTimeUpdatable {
         )
         
       } else {
-        let format = NSLocalizedString("I'll take a %@ from %@.", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Indication of an activity.")
+        let format = NSLocalizedString("I'll take a %@ from %@.", tableName: "TripKit", bundle: .tripKit, comment: "Indication of an activity.")
         return String(format: format,
                       service.shortIdentifier ?? "",
                       stop.name ?? stop.stopCode

@@ -17,8 +17,17 @@ extension XCTestCase {
   var bundle: Bundle { return Bundle(for: TKTestCase.self) }
   
   func dataFromJSON(named name: String) throws -> Data {
+    #if SWIFT_PACKAGE
+    let thisSourceFile = URL(fileURLWithPath: #file)
+    let thisDirectory = thisSourceFile.deletingLastPathComponent()
+    let jsonPath = thisDirectory
+      .appendingPathComponent("Data", isDirectory: true)
+      .appendingPathComponent(name).appendingPathExtension("json")
+    return try Data(contentsOf: jsonPath)
+    #else
     let filePath = bundle.path(forResource: name, ofType: "json")
     return try Data(contentsOf: URL(fileURLWithPath: filePath!))
+    #endif
   }
   
   

@@ -31,6 +31,33 @@ extension TKStyleManager {
   private static let dummyImage = TKImage()
   private static let imageCache = NSCache<NSString, TKImage>()
 
+  public static func activityImage(_ partial: String) -> TKImage {
+    let name: String
+    #if os(iOS) || os(tvOS)
+    switch UIDevice.current.userInterfaceIdiom {
+    case .phone: name = "icon-actionBar-\(partial)-30"
+    default: name = "icon-actionBar-\(partial)-38"
+    }
+    #elseif os(OSX)
+    name = "icon-actionBar-\(partial)-38"
+    #endif
+    return image(named: name)
+  }
+  
+  public static func image(named: String) -> TKImage {
+    let image = optionalImage(named: named)
+    assert(image != nil, "Image named '\(named)' not found.")
+    return image!
+  }
+
+  public static func optionalImage(named: String) -> TKImage? {
+    #if os(iOS) || os(tvOS)
+    return TKImage(named: named, in: .tripKit, compatibleWith: nil)
+    #elseif os(OSX)
+    return TripKit.bundle.image(forResource: named)
+    #endif
+  }
+
   public static func image(forModeImageName imageName: String?, isRealTime: Bool = false, of iconType: TKStyleModeIconType = .listMainMode) -> TKImage? {
     guard let partName = imageName?.lowercased() else {
       return nil
@@ -52,7 +79,7 @@ extension TKStyleManager {
     @unknown default:
       return nil
     }
-    if let image = optionalImageNamed(fullName) {
+    if let image = optionalImage(named: fullName) {
       imageCache.setObject(image, forKey: key)
       return image
     } else if isRealTime {

@@ -60,7 +60,7 @@ extension TKLocationManager {
   }
   
   open override func authorizationAlertText() -> String {
-    return NSLocalizedString("Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Location iOS authorisation needed text")
+    return NSLocalizedString("Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.", tableName: "Shared", bundle: .tripKit, comment: "Location iOS authorisation needed text")
   }
   
   

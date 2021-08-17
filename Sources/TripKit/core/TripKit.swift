@@ -17,9 +17,16 @@ public enum TripKit {
   
   public static let shared = TKTripKit.__sharedInstance()
   
+  public static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: TKTripKit.self)
+    #endif
+  }()
+  
   public static func loadModel() -> NSManagedObjectModel {
-    let bundle = Bundle(for: TKTripKit.self)
-    let modelURL = bundle.url(forResource: "TripKitModel", withExtension: "momd")!
+    let modelURL = TripKit.bundle.url(forResource: "TripKitModel", withExtension: "momd")!
     return NSManagedObjectModel(contentsOf: modelURL)!
   }
   

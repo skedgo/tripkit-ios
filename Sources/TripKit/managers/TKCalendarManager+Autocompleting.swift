@@ -62,7 +62,7 @@ extension TKCalendarManager: TKAutocompleting {
   public func additionalActionTitle() -> String? {
     if isAuthorized() { return nil }
     
-    return NSLocalizedString("Include events", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Button to include events in search, too.")
+    return NSLocalizedString("Include events", tableName: "Shared", bundle: .tripKit, comment: "Button to include events in search, too.")
   }
   
   public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
@@ -94,7 +94,7 @@ extension TKCalendarManager {
     result.object = event
     result.title = TKCalendarManager.title(for: event)
     result.subtitle = location
-    result.image = TKAutocompletionResult.image(forType: .calendar)
+    result.image = TKAutocompletionResult.image(for: .calendar)
     
     if search.isEmpty {
       result.score = 90

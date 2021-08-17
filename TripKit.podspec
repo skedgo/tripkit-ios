@@ -15,23 +15,21 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.14'
   s.requires_arc = true
   
-  s.prefix_header_file = "prefix.pch"
-
   s.source_files = [
-    "TripKit/TripKit.h",
-    "TripKit/Classes/**/*.{h,m,swift}"
+    "Sources/TripKit/**/*.swift",
+    "Sources/TripKitObjc/**/*.{h,m}"
   ]
   s.osx.exclude_files = [
-    "TripKit/Classes/core/Actions/TKActions.{h,m}",
-    "TripKit/Classes/UIKit/TKStyleManager+UIKit.{h,m}",
-    "TripKit/Classes/UIKit/UIFont+CustomFonts.{h,m}",
+    "Sources/TripKitObjc/**/TKActions.{h,m}",
+    "Sources/TripKitObjc/**/TKStyleManager+UIKit.{h,m}",
+    "Sources/TripKitObjc/**/UIFont+CustomFonts.{h,m}",
   ]
 
   s.resources    = [
-    "TripKit/Resources/*.lproj",
-    "TripKit/Resources/TripKit.*",
-    "TripKitModel.xcdatamodeld",
-    "TripKitModel.xcdatamodeld/*."
+    "Sources/TripKit/Resources/*.lproj",
+    "Sources/TripKit/Resources/TripKit.xcassets",
+    "Sources/TripKit/Resources/TripKitModel.xcdatamodeld",
+    "Sources/TripKit/Resources/TripKitModel.xcdatamodeld/*."
   ]
   s.preserve_paths = 'TripKitModel.xcdatamodeld'
   s.frameworks = 'CoreData'

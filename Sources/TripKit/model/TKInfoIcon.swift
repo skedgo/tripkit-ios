@@ -61,7 +61,7 @@ public class TKInfoIcon : NSObject {
     guard
       let fileName = _imageName(for: type, usage: usage)
       else { return nil }
-    return TKStyleManager.imageNamed(fileName)
+    return TKStyleManager.image(named: fileName)
   }
 
   private static func addendum(for usage: TKInfoIconUsage) -> String {

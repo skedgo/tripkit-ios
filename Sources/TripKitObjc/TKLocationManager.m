@@ -121,18 +121,6 @@ NSString *const TKLocationManagerFoundLocationNotification =  @"kTKLocationManag
   }
 }
 
-- (TKImage *)imageForAnnotation:(id<MKAnnotation>)annotation
-{
-#pragma unused(annotation)
-  return [TKAutocompletionResult imageForType:TKAutocompletionSearchIconPin];
-}
-
-- (TKImage *)accessoryImageForAnnotation:(id<MKAnnotation>)annotation
-{
-#pragma unused(annotation)
-  return nil;
-}
-
 #pragma mark - TKPermissionManager implementations
 
 - (void)askForPermission:(void (^)(BOOL enabled))completion

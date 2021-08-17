@@ -99,7 +99,7 @@ public class TKCalendarManager: TKPermissionManager {
   }
   
   public override func authorizationAlertText() -> String {
-    NSLocalizedString("You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature.", tableName: "Shared", bundle: TKTripKit.bundle(), comment: "Calendar authorisation needed text")
+    NSLocalizedString("You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature.", tableName: "Shared", bundle: .tripKit, comment: "Calendar authorisation needed text")
   }
   
 }

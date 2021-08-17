@@ -97,8 +97,8 @@ extension TKTripGoGeocoder: TKAutocompleting {
             result.score = Self.score(named, query: input) ?? 0
             
             if let stop = named as? TKStopCoordinate {
-              result.accessoryButtonImage = TKStyleManager.imageNamed("icon-search-timetable")
-              result.image = TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(forType: .pin)
+              result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
+              result.image = TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin)
               if stop.stopCode.contains(input) {
                 result.subtitle = stop.stopCode + " - " + (stop.services ?? "")
               } else {
@@ -106,7 +106,7 @@ extension TKTripGoGeocoder: TKAutocompleting {
               }
             } else {
               result.subtitle = named.address
-              result.image = TKAutocompletionResult.image(forType: .pin)
+              result.image = TKAutocompletionResult.image(for: .pin)
             }
             
             return result

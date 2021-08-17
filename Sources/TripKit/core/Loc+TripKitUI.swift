@@ -215,7 +215,7 @@ extension Loc {
   // MARK: -
   
   @objc public static var Now: String {
-    return NSLocalizedString("Now", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Countdown cell 'now' indicator")
+    return NSLocalizedString("Now", tableName: "Shared", bundle: .tripKit, comment: "Countdown cell 'now' indicator")
   }
   
   @objc(InDurationString:)
@@ -231,11 +231,11 @@ extension Loc {
   }
   
   @objc public static var Checkmark: String {
-    return NSLocalizedString("Checkmark", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Accessibility title for a checkmark/tick button")
+    return NSLocalizedString("Checkmark", tableName: "Shared", bundle: .tripKit, comment: "Accessibility title for a checkmark/tick button")
   }
   
   public static func Showing(_ visible: Int, ofTransportModes all: Int) -> String {
-    let format = NSLocalizedString("Showing %@ of %@ transport modes", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.")
+    let format = NSLocalizedString("Showing %@ of %@ transport modes", tableName: "Shared", bundle: .tripKit, comment: "Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.")
     return String(format: format, NSNumber(value: visible), NSNumber(value: all))
   }
   

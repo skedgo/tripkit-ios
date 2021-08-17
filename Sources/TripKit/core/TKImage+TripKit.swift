@@ -53,11 +53,10 @@ extension TKImage {
   
   private static func named(_ name: String) -> TKImage {
     
-    let bundle = TKTripKit.bundle()
     #if os(iOS) || os(tvOS)
-      return TKImage(named: name, in: TKTripKit.bundle(), compatibleWith: nil)!
+    return TKImage(named: name, in: .tripKit, compatibleWith: nil)!
     #elseif os(OSX)
-      return bundle.image(forResource: name)!
+    return TripKit.bundle.image(forResource: name)!
     #endif
   }
 }

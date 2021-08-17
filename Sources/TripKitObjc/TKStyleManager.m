@@ -53,19 +53,6 @@
 }
 #endif
 
-+ (TKImage *)activityImage:(NSString *)partial
-{
-#if TARGET_OS_IPHONE
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    return [self imageNamed:[NSString stringWithFormat:@"icon-actionBar-%@-30", partial]];
-  } else {
-    return [self imageNamed:[NSString stringWithFormat:@"icon-actionBar-%@-38", partial]];
-  }
-#else
-  return [self imageNamed:[NSString stringWithFormat:@"icon-actionBar-%@-38", partial]];
-#endif
-}
-
 + (TKImage *)imageNamed:(NSString *)name
 {
   TKImage *image = [self optionalImageNamed:name];

@@ -8,10 +8,8 @@
 
 #if SWIFT_PACKAGE
 #import <TripKitObjc/TKAutocompletionResult.h>
-#import <TripKitObjc/TKStyleManager.h>
 #else
 #import "TKAutocompletionResult.h"
-#import "TKStyleManager.h"
 #endif
 
 @implementation NSString (Matches)
@@ -57,32 +55,6 @@
 @end
 
 @implementation TKAutocompletionResult
-
-+ (TKImage *)imageForType:(TKAutocompletionSearchIcon)type
-{
-	switch (type) {
-    case TKAutocompletionSearchIconCity:
-      return [TKStyleManager imageNamed:@"icon-search-city"];
-      
-    case TKAutocompletionSearchIconContact:
-      return [TKStyleManager imageNamed:@"icon-search-contact"];
-      
-    case TKAutocompletionSearchIconCurrentLocation:
-      return [TKStyleManager imageNamed:@"icon-search-currentlocation"];
-      
-    case TKAutocompletionSearchIconPin:
-      return [TKStyleManager imageNamed:@"icon-search-pin"];
-      
-    case TKAutocompletionSearchIconCalendar:
-      return [TKStyleManager imageNamed:@"icon-search-calendar"];
-      
-    case TKAutocompletionSearchIconHistory:
-      return [TKStyleManager imageNamed:@"icon-search-history"];
-      
-    case TKAutocompletionSearchIconFavourite:
-      return [TKStyleManager imageNamed:@"icon-search-favourite"];
-  }
-}
 
 + (NSUInteger)scoreBasedOnDistanceFromCoordinate:(CLLocationCoordinate2D)coordinate
                                         toRegion:(MKCoordinateRegion)coordinateRegion

@@ -94,21 +94,21 @@ extension Loc {
   // MARK: - Permission manager
   
   public static var ContactsAuthorizationAlertText: String {
-    return NSLocalizedString("You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature.", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Contacts authorisation needed text")
+    return NSLocalizedString("You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature.", tableName: "Shared", bundle: .tripKit, comment: "Contacts authorisation needed text")
   }
   
   public static func PersonsHome(name: String) -> String {
-    let format = NSLocalizedString("%@'s Home", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'%@' will be replaced with the person's name")
+    let format = NSLocalizedString("%@'s Home", tableName: "Shared", bundle: .tripKit, comment: "'%@' will be replaced with the person's name")
     return String(format: format, name)
   }
 
   public static func PersonsWork(name: String) -> String {
-    let format = NSLocalizedString("%@'s Work", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'%@' will be replaced with the person's name")
+    let format = NSLocalizedString("%@'s Work", tableName: "Shared", bundle: .tripKit, comment: "'%@' will be replaced with the person's name")
     return String(format: format, name)
   }
 
   public static func PersonsPlace(name: String) -> String {
-    let format = NSLocalizedString("%@'s", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "'%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else.")
+    let format = NSLocalizedString("%@'s", tableName: "Shared", bundle: .tripKit, comment: "'%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else.")
     return String(format: format, name)
   }
 
@@ -136,13 +136,13 @@ extension Loc {
 
   @objc(Departs:capitalize:)
   public static func Departs(atTime time: String, capitalize: Bool = false) -> String {
-    let format = NSLocalizedString("departs %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of departure; parameter is time, e.g., 'departs 15:30'")
+    let format = NSLocalizedString("departs %@", tableName: "Shared", bundle: .tripKit, comment: "Estimated time of departure; parameter is time, e.g., 'departs 15:30'")
     return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
   @objc(Arrives:capitalize:)
   public static func Arrives(atTime time: String, capitalize: Bool = false) -> String {
-    let format = NSLocalizedString("arrives %@", tableName: "Shared", bundle: TKStyleManager.bundle(), comment: "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'")
+    let format = NSLocalizedString("arrives %@", tableName: "Shared", bundle: .tripKit, comment: "Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'")
     return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
@@ -194,7 +194,7 @@ extension Loc {
   }
   
   public static func UpdatedAgo(duration: String) -> String {
-    let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: TKTripKit.bundle(), comment: "Vehicle updated. (old key: VehicleUpdated)")
+    let format = NSLocalizedString("Updated %@ ago", tableName: "TripKit", bundle: .tripKit, comment: "Vehicle updated. (old key: VehicleUpdated)")
     return String(format: format, duration)
   }
   
@@ -314,7 +314,7 @@ extension Loc {
 
 extension Bundle {
   
-  @objc public static let tripKit: Bundle = TKTripKit.bundle()
+  @objc public static let tripKit: Bundle = TripKit.bundle
   
 }
 

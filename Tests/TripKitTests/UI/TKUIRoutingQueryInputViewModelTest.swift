@@ -292,8 +292,8 @@ fileprivate class FakeAutocompleter: TKAutocompleting {
       .map { name -> TKAutocompletionResult in
         let result = TKAutocompletionResult()
         result.title = name
-        result.image = TKAutocompletionResult.image(forType: .city)
-        result.accessoryButtonImage = TKAutocompletionResult.image(forType: .history)
+        result.image = TKAutocompletionResult.image(for: .city)
+        result.accessoryButtonImage = TKAutocompletionResult.image(for: .history)
         result.object = name
         result.score = 100 - (Self.cities.firstIndex(of: name) ?? 100)
         return result

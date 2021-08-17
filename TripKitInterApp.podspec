@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'TripKit', "~> #{s.version}"
 
-  s.source_files = "TripKit/AddOns/InterApp/**/*.{swift}"
+  s.source_files = "Sources/TripKitInterApp/**/*.{swift}"
 end

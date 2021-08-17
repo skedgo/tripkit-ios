@@ -14,37 +14,37 @@ import MapKit
 
 class ASPolygonKitTests: XCTestCase {
     
-  func testAll() {
-    let polygons = polygonsFromJSON(named: "polygons-tripgo-170217")
+  func testAll() throws {
+    let polygons = try polygonsFromJSON(named: "polygons-tripgo-170217")
     XCTAssertEqual(154, polygons.count)
   }
 
-  func testCH() {
-    let polygons = polygonsFromJSON(named: "polygons-ch-170224")
+  func testCH() throws {
+    let polygons = try polygonsFromJSON(named: "polygons-ch-170224")
     XCTAssertEqual(5, polygons.count)
     
     let merged = MKPolygon.union(polygons)
     XCTAssertEqual(1, merged.count)
   }
   
-  func testUK() {
-    let polygons = polygonsFromJSON(named: "polygons-uk-170217")
+  func testUK() throws {
+    let polygons = try polygonsFromJSON(named: "polygons-uk-170217")
     XCTAssertEqual(19, polygons.count)
     
     let merged = MKPolygon.union(polygons)
     XCTAssertEqual(1, merged.count)
   }
 
-  func testScandinavia() {
-    let polygons = polygonsFromJSON(named: "polygons-scandinavia-170217")
+  func testScandinavia() throws {
+    let polygons = try polygonsFromJSON(named: "polygons-scandinavia-170217")
     XCTAssertEqual(16, polygons.count)
     
     let merged = MKPolygon.union(polygons)
     XCTAssertEqual(1, merged.count)
   }
   
-  func testInvariantToShuffling() {
-    let polygons = polygonsFromJSON(named: "polygons-uk-170217")
+  func testInvariantToShuffling() throws {
+    let polygons = try polygonsFromJSON(named: "polygons-uk-170217")
     XCTAssertEqual(19, polygons.count)
     
     let _ = (1...100).map { _ in
@@ -90,21 +90,32 @@ class ASPolygonKitTests: XCTestCase {
 
 extension ASPolygonKitTests {
   
-  func polygonsFromJSON(named name: String) -> [MKPolygon] {
+  func polygonsFromJSON(named name: String) throws -> [MKPolygon] {
     guard
-      let dict = contentFromJSON(named: name) as? [String: Any],
+      let dict = try contentFromJSON(named: name) as? [String: Any],
       let encodedPolygons = dict ["polygons"] as? [String]
       else { preconditionFailure() }
     
     return encodedPolygons.map { MKPolygon(encoded: $0) }
   }
   
-  func contentFromJSON(named name: String) -> Any {
+  func contentFromJSON(named name: String) throws -> Any {
+    let jsonPath: URL
+    #if SWIFT_PACKAGE
+    let thisSourceFile = URL(fileURLWithPath: #file)
+    let thisDirectory = thisSourceFile.deletingLastPathComponent()
+    jsonPath = thisDirectory
+      .appendingPathComponent("data", isDirectory: true)
+      .appendingPathComponent(name).appendingPathExtension("json")
+    
+    #else
     let bundle = Bundle(for: ASPolygonKitTests.self)
     let filePath = bundle.path(forResource: name, ofType: "json")
-    let data = try? Data(contentsOf: URL(fileURLWithPath: filePath!))
-    let object: Any? = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions(rawValue: 0))
-    return object!
+    jsonPath = URL(fileURLWithPath: filePath!)
+    #endif
+
+    let data = try Data(contentsOf: jsonPath)
+    return try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
   }
   
 }

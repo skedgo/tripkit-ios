@@ -13,6 +13,11 @@
 		3A1777B0232C17570093D495 /* TripKitInterApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A1777B2232C17590093D495 /* TripKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A1AABAC26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */; };
+		3A1AABAD26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */; };
+		3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB126CB78DE00FDDB06 /* pelias-au.json */; };
+		3A1AABB526CB78DE00FDDB06 /* pelias-us.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB226CB78DE00FDDB06 /* pelias-us.json */; };
+		3A1AABB626CB78DE00FDDB06 /* pelias-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB326CB78DE00FDDB06 /* pelias-de.json */; };
 		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A215B9425D0E0D5004EFB61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A215B9325D0E0D5004EFB61 /* Kingfisher */; };
@@ -492,14 +497,11 @@
 		3AFF2A8826C69A96007809CD /* TKUIModePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1426C69A96007809CD /* TKUIModePickerTest.swift */; };
 		3AFF2A8926C69A96007809CD /* TKShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1626C69A96007809CD /* TKShareHelperTest.swift */; };
 		3AFF2A8A26C69A96007809CD /* TKLocationRestorationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */; };
-		3AFF2A8B26C69A96007809CD /* pelias-au.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1A26C69A96007809CD /* pelias-au.json */; };
 		3AFF2A8C26C69A96007809CD /* TKPeliasTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */; };
 		3AFF2A8D26C69A96007809CD /* TKGeoJSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */; };
 		3AFF2A8E26C69A96007809CD /* TKAnnotationClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */; };
 		3AFF2A8F26C69A96007809CD /* TKGeocoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1E26C69A96007809CD /* TKGeocoderTest.swift */; };
 		3AFF2A9026C69A96007809CD /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1F26C69A96007809CD /* TKAutocompletionRaceTest.swift */; };
-		3AFF2A9126C69A96007809CD /* pelias-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2026C69A96007809CD /* pelias-de.json */; };
-		3AFF2A9226C69A96007809CD /* pelias-us.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2126C69A96007809CD /* pelias-us.json */; };
 		3AFF2A9326C69A96007809CD /* TKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2226C69A96007809CD /* TKTestCase.swift */; };
 		3AFF2A9426C69A96007809CD /* ASPolygonKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2426C69A96007809CD /* ASPolygonKitTests.swift */; };
 		3AFF2A9526C69A96007809CD /* polygons-tripgo-170217.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2626C69A96007809CD /* polygons-tripgo-170217.json */; };
@@ -932,6 +934,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKAutocompletionResult+Icon.swift"; sourceTree = "<group>"; };
+		3A1AABB126CB78DE00FDDB06 /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
+		3A1AABB226CB78DE00FDDB06 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
+		3A1AABB326CB78DE00FDDB06 /* pelias-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-de.json"; sourceTree = "<group>"; };
 		3A6DF068202C8C340084CB2C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF069202C8C340084CB2C /* TripKitUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitUI.podspec; sourceTree = "<group>"; };
 		3A6DF06A202C8C340084CB2C /* TripKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKit.podspec; sourceTree = "<group>"; };
@@ -1504,14 +1510,11 @@
 		3AFF2A1426C69A96007809CD /* TKUIModePickerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePickerTest.swift; sourceTree = "<group>"; };
 		3AFF2A1626C69A96007809CD /* TKShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareHelperTest.swift; sourceTree = "<group>"; };
 		3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRestorationTest.swift; sourceTree = "<group>"; };
-		3AFF2A1A26C69A96007809CD /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
 		3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPeliasTitleTest.swift; sourceTree = "<group>"; };
 		3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGeoJSONTest.swift; sourceTree = "<group>"; };
 		3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
 		3AFF2A1E26C69A96007809CD /* TKGeocoderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGeocoderTest.swift; sourceTree = "<group>"; };
 		3AFF2A1F26C69A96007809CD /* TKAutocompletionRaceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAutocompletionRaceTest.swift; sourceTree = "<group>"; };
-		3AFF2A2026C69A96007809CD /* pelias-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-de.json"; sourceTree = "<group>"; };
-		3AFF2A2126C69A96007809CD /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
 		3AFF2A2226C69A96007809CD /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
 		3AFF2A2426C69A96007809CD /* ASPolygonKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPolygonKitTests.swift; sourceTree = "<group>"; };
 		3AFF2A2626C69A96007809CD /* polygons-tripgo-170217.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "polygons-tripgo-170217.json"; sourceTree = "<group>"; };
@@ -1919,6 +1922,7 @@
 				3AFF265E26C6975F007809CD /* TKAggregateGeocoder.swift */,
 				3AFF265C26C6975F007809CD /* TKAnnotationClusterer.swift */,
 				3AFF266126C6975F007809CD /* TKAppleGeocoder.swift */,
+				3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */,
 				3AFF265B26C6975F007809CD /* TKGeocoderHelper.swift */,
 				3AFF265726C6975F007809CD /* TKGeocoding.swift */,
 				3AFF265F26C6975F007809CD /* TKGeocodingResultScorer.swift */,
@@ -2717,9 +2721,6 @@
 		3AFF2A1926C69A96007809CD /* searching */ = {
 			isa = PBXGroup;
 			children = (
-				3AFF2A1A26C69A96007809CD /* pelias-au.json */,
-				3AFF2A2026C69A96007809CD /* pelias-de.json */,
-				3AFF2A2126C69A96007809CD /* pelias-us.json */,
 				3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */,
 				3AFF2A1F26C69A96007809CD /* TKAutocompletionRaceTest.swift */,
 				3AFF2A1E26C69A96007809CD /* TKGeocoderTest.swift */,
@@ -2802,6 +2803,9 @@
 				3AFF2A5626C69A96007809CD /* locationInfo-carRental-days.json */,
 				3AFF2A4026C69A96007809CD /* locationInfo-carRental.json */,
 				3AFF2A4D26C69A96007809CD /* locationInfo-onStreetParking.json */,
+				3A1AABB126CB78DE00FDDB06 /* pelias-au.json */,
+				3A1AABB326CB78DE00FDDB06 /* pelias-de.json */,
+				3A1AABB226CB78DE00FDDB06 /* pelias-us.json */,
 				3AFF2A5E26C69A96007809CD /* regionInfo-multi.json */,
 				3AFF2A4726C69A96007809CD /* regionInfo-Nuremberg.json */,
 				3AFF2A4126C69A96007809CD /* regionInfo-Sydney.json */,
@@ -3301,11 +3305,9 @@
 			files = (
 				3AFF2ABD26C69A96007809CD /* routing-pt-impossible.json in Resources */,
 				3AFF2A9626C69A96007809CD /* polygons-uk-170217.json in Resources */,
-				3AFF2A9126C69A96007809CD /* pelias-de.json in Resources */,
 				3AFF2AC426C69A96007809CD /* routing-pt-cancelled.json in Resources */,
 				3AFF2AB626C69A96007809CD /* regionInfo-Vancouver.json in Resources */,
 				3AFF2AB126C69A96007809CD /* hornsbyToSkedGo.json in Resources */,
-				3AFF2A8B26C69A96007809CD /* pelias-au.json in Resources */,
 				3AFF2AAE26C69A96007809CD /* alertsTransit-melbourne.json in Resources */,
 				3AFF2AB926C69A96007809CD /* routing-pt-platforms.json in Resources */,
 				3AFF2AB726C69A96007809CD /* berowraToHornsbyService.json in Resources */,
@@ -3321,14 +3323,15 @@
 				3AFF2ABB26C69A96007809CD /* routing-goget.json in Resources */,
 				3AFF2AAB26C69A96007809CD /* locationInfo-carRental.json in Resources */,
 				3AFF2AC026C69A96007809CD /* locationInfo-bikePod.json in Resources */,
-				3AFF2A9226C69A96007809CD /* pelias-us.json in Resources */,
 				3AFF2AA926C69A96007809CD /* routing-with-stops.json in Resources */,
 				3AFF2AC526C69A96007809CD /* departures-parentStop.json in Resources */,
 				3AFF2AC226C69A96007809CD /* location-carParks.json in Resources */,
 				3AFF2ABF26C69A96007809CD /* service-for-park-ride.json in Resources */,
 				3AFF2AB526C69A96007809CD /* routing-pt-continuation.json in Resources */,
+				3A1AABB626CB78DE00FDDB06 /* pelias-de.json in Resources */,
 				3AFF2AC126C69A96007809CD /* locationInfo-carRental-days.json in Resources */,
 				3AFF2AB026C69A96007809CD /* routing-pt-realtime.json in Resources */,
+				3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */,
 				3AFF2AC826C69A96007809CD /* routing-walk.json in Resources */,
 				3AFF2A9726C69A96007809CD /* polygons-scandinavia-170217.json in Resources */,
 				3AFF2ACA26C69A96007809CD /* routing-pt-wheelchair-reroute.json in Resources */,
@@ -3336,6 +3339,7 @@
 				3AFF2AAC26C69A96007809CD /* regionInfo-Sydney.json in Resources */,
 				3AFF2A9526C69A96007809CD /* polygons-tripgo-170217.json in Resources */,
 				3AFF2AB426C69A96007809CD /* routing-scooters.json in Resources */,
+				3A1AABB526CB78DE00FDDB06 /* pelias-us.json in Resources */,
 				3AFF2AC726C69A96007809CD /* alertsTransit.json in Resources */,
 				3AFF2AB326C69A96007809CD /* routing-drive-park-walk-train.json in Resources */,
 				3AFF2AAA26C69A96007809CD /* routing-bus+scooter.json in Resources */,
@@ -3524,6 +3528,7 @@
 				3AFF293F26C6980D007809CD /* TKTripGoGeocoder.swift in Sources */,
 				3AFF29E026C69864007809CD /* TKSettings.m in Sources */,
 				3AFF288526C697CA007809CD /* GeocodeAPIModel.swift in Sources */,
+				3A1AABAD26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */,
 				3AFF2A0526C69994007809CD /* Codable+Helpers.swift in Sources */,
 				3AFF298326C69845007809CD /* MKPolygon+Union.swift in Sources */,
 				3AFF284D26C6978A007809CD /* Loc+TripKitUI.swift in Sources */,
@@ -3862,6 +3867,7 @@
 				3AFF298826C6984F007809CD /* DefaultFalse.swift in Sources */,
 				3AFF28A526C697CB007809CD /* PricingTableAPIModel.swift in Sources */,
 				3AFF29F426C69993007809CD /* MKMultiPoint+ClosestPoint.swift in Sources */,
+				3A1AABAC26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */,
 				3AFF283726C6977B007809CD /* TKSegment+Shareable.swift in Sources */,
 				3AFF289526C697CB007809CD /* DeparturesAPIModel.swift in Sources */,
 				3AFF29BA26C69863007809CD /* UIFont+CustomFonts.m in Sources */,
