@@ -26,7 +26,9 @@ public enum TripKit {
   }()
   
   public static func loadModel() -> NSManagedObjectModel {
-    let modelURL = TripKit.bundle.url(forResource: "TripKitModel", withExtension: "momd")!
+    guard
+      let modelURL = TripKit.bundle.url(forResource: "TripKitModel", withExtension: "momd")
+    else { fatalError("TripKitModel not found in \(TripKit.bundle)") }
     return NSManagedObjectModel(contentsOf: modelURL)!
   }
   

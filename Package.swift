@@ -11,14 +11,14 @@ let package = Package(
     .macOS(.v11),
   ],
   products: [
-    // Products define the executables and libraries a package produces, and make them visible to other packages.
     .library(
       name: "TripKit",
-      targets: ["TripKit"]),
+      targets: ["TripKit"]
+    ),
     .library(
       name: "TripKitObjc",
-      type: .dynamic,
-      targets: ["TripKitObjc"]),
+      targets: ["TripKitObjc"]
+    ),
     .library(
       name: "TripKitUI",
       targets: ["TripKitUI"]),
@@ -29,31 +29,42 @@ let package = Package(
     .package(name: "TGCardViewController", url: "https://gitlab.com/SkedGo/iOS/TGCardViewController.git", .branch("spm")),
   ],
   targets: [
-    // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-    // Targets can depend on other targets in this package, and on products in packages this package depends on.
     .target(
       name: "TripKitObjc",
-      dependencies: []),
+      dependencies: []
+    ),
     .target(
       name: "TripKit",
       dependencies: [
         .target(name: "TripKitObjc")
-      ]),
+      ],
+      exclude: ["Supporting Files/Info.plist"]
+    ),
     .target(
       name: "TripKitUI",
       dependencies: [
         .target(name: "TripKit"),
         "Kingfisher",
-        "RxSwift",
         .product(name: "RxCocoa", package: "RxSwift"),
         "TGCardViewController",
-      ]),
+      ],
+      exclude: ["Supporting Files/Info.plist"]
+    ),
     .testTarget(
       name: "TripKitTests",
       dependencies: [
         "TripKit",
         "TripKitUI",
         .product(name: "RxCocoa", package: "RxSwift"),
-      ]),
+      ],
+      exclude: [
+        "Data",
+        "polygon/data",
+        "Supporting Files/Info.plist",
+        "vendor/RxBlocking/README.md",
+        "vendor/RxBlocking/Info.plist",
+        "vendor/RxTest/Info.plist",
+      ]
+    ),
   ]
 )

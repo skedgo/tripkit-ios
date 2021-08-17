@@ -6,6 +6,9 @@
 //
 //
 
+#import "TargetConditionals.h"
+#if !TARGET_OS_OSX
+
 @import UIKit;
 
 #import "TKCrossPlatform.h"
@@ -23,3 +26,5 @@
 + (void)printIncludedCustomFontsByNames;
 
 @end
+
+#endif

@@ -6,6 +6,9 @@
 //
 //
 
+#import "TargetConditionals.h"
+#if !TARGET_OS_OSX
+
 #if SWIFT_PACKAGE
 #import <TripKitObjc/TKStyleManager+UIKit.h>
 #import <TripKitObjc/UIFont+CustomFonts.h>
@@ -65,3 +68,5 @@
 }
 
 @end
+
+#endif

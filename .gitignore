@@ -20,6 +20,7 @@ DerivedData
 xcshareddata
 
 .swiftpm
+.build
 
 # Carthage
 /Carthage

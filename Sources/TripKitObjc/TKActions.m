@@ -6,6 +6,9 @@
 //
 //
 
+#import "TargetConditionals.h"
+#if !TARGET_OS_OSX
+
 #if SWIFT_PACKAGE
 #import <TripKitObjc/TKActions.h>
 #import <TripKitObjc/TKStyleManager.h>
@@ -131,3 +134,5 @@
 }
 
 @end
+
+#endif

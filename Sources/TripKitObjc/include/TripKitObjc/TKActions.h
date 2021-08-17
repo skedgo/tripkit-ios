@@ -7,6 +7,9 @@
 // Helper class for defining actions as pairs of title => block, to configure
 // action sheets.
 
+#import "TargetConditionals.h"
+#if !TARGET_OS_OSX
+
 #import "TKCrossPlatform.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -44,3 +47,5 @@ typedef void(^TKActionTextfieldBlock)(NSString *value);
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif
