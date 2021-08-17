@@ -10,10 +10,6 @@
 import Foundation
 import CoreData
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @objc(Service)
 public class Service: NSManagedObject {
 

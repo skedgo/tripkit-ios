@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public class TKUITripCell: UITableViewCell {
 
   public static let nib = UINib(nibName: "TKUITripCell", bundle: Bundle(for: TKUITripCell.self))

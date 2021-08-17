@@ -13,10 +13,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 /// Fetches trips for a request
 ///
 /// Also takes care of localising the user, if the query involves

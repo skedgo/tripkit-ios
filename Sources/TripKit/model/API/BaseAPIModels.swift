@@ -11,10 +11,6 @@ import CoreLocation
 import CoreGraphics
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKAPI {
   
   public struct CompanyInfo: Codable, Hashable {

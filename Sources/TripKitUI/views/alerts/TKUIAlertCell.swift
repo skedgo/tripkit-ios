@@ -11,10 +11,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIAlertCell: UITableViewCell {
   
   @IBOutlet weak var contentWrapper: UIView!

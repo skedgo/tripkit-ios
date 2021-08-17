@@ -9,10 +9,6 @@
 import UIKit
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @objc
 open class TKUIStyledLabel: UILabel {
   public override init(frame: CGRect) {

@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIEmptyAlertView: UIView {
   
   @IBOutlet weak var imageView: UIImageView!

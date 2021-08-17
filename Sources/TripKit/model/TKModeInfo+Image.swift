@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKModeInfo {
   
   public var image: TKImage? {

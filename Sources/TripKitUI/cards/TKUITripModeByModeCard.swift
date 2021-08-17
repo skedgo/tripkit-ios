@@ -15,10 +15,6 @@ import TGCardViewController
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public protocol TKUITripModeByModeCardDelegate {
 
   func modeByModeCard(_ card: TKUITripModeByModeCard, updatedTrip trip: Trip)

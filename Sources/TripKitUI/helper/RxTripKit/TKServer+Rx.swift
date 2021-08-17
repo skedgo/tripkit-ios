@@ -13,10 +13,6 @@ import RxCocoa
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension Reactive where Base: TKRegionManager {
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {
     return requireRegions()

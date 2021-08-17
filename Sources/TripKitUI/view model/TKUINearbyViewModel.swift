@@ -14,10 +14,6 @@ import TripKit
 import RxSwift
 import RxCocoa
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public class TKUINearbyViewModel {
   
   public enum Next {

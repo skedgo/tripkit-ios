@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIAttributionCell: UITableViewCell {
   
   @IBOutlet weak var titleTextView: UITextView!

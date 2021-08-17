@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUICompactActionCell: UICollectionViewCell {
 
   @IBOutlet private weak var imageWrapper: UIView!

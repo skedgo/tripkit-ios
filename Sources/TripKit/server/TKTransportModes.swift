@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public extension TKTransportModes {
   static func color(for modeIdentifier: String) -> TKColor {
     

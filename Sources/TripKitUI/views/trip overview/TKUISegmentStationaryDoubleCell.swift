@@ -12,10 +12,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUISegmentStationaryDoubleCell: UITableViewCell {
   
   @IBOutlet weak var timeLabel: UILabel!

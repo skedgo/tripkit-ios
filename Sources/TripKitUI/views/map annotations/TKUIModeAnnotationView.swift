@@ -13,10 +13,6 @@ import TripKit
 
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 /// A annotation to display transport locations on the map.
 ///
 /// Uses the mode icon in the centre, coloured circle around it. Also works with

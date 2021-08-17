@@ -13,10 +13,6 @@ import MapKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   
   private weak var vehicleShape: TKUIVehicleView?

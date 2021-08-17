@@ -9,10 +9,6 @@
 import Foundation
 import Contacts
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public class TKContactsManager: TKPermissionManager {
   
   public enum AddressKind {

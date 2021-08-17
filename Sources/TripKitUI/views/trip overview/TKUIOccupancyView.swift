@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKAPI.VehicleOccupancy {
   
   var icon: UIImage? {

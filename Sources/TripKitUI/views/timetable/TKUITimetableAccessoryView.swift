@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUITimetableAccessoryView: UIView {
   
   typealias TimetableCardActionsView = TKUICardActionsView<TKUITimetableCard, [TKUIStopAnnotation]>

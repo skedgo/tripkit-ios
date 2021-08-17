@@ -13,10 +13,6 @@ import RxSwift
 import RxCocoa
 
 import TripKit
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 
 /// View model for displaying and interacting with public
 /// transport departures from an stop (or list thereof).

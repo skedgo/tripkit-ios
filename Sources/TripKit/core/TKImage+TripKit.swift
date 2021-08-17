@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKImage {
   
   @objc public static let iconSearchTimetable = named("icon-search-timetable")

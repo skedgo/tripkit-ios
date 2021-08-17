@@ -9,10 +9,6 @@
 import CoreData
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 /// The SegmentTemplate class keeps all the time-independent and unordered information about a segment.
 ///
 /// It is meant to be used as a template for creating "full" Segment objects which also have  time information and a sense of ordering.

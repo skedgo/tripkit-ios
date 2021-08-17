@@ -10,10 +10,6 @@
 import Foundation
 import CoreData
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 /// A time-dependent pointer to the time-independent `SegmentTemplate`
 @objc(SegmentReference)
 class SegmentReference: NSManagedObject {

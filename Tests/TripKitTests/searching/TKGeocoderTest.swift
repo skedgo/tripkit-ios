@@ -11,10 +11,6 @@ import MapKit
 
 import RxSwift
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @testable import TripKit
 
 class TKGeocoderTest: XCTestCase {

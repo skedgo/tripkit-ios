@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 fileprivate extension Result {
   func callHandler(_ handler: (Success?, Failure?) -> Void) {
     switch self {

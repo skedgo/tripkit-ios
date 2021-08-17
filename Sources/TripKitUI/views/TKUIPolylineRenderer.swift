@@ -12,10 +12,6 @@ import MapKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 open class TKUIPolylineRenderer: MKPolylineRenderer {
   
   public enum SelectionMode {

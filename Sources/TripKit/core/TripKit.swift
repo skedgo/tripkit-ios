@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 #if SWIFT_PACKAGE
-import TripKitObjc
+@_exported import TripKitObjc
 #endif
 
 public enum TripKit {

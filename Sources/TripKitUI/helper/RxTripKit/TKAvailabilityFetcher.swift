@@ -12,10 +12,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKBuzzInfoProvider {
   
   public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, start: Date? = nil, end: Date? = nil) -> Single<[TKAPI.CarAvailability]> {

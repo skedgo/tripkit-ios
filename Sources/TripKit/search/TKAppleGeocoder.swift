@@ -9,10 +9,6 @@
 import Foundation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
 public typealias SGAppleGeocoder = TKAppleGeocoder
 

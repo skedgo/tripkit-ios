@@ -10,10 +10,6 @@
 import Foundation
 import CoreData
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 #if os(iOS)
 import UIKit
 #endif

@@ -12,10 +12,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUISegmentImpossibleCell: UITableViewCell {
   
   @IBOutlet weak var titleLabel: UILabel!

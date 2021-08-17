@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @objc
 public enum TKInfoIconType : Int {
   case none = 0

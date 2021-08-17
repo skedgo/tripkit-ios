@@ -12,10 +12,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 struct TKUIDepartureCellContent {
   var placeholderImage: UIImage? = nil
   var imageURL: URL?

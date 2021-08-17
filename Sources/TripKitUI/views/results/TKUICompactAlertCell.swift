@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUICompactAlertCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUICompactAlertCell"

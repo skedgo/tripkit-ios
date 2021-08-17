@@ -10,10 +10,6 @@ import Foundation
 import CoreLocation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKContactsManager {
   
   private func fetchContacts(searchString: String, kind: TKContactsManager.AddressKind? = nil, completion: @escaping (Result<[TKContactsManager.ContactAddress], Error>) -> Void) {

@@ -9,10 +9,6 @@
 import Foundation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @objc
 public enum TKSegmentOrdering: Int {
   case start   = 1

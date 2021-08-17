@@ -9,10 +9,6 @@
 import Foundation
 import CoreLocation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 // MARK: - Query URLs
 
 public extension TKShareHelper {

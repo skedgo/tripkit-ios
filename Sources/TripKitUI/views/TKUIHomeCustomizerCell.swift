@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIHomeCustomizerCell: UITableViewCell {
 
   @IBOutlet weak var stateImageView: UIImageView!

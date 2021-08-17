@@ -13,10 +13,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 @available(*, unavailable, renamed: "TKUISectionedAlertViewController")
 public typealias TKSectionedAlertViewController = TKUISectionedAlertViewController
 

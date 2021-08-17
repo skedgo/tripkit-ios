@@ -9,10 +9,6 @@
 import Foundation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public class TKGeocodingResultScorer: NSObject {
 
   private override init() {

@@ -9,10 +9,6 @@
 import Foundation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public extension TKLocationManager {
   
   enum LocalizationError: Error {

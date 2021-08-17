@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKSettings {
   public struct Config: Codable {
     public enum DistanceUnit: String, Codable {

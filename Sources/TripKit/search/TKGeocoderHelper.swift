@@ -9,10 +9,6 @@
 import Foundation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKGeocoding {
   
   public func geocode(_ object: TKGeocodable, near region: MKMapRect, completion: @escaping (Result<Void, Error>) -> Void) {

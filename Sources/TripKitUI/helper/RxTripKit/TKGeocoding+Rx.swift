@@ -13,10 +13,6 @@ import RxCocoa
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public extension TKGeocoding {
   
   /// Called to geocode a particular input.

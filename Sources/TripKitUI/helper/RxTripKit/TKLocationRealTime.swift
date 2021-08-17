@@ -13,10 +13,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public enum TKLocationRealTime {
   
   public static func fetchLocationInfo(locationID: String, in region: TKRegion) -> Single<TKAPI.LocationInfo> {

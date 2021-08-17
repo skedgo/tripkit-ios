@@ -12,10 +12,6 @@ import RxCocoa
 import RxSwift
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 /// An item that `TKUIModePicker` can display
 public protocol TKUIModePickerItem: Hashable {
   

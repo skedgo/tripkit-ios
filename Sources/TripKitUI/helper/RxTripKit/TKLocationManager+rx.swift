@@ -14,10 +14,6 @@ import RxCocoa
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public extension Reactive where Base : TKLocationManager {
   
   /// Fetches the user's current location and fires observable

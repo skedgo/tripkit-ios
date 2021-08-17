@@ -9,10 +9,6 @@
 import Foundation
 import CoreLocation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public extension TKModeInfo {
   var glyphColor: TKColor? {
     if let color = color {

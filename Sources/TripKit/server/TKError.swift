@@ -8,10 +8,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 enum TKErrorCode: Int {
   case unsupportedRegionCombination  = 1001
   case unsupportedOriginRegion       = 1002

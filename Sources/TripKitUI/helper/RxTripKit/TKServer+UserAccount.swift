@@ -12,10 +12,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension Reactive where Base == TKServer {
   
   /// Sign the user in using a token from CloudKit, returning

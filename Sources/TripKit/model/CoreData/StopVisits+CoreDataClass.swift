@@ -12,10 +12,6 @@ import CoreData
 import CoreLocation
 import MapKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 #if os(iOS)
 import UIKit
 #endif

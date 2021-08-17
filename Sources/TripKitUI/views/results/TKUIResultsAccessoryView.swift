@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIResultsAccessoryView: UIView {
 
   @IBOutlet weak var timeButton: UIButton!

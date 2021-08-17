@@ -9,10 +9,6 @@
 import Foundation
 import CoreData
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 /// :nodoc:
 @objc
 public class TKAPIToCoreDataConverter: NSObject {

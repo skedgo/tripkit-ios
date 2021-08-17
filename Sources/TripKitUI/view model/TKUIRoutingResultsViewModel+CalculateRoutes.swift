@@ -13,10 +13,6 @@ import RxSwift
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 extension TKUIRoutingResultsViewModel {
   
   public struct RouteBuilder: Codable {

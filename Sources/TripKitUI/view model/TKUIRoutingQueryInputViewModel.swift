@@ -14,10 +14,6 @@ import RxCocoa
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 class TKUIRoutingQueryInputViewModel {
   
   typealias Item = TKUIAutocompletionViewModel.Item

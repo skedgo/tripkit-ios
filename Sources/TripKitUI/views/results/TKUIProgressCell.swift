@@ -10,10 +10,6 @@ import UIKit
 
 import TripKit
 
-#if SWIFT_PACKAGE
-import TripKitObjc
-#endif
-
 public class TKUIProgressCell: UITableViewCell {
   
   @IBOutlet weak var spinner: UIActivityIndicatorView!
