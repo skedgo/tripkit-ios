@@ -18,7 +18,7 @@
     echo "BUILD FAILED. Check the logs and fix the documentation!"
     exit 1
   fi
-  cd ..
+  cd ../..
   
   echo "Preparing for deployment..."
   rm -rf public
