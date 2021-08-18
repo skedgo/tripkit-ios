@@ -138,7 +138,7 @@ extension TKAPI {
 
     public let action: String?
     public var notes: String?
-    public var localCost: TKLocalCost?
+    @UnknownNil public var localCost: TKLocalCost? // Backend is sometimes sending this invalid without currency as of 2021-08-17
     var mini: TKMiniInstruction?
 
     // stationary
