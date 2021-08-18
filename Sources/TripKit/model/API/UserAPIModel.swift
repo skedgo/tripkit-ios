@@ -18,31 +18,12 @@ extension TKAPI {
     public let address2: String?
     public let postCode: String?
     public let phones: [Phone]?
+    public let highResProfilePictureURL: URL?
+    public let lowResProfilePictureURL: URL?
     public var appData: [String : Any]?
     private let rawUserId: String?
     private let rawEmail: String?
     private let rawEmails: [Email]?
-    
-    public init(name: String? = nil,
-                firstName: String? = nil,
-                lastName: String? = nil,
-                address1: String? = nil,
-                address2: String? = nil,
-                postCode: String? = nil,
-                email: String? = nil,
-                phone: String? = nil,
-                appData: [String: Any]? = nil) {
-      self.name = name
-      self.firstName = firstName
-      self.lastName = lastName
-      self.address1 = address1
-      self.address2 = address2
-      self.postCode = postCode
-      self.rawEmail = email
-      self.rawEmails = rawEmail.flatMap { [Email(address: $0)] }
-      self.phones = phone.flatMap { [Phone(number: $0)] }
-      self.rawUserId = nil // This is not set directly
-    }
     
     // MARK: - Codable
     
@@ -54,6 +35,8 @@ extension TKAPI {
       case address2
       case postCode
       case phones
+      case highResProfilePictureURL = "largeImageURL"
+      case lowResProfilePictureURL = "smallImageURL"
       case rawEmail = "email"
       case rawEmails = "emails"
       case rawUserId = "userID"

@@ -59,6 +59,8 @@
 		3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */; };
 		3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */; };
 		3ACD920726CCC8060075CCF3 /* TKBetterDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */; };
+		3ACD921626CCD3600075CCF3 /* TKServer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */; };
+		3ACD921726CCD3600075CCF3 /* TKServer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */; };
 		3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A3229EEDFE0096860D /* AppDelegate.swift */; };
 		3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A5229EEDFE0096860D /* ViewController.swift */; };
 		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
@@ -1000,6 +1002,7 @@
 		3ACD91D526CCC47B0075CCF3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
 		3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBetterDecodingTest.swift; sourceTree = "<group>"; };
+		3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKServer+Image.swift"; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
 		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -2014,6 +2017,7 @@
 				3AFF263E26C6975F007809CD /* TKRouter.swift */,
 				3AFF264B26C6975F007809CD /* TKRoutingServer.swift */,
 				3AFF264A26C6975F007809CD /* TKServer.swift */,
+				3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */,
 				3AFF264326C6975F007809CD /* TKServer+Regions.swift */,
 				3AFF263C26C6975F007809CD /* TKSettings.swift */,
 				3AFF265126C6975F007809CD /* TKSettings+Config.swift */,
@@ -3412,6 +3416,7 @@
 				3AFF296126C6981E007809CD /* TKTripFetcher.swift in Sources */,
 				3AFF296926C6981E007809CD /* TKTransportModes.swift in Sources */,
 				3AFF287C26C697AB007809CD /* TKCalendarManager.swift in Sources */,
+				3ACD921726CCD3600075CCF3 /* TKServer+Image.swift in Sources */,
 				3AFF292B26C697F4007809CD /* TripKitModel.xcdatamodeld in Sources */,
 				3AFF28B826C697D9007809CD /* TKSegment+Ticket.swift in Sources */,
 				3AFF296026C6981E007809CD /* TKSettings+Config.swift in Sources */,
@@ -3952,6 +3957,7 @@
 				3AFF297D26C69845007809CD /* Polygon.swift in Sources */,
 				3AFF28EF26C697DA007809CD /* Trip+Data.swift in Sources */,
 				3AFF283A26C6977B007809CD /* StopLocation+Shareable.swift in Sources */,
+				3ACD921626CCD3600075CCF3 /* TKServer+Image.swift in Sources */,
 				3AFF294D26C6981D007809CD /* TKRoutingParser+Populate.swift in Sources */,
 				3AFF284B26C6978A007809CD /* Loc+TripKitInterApp.swift in Sources */,
 				3AFF290026C697DA007809CD /* Shape+CoreDataProperties.swift in Sources */,
