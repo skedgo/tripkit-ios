@@ -806,6 +806,8 @@
 		D33C05272394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */; };
 		D33E6C8A239F11B500F2AF3B /* TKUISegmentAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */; };
 		D33E6C8B239F11B500F2AF3B /* TKUISegmentAlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */; };
+		D35B961126CC86E100DAE738 /* TKServer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35B961026CC86E100DAE738 /* TKServer+Image.swift */; };
+		D35B961226CC86E100DAE738 /* TKServer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35B961026CC86E100DAE738 /* TKServer+Image.swift */; };
 		D36157ED24FCAA2200B88CD0 /* TKUIHomeCard+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36157EC24FCAA2200B88CD0 /* TKUIHomeCard+Search.swift */; };
 		D36157F024FCAF1600B88CD0 /* TKUIHomeViewModel+Next.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36157EF24FCAF1600B88CD0 /* TKUIHomeViewModel+Next.swift */; };
 		D36157F224FCAF8F00B88CD0 /* TKUIHomeViewModel+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36157F124FCAF8F00B88CD0 /* TKUIHomeViewModel+Component.swift */; };
@@ -1563,6 +1565,7 @@
 		D33C05262394B3D3000D9B5C /* TKUIHomeCard+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeCard+Configuration.swift"; sourceTree = "<group>"; };
 		D33E6C88239F11B500F2AF3B /* TKUISegmentAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISegmentAlertCell.swift; sourceTree = "<group>"; };
 		D33E6C89239F11B500F2AF3B /* TKUISegmentAlertCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUISegmentAlertCell.xib; sourceTree = "<group>"; };
+		D35B961026CC86E100DAE738 /* TKServer+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKServer+Image.swift"; sourceTree = "<group>"; };
 		D36157EC24FCAA2200B88CD0 /* TKUIHomeCard+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeCard+Search.swift"; sourceTree = "<group>"; };
 		D36157EF24FCAF1600B88CD0 /* TKUIHomeViewModel+Next.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeViewModel+Next.swift"; sourceTree = "<group>"; };
 		D36157F124FCAF8F00B88CD0 /* TKUIHomeViewModel+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUIHomeViewModel+Component.swift"; sourceTree = "<group>"; };
@@ -2853,6 +2856,7 @@
 				3AFFAB721F06854F00147990 /* TKServer.h */,
 				3AFFAB731F06854F00147990 /* TKServer.m */,
 				3A096E1D1F20DAD500666E59 /* TKServer.swift */,
+				D35B961026CC86E100DAE738 /* TKServer+Image.swift */,
 				3AFF4E2C26C6295100D71394 /* TKServer+Regions.swift */,
 				3AFFAB751F06854F00147990 /* TKTransportModes.h */,
 				3AFFAB761F06854F00147990 /* TKTransportModes.m */,
@@ -3371,6 +3375,7 @@
 				3ABC3D4926BD299A0064D99A /* TKRealTimeFetcher.swift in Sources */,
 				3ABBDA1B2032132400205042 /* TKBuzzInfoProvider.swift in Sources */,
 				3A462CC22076218A00AF41EF /* TKTurnByTurnMode.swift in Sources */,
+				D35B961226CC86E100DAE738 /* TKServer+Image.swift in Sources */,
 				3ABBDA2D2032132400205042 /* TKReporter.swift in Sources */,
 				3AFF4DF726C5CCFB00D71394 /* StopVisits+CoreDataProperties.swift in Sources */,
 				3A664CEE26C10F30002165CD /* DefaultLossyArray.swift in Sources */,
@@ -3901,6 +3906,7 @@
 				3A7135FA2289695A00D4068E /* TKModeImageBuilder.swift in Sources */,
 				3ABC3D4E26BD5E180064D99A /* RoutingAPIModel.swift in Sources */,
 				3A92205C205FC87C004E6C34 /* TKAppleGeocoder.swift in Sources */,
+				D35B961126CC86E100DAE738 /* TKServer+Image.swift in Sources */,
 				3AFF4E0A26C6003B00D71394 /* TripRequest+CoreDataProperties.swift in Sources */,
 				3AFF4DFB26C5DE8300D71394 /* SegmentReference+Flags.swift in Sources */,
 				3AED3B3826C206E400E8DA6B /* TKRoutingParser.swift in Sources */,
