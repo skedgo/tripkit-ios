@@ -58,6 +58,7 @@
 		3ACD920226CCC47B0075CCF3 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D426CCC47B0075CCF3 /* Resources.swift */; };
 		3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */; };
 		3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */; };
+		3ACD920726CCC8060075CCF3 /* TKBetterDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */; };
 		3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A3229EEDFE0096860D /* AppDelegate.swift */; };
 		3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A5229EEDFE0096860D /* ViewController.swift */; };
 		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
@@ -998,6 +999,7 @@
 		3ACD91D426CCC47B0075CCF3 /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		3ACD91D526CCC47B0075CCF3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
+		3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBetterDecodingTest.swift; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
 		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -2690,7 +2692,6 @@
 				3AFF281326C6975F007809CD /* TKTripKit.m */,
 				3AFF280C26C6975F007809CD /* TripKit.h */,
 				3AFF281426C6975F007809CD /* UIFont+CustomFonts.m */,
-				3AFF281526C6975F007809CD /* Supporting Files */,
 			);
 			path = TripKitObjc;
 			sourceTree = "<group>";
@@ -2730,13 +2731,6 @@
 				3AFF27F626C6975F007809CD /* UIFont+CustomFonts.h */,
 			);
 			path = TripKitObjc;
-			sourceTree = "<group>";
-		};
-		3AFF281526C6975F007809CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		3AFF282726C6975F007809CD /* TripKitInterApp */ = {
@@ -2866,6 +2860,7 @@
 			children = (
 				3AFF2A3926C69A96007809CD /* RoutingAPIParserTest.swift */,
 				3AFF2A3126C69A96007809CD /* TKAlertModelTest.swift */,
+				3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */,
 				3AFF2A3426C69A96007809CD /* TKBookingAvailabilityTest.swift */,
 				3AFF2A3226C69A96007809CD /* TKBookingDecodingTest.swift */,
 				3AFF2A3826C69A96007809CD /* TKBuzzInfoProviderTest.swift */,
@@ -4065,6 +4060,7 @@
 				3ACD91DC26CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift in Sources */,
 				3AFF2A8D26C69A96007809CD /* TKGeoJSONTest.swift in Sources */,
 				3ACD91F126CCC47B0075CCF3 /* Subscription.swift in Sources */,
+				3ACD920726CCC8060075CCF3 /* TKBetterDecodingTest.swift in Sources */,
 				3ACD91E926CCC47B0075CCF3 /* TKUIModePickerTest.swift in Sources */,
 				3AFF2A8E26C69A96007809CD /* TKAnnotationClusterer.swift in Sources */,
 				3ACD91FD26CCC47B0075CCF3 /* RecursiveLock.swift in Sources */,
