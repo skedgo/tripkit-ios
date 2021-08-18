@@ -48,7 +48,7 @@ public extension KeyedDecodingContainer {
     /// Default implementation of decoding a DefaultCodable
     ///
     /// Decodes successfully if key is available if not fallsback to the default value provided.
-    public func decode<P>(_: DefaultCodable<P>.Type, forKey key: Key) throws -> DefaultCodable<P> {
+    func decode<P>(_: DefaultCodable<P>.Type, forKey key: Key) throws -> DefaultCodable<P> {
         if let value = try decodeIfPresent(DefaultCodable<P>.self, forKey: key) {
             return value
         } else {
@@ -62,7 +62,7 @@ public extension KeyedDecodingContainer {
     /// when there is a `typeMismatch` decoding error. This preserves the actual value of the `Bool` in which
     /// the data provider might be sending the value as different types. If everything fails defaults to
     /// the `defaultValue` provided by the strategy.
-    public func decode<P: BoolCodableStrategy>(_: DefaultCodable<P>.Type, forKey key: Key) throws -> DefaultCodable<P> {
+    func decode<P: BoolCodableStrategy>(_: DefaultCodable<P>.Type, forKey key: Key) throws -> DefaultCodable<P> {
         do {
             let value = try decode(Bool.self, forKey: key)
             return DefaultCodable(wrappedValue: value)
