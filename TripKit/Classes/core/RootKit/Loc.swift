@@ -141,7 +141,7 @@ public class Loc : NSObject {
     }
   }
   
-  public static func minuteToString(_ minutes: Int) -> String {
+  private static func minuteToString(_ minutes: Int) -> String {
     var component = DateComponents()
     component.calendar = .autoupdatingCurrent
     component.timeZone = .autoupdatingCurrent
