@@ -47,3 +47,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build TripKitUIExample
       run: xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
+    - name: Build MiniMap
+      run: |
+        cd Examples/MiniMap
+        pod install
+        xcodebuild build -workspace MiniMap.xcworkspace -scheme MiniMap
+    - name: Build CocoaPodsTest
+      run: |
+        cd Examples/CocoaPodsTest
+        pod install
+        xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest
