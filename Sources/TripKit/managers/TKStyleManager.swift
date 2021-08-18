@@ -46,7 +46,7 @@ extension TKStyleManager {
   
   public static func image(named: String) -> TKImage {
     let image = optionalImage(named: named)
-    assert(image != nil, "Image named '\(named)' not found.")
+    assert(image != nil, "Image named '\(named)' not found in \(TripKit.bundle).")
     return image!
   }
 

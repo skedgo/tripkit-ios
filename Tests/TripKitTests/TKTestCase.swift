@@ -49,7 +49,7 @@ class TKTestCase: XCTestCase {
     super.setUp()
     
     // TripKit context
-    let model = TKTestCase.model
+    let model = TKTestCase.model!
     let tripKitCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
     _ = try! tripKitCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
     let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
