@@ -24,6 +24,40 @@
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A215B9425D0E0D5004EFB61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A215B9325D0E0D5004EFB61 /* Kingfisher */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
+		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
+		3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */; };
+		3ACD91DA26CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */; };
+		3ACD91DB26CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A526CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift */; };
+		3ACD91DC26CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A626CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift */; };
+		3ACD91DD26CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A726CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift */; };
+		3ACD91DE26CCC47B0075CCF3 /* TKUIGeocoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A826CCC47B0075CCF3 /* TKUIGeocoderTest.swift */; };
+		3ACD91E826CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B326CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift */; };
+		3ACD91E926CCC47B0075CCF3 /* TKUIModePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B426CCC47B0075CCF3 /* TKUIModePickerTest.swift */; };
+		3ACD91EA26CCC47B0075CCF3 /* HotObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B726CCC47B0075CCF3 /* HotObservable.swift */; };
+		3ACD91EB26CCC47B0075CCF3 /* TestableObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B826CCC47B0075CCF3 /* TestableObservable.swift */; };
+		3ACD91EC26CCC47B0075CCF3 /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B926CCC47B0075CCF3 /* Recorded+Event.swift */; };
+		3ACD91ED26CCC47B0075CCF3 /* Any+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BA26CCC47B0075CCF3 /* Any+Equatable.swift */; };
+		3ACD91EE26CCC47B0075CCF3 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BD26CCC47B0075CCF3 /* Bag.swift */; };
+		3ACD91EF26CCC47B0075CCF3 /* Event+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BE26CCC47B0075CCF3 /* Event+Equatable.swift */; };
+		3ACD91F026CCC47B0075CCF3 /* TestableObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BF26CCC47B0075CCF3 /* TestableObserver.swift */; };
+		3ACD91F126CCC47B0075CCF3 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C026CCC47B0075CCF3 /* Subscription.swift */; };
+		3ACD91F226CCC47B0075CCF3 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C126CCC47B0075CCF3 /* Deprecated.swift */; };
+		3ACD91F326CCC47B0075CCF3 /* Recorded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C226CCC47B0075CCF3 /* Recorded.swift */; };
+		3ACD91F426CCC47B0075CCF3 /* XCTest+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C326CCC47B0075CCF3 /* XCTest+Rx.swift */; };
+		3ACD91F526CCC47B0075CCF3 /* ColdObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C426CCC47B0075CCF3 /* ColdObservable.swift */; };
+		3ACD91F726CCC47B0075CCF3 /* RxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C626CCC47B0075CCF3 /* RxTest.swift */; };
+		3ACD91F826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift */; };
+		3ACD91F926CCC47B0075CCF3 /* TestScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C926CCC47B0075CCF3 /* TestScheduler.swift */; };
+		3ACD91FA26CCC47B0075CCF3 /* Platform.Darwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CC26CCC47B0075CCF3 /* Platform.Darwin.swift */; };
+		3ACD91FB26CCC47B0075CCF3 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CD26CCC47B0075CCF3 /* AtomicInt.swift */; };
+		3ACD91FC26CCC47B0075CCF3 /* Platform.Linux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CE26CCC47B0075CCF3 /* Platform.Linux.swift */; };
+		3ACD91FD26CCC47B0075CCF3 /* RecursiveLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CF26CCC47B0075CCF3 /* RecursiveLock.swift */; };
+		3ACD91FF26CCC47B0075CCF3 /* BlockingObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D126CCC47B0075CCF3 /* BlockingObservable.swift */; };
+		3ACD920026CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D226CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift */; };
+		3ACD920126CCC47B0075CCF3 /* RunLoopLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D326CCC47B0075CCF3 /* RunLoopLock.swift */; };
+		3ACD920226CCC47B0075CCF3 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D426CCC47B0075CCF3 /* Resources.swift */; };
+		3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */; };
+		3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */; };
 		3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A3229EEDFE0096860D /* AppDelegate.swift */; };
 		3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A5229EEDFE0096860D /* ViewController.swift */; };
 		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
@@ -490,18 +524,10 @@
 		3AFF2A0926C699EF007809CD /* TKMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFF2A0826C699EF007809CD /* TKMacro.h */; };
 		3AFF2A0A26C699EF007809CD /* TKMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFF2A0826C699EF007809CD /* TKMacro.h */; };
 		3AFF2A8326C69A96007809CD /* TKAutocompletionResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A0D26C69A96007809CD /* TKAutocompletionResultTest.m */; };
-		3AFF2A8426C69A96007809CD /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1026C69A96007809CD /* TKUIRoutingQueryInputViewModelTest.swift */; };
-		3AFF2A8526C69A96007809CD /* TKUISectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1126C69A96007809CD /* TKUISectionedAlertsTest.swift */; };
-		3AFF2A8626C69A96007809CD /* TKUITripOverviewViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1226C69A96007809CD /* TKUITripOverviewViewModelTest.swift */; };
-		3AFF2A8726C69A96007809CD /* TKUIPolylineRendererStabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1326C69A96007809CD /* TKUIPolylineRendererStabilityTest.swift */; };
-		3AFF2A8826C69A96007809CD /* TKUIModePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1426C69A96007809CD /* TKUIModePickerTest.swift */; };
-		3AFF2A8926C69A96007809CD /* TKShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1626C69A96007809CD /* TKShareHelperTest.swift */; };
 		3AFF2A8A26C69A96007809CD /* TKLocationRestorationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */; };
 		3AFF2A8C26C69A96007809CD /* TKPeliasTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */; };
 		3AFF2A8D26C69A96007809CD /* TKGeoJSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */; };
 		3AFF2A8E26C69A96007809CD /* TKAnnotationClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */; };
-		3AFF2A8F26C69A96007809CD /* TKGeocoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1E26C69A96007809CD /* TKGeocoderTest.swift */; };
-		3AFF2A9026C69A96007809CD /* TKAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1F26C69A96007809CD /* TKAutocompletionRaceTest.swift */; };
 		3AFF2A9326C69A96007809CD /* TKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2226C69A96007809CD /* TKTestCase.swift */; };
 		3AFF2A9426C69A96007809CD /* ASPolygonKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2426C69A96007809CD /* ASPolygonKitTests.swift */; };
 		3AFF2A9526C69A96007809CD /* polygons-tripgo-170217.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2626C69A96007809CD /* polygons-tripgo-170217.json */; };
@@ -528,7 +554,6 @@
 		3AFF2AAB26C69A96007809CD /* locationInfo-carRental.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4026C69A96007809CD /* locationInfo-carRental.json */; };
 		3AFF2AAC26C69A96007809CD /* regionInfo-Sydney.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4126C69A96007809CD /* regionInfo-Sydney.json */; };
 		3AFF2AAD26C69A96007809CD /* location-carPods.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4226C69A96007809CD /* location-carPods.json */; };
-		3AFF2AAE26C69A96007809CD /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4326C69A96007809CD /* alertsTransit-melbourne.json */; };
 		3AFF2AAF26C69A96007809CD /* routing-motorbike.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4426C69A96007809CD /* routing-motorbike.json */; };
 		3AFF2AB026C69A96007809CD /* routing-pt-realtime.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4526C69A96007809CD /* routing-pt-realtime.json */; };
 		3AFF2AB126C69A96007809CD /* hornsbyToSkedGo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4626C69A96007809CD /* hornsbyToSkedGo.json */; };
@@ -558,30 +583,6 @@
 		3AFF2AC926C69A96007809CD /* regionInfo-multi.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5E26C69A96007809CD /* regionInfo-multi.json */; };
 		3AFF2ACA26C69A96007809CD /* routing-pt-wheelchair-reroute.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5F26C69A96007809CD /* routing-pt-wheelchair-reroute.json */; };
 		3AFF2ACB26C69A96007809CD /* routing-cycle-train-cycle.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6026C69A96007809CD /* routing-cycle-train-cycle.json */; };
-		3AFF2ACC26C69A96007809CD /* HotObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6326C69A96007809CD /* HotObservable.swift */; };
-		3AFF2ACD26C69A96007809CD /* TestableObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6426C69A96007809CD /* TestableObservable.swift */; };
-		3AFF2ACE26C69A96007809CD /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6526C69A96007809CD /* Recorded+Event.swift */; };
-		3AFF2ACF26C69A96007809CD /* Any+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6626C69A96007809CD /* Any+Equatable.swift */; };
-		3AFF2AD026C69A96007809CD /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6926C69A96007809CD /* Bag.swift */; };
-		3AFF2AD126C69A96007809CD /* Event+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6A26C69A96007809CD /* Event+Equatable.swift */; };
-		3AFF2AD226C69A96007809CD /* TestableObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6B26C69A96007809CD /* TestableObserver.swift */; };
-		3AFF2AD326C69A96007809CD /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6C26C69A96007809CD /* Subscription.swift */; };
-		3AFF2AD426C69A96007809CD /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6D26C69A96007809CD /* Deprecated.swift */; };
-		3AFF2AD526C69A96007809CD /* Recorded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6E26C69A96007809CD /* Recorded.swift */; };
-		3AFF2AD626C69A96007809CD /* XCTest+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6F26C69A96007809CD /* XCTest+Rx.swift */; };
-		3AFF2AD726C69A96007809CD /* ColdObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7026C69A96007809CD /* ColdObservable.swift */; };
-		3AFF2AD926C69A96007809CD /* RxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7226C69A96007809CD /* RxTest.swift */; };
-		3AFF2ADA26C69A96007809CD /* TestSchedulerVirtualTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7426C69A96007809CD /* TestSchedulerVirtualTimeConverter.swift */; };
-		3AFF2ADB26C69A96007809CD /* TestScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7526C69A96007809CD /* TestScheduler.swift */; };
-		3AFF2ADC26C69A96007809CD /* Platform.Darwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7826C69A96007809CD /* Platform.Darwin.swift */; };
-		3AFF2ADD26C69A96007809CD /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7926C69A96007809CD /* AtomicInt.swift */; };
-		3AFF2ADE26C69A96007809CD /* Platform.Linux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7A26C69A96007809CD /* Platform.Linux.swift */; };
-		3AFF2ADF26C69A96007809CD /* RecursiveLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7B26C69A96007809CD /* RecursiveLock.swift */; };
-		3AFF2AE126C69A96007809CD /* BlockingObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7D26C69A96007809CD /* BlockingObservable.swift */; };
-		3AFF2AE226C69A96007809CD /* ObservableConvertibleType+Blocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7E26C69A96007809CD /* ObservableConvertibleType+Blocking.swift */; };
-		3AFF2AE326C69A96007809CD /* RunLoopLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A7F26C69A96007809CD /* RunLoopLock.swift */; };
-		3AFF2AE426C69A96007809CD /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A8026C69A96007809CD /* Resources.swift */; };
-		3AFF2AE626C69A96007809CD /* BlockingObservable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A8226C69A96007809CD /* BlockingObservable+Operators.swift */; };
 		3AFF2AE726C69B56007809CD /* TKUICardActionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26F626C6975F007809CD /* TKUICardActionStyle.swift */; };
 		3AFF2AE826C69B56007809CD /* TKUISegmentInstructionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26E626C6975F007809CD /* TKUISegmentInstructionsCard.swift */; };
 		3AFF2AE926C69B56007809CD /* TKUIHomeCard+Customizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF270226C6975F007809CD /* TKUIHomeCard+Customizer.swift */; };
@@ -945,13 +946,58 @@
 		3A6DF070202C8C6E0084CB2C /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A932EB323BF3E67004AA154 /* Trip Planning.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Trip Planning.md"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIShareHelperTest.swift; sourceTree = "<group>"; };
+		3ACD91A226CCC47B0075CCF3 /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
+		3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputViewModelTest.swift; sourceTree = "<group>"; };
+		3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapManagerHelperTest.swift; sourceTree = "<group>"; };
+		3ACD91A526CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertsTest.swift; sourceTree = "<group>"; };
+		3ACD91A626CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionRaceTest.swift; sourceTree = "<group>"; };
+		3ACD91A726CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewViewModelTest.swift; sourceTree = "<group>"; };
+		3ACD91A826CCC47B0075CCF3 /* TKUIGeocoderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIGeocoderTest.swift; sourceTree = "<group>"; };
+		3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
+		3ACD91AB26CCC47B0075CCF3 /* routing-motorbike.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-motorbike.json"; sourceTree = "<group>"; };
+		3ACD91AC26CCC47B0075CCF3 /* routing-pt-realtime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-realtime.json"; sourceTree = "<group>"; };
+		3ACD91AD26CCC47B0075CCF3 /* routing-pt-continuation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-continuation.json"; sourceTree = "<group>"; };
+		3ACD91AE26CCC47B0075CCF3 /* routing-pt-platforms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-platforms.json"; sourceTree = "<group>"; };
+		3ACD91AF26CCC47B0075CCF3 /* routing-pt-impossible.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-impossible.json"; sourceTree = "<group>"; };
+		3ACD91B026CCC47B0075CCF3 /* routing-pt-cancelled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-cancelled.json"; sourceTree = "<group>"; };
+		3ACD91B126CCC47B0075CCF3 /* alertsTransit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alertsTransit.json; sourceTree = "<group>"; };
+		3ACD91B226CCC47B0075CCF3 /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
+		3ACD91B326CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRendererStabilityTest.swift; sourceTree = "<group>"; };
+		3ACD91B426CCC47B0075CCF3 /* TKUIModePickerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePickerTest.swift; sourceTree = "<group>"; };
+		3ACD91B726CCC47B0075CCF3 /* HotObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotObservable.swift; sourceTree = "<group>"; };
+		3ACD91B826CCC47B0075CCF3 /* TestableObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObservable.swift; sourceTree = "<group>"; };
+		3ACD91B926CCC47B0075CCF3 /* Recorded+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recorded+Event.swift"; sourceTree = "<group>"; };
+		3ACD91BA26CCC47B0075CCF3 /* Any+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Any+Equatable.swift"; sourceTree = "<group>"; };
+		3ACD91BD26CCC47B0075CCF3 /* Bag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
+		3ACD91BE26CCC47B0075CCF3 /* Event+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+Equatable.swift"; sourceTree = "<group>"; };
+		3ACD91BF26CCC47B0075CCF3 /* TestableObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObserver.swift; sourceTree = "<group>"; };
+		3ACD91C026CCC47B0075CCF3 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		3ACD91C126CCC47B0075CCF3 /* Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
+		3ACD91C226CCC47B0075CCF3 /* Recorded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorded.swift; sourceTree = "<group>"; };
+		3ACD91C326CCC47B0075CCF3 /* XCTest+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Rx.swift"; sourceTree = "<group>"; };
+		3ACD91C426CCC47B0075CCF3 /* ColdObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColdObservable.swift; sourceTree = "<group>"; };
+		3ACD91C526CCC47B0075CCF3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3ACD91C626CCC47B0075CCF3 /* RxTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTest.swift; sourceTree = "<group>"; };
+		3ACD91C826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSchedulerVirtualTimeConverter.swift; sourceTree = "<group>"; };
+		3ACD91C926CCC47B0075CCF3 /* TestScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScheduler.swift; sourceTree = "<group>"; };
+		3ACD91CC26CCC47B0075CCF3 /* Platform.Darwin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Darwin.swift; sourceTree = "<group>"; };
+		3ACD91CD26CCC47B0075CCF3 /* AtomicInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
+		3ACD91CE26CCC47B0075CCF3 /* Platform.Linux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Linux.swift; sourceTree = "<group>"; };
+		3ACD91CF26CCC47B0075CCF3 /* RecursiveLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveLock.swift; sourceTree = "<group>"; };
+		3ACD91D026CCC47B0075CCF3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3ACD91D126CCC47B0075CCF3 /* BlockingObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingObservable.swift; sourceTree = "<group>"; };
+		3ACD91D226CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+Blocking.swift"; sourceTree = "<group>"; };
+		3ACD91D326CCC47B0075CCF3 /* RunLoopLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopLock.swift; sourceTree = "<group>"; };
+		3ACD91D426CCC47B0075CCF3 /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		3ACD91D526CCC47B0075CCF3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
 		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1503,18 +1549,10 @@
 		3AFF283326C6975F007809CD /* TKInterAppCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKInterAppCommunicator.swift; sourceTree = "<group>"; };
 		3AFF2A0826C699EF007809CD /* TKMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKMacro.h; sourceTree = "<group>"; };
 		3AFF2A0D26C69A96007809CD /* TKAutocompletionResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAutocompletionResultTest.m; sourceTree = "<group>"; };
-		3AFF2A1026C69A96007809CD /* TKUIRoutingQueryInputViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputViewModelTest.swift; sourceTree = "<group>"; };
-		3AFF2A1126C69A96007809CD /* TKUISectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertsTest.swift; sourceTree = "<group>"; };
-		3AFF2A1226C69A96007809CD /* TKUITripOverviewViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewViewModelTest.swift; sourceTree = "<group>"; };
-		3AFF2A1326C69A96007809CD /* TKUIPolylineRendererStabilityTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRendererStabilityTest.swift; sourceTree = "<group>"; };
-		3AFF2A1426C69A96007809CD /* TKUIModePickerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePickerTest.swift; sourceTree = "<group>"; };
-		3AFF2A1626C69A96007809CD /* TKShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKShareHelperTest.swift; sourceTree = "<group>"; };
 		3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRestorationTest.swift; sourceTree = "<group>"; };
 		3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPeliasTitleTest.swift; sourceTree = "<group>"; };
 		3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGeoJSONTest.swift; sourceTree = "<group>"; };
 		3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
-		3AFF2A1E26C69A96007809CD /* TKGeocoderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGeocoderTest.swift; sourceTree = "<group>"; };
-		3AFF2A1F26C69A96007809CD /* TKAutocompletionRaceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAutocompletionRaceTest.swift; sourceTree = "<group>"; };
 		3AFF2A2226C69A96007809CD /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
 		3AFF2A2426C69A96007809CD /* ASPolygonKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASPolygonKitTests.swift; sourceTree = "<group>"; };
 		3AFF2A2626C69A96007809CD /* polygons-tripgo-170217.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "polygons-tripgo-170217.json"; sourceTree = "<group>"; };
@@ -1542,7 +1580,6 @@
 		3AFF2A4026C69A96007809CD /* locationInfo-carRental.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental.json"; sourceTree = "<group>"; };
 		3AFF2A4126C69A96007809CD /* regionInfo-Sydney.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Sydney.json"; sourceTree = "<group>"; };
 		3AFF2A4226C69A96007809CD /* location-carPods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "location-carPods.json"; sourceTree = "<group>"; };
-		3AFF2A4326C69A96007809CD /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
 		3AFF2A4426C69A96007809CD /* routing-motorbike.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-motorbike.json"; sourceTree = "<group>"; };
 		3AFF2A4526C69A96007809CD /* routing-pt-realtime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-realtime.json"; sourceTree = "<group>"; };
 		3AFF2A4626C69A96007809CD /* hornsbyToSkedGo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hornsbyToSkedGo.json; sourceTree = "<group>"; };
@@ -1572,33 +1609,6 @@
 		3AFF2A5E26C69A96007809CD /* regionInfo-multi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-multi.json"; sourceTree = "<group>"; };
 		3AFF2A5F26C69A96007809CD /* routing-pt-wheelchair-reroute.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-wheelchair-reroute.json"; sourceTree = "<group>"; };
 		3AFF2A6026C69A96007809CD /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
-		3AFF2A6326C69A96007809CD /* HotObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotObservable.swift; sourceTree = "<group>"; };
-		3AFF2A6426C69A96007809CD /* TestableObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObservable.swift; sourceTree = "<group>"; };
-		3AFF2A6526C69A96007809CD /* Recorded+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recorded+Event.swift"; sourceTree = "<group>"; };
-		3AFF2A6626C69A96007809CD /* Any+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Any+Equatable.swift"; sourceTree = "<group>"; };
-		3AFF2A6926C69A96007809CD /* Bag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
-		3AFF2A6A26C69A96007809CD /* Event+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+Equatable.swift"; sourceTree = "<group>"; };
-		3AFF2A6B26C69A96007809CD /* TestableObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObserver.swift; sourceTree = "<group>"; };
-		3AFF2A6C26C69A96007809CD /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
-		3AFF2A6D26C69A96007809CD /* Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
-		3AFF2A6E26C69A96007809CD /* Recorded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorded.swift; sourceTree = "<group>"; };
-		3AFF2A6F26C69A96007809CD /* XCTest+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Rx.swift"; sourceTree = "<group>"; };
-		3AFF2A7026C69A96007809CD /* ColdObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColdObservable.swift; sourceTree = "<group>"; };
-		3AFF2A7126C69A96007809CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AFF2A7226C69A96007809CD /* RxTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTest.swift; sourceTree = "<group>"; };
-		3AFF2A7426C69A96007809CD /* TestSchedulerVirtualTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSchedulerVirtualTimeConverter.swift; sourceTree = "<group>"; };
-		3AFF2A7526C69A96007809CD /* TestScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScheduler.swift; sourceTree = "<group>"; };
-		3AFF2A7826C69A96007809CD /* Platform.Darwin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Darwin.swift; sourceTree = "<group>"; };
-		3AFF2A7926C69A96007809CD /* AtomicInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
-		3AFF2A7A26C69A96007809CD /* Platform.Linux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Linux.swift; sourceTree = "<group>"; };
-		3AFF2A7B26C69A96007809CD /* RecursiveLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveLock.swift; sourceTree = "<group>"; };
-		3AFF2A7C26C69A96007809CD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3AFF2A7D26C69A96007809CD /* BlockingObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingObservable.swift; sourceTree = "<group>"; };
-		3AFF2A7E26C69A96007809CD /* ObservableConvertibleType+Blocking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+Blocking.swift"; sourceTree = "<group>"; };
-		3AFF2A7F26C69A96007809CD /* RunLoopLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopLock.swift; sourceTree = "<group>"; };
-		3AFF2A8026C69A96007809CD /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		3AFF2A8126C69A96007809CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AFF2A8226C69A96007809CD /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
 		3AFF2BFC26C6A2A2007809CD /* TKLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLog.swift; sourceTree = "<group>"; };
 		D31410982395DFE7009498C5 /* ExampleCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCustomizer.swift; sourceTree = "<group>"; };
 		D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteManager.swift; sourceTree = "<group>"; };
@@ -1671,7 +1681,6 @@
 		3A6DF065202C8C1F0084CB2C /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				3A932EB223BF3E67004AA154 /* api */,
 				3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */,
 				3A6DF068202C8C340084CB2C /* README.md */,
 				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
@@ -1679,15 +1688,6 @@
 				3A6DF069202C8C340084CB2C /* TripKitUI.podspec */,
 			);
 			name = Metadata;
-			sourceTree = "<group>";
-		};
-		3A932EB223BF3E67004AA154 /* api */ = {
-			isa = PBXGroup;
-			children = (
-				3A932EB323BF3E67004AA154 /* Trip Planning.md */,
-			);
-			name = api;
-			path = docs/api;
 			sourceTree = "<group>";
 		};
 		3AB6C6161D1CD0060089F687 = {
@@ -1713,6 +1713,123 @@
 				3ACF47A1229EEDFE0096860D /* TripKitUIExample.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3ACD91A026CCC47B0075CCF3 /* TripKitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91A926CCC47B0075CCF3 /* Data */,
+				3ACD91A226CCC47B0075CCF3 /* TKTestCase.swift */,
+				3ACD91A626CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift */,
+				3ACD91A826CCC47B0075CCF3 /* TKUIGeocoderTest.swift */,
+				3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */,
+				3ACD91B426CCC47B0075CCF3 /* TKUIModePickerTest.swift */,
+				3ACD91B326CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift */,
+				3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */,
+				3ACD91A526CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift */,
+				3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */,
+				3ACD91A726CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift */,
+				3ACD91B526CCC47B0075CCF3 /* vendor */,
+			);
+			path = TripKitUITests;
+			sourceTree = "<group>";
+		};
+		3ACD91A926CCC47B0075CCF3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */,
+				3ACD91AB26CCC47B0075CCF3 /* routing-motorbike.json */,
+				3ACD91AC26CCC47B0075CCF3 /* routing-pt-realtime.json */,
+				3ACD91AD26CCC47B0075CCF3 /* routing-pt-continuation.json */,
+				3ACD91AE26CCC47B0075CCF3 /* routing-pt-platforms.json */,
+				3ACD91AF26CCC47B0075CCF3 /* routing-pt-impossible.json */,
+				3ACD91B026CCC47B0075CCF3 /* routing-pt-cancelled.json */,
+				3ACD91B126CCC47B0075CCF3 /* alertsTransit.json */,
+				3ACD91B226CCC47B0075CCF3 /* routing-cycle-train-cycle.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3ACD91B526CCC47B0075CCF3 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91B626CCC47B0075CCF3 /* RxTest */,
+				3ACD91CA26CCC47B0075CCF3 /* RxBlocking */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		3ACD91B626CCC47B0075CCF3 /* RxTest */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91BB26CCC47B0075CCF3 /* Platform */,
+				3ACD91C726CCC47B0075CCF3 /* Schedulers */,
+				3ACD91BA26CCC47B0075CCF3 /* Any+Equatable.swift */,
+				3ACD91C426CCC47B0075CCF3 /* ColdObservable.swift */,
+				3ACD91C126CCC47B0075CCF3 /* Deprecated.swift */,
+				3ACD91BE26CCC47B0075CCF3 /* Event+Equatable.swift */,
+				3ACD91B726CCC47B0075CCF3 /* HotObservable.swift */,
+				3ACD91C526CCC47B0075CCF3 /* Info.plist */,
+				3ACD91C226CCC47B0075CCF3 /* Recorded.swift */,
+				3ACD91B926CCC47B0075CCF3 /* Recorded+Event.swift */,
+				3ACD91C626CCC47B0075CCF3 /* RxTest.swift */,
+				3ACD91C026CCC47B0075CCF3 /* Subscription.swift */,
+				3ACD91B826CCC47B0075CCF3 /* TestableObservable.swift */,
+				3ACD91BF26CCC47B0075CCF3 /* TestableObserver.swift */,
+				3ACD91C326CCC47B0075CCF3 /* XCTest+Rx.swift */,
+			);
+			path = RxTest;
+			sourceTree = "<group>";
+		};
+		3ACD91BB26CCC47B0075CCF3 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91BC26CCC47B0075CCF3 /* DataStructures */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		3ACD91BC26CCC47B0075CCF3 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91BD26CCC47B0075CCF3 /* Bag.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		3ACD91C726CCC47B0075CCF3 /* Schedulers */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91C826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift */,
+				3ACD91C926CCC47B0075CCF3 /* TestScheduler.swift */,
+			);
+			path = Schedulers;
+			sourceTree = "<group>";
+		};
+		3ACD91CA26CCC47B0075CCF3 /* RxBlocking */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91CB26CCC47B0075CCF3 /* Platform */,
+				3ACD91D126CCC47B0075CCF3 /* BlockingObservable.swift */,
+				3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */,
+				3ACD91D526CCC47B0075CCF3 /* Info.plist */,
+				3ACD91D226CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift */,
+				3ACD91D026CCC47B0075CCF3 /* README.md */,
+				3ACD91D426CCC47B0075CCF3 /* Resources.swift */,
+				3ACD91D326CCC47B0075CCF3 /* RunLoopLock.swift */,
+			);
+			path = RxBlocking;
+			sourceTree = "<group>";
+		};
+		3ACD91CB26CCC47B0075CCF3 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD91CC26CCC47B0075CCF3 /* Platform.Darwin.swift */,
+				3ACD91CD26CCC47B0075CCF3 /* AtomicInt.swift */,
+				3ACD91CE26CCC47B0075CCF3 /* Platform.Linux.swift */,
+				3ACD91CF26CCC47B0075CCF3 /* RecursiveLock.swift */,
+			);
+			path = Platform;
 			sourceTree = "<group>";
 		};
 		3ACF46FE2297EC820096860D /* Examples */ = {
@@ -2660,6 +2777,7 @@
 			children = (
 				3AFF2A0C26C69A96007809CD /* TripKitObjcTests */,
 				3AFF2A0E26C69A96007809CD /* TripKitTests */,
+				3ACD91A026CCC47B0075CCF3 /* TripKitUITests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2681,33 +2799,10 @@
 				3AFF2A1726C69A96007809CD /* restoration */,
 				3AFF2A2C26C69A96007809CD /* routing */,
 				3AFF2A1926C69A96007809CD /* searching */,
-				3AFF2A1526C69A96007809CD /* sharing */,
 				3AFF2A2A26C69A96007809CD /* Supporting Files */,
 				3AFF2A2226C69A96007809CD /* TKTestCase.swift */,
-				3AFF2A0F26C69A96007809CD /* UI */,
-				3AFF2A6126C69A96007809CD /* vendor */,
 			);
 			path = TripKitTests;
-			sourceTree = "<group>";
-		};
-		3AFF2A0F26C69A96007809CD /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A1426C69A96007809CD /* TKUIModePickerTest.swift */,
-				3AFF2A1326C69A96007809CD /* TKUIPolylineRendererStabilityTest.swift */,
-				3AFF2A1026C69A96007809CD /* TKUIRoutingQueryInputViewModelTest.swift */,
-				3AFF2A1126C69A96007809CD /* TKUISectionedAlertsTest.swift */,
-				3AFF2A1226C69A96007809CD /* TKUITripOverviewViewModelTest.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		3AFF2A1526C69A96007809CD /* sharing */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A1626C69A96007809CD /* TKShareHelperTest.swift */,
-			);
-			path = sharing;
 			sourceTree = "<group>";
 		};
 		3AFF2A1726C69A96007809CD /* restoration */ = {
@@ -2722,8 +2817,6 @@
 			isa = PBXGroup;
 			children = (
 				3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */,
-				3AFF2A1F26C69A96007809CD /* TKAutocompletionRaceTest.swift */,
-				3AFF2A1E26C69A96007809CD /* TKGeocoderTest.swift */,
 				3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */,
 				3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */,
 			);
@@ -2789,7 +2882,6 @@
 		3AFF2A3C26C69A96007809CD /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3AFF2A4326C69A96007809CD /* alertsTransit-melbourne.json */,
 				3AFF2A5C26C69A96007809CD /* alertsTransit.json */,
 				3AFF2A5326C69A96007809CD /* berowraToHornsby.json */,
 				3AFF2A4C26C69A96007809CD /* berowraToHornsbyService.json */,
@@ -2830,88 +2922,6 @@
 				3AFF2A5426C69A96007809CD /* service-for-park-ride.json */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		3AFF2A6126C69A96007809CD /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A7626C69A96007809CD /* RxBlocking */,
-				3AFF2A6226C69A96007809CD /* RxTest */,
-			);
-			path = vendor;
-			sourceTree = "<group>";
-		};
-		3AFF2A6226C69A96007809CD /* RxTest */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A6626C69A96007809CD /* Any+Equatable.swift */,
-				3AFF2A7026C69A96007809CD /* ColdObservable.swift */,
-				3AFF2A6D26C69A96007809CD /* Deprecated.swift */,
-				3AFF2A6A26C69A96007809CD /* Event+Equatable.swift */,
-				3AFF2A6326C69A96007809CD /* HotObservable.swift */,
-				3AFF2A7126C69A96007809CD /* Info.plist */,
-				3AFF2A6726C69A96007809CD /* Platform */,
-				3AFF2A6E26C69A96007809CD /* Recorded.swift */,
-				3AFF2A6526C69A96007809CD /* Recorded+Event.swift */,
-				3AFF2A7226C69A96007809CD /* RxTest.swift */,
-				3AFF2A7326C69A96007809CD /* Schedulers */,
-				3AFF2A6C26C69A96007809CD /* Subscription.swift */,
-				3AFF2A6426C69A96007809CD /* TestableObservable.swift */,
-				3AFF2A6B26C69A96007809CD /* TestableObserver.swift */,
-				3AFF2A6F26C69A96007809CD /* XCTest+Rx.swift */,
-			);
-			path = RxTest;
-			sourceTree = "<group>";
-		};
-		3AFF2A6726C69A96007809CD /* Platform */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A6826C69A96007809CD /* DataStructures */,
-			);
-			path = Platform;
-			sourceTree = "<group>";
-		};
-		3AFF2A6826C69A96007809CD /* DataStructures */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A6926C69A96007809CD /* Bag.swift */,
-			);
-			path = DataStructures;
-			sourceTree = "<group>";
-		};
-		3AFF2A7326C69A96007809CD /* Schedulers */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A7526C69A96007809CD /* TestScheduler.swift */,
-				3AFF2A7426C69A96007809CD /* TestSchedulerVirtualTimeConverter.swift */,
-			);
-			path = Schedulers;
-			sourceTree = "<group>";
-		};
-		3AFF2A7626C69A96007809CD /* RxBlocking */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A7726C69A96007809CD /* Platform */,
-				3AFF2A7D26C69A96007809CD /* BlockingObservable.swift */,
-				3AFF2A8226C69A96007809CD /* BlockingObservable+Operators.swift */,
-				3AFF2A8126C69A96007809CD /* Info.plist */,
-				3AFF2A7E26C69A96007809CD /* ObservableConvertibleType+Blocking.swift */,
-				3AFF2A7C26C69A96007809CD /* README.md */,
-				3AFF2A8026C69A96007809CD /* Resources.swift */,
-				3AFF2A7F26C69A96007809CD /* RunLoopLock.swift */,
-			);
-			path = RxBlocking;
-			sourceTree = "<group>";
-		};
-		3AFF2A7726C69A96007809CD /* Platform */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A7926C69A96007809CD /* AtomicInt.swift */,
-				3AFF2A7826C69A96007809CD /* Platform.Darwin.swift */,
-				3AFF2A7A26C69A96007809CD /* Platform.Linux.swift */,
-				3AFF2A7B26C69A96007809CD /* RecursiveLock.swift */,
-			);
-			path = Platform;
 			sourceTree = "<group>";
 		};
 		D314109B2395E779009498C5 /* Autocompleter */ = {
@@ -3308,7 +3318,6 @@
 				3AFF2AC426C69A96007809CD /* routing-pt-cancelled.json in Resources */,
 				3AFF2AB626C69A96007809CD /* regionInfo-Vancouver.json in Resources */,
 				3AFF2AB126C69A96007809CD /* hornsbyToSkedGo.json in Resources */,
-				3AFF2AAE26C69A96007809CD /* alertsTransit-melbourne.json in Resources */,
 				3AFF2AB926C69A96007809CD /* routing-pt-platforms.json in Resources */,
 				3AFF2AB726C69A96007809CD /* berowraToHornsbyService.json in Resources */,
 				3AFF2ACB26C69A96007809CD /* routing-cycle-train-cycle.json in Resources */,
@@ -3331,6 +3340,7 @@
 				3A1AABB626CB78DE00FDDB06 /* pelias-de.json in Resources */,
 				3AFF2AC126C69A96007809CD /* locationInfo-carRental-days.json in Resources */,
 				3AFF2AB026C69A96007809CD /* routing-pt-realtime.json in Resources */,
+				3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */,
 				3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */,
 				3AFF2AC826C69A96007809CD /* routing-walk.json in Resources */,
 				3AFF2A9726C69A96007809CD /* polygons-scandinavia-170217.json in Resources */,
@@ -4031,59 +4041,60 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AFF2A8426C69A96007809CD /* TKUIRoutingQueryInputViewModelTest.swift in Sources */,
-				3AFF2AE226C69A96007809CD /* ObservableConvertibleType+Blocking.swift in Sources */,
-				3AFF2A8626C69A96007809CD /* TKUITripOverviewViewModelTest.swift in Sources */,
+				3ACD91E826CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift in Sources */,
+				3ACD920026CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift in Sources */,
+				3ACD91FF26CCC47B0075CCF3 /* BlockingObservable.swift in Sources */,
+				3ACD91EF26CCC47B0075CCF3 /* Event+Equatable.swift in Sources */,
+				3ACD91ED26CCC47B0075CCF3 /* Any+Equatable.swift in Sources */,
 				3AFF2AA426C69A96007809CD /* TKBuzzInfoProviderTest.swift in Sources */,
 				3AFF2A9326C69A96007809CD /* TKTestCase.swift in Sources */,
-				3AFF2ACE26C69A96007809CD /* Recorded+Event.swift in Sources */,
-				3AFF2A8526C69A96007809CD /* TKUISectionedAlertsTest.swift in Sources */,
-				3AFF2AD026C69A96007809CD /* Bag.swift in Sources */,
-				3AFF2AE126C69A96007809CD /* BlockingObservable.swift in Sources */,
-				3AFF2A8826C69A96007809CD /* TKUIModePickerTest.swift in Sources */,
-				3AFF2ACD26C69A96007809CD /* TestableObservable.swift in Sources */,
+				3ACD91F326CCC47B0075CCF3 /* Recorded.swift in Sources */,
 				3AFF2A8A26C69A96007809CD /* TKLocationRestorationTest.swift in Sources */,
 				3AFF2AA726C69A96007809CD /* TKPolylineDecoderTest.swift in Sources */,
-				3AFF2AD126C69A96007809CD /* Event+Equatable.swift in Sources */,
-				3AFF2AD526C69A96007809CD /* Recorded.swift in Sources */,
 				3AFF2AA326C69A96007809CD /* TKRegionManagerTest.swift in Sources */,
 				3AFF2A9F26C69A96007809CD /* TKJSONSanitizerTest.swift in Sources */,
-				3AFF2AD726C69A96007809CD /* ColdObservable.swift in Sources */,
-				3AFF2ADA26C69A96007809CD /* TestSchedulerVirtualTimeConverter.swift in Sources */,
-				3AFF2AD426C69A96007809CD /* Deprecated.swift in Sources */,
+				3ACD91F526CCC47B0075CCF3 /* ColdObservable.swift in Sources */,
 				3AFF2AA226C69A96007809CD /* TKLocationInfoTest.swift in Sources */,
+				3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */,
 				3AFF2AA126C69A96007809CD /* TKModeHelperTest.swift in Sources */,
-				3AFF2AD626C69A96007809CD /* XCTest+Rx.swift in Sources */,
 				3AFF2AA026C69A96007809CD /* TKBookingAvailabilityTest.swift in Sources */,
-				3AFF2AD226C69A96007809CD /* TestableObserver.swift in Sources */,
-				3AFF2AE626C69A96007809CD /* BlockingObservable+Operators.swift in Sources */,
-				3AFF2AE426C69A96007809CD /* Resources.swift in Sources */,
 				3AFF2A9B26C69A96007809CD /* TKWaypointRouterTest.swift in Sources */,
-				3AFF2A8726C69A96007809CD /* TKUIPolylineRendererStabilityTest.swift in Sources */,
-				3AFF2AD326C69A96007809CD /* Subscription.swift in Sources */,
+				3ACD91EB26CCC47B0075CCF3 /* TestableObservable.swift in Sources */,
+				3ACD91DA26CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift in Sources */,
+				3ACD920126CCC47B0075CCF3 /* RunLoopLock.swift in Sources */,
+				3ACD91DC26CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift in Sources */,
 				3AFF2A8D26C69A96007809CD /* TKGeoJSONTest.swift in Sources */,
+				3ACD91F126CCC47B0075CCF3 /* Subscription.swift in Sources */,
+				3ACD91E926CCC47B0075CCF3 /* TKUIModePickerTest.swift in Sources */,
 				3AFF2A8E26C69A96007809CD /* TKAnnotationClusterer.swift in Sources */,
+				3ACD91FD26CCC47B0075CCF3 /* RecursiveLock.swift in Sources */,
 				3AFF2A9426C69A96007809CD /* ASPolygonKitTests.swift in Sources */,
+				3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */,
 				3AFF2AA526C69A96007809CD /* RoutingAPIParserTest.swift in Sources */,
+				3ACD91F726CCC47B0075CCF3 /* RxTest.swift in Sources */,
+				3ACD91FB26CCC47B0075CCF3 /* AtomicInt.swift in Sources */,
 				3AFF2A9E26C69A96007809CD /* TKBookingDecodingTest.swift in Sources */,
 				3AFF2A9D26C69A96007809CD /* TKAlertModelTest.swift in Sources */,
-				3AFF2A8926C69A96007809CD /* TKShareHelperTest.swift in Sources */,
-				3AFF2ADE26C69A96007809CD /* Platform.Linux.swift in Sources */,
-				3AFF2ADB26C69A96007809CD /* TestScheduler.swift in Sources */,
-				3AFF2ADD26C69A96007809CD /* AtomicInt.swift in Sources */,
-				3AFF2ACC26C69A96007809CD /* HotObservable.swift in Sources */,
+				3ACD91F826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift in Sources */,
+				3ACD91DE26CCC47B0075CCF3 /* TKUIGeocoderTest.swift in Sources */,
+				3ACD91FC26CCC47B0075CCF3 /* Platform.Linux.swift in Sources */,
+				3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */,
+				3ACD91EC26CCC47B0075CCF3 /* Recorded+Event.swift in Sources */,
 				3AFF2A8326C69A96007809CD /* TKAutocompletionResultTest.m in Sources */,
-				3AFF2A8F26C69A96007809CD /* TKGeocoderTest.swift in Sources */,
+				3ACD920226CCC47B0075CCF3 /* Resources.swift in Sources */,
+				3ACD91EA26CCC47B0075CCF3 /* HotObservable.swift in Sources */,
+				3ACD91DD26CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift in Sources */,
 				3AFF2A9A26C69A96007809CD /* TKRouterTest.swift in Sources */,
-				3AFF2A9026C69A96007809CD /* TKAutocompletionRaceTest.swift in Sources */,
-				3AFF2AD926C69A96007809CD /* RxTest.swift in Sources */,
+				3ACD91F926CCC47B0075CCF3 /* TestScheduler.swift in Sources */,
+				3ACD91EE26CCC47B0075CCF3 /* Bag.swift in Sources */,
+				3ACD91F426CCC47B0075CCF3 /* XCTest+Rx.swift in Sources */,
+				3ACD91DB26CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift in Sources */,
+				3ACD91FA26CCC47B0075CCF3 /* Platform.Darwin.swift in Sources */,
 				3AFF2AA626C69A96007809CD /* TKDeparturesModelTest.swift in Sources */,
 				3AFF2A8C26C69A96007809CD /* TKPeliasTitleTest.swift in Sources */,
-				3AFF2ACF26C69A96007809CD /* Any+Equatable.swift in Sources */,
+				3ACD91F226CCC47B0075CCF3 /* Deprecated.swift in Sources */,
 				3AFF2A9C26C69A96007809CD /* TKSettingsTest.swift in Sources */,
-				3AFF2ADC26C69A96007809CD /* Platform.Darwin.swift in Sources */,
-				3AFF2AE326C69A96007809CD /* RunLoopLock.swift in Sources */,
-				3AFF2ADF26C69A96007809CD /* RecursiveLock.swift in Sources */,
+				3ACD91F026CCC47B0075CCF3 /* TestableObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

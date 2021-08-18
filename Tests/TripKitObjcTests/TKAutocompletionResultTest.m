@@ -8,7 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
+#if SWIFT_PACKAGE
 @import TripKitObjc;
+#else
+@import TripKit;
+#endif
 
 @interface TKAutocompletionResultTest : XCTestCase
 
