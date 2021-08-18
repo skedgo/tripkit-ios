@@ -7,7 +7,7 @@ on:
     branches: [ main, spm ]
 
 jobs:
-  build:
+  build_spm:
 
     runs-on: macos-11
 
@@ -15,5 +15,34 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: swift build -v --target TripKit
-    # - name: Run tests
-    #   run: swift test -v
+
+  build_xcode:
+
+    runs-on: macos-11
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build TripKit Mac
+      run: xcodebuild build -project TripKit.xcodeproj -scheme "TripKit-macOS"
+    - name: Build TripKitUI iOS
+      run: xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
+    - name: Build TripKitInterApp iOS
+      run: xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
+
+  test_xcode:
+
+    runs-on: macos-11
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run tests
+      run: xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
+
+  examples:
+    runs-on: macos-11
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run all TripKit iOS tests
+      run: xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
+
