@@ -288,18 +288,18 @@ public final class TKRoutingParser {
           }
           let isNewTemplate = !existingTemplateHashCodes.contains(hashCode)
           
-          var reference: SegmentReference! = nil
+          var maybeReference: SegmentReference! = nil
           if mode.isUpdate {
             if let existing = unmatchedSegmentReferencesByHashCode.removeValue(forKey: hashCode)  {
-              reference = existing
+              maybeReference = existing
             } else {
               trip.clearSegmentCaches()
             }
           }
-          if reference == nil, (isNewTemplate || SegmentTemplate.segmentTemplate(withHashCode: hashCode, existsIn: context)) {
-            reference = SegmentReference(context: context)
+          if maybeReference == nil, (isNewTemplate || SegmentTemplate.segmentTemplate(withHashCode: hashCode, existsIn: context)) {
+            maybeReference = SegmentReference(context: context)
           }
-          guard let reference = reference else {
+          guard let reference = maybeReference else {
             continue
           }
           
