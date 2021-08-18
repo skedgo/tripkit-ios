@@ -81,7 +81,7 @@ extension OptionalISO8601OrSecondsSince1970: Equatable {}
 extension OptionalISO8601OrSecondsSince1970: Hashable {}
 
 extension KeyedDecodingContainer {
-  func decode(_ type: OptionalISO8601OrSecondsSince1970.Type, forKey key: Self.Key) throws -> OptionalISO8601OrSecondsSince1970 {
+  public func decode(_ type: OptionalISO8601OrSecondsSince1970.Type, forKey key: Self.Key) throws -> OptionalISO8601OrSecondsSince1970 {
       return try decodeIfPresent(type, forKey: key) ?? OptionalISO8601OrSecondsSince1970(wrappedValue: nil)
   }
 }
