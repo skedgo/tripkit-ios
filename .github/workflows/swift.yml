@@ -36,6 +36,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
+      env:
+        TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
       run: xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
 
   examples:
@@ -43,6 +45,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Run all TripKit iOS tests
-      run: xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
-
+    - name: Build TripKitUIExample
+      run: xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
