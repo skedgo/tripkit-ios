@@ -1,5 +1,5 @@
 //
-//  SGAutocompletionTest.swift
+//  TKUIGeocoderTest.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 24/11/2015.
@@ -13,7 +13,7 @@ import RxSwift
 
 @testable import TripKit
 
-class TKGeocoderTest: XCTestCase {
+class TKUIGeocoderTest: XCTestCase {
   var geocoder: TKAggregateGeocoder!
   
   // sample regions for testing
@@ -111,7 +111,7 @@ class TKGeocoderTest: XCTestCase {
 
 // MARK: - Helpers
 
-extension TKGeocoderTest {
+extension TKUIGeocoderTest {
   
   enum Error: Swift.Error {
     case badResult(String)
@@ -188,11 +188,11 @@ extension TKGeocoding {
           
           // none should be bad
           for bad in none where title.contains(bad) {
-            throw TKGeocoderTest.Error.badResult("Result '\(title)' is bad as it contains '\(bad)'")
+            throw TKUIGeocoderTest.Error.badResult("Result '\(title)' is bad as it contains '\(bad)'")
           }
         }
         if !foundGood {
-          throw TKGeocoderTest.Error.noGoodResult("Found no result containing '\(any)'")
+          throw TKUIGeocoderTest.Error.noGoodResult("Found no result containing '\(any)'")
         }
       }
   }
@@ -222,7 +222,7 @@ extension TKGeocoding {
             return
           }
         }
-        throw TKGeocoderTest.Error.bestIsNoGood("Best match '\(String(describing: best?.title))' does not have good title.")
+        throw TKUIGeocoderTest.Error.bestIsNoGood("Best match '\(String(describing: best?.title))' does not have good title.")
     }
   }
 }

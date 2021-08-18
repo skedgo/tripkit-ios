@@ -1,5 +1,5 @@
 //
-//  TKAutocompletionRaceTest.swift
+//  TKUIAutocompletionRaceTest.swift
 //  TripKitTests
 //
 //  Created by Adrian Schönig on 15.05.19.
@@ -15,7 +15,7 @@ import RxCocoa
 
 fileprivate let 💥 = [-1]
 
-class TKAutocompletionRaceTest: XCTestCase {
+class TKUIAutocompletionRaceTest: XCTestCase {
   
   func testBestInFirstBatch() throws {
     let simulated = runSimulation(cutOff: 5, fastSpots: 2, [
@@ -136,7 +136,7 @@ class TKAutocompletionRaceTest: XCTestCase {
 
 // MARK: - Running the simulations
 
-extension TKAutocompletionRaceTest {
+extension TKUIAutocompletionRaceTest {
   
   private struct InputError: Error {}
   

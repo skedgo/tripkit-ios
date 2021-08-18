@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "TKAutocompletionResult.h"
+@import TripKitObjc;
 
 @interface TKAutocompletionResultTest : XCTestCase
 

@@ -155,6 +155,8 @@ extension MKPolygon {
   
 }
 
+#if os(iOS)
+
 extension MKPolygon : CustomPlaygroundDisplayConvertible {
   public var playgroundDescription: Any {
     return quickLookImage ?? description
@@ -185,3 +187,5 @@ extension MKPolygon : CustomPlaygroundDisplayConvertible {
   }
 
 }
+
+#endif

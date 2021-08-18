@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
+import UIKit
 import XCTest
 import CoreData
 

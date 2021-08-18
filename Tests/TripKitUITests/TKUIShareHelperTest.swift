@@ -1,5 +1,5 @@
 //
-//  TKShareHelperTest.swift
+//  TKUIShareHelperTest.swift
 //  TripKit
 //
 //  Created by Adrian Schoenig on 29/08/2016.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import TripKit
 
-class TKShareHelperTest: XCTestCase {
+class TKUIShareHelperTest: XCTestCase {
   
   let geocoder: TKTripGoGeocoder? = {
     let env = ProcessInfo.processInfo.environment

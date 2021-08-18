@@ -1,0 +1,73 @@
+{
+  "alerts": [
+             {
+             "alert": {
+             "hashCode": 697250726,
+             "severity": "warning",
+             "text": "Garden Island Wharf Closed.",
+             "title": "Wharf Closed"
+             },
+             "routeIDs": [
+                          "ES"
+                          ]
+             },
+             {
+             "alert": {
+             "hashCode": -1775015295,
+             "severity": "warning",
+             "text": "The lift between the concourse and platforms 1/2 is temporarily out of service. If you require assistance, please ask staff or phone 9847 8496.",
+             "title": "Lift Availability - Berowra",
+             "url": "http://www.transportnsw.info/transport-status"
+             },
+             "stopCodes": [
+                           "208110"
+                           ]
+             },
+             {
+             "alert": {
+             "hashCode": -2057836468,
+             "severity": "warning",
+             "title": "Service has been cancelled"
+             },
+             "serviceTripIDs": [
+                                "H519"
+                                ]
+             },
+             {
+             "alert": {
+             "hashCode": 1439215335,
+             "severity": "warning",
+             "text": "From 21st September to 30th October the Opal gates at the south end of station concourse are temporarily closed for upgrade. This may cause some delays when entering and exiting this end of the station. Please follow station signage and ask station staff for further assistance",
+             "title": "Station Update - Town Hall",
+             "url": "http://www.sydneytrains.info/"
+             },
+             "stopCodes": [
+                           "200070"
+                           ]
+             },
+             {
+             "alert": {
+             "hashCode": -1079965312,
+             "severity": "warning",
+             "text": " due to a medical emergency",
+             "title": "Delayed",
+             "url": "http://www.sydneytrains.info/"
+             },
+             "operators": [
+                           "SydneyTrains"
+                           ]
+             },
+             {
+             "alert": {
+             "hashCode": -478302862,
+             "severity": "warning",
+             "text": "The lift between the concourse and platforms 3/4 is temporarily out of service. For assistance ask staff or call 9379 1046.",
+             "title": "Lift Availability - St Leonards",
+             "url": "http://www.transportnsw.info/transport-status"
+             },
+             "stopCodes": [
+                           "206520"
+                           ]
+             }
+             ]
+}

@@ -9,8 +9,6 @@
 import XCTest
 import CoreLocation
 
-import RxSwift
-
 @testable import TripKit
 
 class TKWaypointRouterTest: TKTestCase {

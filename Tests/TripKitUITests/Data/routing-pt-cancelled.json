@@ -1,0 +1,364 @@
+{
+  "groups": [
+    {
+      "frequency": 20,
+      "sources": [
+        {
+          "disclaimer": "\u00a9 OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+          "provider": {
+            "name": "OpenStreetMap",
+            "website": "https://www.openstreetmap.org"
+          }
+        },
+        {
+          "disclaimer": "Lizenz Creative Commons Namensnennung 3.0 (CC BY 3.0 DE)",
+          "provider": {
+            "name": "VGN - Verkehrsverbund Großraum Nürnberg GmbH",
+            "phone": "+49 (0)911 27075-99",
+            "website": "http://www.vgn.de"
+          }
+        }
+      ],
+      "trips": [
+        {
+          "arrive": 1575300197,
+          "availability": "AVAILABLE",
+          "caloriesCost": 18,
+          "carbonCost": 0.5,
+          "depart": 1575298640,
+          "hassleCost": 5.1,
+          "id": "4ce9e6d2-4311-4970-8e5e-bb5d1acc9022",
+          "mainSegmentHashCode": -107594176,
+          "queryIsLeaveAfter": true,
+          "queryTime": 1575297748,
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "bicycleAccessible": true,
+              "id": "dASaDwDB",
+              "routeDirection": 1,
+              "routeId": "1-1-j19-1",
+              "segmentTemplateHashCode": -107594176,
+              "serviceColor": {
+                "blue": 79,
+                "green": 153,
+                "red": 109
+              },
+              "serviceDirection": "Forchheim",
+              "serviceName": "Bamberg  -  Erlangen  -  F\u00fcrth  -  N\u00fcrnberg  - Lauf (li Pegn)  -  Hersbruck (li Pegn)  -  Hartmannshof",
+              "serviceNumber": "S1",
+              "serviceTripID": "107.T0.1-1-j19-1.14.R",
+              "stops": 4,
+              "ticketWebsiteURL": "http://www.vgn.de",
+              "startPlatform": "1",
+              "endPlatform": "3",
+              "startTime": 1575298680,
+              "endTime": 1575299220,
+              "realTimeStatus": "CANCELLED",
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1575299427,
+              "id": "EbOfWqBE",
+              "segmentTemplateHashCode": 1838283874,
+              "startTime": 1575299220
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1575299740,
+              "id": "zbCj5CJ8",
+              "segmentTemplateHashCode": 1688271042,
+              "startTime": 1575299427
+            },
+            {
+              "availability": "AVAILABLE",
+              "bicycleAccessible": true,
+              "id": "IzdUXAmt",
+              "routeDirection": 1,
+              "routeId": "11-1-j19-1",
+              "segmentTemplateHashCode": -1576784579,
+              "serviceColor": {
+                "blue": 163,
+                "green": 94,
+                "red": 46
+              },
+              "serviceDirection": "F\u00fcrth Hardh\u00f6he",
+              "serviceName": "F\u00fcrth Hardh\u00f6he - N\u00fcrnberg Pl\u00e4rrer - Hauptbahnhof - Langwasser S\u00fcd",
+              "serviceNumber": "U1",
+              "serviceTripID": "247.UG.11-1-j19-1.6.R",
+              "stops": 2,
+              "startPlatform": "U1-1",
+              "endPlatform": "2",
+              "timetableStartTime": 1575299540,
+              "timetableEndTime": 1575299820,
+              "startTime": 1575299740,
+              "endTime": 1575299900
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1575300197,
+              "id": "Ln5MhShz",
+              "segmentTemplateHashCode": 207085791,
+              "startTime": 1575299900
+            }
+          ],
+          "weightedScore": 16.7
+        }
+      ]
+    }
+  ],
+  "realTimeStateURL": "https://hadron.buzzhives.com/satapp/realTimeState/new",
+  "region": "DE_BV_Nuremberg",
+  "regions": [
+    "DE_BV_Nuremberg"
+  ],
+  "segmentTemplates": [
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "de:09564:510:1",
+      "from": {
+        "address": "Rehhof",
+        "class": "Location",
+        "lat": 49.4627,
+        "lng": 11.1546,
+        "timezone": "Europe/Berlin"
+      },
+      "hashCode": -107594176,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "color": {
+          "blue": 68,
+          "green": 154,
+          "red": 30
+        },
+        "identifier": "pt_pub_train",
+        "localIcon": "train",
+        "remoteIcon": "train-germany-s"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+      "operatorID": "1",
+      "serviceOperator": "VGN",
+      "shapes": [
+        {
+          "encodedWaypoints": "yhamHwovcA`q@x}A??rY~`B??ho@f|D??ft@heE??|@`wA",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "st{lHisacAdUvcC??z\\tpA??jf@jmC??lM~}A",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "wjxlHoosbAjQrwA??oO~qA??qvC|sK??csAvmC??sxEsuB",
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "VGN"
+        }
+      ],
+      "stopCode": "de:09564:1411:2",
+      "to": {
+        "address": "N\u00fcrnberg Hbf",
+        "class": "Location",
+        "lat": 49.44572,
+        "lng": 11.08233,
+        "timezone": "Europe/Berlin"
+      },
+      "travelDirection": 256,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "N\u00fcrnberg Hbf",
+        "class": "Location",
+        "lat": 49.44572,
+        "lng": 11.08233,
+        "timezone": "Europe/Berlin"
+      },
+      "hashCode": 1838283874,
+      "metres": 120,
+      "mini": {
+        "description": "N\u00fcrnberg Hbf",
+        "instruction": "Walk",
+        "mainValue": "150m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "color": {
+          "blue": 99,
+          "green": 199,
+          "red": 30
+        },
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 150m",
+      "streets": [
+        {
+          "encodedWaypoints": "wjxlHoosbA@LG[CFHl@]NeATe@NGE",
+          "metres": 120,
+          "name": "Change platform"
+        }
+      ],
+      "to": {
+        "address": "N\u00fcrnberg Hbf",
+        "class": "Location",
+        "lat": 49.44645,
+        "lng": 11.08189,
+        "timezone": "Europe/Berlin"
+      },
+      "travelDirection": 329,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Wait ",
+      "hashCode": 1688271042,
+      "location": {
+        "address": "N\u00fcrnberg Hbf",
+        "class": "Location",
+        "lat": 49.44645,
+        "lng": 11.08189,
+        "timezone": "Europe/Berlin"
+      },
+      "mini": {
+        "instruction": "Wait",
+        "mainValue": "<DURATION>"
+      },
+      "modeInfo": {
+        "alt": "Transfer",
+        "identifier": "stationary_transfer",
+        "localIcon": "transfer"
+      },
+      "notes": "<DURATION>",
+      "type": "stationary",
+      "visibility": "in details"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "de:09564:101:11:1",
+      "from": {
+        "address": "N\u00fcrnberg Hbf",
+        "class": "Location",
+        "lat": 49.44645,
+        "lng": 11.08189,
+        "timezone": "Europe/Berlin"
+      },
+      "hashCode": -1576784579,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Subway",
+        "color": {
+          "blue": 165,
+          "green": 103,
+          "red": 0
+        },
+        "identifier": "pt_pub_subway",
+        "localIcon": "subway",
+        "remoteIcon": "subway-germany"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS>",
+      "operatorID": "1",
+      "serviceOperator": "VGN",
+      "shapes": [
+        {
+          "encodedWaypoints": "kxrlHqnxbAwk@`nB??c^zU??sl@nR??uXdQ??wb@yH",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "ioxlHwlsbAu[`Y??pCpl@",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "mgylHceqbAtJfe@??kKnj@??qMrk@??gPbu@??iOxo@",
+          "travelled": false
+        }
+      ],
+      "sources": [
+        {
+          "provider": "VGN"
+        }
+      ],
+      "stopCode": "de:09564:510:11:U1",
+      "to": {
+        "address": "N\u00fcrnberg Wei\u00dfer Turm",
+        "class": "Location",
+        "lat": 49.45032,
+        "lng": 11.07042,
+        "timezone": "Europe/Berlin"
+      },
+      "travelDirection": 289,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "N\u00fcrnberg Wei\u00dfer Turm",
+        "class": "Location",
+        "lat": 49.45032,
+        "lng": 11.07042,
+        "timezone": "Europe/Berlin"
+      },
+      "hashCode": 207085791,
+      "metres": 356,
+      "mini": {
+        "description": "Josephsplatz 8, 90403 N\u00fcrnberg, Germany",
+        "instruction": "Walk",
+        "mainValue": "400m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "color": {
+          "blue": 99,
+          "green": 199,
+          "red": 30
+        },
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 400m",
+      "streets": [
+        {
+          "encodedWaypoints": "mgylHceqbA@FP`@DIw@gCq@uA?Au@oAYqA]{@[H",
+          "metres": 243,
+          "name": "Change platform"
+        },
+        {
+          "encodedWaypoints": "gnylHwqqbAGi@ScCKiA",
+          "metres": 91,
+          "name": "Josephsplatz"
+        },
+        {
+          "encodedWaypoints": "ooylHoyqbAIBMb@",
+          "metres": 21,
+          "name": "Kaiserstra\u00dfe"
+        }
+      ],
+      "to": {
+        "address": "Josephsplatz 8, 90403 N\u00fcrnberg, Germany",
+        "class": "Location",
+        "lat": 49.45173,
+        "lng": 11.07348,
+        "timezone": "Europe/Berlin"
+      },
+      "travelDirection": 64,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    }
+  ]
+}

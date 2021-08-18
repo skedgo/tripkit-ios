@@ -16,10 +16,6 @@ let package = Package(
       targets: ["TripKit"]
     ),
     .library(
-      name: "TripKitObjc",
-      targets: ["TripKitObjc"]
-    ),
-    .library(
       name: "TripKitUI",
       targets: ["TripKitUI"]),
   ],
@@ -51,7 +47,25 @@ let package = Package(
       exclude: ["Supporting Files/Info.plist"]
     ),
     .testTarget(
+      name: "TripKitObjcTests",
+      dependencies: [
+        "TripKitObjc",
+      ]
+    ),
+    .testTarget(
       name: "TripKitTests",
+      dependencies: [
+        "TripKit",
+        .product(name: "RxCocoa", package: "RxSwift"),
+      ],
+      exclude: [
+        "Data",
+        "polygon/data",
+        "Supporting Files/Info.plist",
+      ]
+    ),
+    .testTarget(
+      name: "TripKitUITests",
       dependencies: [
         "TripKit",
         "TripKitUI",
@@ -59,8 +73,6 @@ let package = Package(
       ],
       exclude: [
         "Data",
-        "polygon/data",
-        "Supporting Files/Info.plist",
         "vendor/RxBlocking/README.md",
         "vendor/RxBlocking/Info.plist",
         "vendor/RxTest/Info.plist",
