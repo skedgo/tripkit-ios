@@ -124,21 +124,29 @@ public class Loc : NSObject {
   public static func LateService(minutes: Int, service: String?) -> String {
     if let service = service {
       let format = NSLocalizedString("%1$@ late (%2$@ service)", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').")
-      return String(format: format, minutes, service)
+      return String(format: format, minuteToString(minutes), service)
     } else {
       let format = NSLocalizedString("%1$@ late", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'.")
-      return String(format: format, minutes)
+      return String(format: format, minuteToString(minutes))
     }
   }
   
   public static func EarlyService(minutes: Int, service: String?) -> String {
     if let service = service {
       let format = NSLocalizedString("%1$@ early (%2$@ service)", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').")
-      return String(format: format, minutes, service)
+      return String(format: format, minuteToString(minutes), service)
     } else {
       let format = NSLocalizedString("%1$@ early", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.")
-      return String(format: format, minutes)
+      return String(format: format, minuteToString(minutes))
     }
+  }
+  
+  private static func minuteToString(_ minutes: Int) -> String {
+    var component = DateComponents()
+    component.calendar = .autoupdatingCurrent
+    component.timeZone = .autoupdatingCurrent
+    component.minute = minutes
+    return DateComponentsFormatter.localizedString(from: component, unitsStyle: .short)!
   }
 
   // MARK: - Reminders
