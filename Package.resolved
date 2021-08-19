@@ -21,11 +21,11 @@
       },
       {
         "package": "TGCardViewController",
-        "repositoryURL": "https://gitlab.com/SkedGo/iOS/TGCardViewController.git",
+        "repositoryURL": "https://github.com/skedgo/TGCardViewController.git",
         "state": {
-          "branch": "spm",
-          "revision": "f0c43e3ee29b92649d31a417bde9c859fe4115a5",
-          "version": null
+          "branch": null,
+          "revision": "9ca9f8f2ced663fc37da25bff9f427a752fea38f",
+          "version": "1.6.2"
         }
       }
     ]

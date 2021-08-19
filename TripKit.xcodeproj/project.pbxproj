@@ -1020,6 +1020,7 @@
 		3ACF47AA229EEDFF0096860D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ACF47AD229EEDFF0096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACF47AF229EEDFF0096860D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3ADCB5F626CDFCC400E4C13A /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		3AFF25EC26C6975F007809CD /* TKShareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKShareHelper.swift; sourceTree = "<group>"; };
 		3AFF25ED26C6975F007809CD /* TKShareHelper+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKShareHelper+Parsing.swift"; sourceTree = "<group>"; };
 		3AFF25EE26C6975F007809CD /* TKShareURLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKShareURLProvider.swift; sourceTree = "<group>"; };
@@ -1690,6 +1691,7 @@
 			children = (
 				3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */,
 				3A6DF068202C8C340084CB2C /* README.md */,
+				3ADCB5F626CDFCC400E4C13A /* Package.swift */,
 				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
 				3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */,
 				3A6DF069202C8C340084CB2C /* TripKitUI.podspec */,
