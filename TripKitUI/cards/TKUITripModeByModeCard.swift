@@ -35,6 +35,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   fileprivate struct SegmentCardsInfo {
     let segmentIndex: Int
     let segmentIdentifier: String?
+    let segmentMode: TKUISegmentMode
     let cards: [(TGCard, TKUISegmentMode)]
     let cardsRange: Range<Int>
     
@@ -128,7 +129,7 @@ public class TKUITripModeByModeCard: TGPageCard {
         mapManager: tripMapManager
       )
       let range = previous.1 ..< previous.1 + cards.count
-      let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: identifier, cards: cards, cardsRange: range)
+      let info = SegmentCardsInfo(segmentIndex: segment.index, segmentIdentifier: identifier, segmentMode: mode, cards: cards, cardsRange: range)
       return (previous.0 + [info], range.upperBound)
     }.0
 
@@ -367,8 +368,8 @@ extension TKUITripModeByModeCard {
       // We use the index here as the identifier would have changed. The index
       // gives us a good guess for finding the corresponding segment in the new
       // trip.
-      let segmentIndex = SegmentCardsInfo.cardsInfo(ofCardAtIndex: currentPageIndex, in: segmentCards)?.segmentIndex
-      let newSegment = cardSegments.first(where: { $0.index == segmentIndex }) ?? cardSegments.first!
+      let cardInfo = SegmentCardsInfo.cardsInfo(ofCardAtIndex: currentPageIndex, in: segmentCards)
+      let newSegment = cardSegments.first(where: { $0.index == cardInfo?.segmentIndex }) ?? cardSegments.first!
       
       do {
         let newCard = try TKUITripModeByModeCard(
@@ -377,7 +378,14 @@ extension TKUITripModeByModeCard {
         )
         newCard.style = self.style
         newCard.modeByModeDelegate = self.modeByModeDelegate
-        controller?.swap(for: newCard, animated: true)
+        
+        if let cardInfo = cardInfo, let offset = offsetToReach(mode: cardInfo.segmentMode, in: newSegment) {
+          controller?.swap(for: newCard, animated: true, onCompletion: {
+            newCard.move(to: newCard.currentPageIndex + offset)
+          })
+        } else {
+          controller?.swap(for: newCard, animated: true)
+        }
       } catch {
         TKLog.warn("Could not rebuild due to \(error)")
       }
