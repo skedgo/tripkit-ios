@@ -61,6 +61,7 @@
 		3ACD920726CCC8060075CCF3 /* TKBetterDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */; };
 		3ACD921626CCD3600075CCF3 /* TKServer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */; };
 		3ACD921726CCD3600075CCF3 /* TKServer+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */; };
+		3ACD92B226CDDC460075CCF3 /* routing-scooter-vehicle.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ACD92B026CDDC460075CCF3 /* routing-scooter-vehicle.json */; };
 		3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A3229EEDFE0096860D /* AppDelegate.swift */; };
 		3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A5229EEDFE0096860D /* ViewController.swift */; };
 		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
@@ -1003,6 +1004,7 @@
 		3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
 		3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBetterDecodingTest.swift; sourceTree = "<group>"; };
 		3ACD921426CCD3600075CCF3 /* TKServer+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKServer+Image.swift"; sourceTree = "<group>"; };
+		3ACD92B026CDDC460075CCF3 /* routing-scooter-vehicle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-scooter-vehicle.json"; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
 		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -2915,6 +2917,7 @@
 				3AFF2A4E26C69A96007809CD /* routing-pt-platforms.json */,
 				3AFF2A4526C69A96007809CD /* routing-pt-realtime.json */,
 				3AFF2A5F26C69A96007809CD /* routing-pt-wheelchair-reroute.json */,
+				3ACD92B026CDDC460075CCF3 /* routing-scooter-vehicle.json */,
 				3AFF2A4926C69A96007809CD /* routing-scooters.json */,
 				3AFF2A5D26C69A96007809CD /* routing-walk.json */,
 				3AFF2A3E26C69A96007809CD /* routing-with-stops.json */,
@@ -3345,6 +3348,7 @@
 				3AFF2A9726C69A96007809CD /* polygons-scandinavia-170217.json in Resources */,
 				3AFF2ACA26C69A96007809CD /* routing-pt-wheelchair-reroute.json in Resources */,
 				3AFF2ABC26C69A96007809CD /* regions.json in Resources */,
+				3ACD92B226CDDC460075CCF3 /* routing-scooter-vehicle.json in Resources */,
 				3AFF2AAC26C69A96007809CD /* regionInfo-Sydney.json in Resources */,
 				3AFF2A9526C69A96007809CD /* polygons-tripgo-170217.json in Resources */,
 				3AFF2AB426C69A96007809CD /* routing-scooters.json in Resources */,

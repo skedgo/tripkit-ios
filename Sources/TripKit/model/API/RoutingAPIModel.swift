@@ -125,6 +125,7 @@ extension TKAPI {
       case realTimeStatus
       case realTimeVehicle = "realtimeVehicle"
       case realTimeVehicleAlternatives = "realtimeVehicleAlternatives"
+      case sharedVehicle
       case vehicleUUID
     }
   }

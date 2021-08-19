@@ -192,6 +192,24 @@ class TKRouterTest: TKTestCase {
     try self.tripKitContext.save()
   }
   
+  func testParsingTripWithSharedScooter() throws {
+    let request = try self.request(fromFilename: "routing-scooter-vehicle")
+
+    XCTAssertNotNil(request)
+    XCTAssertEqual(request.tripGroups.count, 1)
+    XCTAssertEqual(request.trips.count, 2)
+
+    let sharedSegments = request.trips.flatMap(\.segments).filter(\.isSharedVehicle).filter(\.isStationary)
+    XCTAssertEqual(sharedSegments.count, 2)
+    
+    for segment in sharedSegments {
+      XCTAssertNotNil(segment.sharedVehicle)
+    }
+    
+    // Make sure CoreData is happy
+    try self.tripKitContext.save()
+  }
+  
   func testTripCache() throws {
     let identifier = "Test"
     let directory = TKFileCacheDirectory.documents // where TKRouter keeps its trips
