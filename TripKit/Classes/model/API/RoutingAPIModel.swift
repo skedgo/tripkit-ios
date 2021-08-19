@@ -86,7 +86,7 @@ extension TKAPI {
     public var startPlatform: String?
     public var endPlatform: String?
     public var serviceStops: Int?
-    public var ticketWebsite: URL?
+    @UnknownNil public var ticketWebsite: URL? // Backend might send empty string, which is not a valid URL
     public var ticket: TKSegment.Ticket?
     @OptionalISO8601OrSecondsSince1970 public var timetableStartTime: Date?
     @OptionalISO8601OrSecondsSince1970 public var timetableEndTime: Date?
