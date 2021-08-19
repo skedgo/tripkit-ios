@@ -353,9 +353,9 @@
 			baseConfigurationReference = B4CB3668ED0307F9DD13479E /* Pods-CocoaPodsTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CocoaPodsTest/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JFT62W5LA3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CocoaPodsTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -364,7 +364,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.skedgo.CocoaPodsTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -375,9 +374,9 @@
 			baseConfigurationReference = 632E00441EFDCDF351C9593B /* Pods-CocoaPodsTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CocoaPodsTest/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JFT62W5LA3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CocoaPodsTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -386,7 +385,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.skedgo.CocoaPodsTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
