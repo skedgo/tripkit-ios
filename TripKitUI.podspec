@@ -2,14 +2,13 @@ Pod::Spec.new do |s|
   s.name         = "TripKitUI"
   s.version      = "4.0-rc2"
   s.summary      = "SkedGo's TripKitUI"
-  s.homepage     = "https://gitlab.com/skedgo/ios/tripkit-ios"
+  s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = { type: "Closed", file: "LICENSE" }
   s.authors      = {
     "Adrian Schoenig" => "adrian@skedgo.com",
     "Brian Huang" => "brian@skedgo.com"
   }
-  # s.source       = { git: "." }
-  s.source       = { git: "https://gitlab.com/skedgo/ios/tripkit-ios.git", tag: "v#{s.version}" }
+  s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "#{s.version}" }
   s.swift_version = '5.4'
   s.ios.deployment_target = '12.4'
   s.requires_arc = true
