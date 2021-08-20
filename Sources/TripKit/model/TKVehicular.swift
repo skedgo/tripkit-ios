@@ -34,8 +34,12 @@ public class _TKVehicularHelper: NSObject {
 
 extension TKVehicular {
   
+  public var isCarPooling: Bool {
+    garage?() == nil
+  }
+  
   public var icon: TKImage? {
-    if garage?() != nil {
+    if isCarPooling {
       return TKStyleManager.image(named: "icon-mode-car-pool")
     }
     
@@ -55,7 +59,7 @@ extension TKVehicular {
   }
   
   public var title: String? {
-    if garage?() != nil {
+    if isCarPooling {
       return NSLocalizedString("Getting a lift", tableName: "Shared", bundle: .tripKit, comment: "Name for a segment or vehicle where you get a lift from someone.")
     }
     
