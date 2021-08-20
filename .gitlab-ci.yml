@@ -65,22 +65,21 @@ build_minimap_example:
   tags:
     - ios
 
-    ### Not yet compatible with the switch of TripKitUI to SPM
-# build_cocoapodstest_example:
-#   stage: examples
-#   script:
-#     - cd Examples/CocoaPodsTest
-#     - pod install
-#     - xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
-#   retry: 1
-#   cache:
-#     key:
-#       files:
-#         - Examples/MiniMap/Podfile.lock
-#     paths:
-#       - Examples/CocoaPodsTest/Pods
-#   tags:
-#     - ios
+build_cocoapodstest_example:
+  stage: examples
+  script:
+    - cd Examples/CocoaPodsTest
+    - pod install
+    - xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest ONLY_ACTIVE_ARCH=NO | xcpretty -c -r html && exit ${PIPESTATUS[0]}
+  retry: 1
+  cache:
+    key:
+      files:
+        - Examples/MiniMap/Podfile.lock
+    paths:
+      - Examples/CocoaPodsTest/Pods
+  tags:
+    - ios
 
 # code_quality:
 #   stage: deploy
@@ -107,6 +106,7 @@ pages_dryrun:
   before_script:
     - brew install sourcekitten
   script:
+    - cd Scripts
     - ./docs.sh
   tags:
     - ios
@@ -121,6 +121,7 @@ pages:
   before_script:
     - brew install sourcekitten
   script:
+    - cd Scripts
     - ./docs.sh
   tags:
     - ios

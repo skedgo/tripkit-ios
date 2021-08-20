@@ -1,0 +1,47 @@
+author: SkedGo
+author_url: https://skedgo.com
+title: SkedGo's TripKit iOS - TripKit
+theme: fullwidth
+output: source/TripKit
+
+module: TripKit
+podspec: ../../TripKit.podspec
+
+exclude:
+  - /*/TripKit/Classes/core/Loc.swift
+  - /*/TripKit/Classes/core/Loc+*.swift
+  - /*/TripKit/Classes/categories/*
+  - /*/TripKit/vendor/*
+
+abstract: api/*.md
+
+custom_categories:
+  - name: Setup & Configuration
+    children:
+      - TKTripKit
+      - TKConfig
+      - TKRegion
+      - TKRegionManager
+      - TKServer
+      - TKSettings
+      - TKUserProfileHelper
+  - name: Trip Planning
+    children:
+      - TKRouter
+      - TKRealTimeFetcher
+      - TKWaypointRouter
+      - TKTripClassifier
+      - TKMetricClassifier
+  - name: Search
+    children:
+      - TKAppleGeocoder
+      - TKCalendarManager
+      - TKContactsManager
+      - TKPeliasGeocoder
+      - TKRegionAutocompleter
+      - TKTripGoGeocoder
+      - TKAggregateGeocoder
+  - name: POIs + Timetables
+    children:
+      - TKBuzzInfoProvider
+      - TKDeparturesProvider

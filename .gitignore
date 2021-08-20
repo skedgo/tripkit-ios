@@ -19,6 +19,9 @@ DerivedData
 .DS_Store
 xcshareddata
 
+.swiftpm
+.build
+
 # Carthage
 /Carthage
 /TripKit.framework.zip
@@ -28,9 +31,9 @@ xcshareddata
 /Examples/CocoaPodsTest/Pods
 
 # Documentation
-/docs/jazzy-temp.*
-/docs/source/TripKit
-/docs/source/TripKitUI
-/docs/source/TripKitInterApp
-/docs/site
+/Scripts/docs/jazzy-temp.*
+/Scripts/docs/source/TripKit
+/Scripts/docs/source/TripKitUI
+/Scripts/docs/source/TripKitInterApp
+/Scripts/docs/site
 /public

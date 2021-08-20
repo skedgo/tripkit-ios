@@ -1,22 +1,22 @@
 PODS:
-  - Kingfisher (5.13.4):
-    - Kingfisher/Core (= 5.13.4)
-  - Kingfisher/Core (5.13.4)
-  - RxCocoa (5.1.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.1)
-  - TGCardViewController (1.5)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
+  - RxCocoa (6.1.0):
+    - RxRelay (= 6.1.0)
+    - RxSwift (= 6.1.0)
+  - RxRelay (6.1.0):
+    - RxSwift (= 6.1.0)
+  - RxSwift (6.1.0)
+  - TGCardViewController (1.6.1)
   - TripKit (4.0-rc2)
   - TripKitInterApp (4.0-rc2):
     - TripKit (~> 4.0-rc2)
   - TripKitUI (4.0-rc2):
     - Kingfisher (~> 5.8)
-    - RxCocoa (~> 5.1.1)
-    - RxSwift (~> 5.1.1)
-    - TGCardViewController (>= 1.5)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+    - TGCardViewController (>= 1.6.1)
     - TripKit (~> 4.0-rc2)
 
 DEPENDENCIES:
@@ -45,19 +45,19 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   TGCardViewController:
-    :commit: 04b811f14085ad3fb9be5dc08cc06c1c5c03d5b4
+    :commit: 230f21b8d2ecf839867c7d620e48a13800ed3dfd
     :git: https://gitlab.com/SkedGo/iOS/TGCardViewController.git
 
 SPEC CHECKSUMS:
-  Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
-  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  TGCardViewController: cb7d472b184d3c030e391c5ba01e3a932951c73f
-  TripKit: 1963ddf2a89a76db5d659dcd6a9818db34c48307
-  TripKitInterApp: ac1fecbfe58f4396479fc6d288555de363c5f992
-  TripKitUI: fc9816b51503bae7dd00bc9bd1ba1e7be5860330
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
+  RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
+  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
+  TGCardViewController: e3497748075df599ec883676f6f5fc2473c0bf22
+  TripKit: 2039173e555d05358a558b1e20437a6662881643
+  TripKitInterApp: 2f36d09717a542518571279d514e47760fa93a3d
+  TripKitUI: b0ce27858b38b214fdb2d022a7f7e7b599471a27
 
-PODFILE CHECKSUM: 70838626f62f2218a8656a7acc10e6130110e500
+PODFILE CHECKSUM: 21f917fbe8de51c8140896998d41d883b7a2794b
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2
