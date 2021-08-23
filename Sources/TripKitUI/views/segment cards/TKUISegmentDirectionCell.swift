@@ -23,7 +23,9 @@ class TKUISegmentDirectionCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    backgroundColor = .tkBackground
     contentView.backgroundColor = .clear
+    
     durationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     durationLabel.textColor = .tkLabelPrimary
     nameLabel.font = TKStyleManager.customFont(forTextStyle: .body)
