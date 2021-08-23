@@ -68,6 +68,9 @@
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Could not find transit stop.";
 
+/* Title for button to customise the home card */
+"Customise home" = "Customise home";
+
 /* Departure time sorter title */
 "Departure" = "Departure";
 

@@ -14,7 +14,7 @@
 "Already have an account? Sign in" = "Already have an account? Sign in";
 
 /* Authorisation needed title */
-"Authorisation needed" = "Authorisation needed";
+"Authorisation needed" = "Authorization needed";
 
 /* Type of vehicle : bicycle */
 "Bicycle" = "Bicycle";
@@ -23,7 +23,7 @@
 "Cancel" = "Cancel";
 
 /* Label for when a service is cancelled. */
-"Cancelled" = "Cancelled";
+"Cancelled" = "Canceled";
 
 /* Type of vehicle : car */
 "Car" = "Car";
@@ -134,7 +134,7 @@
 "Location" = "Location";
 
 /* Location iOS6+ authorisation needed text */
-"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.";
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorize this app.";
 
 /* ex: 1min */
 "Min==1" = "1min";
@@ -348,10 +348,10 @@
 "You need to agree to the insurance terms and conditions." = "You need to agree to the insurance terms and conditions.";
 
 /* Calendar authorisation needed text */
-"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature.";
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorize this app to use this feature.";
 
 /* Contacts authorisation needed text */
-"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature.";
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorize this app to use this feature.";
 
 /* Name for a {Name}'s place if it's unclear if it's home, work or something else. */
 "%@'s" = "%@'s";

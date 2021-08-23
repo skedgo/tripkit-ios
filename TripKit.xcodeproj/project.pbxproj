@@ -950,6 +950,7 @@
 		3A6DF070202C8C6E0084CB2C /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A963D6026D46AD300C328A1 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
@@ -1066,7 +1067,6 @@
 		3AFF261C26C6975F007809CD /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFF261D26C6975F007809CD /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AFF261E26C6975F007809CD /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Shared.strings"; sourceTree = "<group>"; };
-		3AFF261F26C6975F007809CD /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3AFF262026C6975F007809CD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Shared.strings; sourceTree = "<group>"; };
 		3AFF262126C6975F007809CD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AFF262226C6975F007809CD /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Shared.strings; sourceTree = "<group>"; };
@@ -4229,11 +4229,11 @@
 				3AFF261926C6975F007809CD /* ko */,
 				3AFF261B26C6975F007809CD /* zh-Hant */,
 				3AFF261D26C6975F007809CD /* tr */,
-				3AFF261F26C6975F007809CD /* en-US */,
 				3AFF262126C6975F007809CD /* fr */,
 				3AFF262326C6975F007809CD /* fi */,
 				3AFF262526C6975F007809CD /* nl */,
 				3AFF262826C6975F007809CD /* pt */,
+				3A963D6026D46AD300C328A1 /* en-US */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
