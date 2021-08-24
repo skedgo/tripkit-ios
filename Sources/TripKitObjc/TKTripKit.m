@@ -28,6 +28,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDate *resetDateFromInitialization;
 @property (nonatomic, strong) NSCache *inMemoryCache;
+@property (nonatomic, strong) NSManagedObjectModel *model;
 
 @end
 
@@ -155,6 +156,17 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 
 #pragma mark - Core Data stack
 
+- (NSManagedObjectModel *)model
+{
+  if (_model) {
+    return _model;
+  }
+  
+  NSURL *modelURL = [[TKTripKit bundle] URLForResource:@"TripKitModel" withExtension:@"momd"];
+  _model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+  return _model;
+}
+
 /**
  Returns the managed object context for the application.
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
@@ -191,10 +203,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   NSDate *lastResetDate = [[NSUserDefaults sharedDefaults] objectForKey:@"TripKitLastResetDate"];
   self.resetDateFromInitialization = lastResetDate ?: [NSDate date];
   
-  NSURL *modelURL = [[TKTripKit bundle] URLForResource:@"TripKitModel" withExtension:@"momd"];
-  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-  
-  _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+  _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.model];
   
   NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption : @(YES),
                              NSInferMappingModelAutomaticallyOption       : @(YES)};
