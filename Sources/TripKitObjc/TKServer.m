@@ -140,7 +140,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   ZAssert([[NSOperationQueue currentQueue] isEqual:self.skedGoQueryQueue], @"Should start async data tasks on dedicated queue as we're modifying local variables.");
 #endif
   
-  NSURL *baseURL = [baseURLs lastObject];
+  NSURL *baseURL = [baseURLs firstObject];
   
   if (! baseURL) {
     // don't have that many servers
@@ -164,7 +164,9 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
     return;
   }
 
-  [baseURLs removeLastObject];
+  if (baseURLs.count > 0) {
+    [baseURLs removeObjectAtIndex: 0];
+  }
   NSURLRequest *request = [TKServer buildSkedGoRequestWithMethod:method baseURL:baseURL path:path parameters:parameters headers:headers];
   
   // Backup handler
