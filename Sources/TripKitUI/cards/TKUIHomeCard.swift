@@ -109,6 +109,7 @@ open class TKUIHomeCard: TKUITableCard {
           guard let cell = self.viewModel.componentViewModels.compactMap({ $0.cell(for: componentItem, at: ip, in: tv) }).first else {
             assertionFailure("No component returned a cell for \(componentItem) at \(ip)."); return fallback
           }
+          cell.accessibilityTraits = componentItem.isAction ? .button : .none
           return cell
         }
         
