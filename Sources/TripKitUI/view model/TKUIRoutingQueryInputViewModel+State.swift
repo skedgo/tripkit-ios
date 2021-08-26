@@ -50,9 +50,28 @@ extension TKUIRoutingQueryInputViewModel {
       .scan(into: initialState) { state, action in
         switch (action, state.mode) {
         case (.typeText(let text), .origin):
-          state.originText = text
+          // When we have a new search text, we also need to clear the
+          // underlying annotation. Otherwise, the query will continue
+          // with previous annotation regardless of what's being typed.
+          //
+          // Note that we also check if the text has changed. This is
+          // because when we first load the query input view, we will
+          // pre-populate the search field with the existing address,
+          // which triggers this code path, and if we clear the
+          // underlying annotation, it'd mean we cannot route despite
+          // the user hasn't made any changes to the previous query
+          // request.
+          if text != state.originText {
+            state.originText = text
+            state.origin = nil
+          }
+          
         case (.typeText(let text), .destination):
-          state.destinationText = text
+          // See above explanation.
+          if text != state.destinationText {
+            state.destinationText = text
+            state.destination = nil
+          }
 
         case (.selectResult(let selection), .origin):
           state.origin = selection
