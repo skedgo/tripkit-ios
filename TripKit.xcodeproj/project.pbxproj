@@ -854,6 +854,7 @@
 		D314109F2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */; };
 		D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */; };
 		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
+		D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1623,6 +1624,7 @@
 		D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryFavoriteManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Autocompleting.swift"; sourceTree = "<group>"; };
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
+		D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripSegmentModeTitleTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2869,6 +2871,7 @@
 				3AFF2A3926C69A96007809CD /* RoutingAPIParserTest.swift */,
 				3AFF2A3126C69A96007809CD /* TKAlertModelTest.swift */,
 				3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */,
+				D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */,
 				3AFF2A3426C69A96007809CD /* TKBookingAvailabilityTest.swift */,
 				3AFF2A3226C69A96007809CD /* TKBookingDecodingTest.swift */,
 				3AFF2A3826C69A96007809CD /* TKBuzzInfoProviderTest.swift */,
@@ -4086,6 +4089,7 @@
 				3ACD91F826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift in Sources */,
 				3ACD91DE26CCC47B0075CCF3 /* TKUIGeocoderTest.swift in Sources */,
 				3ACD91FC26CCC47B0075CCF3 /* Platform.Linux.swift in Sources */,
+				D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */,
 				3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */,
 				3ACD91EC26CCC47B0075CCF3 /* Recorded+Event.swift in Sources */,
 				3AFF2A8326C69A96007809CD /* TKAutocompletionResultTest.m in Sources */,

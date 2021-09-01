@@ -66,7 +66,9 @@ class TKUIRoutingQueryInputTitleView: UIView {
     style(fromSearchBar)
     style(toSearchBar)
     fromSearchBar.placeholder = Loc.StartLocation
+    fromSearchBar.enablesReturnKeyAutomatically = true
     toSearchBar.placeholder = Loc.EndLocation
+    toSearchBar.enablesReturnKeyAutomatically = true
     
     fromButton.backgroundColor = .clear
     fromButton.tintColor = .tkAppTintColor

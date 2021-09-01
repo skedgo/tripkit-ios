@@ -53,11 +53,17 @@ public protocol TKUIHomeComponentItem {
   /// This will be used by `RxTableViewSectionedAnimatedDataSource` to determine
   /// if an item at a specific index path can be edited. Defaults to `false`.
   var canEdit: Bool { get }
+  
+  /// This indicates it the item triggers an action. It can be used to determine if an UI element,
+  /// such as a row in a table view should be treated as a button when supporting accessibility.
+  var isAction: Bool { get }
+  
 }
 
 extension TKUIHomeComponentItem {
   public var canEdit: Bool { false }
   public var equalityToken: String { identity }
+  public var isAction: Bool { false }
 }
 
 /// The representation of an home card component for the customizer

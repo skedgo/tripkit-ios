@@ -95,7 +95,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     case remoteImageName = "remoteIcon"
     case remoteIconIsTemplate
     case remoteIconIsBranding
-    case descriptor
+    case descriptor = "description"
     case rgbColor = "color"
   }
   
