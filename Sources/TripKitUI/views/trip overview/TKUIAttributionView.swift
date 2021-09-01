@@ -24,10 +24,20 @@ public class TKUIAttributionView: UIView {
     case mapBy
   }
   
+  public enum Style {
+    /// Regular use, typically on a background colour
+    case regular
+    
+    /// Meant for displaying over a map
+    case mapAnnotation
+  }
+  
   @IBOutlet public weak var title: UITextView!
   @IBOutlet public weak var logo: UIImageView!
   
   public var contentAlignment: Alignment = .leading
+  
+  public var style: Style = .regular
   
   public init(contentAlignment: Alignment = .leading) {
     self.contentAlignment = contentAlignment
@@ -89,8 +99,14 @@ public class TKUIAttributionView: UIView {
   
   // MARK: - Creating view
   
-  public static func newView(title: String, icon: UIImage? = nil, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording) -> TKUIAttributionView {
+  public static func newView(title: String, icon: UIImage? = nil, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording, style: Style = .regular) -> TKUIAttributionView {
     let view = TKUIAttributionView(contentAlignment: alignment)
+    
+    let font: UIFont
+    switch style {
+    case .regular: font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
+    case .mapAnnotation: font = TKStyleManager.semiboldCustomFont(forTextStyle: .caption2)
+    }
     
     if let icon = icon {
       // Powered by `provider` where provider logo is used.
@@ -98,13 +114,13 @@ public class TKUIAttributionView: UIView {
       view.title.text = Loc.PoweredBy
       view.logo.image = icon
       view.title.isUserInteractionEnabled = false
-      view.title.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
+      view.title.font = font
     } else if let iconURL = iconURL {
       // Powered by `provider` where provider logo is used.
       view.title.text = Loc.PoweredBy
       view.logo.setImage(with: iconURL)
       view.title.isUserInteractionEnabled = false
-      view.title.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
+      view.title.font = font
 
     } else {
       // Powered by `provider`, where provider is a text.
@@ -116,7 +132,7 @@ public class TKUIAttributionView: UIView {
       }
       
       let attributedTitle = NSMutableAttributedString(string: plain)
-      attributedTitle.addAttribute(.font, value: TKStyleManager.semiboldCustomFont(forTextStyle: .footnote), range: NSRange(location: 0, length: plain.count))
+      attributedTitle.addAttribute(.font, value: font, range: NSRange(location: 0, length: plain.count))
       attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkLabelSecondary, range: NSRange(location: 0, length: plain.count))
       
       let range = (plain as NSString).range(of: title)
@@ -124,7 +140,12 @@ public class TKUIAttributionView: UIView {
         attributedTitle.addAttribute(.link, value: url, range: range)
         view.title.isUserInteractionEnabled = true
       } else {
-        attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkAppTintColor, range: range)
+        switch style {
+        case .regular:
+          attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkAppTintColor, range: range)
+        case .mapAnnotation:
+          attributedTitle.addAttribute(.underlineStyle, value: NSNumber(value: NSUnderlineStyle.single.rawValue), range: range)
+        }
         view.title.isUserInteractionEnabled = false
       }
       
@@ -135,12 +156,12 @@ public class TKUIAttributionView: UIView {
     return view
   }
   
-  public static func newView(_ sources: [TKAPI.DataAttribution], wording: Wording = .dataProvidedBy, fitsIn view: UIView? = nil, alignment: Alignment = .leading) -> TKUIAttributionView? {
+  public static func newView(_ sources: [TKAPI.DataAttribution], wording: Wording = .dataProvidedBy, fitsIn view: UIView? = nil, alignment: Alignment = .leading, style: Style = .regular) -> TKUIAttributionView? {
     guard !sources.isEmpty else { return nil }
     
     let names = sources.map(\.provider.name).joined(separator: ", ")
 
-    let attributionView = newView(title: names, alignment: alignment, wording: wording)
+    let attributionView = newView(title: names, alignment: alignment, wording: wording, style: style)
     
     if let containingView = view {
       attributionView.frame.size.width = containingView.frame.width
