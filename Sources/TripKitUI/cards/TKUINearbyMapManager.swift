@@ -50,8 +50,8 @@ public class TKUINearbyMapManager: TKUIMapManager {
   
   private var disposeBag = DisposeBag()
   
-  override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
-    super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
+  override public func takeCharge(of mapView: MKMapView, animated: Bool) {
+    super.takeCharge(of: mapView, animated: animated)
     
     guard let viewModel = viewModel else { assertionFailure(); return }
 

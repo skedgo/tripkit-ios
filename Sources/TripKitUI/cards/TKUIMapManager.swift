@@ -191,8 +191,8 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
-  override open func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
-    super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
+  override open func takeCharge(of mapView: MKMapView, animated: Bool) {
+    super.takeCharge(of: mapView, animated: animated)
 
     // Keep heading
     heading = mapView.camera.heading
@@ -226,10 +226,6 @@ open class TKUIMapManager: TGMapManager {
         TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
       })
       .disposed(by: disposeBag)
-  }
-  
-  override open func reactToNewEdgePadding(_ edgePadding: UIEdgeInsets) {
-    attributionConstraint?.constant = edgePadding.top + 8
   }
   
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {

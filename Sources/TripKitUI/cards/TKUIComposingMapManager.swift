@@ -30,13 +30,13 @@ public class TKUIComposingMapManager: TGMapManager {
     self.bottom = below
   }
   
-  public override func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
+  public override func takeCharge(of mapView: MKMapView, animated: Bool) {
     // Not calling super on purpose. Leave to components.
     
-    bottom.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
+    bottom.takeCharge(of: mapView, animated: animated)
 
     // Called last, so that it'll end up the map's delegate
-    top.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
+    top.takeCharge(of: mapView, animated: animated)
   }
   
   public override func cleanUp(_ mapView: MKMapView, animated: Bool) {
