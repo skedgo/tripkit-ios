@@ -100,7 +100,7 @@ open class TKUIMapManager: TGMapManager {
         self.tileOverlay = self.buildTileOverlay(tiles: tiles)
 
         if let mapView = mapView, let overlay = self.tileOverlay {
-          (settingsToRestore, attributionConstraint) = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
+          settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
         }
       }
       
@@ -111,7 +111,6 @@ open class TKUIMapManager: TGMapManager {
   
   private var tileOverlay: MKTileOverlay?
   private var settingsToRestore: TKUIMapSettings?
-  private var attributionConstraint: NSLayoutConstraint?
   
   /// Cache of renderers, used to update styling when selection changes
   private var renderers: [WeakRenderers] = []
@@ -191,8 +190,8 @@ open class TKUIMapManager: TGMapManager {
     }
   }
   
-  override open func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
-    super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
+  override open func takeCharge(of mapView: MKMapView, animated: Bool) {
+    super.takeCharge(of: mapView, animated: animated)
 
     // Keep heading
     heading = mapView.camera.heading
@@ -206,8 +205,7 @@ open class TKUIMapManager: TGMapManager {
     mapView.addAnnotations(animatedAnnotations)
     mapView.addAnnotations(dynamicAnnotations)
     if let overlay = self.tileOverlay, let tiles = self.tiles {
-      (settingsToRestore, attributionConstraint) = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
-      attributionConstraint?.constant = edgePadding.top + 8
+      settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
     }
     
     // Fetching and updating polygons which can be slow
@@ -226,10 +224,6 @@ open class TKUIMapManager: TGMapManager {
         TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
       })
       .disposed(by: disposeBag)
-  }
-  
-  override open func reactToNewEdgePadding(_ edgePadding: UIEdgeInsets) {
-    attributionConstraint?.constant = edgePadding.top + 8
   }
   
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {

@@ -41,8 +41,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     self.preferredZoomLevel = .road
   }
   
-  override public func takeCharge(of mapView: MKMapView, edgePadding: UIEdgeInsets, animated: Bool) {
-    super.takeCharge(of: mapView, edgePadding: edgePadding, animated: animated)
+  override public func takeCharge(of mapView: MKMapView, animated: Bool) {
+    super.takeCharge(of: mapView, animated: animated)
     add(trip)
     
     NotificationCenter.default.rx
