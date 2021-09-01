@@ -257,7 +257,14 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     viewModel.availableModes
-      .drive(onNext: { [weak self] in self?.updateModePicker($0, in: tableView) })
+      .drive(onNext: { [weak self] in
+        self?.updateModePicker($0, in: tableView)
+        // When available modes change, e.g., from toggling the Transport button on and off,
+        // an error view may be sitting above the table view, covering the mode picker. This
+        // repositions it so the mode picker is always visible. See this ticket for details
+        // https://redmine.buzzhives.com/issues/15305
+        self?.repositionErrorView(sittingAbove: tableView, in: cardView)
+      })
       .disposed(by: disposeBag)
     
     // Monitor progress (note: without this, we won't fetch!)
@@ -630,6 +637,11 @@ private extension TKUIRoutingResultsCard {
       .disposed(by: disposeBag)
     
     return modePicker
+  }
+  
+  func repositionErrorView(sittingAbove tableView: UITableView, in cardView: TGCardView) {
+    let parent = (cardView as? TGScrollCardView)?.scrollViewWrapper ?? cardView
+    TKUITripBoyView.addTopPadding(tableView.tableHeaderView?.frame.height ?? 0, from: parent)
   }
   
 }

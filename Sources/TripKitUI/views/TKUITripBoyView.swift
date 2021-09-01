@@ -53,9 +53,16 @@ public class TKUITripBoyView: UIView {
       .filter { $0 is TKUITripBoyView }
       .forEach { $0.removeFromSuperview() }
   }
+  
+  public static func addTopPadding(_ padding: CGFloat, from parent: UIView) {
+    guard let tripBoyView = parent.subviews.first(where: { $0 is TKUITripBoyView }) as? TKUITripBoyView else {
+      return
+    }
+    tripBoyView.frame.origin.y = padding
+  }
 
   @discardableResult
-  public static func show(error: Error, title: String? = nil, in view: UIView, aboveSubview: UIView? = nil, actionTitle: String? = nil) -> TKUITripBoyView {
+  public static func show(error: Error, title: String? = nil, in view: UIView, aboveSubview: UIView? = nil, topPadding: CGFloat = 0, actionTitle: String? = nil) -> TKUITripBoyView {
     self.clear(from: view)
 
     let tripBoy = TKUITripBoyView.newInstance()
@@ -69,7 +76,7 @@ public class TKUITripBoyView: UIView {
       view.addSubview(tripBoy)
     }
     
-    tripBoy.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+    tripBoy.topAnchor.constraint(equalTo: view.topAnchor, constant: topPadding).isActive = true
     tripBoy.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     view.trailingAnchor.constraint(equalTo: tripBoy.trailingAnchor).isActive = true
     view.bottomAnchor.constraint(equalTo: tripBoy.bottomAnchor).isActive = true

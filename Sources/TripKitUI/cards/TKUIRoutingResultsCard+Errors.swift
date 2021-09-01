@@ -49,7 +49,14 @@ extension TKUIRoutingResultsCard {
     
     let allowRequest = TKUIRoutingResultsCard.config.contactCustomerSupport != nil
 
-    let supportView = TKUIRoutingSupportView.show(with: error, for: request, in: parentView, aboveSubview: tableView, allowRequest: allowRequest)
+    let supportView = TKUIRoutingSupportView.show(
+      with: error,
+      for: request,
+      in: parentView,
+      aboveSubview: tableView,
+      topPadding: tableView.tableHeaderView?.frame.height ?? 0,
+      allowRequest: allowRequest
+    )
     
     if allowRequest {
       supportView.requestSupportButton.rx.tap
@@ -72,7 +79,14 @@ extension TKUIRoutingResultsCard {
     let allowRequest = TKUIRoutingResultsCard.config.contactCustomerSupport != nil
     let actionTitle = allowRequest ? Loc.ContactSupport : nil
 
-    let tripBoy = TKUITripBoyView.show(error: error, title: "Trips not available".localizedCapitalized, in: parentView, aboveSubview: tableView, actionTitle: actionTitle)
+    let tripBoy = TKUITripBoyView.show(
+      error: error,
+      title: "Trips not available".localizedCapitalized,
+      in: parentView,
+      aboveSubview: tableView,
+      topPadding: tableView.tableHeaderView?.frame.height ?? 0,
+      actionTitle: actionTitle
+    )
 
     if allowRequest {
       tripBoy.actionButton.rx.tap
