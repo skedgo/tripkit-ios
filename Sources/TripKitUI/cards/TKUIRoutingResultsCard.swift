@@ -54,6 +54,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   private var titleView: TKUIResultsTitleView?
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
+  private weak var errorView: UIView?
   
   private let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
@@ -263,7 +264,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
         // an error view may be sitting above the table view, covering the mode picker. This
         // repositions it so the mode picker is always visible. See this ticket for details
         // https://redmine.buzzhives.com/issues/15305
-        self?.repositionErrorView(sittingAbove: tableView, in: cardView)
+        if let errorView = self?.errorView {
+          self?.offset(errorView, by: tableView.tableHeaderView?.frame.height ?? 0)
+        }
       })
       .disposed(by: disposeBag)
     
@@ -273,7 +276,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
         guard let self = self, let controller = self.controller else { return }
         switch progress {
         case .started:
-          self.clearError(in: cardView)
+          if let errorView = self.errorView {
+            self.clear(errorView)
+          }
           self.showTripGoAttribution(in: tableView)
 
         case .finished:
@@ -304,7 +309,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .asObservable()
       .withLatestFrom(viewModel.request) { ($0, $1) }
       .subscribe(onNext: { [weak self] in
-        self?.show($0, for: $1, cardView: cardView, tableView: tableView)
+        self?.errorView = self?.show($0, for: $1, cardView: cardView, tableView: tableView)
       })
       .disposed(by: disposeBag)
     
@@ -312,7 +317,11 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .map { $0.first?.items.isEmpty }
       .distinctUntilChanged()
       .filter { $0 == false } // we got results!
-      .drive(onNext: { [weak self] _ in self?.clearError(in: cardView) })
+      .drive(onNext: { [weak self] _ in
+        if let errorView = self?.errorView {
+          self?.clear(errorView)
+        }
+      })
       .disposed(by: disposeBag)
     
     viewModel.next
@@ -639,9 +648,8 @@ private extension TKUIRoutingResultsCard {
     return modePicker
   }
   
-  func repositionErrorView(sittingAbove tableView: UITableView, in cardView: TGCardView) {
-    let parent = (cardView as? TGScrollCardView)?.scrollViewWrapper ?? cardView
-    TKUITripBoyView.addTopPadding(tableView.tableHeaderView?.frame.height ?? 0, from: parent)
+  func offset(_ errorView: UIView, by topPadding: CGFloat) {
+    errorView.frame.origin.y = topPadding
   }
   
 }
