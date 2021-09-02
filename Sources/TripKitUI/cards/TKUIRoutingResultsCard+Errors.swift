@@ -22,22 +22,20 @@ extension TKUIRoutingResultsCard {
       for request: TripRequest,
       cardView: TGCardView,
       tableView: UITableView
-    ) {
+    ) -> UIView {
 
     let parent = (cardView as? TGScrollCardView)?.scrollViewWrapper ?? cardView
 
     switch (error as NSError).code {
     case 1001...1003:
-      showRoutingSupportView(with: error, for: request, parentView: parent, tableView: tableView)
+      return showRoutingSupportView(with: error, for: request, parentView: parent, tableView: tableView)
     default:
-      showErrorView(with: error, for: request, parentView: parent, tableView: tableView)
+      return showErrorView(with: error, for: request, parentView: parent, tableView: tableView)
     }
   }
   
-  func clearError(in cardView: TGCardView) {
-    let parent = (cardView as? TGScrollCardView)?.scrollViewWrapper ?? cardView
-    TKUIRoutingSupportView.clear(from: parent)
-    TKUITripBoyView.clear(from: parent)
+  func clear(_ errorView: UIView) {
+    errorView.removeFromSuperview()
   }
   
   private func showRoutingSupportView(
@@ -45,11 +43,18 @@ extension TKUIRoutingResultsCard {
       for request: TripRequest,
       parentView: UIView,
       tableView: UITableView
-  ) {
+  ) -> TKUIRoutingSupportView {
     
     let allowRequest = TKUIRoutingResultsCard.config.contactCustomerSupport != nil
 
-    let supportView = TKUIRoutingSupportView.show(with: error, for: request, in: parentView, aboveSubview: tableView, allowRequest: allowRequest)
+    let supportView = TKUIRoutingSupportView.show(
+      with: error,
+      for: request,
+      in: parentView,
+      aboveSubview: tableView,
+      topPadding: tableView.tableHeaderView?.frame.height ?? 0,
+      allowRequest: allowRequest
+    )
     
     if allowRequest {
       supportView.requestSupportButton.rx.tap
@@ -61,6 +66,8 @@ extension TKUIRoutingResultsCard {
     
     // Can plan trip right from results card, no need to have a button
     supportView.planNewTripButton.isHidden = true
+    
+    return supportView
   }
   
   private func showErrorView(
@@ -68,11 +75,18 @@ extension TKUIRoutingResultsCard {
     for request: TripRequest,
     parentView: UIView,
     tableView: UITableView
-  ) {
+  ) -> TKUITripBoyView {
     let allowRequest = TKUIRoutingResultsCard.config.contactCustomerSupport != nil
     let actionTitle = allowRequest ? Loc.ContactSupport : nil
 
-    let tripBoy = TKUITripBoyView.show(error: error, title: "Trips not available".localizedCapitalized, in: parentView, aboveSubview: tableView, actionTitle: actionTitle)
+    let tripBoy = TKUITripBoyView.show(
+      error: error,
+      title: "Trips not available".localizedCapitalized,
+      in: parentView,
+      aboveSubview: tableView,
+      topPadding: tableView.tableHeaderView?.frame.height ?? 0,
+      actionTitle: actionTitle
+    )
 
     if allowRequest {
       tripBoy.actionButton.rx.tap
@@ -81,6 +95,8 @@ extension TKUIRoutingResultsCard {
         })
         .disposed(by: disposeBag)
     }
+    
+    return tripBoy
   }
   
 }
