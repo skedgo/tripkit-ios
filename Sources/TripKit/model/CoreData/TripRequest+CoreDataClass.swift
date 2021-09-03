@@ -196,8 +196,7 @@ extension TripRequest {
   
   public var applicableModeIdentifiers: [String] {
     let touched: Set<TKRegion> = {
-      var regions = TKRegionManager.shared.localRegions(containing: fromLocation.coordinate)
-      regions.formUnion(TKRegionManager.shared.localRegions(containing: toLocation.coordinate))
+      var regions = Set(TKRegionManager.shared.localRegions(start: fromLocation.coordinate, end: toLocation.coordinate))
       if regions.count > 1 {
         regions.insert(.international)
       }
