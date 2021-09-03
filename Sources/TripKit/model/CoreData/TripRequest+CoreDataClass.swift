@@ -195,7 +195,13 @@ extension TripRequest {
   
   
   public var applicableModeIdentifiers: [String] {
-    let touched = Set(TKRegionManager.shared.localRegions(start: fromLocation.coordinate, end: toLocation.coordinate))
+    let touched: Set<TKRegion> = {
+      var regions = Set(TKRegionManager.shared.localRegions(start: fromLocation.coordinate, end: toLocation.coordinate))
+      if regions.count > 1 {
+        regions.insert(.international)
+      }
+      return regions
+    }()
     
     if touched.count == 1, let first = touched.first {
       return first.modeIdentifiers
