@@ -59,6 +59,8 @@ open class TKUIHomeCard: TKUITableCard {
     
     headerView.searchBar.placeholder = Loc.SearchForDestination
     headerView.searchBar.delegate = self
+    
+    topMapToolBarItems = Self.config.topMapToolbarItems
   }
   
   required convenience public init?(coder: NSCoder) {
@@ -71,11 +73,7 @@ open class TKUIHomeCard: TKUITableCard {
     super.didBuild(tableView: tableView)
     
     tableView.keyboardDismissMode = .onDrag
-        
-    if let topItems = Self.config.topMapToolbarItems {
-      self.topMapToolBarItems = topItems
-    }
-    
+
     tableView.register(TKUIHomeCardSectionHeader.self, forHeaderFooterViewReuseIdentifier: "TKUIHomeCardSectionHeader")
     tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
     
@@ -263,9 +261,11 @@ extension TKUIHomeCard {
       if let city = annotation as? TKRegion.City {
         clearSearchBar()
         
-        controller?.moveCard(to: .collapsed, animated: true)
-        
-        homeMapManager?.zoom(to: city, animated: true)
+        controller?.draggingCardEnabled = true
+        controller?.moveCard(to: .collapsed, animated: true) {
+          // Not animating this as it's typically a big jump
+          self.homeMapManager?.zoom(to: city, animated: false)
+        }
         return
       }
       
