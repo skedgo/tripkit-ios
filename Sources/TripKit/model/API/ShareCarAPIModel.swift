@@ -21,11 +21,11 @@ extension TKAPI {
     
     public struct Interval: Codable, Hashable {
       public let status: Status
-      public let start: Date?
-      public let end: Date?
+      @OptionalISO8601OrSecondsSince1970 public var start: Date?
+      @OptionalISO8601OrSecondsSince1970 public var end: Date?
     }
     
-    public let lastUpdated: Date
+    @ISO8601OrSecondsSince1970 public var lastUpdated: Date
     public let intervals: [Interval]
   }
   
