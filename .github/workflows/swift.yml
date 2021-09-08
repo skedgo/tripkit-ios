@@ -38,6 +38,10 @@ jobs:
     - name: Run tests
       env:
         TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
+        DATADOG_CLIENT_TOKEN: ${{ secrets.DATADOG_CLIENT_TOKEN }}
+        DD_TEST_RUNNER: 1
+        DD_ENV: ci
+        DD_SERVICE: tripkit-ios
       run: xcodebuild test -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
 
   examples:

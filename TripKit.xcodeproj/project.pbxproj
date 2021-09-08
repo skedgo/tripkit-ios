@@ -24,6 +24,7 @@
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A215B9425D0E0D5004EFB61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A215B9325D0E0D5004EFB61 /* Kingfisher */; };
 		3A5B655526CF52620072DE07 /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5B655426CF52620072DE07 /* TGCardViewController */; };
+		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
 		3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */; };
@@ -1665,6 +1666,7 @@
 			files = (
 				3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */,
 				3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */,
+				3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3119,6 +3121,7 @@
 			);
 			name = TripKitTests;
 			packageProductDependencies = (
+				3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */,
 			);
 			productName = TripKitTests;
 			productReference = 3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */;
@@ -3215,6 +3218,7 @@
 				3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */,
 				3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3A5B655326CF52620072DE07 /* XCRemoteSwiftPackageReference "TGCardViewController" */,
+				3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */,
 			);
 			productRefGroup = 3AB6C6211D1CD0060089F687 /* Products */;
 			projectDirPath = "";
@@ -4811,6 +4815,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DataDog/dd-sdk-swift-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -4828,6 +4840,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A5B655326CF52620072DE07 /* XCRemoteSwiftPackageReference "TGCardViewController" */;
 			productName = TGCardViewController;
+		};
+		3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */;
+			productName = DatadogSDKTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 
