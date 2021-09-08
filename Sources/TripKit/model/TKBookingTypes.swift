@@ -140,6 +140,7 @@ public enum TKBooking {
     public let purchase: Purchase?
     public let actions: [Action]?
     public let input: [BookingInput]?
+    public let notes: [BookingNote]?
   }
   
   public struct BookingInput: Codable, Hashable {
@@ -218,7 +219,12 @@ public enum TKBooking {
         try container.encode(optionIds, forKey: .values)
       }
     }
-    
+  }
+  
+  public struct BookingNote: Codable, Hashable {
+    public let provider: String
+    public let text: String
+    @ISO8601OrSecondsSince1970 public var timestamp: Date
   }
   
 }
