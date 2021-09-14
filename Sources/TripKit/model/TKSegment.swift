@@ -309,8 +309,10 @@ public class TKSegment: NSObject {
     //                            isNear:[self coordinate]]) {
     //    return NO; // don't show the visit where we get on
     //  }
-
-    if let visits = _segmentVisits {
+    if visit is DLSEntry {
+      return false // These are represented by segments already *and*
+                   // they get routinely nuked, so adding them is crashy.
+    } else if let visits = _segmentVisits {
       return visits[visit.stop.stopCode] != nil
     } else {
       return true // be optimistic while we haven't loaded the details yet
