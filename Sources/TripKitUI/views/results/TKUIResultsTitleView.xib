@@ -48,9 +48,9 @@
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="88I-7o-sPz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kdn-Jf-NxY" secondAttribute="trailing" constant="8" id="BEJ-Qf-nnu"/>
                                 <constraint firstItem="NF7-bE-gIz" firstAttribute="leading" secondItem="ICE-3N-AiH" secondAttribute="leading" constant="16" id="Fwc-Km-buL"/>
                                 <constraint firstItem="NF7-bE-gIz" firstAttribute="top" secondItem="ICE-3N-AiH" secondAttribute="top" id="LkO-vZ-d07"/>
+                                <constraint firstItem="88I-7o-sPz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NF7-bE-gIz" secondAttribute="trailing" constant="8" id="NEJ-eD-d2B"/>
                                 <constraint firstAttribute="bottom" secondItem="NF7-bE-gIz" secondAttribute="bottom" id="cFq-Wa-THZ"/>
                             </constraints>
                         </view>
