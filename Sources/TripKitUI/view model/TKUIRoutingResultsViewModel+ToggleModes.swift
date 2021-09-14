@@ -73,7 +73,9 @@ extension TKUIRoutingResultsViewModel {
     case (false, true): newWheelchairOn = false
     }
     guard newWheelchairOn != oldWheelchairOn else {
-      return nil // no need to update toggler
+      // no changes in wheelchair preference, so just return the
+      // existing `enabled`.
+      return AvailableModes(available: all, enabled: Set(enabled))
     }
     
     TKUserProfileHelper.showWheelchairInformation = newWheelchairOn
