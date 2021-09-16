@@ -12,7 +12,11 @@ import TripKit
 
 extension Trip {
   
-  func timeTitles(capitalize: Bool) -> (title: String, subtitle: String) {
+  func timeTitles(capitalize: Bool) -> (title: String, subtitle: String)? {
+    guard let departureTime = departureTime, let arrivalTime = arrivalTime else {
+      return nil // This can happen during KVO
+    }
+    
     return Self.timeTitles(
       departure: departureTime,
       arrival: arrivalTime,
