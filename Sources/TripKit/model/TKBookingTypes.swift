@@ -81,17 +81,18 @@ public enum TKBooking {
   
   
   public struct Purchase: Codable, Hashable {
-    public let id:                  String
-    private let rawPrice:           Double?
-    public let currency:            String?
-    public let budgetPoints:        Int?
-    public let productName:         String?
-    public let productType:         String?
-    private let explicitValidity:   Bool?
-    public let validFor:            TimeInterval?
-    public let validFrom:           Date?
-    public let branding:            TSPBranding?
-    public let attribution:         TKAPI.DataAttribution?
+    public let id: String
+    private let rawPrice: Double?
+    public let currency: String?
+    public let budgetPoints: Int?
+    public let productName: String?
+    public let productType: String?
+    private let explicitValidity:  Bool?
+    public let validFor: TimeInterval?
+    public let branding: TSPBranding?
+    public let attribution: TKAPI.DataAttribution?
+    @OptionalISO8601OrSecondsSince1970 public var validFrom: Date?
+    @OptionalISO8601OrSecondsSince1970 public var paymentDate: Date?
     
     private enum CodingKeys: String, CodingKey {
       case id
@@ -102,9 +103,10 @@ public enum TKBooking {
       case productType
       case explicitValidity = "valid"
       case validFor
-      case validFrom
+      case validFrom = "validFromTimestamp"
       case branding = "brand"
       case attribution = "source"
+      case paymentDate = "paymentTimestamp"
     }
     
     public var price: NSDecimalNumber? {
