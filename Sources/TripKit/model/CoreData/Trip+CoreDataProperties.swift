@@ -17,13 +17,13 @@ extension Trip {
         return NSFetchRequest<Trip>(entityName: "Trip")
     }
 
-    @NSManaged public var arrivalTime: Date
+    @NSManaged public var arrivalTime: Date!
     @NSManaged public var budgetPoints: NSNumber?
     @NSManaged public var currencyCode: String?
 
     @NSManaged var data: Data? // Data with an encoded dictionary
 
-    @NSManaged public var departureTime: Date
+    @NSManaged public var departureTime: Date!
 
     @NSManaged var flags: Int16
     @NSManaged public var logURLString: String?

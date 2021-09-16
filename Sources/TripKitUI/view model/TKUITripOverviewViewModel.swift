@@ -93,39 +93,25 @@ class TKUITripOverviewViewModel {
 }
 
 extension TKUITripOverviewViewModel {
-  
   convenience init(initialTrip: Trip) {
     self.init(presentedTrip: .just(initialTrip))
   }
-  
 }
 
 fileprivate extension Reactive where Base == Trip {
-  
-  static func titles(for trip: Trip) -> (title: String, subtitle: String?) {
-    let timeTitles = trip.timeTitles(capitalize: true)
-    return (
-      timeTitles.title,
-      timeTitles.subtitle
-    )
-  }
-  
   var titles: Driver<(title: String, subtitle: String?)> {
     return Observable.merge(observe(Date.self, "arrivalTime"), observe(Date.self, "departureTime"))
-      .map { [unowned base] _ in Self.titles(for: base) }
+      .compactMap { [unowned base] _ in base.timeTitles(capitalize: true) }
       .asDriver(onErrorDriveWith: .empty())
   }
-  
 }
 
 // MARK: - Navigation
 
 extension TKUITripOverviewViewModel {
-  
   enum Next {
     case handleSelection(TKSegment)
     case showAlerts([TKAlert])
     case showAlternativeRoutes(TripRequest)
   }
-  
 }
