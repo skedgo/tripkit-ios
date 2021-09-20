@@ -87,7 +87,7 @@ public enum TKBooking {
     public let budgetPoints: Int?
     public let productName: String?
     public let productType: String?
-    private let explicitValidity:  Bool?
+    private let explicitValidity: Bool?
     public let validFor: TimeInterval?
     public let branding: TSPBranding?
     public let attribution: TKAPI.DataAttribution?
