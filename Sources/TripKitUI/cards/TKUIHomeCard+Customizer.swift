@@ -53,7 +53,6 @@ extension TKUIHomeCard {
 
 extension TKUIHomeCard {
   
-  @available(iOS 13.0, *)
   func showCustomizer(items: [TKUIHomeCard.CustomizedItem]) {
     guard let controller = controller else { return assertionFailure() }
     let customizer = TKUIHomeCardCustomizationViewController(items: items)
@@ -65,7 +64,6 @@ extension TKUIHomeCard {
   
 }
 
-@available(iOS 13.0, *)
 extension TKUIHomeCard: TKUIHomeCardCustomizationViewControllerDelegate {
 
   func customizer(_ controller: TKUIHomeCardCustomizationViewController, completed items: [CustomizedItem]) {

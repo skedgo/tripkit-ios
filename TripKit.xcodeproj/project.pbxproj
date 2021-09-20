@@ -22,7 +22,7 @@
 		3A1AABB926CB7BB100FDDB06 /* TKVehicular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABB726CB7BB100FDDB06 /* TKVehicular.swift */; };
 		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
-		3A215B9425D0E0D5004EFB61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A215B9325D0E0D5004EFB61 /* Kingfisher */; };
+		3A556D7326F8604D00CCDB94 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A556D7226F8604D00CCDB94 /* Kingfisher */; };
 		3A5B655526CF52620072DE07 /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5B655426CF52620072DE07 /* TGCardViewController */; };
 		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
@@ -1640,7 +1640,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A215B9425D0E0D5004EFB61 /* Kingfisher in Frameworks */,
+				3A556D7326F8604D00CCDB94 /* Kingfisher in Frameworks */,
 				3A5B655526CF52620072DE07 /* TGCardViewController in Frameworks */,
 				3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */,
 			);
@@ -3060,8 +3060,8 @@
 			name = "TripKitUI-iOS";
 			packageProductDependencies = (
 				3A1F72D225C7E54800C72CEE /* RxCocoa */,
-				3A215B9325D0E0D5004EFB61 /* Kingfisher */,
 				3A5B655426CF52620072DE07 /* TGCardViewController */,
+				3A556D7226F8604D00CCDB94 /* Kingfisher */,
 			);
 			productName = "TripKitUI-iOS";
 			productReference = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */;
@@ -3216,9 +3216,9 @@
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			packageReferences = (
 				3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */,
-				3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3A5B655326CF52620072DE07 /* XCRemoteSwiftPackageReference "TGCardViewController" */,
 				3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */,
+				3A556D7126F8604D00CCDB94 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 3AB6C6211D1CD0060089F687 /* Products */;
 			projectDirPath = "";
@@ -4330,6 +4330,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Sources/TripKitUI/Supporting Files//Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4359,6 +4361,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Sources/TripKitUI/Supporting Files//Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4799,12 +4803,12 @@
 				minimumVersion = 6.1.0;
 			};
 		};
-		3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		3A556D7126F8604D00CCDB94 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.2.0;
+				kind = revision;
+				revision = 1897586f01041d6ddc025714be156aee2d79509d;
 			};
 		};
 		3A5B655326CF52620072DE07 /* XCRemoteSwiftPackageReference "TGCardViewController" */ = {
@@ -4831,9 +4835,9 @@
 			package = 3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		3A215B9325D0E0D5004EFB61 /* Kingfisher */ = {
+		3A556D7226F8604D00CCDB94 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A1F72E625C7E5E400C72CEE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 3A556D7126F8604D00CCDB94 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		3A5B655426CF52620072DE07 /* TGCardViewController */ = {

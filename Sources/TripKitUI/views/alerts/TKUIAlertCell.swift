@@ -123,14 +123,8 @@ class TKUIAlertCell: UITableViewCell {
   }
   
   private func icon(for alert: TKAlert) -> UIImage? {
-    if #available(iOS 13, *) {
-      let configuration = UIImage.SymbolConfiguration(pointSize: 36)
-      return UIImage(systemName: "exclamationmark.triangle.fill", withConfiguration: configuration)
-    } else {
-      return alert.isCritical() ?
-        TripKitUIBundle.imageNamed("icon-alert-red-high-res") :
-        TripKitUIBundle.imageNamed("icon-alert-yellow-high-res")
-    }
+    let configuration = UIImage.SymbolConfiguration(pointSize: 36)
+    return UIImage(systemName: "exclamationmark.triangle.fill", withConfiguration: configuration)
   }
     
 }

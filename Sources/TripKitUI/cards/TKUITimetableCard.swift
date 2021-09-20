@@ -284,13 +284,11 @@ public class TKUITimetableCard : TKUITableCard {
         })
         .disposed(by: disposeBag)
 
-      if #available(iOS 13.0, *) {
-        accessoryView.searchBar.searchTextField.rx.observe(\.isFirstResponder)
-          .subscribe(onNext: { [unowned self] _ in
-            self.controller?.draggingCardEnabled = true
-          })
-          .disposed(by: disposeBag)
-      }
+      accessoryView.searchBar.searchTextField.rx.observe(\.isFirstResponder)
+        .subscribe(onNext: { [unowned self] _ in
+          self.controller?.draggingCardEnabled = true
+        })
+        .disposed(by: disposeBag)
       
       accessoryView.searchBar.rx.setDelegate(self)
         .disposed(by: disposeBag)

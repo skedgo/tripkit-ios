@@ -33,19 +33,13 @@ class TKUISegmentAlertCell: UITableViewCell {
     // Same styling as in TKUIServiceHeaderView
     contentWrapper.layer.borderWidth = 1.0
     contentWrapper.layer.cornerRadius = 6.0
-    if #available(iOS 13.0, *) {
-      contentWrapper.backgroundColor = UIColor { _ in UIColor.tkStateWarning.withAlphaComponent(0.12) }
-      contentWrapper.layer.borderColor = UIColor { traits in
-        switch traits.userInterfaceStyle {
-        case .dark: return UIColor.tkStateWarning.withAlphaComponent(0.3)
-        default:    return UIColor.tkStateWarning.withAlphaComponent(0.6)
-        }
-      }.cgColor
-
-    } else {
-      contentWrapper.backgroundColor = UIColor.tkStateWarning.withAlphaComponent(0.12)
-      contentWrapper.layer.borderColor = UIColor.tkStateWarning.withAlphaComponent(0.6).cgColor
-    }
+    contentWrapper.backgroundColor = UIColor { _ in UIColor.tkStateWarning.withAlphaComponent(0.12) }
+    contentWrapper.layer.borderColor = UIColor { traits in
+      switch traits.userInterfaceStyle {
+      case .dark: return UIColor.tkStateWarning.withAlphaComponent(0.3)
+      default:    return UIColor.tkStateWarning.withAlphaComponent(0.6)
+      }
+    }.cgColor
     
     iconView.tintColor = .tkStateWarning
     chevronView.tintColor = .tkLabelPrimary

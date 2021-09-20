@@ -116,10 +116,8 @@ class TKUIRoutingQueryInputTitleView: UIView {
       let searchBar = mode == .origin ? fromSearchBar : toSearchBar
       else { return }
     
-    if #available(iOS 13.0, *) {
-      searchBar.becomeFirstResponder()
-      searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
-    }
+    searchBar.becomeFirstResponder()
+    searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
   }
 
   override func resignFirstResponder() -> Bool {

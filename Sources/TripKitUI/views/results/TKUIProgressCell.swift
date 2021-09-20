@@ -24,9 +24,7 @@ public class TKUIProgressCell: UITableViewCell {
     
     contentView.backgroundColor = .tkBackground
     
-    if #available(iOS 13.0, *) {
-      spinner.style = .medium
-    }
+    spinner.style = .medium
     spinner.color = .tkLabelPrimary
     spinner.startAnimating()
     

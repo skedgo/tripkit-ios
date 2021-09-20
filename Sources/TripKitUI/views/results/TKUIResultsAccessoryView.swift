@@ -36,11 +36,9 @@ class TKUIResultsAccessoryView: UIView {
     transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     transportButton.tintColor = .tkAppTintColor
 
-    if #available(iOS 13.0, *) {
-      let config = UIImage.SymbolConfiguration(pointSize: 10)
-      timeButton.setImage(.init(systemName: "clock", withConfiguration: config), for: .normal)
-      transportButton.setImage(.init(systemName: "ellipsis.circle", withConfiguration: config), for: .normal)
-    }
+    let config = UIImage.SymbolConfiguration(pointSize: 10)
+    timeButton.setImage(.init(systemName: "clock", withConfiguration: config), for: .normal)
+    transportButton.setImage(.init(systemName: "ellipsis.circle", withConfiguration: config), for: .normal)
   }
   
   func hideTransportButton() {
