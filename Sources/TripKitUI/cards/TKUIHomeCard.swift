@@ -253,7 +253,6 @@ extension TKUIHomeCard {
       }
       
     case .showCustomizer(let items):
-      guard #available(iOS 13.0, *) else { return assertionFailure() }
       showCustomizer(items: items)
       dismissSelection()
 
@@ -439,7 +438,6 @@ extension TKUIHomeCard: UITableViewDelegate {
     return configurations.first
   }
   
-  @available(iOS 13.0, *)
   public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     guard let item = self.dataSource[indexPath].componentItem else { return nil }
     let configurations = self.viewModel.componentViewModels.compactMap { $0.contextMenuConfiguration(for: item, at: indexPath, in: tableView) }

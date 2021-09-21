@@ -51,11 +51,8 @@ extension TKUIMapManager {
     
     let toRestore = TKUIMapSettings(mapType: mapView.mapType)
     mapView.mapType = .mutedStandard
-
-    if #available(iOS 13.0, *) {
-      mapView.overrideUserInterfaceStyle = .light
-      mapView.pointOfInterestFilter = .excludingAll
-    }
+    mapView.overrideUserInterfaceStyle = .light
+    mapView.pointOfInterestFilter = .excludingAll
     
     if let attributionView = TKUIAttributionView.newView(sources, wording: .mapBy, alignment: .leading, style: .mapAnnotation) {
       attributionView.translatesAutoresizingMaskIntoConstraints = false

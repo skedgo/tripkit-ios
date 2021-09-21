@@ -33,11 +33,9 @@ extension TKUIHomeCard {
 
     /// Shows the user interface to customize the home card, which let's users re-order and toggle
     /// individual home card components.
-    @available(iOS 13.0, *)
     case showCustomizer
 
     /// Hides the home card component of the matching identifier.
-    @available(iOS 13.0, *)
     case hideSection(identifier: String)
     
     case success
@@ -52,7 +50,6 @@ extension TKUIHomeViewModel {
     
     case present(UIViewController, inNavigationController: Bool)
     
-    @available(iOS 13.0, *)
     case showCustomizer([TKUIHomeCard.CustomizedItem])
 
     /// Use this for the home card to decide what to do when selecing the provided annotation by the provided component.
@@ -82,7 +79,6 @@ extension TKUIHomeViewModel {
     case let .handleSelection(annotation, component):
       return .handleSelection(annotation, component: component)
     case .showCustomizer:
-      guard #available(iOS 13.0, *) else { preconditionFailure() }
       return .showCustomizer(customization)
     case .hideSection(let identifier):
       TKUIHomeCard.hideComponent(id: identifier)

@@ -14,12 +14,10 @@ import RxCocoa
 
 import TripKit
 
-@available(iOS 13.0, *)
 protocol TKUIHomeCardCustomizationViewControllerDelegate: AnyObject {
   func customizer(_ controller: TKUIHomeCardCustomizationViewController, completed items: [TKUIHomeCard.CustomizedItem])
 }
 
-@available(iOS 13.0, *)
 class TKUIHomeCardCustomizationViewController: UITableViewController {
   
   weak var delegate: TKUIHomeCardCustomizationViewControllerDelegate?
@@ -90,7 +88,6 @@ class TKUIHomeCardCustomizationViewController: UITableViewController {
   
 }
 
-@available(iOS 13.0, *)
 fileprivate class DataSource: RxTableViewSectionedReloadDataSource<TKUIHomeCardCustomizationViewModel.Section> {
   
   init() {

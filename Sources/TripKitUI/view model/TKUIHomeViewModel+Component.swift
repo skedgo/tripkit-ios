@@ -182,7 +182,6 @@ public protocol TKUIHomeComponentViewModel {
   /// component view model in the list of view models passed to a `TKUIHomeViewModel`. As
   /// such, it may change as other component view models are added or removed. It is best not
   /// to use the `section` property when configuring the returned cell.
-  @available(iOS 13.0, *)
   func contextMenuConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UIContextMenuConfiguration?
 }
 
@@ -194,7 +193,6 @@ extension TKUIHomeComponentViewModel {
   
   public func trailingSwipeActionsConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UISwipeActionsConfiguration? { nil }
   
-  @available(iOS 13.0, *)
   public func contextMenuConfiguration(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UIContextMenuConfiguration? { nil }
 }
 

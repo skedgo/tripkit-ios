@@ -362,10 +362,8 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   public override var keyCommands: [UIKeyCommand]? {
     var commands = super.keyCommands ?? []
     
-    if #available(iOS 13.0, *) {
-      // ⌘+F: Search (show query input)
-      commands.append(UIKeyCommand(title: Loc.Search, image: nil, action: #selector(triggerSearch), input: "F", modifierFlags: [.command]))
-    }
+    // ⌘+F: Search (show query input)
+    commands.append(UIKeyCommand(title: Loc.Search, image: nil, action: #selector(triggerSearch), input: "F", modifierFlags: [.command]))
     
     return commands
   }
@@ -556,7 +554,6 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
   
 }
 
-@available(iOS 13.0, *)
 extension TKUIRoutingResultsCard {
   public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     guard

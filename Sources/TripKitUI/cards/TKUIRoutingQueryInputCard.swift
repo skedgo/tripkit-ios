@@ -146,10 +146,8 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
   public override var keyCommands: [UIKeyCommand]? {
     var commands = super.keyCommands ?? []
     
-    if #available(iOS 13.0, *) {
-      // ⌘+⏎: Route
-      commands.append(UIKeyCommand(title: Loc.Route, image: nil, action: #selector(triggerRoute), input: "\r", modifierFlags: [.command]))
-    }
+    // ⌘+⏎: Route
+    commands.append(UIKeyCommand(title: Loc.Route, image: nil, action: #selector(triggerRoute), input: "\r", modifierFlags: [.command]))
     
     return commands
   }

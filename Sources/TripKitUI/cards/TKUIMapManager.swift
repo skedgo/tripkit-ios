@@ -196,9 +196,7 @@ open class TKUIMapManager: TGMapManager {
     // Keep heading
     heading = mapView.camera.heading
     
-    if #available(iOS 13.0, *) {
-      mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
-    }
+    mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
 
     // Add content
     mapView.addOverlays(overlays, level: overlayLevel)
