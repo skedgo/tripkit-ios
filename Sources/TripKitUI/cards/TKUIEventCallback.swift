@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 import TGCardViewController
+import RxSwift
 
 import TripKit
 
@@ -34,8 +35,11 @@ public struct TKUIEventCallback {
     /// Fires when a particular screen appears, often presented modally from a card
     case screenAppeared(name: String, controller: UIViewController)
     
-    /// Fires whenever the details of a trip are viewed
-    case tripSelected(Trip, controller: TGCardViewController)
+    /// Fires whenever the details of a trip are viewed.
+    ///
+    /// You can use the `DisposeBag` to trigger an action that should be cancelled if the trip
+    /// is no longer selected.
+    case tripSelected(Trip, controller: TGCardViewController, DisposeBag)
 
     /// Fires whenever the routing results were requested and finished loading
     case routesLoaded(TripRequest, controller: TGCardViewController)

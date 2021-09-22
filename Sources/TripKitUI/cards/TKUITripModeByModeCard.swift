@@ -196,7 +196,7 @@ public class TKUITripModeByModeCard: TGPageCard {
 
     TKUIEventCallback.handler(.cardAppeared(self))
     if let controller = self.controller {
-      TKUIEventCallback.handler(.tripSelected(viewModel.trip, controller: controller))
+      TKUIEventCallback.handler(.tripSelected(viewModel.trip, controller: controller, disposeBag))
     }
   }
   
