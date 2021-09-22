@@ -20,12 +20,15 @@ open class TKUITableCard: TGTableCard {
   open override func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
     
-    if #available(iOS 15, *), tableView.style == .plain {
-      tableView.sectionHeaderTopPadding = 0.0
-    }
     
     #if targetEnvironment(macCatalyst)
     self.handleMacSelection = highlighted.onNext
+    #else
+
+    // LATER: Also apply this on Catalyst, once that supports iOS 15
+    if #available(iOS 15, *), tableView.style == .plain {
+      tableView.sectionHeaderTopPadding = 0.0
+    }
     #endif
   }
   

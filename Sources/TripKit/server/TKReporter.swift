@@ -13,7 +13,7 @@ public class TKReporter {
   
   private init() { }
   
-  public static func reportPlannedTrip(_ trip: Trip, userInfo: [String: Any] = [:], includeUserID: Bool = false, completion: ((Bool) -> Void)? = nil) {
+  public static func reportPlannedTrip(_ trip: Trip, userInfo: [String: Any] = [:], includeUserID: Bool = false, isCurrent: (() -> Bool)? = nil, completion: ((Bool) -> Void)? = nil) {
     
     guard
       let urlString = trip.plannedURLString,
@@ -30,10 +30,14 @@ public class TKReporter {
     }
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+      if let isCurrent = isCurrent, !isCurrent() {
+        completion?(false);
+        return
+      }
       
       // Only report if url is still the last one planned
       guard let currentUrl = UserDefaults.standard.url(forKey: key), currentUrl == url
-        else { return }
+      else { completion?(false); return }
       
       UserDefaults.standard.removeObject(forKey: key)
       

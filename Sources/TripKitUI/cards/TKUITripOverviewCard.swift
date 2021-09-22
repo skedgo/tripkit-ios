@@ -207,12 +207,12 @@ public class TKUITripOverviewCard: TKUITableCard {
     
     isVisible
       .filter { $0 }
-      .withLatestFrom(viewModel.refreshMap)
+      .withLatestFrom(viewModel.refreshMap.startWith(initialTrip))
       .withUnretained(self)
       .subscribe(onNext: { owner, trip in
         TKUICustomization.shared.feedbackActiveItemHandler?(trip)
         if let controller = owner.controller {
-          TKUIEventCallback.handler(.tripSelected(trip, controller: controller))
+          TKUIEventCallback.handler(.tripSelected(trip, controller: controller, owner.disposeBag))
         }
       })
       .disposed(by: disposeBag)

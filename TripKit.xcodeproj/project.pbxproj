@@ -24,6 +24,7 @@
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A556D7326F8604D00CCDB94 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A556D7226F8604D00CCDB94 /* Kingfisher */; };
 		3A5B655526CF52620072DE07 /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5B655426CF52620072DE07 /* TGCardViewController */; };
+		3AA1092126FABC6000C52879 /* TKReporter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */; };
 		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
@@ -953,6 +954,7 @@
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A963D6026D46AD300C328A1 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
+		3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKReporter+Rx.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
@@ -2601,6 +2603,7 @@
 				3AFF27B826C6975F007809CD /* TKLocationRealTime.swift */,
 				3AFF27C226C6975F007809CD /* TKLocationTypes+Rx.swift */,
 				3AFF27B726C6975F007809CD /* TKRealTimeHelper.swift */,
+				3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */,
 				3AFF27BE26C6975F007809CD /* TKRouter+Rx.swift */,
 				3AFF27C126C6975F007809CD /* TKServer+Rx.swift */,
 				3AFF27BA26C6975F007809CD /* TKServer+UserAccount.swift */,
@@ -3613,6 +3616,7 @@
 				3AFF2B2C26C69B85007809CD /* TKUIServiceViewModel+Content.swift in Sources */,
 				3AFF2BD226C69BFC007809CD /* DataSources.swift in Sources */,
 				3AFF2B4B26C69B9C007809CD /* TKUIPulsingAnnotationView.swift in Sources */,
+				3AA1092126FABC6000C52879 /* TKReporter+Rx.swift in Sources */,
 				3AFF2AE926C69B56007809CD /* TKUIHomeCard+Customizer.swift in Sources */,
 				3AFF2B7826C69BBE007809CD /* TKUIHomeCustomizerCell.swift in Sources */,
 				3AFF2AED26C69B56007809CD /* TKUIStartTripAction.swift in Sources */,
