@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'Kingfisher', '~> 5.8'
+  s.dependency 'Kingfisher', '~> 7.0'
   
   s.source_files = [
     "Sources/TripKitUI/**/*.swift"
