@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "d06df9adf50ed8cde5786d935836a5f445f780ba",
-          "version": "6.3.1"
+          "revision": "8c65ddf756c633d01d9ae01092bf72f0c66dfc60",
+          "version": "7.0.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/skedgo/TGCardViewController.git",
         "state": {
           "branch": null,
-          "revision": "9ca9f8f2ced663fc37da25bff9f427a752fea38f",
-          "version": "1.6.2"
+          "revision": "b9d0f67a50a57acbf5d70bee25273f558707af14",
+          "version": "1.7.3"
         }
       }
     ]
