@@ -22,8 +22,9 @@ class TKUIAutocompletionResultCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
 
-    // Shouldn't have its own background color
-    backgroundColor = .clear
+    // We set a background colour here to avoid ghosting.
+    // reported here: https://redmine.buzzhives.com/issues/15589
+    backgroundColor = .tkBackground
   }
   
   required init?(coder aDecoder: NSCoder) {
