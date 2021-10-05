@@ -128,14 +128,12 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
       currentModeButtonStackView?.addArrangedSubview(modeButton(for: mode))
     }
     
-    // This is a hacky way to create equally spaced mode icons in stack
-    // that does not have enough modes.
+    // Create equally spaced mode icons in stack that does not have enough modes.
     if let lastModeButtonStackView = modeButtonStackViews.last {
       for _ in 0 ..< modesPerStack - lastModeButtonStackView.arrangedSubviews.count {
-        let hiddenModeButtonView = templateModeButton()
-        hiddenModeButtonView.backgroundColor = .clear
-        hiddenModeButtonView.isUserInteractionEnabled = false
-        lastModeButtonStackView.addArrangedSubview(hiddenModeButtonView)
+        let invisiblePlaceholder = placeholder()
+        invisiblePlaceholder.backgroundColor = .clear
+        lastModeButtonStackView.addArrangedSubview(invisiblePlaceholder)
       }
     }
     
@@ -172,6 +170,14 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     button.heightAnchor.constraint(equalToConstant: Constants.modeButtonWidth).isActive = true
     button.widthAnchor.constraint(equalToConstant: Constants.modeButtonWidth).isActive = true
     return button
+  }
+  
+  private func placeholder() -> UIView {
+    let placeholder = UIView()
+    placeholder.contentMode = .center
+    placeholder.heightAnchor.constraint(equalToConstant: Constants.modeButtonWidth).isActive = true
+    placeholder.widthAnchor.constraint(equalToConstant: Constants.modeButtonWidth).isActive = true
+    return placeholder
   }
   
   private func modeButton(for item: Item) -> UIButton {
