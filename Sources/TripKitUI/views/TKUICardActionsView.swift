@@ -121,8 +121,9 @@ extension TKUICardActionsView {
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
-      actionView.accessibilityLabel = action.title
-      actionView.accessibilityTraits = .button
+      actionView.wrapper.isAccessibilityElement = true
+      actionView.wrapper.accessibilityLabel = action.title
+      actionView.wrapper.accessibilityTraits = .button
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
         guard let card = card else { return }
