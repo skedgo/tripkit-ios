@@ -51,6 +51,10 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     super.didBuild(tableView: tableView)
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIAutocompletionViewModel.Section>(
+      decideViewTransition: { _, _, _ in
+        // Thanks to https://stackoverflow.com/a/59716978
+        return UIAccessibility.isReduceMotionEnabled ? .reload : .animated
+      },
       configureCell: { _, tv, ip, item in
         guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
           preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
