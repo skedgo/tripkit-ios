@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kz9-SC-Spy">
-                    <rect key="frame" x="86" y="4" width="61" height="28"/>
+                    <rect key="frame" x="87" y="4" width="59" height="28"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fL5-ON-i7r">
                             <rect key="frame" x="0.0" y="2" width="24" height="24"/>
@@ -24,12 +24,16 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AE-8m-b34">
-                            <rect key="frame" x="28" y="6" width="33" height="16"/>
+                            <rect key="frame" x="28" y="7" width="31" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" button="YES"/>
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
                     <constraints>
                         <constraint firstItem="fL5-ON-i7r" firstAttribute="centerY" secondItem="kz9-SC-Spy" secondAttribute="centerY" id="6QK-XL-b3z"/>
                         <constraint firstAttribute="bottom" secondItem="fL5-ON-i7r" secondAttribute="bottom" constant="2" id="NaI-Bb-h0X"/>
@@ -53,6 +57,7 @@
             <connections>
                 <outlet property="imageView" destination="fL5-ON-i7r" id="fjQ-mk-1Yh"/>
                 <outlet property="label" destination="8AE-8m-b34" id="IKB-s3-9tf"/>
+                <outlet property="wrapper" destination="kz9-SC-Spy" id="u2y-se-v8r"/>
             </connections>
             <point key="canvasLocation" x="-100.72463768115942" y="-415.51339285714283"/>
         </view>

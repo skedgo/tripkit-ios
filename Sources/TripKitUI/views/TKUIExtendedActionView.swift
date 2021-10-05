@@ -12,6 +12,7 @@ import TripKit
 
 class TKUIExtendedActionView: UIView {
 
+  @IBOutlet weak var wrapper: UIView!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var label: UILabel!
   
