@@ -24,6 +24,7 @@ public enum TKBooking {
     public let internalURL: URL?
     public let externalAction: String?
     public let type: ActionType?
+    public let confirmationMessage: String?
     public var input: [ActionInput]?
     
     public enum ActionType: String, Codable, CaseIterable {
@@ -56,6 +57,7 @@ public enum TKBooking {
       case externalAction = "externalURL"
       case type
       case input
+      case confirmationMessage
     }
   }
   
