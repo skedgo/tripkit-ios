@@ -45,7 +45,9 @@ extension TKUITripOverviewViewModel {
   
   struct TerminalItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.TerminalItem, rhs: TKUITripOverviewViewModel.TerminalItem) -> Bool {
-      return lhs.segment == rhs.segment
+      // Check the segment, plus anything that can change with real-time data
+      return lhs.segment.templateHashCode == rhs.segment.templateHashCode
+          && lhs.time == rhs.time
     }
     
     let title: String
@@ -64,7 +66,13 @@ extension TKUITripOverviewViewModel {
   
   struct StationaryItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.StationaryItem, rhs: TKUITripOverviewViewModel.StationaryItem) -> Bool {
-      return lhs.segment == rhs.segment
+      // Check the segment, plus anything that can change with real-time data
+      // Note: Platforms go into subtitles and can change in real-time, too
+      return lhs.segment.templateHashCode == rhs.segment.templateHashCode
+          && lhs.startTime == rhs.startTime
+          && lhs.endTime == rhs.endTime
+          && lhs.subtitle == rhs.subtitle
+          && lhs.endSubtitle == rhs.endSubtitle
     }
     
     let title: String
@@ -87,7 +95,7 @@ extension TKUITripOverviewViewModel {
   struct MovingItem: Equatable {
     static func == (lhs: TKUITripOverviewViewModel.MovingItem, rhs: TKUITripOverviewViewModel.MovingItem) -> Bool {
       // Check the segment, plus anything that can change with real-time data
-      return lhs.segment == rhs.segment
+      return lhs.segment.templateHashCode == rhs.segment.templateHashCode
           && lhs.accessories == rhs.accessories
     }
     

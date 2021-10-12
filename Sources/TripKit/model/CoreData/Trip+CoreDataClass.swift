@@ -464,11 +464,13 @@ extension Trip {
 /// :nodoc:
 extension Trip: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
+    // We need a URL to update the trip
+    guard updateURLString != nil else { return false }
+
     if segments.contains(where: { $0.bookingConfirmation != nil }) {
       return true // booking confirmations can update at any time
     }
     
-    guard updateURLString != nil else { return false }
     return wantsRealTimeUpdates(forStart: departureTime, end: arrivalTime, forPreplanning: true)
   }
 }

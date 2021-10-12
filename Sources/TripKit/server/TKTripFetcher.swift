@@ -64,7 +64,7 @@ public enum TKTripFetcher {
     let url = url ?? trip.updateURLString.flatMap( { URL(string: $0) })
     guard let updateURL = url else {
       completion(.failure(FetcherError.invalidURL))
-      return assertionFailure()
+      return
     }
     
     self.downloadTripData(from: updateURL, includeStops: false) { result in
