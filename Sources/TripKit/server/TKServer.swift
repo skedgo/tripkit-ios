@@ -293,6 +293,26 @@ extension TKServer {
   }
   
   private static func hit(method: HTTPMethod, url: URL, parameters: [String: Any]?, completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
+    
+    if url.scheme == "file" {
+      do {
+        let filename = (url.lastPathComponent as NSString).deletingPathExtension
+        let type = url.pathExtension
+        let fileURLs = Bundle.allBundles.compactMap { bundle in
+          return bundle.url(forResource: filename, withExtension: type)
+        }
+        guard let fileURL = fileURLs.first else {
+          throw NSError(code: 14351, message: "Does not exit.")
+        }
+        let data = try Data(contentsOf: fileURL)
+        let json = try JSONSerialization.jsonObject(with: data)
+        let dict = json as? [String: Any] ?? [:]
+        return completion(200, dict, .success(data))
+      } catch {
+        return completion(500, [:], .failure(error))
+      }
+    }
+    
     ___hit(
       url,
       method: method.rawValue,
