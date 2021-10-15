@@ -156,19 +156,21 @@ public enum TKBooking {
       public let title: String
     }
     
-    enum InputType: String, Codable {
+    public enum InputType: String, Codable {
       case longText = "LONG_TEXT"
       case singleSelection = "SINGLE_CHOICE"
       case multipleSelections = "MULTIPLE_CHOICE"
+      case datePicker = "DATE_PICKER"
     }
     
     public enum InputValue: Hashable {
       case singleSelection(InputOptionId)
       case multipleSelections([InputOptionId])
       case longText(String)
+      case date(String)
     }
     
-    let type: InputType
+    public let type: InputType
     public let required: Bool
     public let id: String
     public let options: [InputOption]?
@@ -183,6 +185,15 @@ public enum TKBooking {
       case title
       case value
       case values
+    }
+    
+    public init(type: InputType, required: Bool, id: String, options: [InputOption]? = nil, title: String, value: InputValue) {
+      self.type = type
+      self.required = required
+      self.id = id
+      self.options = options
+      self.title = title
+      self.value = value
     }
     
     public init(from decoder: Decoder) throws {
@@ -203,6 +214,9 @@ public enum TKBooking {
       case .multipleSelections:
         let selectedOptionIds = try container.decode([String].self, forKey: .values)
         value = .multipleSelections(selectedOptionIds)
+      case .datePicker:
+        let date = try container.decode(String.self, forKey: .value)
+        value = .date(date)
       }
     }
     
@@ -222,6 +236,8 @@ public enum TKBooking {
         try container.encode(value, forKey: .value)
       case .multipleSelections(let optionIds):
         try container.encode(optionIds, forKey: .values)
+      case .date(let value):
+        try container.encode(value, forKey: .value)
       }
     }
   }
@@ -259,6 +275,14 @@ extension TKBooking.BookingInput {
   
   public func displayTitle(for optionId: InputOptionId) -> String? {
     return options?.first(where: { $0.id == optionId })?.title
+  }
+  
+}
+
+extension TKBooking.BookingInput {
+  
+  public static func placeholderDatePickerInput() -> Self {
+    return Self.init(type: .datePicker, required: false, id: "datePicker", options: nil, title: "Return trip", value: .date(""))
   }
   
 }
