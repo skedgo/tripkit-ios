@@ -108,6 +108,8 @@ public class TKUITripSegmentsView : UIView {
     
     subviews.forEach { $0.removeFromSuperview() }
     
+    var accessibileElements: [UIAccessibilityElement] = []
+    
     var nextX = Self.padding / 2
     
     // We might not yet have a frame, if the Auto Layout engine wants to get the
@@ -122,7 +124,8 @@ public class TKUITripSegmentsView : UIView {
     var count = 0
     for segment in segments {
       let mask: UIView.AutoresizingMask = []
-      let alpha = (segmentIndexToSelect ?? count) == count ? Self.alphaSelected : Self.alphaDeselected
+      let isSelected = (segmentIndexToSelect ?? count) == count
+      let alpha = isSelected ? Self.alphaSelected : Self.alphaDeselected
       
       guard let modeImage = segment.tripSegmentModeImage else {
         continue // this can happen if a trip was visible while TripKit got cleared
@@ -309,7 +312,17 @@ public class TKUITripSegmentsView : UIView {
         subtitleWidth += 2 + viewWidth
       }
       
-      nextX = newFrame.maxX + modeSideWith + Self.padding
+      newFrame.size.width += modeSideWith
+      
+      let accessibleElement = UIAccessibilityElement(accessibilityContainer: self)
+      accessibleElement.accessibilityLabel = segment.tripSegmentAccessibilityLabel
+      accessibleElement.accessibilityFrameInContainerSpace = newFrame
+      if segmentIndexToSelect != nil {
+        accessibleElement.accessibilityTraits = isSelected ? [.button, .selected] : [.button]
+      }
+      accessibileElements.append(accessibleElement)
+      
+      nextX = newFrame.maxX + Self.padding
       count += 1
       if allowSubtitles {
         desiredSize = .init(width: nextX, height: maxHeight)
@@ -324,6 +337,7 @@ public class TKUITripSegmentsView : UIView {
           return
         }
       }
+      
     }
     
     if isCanceled {
@@ -334,6 +348,9 @@ public class TKUITripSegmentsView : UIView {
     }
     
     self.segmentXValues = newSegmentXValues
+    
+    self.accessibilityElements = accessibileElements
+    self.isAccessibilityElement = false
   }
   
 }
