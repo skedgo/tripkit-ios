@@ -194,10 +194,10 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
              completion:
    ^(NSInteger status, NSDictionary<NSString *,id> *headers, NSData *data, NSError * _Nullable error) {
      NSError *serverError = error;
-     if (serverError) {
+     if (serverError || status >= 500) {
        BOOL isUserError = NO;
        #warning TODO: Re-instate no failover on user error?
-       if (isUserError) {
+       if (isUserError && serverError != nil) {
          if (callbackOnMain) {
            dispatch_async(dispatch_get_main_queue(), ^{
              failure(serverError);
