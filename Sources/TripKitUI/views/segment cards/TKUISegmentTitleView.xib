@@ -61,8 +61,8 @@
                         </label>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-5c-QYr">
-                    <rect key="frame" x="327" y="-11" width="44" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="right" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-5c-QYr">
+                    <rect key="frame" x="315" y="8" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Elm-1k-ZA6"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="f0E-Fz-Dp4"/>
@@ -90,14 +90,14 @@
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="25R-dz-Nwr" secondAttribute="trailing" constant="16" id="BVD-7f-ftn"/>
                 <constraint firstItem="d3c-vY-icO" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="FCh-Zb-LLX"/>
                 <constraint firstItem="b5B-sU-BPC" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="KIB-bO-yTX"/>
-                <constraint firstAttribute="trailing" secondItem="nv4-5c-QYr" secondAttribute="trailing" constant="4" id="Rsk-yV-HSc"/>
+                <constraint firstAttribute="trailing" secondItem="nv4-5c-QYr" secondAttribute="trailing" constant="16" id="Rsk-yV-HSc"/>
                 <constraint firstItem="b5B-sU-BPC" firstAttribute="top" secondItem="25R-dz-Nwr" secondAttribute="bottom" constant="8" id="UDm-sk-ZNb"/>
                 <constraint firstAttribute="trailing" secondItem="b5B-sU-BPC" secondAttribute="trailing" constant="16" id="Yni-86-k0C"/>
                 <constraint firstItem="Kza-s5-XB7" firstAttribute="top" secondItem="b5B-sU-BPC" secondAttribute="bottom" constant="8" id="Zi8-qg-neq"/>
-                <constraint firstItem="nv4-5c-QYr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="-11" id="cHF-lK-bN8"/>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="dgy-wO-cUf"/>
                 <constraint firstItem="d3c-vY-icO" firstAttribute="centerY" secondItem="25R-dz-Nwr" secondAttribute="centerY" id="hrR-Hi-97A"/>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="leading" secondItem="d3c-vY-icO" secondAttribute="trailing" constant="8" id="lwa-cr-4JX"/>
+                <constraint firstItem="nv4-5c-QYr" firstAttribute="top" secondItem="wEO-Bf-P7i" secondAttribute="top" id="oQt-fb-orR"/>
                 <constraint firstItem="Kza-s5-XB7" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="sjc-ZR-Frc"/>
                 <constraint firstAttribute="bottom" secondItem="Kza-s5-XB7" secondAttribute="bottom" constant="8" id="v0T-be-kMO"/>
                 <constraint firstItem="d3c-vY-icO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="xhn-mz-HK7"/>
