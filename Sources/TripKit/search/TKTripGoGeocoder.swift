@@ -98,6 +98,7 @@ extension TKTripGoGeocoder: TKAutocompleting {
             
             if let stop = named as? TKStopCoordinate {
               result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
+              result.accessoryAccessibilityLabel = Loc.ShowTimetable
               result.image = TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin)
               if stop.stopCode.contains(input) {
                 result.subtitle = stop.stopCode + " - " + (stop.services ?? "")

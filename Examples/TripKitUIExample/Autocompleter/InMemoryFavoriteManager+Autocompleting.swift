@@ -52,6 +52,7 @@ extension InMemoryFavoriteManager {
     
     if favorite.annotation is TKUIStopAnnotation {
       result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
+      result.accessoryAccessibilityLabel = Loc.ShowTimetable
     }
     
     if searchText.isEmpty {
