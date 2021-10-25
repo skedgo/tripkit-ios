@@ -405,27 +405,9 @@ extension TKUIHomeCard: UITableViewDelegate {
       return nil
     }
     
-    if let configuration = dataSource.sectionModels[section].headerConfiguration {
-      header.label.text = configuration.title
-      if let action = configuration.action {
-        header.button.isHidden = false
-        header.button.setTitle(action.title, for: .normal)
-        header.button.rx.tap
-          .subscribe(onNext: { [weak self] in self?.actionTriggered.onNext(action.handler()) })
-          .disposed(by: header.disposeBag)
-      } else {
-        header.button.isHidden = true
-        header.button.setTitle(nil, for: .normal)
-      }
-      header.minimize = false
-        
-    } else {
-      header.button.isHidden = true
-      header.label.text = nil
-      header.button.setTitle(nil, for: .normal)
-      header.minimize = true
+    header.configure(with: dataSource.sectionModels[section].headerConfiguration) { [weak self] in
+      self?.actionTriggered.onNext($0)
     }
-    
     return header
   }
   

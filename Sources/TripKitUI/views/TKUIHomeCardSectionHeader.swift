@@ -22,15 +22,15 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     static let buttonHeight: CGFloat = 44.0
   }
   
-  @IBOutlet weak var label: UILabel!
-  @IBOutlet weak var button: UIButton!
+  @IBOutlet private weak var label: UILabel!
+  @IBOutlet private weak var button: UIButton!
   
   private var labelTopSpaceConstraint: NSLayoutConstraint!
   private var labelBottomSpaceConstraint: NSLayoutConstraint!
   
   var disposeBag = DisposeBag()
   
-  var minimize: Bool = false {
+  private var minimize: Bool = false {
     didSet {
       labelTopSpaceConstraint.constant = minimize ? 0 : Constraint.top
       labelBottomSpaceConstraint.constant =  minimize ? 0 : Constraint.bottom
@@ -51,6 +51,42 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     label.text = nil
     button.setTitle(nil, for: .normal)
     disposeBag = DisposeBag()
+  }
+  
+  func configure(with configuration: TKUIHomeHeaderConfiguration?, onTap: @escaping (TKUIHomeCard.ComponentAction) -> Void) {
+    if let configuration = configuration {
+      label.text = configuration.title
+      if let action = configuration.action {
+        button.isHidden = false
+        button.setTitle(action.title, for: .normal)
+        button.rx.tap
+          .subscribe(onNext: { _ in onTap(action.handler()) })
+          .disposed(by: disposeBag)
+      } else {
+        button.isHidden = true
+        button.setTitle(nil, for: .normal)
+      }
+      minimize = false
+        
+    } else {
+      button.isHidden = true
+      label.text = nil
+      button.setTitle(nil, for: .normal)
+      minimize = true
+    }
+    
+    updateAccessibilityElements()
+  }
+  
+  private func updateAccessibilityElements() {
+    if minimize {
+      accessibilityElements = []
+    } else if button.isHidden {
+      accessibilityElements = [label!]
+    } else {
+      // Override default order that'd start with the button
+      accessibilityElements = [label!, button!]
+    }
   }
   
   private func didInit() {
@@ -77,9 +113,8 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     button.translatesAutoresizingMaskIntoConstraints = false
     self.button = button
     wrapper.addSubview(button)
-    
-    // Override default order that'd start with the button
-    accessibilityElements = [label, button]
+
+    updateAccessibilityElements()
     
     // Wrapper to content view
     #if targetEnvironment(macCatalyst)
