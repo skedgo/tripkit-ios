@@ -269,7 +269,7 @@ extension TKServer {
       path: path,
       parameters: parameters,
       headers: headers,
-      baseURLs: NSMutableArray(array: baseURLs(for: region)),
+      baseURLs: NSMutableArray(array: baseURLs(for: region).shuffled()),
       callbackOnMain: callbackOnMain,
       info: { uuid, request, response, data, error in
         if let response = response {

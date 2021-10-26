@@ -396,7 +396,7 @@ extension Trip {
     
     let letters = segments(with: .inDetails)
       .compactMap(\.modeInfo?.alt)
-      .filter { $0.isEmpty }
+      .filter { !$0.isEmpty }
       .map { String($0.prefix(1)) }
     output.append(letters.joined(separator: "-"))
     output.append("; ")
@@ -406,7 +406,7 @@ extension Trip {
       output.append(", ")
     }
     
-    output.append(String(format: "%@m, %.0fCal, %.1fkg, %.0fh => %.2f", minutes, totalCalories, totalCarbon, totalHassle, totalScore))
+    output.append(String(format: "%@m, %.0fCal, %.1fkg, %.0fh => %.2f", NSNumber(value: minutes), totalCalories, totalCarbon, totalHassle, totalScore))
 
     return output
   }
