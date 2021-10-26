@@ -68,7 +68,11 @@ extension Loc {
     return NSLocalizedString("Get app", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to get/download an external app.")
   }
 
-  @objc(OpenAppNamed:)
+  public static func ConfirmOpen(appName: String) -> String {
+    let format = NSLocalizedString("Please confirm switching to %@ to get directions.", tableName: "TripKit", bundle: .tripKit, comment: "Confirmation text to open app of name '@%'")
+    return String(format: format, appName)
+  }
+
   public static func Open(appName: String) -> String {
     let format = NSLocalizedString("Open %@", tableName: "TripKit", bundle: .tripKit, comment: "Action title open app of name '@%'")
     return String(format: format, appName)
