@@ -14,12 +14,16 @@ extension Loc {
     return NSLocalizedString("Trip", tableName: "TripKit", bundle: .tripKit, comment: "Title for a trip")
   }
 
-  @objc public static var OpeningHours: String {
+  public static var OpeningHours: String {
     return NSLocalizedString("Opening Hours", tableName: "TripKit", bundle: .tripKit, comment: "Title for opening hours")
   }
   
-  @objc public static var PublicHoliday: String {
+  public static var PublicHoliday: String {
     return NSLocalizedString("Public holiday", tableName: "TripKit", bundle: .tripKit, comment: "")
+  }
+  
+  public static var ShowTimetable: String {
+    return NSLocalizedString("Show timetable", tableName: "TripKit", bundle: .tripKit, comment: "")
   }
   
   // MARK: - Vehicles and transport modes

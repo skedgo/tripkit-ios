@@ -34,7 +34,10 @@ public protocol TKUITripSegmentDisplayable {
   /// The icon to display next to the sub-title to indicate secondary issues
   /// with the segment, e.g., an alert icon for real-time traffic issues.
   var tripSegmentSubtitleIconType: TKInfoIconType { get }
-  
+
+  /// Brief accessibility label for the segmgent in the trip segment view
+  var tripSegmentAccessibilityLabel: String? { get }
+
   /// A title to show next to the mode image.
   var tripSegmentModeTitle: String? { get }
   

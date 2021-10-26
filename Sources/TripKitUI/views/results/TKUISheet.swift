@@ -48,6 +48,8 @@ open class TKUISheet: UIView {
     UIView.animate(withDuration: 0.25) {
       overlay.alpha = 1
       self.frame = endFrame
+      
+      UIAccessibility.post(notification: .screenChanged, argument: self)
     }
   }
   
