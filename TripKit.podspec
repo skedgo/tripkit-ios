@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
     "Sources/TripKitObjc/**/*.{h,m}"
   ]
   s.osx.exclude_files = [
-    "Sources/TripKitObjc/**/TKActions.{h,m}",
     "Sources/TripKitObjc/**/TKStyleManager+UIKit.{h,m}",
     "Sources/TripKitObjc/**/UIFont+CustomFonts.{h,m}",
   ]

@@ -54,19 +54,19 @@ extension TKPermissionManager {
       return
     }
     
-    let alert = TKActions(title: NSLocalizedString("Authorisation needed", tableName: "Shared", bundle: .tripKit, comment: "Authorisation needed title"))
-    alert.message = message
+    let alert = UIAlertController(title: NSLocalizedString("Authorisation needed", tableName: "Shared", bundle: .tripKit, comment: "Authorisation needed title"), message: message, preferredStyle: .alert)
     
     if let handler = openSettingsHandler {
-      alert.hasCancel = true
-      alert.addAction(NSLocalizedString("Open Settings", tableName: "Shared", bundle: .tripKit, comment: "Button that goes to the Setting's app"), handler: handler)
+      alert.addAction(.init(title: Loc.Cancel, style: .cancel))
+      alert.addAction(.init(title: NSLocalizedString("Open Settings", tableName: "Shared", bundle: .tripKit, comment: "Button that goes to the Setting's app"), style: .default) { _ in
+        handler()
+      })
     } else {
-      alert.hasCancel = false
-      alert.addAction(Loc.OK, handler: nil)
+      alert.addAction(.init(title: Loc.OK, style: .default))
     }
     
     DispatchQueue.main.async {
-      alert.showForSender(sender, in: controller)
+      controller.present(alert, animated: true)
     }
   }
   

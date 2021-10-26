@@ -35,11 +35,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKAutocompletionResult.h"
 
 // Helpers
-#if TARGET_OS_IPHONE
-#import "TKActions.h"
-#endif
-
-// Helpers
 #import "NSDate+Helpers.h"
 #import "NSManagedObject+TKPersistence.h"
 #import "NSManagedObjectContext+SimpleFetch.h"
