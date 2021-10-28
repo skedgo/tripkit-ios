@@ -45,7 +45,7 @@ extension TKRegionManager {
       paras["hashCode"] = regionsHash
     }
     
-    TKServer.hit(TKAPI.RegionsResponse.self, url: regionsURL, parameters: paras) { [weak self] _, _, result in
+    TKServer.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras) { [weak self] _, _, result in
       guard let self = self else { return }
       
       switch result {
@@ -62,6 +62,7 @@ extension TKRegionManager {
       case .failure(TKServer.ServerError.noData) where !forced:
         completion(.success(())) // still up-to-date
       case .failure(let error):
+        TKLog.warn("TKServer+Regions", text: "Error fetching regions.json: \(error)")
         completion(.failure(error))
       }
     }
