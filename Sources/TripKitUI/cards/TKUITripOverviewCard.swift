@@ -247,30 +247,35 @@ extension TKUITripOverviewCard {
   private func terminalCell(for terminal: TKUITripOverviewViewModel.TerminalItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
     cell.configure(with: terminal, for: self)
+    cell.accessibilityTraits = .none // No action on terminals
     return cell
   }
 
   private func stationaryCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
     cell.configure(with: stationary, for: self)
+    cell.accessibilityTraits = TKUITripOverviewCard.config.presentSegmentHandler != nil ? .button : .none
     return cell
   }
 
   private static func stationaryDoubleCell(for stationary: TKUITripOverviewViewModel.StationaryItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryDoubleCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryDoubleCell else { preconditionFailure() }
     cell.configure(with: stationary)
+    cell.accessibilityTraits = TKUITripOverviewCard.config.presentSegmentHandler != nil ? .button : .none
     return cell
   }
 
   private func alertCell(for alertItem: TKUITripOverviewViewModel.AlertItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentAlertCell.reuseIdentifier, for: indexPath) as? TKUISegmentAlertCell else { preconditionFailure() }
     cell.configure(with: alertItem)    
+    cell.accessibilityTraits = .button // Will show alerts
     return cell
   }
 
   private func movingCell(for moving: TKUITripOverviewViewModel.MovingItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentMovingCell.reuseIdentifier, for: indexPath) as? TKUISegmentMovingCell else { preconditionFailure() }
     cell.configure(with: moving, for: self)
+    cell.accessibilityTraits = TKUITripOverviewCard.config.presentSegmentHandler != nil ? .button : .none
     return cell
   }
 
@@ -304,6 +309,7 @@ extension TKUITripOverviewCard {
       })
       .disposed(by: disposeBag)
     footer?.addGestureRecognizer(tapper)
+    footer?.accessibilityTraits = .button
     
     tableView.tableFooterView = footer
   }
