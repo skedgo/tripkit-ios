@@ -186,6 +186,7 @@ public class TKUITimetableCard : TKUITableCard {
         }
         
         cell.dataSource = item.contentModel
+        cell.accessibilityTraits = .button // Will trigger showing details
         return cell
         
       }, titleForHeaderInSection: { ds, index in

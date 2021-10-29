@@ -56,6 +56,7 @@ public protocol TKUIHomeComponentItem {
   
   /// This indicates it the item triggers an action. It can be used to determine if an UI element,
   /// such as a row in a table view should be treated as a button when supporting accessibility.
+  /// Defaults to `true`.
   var isAction: Bool { get }
   
 }
@@ -63,7 +64,7 @@ public protocol TKUIHomeComponentItem {
 extension TKUIHomeComponentItem {
   public var canEdit: Bool { false }
   public var equalityToken: String { identity }
-  public var isAction: Bool { false }
+  public var isAction: Bool { true }
 }
 
 /// The representation of an home card component for the customizer

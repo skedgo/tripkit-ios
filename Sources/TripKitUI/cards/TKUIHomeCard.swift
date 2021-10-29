@@ -101,6 +101,7 @@ open class TKUIHomeCard: TKUITableCard {
             with: searchItem,
             onAccessoryTapped: { self.cellAccessoryTapped.onNext(.search($0)) }
           )
+          cell.accessibilityTraits = .button
           return cell
           
         case .component(let componentItem):

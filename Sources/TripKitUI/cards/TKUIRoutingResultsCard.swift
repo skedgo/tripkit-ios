@@ -425,11 +425,13 @@ extension TKUIRoutingResultsCard {
       #if targetEnvironment(macCatalyst)
       tripCell.accessoryType = .disclosureIndicator
       #endif
+      tripCell.accessibilityTraits = .button
       return tripCell
     
     case .advisory(let alert):
       let advisoryCell = tableView.dequeueReusableCell(withIdentifier: TKUICompactAlertCell.reuseIdentifier, for: indexPath) as! TKUICompactAlertCell
       advisoryCell.configure(alert)
+      advisoryCell.accessibilityTraits = .button
       return advisoryCell
     }
   }
