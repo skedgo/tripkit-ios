@@ -229,6 +229,13 @@ open class TKUIMapManager: TGMapManager {
     
     if let tileOverlay = self.tileOverlay {
       mapView.removeOverlay(tileOverlay)
+      // When we have custom map title, we also add an attribution view. We need to
+      // remove this when the map manager is asked to clean up, otherwise, the
+      // attribution view will go side-by-side with the Apple Map attribution.
+      // See https://redmine.buzzhives.com/issues/15942
+      if let attribution = mapView.subviews.first(where: { $0 is TKUIAttributionView }) {
+        attribution.removeFromSuperview()
+      }
     }
     if let toRestore = settingsToRestore {
       self.restore(toRestore, on: mapView)
