@@ -518,7 +518,7 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     return footerView
   }
   
-  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+  public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
     if dataSource.sectionModels[section].items.first?.trip == nil {
       return .leastNonzeroMagnitude
     } else {
