@@ -94,7 +94,6 @@ extension TKServer {
       if newValue != oldValue {
         // User tokens are bound to servers, so we clear that, too
         TKServer.updateUserToken(nil)
-        TKRegionManager.shared.updateRegions()
       }
     }
   }

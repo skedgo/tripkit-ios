@@ -43,6 +43,14 @@ class ASPolygonKitTests: XCTestCase {
     XCTAssertEqual(1, merged.count)
   }
   
+  func testStaya() throws {
+    let polygons = try polygonsFromJSON(named: "polygons-au-211102")
+    XCTAssertEqual(13, polygons.count)
+    
+    let merged = MKPolygon.union(polygons)
+    XCTAssertEqual(7, merged.count)
+  }
+  
   func testInvariantToShuffling() throws {
     let polygons = try polygonsFromJSON(named: "polygons-uk-170217")
     XCTAssertEqual(19, polygons.count)
