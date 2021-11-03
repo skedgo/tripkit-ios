@@ -123,7 +123,7 @@ public class TKUITimePickerSheet: TKUISheet {
       if Self.config.allowsASAP {
         selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
       } else {
-//        assert(timeType != .none && timeType != .leaveASAP)
+        assert(timeType != .none && timeType != .leaveASAP)
         selector = UISegmentedControl(items: [Loc.LeaveAt, Loc.ArriveBy])
       }
       
