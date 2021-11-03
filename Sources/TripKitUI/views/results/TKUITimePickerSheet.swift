@@ -26,6 +26,8 @@ public class TKUITimePickerSheet: TKUISheet {
     case timeWithType(TKTimeType)
   }
   
+  public static var config = Configuration.empty
+  
   public var selectAction: (TKTimeType, Date) -> Void = { _, _ in }
   
   public weak var delegate: TKUITimePickerSheetDelegate?
@@ -95,6 +97,7 @@ public class TKUITimePickerSheet: TKUISheet {
     timePicker.datePickerMode = showTime ? .dateAndTime : .date
     timePicker.date = date
     timePicker.timeZone = timeZone
+    timePicker.minuteInterval = Self.config.incrementInterval
     
     if #available(iOS 13.4, *) {
       timePicker.preferredDatePickerStyle = .wheels
@@ -117,7 +120,13 @@ public class TKUITimePickerSheet: TKUISheet {
     switch mode {
     case .timeWithType(let timeType):
       assert(timeType != .none)
-      selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
+      if Self.config.allowsASAP {
+        selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
+      } else {
+//        assert(timeType != .none && timeType != .leaveASAP)
+        selector = UISegmentedControl(items: [Loc.LeaveAt, Loc.ArriveBy])
+      }
+      
       selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
       
       // this sets the selected section index
