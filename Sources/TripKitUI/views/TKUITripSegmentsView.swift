@@ -213,8 +213,8 @@ public class TKUITripSegmentsView : UIView {
       var modeSideWith: CGFloat = 0
       let x = newFrame.maxX
       var modeSubtitleSize = CGSize.zero
-      let modeTitleFont = TKStyleManager.systemFont(size: 12)
-      let modeSubtitleFont = TKStyleManager.systemFont(size: 10)
+      let modeTitleFont = TKStyleManager.customFont(forTextStyle: .caption1)
+      let modeSubtitleFont = TKStyleManager.customFont(forTextStyle: .caption2)
       
       let modeTitle = allowTitles ? segment.tripSegmentModeTitle.flatMap { $0.isEmpty ? nil : $0 } : nil
       let modeTitleSize = modeTitle?.size(font: modeTitleFont)

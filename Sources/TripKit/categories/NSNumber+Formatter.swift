@@ -31,7 +31,7 @@ extension NSNumber {
   
   public func toCarbonString() -> String {
     guard floatValue > 0 else {
-      return NSLocalizedString("No CO₂", tableName: "Shared", bundle: .tripKit, comment: "Indicator for no carbon emissions")
+      return NSLocalizedString("No\u{00a0}CO₂", tableName: "Shared", bundle: .tripKit, comment: "Indicator for no carbon emissions")
     }
     
     let formatter = Self.formatter
@@ -40,7 +40,7 @@ extension NSNumber {
     formatter.currencySymbol = nil
     formatter.roundingIncrement = NSNumber(value: 0.1)
     formatter.zeroSymbol = nil
-    return NSString(format: "%@kg CO₂", formatter.string(from: self)!) as String
+    return NSString(format: "%@kg\u{00a0}CO₂", formatter.string(from: self)!) as String
   }
   
   func toScoreString() -> String {
