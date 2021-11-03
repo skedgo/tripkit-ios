@@ -22,7 +22,6 @@ public class TKUINearbyMapManager: TKUIMapManager {
     super.init()
     
     self.preferredZoomLevel = .road
-    self.showOverlayPolygon = true
   }
   
   private var mapTrackingPublisher = PublishSubject<MKUserTrackingMode>()

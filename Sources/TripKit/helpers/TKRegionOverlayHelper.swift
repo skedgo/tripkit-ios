@@ -70,6 +70,9 @@ public class TKRegionOverlayHelper: NSObject {
         case .failure(let error):
           TKLog.warn("TKRegionOverlayHelper", text: "Polygon union failed: \(error)")
           self.regionsOverlay = nil
+          for callback in self.callbacks {
+            callback(nil)
+          }
         }
         self.callbacks = []
       }

@@ -211,8 +211,7 @@ open class TKUIMapManager: TGMapManager {
       addOverlay()
     }
     
-    let updateOverlay = { [weak self] (polygon: MKPolygon?) in
-      guard let polygon = polygon else { return }
+    let updateOverlay = { [weak self] (polygon: MKPolygon?) -> Void in
       self?.overlayPolygon = polygon
     }
     TKRegionOverlayHelper.shared.regionsPolygon(completion: updateOverlay)

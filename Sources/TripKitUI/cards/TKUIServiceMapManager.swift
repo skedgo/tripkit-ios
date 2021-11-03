@@ -24,7 +24,6 @@ class TKUIServiceMapManager: TKUIMapManager {
     super.init()
     
     self.preferredZoomLevel = .road
-    self.showOverlayPolygon = false
   }
   
   private var embarkation: TKUISemaphoreDisplayable?
