@@ -47,13 +47,13 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     
     let costLabel = UILabel()
     costLabel.contentMode = .left
-    costLabel.numberOfLines = 1
+    costLabel.numberOfLines = 0
     costLabel.text = nil
     costLabel.textColor = .tkLabelSecondary
     costLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     costLabel.translatesAutoresizingMaskIntoConstraints = false
-    costLabel.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
-    costLabel.setContentCompressionResistancePriority(.defaultHigh + 1, for: .horizontal)
+    costLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    costLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     self.costLabel = costLabel
     contentView.addSubview(costLabel)
     
@@ -63,7 +63,7 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
     button.tintColor = .tkAppTintColor
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     self.button = button
     contentView.addSubview(button)
