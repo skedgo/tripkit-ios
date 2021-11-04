@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *subtitle;
 @property (nonatomic, strong) TKImage *image;
 @property (nonatomic, strong, nullable) TKImage *accessoryButtonImage;
+@property (nonatomic, strong, nullable) NSString *accessoryAccessibilityLabel;
 
 @property (nonatomic, strong, nullable) NSNumber *isInSupportedRegion;
 

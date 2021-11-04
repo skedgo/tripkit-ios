@@ -60,6 +60,7 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
           preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
         }
         cell.configure(with: item)
+        cell.accessibilityTraits = .button
         return cell
       },
       titleForHeaderInSection: { ds, index in

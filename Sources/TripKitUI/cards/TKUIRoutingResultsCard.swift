@@ -425,11 +425,13 @@ extension TKUIRoutingResultsCard {
       #if targetEnvironment(macCatalyst)
       tripCell.accessoryType = .disclosureIndicator
       #endif
+      tripCell.accessibilityTraits = .button
       return tripCell
     
     case .advisory(let alert):
       let advisoryCell = tableView.dequeueReusableCell(withIdentifier: TKUICompactAlertCell.reuseIdentifier, for: indexPath) as! TKUICompactAlertCell
       advisoryCell.configure(alert)
+      advisoryCell.accessibilityTraits = .button
       return advisoryCell
     }
   }
@@ -516,7 +518,7 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     return footerView
   }
   
-  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+  public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
     if dataSource.sectionModels[section].items.first?.trip == nil {
       return .leastNonzeroMagnitude
     } else {

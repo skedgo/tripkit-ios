@@ -52,18 +52,28 @@ public class TKRegionOverlayHelper: NSObject {
       let calculationToken = TKRegionManager.shared.regionsHash?.intValue
       self.calculationToken = calculationToken
       
-      MKPolygon.union(polygons) { regionPolygons in
+      MKPolygon.union(polygons) { result in
         // Ignore callbacks for since outdated regions (e.g., switching servers quickly)
         guard calculationToken == self.calculationToken else { return }
         
-        // create outside polygon (to show which area we cover)
-        let encodable = regionPolygons.map(EncodablePolygon.init)
-        TKRegionOverlayHelper.savePolygonsToCacheFile(encodable)
-        let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
-        for callback in self.callbacks {
-          callback(overlay)
+        switch result {
+        case .success(let regionPolygons):
+          // create outside polygon removing the regions (to show which area is covered)
+          let encodable = regionPolygons.map(EncodablePolygon.init)
+          TKRegionOverlayHelper.savePolygonsToCacheFile(encodable)
+          let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
+          self.regionsOverlay = overlay
+          for callback in self.callbacks {
+            callback(overlay)
+          }
+
+        case .failure(let error):
+          TKLog.warn("TKRegionOverlayHelper", text: "Polygon union failed: \(error)")
+          self.regionsOverlay = nil
+          for callback in self.callbacks {
+            callback(nil)
+          }
         }
-        self.regionsOverlay = overlay
         self.callbacks = []
       }
       

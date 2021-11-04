@@ -13,6 +13,10 @@ import MapKit
 
 extension TKSegment {
   
+  public var tripSegmentAccessibilityLabel: String? {
+    titleWithoutTime
+  }
+  
   @objc
   public var tripSegmentModeTitle: String? {
     if let service = service {

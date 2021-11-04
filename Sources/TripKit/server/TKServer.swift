@@ -94,7 +94,6 @@ extension TKServer {
       if newValue != oldValue {
         // User tokens are bound to servers, so we clear that, too
         TKServer.updateUserToken(nil)
-        TKRegionManager.shared.updateRegions()
       }
     }
   }
@@ -269,7 +268,7 @@ extension TKServer {
       path: path,
       parameters: parameters,
       headers: headers,
-      baseURLs: NSMutableArray(array: baseURLs(for: region)),
+      baseURLs: NSMutableArray(array: baseURLs(for: region).shuffled()),
       callbackOnMain: callbackOnMain,
       info: { uuid, request, response, data, error in
         if let response = response {

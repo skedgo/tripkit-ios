@@ -69,32 +69,37 @@ extension TKInterAppCommunicator {
     let hasWaze = deviceHasWaze()
     
     if !hasGoogleMaps && !hasWaze {
-      // just open Apple Maps
-      openSegmentInAppleMaps(segment, currentLocationHandler: currentLocationHandler)
-    } else {
-      let actions = TKActions(title: Loc.GetDirections)
-      
-      // Apple Maps
-      actions.addAction(Loc.AppleMaps) {
+      // Confirm to open Apple Maps
+      let alert = UIAlertController(title: Loc.GetDirections, message: Loc.ConfirmOpen(appName: Loc.AppleMaps), preferredStyle: .alert)
+      alert.addAction(.init(title: Loc.Cancel, style: .cancel))
+      alert.addAction(.init(title: Loc.Open(appName: Loc.AppleMaps), style: .default) { _ in
         openSegmentInAppleMaps(segment, currentLocationHandler: currentLocationHandler)
-      }
+      })
+      controller.present(alert, animated: true)
+      
+    } else {
+      let actions = UIAlertController(title: Loc.GetDirections, message: nil, preferredStyle: .actionSheet)
+      
+      actions.addAction(.init(title: Loc.AppleMaps, style: .default) { _ in
+        openSegmentInAppleMaps(segment, currentLocationHandler: currentLocationHandler)
+      })
       
       // Google Maps
       if (hasGoogleMaps) {
-        actions.addAction(Loc.GoogleMaps) {
+        actions.addAction(.init(title: Loc.GoogleMaps, style: .default) { _ in
           openSegmentInGoogleMaps(segment, currentLocationHandler: currentLocationHandler)
-        }
+        })
       }
       
       // Waze
       if (hasWaze) {
-        actions.addAction("Waze") {
+        actions.addAction(.init(title: "Waze", style: .default) { _ in
           openSegmentInWaze(segment)
-        }
+        })
       }
       
-      actions.hasCancel = true
-      actions.showForSender(sender, in: controller)
+      actions.addAction(.init(title: Loc.Cancel, style: .cancel))
+      controller.present(actions, animated: true)
     }
   }
   
@@ -159,33 +164,38 @@ extension TKInterAppCommunicator {
     let hasWaze = deviceHasWaze()
     
     if !hasGoogleMaps && !hasWaze {
-      // just open Apple Maps
-      openAppleMaps(in: mode, routeFrom: origin, to: destination)
-    } else {
-      let actions = TKActions(title: Loc.GetDirections)
-      
-      // Apple Maps
-      actions.addAction(Loc.AppleMaps) {
+      // Confirm to open Apple Maps
+      let alert = UIAlertController(title: Loc.GetDirections, message: Loc.ConfirmOpen(appName: Loc.AppleMaps), preferredStyle: .alert)
+      alert.addAction(.init(title: Loc.Cancel, style: .cancel))
+      alert.addAction(.init(title: Loc.Open(appName: Loc.AppleMaps), style: .default) { _ in
         openAppleMaps(in: mode, routeFrom: origin, to: destination)
-      }
+      })
+      controller.present(alert, animated: true)
+
+    } else {
+      let actions = UIAlertController(title: Loc.GetDirections, message: nil, preferredStyle: .actionSheet)
+      
+      actions.addAction(.init(title: Loc.AppleMaps, style: .default) { _ in
+        openAppleMaps(in: mode, routeFrom: origin, to: destination)
+      })
       
       // Google Maps
       if (hasGoogleMaps) {
-        actions.addAction(Loc.GoogleMaps) {
+        actions.addAction(.init(title: Loc.GoogleMaps, style: .default) { _ in
           openGoogleMaps(in: mode, routeFrom: origin, to: destination)
-        }
+        })
       }
       
       // Waze
       if (hasWaze) {
-        actions.addAction("Waze") {
+        actions.addAction(.init(title: "Waze", style: .default) { _ in
           assert(mode == .driving, "Waze only supports driving turn by turn mode")
           openWaze(routeTo: destination)
-        }
+        })
       }
       
-      actions.hasCancel = true
-      actions.showForSender(sender, in: controller)
+      actions.addAction(.init(title: Loc.Cancel, style: .cancel))
+      controller.present(actions, animated: true)
     }
   }
   

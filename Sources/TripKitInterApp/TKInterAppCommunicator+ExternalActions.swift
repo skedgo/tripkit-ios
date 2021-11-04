@@ -106,15 +106,15 @@ extension TKInterAppCommunicator {
       return
     }
     
-    let actions = TKActions()
+    let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     handlers.forEach { handled in
-      actions.addAction(handled.title) {
+      actions.addAction(.init(title: handled.title, style: .default) { _ in
         handled.handler.performAction(for: handled.action, segment: segment, presenter: presenter, sender: sender)
         completion?(handled.action)
-      }
+      })
     }
-    actions.hasCancel = true
-    actions.showForSender(sender, in: presenter)
+    actions.addAction(.init(title: Loc.Cancel, style: .cancel, handler: nil))
+    presenter.present(actions, animated: true)
   }
   
   /// This will perform the provided external action, taking information from the (optionally) provided segment
