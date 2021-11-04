@@ -179,10 +179,14 @@ struct Polygon {
       return false
     }
     
-    return try union(polygon, with: intersections)
+    return try union(polygon, with: intersections, allowInverting: true)
   }
   
   mutating func union(_ polygon: Polygon, with intersections: [Intersection]) throws -> Bool {
+    try union(polygon, with: intersections, allowInverting: true)
+  }
+  
+  private mutating func union(_ polygon: Polygon, with intersections: [Intersection], allowInverting: Bool) throws -> Bool {
     if polygon.points.count < 3 || points.count < 3 {
       throw PolygonUnionError.invalidPolygon
     }
@@ -202,9 +206,23 @@ struct Polygon {
       }
     }
     if polygon.contains(startLink.line.start, onLine: true) {
-      throw PolygonUnionError.polygonIsSubset
+      // This polygon is (deemed to be) a subset of the polygon that you're
+      // trying to merge into it. If this happens, we try it  the other way
+      // around.
+      if allowInverting {
+        var grower = polygon
+        let invertedIntersections = grower.intersections(self)
+        let merged = try grower.union(self, with: invertedIntersections, allowInverting: false)
+        if merged {
+          self = grower
+          return true
+        } else {
+          return false
+        }
+      } else {
+        throw PolygonUnionError.polygonIsSubset
+      }
     }
-    
     
     let startPoint = startLink.line.start
     var current = (point: startLink.line.start, link: startLink, onMine: true)
