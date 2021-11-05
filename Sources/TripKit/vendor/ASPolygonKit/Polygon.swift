@@ -76,6 +76,25 @@ struct Polygon {
     return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
   }
   
+  func isClockwise() -> Bool {
+    var points = self.points
+    if let first = points.first, first != points.last {
+      points.append(first)
+    }
+    let signedArea = zip(points, Array(points[1...] + [points[0]])).reduce(0) { area, pair in
+      area + pair.0.x * pair.1.y - pair.1.x * pair.0.y
+    }
+    // Note: Actual area is `signedArea / 2`, but we just care about sign
+    // Negative points means clock-wise; positive means counter-clockwise
+    return signedArea < 0
+  }
+  
+  func clockwise() -> Polygon {
+    let result = isClockwise() ? self : Polygon(pairs: points.reversed().map(\.ll))
+    assert(result.isClockwise())
+    return result
+  }
+  
   // MARK: MapKit / CoreLocation
   
   init(_ polygon: MKPolygon) {
@@ -127,8 +146,23 @@ struct Polygon {
     for link in firstLink {
       for other in polygon.firstLink {
         if let point = link.line.intersection(with: other.line) {
-          let intersection = Intersection(point: point, myLink: link, yourLink: other)
-          intersections.append(intersection)
+          
+          if let index = intersections.firstIndex(where: { $0.point == point} ) {
+            // Account for the case where the intersection is at a corner of the polygon
+            var updated = intersections[index]
+            if !updated.mine.contains(link) {
+              updated.mine.append(link)
+            }
+            if !updated.yours.contains(other) {
+              updated.yours.append(other)
+            }
+            intersections[index] = updated
+
+          } else {
+            let intersection = Intersection(point: point, mine: [link], yours: [other])
+            intersections.append(intersection)
+          }
+
         }
       }
     }
@@ -234,7 +268,9 @@ struct Polygon {
       Polygon.append(current.point, to: &newPoints)
       
       if newPoints.count - points.count > polygon.points.count * 2 {
-        NSLog("Could not merge \(polygon.description!) into \(self.description!)")
+        #if DEBUG
+        print("Could not merge\n\n\(polygon.encodeCoordinates())\n\ninto\n\n\(encodeCoordinates())\n\n")
+        #endif
         throw PolygonUnionError.polygonTooComplex
       }
       
@@ -247,8 +283,8 @@ struct Polygon {
 
       if let (index, closest, newOnMine) = closestIntersection(candidates, to: current.point), newOnMine != current.onMine {
         remainingIntersections.remove(at: index)
-        current = (point: closest.point, link: newOnMine ? closest.myLink : closest.yourLink, onMine: newOnMine)
-      
+        current = (point: closest.point, link: (newOnMine ? closest.mine : closest.yours).last!, onMine: newOnMine)
+
       } else {
 
         // the linked lines do not wrap around themselves, so we do that here manually
@@ -288,33 +324,29 @@ struct Polygon {
       // It is possible that `point == other.line.end` in that case, we take the angle to `other.next.line.end`. Same thing with `point == line.end` in which case we compare to the angle to `line.next.end`
       
       let point = intersection.point
-      let yourLink = intersection.yourLink
-      let myLink = intersection.myLink
       
-      let yourEnd: Point
-      if point == yourLink.line.end {
-        if let next = yourLink.next {
-          yourEnd = next.line.end
-        } else {
-          yourEnd = polygonStart.yours.line.end
-        }
-      } else {
-        yourEnd = yourLink.line.end
+      func findAngle(for links: [LinkedLine], lastPoint: Point) -> (angle: Double, end: Point) {
+        return links.map { link in
+          let link = links.last!
+          let end: Point
+          if point == link.line.end {
+            if let next = link.next {
+              end = next.line.end
+            } else {
+              end = lastPoint
+            }
+          } else {
+            end = link.line.end
+          }
+          
+          let angle = angle(start: start, middle: point, end: end)
+          return (angle, end)
+        }.min { $0.angle < $1.angle }!
       }
       
-      let myEnd: Point
-      if point == myLink.line.end {
-        if let next = myLink.next {
-          myEnd = next.line.end
-        } else {
-          myEnd = polygonStart.mine.line.end
-        }
-      } else {
-        myEnd = myLink.line.end
-      }
+      let (yourAngle, yourEnd) = findAngle(for: intersection.yours, lastPoint: polygonStart.yours.line.end)
+      let (myAngle, myEnd) = findAngle(for: intersection.mine, lastPoint: polygonStart.mine.line.end)
       
-      let yourAngle = angle(start: start, middle: point, end: yourEnd)
-      let myAngle = angle(start: start, middle: point, end: myEnd)
       let continueOnMine: Bool
       
       if myAngle < yourAngle {
@@ -390,12 +422,12 @@ private func ==(lhs: LinkedLine, rhs: LinkedLine) -> Bool {
 
 struct Intersection {
   let point: Point
-  fileprivate let myLink: LinkedLine
-  fileprivate let yourLink: LinkedLine
+  fileprivate var mine: [LinkedLine]
+  fileprivate var yours: [LinkedLine]
   
   fileprivate func appliesTo(_ link: LinkedLine, start: Point) -> Bool {
-    guard myLink == link || yourLink == link else { return false }
-    
+    guard mine.contains(link) || yours.contains(link) else { return false }
+
     let linkStart = link.line.start
     let toPoint = point.distance(from: linkStart)
     let toStart = start.distance(from: linkStart)

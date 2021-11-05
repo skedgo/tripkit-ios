@@ -25,6 +25,10 @@ class ASPolygonKitTests: XCTestCase {
     
     let merged = try MKPolygon.union(polygons)
     XCTAssertEqual(1, merged.count)
+    
+    XCTAssertEqual(merged.first.map(Polygon.init)?.encodeCoordinates(), """
+      iobcHyvps@j~cAoquEhgj@jWA{AxzAnCzgD~A@hDlpb@`w@_JehAjVoheDb{xCucAjqlBtpmHo`^`zyBtrAlvzA~|IfwsArvX?{iv@htlIuj`ChvB?~P{MqPcaRpP?saVk`aDyn~DeiXoy{D`gC?
+      """)
   }
   
   func testUK() throws {
@@ -33,6 +37,10 @@ class ASPolygonKitTests: XCTestCase {
     
     let merged = try MKPolygon.union(polygons)
     XCTAssertEqual(1, merged.count)
+    
+    XCTAssertEqual(merged.first.map(Polygon.init)?.encodeCoordinates(), """
+      _aisJ~nyo@?_oyo@~nh\\??`f{@nyo@lblH~tAboL~|bKs_kN?nh\\npxD??ovmHnxtI??~s`BnnqC??~m|Qn}}B??~hsXoezG??_ry@_ulL??_ulLo{vA??~dtBoljB??~{|FkkmCrkt@zoJz|x@i_@vaAxzbCgjiAnfrB??~qy@ntfG??ppHnaoA|z`BnpxDnl{U?~hbE_c{X??cro[_msCznqH?fdS
+      """)
   }
 
   func testScandinavia() throws {
@@ -41,14 +49,22 @@ class ASPolygonKitTests: XCTestCase {
     
     let merged = try MKPolygon.union(polygons)
     XCTAssertEqual(1, merged.count)
+    
+    XCTAssertEqual(merged.first.map(Polygon.init)?.encodeCoordinates(), """
+      {musLul~eCzizB}w|z@lxrGr|uD|diB~_uJd~zF{{_F|lq[cngJn`wFncpJyPvl@xdiGvtyK~yxA~olG||]l`nW`I`DiA~}DhA~y@aBi@w~E`k|P`{x@ubiA`z_G??j`mArwrFz|H?vqvE`bgClhtGnkuCnsqHnyo@~tiP_t`Boh\\odkA~wq@_{m@~tu@qrqB|juA?|ypAwapFzcn@hFf~|@_osCkF_}BcoDj|Ll_dEbiSnkkBfv{Ct~MlbLlxx\\{ftK_mEwdvD|x{@?tEcG_Cq_Cti@?}hBcv{Fsj{BempDyloH|VmfDanw^_jug@bRcxB
+      """)
   }
   
   func testStaya() throws {
     let polygons = try polygonsFromJSON(named: "polygons-au-211102")
-    XCTAssertEqual(13, polygons.count)
+    XCTAssertEqual(7, polygons.count)
     
     let merged = try MKPolygon.union(polygons)
-    XCTAssertEqual(7, merged.count)
+    XCTAssertEqual(1, merged.count)
+    
+    XCTAssertEqual(merged.first.map(Polygon.init)?.encodeCoordinates(), """
+      ~ghgCai|h[ykhBmhuOprjAecdOfjpc@nbq@w@yBxd@w|C|fkB}hRxwzLzbyAx`bF~j{AjBjcMnrzQ??vtyK`udMhq`Bw{DbbNh`_IjqqGyKns|Mwr~BfgaFbcMpsY}~t@`ym@~{xBfl~A`J~`gRovq]?`qd@eeqBctKww\\eMkb_AlpPq~j@rn^o_d@z_k@q|H~ab@_bOaoh@iyYbMirVpeTapJlrGwvn@vcVqpo@|vc@hhCj~d@apJd~@}re@daYewB`zi@mhtAzil@wr{@xkZghNttc@yn}@w_m@mu[{oJ}oU?inX{@?ym@wkcAzzXuyiArbMykx@sbM_`~@~aW}xeA}yJcyd@c}Ij}Hw|zHswg@do@mcxLuu~K?j}@reeGeunRg`]kButH
+      """)
   }
   
   func testInvariantToShuffling() throws {
@@ -59,9 +75,13 @@ class ASPolygonKitTests: XCTestCase {
       let shuffled = polygons.shuffle()
       let merged = try MKPolygon.union(shuffled)
       XCTAssertEqual(1, merged.count)
+      
+      XCTAssertEqual(merged.first.map(Polygon.init)?.encodeCoordinates(), """
+        _aisJ~nyo@?_oyo@~nh\\??`f{@nyo@lblH~tAboL~|bKs_kN?nh\\npxD??ovmHnxtI??~s`BnnqC??~m|Qn}}B??~hsXoezG??_ry@_ulL??_ulLo{vA??~dtBoljB??~{|FkkmCrkt@zoJz|x@i_@vaAxzbCgjiAnfrB??~qy@ntfG??ppHnaoA|z`BnpxDnl{U?~hbE_c{X??cro[_msCznqH?fdS
+        """)
     }
   }
-  
+
   func testOCFailure() throws {
     var grower = Polygon(pairs: [ (4,0), (4,3), (1,3), (1,0) ])
     let addition = Polygon(pairs: [ (5,1), (5,4), (3,4), (3,2), (2,2), (2,4), (0,4), (0,1) ])
@@ -151,8 +171,6 @@ extension MutableCollection where Index == Int {
     }
   }
 }
-
-
 
 extension MKPolygon {
   

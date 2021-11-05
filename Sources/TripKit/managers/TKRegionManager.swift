@@ -55,7 +55,7 @@ public class TKRegionManager: NSObject {
   
   @objc public var regionsHash: NSNumber? {
     if let hashCode = response?.hashCode {
-      return NSNumber(value: hashCode)
+      return NSNumber(value: hashCode + 2) // Force update after broken polygons
     } else {
       return nil;
     }
