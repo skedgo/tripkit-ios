@@ -188,7 +188,7 @@ public class TKUITimePickerSheet: TKUISheet {
       self.doneSelector = doneSelector
     }
     
-    self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).heighthttps://bigbang.skedgo.com/satapp/)
+    self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height)
   }
   
   required init?(coder: NSCoder) {
