@@ -98,7 +98,7 @@ public class TKUITimePickerSheet: TKUISheet {
     didSetTime = false
     self.mode = mode
 
-    super.init(frame: .init(origin: .zero, size: .init(width: 320, height: 116)))
+    super.init(frame: .zero)
     
     overlayColor = .tkSheetOverlay
     backgroundColor = .tkBackground
@@ -120,16 +120,30 @@ public class TKUITimePickerSheet: TKUISheet {
     }
     
     timePicker.locale = .current // set 24h setting
-    timePicker.autoresizingMask = .flexibleWidth
+    timePicker.translatesAutoresizingMaskIntoConstraints = false
     timePicker.addTarget(self, action: #selector(timePickerChanged(sender:)), for: .valueChanged)
     self.addSubview(timePicker)
     self.timePicker = timePicker
     
-    let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: timePicker.frame.width, height: 44))
-    toolbar.autoresizingMask = .flexibleWidth
+    NSLayoutConstraint.activate([
+      timePicker.leadingAnchor.constraint(equalTo: leadingAnchor),
+      timePicker.bottomAnchor.constraint(equalTo: bottomAnchor),
+      timePicker.trailingAnchor.constraint(equalTo: trailingAnchor)
+    ])
+    
+    let toolbar = UIToolbar(frame: .zero)
+    toolbar.translatesAutoresizingMaskIntoConstraints = false
     toolbar.setBackgroundImage(.init(), forToolbarPosition: .any, barMetrics: .default)
     toolbar.backgroundColor = self.backgroundColor
     addSubview(toolbar)
+    
+    NSLayoutConstraint.activate([
+      toolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
+      toolbar.topAnchor.constraint(equalTo: topAnchor),
+      toolbar.trailingAnchor.constraint(equalTo: trailingAnchor),
+      toolbar.heightAnchor.constraint(equalToConstant: 44),
+      toolbar.bottomAnchor.constraint(equalTo: timePicker.topAnchor)
+    ])
     
     // Use default time seletor if no custom tool bar items are provided.
     if let toolbarElements = toolBarElements {
@@ -174,7 +188,7 @@ public class TKUITimePickerSheet: TKUISheet {
       self.doneSelector = doneSelector
     }
     
-    self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: timePicker.frame.height + toolbar.frame.height)
+    self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).heighthttps://bigbang.skedgo.com/satapp/)
   }
   
   required init?(coder: NSCoder) {
