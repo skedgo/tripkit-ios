@@ -9,6 +9,7 @@
 import UIKit
 
 import TripKit
+import RxSwift
 
 public protocol TKUITimePickerSheetDelegate: AnyObject {
 
@@ -19,6 +20,16 @@ public protocol TKUITimePickerSheetDelegate: AnyObject {
 }
 
 public class TKUITimePickerSheet: TKUISheet {
+  
+  public struct ToolBarElement {
+    let toolbarItem: UIBarButtonItem
+    let handler: (Date) -> Void
+    
+    public init(toolbarItem: UIBarButtonItem, handler: @escaping (Date) -> Void) {
+      self.toolbarItem = toolbarItem
+      self.handler = handler
+    }
+  }
   
   fileprivate enum Mode {
     case date
@@ -70,19 +81,20 @@ public class TKUITimePickerSheet: TKUISheet {
   
   private let mode: Mode
   private var didSetTime: Bool
+  private let disposeBag = DisposeBag()
   private weak var timePicker: UIDatePicker!
   private weak var timeTypeSelector: UISegmentedControl!
   private weak var doneSelector: UISegmentedControl!
 
-  public convenience init(date: Date, timeZone: TimeZone) {
-    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone)
+  public convenience init(date: Date, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil) {
+    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone, toolBarElements: toolBarElements)
   }
   
-  public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone) {
-    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone)
+  public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil) {
+    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone, toolBarElements: toolBarElements)
   }
   
-  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone) {
+  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil) {
     didSetTime = false
     self.mode = mode
 
@@ -113,40 +125,55 @@ public class TKUITimePickerSheet: TKUISheet {
     self.addSubview(timePicker)
     self.timePicker = timePicker
     
-    let selector: UISegmentedControl! // as `timeTypeSelector` is weak
-    switch mode {
-    case .timeWithType(let timeType):
-      assert(timeType != .none)
-      selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
-      selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
-      
-      // this sets the selected section index
-      self.timeTypeSelector = selector
-      self.selectedTimeType = timeType
-
-    case .time, .date:
-      selector = UISegmentedControl(items: [Loc.Now])
-      selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
-    }
-    
-    // Yes, a segmented control with one element. This is for consistent styling.
-    let doneSelector = UISegmentedControl(items: [Loc.Done])
-    doneSelector.addTarget(self, action: #selector(doneButtonPressed(sender:)), for: .valueChanged)
-    
     let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: timePicker.frame.width, height: 44))
     toolbar.autoresizingMask = .flexibleWidth
-    toolbar.items = [
-      selector.map(UIBarButtonItem.init(customView:)),
-      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      UIBarButtonItem(customView: doneSelector)
-    ].compactMap { $0 }
     toolbar.setBackgroundImage(.init(), forToolbarPosition: .any, barMetrics: .default)
     toolbar.backgroundColor = self.backgroundColor
     addSubview(toolbar)
     
-    self.timeTypeSelector = selector
-    self.doneSelector = doneSelector
+    // Use default time seletor if no custom tool bar items are provided.
+    if let toolbarElements = toolBarElements {
+      toolbar.items = toolbarElements.map { $0.toolbarItem }
+      toolbarElements.forEach { [weak self] element in
+        element.toolbarItem.rx.tap
+          .subscribe(onNext: { _ in
+            guard let self = self else { return }
+            self.removeOverlay(animated: true)
+            element.handler(self.timePicker.date)
+          })
+          .disposed(by: disposeBag)
+      }
+    } else {
+      let selector: UISegmentedControl! // as `timeTypeSelector` is weak
+      switch mode {
+      case .timeWithType(let timeType):
+        assert(timeType != .none)
+        selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
+        selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
+        
+        // this sets the selected section index
+        self.timeTypeSelector = selector
+        self.selectedTimeType = timeType
 
+      case .time, .date:
+        selector = UISegmentedControl(items: [Loc.Now])
+        selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
+      }
+      
+      // Yes, a segmented control with one element. This is for consistent styling.
+      let doneSelector = UISegmentedControl(items: [Loc.Done])
+      doneSelector.addTarget(self, action: #selector(doneButtonPressed(sender:)), for: .valueChanged)
+      
+      toolbar.items = [
+        selector.map(UIBarButtonItem.init(customView:)),
+        UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+        UIBarButtonItem(customView: doneSelector)
+      ].compactMap { $0 }
+      
+      self.timeTypeSelector = selector
+      self.doneSelector = doneSelector
+    }
+    
     self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: timePicker.frame.height + toolbar.frame.height)
   }
   
