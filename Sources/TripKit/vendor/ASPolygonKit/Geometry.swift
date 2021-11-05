@@ -21,7 +21,7 @@ struct Point {
   var lng: Double { return ll.1 }
   
   var description: String {
-    return String(format: "(%.4f,%.4f)", lat, lng)
+    String(format: "(%.6f,%.6f)", lat, lng)
   }
   
   // MARK: Point as a x/y pair
@@ -55,7 +55,7 @@ struct Point {
 
 extension Point: Equatable {}
 func ==(lhs: Point, rhs: Point) -> Bool {
-  let epsilon = 0.0001
+  let epsilon = 0.000001
   return abs(lhs.lat - rhs.lat) < epsilon && abs(lhs.lng - rhs.lng) < epsilon
 }
 
@@ -116,7 +116,7 @@ struct Line {
       return inRange( (point.x, point.y) )
     }
     
-    let epsilon = 0.0001
+    let epsilon = 0.000001
     let y = m * point.x + b
     if abs(y - point.y) < epsilon {
       return inRange( (point.x, point.y) )
@@ -178,7 +178,7 @@ func ==(lhs: Line, rhs: Line) -> Bool {
 
 extension Double {
   func inBetween(_ some: Double, and another: Double) -> Bool {
-    let eps = 0.00001
+    let eps = 0.000001
     return self >= min(some, another) - eps && self <= max(some, another) + eps
   }
 }
