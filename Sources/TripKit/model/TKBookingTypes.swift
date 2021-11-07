@@ -293,12 +293,12 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
   
   static let declinedAsString = "Declined"
   
-  public func toString(jsonCompatible: Bool = true) -> String {
+  public func toString(forJSONEncoding: Bool = true) -> String {
     switch self {
     case .unspecified: return ""
     case .declined: return Self.declinedAsString
     case .date(let date):
-      if jsonCompatible {
+      if forJSONEncoding {
         let formatter = ISO8601DateFormatter()
         return formatter.string(from: date)
       } else {
