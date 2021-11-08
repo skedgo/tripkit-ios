@@ -291,7 +291,7 @@ extension TKBooking.BookingInput {
 
 extension TKBooking.BookingInput.ReturnTripDateValue {
   
-  static let declinedAsString = "Declined"
+  static let declinedAsString = Loc.Declined
   
   public func toString(forJSONEncoding: Bool = true) -> String {
     switch self {
