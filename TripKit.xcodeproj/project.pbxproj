@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0747B12730D4C3000D752F /* polygons-au-211102.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A0747B02730D4C3000D752F /* polygons-au-211102.json */; };
 		3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; };
@@ -26,6 +27,8 @@
 		3A5B655526CF52620072DE07 /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5B655426CF52620072DE07 /* TGCardViewController */; };
 		3AA1092126FABC6000C52879 /* TKReporter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */; };
 		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
+		3AB424DF2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
+		3AB424E02734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
 		3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */; };
@@ -941,6 +944,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A0747B02730D4C3000D752F /* polygons-au-211102.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "polygons-au-211102.json"; sourceTree = "<group>"; };
 		3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKAutocompletionResult+Icon.swift"; sourceTree = "<group>"; };
 		3A1AABB126CB78DE00FDDB06 /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
 		3A1AABB226CB78DE00FDDB06 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
@@ -956,6 +960,7 @@
 		3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKReporter+Rx.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+EncodePolylineString.swift"; sourceTree = "<group>"; };
 		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2257,6 +2262,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFF26E226C6975F007809CD /* CLLocationCoordinate2D+DecodePolylineString.swift */,
+				3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */,
 				3AFF26DF26C6975F007809CD /* Geometry.swift */,
 				3AFF26E126C6975F007809CD /* MKPolygon+Union.swift */,
 				3AFF26E326C6975F007809CD /* Polygon.swift */,
@@ -2845,6 +2851,7 @@
 				3AFF2A2826C69A96007809CD /* polygons-scandinavia-170217.json */,
 				3AFF2A2626C69A96007809CD /* polygons-tripgo-170217.json */,
 				3AFF2A2726C69A96007809CD /* polygons-uk-170217.json */,
+				3A0747B02730D4C3000D752F /* polygons-au-211102.json */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -3352,6 +3359,7 @@
 				3AFF2AB026C69A96007809CD /* routing-pt-realtime.json in Resources */,
 				3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */,
 				3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */,
+				3A0747B12730D4C3000D752F /* polygons-au-211102.json in Resources */,
 				3AFF2AC826C69A96007809CD /* routing-walk.json in Resources */,
 				3AFF2A9726C69A96007809CD /* polygons-scandinavia-170217.json in Resources */,
 				3AFF2ACA26C69A96007809CD /* routing-pt-wheelchair-reroute.json in Resources */,
@@ -3535,6 +3543,7 @@
 				3AFF296F26C6981E007809CD /* TKRealTimeFetcher.swift in Sources */,
 				3AFF296A26C6981E007809CD /* TKError.swift in Sources */,
 				3AFF28DF26C697D9007809CD /* TKInfoIcon.swift in Sources */,
+				3AB424E02734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */,
 				3AFF28AC26C697D9007809CD /* Service+Visits.swift in Sources */,
 				3AFF28BA26C697D9007809CD /* TKSegment.swift in Sources */,
 				3AFF283C26C6977C007809CD /* TKShareHelper.swift in Sources */,
@@ -3847,6 +3856,7 @@
 				3AFF292126C697DA007809CD /* TripGroup+CoreDataProperties.swift in Sources */,
 				3AFF298926C6984F007809CD /* DefaultTrue.swift in Sources */,
 				3A1AABB826CB7BB100FDDB06 /* TKVehicular.swift in Sources */,
+				3AB424DF2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */,
 				3AFF28E826C697DA007809CD /* Shape+Data.swift in Sources */,
 				3AFF295A26C6981D007809CD /* TKRoutingParser.swift in Sources */,
 				3AFF285F26C697A3007809CD /* TripRequest+Classify.swift in Sources */,

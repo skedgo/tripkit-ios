@@ -52,18 +52,28 @@ public class TKRegionOverlayHelper: NSObject {
       let calculationToken = TKRegionManager.shared.regionsHash?.intValue
       self.calculationToken = calculationToken
       
-      MKPolygon.union(polygons) { regionPolygons in
+      MKPolygon.union(polygons) { result in
         // Ignore callbacks for since outdated regions (e.g., switching servers quickly)
         guard calculationToken == self.calculationToken else { return }
         
-        // create outside polygon (to show which area we cover)
-        let encodable = regionPolygons.map(EncodablePolygon.init)
-        TKRegionOverlayHelper.savePolygonsToCacheFile(encodable)
-        let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
-        for callback in self.callbacks {
-          callback(overlay)
+        switch result {
+        case .success(let regionPolygons):
+          // create outside polygon removing the regions (to show which area is covered)
+          let encodable = regionPolygons.map(EncodablePolygon.init)
+          TKRegionOverlayHelper.savePolygonsToCacheFile(encodable)
+          let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
+          self.regionsOverlay = overlay
+          for callback in self.callbacks {
+            callback(overlay)
+          }
+
+        case .failure(let error):
+          TKLog.warn("TKRegionOverlayHelper", text: "Polygon union failed: \(error)")
+          self.regionsOverlay = nil
+          for callback in self.callbacks {
+            callback(nil)
+          }
         }
-        self.regionsOverlay = overlay
         self.callbacks = []
       }
       
@@ -184,6 +194,39 @@ extension TKRegionOverlayHelper {
       else { return }
     
     do {
+      #if DEBUG
+      // Output GeoJSON, too.
+      let secondary = FileManager.default
+        .urls(for: .cachesDirectory, in: .userDomainMask)
+        .first!.appendingPathComponent("regionOverlay.geojson")
+      
+      let features = polygons.map { wrapper -> [String: Any] in
+        let polygon = wrapper.polygon
+        var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: polygon.pointCount)
+        let range = NSRange(location: 0, length: polygon.pointCount)
+        polygon.getCoordinates(&coordinates, range: range)
+
+        return [
+          "type": "Feature",
+          "geometry": [
+            "type": "Polygon",
+            "coordinates": [
+              coordinates.map {
+                [$0.longitude, $0.latitude]
+              }
+            ]
+          ]
+        ]
+      }
+      let geojson: [String: Any] = [
+        "type": "FeatureCollection",
+        "features": features
+      ]
+      let geojsonData = try JSONSerialization.data(withJSONObject: geojson, options: [])
+      try geojsonData.write(to: secondary)
+      print("Saved GeoJSON to \(secondary)")
+      #endif
+
       let archiver = NSKeyedArchiver(requiringSecureCoding: false)
       archiver.encode(polygons, forKey: "polygons")
       archiver.encode(regionsHash, forKey: "regionsHash")
