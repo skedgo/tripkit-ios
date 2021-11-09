@@ -100,7 +100,7 @@ class TKUIResultsTitleView: UIView {
     }
     destinationLabel.text = destinationText
 
-    let originName = origin ?? "..."
+    let originName = origin ?? "…"
     let originText = Loc.From(location: originName)
     let attributedOrigin = NSMutableAttributedString(string: originText)
     attributedOrigin.addAttribute(

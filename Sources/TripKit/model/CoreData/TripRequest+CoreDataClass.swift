@@ -85,11 +85,6 @@ extension TripRequest {
     }
   }
   
-  public var timeString: String {
-    let timeZone = type == .arriveBefore ? arrivalTimeZone : departureTimeZone
-    return TripRequest.timeString(for: time, timeType: type, in: timeZone)
-  }
-  
 }
 
 // MARK: - Inserting
@@ -107,49 +102,6 @@ extension TripRequest {
       request.departureTime = nil // don't lock it in yet!
     }
     return request
-  }
-  
-  static func timeString(for time: Date?, timeType: TKTimeType, in timeZone: TimeZone?) -> String {
-    
-    switch timeType {
-    case .leaveASAP:
-      return NSLocalizedString("Leave now", tableName: "TripKit", bundle: .tripKit, comment: "")
-
-    case .none:
-      return ""
-    
-    case .leaveAfter:
-      return timeString(prefix: Loc.LeaveAt, time: time, in: timeZone)
-
-    case .arriveBefore:
-      return timeString(prefix: Loc.ArriveBy, time: time, in: timeZone)
-    }
-  }
-  
-  private static func timeString(prefix: String, time: Date?, in timeZone: TimeZone?) -> String {
-    var string = prefix
-    string.append(" ")
-    
-    let formatter = DateFormatter()
-    formatter.timeStyle = .short
-    formatter.dateStyle = .short
-    formatter.locale = .current
-    formatter.doesRelativeDateFormatting = true
-    formatter.timeZone = timeZone
-    
-    if let time = time {
-      var timeString = formatter.string(from: time)
-      timeString = timeString.replacingOccurrences(of: " pm", with: "pm")
-      timeString = timeString.replacingOccurrences(of: " am", with: "am")
-      string.append(timeString.localizedLowercase)
-    }
-    
-    if let offset = timeZone?.secondsFromGMT(), let short = timeZone?.abbreviation(), offset != TimeZone.current.secondsFromGMT() {
-      string.append(" ")
-      string.append(short)
-    }
-    
-    return string
   }
 }
 

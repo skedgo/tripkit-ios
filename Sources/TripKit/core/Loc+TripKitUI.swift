@@ -77,6 +77,10 @@ extension Loc {
   public static var EndLocation: String {
     return NSLocalizedString("End location", tableName: "TripKit", bundle: .tripKit, comment: "Placeholder name for destination (then replaced with address or name)")
   }
+  
+  public static var SetTime: String {
+    return NSLocalizedString("Set time", tableName: "TripKit", bundle: .tripKit, comment: "Button label tos et departure time")
+  }
 
   public static var RequestSupport: String {
     return NSLocalizedString("Request support", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that allows users to request support")
@@ -240,6 +244,7 @@ extension Loc {
   }
   
   // MARK: - Home
+  
   public static var CustomizeHome: String {
     return NSLocalizedString("Customise home", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to customise the home card")
   }

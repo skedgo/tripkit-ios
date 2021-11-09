@@ -25,6 +25,7 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
   private let origin: MKAnnotation?
   private let destination: MKAnnotation?
   private let biasMapRect: MKMapRect
+  var startMode: TKUIRoutingResultsViewModel.SearchMode? = nil
   
   private var viewModel: TKUIRoutingQueryInputViewModel!
   private let didAppear = PublishSubject<Void>()
@@ -34,7 +35,6 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
   private let titleView: TKUIRoutingQueryInputTitleView
 
   public init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect) {
-    
     self.origin = origin
     self.destination = destination
     self.biasMapRect = biasMapRect
@@ -83,6 +83,7 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
       origin: origin,
       destination: destination,
       biasMapRect: biasMapRect,
+      startMode: startMode,
       inputs: TKUIRoutingQueryInputViewModel.UIInput(
         searchText: titleView.rx.searchText.map { ($0, forced: false) },
         tappedDone: route,

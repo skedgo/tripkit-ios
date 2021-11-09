@@ -13,7 +13,7 @@ public extension TKUITimePickerSheet {
   struct Configuration {
     private init() {}
     
-    static let empty = Configuration()
+    public static let `default` = Configuration()
     
     public var incrementInterval: Int = 1
     

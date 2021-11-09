@@ -16,11 +16,6 @@ import TripKit
 extension TKUIRoutingResultsViewModel {
   
   public struct RouteBuilder: Codable {
-    fileprivate enum SelectionMode: String, Equatable, Codable {
-      case origin
-      case destination
-    }
-    
     public enum Time: Equatable, Codable {
       private enum CodingKeys: String, CodingKey {
         case type
@@ -58,20 +53,23 @@ extension TKUIRoutingResultsViewModel {
     }
     
     init(destination: MKAnnotation) {
-      self.init(mode: .origin, destination: TKNamedCoordinate.namedCoordinate(for: destination))
+      self.mode = .origin
+      self.origin = nil
+      self.destination = TKNamedCoordinate.namedCoordinate(for: destination)
+      self.time = TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP ? .leaveASAP : nil
     }
     
-    fileprivate init(mode: SelectionMode, origin: TKNamedCoordinate? = nil, destination: TKNamedCoordinate? = nil, time: Time = .leaveASAP) {
+    fileprivate init(mode: TKUIRoutingResultsViewModel.SearchMode, origin: TKNamedCoordinate? = nil, destination: TKNamedCoordinate? = nil, time: Time? = nil) {
       self.mode = mode
       self.origin = origin
       self.destination = destination
-      self.time = time
+      self.time = time ?? (TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP ? .leaveASAP : nil)
     }
     
-    fileprivate var mode: SelectionMode
+    fileprivate(set) var mode: TKUIRoutingResultsViewModel.SearchMode
     fileprivate(set) var origin: TKNamedCoordinate?
     fileprivate(set) var destination: TKNamedCoordinate?
-    fileprivate(set) var time: Time
+    fileprivate(set) var time: Time?
 
     fileprivate static var empty = RouteBuilder(mode: .destination)
   }
@@ -84,7 +82,12 @@ extension TKUIRoutingResultsViewModel {
   
   static func buildId(for builder: RouteBuilder, force: Bool = false) -> String {
     guard !force else { return UUID().uuidString }
-    var id: String = "\(builder.time.timeType.rawValue)-\(Int(builder.time.date.timeIntervalSince1970))"
+    var id: String
+    if let time = builder.time {
+      id = "\(time.timeType.rawValue)-\(Int(time.date.timeIntervalSince1970))-"
+    } else {
+      id = "unknown-"
+    }
     if let origin = builder.origin?.coordinate {
       id.append("\(Int(origin.latitude * 100_000)),\(Int(origin.longitude * 100_000))")
     }
@@ -270,40 +273,6 @@ extension TripRequest {
     
   }
   
-  func reverseGeocodeLocations() -> Observable<(origin: String?, destination: String?)> {
-    let originObservable: Observable<String?>
-    if let from = self.fromLocation.title, from != Loc.Location {
-      originObservable = .just(from)
-    } else {
-      originObservable = geocode(self.fromLocation, retryLimit: 5, delay: 5)
-        .catchAndReturn(nil)
-        .startWith(nil)
-    }
-    
-    let destinationObservable: Observable<String?>
-    if let to = self.toLocation.title, to != Loc.Location {
-      destinationObservable = .just(to)
-    } else {
-      destinationObservable = geocode(self.toLocation, retryLimit: 5, delay: 5)
-        .catchAndReturn(nil)
-        .startWith(nil)
-    }
-    
-    return Observable.combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
-  }
-  
-  private func geocode(_ location: TKNamedCoordinate, retryLimit: Int, delay: Int) -> Observable<String?> {
-    return CLGeocoder().rx
-    .reverseGeocode(namedCoordinate: location)
-    .asObservable()
-      .retry { errors in
-      return errors.enumerated().flatMap { (index, error) -> Observable<Int> in
-        guard index < retryLimit else { throw error }
-        return Observable<Int>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
-      }
-    }
-  }
-  
 }
 
 extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
@@ -342,7 +311,7 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
   
   var timeZone: TimeZone {
     switch time {
-    case .leaveASAP, .leaveAfter:
+    case .leaveASAP, .leaveAfter, .none:
       if let location = origin, let timeZone = TKRegionManager.shared.timeZone(for: location.coordinate) {
         return timeZone
       } else {
@@ -357,8 +326,48 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
     return .current
   }
   
+  func reverseGeocodeLocations() -> Observable<(origin: String?, destination: String?)> {
+    let originObservable: Observable<String?>
+    if let from = origin?.title, from != Loc.Location {
+      originObservable = .just(from)
+    } else if let origin = origin {
+      originObservable = Self.geocode(origin, retryLimit: 5, delay: 5)
+        .catchAndReturn(nil)
+        .startWith(nil)
+    } else {
+      originObservable = .just(nil)
+    }
+    
+    let destinationObservable: Observable<String?>
+    if let to = destination?.title, to != Loc.Location {
+      destinationObservable = .just(to)
+    } else if let destination = destination {
+      destinationObservable = Self.geocode(destination, retryLimit: 5, delay: 5)
+        .catchAndReturn(nil)
+        .startWith(nil)
+    } else {
+      destinationObservable = .just(nil)
+    }
+    
+    return Observable
+      .combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
+      .distinctUntilChanged { $0.origin == $1.origin && $0.destination == $1.destination }
+  }
+  
+  private static func geocode(_ location: TKNamedCoordinate, retryLimit: Int, delay: Int) -> Observable<String?> {
+    return CLGeocoder().rx
+    .reverseGeocode(namedCoordinate: location)
+    .asObservable()
+      .retry { errors in
+      return errors.enumerated().flatMap { (index, error) -> Observable<Int> in
+        guard index < retryLimit else { throw error }
+        return Observable<Int>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
+      }
+    }
+  }
+  
   func generateRequest() -> TripRequest? {
-    guard let destination = destination else { return nil }
+    guard let destination = destination, let time = time else { return nil }
     
     let origin = self.origin ?? TKLocationManager.shared.currentLocation
     
@@ -369,6 +378,51 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
     )
   }
   
+  var timeString: String {
+    return time?.timeString(in: timeZone) ?? Loc.SetTime
+  }
+  
+}
+
+extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
+  func timeString(in timeZone: TimeZone) -> String {
+    switch self {
+    case .leaveASAP:
+      return Loc.LeaveNow
+    
+    case .leaveAfter(let time):
+      return Self.timeString(prefix: Loc.LeaveAt, time: time, in: timeZone)
+
+    case .arriveBefore(let time):
+      return Self.timeString(prefix: Loc.ArriveBy, time: time, in: timeZone)
+    }
+  }
+  
+  private static func timeString(prefix: String, time: Date?, in timeZone: TimeZone?) -> String {
+    var string = prefix
+    string.append(" ")
+    
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    formatter.dateStyle = .short
+    formatter.locale = .current
+    formatter.doesRelativeDateFormatting = true
+    formatter.timeZone = timeZone
+    
+    if let time = time {
+      var timeString = formatter.string(from: time)
+      timeString = timeString.replacingOccurrences(of: " pm", with: "pm")
+      timeString = timeString.replacingOccurrences(of: " am", with: "am")
+      string.append(timeString.localizedLowercase)
+    }
+    
+    if let offset = timeZone?.secondsFromGMT(), let short = timeZone?.abbreviation(), offset != TimeZone.current.secondsFromGMT() {
+      string.append(" ")
+      string.append(short)
+    }
+    
+    return string
+  }
 }
 
 // MARK: - RxDataSources protocol conformance
