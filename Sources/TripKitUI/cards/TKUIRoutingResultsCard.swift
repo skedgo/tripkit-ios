@@ -176,9 +176,16 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     // Build the view model
     
+    let searchTriggers = Observable.merge([
+        showSearch,
+        titleView?.locationTapped.asObservable().map { _ in }
+      ].compactMap { $0 }
+    )
+    
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
       selected: selectedItem(in: tableView, dataSource: dataSource),
       tappedSectionButton: tappedSectionButton.asSignal(onErrorSignalWith: .empty()),
+      tappedSearch: searchTriggers.asSignal(onErrorSignalWith: .empty()),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       tappedShowModeOptions: .empty(),
@@ -326,18 +333,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     viewModel.next
       .emit(onNext: { [weak self] in self?.navigate(to: $0) })
-      .disposed(by: disposeBag)
-    
-    // Search places
-    
-    let searchTriggers = [
-        showSearch,
-        titleView?.locationTapped.asObservable().map { _ in }
-      ].compactMap {$0 }
-    
-    Observable.merge(searchTriggers)
-      .withLatestFrom(viewModel.request)
-      .subscribe(onNext: { [weak self] in self?.showSearch(origin: $0.fromLocation, destination: $0.toLocation) })
       .disposed(by: disposeBag)
   }
   
@@ -673,6 +668,9 @@ private extension TKUIRoutingResultsCard {
       alerter.alerts = [TKAlertAPIAlertClassWrapper(alert: alert)]
       controller.present(alerter, inNavigator: true)
       
+    case let .showSearch(origin, destination, mode):
+      showSearch(origin: origin, destination: destination, startMode: mode)
+      
     case .presentModeConfigurator(let modes, let region):      
       showTransportOptions(modes: modes, for: region)
       
@@ -690,10 +688,11 @@ private extension TKUIRoutingResultsCard {
 
 private extension TKUIRoutingResultsCard {
   
-  func showSearch(origin: MKAnnotation?, destination: MKAnnotation?) {
+  func showSearch(origin: MKAnnotation?, destination: MKAnnotation?, startMode: TKUIRoutingResultsViewModel.SearchMode?) {
     let biasMapRect = (mapManager as? TGMapManager)?.mapView?.visibleMapRect ?? .null
     
     let card = TKUIRoutingQueryInputCard(origin: origin, destination: destination, biasMapRect: biasMapRect)
+    card.startMode = startMode
     card.queryDelegate = self
     
     controller?.push(card)
@@ -723,7 +722,7 @@ private extension TKUIRoutingResultsCard {
     
     let sender: UIButton = accessoryView.timeButton
     
-    let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone)
+    let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone, config: Self.config.timePickerConfig)
     picker.selectAction = { [weak self] timeType, date in
       self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
     }

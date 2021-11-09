@@ -27,6 +27,10 @@ open class TKUISheet: UIView {
   }
   
   public func showWithOverlay(in view: UIView, below: UIView? = nil, hiding: [UIView] = []) {
+    if let existing = view.subviews.compactMap({ $0 as? TKUISheet }).first {
+      existing.removeOverlay(animated: false)
+    }
+    
     overlay?.removeFromSuperview()
     
     // add a background

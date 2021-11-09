@@ -122,7 +122,11 @@ extension Loc {
   @objc public static var Dismiss: String {
     return NSLocalizedString("Dismiss", tableName: "TripKit", bundle: .tripKit, comment: "Button to dismiss something, e.g., an error or action action sheet")
   }
-  
+
+  public static var LeaveNow: String {
+    return NSLocalizedString("Leave now", tableName: "TripKit", bundle: .tripKit, comment: "Leave ASAP/now option")
+  }
+
   @objc public static var LeaveAt: String {
     return NSLocalizedString("Leave at", tableName: "TripKit", bundle: .tripKit, comment: "Leave after button")
   }

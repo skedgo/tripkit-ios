@@ -25,6 +25,10 @@ extension Loc {
   public static var Collapse: String {
     return NSLocalizedString("Collapse", tableName: "TripKit", bundle: .tripKit, comment: "Accessibility title for button that points up to collapse a section")
   }
+  
+  public static var Declined: String {
+    return NSLocalizedString("Declined", tableName: "TripKit", bundle: .tripKit, comment: "Indicating when a user rejected some request, e.g., book a return trip.")
+  }
 
   // MARK: - Attribution
   
@@ -76,6 +80,10 @@ extension Loc {
 
   public static var EndLocation: String {
     return NSLocalizedString("End location", tableName: "TripKit", bundle: .tripKit, comment: "Placeholder name for destination (then replaced with address or name)")
+  }
+  
+  public static var SetTime: String {
+    return NSLocalizedString("Set time", tableName: "TripKit", bundle: .tripKit, comment: "Button label to set departure time")
   }
 
   public static var RequestSupport: String {
@@ -240,6 +248,7 @@ extension Loc {
   }
   
   // MARK: - Home
+  
   public static var CustomizeHome: String {
     return NSLocalizedString("Customise home", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to customise the home card")
   }

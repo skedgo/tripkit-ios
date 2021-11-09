@@ -16,7 +16,7 @@ import TripKit
 
 class TKUIRoutingResultsViewModel {
   
-  enum SearchMode {
+  enum SearchMode: String, Equatable, Codable {
     case origin
     case destination
   }
@@ -29,6 +29,7 @@ class TKUIRoutingResultsViewModel {
   typealias UIInput = (
     selected: Signal<Item>,                     // => do .next
     tappedSectionButton: Signal<ActionPayload>, // => section action
+    tappedSearch: Signal<Void>,                 // => trigger query input
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
     tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
@@ -134,12 +135,12 @@ class TKUIRoutingResultsViewModel {
       .distinctUntilChanged()
       .asDriver(onErrorDriveWith: .empty())
     
-    originDestination = requestChanged
-      .flatMapLatest { $0.0.reverseGeocodeLocations() }
+    originDestination = builderChanged
+      .flatMapLatest { $0.reverseGeocodeLocations() }
       .asDriver(onErrorDriveWith: .empty())
 
-    timeTitle = requestToShow
-      .map { $0.timeString }
+    timeTitle = builderChanged
+      .map(\.timeString)
       .asDriver(onErrorDriveWith: .empty())
     
     let availableFromRequest: Observable<AvailableModes> = requestChanged
@@ -195,6 +196,7 @@ class TKUIRoutingResultsViewModel {
       .compactMap(Next.init)
 
     let modeInput = Observable.combineLatest(requestToShow, builderChanged)
+    
     let presentModes = inputs.tappedShowModeOptions.asObservable()
       .withLatestFrom(modeInput) { (_, tuple) -> Next in
         let modes = tuple.0.applicableModeIdentifiers
@@ -205,10 +207,39 @@ class TKUIRoutingResultsViewModel {
     
     let presentTime = inputs.tappedDate.asObservable()
       .withLatestFrom(builderChanged)
-      .map { Next.presentDatePicker(time: $0.time, timeZone: $0.timeZone) }
+      .map { builder -> Next in
+        let time: RouteBuilder.Time
+        if let selected = builder.time {
+          time = selected
+        } else if TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP {
+          time = .leaveASAP
+        } else {
+          time = .leaveAfter(.init())
+        }
+        return .presentDatePicker(time: time, timeZone: builder.timeZone)
+      }
       .asSignal(onErrorSignalWith: .empty())
     
-    next = Signal.merge(showSelection, presentTime, presentModes, triggerAction)
+    let presentTimeAutomatically = builderChanged
+      .compactMap { builder -> Next? in
+        guard builder.origin != nil, builder.destination != nil, builder.time == nil else { return nil }
+        let time: RouteBuilder.Time
+        if TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP {
+          time = .leaveASAP
+        } else {
+          time = .leaveAfter(.init())
+        }
+        return .presentDatePicker(time: time, timeZone: builder.timeZone)
+      }
+      .asSignal(onErrorSignalWith: .empty())
+
+    let presentSearch = inputs.tappedSearch
+      .asObservable()
+      .withLatestFrom(builderChanged)
+      .map { Next.showSearch(origin: $0.origin, destination: $0.destination, mode: $0.mode) }
+      .asSignal(onErrorSignalWith: .empty())
+
+    next = Signal.merge(showSelection, presentSearch, presentTime, presentTimeAutomatically, presentModes, triggerAction)
   }
   
   let request: Driver<TripRequest>
@@ -268,6 +299,7 @@ extension TKUIRoutingResultsViewModel {
   enum Next {
     case showTrip(Trip)
     case showAlert(TKAPI.Alert)
+    case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
     case presentModeConfigurator(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
