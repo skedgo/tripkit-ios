@@ -16,7 +16,6 @@ public enum TKBooking {
     public let subtitle: String?
     public let imageURL: URL?
   }
-  
 
   public struct Action: Codable, Hashable {
     public let title: String
@@ -61,7 +60,6 @@ public enum TKBooking {
       case confirmationMessage
     }
   }
-  
 
   public struct TSPBranding: Codable, Hashable {
     private let rgbColor: TKAPI.RGBColor?
@@ -81,7 +79,6 @@ public enum TKBooking {
       return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
     }
   }
-  
   
   public struct Purchase: Codable, Hashable {
     public let id: String
@@ -136,7 +133,6 @@ public enum TKBooking {
     }
     
   }
-  
 
   public struct Confirmation: Codable, Hashable {
     public let status: Detail
@@ -156,19 +152,27 @@ public enum TKBooking {
       public let title: String
     }
     
-    enum InputType: String, Codable {
+    public enum InputType: String, Codable {
       case longText = "LONG_TEXT"
       case singleSelection = "SINGLE_CHOICE"
       case multipleSelections = "MULTIPLE_CHOICE"
+      case requestReturnTrip = "RETURN_TRIP"
+    }
+    
+    public enum ReturnTripDateValue: Hashable {
+      case unspecified
+      case date(Date)
+      case declined
     }
     
     public enum InputValue: Hashable {
       case singleSelection(InputOptionId)
       case multipleSelections([InputOptionId])
       case longText(String)
+      case returnTripDate(ReturnTripDateValue)
     }
     
-    let type: InputType
+    public let type: InputType
     public let required: Bool
     public let id: String
     public let options: [InputOption]?
@@ -187,6 +191,7 @@ public enum TKBooking {
     
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
+      
       id = try container.decode(String.self, forKey: .id)
       required = try container.decode(Bool.self, forKey: .required)
       options = try container.decodeIfPresent([InputOption].self, forKey: .options)
@@ -203,6 +208,9 @@ public enum TKBooking {
       case .multipleSelections:
         let selectedOptionIds = try container.decode([String].self, forKey: .values)
         value = .multipleSelections(selectedOptionIds)
+      case .requestReturnTrip:
+        let specifiedReturnDate = try container.decode(String.self, forKey: .value)
+        value = Self.convertStringReturnDateToInputValue(specifiedReturnDate)
       }
     }
     
@@ -222,6 +230,8 @@ public enum TKBooking {
         try container.encode(value, forKey: .value)
       case .multipleSelections(let optionIds):
         try container.encode(optionIds, forKey: .values)
+      case .returnTripDate(let returnDate):
+        try container.encode(returnDate.toString(), forKey: .value)
       }
     }
   }
@@ -259,6 +269,42 @@ extension TKBooking.BookingInput {
   
   public func displayTitle(for optionId: InputOptionId) -> String? {
     return options?.first(where: { $0.id == optionId })?.title
+  }
+  
+  private static func convertStringReturnDateToInputValue(_ returnDateString: String) -> InputValue {
+    if returnDateString.isEmpty {
+      return .returnTripDate(.unspecified)
+    } else if returnDateString == ReturnTripDateValue.declinedAsString {
+      return .returnTripDate(.declined)
+    } else {
+      let formatter = ISO8601DateFormatter()
+      if let date = formatter.date(from: returnDateString) {
+        return .returnTripDate(.date(date))
+      } else {
+        assertionFailure()
+        return .returnTripDate(.unspecified)
+      }
+    }
+  }
+  
+}
+
+extension TKBooking.BookingInput.ReturnTripDateValue {
+  
+  static let declinedAsString = Loc.Declined
+  
+  public func toString(forJSONEncoding: Bool = true) -> String {
+    switch self {
+    case .unspecified: return ""
+    case .declined: return Self.declinedAsString
+    case .date(let date):
+      if forJSONEncoding {
+        let formatter = ISO8601DateFormatter()
+        return formatter.string(from: date)
+      } else {
+        return TKStyleManager.string(for: date, for: .autoupdatingCurrent, showDate: true, showTime: true)
+      }
+    }
   }
   
 }
