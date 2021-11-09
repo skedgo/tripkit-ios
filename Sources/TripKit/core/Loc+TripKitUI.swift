@@ -26,10 +26,6 @@ extension Loc {
     return NSLocalizedString("Collapse", tableName: "TripKit", bundle: .tripKit, comment: "Accessibility title for button that points up to collapse a section")
   }
   
-  public static var Declined: String {
-    return NSLocalizedString("Declined", tableName: "TripKit", bundle: .tripKit, comment: "Indicating when a user rejected some request, e.g., book a return trip.")
-  }
-  
   public static var OneWayOnly: String {
     return NSLocalizedString("One-way only", tableName: "TripKit", bundle: .tripKit, comment: "Indicating no return trip is required.")
   }
