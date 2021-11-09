@@ -162,7 +162,7 @@ public enum TKBooking {
     public enum ReturnTripDateValue: Hashable {
       case unspecified
       case date(Date)
-      case declined
+      case oneWayTrip
     }
     
     public enum InputValue: Hashable {
@@ -274,8 +274,8 @@ extension TKBooking.BookingInput {
   private static func convertStringReturnDateToInputValue(_ returnDateString: String) -> InputValue {
     if returnDateString.isEmpty {
       return .returnTripDate(.unspecified)
-    } else if returnDateString == ReturnTripDateValue.declinedAsString {
-      return .returnTripDate(.declined)
+    } else if returnDateString == Loc.OneWayOnly {
+      return .returnTripDate(.oneWayTrip)
     } else {
       let formatter = ISO8601DateFormatter()
       if let date = formatter.date(from: returnDateString) {
@@ -291,12 +291,10 @@ extension TKBooking.BookingInput {
 
 extension TKBooking.BookingInput.ReturnTripDateValue {
   
-  static let declinedAsString = Loc.Declined
-  
   public func toString(forJSONEncoding: Bool = true, timeZone: TimeZone = .autoupdatingCurrent) -> String {
     switch self {
     case .unspecified: return ""
-    case .declined: return Self.declinedAsString
+    case .oneWayTrip: return Loc.OneWayOnly
     case .date(let date):
       if forJSONEncoding {
         let formatter = ISO8601DateFormatter()
