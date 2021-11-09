@@ -293,7 +293,7 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
   
   static let declinedAsString = Loc.Declined
   
-  public func toString(forJSONEncoding: Bool = true) -> String {
+  public func toString(forJSONEncoding: Bool = true, timeZone: TimeZone = .autoupdatingCurrent) -> String {
     switch self {
     case .unspecified: return ""
     case .declined: return Self.declinedAsString
@@ -302,7 +302,7 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
         let formatter = ISO8601DateFormatter()
         return formatter.string(from: date)
       } else {
-        return TKStyleManager.string(for: date, for: .autoupdatingCurrent, showDate: true, showTime: true)
+        return TKStyleManager.string(for: date, for: timeZone, showDate: true, showTime: true)
       }
     }
   }
