@@ -83,7 +83,7 @@ extension Loc {
   }
   
   public static var SetTime: String {
-    return NSLocalizedString("Set time", tableName: "TripKit", bundle: .tripKit, comment: "Button label tos et departure time")
+    return NSLocalizedString("Set time", tableName: "TripKit", bundle: .tripKit, comment: "Button label to set departure time")
   }
 
   public static var RequestSupport: String {
