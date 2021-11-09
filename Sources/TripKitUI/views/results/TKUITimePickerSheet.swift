@@ -124,10 +124,18 @@ public class TKUITimePickerSheet: TKUISheet {
       timePicker.preferredDatePickerStyle = .wheels
       timePicker.sizeToFit()
     }
-
-    if showTime {
-      // Limit to a month ago until one month from now
+    
+    if let earliest = config.minimumDate {
+      timePicker.minimumDate = earliest
+    } else if showTime {
+      // A month ago
       timePicker.minimumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * -31)
+    }
+    
+    if let latest = config.maximumDate {
+      timePicker.maximumDate = latest
+    } else if showTime {
+      // A month from now
       timePicker.maximumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * 31)
     }
     
