@@ -27,7 +27,7 @@ class TKUIRoutingQueryInputViewModel {
     var tappedSwap: Signal<Void> = .empty()
   }
   
-  init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect = .null, inputs: UIInput, providers: [TKAutocompleting]? = nil) {
+  init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect = .null, startMode: TKUIRoutingResultsViewModel.SearchMode? = nil, inputs: UIInput, providers: [TKAutocompleting]? = nil) {
 
     let origin = origin ?? TKLocationManager.shared.currentLocation
     let providers = providers ?? TKUIRoutingResultsCard.config.autocompletionDataProviders
@@ -42,6 +42,7 @@ class TKUIRoutingQueryInputViewModel {
     
     let state = Self.buildState(
         origin: origin, destination: destination,
+        startMode: startMode,
         inputs: inputs, selection: autocompletionModel.selection
       )
       .share(replay: 1, scope: .whileConnected)

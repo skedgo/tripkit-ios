@@ -72,6 +72,10 @@ public extension TKUIRoutingResultsCard {
     /// the origin or destination labels. If none was provided, the `TKAppleGeocoder` and
     /// `TKTripGoGeocoder` will be used
     public var autocompletionDataProviders: [TKAutocompleting] = [TKAppleGeocoder(), TKTripGoGeocoder()]
+    
+    /// Optional configuration of the time picker used on the routing results card
+    /// Note: this will also be re-used in the mode-by-mode card
+    public var timePickerConfig: TKUITimePickerSheet.Configuration = .default
   }
 
 }

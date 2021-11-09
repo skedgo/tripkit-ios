@@ -54,23 +54,32 @@ public class TKUITimePickerSheet: TKUISheet {
     get {
       guard case .timeWithType = mode else { return .none }
       
-      switch timeTypeSelector?.selectedSegmentIndex {
-      case 0: return .leaveASAP
-      case 1: return .leaveAfter
-      case 2: return .arriveBefore
-      default: return .none
+      switch (timeTypeSelector?.selectedSegmentIndex, config.allowsASAP) {
+      case (0, true):   return .leaveASAP
+      case (1, true),
+           (0, false):  return .leaveAfter
+      case (2, true),
+           (1, false):  return .arriveBefore
+      default:          return .none
       }
     }
     set {
-      switch newValue {
-      case .leaveASAP:
+      switch (newValue, config.allowsASAP) {
+      case (.leaveASAP, true):
         timeTypeSelector?.selectedSegmentIndex = 0
         timePicker.setDate(.init(), animated: true)
-      case .leaveAfter:
+      
+      case (.leaveAfter, true):
         timeTypeSelector?.selectedSegmentIndex = 1
-      case .arriveBefore:
+      case (.leaveAfter, false):
+        timeTypeSelector?.selectedSegmentIndex = 0
+      
+      case (.arriveBefore, true):
         timeTypeSelector?.selectedSegmentIndex = 2
-      case .none:
+      case (.arriveBefore, false):
+        timeTypeSelector?.selectedSegmentIndex = 1
+      
+      default:
         break
       }
       
@@ -79,6 +88,7 @@ public class TKUITimePickerSheet: TKUISheet {
     }
   }
   
+  private let config: Configuration
   private let mode: Mode
   private var didSetTime: Bool
   private let disposeBag = DisposeBag()
@@ -86,17 +96,18 @@ public class TKUITimePickerSheet: TKUISheet {
   private weak var timeTypeSelector: UISegmentedControl!
   private weak var doneSelector: UISegmentedControl!
 
-  public convenience init(date: Date, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil) {
-    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone, toolBarElements: toolBarElements)
+  public convenience init(date: Date, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil, config: Configuration = .default) {
+    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone, toolBarElements: toolBarElements, config: config)
   }
   
-  public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil) {
-    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone, toolBarElements: toolBarElements)
+  public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil, config: Configuration = .default) {
+    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone, toolBarElements: toolBarElements, config: config)
   }
   
-  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil) {
+  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil, config: Configuration) {
     didSetTime = false
     self.mode = mode
+    self.config = config
 
     super.init(frame: .zero)
     
@@ -107,6 +118,7 @@ public class TKUITimePickerSheet: TKUISheet {
     timePicker.datePickerMode = showTime ? .dateAndTime : .date
     timePicker.date = date
     timePicker.timeZone = timeZone
+    timePicker.minuteInterval = config.incrementInterval
     
     if #available(iOS 13.4, *) {
       timePicker.preferredDatePickerStyle = .wheels
@@ -162,7 +174,12 @@ public class TKUITimePickerSheet: TKUISheet {
       switch mode {
       case .timeWithType(let timeType):
         assert(timeType != .none)
-        selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
+          if config.allowsASAP {
+          selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
+        } else {
+          assert(timeType != .none && timeType != .leaveASAP)
+          selector = UISegmentedControl(items: [Loc.LeaveAt, Loc.ArriveBy])
+        }
         selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
         
         // this sets the selected section index

@@ -29,7 +29,7 @@ extension TKUIRoutingQueryInputViewModel {
     var mode: TKUIRoutingResultsViewModel.SearchMode
   }
 
-  static func buildState(origin: MKAnnotation, destination: MKAnnotation?, inputs: UIInput, selection: Signal<MKAnnotation>) -> Observable<State> {
+  static func buildState(origin: MKAnnotation, destination: MKAnnotation?, startMode: TKUIRoutingResultsViewModel.SearchMode?, inputs: UIInput, selection: Signal<MKAnnotation>) -> Observable<State> {
     
     let userActions: Observable<UserAction> = Observable.merge([
         selection.asObservable().map { .selectResult($0) },
@@ -43,7 +43,7 @@ extension TKUIRoutingQueryInputViewModel {
       originText: (origin.title ?? nil) ?? "",
       destination: destination,
       destinationText: (destination?.title ?? nil) ?? "",
-      mode: .destination
+      mode: startMode ?? .destination
     )
     
     return userActions
