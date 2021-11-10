@@ -182,11 +182,11 @@ public class TKUITimePickerSheet: TKUISheet {
       switch mode {
       case .timeWithType(let timeType):
         assert(timeType != .none)
-          if config.allowsASAP {
-          selector = UISegmentedControl(items: [Loc.Now, Loc.LeaveAt, Loc.ArriveBy])
+        if config.allowsASAP {
+          selector = UISegmentedControl(items: [Loc.Now, config.leaveAtLabel, config.arriveByLabel])
         } else {
           assert(timeType != .none && timeType != .leaveASAP)
-          selector = UISegmentedControl(items: [Loc.LeaveAt, Loc.ArriveBy])
+          selector = UISegmentedControl(items: [config.leaveAtLabel, config.arriveByLabel])
         }
         selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
         

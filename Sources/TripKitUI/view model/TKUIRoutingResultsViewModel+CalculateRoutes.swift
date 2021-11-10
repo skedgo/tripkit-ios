@@ -386,15 +386,16 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
   func timeString(in timeZone: TimeZone) -> String {
+    let timePickerConfigurator = TKUIRoutingResultsCard.config.timePickerConfig
     switch self {
     case .leaveASAP:
       return Loc.LeaveNow
     
     case .leaveAfter(let time):
-      return Self.timeString(prefix: Loc.LeaveAt, time: time, in: timeZone)
+      return Self.timeString(prefix: timePickerConfigurator.leaveAtLabel, time: time, in: timeZone)
 
     case .arriveBefore(let time):
-      return Self.timeString(prefix: Loc.ArriveBy, time: time, in: timeZone)
+      return Self.timeString(prefix: timePickerConfigurator.arriveByLabel, time: time, in: timeZone)
     }
   }
   
