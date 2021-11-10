@@ -8,6 +8,8 @@
 
 import Foundation
 
+import TripKit
+
 public extension TKUITimePickerSheet {
   
   struct Configuration {
@@ -34,6 +36,12 @@ public extension TKUITimePickerSheet {
     ///
     /// Defaults to `nil`, i.e., no limit.
     public var maximumDate: Date? = nil
+    
+    /// Allows customizing the "Leave at" time type label.
+    public var leaveAtLabel: String = Loc.LeaveAt
+    
+    /// Allows customizig the "Arrive by" time type label
+    public var arriveByLabel: String = Loc.ArriveBy
   }
   
 }
