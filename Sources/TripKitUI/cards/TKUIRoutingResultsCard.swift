@@ -605,7 +605,6 @@ private extension TKUIRoutingResultsCard {
     }
 
     modePicker.isEnabled = allowChangingQuery
-    modePicker.backgroundColor = .tkBackgroundGrouped
     modePicker.frame.size.width = tableView.frame.width
     modePicker.configure(all: modes.available, updateAll: true, currentlyEnabled: modes.isEnabled)
     
@@ -631,7 +630,7 @@ private extension TKUIRoutingResultsCard {
   func buildModePicker() -> RoutingModePicker {
     let modePicker = RoutingModePicker()
     modePicker.containerView = controller?.view
-    modePicker.backgroundColor = .tkBackground
+    modePicker.backgroundColor = .tkBackgroundGrouped
     
     modePicker.rx_pickedModes
       .emit(onNext: { [weak self] in
