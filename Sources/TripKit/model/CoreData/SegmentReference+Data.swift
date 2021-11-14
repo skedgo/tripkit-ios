@@ -13,6 +13,9 @@ extension SegmentReference: DataAttachable {}
 struct BookingData: Codable, Hashable {
   let title: String
   
+  /// Optional overwrite for `accessibilityLabel`; fallback to `title` if `nil`
+  let accessibilityLabel: String?
+  
   /// For in-app bookings using booking flow
   let url: URL?
   

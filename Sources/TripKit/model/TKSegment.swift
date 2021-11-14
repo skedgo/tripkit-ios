@@ -423,6 +423,7 @@ public class TKSegment: NSObject {
   }
 
   @objc public var bookingTitle: String? { bookingData?.title }
+  public var bookingAccessibilityLabel: String? { bookingData?.accessibilityLabel ?? bookingData?.title }
   public var bookingInternalURL: URL? { bookingData?.url }
   public var bookingVirtualURL: URL? { bookingData?.virtualBookingUrl }
   public var bookingQuickInternalURL: URL? { bookingData?.quickBookingsUrl }

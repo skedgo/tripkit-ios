@@ -122,7 +122,7 @@ extension TKUICardActionsView {
       actionView.imageView.image = action.icon
       actionView.label.text = action.title
       actionView.wrapper.isAccessibilityElement = true
-      actionView.wrapper.accessibilityLabel = action.title
+      actionView.wrapper.accessibilityLabel = action.accessibilityLabel
       actionView.wrapper.accessibilityTraits = .button
       actionView.bold = action.style == .bold
       actionView.onTap = { [weak card, unowned actionView] sender in
@@ -131,7 +131,7 @@ extension TKUICardActionsView {
         if update {
           actionView.imageView.image = action.icon
           actionView.label.text = action.title
-          actionView.accessibilityLabel = action.title
+          actionView.accessibilityLabel = action.accessibilityLabel
           actionView.bold = action.style == .bold
         }
       }
@@ -170,7 +170,7 @@ extension TKUICompactActionCell {
   
   func configure<C, M>(with action: TKUICardAction<C, M>, card: C, model: M, showTitle: Bool = true) {
     tintColor = .tkAppTintColor
-    accessibilityLabel = action.title
+    accessibilityLabel = action.accessibilityLabel
     accessibilityTraits = .button
     imageView.image = action.icon
     titleLabel.text = showTitle ? action.title : nil
@@ -181,7 +181,7 @@ extension TKUICompactActionCell {
       if update {
         self.imageView.image = action.icon
         self.titleLabel.text = showTitle ? action.title : nil
-        self.accessibilityLabel = action.title
+        self.accessibilityLabel = action.accessibilityLabel
         self.bold = action.style == .bold
       }
       return update

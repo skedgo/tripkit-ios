@@ -29,6 +29,7 @@ extension TKInterAppCommunicator {
     let action: TKInterAppIdentifier
 
     public var title: String
+    public var accessibilityLabel: String
     public let type: ExternalActionType
     public var identifier: AnyHashable { return action }
 
@@ -81,6 +82,7 @@ extension TKInterAppCommunicator {
     // otherwise keep the per-handler titles to not duplicate them
     if actions.count == 1, var action = actions.first, let suggestedTitle = segment.bookingTitle {
       action.title = suggestedTitle
+      action.accessibilityLabel = segment.bookingAccessibilityLabel ?? suggestedTitle
       return [action]
     } else {
       return actions
@@ -148,7 +150,13 @@ fileprivate extension TKInterAppExternalActionHandler {
   func handledAction(outOf actions: [TKInterAppIdentifier]) -> TKInterAppCommunicator.ExternalAction? {
     guard let action = actions.first(where: canHandle) else { return nil }
     let title = self.title(for: action)
-    return TKInterAppCommunicator.ExternalAction(action: action, title: title, type: type, handler: self)
+    return TKInterAppCommunicator.ExternalAction(
+      action: action,
+      title: title,
+      accessibilityLabel: title,
+      type: type,
+      handler: self
+    )
   }
   
 }

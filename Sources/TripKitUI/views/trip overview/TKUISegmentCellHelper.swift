@@ -25,11 +25,13 @@ enum TKUISegmentCellHelper {
     // button.setImage(action.icon, for: .normal)
 
     button.setTitle(action.title, for: .normal)
+    button.accessibilityLabel = action.accessibilityLabel
     button.rx.tap
       .subscribe(onNext: { [unowned card] in
         let update = action.handler(action, card, model, button)
         if update {
           button.setTitle(action.title, for: .normal)
+          button.accessibilityLabel = action.accessibilityLabel
         }
       })
       .disposed(by: disposeBag)
