@@ -74,8 +74,8 @@ fileprivate extension TKRegionManager {
       color: color(forModeIdentifier: modeIdentifier),
       localImageName: localImageName,
       remoteImageName: remoteImageName(forModeIdentifier: modeIdentifier),
-      remoteImageIsTemplate: false,
-      remoteImageIsBranding: true
+      remoteImageIsTemplate: remoteImageIsTemplate(forModeIdentifier: modeIdentifier),
+      remoteImageIsBranding: remoteImageIsBranding(forModeIdentifier: modeIdentifier)
     )
 
   }

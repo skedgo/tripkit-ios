@@ -26,6 +26,10 @@ public protocol TKUIModePickerItem: Hashable {
   
   /// Whether `imageURL` points at an image that can be used in template mode
   var imageURLIsTemplate: Bool { get }
+  
+  /// Whether `imageURL` points at a branding image.
+  var imageURLIsBranding: Bool { get }
+  
 }
 
 // MARK: -
@@ -487,12 +491,12 @@ extension TKUIModePicker {
     
     style(pickerCell: pickerCell, asSelected: selected)
     
-    if let remoteImageURL = item.imageURL {
+    if let remoteImageURL = item.imageURL, item.imageURLIsBranding {
       pickerCell.rightImageView.setImage(with: remoteImageURL)
       pickerCell.leftImageView.image = item.image
       pickerCell.hideRightImage(false)
     } else {
-      pickerCell.leftImageView.image = item.image
+      pickerCell.leftImageView.setImage(with: item.imageURL, asTemplate: item.imageURLIsTemplate, placeholder: item.image, completion: nil)
       pickerCell.hideRightImage(true)
     }
     
