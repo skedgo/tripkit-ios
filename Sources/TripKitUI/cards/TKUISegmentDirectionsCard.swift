@@ -51,11 +51,6 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     titleView.applyStyleToCloseButton(style)
   }
   
-  required init?(coder: NSCoder) {
-    // LATER: Implement to support state-restoration
-    return nil
-  }
-  
   override public func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
 

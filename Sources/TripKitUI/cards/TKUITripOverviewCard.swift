@@ -33,10 +33,6 @@ class TKUITripsPageCard: TGPageCard {
     super.init(cards: cards, initialPage: index, includeHeader: false)
   }
   
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-  }
-  
 }
 
 public class TKUITripOverviewCard: TKUITableCard {
@@ -77,38 +73,7 @@ public class TKUITripOverviewCard: TKUITableCard {
     
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
     super.init(title: Loc.Trip(index: index.map { $0 + 1 }), mapManager: mapManager)
-    didInit()
-  }
-  
-  public required convenience init?(coder: NSCoder) {
-    guard
-      let data = coder.decodeObject(forKey: "viewModel") as? Data,
-      let trip = TKUITripOverviewViewModel.restore(from: data)
-      else {
-        return nil
-    }
-    
-    let index = coder.containsValue(forKey: "index")
-      ? coder.decodeInteger(forKey: "index")
-      : nil
-    
-    self.init(trip: trip, index: index)
-    didInit()
 
-    zoomToTrip = true
-  }
-  
-  public override func encode(with aCoder: NSCoder) {
-    if let trip = tripMapManager?.trip {
-      aCoder.encode(TKUITripOverviewViewModel.save(trip: trip), forKey: "viewModel")
-    }
-
-    if let index = index {
-      aCoder.encode(index, forKey: "index")
-    }
-  }
-  
-  private func didInit() {
     if let knownMapManager = mapManager as? TKUIMapManager {
       knownMapManager.attributionDisplayer = { [weak self] sources, sender in
         let displayer = TKUIAttributionTableViewController(attributions: sources)
