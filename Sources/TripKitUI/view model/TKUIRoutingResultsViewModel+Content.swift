@@ -135,11 +135,15 @@ extension TKUIRoutingResultsViewModel {
       let action: SectionAction?
       if let primaryAction = TKUIRoutingResultsCard.config.tripGroupActionFactory?(group) {
         show = items
-        action = (title: primaryAction.title, payload: .trigger(primaryAction, group))
+        action = (
+          title: primaryAction.title,
+          accessibilityLabel: primaryAction.accessibilityLabel,
+          payload: .trigger(primaryAction, group)
+        )
       
       } else if items.count > 2, expand == group {
         show = items
-        action = (title: Loc.Less, payload: .collapse)
+        action = (title: Loc.Less, accessibilityLabel: nil, payload: .collapse)
       
       } else if items.count > 2 {
         let good = items
@@ -150,7 +154,7 @@ extension TKUIRoutingResultsViewModel {
         } else {
           show = Array(good.prefix(2))
         }
-        action = (title: Loc.More, payload: .expand(group))
+        action = (title: Loc.More, accessibilityLabel: nil, payload: .expand(group))
 
       } else {
         show = items
@@ -229,7 +233,7 @@ extension TKUIRoutingResultsViewModel {
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
   }
   
-  typealias SectionAction = (title: String, payload: ActionPayload)
+  typealias SectionAction = (title: String, accessibilityLabel: String?, payload: ActionPayload)
   
   /// A section on the results screen, which consists of various sorted items
   struct Section {

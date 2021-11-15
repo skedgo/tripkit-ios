@@ -21,18 +21,23 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
   
   public init(
     title: String,
+    accessibilityLabel: String? = nil,
     icon: UIImage,
     style: TKUICardActionStyle = .normal,
     handler: @escaping (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
   ) {
     self.title = title
+    self.accessibilityLabel = accessibilityLabel ?? title
     self.icon = icon
     self.style = style
     self.handler = handler
   }
   
-  /// Title (and accessory label) of the button
+  /// Title of the button
   open var title: String
+  
+  /// Accessibility label to use for the button
+  open var accessibilityLabel: String
   
   /// Icon to display as the action. Should be a template image.
   open var icon: UIImage
