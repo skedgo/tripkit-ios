@@ -39,8 +39,10 @@ public struct TKUIRoutingResultsMapRouteItem {
 }
 
 public protocol TKUIRoutingResultsMapManagerType: TGCompatibleMapManager {
+  @MainActor
   var droppedPin: Signal<CLLocationCoordinate2D> { get }
   
+  @MainActor
   var selectedMapRoute: Signal<TKUIRoutingResultsMapRouteItem> { get }
 }
 

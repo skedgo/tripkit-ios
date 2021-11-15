@@ -4834,7 +4834,7 @@
 			repositoryURL = "https://github.com/skedgo/TGCardViewController.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */ = {
@@ -4842,7 +4842,7 @@
 			repositoryURL = "https://github.com/DataDog/dd-sdk-swift-testing";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.4;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

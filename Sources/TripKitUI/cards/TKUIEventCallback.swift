@@ -52,6 +52,6 @@ public struct TKUIEventCallback {
   
   
   /// Set this global handler to be notified of any events that the user undertakes.
-  public static var handler: (Event) -> Void = { _ in }
+  public static var handler: @MainActor (Event) -> Void = { _ in }
   
 }

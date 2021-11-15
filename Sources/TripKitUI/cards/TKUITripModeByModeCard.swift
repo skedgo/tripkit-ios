@@ -225,7 +225,10 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   deinit {
-    TKUITripModeByModeCard.config.builder.cleanUp(existingCards: self.cards)
+    let cards = self.cards
+    DispatchQueue.main.async {
+      TKUITripModeByModeCard.config.builder.cleanUp(existingCards: cards)
+    }
   }
   
 }

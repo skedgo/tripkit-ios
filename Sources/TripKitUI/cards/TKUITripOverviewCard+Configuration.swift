@@ -32,7 +32,7 @@ public extension TKUITripOverviewCard {
     /// example, use this to present a detailed view of the segment.
     ///
     /// By default pushes a `TKUITripModeByModeCard` starting on this segment
-    public var presentSegmentHandler: ((TKUITripOverviewCard, TKSegment) -> Void)? = { card, segment in
+    public var presentSegmentHandler: (@MainActor (TKUITripOverviewCard, TKSegment) -> Void)? = { card, segment in
       guard let mapManager = card.mapManager as? TKUITripMapManager else {
         assertionFailure(); return
       }
@@ -46,7 +46,9 @@ public extension TKUITripOverviewCard {
     /// MapKit.
     ///
     /// Defaults to using `TKUITripMapManager`.
-    public var mapManagerFactory: ((Trip) -> TKUITripMapManagerType) = TKUITripMapManager.init
+    public var mapManagerFactory: (@MainActor (Trip) -> TKUITripMapManagerType) = {
+      TKUITripMapManager(trip: $0)
+    }
     
     
     // MARK: - Customising trip actions
