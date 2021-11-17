@@ -48,7 +48,14 @@ extension TKLocationManager {
       return .authorized
     }
     
-    switch CLLocationManager.authorizationStatus() {
+    let status: CLAuthorizationStatus
+    if #available(macOS 11.0, iOS 14.0, *) {
+      status = CLLocationManager().authorizationStatus
+    } else {
+      status = CLLocationManager.authorizationStatus()
+    }
+    
+    switch status {
     case .authorizedAlways, .authorizedWhenInUse: return .authorized
     case .denied: return .denied
     case .restricted: return .restricted

@@ -63,10 +63,6 @@ open class TKUIHomeCard: TKUITableCard {
     topMapToolBarItems = Self.config.topMapToolbarItems
   }
   
-  required convenience public init?(coder: NSCoder) {
-    self.init()
-  }
-  
   // MARK: - TGCard overrides
   
   open override func didBuild(tableView: UITableView) {

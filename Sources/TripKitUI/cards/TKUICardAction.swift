@@ -24,7 +24,7 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
     accessibilityLabel: String? = nil,
     icon: UIImage,
     style: TKUICardActionStyle = .normal,
-    handler: @escaping (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
+    handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
   ) {
     self.title = title
     self.accessibilityLabel = accessibilityLabel ?? title
@@ -50,5 +50,5 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
   /// Parameters are the card, the model instance, and the sender
-  public let handler: (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
+  public let handler: @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
 }

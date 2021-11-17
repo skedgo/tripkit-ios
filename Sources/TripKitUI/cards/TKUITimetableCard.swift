@@ -21,6 +21,7 @@ public typealias TKUIDeparturesCard = TKUITimetableCard
 @available(*, unavailable, renamed: "TKUITimetableCardDelegate")
 public typealias TKUIDeparturesCardDelegate = TKUITimetableCardDelegate
 
+@MainActor
 public protocol TKUITimetableCardDelegate: AnyObject {
   
   func timetableCard(_ card: TKUITimetableCard, selectedDeparture: StopVisits)
@@ -122,20 +123,7 @@ public class TKUITimetableCard : TKUITableCard {
     super.init(title: title, mapManager: mapManager, initialPosition: .extended)
     didInit()
   }
-  
-  required public init?(coder: NSCoder) {
-    guard
-      let data = coder.decodeData(),
-      let restoredState = TKUITimetableViewModel.restoredState(from: data)
-      else {
-        return nil
-    }
-    
-    self.input = .restored(restoredState)
-    super.init(title: .default(Loc.Timetable, nil, accessoryView), mapManager: nil, initialPosition: .extended)
-    didInit()
-  }
-  
+
   private func didInit() {
     // Don't de-select as we use a custom style and want to keep highlighting
     // the selected departure
@@ -153,14 +141,7 @@ public class TKUITimetableCard : TKUITableCard {
       }
     }
   }
-  
-  override public func encode(with aCoder: NSCoder) {
-    guard let data = try? viewModel.save() else { return }
-    aCoder.encode(data)
     
-    // Not keeping around reused map manager, as that's complicated
-  }
-  
   // MARK: - Public methods
   
   public func visibleDepartures() -> [StopVisits] {

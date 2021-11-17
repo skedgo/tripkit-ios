@@ -135,15 +135,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     didInit()
   }
   
-  public required convenience init?(coder: NSCoder) {
-    guard
-      let data = coder.decodeObject(forKey: "viewModel") as? Data,
-      let request = TKUIRoutingResultsViewModel.restore(from: data)
-      else { return nil }
-    
-    self.init(request: request)
-  }
-  
   private func didInit() {
     // Don't de-select as we use a custom style and want to keep highlighting
     // the best trip (as it's also highlighted on the map still).
@@ -163,10 +154,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
         self?.controller?.present(displayer, inNavigator: true, preferredStyle: .popover, sender: sender)
       }
     }
-  }
-  
-  public override func encode(with aCoder: NSCoder) {
-    aCoder.encode(TKUIRoutingResultsViewModel.save(request: request), forKey: "viewModel")
   }
   
   override public func didBuild(tableView: UITableView, cardView: TGCardView) {
