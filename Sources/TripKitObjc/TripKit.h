@@ -43,8 +43,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKLocationHelper.h"
 #import "TKStyleManager.h"
 #import "TKSettings.h"
-#import "TKVehicular.h"
-#import "TKVehicleType.h"
 
 // Permissions
 #import "TKLocationManager.h"

@@ -8,34 +8,39 @@
 
 import Foundation
 
-/// :nodoc:
-@objc(TKVehicularHelper)
-public class _TKVehicularHelper: NSObject {
+public enum TKVehicleType: Int {
   
-  private override init() {
-    super.init()
-  }
+  case unknown = 0
+  case bicycle = 1
+  case car = 2
+  case motorbike = 3
+  case SUV = 4
   
-  @objc(iconForVehicle:)
-  public static func _icon(for vehicle: TKVehicular) -> TKImage? {
-    return vehicle.icon
-  }
-  
-  @objc(titleForVehicle:)
-  public static func _title(for vehicle: TKVehicular) -> String? {
-    return vehicle.title
-  }
-
-  @objc(stringForVehicleType:)
-  public static func _title(for vehicleType: TKVehicleType) -> String? {
-    return vehicleType.title
-  }
 }
+
+public protocol TKVehicular {
+  
+  /// Optional name to use in the UI to refer to this vehicle.
+  var name: String? { get }
+   
+  /// What kind of vehicle it is. Required field.
+  var vehicleType: TKVehicleType { get }
+  
+  /// Where this vehicle is garaged. Can be `nil` but the algorithms won't try to
+  /// take it back to the garage then.
+  /// - note: `nil` is the same as getting a lift with someone
+  var garage: MKAnnotation? { get }
+  
+  /// The unique identifier that identifies this vehicle.
+  /// - note: Getting a lift instances don't have a UUID
+  var vehicleID: UUID? { get }
+}
+
 
 extension TKVehicular {
   
   public var isCarPooling: Bool {
-    garage?() == nil
+    garage == nil
   }
   
   public var icon: TKImage? {
@@ -43,7 +48,7 @@ extension TKVehicular {
       return TKStyleManager.image(named: "icon-mode-car-pool")
     }
     
-    switch vehicleType() {
+    switch vehicleType {
     case .bicycle:
       return TKStyleManager.image(named: "icon-mode-bicycle")
       
@@ -63,10 +68,10 @@ extension TKVehicular {
       return NSLocalizedString("Getting a lift", tableName: "Shared", bundle: .tripKit, comment: "Name for a segment or vehicle where you get a lift from someone.")
     }
     
-    if let name = name(), !name.isEmpty {
+    if let name = name, !name.isEmpty {
       return name
     } else {
-      return vehicleType().title
+      return vehicleType.title
     }
   }
   

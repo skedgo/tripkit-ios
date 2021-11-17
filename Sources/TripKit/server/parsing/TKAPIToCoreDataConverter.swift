@@ -480,7 +480,7 @@ extension Vehicle {
 extension TKVehicular {
   
   private var privateVehicleType: TKAPI.PrivateVehicleType {
-    switch vehicleType() {
+    switch vehicleType {
     case .bicycle: return .bicycle
     case .motorbike: return .motorbike
     case .SUV: return .SUV
@@ -491,9 +491,9 @@ extension TKVehicular {
   public func toModel() -> TKAPI.PrivateVehicle {
     return TKAPI.PrivateVehicle(
       type: privateVehicleType,
-      UUID: vehicleUUID?() ?? nil,
-      name: name(),
-      garage: TKAPI.Location(annotation: garage?())
+      UUID: vehicleID?.uuidString,
+      name: name,
+      garage: TKAPI.Location(annotation: garage)
     )
   }
 }
@@ -506,7 +506,6 @@ extension TKAPIToCoreDataConverter {
   }
 
   
-  @objc(vehiclesPayloadForVehicles:)
   public static func vehiclesPayload(for vehicles: [TKVehicular]) -> [[String: Any]] {
     let model = vehiclesModel(for: vehicles)
     do {

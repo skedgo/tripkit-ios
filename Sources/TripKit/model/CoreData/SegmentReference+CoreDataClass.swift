@@ -33,12 +33,12 @@ extension SegmentReference {
   }
   
   func assign(_ vehicle: TKVehicular?) {
-    vehicleUUID = vehicle?.vehicleUUID?()
+    vehicleUUID = vehicle?.vehicleID?.uuidString
   }
   
   func findVehicle(all: [TKVehicular]) -> TKVehicular? {
     guard let uuid = vehicleUUID else { return nil }
-    return all.first { $0.vehicleUUID?() == uuid }
+    return all.first { $0.vehicleID?.uuidString == uuid }
   }
 
   

@@ -308,11 +308,11 @@ extension Trip {
   public var usedPrivateVehicleType: TKVehicleType {
     for segment in segments {
       let vehicleType = segment.privateVehicleType
-      if vehicleType != .none {
+      if vehicleType != .unknown {
         return vehicleType
       }
     }
-    return .none
+    return .unknown
   }
   
   /// - Parameter vehicle: The vehicle to assign this trip to. `nil` to reset to a generic vehicle.

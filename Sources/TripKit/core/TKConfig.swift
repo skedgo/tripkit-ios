@@ -18,6 +18,10 @@ extension TKConfig {
 
 extension TKConfig {
 
+  public var appGroupName: String? {
+    configuration["AppGroupName"] as? String
+  }
+  
   @objc
   public var appURLScheme: String? {
     return configuration["URLScheme"] as? String

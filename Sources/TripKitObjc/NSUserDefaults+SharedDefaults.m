@@ -23,7 +23,7 @@
   static dispatch_once_t onceToken;
   
   dispatch_once(&onceToken, ^{
-    _sharedDefaults = [[self alloc] initWithSuiteName:[[TKConfig sharedInstance] appGroupName]];
+    _sharedDefaults = [[self alloc] initWithSuiteName:[[TKConfig sharedInstance] configuration][@"AppGroupName"]];
   });
   
   return _sharedDefaults;
