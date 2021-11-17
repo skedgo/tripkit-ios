@@ -128,7 +128,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
     mapView.addGestureRecognizer(tapRecognizer)
     tapRecognizer.rx.event
       .filter { $0.state == .ended }
-      .compactMap(closestAnnotation)
+      .compactMap { [weak self] in self?.closestAnnotation(to: $0) }
       .bind(to: mapSelectionPublisher)
       .disposed(by: disposeBag)    
   }
@@ -192,6 +192,7 @@ extension TKUINearbyMapManager {
 // MARK: Search result
 
 extension Reactive where Base: TKUINearbyMapManager {
+  @MainActor
   var searchResult: Binder<MKAnnotation?> {
     return Binder(self.base) { mapManager, annotation in
       mapManager.searchResult = annotation

@@ -69,7 +69,7 @@ open class TKUIMapManager: TGMapManager {
   
   /// A factory that all map managers will use as for the default annotations.
   ///
-  /// @default: TKUIAnnotationViewBuilder
+  /// - default: TKUIAnnotationViewBuilder
   public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKUIAnnotationViewBuilder) = TKUIAnnotationViewBuilder.init
   
   static var tileOverlays: [String: MKTileOverlay] = [:]

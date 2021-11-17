@@ -19,7 +19,7 @@ public protocol TKUITripModeByModePageBuilder {
   ///   - segment: A segment to display in the mode-by-mode pager
   ///   - mapManager: The mode-by-mode pager's map manager
   /// - Returns: The cards to use for the provided segment, can be empty
-  func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)]
+  @MainActor func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)]
   
   /// Each segment should have an identifier that changes whenever the card's configuration
   /// changes for this segment. If you return a new identifier for the same segment, the mode-by-mode
@@ -37,7 +37,7 @@ public protocol TKUITripModeByModePageBuilder {
   /// This provides a compatible mode by mode builder a chance to perform any
   /// clean up tasks before a mode by mode card is disposed.
   /// - Parameter cards: An array of cards currently displayed in the mode by mode card
-  func cleanUp(existingCards: [TGCard])
+  @MainActor func cleanUp(existingCards: [TGCard])
 }
 
 // MARK: - Default MxM page builder

@@ -17,6 +17,7 @@ import TripKit
 
 /// This protocol defines the requirements for any map managers that want
 /// to take control of the map in a `TKUIHomeCard`
+@MainActor
 public protocol TKUICompatibleHomeMapManager: TGCompatibleMapManager {
   
   /// This returns an observable sequence that emits an element whenever an

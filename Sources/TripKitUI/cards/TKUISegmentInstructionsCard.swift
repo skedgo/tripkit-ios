@@ -41,11 +41,6 @@ public class TKUISegmentInstructionCard: TGPlainCard {
     titleView.applyStyleToCloseButton(style)
   }
   
-  required init?(coder: NSCoder) {
-    // LATER: Implement to support state-restoration
-    return nil
-  }
-  
   public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     

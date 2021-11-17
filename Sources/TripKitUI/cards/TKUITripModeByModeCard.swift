@@ -164,11 +164,6 @@ public class TKUITripModeByModeCard: TGPageCard {
     try! self.init(startingOn: first, initialPosition: initialPosition)
   }
   
-  required init?(coder: NSCoder) {
-    // Implement this to support state-restoration
-    return nil
-  }
-  
   public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
     
@@ -225,7 +220,10 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   deinit {
-    TKUITripModeByModeCard.config.builder.cleanUp(existingCards: self.cards)
+    let cards = self.cards
+    DispatchQueue.main.async {
+      TKUITripModeByModeCard.config.builder.cleanUp(existingCards: cards)
+    }
   }
   
 }

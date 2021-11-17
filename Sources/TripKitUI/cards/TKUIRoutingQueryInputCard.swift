@@ -43,10 +43,6 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     super.init(title: .custom(titleView, dismissButton: titleView.closeButton))
   }
   
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
   override public func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
     

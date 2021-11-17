@@ -89,10 +89,6 @@ public class TKUIServiceCard: TKUITableCard {
     didInit()
   }
   
-  required convenience public init?(coder: NSCoder) {
-    return nil // not supported
-  }
-  
   private func didInit() {
     switch self.title {
     case .custom(_, let dismissButton):
