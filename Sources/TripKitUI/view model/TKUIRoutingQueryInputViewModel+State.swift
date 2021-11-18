@@ -26,7 +26,9 @@ extension TKUIRoutingQueryInputViewModel {
     var originText: String
     var destination: MKAnnotation?
     var destinationText: String
-    var mode: TKUIRoutingResultsViewModel.SearchMode
+    
+    /// `nil` means: Done, select "Route"
+    var mode: TKUIRoutingResultsViewModel.SearchMode?
   }
 
   static func buildState(origin: MKAnnotation, destination: MKAnnotation?, startMode: TKUIRoutingResultsViewModel.SearchMode?, inputs: UIInput, selection: Signal<MKAnnotation>) -> Observable<State> {
@@ -46,7 +48,7 @@ extension TKUIRoutingQueryInputViewModel {
       mode: startMode ?? .destination
     )
     
-    return userActions
+    let state: Observable<State> = userActions
       .scan(into: initialState) { state, action in
         switch (action, state.mode) {
         case (.typeText(let text), .origin):
@@ -76,12 +78,12 @@ extension TKUIRoutingQueryInputViewModel {
         case (.selectResult(let selection), .origin):
           state.origin = selection
           state.originText = (selection.title ?? nil) ?? ""
-          state.mode = .destination
+          state.mode = state.destination == nil ? .destination : nil
         
         case (.selectResult(let selection), .destination):
           state.destination = selection
           state.destinationText = (selection.title ?? nil) ?? ""
-          state.mode = .origin
+          state.mode = state.origin == nil ? .origin : nil
 
         case (.selectMode(let mode), _):
           state.mode = mode
@@ -89,9 +91,14 @@ extension TKUIRoutingQueryInputViewModel {
         case (.swap, _):
           (state.origin, state.destination) = (state.destination, state.origin)
           (state.originText, state.destinationText) = (state.destinationText, state.originText)
+          
+        case (_, .none):
+          break // No need to update
         }
       }
       .startWith(initialState)
+    
+    return state
   }
   
 }
