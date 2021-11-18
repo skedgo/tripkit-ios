@@ -18,6 +18,8 @@ open class TKUISheet: UIView {
 
   public var isBeingOverlaid: Bool { overlay != nil }
   
+  private var originalAccessibilityElements: [Any]? = nil
+  
   public override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -48,6 +50,9 @@ open class TKUISheet: UIView {
     view.addSubview(self)
     view.insertSubview(overlay, belowSubview: self)
     
+    originalAccessibilityElements = view.accessibilityElements
+    view.accessibilityElements = [self]
+    
     // animate it in
     UIView.animate(withDuration: 0.25) {
       overlay.alpha = 1
@@ -65,10 +70,8 @@ open class TKUISheet: UIView {
     let tapper = UITapGestureRecognizer(target: self, action: #selector(tappedOverlay(_:)))
     overlay.addGestureRecognizer(tapper)
     
-    // allow accessibility interaction with overlay
-    overlay.isAccessibilityElement = true
-    overlay.accessibilityTraits = .button
-    overlay.accessibilityLabel = Loc.Dismiss
+    // don't interact with overlay (or what's below)
+    overlay.isAccessibilityElement = false
 
     return overlay
   }
@@ -79,7 +82,7 @@ open class TKUISheet: UIView {
   }
   
   public func removeOverlay(animated: Bool) {
-    guard let overlay = self.overlay else { return }
+    guard let overlay = self.overlay, let superview = overlay.superview else { return }
     
     if animated {
       UIView.animate(withDuration: 0.25) {
@@ -87,6 +90,9 @@ open class TKUISheet: UIView {
         self.frame.origin.y += self.frame.size.height
       } completion: { finished in
         if finished {
+          superview.accessibilityElements = self.originalAccessibilityElements
+          self.originalAccessibilityElements = nil
+
           overlay.removeFromSuperview()
           self.overlay = nil
           self.removeFromSuperview()
@@ -95,6 +101,9 @@ open class TKUISheet: UIView {
         }
       }
     } else {
+      superview.accessibilityElements = self.originalAccessibilityElements
+      self.originalAccessibilityElements = nil
+
       overlay.removeFromSuperview()
       self.overlay = nil
       self.removeFromSuperview()
