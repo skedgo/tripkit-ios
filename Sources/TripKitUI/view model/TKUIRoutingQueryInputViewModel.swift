@@ -22,6 +22,7 @@ class TKUIRoutingQueryInputViewModel {
   struct UIInput {
     let searchText: Observable<(String, forced: Bool)>
     let tappedRoute: Signal<Void>
+    var tappedKeyboardDone: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
     var selected: Signal<Item> = .empty()
     var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
     var tappedSwap: Signal<Void> = .empty()
