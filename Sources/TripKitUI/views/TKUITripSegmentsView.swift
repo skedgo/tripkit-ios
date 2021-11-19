@@ -349,8 +349,10 @@ public class TKUITripSegmentsView : UIView {
     
     self.segmentXValues = newSegmentXValues
     
-    self.accessibilityElements = accessibileElements
-    self.isAccessibilityElement = false
+    if segmentIndexToSelect != nil {
+      self.accessibilityElements = accessibileElements
+      self.isAccessibilityElement = false
+    }
   }
   
 }

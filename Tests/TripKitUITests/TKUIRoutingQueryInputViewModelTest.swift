@@ -132,12 +132,10 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     let results = run([
         .type("B"),
         .select("Bahia Blanca", index: 0),
-        .type("N"),
-        .select("Nuremberg", index: 0),
         .route
       ]).last
     
-    XCTAssertEqual(results, "✅ Nuremberg -- Bahia Blanca")
+    XCTAssertEqual(results, "✅ Current Location -- Bahia Blanca")
   }
   
   func testSwapping() throws {
@@ -210,7 +208,7 @@ extension TKUIRoutingQueryInputViewModelTest {
 
     let viewModel = TKUIRoutingQueryInputViewModel(inputs: TKUIRoutingQueryInputViewModel.UIInput(
       searchText: scheduler.createHotObservable(searches).asObservable(),
-      tappedDone: scheduler.createHotObservable(routes).asSignal(onErrorSignalWith: .empty()),
+      tappedRoute: scheduler.createHotObservable(routes).asSignal(onErrorSignalWith: .empty()),
       selected: scheduler.createHotObservable(selections).asSignal(onErrorSignalWith: .empty()),
       selectedSearchMode: scheduler.createHotObservable(modes).asSignal(onErrorSignalWith: .empty()),
       tappedSwap: scheduler.createHotObservable(swaps).asSignal(onErrorSignalWith: .empty())
@@ -257,7 +255,7 @@ fileprivate extension MKPointAnnotation {
 fileprivate extension TKUIRoutingQueryInputViewModel.UIInput {
   static let dummy = TKUIRoutingQueryInputViewModel.UIInput(
     searchText: .empty(),
-    tappedDone: .empty()
+    tappedRoute: .empty()
   )
 }
 

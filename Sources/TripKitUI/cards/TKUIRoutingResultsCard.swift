@@ -165,7 +165,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     let searchTriggers = Observable.merge([
         showSearch,
-        titleView?.locationTapped.asObservable().map { _ in }
+        titleView?.locationTapped.asObservable()
       ].compactMap { $0 }
     )
     
