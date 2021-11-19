@@ -132,12 +132,10 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
     let results = run([
         .type("B"),
         .select("Bahia Blanca", index: 0),
-        .type("N"),
-        .select("Nuremberg", index: 0),
         .route
       ]).last
     
-    XCTAssertEqual(results, "✅ Nuremberg -- Bahia Blanca")
+    XCTAssertEqual(results, "✅ Current Location -- Bahia Blanca")
   }
   
   func testSwapping() throws {
