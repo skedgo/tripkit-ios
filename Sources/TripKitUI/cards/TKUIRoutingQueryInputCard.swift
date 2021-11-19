@@ -82,7 +82,7 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
       startMode: startMode,
       inputs: TKUIRoutingQueryInputViewModel.UIInput(
         searchText: titleView.rx.searchText.map { ($0, forced: false) },
-        tappedDone: route,
+        tappedRoute: route,
         selected: selectedItem(in: tableView, dataSource: dataSource),
         selectedSearchMode: titleView.rx.selectedSearchMode,
         tappedSwap: titleView.swapButton.rx.tap.asSignal()
@@ -90,7 +90,9 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     )
     
     viewModel.activeMode
-      .drive(titleView.rx.searchMode)
+      .asObservable()
+      .observe(on: MainScheduler.asyncInstance) // Avoid reentrancy
+      .bind(to: titleView.rx.searchMode)
       .disposed(by: disposeBag)
     
     viewModel.originDestination
@@ -106,7 +108,7 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     // Only become first responder once we appeared and after a brief delay,
-    // as immediately on `didAppear` doesn't work in testing on iOS 13+14.
+    // as immediately on `didAppear` doesn't work in testing on iOS 13-15.
     didAppear
       .delay(.milliseconds(100), scheduler: MainScheduler.instance)
       .withLatestFrom(viewModel.activeMode)
@@ -143,6 +145,10 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     TKUIEventCallback.handler(.cardAppeared(self))
 
     self.didAppear.onNext(())
+  }
+  
+  public override var preferredView: UIView? {
+    nil // We'll manage this manually, by letting the search bar become first responder
   }
   
   public override var keyCommands: [UIKeyCommand]? {

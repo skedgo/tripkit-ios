@@ -21,6 +21,7 @@ class TKUIResultsTitleView: UIView {
   @IBOutlet weak var destinationLabel: UILabel!
   @IBOutlet weak var dismissButton: UIButton!
   
+  @IBOutlet private weak var fromToStack: UIStackView!
   @IBOutlet private weak var topLevelStack: UIStackView!
   @IBOutlet private weak var accessoryViewContainer: UIView!
   
@@ -28,8 +29,8 @@ class TKUIResultsTitleView: UIView {
   
   var enableTappingLocation: Bool = true
   
-  private let locationSearchPublisher = PublishSubject<TKUIRoutingResultsViewModel.SearchMode>()
-  var locationTapped: Signal<TKUIRoutingResultsViewModel.SearchMode> {
+  private let locationSearchPublisher = PublishSubject<Void>()
+  var locationTapped: Signal<Void> {
     return locationSearchPublisher.asSignal(onErrorSignalWith: .empty())
   }
   
@@ -74,17 +75,14 @@ class TKUIResultsTitleView: UIView {
     
     originLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     originLabel.textColor = .tkLabelSecondary
-    let originLabelTapper = UITapGestureRecognizer(target: self, action: #selector(originLabelTapped))
-    originLabelTapper.delegate = self
-    originLabel.isUserInteractionEnabled = true
-    originLabel.addGestureRecognizer(originLabelTapper)
     
     destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title3)
     destinationLabel.textColor = .tkLabelPrimary
-    let destinationTapper = UITapGestureRecognizer(target: self, action: #selector(destinationLabelTapped))
-    destinationTapper.delegate = self
-    destinationLabel.isUserInteractionEnabled = true
-    destinationLabel.addGestureRecognizer(destinationTapper)
+    
+    let fromToTapper = UITapGestureRecognizer(target: self, action: #selector(fromToTapped))
+    fromToTapper.delegate = self
+    fromToStack.isUserInteractionEnabled = true
+    fromToStack.addGestureRecognizer(fromToTapper)
     
     dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
     dismissButton.setTitle(nil, for: .normal)
@@ -113,19 +111,30 @@ class TKUIResultsTitleView: UIView {
     )
     
     originLabel.attributedText = attributedOrigin
+    
+    originLabel.isAccessibilityElement = false
+    destinationLabel.isAccessibilityElement = false
+    fromToStack.isAccessibilityElement = true
+    if destination != nil, origin != nil {
+      fromToStack.accessibilityLabel = originText + " - " + destinationText
+    } else if destination != nil {
+      fromToStack.accessibilityLabel = Loc.PlanTrip + " - " + destinationText
+    } else if origin != nil {
+      fromToStack.accessibilityLabel = Loc.PlanTrip + " - " + originText
+    } else {
+      fromToStack.accessibilityLabel = Loc.PlanTrip
+    }
+    fromToStack.accessibilityTraits = .button
+    
+    accessibilityElements = [
+      fromToStack, dismissButton, accessoryView
+    ].compactMap { $0 }
   }
   
   @objc @IBAction
-  private func originLabelTapped() {
+  private func fromToTapped() {
     guard enableTappingLocation else { return }
-    
-    locationSearchPublisher.onNext(.origin)
-  }
-  
-  @objc private func destinationLabelTapped() {
-    guard enableTappingLocation else { return }
-
-    locationSearchPublisher.onNext(.destination)
+    locationSearchPublisher.onNext(())
   }
   
 }

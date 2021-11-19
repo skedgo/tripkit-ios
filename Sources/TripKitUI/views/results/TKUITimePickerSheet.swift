@@ -211,7 +211,7 @@ public class TKUITimePickerSheet: TKUISheet {
       
       self.timeTypeSelector = selector
       self.doneSelector = doneSelector
-      self.accessibilityElements = [selector, timePicker, doneSelector]
+      self.accessibilityElements = [selector, timePicker, doneSelector].compactMap { $0 }
     }
     
     self.frame = .init(x: 0, y: 0, width: timePicker.frame.width, height: systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height)

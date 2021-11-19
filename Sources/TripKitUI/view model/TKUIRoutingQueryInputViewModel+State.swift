@@ -26,7 +26,14 @@ extension TKUIRoutingQueryInputViewModel {
     var originText: String
     var destination: MKAnnotation?
     var destinationText: String
-    var mode: TKUIRoutingResultsViewModel.SearchMode
+    
+    /// The active search mode, determines what field gets populated when selecting a
+    /// search result.
+    fileprivate var searchMode: TKUIRoutingResultsViewModel.SearchMode
+    
+    /// Which mode to switch to. Typically is same as `searchMode` but can switch to `nil`
+    /// when from and to are set and UI should select "Route"
+    var mode: TKUIRoutingResultsViewModel.SearchMode?
   }
 
   static func buildState(origin: MKAnnotation, destination: MKAnnotation?, startMode: TKUIRoutingResultsViewModel.SearchMode?, inputs: UIInput, selection: Signal<MKAnnotation>) -> Observable<State> {
@@ -43,12 +50,13 @@ extension TKUIRoutingQueryInputViewModel {
       originText: (origin.title ?? nil) ?? "",
       destination: destination,
       destinationText: (destination?.title ?? nil) ?? "",
+      searchMode: startMode ?? .destination,
       mode: startMode ?? .destination
     )
     
-    return userActions
+    let state: Observable<State> = userActions
       .scan(into: initialState) { state, action in
-        switch (action, state.mode) {
+        switch (action, state.searchMode) {
         case (.typeText(let text), .origin):
           // When we have a new search text, we also need to clear the
           // underlying annotation. Otherwise, the query will continue
@@ -76,14 +84,23 @@ extension TKUIRoutingQueryInputViewModel {
         case (.selectResult(let selection), .origin):
           state.origin = selection
           state.originText = (selection.title ?? nil) ?? ""
-          state.mode = .destination
+          
+          // Switch to destination if it's not set yet, otherwise stay on
+          // "origin" and indicate we're done.
+          state.searchMode = state.destination == nil ? .destination : .origin
+          state.mode = state.destination == nil ? .destination : nil
         
         case (.selectResult(let selection), .destination):
           state.destination = selection
           state.destinationText = (selection.title ?? nil) ?? ""
-          state.mode = .origin
+
+          // Switch to origin if it's not set yet, otherwise stay on
+          // "destination" and indicate we're done.
+          state.searchMode = state.origin == nil ? .origin : .destination
+          state.mode = state.origin == nil ? .origin : nil
 
         case (.selectMode(let mode), _):
+          state.searchMode = mode
           state.mode = mode
         
         case (.swap, _):
@@ -92,6 +109,8 @@ extension TKUIRoutingQueryInputViewModel {
         }
       }
       .startWith(initialState)
+    
+    return state
   }
   
 }
