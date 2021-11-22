@@ -67,10 +67,6 @@ extension TKUIModePickerLayoutHelper: UICollectionViewDelegate {
     delegate.selectedItem(at: indexPath, in: collectionView)
   }
   
-  func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-    TKLog.info("Picker", text: "did highlight")
-  }
-  
 }
 
 // MARK: - Layout
