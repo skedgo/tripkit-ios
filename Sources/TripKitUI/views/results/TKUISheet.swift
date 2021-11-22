@@ -20,6 +20,8 @@ open class TKUISheet: UIView {
   
   private var originalAccessibilityElements: [Any]? = nil
   
+  private var dismissHandler: (() -> Void)?
+  
   public override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -28,12 +30,14 @@ open class TKUISheet: UIView {
     super.init(coder: coder)
   }
   
-  public func showWithOverlay(in view: UIView, below: UIView? = nil, hiding: [UIView] = []) {
+  public func showWithOverlay(in view: UIView, below: UIView? = nil, hiding: [UIView] = [], onDismiss handler: (() -> Void)? = nil) {
     if let existing = view.subviews.compactMap({ $0 as? TKUISheet }).first {
       existing.removeOverlay(animated: false)
     }
     
     overlay?.removeFromSuperview()
+    
+    self.dismissHandler = handler
     
     // add a background
     let overlay = makeOverlay(view.bounds)
@@ -96,6 +100,7 @@ open class TKUISheet: UIView {
           overlay.removeFromSuperview()
           self.overlay = nil
           self.removeFromSuperview()
+          self.dismissHandler?()
         } else {
           overlay.alpha = 1
         }
@@ -107,6 +112,7 @@ open class TKUISheet: UIView {
       overlay.removeFromSuperview()
       self.overlay = nil
       self.removeFromSuperview()
+      dismissHandler?()
     }
   }
   
