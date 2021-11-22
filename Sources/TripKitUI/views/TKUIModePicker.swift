@@ -71,7 +71,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     
     // We need to give the collection view a height constraint, or
     // its content won't be loaded properly. This initial height is
-    // liely to be different than the parent view, so to avoid auto
+    // likely to be different than the parent view, so to avoid auto
     // layout warning, we reduce its priority.
     let heightConstraint = collectionView.heightAnchor.constraint(equalToConstant: 100)
     heightConstraint.priority = .init(rawValue: 999)
