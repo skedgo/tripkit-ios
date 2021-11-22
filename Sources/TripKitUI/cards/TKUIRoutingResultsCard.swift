@@ -156,6 +156,12 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     }
   }
   
+  public override var preferredView: UIView? {
+    // See if we have an overlay; if so, don't say we have a preferred view
+    // to not read out something from VoiceOver that has an overlay on top.
+    return findOverlay() != nil ? nil : titleView
+  }
+  
   override public func didBuild(tableView: UITableView, cardView: TGCardView) {
     super.didBuild(tableView: tableView, cardView: cardView)
     
@@ -701,6 +707,16 @@ extension TKUIRoutingResultsCard: TKUIRoutingQueryInputCardDelegate {
 // MARK: - Picking times
 
 private extension TKUIRoutingResultsCard {
+  
+  func findOverlay() -> UIView? {
+    if let presentee = controller?.presentedViewController {
+      return presentee.view
+    } else if let sheet = controller?.view.subviews.first(where: { $0 is TKUISheet }) {
+      return sheet
+    } else {
+      return nil
+    }
+  }
   
   func showTimePicker(time: TKUIRoutingResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
     guard let controller = controller else {
