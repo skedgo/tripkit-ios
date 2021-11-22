@@ -11,6 +11,7 @@ import Foundation
 import TripKit
 
 extension TKRegion.RoutingMode: TKUIModePickerItem {
-  public var imageURLIsTemplate: Bool { return remoteImageIsTemplate }
-  public var imageTextRepresentation: String { return title }
+  public var imageURLIsTemplate: Bool { remoteImageIsTemplate }
+  public var imageTextRepresentation: String { title }
+  public var imageURLIsBranding: Bool { remoteImageIsBranding }
 }

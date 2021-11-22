@@ -11,8 +11,9 @@ import Foundation
 import TripKit
 
 extension TKModeInfo: TKUIModePickerItem {
-  public var imageURLIsTemplate: Bool { return remoteImageIsTemplate }
-  public var imageTextRepresentation: String { return alt }
+  public var imageURLIsTemplate: Bool { remoteImageIsTemplate }
+  public var imageTextRepresentation: String { alt }
+  public var imageURLIsBranding: Bool { remoteImageIsBranding }
 }
 
 extension TKModeInfo: Comparable {

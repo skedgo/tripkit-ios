@@ -177,7 +177,9 @@ extension TKRegionManager {
     return response?.modes?[mode]?.isTemplate ?? false
   }
   
-
+  public func remoteImageIsBranding(forModeIdentifier mode: String) -> Bool {
+    return response?.modes?[mode]?.isBranding ?? false
+  }
 
   @objc(imageURLForModeIdentifier:ofIconType:)
   public func imageURL(forModeIdentifier mode: String?, iconType: TKStyleModeIconType) -> URL? {

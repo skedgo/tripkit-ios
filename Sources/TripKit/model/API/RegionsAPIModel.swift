@@ -26,6 +26,7 @@ extension TKAPI {
       case implies
       case icon
       case isTemplate
+      case isBranding
       case vehicleIcon
     }
     
@@ -37,6 +38,7 @@ extension TKAPI {
     let implies: [String]?
     let icon: String?
     let isTemplate: Bool?
+    let isBranding: Bool?
     let vehicleIcon: String?
     
     var color: TKColor {
