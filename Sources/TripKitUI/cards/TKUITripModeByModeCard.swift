@@ -283,6 +283,10 @@ extension TKUITripModeByModeCard {
     stack.axis = .vertical
     stack.distribution = .fill
     
+    if segments.count == 1 {
+      stack.accessibilityElements = []
+    }
+    
     return stack
   }
   

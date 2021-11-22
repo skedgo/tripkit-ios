@@ -57,7 +57,7 @@ open class TKUISheet: UIView {
     UIView.animate(withDuration: 0.25) {
       overlay.alpha = 1
       self.frame = endFrame
-      
+    } completion: { _ in
       UIAccessibility.post(notification: .screenChanged, argument: self)
     }
   }
