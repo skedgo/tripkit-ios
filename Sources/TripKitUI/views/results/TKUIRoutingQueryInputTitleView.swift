@@ -21,6 +21,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
   }
   
   @IBOutlet weak var closeButton: UIButton!
+  @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var routeButton: UIButton!
   
   @IBOutlet weak var fromSearchBar: UISearchBar!
@@ -49,7 +50,9 @@ class TKUIRoutingQueryInputTitleView: UIView {
     
     backgroundColor = .tkBackground
     
-    func style(_ searchBar: UISearchBar) {
+    titleLabel.text = Loc.ChangeRoute
+    
+    func style(_ searchBar: UISearchBar, label: String) {
       searchBar.backgroundImage = UIImage() // blank
       
       // Don't show search icon, i.e., the magnifying glass
@@ -57,14 +60,15 @@ class TKUIRoutingQueryInputTitleView: UIView {
       
       TKStyleManager.style(searchBar) { textField in
         // This is to remove the space occupied by the magnifying glass.
+        textField.accessibilityLabel = label
         textField.leftView = UIImageView()
         textField.tintColor = .tkLabelPrimary
         textField.textColor = .tkLabelPrimary
       }
     }
     
-    style(fromSearchBar)
-    style(toSearchBar)
+    style(fromSearchBar, label: Loc.StartLocation)
+    style(toSearchBar, label: Loc.EndLocation)
     fromSearchBar.placeholder = Loc.StartLocation
     fromSearchBar.enablesReturnKeyAutomatically = true
     toSearchBar.placeholder = Loc.EndLocation
@@ -87,15 +91,19 @@ class TKUIRoutingQueryInputTitleView: UIView {
     swapButton.addTarget(self, action: #selector(animateSwap), for: .touchUpInside)
     
     fromButton.rx.tap
-      .subscribe(onNext: { [weak self] _ in self?.switchMode.onNext(.origin)})
+      .subscribe(onNext: { [weak self] _ in self?.switchMode(to: .origin, updateResponder: true) })
       .disposed(by: disposeBag)
 
     toButton.rx.tap
-      .subscribe(onNext: { [weak self] _ in self?.switchMode.onNext(.destination)})
+      .subscribe(onNext: { [weak self] _ in self?.switchMode(to: .destination, updateResponder: true) })
       .disposed(by: disposeBag)
     
     fromSearchBar.delegate = self
     toSearchBar.delegate = self
+    
+    accessibilityElements = [
+      closeButton, titleLabel, routeButton, fromSearchBar, swapButton, toSearchBar
+    ].compactMap { $0 }
   }
   
   func setText(origin: String, destination: String) {
@@ -111,13 +119,38 @@ class TKUIRoutingQueryInputTitleView: UIView {
     }
   }
   
-  func becomeFirstResponder(mode: TKUIRoutingResultsViewModel.SearchMode) {
+  private func switchMode(to mode: TKUIRoutingResultsViewModel.SearchMode, updateResponder: Bool) {
+    /// Tell the VM (the confirmation of that will be that it'll update the dot colours
+    switchMode.onNext(mode)
+
+    if updateResponder {
+      becomeFirstResponder(mode: mode)
+    }
+  }
+  
+  func becomeFirstResponder(mode: TKUIRoutingResultsViewModel.SearchMode?) {
+    if let mode = mode {
+      focusOn(mode: mode)
+    } else {
+      routeButton.becomeFirstResponder()
+      UIAccessibility.post(notification: .layoutChanged, argument: routeButton)
+    }
+  }
+  
+  private func focusOn(mode: TKUIRoutingResultsViewModel.SearchMode) {
     guard
-      let searchBar = mode == .origin ? fromSearchBar : toSearchBar
+      let searchBar = mode == .origin ? fromSearchBar : toSearchBar,
+      !searchBar.isFirstResponder
       else { return }
     
     searchBar.becomeFirstResponder()
     searchBar.searchTextField.selectedTextRange = searchBar.searchTextField.textualRange
+    
+    // A bit of a hacky way to make sure that VoiceOver follows the first
+    // responder, which is preferred behaviour as otherwise it might stay
+    // on the owner's list of locations (which likely just changed, too).
+    // See https://redmine.buzzhives.com/issues/16010
+    UIAccessibility.post(notification: .layoutChanged, argument: searchBar)
   }
 
   override func resignFirstResponder() -> Bool {
@@ -138,8 +171,8 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
   
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     switch searchBar {
-    case fromSearchBar: switchMode.onNext(.origin)
-    case toSearchBar: switchMode.onNext(.destination)
+    case fromSearchBar: switchMode(to: .origin, updateResponder: false)
+    case toSearchBar: switchMode(to: .destination, updateResponder: false)
     default: assertionFailure()
     }
     
@@ -153,8 +186,8 @@ extension TKUIRoutingQueryInputTitleView: UISearchBarDelegate {
     // the text change was initiated from a search bar that does not match the
     // current search mode, see: https://redmine.buzzhives.com/issues/12017.
     switch searchBar {
-    case fromSearchBar: switchMode.onNext(.origin)
-    case toSearchBar: switchMode.onNext(.destination)
+    case fromSearchBar: switchMode(to: .origin, updateResponder: false)
+    case toSearchBar: switchMode(to: .destination, updateResponder: false)
     default: assertionFailure()
     }
     
@@ -221,10 +254,12 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
     }
   }
 
-  var searchMode: Binder<TKUIRoutingResultsViewModel.SearchMode> {
+  var searchMode: Binder<TKUIRoutingResultsViewModel.SearchMode?> {
     return Binder(self.base) { view, mode in
-      view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
-      view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
+      if let mode = mode {
+        view.fromButton.tintColor = mode == .origin ? .tkAppTintColor : .tkLabelSecondary
+        view.toButton.tintColor = mode == .destination ? .tkAppTintColor : .tkLabelSecondary
+      }
 
       if view.didAppear {
         view.becomeFirstResponder(mode: mode)

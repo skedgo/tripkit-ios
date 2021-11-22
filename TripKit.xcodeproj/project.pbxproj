@@ -2398,7 +2398,6 @@
 				3AFF275626C6975F007809CD /* alerts */,
 				3AFF278E26C6975F007809CD /* map annotations */,
 				3AFF276226C6975F007809CD /* results */,
-				3AFF275426C6975F007809CD /* routing input */,
 				3AFF274826C6975F007809CD /* segment cards */,
 				3AFF279D26C6975F007809CD /* timetable */,
 				3AFF277A26C6975F007809CD /* trip overview */,
@@ -2442,14 +2441,6 @@
 			path = "segment cards";
 			sourceTree = "<group>";
 		};
-		3AFF275426C6975F007809CD /* routing input */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF275526C6975F007809CD /* TKUIRoutingQueryInputTitleView.swift */,
-			);
-			path = "routing input";
-			sourceTree = "<group>";
-		};
 		3AFF275626C6975F007809CD /* alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -2479,6 +2470,7 @@
 				3AFF277026C6975F007809CD /* TKUIResultsSectionHeaderView.swift */,
 				3AFF276726C6975F007809CD /* TKUIResultsTitleView.swift */,
 				3AFF276D26C6975F007809CD /* TKUIResultsTitleView.xib */,
+				3AFF275526C6975F007809CD /* TKUIRoutingQueryInputTitleView.swift */,
 				3AFF276426C6975F007809CD /* TKUIRoutingQueryInputTitleView.xib */,
 				3AFF276F26C6975F007809CD /* TKUIRoutingSupportView.swift */,
 				3AFF276326C6975F007809CD /* TKUIRoutingSupportView.xib */,

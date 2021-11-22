@@ -69,6 +69,10 @@ extension Loc {
   @objc public static var Route: String {
     return NSLocalizedString("Route", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to plan a route")
   }
+  
+  public static var ChangeRoute: String {
+    return NSLocalizedString("Change Route", tableName: "TripKit", bundle: .tripKit, comment: "Title of page to change the from/to of the routing results")
+  }
 
   @objc public static var Trips: String {
     return NSLocalizedString("Trips", tableName: "TripKit", bundle: .tripKit, comment: "Title of page that shows routing results")

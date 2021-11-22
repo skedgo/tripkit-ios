@@ -21,7 +21,8 @@ class TKUIRoutingQueryInputViewModel {
 
   struct UIInput {
     let searchText: Observable<(String, forced: Bool)>
-    let tappedDone: Signal<Void>
+    let tappedRoute: Signal<Void>
+    var tappedKeyboardDone: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
     var selected: Signal<Item> = .empty()
     var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> = .empty()
     var tappedSwap: Signal<Void> = .empty()
@@ -63,14 +64,14 @@ class TKUIRoutingQueryInputViewModel {
       .map { $0.origin != nil && $0.destination != nil }
       .asDriver(onErrorJustReturn: false)
 
-    selections = inputs.tappedDone.asObservable()
+    selections = inputs.tappedRoute.asObservable()
       .withLatestFrom(state)
       .filter { $0.origin != nil && $0.destination != nil }
       .map { ($0.origin!, $0.destination!) }
       .asSignal(onErrorSignalWith: .empty())
 }
   
-  let activeMode: Driver<TKUIRoutingResultsViewModel.SearchMode>
+  let activeMode: Driver<TKUIRoutingResultsViewModel.SearchMode?>
   
   let originDestination: Driver<(origin: String, destination: String)>
   
