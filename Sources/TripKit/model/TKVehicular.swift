@@ -15,6 +15,7 @@ public enum TKVehicleType: Int {
   case car = 2
   case motorbike = 3
   case SUV = 4
+  case kickscooter = 5
   
 }
 
@@ -44,26 +45,21 @@ extension TKVehicular {
   }
   
   public var icon: TKImage? {
-    if isCarPooling {
-      return TKStyleManager.image(named: "icon-mode-car-pool")
+    guard !isCarPooling else {
+      return .iconModeCarPool
     }
     
     switch vehicleType {
-    case .bicycle:
-      return TKStyleManager.image(named: "icon-mode-bicycle")
-      
-    case .car, .SUV:
-      return TKStyleManager.image(named: "icon-mode-car")
-
-    case .motorbike:
-      return TKStyleManager.image(named: "icon-mode-motorbike")
-      
-    default:
-      return nil
+    case .bicycle:      return .iconModeBicycle
+    case .car,
+         .SUV:          return .iconModeCar
+    case .motorbike:    return .iconModeMotorbike
+    case .kickscooter:  return .iconModeKickscooter
+    case .unknown:      return nil
     }
   }
   
-  public var title: String? {
+  public var title: String {
     if isCarPooling {
       return NSLocalizedString("Getting a lift", tableName: "Shared", bundle: .tripKit, comment: "Name for a segment or vehicle where you get a lift from someone.")
     }
@@ -78,13 +74,14 @@ extension TKVehicular {
 }
 
 extension TKVehicleType {
-  public var title: String? {
+  public var title: String {
     switch self {
     case .bicycle: return Loc.VehicleTypeBicycle
     case .car: return Loc.VehicleTypeCar
     case .SUV: return Loc.VehicleTypeSUV
     case .motorbike: return Loc.VehicleTypeMotorbike
-    default: return nil
+    case .kickscooter: return Loc.VehicleTypeKickScooter
+    case .unknown: return Loc.Unknown
     }
   }
 }

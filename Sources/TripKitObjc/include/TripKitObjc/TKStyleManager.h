@@ -70,7 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (TKColor *)globalBarTintColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
 + (TKColor *)globalSecondaryBarTintColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
-+ (TKColor *)globalViewBackgroundColor DEPRECATED_MSG_ATTRIBUTE("Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI");
 
 @end
 
