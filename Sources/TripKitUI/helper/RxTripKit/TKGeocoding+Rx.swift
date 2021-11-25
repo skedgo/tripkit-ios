@@ -156,7 +156,7 @@ public extension Array where Element == TKAutocompleting {
 
 extension ObservableType {
 
-  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(250), fastSpots: Int = 2, comparer: @escaping (Self.Element, Self.Element) -> Bool) -> Observable<[Self.Element]>
+  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3, comparer: @escaping (Self.Element, Self.Element) -> Bool) -> Observable<[Self.Element]>
     where Collection.Element: Observable<[Self.Element]>, Element: Equatable {
 
       // Structure:
@@ -203,7 +203,7 @@ extension ObservableType {
       return Observable.amb([all, fastThenAll])
   }
   
-  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(250), fastSpots: Int = 2) -> Observable<[Element]>
+  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3) -> Observable<[Element]>
     where Collection.Element: Observable<[Element]>, Element: Comparable {
       return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <)
   }
