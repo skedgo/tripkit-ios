@@ -17,6 +17,12 @@ public class TKPeliasGeocoder: NSObject {
     super.init()
   }
   
+  private lazy var session: URLSession = {
+    var configuration = URLSessionConfiguration.default
+    configuration.timeoutIntervalForRequest = 5
+    return URLSession(configuration: configuration)
+  }()
+  
   private func hitSearch(_ components: URLComponents?, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     
     guard let url = components?.url else {
@@ -28,7 +34,12 @@ public class TKPeliasGeocoder: NSObject {
     var request = URLRequest(url: url)
     request.addValue(TKServer.shared.apiKey, forHTTPHeaderField: "X-TripGo-Key")
     
-    let dataTask = URLSession.shared.dataTask(with: request) { data, _, error in
+    let requestID = UUID()
+    TKLog.log("TKPeliasGeocoder", request: request, uuid: requestID)
+    
+    let dataTask = session.dataTask(with: request) { data, response, error in
+      TKLog.log("TKPeliasGeocoder", response: response, data: data, orError: error as NSError?, for: request, uuid: requestID)
+      
       if let error = error {
         completion(.failure(error))
       } else if let data = data {
