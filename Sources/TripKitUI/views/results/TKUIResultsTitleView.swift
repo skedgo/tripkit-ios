@@ -124,6 +124,7 @@ class TKUIResultsTitleView: UIView {
     } else {
       fromToStack.accessibilityLabel = Loc.PlanTrip
     }
+    fromToStack.accessibilityHint = Loc.TapToChangeStartAndEndLocations
     fromToStack.accessibilityTraits = .button
     
     accessibilityElements = [
