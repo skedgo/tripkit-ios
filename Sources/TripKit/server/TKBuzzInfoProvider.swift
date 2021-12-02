@@ -77,7 +77,7 @@ public enum TKBuzzInfoProvider {
       from: shapes,
       for: service,
       modeInfo: response.modeInfo,
-      clearRealTime: true // these are timetable times
+      clearRealTime: false // these are timetable times, so don't clear real-time
     )
     
     return true
