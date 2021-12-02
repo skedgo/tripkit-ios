@@ -36,6 +36,10 @@ extension StopVisits {
     @NSManaged public var regionDay: Date?
     @NSManaged public var searchString: String?
     @NSManaged public var service: Service!
+
+    @NSManaged public var startPlatform: String?
+    @NSManaged public var timetableStartPlatform: String?
+  
     @NSManaged public var shapes: Set<Shape>?
     @NSManaged public var stop: StopLocation!
 

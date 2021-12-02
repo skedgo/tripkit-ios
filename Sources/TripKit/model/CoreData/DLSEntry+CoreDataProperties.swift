@@ -25,4 +25,7 @@ extension DLSEntry {
   /// - See `StopVisits` superclass
   @NSManaged public var endStop: StopLocation
   
+  @NSManaged public var endPlatform: String?
+  @NSManaged public var timetableEndPlatform: String?
+  
 }

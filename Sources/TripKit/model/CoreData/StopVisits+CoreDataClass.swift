@@ -67,6 +67,10 @@ extension StopVisits {
     }
   }
   
+  public var departurePlatform: String? {
+    startPlatform?.trimmedNonEmpty ?? stop.shortName?.trimmedNonEmpty
+  }
+
   /// :nodoc:
   public var smsString: String? {
     guard let serviceId = service.shortIdentifier else {
@@ -144,8 +148,6 @@ extension StopVisits {
     
     return label
   }
-  
-
   
 }
 
