@@ -67,7 +67,7 @@ public class TKRealTimeFetcher {
     var keysToUpdateables: [String: Updateable] = [:]
     var context: NSManagedObjectContext? = nil
     for service in services {
-      guard !service.wantsRealTimeUpdates else { continue }
+      guard service.wantsRealTimeUpdates else { continue }
       context = context ?? service.managedObjectContext
       assert(context == service.managedObjectContext)
 
