@@ -68,4 +68,9 @@ extension DLSEntry {
       let arrival = maybeArrival else { return false }
     return wantsRealTimeUpdates(forStart: departure, end: arrival, forPreplanning: false)
   }
+  
+  public var arrivalPlatform: String? {
+    endPlatform?.trimmedNonEmpty ?? endStop.shortName?.trimmedNonEmpty
+  }
+
 }

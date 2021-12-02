@@ -47,20 +47,24 @@ extension TKAPI {
     @DefaultEmptyArray public var alertHashCodes: [Int]
     public let bicycleAccessible: Bool?
     public let wheelchairAccessible: Bool?
-    
-    // real-time information
-    public let realTimeStatus: RealTimeStatus?
-    @OptionalISO8601OrSecondsSince1970 public var realTimeDeparture: Date?
-    @OptionalISO8601OrSecondsSince1970 public var realTimeArrival: Date?
-    public let primaryVehicle: Vehicle?
-    @DefaultEmptyArray public var alternativeVehicles: [Vehicle]
 
     // static information about the departure
     public let frequency: Int?
     public let searchString: String?
     @OptionalISO8601OrSecondsSince1970 public var startTime: Date?
     @OptionalISO8601OrSecondsSince1970 public var endTime: Date?
+    public let timetableStartPlatform: String?
+    public let timetableEndPlatform: String?
     public let endStopCode: String?
+
+    // real-time information
+    public let realTimeStatus: RealTimeStatus?
+    @OptionalISO8601OrSecondsSince1970 public var realTimeDeparture: Date?
+    @OptionalISO8601OrSecondsSince1970 public var realTimeArrival: Date?
+    public let primaryVehicle: Vehicle?
+    @DefaultEmptyArray public var alternativeVehicles: [Vehicle]
+    public let startPlatform: String?
+    public let endPlatform: String?
     
     private enum CodingKeys: String, CodingKey {
       case serviceTripID
@@ -88,6 +92,10 @@ extension TKAPI {
       
       case startTime
       case endTime
+      case timetableStartPlatform
+      case timetableEndPlatform
+      case startPlatform
+      case endPlatform
       case endStopCode
     }
   }
