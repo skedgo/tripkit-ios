@@ -248,7 +248,7 @@ public final class TKRoutingParser {
         
         trip.departureTime = apiTrip.depart
         trip.arrivalTime = apiTrip.arrive
-        trip.hideExactTimes = apiTrip.hideExactTimes ?? false
+        trip.hideExactTimes = apiTrip.hideExactTimes
         trip.calculateDuration()
         
         trip.mainSegmentHashCode = Int32(apiTrip.mainSegmentHashCode)
