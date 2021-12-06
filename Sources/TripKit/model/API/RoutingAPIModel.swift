@@ -35,6 +35,7 @@ extension TKAPI {
   public struct Trip: Codable, Hashable {
     @ISO8601OrSecondsSince1970 public var depart: Date
     @ISO8601OrSecondsSince1970 public var arrive: Date
+    public let hideExactTimes: Bool?
     public let mainSegmentHashCode: Int
     public let segments: [SegmentReference]
     
