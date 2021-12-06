@@ -153,7 +153,7 @@ extension TKSegment: TKUISemaphoreDisplayable {
         return .headOnly
       }
     } else {
-      return .headWithTime(departureTime, timeZone, isRealTime: timesAreRealTime)
+      return trip.hideExactTimes ? .headOnly : .headWithTime(departureTime, timeZone, isRealTime: timesAreRealTime)
     }
   }
   
