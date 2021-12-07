@@ -33,9 +33,9 @@ extension Trip {
     
     let duration = arrival.durationSince(departure)
     
+    guard !hideExactTimes else { return (duration, "") }
+    
     if focusOnDuration {
-      guard !hideExactTimes else { return (duration, "") }
-      
       let subtitle: String
       if isArriveBefore {
         let timeText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
