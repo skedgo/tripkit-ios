@@ -244,6 +244,28 @@ extension TKUITripModeByModeCard {
   }
   
   private static func headerTimeText(for trip: Trip) -> String {
+    if trip.hideExactTimes {
+      return buildRequestedPickupOrDropoffTimeText(for: trip)
+    } else {
+      return buildDepartureAndArrivalTimeText(for: trip)
+    }
+  }
+  
+  private static func buildRequestedPickupOrDropoffTimeText(for trip: Trip) -> String {
+    switch trip.request.type {
+    case .leaveAfter:
+      let pickUpTime = TKStyleManager.timeString(trip.departureTime, for: trip.departureTimeZone)
+      return Loc.RequestedPickUpTime(pickUpTime)
+    case .arriveBefore:
+      let dropOffTime = TKStyleManager.timeString(trip.arrivalTime, for: trip.arrivalTimeZone ?? trip.departureTimeZone, relativeTo: trip.departureTimeZone)
+      return Loc.RequestedDropOffTime(dropOffTime)
+    default:
+      assertionFailure("Building requested pick up or drop off time for leave now type is unexpected!")
+      return ""
+    }
+  }
+  
+  private static func buildDepartureAndArrivalTimeText(for trip: Trip) -> String {
     let departure = TKStyleManager.timeString(trip.departureTime, for: trip.departureTimeZone)
     let arrival   = TKStyleManager.timeString(trip.arrivalTime, for: trip.arrivalTimeZone ?? trip.departureTimeZone, relativeTo: trip.departureTimeZone)
     return "\(departure) - \(arrival)"
