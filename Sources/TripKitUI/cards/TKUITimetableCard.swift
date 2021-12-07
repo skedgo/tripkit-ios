@@ -300,7 +300,7 @@ public class TKUITimetableCard : TKUITableCard {
       .take(1)
       .delay(.milliseconds(250), scheduler: MainScheduler.instance)
       .subscribe(onNext: { indexPath in
-        if tableView.numberOfSections > indexPath.section, tableView.numberOfRows(inSection: indexPath.section) > indexPath.row {
+        if indexPath.section < tableView.numberOfSections, indexPath.row < tableView.numberOfRows(inSection: indexPath.section) {
           tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         }
       })
