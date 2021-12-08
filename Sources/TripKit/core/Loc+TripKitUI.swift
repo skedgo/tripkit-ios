@@ -146,18 +146,6 @@ extension Loc {
   public static var BadgeRecommended: String {
     return NSLocalizedString("Recommended", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Recommended")
   }
-  
-  // MARK: - Mode by mode
-  
-  public static func RequestedPickUpTime(_ pickUpTime: String) -> String {
-    let format = NSLocalizedString("Requested pickup time: %@", tableName: "TripKit", bundle: .tripKit, comment: "")
-    return String(format: format, pickUpTime)
-  }
-  
-  public static func RequestedDropOffTime(_ dropOffTime: String) -> String {
-    let format = NSLocalizedString("Requested drop-off time: %@", tableName: "TripKit", bundle: .tripKit, comment: "")
-    return String(format: format, dropOffTime)
-  }
 
   
   // MARK: - Trip details
