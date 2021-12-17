@@ -15,12 +15,6 @@ public enum TKBooking {
     public let title: String
     public let subtitle: String?
     public let imageURL: URL?
-    
-    public init(title: String, subtitle: String?, imageURL: URL?) {
-      self.title = title
-      self.subtitle = subtitle
-      self.imageURL = imageURL
-    }
   }
 
   public struct Action: Codable, Hashable {
