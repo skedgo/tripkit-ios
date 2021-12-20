@@ -26,16 +26,6 @@ extension TKUITripCell {
       super.init()
     }
     
-    func timeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
-      
-      let titles = Trip.timeTitles(departure: departure, arrival: arrival, departureTimeZone: departureTimeZone, arrivalTimeZone: arrivalTimeZone, focusOnDuration: focusOnDuration, isArriveBefore: isArriveBefore)
-      
-      let attributed = NSMutableAttributedString()
-      append(titles.title, to: attributed, isPrimary: true)
-      append(" (\(titles.subtitle))", to: attributed, isPrimary: false)
-      return attributed
-    }
-    
     func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
       let attributes = [
         NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .body),

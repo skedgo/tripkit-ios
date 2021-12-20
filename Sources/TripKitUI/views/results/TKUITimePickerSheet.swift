@@ -21,14 +21,24 @@ public protocol TKUITimePickerSheetDelegate: AnyObject {
 
 public class TKUITimePickerSheet: TKUISheet {
   
-  public struct ToolBarElement {
-    let toolbarItem: UIBarButtonItem
-    let handler: (Date) -> Void
-    
-    public init(toolbarItem: UIBarButtonItem, handler: @escaping (Date) -> Void) {
-      self.toolbarItem = toolbarItem
-      self.handler = handler
+  public struct ToolbarBuilder {
+    /// Builder for custom toolbar elements
+    /// - Parameters:
+    ///   - elements: Closure that returns the elements to go into the toolbar, i.e., above the time picker.
+    ///   - accessibilityElements: List of accessible elements in the order that they should be selected. Must include `.picker`!
+    public init(elements: [TKUITimePickerSheet.ToolbarElement], accessibilityElements: [TKUITimePickerSheet.ToolbarElement]) {
+      self.elements = elements
+      self.accessibilityElements = accessibilityElements
     }
+    
+    var elements: [ToolbarElement]
+    var accessibilityElements: [ToolbarElement]
+  }
+  
+  public enum ToolbarElement {
+    case button(title: String, tint: UIColor? = nil, handler: (Date) -> Void)
+    case spacer
+    case picker
   }
   
   fileprivate enum Mode {
@@ -96,15 +106,15 @@ public class TKUITimePickerSheet: TKUISheet {
   private weak var timeTypeSelector: UISegmentedControl!
   private weak var doneSelector: UISegmentedControl!
 
-  public convenience init(date: Date, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil, config: Configuration = .default) {
-    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone, toolBarElements: toolBarElements, config: config)
+  public convenience init(date: Date, timeZone: TimeZone, toolbarBuilder: ToolbarBuilder? = nil, config: Configuration = .default) {
+    self.init(date: date, showTime: false, mode: .date, timeZone: timeZone, toolbarBuilder: toolbarBuilder, config: config)
   }
   
-  public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil, config: Configuration = .default) {
-    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone, toolBarElements: toolBarElements, config: config)
+  public convenience init(time: Date, timeType: TKTimeType = .none, timeZone: TimeZone, toolbarBuilder: ToolbarBuilder? = nil, config: Configuration = .default) {
+    self.init(date: time, showTime: true, mode: timeType == .none ? .time : .timeWithType(timeType), timeZone: timeZone, toolbarBuilder: toolbarBuilder, config: config)
   }
   
-  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone, toolBarElements: [ToolBarElement]? = nil, config: Configuration) {
+  private init(date: Date, showTime: Bool, mode: Mode, timeZone: TimeZone, toolbarBuilder: ToolbarBuilder?, config: Configuration) {
     didSetTime = false
     self.mode = mode
     self.config = config
@@ -166,17 +176,44 @@ public class TKUITimePickerSheet: TKUISheet {
     ])
     
     // Use default time seletor if no custom tool bar items are provided.
-    if let toolbarElements = toolBarElements {
-      toolbar.items = toolbarElements.map { $0.toolbarItem }
-      toolbarElements.forEach { [weak self] element in
-        element.toolbarItem.rx.tap
-          .subscribe(onNext: { _ in
-            guard let self = self else { return }
-            self.removeOverlay(animated: true)
-            element.handler(self.timePicker.date)
-          })
-          .disposed(by: disposeBag)
+    if let builder = toolbarBuilder {
+      toolbar.items = builder.elements.compactMap { element -> UIBarButtonItem? in
+        switch element {
+        case let .button(title, tint, handler):
+          let selector = UISegmentedControl(items: [title])
+          selector.tintColor = tint
+          selector.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] _ in
+              guard let self = self else { return }
+              self.removeOverlay(animated: true)
+              handler(self.timePicker.date)
+            })
+            .disposed(by: disposeBag)
+          return .init(customView: selector)
+        
+        case .spacer:
+          return .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+          
+        case .picker:
+          return nil
+        }
       }
+      
+      self.accessibilityElements = builder.accessibilityElements.compactMap { element in
+        switch element {
+        case let .button(title, _, _):
+          return toolbar.items?
+            .compactMap { $0.customView as? UISegmentedControl }
+            .first { $0.titleForSegment(at: 0) == title }
+          
+        case .picker:
+          return timePicker
+          
+        case .spacer:
+          return nil
+        }
+      }
+      
     } else {
       let selector: UISegmentedControl! // as `timeTypeSelector` is weak
       switch mode {

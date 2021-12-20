@@ -25,6 +25,11 @@ extension Trip {
     set { set(.bookingWindowMissed, to: newValue) }
   }
   
+  public var hideExactTimes: Bool {
+    get { has(.hideExactTimes) }
+    set { set(.hideExactTimes, to: newValue) }
+  }
+  
   @objc // TEMP
   public var isCanceled: Bool {
     get { has(.isCanceled) }
@@ -40,6 +45,7 @@ extension Trip {
     static let hasFixedDeparture        = FlagOptions(rawValue: 1 << 3)
     static let bookingWindowMissed      = FlagOptions(rawValue: 1 << 4)
     static let isCanceled               = FlagOptions(rawValue: 1 << 5)
+    static let hideExactTimes           = FlagOptions(rawValue: 1 << 6)
   }
 
   private func set(_ option: FlagOptions, to value: Bool) {

@@ -13,7 +13,7 @@ import TGCardViewController
 
 import TripKit
 
-public class TKUISegmentTitleView: UIView {
+public class TKUISegmentTitleView: UIView, TGPreferrableView {
   
   public typealias Action = TKUICardAction<TGCard, TKSegment>
   
@@ -69,6 +69,10 @@ public class TKUISegmentTitleView: UIView {
     separator.backgroundColor = .clear
     actionsWrapper.backgroundColor = nil
     showActionsWrapper(false)
+  }
+  
+  public var preferredView: UIView? {
+    titleLabel
   }
   
   public func setCustomActions(_ actions: [TKUISegmentTitleView.Action], for model: TKSegment, card: TGCard) {
