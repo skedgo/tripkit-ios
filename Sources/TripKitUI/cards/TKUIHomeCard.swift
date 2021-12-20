@@ -339,8 +339,7 @@ extension TKUIHomeCard {
 
 extension TKUIHomeCard: TKUIRoutingQueryInputCardDelegate {
   public func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation) {
-    let request = TripRequest.insert(from: origin, to: destination, for: nil, timeType: .leaveASAP, into: TripKit.shared.tripKitContext)
-    let routingResultsCard = TKUIRoutingResultsCard(request: request)
+    let routingResultsCard = TKUIRoutingResultsCard(destination: destination, origin: origin)
     
     // We don't want the query input card anymore as it's accessible from the results card
     controller?.swap(for: routingResultsCard, animated: true)
