@@ -87,6 +87,7 @@ public enum TKBooking {
     public let budgetPoints: Int?
     public let productName: String?
     public let productType: String?
+    public let waitTime: Int?
     private let explicitValidity: Bool?
     public let validFor: TimeInterval?
     public let branding: TSPBranding?
@@ -101,6 +102,7 @@ public enum TKBooking {
       case budgetPoints
       case productName
       case productType
+      case waitTime = "pickupWindowDuration"
       case explicitValidity = "valid"
       case validFor
       case validFrom = "validFromTimestamp"

@@ -444,6 +444,7 @@ extension TKUITripCell.Model {
       isArriveBefore: isArriveBefore ?? trip.isArriveBefore,
       showFaded: allowFading && trip.showFaded,
       isCancelled: trip.isCanceled,
+      hideExactTimes: trip.hideExactTimes,
       segments: trip.segments(with: .inSummary),
       accessibilityLabel: trip.accessibilityLabel
     )

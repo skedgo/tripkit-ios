@@ -76,6 +76,7 @@ public class TKUITripCell: UITableViewCell {
     let isArriveBefore: Bool
     let showFaded: Bool
     let isCancelled: Bool
+    let hideExactTimes: Bool
     let segments: [TKUITripSegmentDisplayable]
     var action: String?
     var accessibilityLabel: String?
@@ -86,7 +87,7 @@ public class TKUITripCell: UITableViewCell {
     
     titleLabel.attributedText = formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
-    subtitleLabel.attributedText = formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    subtitleLabel.attributedText = model.hideExactTimes ? nil : formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
     segmentView.isCanceled = model.isCancelled
     segmentView.configure(model.segments)
