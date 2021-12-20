@@ -44,6 +44,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   public var onSelection: ((Trip) -> Bool)? = nil
   
   private let destination: MKAnnotation?
+  private let origin: MKAnnotation?
   private var request: TripRequest? // Updated for debugging purposes
   private let editable: Bool
 
@@ -77,10 +78,12 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   ///
   /// - Parameters:
   ///   - destination: The destination of the routing request.
+  ///   - origin: Optionally, the origin lf the routing request. if not supplied, will use current location.
   ///   - zoomToDestination: Whether the map should zoom to `destination` immediately. (Defaults to `true` if not provided.)
   ///   - initialPosition: The initial position at which the card is placed when it's displayed.
-  public init(destination: MKAnnotation, zoomToDestination: Bool = true, initialPosition: TGCardPosition? = nil) {
+  public init(destination: MKAnnotation, origin: MKAnnotation? = nil, zoomToDestination: Bool = true, initialPosition: TGCardPosition? = nil) {
     self.destination = destination
+    self.origin = origin
     self.request = nil
     self.editable = true
     
@@ -109,6 +112,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   
   public init(request: TripRequest, editable: Bool = true) {
     self.destination = nil
+    self.origin = nil
     self.request = request
     self.editable = editable
     
@@ -195,7 +199,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     let viewModel: TKUIRoutingResultsViewModel
     if let destination = self.destination {
-      viewModel = TKUIRoutingResultsViewModel(destination: destination, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
+      viewModel = TKUIRoutingResultsViewModel(destination: destination, origin: origin, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else if let request = self.request {
       viewModel = TKUIRoutingResultsViewModel(request: request, editable: editable, limitTo: Self.config.limitToModes, inputs: inputs, mapInput: mapInput)
     } else {

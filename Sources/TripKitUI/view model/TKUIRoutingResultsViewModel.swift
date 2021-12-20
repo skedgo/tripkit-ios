@@ -44,8 +44,8 @@ class TKUIRoutingResultsViewModel {
     droppedPin: Signal<CLLocationCoordinate2D>  // => call dropPin()
   )
   
-  convenience init(destination: MKAnnotation, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
-    let builder = RouteBuilder(destination: destination)
+  convenience init(destination: MKAnnotation, origin: MKAnnotation? = nil, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+    let builder = RouteBuilder(destination: destination, origin: origin)
     self.init(builder: builder, editable: false, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
