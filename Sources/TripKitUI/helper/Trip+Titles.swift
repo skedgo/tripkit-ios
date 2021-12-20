@@ -23,14 +23,17 @@ extension Trip {
       departureTimeZone: departureTimeZone,
       arrivalTimeZone: arrivalTimeZone ?? departureTimeZone,
       focusOnDuration: !departureTimeIsFixed,
+      hideExactTimes: hideExactTimes,
       isArriveBefore: request.type == .arriveBefore,
       capitalize: true
     )
   }
   
-  static func timeTitles(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool, capitalize: Bool = false) -> (title: String, subtitle: String) {
+  static func timeTitles(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, hideExactTimes: Bool, isArriveBefore: Bool, capitalize: Bool = false) -> (title: String, subtitle: String) {
     
     let duration = arrival.durationSince(departure)
+    
+    guard !hideExactTimes else { return (duration, "") }
     
     if focusOnDuration {
       let subtitle: String
