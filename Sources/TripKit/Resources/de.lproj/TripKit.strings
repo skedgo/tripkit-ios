@@ -110,6 +110,9 @@
 /* Text for vehicle of type: Car */
 "Car" = "Auto";
 
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Route ändern";
+
 /* Trip badge: Cheapest */
 "Cheapest" = "Günstig";
 
@@ -261,7 +264,7 @@
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Abfahrt";
 
-/* No comment provided by engineer. */
+/* Leave ASAP/now option */
 "Leave now" = "Jetzt";
 
 /* Title of button to show fewer results */
@@ -312,6 +315,9 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Pünktlich";
 
+/* Indicating no return trip is required. */
+"One-way only" = "Nur Hin";
+
 /* Action title open app of name '@%' */
 "Open %@" = "%@ öffnen";
 
@@ -332,6 +338,9 @@
 
 /* Title of page to plan a trip */
 "Plan Trip" = "Trip planen";
+
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Bitte bestätige den Wechsel zu %@ , um Navigationshilfe zu erhalten.";
 
 /* No comment provided by engineer. */
 "Powered by" = "Powered by";
@@ -378,11 +387,17 @@
 /* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
 "Service has been cancelled." = "Fällt aus.";
 
+/* Button label to set departure time */
+"Set time" = "Zeit einstellen";
+
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Setup";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Anzeigen";
+
+/* No comment provided by engineer. */
+"Show timetable" = "Fahrplan anzeigen";
 
 /* Show website action button */
 "Show website" = "Webseite öffnen";
