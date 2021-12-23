@@ -31,7 +31,11 @@ extension NSNumber {
   
   public func toCarbonString() -> String {
     guard floatValue > 0 else {
-      return NSLocalizedString("No\u{00a0}CO₂", tableName: "Shared", bundle: .tripKit, comment: "Indicator for no carbon emissions")
+      // Should really be as below, but it breaks Xcode export
+      // See https://developer.apple.com/forums/thread/696752?login=true
+      //
+      // Should be: "No\u{00a0}CO₂" (i.e., non-breaking unicode)
+      return NSLocalizedString("No CO₂", tableName: "Shared", bundle: .tripKit, comment: "Indicator for no carbon emissions. Note the space is non-breaking white space!")
     }
     
     let formatter = Self.formatter
@@ -40,7 +44,8 @@ extension NSNumber {
     formatter.currencySymbol = nil
     formatter.roundingIncrement = NSNumber(value: 0.1)
     formatter.zeroSymbol = nil
-    return NSString(format: "%@kg\u{00a0}CO₂", formatter.string(from: self)!) as String
+    // Should be "%@kg\u{00a0}CO₂" (i.e., non-breaking unicode)
+    return NSString(format: "%@kg CO₂", formatter.string(from: self)!) as String
   }
   
   func toScoreString() -> String {
