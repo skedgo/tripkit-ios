@@ -3219,6 +3219,7 @@
 				nb,
 				tr,
 				ja,
+				ar,
 			);
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			packageReferences = (
