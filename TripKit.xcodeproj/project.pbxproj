@@ -960,6 +960,8 @@
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A963D6026D46AD300C328A1 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
+		3A9AC27E27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Shared.strings; sourceTree = "<group>"; };
+		3A9AC27F27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKReporter+Rx.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -4230,6 +4232,7 @@
 				3AFF262226C6975F007809CD /* fi */,
 				3AFF262426C6975F007809CD /* nl */,
 				3AFF262726C6975F007809CD /* pt */,
+				3A9AC27E27753E1C004B8A52 /* ar */,
 			);
 			name = Shared.strings;
 			sourceTree = "<group>";
@@ -4254,6 +4257,7 @@
 				3AFF262526C6975F007809CD /* nl */,
 				3AFF262826C6975F007809CD /* pt */,
 				3A963D6026D46AD300C328A1 /* en-US */,
+				3A9AC27F27753E1C004B8A52 /* ar */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
