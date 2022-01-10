@@ -163,7 +163,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   public override var preferredView: UIView? {
     // See if we have an overlay; if so, don't say we have a preferred view
     // to not read out something from VoiceOver that has an overlay on top.
-    return findOverlay() != nil ? nil : titleView
+    return findOverlay() != nil ? nil : titleView?.preferredView
   }
   
   override public func didBuild(tableView: UITableView, cardView: TGCardView) {
