@@ -69,6 +69,8 @@ class TKUICollectionViewBubbleLayout: UICollectionViewFlowLayout {
         return
     }
     
+    let isRightToLeft = collectionView.traitCollection.layoutDirection == .rightToLeft
+    
     var x: CGFloat = 0
     var y: CGFloat = 0
     var iSize: CGSize = .zero
@@ -76,28 +78,35 @@ class TKUICollectionViewBubbleLayout: UICollectionViewFlowLayout {
     let numberOfItems = collectionView.numberOfItems(inSection: 0)
     itemAttributesCache = []
     
+    let maxWidth = collectionView.frame.width
+    
     for index in 0..<numberOfItems {
       let indexPath = IndexPath(item: index, section: 0)
       iSize = delegate.collectionView(collectionView, itemSizeAt: indexPath)
       
       var itemRect = CGRect(x: x, y: y, width: iSize.width, height: iSize.height)
-      if (x > 0 && (x + iSize.width + minimumInteritemSpacing > collectionView.frame.width)) {
+      if (x > 0 && (x + iSize.width + minimumInteritemSpacing > maxWidth)) {
         //... Checking if item width is greater than collection view width then set item in new row.
         itemRect.origin.x = 0
         itemRect.origin.y = y + iSize.height + minimumLineSpacing
+      }
+      
+      let leftyX = itemRect.origin.x
+      if isRightToLeft {
+        itemRect.origin.x = maxWidth - itemRect.maxX
       }
       
       let itemAttributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
       itemAttributes.frame = itemRect
       itemAttributesCache.append(itemAttributes)
       
-      x = itemRect.origin.x + iSize.width + minimumInteritemSpacing
+      x = leftyX + iSize.width + minimumInteritemSpacing
       y = itemRect.origin.y
     }
     
     y += iSize.height + self.minimumLineSpacing
     
-    contentSize = CGSize(width: collectionView.frame.width, height: y)
+    contentSize = CGSize(width: maxWidth, height: y)
   }
   
   override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
