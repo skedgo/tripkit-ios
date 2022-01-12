@@ -79,7 +79,11 @@ extension Reactive where Base: TKServer {
           let data = try result.get()
           subscriber(.success((status, headers, data)))
         } catch {
-          subscriber(.failure(error))
+          if let serverError = error as? TKServer.ServerError, serverError == .noData {
+            subscriber(.success((status, headers, nil)))
+          } else {
+            subscriber(.failure(error))
+          }
         }
       }
       return Disposables.create()
