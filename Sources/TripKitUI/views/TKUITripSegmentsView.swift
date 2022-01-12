@@ -52,7 +52,7 @@ public class TKUITripSegmentsView : UIView {
     
     let minX = segmentLeftyValues[index]
     let maxX = index + 1 < segmentLeftyValues.count ? segmentLeftyValues[index + 1] : .greatestFiniteMagnitude
-    let isRightToLeft = traitCollection.layoutDirection == .rightToLeft
+    let isRightToLeft = effectiveUserInterfaceLayoutDirection == .rightToLeft
     for view in subviews {
       let midX = isRightToLeft ? bounds.width - view.frame.midX : view.frame.midX
       view.alpha = midX >= minX && midX < maxX ? Self.alphaSelected : Self.alphaDeselected
@@ -60,7 +60,7 @@ public class TKUITripSegmentsView : UIView {
   }
   
   public func segmentIndex(atX x: CGFloat) -> Int {
-    let target = traitCollection.layoutDirection == .leftToRight ? x : bounds.width - x
+    let target = effectiveUserInterfaceLayoutDirection == .leftToRight ? x : bounds.width - x
     return segmentLeftyValues.lastIndex { $0 <= target } ?? 0
   }
   
@@ -126,7 +126,7 @@ public class TKUITripSegmentsView : UIView {
     var newSegmentXValues: [CGFloat] = []
     let segmentIndexToSelect = self.segmentIndexToSelect.flatMap { $0 < segments.count ? $0 : nil }
     
-    let isRightToLeft = traitCollection.layoutDirection == .rightToLeft
+    let isRightToLeft = effectiveUserInterfaceLayoutDirection == .rightToLeft
     contentMode = isRightToLeft ? .right : .left
     autoresizingMask = isRightToLeft ? [.flexibleLeftMargin, .flexibleBottomMargin] : [.flexibleRightMargin, .flexibleBottomMargin]
     

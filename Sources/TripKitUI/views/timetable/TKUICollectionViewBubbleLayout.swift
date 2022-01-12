@@ -69,7 +69,7 @@ class TKUICollectionViewBubbleLayout: UICollectionViewFlowLayout {
         return
     }
     
-    let isRightToLeft = collectionView.traitCollection.layoutDirection == .rightToLeft
+    let isRightToLeft = collectionView.effectiveUserInterfaceLayoutDirection == .rightToLeft
     
     var x: CGFloat = 0
     var y: CGFloat = 0
