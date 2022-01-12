@@ -48,18 +48,20 @@ public class TKUITripSegmentsView : UIView {
   
   public func selectSegment(atIndex index: Int) {
     segmentIndexToSelect = index
-    guard index > 0, index < segmentXValues.count else { return }
+    guard index >= 0, index < segmentLeftyValues.count else { return }
     
-    let minX = segmentXValues[index]
-    let maxX = index + 1 < segmentXValues.count ? segmentXValues[index + 1] : .greatestFiniteMagnitude
+    let minX = segmentLeftyValues[index]
+    let maxX = index + 1 < segmentLeftyValues.count ? segmentLeftyValues[index + 1] : .greatestFiniteMagnitude
+    let isRightToLeft = traitCollection.layoutDirection == .rightToLeft
     for view in subviews {
-      let midX = view.frame.midX
+      let midX = isRightToLeft ? bounds.width - view.frame.midX : view.frame.midX
       view.alpha = midX >= minX && midX < maxX ? Self.alphaSelected : Self.alphaDeselected
     }
   }
   
   public func segmentIndex(atX x: CGFloat) -> Int {
-    return segmentXValues.lastIndex { $0 <= x } ?? 0
+    let target = traitCollection.layoutDirection == .leftToRight ? x : bounds.width - x
+    return segmentLeftyValues.lastIndex { $0 <= target } ?? 0
   }
   
   public override var intrinsicContentSize: CGSize {
@@ -91,7 +93,10 @@ public class TKUITripSegmentsView : UIView {
   private var desiredSize: CGSize = .zero
   private var didLayoutSubviews: Bool = false
   private var onLayout: (() -> Void)? = nil
-  private var segmentXValues: [CGFloat] = []
+  
+  /// These are from the left, i.e., same for left-to-right and right-to-left
+  private var segmentLeftyValues: [CGFloat] = []
+  
   private var segmentIndexToSelect: Int? = nil
   
   private func configure(_ segments: [TKUITripSegmentDisplayable], allowTitles: Bool, allowSubtitles: Bool, allowInfoIcons: Bool) {
@@ -355,17 +360,14 @@ public class TKUITripSegmentsView : UIView {
       strikethrough.backgroundColor = darkTextColor
       addSubview(strikethrough)
     }
-    
-    #warning("TODO: Also fix up segment XValues")
-    
+        
     if isRightToLeft {
       for view in subviews {
         view.frame.origin.x = frame.width - view.frame.maxX
       }
     }
 
-    self.segmentXValues = newSegmentXValues
-
+    self.segmentLeftyValues = newSegmentXValues
     
     if segmentIndexToSelect != nil {
       self.accessibilityElements = accessibileElements
