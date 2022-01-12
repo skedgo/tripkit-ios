@@ -341,7 +341,7 @@
 "SUV" = "سيارات الدفع الرباعي";
 
 /* Accessibility hint for routing results screen. */
-"Tap to change start and end locations" = "Tap to change start and end locations";
+"Tap to change start and end locations" = "انقر لتغيير مواقع البدء والانتهاء";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "انقر لتعيين الموقع";

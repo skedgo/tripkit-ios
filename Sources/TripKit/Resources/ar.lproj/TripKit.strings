@@ -111,7 +111,7 @@
 "Car" = "سيارة";
 
 /* Title of page to change the from/to of the routing results */
-"Change Route" = "Change Route";
+"Change Route" = "تغيير المسار";
 
 /* Trip badge: Cheapest */
 "Cheapest" = "أرخص";
@@ -316,7 +316,7 @@
 "On time" = "في الوقت المناسب";
 
 /* Indicating no return trip is required. */
-"One-way only" = "One-way only";
+"One-way only" = "ذهاب فقط";
 
 /* Action title open app of name '@%' */
 "Open %@" = "فتح %@";
@@ -340,7 +340,7 @@
 "Plan Trip" = "تخطيط الرحلة";
 
 /* Confirmation text to open app of name '@%' */
-"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
+"Please confirm switching to %@ to get directions." = "يرجى تأكيد التحويل إلى %@ للحصول على الاتجاهات.";
 
 /* No comment provided by engineer. */
 "Powered by" = "بدعم من";
