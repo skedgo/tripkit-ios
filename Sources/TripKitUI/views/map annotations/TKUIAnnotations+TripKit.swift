@@ -113,10 +113,6 @@ extension StopVisits: TKUISemaphoreDisplayable {
     return .none
   }
   
-  public var canFlipImage: Bool {
-    return true
-  }
-  
   public var isTerminal: Bool {
     return false
   }

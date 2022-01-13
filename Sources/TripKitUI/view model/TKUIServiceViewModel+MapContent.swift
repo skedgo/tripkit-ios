@@ -177,7 +177,6 @@ extension TKUIServiceViewModel.ServiceEmbarkation: TKUISemaphoreDisplayable {
     }
   }
   
-  var canFlipImage: Bool { return visit.canFlipImage }
   var isTerminal: Bool { return action == .disembark }
   var selectionIdentifier: String? { return visit.selectionIdentifier }
 }

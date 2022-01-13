@@ -1,0 +1,414 @@
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "\"%@\" غير موجود.";
+
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
+"%@'s" = "%@'s";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Home" = "%@الصفحة الرئيسية";
+
+/* '%@' will be replaced with the person's name */
+"%@'s Work" = "%@ العمل";
+
+/* Number of repeats. (old key: NumberRecurrences) */
+"%lu recurrences" = "%lu التكرار";
+
+/* Authorization restricted alert message */
+"Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "تم تقييد الوصول إلى هذه المميزة لجهازك. يرجى التحقق من إعدادات التطبيق > القيود العامة > أو اسأل مزود جهازك.";
+
+/* Accessibility label for action button */
+"Action" = "الإجراء";
+
+/* Default title for alert view */
+"Alert" = "تنبيه";
+
+/* Indicator that an event is all-day */
+"all-day" = "طوال اليوم";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "هل لديك حساب بالفعل؟";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account? Sign in" = "هل لديك حساب بالفعل؟ تسجيل الدخول";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "يصل %@";
+
+/* Source where the account was derived, e.g., Facebook */
+"Authentication" = "المصادقة";
+
+/* Authorisation needed title */
+"Authorisation needed" = "مطلوب إذن";
+
+/* Accessibility label for 'back' or 'previous' button */
+"Back" = "رجوع";
+
+/* Type of vehicle : bicycle */
+"Bicycle" = "دراجة";
+
+/* Cancel action */
+"Cancel" = "إلغاء";
+
+/* Label for when a service is cancelled. */
+"Cancelled" = "تم الإلغاء";
+
+/* Type of vehicle : car */
+"Car" = "سيارة";
+
+/* Instruction for changing password */
+"Change" = "تغيير";
+
+/* Accessibility - user location button - hint */
+"Change tracking options" = "تغيير خيارات التعقب";
+
+/* Accessibility title for a checkmark/tick button */
+"Checkmark" = "علامة الاختيار";
+
+/* Close action */
+"Close" = "إغلاق";
+
+/* Title on the button that asks users to confirm if they want to proceed with booking */
+"Confirm" = "تأكيد";
+
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "تأكيد كلمة المرور ";
+
+/* Title for button that allows users to contact our support team to help resolve some error in the app. */
+"Contact support" = "الاتصال بالدعم";
+
+/* Error title when GPS failed. */
+"Could not determine your current location." = "تعذر تحديد موقعك الحالي.";
+
+/* Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions) */
+"Could not download supported regions from TripGo's server. Please try again later." = "تعذر تنزيل المناطق المدعومة من خادم TripGo. يرجة معاودة المحاولة في وقت لاحق.";
+
+/* Current city */
+"Current City" = "المدينة الحالية";
+
+/* Title for user's current location */
+"Current Location" = "الموقع الحالي";
+
+/* Class of errors usually originated from databases */
+"Data Error" = "خطأ في البيانات";
+
+/* Delete action */
+"Delete" = "حذف";
+
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "يغادر %@";
+
+/* Sort by distance */
+"Distance" = "المسافة";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "ليس لديك حساب؟";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account? Sign up" = "ليس لديك حساب؟ قم بالتسجيل";
+
+/* Done action */
+"Done" = "تم";
+
+/* Drop new pin */
+"Drop new pin" = "تحديد رمز جديد";
+
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "تعديل الحساب";
+
+/* For email address */
+"Email" = "البريد الإلكتروني";
+
+/* Short indicator of end-time */
+"ends at %@" = "ينتهي عند %@";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "أدخل كلمة مرور جديدة";
+
+/* Describing any generic/unclassified errors */
+"Error" = "خطأ";
+
+/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
+"Every %@" = "كل %@";
+
+/* Everyday in context of repetitions (especially recurring events) */
+"Everyday" = "كل يوم";
+
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "فشل فى الإرسال";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "الاسم الاول";
+
+/* Reminder to leave preference */
+"For when to leave" = "وقت المغادرة";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "من أجل أمانك، يرجى إدخال كلمة المرور الحالية الخاصة بك.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "هل نسيت كلمة المرور؟";
+
+/* Free as in beer */
+"Free" = "مجاني";
+
+/* Name for a segment or vehicle where you get a lift from someone. */
+"Getting a lift" = "الحصول على دعم";
+
+/* Accessibility annotation for trips which have a reminder set. */
+"Has reminder" = "لديه تذكير";
+
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "لتغيير كلمة المرور الخاصة بك، يجب عليك أولاً التحقق من بريدك الإلكتروني. يرجى اتباع الرابط الذي تم إرساله إليك أو طلب رابط آخر أدناه.";
+
+/* Include contacts. */
+"Include contacts" = "تضمين جهات الاتصال";
+
+/* Include events. */
+"Include events" = "تضمين الأحداث";
+
+/* Instant results proposal */
+"Instant results" = "النتائج الفورية";
+
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "تم إرسال تعليمات حول كيفية إعادة تعيين كلمة المرور إلى عنوان البريد الإلكتروني أعلاه.";
+
+/* Name placeholder text */
+"John Appleseed" = "جون أبلسد";
+
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "اسم العائلة";
+
+/* Last updated at %date */
+"Last updated: %@" = "آخر تحديث: %@";
+
+/* Title of button to perform some action at a later time */
+"Later" = "لاحقًا";
+
+/* Indicator for real-time information */
+"Live traffic" = "حركة المرور المباشرة";
+
+/* Title on the button that indicates to the user that booking is in progressing */
+"Loading" = "جار التحميل";
+
+/* Title for unnamed location */
+"Location" = "الموقع";
+
+/* Location iOS authorisation needed text */
+"Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app." = "خدمات الموقع مطلوبة لاستخدام هذه الميزة. يرجى الانتقال إلى إعدادات التطبيق > الخصوصية > خدمات الموقع، وتأكد من تشغيلها والسماح لهذا التطبيق.";
+
+/* Reminder to leave preference */
+"Minutes before trip" = "دقائق قبل الرحلة";
+
+/* More results proposal */
+"More results" = "المزيد من النتائج";
+
+/* Type of vehicle : motorbike */
+"Motorbike" = "دراجة نارية";
+
+/* Title for name of something (or someone) */
+"Name" = "الاسم";
+
+/* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
+"Never" = "أبدًا";
+
+/* Next action */
+"Next" = "التالي";
+
+/* Indicator for no carbon emissions. Note the space is non-breaking white space! */
+"No CO₂" = "لا يوجد ثاني أكسيد الكربون";
+
+/* Indicator for wheelchair not accessible services */
+"Not wheelchair accessible" = "لا يمكن الوصول إلى الكرسي المتحرك";
+
+/* Countdown cell 'now' indicator */
+"Now" = "الآن";
+
+/* Ok action */
+"OK" = "موافق";
+
+/* Open in Safari action */
+"Open in Safari" = "فتح في متصفح سفاري";
+
+/* Button that goes to the Setting's app */
+"Open Settings" = "فتح الإعدادات";
+
+/* No comment provided by engineer. */
+"Password" = "كلمة المرور";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "يرجى إدخال عنوان بريدك الإلكتروني المسجل. سنرسل إليك بعد ذلك تعليمات حول كيفية إعادة تعيين كلمة المرور";
+
+/* Please select a location prompt */
+"Please select a location" = "يرجى تحديد موقع";
+
+/* Error recovery suggestion when GPS fails. */
+"Please try again or set your location manually." = "يرجى المحاولة مرة أخرى أو تعيين موقعك يدويًا.";
+
+/* Please verify the location prompt */
+"Please verify the location" = "يرجى التحقق من الموقع";
+
+/* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
+"Press 'search' for more…" = "اضغط على \"بحث\" للمزيد…";
+
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "لم يتم تعيين البريد الإلكتروني الأساسي في حسابك. يرجى التواصل معنا للمزيد من الدعم";
+
+/* No comment provided by engineer. */
+"Read more…" = "اقرأ المزيد…";
+
+/* Indicator for real-time information */
+"Real-time" = "الوقت الفعلي";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "رمز الإحالة (اختياري)";
+
+/* Action title to add/remove reminder */
+"Reminder" = "تذكير";
+
+/* Repeats daily */
+"Repeats daily" = "التكرار اليومي";
+
+/* Repeats monthly */
+"Repeats monthly" = "التكرار الشهري";
+
+/* Repeats weekly */
+"Repeats weekly" = "التكرار الأسبوعي";
+
+/* Repeats yearly */
+"Repeats yearly" = "التكرار السنوي";
+
+/* Button title to report a problem */
+"Report Problem" = "الإبلاغ عن مشكلة";
+
+/* Give users an option to rece */
+"Resend verification email" = "إعادة ارسال رسالة التحقق";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "إعادة تعيين كلمة المرور";
+
+/* Retry action, e.g., in case something didn't load */
+"Retry" = "إعادة المحاولة";
+
+/* Sort by overall score, like a ranking. */
+"Score" = "النتيجة";
+
+/* Empty search bar placeholder */
+"Search" = "بحث";
+
+/* No comment provided by engineer. */
+"Search for a city" = "ابحث عن مدينة";
+
+/* No comment provided by engineer. */
+"Search Results" = "نتائج البحث";
+
+/* Placeholder text while waiting for server response when searching for a location. */
+"Searching for '%@'…" = "البحث عن '%@'…";
+
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "تتكون كلمات المرور الآمنة من خمسة أحرف على الأقل وتتضمن أرقامًا ورموزًا";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "تم الإرسال";
+
+/* Class of errors generated by our servers */
+"Server Error" = "خطأ في الخادم";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "استجابة الخادم لا تحتوي على بيانات";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "عرض %1$@ من %2$@ من أوضاع النقل";
+
+/* Title of page or button to sign in */
+"Sign in" = "تسجيل الدخول";
+
+/* Instruction for signing out user account */
+"Sign out" = "تسجيل الخروج";
+
+/* Title of page or button to sign up */
+"Sign up" = "تسجيل الدخول";
+
+/* Starting %date. (old key: DateFromFormat) */
+"Starting %@" = "بدء %@";
+
+/* Short indicator of start-time */
+"starts at %@" = "يبدأ من %@";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "سيارات الدفع الرباعي";
+
+/* Accessibility hint for routing results screen. */
+"Tap to change start and end locations" = "انقر لتغيير مواقع البدء والانتهاء";
+
+/* Tap to set location. (old key: SetLocation) */
+"Tap to set location" = "انقر لتعيين الموقع";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "لا يمكن أن يكون حقل كلمة المرور فارغًا.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "اسم المستخدم أو كلمة المرور التي أدخلتها غير صحيحة.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "إلى %@";
+
+/* Accessibility - user location button - off */
+"Tracking - off" = "التعقب - إيقاف";
+
+/* user location button - follow */
+"Tracking - on" = "التعقب - تشغيل";
+
+/* user location button - follow with heading */
+"Tracking - on with heading" = "التعقب - تشغيل مع العنوان";
+
+/* Up to %date. (old key: DateToFormat) */
+"Up to %@" = "ما يصل إلى %@";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "تحديث";
+
+/* Message that shows app is updating trip after user finalised bookings */
+"Updating trip" = "تحديث الرحلة";
+
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "رمز المستخدم مفقود في استجابة الخادم";
+
+/* Message that informs users that some values are missing from the required fields in a booking form. */
+"Values missing from required fields." = "القيم المفقودة من الحقول المطلوبة.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "تأكيد";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "تأكيد كلمة المرور";
+
+/* Every weekday in context of repetitions (especially recurring events) */
+"Weekdays" = "أيام الأسبوع";
+
+/* Every weekend day in context of repetitions (especially recurring events) */
+"Weekends" = "عطلات نهاية الأسبوع";
+
+/* Indicator for unknow if service or station is wheelchair accessible or not */
+"Wheelchair accessibility unknown" = "إمكانية الوصول إلى الكرسي المتحرك غير معروفة";
+
+/* Indicator for wheelchair accessible services */
+"Wheelchair accessible" = "إمكانية الوصول إلى الكرسي المتحرك";
+
+/* Question asked when user is taking a screenshot */
+"Would you like to report a problem?" = "هل ترغب في الإبلاغ عن مشكلة؟";
+
+/* Message that informs users that T&C must be agreed before booking can be made. */
+"You need to agree to the booking terms and conditions." = "يجب عليك الموافقة على شروط وأحكام الحجز.";
+
+/* Message that informs users that T&C for insurance must be agreed before booking can be made. */
+"You need to agree to the insurance terms and conditions." = "يجب عليك الموافقة على شروط وأحكام التأمين.";
+
+/* Calendar authorisation needed text */
+"You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature." = "لقد رفضت سابقًا وصول هذا التطبيق إلى التقويم الخاص بك. يرجى الانتقال إلى إعدادت التطبيق > الخصوصية > التقويم والسماح بهذا التطبيق لاستخدام هذه الميزة.";
+
+/* Contacts authorisation needed text */
+"You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "لقد رفضت سابقًا وصول هذا التطبيق إلى جهات الاتصال الخاص بك. يرجى الانتقال إلى إعدادت التطبيق > الخصوصية > جهات الاتصال والسماح بهذا التطبيق لاستخدام هذه الميزة.";
+

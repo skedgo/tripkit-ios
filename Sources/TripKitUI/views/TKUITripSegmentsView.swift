@@ -48,18 +48,20 @@ public class TKUITripSegmentsView : UIView {
   
   public func selectSegment(atIndex index: Int) {
     segmentIndexToSelect = index
-    guard index > 0, index < segmentXValues.count else { return }
+    guard index >= 0, index < segmentLeftyValues.count else { return }
     
-    let minX = segmentXValues[index]
-    let maxX = index + 1 < segmentXValues.count ? segmentXValues[index + 1] : .greatestFiniteMagnitude
+    let minX = segmentLeftyValues[index]
+    let maxX = index + 1 < segmentLeftyValues.count ? segmentLeftyValues[index + 1] : .greatestFiniteMagnitude
+    let isRightToLeft = effectiveUserInterfaceLayoutDirection == .rightToLeft
     for view in subviews {
-      let midX = view.frame.midX
+      let midX = isRightToLeft ? bounds.width - view.frame.midX : view.frame.midX
       view.alpha = midX >= minX && midX < maxX ? Self.alphaSelected : Self.alphaDeselected
     }
   }
   
   public func segmentIndex(atX x: CGFloat) -> Int {
-    return segmentXValues.lastIndex { $0 <= x } ?? 0
+    let target = effectiveUserInterfaceLayoutDirection == .leftToRight ? x : bounds.width - x
+    return segmentLeftyValues.lastIndex { $0 <= target } ?? 0
   }
   
   public override var intrinsicContentSize: CGSize {
@@ -91,7 +93,10 @@ public class TKUITripSegmentsView : UIView {
   private var desiredSize: CGSize = .zero
   private var didLayoutSubviews: Bool = false
   private var onLayout: (() -> Void)? = nil
-  private var segmentXValues: [CGFloat] = []
+  
+  /// These are from the left, i.e., same for left-to-right and right-to-left
+  private var segmentLeftyValues: [CGFloat] = []
+  
   private var segmentIndexToSelect: Int? = nil
   
   private func configure(_ segments: [TKUITripSegmentDisplayable], allowTitles: Bool, allowSubtitles: Bool, allowInfoIcons: Bool) {
@@ -107,7 +112,7 @@ public class TKUITripSegmentsView : UIView {
     }
     
     subviews.forEach { $0.removeFromSuperview() }
-    
+
     var accessibileElements: [UIAccessibilityElement] = []
     
     var nextX = Self.padding / 2
@@ -121,9 +126,13 @@ public class TKUITripSegmentsView : UIView {
     var newSegmentXValues: [CGFloat] = []
     let segmentIndexToSelect = self.segmentIndexToSelect.flatMap { $0 < segments.count ? $0 : nil }
     
+    let isRightToLeft = effectiveUserInterfaceLayoutDirection == .rightToLeft
+    contentMode = isRightToLeft ? .right : .left
+    autoresizingMask = isRightToLeft ? [.flexibleLeftMargin, .flexibleBottomMargin] : [.flexibleRightMargin, .flexibleBottomMargin]
+    
     var count = 0
     for segment in segments {
-      let mask: UIView.AutoresizingMask = []
+      let mask: UIView.AutoresizingMask = autoresizingMask
       let isSelected = (segmentIndexToSelect ?? count) == count
       let alpha = isSelected ? Self.alphaSelected : Self.alphaDeselected
       
@@ -135,6 +144,7 @@ public class TKUITripSegmentsView : UIView {
       
       let color = segment.tripSegmentModeColor
       let modeImageView = UIImageView(image: modeImage)
+      modeImageView.autoresizingMask = mask
       modeImageView.alpha = alpha
       
       // remember that color will be nil for non-PT modes. In these cases, since the
@@ -144,7 +154,6 @@ public class TKUITripSegmentsView : UIView {
       newSegmentXValues.append(nextX)
       modeImageView.frame.origin.x = nextX
       modeImageView.frame.origin.y = (maxHeight - modeImage.size.height) / 2
-      modeImageView.autoresizingMask = mask
       
       var newFrame = modeImageView.frame
       
@@ -156,6 +165,7 @@ public class TKUITripSegmentsView : UIView {
         func addCircle(frame: CGRect) -> UIView {
           let circleFrame = frame.insetBy(dx: -1, dy: -1)
           let modeCircleBackground = UIView(frame: circleFrame)
+          modeCircleBackground.autoresizingMask = mask
           modeCircleBackground.backgroundColor = .white
           modeCircleBackground.layer.cornerRadius = circleFrame.width / 2
           modeCircleBackground.alpha = alpha
@@ -201,9 +211,9 @@ public class TKUITripSegmentsView : UIView {
       // 2. Optional info icon
       if allowInfoIcons, let image = TKInfoIcon.image(for: segment.tripSegmentModeInfoIconType, usage: .overlay) {
         let infoIconImageView = UIImageView(image: image)
+        infoIconImageView.autoresizingMask = mask
         infoIconImageView.frame.origin.x = newFrame.minX
         infoIconImageView.frame.origin.y = newFrame.maxY - image.size.height
-        infoIconImageView.autoresizingMask = mask
         infoIconImageView.alpha = modeImageView.alpha
         addSubview(infoIconImageView)
       }
@@ -251,6 +261,7 @@ public class TKUITripSegmentsView : UIView {
           y += 2
         }
         let label = TKUIStyledLabel(frame: .init(origin: .init(x: x + 2, y: y), size: modeTitleSize))
+        label.autoresizingMask = mask
         label.font = modeTitleFont
         label.text = modeTitle
         label.textColor = colorCodingTransitIcon ? lightTextColor : darkTextColor
@@ -261,6 +272,7 @@ public class TKUITripSegmentsView : UIView {
       } else if allowSubtitles, let color = color {
         let y = (maxHeight - modeSubtitleSize.height - modeTitleSize.height) / 2
         let stripe = UIView(frame: .init(origin: .init(x: x, y: y), size: modeTitleSize))
+        stripe.autoresizingMask = mask
         stripe.layer.borderColor = color.cgColor
         stripe.layer.borderWidth = modeTitleSize.width / 4
         stripe.layer.cornerRadius = modeTitleSize.width / 2
@@ -289,6 +301,7 @@ public class TKUITripSegmentsView : UIView {
         // label goes under the mode code (if we have one)
         let y = (maxHeight - modeSubtitleSize.height - modeTitleSize.height) / 2 + modeTitleSize.height
         let label = TKUIStyledLabel(frame: .init(origin: .init(x: x + 2, y: y), size: modeSubtitleSize))
+        label.autoresizingMask = mask
         label.font = modeSubtitleFont
         label.text = subtitle
         label.textColor = lightTextColor
@@ -300,6 +313,7 @@ public class TKUITripSegmentsView : UIView {
       var subtitleWidth = modeSubtitleSize.width
       for imageView in modeSubtitleAccessoryImageViews {
         guard let image = imageView.image else { assertionFailure(); continue }
+        imageView.autoresizingMask = mask
         let viewHeight = modeSubtitleSize.height > 0
           ? min(image.size.height, modeSubtitleSize.height)
           : min(image.size.height, 20)
@@ -346,8 +360,14 @@ public class TKUITripSegmentsView : UIView {
       strikethrough.backgroundColor = darkTextColor
       addSubview(strikethrough)
     }
-    
-    self.segmentXValues = newSegmentXValues
+        
+    if isRightToLeft {
+      for view in subviews {
+        view.frame.origin.x = frame.width - view.frame.maxX
+      }
+    }
+
+    self.segmentLeftyValues = newSegmentXValues
     
     if segmentIndexToSelect != nil {
       self.accessibilityElements = accessibileElements
