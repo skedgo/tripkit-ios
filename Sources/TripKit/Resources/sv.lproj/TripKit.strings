@@ -1,7 +1,7 @@
 /* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
 "%@ ago" = "%@ sedan";
 
-/* Number of alerts, in this case, there are multiple (plural) */
+/* Number of alerts, in this case, there are multiple (plural */
 "%@ alerts" = "%@ aviseringar";
 
 /* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
@@ -52,6 +52,9 @@
 /* Instruction to follow unnamed street */
 "Along unnamed street" = "Längs namnlös gata";
 
+/* Action button title to see alternative options for the case where you cant make the next connection */
+"Alternative routes" = "Alternativa rutter";
+
 /* apple maps directions action */
 "Apple Maps" = "Apple Kartor";
 
@@ -59,8 +62,14 @@
 "Arrival" = "Ankomst";
 
 /* Prefix for selected 'arrive by' time
-   Single line instruction to arrive */
+ Single line instruction to arrive */
 "Arrive" = "Ankomst";
+
+/* The place of arrival. */
+"Arrive %@" = "Arrive %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the arrival time. (old key: ArrivalLocationTime) */
+"Arrive %@ at %@" = "Arrive %1$@ at %2$@";
 
 /* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
 "Arrive at %@" = "Anländer kl. %@";
@@ -74,11 +83,13 @@
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Anländer om";
 
+/* Used when the trip does not end at the requested location, but nearby. The '%@' will be replaced with requested destination location. */
+"Arrive near %@" = "Arrive near %@";
+
 /* Time of the bus departure. (old key: DepartureTime) */
 "at %@" = "kl. %@";
 
-/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary)
-   Filler for a service running at time, e.g., 'At 11:56am' */
+/* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Kl. %@";
 
 /* Text for vehicle of type: Bicycle */
@@ -99,11 +110,20 @@
 /* Text for vehicle of type: Car */
 "Car" = "Bil";
 
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Change Route";
+
 /* Trip badge: Cheapest */
 "Cheapest" = "Billigast";
 
+/* Accessibility title for button that points up to collapse a section */
+"Collapse" = "Collapse";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Det gick inte att hitta mellanlandning/byte.";
+
+/* Title for button to customise the home card */
+"Customise home" = "Customise home";
 
 /* Text for attributing data sources. The list of providers will be used instead of '%@' */
 "Data provided by %@" = "Data från %@";
@@ -111,11 +131,17 @@
 /* Title for screen showing data providers */
 "Data Providers" = "Dataleverantörer";
 
+/* Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location. */
+"Depart near %@" = "Depart near %@";
+
 /* Departure time sorter title */
 "Departure" = "Avgång";
 
 /* Destination of the bus */
 "Direction" = "Riktning";
+
+/* Status indicator that a mode is not enabled */
+"Disabled" = "Disabled";
 
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Koppla från";
@@ -135,11 +161,17 @@
 /* As in 'this bus/train is empty' */
 "Empty" = "Tom";
 
+/* Status indicator that a mode is enabled */
+"Enabled" = "Enabled";
+
 /* Placeholder name for destination (then replaced with address or name) */
 "End location" = "Slutdestination";
 
 /* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
 "Every %@" = "Var %@";
+
+/* Accessibility title for button that points down to expand a section */
+"Expand" = "Expand";
 
 /* Action title to extend an existing booking */
 "Extend" = "Förläng";
@@ -159,9 +191,6 @@
 /* Departure location. (old key: PrimaryLocationStart) */
 "From %@" = "Från %@";
 
-/* No comment provided by engineer. */
-"From current location" = "Från nuvarande plats";
-
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "Fullt";
 
@@ -176,6 +205,9 @@
 
 /* Instruction to get a service towards provided destination */
 "Get on service to %@" = "Åk med tjänst till %@";
+
+/* Title of button to start a trip */
+"Go" = "Go";
 
 /* goCatch action */
 "goCatch a Taxi" = "goCatch en taxi";
@@ -214,7 +246,7 @@
 "Kick Scooter" = "Sparkcykel";
 
 /* Prefix for selected 'leave after' time
-   Single line instruction to leave */
+ Single line instruction to leave */
 "Leave" = "Avgång";
 
 /* The place of departure. (old key: LeaveLocation) */
@@ -232,8 +264,11 @@
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Avgång om";
 
-/* No comment provided by engineer. */
+/* Leave ASAP/now option */
 "Leave now" = "Avgång nu";
+
+/* Title of button to show fewer results */
+"Less" = "Less";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Endast begränsat med ståplatser";
@@ -246,6 +281,12 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Många lediga platser";
+
+/* No comment provided by engineer. */
+"Map by %@" = "Map by %@";
+
+/* Title of button to show additional results */
+"More" = "More";
 
 /* Title of button to get more details about an alert */
 "More info" = "Mer info";
@@ -274,11 +315,17 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "I tid";
 
+/* Indicating no return trip is required. */
+"One-way only" = "One-way only";
+
 /* Action title open app of name '@%' */
 "Open %@" = "Öppna %@";
 
 /* Title for button that opens an external app. */
 "Open app" = "Öppna app";
+
+/* Action button title for opening something in another app. Tapping this button will show a list of app names. */
+"Open in…" = "Open in…";
 
 /* Title for opening hours */
 "Opening Hours" = "Öppettider";
@@ -292,8 +339,8 @@
 /* Title of page to plan a trip */
 "Plan Trip" = "Planera resa";
 
-/* Error recovery suggestion for when routing produced no results (but no specific error was returned from routing). */
-"Please adjust your query and try again." = "Justera din sökning och försök igen.";
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
 
 /* No comment provided by engineer. */
 "Powered by" = "Drivs av";
@@ -313,8 +360,20 @@
 /* Title for button that allows users to request support */
 "Request support" = "Begär support";
 
+/* Action button title to plan a route */
+"Route" = "Rutt";
+
+/* No comment provided by engineer. */
+"Routing between these locations is not yet supported." = "Rutter mellan dessa platser stöds ännu inte.";
+
 /* Error message if interregional routing isn't yet supported */
 "Routing from %@ to %@ is not yet supported" = "Rutter från %1$@ till %2$@ stöds inte än";
+
+/* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
+"Scheduled" = "Scheduled";
+
+/* No comment provided by engineer. */
+"Search for destination" = "Search for destination";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Sök efter mellanlandning/byte igen eller försök igen senare...";
@@ -322,11 +381,23 @@
 /* Send SMS action button */
 "Send SMS" = "Skicka SMS";
 
+/* Title for displaying the details of a public transport service (i.e., a specific departure of a specific route) */
+"Service" = "Tjänst";
+
+/* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
+"Service has been cancelled." = "Service has been cancelled.";
+
+/* Button label to set departure time */
+"Set time" = "Ställ in tid";
+
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Konfigurera";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Visa";
+
+/* No comment provided by engineer. */
+"Show timetable" = "Visa tidtabell";
 
 /* Show website action button */
 "Show website" = "Visa webbplats";
@@ -334,7 +405,7 @@
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Endast ståplatser";
 
-/* Title of button to start a trip */
+/* Title of button to start a trip (primarily after pausing) */
 "Start" = "Starta";
 
 /* Placeholder name for origin (then replaced with address or name) */
@@ -367,6 +438,9 @@
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
 "Unknown" = "Okänt";
 
+/* Title for button that unlocks a shared vehicle. */
+"Unlock" = "Unlock";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Uppdaterades för %@ sedan";
 
@@ -381,4 +455,7 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Vi håller dig uppdaterad med de senaste transitaviseringarna här";
+
+/* Alert if service running late/early, meaning that the user might not make the next service */
+"You might not make this transfer." = "Du kanske inte hinner till denna transfer.";
 

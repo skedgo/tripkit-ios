@@ -1,17 +1,17 @@
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' niet gevonden.";
+
 /* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
 "%@'s" = "%@'s";
 
-/* No comment provided by engineer. */
+/* '%@' will be replaced with the person's name */
 "%@'s Home" = "%@'s thuis";
 
-/* No comment provided by engineer. */
+/* '%@' will be replaced with the person's name */
 "%@'s Work" = "%@'s werk";
 
 /* Number of repeats. (old key: NumberRecurrences) */
 "%lu recurrences" = "%lu herhalingen";
-
-/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "'%@' niet gevonden.";
 
 /* Authorization restricted alert message */
 "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "Toegang tot deze functie is niet toegestaan op uw apparaat. Check Instellingen app > Algemeen > Beperkingen of vraag uw aanbieder voor meer informatie.";
@@ -22,8 +22,17 @@
 /* Default title for alert view */
 "Alert" = "Alarm";
 
+/* Indicator that an event is all-day */
+"all-day" = "hele dag";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "Already have an account?";
+
 /* Option for users if they already owned a SkedGo account */
 "Already have an account? Sign in" = "Heb je al een account? Aanmelden";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "aankomst %@";
 
 /* Source where the account was derived, e.g., Facebook */
 "Authentication" = "Verificatie";
@@ -43,9 +52,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Geannuleerd";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Kan niet verder gaan zonder een geldig e-mailadres";
-
 /* Type of vehicle : car */
 "Car" = "Auto";
 
@@ -64,6 +70,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Bevestigen";
 
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "Confirm password";
+
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
 "Contact support" = "Support contacteren";
 
@@ -79,11 +88,20 @@
 /* Title for user's current location */
 "Current Location" = "Huidige locatie";
 
+/* Class of errors usually originated from databases */
+"Data Error" = "Data Error";
+
 /* Delete action */
 "Delete" = "Verwijderen";
 
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "vertrekt %@";
+
 /* Sort by distance */
 "Distance" = "Afstand";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "Don't have an account?";
 
 /* Option for users if they don't yet have a SkedGo account */
 "Don't have an account? Sign up" = "Nog geen account? Aanmelden";
@@ -94,8 +112,20 @@
 /* Drop new pin */
 "Drop new pin" = "Nieuwe pin neerzetten";
 
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "Edit Account";
+
 /* For email address */
 "Email" = "E-mail";
+
+/* Short indicator of end-time */
+"ends at %@" = "eindigt op %@";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "Enter a new password";
+
+/* Describing any generic/unclassified errors */
+"Error" = "Fout";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Elke %@";
@@ -103,17 +133,35 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Elke dag";
 
+/* Email placeholder text */
+"example@example.com" = "info@voorbeeld.nl";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "Failed to send";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "First name";
+
 /* Reminder to leave preference */
 "For when to leave" = "Voor vertrek";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "For your security, please enter your current password.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "Forgot password";
 
 /* Free as in beer */
 "Free" = "Gratis";
 
-/* No comment provided by engineer. */
+/* Name for a segment or vehicle where you get a lift from someone. */
 "Getting a lift" = "Ik krijg een lift";
 
 /* Accessibility annotation for trips which have a reminder set. */
 "Has reminder" = "Heeft een herinnering";
+
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below.";
 
 /* Include contacts. */
 "Include contacts" = "Contactpersonen opnemen";
@@ -124,11 +172,23 @@
 /* Instant results proposal */
 "Instant results" = "Direct resultaten weergeven";
 
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "Instructions on how to reset password has been sent to the above email address.";
+
 /* Name placeholder text */
 "John Appleseed" = "Klaas Jansen";
 
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "Last name";
+
+/* Last updated at %date */
+"Last updated: %@" = "Last updated: %@";
+
 /* Title of button to perform some action at a later time */
 "Later" = "Later";
+
+/* Indicator for real-time information */
+"Live traffic" = "Live verkeer";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Laden";
@@ -148,22 +208,16 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Moottoripyörä";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Mijn account";
-
 /* Title for name of something (or someone) */
 "Name" = "Naam";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Nooit";
 
-/* Title of page to create new account */
-"New account" = "Nieuwe account";
-
 /* Next action */
 "Next" = "Volgende";
 
-/* No comment provided by engineer. */
+/* Indicator for no carbon emissions. Note the space is non-breaking white space! */
 "No CO₂" = "Geen CO₂";
 
 /* Indicator for wheelchair not accessible services */
@@ -175,14 +229,17 @@
 /* Ok action */
 "OK" = "OK";
 
-/* Button that goes to the Setting's app */
-"Open Settings" = "Instellingen openen";
-
 /* Open in Safari action */
 "Open in Safari" = "In Safari openen";
 
+/* Button that goes to the Setting's app */
+"Open Settings" = "Instellingen openen";
+
 /* No comment provided by engineer. */
 "Password" = "Paswoord";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Please enter your registered email address. We will then send you instructions on how to reset password";
 
 /* Please select a location prompt */
 "Please select a location" = "Selecteer een locatie";
@@ -196,11 +253,17 @@
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
 "Press 'search' for more…" = "Druk op 'zoeken' voor meer…";
 
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "Primary email is not set on your account. Please contact us for support";
+
 /* No comment provided by engineer. */
 "Read more…" = "Lees meer…";
 
 /* Indicator for real-time information */
 "Real-time" = "Real-time";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "Referral code (optional)";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Herinnering";
@@ -220,11 +283,14 @@
 /* Button title to report a problem */
 "Report Problem" = "Meld probleem";
 
+/* Give users an option to rece */
+"Resend verification email" = "Resend verification email";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "Reset password";
+
 /* Retry action, e.g., in case something didn't load */
 "Retry" = "Opnieuw";
-
-/* Sports utility vehicle abbreviation */
-"SUV" = "SUV";
 
 /* Sort by overall score, like a ranking. */
 "Score" = "Score";
@@ -233,13 +299,28 @@
 "Search" = "Zoeken";
 
 /* No comment provided by engineer. */
-"Search Results" = "Zoekresultaten";
+"Search for a city" = "Zoek een stad";
 
 /* No comment provided by engineer. */
-"Search for a city" = "Zoek een stad";
+"Search Results" = "Zoekresultaten";
 
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'…" = "Op zoek naar '%@'…";
+
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "Secure passwords are at least five characters long and include numbers and symbols";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "Sent";
+
+/* Class of errors generated by our servers */
+"Server Error" = "Server Error";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "Server response contains no data";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "%1$@ van %2$@ vervoerstypen weergegeven";
 
 /* Title of page or button to sign in */
 "Sign in" = "Inloggen";
@@ -250,17 +331,29 @@
 /* Title of page or button to sign up */
 "Sign up" = "Aanmelden";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Het aanmelden kan niet worden voltooid zonder een geldig wachtwoord";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Inloggen";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "Vanaf %@";
 
+/* Short indicator of start-time */
+"starts at %@" = "begint om %@";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "SUV";
+
+/* Accessibility hint for routing results screen. */
+"Tap to change start and end locations" = "Tap to change start and end locations";
+
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tik om een locatie in te stellen";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "The password field cannot be empty.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "The username or password you've entered is incorrect.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "tot %@";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Volgen - uit";
@@ -271,17 +364,26 @@
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Volgen - aan met richting";
 
-/* No comment provided by engineer. */
-"Unknown error" = "Onbekende fout";
-
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "tot %@";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "Update";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Reis wordt bijgewerkt";
 
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "userToken is missing in the server response";
+
 /* Message that informs users that some values are missing from the required fields in a booking form. */
 "Values missing from required fields." = "Verplichte velden zijn nog niet allemaal ingevuld.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "Verifiëren";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "Verifieer wachtwoord";
 
 /* Every weekday in context of repetitions (especially recurring events) */
 "Weekdays" = "Weekdagen";
@@ -309,25 +411,4 @@
 
 /* Contacts authorisation needed text */
 "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "U heeft eerder de toegang van deze app naar uw kontakten geweigerd. Ga naar Instellingen > Privacy > Kontacten en geef TripGo toestemming om deze functie te gebruiken.";
-
-/* Indicator that an event is all-day */
-"all-day" = "hele dag";
-
-/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
-"arrives %@" = "aankomst %@";
-
-/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
-"departs %@" = "vertrekt %@";
-
-/* Short indicator of end-time */
-"ends at %@" = "eindigt op %@";
-
-/* Email placeholder text */
-"example@example.com" = "info@voorbeeld.nl";
-
-/* Short indicator of start-time */
-"starts at %@" = "begint om %@";
-
-/* to %date. (old key: DateToFormat) */
-"to %@" = "tot %@";
 
