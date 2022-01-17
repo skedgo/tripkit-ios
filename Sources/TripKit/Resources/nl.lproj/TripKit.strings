@@ -1,3 +1,30 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ geleden";
+
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ meldingen";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%1$@ om %2$@";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ fiets vriendelijk";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "%1$@ elke %2$@";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "%@ meer";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ stations";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ zonder verkeer";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ rolstoel vriendelijk";
+
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
 "%1$@ early" = "%1$@ te vroeg";
 
@@ -10,29 +37,23 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ te laat (%2$@ dienst)";
 
-/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
-"%@ ago" = "%@ ago";
-
-/* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ meldingen";
-
-/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ fiets vriendelijk";
-
-/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
-"%@ stops" = "%@ stations";
-
-/* Duration without traffic */
-"%@ w/o traffic" = "%@ zonder verkeer";
-
-/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "%@ rolstoel vriendelijk";
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1 waarschuwing";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 station";
 
 /* No comment provided by engineer. */
 "Alerts" = "Alarm";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "Langs %@";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "Langs naamloze straat";
+
+/* Action button title to see alternative options for the case where you cant make the next connection */
+"Alternative routes" = "Alternatieve routes";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Kaarten";
@@ -41,23 +62,44 @@
 "Arrival" = "Aankomst";
 
 /* Prefix for selected 'arrive by' time
-   Single line instruction to arrive */
+ Single line instruction to arrive */
 "Arrive" = "Aankomst";
+
+/* The place of arrival. */
+"Arrive %@" = "Aankomst %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the arrival time. (old key: ArrivalLocationTime) */
+"Arrive %@ at %@" = "Aankomst %1$@ om %2$@";
 
 /* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
 "Arrive at %@" = "Arriveer om %@";
 
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
-"Arrive at %@ at %@" = "Arriveer op %@ om %@";
+"Arrive at %@ at %@" = "Arriveer op %1$@ om %2$@";
+
+/* Arrive before button */
+"Arrive by" = "Aankomst";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "Arriveer in";
 
+/* Used when the trip does not end at the requested location, but nearby. The '%@' will be replaced with requested destination location. */
+"Arrive near %@" = "Aankomst in de buurt van %@";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "om %@";
+
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "Op %@";
 
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "fiets";
+
+/* Action title to make a booking */
+"Book" = "Boek";
+
 /* Action title to make a booking using service/app named '@%' */
-"Book with %@" = "Book with %@";
+"Book with %@" = "Boek met %@";
 
 /* No comment provided by engineer. */
 "Call" = "Bel";
@@ -65,8 +107,32 @@
 /* Action title to make a call to service/company named '@%' */
 "Call %@" = "Bel %@";
 
+/* Text for vehicle of type: Car */
+"Car" = "auto";
+
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Wijzig route";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "Goedkoopste";
+
+/* Accessibility title for button that points up to collapse a section */
+"Collapse" = "Samenvouwen";
+
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Overstap station kon niet gevonden worden.";
+
+/* Title for button to customise the home card */
+"Customise home" = "Thuis aanpassen";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "Gegevens worden verstrekt door %@";
+
+/* Title for screen showing data providers */
+"Data Providers" = "Data Providers";
+
+/* Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location. */
+"Depart near %@" = "Vertrek in de buurt van %@";
 
 /* Departure time sorter title */
 "Departure" = "Vertrek";
@@ -74,14 +140,50 @@
 /* Destination of the bus */
 "Direction" = "Eindpunt";
 
+/* Status indicator that a mode is not enabled */
+"Disabled" = "Uitgeschakeld";
+
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Verbinding verbreken";
+
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "Sluiten";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "Afstappen";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "E-fiets";
+
+/* Trip badge: Easiest */
+"Easiest" = "Gemakkelijkste";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Leeg";
 
+/* Status indicator that a mode is enabled */
+"Enabled" = "Ingeschakeld";
+
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "Eindlocatie";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "Elke %@";
+
+/* Accessibility title for button that points down to expand a section */
+"Expand" = "Uitklappen";
+
+/* Action title to extend an existing booking */
+"Extend" = "Verlengen";
+
+/* Trip badge: Fastest */
+"Fastest" = "Snelste";
+
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "Beperkte zitplaatsen beschikbaar";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "voor %@";
 
 /* Indicating a path is wheelchair/cycyling friendly */
 "Friendly" = "Vriendelijk";
@@ -93,19 +195,40 @@
 "Full" = "Vol";
 
 /* Action title get/download app of name '@%' */
-"Get %@" = "Get %@";
+"Get %@" = "Haal %@";
+
+/* Title for button to get/download an external app. */
+"Get app" = "Download de app";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Routebeschrijving";
 
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "Get on service to %@";
+
+/* Title of button to start a trip */
+"Go" = "Go";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch een Taxi";
+
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
+/* Trip badge: Greenest */
+"Greenest" = "Greenest";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "Healthiest";
+
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
-"I'll arrive at %@ at %@" = "Ik kom aan op %@ om %@.";
+"I'll arrive at %@ at %@" = "Ik kom aan op %1$@ om %2$@.";
 
 /* Indication of an activity. (old key: ActivityIndication) */
-"I'll take a %@ at %@ from %@." = "Ik neem de %@ om %@ vanuit %@.";
+"I'll take a %@ at %@ from %@." = "Ik neem de %1$@ om %2$@ vanuit %3$@.";
+
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "I'll take a %1$@ from %2$@.";
 
 /* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
 "In %@" = "In %@";
@@ -113,15 +236,27 @@
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Ondertussen, laten we %@ blijven verkennen en geniet van uw reizen";
 
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo een Taxi";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "Direct resultaten weergeven";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "Kick Scooter";
+
 /* Prefix for selected 'leave after' time
-   Single line instruction to leave */
+ Single line instruction to leave */
 "Leave" = "Vertrek";
 
 /* The place of departure. (old key: LeaveLocation) */
 "Leave %@" = "Verlaat %@";
 
 /* The place of departure with time. (old key: LeaveLocationTime) */
-"Leave %@ at %@" = "Verlaat %@ om %@";
+"Leave %@ at %@" = "Verlaat %1$@ om %2$@";
+
+/* Leave after button */
+"Leave at" = "Vertrek op";
 
 /* Time departure. (old key: LeaveTime) */
 "Leave at %@" = "Vetrek om %@";
@@ -129,8 +264,11 @@
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Vertrek in";
 
-/* No comment provided by engineer. */
+/* Leave ASAP/now option */
 "Leave now" = "Vertrek nu";
+
+/* Title of button to show fewer results */
+"Less" = "Less";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Beperkte staruimte";
@@ -144,11 +282,32 @@
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "Veel zitplaatsen beschikbaar";
 
+/* No comment provided by engineer. */
+"Map by %@" = "Map by %@";
+
+/* Title of button to show additional results */
+"More" = "More";
+
 /* Title of button to get more details about an alert */
 "More info" = "Meer info";
 
+/* 'More results' section in autocompletion */
+"More results" = "Meer resultaten";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "Moto Scooter";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "motor";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Geen geplannde trips";
+
+/* Indicator to show when a service does not have real-time data (even though we usually get it for services like this.) */
+"No real-time available" = "No real-time available";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "Geen reizen gevonden.";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
 "Not accepting passengers" = "Accepteert geen passagiers";
@@ -156,14 +315,38 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "Op tijd";
 
+/* Indicating no return trip is required. */
+"One-way only" = "One-way only";
+
 /* Action title open app of name '@%' */
 "Open %@" = "Open %@";
+
+/* Title for button that opens an external app. */
+"Open app" = "Open app";
+
+/* Action button title for opening something in another app. Tapping this button will show a list of app names. */
+"Open in…" = "Open in…";
 
 /* Title for opening hours */
 "Opening Hours" = "Openingstijden";
 
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "Plan een nieuwe reis";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "Plan een reis, en het zal hier verschijnen.";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "Plan reis";
+
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
+
+/* No comment provided by engineer. */
+"Powered by" = "Mede mogelijk gemaakt door";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "Mogelijk gemaakt door %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Officiële feestdag";
@@ -171,11 +354,41 @@
 /* No comment provided by engineer. */
 "Real-time" = "Real-time";
 
+/* Trip badge: Recommended */
+"Recommended" = "Recommended";
+
+/* Title for button that allows users to request support */
+"Request support" = "Support aanvragen";
+
+/* Action button title to plan a route */
+"Route" = "Route";
+
+/* No comment provided by engineer. */
+"Routing between these locations is not yet supported." = "Routebepaling tussen deze locaties wordt nog niet ondersteund.";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "Reititys %1$@ ja %2$@ ei vielä tueta.";
+
+/* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
+"Scheduled" = "Scheduled";
+
+/* No comment provided by engineer. */
+"Search for destination" = "Search for destination";
+
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Search for this stop again or try again later.";
 
 /* Send SMS action button */
 "Send SMS" = "SMS versturen";
+
+/* Title for displaying the details of a public transport service (i.e., a specific departure of a specific route) */
+"Service" = "Dienst";
+
+/* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
+"Service has been cancelled." = "Service has been cancelled.";
+
+/* Button label to set departure time */
+"Set time" = "Kies een tijd";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Setup";
@@ -183,17 +396,41 @@
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Meer";
 
+/* No comment provided by engineer. */
+"Show timetable" = "Bekijk dienstregeling";
+
 /* Show website action button */
 "Show website" = "Open Website";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "Alleen staruimte beschikbaar";
 
+/* Title of button to start a trip (primarily after pausing) */
+"Start" = "Vertrek";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "Start location";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "SUV";
+
+/* Title of button to access timetable */
+"Timetable" = "Dienstregeling";
+
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "Naar %@";
 
+/* Title for button to access transport modes */
+"Transport" = "Vervoer";
+
 /* Title for a trip */
 "Trip" = "Reis";
+
+/* Title for trip of provided index */
+"Trip %@" = "Trip %@";
+
+/* Title of page that shows routing results */
+"Trips" = "Reizen";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
 "Unfriendly" = "Onvriendelijk";
@@ -201,11 +438,17 @@
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
 "Unknown" = "Onbekend";
 
+/* Title for button that unlocks a shared vehicle. */
+"Unlock" = "Unlock";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Bijgewerkt %@ geleden";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = "Voertuig %@ bijgewerkt %@ geleden";
+"Vehicle %@ updated %@ ago" = "Voertuig %1$@ bijgewerkt %2$@ geleden";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Vehicles";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "We zijn bezig om uw reis op te halen. Een ogenblik geduld...";
@@ -213,15 +456,6 @@
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Hier houden we u op de hoogte van de nieuwste transport waarschuwingen";
 
-/* Time of the bus departure. (old key: DepartureTime) */
-"at %@" = "om %@";
-
-/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
-"for %@" = "voor %@";
-
-/* goCatch action */
-"goCatch a Taxi" = "goCatch een Taxi";
-
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "ingogo een Taxi";
+/* Alert if service running late/early, meaning that the user might not make the next service */
+"You might not make this transfer." = "U zou deze connectie wellicht niet kunnen halen.";
 
