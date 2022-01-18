@@ -20,6 +20,7 @@ protocol TKUIModePickerLayoutHelperDelegate: AnyObject {
   
   func selectedItem(at indexPath: IndexPath, in collectionView: UICollectionView)
   
+  func hoverChanged(isActive: Bool, at indexPath: IndexPath?, in collectionView: UICollectionView)
 }
 
 class TKUIModePickerLayoutHelper: NSObject {
@@ -49,12 +50,56 @@ class TKUIModePickerLayoutHelper: NSObject {
 
 extension TKUIModePickerLayoutHelper: UICollectionViewDataSource {
   
+  #if targetEnvironment(macCatalyst)
+  @objc
+  func tapped(sender: UITapGestureRecognizer) {
+    guard let collectionView = collectionView else { return }
+    let point = sender.location(in: collectionView)
+    if let indexPath = collectionView.indexPathForItem(at: point) {
+      delegate.selectedItem(at: indexPath, in: collectionView)
+    }
+  }
+  
+  @objc
+  func hover(sender: UIHoverGestureRecognizer) {
+    guard let collectionView = collectionView else { return }
+    let point = sender.location(in: collectionView)
+    if let indexPath = collectionView.indexPathForItem(at: point) {
+      switch sender.state {
+      case .began:
+        delegate.hoverChanged(isActive: true, at: indexPath, in: collectionView)
+      case .ended, .cancelled, .failed:
+        delegate.hoverChanged(isActive: false, at: indexPath, in: collectionView)
+      default:
+        break
+      }
+    } else {
+      delegate.hoverChanged(isActive: false, at: nil, in: collectionView)
+    }
+  }
+
+  #endif
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return delegate.numberOfModesToDisplay(in: collectionView)
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    return delegate.pickerCellToDisplay(at: indexPath, in: collectionView)
+    let pickerCell = delegate.pickerCellToDisplay(at: indexPath, in: collectionView)
+      
+    #if targetEnvironment(macCatalyst)
+    if (pickerCell.gestureRecognizers ?? []).isEmpty {
+      // For some reason, the 'did select' delegate callback won't fire on
+      // Mac Catalyst, so we immitate that manually.
+      let tapper = UITapGestureRecognizer(target: self, action: #selector(tapped(sender:)))
+      pickerCell.addGestureRecognizer(tapper)
+      
+      let hover = UIHoverGestureRecognizer(target: self, action: #selector(hover(sender:)))
+      pickerCell.addGestureRecognizer(hover)
+    }
+    #endif
+    
+    return pickerCell
   }
   
 }

@@ -28,6 +28,8 @@
 		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
 		3AB424DF2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
 		3AB424E02734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
+		3AB4E58127584632006D2363 /* String+NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4E58027584632006D2363 /* String+NonEmpty.swift */; };
+		3AB4E58227584632006D2363 /* String+NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4E58027584632006D2363 /* String+NonEmpty.swift */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
 		3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */; };
@@ -954,11 +956,14 @@
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A963D6026D46AD300C328A1 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
+		3A9AC27E27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Shared.strings; sourceTree = "<group>"; };
+		3A9AC27F27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/TripKit.strings; sourceTree = "<group>"; };
 		3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKReporter+Rx.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+EncodePolylineString.swift"; sourceTree = "<group>"; };
 		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
+		3AB4E58027584632006D2363 /* String+NonEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NonEmpty.swift"; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -2197,6 +2202,7 @@
 				3AFF26BE26C6975F007809CD /* NSManagedObjectContext+Fetch.swift */,
 				3AFF26BD26C6975F007809CD /* NSNumber+Formatter.swift */,
 				3AFF26C126C6975F007809CD /* NSUserDefaults+SharedDefaults.swift */,
+				3AB4E58027584632006D2363 /* String+NonEmpty.swift */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -3201,6 +3207,7 @@
 				nb,
 				tr,
 				ja,
+				ar,
 			);
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			packageReferences = (
@@ -3535,6 +3542,7 @@
 				3AFF296C26C6981E007809CD /* TKRoutingServer.swift in Sources */,
 				3AFF287D26C697AB007809CD /* TKRegionManager.swift in Sources */,
 				3AFF288A26C697CA007809CD /* RoutingAPIModel.swift in Sources */,
+				3AB4E58227584632006D2363 /* String+NonEmpty.swift in Sources */,
 				3AFF2A0626C69994007809CD /* NSDate+Formatting.swift in Sources */,
 				3AFF299226C69850007809CD /* ISO8601OrSecondsSince1970.swift in Sources */,
 				3AFF28D626C697D9007809CD /* SegmentTemplate+Data.swift in Sources */,
@@ -3899,6 +3907,7 @@
 				3AFF294826C6981D007809CD /* TKQuickBookingHelper.swift in Sources */,
 				3AFF290C26C697DA007809CD /* TKLocationTypes.swift in Sources */,
 				3AFF295726C6981D007809CD /* TKReporter.swift in Sources */,
+				3AB4E58127584632006D2363 /* String+NonEmpty.swift in Sources */,
 				3AFF290826C697DA007809CD /* SegmentReference+CoreDataProperties.swift in Sources */,
 				3AFF293926C6980D007809CD /* TKGeoJSON.swift in Sources */,
 				3AFF28A126C697CB007809CD /* OpeningHoursAPIModel.swift in Sources */,
@@ -4212,6 +4221,7 @@
 				3AFF262226C6975F007809CD /* fi */,
 				3AFF262426C6975F007809CD /* nl */,
 				3AFF262726C6975F007809CD /* pt */,
+				3A9AC27E27753E1C004B8A52 /* ar */,
 			);
 			name = Shared.strings;
 			sourceTree = "<group>";
@@ -4236,6 +4246,7 @@
 				3AFF262526C6975F007809CD /* nl */,
 				3AFF262826C6975F007809CD /* pt */,
 				3A963D6026D46AD300C328A1 /* en-US */,
+				3A9AC27F27753E1C004B8A52 /* ar */,
 			);
 			name = TripKit.strings;
 			sourceTree = "<group>";
@@ -4826,7 +4837,7 @@
 			repositoryURL = "https://github.com/skedgo/TGCardViewController.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

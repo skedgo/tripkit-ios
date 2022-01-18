@@ -84,11 +84,13 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
       trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
       bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
     ])
-    
+
+    #if !targetEnvironment(macCatalyst)
     let longTap = UILongPressGestureRecognizer(target: self, action: #selector(handleLongTap))
     longTap.delaysTouchesBegan = true
     longTap.minimumPressDuration = 0.25
     collectionView.addGestureRecognizer(longTap)
+    #endif
     
     self.collectionView = collectionView
     
@@ -343,6 +345,21 @@ extension TKUIModePicker: TKUIModePickerLayoutHelperDelegate {
     }
     
     self.tap.onNext(())
+  }
+  
+  func hoverChanged(isActive: Bool, at indexPath: IndexPath?, in collectionView: UICollectionView) {
+    if isActive, let indexPath = indexPath {
+      let tappedItem = visibleModes[indexPath.row]
+      if let lastTapped = self.lastTappedItem, lastTapped != tappedItem {
+        hide(item: lastTapped)
+      }
+      if let cell = collectionView.cellForItem(at: indexPath) {
+        show(item: tappedItem, above: cell)
+      }
+      self.lastTappedItem = tappedItem
+    } else if let lastTapped = self.lastTappedItem {
+      hide(item: lastTapped)
+    }
   }
   
 }

@@ -19,7 +19,6 @@ import TripKit
 public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation {
   var semaphoreMode: TKUISemaphoreView.Mode? { get }
   var bearing: NSNumber? { get }
-  var canFlipImage: Bool { get }
   var imageIsTemplate: Bool { get }
   var isTerminal: Bool { get }
   var selectionIdentifier: String? { get }
@@ -91,6 +90,7 @@ public class TKUISemaphoreView: MKAnnotationView {
     configure(.headOnly, side: .defaultDirection)
     disposeBag = .init()
     isFlipped = false
+    modeImageView?.semanticContentAttribute = .unspecified
     modeImageView?.removeFromSuperview()
     modeImageView = nil
     headImageView?.removeFromSuperview()
@@ -232,7 +232,7 @@ extension TKUISemaphoreView {
     let asTemplate = semaphorable.imageIsTemplate
     let bearing = semaphorable.bearing
     let terminal = semaphorable.isTerminal
-    let canFlip = imageURL == nil && semaphorable.canFlipImage == true
+    let canFlip = imageURL == nil
     
     let headImage: UIImage
     let headTintColor: UIColor
@@ -277,9 +277,10 @@ extension TKUISemaphoreView {
       modeImageView.setImage(with: imageURL, asTemplate: asTemplate, placeholder: image)
       
       if canFlip, totalBearing > 180 || totalBearing < 0 {
-        modeImageView.transform = modeImageView.transform.scaledBy(x: -1, y: 1)
+        modeImageView.semanticContentAttribute = .forceRightToLeft
         isFlipped = true
       } else {
+        modeImageView.semanticContentAttribute = .forceLeftToRight
         isFlipped = false
       }
       
@@ -306,7 +307,7 @@ extension TKUISemaphoreView {
     headImageView?.update(magneticHeading: CGFloat(magneticHeading), bearing: CGFloat(bearing))
     
     guard let displayable = (annotation as? TKUISemaphoreDisplayable) else { return }
-    if displayable.canFlipImage && displayable.imageURL == nil {
+    if displayable.imageURL == nil {
       let totalBearing = bearing - magneticHeading
       let flip = totalBearing > 180 || totalBearing < 0
       self.flipHead(flip)
@@ -317,10 +318,10 @@ extension TKUISemaphoreView {
   
   private func flipHead(_ flip: Bool) {
     if flip, !isFlipped {
-      modeImageView.transform = modeImageView.transform.scaledBy(x: -1, y: 1)
+      modeImageView.semanticContentAttribute = .forceRightToLeft
       isFlipped = true
     } else if !flip, isFlipped {
-      modeImageView.transform = .identity
+      modeImageView.semanticContentAttribute = .forceLeftToRight
       isFlipped = false
     }
   }

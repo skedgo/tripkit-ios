@@ -75,7 +75,16 @@ extension Reactive where Base: TKServer {
     Single.create { subscriber in
       base.hit(method, path: path, parameters: parameters, headers: headers, region: region
       ) { status, headers, result in
-        subscriber(.success((status, headers, try? result.get())))
+        do {
+          let data = try result.get()
+          subscriber(.success((status, headers, data)))
+        } catch {
+          if let serverError = error as? TKServer.ServerError, serverError == .noData {
+            subscriber(.success((status, headers, nil)))
+          } else {
+            subscriber(.failure(error))
+          }
+        }
       }
       return Disposables.create()
     }

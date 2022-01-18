@@ -1,3 +1,30 @@
+/* Title for something that happened a certain timeframe ago, e.g., '5 mins ago' */
+"%@ ago" = "%@ ago";
+
+/* Number of alerts, in this case, there are multiple (plural */
+"%@ alerts" = "%@ alerts";
+
+/* Filler for a specific service running at a time, e.g., '396 at 11:56am' */
+"%@ at %@" = "%1$@ at %2$@";
+
+/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
+"%@ cycle friendly" = "%@ 자전거 이용 가능";
+
+/* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
+"%@ every %@" = "%$1@ %$2@마다";
+
+/* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
+"%@ more" = "%@ more";
+
+/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
+"%@ stops" = "%@ 정거장";
+
+/* Duration without traffic */
+"%@ w/o traffic" = "%@ 교통지체 없이";
+
+/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
+"%@ wheelchair friendly" = "%@ 휠체어 이용 가능";
+
 /* Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. */
 "%1$@ early" = "%1$@ 일찍 도착";
 
@@ -10,26 +37,23 @@
 /* Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). */
 "%1$@ late (%2$@ service)" = "%1$@ 지연 (%2$@ 서비스)";
 
-/* Number of alerts, in this case, there are multiple (plural */
-"%@ alerts" = "%@ alerts";
-
-/* Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'. */
-"%@ cycle friendly" = "%@ 자전거 이용 가능";
-
-/* Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops) */
-"%@ stops" = "%@ 정거장";
-
-/* Duration without traffic */
-"%@ w/o traffic" = "%@ 교통지체 없이";
-
-/* Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'. */
-"%@ wheelchair friendly" = "%@ 휠체어 이용 가능";
+/* Number of alerts, in this case, there is just one */
+"1 alert" = "1 alert";
 
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "한 정거장";
 
 /* No comment provided by engineer. */
 "Alerts" = "알림";
+
+/* Instruction to follow street of the provided name */
+"Along %@" = "Along %@";
+
+/* Instruction to follow unnamed street */
+"Along unnamed street" = "Along unnamed street";
+
+/* Action button title to see alternative options for the case where you cant make the next connection */
+"Alternative routes" = "대체 노선";
 
 /* apple maps directions action */
 "Apple Maps" = "애플 지도";
@@ -38,35 +62,77 @@
 "Arrival" = "도착";
 
 /* Prefix for selected 'arrive by' time
-   Single line instruction to arrive */
+ Single line instruction to arrive */
 "Arrive" = "도착";
+
+/* The place of arrival. */
+"Arrive %@" = "Arrive %@";
+
+/* The first '%@' will be replaced with the place of arrival, the second with the arrival time. (old key: ArrivalLocationTime) */
+"Arrive %@ at %@" = "Arrive %1$@ at %2$@";
 
 /* '%@' will be replaced with the arrival time. (old key: ArrivalTime) */
 "Arrive at %@" = "%@에 도착";
 
 /* The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime) */
-"Arrive at %@ at %@" = "%@에 %@시에 도착";
+"Arrive at %@ at %@" = "%1$@에 %2$@시에 도착";
+
+/* Arrive before button */
+"Arrive by" = "도착";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "도착";
 
+/* Used when the trip does not end at the requested location, but nearby. The '%@' will be replaced with requested destination location. */
+"Arrive near %@" = "Arrive near %@";
+
+/* Time of the bus departure. (old key: DepartureTime) */
+"at %@" = "%@에";
+
 /* 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park. (old key: PrimaryLocationStationary) */
 "At %@" = "%@에서";
 
-/* Placeholder title while calculating trips */
-"Calculating trips..." = "일정을 불러오고 있습니다.";
+/* Text for vehicle of type: Bicycle */
+"Bicycle" = "자전거";
+
+/* Action title to make a booking */
+"Book" = "예약";
+
+/* Action title to make a booking using service/app named '@%' */
+"Book with %@" = "Book with %@";
 
 /* No comment provided by engineer. */
 "Call" = "전화걸기";
 
-/* Action title for calling provider of name. (old key: CallTaxiFormat) */
+/* Action title to make a call to service/company named '@%' */
 "Call %@" = "%@에 전화";
 
-/* Single line instruction if device is offline and user needs to reconnect to internet to calculate trips */
-"Connect to Internet to get trips" = "인터넷에 연결합니다.";
+/* Text for vehicle of type: Car */
+"Car" = "자동차";
+
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Change Route";
+
+/* Trip badge: Cheapest */
+"Cheapest" = "Cheapest";
+
+/* Accessibility title for button that points up to collapse a section */
+"Collapse" = "Collapse";
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "환승 정류장을 찾을 수 없습니다.";
+
+/* Title for button to customise the home card */
+"Customise home" = "Customise home";
+
+/* Text for attributing data sources. The list of providers will be used instead of '%@' */
+"Data provided by %@" = "%@에서 제공 데이터";
+
+/* Title for screen showing data providers */
+"Data Providers" = "데이터 제공";
+
+/* Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location. */
+"Depart near %@" = "Depart near %@";
 
 /* Departure time sorter title */
 "Departure" = "출발";
@@ -74,14 +140,50 @@
 /* Destination of the bus */
 "Direction" = "방향";
 
+/* Status indicator that a mode is not enabled */
+"Disabled" = "Disabled";
+
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "접속끊기";
+
+/* Button to dismiss something, e.g., an error or action action sheet */
+"Dismiss" = "무시";
+
+/* Indicating a path requires you to dismount and push your bicycle */
+"Dismount" = "Dismount";
+
+/* Text for vehicle of type: E-Bike */
+"E-Bike" = "E-Bike";
+
+/* Trip badge: Easiest */
+"Easiest" = "Easiest";
 
 /* As in 'this bus/train is empty' */
 "Empty" = "비어 있음";
 
+/* Status indicator that a mode is enabled */
+"Enabled" = "Enabled";
+
+/* Placeholder name for destination (then replaced with address or name) */
+"End location" = "End location";
+
+/* Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes' */
+"Every %@" = "매 %@";
+
+/* Accessibility title for button that points down to expand a section */
+"Expand" = "Expand";
+
+/* Action title to extend an existing booking */
+"Extend" = "Extend";
+
+/* Trip badge: Fastest */
+"Fastest" = "Fastest";
+
 /* As in 'this bus/train has few seats available' */
 "Few seats available" = "자리가 몇 개 안 남았습니다.";
+
+/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
+"for %@" = "%@동안";
 
 /* Indicating a path is wheelchair/cycyling friendly */
 "Friendly" = "Friendly";
@@ -92,42 +194,69 @@
 /* As in 'this bus/train is full and likely can't accept further passengers' */
 "Full" = "만차";
 
-/* No comment provided by engineer. */
-"Get Lyft" = "리프트 부르기";
+/* Action title get/download app of name '@%' */
+"Get %@" = "Get %@";
 
-/* No comment provided by engineer. */
-"Get Ola" = "올라 부르기";
+/* Title for button to get/download an external app. */
+"Get app" = "Get app";
 
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "길 찾기";
 
-/* No comment provided by engineer. */
-"Get ingogo" = "Ingogo 부르기";
+/* Instruction to get a service towards provided destination */
+"Get on service to %@" = "Get on service to %@";
+
+/* Title of button to start a trip */
+"Go" = "Go";
+
+/* goCatch action */
+"goCatch a Taxi" = "goCatch 택시";
 
 /* google maps directions action */
 "Google Maps" = "구글 맵";
 
+/* Trip badge: Greenest */
+"Greenest" = "Greenest";
+
+/* Trip badge: Healthiest */
+"Healthiest" = "Healthiest";
+
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
-"I'll arrive at %@ at %@" = "%@에 %@에 도착";
+"I'll arrive at %@ at %@" = "%1$@에 %2$@에 도착";
 
 /* Indication of an activity. (old key: ActivityIndication) */
-"I'll take a %@ at %@ from %@." = "%@에서 부터 %@에 가는 %@를 타겠습니다.";
+"I'll take a %@ at %@ from %@." = "%1$@에서 부터 %2$@에 가는 %3$@를 타겠습니다.";
+
+/* Indication of an activity. */
+"I'll take a %@ from %@." = "I'll take a %1$@ from %2$@.";
+
+/* Title for something to happen in a certain timeframe, e.g., 'In 5 mins' */
+"In %@" = "In %@";
 
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "그동안 %@을 계속 둘러보시고 즐거운 여행 되세요.";
 
-/* No comment provided by engineer. */
-"In the meantime, let's keep exploring and enjoy your trips" = "그동안 계속 둘러보시고 즐거운 여행 되세요.";
+/* inGogo taxi booking action */
+"ingogo a Taxi" = "ingogo 택시";
+
+/* Title for section with instant results in autocompletion */
+"Instant results" = "즉각적인 결과";
+
+/* Text for vehicle of type: Kick Scooter */
+"Kick Scooter" = "Kick Scooter";
 
 /* Prefix for selected 'leave after' time
-   Single line instruction to leave */
+ Single line instruction to leave */
 "Leave" = "떠나기";
 
 /* The place of departure. (old key: LeaveLocation) */
 "Leave %@" = " %@에 떠남";
 
 /* The place of departure with time. (old key: LeaveLocationTime) */
-"Leave %@ at %@" = "%@에 %@를 떠남";
+"Leave %@ at %@" = "%1$@에 %2$@를 떠남";
+
+/* Leave after button */
+"Leave at" = "떠나기";
 
 /* Time departure. (old key: LeaveTime) */
 "Leave at %@" = "%@에 떠남";
@@ -135,8 +264,11 @@
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "떠나기";
 
-/* No comment provided by engineer. */
+/* Leave ASAP/now option */
 "Leave now" = "지금 떠남";
+
+/* Title of button to show fewer results */
+"Less" = "Less";
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "자리가 별로 남지 않았습니다.";
@@ -144,17 +276,38 @@
 /* No comment provided by engineer. */
 "Live traffic" = "실시간 교통";
 
-/* Title to show while loading/waiting for results */
+/* Indicating when something is loading */
 "Loading…" = "로딩 중…";
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "자리가 많이 남아 있습니다.";
 
+/* No comment provided by engineer. */
+"Map by %@" = "Map by %@";
+
+/* Title of button to show additional results */
+"More" = "More";
+
 /* Title of button to get more details about an alert */
 "More info" = "더 많은 정보";
 
+/* 'More results' section in autocompletion */
+"More results" = "더 많은 결과 보기";
+
+/* Text for vehicle of type: Moto Scooter */
+"Moto Scooter" = "Moto Scooter";
+
+/* Text for vehicle of type: Motorbike */
+"Motorbike" = "오토바이";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "예정된 경로가 없습니다.";
+
+/* Indicator to show when a service does not have real-time data (even though we usually get it for services like this.) */
+"No real-time available" = "No real-time available";
+
+/* Error title when routing produced no results (but no specific error was returned from routing). */
+"No routes found." = "설정된 경로가 없음";
 
 /* As in 'this bus/train is full and definitely not accepting further passengers' */
 "Not accepting passengers" = "자리가 없습니다.";
@@ -162,17 +315,38 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "정각에";
 
-/* No comment provided by engineer. */
-"Open Lyft" = "Lyft 앱 열기";
+/* Indicating no return trip is required. */
+"One-way only" = "One-way only";
 
-/* No comment provided by engineer. */
-"Open Ola" = "올라 열기";
+/* Action title open app of name '@%' */
+"Open %@" = "Open %@";
+
+/* Title for button that opens an external app. */
+"Open app" = "Open app";
+
+/* Action button title for opening something in another app. Tapping this button will show a list of app names. */
+"Open in…" = "Open in…";
 
 /* Title for opening hours */
 "Opening Hours" = "영업 시간";
 
+/* Title for button that allows users to plan a new trip */
+"Plan a new trip" = "새로운 경로 선택";
+
 /* No comment provided by engineer. */
 "Plan a trip and it will show up here." = "일정을 계획하시면 여기에 나타납니다.";
+
+/* Title of page to plan a trip */
+"Plan Trip" = "경로 계획";
+
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
+
+/* No comment provided by engineer. */
+"Powered by" = "제공";
+
+/* No comment provided by engineer. */
+"Powered by %@" = "제공: %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "공휴일";
@@ -180,11 +354,41 @@
 /* No comment provided by engineer. */
 "Real-time" = "실시간";
 
+/* Trip badge: Recommended */
+"Recommended" = "Recommended";
+
+/* Title for button that allows users to request support */
+"Request support" = "고객지원 요청";
+
+/* Action button title to plan a route */
+"Route" = "경로";
+
+/* No comment provided by engineer. */
+"Routing between these locations is not yet supported." = "이 경로는 지원이 되지 않습니다.";
+
+/* Error message if interregional routing isn't yet supported */
+"Routing from %@ to %@ is not yet supported" = "%1$@에서 %2$@ 경로가 지원되지 않습니다.";
+
+/* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
+"Scheduled" = "Scheduled";
+
+/* No comment provided by engineer. */
+"Search for destination" = "Search for destination";
+
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "이 목적지 검색을 중단하거나 나중에 다시 시도해주세요.";
 
-/* Send SMS action */
+/* Send SMS action button */
 "Send SMS" = "SMS 보내기";
+
+/* Title for displaying the details of a public transport service (i.e., a specific departure of a specific route) */
+"Service" = "서비스";
+
+/* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
+"Service has been cancelled." = "Service has been cancelled.";
+
+/* Button label to set departure time */
+"Set time" = "시간 설정";
 
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "설정";
@@ -192,17 +396,41 @@
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Show";
 
-/* Show website action */
+/* No comment provided by engineer. */
+"Show timetable" = "시간표 보기";
+
+/* Show website action button */
 "Show website" = "웹사이트 보기";
 
 /* As in 'this bus/train is fairly full and has standing room only' */
 "Standing room only" = "설자리만 남아있습니다.";
 
+/* Title of button to start a trip (primarily after pausing) */
+"Start" = "시작";
+
+/* Placeholder name for origin (then replaced with address or name) */
+"Start location" = "Start location";
+
+/* Text for vehicle of type: SUV */
+"SUV" = "SUV";
+
+/* Title of button to access timetable */
+"Timetable" = "시간표";
+
 /* Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd) */
 "To %@" = "%@에";
 
+/* Title for button to access transport modes */
+"Transport" = "운송수단";
+
 /* Title for a trip */
 "Trip" = "경로";
+
+/* Title for trip of provided index */
+"Trip %@" = "Trip %@";
+
+/* Title of page that shows routing results */
+"Trips" = "\n경로";
 
 /* Indicating a path is wheelchair/cycyling unfriendly */
 "Unfriendly" = "Unfriendly";
@@ -210,11 +438,17 @@
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
 "Unknown" = "Unknown";
 
+/* Title for button that unlocks a shared vehicle. */
+"Unlock" = "Unlock";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "%s 전에 업데이트 됨";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
-"Vehicle %@ updated %@ ago" = " %@이 %@ 전에 업데이트 됨";
+"Vehicle %@ updated %@ ago" = "%1$@이 %2$@ 전에 업데이트 됨";
+
+/* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
+"Vehicles" = "Vehicles";
 
 /* No comment provided by engineer. */
 "We are busy getting your upcoming trip. Please wait..." = "정보를 받고 있습니다. 잠시만 기다려 주세요.";
@@ -222,15 +456,6 @@
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "최신 교통상황을 계속 업데이트 하겠습니다.";
 
-/* Time of the bus departure. (old key: DepartureTime) */
-"at %@" = "%@에";
-
-/* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
-"for %@" = "%@동안";
-
-/* goCatch action */
-"goCatch a Taxi" = "goCatch 택시";
-
-/* No comment provided by engineer. */
-"ingogo a Taxi" = "ingogo 택시";
+/* Alert if service running late/early, meaning that the user might not make the next service */
+"You might not make this transfer." = "경유 옵션을 다시 생각해 보세요.";
 

@@ -358,16 +358,3 @@ extension Alert {
     }
   }
 }
-
-extension Optional where Wrapped == String {
-  fileprivate var isEmpty: Bool {
-    switch self {
-    case .none: return true
-    case .some(let string): return string.isEmpty
-    }
-  }
-  
-  fileprivate var nonEmpty: String? {
-    return isEmpty ? self : nil
-  }
-}

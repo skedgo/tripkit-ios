@@ -14,11 +14,13 @@ open class TKUISheet: UIView {
 
   public var overlayColor: UIColor = .tkNeutral4
   
-  private var overlay: UIView? = nil
-
+  private var overlay: UIView?
+  
   public var isBeingOverlaid: Bool { overlay != nil }
   
-  private var originalAccessibilityElements: [Any]? = nil
+  private var bottomConstraint: NSLayoutConstraint?
+
+  private var originalAccessibilityElements: [Any]?
   
   private var dismissHandler: (() -> Void)?
   
@@ -39,31 +41,48 @@ open class TKUISheet: UIView {
     
     self.dismissHandler = handler
     
-    // add a background
+    // add a background, disable accessibility of anything that's hidden by it
+    
     let overlay = makeOverlay(view.bounds)
     self.overlay = overlay
-    
-    // determine start and end positions for sheet
-    frame.size.width = view.frame.width
-    frame.origin.y = view.frame.maxY - view.frame.minY
-    
-    var endFrame = self.frame
-    endFrame.origin.y -= endFrame.height
-    
-    autoresizingMask = .flexibleTopMargin
-    view.addSubview(self)
-    view.insertSubview(overlay, belowSubview: self)
     
     originalAccessibilityElements = view.accessibilityElements
     view.accessibilityElements = [self]
     
-    // animate it in
+    // First, position where it's supposed to go
+
+    view.addSubview(self)
+    view.insertSubview(overlay, belowSubview: self)
+
+    self.translatesAutoresizingMaskIntoConstraints = false
+    let bottomConstraint = view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
+    self.bottomConstraint = bottomConstraint
+    
+    NSLayoutConstraint.activate([
+      bottomConstraint,
+      view.leadingAnchor.constraint(equalTo: leadingAnchor),
+      view.trailingAnchor.constraint(equalTo: trailingAnchor)
+    ])
+
+    bottomConstraint.constant = 0
+    view.setNeedsUpdateConstraints()
+    view.layoutIfNeeded()
+
+    // Then, animate it in from below
+    
+    let endFrame = frame
+    frame.origin.y += frame.height
     UIView.animate(withDuration: 0.25) {
       overlay.alpha = 1
       self.frame = endFrame
     } completion: { _ in
       UIAccessibility.post(notification: .screenChanged, argument: self)
     }
+
+    // track keyboard, in case that the sheet content brings it up
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
   
   private func makeOverlay(_ frame: CGRect) -> UIView {
@@ -88,31 +107,64 @@ open class TKUISheet: UIView {
   public func removeOverlay(animated: Bool) {
     guard let overlay = self.overlay, let superview = overlay.superview else { return }
     
+    func onDismissal() {
+      superview.accessibilityElements = originalAccessibilityElements
+      originalAccessibilityElements = nil
+
+      overlay.removeFromSuperview()
+      self.overlay = nil
+      removeFromSuperview()
+      NotificationCenter.default.removeObserver(self)
+      dismissHandler?()
+    }
+    
     if animated {
       UIView.animate(withDuration: 0.25) {
         overlay.alpha = 0
         self.frame.origin.y += self.frame.size.height
       } completion: { finished in
         if finished {
-          superview.accessibilityElements = self.originalAccessibilityElements
-          self.originalAccessibilityElements = nil
-
-          overlay.removeFromSuperview()
-          self.overlay = nil
-          self.removeFromSuperview()
-          self.dismissHandler?()
+          onDismissal()
         } else {
           overlay.alpha = 1
         }
       }
     } else {
-      superview.accessibilityElements = self.originalAccessibilityElements
-      self.originalAccessibilityElements = nil
+      onDismissal()
+    }
+  }
+  
+  // MARK: - Responding to Keyboard Appearance
+  
+  @objc private func keyboardWillShow(_ notification: Notification) {
+    guard
+      let bottomConstraint = self.bottomConstraint,
+      let info = notification.userInfo,
+      let size = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size,
+      let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+    else { return }
 
-      overlay.removeFromSuperview()
-      self.overlay = nil
-      self.removeFromSuperview()
-      dismissHandler?()
+    bottomConstraint.constant = size.height
+    setNeedsUpdateConstraints()
+    
+    UIView.animate(withDuration: duration) {
+      self.superview?.layoutIfNeeded()
+    }
+  }
+  
+  @objc private func keyboardWillHide(_ notification: Notification) {
+    guard
+      let bottomConstraint = self.bottomConstraint,
+      let info = notification.userInfo,
+      let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+    else { return }
+
+    
+    bottomConstraint.constant = 0
+    setNeedsUpdateConstraints()
+    
+    UIView.animate(withDuration: duration) {
+      self.superview?.layoutIfNeeded()
     }
   }
   

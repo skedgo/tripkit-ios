@@ -110,6 +110,9 @@
 /* Text for vehicle of type: Car */
 "Car" = "coche";
 
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Change Route";
+
 /* Trip badge: Cheapest */
 "Cheapest" = "Más barato";
 
@@ -261,7 +264,7 @@
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "Partida en";
 
-/* No comment provided by engineer. */
+/* Leave ASAP/now option */
 "Leave now" = "Partir ahora";
 
 /* Title of button to show fewer results */
@@ -312,6 +315,9 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "A tiempo";
 
+/* Indicating no return trip is required. */
+"One-way only" = "One-way only";
+
 /* Action title open app of name '@%' */
 "Open %@" = "Abrir %@";
 
@@ -332,6 +338,9 @@
 
 /* Title of page to plan a trip */
 "Plan Trip" = "Planifica un viaje";
+
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
 
 /* No comment provided by engineer. */
 "Powered by" = "Powered by tripAdvisor";
@@ -378,11 +387,17 @@
 /* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
 "Service has been cancelled." = "El servicio ha sido cancelado.";
 
+/* Button label to set departure time */
+"Set time" = "Definir hora";
+
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "Establecer";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "Mostrar";
+
+/* No comment provided by engineer. */
+"Show timetable" = "Mostrar horarios";
 
 /* Show website action button */
 "Show website" = "Ir al Sitio Web";

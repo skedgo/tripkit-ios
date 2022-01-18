@@ -1,7 +1,7 @@
 /* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
 "'%@' not found." = "无法找到'%@'.";
 
-/* '%@' will be replaced with the person's name. Name for a person's place if it's unclear if it's home, work or something else. */
+/* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
 "%@'s" = "%@'的";
 
 /* '%@' will be replaced with the person's name */
@@ -22,7 +22,7 @@
 /* Default title for alert view */
 "Alert" = "提示";
 
-/* Indicator that an event is all-day, or that something is open all-day */
+/* Indicator that an event is all-day */
 "all-day" = "整天";
 
 /* Option for users if they already owned a SkedGo account */
@@ -154,7 +154,7 @@
 /* Free as in beer */
 "Free" = "免费";
 
-/* No comment provided by engineer. */
+/* Name for a segment or vehicle where you get a lift from someone. */
 "Getting a lift" = "与人共乘";
 
 /* Accessibility annotation for trips which have a reminder set. */
@@ -166,7 +166,7 @@
 /* Include contacts. */
 "Include contacts" = "包含联络人";
 
-/* Button to include events in search, too. */
+/* Include events. */
 "Include events" = "包含事件";
 
 /* Instant results proposal */
@@ -186,6 +186,9 @@
 
 /* Title of button to perform some action at a later time */
 "Later" = "稍后";
+
+/* Indicator for real-time information */
+"Live traffic" = "实时交通";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "加载中";
@@ -214,7 +217,7 @@
 /* Next action */
 "Next" = "下一步";
 
-/* No comment provided by engineer. */
+/* Indicator for no carbon emissions. Note the space is non-breaking white space! */
 "No CO₂" = "无二氧化碳排放";
 
 /* Indicator for wheelchair not accessible services */
@@ -304,6 +307,9 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'…" = "搜索 '%@'…";
 
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "Secure passwords are at least five characters long and include numbers and symbols";
+
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "已发送";
 
@@ -333,6 +339,9 @@
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "越野车";
+
+/* Accessibility hint for routing results screen. */
+"Tap to change start and end locations" = "Tap to change start and end locations";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "点击来选取地点";

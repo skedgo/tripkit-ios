@@ -52,9 +52,9 @@ extension TKUIRoutingResultsViewModel {
       case arriveBefore(Date)
     }
     
-    init(destination: MKAnnotation) {
-      self.mode = .origin
-      self.origin = nil
+    init(destination: MKAnnotation, origin: MKAnnotation? = nil) {
+      self.mode = origin == nil ? .origin : .destination
+      self.origin = origin.map(TKNamedCoordinate.namedCoordinate(for:))
       self.destination = TKNamedCoordinate.namedCoordinate(for: destination)
       self.time = TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP ? .leaveASAP : nil
     }

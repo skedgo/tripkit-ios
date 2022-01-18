@@ -1,17 +1,17 @@
+/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
+"'%@' not found." = "'%@' não encontrado.";
+
 /* Name for a {%@}'s place if it's unclear if it's home, work or something else. */
 "%@'s" = "De %@";
 
-/* No comment provided by engineer. */
+/* '%@' will be replaced with the person's name */
 "%@'s Home" = "Casa de %@";
 
-/* No comment provided by engineer. */
+/* '%@' will be replaced with the person's name */
 "%@'s Work" = "Trabalho de %@";
 
 /* Number of repeats. (old key: NumberRecurrences) */
 "%lu recurrences" = "%lu repetições";
-
-/* Error when location search for %input was not successful. (old key: RequestErrorFormat) */
-"'%@' not found." = "'%@' não encontrado.";
 
 /* Authorization restricted alert message */
 "Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider." = "O acesso a este recurso tem sido restrito para o seu dispositivo. Por favor, verifique as configurações do aplicativo> Geral> Restrições ou pergunte ao seu provedor.";
@@ -22,8 +22,17 @@
 /* Default title for alert view */
 "Alert" = "Alerta";
 
+/* Indicator that an event is all-day */
+"all-day" = "dia inteiro";
+
+/* Option for users if they already owned a SkedGo account */
+"Already have an account?" = "Already have an account?";
+
 /* Option for users if they already owned a SkedGo account */
 "Already have an account? Sign in" = "Ja possui contat? Assine";
+
+/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
+"arrives %@" = "chegada %@";
 
 /* Source where the account was derived, e.g., Facebook */
 "Authentication" = "Autenticação";
@@ -43,9 +52,6 @@
 /* Label for when a service is cancelled. */
 "Cancelled" = "Cancelado";
 
-/* No comment provided by engineer. */
-"Cannot proceed without a valid email address" = "Não é possível proceder sem um endereço de email válido";
-
 /* Type of vehicle : car */
 "Car" = "Carro";
 
@@ -64,6 +70,9 @@
 /* Title on the button that asks users to confirm if they want to proceed with booking */
 "Confirm" = "Confirmar";
 
+/* This often appears below a password field, asking users to confirm the password entered. */
+"Confirm password" = "Confirm password";
+
 /* Title for button that allows users to contact our support team to help resolve some error in the app. */
 "Contact support" = "Contactar o suporte";
 
@@ -79,11 +88,20 @@
 /* Title for user's current location */
 "Current Location" = "Localização atual";
 
+/* Class of errors usually originated from databases */
+"Data Error" = "Data Error";
+
 /* Delete action */
 "Delete" = "Apagar";
 
+/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
+"departs %@" = "saída %@";
+
 /* Sort by distance */
 "Distance" = "Distância";
+
+/* Option for users if they don't yet have a SkedGo account */
+"Don't have an account?" = "Don't have an account?";
 
 /* Option for users if they don't yet have a SkedGo account */
 "Don't have an account? Sign up" = "Não possui conta? Assine";
@@ -94,8 +112,20 @@
 /* Drop new pin */
 "Drop new pin" = "Baixar novo pin";
 
+/* Title for the screen which allows users to edit their accounts */
+"Edit Account" = "Edit Account";
+
 /* For email address */
 "Email" = "Email";
+
+/* Short indicator of end-time */
+"ends at %@" = "termina as %@";
+
+/* Prompt for users to enter a new password */
+"Enter a new password" = "Enter a new password";
+
+/* Describing any generic/unclassified errors */
+"Error" = "erro";
 
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Toda %@";
@@ -103,17 +133,35 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Todo dia";
 
+/* Email placeholder text */
+"example@example.com" = "example@example.com";
+
+/* Text often displayed in a HUD, informing users some request has not been successfully sent, e.g., a request to resend a verification email */
+"Failed to send" = "Failed to send";
+
+/* Placeholder text for textField that asks user's first name/given name */
+"First name" = "First name";
+
 /* Reminder to leave preference */
 "For when to leave" = "Para horário de saída";
+
+/* A footnote that tells users we are asking for their current passwords, and why. */
+"For your security, please enter your current password." = "For your security, please enter your current password.";
+
+/* Title for a button which allows users to reset their password */
+"Forgot password" = "Forgot password";
 
 /* Free as in beer */
 "Free" = "Grátis";
 
-/* No comment provided by engineer. */
+/* Name for a segment or vehicle where you get a lift from someone. */
 "Getting a lift" = "Pegar carona";
 
 /* Accessibility annotation for trips which have a reminder set. */
 "Has reminder" = "Possui lembrete";
+
+/* Warning message shown to a user when he/she tries to change password without the primary email verified */
+"In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below." = "In order to change your password, you must first verify your email. Please follow the link that was sent to you or request another one below.";
 
 /* Include contacts. */
 "Include contacts" = "Incluir contatos";
@@ -124,11 +172,23 @@
 /* Instant results proposal */
 "Instant results" = "Resultado instantâneo";
 
+/* A footnote that instructs users to check their emails for reset instructions */
+"Instructions on how to reset password has been sent to the above email address." = "Instructions on how to reset password has been sent to the above email address.";
+
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
+/* Placeholder text for textField that asks user's last name/surname */
+"Last name" = "Last name";
+
+/* Last updated at %date */
+"Last updated: %@" = "Last updated: %@";
+
 /* Title of button to perform some action at a later time */
 "Later" = "Later";
+
+/* Indicator for real-time information */
+"Live traffic" = "Trânsito em tempo real";
 
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Carregando";
@@ -148,22 +208,16 @@
 /* Type of vehicle : motorbike */
 "Motorbike" = "Motocicleta";
 
-/* Title for view that shows the summary of a user's account information */
-"My account" = "Minha conta";
-
 /* Title for name of something (or someone) */
 "Name" = "Nome";
 
 /* Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events). */
 "Never" = "Nunca";
 
-/* Title of page to create new account */
-"New account" = "Conta nova";
-
 /* Next action */
 "Next" = "Continuar";
 
-/* No comment provided by engineer. */
+/* Indicator for no carbon emissions. Note the space is non-breaking white space! */
 "No CO₂" = "Sem CO₂";
 
 /* Indicator for wheelchair not accessible services */
@@ -175,14 +229,17 @@
 /* Ok action */
 "OK" = "Okey";
 
-/* Button that goes to the Setting's app */
-"Open Settings" = "Abrir Configurações";
-
 /* Open in Safari action */
 "Open in Safari" = "Abrir em Safari";
 
+/* Button that goes to the Setting's app */
+"Open Settings" = "Abrir Configurações";
+
 /* No comment provided by engineer. */
 "Password" = "Senha";
+
+/* A footnote that asks users for their email addresses in order to reset password */
+"Please enter your registered email address. We will then send you instructions on how to reset password" = "Please enter your registered email address. We will then send you instructions on how to reset password";
 
 /* Please select a location prompt */
 "Please select a location" = "Porfavor selecione a localização";
@@ -194,13 +251,19 @@
 "Please verify the location" = "Porfavor verifique a localizacão";
 
 /* Location picker 'no autocompletion results' text. Needs to match text on keyboard. */
-"Press 'search' for more…" = "Apertar 'pesquisa' para mais…";
+"Press 'search' for more…" = "Press 'search' for more…";
+
+/* Message to user if no primary email is set on his/her account */
+"Primary email is not set on your account. Please contact us for support" = "Primary email is not set on your account. Please contact us for support";
 
 /* No comment provided by engineer. */
-"Read more…" = "Saiba mais…";
+"Read more…" = "Read more…";
 
 /* Indicator for real-time information */
 "Real-time" = "Tempo real";
+
+/* This is the placeholder text in a text field to inform users an optioanl referral code can be entered. */
+"Referral code (optional)" = "Referral code (optional)";
 
 /* Action title to add/remove reminder */
 "Reminder" = "Lembrete";
@@ -220,11 +283,14 @@
 /* Button title to report a problem */
 "Report Problem" = "Reportar problema";
 
+/* Give users an option to rece */
+"Resend verification email" = "Resend verification email";
+
+/* Title for a button which, when tapped, confirms the reset of password. */
+"Reset password" = "Reset password";
+
 /* Retry action, e.g., in case something didn't load */
 "Retry" = "tente reservar de novo";
-
-/* Sports utility vehicle abbreviation */
-"SUV" = "Sports veículo utilitário";
 
 /* Sort by overall score, like a ranking. */
 "Score" = "Pontos";
@@ -233,13 +299,28 @@
 "Search" = "Pesquisa";
 
 /* No comment provided by engineer. */
-"Search Results" = "Resultados da pesquisa";
-
-/* No comment provided by engineer. */
 "Search for a city" = "Procura pela cidade";
 
+/* No comment provided by engineer. */
+"Search Results" = "Resultados da pesquisa";
+
 /* Placeholder text while waiting for server response when searching for a location. */
-"Searching for '%@'…" = "Procurando por '%@'…";
+"Searching for '%@'…" = "Searching for '%@'…";
+
+/* A footnote that tells recommends the format of a secure password. */
+"Secure passwords are at least five characters long and include numbers and symbols" = "Secure passwords are at least five characters long and include numbers and symbols";
+
+/* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
+"Sent" = "Sent";
+
+/* Class of errors generated by our servers */
+"Server Error" = "Server Error";
+
+/* Error message when our server returns empty data in response to a network request */
+"Server response contains no data" = "Server response contains no data";
+
+/* Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number. */
+"Showing %@ of %@ transport modes" = "Mostrando %1$@ de %2$@ modos de transporte";
 
 /* Title of page or button to sign in */
 "Sign in" = "Entrar";
@@ -250,17 +331,29 @@
 /* Title of page or button to sign up */
 "Sign up" = "Inscrever-se";
 
-/* No comment provided by engineer. */
-"Sign up cannot be completed without a valid password" = "Inscrição não pode ser compltada sem uma senha válida";
-
-/* Message that indicates the app is signing users into their user accounts */
-"Signing in" = "Entrando";
-
 /* Starting %date. (old key: DateFromFormat) */
 "Starting %@" = "De %@";
 
+/* Short indicator of start-time */
+"starts at %@" = "começa as %@";
+
+/* Sports utility vehicle abbreviation */
+"SUV" = "Sports veículo utilitário";
+
+/* Accessibility hint for routing results screen. */
+"Tap to change start and end locations" = "Tap to change start and end locations";
+
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Toque para definir a localização";
+
+/* Error message shown to a user when zero-length password field is detected */
+"The password field cannot be empty." = "The password field cannot be empty.";
+
+/* Error message shown to a user when he/she enters incorrect username or password */
+"The username or password you've entered is incorrect." = "The username or password you've entered is incorrect.";
+
+/* to %date. (old key: DateToFormat) */
+"to %@" = "para %@";
 
 /* Accessibility - user location button - off */
 "Tracking - off" = "Ratreamento - desligado";
@@ -271,17 +364,26 @@
 /* user location button - follow with heading */
 "Tracking - on with heading" = "Ratreamento - ligado com título";
 
-/* No comment provided by engineer. */
-"Unknown error" = "Erro desconhecido";
-
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "para %@";
+
+/* Title for a button which, when tapped, proceeds to updating password */
+"Update" = "Update";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Atualização do trajeto";
 
+/* Error message when our server fails to return userToken in response to a sign in or sign up request */
+"userToken is missing in the server response" = "userToken is missing in the server response";
+
 /* Message that informs users that some values are missing from the required fields in a booking form. */
 "Values missing from required fields." = "Falta de valores nos campos requeridos.";
+
+/* Title for a button which, when tapped, proceeds to verifying password */
+"Verify" = "Verify";
+
+/* Prompt for users to enter their passwords for verification purpose. */
+"Verify password" = "Verify password";
 
 /* Every weekday in context of repetitions (especially recurring events) */
 "Weekdays" = "Dia de semana";
@@ -309,25 +411,4 @@
 
 /* Contacts authorisation needed text */
 "You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature." = "Você anteriormente negou o acesso desse aplicativo aos seus contatos. Por favor, acione configurações de aplicativos > Privacidade > Contatos e autorizar este aplicativo para usar este recurso.";
-
-/* Indicator that an event is all-day */
-"all-day" = "dia inteiro";
-
-/* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
-"arrives %@" = "chegada %@";
-
-/* Estimated time of departure; parameter is time, e.g., 'departs 15:30' */
-"departs %@" = "saída %@";
-
-/* Short indicator of end-time */
-"ends at %@" = "termina as %@";
-
-/* Email placeholder text */
-"example@example.com" = "example@example.com";
-
-/* Short indicator of start-time */
-"starts at %@" = "começa as %@";
-
-/* to %date. (old key: DateToFormat) */
-"to %@" = "para %@";
 

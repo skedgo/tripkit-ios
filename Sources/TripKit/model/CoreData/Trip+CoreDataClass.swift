@@ -439,15 +439,19 @@ extension Trip {
       label.append("  ")
       
       if departureTimeIsFixed {
-        label.append(Loc.Departs(atTime: formatter.string(from: departureTime)))
-        label.append("; ")
-        label.append(Loc.Arrives(atTime: formatter.string(from: arrivalTime)))
-        label.append("; ")
+        if !hideExactTimes {
+          label.append(Loc.Departs(atTime: formatter.string(from: departureTime)))
+          label.append("; ")
+          label.append(Loc.Arrives(atTime: formatter.string(from: arrivalTime)))
+          label.append("; ")
+        }
         label.append(arrivalTime.durationLongSince(departureTime))
       } else {
         label.append(arrivalTime.durationLongSince(departureTime))
-        label.append("; ")
-        label.append(Loc.Arrives(atTime: formatter.string(from: arrivalTime)))
+        if !hideExactTimes {
+          label.append("; ")
+          label.append(Loc.Arrives(atTime: formatter.string(from: arrivalTime)))
+        }
       }
       
       return label

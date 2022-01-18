@@ -86,6 +86,10 @@ extension Loc {
     return NSLocalizedString("End location", tableName: "TripKit", bundle: .tripKit, comment: "Placeholder name for destination (then replaced with address or name)")
   }
   
+  public static var TapToChangeStartAndEndLocations: String {
+    return NSLocalizedString("Tap to change start and end locations", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for routing results screen.")
+  }
+  
   public static var SetTime: String {
     return NSLocalizedString("Set time", tableName: "TripKit", bundle: .tripKit, comment: "Button label to set departure time")
   }

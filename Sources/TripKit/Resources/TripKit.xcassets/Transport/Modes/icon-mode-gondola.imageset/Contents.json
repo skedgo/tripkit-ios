@@ -2,21 +2,25 @@
   "images" : [
     {
       "filename" : "icon-gondola.pdf",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "language-direction" : "left-to-right"
     },
     {
       "filename" : "icon-mode-gondola.png",
       "idiom" : "universal",
+      "language-direction" : "left-to-right",
       "scale" : "1x"
     },
     {
       "filename" : "icon-mode-gondola@2x.png",
       "idiom" : "universal",
+      "language-direction" : "left-to-right",
       "scale" : "2x"
     },
     {
       "filename" : "icon-mode-gondola@3x.png",
       "idiom" : "universal",
+      "language-direction" : "left-to-right",
       "scale" : "3x"
     }
   ],

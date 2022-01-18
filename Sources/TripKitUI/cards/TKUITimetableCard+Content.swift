@@ -111,7 +111,7 @@ extension StopVisits {
     var text = ""
     
     // platforms
-    if let standName = stop.shortName?.trimmingCharacters(in: .whitespaces), !standName.isEmpty {
+    if let standName = departurePlatform {
       if !text.isEmpty {
         text += " ⋅ "
       }
@@ -130,3 +130,4 @@ extension StopVisits {
   }
   
 }
+

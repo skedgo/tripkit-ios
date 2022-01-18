@@ -110,6 +110,9 @@
 /* Text for vehicle of type: Car */
 "Car" = "車";
 
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Change Route";
+
 /* Trip badge: Cheapest */
 "Cheapest" = "最安";
 
@@ -261,7 +264,7 @@
 /* Title for when to depart. Countdown to departure will be displayed below. */
 "Leave in" = "で出発";
 
-/* No comment provided by engineer. */
+/* Leave ASAP/now option */
 "Leave now" = "すぐに出発";
 
 /* Title of button to show fewer results */
@@ -312,6 +315,9 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "定刻";
 
+/* Indicating no return trip is required. */
+"One-way only" = "One-way only";
+
 /* Action title open app of name '@%' */
 "Open %@" = "%@ を開く";
 
@@ -332,6 +338,9 @@
 
 /* Title of page to plan a trip */
 "Plan Trip" = "旅行計画";
+
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
 
 /* No comment provided by engineer. */
 "Powered by" = "使用";
@@ -378,11 +387,17 @@
 /* Alert if service has been cancelled, meaning that the user can't take it and find an alternative */
 "Service has been cancelled." = "サービスはキャンセルされました。";
 
+/* Button label to set departure time */
+"Set time" = "時間の設定";
+
 /* Set up to connect/link to a service provider, e.g., Uber */
 "Setup" = "セットアップ";
 
 /* Title for button that, when tapped, shows something, e.g., a list of alert */
 "Show" = "表示する";
+
+/* No comment provided by engineer. */
+"Show timetable" = "時刻表を表示します。";
 
 /* Show website action button */
 "Show website" = "ウェブサイトを見る";

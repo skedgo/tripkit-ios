@@ -1,28 +1,32 @@
 {
   "images" : [
     {
+      "filename" : "icon-mode-moto-scooter-sharing.pdf",
       "idiom" : "universal",
-      "filename" : "icon-mode-moto-scooter-sharing.pdf"
+      "language-direction" : "left-to-right"
     },
     {
-      "idiom" : "universal",
       "filename" : "icon-mode-moto-scooter-sharing.png",
+      "idiom" : "universal",
+      "language-direction" : "left-to-right",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
       "filename" : "icon-mode-moto-scooter-sharing@2x.png",
+      "idiom" : "universal",
+      "language-direction" : "left-to-right",
       "scale" : "2x"
     },
     {
-      "idiom" : "universal",
       "filename" : "icon-mode-moto-scooter-sharing@3x.png",
+      "idiom" : "universal",
+      "language-direction" : "left-to-right",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   },
   "properties" : {
     "template-rendering-intent" : "template"

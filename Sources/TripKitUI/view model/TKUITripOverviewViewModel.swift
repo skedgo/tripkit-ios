@@ -48,12 +48,13 @@ class TKUITripOverviewViewModel {
       .flatMapLatest {
         return TKRealTimeFetcher.rx.streamUpdates($0, active: inputs.isVisible.asObservable())
           .startWith($0)
+          .catchAndReturn($0)
       }
       .share(replay: 1, scope: .forever)
         
     sections = tripUpdated
       .map(Self.buildSections)
-      .asDriver(onErrorJustReturn: [])
+      .asDriver { assertionFailure("Unexpected error: \($0)"); return .never() }
     
     actions = tripUpdated
       .map { updated -> ([TKUITripOverviewCard.TripAction], Trip) in

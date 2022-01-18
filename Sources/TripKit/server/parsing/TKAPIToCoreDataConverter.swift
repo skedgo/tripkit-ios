@@ -79,10 +79,7 @@ extension TKAPIToCoreDataConverter {
 extension Service {
   convenience init(from model: TKAPI.Departure, into context: NSManagedObjectContext) {
     self.init(context: context)
-//    update(from: model)
-//  }
-//
-//  func update(from model: TKAPI.Service) {
+
     frequency = model.frequency != nil ? NSNumber(value: model.frequency!) : nil
     number = model.number
     lineName = model.name
@@ -91,6 +88,7 @@ extension Service {
     color = model.color?.color
     modeInfo = model.modeInfo
     operatorName = model.operatorName
+    
     wheelchairAccessibility = TKWheelchairAccessibility(bool: model.wheelchairAccessible)
     
     isBicycleAccessible = model.bicycleAccessible ?? false
@@ -141,6 +139,14 @@ extension Service {
     }
     
     visit.searchString = model.searchString
+    visit.startPlatform = model.startPlatform
+    visit.timetableStartPlatform = model.timetableStartPlatform
+    
+    if let dls = visit as? DLSEntry {
+      dls.endPlatform = model.endPlatform
+      dls.timetableEndPlatform = model.timetableEndPlatform
+    }
+
     visit.service = self
     visit.stop = stop
     

@@ -113,10 +113,6 @@ extension StopVisits: TKUISemaphoreDisplayable {
     return .none
   }
   
-  public var canFlipImage: Bool {
-    return true
-  }
-  
   public var isTerminal: Bool {
     return false
   }
@@ -153,7 +149,7 @@ extension TKSegment: TKUISemaphoreDisplayable {
         return .headOnly
       }
     } else {
-      return .headWithTime(departureTime, timeZone, isRealTime: timesAreRealTime)
+      return trip.hideExactTimes ? .headOnly : .headWithTime(departureTime, timeZone, isRealTime: timesAreRealTime)
     }
   }
   

@@ -154,7 +154,7 @@
 /* Free as in beer */
 "Free" = "Gratis";
 
-/* No comment provided by engineer. */
+/* Name for a segment or vehicle where you get a lift from someone. */
 "Getting a lift" = "Conseguir un aventón";
 
 /* Accessibility annotation for trips which have a reminder set. */
@@ -187,6 +187,9 @@
 /* Title of button to perform some action at a later time */
 "Later" = "Más tarde";
 
+/* Indicator for real-time information */
+"Live traffic" = "Tráfico en tiempo real";
+
 /* Title on the button that indicates to the user that booking is in progressing */
 "Loading" = "Cargando";
 
@@ -214,7 +217,7 @@
 /* Next action */
 "Next" = "Siguiente";
 
-/* Indicator for no carbon emissions */
+/* Indicator for no carbon emissions. Note the space is non-breaking white space! */
 "No CO₂" = "No CO₂";
 
 /* Indicator for wheelchair not accessible services */
@@ -336,6 +339,9 @@
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
+
+/* Accessibility hint for routing results screen. */
+"Tap to change start and end locations" = "Tap to change start and end locations";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Seleccione ubicación";

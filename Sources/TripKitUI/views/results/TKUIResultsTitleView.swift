@@ -15,7 +15,7 @@ import RxCocoa
 
 import TripKit
 
-class TKUIResultsTitleView: UIView {
+class TKUIResultsTitleView: UIView, TGPreferrableView {
   
   @IBOutlet weak var originLabel: UILabel!
   @IBOutlet weak var destinationLabel: UILabel!
@@ -32,6 +32,10 @@ class TKUIResultsTitleView: UIView {
   private let locationSearchPublisher = PublishSubject<Void>()
   var locationTapped: Signal<Void> {
     return locationSearchPublisher.asSignal(onErrorSignalWith: .empty())
+  }
+  
+  public var preferredView: UIView? {
+    fromToStack
   }
   
   var accessoryView: UIView? {
@@ -124,10 +128,11 @@ class TKUIResultsTitleView: UIView {
     } else {
       fromToStack.accessibilityLabel = Loc.PlanTrip
     }
+    fromToStack.accessibilityHint = Loc.TapToChangeStartAndEndLocations
     fromToStack.accessibilityTraits = .button
     
     accessibilityElements = [
-      fromToStack, dismissButton, accessoryView
+      dismissButton, fromToStack, accessoryView
     ].compactMap { $0 }
   }
   
