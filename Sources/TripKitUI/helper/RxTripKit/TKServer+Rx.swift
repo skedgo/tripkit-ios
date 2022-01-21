@@ -116,20 +116,27 @@ extension Reactive where Base: TKServer {
           }
           
           let hitAgain: TKServer.RepeatHandler?
-          let model = try? result.get()
-          if let repeatHandler = repeatHandler {
-            hitAgain = repeatHandler(code, model)
-          } else {
-            hitAgain = nil
+          
+          do {
+            let model = try result.get()
+            
+            if let repeatHandler = repeatHandler {
+              hitAgain = repeatHandler(code, model)
+            } else {
+              hitAgain = nil
+            }
+            
+            subscriber.onNext((code, responseHeaders, model))
+            
+            if hitAgain == nil {
+              subscriber.onCompleted()
+            }
+            
+            return hitAgain
+          } catch {
+            subscriber.onError(error)
+            return nil
           }
-          
-          subscriber.onNext((code, responseHeaders, model))
-          
-          if hitAgain == nil {
-            subscriber.onCompleted()
-          }
-          
-          return hitAgain
         }
       )
       
