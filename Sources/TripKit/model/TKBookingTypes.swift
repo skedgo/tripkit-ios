@@ -36,7 +36,6 @@ public enum TKBooking {
       case lock
       case unlock
       case cancel
-      case returntrip
       case unknown
     }
     
