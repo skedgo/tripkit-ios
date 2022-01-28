@@ -29,6 +29,12 @@ public extension TKUIHomeCard {
     case `default`
   }
   
+  enum VoiceOverMode {
+    case searchBar
+    
+    case routeButton
+  }
+  
   struct Configuration {
     // We don't want this to be initialised.
     private init() {}
@@ -57,12 +63,15 @@ public extension TKUIHomeCard {
     public var componentViewModelClasses: [TKUIHomeComponentViewModel.Type] = []
 
     /// Set this to `true` if your components aren't customizable and they should always be ordered
-    /// as defined in `componentViewModelClasses`.
+    /// as defined in ``componentViewModelClasses``.
     public var ignoreComponentCustomization: Bool = false
 
     /// Set this to customise what should happen if map content or an autocompletion
     /// result is tapped (or whenever one of your component view models calls `.handleSelection`)
     public var selectionMode: SelectionMode = .default
+    
+    /// Set where the initial VoiceOver focus should be. Defaults to `.searchBar`
+    public var voiceOverStartMode: TKUIHomeCard.VoiceOverMode = .searchBar
   }
   
 }
