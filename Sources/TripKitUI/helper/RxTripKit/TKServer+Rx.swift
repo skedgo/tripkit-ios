@@ -111,7 +111,7 @@ extension Reactive where Base: TKServer {
         region: region,
         repeatHandler: { code, responseHeaders, result in
           if stopper.stop {
-            // we got discarded
+            // we got disposed
             return nil
           }
           
@@ -156,15 +156,36 @@ extension Reactive where Base: TKServer {
     region: TKRegion? = nil
     ) -> Single<(Int?, [String: Any], Model)>
   {
-    return stream(type, method, path: path, parameters: parameters, headers: headers, region: region, repeatHandler: nil)
-      .map {
-        if let model = $0.2 {
-          return ($0.0, $0.1, model)
-        } else {
-          throw TKServer.ServerError.noData
+    return Single.create { subscriber in
+      let stopper = Stopper()
+      
+      self.hit(
+        method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        repeatHandler: { code, responseHeaders, result in
+          if stopper.stop {
+            // we got disposed while waiting for response
+            return nil
+          }
+          
+          subscriber(Result {
+            let data = try result.get()
+            let model = try JSONDecoder().decode(Model.self, from: data)
+            return (code, responseHeaders, model)
+          })
+          
+          // Never repeat
+          return nil
         }
+      )
+      
+      return Disposables.create() {
+        stopper.stop = true
       }
-      .asSingle()
+    }
   }
   
   /// Hit a SkedGo endpoint, using a variety of options
