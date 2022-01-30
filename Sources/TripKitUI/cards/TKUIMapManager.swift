@@ -127,11 +127,16 @@ open class TKUIMapManager: TGMapManager {
   fileprivate var heading: CLLocationDirection = 0 {
     didSet {
       guard let mapView = mapView else { return }
+      
+      let newHeading = self.heading
+      let annotationViews = mapView.annotations(in: mapView.visibleMapRect)
+        .compactMap { $0 as? MKAnnotation }
+        .compactMap { mapView.view(for: $0) }
+      
       UIView.animate(withDuration: 0.25) {
-        mapView.annotations(in: mapView.visibleMapRect)
-          .compactMap { $0 as? MKAnnotation }
-          .compactMap { mapView.view(for: $0) }
-          .forEach { TKUIAnnotationViewBuilder.update(annotationView: $0, forHeading: self.heading) }
+        for view in annotationViews {
+          TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: newHeading)
+        }
       }
     }
   }
