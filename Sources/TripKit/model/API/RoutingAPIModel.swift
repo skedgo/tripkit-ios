@@ -142,6 +142,7 @@ extension TKAPI {
     public var notes: String?
     @UnknownNil public var localCost: TKLocalCost? // Backend is sometimes sending this invalid without currency as of 2021-08-17
     var mini: TKMiniInstruction?
+    @DefaultFalse var hideExactTimes: Bool
 
     // stationary
     public var location: TKNamedCoordinate?
@@ -187,6 +188,7 @@ extension TKAPI {
       case localCost
       case mapTiles
       case mini
+      case hideExactTimes
       case turnByTurn = "turn-by-turn"
       case streets
       case stopCode

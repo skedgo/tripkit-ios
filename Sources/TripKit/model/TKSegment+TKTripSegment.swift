@@ -34,7 +34,7 @@ extension TKSegment {
     if timesAreRealTime {
       return isPublicTransport ? Loc.RealTime : Loc.LiveTraffic
 
-    } else if !trip.isMixedModal(ignoreWalking: false), !isPublicTransport {
+    } else if !trip.isMixedModal(ignoreWalking: false), !isPublicTransport, template?.hideExactTimes != true {
       let final = finalSegmentIncludingContinuation()
       return final.arrivalTime.durationSince(departureTime)
 
