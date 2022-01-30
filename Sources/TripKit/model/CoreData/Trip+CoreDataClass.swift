@@ -224,8 +224,8 @@ extension Trip {
     
     let sorted = references.sorted { $0.index < $1.index }
     guard
-      let start = sorted.first?.template.start,
-      let end = sorted.last?.template.end
+      let start = sorted.first?.template?.start,
+      let end = sorted.last?.template?.end
     else {
       assertionFailure()
       return []
