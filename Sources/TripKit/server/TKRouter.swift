@@ -430,7 +430,7 @@ extension TKRouter {
     let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil)
     let baseURL = TKServer.fallbackBaseURL
     let fullURL = baseURL.appendingPathComponent("routing.json")
-    let request = TKServer.getRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
+    let request = TKServer.shared.getRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
     return request.url?.absoluteString
   }
   
