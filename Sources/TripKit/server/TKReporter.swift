@@ -41,7 +41,7 @@ public class TKReporter {
       
       UserDefaults.standard.removeObject(forKey: key)
       
-      TKServer.hit(.POST, url: url, parameters: paras) { _, _, result in
+      TKServer.shared.hit(.POST, url: url, parameters: paras) { _, _, result in
         switch result {
         case .success:
           TKLog.debug("Planned trip reported successfully")
@@ -65,7 +65,7 @@ public class TKReporter {
       "samples": samples
     ]
     
-    TKServer.hit(.POST, url: url, parameters: paras) { _, _, result in
+    TKServer.shared.hit(.POST, url: url, parameters: paras) { _, _, result in
       switch result {
       case .success:
         TKLog.debug("Progress posted successfully")
