@@ -31,7 +31,7 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
 
 + (TKServer *)sharedInstance NS_REFINED_FOR_SWIFT;
 
-+ (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL paras:(nullable NSDictionary *)paras;
+- (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL paras:(nullable NSDictionary *)paras;
 
 + (nullable NSString *)xTripGoVersion;
 
@@ -55,7 +55,7 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
                      failure:(TKServerFailureBlock)failure NS_REFINED_FOR_SWIFT;
 
 /// :nodoc:
-+ (void)_hitURL:(NSURL *)url
+- (void)_hitURL:(NSURL *)url
          method:(NSString *)method
      parameters:(nullable NSDictionary<NSString *, id> *)parameters
            info:(TKServerInfoBlock)info

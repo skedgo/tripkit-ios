@@ -48,7 +48,7 @@ public class TKShareURLProvider: UIActivityItemProvider {
 
     let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
     
-    TKServer.hit(TKAPI.SaveTripResponse.self, url: saveURL) { _, _, response in
+    TKServer.shared.hit(TKAPI.SaveTripResponse.self, url: saveURL) { _, _, response in
       do {
         let url = try response.get().url
         saveable.shareURL = url
@@ -87,7 +87,7 @@ public class TKShareURLProvider: UIActivityItemProvider {
 
     let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
     do {
-      let data = try TKServer.hitSync(url: saveURL, timeout: .seconds(10))
+      let data = try TKServer.shared.hitSync(url: saveURL, timeout: .seconds(10))
       let url = try JSONDecoder().decode(TKAPI.SaveTripResponse.self, from: data).url
       saveable.shareURL = url
       return url

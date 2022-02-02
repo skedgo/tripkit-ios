@@ -40,16 +40,16 @@ extension Reactive where Base: TKRegionManager {
 
 extension Reactive where Base: TKServer {
   
-  public static func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
+  public func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
     return Single.create { single in
-      Base.hit(method, url: url, parameters: parameters) { code, responseHeader, result in
+      base.hit(method, url: url, parameters: parameters) { code, responseHeader, result in
         single(result.map { (code, responseHeader, $0) })
       }
       return Disposables.create()
     }
   }
 
-  public static func hit<Model: Decodable>(
+  public func hit<Model: Decodable>(
     _ type: Model.Type,
     _ method: TKServer.HTTPMethod = .GET,
     url: URL,
@@ -57,7 +57,7 @@ extension Reactive where Base: TKServer {
     ) -> Single<(Int, [String: Any], Model)>
   {
     Single.create { subscriber in
-      TKServer.hit(type, url: url, parameters: parameters) { status, headers, result in
+      base.hit(type, url: url, parameters: parameters) { status, headers, result in
         subscriber(result.map { (status, headers, $0) })
       }
       return Disposables.create()

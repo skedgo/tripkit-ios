@@ -123,7 +123,7 @@ public enum TKTripFetcher {
       return assertionFailure()
     }
         
-    TKServer.hit(url: url) { _, _, response in
+    TKServer.shared.hit(url: url) { _, _, response in
       switch response {
       case .success(let data):
         completion(.success((data, shareURL: shareURL)))
