@@ -63,6 +63,11 @@ open class TKUIHomeCard: TKUITableCard {
     topMapToolBarItems = Self.config.topMapToolbarItems
   }
   
+  /// Puts the focus to the search bar in the header view, ready for users to begin typing destination.
+  public func enterSearchMode() {
+    headerView.searchBar.becomeFirstResponder()
+  }
+  
   // MARK: - TGCard overrides
   
   open override func didBuild(tableView: UITableView) {
