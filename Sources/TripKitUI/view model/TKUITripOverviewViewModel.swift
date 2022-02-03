@@ -22,10 +22,6 @@ class TKUITripOverviewViewModel {
   
   init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput()) {
     
-    titles = presentedTrip
-      .asDriver(onErrorDriveWith: .empty())
-      .flatMapLatest { $0.rx.titles }
-    
     dataSources = presentedTrip
       .asDriver(onErrorDriveWith: .empty())
       .map { $0.tripGroup.sources }
@@ -78,9 +74,7 @@ class TKUITripOverviewViewModel {
       }
     
   }
-  
-  let titles: Driver<(title: String, subtitle: String?)>
-  
+    
   let sections: Driver<[Section]>
   
   let actions: Driver<([TKUITripOverviewCard.TripAction], Trip)>
@@ -96,14 +90,6 @@ class TKUITripOverviewViewModel {
 extension TKUITripOverviewViewModel {
   convenience init(initialTrip: Trip) {
     self.init(presentedTrip: .just(initialTrip))
-  }
-}
-
-fileprivate extension Reactive where Base == Trip {
-  var titles: Driver<(title: String, subtitle: String?)> {
-    return Observable.merge(observe(Date.self, "arrivalTime"), observe(Date.self, "departureTime"))
-      .compactMap { [unowned base] _ in base.timeTitles(capitalize: true) }
-      .asDriver(onErrorDriveWith: .empty())
   }
 }
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="PuZ-UO-Kto" customClass="TKUITripTitleView" customModule="TripKitUI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xnJ-3S-K7I">
+                    <rect key="frame" x="16" y="8" width="302" height="64"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="k6z-To-XRp">
+                            <rect key="frame" x="0.0" y="0.0" width="302" height="16"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:59 - 05:35" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpT-7Q-6Qy" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="91.5" height="16"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mx-Jy-AMQ" userLabel="Spacer">
+                                    <rect key="frame" x="95.5" y="0.0" width="154.5" height="16"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBP-RS-YPy" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
+                                    <rect key="frame" x="254" y="0.0" width="48" height="16"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-Dq-vKm" customClass="TKUITripSegmentsView" customModule="TripKitUI" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="24" width="240" height="40"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="dO8-iG-ip6"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-jx-QPl">
+                    <rect key="frame" x="324" y="-11" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Pe5-A6-5ca"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="tz4-XP-1t3"/>
+                    </constraints>
+                    <state key="normal" title="Close"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xnJ-3S-K7I" secondAttribute="bottom" constant="8" id="3DI-QA-0DT"/>
+                <constraint firstItem="Fbi-jx-QPl" firstAttribute="top" secondItem="PuZ-UO-Kto" secondAttribute="top" constant="-11" id="FKF-TB-hm6"/>
+                <constraint firstItem="xnJ-3S-K7I" firstAttribute="top" secondItem="PuZ-UO-Kto" secondAttribute="top" constant="8" id="PV0-cq-QeC"/>
+                <constraint firstItem="Fbi-jx-QPl" firstAttribute="leading" secondItem="xnJ-3S-K7I" secondAttribute="trailing" constant="6" id="Taf-TM-ott"/>
+                <constraint firstAttribute="trailing" secondItem="Fbi-jx-QPl" secondAttribute="trailing" constant="4" id="ibX-Zd-MQ6"/>
+                <constraint firstItem="xnJ-3S-K7I" firstAttribute="leading" secondItem="PuZ-UO-Kto" secondAttribute="leading" constant="16" id="jRi-7w-aM1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dismissButton" destination="Fbi-jx-QPl" id="ZxJ-SN-MqU"/>
+                <outlet property="segmentView" destination="ucH-Dq-vKm" id="Sul-og-ba0"/>
+                <outlet property="timeStack" destination="k6z-To-XRp" id="n8m-P6-5Bv"/>
+                <outlet property="timeSubtitleLabel" destination="fBP-RS-YPy" id="bad-Jc-a0T"/>
+                <outlet property="timeTitleLabel" destination="HpT-7Q-6Qy" id="4AR-eJ-hp3"/>
+            </connections>
+            <point key="canvasLocation" x="20.289855072463769" y="-670.3125"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
