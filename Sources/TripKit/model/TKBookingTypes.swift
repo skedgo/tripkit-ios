@@ -36,7 +36,7 @@ public enum TKBooking {
       case lock
       case unlock
       case cancel
-      case plannext
+      case planNext = "requestanother"
       case unknown
     }
     
