@@ -180,7 +180,7 @@ extension TKServer {
     }
   }
   
-  public static func hit<Model: Decodable>(
+  public func hit<Model: Decodable>(
     _ type: Model.Type,
     _ method: HTTPMethod = .GET,
     url: URL,
@@ -197,7 +197,7 @@ extension TKServer {
     }
   }
   
-  public static func hit(
+  public func hit(
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
@@ -213,7 +213,7 @@ extension TKServer {
     }
   }
   
-  public static func hitSync(
+  public func hitSync(
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
@@ -231,7 +231,7 @@ extension TKServer {
   }
   
   @objc(GET:paras:completion:)
-  public static func _get(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
+  public func _get(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
     hit(.GET, url: url, parameters: parameters) { status, headers, result in
       do {
         let data = try result.get()
@@ -244,7 +244,7 @@ extension TKServer {
   }
   
   @objc(POST:paras:completion:)
-  public static func _post(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
+  public func _post(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
     hit(.POST, url: url, parameters: parameters) { status, headers, result in
       do {
         let data = try result.get()
@@ -291,7 +291,7 @@ extension TKServer {
     )
   }
   
-  private static func hit(method: HTTPMethod, url: URL, parameters: [String: Any]?, completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
+  private func hit(method: HTTPMethod, url: URL, parameters: [String: Any]?, completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
     
     if url.scheme == "file" {
       do {

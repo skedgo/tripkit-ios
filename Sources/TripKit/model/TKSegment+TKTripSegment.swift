@@ -150,7 +150,7 @@ extension TKSegment {
     var target = scheduledStartStopCode
     
     for visit in service.sortedVisits {
-      let current = visit.stop.stopCode
+      guard let current = visit.stop?.stopCode else { continue }
       if target == current {
         if !isTravelled {
           // found start

@@ -215,6 +215,15 @@ open class TKUIHomeCard: TKUITableCard {
     
     cardAppearancePublisher.onNext(false)
   }
+  
+  open override var preferredView: UIView? {
+    switch Self.config.voiceOverStartMode {
+    case .searchBar:
+      return headerView.searchBar
+    case .routeButton:
+      return headerView.directionsButton
+    }
+  }
 }
 
 // MARK: - Action on search result
