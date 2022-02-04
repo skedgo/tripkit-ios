@@ -63,6 +63,7 @@ public class TKUITripOverviewCard: TKUITableCard {
   // we model it as an observable sequence.
   private let presentedTripPublisher = PublishSubject<Trip>()
   
+  private var titleView: TKUITripTitleView?
   private weak var tableView: UITableView?
   
   var tripMapManager: TKUITripMapManager? { mapManager as? TKUITripMapManager }
@@ -71,8 +72,12 @@ public class TKUITripOverviewCard: TKUITableCard {
     self.initialTrip = trip
     self.index = index
     
+    let tripTitle = TKUITripTitleView.newInstance()
+    tripTitle.configure(with: .init(trip, allowFading: false))
+    self.titleView = tripTitle
+    
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
-    super.init(title: Loc.Trip(index: index.map { $0 + 1 }), mapManager: mapManager)
+    super.init(title: .custom(tripTitle, dismissButton: tripTitle.dismissButton), mapManager: mapManager)
 
     if let knownMapManager = mapManager as? TKUIMapManager {
       knownMapManager.attributionDisplayer = { [weak self] sources, sender in
@@ -130,10 +135,6 @@ public class TKUITripOverviewCard: TKUITableCard {
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
-    
-    viewModel.titles
-      .drive(cardView.rx.titles)
-      .disposed(by: disposeBag)
 
     viewModel.sections
       .drive(tableView.rx.items(dataSource: dataSource))

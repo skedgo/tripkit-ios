@@ -56,6 +56,7 @@ extension SegmentTemplate {
     
     template.isContinuation = model.isContinuation
     template.hasCarParks = model.hasCarParks
+    template.hideExactTimes = model.hideExactTimes
     
     if template.isStationary {
       // stationary segments just have a single location

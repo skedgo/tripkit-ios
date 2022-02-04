@@ -30,7 +30,6 @@ extension Trip {
     set { set(.hideExactTimes, to: newValue) }
   }
   
-  @objc // TEMP
   public var isCanceled: Bool {
     get { has(.isCanceled) }
     set { set(.isCanceled, to: newValue) }

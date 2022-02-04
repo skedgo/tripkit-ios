@@ -19,14 +19,20 @@ extension SegmentTemplate {
     get { has(.isContinuation) }
     set { set(.isContinuation, to: newValue) }
   }
-  
+
+  var hideExactTimes: Bool {
+    get { has(.hideExactTimes) }
+    set { set(.hideExactTimes, to: newValue) }
+  }
+
   // MARK: -
   
   private struct FlagOptions: OptionSet {
     let rawValue: Int16
     
-    static let isContinuation   = FlagOptions(rawValue: 1 << 0)
-    static let hasCarParks    = FlagOptions(rawValue: 1 << 1)
+    static let isContinuation     = FlagOptions(rawValue: 1 << 0)
+    static let hasCarParks        = FlagOptions(rawValue: 1 << 1)
+    static let hideExactTimes     = FlagOptions(rawValue: 1 << 2)
   }
   
   private func set(_ option: FlagOptions, to value: Bool) {
