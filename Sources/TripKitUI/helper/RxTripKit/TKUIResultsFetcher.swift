@@ -128,12 +128,12 @@ fileprivate class CountHolder {
 
 fileprivate extension Reactive where Base : TKRouter {
   
-  static func multiFetchRequest(for request: TripRequest, modes: Set<String>?, classifier: TKTripClassifier? = nil, baseURL: URL? = nil) -> Observable<TKUIResultsFetcher.Progress> {
+  static func multiFetchRequest(for request: TripRequest, modes: Set<String>?, classifier: TKTripClassifier? = nil, baseURL: URL? = nil, apiKey: String? = nil) -> Observable<TKUIResultsFetcher.Progress> {
     
     return Observable.create { observer in
       var router: TKRouter! = TKRouter()
-      if let baseURL = baseURL {
-        router.server = TKRoutingServer(baseURL: baseURL)
+      if baseURL != nil || apiKey != nil {
+        router.server = TKRoutingServer(baseURL: baseURL, apiKey: apiKey)
       }
       var holder: CountHolder! = CountHolder()
       let count = router.multiFetchTrips(

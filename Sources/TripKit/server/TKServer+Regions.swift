@@ -45,7 +45,7 @@ extension TKRegionManager {
       paras["hashCode"] = regionsHash
     }
     
-    TKServer.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras) { [weak self] _, _, result in
+    TKServer.shared.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras) { [weak self] _, _, result in
       guard let self = self else { return }
       
       switch result {
