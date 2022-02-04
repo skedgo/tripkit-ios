@@ -317,6 +317,8 @@ extension TKUISemaphoreView {
   }
   
   private func flipHead(_ flip: Bool) {
+    guard let modeImageView = modeImageView else { return }
+    
     if flip, !isFlipped {
       modeImageView.semanticContentAttribute = .forceRightToLeft
       isFlipped = true
