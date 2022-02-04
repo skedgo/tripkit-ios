@@ -179,7 +179,7 @@ open class TKUIHomeCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     headerView.directionsButton?.rx.tap.asSignal()
-      .emit(onNext: { [weak self] in self?.showQueryInput() })
+      .emit(onNext: { [weak self] in self?.showQueryInput(startingInDestinationMode: false) })
       .disposed(by: disposeBag)
 
     // Map interaction
@@ -309,9 +309,10 @@ extension TKUIHomeCard {
   }
   
   /// Pushes the routing query input card and handles its response.
-  public func showQueryInput() {
+  public func showQueryInput(startingInDestinationMode: Bool = true) {
     let mapRect = (homeMapManager as? TKUIMapManager)?.mapView?.visibleMapRect ?? .world
     let queryInputCard = TKUIRoutingQueryInputCard(biasMapRect: mapRect)
+    queryInputCard.startMode = startingInDestinationMode ? .destination : .origin
     queryInputCard.queryDelegate = self
     handleNext(.push(queryInputCard))
   }
