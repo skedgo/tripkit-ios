@@ -179,7 +179,9 @@ open class TKUIHomeCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     headerView.directionsButton?.rx.tap.asSignal()
-      .emit(onNext: { [weak self] in self?.showQueryInput(startingInDestinationMode: false) })
+      .emit(onNext: { [weak self] in
+        self?.showQueryInput(startingInDestinationMode: Self.config.directionButtonStartsQueryInputInDestinationMode)
+      })
       .disposed(by: disposeBag)
 
     // Map interaction
