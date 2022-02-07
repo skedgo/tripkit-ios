@@ -124,17 +124,7 @@ open class TKUIMapManager: TGMapManager {
   
   public var selectionMode: TKUIPolylineRenderer.SelectionMode = .thickWithSelectionColor
   
-  fileprivate var heading: CLLocationDirection = 0 {
-    didSet {
-      guard let mapView = mapView else { return }
-      UIView.animate(withDuration: 0.25) {
-        mapView.annotations(in: mapView.visibleMapRect)
-          .compactMap { $0 as? MKAnnotation }
-          .compactMap { mapView.view(for: $0) }
-          .forEach { TKUIAnnotationViewBuilder.update(annotationView: $0, forHeading: self.heading) }
-      }
-    }
-  }
+  fileprivate var heading: CLLocationDirection = 0
 
   fileprivate let disposeBag = DisposeBag()
   private var dynamicDisposeBag: DisposeBag?
@@ -507,7 +497,28 @@ extension TKUIMapManager {
   }
   
   open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-    self.heading = mapView.camera.heading
+    let newHeading = mapView.camera.heading
+    guard abs(newHeading - self.heading) > 5 else { return }
+    
+    self.heading = newHeading
+    
+    let annotationViews = mapView.annotations(in: mapView.visibleMapRect)
+      .compactMap { $0 as? MKAnnotation }
+      .compactMap { mapView.view(for: $0) }
+    guard !annotationViews.isEmpty else { return }
+    
+    if animated {
+      UIView.animate(withDuration: 0.25) {
+        for view in annotationViews {
+          TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: newHeading)
+        }
+      }
+
+    } else {
+      for view in annotationViews {
+        TKUIAnnotationViewBuilder.update(annotationView: view, forHeading: newHeading)
+      }
+    }
   }
   
   open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

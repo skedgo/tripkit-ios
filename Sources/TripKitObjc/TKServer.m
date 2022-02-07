@@ -65,7 +65,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
 
 #pragma mark - Network requests
 
-+ (void)_hitURL:(NSURL *)url
+- (void)_hitURL:(NSURL *)url
          method:(NSString *)method
      parameters:(nullable NSDictionary<NSString *, id> *)parameters
            info:(TKServerInfoBlock)info
@@ -77,7 +77,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   } else {
     request = [self POSTLikeRequestWithSkedGoHTTPHeadersForURL:url method:method paras:parameters headers:nil];
   }
-  [self hitRequest:request info:info completion:completion];
+  [TKServer hitRequest:request info:info completion:completion];
 }
 
 - (void)_hitSkedGoWithMethod:(NSString *)method
@@ -167,7 +167,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   if (baseURLs.count > 0) {
     [baseURLs removeObjectAtIndex: 0];
   }
-  NSURLRequest *request = [TKServer buildSkedGoRequestWithMethod:method baseURL:baseURL path:path parameters:parameters headers:headers];
+  NSURLRequest *request = [self buildSkedGoRequestWithMethod:method baseURL:baseURL path:path parameters:parameters headers:headers];
   
   // Backup handler
   void (^failOverBlock)(NSInteger, NSDictionary<NSString *, id> *, NSData *, NSError *) = ^(NSInteger status, NSDictionary<NSString *, id> *headers, NSData *data, NSError *error) {
@@ -260,7 +260,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   [task resume];
 }
 
-+ (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
+- (NSURLRequest *)buildSkedGoRequestWithMethod:(NSString *)method
                                        baseURL:(NSURL *)baseURL
                                           path:(NSString *)path
                                     parameters:(nullable NSDictionary<NSString *, id> *)parameters
@@ -270,7 +270,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   NSURLRequest *request = nil;
   if ([method isEqualToString:@"GET"]) {
     NSURL *fullURL = [baseURL URLByAppendingPathComponent:path];
-    request = [TKServer GETRequestWithSkedGoHTTPHeadersForURL:fullURL paras:parameters headers:headers];
+    request = [self GETRequestWithSkedGoHTTPHeadersForURL:fullURL paras:parameters headers:headers];
 
   } else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"]) {
     
@@ -286,7 +286,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
     }
     
     // all of these work like post in terms of body and headers
-    request = [TKServer POSTLikeRequestWithSkedGoHTTPHeadersForURL:fullURL method:method paras:parameters headers:headers];
+    request = [self POSTLikeRequestWithSkedGoHTTPHeadersForURL:fullURL method:method paras:parameters headers:headers];
   } else {
     ZAssert(false, @"Method is not supported: %@", request);
   }
@@ -314,11 +314,11 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
 
 #pragma mark - Configure session manager
 
-+ (NSMutableDictionary *)SkedGoHTTPHeaders
+- (NSMutableDictionary *)SkedGoHTTPHeaders
 {
   NSMutableDictionary *headers = [NSMutableDictionary dictionary];
   
-  NSString *APIKey = [[TKServer sharedInstance] APIKey];
+  NSString *APIKey = [self APIKey];
   if (APIKey.length > 0) {
     headers[@"X-TripGo-Key"] = APIKey;
   } else {
@@ -391,27 +391,27 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   return nil;
 }
 
-+ (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(nonnull NSURL *)URL
+- (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(nonnull NSURL *)URL
                                                   paras:(nullable NSDictionary *)paras
 {
   return [self GETRequestWithSkedGoHTTPHeadersForURL:URL paras:paras headers:nil];
 }
 
-+ (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(nonnull NSURL *)URL
+- (NSURLRequest *)GETRequestWithSkedGoHTTPHeadersForURL:(nonnull NSURL *)URL
                                                   paras:(nullable NSDictionary *)paras
                                                 headers:(nullable NSDictionary<NSString *, NSString *> *)headers
 {
   if (paras.count > 0) {
-    URL = [self URLForGetRequestToBaseURL:URL paras:paras];
+    URL = [TKServer URLForGetRequestToBaseURL:URL paras:paras];
   }
-  NSURL *adjusted = [self adjustedFileURLForURL:URL];
+  NSURL *adjusted = [TKServer adjustedFileURLForURL:URL];
   if (adjusted) {
     URL = adjusted;
   }
 
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
   
-  NSDictionary *defaultHeaders = [TKServer SkedGoHTTPHeaders];
+  NSDictionary *defaultHeaders = [self SkedGoHTTPHeaders];
   [defaultHeaders enumerateKeysAndObjectsUsingBlock:^(NSString * __nonnull key, NSString *  __nonnull obj, BOOL * __nonnull stop) {
 #pragma unused(stop)
     [request setValue:obj forHTTPHeaderField:key];
@@ -426,14 +426,14 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   return request;
 }
 
-+ (NSURLRequest *)POSTLikeRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL
+- (NSURLRequest *)POSTLikeRequestWithSkedGoHTTPHeadersForURL:(NSURL *)URL
                                                       method:(NSString *)method
                                                        paras:(nullable NSDictionary *)paras
                                                      headers:(nullable NSDictionary<NSString *, NSString *> *)headers
 {
   ZAssert([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"], @"Bad method: %@", method);
   
-  NSURL *adjusted = [self adjustedFileURLForURL:URL];
+  NSURL *adjusted = [TKServer adjustedFileURLForURL:URL];
   if (adjusted) {
     // POST not supported. Switch to GET.
     return [self GETRequestWithSkedGoHTTPHeadersForURL:adjusted paras:paras];
@@ -442,7 +442,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
   request.HTTPMethod = method;
   
-  NSDictionary *defaultHeaders = [TKServer SkedGoHTTPHeaders];
+  NSDictionary *defaultHeaders = [self SkedGoHTTPHeaders];
   [defaultHeaders enumerateKeysAndObjectsUsingBlock:^(NSString * __nonnull key, NSString *  __nonnull obj, BOOL * __nonnull stop) {
 #pragma unused(stop)
     [request setValue:obj forHTTPHeaderField:key];

@@ -8,7 +8,6 @@
 
 import UIKit
 
-import RxSwift
 import TGCardViewController
 
 import TripKit
@@ -26,8 +25,6 @@ class TKUIServiceTitleView: UIView {
   
   @IBOutlet weak var accessoryStack: UIStackView!
   
-  private let disposeBag = DisposeBag()
-  
   static func newInstance() -> TKUIServiceTitleView {
     return Bundle(for: TKUIServiceTitleView.self).loadNibNamed("TKUIServiceTitleView", owner: self, options: nil)?.first as! TKUIServiceTitleView
   }
@@ -42,7 +39,7 @@ class TKUIServiceTitleView: UIView {
     serviceTitleLabel.text = nil
     
     serviceShortNameLabel.text = nil
-    
+
     serviceTimeLabel.textColor = .tkLabelSecondary
     serviceTimeLabel.text = nil
     

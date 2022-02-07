@@ -29,25 +29,38 @@ extension TKSegment {
       return nil
     }
   }
-
+  
   public var tripSegmentModeSubtitle: String? {
-    if timesAreRealTime {
-      return isPublicTransport ? Loc.RealTime : Loc.LiveTraffic
-
-    } else if !trip.isMixedModal(ignoreWalking: false), !isPublicTransport {
-      let final = finalSegmentIncludingContinuation()
-      return final.arrivalTime.durationSince(departureTime)
-
-    } else if let friendly = distanceInMetresFriendly, let total = distanceInMetres {
+    
+    func friendliness() -> String? {
+      guard let friendly = distanceInMetresFriendly, let total = distanceInMetres else { return nil }
       let formatter = NumberFormatter()
       formatter.numberStyle = .percent
+      
       guard let percentage = formatter.string(from: NSNumber(value: friendly.doubleValue / total.doubleValue)) else {
         return nil
       }
+      
       if isCycling {
         return Loc.PercentCycleFriendly(percentage)
       } else if isWheelchair {
         return Loc.PercentWheelchairFriendly(percentage)
+      } else {
+        return nil
+      }
+    }
+    
+    if timesAreRealTime {
+      return isPublicTransport ? Loc.RealTime : Loc.LiveTraffic
+
+    } else if let friendliness = friendliness() {
+      return friendliness
+    
+    } else if !isPublicTransport, template?.hideExactTimes != true {
+      let final = finalSegmentIncludingContinuation()
+      let duration = final.arrivalTime.timeIntervalSince(departureTime)
+      if duration > 10 * 60 || !trip.isMixedModal(ignoreWalking: false) {
+        return final.arrivalTime.durationSince(departureTime)
       } else {
         return nil
       }
@@ -150,7 +163,7 @@ extension TKSegment {
     var target = scheduledStartStopCode
     
     for visit in service.sortedVisits {
-      let current = visit.stop.stopCode
+      guard let current = visit.stop?.stopCode else { continue }
       if target == current {
         if !isTravelled {
           // found start

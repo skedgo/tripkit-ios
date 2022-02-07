@@ -438,7 +438,7 @@ extension TKUITripCell {
 
 extension TKUITripCell.Model {
 
-  init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool?) {
+  init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool? = nil) {
     self.init(
       departure: trip.departureTime,
       arrival: trip.arrivalTime,

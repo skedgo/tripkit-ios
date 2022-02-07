@@ -14,6 +14,8 @@
 		3A1777B0232C17570093D495 /* TripKitInterApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A1777B2232C17590093D495 /* TripKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A19BE2527ABA44500B4AA8C /* TKUITripTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A19BE2427ABA44500B4AA8C /* TKUITripTitleView.swift */; };
+		3A19BE2727ABA44D00B4AA8C /* TKUITripTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A19BE2627ABA44D00B4AA8C /* TKUITripTitleView.xib */; };
 		3A1AABAC26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */; };
 		3A1AABAD26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */; };
 		3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB126CB78DE00FDDB06 /* pelias-au.json */; };
@@ -944,6 +946,8 @@
 
 /* Begin PBXFileReference section */
 		3A0747B02730D4C3000D752F /* polygons-au-211102.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "polygons-au-211102.json"; sourceTree = "<group>"; };
+		3A19BE2427ABA44500B4AA8C /* TKUITripTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripTitleView.swift; sourceTree = "<group>"; };
+		3A19BE2627ABA44D00B4AA8C /* TKUITripTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITripTitleView.xib; sourceTree = "<group>"; };
 		3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKAutocompletionResult+Icon.swift"; sourceTree = "<group>"; };
 		3A1AABB126CB78DE00FDDB06 /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
 		3A1AABB226CB78DE00FDDB06 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
@@ -2522,6 +2526,8 @@
 				3AFF278226C6975F007809CD /* TKUISegmentStationaryDoubleCell.swift */,
 				3AFF278726C6975F007809CD /* TKUISegmentStationaryDoubleCell.xib */,
 				3AFF277D26C6975F007809CD /* TKUITrainOccupancyView.swift */,
+				3A19BE2427ABA44500B4AA8C /* TKUITripTitleView.swift */,
+				3A19BE2627ABA44D00B4AA8C /* TKUITripTitleView.xib */,
 			);
 			path = "trip overview";
 			sourceTree = "<group>";
@@ -3276,6 +3282,7 @@
 				3AFF2B0B26C69B63007809CD /* TKUISectionedAlertViewController.xib in Resources */,
 				3AFF2B7726C69BBE007809CD /* TKUIExtendedActionView.xib in Resources */,
 				3AFF2B5426C69BA4007809CD /* TKUIRoutingSupportView.xib in Resources */,
+				3A19BE2727ABA44D00B4AA8C /* TKUITripTitleView.xib in Resources */,
 				D3AB4792273DE39E0086C956 /* TKUIModePickerCell.xib in Resources */,
 				3AFF2B6F26C69BB9007809CD /* TKUIServiceHeaderView.xib in Resources */,
 				3AFF2B9926C69BC9007809CD /* TKUISegmentMovingCell.xib in Resources */,
@@ -3628,6 +3635,7 @@
 				3AFF2BAD26C69BE7007809CD /* TKShareHelper+Rx.swift in Sources */,
 				3AFF2BA526C69BDE007809CD /* UIColor+Variations.swift in Sources */,
 				3AFF2BC526C69BE7007809CD /* NSManagedObjectContext+Rx.swift in Sources */,
+				3A19BE2527ABA44500B4AA8C /* TKUITripTitleView.swift in Sources */,
 				3AFF2AEB26C69B56007809CD /* TKUITimetableCard+Content.swift in Sources */,
 				3AFF2BCE26C69BF4007809CD /* IdentifiableValue.swift in Sources */,
 				3AFF2B4726C69B9C007809CD /* TKUIAnnotations+TripKit.swift in Sources */,

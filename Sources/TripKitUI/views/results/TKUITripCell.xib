@@ -94,6 +94,7 @@
                 <outlet property="separatorView" destination="83m-f5-90i" id="di4-QI-Rxp"/>
                 <outlet property="subtitleLabel" destination="qJE-k6-hxt" id="XGN-jL-yhC"/>
                 <outlet property="titleLabel" destination="vsO-d9-TCI" id="bYl-xE-bZL"/>
+                <outlet property="titleStackView" destination="R4b-AK-zvO" id="ACT-9O-qwq"/>
             </connections>
             <point key="canvasLocation" x="67.200000000000003" y="102.99850074962519"/>
         </tableViewCell>

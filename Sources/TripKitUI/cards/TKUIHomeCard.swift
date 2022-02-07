@@ -63,6 +63,11 @@ open class TKUIHomeCard: TKUITableCard {
     topMapToolBarItems = Self.config.topMapToolbarItems
   }
   
+  /// Puts the focus to the search bar in the header view, ready for users to begin typing destination.
+  public func enterSearchMode() {
+    headerView.searchBar.becomeFirstResponder()
+  }
+  
   // MARK: - TGCard overrides
   
   open override func didBuild(tableView: UITableView) {
@@ -174,7 +179,7 @@ open class TKUIHomeCard: TKUITableCard {
       .disposed(by: disposeBag)
     
     headerView.directionsButton?.rx.tap.asSignal()
-      .emit(onNext: { [weak self] in self?.showQueryInput() })
+      .emit(onNext: { [weak self] in self?.showQueryInput(startingInDestinationMode: false) })
       .disposed(by: disposeBag)
 
     // Map interaction
@@ -214,6 +219,15 @@ open class TKUIHomeCard: TKUITableCard {
     super.didDisappear(animated: animated)
     
     cardAppearancePublisher.onNext(false)
+  }
+  
+  open override var preferredView: UIView? {
+    switch Self.config.voiceOverStartMode {
+    case .searchBar:
+      return headerView.searchBar
+    case .routeButton:
+      return headerView.directionsButton
+    }
   }
 }
 
@@ -295,9 +309,10 @@ extension TKUIHomeCard {
   }
   
   /// Pushes the routing query input card and handles its response.
-  public func showQueryInput() {
+  public func showQueryInput(startingInDestinationMode: Bool = true) {
     let mapRect = (homeMapManager as? TKUIMapManager)?.mapView?.visibleMapRect ?? .world
     let queryInputCard = TKUIRoutingQueryInputCard(biasMapRect: mapRect)
+    queryInputCard.startMode = startingInDestinationMode ? .destination : .origin
     queryInputCard.queryDelegate = self
     handleNext(.push(queryInputCard))
   }

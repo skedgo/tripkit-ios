@@ -31,10 +31,9 @@ extension Trip {
   
   static func timeTitles(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, hideExactTimes: Bool, isArriveBefore: Bool, capitalize: Bool = false) -> (title: String, subtitle: String) {
     
+    guard !hideExactTimes else { return ("", "") }
+
     let duration = arrival.durationSince(departure)
-    
-    guard !hideExactTimes else { return (duration, "") }
-    
     if focusOnDuration {
       let subtitle: String
       if isArriveBefore {
@@ -56,5 +55,4 @@ extension Trip {
     }
   }
 
-  
 }

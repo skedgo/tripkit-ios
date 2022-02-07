@@ -40,16 +40,16 @@ extension Reactive where Base: TKRegionManager {
 
 extension Reactive where Base: TKServer {
   
-  public static func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
+  public func hit(_ method: TKServer.HTTPMethod = .GET, url: URL, parameters: [String: Any]? = nil) -> Single<(Int, [String: Any], Data)> {
     return Single.create { single in
-      Base.hit(method, url: url, parameters: parameters) { code, responseHeader, result in
+      base.hit(method, url: url, parameters: parameters) { code, responseHeader, result in
         single(result.map { (code, responseHeader, $0) })
       }
       return Disposables.create()
     }
   }
 
-  public static func hit<Model: Decodable>(
+  public func hit<Model: Decodable>(
     _ type: Model.Type,
     _ method: TKServer.HTTPMethod = .GET,
     url: URL,
@@ -57,7 +57,7 @@ extension Reactive where Base: TKServer {
     ) -> Single<(Int, [String: Any], Model)>
   {
     Single.create { subscriber in
-      TKServer.hit(type, url: url, parameters: parameters) { status, headers, result in
+      base.hit(type, url: url, parameters: parameters) { status, headers, result in
         subscriber(result.map { (status, headers, $0) })
       }
       return Disposables.create()
@@ -111,7 +111,7 @@ extension Reactive where Base: TKServer {
         region: region,
         repeatHandler: { code, responseHeaders, result in
           if stopper.stop {
-            // we got discarded
+            // we got disposed
             return nil
           }
           
@@ -156,15 +156,36 @@ extension Reactive where Base: TKServer {
     region: TKRegion? = nil
     ) -> Single<(Int?, [String: Any], Model)>
   {
-    return stream(type, method, path: path, parameters: parameters, headers: headers, region: region, repeatHandler: nil)
-      .map {
-        if let model = $0.2 {
-          return ($0.0, $0.1, model)
-        } else {
-          throw TKServer.ServerError.noData
+    return Single.create { subscriber in
+      let stopper = Stopper()
+      
+      self.hit(
+        method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        repeatHandler: { code, responseHeaders, result in
+          if stopper.stop {
+            // we got disposed while waiting for response
+            return nil
+          }
+          
+          subscriber(Result {
+            let data = try result.get()
+            let model = try JSONDecoder().decode(Model.self, from: data)
+            return (code, responseHeaders, model)
+          })
+          
+          // Never repeat
+          return nil
         }
+      )
+      
+      return Disposables.create() {
+        stopper.stop = true
       }
-      .asSingle()
+    }
   }
   
   /// Hit a SkedGo endpoint, using a variety of options

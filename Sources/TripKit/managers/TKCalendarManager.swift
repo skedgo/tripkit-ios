@@ -57,7 +57,7 @@ public class TKCalendarManager: TKPermissionManager {
       .lazy
       .filter { event in
         event.location?.lowercased().contains(needle) == true
-          || event.title.lowercased().contains(needle)
+          || event.title?.lowercased().contains(needle) == true
       }
       .prefix(10)
     return Array(matches)

@@ -16,6 +16,7 @@ public class TKUITripCell: UITableViewCell {
   
   public static let reuseIdentifier: String = "TKUITripCell"
 
+  @IBOutlet weak var titleStackView: UIStackView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
@@ -85,7 +86,7 @@ public class TKUITripCell: UITableViewCell {
   func configure(_ model: Model) {
     guard let formatter = self.formatter else { return }
     
-    titleLabel.attributedText = formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    titleLabel.attributedText = model.hideExactTimes ? nil : formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     
     subtitleLabel.attributedText = model.hideExactTimes ? nil : formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     

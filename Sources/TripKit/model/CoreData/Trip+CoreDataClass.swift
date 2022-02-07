@@ -126,7 +126,7 @@ extension Trip {
   @discardableResult
   func calculateDuration() -> TimeInterval {
     let minutes = arrivalTime.minutesSince(departureTime)
-    self.minutes = Int16(minutes)
+    self.minutes = Int16(min(Double(INT16_MAX), Double(minutes)))
     return TimeInterval(minutes * 60)
   }
 }
@@ -224,8 +224,8 @@ extension Trip {
     
     let sorted = references.sorted { $0.index < $1.index }
     guard
-      let start = sorted.first?.template.start,
-      let end = sorted.last?.template.end
+      let start = sorted.first?.template?.start,
+      let end = sorted.last?.template?.end
     else {
       assertionFailure()
       return []
