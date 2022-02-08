@@ -86,23 +86,7 @@ extension TKUITripCell {
       
       return metricValues
     }
-
-    private func append(_ string: String?, to attributed: NSMutableAttributedString, isPrimary: Bool) {
-      append(string, to: attributed, font: isPrimary ? primaryFont : secondaryFont, color: isPrimary ? primaryColor : secondaryColor)
-    }
     
-    private func append(_ string: String?, to attributed: NSMutableAttributedString, font: UIFont? = nil, color: UIColor) {
-      guard let string = string else { return }
-      
-      var attributes = [NSAttributedString.Key: Any]()
-      if let font = font {
-        attributes[.font] = font
-      }
-      attributes[.foregroundColor] = color
-
-      let addition = NSAttributedString(string: string, attributes: attributes)
-      attributed.append(addition)
-    }
   }
   
 }
