@@ -96,10 +96,4 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     set { costLabel.attributedText = newValue }
   }
   
-  var hideCost: Bool = false {
-    didSet {
-      costLabel.isHidden = hideCost
-    }
-  }
-  
 }

@@ -64,30 +64,27 @@ extension TKUITripCell {
     }
     
     func costString(costs: [TKTripCostType: String]) -> NSAttributedString {
-      let attributed = NSMutableAttributedString()
-      #if DEBUG
-      append(costs[.score], to: attributed, color: costColor)
-      append(" ⋅ ", to: attributed, color: costColor)
-      #endif
-      
-      if let price = costs[.price] {
-        append(price, to: attributed, color: costColor)
-        append(" ⋅ ", to: attributed, color: costColor)
-      }
-      append(costs[.calories], to: attributed, color: costColor)
-      append(" ⋅ ", to: attributed, color: costColor)
-      append(costs[.carbon], to: attributed, color: costColor)
-      return attributed
+      let displayable = displayableMetrics(for: costs)
+      guard !displayable.isEmpty else { return NSAttributedString(string: " ") }
+      let joint = displayable.joined(separator: " ⋅ ")
+      return NSAttributedString(string: joint, attributes: [.foregroundColor: costColor])
     }
     
     func costAccessibilityLabel(costs: [TKTripCostType: String]) -> String {
-      return [
-          costs[.price],
-          costs[.calories],
-          costs[.carbon]?.replacingOccurrences(of: "CO₂", with: "C-O-2") // Don't say "Co subscript 2"
-        ]
-        .compactMap { $0 }
+      return displayableMetrics(for: costs)
+        .map { $0.replacingOccurrences(of: "CO₂", with: "C-O-2") }
         .joined(separator: "; ")
+    }
+    
+    private func displayableMetrics(for costs: [TKTripCostType: String]) -> [String] {
+      var metricValues: [String] = []
+      
+      for metricKey in TKUIRoutingResultsCard.config.tripMetricsToShow {
+        guard let value = costs[metricKey] else { continue }
+        metricValues.append(value)
+      }
+      
+      return metricValues
     }
 
     private func append(_ string: String?, to attributed: NSMutableAttributedString, isPrimary: Bool) {

@@ -79,8 +79,23 @@ public extension TKUIRoutingResultsCard {
     /// Note: this will also be re-used in the mode-by-mode card
     public var timePickerConfig: TKUITimePickerSheet.Configuration = .default
     
-    /// Set this to hide the trip metrics displayed in each trip group. Default is `false`
-    public var hideTripMetrics: Bool = false
+    /// Set this to select which trip metrics to show for each trip group in the routing
+    /// results card.
+    ///
+    /// It is important to note that, while you may specify a trip metric to be shown, if
+    /// such metric is unavailable in the response of the routing request, it will not be
+    /// shown. In addition, the order specified here is the order in which the metrics
+    /// will be displayed.
+    ///
+    /// The default metrics to show are `price`, `calories` and `carbon`.
+    public var tripMetricsToShow: [TKTripCostType] = {
+      var metrics: [TKTripCostType] = [.price, .calories, .carbon]
+      #if DEBUG
+      metrics.insert(.score, at: 0)
+      #endif
+      return metrics
+    }()
+    
   }
 
 }
