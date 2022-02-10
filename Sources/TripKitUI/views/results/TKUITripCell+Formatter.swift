@@ -72,7 +72,7 @@ extension TKUITripCell {
     
     func costAccessibilityLabel(costs: [TKTripCostType: String]) -> String {
       return displayableMetrics(for: costs)
-        .map { $0.replacingOccurrences(of: "CO₂", with: "C-O-2") }
+        .map { $0.replacingOccurrences(of: "CO₂", with: "C-O-2") } // Don't say "Co subscript 2"
         .joined(separator: "; ")
     }
     
