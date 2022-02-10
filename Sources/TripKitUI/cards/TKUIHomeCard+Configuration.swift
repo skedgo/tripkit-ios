@@ -72,6 +72,10 @@ public extension TKUIHomeCard {
     
     /// Set where the initial VoiceOver focus should be. Defaults to `.searchBar`
     public var voiceOverStartMode: TKUIHomeCard.VoiceOverMode = .searchBar
+    
+    /// Determines if a  `TKUIRoutingQueryInputCard` starts with a focus on the destination field,
+    /// if activated through the direction button in the home card.
+    public var directionButtonStartsQueryInputInDestinationMode: Bool = true
   }
   
 }
