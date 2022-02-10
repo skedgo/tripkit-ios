@@ -320,7 +320,15 @@ extension TKLog {
     var message = "\(method) \(url.absoluteString)"
     if let headers = urlRequest.allHTTPHeaderFields {
       for header in headers {
+        #if DEBUG
         message += "\n\(header.key): \(header.value)"
+        #else
+        if header.key.lowercased() == "x-tripgo-key" {
+          message += "\n\(header.key): \(header.value.obscured)"
+        } else {
+          message += "\n\(header.key): \(header.value)"
+        }
+        #endif
       }
     }
     if let body = urlRequest.httpBody, !body.isEmpty {
@@ -355,5 +363,11 @@ extension TKLog {
       message += "\n\n\t" + String(decoding: data, as: UTF8.self)
     }
     return message
+  }
+}
+
+fileprivate extension String {
+  var obscured: String {
+    String(prefix(6)).appending("...").appending(String(suffix(2)))
   }
 }
