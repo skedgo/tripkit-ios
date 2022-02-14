@@ -154,11 +154,6 @@ extension Loc {
     return String(format: capitalize ? format.localizedCapitalized : format, time)
   }
   
-  @objc(ArriveAtDate:)
-  public static func ArriveAt(date: String) -> String {
-    return ArriveAtLocation(nil, at: date)
-  }
-  
   @objc(FromLocation:)
   public static func From(location from: String) -> String {
     let format = NSLocalizedString("From %@", tableName: "TripKit", bundle: .tripKit, comment: "Departure location. (old key: PrimaryLocationStart)")

@@ -34,23 +34,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "Back";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Bicycle";
-
 /* Cancel action */
 "Cancel" = "Cancel";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Cancelled";
 
-/* Type of vehicle : car */
-"Car" = "Car";
-
 /* Instruction for changing password */
 "Change" = "Change";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Change tracking options";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Checkmark";
@@ -97,9 +88,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Every %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Everyday";
-
 /* Reminder to leave preference */
 "For when to leave" = "For when to leave";
 
@@ -118,9 +106,6 @@
 /* Include events. */
 "Include events" = "Include events";
 
-/* Instant results proposal */
-"Instant results" = "Instant results";
-
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
@@ -130,9 +115,6 @@
 /* No comment provided by engineer. */
 "Last updated: %@" = "Last updated: %@";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Loading";
-
 /* Title for unnamed location */
 "Location" = "Location";
 
@@ -141,12 +123,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minutes before trip";
-
-/* More results proposal */
-"More results" = "More results";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Motorbike";
 
 /* Title for name of something (or someone) */
 "Name" = "Name";
@@ -249,15 +225,6 @@
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tap to set location";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Tracking - off";
-
-/* user location button - follow */
-"Tracking - on" = "Tracking - on";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Tracking - on with heading";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "Up to %@";

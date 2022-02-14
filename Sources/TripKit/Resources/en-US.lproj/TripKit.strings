@@ -37,9 +37,6 @@
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
 
-/* Arrival time sorter title */
-"Arrival" = "Arrival";
-
 /* Prefix for selected 'arrive by' time
  Single line instruction to arrive */
 "Arrive" = "Arrive";
@@ -70,9 +67,6 @@
 
 /* Title for button to customise the home card */
 "Customise home" = "Customize home";
-
-/* Departure time sorter title */
-"Departure" = "Departure";
 
 /* Destination of the bus */
 "Direction" = "Direction";
@@ -140,9 +134,6 @@
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Limited standing room only";
-
-/* No comment provided by engineer. */
-"Live traffic" = "Live traffic";
 
 /* Indicating when something is loading */
 "Loading…" = "Loading…";
@@ -224,10 +215,4 @@
 
 /* Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'. */
 "for %@" = "for %@";
-
-/* goCatch action */
-"goCatch a Taxi" = "goCatch a Taxi";
-
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "ingogo a Taxi";
 

@@ -236,9 +236,6 @@
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "とりあえず %@ を探索しながら、移動を楽しみましょう。";
 
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "ingogo a Taxi";
-
 /* Title for section with instant results in autocompletion */
 "Instant results" = "簡易結果";
 
