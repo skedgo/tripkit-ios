@@ -122,6 +122,7 @@ class TKUIRoutingResultsViewModel {
     fetchProgress = progress
     
     let advisory = Self.fetchAdvisory(for: requestToShow)
+      .observe(on: MainScheduler.instance)
 
     realTimeUpdate = Self.fetchRealTimeUpdates(for: tripGroupsChanged.map(\.0))
       .asDriver(onErrorDriveWith: .empty())
