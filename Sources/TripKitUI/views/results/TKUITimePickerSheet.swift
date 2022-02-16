@@ -295,12 +295,16 @@ public class TKUITimePickerSheet: TKUISheet {
     selectAction(.leaveASAP, .init())
     selectAction = { _, _ in }
     
+    // be consistent in case these are accessed by the owner or delegate
+    timeTypeSelector?.selectedSegmentIndex = 0
+    timePicker.setDate(.init(), animated: true)
+    
     if isBeingOverlaid {
       tappedOverlay(sender)
     } else if let delegate = delegate {
       delegate.timePickerRequestsResign(self)
     } else {
-      timePicker.setDate(.init(), animated: true)
+      // We updated the time picker above
     }
   }
 
