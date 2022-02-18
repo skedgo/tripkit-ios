@@ -88,11 +88,6 @@
   }
 }
 
-- (BOOL)globalTranslucency
-{
-  return [self.configuration[@"GlobalTranslucency"] boolValue];
-}
-
 #pragma mark - Fonts
 
 - (NSDictionary *)preferredFonts

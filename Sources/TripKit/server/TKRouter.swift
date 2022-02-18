@@ -61,17 +61,25 @@ public class TKRouter: NSObject {
   ///   - request: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
   public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
-    guard !request.isDeleted else {
-      callbackQueue.async {
-        let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
-        completion(.failure(error))
-      }
-      return
+    
+    func abort() {
+      let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
+      callbackQueue.async { completion(.failure(error)) }
     }
     
-    return fetchTrips(for: request, bestOnly: false, additional: additional, visibility: visibility, callbackQueue: callbackQueue) {
-      let result = $0.map { _ in }
-      completion(result)
+    guard let context = request.managedObjectContext else {
+      return abort()
+    }
+    
+    context.perform {
+      guard !request.isDeleted else {
+        return abort()
+      }
+      
+      self.fetchTrips(for: request, bestOnly: false, additional: additional, visibility: visibility, callbackQueue: callbackQueue) {
+        let result = $0.map { _ in }
+        completion(result)
+      }
     }
   }
   
@@ -207,6 +215,7 @@ extension TKRouter {
     let groupedIdentifier = TKTransportModes.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
     
     var tripRequest: TripRequest! = nil
+    var additional: Set<URLQueryItem> = []
     context.performAndWait {
       tripRequest = request.toTripRequest()
       do {
@@ -215,8 +224,11 @@ extension TKRouter {
         assertionFailure()
         return handleError(error, callbackQueue: queue, completion: completion)
       }
+      
+      // This will also hit the context, so we need to do this here
+      additional = request.additional
     }
-
+    
     queue.async {
       self.cancelRequestsWorker()
       self.isActive = true
@@ -232,7 +244,7 @@ extension TKRouter {
         worker.modeIdentifiers = modeGroup
         
         // Hidden as we'll adjust the visibility in the completion block
-        worker.fetchTrips(for: tripRequest, additional: request.additional, visibility: .hidden, callbackQueue: queue) { [weak self] result in
+        worker.fetchTrips(for: tripRequest, additional: additional, visibility: .hidden, callbackQueue: queue) { [weak self] result in
           guard let self = self else { return }
           
           self.finishedWorkers += 1

@@ -229,11 +229,6 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
   }
 }
 
-+ (BOOL)globalTranslucency
-{
-  return [[TKConfig sharedInstance] globalTranslucency];
-}
-
 #pragma mark - Private
 
 + (CGFloat)redComponent:(NSDictionary *)RGB
