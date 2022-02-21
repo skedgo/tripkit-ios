@@ -10,15 +10,9 @@ import Foundation
 
 public class TKUserProfileHelper: NSObject {
   
-  public enum DefaultsKey: String {
-    case onWheelchair = "profileOnWheelchair"
-    case sortedEnabled = "profileSortedModeIdentifiers"
-    case hidden = "profileHiddenModeIdentifiers"
-    case disliked = "profileDislikedTransitMode"
-  }
-  
+  public typealias DefaultsKey = TKSettings.DefaultsKey
+
   public typealias Identifier = String
-  
   
   // MARK: - Simple settings
     

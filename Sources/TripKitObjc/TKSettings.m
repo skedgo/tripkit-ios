@@ -24,47 +24,6 @@
   [[NSUserDefaults sharedDefaults] setDouble:minutes forKey:TKDefaultsKeyProfileTransportWalkMaxDuration];
 }
 
-+ (void)setMinimumTransferDuration:(NSTimeInterval)duration
-{
-  NSInteger minutes = (NSInteger) ((duration + 59) / 60);
-  [[NSUserDefaults sharedDefaults] setInteger:minutes forKey:TKDefaultsKeyProfileTransportTransferTime];
-}
-
-+ (void)setProfileWeight:(float)weight forComponent:(TKSettingsProfileWeight)component
-{
-  switch (component) {
-    case TKSettingsProfileWeight_Carbon:
-      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightCarbon];
-      break;
-      
-    case TKSettingsProfileWeight_Hassle:
-      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightHassle];
-      break;
-      
-    case TKSettingsProfileWeight_Money:
-      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightMoney];
-      break;
-
-    case TKSettingsProfileWeight_Time:
-      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightTime];
-      break;
-
-    case TKSettingsProfileWeight_Exercise:
-      [[NSUserDefaults sharedDefaults] setFloat:weight forKey:TKDefaultsKeyProfileWeightExercise];
-      break;
-  }
-}
-
-+ (void)setWalkingSpeed:(TKSettingsSpeed)speed
-{
-  [[NSUserDefaults sharedDefaults] setInteger:(NSInteger)speed forKey:TKDefaultsKeyProfileTransportWalkSpeed];
-}
-
-+ (void)setCyclingSpeed:(TKSettingsSpeed)speed
-{
-  [[NSUserDefaults sharedDefaults] setInteger:(NSInteger)speed forKey:TKDefaultsKeyProfileTransportCyclingSpeed];
-}
-
 + (void)setEmissions:(float)gramsCO2PerKm forModeIdentifier:(NSString *)modeIdentifier
 {
   NSMutableDictionary *mutable = nil;
