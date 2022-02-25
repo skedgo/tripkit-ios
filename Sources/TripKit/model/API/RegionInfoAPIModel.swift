@@ -62,7 +62,7 @@ extension TKAPI {
     
     /// The specific modes of this group that are
     /// available for your API key.
-    public let specificModes: [SpecificModeDetails]?
+    @DefaultEmptyArray public var specificModes: [SpecificModeDetails]
     
     /// Additional specific modes that are available
     /// on the platform, but not currently available
@@ -71,7 +71,7 @@ extension TKAPI {
     /// See https://developer.tripgo.com/extensions/
     /// for how to unlock them, or get in touch with
     /// someone from the TripGo API team.
-    public let lockedModes: [SpecificModeDetails]?
+    @DefaultEmptyArray public var lockedModes: [SpecificModeDetails]
   }
   
   /// Additional details about a specific mode, where the
@@ -87,7 +87,7 @@ extension TKAPI {
     
     /// Available integrations for this mode that are available
     /// through the TripGo API.
-    public let integrations: [Integrations]?
+    @DefaultEmptyArray public var integrations: [Integrations]
     
     /// URL of the primary transport provider of this mode.
     public let url: URL?
@@ -99,10 +99,10 @@ extension TKAPI {
     
     /// List of public transport operator names servicing
     /// this mode. (Public transport modes only)
-    public let operators: [String]?
+    @DefaultEmptyArray public var operators: [String]
     
     /// List of image name-parts related to this operator
-    public let modeImageNames: [String]?
+    @DefaultEmptyArray public var modeImageNames: [String]
     
     public var identifier: String {
       if let id = modeInfo.identifier {
@@ -124,7 +124,7 @@ extension TKAPI.RegionInfo {
   ///     one with two underscores in it.)
   public func specificModeDetails(for modeIdentifier: String) -> TKAPI.SpecificModeDetails? {
     let genericMode = TKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
-    return modes[genericMode]?.specificModes?.first { modeIdentifier == $0.identifier }
+    return modes[genericMode]?.specificModes.first { modeIdentifier == $0.identifier }
   }
   
 }

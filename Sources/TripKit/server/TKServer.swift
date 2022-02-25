@@ -12,7 +12,8 @@ extension TKServer {
   
   public static let shared = TKServer.__sharedInstance()
   
-  public static func imageURL(iconFileNamePart: String, iconType: TKStyleModeIconType? = nil) -> URL? {
+  public static func imageURL(iconFileNamePart: String?, iconType: TKStyleModeIconType? = nil) -> URL? {
+    guard let iconFileNamePart = iconFileNamePart else { return nil }
     let regionsURLString = TKServer.developmentServer ?? "https://api.tripgo.com/v1"
     
     let isPNG: Bool

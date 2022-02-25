@@ -116,7 +116,6 @@
 		3AFF285826C697A3007809CD /* TKMetricClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C726C6975F007809CD /* TKMetricClassifier.swift */; };
 		3AFF285926C697A3007809CD /* DataAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C926C6975F007809CD /* DataAttachable.swift */; };
 		3AFF285A26C697A3007809CD /* API+ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CF26C6975F007809CD /* API+ViewHelpers.swift */; };
-		3AFF285B26C697A3007809CD /* TKObjcDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D326C6975F007809CD /* TKObjcDateHelper.swift */; };
 		3AFF285C26C697A3007809CD /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CC26C6975F007809CD /* TKJSONCache.swift */; };
 		3AFF285D26C697A3007809CD /* TKTripClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C826C6975F007809CD /* TKTripClassifier.swift */; };
 		3AFF285E26C697A3007809CD /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CA26C6975F007809CD /* TKModeHelper.swift */; };
@@ -129,7 +128,6 @@
 		3AFF286626C697A3007809CD /* TKMetricClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C726C6975F007809CD /* TKMetricClassifier.swift */; };
 		3AFF286726C697A3007809CD /* DataAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C926C6975F007809CD /* DataAttachable.swift */; };
 		3AFF286826C697A3007809CD /* API+ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CF26C6975F007809CD /* API+ViewHelpers.swift */; };
-		3AFF286926C697A3007809CD /* TKObjcDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D326C6975F007809CD /* TKObjcDateHelper.swift */; };
 		3AFF286A26C697A3007809CD /* TKJSONCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CC26C6975F007809CD /* TKJSONCache.swift */; };
 		3AFF286B26C697A3007809CD /* TKTripClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C826C6975F007809CD /* TKTripClassifier.swift */; };
 		3AFF286C26C697A3007809CD /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CA26C6975F007809CD /* TKModeHelper.swift */; };
@@ -1245,7 +1243,6 @@
 		3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKJSONSanitizer.swift; sourceTree = "<group>"; };
 		3AFF26D126C6975F007809CD /* TKImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKImageBuilder.swift; sourceTree = "<group>"; };
 		3AFF26D226C6975F007809CD /* TKRegion+RoutingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKRegion+RoutingMode.swift"; sourceTree = "<group>"; };
-		3AFF26D326C6975F007809CD /* TKObjcDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKObjcDateHelper.swift; sourceTree = "<group>"; };
 		3AFF26D626C6975F007809CD /* DefaultNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNil.swift; sourceTree = "<group>"; };
 		3AFF26D726C6975F007809CD /* DefaultCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCodable.swift; sourceTree = "<group>"; };
 		3AFF26D826C6975F007809CD /* ISO8601OrSecondsSince1970.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601OrSecondsSince1970.swift; sourceTree = "<group>"; };
@@ -2218,7 +2215,6 @@
 				3AFF26CC26C6975F007809CD /* TKJSONCache.swift */,
 				3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */,
 				3AFF26CA26C6975F007809CD /* TKModeHelper.swift */,
-				3AFF26D326C6975F007809CD /* TKObjcDateHelper.swift */,
 				3AFF26CE26C6975F007809CD /* TKParserHelper.swift */,
 				3AFF26D226C6975F007809CD /* TKRegion+RoutingMode.swift */,
 				3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */,
@@ -3423,7 +3419,6 @@
 				3AFF293E26C6980D007809CD /* TKAnnotationClusterer.swift in Sources */,
 				3AFF29A226C6985D007809CD /* NSManagedObject+TKPersistence.m in Sources */,
 				3AFF298F26C69850007809CD /* LossyArray.swift in Sources */,
-				3AFF286926C697A3007809CD /* TKObjcDateHelper.swift in Sources */,
 				3AFF284326C6977C007809CD /* Trip+Shareable.swift in Sources */,
 				3AFF294026C6980D007809CD /* TKNamedCoordinate+Attribution.swift in Sources */,
 				3AFF294126C6980D007809CD /* TKGeocoding.swift in Sources */,
@@ -3879,7 +3874,6 @@
 				3AFF293026C6980D007809CD /* TKAnnotationClusterer.swift in Sources */,
 				3AFF299726C6985C007809CD /* NSManagedObject+TKPersistence.m in Sources */,
 				3AFF298726C6984F007809CD /* LossyArray.swift in Sources */,
-				3AFF285B26C697A3007809CD /* TKObjcDateHelper.swift in Sources */,
 				3AFF283B26C6977B007809CD /* Trip+Shareable.swift in Sources */,
 				3AFF293226C6980D007809CD /* TKNamedCoordinate+Attribution.swift in Sources */,
 				3AFF293326C6980D007809CD /* TKGeocoding.swift in Sources */,
