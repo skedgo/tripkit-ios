@@ -62,7 +62,6 @@ extension TKRegionManager {
       case .failure(TKServer.ServerError.noData) where !forced:
         completion(.success(())) // still up-to-date
       case .failure(let error):
-        TKLog.warn("TKServer+Regions", text: "Error fetching regions.json: \(error)")
         completion(.failure(error))
       }
     }

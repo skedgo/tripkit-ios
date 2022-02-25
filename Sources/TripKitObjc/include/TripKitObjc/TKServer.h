@@ -17,7 +17,7 @@ typedef void (^TKServerSuccessBlock)(NSInteger status, NSData * _Nullable data);
 typedef void (^TKServerFullSuccessBlock)(NSInteger status, NSDictionary<NSString *, id> *headers, NSData * _Nullable data);
 typedef void (^TKServerFailureBlock)(NSError *error);
 typedef void (^TKServerGenericBlock)(NSInteger status, NSDictionary<NSString *, id> *headers, NSData * _Nullable data, NSError * _Nullable error);
-typedef void (^TKServerInfoBlock)(NSUUID *uuid, NSURLRequest *, NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable error);
+typedef void (^TKServerInfoBlock)(NSUUID *uuid, BOOL isResponse, NSURLRequest *, NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable error);
 
 /// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyUserToken;

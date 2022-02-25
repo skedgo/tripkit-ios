@@ -270,8 +270,8 @@ extension TKServer {
       headers: headers,
       baseURLs: NSMutableArray(array: baseURLs(for: region).shuffled()),
       callbackOnMain: callbackOnMain,
-      info: { uuid, request, response, data, error in
-        if let response = response {
+      info: { uuid, isResponse, request, response, data, error in
+        if isResponse {
           TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
         } else {
           TKLog.log("TKServer", request: request, uuid: uuid)
@@ -316,8 +316,8 @@ extension TKServer {
       url,
       method: method.rawValue,
       parameters: parameters,
-      info: { uuid, request, response, data, error in
-        if let response = response {
+      info: { uuid, isResponse, request, response, data, error in
+        if isResponse {
           TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
         } else {
           TKLog.log("TKServer", request: request, uuid: uuid)
