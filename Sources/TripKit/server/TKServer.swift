@@ -116,7 +116,7 @@ extension TKServer {
   public enum ServerError: Error {
     case noData
   }
-
+  
   public enum RepeatHandler {
     case repeatIn(TimeInterval)
     case repeatWithNewParameters(TimeInterval, [String: Any])
@@ -256,6 +256,44 @@ extension TKServer {
     }
   }
 
+}
+
+// MARK: - Async/await
+
+extension TKServer {
+  public struct Response<T> {
+    public var statusCode: Int?
+    public var headers: [String: Any]
+    public var result: Result<T, Error>
+  }
+
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
+    region: TKRegion?
+  ) async -> Response<Model> {
+    await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { status, header, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: header,
+          result: Result {
+            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
 }
 
 // MARK: - Calling to Objective-C

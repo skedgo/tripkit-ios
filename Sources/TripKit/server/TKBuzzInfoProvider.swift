@@ -87,16 +87,15 @@ public enum TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public static func fetchRegionInformation(forRegion region: TKRegion, completion: @escaping (TKAPI.RegionInfo?) -> Void)
+  public static func fetchRegionInformation(forRegion region: TKRegion) async -> TKAPI.RegionInfo?
   {
-    TKServer.shared.hit(RegionInfoResponse.self,
-                        .POST,
-                        path: "regionInfo.json",
-                        parameters: ["region": region.name],
-                        region: region
-    ) { _, _, result in
-      completion(try? result.get().regions.first)
-    }
+    try? await TKServer.shared.hit(
+      RegionInfoResponse.self,
+      .POST,
+      path: "regionInfo.json",
+      parameters: ["region": region.name],
+      region: region
+    ).result.get().regions.first
   }
   
   /**
@@ -104,11 +103,9 @@ public enum TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public static func fetchParatransitInformation(forRegion region: TKRegion, completion: @escaping (TKAPI.Paratransit?) -> Void)
+  public static func fetchParatransitInformation(forRegion region: TKRegion) async -> TKAPI.Paratransit?
   {
-    fetchRegionInformation(forRegion: region) { info in
-      completion(info?.paratransit)
-    }
+    await fetchRegionInformation(forRegion: region)?.paratransit
   }
   
   /**
@@ -116,11 +113,9 @@ public enum TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public static func fetchPublicTransportModes(forRegion region: TKRegion, completion: @escaping ([TKModeInfo]) -> Void)
+  public static func fetchPublicTransportModes(forRegion region: TKRegion) async -> [TKModeInfo]?
   {
-    fetchRegionInformation(forRegion: region) { info in
-      completion(info?.transitModes ?? [])
-    }
+    await fetchRegionInformation(forRegion: region)?.transitModes
   }
   
 
@@ -180,29 +175,6 @@ public enum TKBuzzInfoProvider {
       completion(mappings.map(\.alert))
     }
   }
-  
-  // MARK: - Accessibility
-  
-  /**
-   Asynchronously fetches information about whether the provided region supports
-   wheelchair.
-   
-   - Note: Completion block is executed on the main thread.
-   */
-  
-  public static func fetchWheelchairSupportInformation(forRegion region: TKRegion, completiton: @escaping (Bool) -> Void)
-  {
-    fetchRegionInformation(forRegion: region) { info in
-      let isSupported: Bool
-      if let info = info {
-        isSupported = info.transitWheelchairAccessibility || info.streetWheelchairAccessibility
-      } else {
-        isSupported = false
-      }
-      completiton(isSupported)
-    }
-  }
-  
 }
 
 // MARK: - Response data model
