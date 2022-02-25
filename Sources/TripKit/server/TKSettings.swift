@@ -195,7 +195,11 @@ extension TKSettings.Speed {
     case .slow:              return 0
     case .medium:            return 1
     case .fast:              return 2
-    case .custom(let speed): return "(\(speed)m/s"
+    case .custom(let speed):
+      let formatter = NumberFormatter()
+      formatter.locale = Locale(identifier: "en_US")
+      formatter.maximumFractionDigits = 2
+      return "\(formatter.string(from: .init(value: speed))!)mps"
     }
   }
   
@@ -211,7 +215,7 @@ extension TKSettings.Speed {
     }
     
     if let string = apiValue as? String,
-      let speed = CLLocationSpeed(string.replacingOccurrences(of: "m/s", with: "")) {
+      let speed = CLLocationSpeed(string.replacingOccurrences(of: "mps", with: "")) {
       self = .custom(speed)
     } else {
       return nil
