@@ -13,7 +13,6 @@
 #endif
 
 NSString *const TKDefaultsKeyProfileTransportWalkMaxDuration = @"profileTransportWalkMax";
-NSString *const TKDefaultsKeyProfileTransportConcessionPricing = @"profileTransportConcessionPricing";
 NSString *const TKDefaultsKeyProfileTransportEmissions    = @"profileTransportEmissions";
 
 NSString *const TKDefaultsKeyProfileBookingsUseSandbox    = @"profileBookingsUseSandbox";

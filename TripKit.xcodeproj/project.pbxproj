@@ -121,7 +121,6 @@
 		3AFF285D26C697A3007809CD /* TKTripClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C826C6975F007809CD /* TKTripClassifier.swift */; };
 		3AFF285E26C697A3007809CD /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CA26C6975F007809CD /* TKModeHelper.swift */; };
 		3AFF285F26C697A3007809CD /* TripRequest+Classify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C626C6975F007809CD /* TripRequest+Classify.swift */; };
-		3AFF286026C697A3007809CD /* TKUserProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CB26C6975F007809CD /* TKUserProfileHelper.swift */; };
 		3AFF286126C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */; };
 		3AFF286226C697A3007809CD /* TKImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D126C6975F007809CD /* TKImageBuilder.swift */; };
 		3AFF286326C697A3007809CD /* TKJSONSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */; };
@@ -135,7 +134,6 @@
 		3AFF286B26C697A3007809CD /* TKTripClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C826C6975F007809CD /* TKTripClassifier.swift */; };
 		3AFF286C26C697A3007809CD /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CA26C6975F007809CD /* TKModeHelper.swift */; };
 		3AFF286D26C697A3007809CD /* TripRequest+Classify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C626C6975F007809CD /* TripRequest+Classify.swift */; };
-		3AFF286E26C697A3007809CD /* TKUserProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CB26C6975F007809CD /* TKUserProfileHelper.swift */; };
 		3AFF286F26C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */; };
 		3AFF287026C697A3007809CD /* TKImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D126C6975F007809CD /* TKImageBuilder.swift */; };
 		3AFF287126C697A3007809CD /* TKJSONSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */; };
@@ -805,7 +803,7 @@
 		3AFF2BBC26C69BE7007809CD /* TKUIResultsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27B626C6975F007809CD /* TKUIResultsFetcher.swift */; };
 		3AFF2BBD26C69BE7007809CD /* TKUIMapManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27C626C6975F007809CD /* TKUIMapManagerHelper.swift */; };
 		3AFF2BBE26C69BE7007809CD /* TKRealTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27B726C6975F007809CD /* TKRealTimeHelper.swift */; };
-		3AFF2BBF26C69BE7007809CD /* TKUserProfileHelper+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27BF26C6975F007809CD /* TKUserProfileHelper+Rx.swift */; };
+		3AFF2BBF26C69BE7007809CD /* TKSettings+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27BF26C6975F007809CD /* TKSettings+Rx.swift */; };
 		3AFF2BC026C69BE7007809CD /* TKGeocoding+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27C026C6975F007809CD /* TKGeocoding+Rx.swift */; };
 		3AFF2BC126C69BE7007809CD /* TKWheelchairAccessibility+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27C526C6975F007809CD /* TKWheelchairAccessibility+UI.swift */; };
 		3AFF2BC226C69BE7007809CD /* TKAPI+ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF27C926C6975F007809CD /* TKAPI+ViewHelpers.swift */; };
@@ -1240,7 +1238,6 @@
 		3AFF26C826C6975F007809CD /* TKTripClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripClassifier.swift; sourceTree = "<group>"; };
 		3AFF26C926C6975F007809CD /* DataAttachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAttachable.swift; sourceTree = "<group>"; };
 		3AFF26CA26C6975F007809CD /* TKModeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKModeHelper.swift; sourceTree = "<group>"; };
-		3AFF26CB26C6975F007809CD /* TKUserProfileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUserProfileHelper.swift; sourceTree = "<group>"; };
 		3AFF26CC26C6975F007809CD /* TKJSONCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
 		3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionOverlayHelper.swift; sourceTree = "<group>"; };
 		3AFF26CE26C6975F007809CD /* TKParserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKParserHelper.swift; sourceTree = "<group>"; };
@@ -1463,7 +1460,7 @@
 		3AFF27BC26C6975F007809CD /* TKDeparturesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKDeparturesProvider.swift; sourceTree = "<group>"; };
 		3AFF27BD26C6975F007809CD /* TKLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKLocationProvider.swift; sourceTree = "<group>"; };
 		3AFF27BE26C6975F007809CD /* TKRouter+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKRouter+Rx.swift"; sourceTree = "<group>"; };
-		3AFF27BF26C6975F007809CD /* TKUserProfileHelper+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUserProfileHelper+Rx.swift"; sourceTree = "<group>"; };
+		3AFF27BF26C6975F007809CD /* TKSettings+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKSettings+Rx.swift"; sourceTree = "<group>"; };
 		3AFF27C026C6975F007809CD /* TKGeocoding+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKGeocoding+Rx.swift"; sourceTree = "<group>"; };
 		3AFF27C126C6975F007809CD /* TKServer+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKServer+Rx.swift"; sourceTree = "<group>"; };
 		3AFF27C226C6975F007809CD /* TKLocationTypes+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKLocationTypes+Rx.swift"; sourceTree = "<group>"; };
@@ -2225,7 +2222,6 @@
 				3AFF26CE26C6975F007809CD /* TKParserHelper.swift */,
 				3AFF26D226C6975F007809CD /* TKRegion+RoutingMode.swift */,
 				3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */,
-				3AFF26CB26C6975F007809CD /* TKUserProfileHelper.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -2613,9 +2609,9 @@
 				3AFF27BE26C6975F007809CD /* TKRouter+Rx.swift */,
 				3AFF27C126C6975F007809CD /* TKServer+Rx.swift */,
 				3AFF27BA26C6975F007809CD /* TKServer+UserAccount.swift */,
+				3AFF27BF26C6975F007809CD /* TKSettings+Rx.swift */,
 				3AFF27C326C6975F007809CD /* TKShareHelper+Rx.swift */,
 				3AFF27B626C6975F007809CD /* TKUIResultsFetcher.swift */,
-				3AFF27BF26C6975F007809CD /* TKUserProfileHelper+Rx.swift */,
 				3AFF27B526C6975F007809CD /* Vehicle+Rx.swift */,
 			);
 			path = RxTripKit;
@@ -3492,7 +3488,6 @@
 				3AFF29EC26C69864007809CD /* TKStyleManager.m in Sources */,
 				3AFF28AF26C697D9007809CD /* TKModeInfo.swift in Sources */,
 				3AFF28BF26C697D9007809CD /* SegmentReference+Flags.swift in Sources */,
-				3AFF286E26C697A3007809CD /* TKUserProfileHelper.swift in Sources */,
 				3AFF297526C6981E007809CD /* TKBuzzInfoProvider.swift in Sources */,
 				3AFF28A626C697D9007809CD /* TKRoutePolyline.swift in Sources */,
 				3AFF28BB26C697D9007809CD /* TKWheelchairAccessibility.swift in Sources */,
@@ -3810,7 +3805,7 @@
 				3AFF2B8326C69BBE007809CD /* TKUITripBoyView.swift in Sources */,
 				3AFF2B1D26C69B85007809CD /* TKUINearbyViewModel+Content.swift in Sources */,
 				3AFF2BCA26C69BF4007809CD /* AnimatableSectionModelType.swift in Sources */,
-				3AFF2BBF26C69BE7007809CD /* TKUserProfileHelper+Rx.swift in Sources */,
+				3AFF2BBF26C69BE7007809CD /* TKSettings+Rx.swift in Sources */,
 				3AFF2BCD26C69BF4007809CD /* Diff.swift in Sources */,
 				3AFF2BB726C69BE7007809CD /* TKSegment+AlternativeRoutes.swift in Sources */,
 				3AFF2B4026C69B94007809CD /* TKUISectionedAlertTableHeader.swift in Sources */,
@@ -3952,7 +3947,6 @@
 				3AFF29C926C69863007809CD /* TKStyleManager.m in Sources */,
 				3AFF28EE26C697DA007809CD /* TKModeInfo.swift in Sources */,
 				3AFF28FE26C697DA007809CD /* SegmentReference+Flags.swift in Sources */,
-				3AFF286026C697A3007809CD /* TKUserProfileHelper.swift in Sources */,
 				3AFF295E26C6981D007809CD /* TKBuzzInfoProvider.swift in Sources */,
 				3AFF28E526C697DA007809CD /* TKRoutePolyline.swift in Sources */,
 				3AFF28FA26C697DA007809CD /* TKWheelchairAccessibility.swift in Sources */,

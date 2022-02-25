@@ -46,7 +46,7 @@ public extension TKUIRoutingResultsCard {
     /// which allows users to show or hide transport modes when results are
     /// presented
     ///
-    /// Defaults to nil, which means the SDK will read from `TKUserProfile`
+    /// Defaults to nil, which means the SDK will read from `TKSettings`
     public var limitToModes: Set<String>? = nil
     
     /// Set this to add a button for a trip group

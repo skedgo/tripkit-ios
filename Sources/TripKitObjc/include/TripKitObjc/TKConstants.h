@@ -11,8 +11,6 @@
 /// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportWalkMaxDuration;
 /// :nodoc:
-FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportConcessionPricing;
-/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKDefaultsKeyProfileTransportEmissions;
 
 /// :nodoc:

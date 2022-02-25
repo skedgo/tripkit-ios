@@ -20,6 +20,7 @@ extension TKSettings {
     case cyclingSpeed = "profileTransportCycleSpeed"
     case walkingSpeed = "profileTransportWalkSpeed"
     case minimumTransferTime = "profileTransportTransferTime"
+    case concessionPricing = "profileTransportConcessionPricing"
   }
   
   public static var sortOrder: TKTripCostType {
@@ -50,6 +51,19 @@ extension TKSettings {
     set {
       minimumTransferTime = newValue.map { $0  * 60 }
     }
+  }
+  
+  /// Whether to show wheelchair information and show routes as being
+  /// on a wheelchair. This will set TripKit's settings
+  @objc
+  public class var showWheelchairInformation: Bool {
+    get { UserDefaults.shared.bool(forKey: DefaultsKey.onWheelchair.rawValue) }
+    set { UserDefaults.shared.set(newValue, forKey: DefaultsKey.onWheelchair.rawValue) }
+  }
+  
+  public class var useConcessionPricing: Bool {
+    get { UserDefaults.shared.bool(forKey: DefaultsKey.concessionPricing.rawValue) }
+    set { UserDefaults.shared.set(newValue, forKey: DefaultsKey.concessionPricing.rawValue) }
   }
   
   /// Determine whether two-way-hire vehicles, such as pod-based car-share, should include the cost of returning the car-hire vehicle to its pick-up location. By default this is set to `false` and the cost of the trip only include the cost that's attributed to this trip and ignore the unavoidable additional cost for returning the vehicle to its pick-up location. Set this to `true` if the cost of returning the vehicle to its pick-up location should be added to all one-way trips.
@@ -203,4 +217,113 @@ extension TKSettings.Speed {
       return nil
     }
   }
+}
+
+// MARK: - Enabled transport modes
+
+extension TKSettings {
+  
+  public static var hiddenModesPickedManually: Bool {
+    get { UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) != nil }
+  }
+
+  /// Overwrites user preferences for each non-nil value.
+  @objc
+  public static func updateTransportModesWithEnabledOrder(_ enabled: [String]?, hidden: Set<String>?)
+  {
+    let shared = UserDefaults.shared
+    if let enabled = enabled {
+      shared.set(enabled, forKey: DefaultsKey.sortedEnabled.rawValue)
+      if enabled.contains(TKTransportModeIdentifierWheelchair) {
+        TKSettings.showWheelchairInformation = true
+      } else if enabled.contains(TKTransportModeIdentifierWalking) {
+        TKSettings.showWheelchairInformation = false
+      }
+    }
+    if let hidden = hidden {
+      shared.set(Array(hidden), forKey: DefaultsKey.hidden.rawValue)
+      if hidden.contains(TKTransportModeIdentifierWheelchair) {
+        TKSettings.showWheelchairInformation = false
+      }
+    }
+  }
+  
+  @objc
+  public static func orderedEnabledModeIdentifiersForAvailableModeIdentifiers(_ available: [String]) -> [String] {
+    let hidden = hiddenModeIdentifiers
+    let ordered = available.filter { !hidden.contains($0) }
+    
+    // Once we let users sort them again, do something like this:
+//    if let sorted = NSUserDefaults.sharedDefaults().objectForKey(DefaultsKey.SortedEnabled.rawValue) as? [Identifier] {
+//      ordered.sortInPlace { sorted.indexOf($0) < sorted.indexOf($1) }
+//    }
+    
+    return ordered
+  }
+  
+  public static func enabledModeIdentifiers(_ available: [String]) -> Set<String> {
+    let hidden = hiddenModeIdentifiers
+    let ordered = available.filter { !hidden.contains($0) }
+    return Set(ordered)
+  }
+  
+  public static func modeIdentifierIsHidden(_ modeIdentifier: String) -> Bool {
+    return hiddenModeIdentifiers.contains(modeIdentifier)
+  }
+  
+  public static func setModeIdentifier(_ modeIdentifier: String, toHidden hidden: Bool) {
+    update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: modeIdentifier, include: hidden)
+  }
+  
+  
+  
+  private static func update(_ identifiers: Set<String>, forKey key: DefaultsKey, modeIdentifier: String, include: Bool) {
+    var modes = identifiers
+    
+    if include {
+      modes.insert(modeIdentifier)
+    } else {
+      modes.remove(modeIdentifier)
+    }
+    
+    UserDefaults.shared.set(Array(modes), forKey: key.rawValue)
+  }
+  
+  public static var hiddenModeIdentifiers: Set<String> {
+    if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [String] {
+      return Set(hidden)
+    } else {
+      return [TKTransportModeIdentifierSchoolBuses]
+    }
+  }
+  
+}
+
+// MARK: - Preferred/disliked public transit modes
+
+extension TKSettings {
+  
+  public static func setTransitMode(_ identifier: String, asDisliked disliked: Bool) {
+    var modes = dislikedTransitModes
+    if disliked {
+      modes.remove(identifier)
+    } else {
+      modes.insert(identifier)
+    }
+    self.dislikedTransitModes = modes
+  }
+  
+  public static var dislikedTransitModes: Set<String> {
+    get {
+      if let disliked = UserDefaults.shared.object(forKey: DefaultsKey.disliked.rawValue) as? [String] {
+        return Set(disliked)
+      } else {
+        return []
+      }
+    }
+    set {
+      UserDefaults.shared.set(Array(newValue), forKey: DefaultsKey.disliked.rawValue)
+    }
+  }
+  
 }

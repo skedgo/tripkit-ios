@@ -53,9 +53,9 @@ extension TKSettings {
       weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
         ($0, TKSettings[$0])
       })
-      avoidModes = TKUserProfileHelper.dislikedTransitModes
-      concession = shared.bool(forKey: TKDefaultsKeyProfileTransportConcessionPricing)
-      wheelchair = TKUserProfileHelper.showWheelchairInformation
+      avoidModes = Array(TKSettings.dislikedTransitModes)
+      concession = TKSettings.useConcessionPricing
+      wheelchair = TKSettings.showWheelchairInformation
       twoWayHireCostIncludesReturn = TKSettings.includeCostToReturnCarHireVehicle
       
       cyclingSpeed = TKSettings.cyclingSpeed
