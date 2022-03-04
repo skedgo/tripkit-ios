@@ -18,7 +18,7 @@
 static NSString* const kSGTransportModeTypeIdentifierFlight         = @"air";
 static NSString* const kSGTransportModeTypeIdentifierRegularPublic  = @"pub";
 static NSString* const kSGTransportModeTypeIdentifierLimitedTransit = @"ltd";
-static NSString* const kSGTransportModeTypeIdentifierOnDemand       = @"dem";
+static NSString* const kSGTransportModeTypeIdentifierOnDemand       = @"drt";
 static NSString* const kSGTransportModeTypeIdentifierTaxi           = @"tax";
 static NSString* const kSGTransportModeTypeIdentifierTNC            = @"tnc";
 static NSString* const kSGTransportModeTypeIdentifierAutoRickshaw   = @"ars";
@@ -36,7 +36,7 @@ static NSString* const kSGTransportModeTypeIdentifierWheelchair     = @"whe";
 NSString *const TKTransportModeIdentifierFlight                    = @"in_air";
 NSString *const TKTransportModeIdentifierRegularPublicTransport    = @"pt_pub";
 NSString *const TKTransportModeIdentifierSchoolBuses               = @"pt_ltd_SCHOOLBUS";
-NSString *const TKTransportModeIdentifierOnDemandTransit           = @"pt_dem";
+NSString *const TKTransportModeIdentifierOnDemandTransit           = @"ps_drt";
 NSString *const TKTransportModeIdentifierTaxi                      = @"ps_tax";
 NSString *const TKTransportModeIdentifierAutoRickshaw              = @"ps_ars";
 NSString *const TKTransportModeIdentifierCar                       = @"me_car";
