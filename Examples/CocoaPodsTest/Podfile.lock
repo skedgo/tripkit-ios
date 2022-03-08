@@ -1,26 +1,23 @@
 PODS:
-  - Kingfisher (5.15.8):
-    - Kingfisher/Core (= 5.15.8)
-  - Kingfisher/Core (5.15.8)
-  - RxCocoa (6.1.0):
-    - RxRelay (= 6.1.0)
-    - RxSwift (= 6.1.0)
-  - RxRelay (6.1.0):
-    - RxSwift (= 6.1.0)
-  - RxSwift (6.1.0)
-  - TGCardViewController (1.6.1)
-  - TripKit (4.0-rc2)
-  - TripKitInterApp (4.0-rc2):
-    - TripKit (~> 4.0-rc2)
-  - TripKitUI (4.0-rc2):
-    - Kingfisher (~> 5.8)
-    - RxCocoa (~> 6.1.0)
-    - RxSwift (~> 6.1.0)
-    - TGCardViewController (>= 1.6.1)
-    - TripKit (~> 4.0-rc2)
+  - Kingfisher (7.2.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - TGCardViewController (2.1.2)
+  - TripKit (4.0-rc3)
+  - TripKitInterApp (4.0-rc3):
+    - TripKit (~> 4.0-rc3)
+  - TripKitUI (4.0-rc3):
+    - Kingfisher (~> 7.0)
+    - RxCocoa (~> 6.5)
+    - RxSwift (~> 6.5)
+    - TGCardViewController (>= 2.1)
+    - TripKit (~> 4.0-rc3)
 
 DEPENDENCIES:
-  - TGCardViewController (from `https://gitlab.com/SkedGo/iOS/TGCardViewController.git`, branch `spm`)
   - TripKit (from `../../`)
   - TripKitInterApp (from `../../`)
   - TripKitUI (from `../../`)
@@ -31,11 +28,9 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - TGCardViewController
 
 EXTERNAL SOURCES:
-  TGCardViewController:
-    :branch: spm
-    :git: https://gitlab.com/SkedGo/iOS/TGCardViewController.git
   TripKit:
     :path: "../../"
   TripKitInterApp:
@@ -43,21 +38,16 @@ EXTERNAL SOURCES:
   TripKitUI:
     :path: "../../"
 
-CHECKOUT OPTIONS:
-  TGCardViewController:
-    :commit: 230f21b8d2ecf839867c7d620e48a13800ed3dfd
-    :git: https://gitlab.com/SkedGo/iOS/TGCardViewController.git
-
 SPEC CHECKSUMS:
-  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
-  RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
-  RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
-  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
-  TGCardViewController: e3497748075df599ec883676f6f5fc2473c0bf22
-  TripKit: 2039173e555d05358a558b1e20437a6662881643
-  TripKitInterApp: 2f36d09717a542518571279d514e47760fa93a3d
-  TripKitUI: b0ce27858b38b214fdb2d022a7f7e7b599471a27
+  Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  TGCardViewController: a19c5fad9f8352f75a7cd0663292d63c693b9947
+  TripKit: f1cb6cf065feb1654a3b9e44ec482a90681b8c56
+  TripKitInterApp: 1b4f79813eff7251b1d45e9c760ed351884ee24b
+  TripKitUI: 94b521b1b30d94dcb0ee5f0e9117c074275b37fc
 
-PODFILE CHECKSUM: 21f917fbe8de51c8140896998d41d883b7a2794b
+PODFILE CHECKSUM: a2ca0312f3711cec4dd98455d47462fd95511a05
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2
