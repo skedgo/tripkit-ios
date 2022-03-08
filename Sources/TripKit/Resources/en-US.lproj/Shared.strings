@@ -16,26 +16,17 @@
 /* Authorisation needed title */
 "Authorisation needed" = "Authorization needed";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Bicycle";
-
 /* Cancel - for action sheets */
 "Cancel" = "Cancel";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Canceled";
 
-/* Type of vehicle : car */
-"Car" = "Car";
-
 /* Credit card number */
 "Card No." = "Card No.";
 
 /* Instruction for changing password */
 "Change" = "Change";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Change tracking options";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Checkmark";
@@ -86,10 +77,6 @@
 /* Everyday in context of repetitions (especially recurring events) */
 "Everyday" = "Every day";
 
-/* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'
-   Every %day, e.g., 'Every Monday' */
-"EveryDayFormat" = "Every %@";
-
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
 
@@ -116,9 +103,6 @@
 
 /* Include events. */
 "Include events" = "Include calendar events";
-
-/* Instant results proposal */
-"Instant results" = "Instant results";
 
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
@@ -207,12 +191,6 @@
 
 /* 'more' indicator for truncated text. */
 "more" = "more";
-
-/* More results proposal */
-"More results" = "More results";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Motorbike";
 
 /* Title for view that shows the summary of a user's account information */
 "My account" = "My account";
@@ -319,15 +297,6 @@
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Tracking - off";
-
-/* user location button - follow */
-"Tracking - on" = "Tracking - on";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Tracking - on with heading";
 
 /* Message that shows app is updating trip after user finalised bookings */
 "Updating trip" = "Updating trip";

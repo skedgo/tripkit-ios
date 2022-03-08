@@ -58,7 +58,7 @@ extension TKPermissionManager {
     
     if let handler = openSettingsHandler {
       alert.addAction(.init(title: Loc.Cancel, style: .cancel))
-      alert.addAction(.init(title: NSLocalizedString("Open Settings", tableName: "Shared", bundle: .tripKit, comment: "Button that goes to the Setting's app"), style: .default) { _ in
+      alert.addAction(.init(title: Loc.OpenSettings, style: .default) { _ in
         handler()
       })
     } else {

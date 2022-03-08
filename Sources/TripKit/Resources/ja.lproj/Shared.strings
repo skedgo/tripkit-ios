@@ -32,7 +32,7 @@
 "Already have an account? Sign in" = "アカウントを既にお持ちですか。サインイン";
 
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
-"arrives %@" = "%@ に到着します。";
+"arrives %@" = "%@ に到着";
 
 /* Source where the account was derived, e.g., Facebook */
 "Authentication" = "認証";
@@ -43,23 +43,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "戻る";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "自転車";
-
 /* Cancel action */
 "Cancel" = "取り消し";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "キャンセルされました。";
 
-/* Type of vehicle : car */
-"Car" = "車";
-
 /* Instruction for changing password */
 "Change" = "変更";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "変更の追跡オプション";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "チェック マーク";
@@ -130,9 +121,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "すべての %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "毎日";
-
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
 
@@ -169,9 +157,6 @@
 /* Include events. */
 "Include events" = "イベントを含める";
 
-/* Instant results proposal */
-"Instant results" = "簡易結果";
-
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "パスワードのリセット方法については、上記のメールアドレスに送信されています。";
 
@@ -190,9 +175,6 @@
 /* Indicator for real-time information */
 "Live traffic" = "交通状況";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "読み込み";
-
 /* Title for unnamed location */
 "Location" = "場所";
 
@@ -201,12 +183,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "トリップの数分前";
-
-/* More results proposal */
-"More results" = "その他の結果";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "バイク";
 
 /* Title for name of something (or someone) */
 "Name" = "名前";
@@ -341,7 +317,7 @@
 "SUV" = "SUV";
 
 /* Accessibility hint for routing results screen. */
-"Tap to change start and end locations" = "Tap to change start and end locations";
+"Tap to change start and end locations" = "タップして出発地と到着地を変更します";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "タップして場所を設定";
@@ -354,15 +330,6 @@
 
 /* to %date. (old key: DateToFormat) */
 "to %@" = "%@ に";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "追跡 - オフ";
-
-/* user location button - follow */
-"Tracking - on" = "追跡 - オン";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "追跡 - 見出し付きでオン";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "%@ まで";

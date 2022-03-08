@@ -58,9 +58,6 @@
 /* apple maps directions action */
 "Apple Maps" = "Apple Kaarten";
 
-/* Arrival time sorter title */
-"Arrival" = "Aankomst";
-
 /* Prefix for selected 'arrive by' time
  Single line instruction to arrive */
 "Arrive" = "Aankomst";
@@ -134,9 +131,6 @@
 /* Used when the trip does not start at the requested location, but nearby. The '%@' will be replaced with requested departure location. */
 "Depart near %@" = "Vertrek in de buurt van %@";
 
-/* Departure time sorter title */
-"Departure" = "Vertrek";
-
 /* Destination of the bus */
 "Direction" = "Eindpunt";
 
@@ -209,9 +203,6 @@
 /* Title of button to start a trip */
 "Go" = "Go";
 
-/* goCatch action */
-"goCatch a Taxi" = "goCatch een Taxi";
-
 /* google maps directions action */
 "Google Maps" = "Google Maps";
 
@@ -235,9 +226,6 @@
 
 /* %@ is replaced with app name */
 "In the meantime, let's keep exploring %@ and enjoy your trips" = "Ondertussen, laten we %@ blijven verkennen en geniet van uw reizen";
-
-/* inGogo taxi booking action */
-"ingogo a Taxi" = "ingogo een Taxi";
 
 /* Title for section with instant results in autocompletion */
 "Instant results" = "Direct resultaten weergeven";
@@ -272,9 +260,6 @@
 
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Beperkte staruimte";
-
-/* No comment provided by engineer. */
-"Live traffic" = "Live verkeer";
 
 /* Indicating when something is loading */
 "Loading…" = "Laden…";
