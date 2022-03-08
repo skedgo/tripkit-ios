@@ -46,12 +46,12 @@ class TKBuzzInfoProviderTest: XCTestCase {
     XCTAssertEqual(response.regions.count, 1)
     
     XCTAssertEqual(vancouver?.modes.count, 5)
-    XCTAssertEqual(vancouver?.modes["me_car-s"]?.specificModes?.count, 1)
+    XCTAssertEqual(vancouver?.modes["me_car-s"]?.specificModes.count, 1)
     XCTAssertEqual(vancouver?.specificModeDetails(for: "me_car-s_MODO")?.minimumLocalCostForMembership, 1)
 
-    let modo = vancouver?.modes["me_car-s"]?.specificModes?.first
+    let modo = vancouver?.modes["me_car-s"]?.specificModes.first
     XCTAssertEqual(modo?.minimumLocalCostForMembership, 1)
-    XCTAssertEqual(modo?.integrations?.contains(.realTime), true)
+    XCTAssertEqual(modo?.integrations.contains(.realTime), true)
   }
   
   func testRegionInformationNuremberg() throws {
@@ -63,14 +63,14 @@ class TKBuzzInfoProviderTest: XCTestCase {
     XCTAssertEqual(response.regions.count, 1)
     
     XCTAssertEqual(nuremberg?.modes.count, 6)
-    XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes?.count, 1)
-    XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes?.first?.identifier, "ps_tax_MYDRIVER")
+    XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes.count, 1)
+    XCTAssertEqual(nuremberg?.modes["ps_tax"]?.lockedModes.first?.identifier, "ps_tax_MYDRIVER")
     
     let norisbike = nuremberg?.specificModeDetails(for: "cy_bic-s_norisbike-nurnberg")
     XCTAssertEqual(norisbike?.url, URL(string: "http://www.norisbike.de"))
     XCTAssertEqual(norisbike?.title, "NorisBike")
     XCTAssertEqual(norisbike?.minimumLocalCostForMembership, 0)
-    XCTAssertEqual(norisbike?.integrations?.count, 2)
+    XCTAssertEqual(norisbike?.integrations.count, 2)
   }
   
   func testPublicTransportModes() throws {
