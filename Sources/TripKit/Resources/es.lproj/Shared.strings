@@ -43,23 +43,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "Atrás";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Bicicleta";
-
 /* Cancel action */
 "Cancel" = "Cancelar";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Cancelado";
 
-/* Type of vehicle : car */
-"Car" = "Automóvil";
-
 /* Instruction for changing password */
 "Change" = "Cambiar";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Cambiar opciones de seguimiento";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Marca de Verificación";
@@ -130,9 +121,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Cada %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Todos los días";
-
 /* Email placeholder text */
 "example@example.com" = "ejemplo@ejemplo.com";
 
@@ -169,9 +157,6 @@
 /* Include events. */
 "Include events" = "Incluír eventos";
 
-/* Instant results proposal */
-"Instant results" = "Resultados inmediatos";
-
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Se han enviado instrucciones sobre cómo restablecer la contraseña a la dirección de correo electrónico anterior.";
 
@@ -190,9 +175,6 @@
 /* Indicator for real-time information */
 "Live traffic" = "Tráfico en tiempo real";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Cargando";
-
 /* Title for unnamed location */
 "Location" = "Ubicación";
 
@@ -201,12 +183,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minutos antes del viaje";
-
-/* More results proposal */
-"More results" = "Más resultados";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Motocicleta";
 
 /* Title for name of something (or someone) */
 "Name" = "Nombre";
@@ -354,15 +330,6 @@
 
 /* to %date. (old key: DateToFormat) */
 "to %@" = "hasta %@";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Seguimiento - apagado";
-
-/* user location button - follow */
-"Tracking - on" = "Seguimiento - encendido";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Tracking - on with heading";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "hasta %@";
