@@ -69,8 +69,8 @@ jobs:
         cd Examples/MiniMap
         pod install
         xcodebuild build -quiet -workspace MiniMap.xcworkspace -scheme MiniMap
-    # - name: Build CocoaPodsTest
-    #   run: |
-    #     cd Examples/CocoaPodsTest
-    #     pod install
-    #     xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest
+    - name: Build CocoaPodsTest
+      run: |
+        cd Examples/CocoaPodsTest
+        pod install
+        xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest
