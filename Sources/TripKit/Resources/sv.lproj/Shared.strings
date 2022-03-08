@@ -43,23 +43,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "Tillbaka";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Cykel";
-
 /* Cancel action */
 "Cancel" = "Avbryt";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Avbruten";
 
-/* Type of vehicle : car */
-"Car" = "Bil";
-
 /* Instruction for changing password */
 "Change" = "Byt";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Ändra spårningsalternativ";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Kryssruta";
@@ -130,9 +121,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Var %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Varje dag";
-
 /* Email placeholder text */
 "example@example.com" = "exempel@exempel.se";
 
@@ -169,9 +157,6 @@
 /* Include events. */
 "Include events" = "Inkludera händelser";
 
-/* Instant results proposal */
-"Instant results" = "Omedelbara resultat";
-
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Instruktioner för hur du återställer lösenord har skickats till ovanstående e-postadress.";
 
@@ -190,9 +175,6 @@
 /* Indicator for real-time information */
 "Live traffic" = "Trafik i realtid";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Laddar";
-
 /* Title for unnamed location */
 "Location" = "Plats";
 
@@ -201,12 +183,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuter innan resan";
-
-/* More results proposal */
-"More results" = "Fler resultat";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Motorcykel";
 
 /* Title for name of something (or someone) */
 "Name" = "Namn";
@@ -354,15 +330,6 @@
 
 /* to %date. (old key: DateToFormat) */
 "to %@" = "till %@";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Spårning – av";
-
-/* user location button - follow */
-"Tracking - on" = "Spårning – på";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Spårning – på med rubrik";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "Upp till %@";

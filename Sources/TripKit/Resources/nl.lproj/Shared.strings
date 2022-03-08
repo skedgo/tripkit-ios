@@ -43,23 +43,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "Terug";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Polkupyörä";
-
 /* Cancel action */
 "Cancel" = "Annuleer";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Geannuleerd";
 
-/* Type of vehicle : car */
-"Car" = "Auto";
-
 /* Instruction for changing password */
 "Change" = "Wijzigen";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Verander volgen opties";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Vinkje";
@@ -130,9 +121,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Elke %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Elke dag";
-
 /* Email placeholder text */
 "example@example.com" = "info@voorbeeld.nl";
 
@@ -169,9 +157,6 @@
 /* Include events. */
 "Include events" = "Activiteiten invoegen";
 
-/* Instant results proposal */
-"Instant results" = "Direct resultaten weergeven";
-
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Instructions on how to reset password has been sent to the above email address.";
 
@@ -190,9 +175,6 @@
 /* Indicator for real-time information */
 "Live traffic" = "Live verkeer";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Laden";
-
 /* Title for unnamed location */
 "Location" = "Locatie";
 
@@ -201,12 +183,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuten voor vertrek";
-
-/* More results proposal */
-"More results" = "Meer resultaten";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Moottoripyörä";
 
 /* Title for name of something (or someone) */
 "Name" = "Naam";
@@ -354,15 +330,6 @@
 
 /* to %date. (old key: DateToFormat) */
 "to %@" = "tot %@";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Volgen - uit";
-
-/* user location button - follow */
-"Tracking - on" = "Volgen - aan";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Volgen - aan met richting";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "tot %@";

@@ -192,26 +192,6 @@ public class Loc : NSObject {
   }
   
   @objc
-  public static var ChangeTrackingOptions: String {
-    return NSLocalizedString("Change tracking options", tableName: "Shared", bundle: .tripKit, comment: "Accessibility - user location button - hint")
-  }
-  
-  @objc
-  public static var TrackingOff: String {
-    return NSLocalizedString("Tracking - off", tableName: "Shared", bundle: .tripKit, comment: "Accessibility - user location button - off")
-  }
-  
-  @objc
-  public static var TrackingOn: String {
-    return NSLocalizedString("Tracking - on", tableName: "Shared", bundle: .tripKit, comment: "user location button - follow")
-  }
-  
-  @objc
-  public static var TrackingOnWithHeading: String {
-    return NSLocalizedString("Tracking - on with heading", tableName: "Shared", bundle: .tripKit, comment: "user location button - follow with heading")
-  }
-  
-  @objc
   public static var TapToSetLocation: String {
     return NSLocalizedString("Tap to set location", tableName: "Shared", bundle: .tripKit, comment: "Tap to set location. (old key: SetLocation)")
   }
