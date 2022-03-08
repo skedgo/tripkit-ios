@@ -229,22 +229,6 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
   }
 }
 
-+ (TKColor *)globalViewBackgroundColor
-{
-  NSDictionary *RGBs = [[TKConfig sharedInstance] globalViewBackgroundColor];
-  if (RGBs != nil) {
-    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
-  } else {
-    // This is the color used in TripGo.
-    return [TKColor colorWithRed:237/255.0f green:238/255.0f blue:242/255.0f alpha:1];
-  }
-}
-
-+ (BOOL)globalTranslucency
-{
-  return [[TKConfig sharedInstance] globalTranslucency];
-}
-
 #pragma mark - Private
 
 + (CGFloat)redComponent:(NSDictionary *)RGB

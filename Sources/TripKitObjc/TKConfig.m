@@ -91,21 +91,6 @@
   }
 }
 
-- (NSDictionary *)globalViewBackgroundColor
-{
-  if ([self.configuration[@"GlobalViewBackgroundColor"] isKindOfClass:[NSDictionary class]])
-  {
-    return self.configuration[@"GlobalViewBackgroundColor"];
-  } else {
-    return nil;
-  }
-}
-
-- (BOOL)globalTranslucency
-{
-  return [self.configuration[@"GlobalTranslucency"] boolValue];
-}
-
 #pragma mark - Fonts
 
 - (NSDictionary *)preferredFonts
