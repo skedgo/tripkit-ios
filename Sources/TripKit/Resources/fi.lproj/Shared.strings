@@ -43,23 +43,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "Takaisin";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Pyörä";
-
 /* Cancel action */
 "Cancel" = "Peruuta";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Peruttu";
 
-/* Type of vehicle : car */
-"Car" = "Auto";
-
 /* Instruction for changing password */
 "Change" = "Muuta";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Muuta seurantavaihtoehtoja";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Valintamerkki";
@@ -130,9 +121,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Joka %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Päivittäin";
-
 /* Email placeholder text */
 "example@example.com" = "esimerkki@example.com";
 
@@ -169,9 +157,6 @@
 /* Include events. */
 "Include events" = "Sisällytä tapahtumat";
 
-/* Instant results proposal */
-"Instant results" = "Pikahaun tulokset";
-
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Ohjeet salasanan palauttamiseksi on lähetetty edellä mainittuun sähköpostiosoitteeseen.";
 
@@ -190,9 +175,6 @@
 /* Indicator for real-time information */
 "Live traffic" = "Live-liikenne";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Ladataan";
-
 /* Title for unnamed location */
 "Location" = "Sijainti";
 
@@ -201,12 +183,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minuuttia ennen lähtöä";
-
-/* More results proposal */
-"More results" = "Lisää tuloksia";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Moottoripyörä";
 
 /* Title for name of something (or someone) */
 "Name" = "Nimi";
@@ -354,15 +330,6 @@
 
 /* to %date. (old key: DateToFormat) */
 "to %@" = "%@ saakka";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Seuranta - pois päältä";
-
-/* user location button - follow */
-"Tracking - on" = "Seuranta - päällä";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Seuranta - päällä (sis. kulkusuunta)";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "%@ saakka";
