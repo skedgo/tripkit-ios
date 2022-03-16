@@ -20,21 +20,15 @@ extension TKUIServiceViewModel {
     case couldNotFetchServiceContent
   }
   
-  static func fetchServiceContent(embarkation: StopVisits) -> Single<Void> {
-    guard let service = embarkation.service, !service.hasServiceData else {
-      return .just((), scheduler: MainScheduler.instance)
+  static func fetchServiceContent(embarkation: StopVisits) async throws {
+    guard let service = embarkation.service, !service.hasServiceData, let region = embarkation.stop.region else {
+      return
     }
-    
-    return Single.create { subscriber in
-      TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.timeForServerRequests, region: embarkation.stop.region) { service, success in
-        if success {
-          subscriber(.success(()))
-        } else {
-          subscriber(.failure(FetchError.couldNotFetchServiceContent))
-        }
-      }
-      return Disposables.create()
-    }.observe(on: MainScheduler.instance)
+
+    let response = try await TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.timeForServerRequests, region: region)
+    guard case .some((_, true)) = response else {
+      throw FetchError.couldNotFetchServiceContent
+    }
   }
   
 }

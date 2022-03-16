@@ -44,24 +44,13 @@ extension Reactive where Base: TKRealTimeFetcher {
   }
   
   
-  /// Perform one-off real-time update of the provided trip
-  ///
-  /// No need to call this if `trip.wantsRealTimeUpdates == false`. It'd just complete immediately.
-  ///
-  /// - Parameter trip: The trip to update
-  ///
-  /// - returns: One-off callback with the update. Note that the `Trip` object returned in the callback will always be the same object provided to the method, i.e., trips are updated in-place.
-  public static func update(_ trip: Trip) -> Single<(Trip, didUpdate: Bool)> {
-    guard trip.wantsRealTimeUpdates else {
-      TKLog.debug("Don't bother calling this for trips that don't want updates")
-      return .just((trip, false))
-    }
-    
-    return Single.create { subscriber in
-      TKTripFetcher.update(trip) { result in
-        subscriber(result.map { ($0.0, $0.didUpdate)} )
+  private static func update(_ trip: Trip) -> Single<(Trip, didUpdate: Bool)> {
+    Single.create {
+      if let result = try await TKTripFetcher.update(trip) {
+        return (result.0, result.didUpdate)
+      } else {
+        return (trip, false)
       }
-      return Disposables.create()
     }
   }
   

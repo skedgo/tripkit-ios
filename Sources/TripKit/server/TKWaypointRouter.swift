@@ -8,14 +8,6 @@
 
 import Foundation
 
-fileprivate extension Result {
-  func callHandler(_ handler: (Success?, Failure?) -> Void) {
-    switch self {
-    case .success(let success): handler(success, nil)
-    case .failure(let error): handler(nil, error)
-    }
-  }
-}
 
 /// Provides helper methods around TripGo API's `waypoint.json` endpoint
 ///
@@ -52,18 +44,16 @@ extension TKWaypointRouter {
   ///   - trip: The trip for which to get the next departure
   ///   - vehicles: Optional vehicles that should be for private vehicles segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  public static func fetchNextTrip(after trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func fetchNextTrip(after trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = []) async throws -> Trip {
     
-    TKRegionManager.shared.requireRegions { error in
-      guard let region = trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
-        return
-      }
-      
-      let pattern = TKTripPattern.pattern(for: trip)
-      let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: trip.departureTime, using: vehicles)
-      self.fetchTrip(waypointParas: paras, region: region, into: trip.tripGroup, completion: completion)
+    try await TKRegionManager.shared.requireRegions()
+    guard let region = trip.request.startRegion else {
+      throw TKWaypointRouter.WaypointError.couldNotFindRegionForTrip
     }
+      
+    let pattern = TKTripPattern.pattern(for: trip)
+    let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: trip.departureTime, using: vehicles)
+    return try await fetchTrip(waypointParas: paras, region: region, into: trip.tripGroup)
   }
     
   /// Calculates a trip from the provided pattern. Departure time is the provided
@@ -76,10 +66,10 @@ extension TKWaypointRouter {
   ///   - tripKit: TripKit instance into which the new trip will be inserted
   ///   - region: The region where the trip starts
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  public static func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit = TripKit.shared, in region: TKRegion, completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit = TripKit.shared, in region: TKRegion) async throws -> Trip {
     
     let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: departure, using: vehicles)
-    fetchTrip(waypointParas: paras, region: region, into: tripKit.tripKitContext, completion: completion)
+    return try await fetchTrip(waypointParas: paras, region: region, into: tripKit.tripKitContext)
   }
   
   
@@ -111,56 +101,33 @@ extension TKWaypointRouter {
   ///   - atStart: `true` if getting on should change, `false` if getting off should change
   ///   - vehicles: The private vehicles to use for private vehicle segments
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  public static func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = []) async throws -> Trip {
     
-    TKRegionManager.shared.requireRegions { result in
-      if case .failure(let error) = result {
-        completion(.failure(error))
-        return
-      }
-      guard let region = segment.trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
-        return
-      }
-      
-      do {
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        let paras = try builder.build(moving: segment, to: visit, atStart: atStart)
-        
-        // Will have new pattern, so we'll add it to the request rather than
-        // to the original trip group.
-        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.request, completion: completion)
-      
-      } catch {
-        completion(.failure(error))
-      }
+    try await TKRegionManager.shared.requireRegions()
+    guard let region = segment.trip.request.startRegion else {
+      throw TKWaypointRouter.WaypointError.couldNotFindRegionForTrip
     }
+
+    let builder = WaypointParasBuilder(privateVehicles: vehicles)
+    let paras = try builder.build(moving: segment, to: visit, atStart: atStart)
+    
+    // Will have new pattern, so we'll add it to the request rather than
+    // to the original trip group.
+    return try await fetchTrip(waypointParas: paras, region: region, into: segment.trip.request)
   }
   
-  public static func fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
-    
-    TKRegionManager.shared.requireRegions { result in
-      if case .failure(let error) = result {
-        completion(.failure(error))
-        return
-      }
-      guard let region = segment.trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
-        return
-      }
-      
-      do {
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        let paras = try builder.build(replacing: segment, with: entry, fallbackRegion: region)
-        
-        // Will have the same pattern, so we'll add it to original trip group
-        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
-        
-      } catch {
-        completion(.failure(error))
-      }
+  public static func fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = []) async throws -> Trip {
+
+    try await TKRegionManager.shared.requireRegions()
+    guard let region = segment.trip.request.startRegion else {
+      throw TKWaypointRouter.WaypointError.couldNotFindRegionForTrip
     }
+      
+    let builder = WaypointParasBuilder(privateVehicles: vehicles)
+    let paras = try builder.build(replacing: segment, with: entry, fallbackRegion: region)
     
+    // Will have the same pattern, so we'll add it to original trip group
+    return try await fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup)
   }
   
 }
@@ -169,47 +136,36 @@ extension TKWaypointRouter {
 
 extension TKWaypointRouter {
   
-  public static func fetchTrip(byMoving segment: TKSegment, to location: TKModeCoordinate, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
-    TKRegionManager.shared.requireRegions { result in
-      if case .failure(let error) = result {
-        completion(.failure(error))
-        return
-      }
-      
-      guard let region = segment.trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
-        return
-      }
-      
-      let movingSegment: TKSegment
-      let isMovingStartOfSegment: Bool
-      
-      if segment.hasCarParks, let mover = segment.previous {
-        movingSegment = mover
-        isMovingStartOfSegment = false
-      } else if segment.stationaryType == .vehicleCollect, let mover = segment.next {
-        movingSegment = mover
-        isMovingStartOfSegment = true
-      } else {
-        movingSegment = segment
-        isMovingStartOfSegment = true
-      }
-      
-      do {
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        
-        let paras: [String: Any]
-        if isMovingStartOfSegment {
-          paras = try builder.build(movingStartOf: movingSegment, to: location)
-        } else {
-          paras = try builder.build(movingEndOf: movingSegment, to: location)
-        }
-        
-        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
-      } catch {
-        completion(.failure(error))
-      }
+  public static func fetchTrip(byMoving segment: TKSegment, to location: TKModeCoordinate, usingPrivateVehicles vehicles: [TKVehicular] = []) async throws -> Trip {
+
+    try await TKRegionManager.shared.requireRegions()
+    guard let region = segment.trip.request.startRegion else {
+      throw TKWaypointRouter.WaypointError.couldNotFindRegionForTrip
     }
+      
+    let movingSegment: TKSegment
+    let isMovingStartOfSegment: Bool
+    
+    if segment.hasCarParks, let mover = segment.previous {
+      movingSegment = mover
+      isMovingStartOfSegment = false
+    } else if segment.stationaryType == .vehicleCollect, let mover = segment.next {
+      movingSegment = mover
+      isMovingStartOfSegment = true
+    } else {
+      movingSegment = segment
+      isMovingStartOfSegment = true
+    }
+    
+    let builder = WaypointParasBuilder(privateVehicles: vehicles)
+    
+    let paras: [String: Any]
+    if isMovingStartOfSegment {
+      paras = try builder.build(movingStartOf: movingSegment, to: location)
+    } else {
+      paras = try builder.build(movingEndOf: movingSegment, to: location)
+    }
+    return try await fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup)
   }
   
 }
@@ -223,28 +179,18 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will fit that
   ///     trip group as this will not be checked separately. It will fit
   ///     if it's using the same modes and same/similar stops.
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into tripGroup: TripGroup, completion: @escaping (Result<Trip, Error>) -> Void) {
+  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into tripGroup: TripGroup) async throws -> Trip {
     guard let context = tripGroup.managedObjectContext else {
-      completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
-      return
+      throw TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData
     }
     
-    fetchAndParse(
+    let response = try await fetch(
       waypointParas: waypointParas,
       region: region,
       into: context
-    ) { _, _, result in
-      do {
-        let response = try result.get()
-        TKRoutingParser.add(response, to: tripGroup, merge: false) { parserResult in
-          completion(Result {
-            try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
-          })
-        }
-      } catch {
-        completion(.failure(error))
-      }
-    }
+    ).result.get()
+    let trips = try await TKRoutingParser.add(response, to: tripGroup, merge: false)
+    return try trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
   }
   
   /// For calculating a trip and adding it to an existing request
@@ -252,60 +198,39 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will have
   ///     the same origin, destination and approximate query time
   ///     as the request as this will not be checked separately.
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into request: TripRequest, completion: @escaping (Result<Trip, Error>) -> Void) {
+  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into request: TripRequest) async throws -> Trip {
     guard let context = request.managedObjectContext else {
-      completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
-      return
+      throw TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData
     }
     
-    fetchAndParse(
+    let response = try await fetch(
       waypointParas: waypointParas,
       region: region,
       into: context
-    ) { _, _, result in
-      do {
-        let response = try result.get()
-        TKRoutingParser.add(response, to: request, merge: false) { parserResult in
-          completion(Result {
-            try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
-          })
-        }
-      } catch {
-        completion(.failure(error))
-      }
-    }
+    ).result.get()
+    let trips = try await TKRoutingParser.add(response, to: request, merge: false)
+    return try trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
   }
   
   /// For calculating a trip and adding it as a stand-alone trip / request to TripKit
-  public static func fetchTrip(waypointParas: [String: Any], region: TKRegion? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func fetchTrip(waypointParas: [String: Any], region: TKRegion? = nil, into context: NSManagedObjectContext) async throws -> Trip {
     
-    fetchAndParse(
+    let response = try await fetch(
       waypointParas: waypointParas,
       region: region,
       into: context
-    ) { _, _, result in
-      do {
-        let response = try result.get()
-        TKRoutingParser.add(response, into: context) { parserResult in
-          completion(Result {
-            try parserResult.get().trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
-          })
-        }
-      } catch {
-        completion(.failure(error))
-      }
-    }
+    ).result.get()
+    let request = try await TKRoutingParser.add(response, into: context)
+    return try request.trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
   }
 
-  private static func fetchAndParse(waypointParas: [String: Any], region: TKRegion?, into context: NSManagedObjectContext, handler: @escaping (Int?, [String: Any], Result<TKAPI.RoutingResponse, Error>) -> Void) {
+  private static func fetch(waypointParas: [String: Any], region: TKRegion?, into context: NSManagedObjectContext) async throws -> TKServer.Response<TKAPI.RoutingResponse> {
     
-    TKServer.shared.hit(
+    await TKServer.shared.hit(
       TKAPI.RoutingResponse.self,
       .POST, path: "waypoint.json",
       parameters: waypointParas,
-      region: region,
-      callbackOnMain: true, // we parse on main
-      completion: handler
+      region: region
     )
   }
   

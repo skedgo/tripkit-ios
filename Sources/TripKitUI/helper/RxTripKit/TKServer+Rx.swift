@@ -14,6 +14,7 @@ import RxCocoa
 import TripKit
 
 extension Reactive where Base: TKRegionManager {
+  @available(*, deprecated, message: "Use async/await instead.")
   public func requireRegion(_ coordinate: CLLocationCoordinate2D) -> Single<TKRegion> {
     return requireRegions()
       .map {
@@ -21,6 +22,7 @@ extension Reactive where Base: TKRegionManager {
       }
   }
   
+  @available(*, deprecated, message: "Use async/await instead.")
   public func requireRegion(_ coordinateRegion: MKCoordinateRegion) -> Single<TKRegion> {
     return requireRegions()
       .map {
@@ -28,12 +30,12 @@ extension Reactive where Base: TKRegionManager {
       }
   }
   
+  @available(*, deprecated, message: "Use async/await instead.")
   public func requireRegions() -> Single<Void> {
     return Single.create { subscriber in
       self.base.requireRegions(completion: subscriber)
       return Disposables.create()
     }
-    
   }
 }
 

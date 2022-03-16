@@ -8,11 +8,7 @@
 
 import Foundation
 
-import RxSwift
-
-import TripKit
-
-extension Reactive where Base == TKServer {
+extension TKServer {
   
   /// Sign the user in using a token from CloudKit, returning
   /// the user token.
@@ -28,8 +24,8 @@ extension Reactive where Base == TKServer {
   /// - Parameter cloudKitID: The record name of the CloudKit's
   ///     user record ID.
   /// - Returns: The user token. Can fail.
-  public func signIn(withCloudKitID cloudKitID: String) -> Single<String> {
-    return signIn(token: cloudKitID, endpoint: "apple")
+  public func signIn(withCloudKitID cloudKitID: String) async throws -> String {
+    try await signIn(token: cloudKitID, endpoint: "apple")
   }
   
   /// Sign the user in using a UUID, which you might sync using whichever means
@@ -45,14 +41,14 @@ extension Reactive where Base == TKServer {
   ///
   /// - Parameter uuid: A UUID of your choosing
   /// - Returns: The user token. Can fail.
-  public func signIn(withUUID uuid: String) -> Single<String> {
-    return signIn(token: uuid, endpoint: "uuid")
+  public func signIn(withUUID uuid: String) async throws -> String {
+    try await signIn(token: uuid, endpoint: "uuid")
   }
   
-  private func signIn(token: String, endpoint: String) -> Single<String> {
+  private func signIn(token: String, endpoint: String) async throws -> String {
     let urlFriendly = token.replacingOccurrences(of: "_", with: "")
-    return hit(SignInResponse.self, .POST, path: "account/\(endpoint)/\(urlFriendly)")
-      .map(\.2.userToken)
+    let response = await hit(SignInResponse.self, .POST, path: "account/\(endpoint)/\(urlFriendly)")
+    return try response.result.get().userToken
   }
   
   /// Fetches all server-side data for a user, returning it as raw data, which
@@ -61,27 +57,18 @@ extension Reactive where Base == TKServer {
   /// - Note: Only returns data if a `userToken` was previously set.
   ///
   /// - Returns: Data, if any was available
-  public func downloadUserData() -> Single<Data> {
-    hit(path: "data/user/gdpr")
-      .map {
-        if let data = $0.2 {
-          return data
-        } else {
-          throw TKServer.ServerError.noData
-        }
-      }
+  public func downloadUserData() async throws -> Data {
+    return try await self.hit(path: "data/user/gdpr").result.get()
   }
   
   /// Deletes all server-side data for a user, and also signs them out by
   /// resetting the user token
-  public func deleteUserDataAndSignOut() -> Single<Void> {
-    hit(.DELETE, path: "data/user/gdpr")
-      .map { status, _, _ in
-        if status != 200 {
-          throw TKError.error(withCode: 16524, userInfo: [ NSLocalizedDescriptionKey: "Couldn't delete account. Status: \(String(describing: status))" ])
-        } else {
-          TKServer.updateUserToken(nil)
-        }
+  public func deleteUserDataAndSignOut() async throws -> Void {
+    let result = await self.hit(.DELETE, path: "data/user/gdpr")
+    if result.statusCode != 200 {
+      throw TKError.error(withCode: 16524, userInfo: [ NSLocalizedDescriptionKey: "Couldn't delete account. Status: \(String(describing: result.statusCode))" ])
+    } else {
+      TKServer.updateUserToken(nil)
     }
   }
   

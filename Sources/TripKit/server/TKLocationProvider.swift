@@ -9,10 +9,6 @@
 import Foundation
 import CoreLocation
 
-import RxSwift
-
-import TripKit
-
 public enum TKLocationProvider {
   
   public enum Error: Swift.Error {
@@ -32,26 +28,23 @@ public enum TKLocationProvider {
   ///   - modes: Modes for which to fetch locations. If not provided, will use all.
   ///   - strictModeMatch: Should `modes` be treated strictly, or should related results also be returned?
   /// - Returns: Observable of fetched locations; always returns empty array for international region; can error out
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true) -> Single<[TKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true) async throws -> [TKModeCoordinate] {
     
-    return TKRegionManager.shared.rx
-      .requireRegion(center)
-      .flatMap { region in
-        TKLocationProvider.fetchLocations(
-          center: center,
-          radius: radius,
-          limit: limit,
-          modes: modes,
-          strictModeMatch: strictModeMatch,
-          in: region
-        )
-      }
+    let region = try await TKRegionManager.shared.requireRegion(for: center)
+    return try await TKLocationProvider.fetchLocations(
+      center: center,
+      radius: radius,
+      limit: limit,
+      modes: modes,
+      strictModeMatch: strictModeMatch,
+      in: region
+    )
   }
   
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true, in region: TKRegion) -> Single<[TKModeCoordinate]> {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true, in region: TKRegion) async throws -> [TKModeCoordinate] {
 
     guard region != .international else {
-      return Single.just([])
+      return []
     }
     
     var paras: [String: Any] = [
@@ -62,12 +55,8 @@ public enum TKLocationProvider {
       "strictModeMatch": strictModeMatch
     ]
     paras["modes"] = modes
-    
-    return TKServer.shared.rx
-      .hit(TKAPI.LocationsResponse.self, path: "locations.json", parameters: paras, region: region)
-      .map { _, _, model in
-        model.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
-      }
+    let model = try await TKServer.shared.hit(TKAPI.LocationsResponse.self, path: "locations.json", parameters: paras, region: region).result.get()
+    return model.groups.reduce(into: []) { $0.append(contentsOf: $1.all) }
   }
   
 }

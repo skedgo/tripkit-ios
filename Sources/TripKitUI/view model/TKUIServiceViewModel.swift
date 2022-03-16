@@ -30,8 +30,11 @@ class TKUIServiceViewModel {
     
     let errorPublisher = PublishSubject<Error>()
     
-    let withEmbarkation = Self.getEmbarkation(for: dataInput)
+    let withEmbarkation = Single.create {
+        try await Self.getEmbarkation(for: dataInput)
+      }
       .asObservable()
+      .compactMap { $0 }
       .share(replay: 1, scope: .forever)
     
     let realTimeUpdate = withEmbarkation
@@ -94,35 +97,35 @@ class TKUIServiceViewModel {
 
 extension TKUIServiceViewModel {
   
-  private static func getEmbarkation(for input: DataInput) -> Single<(StopVisits, StopVisits?)> {
+  private static func getEmbarkation(for input: DataInput) async throws -> (StopVisits, StopVisits?)? {
     switch input {
     case .visits(let embarkation, let disembarkation):
       if embarkation.service.hasServiceData {
-        return .just((embarkation, disembarkation))
+        return (embarkation, disembarkation)
       } else if let region = embarkation.service.region {
-        return TKBuzzInfoProvider.rx.downloadContent(of: embarkation.service, forEmbarkationDate: embarkation.departure ?? Date(), in: region)
-          .map { (embarkation, disembarkation) }
+        _ = try await TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.departure ?? Date(), region: region)
+        return (embarkation, disembarkation)
       } else {
-        return .error(NSError(code: 57123, message: "Could not find region for service '\(embarkation.service.code)'."))
+        throw NSError(code: 57123, message: "Could not find region for service '\(embarkation.service.code)'.")
       }
       
     case .segment(let segment):
       guard let service = segment.service else {
         assertionFailure("Used an incompatible segment")
-        return .never()
+        return nil
       }
       
       if service.hasServiceData, let embarkation = segment.embarkation {
-        return .just((embarkation, segment.finalSegmentIncludingContinuation().disembarkation))
+        return (embarkation, segment.finalSegmentIncludingContinuation().disembarkation)
       
       } else if let region = segment.startRegion {
-        return TKBuzzInfoProvider.rx.downloadContent(of: service, forEmbarkationDate: segment.departureTime, in: region)
-          .map {
-            guard let embarkation = segment.embarkation else { throw NSError(code: 57124, message: "Could not download details for '\(segment.description)'.") }
-            return (embarkation, segment.finalSegmentIncludingContinuation().disembarkation)
-          }
+        let _ = try await TKBuzzInfoProvider.downloadContent(of: service, embarkationDate: segment.departureTime, region: region)
+        guard let embarkation = segment.embarkation else {
+          throw NSError(code: 57124, message: "Could not download details for '\(segment.description)'.")
+        }
+        return (embarkation, segment.finalSegmentIncludingContinuation().disembarkation)
       } else {
-        return .error(NSError(code: 57123, message: "Could not find region for segment '\(segment.description)'."))
+        throw NSError(code: 57123, message: "Could not find region for segment '\(segment.description)'.")
       }
     }
   }

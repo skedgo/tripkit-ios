@@ -21,8 +21,14 @@ extension TKUITripOverviewViewModel {
       .filter { $0.0.hasServiceData == false }
       
     let requests: [Observable<Void>] = queries
-      .map(TKBuzzInfoProvider.rx.downloadContent)
-      .map { $0.asObservable() }
+      .map { query in
+        Single.create {
+          return try await TKBuzzInfoProvider.downloadContent(of: query.0, embarkationDate: query.1, region: query.2)
+        }
+        .asObservable()
+        .compactMap { $0 }
+        .map { _ in }
+      }
 
     let merged = Observable<Void>.merge(requests)
     return merged.throttle(.milliseconds(500), latest: true, scheduler: MainScheduler.asyncInstance)

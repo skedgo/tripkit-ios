@@ -20,24 +20,39 @@ public final class TKRoutingParser {
     case serverError(String)
   }
   
+  @available(*, renamed: "add(_:into:)")
   public static func add(_ response: TKAPI.RoutingResponse, into context: NSManagedObjectContext = TripKit.shared.tripKitContext, completion: @escaping (Result<TripRequest, Error>) -> Void) {
-    context.perform {
-      let request = TripRequest(context: context)
-      request.timeCreated = .init()
+    Task {
       do {
-        try add(response,
-                mode: .addTo(request),
-                context: context,
-                allowDuplicates: true,
-                visibility: .full
-        )
-        
-        Self.populate(request, using: response.query)
-        completion(.success(request))
-        
+        let result = try await add(response, into: context)
+        completion(.success(result))
       } catch {
-        context.delete(request)
         completion(.failure(error))
+      }
+    }
+  }
+  
+  
+  public static func add(_ response: TKAPI.RoutingResponse, into context: NSManagedObjectContext = TripKit.shared.tripKitContext) async throws -> TripRequest {
+    return try await withCheckedThrowingContinuation { continuation in
+      context.perform {
+        let request = TripRequest(context: context)
+        request.timeCreated = .init()
+        do {
+          try add(response,
+                  mode: .addTo(request),
+                  context: context,
+                  allowDuplicates: true,
+                  visibility: .full
+          )
+          
+          Self.populate(request, using: response.query)
+          continuation.resume(returning: request)
+          
+        } catch {
+          context.delete(request)
+          continuation.resume(throwing: error)
+        }
       }
     }
   }
@@ -62,88 +77,130 @@ public final class TKRoutingParser {
     return try result.orThrow(ParserError.didNotFinish).get()
   }
   
+  @available(*, renamed: "add(_:to:merge:visibility:)")
   static func add(_ response: TKAPI.RoutingResponse, to request: TripRequest, merge: Bool, visibility: TripGroup.Visibility = .full, completion: @escaping (Result<[Trip], Error>) -> Void) {
+    Task {
+      do {
+        let result = try await add(response, to: request, merge: merge, visibility: visibility)
+        completion(.success(result))
+      } catch {
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  
+  static func add(_ response: TKAPI.RoutingResponse, to request: TripRequest, merge: Bool, visibility: TripGroup.Visibility = .full) async throws -> [Trip] {
     guard let context = request.managedObjectContext else {
       assertionFailure("Request's context went missing.")
-      completion(.success([]))
-      return
+      return []
     }
     
-    context.perform {
+    return try await withCheckedThrowingContinuation { continuation in
+      context.perform {
+        do {
+          let added = try add(response,
+                              mode: .addTo(request),
+                              context: context,
+                              allowDuplicates: !merge,
+                              visibility: visibility
+          )
+          continuation.resume(returning: added)
+        } catch {
+          continuation.resume(throwing: error)
+        }
+      }
+    }
+  }
+  
+  @available(*, renamed: "add(_:to:merge:)")
+  static func add(_ response: TKAPI.RoutingResponse, to group: TripGroup, merge: Bool, completion: @escaping (Result<[Trip], Error>) -> Void) {
+    Task {
       do {
-        let added = try add(response,
-                mode: .addTo(request),
-                context: context,
-                allowDuplicates: !merge,
-                visibility: visibility
-        )
-        completion(.success(added))
-        
+        let result = try await add(response, to: group, merge: merge)
+        completion(.success(result))
       } catch {
         completion(.failure(error))
       }
     }
   }
   
-  static func add(_ response: TKAPI.RoutingResponse, to group: TripGroup, merge: Bool, completion: @escaping (Result<[Trip], Error>) -> Void) {
+  
+  static func add(_ response: TKAPI.RoutingResponse, to group: TripGroup, merge: Bool) async throws -> [Trip] {
     guard let context = group.managedObjectContext else {
       assertionFailure("Trip group's context went missing.")
-      completion(.success([]))
-      return
+      return []
     }
     
-    context.perform {
+    return try await withCheckedThrowingContinuation { continuation in
+      context.perform {
+        do {
+          let added = try add(response,
+                              mode: .appendTo(group),
+                              context: context,
+                              allowDuplicates: !merge,
+                              visibility: .full
+          )
+          continuation.resume(returning: added)
+        } catch {
+          continuation.resume(throwing: error)
+        }
+      }
+    }
+  }
+  
+  @available(*, renamed: "update(_:from:)")
+  static func update(_ trip: Trip, from response: TKAPI.RoutingResponse, completion: @escaping (Result<Trip, Error>) -> Void) {
+    Task {
       do {
-        let added = try add(response,
-                mode: .appendTo(group),
-                context: context,
-                allowDuplicates: !merge,
-                visibility: .full
-        )
-        completion(.success(added))
-        
+        let result = try await update(trip, from: response)
+        completion(.success(result))
       } catch {
         completion(.failure(error))
       }
     }
   }
   
-  static func update(_ trip: Trip, from response: TKAPI.RoutingResponse, completion: @escaping (Result<Trip, Error>) -> Void) {
+  static func update(_ trip: Trip, from response: TKAPI.RoutingResponse) async throws -> Trip {
     guard let context = trip.managedObjectContext else {
       assertionFailure("Trip's context went missing.")
-      completion(.success(trip))
-      return
+      return trip
     }
     
-    context.perform {
-      completion(Result {
-        try add(response,
-            mode: .update(trip),
-            context: context,
-            allowDuplicates: true, // we don't actually create a duplicate
-            visibility: .full
-        )
-        try context.save()
-        return trip
-      })
+    return try await withCheckedThrowingContinuation { continuation in
+      context.perform {
+        continuation.resume(with: Result {
+          try add(response,
+                  mode: .update(trip),
+                  context: context,
+                  allowDuplicates: true, // we don't actually create a duplicate
+                  visibility: .full
+          )
+          try context.save()
+          return trip
+        })
+      }
     }
   }
   
-  public static func add<Key>(groups: [Key: [TKAPI.TripGroup]], templates: [TKAPI.SegmentTemplate], alerts: [TKAPI.Alert], into context: NSManagedObjectContext = TripKit.shared.tripKitContext, completion: @escaping (Result<[Key: [Trip]], Error>) -> Void) {
-    context.perform {
-      do {
-        var keyToTrips: [Key: [Trip]] = [:]
-        for (key, groups) in groups {
-          let request = TripRequest(context: context)
-          request.timeCreated = .init()
-          let trips = try add(groups: groups, templates: templates, alerts: alerts, mode: .addTo(request), context: context, allowDuplicates: true, visibility: .full)
-          if !trips.isEmpty {
-            keyToTrips[key] = trips
+  public static func add<Key>(groups: [Key: [TKAPI.TripGroup]], templates: [TKAPI.SegmentTemplate], alerts: [TKAPI.Alert], into context: NSManagedObjectContext = TripKit.shared.tripKitContext) async throws -> [Key : [Trip]] {
+    
+    return try await withCheckedThrowingContinuation { continuation in
+      context.perform {
+        do {
+          var keyToTrips: [Key: [Trip]] = [:]
+          for (key, groups) in groups {
+            let request = TripRequest(context: context)
+            request.timeCreated = .init()
+            let trips = try add(groups: groups, templates: templates, alerts: alerts, mode: .addTo(request), context: context, allowDuplicates: true, visibility: .full)
+            if !trips.isEmpty {
+              keyToTrips[key] = trips
+            }
           }
+          continuation.resume(returning: keyToTrips)
+        } catch {
+          continuation.resume(throwing: error)
         }
-        completion(.success(keyToTrips))
-      } catch {
-        completion(.failure(error))
       }
     }
   }

@@ -11,8 +11,21 @@ import MapKit
 
 extension TKGeocoding {
   
+  @available(*, renamed: "geocode(_:near:)")
   public func geocode(_ object: TKGeocodable, near region: MKMapRect, completion: @escaping (Result<Void, Error>) -> Void) {
-    TKGeocoderHelper.geocode(object, using: self, near: region, completion: completion)
+    Task {
+      do {
+        try await geocode(object, near: region)
+        completion(.success(()))
+      } catch {
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  
+  public func geocode(_ object: TKGeocodable, near region: MKMapRect) async throws {
+    try await TKGeocoderHelper.geocode(object, using: self, near: region)
   }
   
 }
@@ -40,6 +53,7 @@ public class TKGeocoderHelper: NSObject {
     return NSError(code: 64720, message: message)
   }
   
+  @available(*, renamed: "geocode(_:using:near:)")
   public class func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect, completion: @escaping (Result<Void, Error>) -> Void) {
     
     guard let address = object.addressForGeocoding, !address.isEmpty else {
@@ -75,6 +89,15 @@ public class TKGeocoderHelper: NSObject {
       }
     }
   }
+  
+  public class func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect) async throws {
+    return try await withCheckedThrowingContinuation { continuation in
+      geocode(object, using: geocoder, near: region) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+  
   
   @objc(pickBestFromResults:)
   public class func pickBest(from results: [MKAnnotation]) -> MKAnnotation? {

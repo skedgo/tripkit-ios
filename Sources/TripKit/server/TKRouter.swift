@@ -118,6 +118,19 @@ public class TKRouter: NSObject {
     }
   }
   
+  public func fetchBestTrip<C>(for request: TKRouterRequestable, modes: C) async throws -> Trip where C: Collection, C.Element == String {
+    
+    if !modes.isEmpty {
+      modeIdentifiers = Set(modes)
+    }
+    
+    return try await withCheckedThrowingContinuation { continuation in
+      fetchBestTrip(for: request) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+  
   public func cancelRequests() {
     if let queue = workerQueue {
       queue.async(execute: cancelRequestsWorker)
@@ -562,15 +575,17 @@ extension TKRouter {
     
     TKLog.verbose("Parsing \(request)")
     TKRoutingParser.add(response, to: request, merge: true, visibility: visibility) { _ in
-      do {
-        TKLog.verbose("Saving parsed result for \(request)")
-        try context.save()
-        callbackQueue.async {
-          completion(.success(request))
+      context.perform {
+        do {
+          TKLog.verbose("Saving parsed result for \(request)")
+          try context.save()
+          callbackQueue.async {
+            completion(.success(request))
+          }
+        } catch {
+          assertionFailure("Error saving: \(error)")
+          self.handleError(error, callbackQueue: callbackQueue, completion: completion)
         }
-      } catch {
-        assertionFailure("Error saving: \(error)")
-        self.handleError(error, callbackQueue: callbackQueue, completion: completion)
       }
     }
   }

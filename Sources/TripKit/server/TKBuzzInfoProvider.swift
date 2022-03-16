@@ -12,44 +12,45 @@ import CoreLocation
 // MARK: - Fetcher methods
 
 public enum TKBuzzInfoProvider {
+
+  public static func downloadContent(of service: Service, embarkationDate: Date) async throws -> (Service, Bool)? {
+    let region = await service.access { service.region }
+    guard let region = region else {
+      return (service, false)
+    }
+    return try await downloadContent(of: service, embarkationDate: embarkationDate, region: region)
+  }
   
-  public static func downloadContent(of service: Service, embarkationDate: Date, region: TKRegion?, completion: @escaping (Service, Bool) -> Void) {
-    assert(service.managedObjectContext?.parent != nil || Thread.isMainThread)
-    guard !service.isRequestingServiceData else { return }
+  public static func downloadContent(of service: Service, embarkationDate: Date, region: TKRegion) async throws -> (Service, Bool)? {
+    guard !service.isRequestingServiceData else { return nil }
     
     service.isRequestingServiceData = true
-    TKRegionManager.shared.requireRegions { result in
-      if case .failure = result {
-        service.isRequestingServiceData = false
-        completion(service, false)
-        return
+    defer {
+      service.isRequestingServiceData = false
+    }
+
+    do {
+      try await TKRegionManager.shared.requireRegions()
+      let paras = await service.access {
+        [
+          "region": region.name,
+          "serviceTripID": service.code,
+          "operator": service.operatorName ?? "",
+          "embarkationDate": embarkationDate.timeIntervalSince1970,
+          "encode": true
+        ]
       }
-      
-      guard let region = region ?? service.region else {
-        service.isRequestingServiceData = false
-        completion(service, false)
-        return
-      }
-      
-      let paras: [String: Any] = [
-        "region": region.name,
-        "serviceTripID": service.code,
-        "operator": service.operatorName ?? "",
-        "embarkationDate": embarkationDate.timeIntervalSince1970,
-        "encode": true
-      ]
-      
-      TKServer.shared.hit(
+      let response = try await TKServer.shared.hit(
         TKAPI.ServiceResponse.self,
         path: "service.json",
         parameters: paras,
         region: region
-      ) { _, _, result in
-        service.isRequestingServiceData = false
-        let response = try? result.get()
-        let success = response.map { Self.addContent(from: $0, to: service) }
-        completion(service, success ?? false)
-      }
+      ).result.get()
+      let success = Self.addContent(from: response, to: service)
+      return (service, success)
+
+    } catch {
+      return (service, false)
     }
   }
   
@@ -121,10 +122,8 @@ public enum TKBuzzInfoProvider {
 
   /**
    Asynchronously fetches additional location information for a specified coordinate.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchLocationInformation(_ annotation: MKAnnotation, for region: TKRegion, completion: @escaping (TKAPI.LocationInfo?) -> Void) {
+  public static func fetchLocationInformation(_ annotation: MKAnnotation, for region: TKRegion) async throws -> TKAPI.LocationInfo {
     
     let paras: [String: Any]
     if let named = annotation as? TKNamedCoordinate, let identifier = named.locationID {
@@ -132,14 +131,28 @@ public enum TKBuzzInfoProvider {
     } else {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
+    return try await TKServer.shared.hit(
+      TKAPI.LocationInfo.self,
+      path: "locationInfo.json",
+      parameters: paras,
+      region: region
+    ).result.get()
+  }
+  
+  /**
+   Asynchronously fetches additional location information for a location of specified ID
+   */
+  public static func fetchLocationInformation(locationID: String, for region: TKRegion) async throws -> TKAPI.LocationInfo {
     
-    TKServer.shared.hit(TKAPI.LocationInfo.self,
-                        path: "locationInfo.json",
-                        parameters: paras,
-                        region: region
-    ) { _, _, result in
-      completion(try? result.get())
-    }
+    return try await TKServer.shared.hit(
+      TKAPI.LocationInfo.self,
+      path: "locationInfo.json",
+      parameters: [
+        "identifier": locationID,
+        "region": region.name
+      ],
+      region: region
+    ).result.get()
   }
   
   /**
@@ -147,10 +160,10 @@ public enum TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public static func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion, completion: @escaping (TKAPI.LocationInfo?) -> Void) {
+  public static func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion) async throws -> TKAPI.LocationInfo {
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
-    fetchLocationInformation(annotation, for: region, completion: completion)
+    return try await fetchLocationInformation(annotation, for: region)
   }
   
   // MARK: - Transit alerts
@@ -160,20 +173,18 @@ public enum TKBuzzInfoProvider {
    
    - Note: Completion block is executed on the main thread.
    */
-  public static func fetchTransitAlerts(forRegion region: TKRegion, completion: @escaping ([TKAPI.Alert]) -> Void) {
+  public static func fetchTransitAlerts(forRegion region: TKRegion) async throws -> [TKAPI.AlertMapping] {
     let paras: [String: Any] = [
       "region": region.name,
       "v": TKSettings.parserJsonVersion
     ]
 
-    TKServer.shared.hit(AlertsTransitResponse.self,
-                        path: "alerts/transit.json",
-                        parameters: paras,
-                        region: region
-    ) { _, _, result in
-      let mappings = (try? result.get().alerts) ?? []
-      completion(mappings.map(\.alert))
-    }
+    return try await TKServer.shared.hit(
+      AlertsTransitResponse.self,
+      path: "alerts/transit.json",
+      parameters: paras,
+      region: region
+    ).result.get().alerts
   }
 }
 

@@ -21,18 +21,6 @@ public enum TKLocationRealTime {
       .asSingle()
   }
 
-  @available(*, deprecated, message: "You should manage that yourself.")
-  public static func streamRealTime(for location: TKNamedCoordinate, fetchOnlyOn: Observable<Bool>) -> Observable<TKAPI.LocationInfo> {
-    return fetchOnlyOn
-      .flatMapLatest { fetch -> Observable<TKAPI.LocationInfo> in
-        if fetch {
-          return streamRealTime(for: location)
-        } else {
-          return .empty()
-        }
-      }
-  }
-  
   public static func streamRealTime(for location: TKNamedCoordinate) -> Observable<TKAPI.LocationInfo> {
     return TKRegionManager.shared.rx
       .requireRegion(location.coordinate)

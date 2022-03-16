@@ -20,6 +20,22 @@ public protocol TKGeocoding {
   func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void)
 }
 
+public extension TKGeocoding {
+  /// Called to geocode a particular input.
+  ///
+  /// - Parameters:
+  ///   - input: Query typed by the user
+  ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
+  /// - Returns: Geocoding results for the query.
+  func geocode(_ input: String, near mapRect: MKMapRect) async throws -> [TKNamedCoordinate] {
+    try await withCheckedThrowingContinuation { continuation in
+      geocode(input, near: mapRect) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+}
+
 public protocol TKAutocompleting {
   
   /// Called whenever a user types a character. You can assume this is already throttled.

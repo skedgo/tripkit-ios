@@ -18,78 +18,81 @@ public enum TKTripFetcher {
     case serverError(String? = nil)
   }
   
-  public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext = TripKit.shared.tripKitContext) async throws -> Trip {
     
     let identifier = identifier ?? String(url.absoluteString.hash)
     
-    func withData(_ data: Data, shareURL: URL? = nil) {
-      Self.parseTrip(from: data, into: context) { result in
-        completion(result.map { trip in
-          trip.shareURLString = trip.shareURLString ?? shareURL?.absoluteString
-          trip.request.expandForFavorite = true
-          return trip
-        })
-      }
+    func tripWithData(_ data: Data, shareURL: URL? = nil) async throws -> Trip {
+      let trip = try await Self.parseTrip(from: data, into: context)
+      trip.shareURLString = trip.shareURLString ?? shareURL?.absoluteString
+      trip.request.expandForFavorite = true
+      return trip
     }
     
-    downloadTripData(from: url, includeStops: true) { result in
-      switch result {
-      case let .success((.some(data), shareURL)):
+    do {
+      let tripData = try await downloadTripData(from: url, includeStops: true)
+      switch tripData {
+      case let (.some(data), shareURL):
         TKFileCache.save(identifier, data: data, directory: .documents)
-        withData(data, shareURL: shareURL)
+        return try await tripWithData(data, shareURL: shareURL)
         
-      case .success:
+      default:
         // Download succeeded but was empty => failure
         if let cached = TKFileCache.read(identifier, directory: .documents) {
-          withData(cached)
+          return try await tripWithData(cached)
         } else {
-          completion(.failure(FetcherError.serverError()))
+          throw FetcherError.serverError()
         }
-
-        
-      case .failure(let error):
-        if let cached = TKFileCache.read(identifier, directory: .documents) {
-          withData(cached)
-        
-        } else {
-          TKLog.info("Failed to download trip, and no copy in cache. Error: \(error)")
-          completion(.failure(error))
-        }
+      }
+    } catch {
+      if let cached = TKFileCache.read(identifier, directory: .documents) {
+        return try await tripWithData(cached)
+      
+      } else {
+        TKLog.info("Failed to download trip, and no copy in cache. Error: \(error)")
+        throw error
       }
     }
     
   }
   
-  public static func update(_ trip: Trip, url: URL? = nil, aborter: @escaping ((URL) -> Bool) = { _ in false }, completion: @escaping (Result<(Trip, URL, didUpdate: Bool), Error>) -> Void) {
+  /// Perform one-off real-time update of the provided trip
+  ///
+  /// No need to call this if `trip.wantsRealTimeUpdates == false`. It'd just complete immediately.
+  ///
+  /// - Parameter trip: The trip to update
+  ///
+  /// - returns: One-off callback with the update. Note that the `Trip` object returned will always be the same object provided to the method, i.e., trips are updated in-place.
+  public static func update(_ trip: Trip, url: URL? = nil, aborter: @escaping ((URL) -> Bool) = { _ in false }) async throws -> (Trip, URL?, didUpdate: Bool)? {
+    guard trip.wantsRealTimeUpdates else {
+      TKLog.debug("Don't bother calling this for trips that don't want updates")
+      return (trip, nil, false)
+    }
+    
     let url = url ?? trip.updateURLString.flatMap( { URL(string: $0) })
     guard let updateURL = url else {
-      completion(.failure(FetcherError.invalidURL))
-      return
+      throw FetcherError.invalidURL
     }
     
-    self.downloadTripData(from: updateURL, includeStops: false) { result in
-      if aborter(updateURL) {
-        return // no need to call completion block
-      }
+    let tripData = try await downloadTripData(from: updateURL, includeStops: false)
+    if aborter(updateURL) {
+      return nil // no need to return anything
+    }
       
-      switch result {
-      case let .success((.some(data), _)):
-        parseTrip(from: data, updating: trip) { result in
-          completion(result.map { ($0, updateURL, true) })
-        }
-      case .success((.none, _)):
-        completion(.success((trip, updateURL, false)))
-      case let .failure(error):
-        completion(.failure(error))
-      }
+    switch tripData {
+    case let (.some(data), _):
+      let trip = try await parseTrip(from: data, updating: trip)
+      return (trip, updateURL, true)
+    case (.none, _):
+      return (trip, updateURL, false)
     }
   }
   
-  private static func downloadTripData(from url: URL, includeStops: Bool, completion: @escaping (Result<(Data?, shareURL: URL), Error>) -> Void) {
+  private static func downloadTripData(from url: URL, includeStops: Bool) async throws -> (Data?, shareURL: URL) {
     
     guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-      completion(.failure(FetcherError.invalidURL))
-      return assertionFailure()
+      assertionFailure()
+      throw FetcherError.invalidURL
     }
     
     switch components.scheme {
@@ -102,8 +105,8 @@ public enum TKTripFetcher {
     }
 
     guard let shareURL = components.url else {
-      completion(.failure(FetcherError.invalidURL))
-      return assertionFailure()
+      assertionFailure()
+      throw FetcherError.invalidURL
     }
 
     // fill in some default parameters that don't relate to trip properties
@@ -119,53 +122,35 @@ public enum TKTripFetcher {
     }
     
     guard let url = components.url else {
-      completion(.failure(FetcherError.invalidURL))
-      return assertionFailure()
-    }
-        
-    TKServer.shared.hit(url: url) { _, _, response in
-      switch response {
-      case .success(let data):
-        completion(.success((data, shareURL: shareURL)))
-      case .failure(TKServer.ServerError.noData):
-        // Empty response, which is valid for updates
-        completion(.success((nil, shareURL: shareURL)))
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    }
-  }
-  
-  private static func parseTrip(from data: Data, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
-    let response: TKAPI.RoutingResponse
-    do {
-      response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: data)
-    } catch {
-      completion(.failure(error))
-      return
-    }
-      
-    TKRoutingParser.add(response, into: context) { result in
-      completion(Result {
-        let request = try result.get()
-        try context.save()
-        request.preferredGroup = request.tripGroups.first
-        request.preferredGroup?.adjustVisibleTrip()
-        return try request.preferredTrip.orThrow(FetcherError.noTrip)
-      })
-    }
-  }
-  
-  private static func parseTrip(from data: Data, updating trip: Trip, completion: @escaping (Result<Trip, Error>) -> Void) {
-    let response: TKAPI.RoutingResponse
-    do {
-      response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: data)
-    } catch {
-      completion(.failure(error))
-      return
+      assertionFailure()
+      throw FetcherError.invalidURL
     }
     
-    TKRoutingParser.update(trip, from: response, completion: completion)
+    let response = await TKServer.shared.hit(url: url)
+    switch response.result {
+    case .success(let data):
+      return (data, shareURL: shareURL)
+    case .failure(TKServer.ServerError.noData):
+      // Empty response, which is valid for updates
+      return (nil, shareURL: shareURL)
+    case .failure(let error):
+      throw error
+    }
+  }
+  
+  private static func parseTrip(from data: Data, into context: NSManagedObjectContext) async throws -> Trip {
+    let response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: data)
+    let request = try await TKRoutingParser.add(response, into: context)
+    #warning("TODO: Tell parser to save")
+    try context.save()
+    request.preferredGroup = request.tripGroups.first
+    request.preferredGroup?.adjustVisibleTrip()
+    return try request.preferredTrip.orThrow(FetcherError.noTrip)
+  }
+  
+  private static func parseTrip(from data: Data, updating trip: Trip) async throws -> Trip {
+    let response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: data)
+    return try await TKRoutingParser.update(trip, from: response)
   }
   
 }
