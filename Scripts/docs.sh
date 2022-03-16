@@ -2,14 +2,14 @@
 # Bash script to update documentation
 
 (
-  echo "Building TripKit docs..."
-  ./docs_tripkit.sh
+  # echo "Building TripKit docs..."
+  # ./docs_tripkit.sh
 
-  echo "Building TripKitUI docs..."
-  ./docs_tripkitui.sh
+  # echo "Building TripKitUI docs..."
+  # ./docs_tripkitui.sh
 
-  echo "Building TripKitInterApp docs..."
-  ./docs_tripkitinterapp.sh
+  # echo "Building TripKitInterApp docs..."
+  # ./docs_tripkitinterapp.sh
 
   echo "Building the TripGo iOS Dev site..."
   cd docs

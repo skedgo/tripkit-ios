@@ -19,6 +19,12 @@ custom_categories:
       - TKUIHomeViewController
       - TKUIHomeCard
       - TKUIHomeCardSearchResultsDelegate
+      - TKUIHomeComponentViewModel
+      - TKUIHomeComponentContent
+      - TKUIHomeComponentInput
+      - TKUIHomeComponentItem
+      - TKUIHomeHeaderConfiguration
+      - TKUIHomeCardCustomizerItem
   - name: Trip Planning
     children:
       - TKUIRoutingResultsViewController

@@ -267,6 +267,52 @@ extension TKServer {
     public var headers: [String: Any]
     public var result: Result<T, Error>
   }
+  
+  public func hit(
+    _ method: HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any]? = nil
+  ) async -> Response<Data> {
+    await withCheckedContinuation { continuation in
+      hit(method: method,
+          url: url,
+          parameters: parameters)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try result.get().orThrow(ServerError.noData)
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit(
+    _ method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil
+  ) async -> Response<Data> {
+    await withCheckedContinuation { continuation in
+      hit(method,
+          path: path,
+          parameters: parameters,
+          headers: headers,
+          region: region)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try result.get()
+          }
+        ))
+      }
+    }
+  }
 
   public func hit<Model: Decodable>(
     _ type: Model.Type,
@@ -274,7 +320,7 @@ extension TKServer {
     path: String,
     parameters: [String: Any]? = nil,
     headers: [String: String]? = nil,
-    region: TKRegion?
+    region: TKRegion? = nil
   ) async -> Response<Model> {
     await withCheckedContinuation { continuation in
       hitSkedGo(
@@ -284,10 +330,32 @@ extension TKServer {
         headers: headers,
         region: region,
         callbackOnMain: false
-      ) { status, header, result in
+      ) { status, headers, result in
         continuation.resume(returning: .init(
           statusCode: status,
-          headers: header,
+          headers: headers,
+          result: Result {
+            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any]? = nil
+  ) async -> Response<Model> {
+    await withCheckedContinuation { continuation in
+      hit(method: method,
+          url: url,
+          parameters: parameters)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
           result: Result {
             try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
           }
