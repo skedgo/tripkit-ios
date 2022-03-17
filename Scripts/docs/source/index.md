@@ -15,7 +15,7 @@ You can use them individually, but note that the latter two depend on the first 
 ### Swift Package Manager (recommended)
 
 ```swift
-  .package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", .exact("4.0rc3"))
+  .package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", from: "4.0.0-rc3")
 ```
 
 ### Cocoapods
