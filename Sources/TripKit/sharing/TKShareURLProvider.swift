@@ -51,8 +51,15 @@ public class TKShareURLProvider: UIActivityItemProvider {
     TKServer.shared.hit(TKAPI.SaveTripResponse.self, url: saveURL) { _, _, response in
       do {
         let url = try response.get().url
-        saveable.shareURL = url
-        completion(.success(url))
+        if let context = (saveable as? NSManagedObject)?.managedObjectContext {
+          context.perform {
+            saveable.shareURL = url
+            completion(.success(url))
+          }
+        } else {
+          saveable.shareURL = url
+          completion(.success(url))
+        }
       } catch {
         completion(.failure(error))
       }
