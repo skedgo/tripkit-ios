@@ -23,7 +23,7 @@ extension TKUIHomeCard {
   
   /// Actions that can be triggered by component view models
   public enum ComponentAction {
-    case push(TGCard)
+    case push(TGCard, selection: MKAnnotation? = nil)
 
     case present(UIViewController, inNavigationController: Bool = false)
 
@@ -46,7 +46,7 @@ extension TKUIHomeViewModel {
   
   /// Actions that the view model handles; based on `TKUIHomeCard.ComponentAction`
   enum NextAction {
-    case push(TGCard)
+    case push(TGCard, selection: MKAnnotation?)
     
     case present(UIViewController, inNavigationController: Bool)
     
@@ -72,8 +72,8 @@ extension TKUIHomeViewModel {
   
   static func buildNext(for componentAction: TKUIHomeCard.ComponentAction, customization: [TKUIHomeCard.CustomizedItem]) -> NextAction? {
     switch componentAction {
-    case let .push(card):
-      return .push(card)
+    case let .push(card, selection):
+      return .push(card, selection: selection)
     case let .present(controller, inNavigator):
       return .present(controller, inNavigationController: inNavigator)
     case let .handleSelection(annotation, component):

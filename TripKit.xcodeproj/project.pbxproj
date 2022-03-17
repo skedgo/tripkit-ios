@@ -33,6 +33,11 @@
 		3AB4E58127584632006D2363 /* String+NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4E58027584632006D2363 /* String+NonEmpty.swift */; };
 		3AB4E58227584632006D2363 /* String+NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4E58027584632006D2363 /* String+NonEmpty.swift */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
+		3AC6946E27E3043C00DBD287 /* InMemoryHistoryManager+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */; };
+		3AC6947327E30CB400DBD287 /* TKUINearbyViewModel+HomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6947227E30CB400DBD287 /* TKUINearbyViewModel+HomeCard.swift */; };
+		3AC6947827E30E2B00DBD287 /* TKUINearbyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC6947627E30E2B00DBD287 /* TKUINearbyCell.xib */; };
+		3AC6947927E30E2B00DBD287 /* TKUINearbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6947727E30E2B00DBD287 /* TKUINearbyCell.swift */; };
+		3AC6947B27E3103300DBD287 /* TKUINearbyMapManager+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6947A27E3103300DBD287 /* TKUINearbyMapManager+Home.swift */; };
 		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
 		3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */; };
 		3ACD91DA26CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */; };
@@ -967,6 +972,11 @@
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Home.swift"; sourceTree = "<group>"; };
+		3AC6947227E30CB400DBD287 /* TKUINearbyViewModel+HomeCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKUINearbyViewModel+HomeCard.swift"; sourceTree = "<group>"; };
+		3AC6947627E30E2B00DBD287 /* TKUINearbyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKUINearbyCell.xib; sourceTree = "<group>"; };
+		3AC6947727E30E2B00DBD287 /* TKUINearbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUINearbyCell.swift; sourceTree = "<group>"; };
+		3AC6947A27E3103300DBD287 /* TKUINearbyMapManager+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUINearbyMapManager+Home.swift"; sourceTree = "<group>"; };
 		3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIShareHelperTest.swift; sourceTree = "<group>"; };
 		3ACD91A226CCC47B0075CCF3 /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
 		3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputViewModelTest.swift; sourceTree = "<group>"; };
@@ -2300,6 +2310,7 @@
 				3AFF26F126C6975F007809CD /* TKUIMapManager.swift */,
 				3AFF26FC26C6975F007809CD /* TKUIMapManager+Tiles.swift */,
 				3AFF26FB26C6975F007809CD /* TKUINearbyMapManager.swift */,
+				3AC6947A27E3103300DBD287 /* TKUINearbyMapManager+Home.swift */,
 				3AFF26F226C6975F007809CD /* TKUIRoutingQueryInputCard.swift */,
 				3AFF270026C6975F007809CD /* TKUIRoutingResultsCard.swift */,
 				3AFF26F826C6975F007809CD /* TKUIRoutingResultsCard+Configuration.swift */,
@@ -2375,6 +2386,7 @@
 				3AFF272326C6975F007809CD /* TKUIHomeViewModel+Search.swift */,
 				3AFF273626C6975F007809CD /* TKUINearbyViewModel.swift */,
 				3AFF273026C6975F007809CD /* TKUINearbyViewModel+Content.swift */,
+				3AC6947227E30CB400DBD287 /* TKUINearbyViewModel+HomeCard.swift */,
 				3AFF273B26C6975F007809CD /* TKUIRoutingQueryInputViewModel.swift */,
 				3AFF272B26C6975F007809CD /* TKUIRoutingQueryInputViewModel+State.swift */,
 				3AFF272626C6975F007809CD /* TKUIRoutingResultsViewModel.swift */,
@@ -2426,6 +2438,8 @@
 				3AFF279C26C6975F007809CD /* TKUIModePicker+TKModeInfo.swift */,
 				D3AB478F273DE39E0086C956 /* TKUIModePickerCell.swift */,
 				D3AB4790273DE39E0086C956 /* TKUIModePickerCell.xib */,
+				3AC6947727E30E2B00DBD287 /* TKUINearbyCell.swift */,
+				3AC6947627E30E2B00DBD287 /* TKUINearbyCell.xib */,
 				3AFF273E26C6975F007809CD /* TKUIPolylineRenderer.swift */,
 				3AFF277626C6975F007809CD /* TKUIStyledLabel.swift */,
 				3AFF279B26C6975F007809CD /* TKUIStyleKit.swift */,
@@ -2934,10 +2948,11 @@
 		D314109B2395E779009498C5 /* Autocompleter */ = {
 			isa = PBXGroup;
 			children = (
-				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
-				D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */,
 				D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */,
 				D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */,
+				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
+				D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */,
+				3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */,
 			);
 			path = Autocompleter;
 			sourceTree = "<group>";
@@ -3272,6 +3287,7 @@
 				3AFF2B4E26C69BA4007809CD /* TKUIRoutingQueryInputTitleView.xib in Resources */,
 				3AFF2B7226C69BB9007809CD /* TKUITimetableAccessoryView.xib in Resources */,
 				3AFF2B0B26C69B63007809CD /* TKUISectionedAlertViewController.xib in Resources */,
+				3AC6947827E30E2B00DBD287 /* TKUINearbyCell.xib in Resources */,
 				3AFF2B7726C69BBE007809CD /* TKUIExtendedActionView.xib in Resources */,
 				3AFF2B5426C69BA4007809CD /* TKUIRoutingSupportView.xib in Resources */,
 				3A19BE2727ABA44D00B4AA8C /* TKUITripTitleView.xib in Resources */,
@@ -3655,6 +3671,7 @@
 				3AFF2B5626C69BA4007809CD /* TKUIResultsSectionHeaderView.swift in Sources */,
 				3AFF2BDB26C69BFC007809CD /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				3AFF2B5C26C69BA4007809CD /* TKUITripCell.swift in Sources */,
+				3AC6947B27E3103300DBD287 /* TKUINearbyMapManager+Home.swift in Sources */,
 				3AFF2BD126C69BF4007809CD /* SectionModelType.swift in Sources */,
 				3AFF2BD826C69BFC007809CD /* AnimationConfiguration.swift in Sources */,
 				3AFF2B9826C69BC9007809CD /* TKUISegmentAlertCell.swift in Sources */,
@@ -3763,6 +3780,7 @@
 				3AFF2BAB26C69BE7007809CD /* Trip+Titles.swift in Sources */,
 				3AFF2B6326C69BB1007809CD /* TKUISegmentTitleView.swift in Sources */,
 				3AFF2B2426C69B85007809CD /* TKUIHomeViewModel+Component.swift in Sources */,
+				3AC6947927E30E2B00DBD287 /* TKUINearbyCell.swift in Sources */,
 				3AFF2AEC26C69B56007809CD /* TKUIComposingMapManager.swift in Sources */,
 				3AFF2B0D26C69B63007809CD /* TKUISheetViewController.swift in Sources */,
 				3AFF2BDD26C69BFC007809CD /* UI+SectionedViewType.swift in Sources */,
@@ -3779,6 +3797,7 @@
 				3AFF2BA226C69BDE007809CD /* UIView+BearingRotation.swift in Sources */,
 				3AFF2AF526C69B56007809CD /* TKUITripModeByModeCard+Configuration.swift in Sources */,
 				3AFF2B9426C69BC9007809CD /* TKUIAttributionCell.swift in Sources */,
+				3AC6947327E30CB400DBD287 /* TKUINearbyViewModel+HomeCard.swift in Sources */,
 				3AFF2BA726C69BE7007809CD /* TKUICardActionsViewLayoutHelper.swift in Sources */,
 				3AFF2B1626C69B63007809CD /* TKUIRoutingResultsViewController.swift in Sources */,
 				3AFF2BC226C69BE7007809CD /* TKAPI+ViewHelpers.swift in Sources */,
@@ -4121,6 +4140,7 @@
 				D314109D2395E79E009498C5 /* InMemoryFavoriteManager.swift in Sources */,
 				D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */,
 				D314109F2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift in Sources */,
+				3AC6946E27E3043C00DBD287 /* InMemoryHistoryManager+Home.swift in Sources */,
 				3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */,
 				D31410992395DFE7009498C5 /* ExampleCustomizer.swift in Sources */,
 				D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */,

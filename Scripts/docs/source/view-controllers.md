@@ -110,5 +110,15 @@ The following data sources are included in TripKit:
 
 The [`TKUIHomeViewController`](TripKitUI/Classes/TKUIHomeViewController.html) can be used as a start-screen for the trip planning, timetable and search components -- while being highly customisable to add arbitrary other features.
 
-The default functionality is:
-- A search bar at the top, which uses the same search functionality as the dedicated [`TKUIAutocompletionViewController`](TripKitUI/Classes/TKUIAutocompletionViewController.html) but with the search integrated in the home screen UI.
+The built-in functionality is a search bar at the top, which uses the same search functionality as the dedicated [`TKUIAutocompletionViewController`](TripKitUI/Classes/TKUIAutocompletionViewController.html) but with the search integrated in the home screen UI, along with a directions button to bring up the [`TKUIRoutingQueryInputCard`](TripKitUI/Classes/TKUIRoutingQueryInputCard.html).
+
+The purpose of the home screen is then to add individual *components*, to give users quick access to different section. How to build these, is up to you, but they can be things like:
+
+- The user's favourites
+- Recently searched locations
+- Nearby locations
+- Access to the user's booked trips
+- Access to the user's tickets
+
+The `TripKitUIExample` shows to do some of these.
+

@@ -7,10 +7,12 @@
 //
 
 import Foundation
-
 import MapKit
 
-class InMemoryHistoryManager {
+import RxSwift
+import RxCocoa
+
+final class InMemoryHistoryManager {
   
   struct History {
     let annotation: MKAnnotation
@@ -19,19 +21,23 @@ class InMemoryHistoryManager {
   
   static let shared = InMemoryHistoryManager()
   
-  var history: [History] = []
-  
+  var history: BehaviorSubject<[History]> = .init(value: [])
+  var selection: Signal<History> = .empty()
+
   func add(_ annotation: MKAnnotation) {
     let mostRecent = History(annotation: annotation, date: Date())
     
-    guard history.first(where: { $0 == mostRecent }) == nil else {
+    guard
+      var histories = try? history.value(),
+      histories.first(where: { $0 == mostRecent }) == nil else {
       print("search result is already in history, skip")
       return
     }
     
-    history.append(mostRecent)
+    histories.append(mostRecent)
+    print("recent searches count: \(histories.count)")
     
-    print("recent searches count: \(history.count)")
+    history.onNext(histories)
   }
   
 }

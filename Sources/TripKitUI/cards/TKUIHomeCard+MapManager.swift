@@ -28,7 +28,7 @@ public protocol TKUICompatibleHomeMapManager: TGCompatibleMapManager {
   /// map's mapRect changes
   var mapRect: Driver<MKMapRect> { get }
   
-  /// This provides you an oppotunity to perform actions on the map when
+  /// This provides you an opportunity to perform actions on the map when
   /// a `TKUIHomeCard` appears
   /// - Parameter appear: `true` when a home card just appeared
   func onHomeCardAppearance(_ appear: Bool)
@@ -41,4 +41,10 @@ public protocol TKUICompatibleHomeMapManager: TGCompatibleMapManager {
   /// - Parameter annotation: The annotation to select on the map.
   func select(_ annotation: MKAnnotation)
   
+}
+
+public extension TKUICompatibleHomeMapManager {
+  var nextFromMap: Observable<TKUIHomeCard.ComponentAction> { .empty() }
+  
+  func onHomeCardAppearance(_ appear: Bool) { }
 }

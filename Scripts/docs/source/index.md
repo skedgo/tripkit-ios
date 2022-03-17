@@ -65,3 +65,5 @@ import TripKitUI
 let controller = TKUIHomeViewController()
 present(controller, animated: true)
 ```
+
+Have a look at the `TripKitUIExample` in the GitHub repository, as well as the SDK Reference at the top of this page.
