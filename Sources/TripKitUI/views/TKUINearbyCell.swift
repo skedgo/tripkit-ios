@@ -53,7 +53,7 @@ import RxSwift
   
   // MARK: - Configuration
   
-  var nearbyItem: TKUINearbyViewModel.Item? {
+  public var nearbyItem: TKUINearbyViewModel.Item? {
     didSet {
       updateUI()
     }

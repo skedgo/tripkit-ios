@@ -3,13 +3,13 @@
 
 (
   # echo "Building TripKit docs..."
-  # ./docs_tripkit.sh
+  ./docs_tripkit.sh
 
   # echo "Building TripKitUI docs..."
-  # ./docs_tripkitui.sh
+  ./docs_tripkitui.sh
 
   # echo "Building TripKitInterApp docs..."
-  # ./docs_tripkitinterapp.sh
+  ./docs_tripkitinterapp.sh
 
   echo "Building the TripGo iOS Dev site..."
   cd docs
