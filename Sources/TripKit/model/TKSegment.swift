@@ -587,20 +587,20 @@ extension TKSegment {
   }
   
   /// The private vehicle type used by this segment (if any)
-  @objc public var privateVehicleType: TKVehicleType {
-    guard let identifier = modeIdentifier else { return .none }
+  public var privateVehicleType: TKVehicleType {
+    guard let identifier = modeIdentifier else { return .unknown }
     
     switch identifier {
     case TKTransportModeIdentifierCar: return .car
     case TKTransportModeIdentifierBicycle: return .bicycle
     case TKTransportModeIdentifierMotorbike: return .motorbike
-    default: return .none
+    default: return .unknown
     }
   }
   
   /// - Parameter vehicle: Vehicle to assign to this segment. Only takes affect if its of a compatible type.
   public func assign(_ vehicle: TKVehicular?) {
-    guard privateVehicleType == vehicle?.vehicleType() else { return }
+    guard privateVehicleType == vehicle?.vehicleType else { return }
     
     reference?.assign(vehicle)
   }

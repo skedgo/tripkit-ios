@@ -44,14 +44,6 @@ public class TKWaypointRouter: NSObject {
 // MARK: - Trip patterns + next trips
 
 extension TKWaypointRouter {
-  
-  /// :nodoc:
-  @objc(fetchNextTripAfter:usingPrivateVehicles:completion:)
-  public static func _fetchNextTrip(after trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
-    fetchNextTrip(after: trip, usingPrivateVehicles: vehicles) { (result: Result<Trip, Error>) in
-      result.callHandler(completion)
-    }
-  }
 
   /// Calculates a trip based on the provided trip. Departure time is the provided
   /// time or now, whichever is later.
@@ -73,16 +65,7 @@ extension TKWaypointRouter {
       self.fetchTrip(waypointParas: paras, region: region, into: trip.tripGroup, completion: completion)
     }
   }
-  
-  
-  /// :nodoc:
-  @objc(fetchTripWithPattern:departure:usingPrivateVehicles:intoTripKit:inRegion:completion:)
-  public static func _fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit, in region: TKRegion, completion: @escaping (Trip?, Error?) -> Void) {
-    fetchTrip(pattern: pattern, departure: departure, usingPrivateVehicles: vehicles, into: tripKit, in: region) { (result: Result<Trip, Error>) in
-      result.callHandler(completion)
-    }
-  }
-  
+    
   /// Calculates a trip from the provided pattern. Departure time is the provided
   /// time or now, whichever is later.
   ///
@@ -118,14 +101,6 @@ extension TKWaypointRouter {
 // MARK: - Tuning public transport trips
 
 extension TKWaypointRouter {
-  /// :nodoc:
-  @objc(fetchTripMovingSegment:toVisit:atStart:usingPrivateVehicles:completion:)
-  public static func _fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
-    fetchTrip(moving: segment, to: visit, atStart: atStart, usingPrivateVehicles: vehicles) { (result: Result<Trip, Error>) in
-      result.callHandler(completion)
-    }
-  }
-
   
   /// Calculates a trip from the provided trip (implied by the segment), which moves
   /// where to get on or off the provided `segment` to the provided `visit`.
@@ -159,14 +134,6 @@ extension TKWaypointRouter {
       } catch {
         completion(.failure(error))
       }
-    }
-  }
-  
-  /// :nodoc:
-  @objc(fetchTripReplacingSegment:withDLSEntry:usingPrivateVehicles:completion:)
-  public static func _fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Trip?, Error?) -> Void) {
-    self.fetchTrip(replacing: segment, with: entry, usingPrivateVehicles: vehicles) { (result: Result<Trip, Error>) in
-      result.callHandler(completion)
     }
   }
   

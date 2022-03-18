@@ -1,19 +1,19 @@
-# View Controllers of TripKitUI <img srcset="../assets/badge-premium.png 1x,../assets/badge-premium@2x.png 2x" style="display: inline;" alt="Premium SDK-only" />
+# View Controllers of TripKitUI
 
 [TripKitUI](TripKitUI/index.html) provides customisable view controllers for the following high-level features:
 
 - **Trip planning** for showing and comparing the different ways of getting from A-to-B, including details screens for each trip both as an overview of the whole trip or the steps of each trip on a mode-by-mode basis.
 - **Public transport departures** for a specific stop or station with real-time information, including a details screen for each service that shows the route on the map and in a list.
 - **Location search** including autocompletion for searching by addresses, public transport POIs, or your own data sources.
+- **Customisable home screen** which ties all of these together, and let's you add additional custom components
 
 Each of these share the following characteristics:
 
 - Customisation points for colours and fonts
 - VoiceOver accessible
-- Translated into the following languages: Chinese (Simplified + Traditional), Danish, Dutch, English, Finnish, French, German, Italian, Korean, Norwegian (Bokmål), Portuguese, Spanish and Swedish
+- Translated into the following languages: Arabic, Chinese (Simplified + Traditional), Danish, Dutch, English, Finnish, French, German, Italian, Japanese, Korean, Norwegian (Bokmål), Portuguese, Spanish and Swedish
 - Compatible with iPhone and iPad
-- Compatible with iOS 10.3+
-- Compatible with Dark Mode on iOS 13+
+- Compatible with iOS 13+
 - Compatible with Apple's MapKit out of the box, but can also use other map UI layers, such as Google, HERE or OpenStreetMap
 - Source code available
 
@@ -104,3 +104,21 @@ The following data sources are included in TripKit:
 - [`TKPeliasGeocoder`](TripKit/Classes/TKPeliasGeocoder.html) for use with any Pelias-powered geocoder
 - [`TKCalendarManager`](TripKit/Classes/TKCalendarManager.html) for searching the user's calendar for events with locations
 - [`TKContactsManager`](TripKit/Classes/TKContactsManager.html) for searching the  user's contacts for locations
+
+
+## Home screen
+
+The [`TKUIHomeViewController`](TripKitUI/Classes/TKUIHomeViewController.html) can be used as a start-screen for the trip planning, timetable and search components -- while being highly customisable to add arbitrary other features.
+
+The built-in functionality is a search bar at the top, which uses the same search functionality as the dedicated [`TKUIAutocompletionViewController`](TripKitUI/Classes/TKUIAutocompletionViewController.html) but with the search integrated in the home screen UI, along with a directions button to bring up the [`TKUIRoutingQueryInputCard`](TripKitUI/Classes/TKUIRoutingQueryInputCard.html).
+
+The purpose of the home screen is then to add individual *components*, to give users quick access to different section. How to build these, is up to you, but they can be things like:
+
+- The user's favourites
+- Recently searched locations
+- Nearby locations
+- Access to the user's booked trips
+- Access to the user's tickets
+
+The `TripKitUIExample` shows to do some of these.
+

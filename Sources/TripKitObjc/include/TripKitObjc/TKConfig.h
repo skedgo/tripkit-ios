@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (TKConfig *)sharedInstance NS_REFINED_FOR_SWIFT;
 
-- (nullable NSString *)appGroupName;
-
 // Colors
 - (nullable NSDictionary *)globalTintColor;
 - (nullable NSDictionary *)globalAccentColor;

@@ -19,8 +19,7 @@ public enum TKBuzzInfoProvider {
     
     service.isRequestingServiceData = true
     TKRegionManager.shared.requireRegions { result in
-      if case .failure(let error) = result {
-        TKLog.warn("Error fetching regions: \(error)")
+      if case .failure = result {
         service.isRequestingServiceData = false
         completion(service, false)
         return
@@ -85,52 +84,38 @@ public enum TKBuzzInfoProvider {
   
   /**
    Asynchronously fetches additional region information for the provided region.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchRegionInformation(forRegion region: TKRegion, completion: @escaping (TKAPI.RegionInfo?) -> Void)
+  public static func fetchRegionInformation(forRegion region: TKRegion) async -> TKAPI.RegionInfo?
   {
-    TKServer.shared.hit(RegionInfoResponse.self,
-                        .POST,
-                        path: "regionInfo.json",
-                        parameters: ["region": region.name],
-                        region: region
-    ) { _, _, result in
-      completion(try? result.get().regions.first)
-    }
+    try? await TKServer.shared.hit(
+      RegionInfoResponse.self,
+      .POST,
+      path: "regionInfo.json",
+      parameters: ["region": region.name],
+      region: region
+    ).result.get().regions.first
   }
   
   /**
    Asynchronously fetches paratransit information for the provided region.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchParatransitInformation(forRegion region: TKRegion, completion: @escaping (TKAPI.Paratransit?) -> Void)
+  public static func fetchParatransitInformation(forRegion region: TKRegion) async -> TKAPI.Paratransit?
   {
-    fetchRegionInformation(forRegion: region) { info in
-      completion(info?.paratransit)
-    }
+    await fetchRegionInformation(forRegion: region)?.paratransit
   }
   
   /**
    Asynchronously fetches all available individual public transport modes for the provided region.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchPublicTransportModes(forRegion region: TKRegion, completion: @escaping ([TKModeInfo]) -> Void)
+  public static func fetchPublicTransportModes(forRegion region: TKRegion) async -> [TKModeInfo]?
   {
-    fetchRegionInformation(forRegion: region) { info in
-      completion(info?.transitModes ?? [])
-    }
+    await fetchRegionInformation(forRegion: region)?.transitModes
   }
-  
 
   /**
    Asynchronously fetches additional location information for a specified coordinate.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchLocationInformation(_ annotation: MKAnnotation, for region: TKRegion, completion: @escaping (TKAPI.LocationInfo?) -> Void) {
+  public static func fetchLocationInformation(_ annotation: MKAnnotation, for region: TKRegion) async throws -> TKAPI.LocationInfo {
     
     let paras: [String: Any]
     if let named = annotation as? TKNamedCoordinate, let identifier = named.locationID {
@@ -138,72 +123,57 @@ public enum TKBuzzInfoProvider {
     } else {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
+    return try await TKServer.shared.hit(
+      TKAPI.LocationInfo.self,
+      path: "locationInfo.json",
+      parameters: paras,
+      region: region
+    ).result.get()
+  }
+  
+  /**
+   Asynchronously fetches additional location information for a location of specified ID
+   */
+  public static func fetchLocationInformation(locationID: String, for region: TKRegion) async throws -> TKAPI.LocationInfo {
     
-    TKServer.shared.hit(TKAPI.LocationInfo.self,
-                        path: "locationInfo.json",
-                        parameters: paras,
-                        region: region
-    ) { _, _, result in
-      completion(try? result.get())
-    }
+    return try await TKServer.shared.hit(
+      TKAPI.LocationInfo.self,
+      path: "locationInfo.json",
+      parameters: [
+        "identifier": locationID,
+        "region": region.name
+      ],
+      region: region
+    ).result.get()
   }
   
   /**
    Asynchronously fetches additional location information for a specified coordinate.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion, completion: @escaping (TKAPI.LocationInfo?) -> Void) {
+  public static func fetchLocationInformation(_ coordinate: CLLocationCoordinate2D, for region: TKRegion) async throws -> TKAPI.LocationInfo {
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
-    fetchLocationInformation(annotation, for: region, completion: completion)
+    return try await fetchLocationInformation(annotation, for: region)
   }
   
   // MARK: - Transit alerts
   
   /**
    Asynchronously fetches transit alerts for the provided region.
-   
-   - Note: Completion block is executed on the main thread.
    */
-  public static func fetchTransitAlerts(forRegion region: TKRegion, completion: @escaping ([TKAPI.Alert]) -> Void) {
+  public static func fetchTransitAlerts(forRegion region: TKRegion) async throws -> [TKAPI.AlertMapping] {
     let paras: [String: Any] = [
       "region": region.name,
       "v": TKSettings.parserJsonVersion
     ]
 
-    TKServer.shared.hit(AlertsTransitResponse.self,
-                        path: "alerts/transit.json",
-                        parameters: paras,
-                        region: region
-    ) { _, _, result in
-      let mappings = (try? result.get().alerts) ?? []
-      completion(mappings.map(\.alert))
-    }
+    return try await TKServer.shared.hit(
+      AlertsTransitResponse.self,
+      path: "alerts/transit.json",
+      parameters: paras,
+      region: region
+    ).result.get().alerts
   }
-  
-  // MARK: - Accessibility
-  
-  /**
-   Asynchronously fetches information about whether the provided region supports
-   wheelchair.
-   
-   - Note: Completion block is executed on the main thread.
-   */
-  
-  public static func fetchWheelchairSupportInformation(forRegion region: TKRegion, completiton: @escaping (Bool) -> Void)
-  {
-    fetchRegionInformation(forRegion: region) { info in
-      let isSupported: Bool
-      if let info = info {
-        isSupported = info.transitWheelchairAccessibility || info.streetWheelchairAccessibility
-      } else {
-        isSupported = false
-      }
-      completiton(isSupported)
-    }
-  }
-  
 }
 
 // MARK: - Response data model

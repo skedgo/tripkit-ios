@@ -30,16 +30,18 @@ extension InMemoryHistoryManager: TKAutocompleting {
 extension InMemoryHistoryManager {
   
   private func fetchDefaultHistory() -> [History] {
-    if history.count > 5 {
-      return history.sorted(by: { $0.date > $1.date} ).prefix(upTo: 5).map { $0 }
+    let items = (try? history.value()) ?? []
+    if items.count > 5 {
+      return items.sorted(by: { $0.date > $1.date} ).prefix(upTo: 5).map { $0 }
     } else {
-      return history.sorted(by: { $0.date > $1.date} )
+      return items.sorted(by: { $0.date > $1.date} )
     }
   }
   
   private func fetchHistory(matching searchText: String) -> [History] {
+    let items = (try? history.value()) ?? []
     let loweredCasedSearchText = searchText.lowercased()
-    return history.filter { $0.annotation.title??.lowercased().contains(loweredCasedSearchText) ?? false }
+    return items.filter { $0.annotation.title??.lowercased().contains(loweredCasedSearchText) ?? false }
   }
   
   static func autocompletionResult(for history: History, searchText: String) -> TKAutocompletionResult? {

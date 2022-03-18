@@ -29,6 +29,8 @@ FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierMotorbike;
 /// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierBicycle;
 /// :nodoc:
+FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierDeprecatedBicycle;
+/// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierBikeShare;
 /// :nodoc:
 FOUNDATION_EXPORT NSString *const TKTransportModeIdentifierWalking;

@@ -46,7 +46,7 @@ public class TKRouter: NSObject {
   /// Optional server to use instead of `TKServer.shared`. Should only be used for testing or development.
   public var server: TKServer?
 
-  /// Set to limit the modes. If not provided, modes according to `TKUserProfileHelper` will be used.
+  /// Set to limit the modes. If not provided, modes according to `TKSettings` will be used.
   public var modeIdentifiers: Set<String> = []
 
   private var isActive: Bool = false
@@ -92,7 +92,7 @@ public class TKRouter: NSObject {
   }
 
   /// Kicks off the server request to fetch the best trip matching the request and the enabled
-  /// modes according to `TKUserProfileHelper`.
+  /// modes according to `TKSettings`.
   ///
   /// On success, the request's `.trips` and `.tripGroup` properties will be set. Note, that these
   /// might include multiple trips (despite the naming of this method), which are variants of the
@@ -146,7 +146,7 @@ extension TKRouter {
   /// - note: Calling this method will lock-in the departure time for "Leave now" queries.
   ///
   /// As trips get added, they get flagged with full, minimised or hidden visibility.
-  /// Which depends on the standard defaults. Check `TKUserProfileHelper` for setting
+  /// Which depends on the standard defaults. Check `TKSettings` for setting
   /// those.
   ///
   /// - Parameters:
@@ -166,12 +166,12 @@ extension TKRouter {
   /// - note: Calling this method will lock-in the departure time for "Leave now" queries.
   ///
   /// As trips get added, they get flagged with full, minimised or hidden visibility.
-  /// Which depends on the standard defaults. Check `TKUserProfileHelper` for setting
+  /// Which depends on the standard defaults. Check `TKSettings` for setting
   /// those.
   ///
   /// - Parameters:
   ///   - request: The request specifying the query
-  ///   - modes: The modes to enable. If set to `nil` then it'll use the modes as set in the user defaults (see `TKUserProfileHelper` for more)
+  ///   - modes: The modes to enable. If set to `nil` then it'll use the modes as set in the user defaults (see `TKSettings` for more)
   ///   - classifier: Optional classifier to assign `TripGroup`'s `classification`
   ///   - progress: Optional progress callback executed when each request finished, with the number of completed requests passed to the block.
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
@@ -261,7 +261,7 @@ extension TKRouter {
               if modes == nil {
                 // We get hidden modes here in the completion block
                 // since they might have changed while waiting for results
-                let hidden = TKUserProfileHelper.hiddenModeIdentifiers
+                let hidden = TKSettings.hiddenModeIdentifiers
                 tripRequest.adjustVisibility(hiddenIdentifiers: hidden)
               } else {
                 tripRequest.adjustVisibility(hiddenIdentifiers: [])
@@ -414,11 +414,7 @@ extension TripRequest: TKRouterRequestable {
   public var from: MKAnnotation { fromLocation }
   public var to: MKAnnotation { toLocation }
   
-  public var modes: Set<String> {
-    return Set(applicableModeIdentifiers)
-      .subtracting(TKUserProfileHelper.hiddenModeIdentifiers)
-    
-  }
+  public var modes: Set<String> { TKSettings.enabledModeIdentifiers(applicableModeIdentifiers) }
 
   public var at: TKShareHelper.QueryDetails.Time {
     switch (type, departureTime, arrivalTime) {

@@ -19,21 +19,37 @@ extension TKRegionManager {
   /// Recommended to call from the application delegate.
   /// - Parameter forced: Set true to force overwriting the internal cache
   public func updateRegions(forced: Bool = false) {
-    fetchRegions(forced: forced, completion: { _ in })
+    Task {
+      try? await fetchRegions(forced: forced)
+    }
   }
   
+  @available(*, renamed: "requireRegions()")
   public func requireRegions(completion: @escaping (Result<Void, Error>) -> Void) {
     guard !hasRegions else {
       return completion(.success(()))
     }
-    fetchRegions(forced: false, completion: completion)
+    Task {
+      do {
+        try await fetchRegions(forced: false)
+        completion(.success(()))
+      } catch {
+        completion(.failure(error))
+      }
+    }
   }
   
-  func fetchRegions(forced: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
+  public func requireRegions() async throws {
+    if !hasRegions {
+      try await fetchRegions(forced: false)
+    }
+  }
+  
+  private func fetchRegions(forced: Bool) async throws {
     let regionsURL: URL
     if let developmentServer = TKServer.developmentServer {
       guard let url = URL(string: developmentServer) else {
-        return completion(.failure(RegionError.invalidDevelopmentServer))
+        throw RegionError.invalidDevelopmentServer
       }
       regionsURL = url.appendingPathComponent("regions.json")
     } else {
@@ -45,28 +61,36 @@ extension TKRegionManager {
       paras["hashCode"] = regionsHash
     }
     
-    TKServer.shared.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras) { [weak self] _, _, result in
-      guard let self = self else { return }
-      
-      switch result {
-      case .success(let response):
-        self.updateRegions(from: response)
-        if self.hasRegions {
-          completion(.success(()))
-        } else {
-          let message = NSLocalizedString("Could not download supported regions from TripGo's server. Please try again later.", tableName: "Shared", bundle: .tripKit, comment: "Could not download supported regions warning.")
-          let userError = NSError(code: Int(kTKServerErrorTypeUser), message: message)
-          completion(.failure(userError))
-        }
-        
-      case .failure(TKServer.ServerError.noData) where !forced:
-        completion(.success(())) // still up-to-date
-      case .failure(let error):
-        TKLog.warn("TKServer+Regions", text: "Error fetching regions.json: \(error)")
-        completion(.failure(error))
+    let response = await TKServer.shared.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras)
+    switch response.result {
+    case .success(let model):
+      updateRegions(from: model)
+      if hasRegions {
+        return
+      } else {
+        let message = NSLocalizedString("Could not download supported regions from TripGo's server. Please try again later.", tableName: "Shared", bundle: .tripKit, comment: "Could not download supported regions warning.")
+        throw NSError(code: Int(kTKServerErrorTypeUser), message: message)
       }
+      
+    case .failure(TKServer.ServerError.noData) where !forced:
+      return // still up-to-date
+    case .failure(let error):
+      throw error
     }
   }
-
   
+}
+
+// MARK: - Convenience methods
+
+extension TKRegionManager {
+  public func requireRegion(for coordinate: CLLocationCoordinate2D) async throws -> TKRegion {
+    try await requireRegions()
+    return self.region(containing: coordinate, coordinate)
+  }
+
+  public func requireRegion(for coordinateRegion: MKCoordinateRegion) async throws -> TKRegion {
+    try await requireRegions()
+    return self.region(containing: coordinateRegion)
+  }
 }

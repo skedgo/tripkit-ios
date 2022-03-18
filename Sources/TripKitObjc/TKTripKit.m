@@ -102,7 +102,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 - (NSURL *)localDirectory
 {
   NSURL *directory;
-  NSString * appGroupName = [[TKConfig sharedInstance] appGroupName];
+  NSString * appGroupName = [[TKConfig sharedInstance] configuration][@"AppGroupName"];
   if (appGroupName != nil) {
     directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroupName];
     if (directory == nil) {

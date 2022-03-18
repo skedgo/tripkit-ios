@@ -36,7 +36,6 @@ extension TKTripGoGeocoder: TKGeocoding {
     
     TKRegionManager.shared.requireRegions { result in
       if case .failure(let error) = result {
-        TKLog.info("Error fetching regions: \(error)")
         completion(.failure(error))
         return
       }

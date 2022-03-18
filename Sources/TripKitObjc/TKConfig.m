@@ -42,9 +42,6 @@
   return _configuration;
 }
 
-- (NSString *)appGroupName {
-  return self.configuration[@"AppGroupName"];
-}
 
 #pragma mark - Colors.
 

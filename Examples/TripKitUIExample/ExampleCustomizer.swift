@@ -18,6 +18,7 @@ struct ExampleCustomizer {
   static func configureCards() {
     configureTimetableCard()
     configureRoutingResultsCard()
+    configureHomeCard()
   }
   
 }
@@ -26,11 +27,16 @@ struct ExampleCustomizer {
 
 extension ExampleCustomizer {
   
+  private static func configureHomeCard() {
+    TKUIHomeCard.config.componentViewModelClasses = [
+      TKUINearbyViewModel.self,
+      InMemoryHistoryManager.self,
+    ]
+  }
+  
   private static func configureRoutingResultsCard() {
-    
     TKUIRoutingResultsCard.config.initialCardPosition = .collapsed
     TKUIRoutingResultsCard.config.limitToModes = ["pt_pub"]
-    
   }
   
   private static func configureTimetableCard() {

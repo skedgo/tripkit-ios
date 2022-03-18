@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '13.0' # latest-stable
+        xcode-version: '13.2.1' # latest-stable
     - uses: actions/checkout@v2
     - name: Build TripKit Mac
       run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit-macOS"
@@ -36,7 +36,7 @@ jobs:
     steps:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '13.0' # latest-stable
+        xcode-version: '13.2.1' # latest-stable
     - uses: actions/checkout@v2
     - name: Run tests
       env:
@@ -60,7 +60,7 @@ jobs:
     steps:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '13.0' # latest-stable
+        xcode-version: '13.2.1' # latest-stable
     - uses: actions/checkout@v2
     - name: Build TripKitUIExample
       run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
@@ -69,8 +69,8 @@ jobs:
         cd Examples/MiniMap
         pod install
         xcodebuild build -quiet -workspace MiniMap.xcworkspace -scheme MiniMap
-    # - name: Build CocoaPodsTest
-    #   run: |
-    #     cd Examples/CocoaPodsTest
-    #     pod install
-    #     xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest
+    - name: Build CocoaPodsTest
+      run: |
+        cd Examples/CocoaPodsTest
+        pod install
+        xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13 mini'

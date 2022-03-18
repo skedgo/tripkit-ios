@@ -91,23 +91,19 @@ public enum TKQuickBookingHelper {
   /**
    Fetches the quick booking options for a particular segment, if there are any. Each booking option represents a one-click-to-buy option uses default options for various booking customisation parameters. To let the user customise these values, do not use quick bookings, but instead the `bookingInternalURL` of a segment.
    */
-  public static func fetchQuickBookings(for segment: TKSegment, completion: @escaping (Result<[TKQuickBooking], Error>) -> Void) {
+  public static func fetchQuickBookings(for segment: TKSegment) async throws -> [TKQuickBooking] {
     if let stored = segment.storedQuickBookings {
-      completion(.success(stored))
-      return
+      return stored
     }
     
     guard let bookingsURL = segment.bookingQuickInternalURL else {
-      completion(.success([]))
-      return
+      return []
     }
     
-    TKServer.shared.hit([TKQuickBooking].self, url: bookingsURL) { _, _, result in
-      if let bookings = try? result.get() {
-        segment.storeQuickBookings(bookings)
-      }
-      completion(result)
-    }
+    let response = await TKServer.shared.hit([TKQuickBooking].self, url: bookingsURL)
+    let bookings = try response.result.get()
+    segment.storeQuickBookings(bookings)
+    return bookings
   }
 
 }

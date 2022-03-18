@@ -14,11 +14,6 @@ exclude:
   - /*/TripKitUI/vendor/RxDataSources/*
 
 custom_categories:
-  - name: Home
-    children:
-      - TKUIHomeViewController
-      - TKUIHomeCard
-      - TKUIHomeCardSearchResultsDelegate
   - name: Trip Planning
     children:
       - TKUIRoutingResultsViewController
@@ -44,6 +39,17 @@ custom_categories:
     children:
       - TKUIAutocompletionViewController
       - TKUIAutocompletionViewControllerDelegate
+  - name: Home Screen
+    children:
+      - TKUIHomeViewController
+      - TKUIHomeCard
+      - TKUIHomeCardSearchResultsDelegate
+      - TKUIHomeComponentViewModel
+      - TKUIHomeComponentContent
+      - TKUIHomeComponentInput
+      - TKUIHomeComponentItem
+      - TKUIHomeHeaderConfiguration
+      - TKUIHomeCardCustomizerItem
   - name: Notable Classes
     children:
       - TKUICardAction

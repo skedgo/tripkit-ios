@@ -100,22 +100,24 @@ extension TKUINearbyViewModel {
     /// *All* the locations near current coordinate (either from device location
     /// or the user moving the map).
     return Observable.combineLatest(newRect, refresh.startWith(()))
-      .flatMapLatest { (mapRect, _) -> Observable<([TKModeCoordinate], CLLocationCoordinate2D)> in
-        guard let mapRect = mapRect else { return .just( ([], .invalid) ) }
+      .asyncMap { (mapRect, _) async -> ([TKModeCoordinate], CLLocationCoordinate2D) in
+        guard let mapRect = mapRect else {
+          return ([], .invalid)
+        }
         let radius = mapRect.length * 1.5
-        return TKLocationProvider.fetchLocations(
+        do {
+          let locations = try await TKLocationProvider.fetchLocations(
             center: mapRect.centerCoordinate,
             radius: radius,
             limit: fixedLocation != nil ? 1000 : 100,
             modes: mode.flatMap { [$0] },
             strictModeMatch: strictModeMatch
           )
-          .asObservable()
-          .catch { error in
-            errorPublisher.onNext(error)
-            return .just([])
-          }
-          .map { ($0, mapRect.centerCoordinate) }
+          return (locations, mapRect.centerCoordinate)
+        } catch {
+          errorPublisher.onNext(error)
+          return ([], mapRect.centerCoordinate)
+        }
       }
       .map { ViewContent(locations: $0.0, mapCenter: $0.1) }
   }

@@ -257,8 +257,11 @@ extension TKUIHomeCard {
       cardController.present(controller, inNavigator: inNavigator)
       dismissSelection()
       
-    case .push(let card):
+    case .push(let card, let selection):
       exitSearchMode()
+      if let selection = selection {
+        searchResultDelegate?.homeCard(self, selected: selection)
+      }
       if cardController.topCard == self {
         cardController.push(card)
       } else {
@@ -316,40 +319,7 @@ extension TKUIHomeCard {
     let queryInputCard = TKUIRoutingQueryInputCard(biasMapRect: mapRect)
     queryInputCard.startMode = startingInDestinationMode ? .destination : .origin
     queryInputCard.queryDelegate = self
-    handleNext(.push(queryInputCard))
-  }
-  
-  private func showRoutes(to destination: MKAnnotation) {
-    exitSearchMode()
-    
-    // We push the routing card. To replicate Apple Maps, we put
-    // the routing card at the peaking position when it's pushed.
-    let routingResultCard = TKUIRoutingResultsCard(destination: destination)
-    controller?.push(routingResultCard)
-    
-    searchResultDelegate?.homeCard(self, selected: destination)
-  }
-  
-  private func showTimetable(for annotation: MKAnnotation) {
-    guard let stop = annotation as? TKUIStopAnnotation else { return }
-    exitSearchMode()
-
-    // We push the timetable card. To replicate Apple Maps, we put
-    // the timetable card at the peaking position when it's pushed.
-    let timetableCard = TKUITimetableCard(stops: [stop], reusing: (mapManager as? TKUIMapManager), initialPosition: .peaking)
-    if controller?.topCard is TKUITimetableCard {
-      // If we are already showing a timetable card,
-      // instead of pushing another one, we swap it
-      controller?.swap(for: timetableCard, animated: true)
-    } else {
-      controller?.push(timetableCard)
-    }
-    
-    searchResultDelegate?.homeCard(self, selected: stop)
-    
-    // This removes nearby annotations and leaves only the stop
-    // visible on the map.
-    focusedAnnotationPublisher.onNext(stop)
+    handleNext(.push(queryInputCard, selection: nil))
   }
   
 }

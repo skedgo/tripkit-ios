@@ -12,7 +12,8 @@ extension TKServer {
   
   public static let shared = TKServer.__sharedInstance()
   
-  public static func imageURL(iconFileNamePart: String, iconType: TKStyleModeIconType? = nil) -> URL? {
+  public static func imageURL(iconFileNamePart: String?, iconType: TKStyleModeIconType? = nil) -> URL? {
+    guard let iconFileNamePart = iconFileNamePart else { return nil }
     let regionsURLString = TKServer.developmentServer ?? "https://api.tripgo.com/v1"
     
     let isPNG: Bool
@@ -116,7 +117,7 @@ extension TKServer {
   public enum ServerError: Error {
     case noData
   }
-
+  
   public enum RepeatHandler {
     case repeatIn(TimeInterval)
     case repeatWithNewParameters(TimeInterval, [String: Any])
@@ -258,6 +259,112 @@ extension TKServer {
 
 }
 
+// MARK: - Async/await
+
+extension TKServer {
+  public struct Response<T> {
+    public var statusCode: Int?
+    public var headers: [String: Any]
+    public var result: Result<T, Error>
+  }
+  
+  public func hit(
+    _ method: HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any]? = nil
+  ) async -> Response<Data> {
+    await withCheckedContinuation { continuation in
+      hit(method: method,
+          url: url,
+          parameters: parameters)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try result.get().orThrow(ServerError.noData)
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit(
+    _ method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil
+  ) async -> Response<Data> {
+    await withCheckedContinuation { continuation in
+      hit(method,
+          path: path,
+          parameters: parameters,
+          headers: headers,
+          region: region)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try result.get()
+          }
+        ))
+      }
+    }
+  }
+
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil
+  ) async -> Response<Model> {
+    await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any]? = nil
+  ) async -> Response<Model> {
+    await withCheckedContinuation { continuation in
+      hit(method: method,
+          url: url,
+          parameters: parameters)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+}
+
 // MARK: - Calling to Objective-C
 
 extension TKServer {
@@ -270,8 +377,8 @@ extension TKServer {
       headers: headers,
       baseURLs: NSMutableArray(array: baseURLs(for: region).shuffled()),
       callbackOnMain: callbackOnMain,
-      info: { uuid, request, response, data, error in
-        if let response = response {
+      info: { uuid, isResponse, request, response, data, error in
+        if isResponse {
           TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
         } else {
           TKLog.log("TKServer", request: request, uuid: uuid)
@@ -316,8 +423,8 @@ extension TKServer {
       url,
       method: method.rawValue,
       parameters: parameters,
-      info: { uuid, request, response, data, error in
-        if let response = response {
+      info: { uuid, isResponse, request, response, data, error in
+        if isResponse {
           TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
         } else {
           TKLog.log("TKServer", request: request, uuid: uuid)

@@ -228,13 +228,13 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
         completion:(TKServerGenericBlock)completion
 {
   NSUUID *requestUUID = [NSUUID UUID];
-  info(requestUUID, request, nil, nil, nil);
+  info(requestUUID, NO, request, nil, nil, nil);
   
   NSURLSession *defaultSession = [NSURLSession sharedSession];
   NSURLSessionDataTask *task = [defaultSession dataTaskWithRequest:request
                                                  completionHandler:
                                 ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                  info(requestUUID, request, response, data, error);
+                                  info(requestUUID, YES, request, response, data, error);
     
                                   NSInteger status = 0;
                                   NSDictionary *headers = nil;

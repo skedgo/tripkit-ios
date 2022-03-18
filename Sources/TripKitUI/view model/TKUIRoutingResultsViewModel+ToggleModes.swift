@@ -34,10 +34,10 @@ extension TKUIRoutingResultsViewModel {
       
     let enabledModes: Set<String>
     if mutable {
-      let enabled = TKUserProfileHelper.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
+      let enabled = TKSettings.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
       var newEnabled = Set(enabled)
       
-      if TKUserProfileHelper.showWheelchairInformation {
+      if TKSettings.showWheelchairInformation {
         newEnabled.insert(TKTransportModeIdentifierWheelchair)
         newEnabled.remove(TKTransportModeIdentifierWalking)
       } else {
@@ -57,13 +57,13 @@ extension TKUIRoutingResultsViewModel {
   static func updateAvailableModes(enabled: [String]?, request: TripRequest?) -> AvailableModes? {
     guard let enabled = enabled, let all = request.map(Self.modes(for:)) else { return nil }
 
-    // check this first, in case that TKUserProfileHelper messes with it
-    let oldWheelchairOn = TKUserProfileHelper.showWheelchairInformation
+    // check this first, in case that TKSettings messes with it
+    let oldWheelchairOn = TKSettings.showWheelchairInformation
 
     // handle regular modes
     var hidden = all.map(\.identifier)
     hidden.removeAll(where: enabled.contains)
-    TKUserProfileHelper.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
+    TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
     
     // handle toggling wheelchair on and off
     let newWheelchairOn: Bool
@@ -78,7 +78,7 @@ extension TKUIRoutingResultsViewModel {
       return AvailableModes(available: all, enabled: Set(enabled))
     }
     
-    TKUserProfileHelper.showWheelchairInformation = newWheelchairOn
+    TKSettings.showWheelchairInformation = newWheelchairOn
 
     var newEnabled = Set(enabled)
     if newWheelchairOn {

@@ -13,6 +13,7 @@ extension UIImage {
 
   public static let iconAlert = named("icon-alert")
   public static let iconCross = named("icon-cross")
+  public static let iconCompass = UIImage.named("icon-compass")
 
   // Occupancy
   
@@ -33,6 +34,7 @@ extension UIImage {
   // Actions
 
   public static let iconAlternative = named("alternative")
+  public static let iconArrow = named("icon-arrow")
   public static let iconArrowUp = named("arrow-up")
   public static let iconShowPassword = named("icon-show")
   public static let iconHidePassword = named("icon-hide")
@@ -76,6 +78,6 @@ class TripKitUIBundle: NSObject {
 
 extension Bundle {
   
-  public static let tripKitUI: Bundle = TripKitUIBundle.bundle()
+  static let tripKitUI: Bundle = TripKitUIBundle.bundle()
   
 }

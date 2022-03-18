@@ -180,8 +180,8 @@ extension TKUIRoutingResultsViewModel {
 extension TripRequest {
   var includedTransportModes: String {
     let all = spanningRegion.modeIdentifiers
-    let visible = Set(all).subtracting(TKUserProfileHelper.hiddenModeIdentifiers)
-    return Loc.Showing(visible.count, ofTransportModes: all.count)
+    let enabled = TKSettings.enabledModeIdentifiers(all)
+    return Loc.Showing(enabled.count, ofTransportModes: all.count)
   }
 }
 

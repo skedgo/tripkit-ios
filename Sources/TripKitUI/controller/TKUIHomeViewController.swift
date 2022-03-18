@@ -25,8 +25,11 @@ open class TKUIHomeViewController: TGCardViewController {
   
   public var initialPosition: TGCardPosition?
   
-  public init(initialPosition: TGCardPosition? = nil) {
+  public var mapManager: TKUICompatibleHomeMapManager?
+  
+  public init(mapManager: TKUICompatibleHomeMapManager? = nil, initialPosition: TGCardPosition? = nil) {
     self.initialPosition = initialPosition
+    self.mapManager = mapManager
     
     super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
   }
@@ -49,11 +52,11 @@ open class TKUIHomeViewController: TGCardViewController {
     
     TKUIHomeCard.config.autocompletionDataProviders = autocompletionDataProviders
     
-    let homeCard = TKUIHomeCard()
+    let homeCard = TKUIHomeCard(mapManager: mapManager, initialPosition: initialPosition)
     homeCard.style = TKUICustomization.shared.cardStyle
     homeCard.searchResultDelegate = searchResultsDelegate
     rootCard = homeCard
-    
+
     super.viewDidLoad()
   }
   

@@ -16,6 +16,8 @@ import RxCocoa
 
 public class TKUINearbyViewModel {
   
+  static var homeInstance: TKUINearbyViewModel? = nil
+  
   public enum Next {
     case stop(TKUIStopAnnotation)
     case location(TKModeCoordinate)

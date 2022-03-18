@@ -52,7 +52,9 @@ public class TKUINearbyMapManager: TKUIMapManager {
   
   override public func takeCharge(of mapView: MKMapView, animated: Bool) {
     super.takeCharge(of: mapView, animated: animated)
-    
+    if viewModel == nil {
+      viewModel = TKUINearbyViewModel.homeInstance
+    }
     guard let viewModel = viewModel else { assertionFailure(); return }
 
     // Default content on taking charge
