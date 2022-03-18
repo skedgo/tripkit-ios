@@ -21,6 +21,7 @@ public extension TKGeocoding {
   ///   - input: Query typed by the user
   ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
   /// - Returns: Single-observable with the geocoding results for the query.
+  @available(*, deprecated, message: "Use async/await instead.")
   func geocode(_ input: String, near mapRect: MKMapRect) -> Single<[TKNamedCoordinate]> {
     return Single.create { subscriber in
       self.geocode(input, near: mapRect) { result in
@@ -95,6 +96,7 @@ public extension TKAutocompleting {
 
 public extension Reactive where Base == TKGeocoderHelper {
   
+  @available(*, deprecated, message: "Use async/await instead.")
   static func geocode(_ object: TKGeocodable, using geocoder: TKGeocoding, near region: MKMapRect) -> Single<Void> {
     return Single.create { subscriber in
       TKGeocoderHelper.geocode(object, using: geocoder, near: region) { result in
@@ -105,10 +107,6 @@ public extension Reactive where Base == TKGeocoderHelper {
       }
       return Disposables.create()
     }
-  }
-  
-  static func geocodeUsingPreferredGeocoder(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
-    return self.geocode(object, using: TKGeocoderHelper.preferredGeocoder, near: region)
   }
   
 }

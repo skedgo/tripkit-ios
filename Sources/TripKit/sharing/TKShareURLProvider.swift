@@ -26,6 +26,7 @@ extension TKAPI {
 #if os(iOS)
 
 import UIKit
+import CoreData
 
 public class TKShareURLProvider: UIActivityItemProvider {
   
@@ -33,38 +34,31 @@ public class TKShareURLProvider: UIActivityItemProvider {
     case missingSaveURL
   }
   
-  public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool, completion: @escaping (Result<URL, Error>) -> Void) {
+  public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool = true) async throws -> URL {
     
     if let shareURL = shareable.shareURL {
-      return completion(.success(shareURL))
+      return shareURL
     }
     
     guard
       var saveable = shareable as? TKURLSavable,
       let baseSaveURL = saveable.saveURL
     else {
-      return completion(.failure(ShareError.missingSaveURL))
+      throw ShareError.missingSaveURL
     }
 
     let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
     
-    TKServer.shared.hit(TKAPI.SaveTripResponse.self, url: saveURL) { _, _, response in
-      do {
-        let url = try response.get().url
-        if let context = (saveable as? NSManagedObject)?.managedObjectContext {
-          context.perform {
-            saveable.shareURL = url
-            completion(.success(url))
-          }
-        } else {
-          saveable.shareURL = url
-          completion(.success(url))
-        }
-      } catch {
-        completion(.failure(error))
+    let url = try await TKServer.shared.hit(TKAPI.SaveTripResponse.self, url: saveURL).result.get().url
+    if let context = (saveable as? NSManagedObject)?.managedObjectContext {
+      await context.perform {
+        saveable.shareURL = url
       }
+    } else {
+      saveable.shareURL = url
     }
     
+    return url
   }
   
   /// Gets and optionally fetches the share URL for the provided object.
