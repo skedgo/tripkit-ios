@@ -9,8 +9,6 @@
 import XCTest
 import MapKit
 
-import RxSwift
-
 @testable import TripKit
 
 class TKUIGeocoderTest: XCTestCase {
@@ -32,63 +30,62 @@ class TKUIGeocoderTest: XCTestCase {
   
   //MARK: - The Tests
   
-  func testBrandonAveSydney() throws {
-    try geocoderPasses(geocoder, input: "Brandon Ave, Sydney", near: sydney, resultsInAny: ["Brandon Ave", "Brandon Avenue"], noneOf: ["Gordon Ave", "Brothel"])
+  func testBrandonAveSydney() async throws {
+    await geocoderPasses(geocoder, input: "Brandon Ave, Sydney", near: sydney, resultsInAny: ["Brandon Ave", "Brandon Avenue"], noneOf: ["Gordon Ave", "Brothel"])
 
     // We want no garbage matches from Foursquare
     let another = try aggregateGeocoder()
-    try geocoderPasses(another, input: "Brandon Ave", near: sydney, noneOf: ["Gordon Ave", "Brothel"])
+    await geocoderPasses(another, input: "Brandon Ave", near: sydney, noneOf: ["Gordon Ave", "Brothel"])
 }
   
-  func testNoUnnecessaryStreetNumbers() throws {
+  func testNoUnnecessaryStreetNumbers() async {
     // We want no garbage matches from Foursquare
-    try geocoderPasses(geocoder, input: "George St, Sydney", near: sydney, resultsInAny: ["George Street"], noneOf: ["Tesla Loading Dock", "333 George", "345 George", "261 George"])
+    await geocoderPasses(geocoder, input: "George St, Sydney", near: sydney, resultsInAny: ["George Street", "George St"], noneOf: ["Tesla Loading Dock", "333 George", "345 George", "261 George"])
   }
 
-  // TODO: Re-instate this test. BACKEND ISSUE. SKEDGO TEAM IS ON IT. SILENCING THIS IN THE MEANTIME.
-//  func testGeorgeSt2554() {
-//    // We want to result first which starts with a house number
-//    //
-//    geocoderPasses(geocoder, input: "George St", near: sydney, bestStartsWithAny: ["George St"])
-//  }
-
-  func testGilbertPark4240() throws {
-    try geocoderPasses(geocoder, input: "Gilbert Park, Manly", near: sydney, resultsInAny: ["Gilbert Park"])
+  func testGeorgeSt2554() async {
+    // We want to result first which starts with a house number
+    //
+    await geocoderPasses(geocoder, input: "George St", near: sydney, bestStartsWithAny: ["George St"])
   }
 
-  func testGarrisSt4252() throws {
-    try geocoderPasses(geocoder, input: "608 Harris", near: sydney, resultsInAny: ["608 Harris St"])
+  func testGilbertPark4240() async {
+    await geocoderPasses(geocoder, input: "Gilbert Park, Manly", near: sydney, resultsInAny: ["Gilbert Park"])
   }
 
-  func testDeeWhy5147() throws {
-    try geocoderPasses(geocoder, input: "Dee Why", near: sydney, bestStartsWithAny: ["Dee Why"])
+  func testGarrisSt4252() async {
+    await geocoderPasses(geocoder, input: "608 Harris", near: sydney, resultsInAny: ["608 Harris St"])
   }
 
-  func testMOMA6279() throws {
-    try geocoderPasses(geocoder, input: "MoMA", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
+  func testDeeWhy5147() async {
+    await geocoderPasses(geocoder, input: "Dee Why", near: sydney, bestStartsWithAny: ["Dee Why"])
+  }
+
+  func testMOMA6279() async throws {
+    await geocoderPasses(geocoder, input: "MoMA", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
     
     let second = try aggregateGeocoder()
-    try geocoderPasses(second, input: "Museum of Modern Art", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
+    await geocoderPasses(second, input: "Museum of Modern Art", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
 
     // Shouldn't just find it but also rank it first
     let third = try aggregateGeocoder()
-    try geocoderPasses(third, input: "moma", near: newYork, bestStartsWithAny: ["Museum of Modern Art", "The Museom of Modern Art", "MoMA"])
+    await geocoderPasses(third, input: "moma", near: newYork, bestStartsWithAny: ["Museum of Modern Art", "The Museom of Modern Art", "MoMA"])
   }
   
-  func testRPATypo6294() throws {
+  func testRPATypo6294() async {
     // We want no garbage matches from Foursquare
-    try geocoderPasses(geocoder, input: "RPA Emergancy", near: sydney, noneOf: ["Callan Park"])
+    await geocoderPasses(geocoder, input: "RPA Emergancy", near: sydney, noneOf: ["Callan Park"])
   }
   
-  func testExploreAutocomplete7336() throws {
+  func testExploreAutocomplete7336() async {
     // We want no garbage matches from Foursquare
-    try geocoderPasses(geocoder, input: "Lend Lease Darling Quarter Theatre", near: sydney, resultsInAny: ["Darling Quarter Theatre", "lend lease Darling Quarter"])
+    await geocoderPasses(geocoder, input: "Lend Lease Darling Quarter Theatre", near: sydney, resultsInAny: ["Darling Quarter Theatre", "lend lease Darling Quarter"])
   }
 
-  func testWrongSydneyAirport7838() throws {
+  func testWrongSydneyAirport7838() async {
     // We want no garbage matches from Foursquare
     let SYD = CLLocationCoordinate2D(latitude: -33.939932, longitude: 151.175212)
-    try geocoderPasses(geocoder, input: "Sydney International Airport", near: sydney, of: SYD)
+    await geocoderPasses(geocoder, input: "Sydney International Airport", near: sydney, of: SYD)
   }
   
   //MARK: - Private helpers
@@ -126,15 +123,11 @@ extension TKUIGeocoderTest {
     resultsInAny any: [String] = [],
     noneOf none: [String] = [],
     of coordinate: CLLocationCoordinate2D? = nil,
-    file: StaticString = #file, line: UInt = #line)
-    throws
+    file: StaticString = #file,
+    line: UInt = #line)
+    async
   {
-    let result = geocoder.passes(input, near:region, resultsInAny:any, noneOf:none, of:coordinate)
-    do {
-      _ = try result.toBlocking(timeout: 5).first()
-    } catch {
-      try XCTSkipIf(true, "Skipped due to: \(error)", file: file, line: line)
-    }
+    await geocoder.passes(input, near: region, resultsInAny: any, noneOf: none, of: coordinate, file: file, line: line)
   }
   
   fileprivate func geocoderPasses(
@@ -142,15 +135,10 @@ extension TKUIGeocoderTest {
     input: String,
     near region: MKCoordinateRegion,
     bestStartsWithAny starts: [String],
-    file: StaticString = #file, line: UInt = #line)
-    throws
-  {
-    let result = geocoder.passes(input, near:region, bestStartsWithAny: starts)
-    do {
-      _ = try result.toBlocking(timeout: 5).first()
-    } catch {
-      try XCTSkipIf(true, "Skipped due to: \(error)", file: file, line: line)
-    }
+    file: StaticString = #file,
+    line: UInt = #line
+  ) async {
+    await geocoder.passes(input, near:region, bestStartsWithAny: starts, file: file, line: line)
   }
 }
 
@@ -170,31 +158,34 @@ extension TKGeocoding {
     near region: MKCoordinateRegion,
     resultsInAny any: [String] = [],
     noneOf none: [String] = [],
-    of coordinate: CLLocationCoordinate2D? = nil)
-    -> Single<Void>
-  {
+    of coordinate: CLLocationCoordinate2D? = nil,
+    file: StaticString = #file,
+    line: UInt = #line
+  ) async {
     let mapRect = MKMapRect.forCoordinateRegion(region)
-    return geocode(input, near: mapRect).map { results in
-        var foundGood = any.count == 0
-        for result in results {
-          // ignore results without a title
-          guard let title = result.title else { continue }
-          
-          // check if we found a good result
-          for good in any where title.contains(good) {
-            foundGood = true
-            break
-          }
-          
-          // none should be bad
-          for bad in none where title.contains(bad) {
-            throw TKUIGeocoderTest.Error.badResult("Result '\(title)' is bad as it contains '\(bad)'")
-          }
-        }
-        if !foundGood {
-          throw TKUIGeocoderTest.Error.noGoodResult("Found no result containing '\(any)'")
-        }
+    let results: [TKNamedCoordinate]
+    do {
+      results = try await geocode(input, near: mapRect)
+    } catch {
+      return XCTFail("Geocoding failed with error: \(error)", file: file, line: line)
+    }
+    var foundGood = any.count == 0
+    for result in results {
+      // ignore results without a title
+      guard let title = result.title else { continue }
+      
+      // check if we found a good result
+      for good in any where title.contains(good) {
+        foundGood = true
+        break
       }
+      
+      // none should be bad
+      for bad in none where title.contains(bad) {
+        XCTFail("Result '\(title)' is bad as it contains '\(bad)'", file: file, line: line)
+      }
+    }
+    XCTAssertTrue(foundGood, "Found no result containing '\(any)'", file: file, line: line)
   }
   
   /// Runs the geocoder and checks that the highest scored result starts with any of the
@@ -204,26 +195,35 @@ extension TKGeocoding {
   /// - parameter region: Region near which to search
   /// - parameter starts: Any result needs to start with any of these
   /// - parameter completion: Called when done, with one parameter indicating if all results pass
-  func passes(_ input: String, near region: MKCoordinateRegion, bestStartsWithAny starts: [String]) -> Single<Void>
-  {
+  func passes(
+    _ input: String,
+    near region: MKCoordinateRegion,
+    bestStartsWithAny starts: [String],
+    file: StaticString = #file,
+    line: UInt = #line
+  ) async {
     let mapRect = MKMapRect.forCoordinateRegion(region)
-    return geocode(input, near: mapRect).map { results in
-        let (_, best) = results.reduce((0, nil as TKNamedCoordinate?)) { previous, next in
-          if next.sortScore > previous.0 {
-            return (next.sortScore, next)
-          } else {
-            return previous
-          }
-        }
-        
-        // check if we found a good result
-        if let title = best?.title {
-          for good in starts where title.lowercased().hasPrefix(good.lowercased()) {
-            return
-          }
-        }
-        throw TKUIGeocoderTest.Error.bestIsNoGood("Best match '\(String(describing: best?.title))' does not have good title.")
+    let results: [TKNamedCoordinate]
+    do {
+      results = try await geocode(input, near: mapRect)
+    } catch {
+      return XCTFail("Geocoding failed with error: \(error)", file: file, line: line)
     }
+    let (_, best) = results.reduce((0, nil as TKNamedCoordinate?)) { previous, next in
+      if next.sortScore > previous.0 {
+        return (next.sortScore, next)
+      } else {
+        return previous
+      }
+    }
+    
+    // check if we found a good result
+    if let title = best?.title {
+      for good in starts where title.lowercased().hasPrefix(good.lowercased()) {
+        return
+      }
+    }
+    XCTFail("Best match '\(String(describing: best?.title))' does not have good title.", file: file, line: line)
   }
 }
 

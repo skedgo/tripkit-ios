@@ -22,7 +22,7 @@ class TKUIShareHelperTest: XCTestCase {
     }
   }()
   
-  func testQueryUrlWithW3W() throws {
+  func testQueryUrlWithW3W() async throws {
     guard let geocoder = geocoder else {
       try XCTSkipIf(true, "Could not construct TKTripGoGeocoder. Check environment variables.")
       return
@@ -30,7 +30,7 @@ class TKUIShareHelperTest: XCTestCase {
 
     let url = URL(string: "tripgo:///go?tname=dragon.letter.spoke")!
     
-    guard let result = try TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }
+    let result = try await TKShareHelper.queryDetails(for: url, using: geocoder)
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
@@ -43,11 +43,11 @@ class TKUIShareHelperTest: XCTestCase {
     
   }
 
-  func testW3WQueryUrlWithLatLng() throws {
+  func testW3WQueryUrlWithLatLng() async throws {
     let geocoder = TKAppleGeocoder()
     let url = URL(string: "tripgo:///go?tlat=-33.94501&tlng=151.25807&type=1&time=1385535734")!
     
-    guard let result = try TKShareHelper.queryDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }
+    let result = try await TKShareHelper.queryDetails(for: url, using: geocoder)
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
@@ -62,11 +62,11 @@ class TKUIShareHelperTest: XCTestCase {
   }
   
   
-  func testMeetUrl() throws {
+  func testMeetUrl() async throws {
     let geocoder = TKAppleGeocoder()
     let url = URL(string: "tripgo:///meet?lat=-33.94501&lng=151.25807&at=1385535734")!
     
-    guard let result = try TKShareHelper.meetingDetails(for: url, using: geocoder).toBlocking().first() else { XCTFail(); return }
+    let result = try await TKShareHelper.meetingDetails(for: url, using: geocoder)
     
     XCTAssertNil(result.start)
     XCTAssertTrue(result.end.isValid)
@@ -83,7 +83,7 @@ class TKUIShareHelperTest: XCTestCase {
   func testStopUrl() throws {
     let url = URL(string: "tripgo:///stop/AU_NSW_Sydney/2035143")!
     
-    guard let result = try TKShareHelper.stopDetails(for: url).toBlocking().first() else { XCTFail(); return }
+    let result = try TKShareHelper.stopDetails(for: url)
     
     XCTAssertEqual(result.region, "AU_NSW_Sydney")
     XCTAssertEqual(result.code, "2035143")
@@ -93,7 +93,7 @@ class TKUIShareHelperTest: XCTestCase {
   func testServiceUrl() throws {
     let url = URL(string: "https://tripgo.com/service/AR_B_BahiaBlanca/AR_B_BahiaBlanca-P517245/trip-517-V-01-032/1529321905")!
     
-    guard let result = try TKShareHelper.serviceDetails(for: url).toBlocking().first() else { XCTFail(); return }
+    let result = try TKShareHelper.serviceDetails(for: url)
     
     XCTAssertEqual(result.region, "AR_B_BahiaBlanca")
     XCTAssertEqual(result.stopCode, "AR_B_BahiaBlanca-P517245")
@@ -103,7 +103,7 @@ class TKUIShareHelperTest: XCTestCase {
   func testOldServiceUrl() throws {
     let url = URL(string: "https://tripgo.com/service?regionName=AU_NSW_Sydney&stopCode=2000352&serviceID=89-W.1290.120.60.K.8.52029766")!
     
-    guard let result = try TKShareHelper.serviceDetails(for: url).toBlocking().first() else { XCTFail(); return }
+    let result = try TKShareHelper.serviceDetails(for: url)
     
     XCTAssertEqual(result.region, "AU_NSW_Sydney")
     XCTAssertEqual(result.stopCode, "2000352")

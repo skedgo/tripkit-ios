@@ -36,6 +36,7 @@ public extension TKGeocoding {
     }
   }
   
+  @available(*, deprecated, message: "Use async/await instead.")
   func geocode(_ object: TKGeocodable, near region: MKMapRect) -> Single<Void> {
     return TKGeocoderHelper.rx.geocode(object, using: self, near: region)
   }
