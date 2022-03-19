@@ -187,47 +187,39 @@ extension TKRouter {
     self.workerQueue = queue
     var count: UInt = 0
     queue.sync {
-      count = self.multiFetchTripsWorker(request: request, modes: modes, classifier: classifier, progress: progress, on: queue, completion: completion)
+      do {
+        count = try self.multiFetchTripsWorker(request: request, modes: modes, classifier: classifier, progress: progress, on: queue, completion: completion)
+      } catch {
+        self.handleError(error, callbackQueue: queue, completion: completion)
+      }
     }
     return count
   }
     
-  private func multiFetchTripsWorker(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, on queue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
+  private func multiFetchTripsWorker(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, on queue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) throws -> UInt {
     
-    let includesAllModes = request.additional.contains { $0.name == "allModes" }
+    let includesAllModes = try request.performAndWait { $0.additional.contains { $0.name == "allModes" } }
+    
     if includesAllModes {
-      modeIdentifiers = modes ?? request.modes
+      modeIdentifiers = try modes ?? request.performAndWait(\.modes)
       fetchTrips(for: request, bestOnly: false, additional: nil, callbackQueue: queue, completion: completion)
       return 1
     }
     
-    guard let context = request.context else {
-      completion(.failure(RoutingError.invalidRequest("Could not access CoreData storage")))
-      return 0
-    }
-
-    let enabledModes = modes ?? request.modes
+    let enabledModes = try modes ?? request.performAndWait(\.modes)
     guard !enabledModes.isEmpty else {
-      completion(.failure(RoutingError.invalidRequest("No modes enabled")))
-      return 0
+      throw RoutingError.invalidRequest("No modes enabled")
     }
     
     let groupedIdentifier = TKTransportModes.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
     
-    var tripRequest: TripRequest! = nil
-    var additional: Set<URLQueryItem> = []
-    context.performAndWait {
-      tripRequest = request.toTripRequest()
-      do {
-        try context.save()
-      } catch {
-        assertionFailure()
-        return handleError(error, callbackQueue: queue, completion: completion)
-      }
-      
-      // This will also hit the context, so we need to do this here
-      additional = request.additional
+    let tripRequest: TripRequest = try request.performAndWait {
+      let tripRequest = $0.toTripRequest()
+      try request.context?.save()
+      return tripRequest
     }
+    
+    let additional = try request.performAndWait(\.additional)
     
     queue.async {
       self.cancelRequestsWorker()
@@ -257,7 +249,7 @@ extension TKRouter {
           case .success:
             // Classifiers will likely heavily read from the trips, so
             // we need to switch
-            context.perform {
+            request.perform { _ in
               if modes == nil {
                 // We get hidden modes here in the completion block
                 // since they might have changed while waiting for results
@@ -294,7 +286,7 @@ extension TKRouter {
     
     if workers.isEmpty {
       // Only show an error if we found nothing
-      request.context?.perform {
+      request.perform { _ in
         if request.trips.isEmpty, let error = self.lastWorkerError {
           completion(.failure(error))
         } else {
@@ -380,6 +372,39 @@ public protocol TKRouterRequestable {
   var context: NSManagedObjectContext? { get }
   
   func toTripRequest() -> TripRequest
+}
+
+fileprivate extension TKRouterRequestable {
+  func perform(_ block: @escaping (Self) -> Void) {
+    if let context = context {
+      context.perform {
+        block(self)
+      }
+    } else {
+      block(self)
+    }
+  }
+  
+  func performAndWait<R>(_ block: (Self) throws -> R) throws -> R {
+    if let context = context {
+      var result: R! = nil
+      var blockError: Error? = nil
+      context.performAndWait {
+        do {
+          result = try block(self)
+        } catch {
+          blockError = error
+        }
+      }
+      if let blockError = blockError {
+        throw blockError
+      } else {
+        return result
+      }
+    } else {
+      return try block(self)
+    }
+  }
 }
 
 extension TKRouter.RoutingQuery: TKRouterRequestable {
@@ -490,50 +515,48 @@ extension TKRouter {
     }
     
     TKRegionManager.shared.requireRegions { [weak self] result in
-      guard let self = self else { return }
-
-      if case .failure(let error) = result {
-        return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
-      }
-      
-      // we are guaranteed to have regions
-      guard let region = TKRegionManager.shared.localRegions(start: request.from.coordinate, end: request.to.coordinate).first else {
-        return self.handleError(
-          NSError(code: 1001, // matches server
-                  message: Loc.RoutingBetweenTheseLocationsIsNotYetSupported),
-          callbackQueue: callbackQueue,
-          completion: completion)
-      }
-      
-      let paras = Self.requestParameters(
-        for: request,
-        modeIdentifiers: self.modeIdentifiers,
-        additional: additional,
-        bestOnly: bestOnly
-      )
-      
-      let server = self.server ?? .shared
-      server.hit(TKAPI.RoutingResponse.self,
-                 path: "routing.json",
-                 parameters: paras,
-                 region: region,
-                 callbackOnMain: false
-      ) { [weak self] _, _, result in
+      request.perform { [weak self] _ in
         guard let self = self else { return }
-        switch result {
-        case .success(let response):
-          if let context = request.context {
-            context.perform {
+
+        if case .failure(let error) = result {
+          return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
+        }
+        
+        // we are guaranteed to have regions
+        guard let region = TKRegionManager.shared.localRegions(start: request.from.coordinate, end: request.to.coordinate).first else {
+          return self.handleError(
+            NSError(code: 1001, // matches server
+                    message: Loc.RoutingBetweenTheseLocationsIsNotYetSupported),
+            callbackQueue: callbackQueue,
+            completion: completion)
+        }
+        
+        let paras = Self.requestParameters(
+          for: request,
+          modeIdentifiers: self.modeIdentifiers,
+          additional: additional,
+          bestOnly: bestOnly
+        )
+        
+        let server = self.server ?? .shared
+        server.hit(TKAPI.RoutingResponse.self,
+                   path: "routing.json",
+                   parameters: paras,
+                   region: region,
+                   callbackOnMain: false
+        ) { [weak self] _, _, result in
+          request.perform { [weak self] _ in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
               let tripRequest = request.toTripRequest()
               self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+              
+            case .failure(let error):
+              self.handleError(error, callbackQueue: callbackQueue, completion: completion)
             }
-          } else {
-            let tripRequest = request.toTripRequest()
-            self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
           }
-          
-        case .failure(let error):
-          self.handleError(error, callbackQueue: callbackQueue, completion: completion)
         }
       }
     }
