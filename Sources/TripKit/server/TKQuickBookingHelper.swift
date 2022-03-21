@@ -103,10 +103,12 @@ public enum TKQuickBookingHelper {
     }
     
     TKServer.shared.hit([TKQuickBooking].self, url: bookingsURL) { _, _, result in
-      if let bookings = try? result.get() {
-        segment.storeQuickBookings(bookings)
+      segment.trip.managedObjectContext?.perform {
+        if let bookings = try? result.get() {
+          segment.storeQuickBookings(bookings)
+        }
+        completion(result)
       }
-      completion(result)
     }
   }
 
