@@ -11,7 +11,7 @@ nav:
   - TripKitInterApp: TripKitInterApp/index.html
 - API: https://developer.tripgo.com
 
-repo_url: https://gitlab.com/skedgo/ios/tripkit-ios
+repo_url: https://github.com/skedgo/tripkit-ios
 docs_dir: source
 strict: true
 theme:
