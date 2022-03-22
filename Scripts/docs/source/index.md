@@ -8,15 +8,19 @@ The SDK consists of the following three frameworks:
 - [**TripKitUI**](TripKitUI/index.html) (iOS, iOS extensions): [View controllers](view-controllers.md), as well as individual UI helpers and components.
 - [**TripKitInterApp** ](TripKitInterApp/index.html) (iOS): Helpers for deep linking into other apps, such as GoCatch, Ingogo, Lyft, Ola and Uber.
 
-You can use them individually, but note that the latter two depend on the first one.
+TripKit contains the core logic, and the other two depend on it..
 
 ## Installation
 
 ### Swift Package Manager (recommended)
 
+Add it to your dependencies:
+
 ```swift
-  .package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", from: "4.0.0-rc3")
+.package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", from: "4.0.0")
 ```
+
+And then add the TripKit, TripKitUI, and/or TripKitInterApp dependencies to your target, as appropriate.
 
 ### Cocoapods
 
@@ -25,9 +29,9 @@ Add desired pods to your `Podfile`:
 ```ruby
 use_frameworks!
 
-pod 'TripKit',          :git => 'https://gitlab.com/SkedGo/iOS/tripkit-ios.git'
-pod 'TripKitUI',        :git => 'https://gitlab.com/SkedGo/iOS/tripkit-ios.git'
-pod 'TripKitInterApp',  :git => 'https://gitlab.com/SkedGo/iOS/tripkit-ios.git'
+pod 'TripKit'
+pod 'TripKitUI'
+pod 'TripKitInterApp'
 ```
 
 Then run `pod update` and you're set.
@@ -36,12 +40,12 @@ Then run `pod update` and you're set.
 
 - Drag the files into your project.
 - Add dependencies (see TripKit.podspec)
-- Add `-DTK_NO_MODULE` to your target's `Other C Flags` and `Other Swift Flags`
-- Add `TK_NO_MODULE=1` to your target's `Preprocessor Macros`
 
 If there's any trouble with that, see the examples in the repository.
 
 ## Set-up
+
+First up, sign up for a [TripGo API key](https://developer.tripgo.com).
 
 In your app delegate, provide your API key and start a new session:
 
@@ -66,4 +70,4 @@ let controller = TKUIHomeViewController()
 present(controller, animated: true)
 ```
 
-Have a look at the `TripKitUIExample` in the GitHub repository, as well as the SDK Reference at the top of this page.
+Have a look at the [`TripKitUIExample`](https://github.com/skedgo/tripkit-ios/tree/main/Examples/TripKitUIExample) in the GitHub repository, as well as the SDK Reference at the top of this page.
