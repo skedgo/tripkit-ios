@@ -196,7 +196,7 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
      NSError *serverError = error;
      if (serverError || status >= 500) {
        BOOL isUserError = NO;
-       #warning TODO: Re-instate no failover on user error?
+       // LATER: Re-instate no failover on user error
        if (isUserError && serverError != nil) {
          if (callbackOnMain) {
            dispatch_async(dispatch_get_main_queue(), ^{
