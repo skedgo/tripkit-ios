@@ -36,13 +36,13 @@ public class TKShareURLProvider: UIActivityItemProvider {
   
   public class func getShareURL(for shareable: TKURLShareable, allowLongURL: Bool = true) async throws -> URL {
     
-    if let shareURL = shareable.shareURL {
+    if let shareURL = tk_safeRead(\.shareURL, from: shareable) {
       return shareURL
     }
     
     guard
       var saveable = shareable as? TKURLSavable,
-      let baseSaveURL = saveable.saveURL
+      let baseSaveURL = tk_safeRead(\.saveURL, from: saveable)
     else {
       throw ShareError.missingSaveURL
     }
@@ -50,14 +50,7 @@ public class TKShareURLProvider: UIActivityItemProvider {
     let saveURL = self.saveURL(forBase: baseSaveURL, allowLongURL: allowLongURL)
     
     let url = try await TKServer.shared.hit(TKAPI.SaveTripResponse.self, url: saveURL).result.get().url
-    if let context = (saveable as? NSManagedObject)?.managedObjectContext {
-      context.performAndWait {
-        saveable.shareURL = url
-      }
-    } else {
-      saveable.shareURL = url
-    }
-    
+    tk_safeWrite(\.shareURL, value: url, to: &saveable)
     return url
   }
   
