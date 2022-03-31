@@ -45,13 +45,12 @@ class TKUIGeocoderTest: XCTestCase {
 
   func testGeorgeSt2554() async {
     // We want to result first which starts with a house number
-    //
     await geocoderPasses(geocoder, input: "George St", near: sydney, bestStartsWithAny: ["George St"])
   }
 
-  func testGilbertPark4240() async {
-    await geocoderPasses(geocoder, input: "Gilbert Park, Manly", near: sydney, resultsInAny: ["Gilbert Park"])
-  }
+//  func testGilbertPark4240() async {
+//    await geocoderPasses(geocoder, input: "Gilbert Park, Manly", near: sydney, resultsInAny: ["Gilbert Park"])
+//  }
 
   func testGarrisSt4252() async {
     await geocoderPasses(geocoder, input: "608 Harris", near: sydney, resultsInAny: ["608 Harris St"])

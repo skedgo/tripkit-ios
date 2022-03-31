@@ -29,9 +29,16 @@ extension TKServer {
     data.append(imageData)
     data.append(Data("\r\n--\(boundary)--\r\n".utf8))
     
+    let id = UUID()
+    TKLog.log("TKServer+Image", request: request, uuid: id)
+    
     let task = URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
-      if let error = error { handler(.failure(error)) }
-      else { handler(.success(TKImage(data: imageData))) }
+      TKLog.log("TKServer+Image", response: response, data: data, orError: error as NSError?, for: request, uuid: id)
+      if let error = error {
+        handler(.failure(error))
+      } else {
+        handler(.success(TKImage(data: imageData)))
+      }
     }
     
     task.resume()

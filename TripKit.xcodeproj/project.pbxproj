@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A0747B12730D4C3000D752F /* polygons-au-211102.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A0747B02730D4C3000D752F /* polygons-au-211102.json */; };
+		3A0F254C27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */; };
+		3A0F254D27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */; };
 		3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; };
@@ -949,6 +951,7 @@
 
 /* Begin PBXFileReference section */
 		3A0747B02730D4C3000D752F /* polygons-au-211102.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "polygons-au-211102.json"; sourceTree = "<group>"; };
+		3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Safely.swift"; sourceTree = "<group>"; };
 		3A19BE2427ABA44500B4AA8C /* TKUITripTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripTitleView.swift; sourceTree = "<group>"; };
 		3A19BE2627ABA44D00B4AA8C /* TKUITripTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITripTitleView.xib; sourceTree = "<group>"; };
 		3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKAutocompletionResult+Icon.swift"; sourceTree = "<group>"; };
@@ -2215,6 +2218,7 @@
 				3AFF26BD26C6975F007809CD /* NSNumber+Formatter.swift */,
 				3AFF26C126C6975F007809CD /* NSUserDefaults+SharedDefaults.swift */,
 				3AB4E58027584632006D2363 /* String+NonEmpty.swift */,
+				3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -3577,6 +3581,7 @@
 				3AFF29DC26C69864007809CD /* TKPermissionManager.m in Sources */,
 				3AFF28CA26C697D9007809CD /* SegmentTemplate+Flags.swift in Sources */,
 				3AFF2A0726C69994007809CD /* NSBundle+ProductName.swift in Sources */,
+				3A0F254D27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */,
 				3AFF28B726C697D9007809CD /* TKDLSTable.swift in Sources */,
 				3AFF294626C6980D007809CD /* TKGeocodingResultScorer.swift in Sources */,
 				3AFF288026C697AB007809CD /* TKPermissionManager+AuthorizationAlert.swift in Sources */,
@@ -4016,6 +4021,7 @@
 				3AFF283426C6977B007809CD /* TKShareHelper.swift in Sources */,
 				3AFF294E26C6981D007809CD /* TKRouter.swift in Sources */,
 				3AFF295526C6981D007809CD /* TKRoutingServer.swift in Sources */,
+				3A0F254C27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */,
 				3AFF287526C697AA007809CD /* TKRegionManager.swift in Sources */,
 				3A89090827E473EE005A49B1 /* TKLocationProvider.swift in Sources */,
 				3AFF289C26C697CB007809CD /* RoutingAPIModel.swift in Sources */,
