@@ -14,14 +14,19 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@v2
 
-      - name: Build docs
+      - name: Prepare dependencies
         run: |
           brew install sourcekitten
+          pip3 install mkdocs
+          pip3 install pymdown-extensions     
+
+      - name: Build docs
+        run: |
           cd Scripts
           ./docs.sh
 
       - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CUSTOM_DOMAIN: ios.developer.tripgo.com
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
