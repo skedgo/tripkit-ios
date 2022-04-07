@@ -12,8 +12,8 @@ extension TKAPI {
   
   public struct User: Codable {
     public let name: String?
-    public let firstName: String?
-    public let lastName: String?
+    public let givenName: String?
+    public let familyName: String?
     public let address1: String?
     public let address2: String?
     public let postCode: String?
@@ -29,8 +29,8 @@ extension TKAPI {
     
     private enum CodingKeys: String, CodingKey {
       case name
-      case firstName = "givenName"
-      case lastName = "surname"
+      case givenName
+      case familyName = "surname"
       case address1
       case address2
       case postCode
