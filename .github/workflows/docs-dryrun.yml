@@ -1,4 +1,4 @@
-name: Swift
+name: Build docs
 
 on:
   pull_request:
@@ -14,8 +14,13 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@v2
 
-      - name: Build docs
+      - name: Prepare dependencies
         run: |
           brew install sourcekitten
+          pip3 install mkdocs
+          pip3 install pymdown-extensions     
+
+      - name: Build docs
+        run: |
           cd Scripts
           ./docs.sh
