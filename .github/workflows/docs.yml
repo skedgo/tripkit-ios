@@ -9,7 +9,7 @@ on:
 jobs:
   build_docs:
     name: Build and deploy docs
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     steps:
       - name: Checkout master
         uses: actions/checkout@v2
