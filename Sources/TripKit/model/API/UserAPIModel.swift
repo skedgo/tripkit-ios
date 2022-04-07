@@ -25,6 +25,12 @@ extension TKAPI {
     private let rawEmail: String?
     private let rawEmails: [Email]?
     
+    @available(*, unavailable, renamed: "givenName")
+    public var firstName: String? { givenName }
+
+    @available(*, unavailable, renamed: "familyName")
+    public var lastName: String? { familyName }
+
     // MARK: - Codable
     
     private enum CodingKeys: String, CodingKey {
