@@ -1,0 +1,21 @@
+name: Swift
+
+on:
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build_docs:
+    name: Build docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+
+      - name: Build docs
+        run: |
+          brew install sourcekitten
+          cd Scripts
+          ./docs.sh
