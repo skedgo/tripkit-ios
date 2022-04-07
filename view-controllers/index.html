@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<meta name="author" content="SkedGo Pty Ltd">
+		
+		<link rel="apple-touch-icon" sizes="57x57" href="../img/favicon/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../img/favicon/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../img/favicon/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../img/favicon/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../img/favicon/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../img/favicon/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../img/favicon/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../img/favicon/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="../img/favicon/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../img/favicon/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="../img/favicon/manifest.json">
+		<meta name="msapplication-TileColor" content="#154c7b">
+		<meta name="msapplication-TileImage" content="../img/favicon/ms-icon-144x144.png">
+		<meta name="theme-color" content="#154c7b">
+		<title>View Controllers of TripKitUI - TripKit SDK for iOS</title>
+			<link rel="stylesheet" href="../css/main.css">
+			<link rel="stylesheet" href="../css/superfences.css">
+			<link rel="stylesheet" href="../css/codehilite.css">
+			<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+
+			<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+			<![endif]--> 
+	</head>
+
+	<body >
+		<header class="navbar">
+	
+	<div class="container-fluid">
+		<a class="logo" href="..">
+			<img src="../img/tripgo-api-logo-white.svg" alt="TripGo API Logo White" height="32" width="140">
+		</a>
+
+		<div class="divider"></div>
+		<a class="menu-toggle" type="button" href="#" aria-hidden="true">
+			<div class="bar-container">
+				<span class="bar-1"></span>
+				<span class="bar-2"></span>
+				<span class="bar-3"></span>
+			</div>
+		</a>
+		<div class="menu" aria-hidden="false">
+			
+				<ul>
+					
+						
+							<li class="">
+								<a href="..">Getting Started</a>
+							</li>
+						
+					
+						
+							<li class="">
+								<a href="../faq/">F.A.Q.</a>
+							</li>
+						
+					
+						
+							<li>
+								<a href="#" class="dropdown">SDK Reference</a>
+								<ul class="submenu">
+									
+										<li class="">
+											<a href="../TripKit/">TripKit</a>
+										</li>
+									
+										<li class="">
+											<a href="../TripKitUI/">TripKitUI</a>
+										</li>
+									
+										<li class="">
+											<a href="../TripKitInterApp/">TripKitInterApp</a>
+										</li>
+									
+								</ul>
+							</li>
+						
+					
+						
+							<li class="">
+								<a href="https://developer.tripgo.com">API</a>
+							</li>
+						
+					
+				</ul>
+			
+		</div>
+		
+	</div>
+	
+</header>
+
+		<div class="container -layout-3-9">
+				<div class="col" role="complementary"><div class="sidebar hidden-print affix" role="complementary" id="sidebar">
+	<div class="indicator"></div>
+    <ul class="nav sidenav">
+        <li class="main "><a href="#view-controllers-of-tripkitui" class="active">View Controllers of TripKitUI</a></li>
+            <li><a href="#real-time-departures-and-service-details" class="">Real-time departures and service details</a></li>
+            <li><a href="#trip-planning-and-trip-details" class="">Trip planning and trip details</a></li>
+            <li><a href="#trip-mode-by-mode-overview" class="">Trip mode-by-mode overview</a></li>
+            <li><a href="#location-search" class="">Location search</a></li>
+            <li><a href="#home-screen" class="">Home screen</a></li>
+    </ul>
+</div></div>
+				<div class="col content" role="main">
+
+<h1 id="view-controllers-of-tripkitui">View Controllers of TripKitUI</h1>
+<p><a href="../TripKitUI/">TripKitUI</a> provides customisable view controllers for the following high-level features:</p>
+<ul>
+<li><strong>Trip planning</strong> for showing and comparing the different ways of getting from A-to-B, including details screens for each trip both as an overview of the whole trip or the steps of each trip on a mode-by-mode basis.</li>
+<li><strong>Public transport departures</strong> for a specific stop or station with real-time information, including a details screen for each service that shows the route on the map and in a list.</li>
+<li><strong>Location search</strong> including autocompletion for searching by addresses, public transport POIs, or your own data sources.</li>
+<li><strong>Customisable home screen</strong> which ties all of these together, and let's you add additional custom components</li>
+</ul>
+<p>Each of these share the following characteristics:</p>
+<ul>
+<li>Customisation points for colours and fonts</li>
+<li>VoiceOver accessible</li>
+<li>Translated into the following languages: Arabic, Chinese (Simplified + Traditional), Danish, Dutch, English, Finnish, French, German, Italian, Japanese, Korean, Norwegian (Bokmål), Portuguese, Spanish and Swedish</li>
+<li>Compatible with iPhone and iPad</li>
+<li>Compatible with iOS 13+</li>
+<li>Compatible with Apple's MapKit out of the box, but can also use other map UI layers, such as Google, HERE or OpenStreetMap</li>
+<li>Source code available</li>
+</ul>
+<h2 id="real-time-departures-and-service-details">Real-time departures and service details</h2>
+<p><img src="../assets/departures.png" style="height:500px; width: auto;" /></p>
+<p>The stand-alone view controller <a href="../TripKitUI/Classes/TKUITimetableViewController.html"><code>TKUITimetableViewController</code></a> let's you quickly and easily embed public transport departures. </p>
+<p>This view controller has the following features:</p>
+<ul>
+<li>Show departures for an individual stop or larger station<ul>
+<li>Real-time information where available, including real-time departure and arrival times, service disruptions and crowdedness of individual services.</li>
+<li>Optionally with wheelchair accessibility information</li>
+<li>Let users set the time of the first departure time</li>
+</ul>
+</li>
+<li>Show details of each service<ul>
+<li>Route on the map</li>
+<li>List of stops including arrival and departure time at each stop</li>
+<li>Real-time vehicle location where available</li>
+</ul>
+</li>
+</ul>
+<p>It has the following additional customisation points:</p>
+<ul>
+<li>Style of cards via <a href="../TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
+<li>Timetable screen via <a href="../TripKitUI/Classes/TKUITimetableCard/Configuration.html"><code>TKUITimetableCard.config</code></a>:</li>
+<li>Customisable list of action buttons</li>
+</ul>
+<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKitUI/Classes/TKUITimetableCard.html"><code>TKUITimetableCard</code></a> and <a href="../TripKitUI/Classes/TKUIServiceCard.html"><code>TKUIServiceCard</code></a>) and use them directly in a <code>TGCardViewController</code> container.</p>
+<h2 id="trip-planning-and-trip-details">Trip planning and trip details</h2>
+<p><img src="../assets/routing.png" style="height:500px; width: auto;" /></p>
+<p>The stand-alone view controller <a href="../TripKitUI/Classes/TKUIRoutingResultsViewController.html"><code>TKUIRoutingResultsViewController</code></a> let's you quickly and easily show routing results between two locations for various modes including combinations of those modes, i.e., this is fully multi-modal and inter-modal.</p>
+<p>This view controller has the following features:</p>
+<ul>
+<li>Show routing results to a specified location from the user's current location, or between specified locations<ul>
+<li>High-level comparison of trips, showing durations, cost, carbon emissions, and calories burnt</li>
+<li>Real-time information, including departure times, traffic, service disruptions, pricing quotes, ETAs</li>
+<li>Let users select what modes should be included</li>
+<li>Let users set the time to depart or the time to arrive</li>
+</ul>
+</li>
+<li>Show details for each trip as an overview</li>
+</ul>
+<p>It has the following additional customisation points:</p>
+<ul>
+<li>Style of cards via <a href="../TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
+<li>Results screen via <a href="../TripKitUI/Classes/TKUIRoutingResultsCard/Configuration.html"><code>TKUIRoutingResultsCard.config</code></a>:<ul>
+<li>Option to provide a feedback action when user presses a "Contact support" button in case of an error or trying to route in an area that's not supported</li>
+</ul>
+</li>
+<li>Trip overview via <a href="../TripKitUI/Classes/TKUITripOverviewCard/Configuration.html"><code>TKUITripOverviewCard.config</code></a>:<ul>
+<li>Presentation of attribution</li>
+<li>Custom callback for what to do when tapping a segment</li>
+<li>Customisable list of per-trip action buttons</li>
+<li>Customisable list of per-segment action buttons</li>
+</ul>
+</li>
+</ul>
+<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKitUI/Classes/TKUIRoutingResultsCard.html"><code>TKUIRoutingResultsCard</code></a> and <a href="../TripKitUI/Classes/TKUITripOverviewCard.html"><code>TKUITripOverviewCard</code></a>) and use them directly in a <code>TGCardViewController</code> container.</p>
+<h2 id="trip-mode-by-mode-overview">Trip mode-by-mode overview</h2>
+<p><img src="../assets/mode-by-mode.png" style="height:500px; width: auto;" /></p>
+<p>The stand-alone view controller <a href="../TripKitUI/Classes/TKUITripModeByModeViewController.html"><code>TKUITripModeByModeViewController</code></a> let's you display details of a trip on a mode-by-mode (or segment-by-segment) basis.</p>
+<p>This view controller has the following features:</p>
+<ul>
+<li>Show details for a trip on a mode-by-mode basis</li>
+<li>Highly customisable what cards to display for each mode, including custom cards or also the built-in cards like <a href="../TripKitUI/Classes/TKUITimetableCard.html"><code>TKUITimetableCard</code></a> or <a href="../TripKitUI/Classes/TKUIServiceCard.html"><code>TKUIServiceCard</code></a> from above</li>
+</ul>
+<p>It has the following additional customisation points:</p>
+<ul>
+<li>Style of cards via <a href="../TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
+<li>Trip mode-by-mode cards view <a href="../TripKitUI/Classes/TKUITripModeByModeCard/Configuration.html"><code>TKUITripModeByModeCard.config</code></a>:</li>
+<li>What cards to display for each segment</li>
+</ul>
+<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKitUI/Classes/TKUITripModeByModeCard.html"><code>TKUITripModeByModeCard</code></a>, as well as the per-segment cards) and use them directly in a <code>TGCardViewController</code> container. This for example allows to show these mode-by-mode details when a user selects a segment on a trip card (see <a href="../TripKitUI/Classes/TKUITripOverviewCard.html"><code>TKUITripOverviewCard</code></a>). </p>
+<h2 id="location-search">Location search</h2>
+<p><img src="../assets/search.png" style="height:500px; width: auto;" /></p>
+<p>The <a href="../TripKitUI/Classes/TKUIAutocompletionViewController.html"><code>TKUIAutocompletionViewController</code></a> can be used with the standard <code>UISearchController</code> to provide autocompletion results for addresses, POIs and custom data sources.</p>
+<p>The following data sources are included in TripKit:</p>
+<ul>
+<li><a href="../TripKit/Classes/TKTripGoGeocoder.html"><code>TKTripGoGeocoder</code></a> for public transport stops and stations</li>
+<li><a href="../TripKit/Classes/TKAppleGeocoder.html"><code>TKAppleGeocoder</code></a> for addresses and POIs provided by Apple Maps</li>
+<li><a href="../TripKit/Classes/TKPeliasGeocoder.html"><code>TKPeliasGeocoder</code></a> for use with any Pelias-powered geocoder</li>
+<li><a href="../TripKit/Classes/TKCalendarManager.html"><code>TKCalendarManager</code></a> for searching the user's calendar for events with locations</li>
+<li><a href="../TripKit/Classes/TKContactsManager.html"><code>TKContactsManager</code></a> for searching the  user's contacts for locations</li>
+</ul>
+<h2 id="home-screen">Home screen</h2>
+<p>The <a href="../TripKitUI/Classes/TKUIHomeViewController.html"><code>TKUIHomeViewController</code></a> can be used as a start-screen for the trip planning, timetable and search components -- while being highly customisable to add arbitrary other features.</p>
+<p>The built-in functionality is a search bar at the top, which uses the same search functionality as the dedicated <a href="../TripKitUI/Classes/TKUIAutocompletionViewController.html"><code>TKUIAutocompletionViewController</code></a> but with the search integrated in the home screen UI, along with a directions button to bring up the <a href="../TripKitUI/Classes/TKUIRoutingQueryInputCard.html"><code>TKUIRoutingQueryInputCard</code></a>.</p>
+<p>The purpose of the home screen is then to add individual <em>components</em>, to give users quick access to different section. How to build these, is up to you, but they can be things like:</p>
+<ul>
+<li>The user's favourites</li>
+<li>Recently searched locations</li>
+<li>Nearby locations</li>
+<li>Access to the user's booked trips</li>
+<li>Access to the user's tickets</li>
+</ul>
+<p>The <code>TripKitUIExample</code> shows to do some of these.</p></div>
+		</div>
+		<div class="navbar-bottom" role="navigation">
+	<div class="container -layout-6-6">
+	</div>
+</div>
+		<footer class="footer">
+	<div class="logo">
+		<img src="../img/tripgo-api-logo-mono.svg" alt="TripGo Logo" width="134" height="34">
+	</div>
+	<ul class="menu">
+		<li>
+			<a href="https://www.skedgo.com">SkedGo website</a>
+		</li>
+		<li>
+			<a href="https://skedgo.com/en/tripgo-api/pricing/">Pricing</a>
+		</li>
+		<li>
+			<a href="https://github.com/skedgo/tripgo-api/issues">Report issue</a>
+		</li>
+		<li>
+			<a href="mailto:api@tripgo.com">Email support</a>
+		</li>
+		<li>
+			<a href="http://slack.tripgo.com/">Slack community</a>
+		</li>
+	</ul>
+</footer>
+			<script>var base_url = '..';</script>
+			<script src="../js/app.min.js"></script>
+</body>
+</html>

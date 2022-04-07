@@ -1,0 +1,39 @@
+/* @license
+* MyFonts Webfont Build ID 2313717, 2012-06-22T04:59:15-0400
+*
+* The fonts listed in this notice are subject to the End User License
+* Agreement(s) entered into by the website owner. All other parties are
+* explicitly restricted from using the Licensed Webfonts(s).
+*
+* You may obtain a valid license at the URLs below.
+*
+* Webfont: Proxima Nova Soft Medium by Mark Simonson
+* URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova-soft/medium/
+*
+* Webfont: Proxima Nova Soft Semibold by Mark Simonson
+* URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova-soft/semibold/
+*
+* Webfont: Proxima Nova Soft Bold by Mark Simonson
+* URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova-soft/bold/
+*
+* Webfont: Proxima Nova Soft Regular by Mark Simonson
+* URL: http://www.myfonts.com/fonts/marksimonson/proxima-nova-soft/regular/
+*
+*
+* License: http://www.myfonts.com/viewlicense?type=web&buildid=2313717
+* Licensed pageviews: 200,000
+* Webfonts copyright: Copyright (c) Mark Simonson, 2010. All rights reserved.
+*
+* © 2012 Bitstream Inc
+*/
+
+@font-face {font-family: 'ProximaNovaSoft-Medium';src: url('webfonts/234DF5_0_0.eot');src: url('webfonts/234DF5_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/234DF5_0_0.woff') format('woff'),url('webfonts/234DF5_0_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'ProximaNovaSoft-Semibold';src: url('webfonts/234DF5_1_0.eot');src: url('webfonts/234DF5_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/234DF5_1_0.woff') format('woff'),url('webfonts/234DF5_1_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'ProximaNovaSoft-Bold';src: url('webfonts/234DF5_2_0.eot');src: url('webfonts/234DF5_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/234DF5_2_0.woff') format('woff'),url('webfonts/234DF5_2_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'ProximaNovaSoft-Regular';src: url('webfonts/234DF5_3_0.eot');src: url('webfonts/234DF5_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/234DF5_3_0.woff') format('woff'),url('webfonts/234DF5_3_0.ttf') format('truetype');}
