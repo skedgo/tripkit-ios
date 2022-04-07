@@ -1,0 +1,32 @@
+name: Deploy docs
+
+on:
+  push:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build_docs:
+    name: Build and deploy docs
+    runs-on: macos-11
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+
+      - name: Prepare dependencies
+        run: |
+          brew install sourcekitten
+          pip3 install mkdocs
+          pip3 install pymdown-extensions     
+
+      - name: Build docs
+        run: |
+          cd Scripts
+          ./docs.sh
+
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

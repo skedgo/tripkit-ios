@@ -28,6 +28,10 @@ public class TKUISegmentInstructionCard: TGPlainCard {
     return tripper
   }
   
+  public static func hasContent(for segment: TKSegment) -> Bool {
+    (segment.notes ?? "").isEmpty == false
+  }
+  
   public init(for segment: TKSegment, mapManager: TKUITripMapManager) {
     self.segment = segment
     

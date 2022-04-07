@@ -54,8 +54,10 @@ open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
       return []
     } else if TKUISegmentDirectionsCard.canShowInstructions(for: segment) {
       return [(TKUISegmentDirectionsCard(for: segment, mapManager: mapManager), .onSegment)]
-    } else {
+    } else if TKUISegmentInstructionCard.hasContent(for: segment) {
       return [(TKUISegmentInstructionCard(for: segment, mapManager: mapManager), .onSegment)]
+    } else {
+      return []
     }
   }
   
