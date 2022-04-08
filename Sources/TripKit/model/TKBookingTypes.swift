@@ -159,6 +159,7 @@ public enum TKBooking {
       case singleSelection = "SINGLE_CHOICE"
       case multipleSelections = "MULTIPLE_CHOICE"
       case requestReturnTrip = "RETURN_TRIP"
+      case number = "NUMBER"
     }
     
     public enum ReturnTripDateValue: Hashable {
@@ -172,14 +173,24 @@ public enum TKBooking {
       case multipleSelections([InputOptionId])
       case longText(String)
       case returnTripDate(ReturnTripDateValue)
+      case number(Int, min: Int?, max: Int?)
     }
     
-    public let type: InputType
     public let required: Bool
     public let id: String
     public let options: [InputOption]?
     public let title: String
     public var value: InputValue
+    
+    public var type: InputType {
+      switch value {
+      case .longText: return .longText
+      case .singleSelection: return .singleSelection
+      case .multipleSelections: return .multipleSelections
+      case .returnTripDate: return .requestReturnTrip
+      case .number: return .number
+      }
+    }
     
     private enum CodingKeys: String, CodingKey {
       case id
@@ -189,6 +200,8 @@ public enum TKBooking {
       case title
       case value
       case values
+      case minValue
+      case maxValue
     }
     
     public init(from decoder: Decoder) throws {
@@ -198,7 +211,7 @@ public enum TKBooking {
       required = try container.decode(Bool.self, forKey: .required)
       options = try container.decodeIfPresent([InputOption].self, forKey: .options)
       title = try container.decode(String.self, forKey: .title)
-      type = try container.decode(InputType.self, forKey: .type)
+      let type = try container.decode(InputType.self, forKey: .type)
       
       switch type {
       case .longText:
@@ -213,6 +226,11 @@ public enum TKBooking {
       case .requestReturnTrip:
         let specifiedReturnDate = try container.decode(String.self, forKey: .value)
         value = Self.convertStringReturnDateToInputValue(specifiedReturnDate)
+      case .number:
+        let rawValue = try container.decode(String.self, forKey: .value)
+        let minValue = try container.decodeIfPresent(Int.self, forKey: .minValue)
+        let maxValue = try container.decodeIfPresent(Int.self, forKey: .maxValue)
+        value = .number(Int(rawValue) ?? 0, min: minValue, max: maxValue)
       }
     }
     
@@ -222,9 +240,9 @@ public enum TKBooking {
       try container.encode(id, forKey: .id)
       try container.encode(required, forKey: .required)
       try container.encode(title, forKey: .title)
-      try container.encode(type, forKey: .type)
       try container.encodeIfPresent(options, forKey: .options)
       
+      try container.encode(type, forKey: .type)
       switch value {
       case .singleSelection(let optionId):
         try container.encode(optionId, forKey: .value)
@@ -234,6 +252,10 @@ public enum TKBooking {
         try container.encode(optionIds, forKey: .values)
       case .returnTripDate(let returnDate):
         try container.encode(returnDate.toString(), forKey: .value)
+      case .number(let number, let min, let max):
+        try container.encode(String(number), forKey: .value)
+        try container.encode(min, forKey: .minValue)
+        try container.encode(max, forKey: .maxValue)
       }
     }
   }
