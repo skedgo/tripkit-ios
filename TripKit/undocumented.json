@@ -10096,182 +10096,196 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 164,
+      "line": 162,
+      "symbol": "TKBooking.BookingInput.InputType.number",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
+      "line": 165,
       "symbol": "TKBooking.BookingInput.ReturnTripDateValue",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 165,
+      "line": 166,
       "symbol": "TKBooking.BookingInput.ReturnTripDateValue.unspecified",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 166,
+      "line": 167,
       "symbol": "TKBooking.BookingInput.ReturnTripDateValue.date(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 167,
+      "line": 168,
       "symbol": "TKBooking.BookingInput.ReturnTripDateValue.oneWayTrip",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 170,
+      "line": 171,
       "symbol": "TKBooking.BookingInput.InputValue",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 171,
+      "line": 172,
       "symbol": "TKBooking.BookingInput.InputValue.singleSelection(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 172,
+      "line": 173,
       "symbol": "TKBooking.BookingInput.InputValue.multipleSelections(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 173,
+      "line": 174,
       "symbol": "TKBooking.BookingInput.InputValue.longText(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 174,
+      "line": 175,
       "symbol": "TKBooking.BookingInput.InputValue.returnTripDate(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 177,
-      "symbol": "TKBooking.BookingInput.type",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "line": 176,
+      "symbol": "TKBooking.BookingInput.InputValue.number(_:min:max:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 178,
+      "line": 179,
       "symbol": "TKBooking.BookingInput.required",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 179,
+      "line": 180,
       "symbol": "TKBooking.BookingInput.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 180,
+      "line": 181,
       "symbol": "TKBooking.BookingInput.options",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 181,
+      "line": 182,
       "symbol": "TKBooking.BookingInput.title",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 182,
+      "line": 183,
       "symbol": "TKBooking.BookingInput.value",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 241,
+      "line": 185,
+      "symbol": "TKBooking.BookingInput.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
+      "line": 263,
       "symbol": "TKBooking.BookingNote",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 242,
+      "line": 264,
       "symbol": "TKBooking.BookingNote.provider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 243,
+      "line": 265,
       "symbol": "TKBooking.BookingNote.text",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 244,
+      "line": 266,
       "symbol": "TKBooking.BookingNote.timestamp",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 249,
+      "line": 271,
       "symbol": "TKBooking.BookingInput",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 251,
+      "line": 273,
       "symbol": "TKBooking.BookingInput.longText",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 258,
+      "line": 280,
       "symbol": "TKBooking.BookingInput.singleSelection",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 265,
+      "line": 287,
       "symbol": "TKBooking.BookingInput.multipleSelections",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 272,
+      "line": 294,
       "symbol": "TKBooking.BookingInput.displayTitle(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 294,
+      "line": 316,
       "symbol": "TKBooking.BookingInput.ReturnTripDateValue",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
-      "line": 296,
+      "line": 318,
       "symbol": "TKBooking.BookingInput.ReturnTripDateValue.toString(forJSONEncoding:timeZone:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
