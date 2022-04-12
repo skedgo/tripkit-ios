@@ -302,13 +302,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/categories/NSBundle+ProductName.swift",
-      "line": 13,
-      "symbol": "Bundle.productName",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/categories/NSDate+Formatting.swift",
       "line": 82,
       "symbol": "Date.minutesSince(_:)",
