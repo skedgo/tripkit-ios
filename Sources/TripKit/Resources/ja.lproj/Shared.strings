@@ -98,7 +98,7 @@
 "Don't have an account? Sign up" = "アカウントを持っていますか・サインアップ";
 
 /* Done action */
-"Done" = "行われます";
+"Done" = "実行";
 
 /* Drop new pin */
 "Drop new pin" = "新しいピンをドロップしてください";
@@ -200,7 +200,7 @@
 "Not wheelchair accessible" = "車椅子対応不可";
 
 /* Countdown cell 'now' indicator */
-"Now" = "今";
+"Now" = "現在時刻";
 
 /* Ok action */
 "OK" = "わかりました";
