@@ -75,7 +75,7 @@
 "Arrive at %@ at %@" = "%2$@に %1$@に到着";
 
 /* Arrive before button */
-"Arrive by" = "到着します。";
+"Arrive by" = "到着";
 
 /* Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below. */
 "Arrive in" = "到着します。";
@@ -198,7 +198,7 @@
 "Get directions" = "道順します。";
 
 /* Instruction to get a service towards provided destination */
-"Get on service to %@" = "%@までサービスを開始します";
+"Get on service to %@" = "%@まで";
 
 /* Title of button to start a trip */
 "Go" = "開始";
@@ -355,10 +355,10 @@
 "Routing from %@ to %@ is not yet supported" = "%1$@ から %2$@ へのルートはまだサポートされていません";
 
 /* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
-"Scheduled" = "予定済み";
+"Scheduled" = "発着予定";
 
 /* No comment provided by engineer. */
-"Search for destination" = "宛先を検索";
+"Search for destination" = "目的地を検索";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "この停止を再度検索または、後でもう一度試してください.";
