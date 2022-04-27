@@ -14,7 +14,7 @@ extension TKServer {
   
   public static func imageURL(iconFileNamePart: String?, iconType: TKStyleModeIconType? = nil) -> URL? {
     guard let iconFileNamePart = iconFileNamePart else { return nil }
-    let regionsURLString = TKServer.developmentServer ?? "https://api.tripgo.com/v1"
+    let regionsURLString = TKServer.customBaseURL ?? "https://api.tripgo.com/v1"
     
     let isPNG: Bool
     let fileNamePrefix: String
@@ -77,12 +77,19 @@ extension TKServer {
     return URL(string: urlString)
   }
   
+  @available(*, unavailable, renamed: "customBaseURL")
   public static var developmentServer: String? {
+    get { customBaseURL }
+    set { customBaseURL = newValue }
+  }
+
+  /// Custom base URL to use, instead of hitting SkedGo's default servers directly.
+  public static var customBaseURL: String? {
     get {
       UserDefaults.shared.string(forKey: "developmentServer")
     }
     set {
-      let oldValue = developmentServer
+      let oldValue = customBaseURL
       if var newValue = newValue, !newValue.isEmpty {
         if !newValue.hasSuffix("/") {
           newValue.append("/")
@@ -99,8 +106,10 @@ extension TKServer {
     }
   }
   
+  /// Base URL to use for server calls when `customBaseURL` is not set and the server calls
+  /// do not specify a ```TKRegion```.
   public static var fallbackBaseURL: URL {
-    developmentServer.flatMap(URL.init) ?? URL(string: "https://api.tripgo.com/v1/")!
+    customBaseURL.flatMap(URL.init) ?? URL(string: "https://api.tripgo.com/v1/")!
   }
   
 }
@@ -125,7 +134,7 @@ extension TKServer {
   
   @objc // so that subclasses can override
   func baseURLs(for region: TKRegion?) -> [URL] {
-    if let dev = Self.developmentServer.flatMap(URL.init) {
+    if let dev = Self.customBaseURL.flatMap(URL.init) {
       return [dev]
     } else if let urls = region?.urls, !urls.isEmpty {
       return urls
@@ -231,6 +240,7 @@ extension TKServer {
     return try dataResult.orThrow(ServerError.noData).get()
   }
   
+  /// :nodoc: - Public for Objective-C only
   @objc(GET:paras:completion:)
   public func _get(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
     hit(.GET, url: url, parameters: parameters) { status, headers, result in
@@ -244,6 +254,7 @@ extension TKServer {
     }
   }
   
+  /// :nodoc: - Public for Objective-C only
   @objc(POST:paras:completion:)
   public func _post(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
     hit(.POST, url: url, parameters: parameters) { status, headers, result in
@@ -262,9 +273,17 @@ extension TKServer {
 // MARK: - Async/await
 
 extension TKServer {
+  /// Captures server response with HTTP status code, headers and typed response
   public struct Response<T> {
+    
+    /// HTTP status code of response. Can be `nil` if request failed.
     public var statusCode: Int?
+    
+    /// HTTP response headers. Can be empty if request failed.
     public var headers: [String: Any]
+    
+    /// Types response, which can encapsulate a failure if the server returned an error
+    /// or if the server's data couldn't be decoded as the appropriate type.
     public var result: Result<T, Error>
   }
   
