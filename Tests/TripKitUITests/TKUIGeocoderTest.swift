@@ -21,8 +21,8 @@ class TKUIGeocoderTest: XCTestCase {
   override func setUpWithError() throws {
     try super.setUpWithError()
     
-    if TKServer.developmentServer != nil {
-      TKServer.developmentServer = nil // make sure to hit production
+    if TKServer.customBaseURL != nil {
+      TKServer.customBaseURL = nil // make sure to hit production
     }
     
     geocoder = try aggregateGeocoder()

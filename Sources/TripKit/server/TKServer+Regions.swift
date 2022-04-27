@@ -11,7 +11,7 @@ import Foundation
 extension TKRegionManager {
   
   enum RegionError: Error {
-    case invalidDevelopmentServer
+    case invalidCustomBaseURL
   }
   
   /// Fetched the list of regions and updates `TKRegionManager`'s cache
@@ -47,9 +47,9 @@ extension TKRegionManager {
   
   private func fetchRegions(forced: Bool) async throws {
     let regionsURL: URL
-    if let developmentServer = TKServer.developmentServer {
-      guard let url = URL(string: developmentServer) else {
-        throw RegionError.invalidDevelopmentServer
+    if let customBaseURL = TKServer.customBaseURL {
+      guard let url = URL(string: customBaseURL) else {
+        throw RegionError.invalidCustomBaseURL
       }
       regionsURL = url.appendingPathComponent("regions.json")
     } else {
