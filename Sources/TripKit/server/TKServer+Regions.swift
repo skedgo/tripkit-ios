@@ -47,8 +47,8 @@ extension TKRegionManager {
   
   private func fetchRegions(forced: Bool) async throws {
     let regionsURL: URL
-    if let developmentServer = TKServer.customBaseURL {
-      guard let url = URL(string: developmentServer) else {
+    if let customBaseURL = TKServer.customBaseURL {
+      guard let url = URL(string: customBaseURL) else {
         throw RegionError.invalidCustomBaseURL
       }
       regionsURL = url.appendingPathComponent("regions.json")
