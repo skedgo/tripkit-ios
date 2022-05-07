@@ -139,6 +139,26 @@ public class TKRouter: NSObject {
 
 extension TKRouter {
   
+  /// Kicks off the required server requests asynchronously to the servers, and returns the final result.
+  ///
+  /// - note: Calling this method will lock-in the departure time for "Leave now" queries.
+  ///
+  /// As trips get added, they get flagged with full, minimised or hidden visibility.
+  /// Which depends on the standard defaults. Check `TKSettings` for setting
+  /// those.
+  ///
+  /// - Parameters:
+  ///   - request: The request specifying the query
+  ///   - classifier: Optional classifier to assign `TripGroup`'s `classification`
+  /// - returns: `TripRequest` with the resulting trip groups associated
+  public func multiFetchTrips(for query: RoutingQuery, classifier: TKTripClassifier? = nil) async throws -> TripRequest {
+    try await withCheckedThrowingContinuation { continuation in
+      _ = multiFetchTrips(request: query, modes: query.modes, classifier: classifier) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+  
   /// Kicks off the required server requests asynchronously to the servers. As they
   /// return `progress` is called and the trips get added to TripKit's database. Also
   /// calls `completion` when all are done.
@@ -155,6 +175,7 @@ extension TKRouter {
   ///   - progress: Optional progress callback executed when each request finished, with the number of completed requests passed to the block.
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
   /// - returns: The number of requests sent. This will match the number of times `progress` is called.
+  @discardableResult
   public func multiFetchTrips(for query: RoutingQuery, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
     return multiFetchTrips(request: query, modes: query.modes, classifier: classifier, progress: progress, completion: completion)
   }
@@ -176,6 +197,7 @@ extension TKRouter {
   ///   - progress: Optional progress callback executed when each request finished, with the number of completed requests passed to the block.
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
   /// - returns: The number of requests sent. This will match the number of times `progress` is called.
+  @discardableResult
   public func multiFetchTrips(for request: TripRequest, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<Void, Error>) -> Void) -> UInt {
     return multiFetchTrips(request: request, modes: modes, classifier: classifier, progress: progress) { result in
       completion(result.map { _ in })
@@ -514,21 +536,32 @@ extension TKRouter {
       return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "End location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
     }
     
-    TKRegionManager.shared.requireRegions { [weak self] result in
+    TKRegionManager.shared.requireRegions { [weak self] regionsResult in
       request.perform { [weak self] _ in
         guard let self = self else { return }
-
-        if case .failure(let error) = result {
-          return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
-        }
         
-        // we are guaranteed to have regions
-        guard let region = TKRegionManager.shared.localRegions(start: request.from.coordinate, end: request.to.coordinate).first else {
-          return self.handleError(
-            NSError(code: 1001, // matches server
-                    message: Loc.RoutingBetweenTheseLocationsIsNotYetSupported),
-            callbackQueue: callbackQueue,
-            completion: completion)
+        let region: TKRegion?
+        if self.server is TKRoutingServer {
+          // Fine to proceed without checking region as we're just hitting
+          // the base URL anyway and can rely on server errors instead.
+          // This allows hitting the server with different API keys without
+          // having to update `TKRegionManager`.
+          region = nil
+          
+        } else {
+          if case .failure(let error) = regionsResult {
+            return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
+          }
+
+          // we are guaranteed to have regions
+          guard let localRegion = TKRegionManager.shared.localRegions(start: request.from.coordinate, end: request.to.coordinate).first else {
+            return self.handleError(
+              NSError(code: 1001, // matches server
+                      message: Loc.RoutingBetweenTheseLocationsIsNotYetSupported),
+              callbackQueue: callbackQueue,
+              completion: completion)
+          }
+          region = localRegion
         }
         
         let paras = Self.requestParameters(
