@@ -347,7 +347,15 @@ public class TKSegment: NSObject {
         $0.closestPoint(to: needle).distance < maximumMeters
       }
   }
-  
+
+  public func startsAndEnds(inEncodedPolygon polygon: String) -> Bool {
+    let polygon = Polygon(encodedPolygon: polygon)
+    let candidates = [start?.coordinate, end?.coordinate].compactMap { $0 }
+    return candidates.allSatisfy { coordinate in
+      polygon.contains(.init(ll: (coordinate.latitude, coordinate.longitude)), onLine: true)
+    }
+  }
+
 
   // MARK: - Inferred properties: Real-time
   
