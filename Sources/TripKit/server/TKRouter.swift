@@ -153,7 +153,7 @@ extension TKRouter {
   /// - returns: `TripRequest` with the resulting trip groups associated
   public func multiFetchTrips(for query: RoutingQuery, classifier: TKTripClassifier? = nil) async throws -> TripRequest {
     try await withCheckedThrowingContinuation { continuation in
-      multiFetchTrips(request: query, modes: query.modes, classifier: classifier) { result in
+      _ = multiFetchTrips(request: query, modes: query.modes, classifier: classifier) { result in
         continuation.resume(with: result)
       }
     }
