@@ -9382,7 +9382,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/TripRequest+CoreDataClass.swift",
-      "line": 437,
+      "line": 459,
       "symbol": "TripRequest",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -13890,126 +13890,126 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 366,
+      "line": 388,
       "symbol": "TKRouterRequestable",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 367,
+      "line": 389,
       "symbol": "TKRouterRequestable.from",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 368,
+      "line": 390,
       "symbol": "TKRouterRequestable.to",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 369,
+      "line": 391,
       "symbol": "TKRouterRequestable.at",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 370,
+      "line": 392,
       "symbol": "TKRouterRequestable.modes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 371,
+      "line": 393,
       "symbol": "TKRouterRequestable.additional",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 372,
+      "line": 394,
       "symbol": "TKRouterRequestable.context",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 374,
+      "line": 396,
       "symbol": "TKRouterRequestable.toTripRequest()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 410,
+      "line": 432,
       "symbol": "TKRouter.RoutingQuery",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 411,
+      "line": 433,
       "symbol": "TKRouter.RoutingQuery.toTripRequest()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 438,
+      "line": 460,
       "symbol": "TripRequest.context",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 439,
+      "line": 461,
       "symbol": "TripRequest.from",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 440,
+      "line": 462,
       "symbol": "TripRequest.to",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 442,
+      "line": 464,
       "symbol": "TripRequest.modes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 444,
+      "line": 466,
       "symbol": "TripRequest.at",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 452,
+      "line": 474,
       "symbol": "TripRequest.additional",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 457,
+      "line": 479,
       "symbol": "TripRequest.toTripRequest()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
-      "line": 462,
+      "line": 484,
       "symbol": "TKRouter.routingRequestURL(for:modes:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -14030,7 +14030,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRoutingServer.swift",
-      "line": 28,
+      "line": 29,
       "symbol": "TKRoutingServer.baseURLs(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

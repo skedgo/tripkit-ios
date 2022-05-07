@@ -1234,6 +1234,80 @@ same trip leaving earlier or later.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:7TripKit8TKRouterC15multiFetchTrips3for10classifierAA0A7RequestCAC12RoutingQueryV_AA16TKTripClassifier_pSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/multiFetchTrips(for:classifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit8TKRouterC15multiFetchTrips3for10classifierAA0A7RequestCAC12RoutingQueryV_AA16TKTripClassifier_pSgtYaKF">multiFetchTrips(for:<wbr>classifier:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Kicks off the required server requests asynchronously to the servers, and returns the final result.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Calling this method will lock-in the departure time for &ldquo;Leave now&rdquo; queries.
+
+</div>
+
+<p>As trips get added, they get flagged with full, minimised or hidden visibility.
+Which depends on the standard defaults. Check <code><a href="../Classes/TKSettings.html">TKSettings</a></code> for setting
+those.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">multiFetchTrips</span><span class="p">(</span><span class="k">for</span> <span class="nv">query</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRouter/RoutingQuery.html">RoutingQuery</a></span><span class="p">,</span> <span class="nv">classifier</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TKTripClassifier.html">TKTripClassifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TripRequest.html">TripRequest</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request specifying the query</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional classifier to assign <code><a href="../Classes/TripGroup.html">TripGroup</a></code>&lsquo;s <code>classification</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Classes/TripRequest.html">TripRequest</a></code> with the resulting trip groups associated</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:7TripKit8TKRouterC15multiFetchTrips3for10classifier8progress10completionSuAC12RoutingQueryV_AA16TKTripClassifier_pSgySucSgys6ResultOyAA0A7RequestCs5Error_pGctF"></a>
                     <a name="//apple_ref/swift/Method/multiFetchTrips(for:classifier:progress:completion:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:7TripKit8TKRouterC15multiFetchTrips3for10classifier8progress10completionSuAC12RoutingQueryV_AA16TKTripClassifier_pSgySucSgys6ResultOyAA0A7RequestCs5Error_pGctF">multiFetchTrips(for:<wbr>classifier:<wbr>progress:<wbr>completion:<wbr>)</a>
@@ -1262,7 +1336,8 @@ those.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">multiFetchTrips</span><span class="p">(</span><span class="k">for</span> <span class="nv">query</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRouter/RoutingQuery.html">RoutingQuery</a></span><span class="p">,</span> <span class="nv">classifier</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TKTripClassifier.html">TKTripClassifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">((</span><span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TripRequest.html">TripRequest</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">multiFetchTrips</span><span class="p">(</span><span class="k">for</span> <span class="nv">query</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRouter/RoutingQuery.html">RoutingQuery</a></span><span class="p">,</span> <span class="nv">classifier</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TKTripClassifier.html">TKTripClassifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">((</span><span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TripRequest.html">TripRequest</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
 
                         </div>
                       </div>
@@ -1359,7 +1434,8 @@ those.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">multiFetchTrips</span><span class="p">(</span><span class="k">for</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Classes/TripRequest.html">TripRequest</a></span><span class="p">,</span> <span class="nv">modes</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">classifier</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TKTripClassifier.html">TKTripClassifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">((</span><span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">multiFetchTrips</span><span class="p">(</span><span class="k">for</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Classes/TripRequest.html">TripRequest</a></span><span class="p">,</span> <span class="nv">modes</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">classifier</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TKTripClassifier.html">TKTripClassifier</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">((</span><span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
 
                         </div>
                       </div>
