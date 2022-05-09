@@ -15,8 +15,8 @@ class TKSettingsTest: XCTestCase {
   func testDefaultValues() throws {
     let config = TKSettings.Config.defaultValues()
     XCTAssertEqual(config.version, TKSettings.parserJsonVersion)
-    XCTAssertEqual(config.distanceUnit, Locale.current.usesMetricSystem ? .metric : .imperial)
-    XCTAssertEqual(config.weights, [.money: 1.0, .carbon: 1.0, .time: 1.0, .hassle: 1.0])
+    XCTAssertEqual(config.distanceUnit, .auto)
+    XCTAssertEqual(config.weights, [.money: 1.0, .carbon: 1.0, .time: 1.0, .hassle: 1.0, .exercise: 1.0])
     XCTAssertEqual(config.avoidModes, [])
     XCTAssertEqual(config.concession, false)
     XCTAssertEqual(config.wheelchair, false)
@@ -26,7 +26,7 @@ class TKSettingsTest: XCTestCase {
     XCTAssertNil(config.minimumTransferMinutes)
     XCTAssertEqual(config.emissions, [:])
     XCTAssertEqual(config.bookingSandbox, false)
-    XCTAssertEqual(config.twoWayHireCostIncludesReturn, true)
+    XCTAssertEqual(config.twoWayHireCostIncludesReturn, false)
   }
   
   func testReadPerformance() {
