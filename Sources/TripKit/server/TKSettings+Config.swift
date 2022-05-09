@@ -16,19 +16,19 @@ extension TKSettings {
       case imperial
     }
     
-    public let version: Int
-    public let distanceUnit: DistanceUnit
-    public let weights: [Weight: Double]
-    public let avoidModes: [String]
-    public let concession: Bool
-    public let wheelchair: Bool
-    public let cyclingSpeed: Speed
-    public let walkingSpeed: Speed
-    public let maximumWalkingMinutes: Double?
-    public let minimumTransferMinutes: Double?
-    public let emissions: [String: Double]
-    public let bookingSandbox: Bool
-    public let twoWayHireCostIncludesReturn: Bool
+    public let version: Int = TKSettings.parserJsonVersion
+    public var distanceUnit: DistanceUnit = .auto
+    public var weights: [Weight: Double]
+    public var avoidModes: [String] = []
+    public var concession: Bool = false
+    public var wheelchair: Bool = false
+    public var cyclingSpeed: Speed = .medium
+    public var walkingSpeed: Speed = .medium
+    public var maximumWalkingMinutes: Double? = nil
+    public var minimumTransferMinutes: Double? = nil
+    public var emissions: [String: Double] = [:]
+    public var bookingSandbox: Bool = false
+    public var twoWayHireCostIncludesReturn: Bool = false
 
     private enum CodingKeys: String, CodingKey {
       case version = "v"
@@ -46,55 +46,70 @@ extension TKSettings {
       case twoWayHireCostIncludesReturn = "2wirc"
     }
     
+    public static func userSettings() -> Self {
+      return .init(fromDefaults: true)
+    }
+    
+    public static func defaultValues() -> Self {
+      return .init(fromDefaults: false)
+    }
+    
+    @available(*, deprecated, message: "Use TKSettings.Config.userSettings() or TKSettings.Config.defaultValues()")
     public init() {
-      let shared = UserDefaults.shared
-      version = TKSettings.parserJsonVersion
-      distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
-      weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
-        ($0, TKSettings[$0])
-      })
-      avoidModes = Array(TKSettings.dislikedTransitModes)
-      concession = TKSettings.useConcessionPricing
-      wheelchair = TKSettings.showWheelchairInformation
-      twoWayHireCostIncludesReturn = TKSettings.includeCostToReturnCarHireVehicle
+      self.init(fromDefaults: true)
+    }
+    
+    private init(fromDefaults: Bool) {
+      if fromDefaults {
+        let shared = UserDefaults.shared
+        distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
+        weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
+          ($0, TKSettings[$0])
+        })
+        avoidModes = Array(TKSettings.dislikedTransitModes)
+        concession = TKSettings.useConcessionPricing
+        wheelchair = TKSettings.showWheelchairInformation
+        twoWayHireCostIncludesReturn = TKSettings.includeCostToReturnCarHireVehicle
+        
+        cyclingSpeed = TKSettings.cyclingSpeed
+        walkingSpeed = TKSettings.walkingSpeed
+
+        if let minutes = shared.object(forKey: TKDefaultsKeyProfileTransportWalkMaxDuration) as? NSNumber {
+          maximumWalkingMinutes = minutes.doubleValue
+        }
+
+        minimumTransferMinutes = TKSettings.minimumTransferTime
+
+        emissions = (shared.object(forKey: TKDefaultsKeyProfileTransportEmissions) as? [String: Double]) ?? [:]
+        
+        #if DEBUG
+        if let setting = shared.object(forKey: TKDefaultsKeyProfileBookingsUseSandbox) as? NSNumber {
+          bookingSandbox = setting.boolValue
+        } else {
+          bookingSandbox = true // Default to sandbox while developing
+        }
+        #else
+        if shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+          bookingSandbox = true
+        }
+        #endif
       
-      cyclingSpeed = TKSettings.cyclingSpeed
-      walkingSpeed = TKSettings.walkingSpeed
-
-      if let minutes = shared.object(forKey: TKDefaultsKeyProfileTransportWalkMaxDuration) as? NSNumber {
-        maximumWalkingMinutes = minutes.doubleValue
       } else {
-        maximumWalkingMinutes = nil
+        weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
+          ($0, 1)
+        })
       }
-
-      minimumTransferMinutes = TKSettings.minimumTransferTime
-
-      emissions = (shared.object(forKey: TKDefaultsKeyProfileTransportEmissions) as? [String: Double]) ?? [:]
-      
-      #if DEBUG
-      if let setting = shared.object(forKey: TKDefaultsKeyProfileBookingsUseSandbox) as? NSNumber {
-        bookingSandbox = setting.boolValue
-      } else {
-        bookingSandbox = true // Default to sandbox while developing
-      }
-      #else
-      if shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
-        bookingSandbox = true
-      } else {
-        bookingSandbox = false
-      }
-      #endif
     }
     
     public var paras: [String: Any] {
       var paras: [String: Any] = [
         "v": version,
-        "unit": distanceUnit.rawValue,
         "wp": "(\(weights[.money] ?? 1.0),\(weights[.carbon] ?? 1.0),\(weights[.time] ?? 1.0),\(weights[.hassle] ?? 1.0))",
-        "cs": cyclingSpeed.apiValue,
-        "ws": walkingSpeed.apiValue,
-        "2wirc": twoWayHireCostIncludesReturn
       ]
+      if twoWayHireCostIncludesReturn { paras["2wirc"] = twoWayHireCostIncludesReturn }
+      if distanceUnit != .auto { paras["unit"] = distanceUnit.rawValue }
+      if cyclingSpeed != .medium { paras["cs"] = cyclingSpeed.apiValue }
+      if walkingSpeed != .medium { paras["ws"] = walkingSpeed.apiValue }
       if !avoidModes.isEmpty { paras["avoid"] = avoidModes }
       if concession { paras["conc"] = true }
       if wheelchair { paras["wheelchair"] = true }
@@ -106,18 +121,11 @@ extension TKSettings {
     }
   }
   
-  @objc
   public static let parserJsonVersion: Int = 13
   
-  @objc
-  @available(*, unavailable, renamed: "config")
-  public static func defaultDictionary() -> [String: Any] {
-    return config
-  }
-  
-  @objc
+  @available(*, deprecated, message: "Use TKSettings.Config.userSettings().paras directly instead")
   public static var config: [String: Any] {
-    return Config().paras
+    return Config.userSettings().paras
   }
 
 }

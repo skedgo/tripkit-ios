@@ -43,8 +43,11 @@ public class TKRouter: NSObject {
     }
   }
   
-  /// Optional server to use instead of `TKServer.shared`. Should only be used for testing or development.
+  /// Optional server to use instead of `TKServer.shared`.
   public var server: TKServer?
+  
+  /// Optional configuration parameters to use instead of `TKSettings.Config.fromUserDefaults()`.
+  public var config: TKSettings.Config?
 
   /// Set to limit the modes. If not provided, modes according to `TKSettings` will be used.
   public var modeIdentifiers: Set<String> = []
@@ -233,6 +236,7 @@ extension TKRouter {
         let worker = TKRouter()
         self.workers[modeGroup] = worker
         worker.server = self.server
+        worker.config = self.config
         worker.modeIdentifiers = modeGroup
         
         // Hidden as we'll adjust the visibility in the completion block
@@ -460,15 +464,15 @@ extension TripRequest: TKRouterRequestable {
 extension TKRouter {
   
   public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil) -> String? {
-    let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil)
+    let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil, config: nil)
     let baseURL = TKServer.fallbackBaseURL
     let fullURL = baseURL.appendingPathComponent("routing.json")
     let request = TKServer.shared.getRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
     return request.url?.absoluteString
   }
   
-  private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, bestOnly: Bool = false) -> [String: Any] {
-    var paras = TKSettings.config
+  private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKSettings.Config?, bestOnly: Bool = false) -> [String: Any] {
+    var paras = (config ?? .userSettings()).paras
     let modes = modeIdentifiers ?? request.modes
     paras["modes"] = modes.sorted()
     paras["from"] = TKParserHelper.requestString(for: request.from)
@@ -535,6 +539,7 @@ extension TKRouter {
           for: request,
           modeIdentifiers: self.modeIdentifiers,
           additional: additional,
+          config: self.config,
           bestOnly: bestOnly
         )
         
