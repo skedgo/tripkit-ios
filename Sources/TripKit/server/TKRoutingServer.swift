@@ -12,7 +12,7 @@ import Foundation
  `TKServer` subclass that is forced to hit the provided `baseURL` and API key for SkedGo calls.
  */
 public class TKRoutingServer: TKServer {
-  private let baseURL: URL?
+  let baseURL: URL?
   private var _apiKey: String
   
   public override var apiKey: String {
@@ -21,6 +21,7 @@ public class TKRoutingServer: TKServer {
   }
   
   public init(baseURL: URL?, apiKey: String?) {
+    assert(baseURL != nil || apiKey != nil)
     self.baseURL = baseURL
     self._apiKey = apiKey ?? TKServer.shared.apiKey
   }
