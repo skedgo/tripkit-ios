@@ -32,7 +32,7 @@ public extension TKLocationManager {
 extension TKLocationManager {
   
   open override func featureIsAvailable() -> Bool {
-    return true
+    return Bundle.main.infoDictionary?.keys.contains("NSLocationWhenInUseUsageDescription") == true
   }
   
   open override func authorizationRestrictionsApply() -> Bool {

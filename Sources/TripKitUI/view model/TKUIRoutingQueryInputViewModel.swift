@@ -30,19 +30,28 @@ class TKUIRoutingQueryInputViewModel {
   
   init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect = .null, startMode: TKUIRoutingResultsViewModel.SearchMode? = nil, inputs: UIInput, providers: [TKAutocompleting]? = nil) {
 
-    let origin = origin ?? TKLocationManager.shared.currentLocation
+    let includeCurrentLocation = TKLocationManager.shared.featureIsAvailable()
+    let start: MKAnnotation?
+    if let provided = origin {
+      start = provided
+    } else if includeCurrentLocation {
+      start = TKLocationManager.shared.currentLocation
+    } else {
+      start = nil
+    }
+    
     let providers = providers ?? TKUIRoutingResultsCard.config.autocompletionDataProviders
     
     let autocompletionModel = TKUIAutocompletionViewModel(
       providers: providers,
-      includeCurrentLocation: true,
+      includeCurrentLocation: includeCurrentLocation,
       searchText: inputs.searchText.startWith(("", forced: false)),
       selected: inputs.selected,
       biasMapRect: .just(biasMapRect)
     )
     
     let state = Self.buildState(
-        origin: origin, destination: destination,
+        origin: start, destination: destination,
         startMode: startMode,
         inputs: inputs, selection: autocompletionModel.selection
       )

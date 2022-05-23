@@ -45,10 +45,10 @@ public class TKUITripOverviewCard: TKUITableCard {
   private let index: Int? // for restoring
   private var zoomToTrip: Bool = false // for restoring
 
-  /// Set this callback to include a "Show routes" button, which then presents the `TKUIRoutingResultsCard`
+  /// Set this callback to include a "Show routes" button, which then presents the ``TKUIRoutingResultsCard``
   /// and selecting a different trip will trigger this callback.
   ///
-  /// Returning `true` will lead to that trip being displayed as usual in *another* `TKUITripOverviewCard`
+  /// Returning `true` will lead to that trip being displayed as usual in *another* ``TKUITripOverviewCard``
   /// that gets pushed, and returning `false` will do nothing, i.e., the callback handles displaying it.
   public var selectedAlternativeTripCallback: ((Trip) -> Bool)? = nil
   

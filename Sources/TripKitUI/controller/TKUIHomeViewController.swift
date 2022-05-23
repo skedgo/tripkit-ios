@@ -12,6 +12,37 @@ import TGCardViewController
 
 import TripKit
 
+
+/// The `TKUIHomeViewController` class provides a customisable user interface of a
+/// search bar, a map, and a list of *components*.
+///
+/// ## How to use
+///
+/// You will need to provide a list of components that specify the content of the home card. You do
+/// so by providing a list of classes that implement `TKUIHomeComponentViewModel`:
+///
+/// ```swift
+/// TKUIHomeCard.config.componentViewModelClasses = [
+///   MyFavoritesViewModel.self,
+///   MySearchHistoryViewModel.self
+/// ]
+/// ```
+///
+/// ## Notes on subclassing
+///
+/// This class is safe to subclass, but you need to pay attention to the order of things in your
+/// `viewDidLoad` method:
+///
+/// ```swift
+/// override func viewDidLoad() {
+///    self.autocompletionDataProviders = /* add your data sources here */
+///
+///    super.viewDidLoad()
+///
+///    // other customisation
+/// }
+/// ```
+///
 open class TKUIHomeViewController: TGCardViewController {
   
   public weak var searchResultsDelegate: TKUIHomeCardSearchResultsDelegate? {

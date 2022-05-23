@@ -19,6 +19,13 @@ public protocol TKUIRoutingQueryInputCardDelegate: AnyObject {
   func routingQueryInput(card: TKUIRoutingQueryInputCard, selectedOrigin origin: MKAnnotation, destination: MKAnnotation)
 }
 
+/// An interactive card for searching for from and to locations.
+///
+/// Can be used standalone and is also integrated into ``TKUIRoutingResultsCard``.
+///
+/// When using standalone, you can provide a ``queryDelegate`` to determine what to do
+/// when the "Route" button is pressed. Otherwise, a ``TKUIRoutingResultsCard`` will
+/// be pushed onto the card stack.
 public class TKUIRoutingQueryInputCard: TKUITableCard {
   public weak var queryDelegate: TKUIRoutingQueryInputCardDelegate?
   
@@ -130,8 +137,13 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     
     viewModel.selections
       .emit(onNext: { [weak self] origin, destination in
-        guard let self = self, let delegate = self.queryDelegate else { return }
-        delegate.routingQueryInput(card: self, selectedOrigin: origin, destination: destination)
+        guard let self = self else { return }
+        if let delegate = self.queryDelegate {
+          delegate.routingQueryInput(card: self, selectedOrigin: origin, destination: destination)
+        } else {
+          let routingResultsCard = TKUIRoutingResultsCard(destination: destination, origin: origin)
+          self.controller?.push(routingResultsCard)
+        }
       })
       .disposed(by: disposeBag)
 

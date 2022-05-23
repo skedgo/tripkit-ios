@@ -19,15 +19,15 @@ extension TKUIRoutingResultsCard {
   
   func show(
       _ error: Error,
-      for request: TripRequest,
+      for request: TripRequest?,
       cardView: TGCardView,
       tableView: UITableView
     ) -> UIView {
 
     let parent = (cardView as? TGScrollCardView)?.scrollViewWrapper ?? cardView
 
-    switch (error as NSError).code {
-    case 1001...1003:
+    switch ((error as NSError).code, request) {
+    case (1001...1003, .some(let request)):
       return showRoutingSupportView(with: error, for: request, parentView: parent, tableView: tableView)
     default:
       return showErrorView(with: error, for: request, parentView: parent, tableView: tableView)
@@ -72,7 +72,7 @@ extension TKUIRoutingResultsCard {
   
   private func showErrorView(
     with error: Error,
-    for request: TripRequest,
+    for request: TripRequest?,
     parentView: UIView,
     tableView: UITableView
   ) -> TKUITripBoyView {
@@ -88,7 +88,7 @@ extension TKUIRoutingResultsCard {
       actionTitle: actionTitle
     )
 
-    if allowRequest {
+    if let request = request, allowRequest {
       tripBoy.actionButton.rx.tap
         .subscribe(onNext: { [unowned self] in
           TKUIRoutingResultsCard.config.contactCustomerSupport?(self, .routingError(error, request))
