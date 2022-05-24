@@ -167,6 +167,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
     labels[item] = wrapper
     
     let modeImageView = UIImageView()
+    modeImageView.tintColor = .tkLabelSecondary
     modeImageView.setImage(with: item.imageURL, asTemplate: item.imageURLIsTemplate, placeholder: item.image)
     modeImageView.backgroundColor = .clear
     modeImageView.translatesAutoresizingMaskIntoConstraints = false

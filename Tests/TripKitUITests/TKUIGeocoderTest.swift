@@ -43,7 +43,9 @@ class TKUIGeocoderTest: XCTestCase {
     await geocoderPasses(geocoder, input: "George St, Sydney", near: sydney, resultsInAny: ["George Street", "George St"], noneOf: ["Tesla Loading Dock", "333 George", "345 George", "261 George"])
   }
 
-  func testGeorgeSt2554() async {
+  func testGeorgeSt2554() async throws {
+    try XCTSkipIf(true) // Too flaky
+    
     // We want to result first which starts with a house number
     await geocoderPasses(geocoder, input: "George St", near: sydney, bestStartsWithAny: ["George St"])
   }

@@ -30,7 +30,7 @@ public protocol TKUIRoutingResultsViewControllerDelegate: TGCardViewControllerDe
 /// displayed.
 ///
 /// Customisation points:
-/// - `TKUICustomization` for the visual style of the cards
+/// - ``TKUICustomization`` for the visual style of the cards
 /// - `TKUIRoutingResultsCard.config` for the comparison of routing options
 /// - `TKUITripOverviewCard.config` for the trip details
 /// - `TKUITripModeByModeCard.config` for the step-by-step details of a trip
@@ -55,7 +55,7 @@ public class TKUIRoutingResultsViewController: TGCardViewController {
   /// departure or arrival time.
   ///
   /// - Parameter request: The trip request object, which should be instatiated
-  ///     using `TripRequest.insert(...)`
+  ///     using `TripRequest.insert(from:to:for:timeType:info:)`
   public init(request: TripRequest) {
     super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
 

@@ -28,7 +28,7 @@ public protocol TKUIRoutingResultsCardDelegate: AnyObject {
 
 /// An interactive card for displaying routing results, including updating from/to location, time and selected modes.
 ///
-/// Can be used standalone or via `TKUIRoutingResultsViewController`.
+/// Can be used standalone or via ``TKUIRoutingResultsViewController``.
 public class TKUIRoutingResultsCard: TKUITableCard {
   
   typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>
@@ -39,7 +39,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   
   /// Set this callback to provide a custom handler for what should happen when a user selects a trip.
   ///
-  /// If not provided, or you return `true` it will lead to the standard of pushing a `TKUITripOverviewCard`.
+  /// If not provided, or you return `true` it will lead to the standard of pushing a ``TKUITripOverviewCard``.
   /// Returning `false` will do nothing, i.e., the callback should handle displaying the trip.
   public var onSelection: ((Trip) -> Bool)? = nil
   
@@ -311,7 +311,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
 
     viewModel.error
       .asObservable()
-      .withLatestFrom(viewModel.request) { ($0, $1) }
+      .withLatestFrom(viewModel.request.startOptional()) { ($0, $1) }
       .subscribe(onNext: { [weak self] in
         self?.errorView = self?.show($0, for: $1, cardView: cardView, tableView: tableView)
       })
