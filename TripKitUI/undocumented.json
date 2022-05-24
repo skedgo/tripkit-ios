@@ -506,49 +506,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 22,
-      "symbol": "TKUIRoutingQueryInputCard",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 23,
+      "line": 30,
       "symbol": "TKUIRoutingQueryInputCard.queryDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 37,
+      "line": 44,
       "symbol": "TKUIRoutingQueryInputCard.init(origin:destination:biasMapRect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 154,
+      "line": 166,
       "symbol": "TKUIRoutingQueryInputCard.keyCommands",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 168,
-      "symbol": "TKUIRoutingQueryInputCard",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 170,
+      "line": 182,
       "symbol": "TKUIRoutingQueryInputCard.tableView(_:didSelectRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 174,
+      "line": 186,
       "symbol": "TKUIRoutingQueryInputCard.scrollViewDidScroll(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1346,56 +1332,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 15,
-      "symbol": "TKUIHomeViewController",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 17,
+      "line": 48,
       "symbol": "TKUIHomeViewController.searchResultsDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 24,
+      "line": 55,
       "symbol": "TKUIHomeViewController.autocompletionDataProviders",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 26,
+      "line": 57,
       "symbol": "TKUIHomeViewController.initialPosition",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 28,
+      "line": 59,
       "symbol": "TKUIHomeViewController.mapManager",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 30,
+      "line": 61,
       "symbol": "TKUIHomeViewController.init(mapManager:initialPosition:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 37,
+      "line": 68,
       "symbol": "TKUIHomeViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIHomeViewController.swift",
-      "line": 41,
+      "line": 72,
       "symbol": "TKUIHomeViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2564,7 +2543,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUIModePicker.swift",
-      "line": 266,
+      "line": 267,
       "symbol": "TKUIModePicker.rx_pickedModes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

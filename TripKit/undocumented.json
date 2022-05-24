@@ -3075,21 +3075,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 38,
+      "line": 42,
       "symbol": "TKLocationManager.authorizationRestrictionsApply()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 42,
+      "line": 46,
       "symbol": "TKLocationManager.authorizationStatus()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 69,
+      "line": 73,
       "symbol": "TKLocationManager.authorizationAlertText()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
