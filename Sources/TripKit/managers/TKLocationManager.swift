@@ -26,13 +26,17 @@ public extension TKLocationManager {
   
 }
 
-
+ 
 // TKPermissionManager overrides
 
 extension TKLocationManager {
   
   open override func featureIsAvailable() -> Bool {
+    #if DEBUG
+    return ProcessInfo().environment.keys.contains("XCTestSessionIdentifier")
+    #else
     return Bundle.main.infoDictionary?.keys.contains("NSLocationWhenInUseUsageDescription") == true
+    #endif
   }
   
   open override func authorizationRestrictionsApply() -> Bool {
