@@ -121,14 +121,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUICardAction.swift",
-      "line": 22,
-      "symbol": "TKUICardAction.init(title:accessibilityLabel:icon:style:handler:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUICardAction.swift",
-      "line": 45,
+      "line": 103,
       "symbol": "TKUICardAction.style",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -813,13 +806,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIStartTripAction.swift",
-      "line": 46,
-      "symbol": "TKUITripOverviewCard.buildStartTripAction(actionHandler:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITableCard.swift",
       "line": 16,
       "symbol": "TKUITableCard",
@@ -1108,6 +1094,13 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 15,
+      "symbol": "TKUITripOverviewCard",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
       "line": 38,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.class",
@@ -1118,13 +1111,6 @@
       "line": 42,
       "symbol": "TKUITripOverviewCard.config",
       "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 44,
-      "symbol": "TKUITripOverviewCard",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {

@@ -573,6 +573,22 @@ e.g., <code>TKUITripOverviewCard.config.tripActionsFactory</code> or
 
 <p>For a concerte example, see <code>TKUIStartTripAction</code>.</p>
 
+<p>If the action changes the state of the button itself, some care need to be
+taken that this is reflected:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">buildFavoriteAction</span><span class="p">(</span><span class="nv">stop</span><span class="p">:</span> <span class="kt">TKUIStopAnnotation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">TKUITimetableCard</span><span class="o">.</span><span class="kt">Action</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">isFavorite</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="kt">FavoriteHelper</span><span class="o">.</span><span class="nf">isFavorite</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="p">}</span>
+  <span class="kd">func</span> <span class="nf">title</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span> <span class="nf">isFavorite</span><span class="p">()</span> <span class="p">?</span> <span class="s">"Remove"</span> <span class="p">:</span> <span class="s">"Add"</span> <span class="p">}</span>
+  <span class="kd">func</span> <span class="nf">icon</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span> <span class="p">{</span> <span class="nf">isFavorite</span><span class="p">()</span> <span class="p">?</span> <span class="kt">UIImage</span><span class="o">.</span><span class="nv">remove</span> <span class="p">:</span> <span class="kt">UIImage</span><span class="o">.</span><span class="n">add</span> <span class="p">}</span>
+
+  <span class="k">return</span> <span class="kt">TKUITimetableCard</span><span class="o">.</span><span class="kt">Action</span><span class="p">(</span>
+    <span class="nv">title</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="nv">icon</span><span class="p">:</span> <span class="n">icon</span>
+  <span class="p">)</span> <span class="p">{</span> <span class="n">action</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span>
+    <span class="kt">FavoriteHelper</span><span class="o">.</span><span class="nf">toggleFavorite</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+
           </div>
         </section>
 
@@ -593,7 +609,7 @@ e.g., <code>TKUITripOverviewCard.config.tripActionsFactory</code> or
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initialises a new card action, which can be used to add custom buttons to a card.</p>
 
                       </div>
                       <div class="declaration">
@@ -609,6 +625,175 @@ e.g., <code>TKUITripOverviewCard.config.tripActionsFactory</code> or
 <span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Action button title.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessibilityLabel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Accessibility label to use for the button. Uses <code><a href="../Classes/TKUICardAction.html#/s:9TripKitUI14TKUICardActionC5titleSSvp">title</a></code> if not provided.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>icon</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Icon to display as the action. Should be a template image.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>style</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Style for the button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Handler executed when user taps on the button. Parameters are the action itself, the owning card, the model instance, and the sender. Should return whether the button should be refreshed, by calling the relevant &ldquo;actions factory&rdquo; again.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgyx_q_So6UIViewCtScMYcctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:handler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgyx_q_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>handler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialises a new card action where the properties change depending on the handler.</p>
+
+<p>All the closures are called when first displaying the action, and after the handler is called on every tap.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span>
+  <span class="nv">title</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">,</span>
+  <span class="nv">accessibilityLabel</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+  <span class="nv">icon</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span><span class="p">,</span>
+  <span class="nv">style</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a></span><span class="p">)?</span>  <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+  <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Provider of title for button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessibilityLabel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Provider of accessibility label for the button. Uses <code><a href="../Classes/TKUICardAction.html#/s:9TripKitUI14TKUICardActionC5titleSSvp">title</a></code> if not provided.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>icon</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Provider of icon for the button. Should be a template image.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>style</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Provider of style for the button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -739,7 +924,7 @@ corresponding card and model instance. Should return whether the button
 should be refreshed as its title or icon changed as a result (e.g., for
 toggle actions such as adding or removing a reminder or favourite).</p>
 
-<p>Parameters are the card, the model instance, and the sender</p>
+<p>Parameters are the action itself, the owning card, the model instance, and the sender.</p>
 
                       </div>
                       <div class="declaration">
@@ -761,7 +946,7 @@ toggle actions such as adding or removing a reminder or favourite).</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-05-24)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-05-26)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
