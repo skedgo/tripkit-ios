@@ -18,9 +18,9 @@ class TKUIExtendedActionView: UIView {
   
   private var tapGestureRecognizer: UITapGestureRecognizer!
   
-  var bold: Bool = false {
+  var style: TKUICardActionStyle = .normal {
     didSet {
-      updateForBoldness()
+      updateForStyle()
     }
   }
 
@@ -44,12 +44,12 @@ class TKUIExtendedActionView: UIView {
     
     label.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
     
-    updateForBoldness()
+    updateForStyle()
   }
   
   override func tintColorDidChange() {
     super.tintColorDidChange()
-    updateForBoldness()
+    updateForStyle()
   }
   
   @objc
@@ -57,16 +57,25 @@ class TKUIExtendedActionView: UIView {
     onTap?(self)
   }
   
-  private func updateForBoldness() {
-    if bold, let tintColor = self.tintColor {
-      backgroundColor = tintColor
+  private func updateForStyle() {
+    switch style {
+    case .bold, .destructive:
+      let background: UIColor
+      if style == .destructive {
+        background = .tkStateError
+      } else {
+        background = tintColor ?? .tkAppTintColor
+      }
+      
+      backgroundColor = background
       layer.borderWidth = 0
       layer.borderColor = nil
       
-      let textColor: UIColor = tintColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
+      let textColor: UIColor = background.isDark ? .tkLabelOnDark : .tkLabelOnLight
       imageView.tintColor = textColor
       label.textColor = textColor
-    } else {
+
+    case .normal:
       backgroundColor = .tkBackground
       layer.borderWidth = 2
       layer.borderColor = UIColor.tkLabelQuarternary.cgColor

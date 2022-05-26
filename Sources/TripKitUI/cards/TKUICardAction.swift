@@ -17,8 +17,34 @@ import TGCardViewController
 /// `TKUIServiceCard.config.serviceActionsFactory`
 ///
 /// For a concerte example, see `TKUIStartTripAction`.
+///
+/// If the action changes the state of the button itself, some care need to be
+/// taken that this is reflected:
+///
+/// ```swift
+/// func buildFavoriteAction(stop: TKUIStopAnnotation) -> TKUITimetableCard.Action {
+///   func isFavorite() -> Bool { FavoriteHelper.isFavorite(stop) }
+///   func title() -> String { isFavorite() ? "Remove" : "Add" }
+///   func icon() -> UIImage { isFavorite() ? UIImage.remove : UIImage.add }
+///
+///   return TKUITimetableCard.Action(
+///     title: title, icon: icon
+///   ) { action, _, stop, _ in
+///     FavoriteHelper.toggleFavorite(stop)
+///   }
+/// }
+///
+/// ```
 open class TKUICardAction<Card, Model> where Card: TGCard {
   
+  /// Initialises a new card action, which can be used to add custom buttons to a card.
+  ///
+  /// - Parameters:
+  ///   - title: Action button title.
+  ///   - accessibilityLabel: Accessibility label to use for the button. Uses `title` if not provided.
+  ///   - icon: Icon to display as the action. Should be a template image.
+  ///   - style: Style for the button.
+  ///   - handler: Handler executed when user taps on the button. Parameters are the action itself, the owning card, the model instance, and the sender. Should return whether the button should be refreshed, by calling the relevant "actions factory" again.
   public init(
     title: String,
     accessibilityLabel: String? = nil,
@@ -31,6 +57,38 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
     self.icon = icon
     self.style = style
     self.handler = handler
+  }
+  
+  /// Initialises a new card action where the properties change depending on the handler.
+  ///
+  /// All the closures are called when first displaying the action, and after the handler is called on every tap.
+  ///
+  /// - Parameters:
+  ///   - title: Provider of title for button.
+  ///   - accessibilityLabel: Provider of accessibility label for the button. Uses `title` if not provided.
+  ///   - icon: Provider of icon for the button. Should be a template image.
+  ///   - style: Provider of style for the button.
+  ///   - handler: Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.
+  public convenience init(
+    title: @escaping () -> String,
+    accessibilityLabel: (() -> String)? = nil,
+    icon: @escaping () -> UIImage,
+    style: (() -> TKUICardActionStyle)?  = nil,
+    handler: @escaping @MainActor (Card, Model, UIView) -> Void
+  ) {
+    self.init(
+      title: title(),
+      accessibilityLabel: accessibilityLabel?(),
+      icon: icon(),
+      style: style?() ?? .normal
+    ) { action, card, model, view in
+      handler(card, model, view)
+      action.title = title()
+      action.accessibilityLabel = accessibilityLabel?() ?? title()
+      action.icon = icon()
+      action.style = style?() ?? .normal
+      return true
+    }
   }
   
   /// Title of the button
@@ -49,6 +107,6 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
   /// should be refreshed as its title or icon changed as a result (e.g., for
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
-  /// Parameters are the card, the model instance, and the sender
+  /// Parameters are the action itself, the owning card, the model instance, and the sender.
   public let handler: @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
 }
