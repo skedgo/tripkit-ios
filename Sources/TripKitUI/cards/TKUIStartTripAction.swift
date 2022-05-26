@@ -12,38 +12,13 @@ import TripKit
 
 import TGCardViewController
 
-///// An action that can be added to a `TKUITripOverviewCard`. Set an array of
-///// these on `TKUITripOverviewCard.tripActionsFactory` and/or
-/////  on `TKUITripOverviewCard.segmentActionsFactory`.
-/////
-///// See `TKUIStartTripAction` as an example.
-//public protocol TKUITripOverviewCardAction {
-//  /// Title (and accessory label) of the button
-//  var title: String { get }
-//  
-//  /// Icon to display as the action. Should be a template image.
-//  var icon: UIImage { get }
-//  
-//  var style: TKUICardActionStyle { get }
-//  
-//  /// Handler executed when user taps on the button, providing the
-//  /// corresponding card and trip. Should return whether the button should
-//  /// be refreshed as its title or icon changed as a result (e.g., for
-//  /// toggle actions such as adding or removing a reminder or favourite).
-//  ///
-//  /// Parameters are the card, the trip, and the sender
-//  var handler: (TKUITripOverviewCard, UIView) -> Bool { get }
-//}
-//
-//public extension TKUITripOverviewCardAction {
-//  var style: TKUICardActionStyle { .normal }
-//}
-
-// MARK: - Example
-
-public extension TKUITripOverviewCard {
+extension TKUITripOverviewCard {
   
-  static func buildStartTripAction(actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
+  /// Creates a trip action with a "Go" title and arrow icon to indicate starting a trip
+  ///
+  /// - Parameter actionHandler: Optional handler, passed to `TKUITripModeByModeCard.tripStartedHandler`.
+  /// - Returns: A new trip action to be used on a `TKUITripOverviewCard`
+  public static func buildStartTripAction(actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
     return TKUICardAction(
       title: Loc.ActionGo,
       icon: .iconArrowUp

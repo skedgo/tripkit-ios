@@ -20,9 +20,9 @@ class TKUICompactActionCell: UICollectionViewCell {
   
   static let nib = UINib(nibName: "TKUICompactActionCell", bundle: .tripKitUI)
   
-  var bold: Bool = false {
+  var style: TKUICardActionStyle = .normal {
     didSet {
-      updateUI()
+      updateForStyle()
     }
   }
   
@@ -32,7 +32,7 @@ class TKUICompactActionCell: UICollectionViewCell {
     super.prepareForReuse()
     imageView.image = nil
     titleLabel.text = nil
-    updateUI()
+    updateForStyle()
   }
   
   override var isHighlighted: Bool {
@@ -60,19 +60,35 @@ class TKUICompactActionCell: UICollectionViewCell {
     titleLabel.textColor = .tkLabelPrimary
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     
-    updateUI()
+    updateForStyle()
   }
   
   override func tintColorDidChange() {
     super.tintColorDidChange()
-    updateUI()
+    updateForStyle()
   }
   
-  private func updateUI() {
-    imageWrapper.backgroundColor = bold ? (tintColor ?? .clear) : .tkBackground
-    imageWrapper.layer.borderWidth = bold ? 0 : 2
-    imageWrapper.layer.borderColor = bold ? nil : UIColor.tkLabelQuarternary.cgColor
-    imageWrapper.tintColor = bold ? .tkBackground : .tkLabelSecondary
+  private func updateForStyle() {
+    switch style {
+    case .bold, .destructive:
+      let background: UIColor
+      if style == .destructive {
+        background = .tkStateError
+      } else {
+        background = tintColor ?? .clear
+      }
+      
+      imageWrapper.backgroundColor = background
+      imageWrapper.layer.borderWidth = 0
+      imageWrapper.layer.borderColor = nil
+      imageWrapper.tintColor = .tkBackground
+
+    case .normal:
+      imageWrapper.backgroundColor = .tkBackground
+      imageWrapper.layer.borderWidth = 2
+      imageWrapper.layer.borderColor = UIColor.tkLabelQuarternary.cgColor
+      imageWrapper.tintColor = .tkLabelSecondary
+    }
   }
   
 }

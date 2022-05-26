@@ -11,7 +11,10 @@ import Foundation
 public enum TKUICardActionStyle {
   /// Highlights the button with the tint colour as a circular background
   case bold
-  
+
+  /// Highlights the button in red tint colour with a circular background
+  case destructive
+
   /// Normal style of the button, not tinted, with a light circular border around the icon
   case normal
 }

@@ -25,13 +25,25 @@ public enum TKSegmentType: Int {
 }
 
 public class TKSegment: NSObject {
-  @objc public let order: TKSegmentOrdering
-  @objc public let start: MKAnnotation?
-  @objc public let end: MKAnnotation?
   
+  /// The type of segment, `.start` and `.end` are terminal segments that just
+  /// indicate the start and end locations. `.regular` indicates "normal" segments
+  /// of moving around or changing modes.
+  @objc public let order: TKSegmentOrdering
+  @objc public let start: MKAnnotation!
+  @objc public let end: MKAnnotation!
+  
+  /// The previous segment in the same trip
+  ///
+  /// Can be a segment with a different `order`, e.g., it can be a terminal segment.
   @objc public weak var previous: TKSegment?
+
+  /// The following segment in the same trip; can be a terminal segment
+  ///
+  /// Can be a segment with a different `order`, e.g., it can be a terminal segment.
   @objc public weak var next: TKSegment?
   
+  /// The trip this segment belongs to
   @objc public private(set) var trip: Trip! // practically nonnull, but can be nulled due to weak reference
   let reference: SegmentReference?
   var template: SegmentTemplate? { reference?.template }
