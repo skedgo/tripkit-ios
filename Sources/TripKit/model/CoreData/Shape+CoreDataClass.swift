@@ -71,6 +71,7 @@ public class Shape: NSManagedObject {
     }
   }
   
+  /// Indicates if you need to dismount your vehicle (e.g., your bicycle) to traverse this shape
   @objc
   public var isDismount: Bool {
     get {
@@ -81,6 +82,8 @@ public class Shape: NSManagedObject {
     }
   }
   
+  /// A hop is a shape element where the actual path is unknown and the indicated waypoints
+  /// can not be relied on.
   @objc
   public var isHop: Bool {
     get {
