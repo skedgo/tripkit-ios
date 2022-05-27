@@ -18,9 +18,7 @@ public typealias TKUIRoutesViewController = TKUIRoutingResultsViewController
 @available(*, unavailable, renamed: "TKUIRoutingResultsViewControllerDelegate")
 public typealias TKUIRoutesViewControllerDelegate = TKUIRoutingResultsViewControllerDelegate
 
-
 public protocol TKUIRoutingResultsViewControllerDelegate: TGCardViewControllerDelegate {
-  
 }
 
 /// The `TKUIRoutingResultsViewController` class provides a user interface for viewing
@@ -31,9 +29,9 @@ public protocol TKUIRoutingResultsViewControllerDelegate: TGCardViewControllerDe
 ///
 /// Customisation points:
 /// - ``TKUICustomization`` for the visual style of the cards
-/// - `TKUIRoutingResultsCard.config` for the comparison of routing options
-/// - `TKUITripOverviewCard.config` for the trip details
-/// - `TKUITripModeByModeCard.config` for the step-by-step details of a trip
+/// - ``TKUIRoutingResultsCard``.``TKUIRoutingResultsCard/config`` for the comparison of routing options
+/// - ``TKUITripOverviewCard``.``TKUITripOverviewCard/config`` for the trip details
+/// - ``TKUITripModeByModeCard``.``TKUITripModeByModeCard/config`` for the step-by-step details of a trip
 public class TKUIRoutingResultsViewController: TGCardViewController {
   
   /// Configure for showing the routes from the user's current location
