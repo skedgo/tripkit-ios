@@ -41,6 +41,9 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
 
 @property (nonatomic, copy) NSString *APIKey;
 
+/// Custom headers to use, passed allong with calls
+@property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *customHeaders;
+
 - (void)registerFileBundle:(NSBundle *)bundle;
 
 /// :nodoc:
