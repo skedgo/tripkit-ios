@@ -84,6 +84,8 @@ extension TKServer {
   }
 
   /// Custom base URL to use, instead of hitting SkedGo's default servers directly.
+  ///
+  /// - Note: This is persistently saved to `UserDefaults`
   public static var customBaseURL: String? {
     get {
       UserDefaults.shared.string(forKey: "developmentServer")
@@ -389,11 +391,19 @@ extension TKServer {
 extension TKServer {
   
   private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, region: TKRegion?, callbackOnMain: Bool = true, completion: @escaping (Int?, [String: Any], Result<Data?, Error>) -> Void) {
+    
+    var adjustedHeaders: [String: String]? = headers
+    if let region = region, region != .international {
+      var headers = adjustedHeaders ?? [:]
+      headers["X-TripGo-Region"] = region.name
+      adjustedHeaders = headers
+    }
+    
     ___hitSkedGo(
       withMethod: method.rawValue,
       path: path,
       parameters: parameters,
-      headers: headers,
+      headers: adjustedHeaders,
       baseURLs: NSMutableArray(array: baseURLs(for: region).shuffled()),
       callbackOnMain: callbackOnMain,
       info: { uuid, isResponse, request, response, data, error in

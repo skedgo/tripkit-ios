@@ -332,6 +332,12 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
   // Force JSON as server otherwise might return XML
   headers[@"Accept"] = @"application/json";
   
+  if (self.customHeaders) {
+    [self.customHeaders enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+      [headers setValue:obj forKey:key];
+    }];
+  }
+  
   return headers;
 }
 
