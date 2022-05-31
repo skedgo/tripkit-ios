@@ -1843,56 +1843,63 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 233,
+      "line": 229,
+      "symbol": "Loc.LocalizationPermissionsMissing",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
+      "line": 237,
       "symbol": "Loc.Recurrences(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 239,
+      "line": 243,
       "symbol": "Loc.From(date:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 245,
+      "line": 249,
       "symbol": "Loc.To(date:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 250,
+      "line": 254,
       "symbol": "Loc.LastUpdated(date:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 256,
+      "line": 260,
       "symbol": "Loc.Every(dayString:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 262,
+      "line": 266,
       "symbol": "Loc.SearchingFor(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 267,
+      "line": 271,
       "symbol": "Loc.PercentCycleFriendly(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 272,
+      "line": 276,
       "symbol": "Loc.PercentWheelchairFriendly(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -3068,28 +3075,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 34,
+      "line": 29,
+      "symbol": "TKLocationManager.LocalizationError",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
+      "line": 45,
       "symbol": "TKLocationManager.featureIsAvailable()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 42,
+      "line": 58,
       "symbol": "TKLocationManager.authorizationRestrictionsApply()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 46,
+      "line": 62,
       "symbol": "TKLocationManager.authorizationStatus()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 73,
+      "line": 89,
       "symbol": "TKLocationManager.authorizationAlertText()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
