@@ -7975,79 +7975,30 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 75,
-      "symbol": "Shape.isDismount",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 85,
-      "symbol": "Shape.isHop",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 94,
+      "line": 97,
       "symbol": "Shape.isSafe",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 131,
+      "line": 134,
       "symbol": "Shape",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 133,
+      "line": 136,
       "symbol": "Shape.friendliness",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 158,
+      "line": 161,
       "symbol": "Shape",
       "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 160,
-      "symbol": "Shape.routePath",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 164,
-      "symbol": "Shape.routeColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 188,
-      "symbol": "Shape.routeIsTravelled",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 192,
-      "symbol": "Shape.routeDashPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+CoreDataClass.swift",
-      "line": 200,
-      "symbol": "Shape.selectionIdentifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -8115,126 +8066,91 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 19,
-      "symbol": "Shape.RoadSafety.safe",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 20,
-      "symbol": "Shape.RoadSafety.designated",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 21,
-      "symbol": "Shape.RoadSafety.neutral",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 22,
-      "symbol": "Shape.RoadSafety.hostile",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 25,
+      "line": 32,
       "symbol": "Shape.RoadSafety.color",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 36,
+      "line": 43,
       "symbol": "Shape.RoadTag",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 37,
+      "line": 44,
       "symbol": "Shape.RoadTag.cycleLane",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 38,
+      "line": 45,
       "symbol": "Shape.RoadTag.cycleTrack",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 39,
+      "line": 46,
       "symbol": "Shape.RoadTag.cycleNetwork",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 41,
+      "line": 48,
       "symbol": "Shape.RoadTag.bicycleBoulevard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 42,
+      "line": 49,
       "symbol": "Shape.RoadTag.sideWalk",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 43,
+      "line": 50,
       "symbol": "Shape.RoadTag.mainRoad",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 44,
+      "line": 51,
       "symbol": "Shape.RoadTag.sideRoad",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 45,
+      "line": 52,
       "symbol": "Shape.RoadTag.sharedRoad",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 48,
+      "line": 55,
       "symbol": "Shape.RoadTag.localized",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 61,
+      "line": 68,
       "symbol": "Shape.RoadTag.safety",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 80,
-      "symbol": "Shape.cyclingNetwork",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 85,
+      "line": 93,
       "symbol": "Shape.roadTags",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -10299,34 +10215,6 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKColoredRoute.swift",
-      "line": 15,
-      "symbol": "TKColoredRoute.routeColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKColoredRoute.swift",
-      "line": 16,
-      "symbol": "TKColoredRoute.routeDashPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKColoredRoute.swift",
-      "line": 17,
-      "symbol": "TKColoredRoute.routeIsTravelled",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKColoredRoute.swift",
-      "line": 19,
-      "symbol": "TKColoredRoute.selectionIdentifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKColoredRoute.swift",
       "line": 21,
       "symbol": "TKColoredRoute.init(path:color:dashPattern:isTravelled:identifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
@@ -10351,13 +10239,6 @@
       "line": 47,
       "symbol": "TKColoredRoute",
       "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKColoredRoute.swift",
-      "line": 49,
-      "symbol": "TKColoredRoute.routePath",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -11496,126 +11377,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 18,
-      "symbol": "TKDisplayableRoute.routePath",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 19,
-      "symbol": "TKDisplayableRoute.routeColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 20,
-      "symbol": "TKDisplayableRoute.routeDashPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 21,
-      "symbol": "TKDisplayableRoute.routeIsTravelled",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 22,
-      "symbol": "TKDisplayableRoute.selectionIdentifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 26,
+      "line": 40,
       "symbol": "TKDisplayableRoute",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 27,
-      "symbol": "TKDisplayableRoute.routeColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 28,
-      "symbol": "TKDisplayableRoute.routeDashPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 29,
-      "symbol": "TKDisplayableRoute.routeIsTravelled",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 40,
-      "symbol": "MKGeodesicPolyline.routePath",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 47,
-      "symbol": "MKGeodesicPolyline.routeColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 51,
-      "symbol": "MKGeodesicPolyline.routeDashPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 55,
-      "symbol": "MKGeodesicPolyline.routeIsTravelled",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 59,
-      "symbol": "MKGeodesicPolyline.selectionIdentifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 65,
+      "line": 79,
       "symbol": "TKRoutePolyline",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 66,
+      "line": 80,
       "symbol": "TKRoutePolyline.route",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 68,
+      "line": 82,
       "symbol": "TKRoutePolyline.selectionIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKRoutePolyline.swift",
-      "line": 70,
+      "line": 84,
       "symbol": "TKRoutePolyline.init(route:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

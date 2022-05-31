@@ -1367,14 +1367,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIRoutingResultsViewController.swift",
-      "line": 22,
+      "line": 21,
       "symbol": "TKUIRoutingResultsViewControllerDelegate",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIRoutingResultsViewController.swift",
-      "line": 67,
+      "line": 65,
       "symbol": "TKUIRoutingResultsViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2175,41 +2175,6 @@
       "line": 227,
       "symbol": "CLLocationCoordinate2D.bearing(from:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 263,
-      "symbol": "TKOnStreetParkingLocation.routePath",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 269,
-      "symbol": "TKOnStreetParkingLocation.selectionIdentifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 273,
-      "symbol": "TKOnStreetParkingLocation.routeColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 286,
-      "symbol": "TKOnStreetParkingLocation.routeDashPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 287,
-      "symbol": "TKOnStreetParkingLocation.routeIsTravelled",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
