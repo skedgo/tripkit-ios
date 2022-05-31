@@ -13848,133 +13848,133 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 119,
+      "line": 121,
       "symbol": "TKServer.HTTPMethod",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 120,
+      "line": 122,
       "symbol": "TKServer.HTTPMethod.POST",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 121,
+      "line": 123,
       "symbol": "TKServer.HTTPMethod.GET",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 122,
+      "line": 124,
       "symbol": "TKServer.HTTPMethod.DELETE",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 123,
+      "line": 125,
       "symbol": "TKServer.HTTPMethod.PUT",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 126,
+      "line": 128,
       "symbol": "TKServer.ServerError",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 127,
+      "line": 129,
       "symbol": "TKServer.ServerError.noData",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 130,
+      "line": 132,
       "symbol": "TKServer.RepeatHandler",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 131,
+      "line": 133,
       "symbol": "TKServer.RepeatHandler.repeatIn(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 132,
+      "line": 134,
       "symbol": "TKServer.RepeatHandler.repeatWithNewParameters(_:_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 146,
+      "line": 148,
       "symbol": "TKServer.hit(_:_:path:parameters:headers:region:callbackOnMain:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 170,
+      "line": 172,
       "symbol": "TKServer.hit(_:path:parameters:headers:region:callbackOnMain:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 193,
+      "line": 195,
       "symbol": "TKServer.hit(_:_:url:parameters:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 210,
+      "line": 212,
       "symbol": "TKServer.hit(_:url:parameters:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 226,
+      "line": 228,
       "symbol": "TKServer.hitSync(_:url:parameters:timeout:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 290,
+      "line": 292,
       "symbol": "TKServer.hit(_:url:parameters:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 311,
+      "line": 313,
       "symbol": "TKServer.hit(_:path:parameters:headers:region:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 336,
+      "line": 338,
       "symbol": "TKServer.hit(_:_:path:parameters:headers:region:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 364,
+      "line": 366,
       "symbol": "TKServer.hit(_:_:url:parameters:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -15759,7 +15759,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitObjc/include/TripKitObjc/TKServer.h",
-      "line": 44,
+      "line": 47,
       "symbol": "TKServer.-registerFileBundle:",
       "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
       "warning": "undocumented"

@@ -1095,6 +1095,38 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:objc(cs)TKServer(py)customHeaders"></a>
+                    <a name="//apple_ref/swift/Property/customHeaders" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TKServer(py)customHeaders">customHeaders</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Custom headers to use, passed allong with calls</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSDictionary</span><span class="o">&lt;</span><span class="n">NSString</span> <span class="o">*</span><span class="p">,</span> <span class="n">NSString</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="n">customHeaders</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">customHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:objc(cs)TKServer(im)registerFileBundle:"></a>
                     <a name="//apple_ref/swift/Method/-registerFileBundle:" class="dashAnchor"></a>
                     <a class="token" href="#/c:objc(cs)TKServer(im)registerFileBundle:">-registerFileBundle:<wbr></a>
@@ -1425,6 +1457,11 @@ resetting the user token</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Custom base URL to use, instead of hitting SkedGo&rsquo;s default servers directly.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is persistently saved to <code>UserDefaults</code>
+
+</div>
 
                       </div>
                       <div class="declaration">
