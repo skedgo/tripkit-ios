@@ -19,7 +19,7 @@ import TripKit
 /// ## How to use
 ///
 /// You will need to provide a list of components that specify the content of the home card. You do
-/// so by providing a list of classes that implement `TKUIHomeComponentViewModel`:
+/// so by providing a list of classes that implement ``TKUIHomeComponentViewModel``:
 ///
 /// ```swift
 /// TKUIHomeCard.config.componentViewModelClasses = [

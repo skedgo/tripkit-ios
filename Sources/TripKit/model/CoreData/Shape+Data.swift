@@ -16,10 +16,17 @@ extension Shape: DataAttachable {}
 
 extension Shape {
   public enum RoadSafety: Comparable {
-    case safe       // Just for you
-    case designated // Designated for your mode
-    case neutral    // Shared, but could be worse, e.g., it's quiet or others are aware of you
-    case hostile    // Shared, and busy
+    /// Just for this mode
+    case safe
+    
+    /// Designated for this mode, but not exclusively
+    case designated
+    
+    /// Shared, but could be worse, e.g., it's quiet or others are aware of you
+    case neutral
+    
+    /// Shared, and busy
+    case hostile
     
     #if os(iOS) || os(tvOS)
     public var color: UIColor {
@@ -76,6 +83,7 @@ extension Shape {
     }
   }
   
+  /// Name of the "cycling network" that this segment is part of
   @objc
   public var cyclingNetwork: String? {
     get { decodePrimitive(String.self, key: "cyclingNetwork") }

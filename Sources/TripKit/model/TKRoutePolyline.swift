@@ -15,10 +15,24 @@ import MapKit
 @objc
 public protocol TKDisplayableRoute {
   
-  var routePath: [Any] { get } // objects that have a coordinate, e.g., <MKAnnotation> or CLLocation
+  /// The path of the route, used to draw it on the map
+  ///
+  /// Should be objects that have a coordinate, i.e., `MKAnnotation` or `CLLocation`
+  var routePath: [Any] { get } //
+  
+  /// Colour to use for drawing the route
   var routeColor: TKColor? { get }
+  
+  /// Dash pattern to use for drawing the route
   var routeDashPattern: [NSNumber]? { get }
+
+  /// Whether this shape is part of the trip.
+  ///
+  /// For example, this returns false for section of a route that indicate where a bus is coming from
+  /// before you get on, or where it goes after you got off.
   var routeIsTravelled: Bool { get }
+
+  /// An identifier for the route, used to highlight the route on the map and allow tapping on it
   var selectionIdentifier: String? { get }
   
 }
