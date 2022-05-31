@@ -226,6 +226,10 @@ public class Loc : NSObject {
     return NSLocalizedString("Search Results", tableName: "Shared", bundle: .tripKit, comment: "")
   }
   
+  public static var LocalizationPermissionsMissing: String {
+    return NSLocalizedString("Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.", tableName: "Shared", bundle: .tripKit, comment: "Location iOS authorisation needed text")
+  }
+  
   
   // MARK: - Format
   
