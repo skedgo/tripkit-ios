@@ -26,16 +26,32 @@ public extension TKLocationManager {
   
 }
 
+extension TKLocationManager.LocalizationError: LocalizedError {
+  public var errorDescription: String? {
+    switch self {
+    case .authorizationDenied:
+      return Loc.LocalizationPermissionsMissing
+    case .featureNotAvailable:
+      return nil
+    }
+  }
+}
+
  
 // TKPermissionManager overrides
 
 extension TKLocationManager {
   
   open override func featureIsAvailable() -> Bool {
+    if Bundle.main.infoDictionary?.keys.contains("NSLocationWhenInUseUsageDescription") == true {
+      return true
+    }
+    
     #if DEBUG
+    // Assume available, when running tests
     return ProcessInfo().environment.keys.contains("XCTestSessionIdentifier")
     #else
-    return Bundle.main.infoDictionary?.keys.contains("NSLocationWhenInUseUsageDescription") == true
+    return false
     #endif
   }
   
@@ -71,8 +87,7 @@ extension TKLocationManager {
   }
   
   open override func authorizationAlertText() -> String {
-    return NSLocalizedString("Location services are required to use this feature. Please go to the Settings app > Privacy > Location Services, make sure they are turned on and authorise this app.", tableName: "Shared", bundle: .tripKit, comment: "Location iOS authorisation needed text")
+    return Loc.LocalizationPermissionsMissing
   }
-  
   
 }
