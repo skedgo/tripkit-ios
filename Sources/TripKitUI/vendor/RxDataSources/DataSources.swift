@@ -26,9 +26,5 @@ func rxDebugFatalError(_ error: Error) {
 }
 
 func rxDebugFatalError(_ message: String) {
-  #if DEBUG
-    fatalError(message)
-  #else
-    print(message)
-  #endif
+  print(message)
 }
