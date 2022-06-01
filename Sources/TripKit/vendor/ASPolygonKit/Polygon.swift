@@ -91,7 +91,11 @@ struct Polygon {
   
   func clockwise() -> Polygon {
     let result = isClockwise() ? self : Polygon(pairs: points.reversed().map(\.ll))
-    assert(result.isClockwise())
+    #if DEBUG
+    if !result.isClockwise() {
+      print("ASPolygonKit error: clockwise() failed.")
+    }
+    #endif
     return result
   }
   
@@ -301,7 +305,12 @@ struct Polygon {
       
     } while current.point != startPoint
     
-    assert(newPoints.count > 2, "Should never end up with a line (or less) after merging")
+#if DEBUG
+    if newPoints.count <= 2 {
+      print("ASPolygonKit error: Should never end up with a line (or less) after merging.")
+    }
+#endif
+
     points = newPoints
     return true
   }

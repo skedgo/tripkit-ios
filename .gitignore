@@ -17,14 +17,11 @@ DerivedData
 *.ipa
 *.xcuserstate
 .DS_Store
-xcshareddata
+xcbaselines
 
 .swiftpm
 .build
 
-# Carthage
-/Carthage
-/TripKit.framework.zip
 
 # Examples
 /Examples/MiniMap/Pods
