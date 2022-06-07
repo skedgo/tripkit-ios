@@ -511,7 +511,15 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     return footerView
   }
   
+  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return getFooterHeight(from: section)
+  }
+  
   public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+    return getFooterHeight(from: section)
+  }
+  
+  private func getFooterHeight(from section: Int) -> CGFloat {
     if dataSource.sectionModels[section].items.first?.trip == nil {
       return .leastNonzeroMagnitude
     } else {
@@ -536,7 +544,15 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     return headerView
   }
   
+  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return getHeaderHeight(from: section)
+  }
+  
   public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    return getHeaderHeight(from: section)
+  }
+    
+  private func getHeaderHeight(from section: Int) -> CGFloat {
     let section = dataSource.sectionModels[section]
     if section.badge?.footerContent == nil {
       return 16
