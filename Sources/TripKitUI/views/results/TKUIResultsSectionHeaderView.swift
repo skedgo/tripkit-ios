@@ -77,9 +77,7 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     badgeIcon.contentMode = .scaleAspectFit
     badgeIcon.tintColor = .tkFilledButtonTextColor
     badgeIcon.widthAnchor.constraint(equalToConstant: 16).isActive = true
-    let heightConstraint = badgeIcon.heightAnchor.constraint(equalToConstant: 16)
-    heightConstraint.priority = UILayoutPriority(rawValue: 999)
-    heightConstraint.isActive = true
+    badgeIcon.heightAnchor.constraint(equalToConstant: 16).isActive = true
     badgeIcon.translatesAutoresizingMaskIntoConstraints = false
     self.badgeIcon = badgeIcon
     wrapper.addSubview(badgeIcon)
@@ -92,15 +90,21 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     badgeLabel.translatesAutoresizingMaskIntoConstraints = false
     self.badgeLabel = badgeLabel
     wrapper.addSubview(badgeLabel)
+      
+    let bottomWrapperMarginConstraint = wrapper.bottomAnchor.constraint(equalTo: badgeIcon.bottomAnchor, constant: 4)
+    bottomWrapperMarginConstraint.priority = UILayoutPriority(rawValue: 999)
+        
+    let badgeTopMarginConstraint = badgeIcon.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 16)
+    badgeTopMarginConstraint.priority = UILayoutPriority(rawValue: 999)
     
     NSLayoutConstraint.activate([
       badgeIcon.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
       badgeLabel.leadingAnchor.constraint(equalTo: badgeIcon.trailingAnchor, constant: 8),
       wrapper.trailingAnchor.constraint(equalTo: badgeLabel.trailingAnchor, constant: 16),
       
-      badgeIcon.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 16),
+      badgeTopMarginConstraint,
       badgeLabel.centerYAnchor.constraint(equalTo: badgeIcon.centerYAnchor),
-      wrapper.bottomAnchor.constraint(equalTo: badgeIcon.bottomAnchor, constant: 4)
+      bottomWrapperMarginConstraint
     ])
   }
   

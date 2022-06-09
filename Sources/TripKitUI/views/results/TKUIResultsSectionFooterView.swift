@@ -67,15 +67,21 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     self.button = button
     contentView.addSubview(button)
+      
+    let topMarginConstraint = costLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6)
+    topMarginConstraint.priority = UILayoutPriority(rawValue: 999)
+  
+    let bottomMarginConstraint = contentView.bottomAnchor.constraint(equalTo: costLabel.bottomAnchor, constant: 6)
+    bottomMarginConstraint.priority = UILayoutPriority(rawValue: 999)
     
     NSLayoutConstraint.activate([
       costLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
       button.leadingAnchor.constraint(equalTo: costLabel.trailingAnchor, constant: 16),
       contentView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: 16),
       
-      costLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+      topMarginConstraint,
       costLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor),
-      contentView.bottomAnchor.constraint(equalTo: costLabel.bottomAnchor, constant: 6)
+      bottomMarginConstraint
     ])
   }
   
