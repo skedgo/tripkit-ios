@@ -320,7 +320,7 @@ extension TKRouter {
     if workers.isEmpty {
       request.perform { _ in
         // Only show an error if we found nothing, unless `failOnAnyError == true`
-        if (failOnAnyError || request.trips.isEmpty), let error = self.lastWorkerError {
+        if (self.failOnAnyError || request.trips.isEmpty), let error = self.lastWorkerError {
           completion(.failure(error))
         } else {
           completion(.success(request))
