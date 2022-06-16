@@ -51,6 +51,12 @@ public class TKRouter: NSObject {
 
   /// Set to limit the modes. If not provided, modes according to `TKSettings` will be used.
   public var modeIdentifiers: Set<String> = []
+  
+  /// A `TKRouter` might turn a routing request into multiple server requests. If some of these fail
+  /// but others return trips, the default behaviour is to return the trips that were found without returning
+  /// an error. Set this to `true` to always return an error if any of the requests fail, even if some trips were
+  /// found by other requests.
+  public var failOnAnyError: Bool = false
 
   private var isActive: Bool = false
 
@@ -259,6 +265,7 @@ extension TKRouter {
         self.workers[modeGroup] = worker
         worker.server = self.server
         worker.config = self.config
+        worker.failOnAnyError = self.failOnAnyError
         worker.modeIdentifiers = modeGroup
         
         // Hidden as we'll adjust the visibility in the completion block
@@ -311,9 +318,9 @@ extension TKRouter {
     }
     
     if workers.isEmpty {
-      // Only show an error if we found nothing
       request.perform { _ in
-        if request.trips.isEmpty, let error = self.lastWorkerError {
+        // Only show an error if we found nothing, unless `failOnAnyError == true`
+        if (self.failOnAnyError || request.trips.isEmpty), let error = self.lastWorkerError {
           completion(.failure(error))
         } else {
           completion(.success(request))
