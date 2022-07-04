@@ -445,9 +445,9 @@ extension TKWaypointRouter {
           return true
         }
       }
-      .map { $0.element }
+      .map(\.element)
     
-    // Construct the paras on a segment by segment basis
+    // Construct the paras on a segment-by-segment basis
     var foundMatch = false
     let unglued = try prunedSegments.map { segment -> (segment: TKSegment, input: TKWaypointRouter.Segment) in
       if segmentToMatch == segment {
@@ -468,7 +468,7 @@ extension TKWaypointRouter {
       // end to that location.
       if atStart, index+1 < unglued.count, unglued[index+1].segment == segmentToMatch  {
         var input = current.input
-        input.end = .coordinate(visit.coordinate) // TODO: Should this use `.code` instead?
+        input.end = .coordinate(visit.coordinate) // not stop code, as this is a non-PT segment
         return [input]
       }
       
@@ -477,7 +477,7 @@ extension TKWaypointRouter {
       if atStart, index == 0, current.segment == segmentToMatch {
         let walk = TKWaypointRouter.Segment(
           start: .coordinate(trip.request.fromLocation.coordinate),
-          end: .coordinate(visit.coordinate),  // TODO: Should this use `.code` instead?
+          end: .coordinate(visit.coordinate), // not stop code, as this is a walking segment
           modes: ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
         )
         return [walk, current.input]
@@ -485,12 +485,12 @@ extension TKWaypointRouter {
       
       if !atStart, index > 0, unglued[index-1].segment == segmentToMatch {
         var input = current.input
-        input.start = .coordinate(visit.coordinate) // TODO: Should this use `.code` instead?
+        input.start = .coordinate(visit.coordinate) // not stop code, as this is a non-PT segment
         return [input]
       }
       if !atStart, index == unglued.count - 1, current.segment == segmentToMatch {
         let walk = TKWaypointRouter.Segment(
-          start: .coordinate(visit.coordinate),  // TODO: Should this use `.code` instead?
+          start: .coordinate(visit.coordinate), // not stop code, as this is a walking segment
           end: .coordinate(trip.request.toLocation.coordinate),
           modes: ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
         )
