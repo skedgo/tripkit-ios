@@ -56,9 +56,12 @@ extension TKWaypointRouter {
         return
       }
       
+      // TODO: Previously also had
+  //    paras["leaveAt"]  = trip.departureTime.timeIntervalSince1970 + 60
       let pattern = TKTripPattern.pattern(for: trip)
-      let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: trip.departureTime, using: vehicles)
-      self.fetchTrip(waypointParas: paras, region: region, into: trip.tripGroup, completion: completion)
+      let input = buildInput(segments: pattern, vehicles: vehicles)
+
+      self.fetchTrip(input: input, region: region, into: trip.tripGroup, completion: completion)
     }
   }
   
@@ -74,22 +77,10 @@ extension TKWaypointRouter {
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
   public static func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit = TripKit.shared, in region: TKRegion, completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    let paras = TKWaypointRouter.nextTripParas(pattern: pattern, departure: departure, using: vehicles)
-    fetchTrip(waypointParas: paras, region: region, into: tripKit.tripKitContext, completion: completion)
-  }
-  
-  
-  private static func nextTripParas(pattern: [TKSegmentPattern], departure: Date, using vehicles: [TKVehicular]) -> [String: Any] {
-    
-    let now = Date()
-    let leaveAt = departure > now ? departure : now
-    
-    var paras = [String: Any]()
-    paras["config"]   = TKSettings.Config.userSettings().paras
-    paras["vehicles"] = TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
-    paras["segments"] = pattern
-    paras["leaveAt"]  = leaveAt.timeIntervalSince1970 + 60
-    return paras
+    // TODO: Previously also had
+//    paras["leaveAt"]  = departure.timeIntervalSince1970 + 60
+    let input = buildInput(segments: pattern, vehicles: vehicles)
+    fetchTrip(input: input, region: region, into: tripKit.tripKitContext, completion: completion)
   }
   
 }
@@ -121,11 +112,11 @@ extension TKWaypointRouter {
       
       do {
         let segments = try Self.segments(moving: segment, to: visit, atStart: atStart)
-        let paras = try buildParas(segments: segments, vehicles: vehicles)
+        let input = buildInput(segments: segments, vehicles: vehicles)
         
         // Will have new pattern, so we'll add it to the request rather than
         // to the original trip group.
-        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.request, completion: completion)
+        self.fetchTrip(input: input, region: region, into: segment.trip.request, completion: completion)
       
       } catch {
         completion(.failure(error))
@@ -147,10 +138,10 @@ extension TKWaypointRouter {
       
       do {
         let segments = try Self.segments(replacing: segment, with: entry, fallbackRegion: region)
-        let paras = try buildParas(segments: segments, vehicles: vehicles)
+        let input = buildInput(segments: segments, vehicles: vehicles)
         
         // Will have the same pattern, so we'll add it to original trip group
-        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
+        self.fetchTrip(input: input, region: region, into: segment.trip.tripGroup, completion: completion)
         
       } catch {
         completion(.failure(error))
@@ -199,8 +190,8 @@ extension TKWaypointRouter {
           segments = try Self.segments(movingEndOf: movingSegment, to: location)
         }
 
-        let paras = try buildParas(segments: segments, vehicles: vehicles)
-        self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
+        let input = buildInput(segments: segments, vehicles: vehicles)
+        self.fetchTrip(input: input, region: region, into: segment.trip.tripGroup, completion: completion)
       } catch {
         completion(.failure(error))
       }
@@ -218,20 +209,17 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will fit that
   ///     trip group as this will not be checked separately. It will fit
   ///     if it's using the same modes and same/similar stops.
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into tripGroup: TripGroup, completion: @escaping (Result<Trip, Error>) -> Void) {
+  private static func fetchTrip(input: TKWaypointRouter.Input, region: TKRegion, into tripGroup: TripGroup, completion: @escaping (Result<Trip, Error>) -> Void) {
     guard let context = tripGroup.managedObjectContext else {
       completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
       return
     }
     
-    fetchAndParse(
-      waypointParas: waypointParas,
-      region: region,
-      into: context
-    ) { _, _, result in
+    Task {
       do {
-        let response = try result.get()
-        TKRoutingParser.add(response, to: tripGroup, merge: false) { parserResult in
+        let response = try await fetchAndParse(input: input, region: region, into: context)
+        let routingResponse = try response.result.get()
+        TKRoutingParser.add(routingResponse, to: tripGroup, merge: false)  { parserResult in
           completion(Result {
             try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
           })
@@ -247,20 +235,17 @@ extension TKWaypointRouter {
   /// - note: Only use this method if the calculated trip will have
   ///     the same origin, destination and approximate query time
   ///     as the request as this will not be checked separately.
-  private static func fetchTrip(waypointParas: [String: Any], region: TKRegion, into request: TripRequest, completion: @escaping (Result<Trip, Error>) -> Void) {
+  private static func fetchTrip(input: TKWaypointRouter.Input, region: TKRegion, into request: TripRequest, completion: @escaping (Result<Trip, Error>) -> Void) {
     guard let context = request.managedObjectContext else {
       completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
       return
     }
     
-    fetchAndParse(
-      waypointParas: waypointParas,
-      region: region,
-      into: context
-    ) { _, _, result in
+    Task {
       do {
-        let response = try result.get()
-        TKRoutingParser.add(response, to: request, merge: false) { parserResult in
+        let response = try await fetchAndParse(input: input, region: region, into: context)
+        let routingResponse = try response.result.get()
+        TKRoutingParser.add(routingResponse, to: request, merge: false) { parserResult in
           completion(Result {
             try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
           })
@@ -272,16 +257,12 @@ extension TKWaypointRouter {
   }
   
   /// For calculating a trip and adding it as a stand-alone trip / request to TripKit
-  public static func fetchTrip(waypointParas: [String: Any], region: TKRegion? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
-    
-    fetchAndParse(
-      waypointParas: waypointParas,
-      region: region,
-      into: context
-    ) { _, _, result in
+  public static func fetchTrip(input: TKWaypointRouter.Input, region: TKRegion? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
+    Task {
       do {
-        let response = try result.get()
-        TKRoutingParser.add(response, into: context) { parserResult in
+        let response = try await fetchAndParse(input: input, region: region, into: context)
+        let routingResponse = try response.result.get()
+        TKRoutingParser.add(routingResponse, into: context) { parserResult in
           completion(Result {
             try parserResult.get().trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
           })
@@ -292,15 +273,15 @@ extension TKWaypointRouter {
     }
   }
 
-  private static func fetchAndParse(waypointParas: [String: Any], region: TKRegion?, into context: NSManagedObjectContext, handler: @escaping (Int?, [String: Any], Result<TKAPI.RoutingResponse, Error>) -> Void) {
+  private static func fetchAndParse(input: TKWaypointRouter.Input, region: TKRegion?, into context: NSManagedObjectContext) async throws -> TKServer.Response<TKAPI.RoutingResponse> {
     
-    TKServer.shared.hit(
+    // TODO: Make sure these are encoded using secondsSince1970 for now
+    
+    return try await TKServer.shared.hit(
       TKAPI.RoutingResponse.self,
-      .POST, path: "waypoint.json",
-      parameters: waypointParas,
-      region: region,
-      callbackOnMain: true, // we parse on main
-      completion: handler
+      path: "waypoint.json",
+      input: input,
+      region: region
     )
   }
   
@@ -310,18 +291,30 @@ extension TKWaypointRouter {
 
 extension TKWaypointRouter {
   
-  struct Input: Encodable {
+  public struct Input: Codable {
     var segments: [Segment]
     var vehicles: [TKAPI.PrivateVehicle]
-    // var config: TKConfig
+    var config: TKSettings.Config
   }
   
-  enum Location {
+  enum Location: Equatable {
+    static func == (lhs: TKWaypointRouter.Location, rhs: TKWaypointRouter.Location) -> Bool {
+      switch (lhs, rhs) {
+      case let (.coordinate(left), .coordinate(right)):
+        return abs(left.latitude - right.latitude) < 0.0001
+            && abs(left.longitude - right.longitude) < 0.0001
+      case let (.code(leftCode, leftRegion), .code(rightCode, rightRegion)):
+        return leftCode == rightCode && leftRegion.name == rightRegion.name
+      default:
+        return false
+      }
+    }
+    
     case coordinate(CLLocationCoordinate2D)
     case code(String, TKRegion)
   }
   
-  struct Segment: Encodable {
+  public struct Segment: Equatable {
     var start: Location
     var end: Location
     let modes: [String]
@@ -339,53 +332,102 @@ extension TKWaypointRouter {
     var serviceTripID: String?
     var operatorID: String?
     var operatorName: String?
-    
-    enum CodingKeys: String, CodingKey {
-      case start
-      case startRegion = "region"
-      case startTime
-      case end
-      case endRegion = "disembarkationRegion"
-      case endTime
-      case modes
-      case vehicleUUID
-      case sharedVehicleID
-      case serviceTripID
-      case operatorName = "operator"
-      case operatorID = "operatorID"
-    }
-    
-    func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: CodingKeys.self)
-      
-      // required
-      switch start {
-      case .coordinate(let coordinate):
-        try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .start)
-      case .code(let string, let region):
-        try container.encode(string, forKey: .start)
-        try container.encode(region.name, forKey: .startRegion)
-      }
-      switch end {
-      case .coordinate(let coordinate):
-        try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .end)
-      case .code(let string, let region):
-        try container.encode(string, forKey: .end)
-        try container.encode(region.name, forKey: .endRegion)
-      }
-      try container.encode(modes, forKey: .modes)
+  }
+}
 
-      // optional
-      try container.encodeIfPresent(startTime, forKey: .startTime)
-      try container.encodeIfPresent(endTime, forKey: .endTime)
-      try container.encodeIfPresent(vehicleUUID, forKey: .vehicleUUID)
-      try container.encodeIfPresent(sharedVehicleID, forKey: .sharedVehicleID)
-      try container.encodeIfPresent(serviceTripID, forKey: .serviceTripID)
-      try container.encodeIfPresent(operatorID, forKey: .operatorID)
-      try container.encodeIfPresent(operatorName, forKey: .operatorName)
-    }
+extension TKWaypointRouter.Segment: Codable {
+  enum CodingKeys: String, CodingKey {
+    case start
+    case startRegion = "region"
+    case startTime
+    case end
+    case endRegion = "disembarkationRegion"
+    case endTime
+    case modes
+    case vehicleUUID
+    case sharedVehicleID
+    case serviceTripID
+    case operatorName = "operator"
+    case operatorID = "operatorID"
   }
   
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    
+    // required
+    switch start {
+    case .coordinate(let coordinate):
+      try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .start)
+    case .code(let string, let region):
+      try container.encode(string, forKey: .start)
+      try container.encode(region.name, forKey: .startRegion)
+    }
+    switch end {
+    case .coordinate(let coordinate):
+      try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .end)
+    case .code(let string, let region):
+      try container.encode(string, forKey: .end)
+      try container.encode(region.name, forKey: .endRegion)
+    }
+    try container.encode(modes, forKey: .modes)
+
+    // optional
+    try container.encodeIfPresent(startTime, forKey: .startTime)
+    try container.encodeIfPresent(endTime, forKey: .endTime)
+    try container.encodeIfPresent(vehicleUUID, forKey: .vehicleUUID)
+    try container.encodeIfPresent(sharedVehicleID, forKey: .sharedVehicleID)
+    try container.encodeIfPresent(serviceTripID, forKey: .serviceTripID)
+    try container.encodeIfPresent(operatorID, forKey: .operatorID)
+    try container.encodeIfPresent(operatorName, forKey: .operatorName)
+  }
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    if container.contains(.startRegion) {
+      let regionCode = try container.decode(String.self, forKey: .startRegion)
+      guard let region = TKRegionManager.shared.localRegion(named: regionCode) else {
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid region: \(regionCode)"))
+      }
+      
+      start = .code(
+        try container.decode(String.self, forKey: .start),
+        region
+      )
+    } else {
+      let rawCoordinate = try container.decode(String.self, forKey: .start)
+      guard let coordinate = TKParserHelper.coordinate(forRequest: rawCoordinate) else {
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid start coordinate: \(rawCoordinate)"))
+      }
+      start = .coordinate(coordinate)
+    }
+    if container.contains(.endRegion) {
+      let regionCode = try container.decode(String.self, forKey: .endRegion)
+      guard let region = TKRegionManager.shared.localRegion(named: regionCode) else {
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid disembarkation region: \(regionCode)"))
+      }
+      
+      end = .code(
+        try container.decode(String.self, forKey: .end),
+        region
+      )
+    } else {
+      let rawCoordinate = try container.decode(String.self, forKey: .end)
+      guard let coordinate = TKParserHelper.coordinate(forRequest: rawCoordinate) else {
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid end coordinate: \(rawCoordinate)"))
+      }
+      end = .coordinate(coordinate)
+    }
+    modes = try container.decode([String].self, forKey: .modes)
+
+    // optional
+    startTime = try container.decodeIfPresent(Date.self, forKey: .startTime)
+    endTime = try container.decodeIfPresent(Date.self, forKey: .endTime)
+    vehicleUUID = try container.decodeIfPresent(String.self, forKey: .vehicleUUID)
+    sharedVehicleID = try container.decodeIfPresent(String.self, forKey: .sharedVehicleID)
+    serviceTripID = try container.decodeIfPresent(String.self, forKey: .serviceTripID)
+    operatorID = try container.decodeIfPresent(String.self, forKey: .operatorID)
+    operatorName = try container.decodeIfPresent(String.self, forKey: .operatorName)
+  }
 }
 
 extension TKWaypointRouter.Segment {
@@ -407,21 +449,12 @@ extension TKWaypointRouter.Segment {
 
 extension TKWaypointRouter {
   
-  static func buildParas(segments: [TKWaypointRouter.Segment], vehicles: [TKVehicular]) throws -> [String: Any] {
-    let input = TKWaypointRouter.Input(
+  static func buildInput(segments: [TKWaypointRouter.Segment], vehicles: [TKVehicular] = []) -> TKWaypointRouter.Input {
+    return TKWaypointRouter.Input(
       segments: segments,
-      vehicles: vehicles.map { $0.toModel() }
+      vehicles: vehicles.map { $0.toModel() },
+      config: .userSettings()
     )
-    
-    let encoder = JSONEncoder()
-    encoder.dateEncodingStrategy = .secondsSince1970
-#if DEBUG
-    encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-#endif
-    let data = try encoder.encode(input)
-    var object = try JSONSerialization.jsonObject(with: data) as? [String: Any] ?? [:]
-    object["config"] = TKSettings.config
-    return object
   }
   
   static func segments(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [TKWaypointRouter.Segment] {

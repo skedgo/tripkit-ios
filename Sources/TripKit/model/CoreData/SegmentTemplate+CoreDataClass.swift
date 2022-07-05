@@ -15,7 +15,6 @@ import MapKit
 ///
 /// Also see `SegmentReference`. SDK users should just use `TKSegment` instead.
 ///
-/// :nodoc:
 @objc(SegmentTemplate)
 class SegmentTemplate: NSManagedObject {
 }
@@ -29,7 +28,6 @@ extension SegmentTemplate {
     return context.containsObject(SegmentTemplate.self, predicate: predicate)
   }
   
-  @objc(fetchSegmentTemplateWithHashCode:inTripKitContext:)
   static func fetchSegmentTemplate(withHashCode hashCode: Int, in context: NSManagedObjectContext) -> SegmentTemplate? {
     let predicate = NSPredicate(format: "hashCode == %d", hashCode)
     return context.fetchUniqueObject(SegmentTemplate.self, predicate: predicate)
@@ -41,11 +39,11 @@ extension SegmentTemplate {
 
 extension SegmentTemplate {
   
-  @objc var start: MKAnnotation? {
+  var start: MKAnnotation? {
     return self.startLocation as? MKAnnotation ?? endWaypoint(atStart: true)
   }
 
-  @objc var end: MKAnnotation? {
+  var end: MKAnnotation? {
     return self.endLocation as? MKAnnotation ?? endWaypoint(atStart: false)
   }
 
@@ -55,64 +53,63 @@ extension SegmentTemplate {
     return atStart ? shape.start : shape.end
   }
   
-  @objc var dashPattern: [NSNumber] {
+  var dashPattern: [NSNumber] {
     if modeInfo?.color != nil {
       return [1] // no dashes if we have dedicated color
     }
     
-    let group: TKParserHelperMode
+    // walking has regular dashes; driving has longer dashes, public has full lines
     if isWalking {
-      group = .walking
+      return [1, 10]
     } else if !isPublicTransport && !isStationary {
-      group = .transit
+      return [10, 20]
     } else {
-      group = .vehicle
+      return [1]
     }
-    return TKParserHelper.dashPattern(for: group)
   }
   
-  @objc var isPublicTransport: Bool {
+  var isPublicTransport: Bool {
     return segmentType?.intValue == TKSegmentType.scheduled.rawValue
   }
 
-  @objc var isWalking: Bool {
+  var isWalking: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsWalking(modeIdentifier)
   }
 
-  @objc var isWheelchair: Bool {
+  var isWheelchair: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
   }
   
-  @objc var isCycling: Bool {
+  var isCycling: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsCycling(modeIdentifier)
   }
   
-  @objc var isDriving: Bool {
+  var isDriving: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsDriving(modeIdentifier)
   }
   
-  @objc var isStationary: Bool {
+  var isStationary: Bool {
     return segmentType?.intValue == TKSegmentType.stationary.rawValue
   }
   
-  @objc var isSelfNavigating: Bool {
+  var isSelfNavigating: Bool {
     return turnByTurnMode != nil
   }
   
-  @objc var isAffectedByTraffic: Bool {
+  var isAffectedByTraffic: Bool {
     return !isStationary && TKTransportModes.modeIdentifierIsAffected(byTraffic: modeIdentifier)
   }
   
-  @objc var isSharedVehicle: Bool {
+  var isSharedVehicle: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsSharedVehicle(modeIdentifier)
   }
   
-  @objc var isFlight: Bool {
+  var isFlight: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
     return TKTransportModes.modeIdentifierIsFlight(modeIdentifier)
   }
