@@ -56,10 +56,9 @@ extension TKWaypointRouter {
         return
       }
       
-      // TODO: Previously also had
-  //    paras["leaveAt"]  = trip.departureTime.timeIntervalSince1970 + 60
       let pattern = TKTripPattern.pattern(for: trip)
-      let input = buildInput(segments: pattern, vehicles: vehicles)
+      var input = buildInput(segments: pattern, vehicles: vehicles)
+      input.leaveAt = trip.departureTime
 
       self.fetchTrip(input: input, region: region, into: trip.tripGroup, completion: completion)
     }
@@ -77,9 +76,9 @@ extension TKWaypointRouter {
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
   public static func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit = TripKit.shared, in region: TKRegion, completion: @escaping (Result<Trip, Error>) -> Void) {
     
-    // TODO: Previously also had
-//    paras["leaveAt"]  = departure.timeIntervalSince1970 + 60
-    let input = buildInput(segments: pattern, vehicles: vehicles)
+    var input = buildInput(segments: pattern, vehicles: vehicles)
+    input.leaveAt = departure
+
     fetchTrip(input: input, region: region, into: tripKit.tripKitContext, completion: completion)
   }
   
@@ -275,13 +274,12 @@ extension TKWaypointRouter {
 
   private static func fetchAndParse(input: TKWaypointRouter.Input, region: TKRegion?, into context: NSManagedObjectContext) async throws -> TKServer.Response<TKAPI.RoutingResponse> {
     
-    // TODO: Make sure these are encoded using secondsSince1970 for now
-    
     return try await TKServer.shared.hit(
       TKAPI.RoutingResponse.self,
       path: "waypoint.json",
       input: input,
-      region: region
+      region: region,
+      encoderConfig: { $0.dateEncodingStrategy = .secondsSince1970 }
     )
   }
   
@@ -295,6 +293,7 @@ extension TKWaypointRouter {
     var segments: [Segment]
     var vehicles: [TKAPI.PrivateVehicle]
     var config: TKSettings.Config
+    var leaveAt: Date?
   }
   
   enum Location: Equatable {

@@ -369,9 +369,16 @@ extension TKServer {
     path: String,
     input: Input,
     headers: [String: String]? = nil,
-    region: TKRegion? = nil
+    region: TKRegion? = nil,
+    encoderConfig: (JSONEncoder) -> Void = { _ in },
+    decoderConfig: (JSONDecoder) -> Void = { _ in }
   ) async throws -> Response<Output> {
-    let parameters = try JSONEncoder().encodeJSONObject(input) as? [String: Any]
+    let encoder = JSONEncoder()
+    encoderConfig(encoder)
+    let parameters = try encoder.encodeJSONObject(input) as? [String: Any]
+
+    let decoder = JSONDecoder()
+    decoderConfig(decoder)
 
     return await withCheckedContinuation { continuation in
       hitSkedGo(
@@ -386,7 +393,7 @@ extension TKServer {
           statusCode: status,
           headers: headers,
           result: Result {
-            try JSONDecoder().decode(Output.self, from: try result.get().orThrow(ServerError.noData))
+            try decoder.decode(Output.self, from: try result.get().orThrow(ServerError.noData))
           }
         ))
       }
