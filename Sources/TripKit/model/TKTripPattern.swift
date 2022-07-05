@@ -12,35 +12,50 @@ import CoreLocation
 
 /// Simple dictionary representing a segment that can be
 /// used as input to `TKWaypointRouter`.
-public typealias TKSegmentPattern = [String: Any]
+public typealias TKSegmentPattern = TKWaypointRouter.Segment
 
 
-// Pure Swift this would be a caseless enum
-public class TKTripPattern: NSObject {
-  
-  private override init() { super.init() }
-  
+public enum TKTripPattern {
   
   /// - Returns: The trip pattern for a trip
-  @objc(tripPatternForTrip:)
   public static func pattern(for trip: Trip) -> [TKSegmentPattern] {
-    return trip.segments.compactMap { $0.pattern }
+    return trip.segments.compactMap(\.pattern)
   }
-  
 
   public static func od(for pattern: [TKSegmentPattern]) -> (o: CLLocationCoordinate2D, d: CLLocationCoordinate2D)? {
-    
-    guard
-      let startString = pattern.first?["start"] as? String,
-      let endString = pattern.last?["end"] as? String,
-      let start = TKParserHelper.coordinate(forRequest: startString),
-      let end = TKParserHelper.coordinate(forRequest: endString)
-      else { return nil }
-    
-    return (start, end)
+    if case .coordinate(let start) = pattern.first?.start,
+       case .coordinate(let end) = pattern.last?.end {
+      return (start, end)
+    } else {
+      return nil
+    }
+  }
+  
+  public static func modeLabels(for trip: Trip) -> [String] {
+    return trip.segments.compactMap { segment in
+      guard !segment.isStationary else { return nil }
+      if let info = segment.modeInfo {
+        return info.alt
+      } else if let mode = segment.modeIdentifier {
+        return TKRegionManager.shared.title(forModeIdentifier: mode)
+      } else {
+        return nil
+      }
+    }
+  }
+  
+  public static func modeLabels(for pattern: [TKSegmentPattern]) -> [String] {
+    return pattern.compactMap { pattern in
+      if let mode = pattern.modes.first {
+        return TKRegionManager.shared.title(forModeIdentifier: mode)
+      } else {
+        return nil
+      }
+    }
   }
   
 }
+
 
 
 extension TKSegment {
@@ -55,42 +70,15 @@ extension TKSegment {
       assertionFailure("Non-stationary segment without start & stop")
       return nil
     }
-    
-    var pattern: [String: Any] = [
-      "start":  TKParserHelper.requestString(for: start),
-      "end":    TKParserHelper.requestString(for: end),
-      "modes":  [mode]
-    ]
-    
-    pattern["alt"] = modeInfo?.alt
-    pattern["preferredPublic"] = isPublicTransport ? modeInfo?.identifier : nil
-    return pattern
-  }
-  
-}
 
-
-/// :nodoc:
-extension TKParserHelper {
-  
-  /// Inverse of `TKParserHelper.requestString(for:)`
-  class func coordinate(forRequest string: String) -> CLLocationCoordinate2D? {
+    // Previously also had:
+//    pattern["preferredPublic"] = isPublicTransport ? modeInfo?.identifier : nil
     
-    let pruned = string
-      .replacingOccurrences(of: "(", with: "")
-      .replacingOccurrences(of: ")", with: "")
-    
-    let numbers = pruned.components(separatedBy: ",")
-    if numbers.count != 2 {
-      return nil
-    }
-    
-    guard
-      let lat = CLLocationDegrees(numbers[0]),
-      let lng = CLLocationDegrees(numbers[1])
-      else { return nil }
-    
-    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
+    return .init(
+      start: .coordinate(start.coordinate),
+      end: .coordinate(end.coordinate),
+      modes: [mode]
+    )
   }
   
 }

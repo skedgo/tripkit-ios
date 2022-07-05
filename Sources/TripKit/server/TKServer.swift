@@ -284,7 +284,7 @@ extension TKServer {
     /// HTTP response headers. Can be empty if request failed.
     public var headers: [String: Any]
     
-    /// Types response, which can encapsulate a failure if the server returned an error
+    /// Typed response, which can encapsulate a failure if the server returned an error
     /// or if the server's data couldn't be decoded as the appropriate type.
     public var result: Result<T, Error>
   }
@@ -357,6 +357,43 @@ extension TKServer {
           headers: headers,
           result: Result {
             try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit<Input: Encodable, Output: Decodable>(
+    _ type: Output.Type,
+    _ method: HTTPMethod = .POST,
+    path: String,
+    input: Input,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil,
+    encoderConfig: (JSONEncoder) -> Void = { _ in },
+    decoderConfig: (JSONDecoder) -> Void = { _ in }
+  ) async throws -> Response<Output> {
+    let encoder = JSONEncoder()
+    encoderConfig(encoder)
+    let parameters = try encoder.encodeJSONObject(input) as? [String: Any]
+
+    let decoder = JSONDecoder()
+    decoderConfig(decoder)
+
+    return await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try decoder.decode(Output.self, from: try result.get().orThrow(ServerError.noData))
           }
         ))
       }
