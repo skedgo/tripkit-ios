@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TKWaypointRouter Class Reference</title>
+    <title>TKTripPattern Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/TKWaypointRouter" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/TKTripPattern" class="dashAnchor"></a>
 
-    <a title="TKWaypointRouter Class Reference"></a>
+    <a title="TKTripPattern Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">TripKit Reference</a>
       <img class="carat" src="../img/carat.png" alt=""/>
-      TKWaypointRouter Class Reference
+      TKTripPattern Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -113,10 +113,16 @@
                 <a class="nav-group-task-link" href="../Classes/TKRealTimeFetcher.html">TKRealTimeFetcher</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TKWaypointRouter.html">TKWaypointRouter</a>
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter.html">TKWaypointRouter</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TKWaypointRouter/WaypointError.html">– WaypointError</a>
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter/WaypointError.html">– WaypointError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter.html#/s:7TripKit16TKWaypointRouterO5InputV">– Input</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter/Segment.html">– Segment</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TKTripClassifier.html">TKTripClassifier</a>
@@ -394,9 +400,6 @@
                 <a class="nav-group-task-link" href="../Classes/TKTransportModes.html">TKTransportModes</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TKTripPattern.html">TKTripPattern</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/Trip.html">Trip</a>
               </li>
               <li class="nav-group-task">
@@ -510,6 +513,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/TKTripFetcher.html">TKTripFetcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKTripPattern.html">TKTripPattern</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/TKTripSegmentVisibility.html">TKTripSegmentVisibility</a>
@@ -883,17 +889,15 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>TKWaypointRouter</h1>
+            <h1>TKTripPattern</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TKWaypointRouter</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKTripPattern</span></code></pre>
 
                 </div>
               </div>
-            <p>Provides helper methods around TripGo API&rsquo;s <code>waypoint.json</code> endpoint</p>
-
-<p>For planning A-to-B-via-C trips, including building trip that follow a specific segment pattern.</p>
+            <p>Undocumented</p>
 
           </div>
         </section>
@@ -905,9 +909,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC13WaypointErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/WaypointError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC13WaypointErrorO">WaypointError</a>
+                    <a name="/s:7TripKit13TKTripPatternO7pattern3forSayAA16TKWaypointRouterO7SegmentVGAA0A0C_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/pattern(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit13TKTripPatternO7pattern3forSayAA16TKWaypointRouterO7SegmentVGAA0A0C_tFZ">pattern(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -915,101 +919,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="../Classes/TKWaypointRouter/WaypointError.html" class="slightly-smaller">See more</a>
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">WaypointError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Trip%20patterns%20%2B%20next%20trips"></a>
-                <a name="//apple_ref/swift/Section/Trip patterns + next trips" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Trip%20patterns%20%2B%20next%20trips"></a>
-                  <h3 class="section-name"><span>Trip patterns + next trips</span>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC09fetchNextA05after20usingPrivateVehicles10completionyAA0A0C_SayAA11TKVehicular_pGys6ResultOyAIs5Error_pGctFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchNextTrip(after:usingPrivateVehicles:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC09fetchNextA05after20usingPrivateVehicles10completionyAA0A0C_SayAA11TKVehicular_pGys6ResultOyAIs5Error_pGctFZ">fetchNextTrip(after:<wbr>usingPrivateVehicles:<wbr>completion:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Calculates a trip based on the provided trip. Departure time is the provided
-time or now, whichever is later.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchNextTrip</span><span class="p">(</span><span class="n">after</span> <span class="nv">trip</span><span class="p">:</span> <span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="n">usingPrivateVehicles</span> <span class="nv">vehicles</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKVehicular.html">TKVehicular</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">pattern</span><span class="p">(</span><span class="k">for</span> <span class="nv">trip</span><span class="p">:</span> <span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Other%20Typealiases.html#/s:7TripKit16TKSegmentPatterna">TKSegmentPattern</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
                       <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>trip</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The trip for which to get the next departure</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>vehicles</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Optional vehicles that should be for private vehicles segments</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Handler called on success with a trip or on error (with optional <code>Error</code>)</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <h4>Return Value</h4>
+                        <p>The trip pattern for a trip</p>
                       </div>
                     </section>
                   </div>
@@ -1017,224 +939,9 @@ time or now, whichever is later.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC05fetchA07pattern9departure20usingPrivateVehicles4into2in10completionySaySDySSypGG_10Foundation4DateVSayAA11TKVehicular_pGSo06TKTripB0CAA8TKRegionCys6ResultOyAA0A0Cs5Error_pGctFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchTrip(pattern:departure:usingPrivateVehicles:into:in:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC05fetchA07pattern9departure20usingPrivateVehicles4into2in10completionySaySDySSypGG_10Foundation4DateVSayAA11TKVehicular_pGSo06TKTripB0CAA8TKRegionCys6ResultOyAA0A0Cs5Error_pGctFZ">fetchTrip(pattern:<wbr>departure:<wbr>usingPrivateVehicles:<wbr>into:<wbr>in:<wbr>completion:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Calculates a trip from the provided pattern. Departure time is the provided
-time or now, whichever is later.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchTrip</span><span class="p">(</span><span class="nv">pattern</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Other%20Typealiases.html#/s:7TripKit16TKSegmentPatterna">TKSegmentPattern</a></span><span class="p">],</span> <span class="nv">departure</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">usingPrivateVehicles</span> <span class="nv">vehicles</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKVehicular.html">TKVehicular</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">into</span> <span class="nv">tripKit</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKTripKit.html">TKTripKit</a></span> <span class="o">=</span> <span class="kt"><a href="../Enums/TripKit.html">TripKit</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span> <span class="k">in</span> <span class="nv">region</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>pattern</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The pattern that&rsquo;s used as input to calculate a trip</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>departure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Departure time for new trip (ignored if before current time)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>vehicles</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Optional vehicles that should be for private vehicles segments</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>tripKit</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>TripKit instance into which the new trip will be inserted</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>region</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The region where the trip starts</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Handler called on success with a trip or on error (with optional <code>Error</code>)</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Tuning%20public%20transport%20trips"></a>
-                <a name="//apple_ref/swift/Section/Tuning public transport trips" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Tuning%20public%20transport%20trips"></a>
-                  <h3 class="section-name"><span>Tuning public transport trips</span>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC05fetchA06moving2to7atStart20usingPrivateVehicles10completionyAA9TKSegmentC_AA10StopVisitsCSbSayAA11TKVehicular_pGys6ResultOyAA0A0Cs5Error_pGctFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchTrip(moving:to:atStart:usingPrivateVehicles:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC05fetchA06moving2to7atStart20usingPrivateVehicles10completionyAA9TKSegmentC_AA10StopVisitsCSbSayAA11TKVehicular_pGys6ResultOyAA0A0Cs5Error_pGctFZ">fetchTrip(moving:<wbr>to:<wbr>atStart:<wbr>usingPrivateVehicles:<wbr>completion:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Calculates a trip from the provided trip (implied by the segment), which moves
-where to get on or off the provided <code>segment</code> to the provided <code>visit</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchTrip</span><span class="p">(</span><span class="n">moving</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKSegment.html">TKSegment</a></span><span class="p">,</span> <span class="n">to</span> <span class="nv">visit</span><span class="p">:</span> <span class="kt"><a href="../Classes/StopVisits.html">StopVisits</a></span><span class="p">,</span> <span class="nv">atStart</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">usingPrivateVehicles</span> <span class="nv">vehicles</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKVehicular.html">TKVehicular</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>segment</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The segment for which to change getting on/off</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>visit</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The visit along this segment to get on/off</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>atStart</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>true</code> if getting on should change, <code>false</code> if getting off should change</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>vehicles</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The private vehicles to use for private vehicle segments</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Handler called on success with a trip or on error (with optional <code>Error</code>)</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC05fetchA09replacing4with20usingPrivateVehicles10completionyAA9TKSegmentC_AA8DLSEntryCSayAA11TKVehicular_pGys6ResultOyAA0A0Cs5Error_pGctFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchTrip(replacing:with:usingPrivateVehicles:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC05fetchA09replacing4with20usingPrivateVehicles10completionyAA9TKSegmentC_AA8DLSEntryCSayAA11TKVehicular_pGys6ResultOyAA0A0Cs5Error_pGctFZ">fetchTrip(replacing:<wbr>with:<wbr>usingPrivateVehicles:<wbr>completion:<wbr>)</a>
+                    <a name="/s:7TripKit13TKTripPatternO2od3forSo22CLLocationCoordinate2DV1o_AG1dtSgSayAA16TKWaypointRouterO7SegmentVG_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/od(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit13TKTripPatternO2od3forSo22CLLocationCoordinate2DV1o_AG1dtSgSayAA16TKWaypointRouterO7SegmentVG_tFZ">od(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1249,32 +956,19 @@ where to get on or off the provided <code>segment</code> to the provided <code>v
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchTrip</span><span class="p">(</span><span class="n">replacing</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKSegment.html">TKSegment</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">entry</span><span class="p">:</span> <span class="kt"><a href="../Classes/DLSEntry.html">DLSEntry</a></span><span class="p">,</span> <span class="n">usingPrivateVehicles</span> <span class="nv">vehicles</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKVehicular.html">TKVehicular</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">od</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Other%20Typealiases.html#/s:7TripKit16TKSegmentPatterna">TKSegmentPattern</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">o</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">,</span> <span class="nv">d</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)?</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Picking%20different%20shared%20vehicles"></a>
-                <a name="//apple_ref/swift/Section/Picking different shared vehicles" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Picking%20different%20shared%20vehicles"></a>
-                  <h3 class="section-name"><span>Picking different shared vehicles</span>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC05fetchA08byMoving2to20usingPrivateVehicles10completionyAA9TKSegmentC_AA16TKModeCoordinateCSayAA11TKVehicular_pGys6ResultOyAA0A0Cs5Error_pGctFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchTrip(byMoving:to:usingPrivateVehicles:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC05fetchA08byMoving2to20usingPrivateVehicles10completionyAA9TKSegmentC_AA16TKModeCoordinateCSayAA11TKVehicular_pGys6ResultOyAA0A0Cs5Error_pGctFZ">fetchTrip(byMoving:<wbr>to:<wbr>usingPrivateVehicles:<wbr>completion:<wbr>)</a>
+                    <a name="/s:7TripKit13TKTripPatternO10modeLabels3forSaySSGAA0A0C_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/modeLabels(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit13TKTripPatternO10modeLabels3forSaySSGAA0A0C_tFZ">modeLabels(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1289,32 +983,19 @@ where to get on or off the provided <code>segment</code> to the provided <code>v
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchTrip</span><span class="p">(</span><span class="n">byMoving</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKSegment.html">TKSegment</a></span><span class="p">,</span> <span class="n">to</span> <span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKModeCoordinate.html">TKModeCoordinate</a></span><span class="p">,</span> <span class="n">usingPrivateVehicles</span> <span class="nv">vehicles</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TKVehicular.html">TKVehicular</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">modeLabels</span><span class="p">(</span><span class="k">for</span> <span class="nv">trip</span><span class="p">:</span> <span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Helpers"></a>
-                <a name="//apple_ref/swift/Section/Helpers" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Helpers"></a>
-                  <h3 class="section-name"><span>Helpers</span>
-</h3>
-                </div>
-              </div>
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit16TKWaypointRouterC05fetchA013waypointParas6region4into10completionySDySSypG_AA8TKRegionCSgSo22NSManagedObjectContextCys6ResultOyAA0A0Cs5Error_pGctFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchTrip(waypointParas:region:into:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit16TKWaypointRouterC05fetchA013waypointParas6region4into10completionySDySSypG_AA8TKRegionCSgSo22NSManagedObjectContextCys6ResultOyAA0A0Cs5Error_pGctFZ">fetchTrip(waypointParas:<wbr>region:<wbr>into:<wbr>completion:<wbr>)</a>
+                    <a name="/s:7TripKit13TKTripPatternO10modeLabels3forSaySSGSayAA16TKWaypointRouterO7SegmentVG_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/modeLabels(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit13TKTripPatternO10modeLabels3forSaySSGSayAA16TKWaypointRouterO7SegmentVG_tFZ">modeLabels(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1322,14 +1003,14 @@ where to get on or off the provided <code>segment</code> to the provided <code>v
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>For calculating a trip and adding it as a stand-alone trip / request to TripKit</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchTrip</span><span class="p">(</span><span class="nv">waypointParas</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">region</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">into</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">NSManagedObjectContext</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Trip.html">Trip</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">modeLabels</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Other%20Typealiases.html#/s:7TripKit16TKSegmentPatterna">TKSegmentPattern</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -1344,7 +1025,7 @@ where to get on or off the provided <code>segment</code> to the provided <code>v
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-06-16)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-07-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

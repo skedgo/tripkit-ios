@@ -113,10 +113,16 @@
                 <a class="nav-group-task-link" href="../Classes/TKRealTimeFetcher.html">TKRealTimeFetcher</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TKWaypointRouter.html">TKWaypointRouter</a>
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter.html">TKWaypointRouter</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TKWaypointRouter/WaypointError.html">– WaypointError</a>
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter/WaypointError.html">– WaypointError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter.html#/s:7TripKit16TKWaypointRouterO5InputV">– Input</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKWaypointRouter/Segment.html">– Segment</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TKTripClassifier.html">TKTripClassifier</a>
@@ -394,9 +400,6 @@
                 <a class="nav-group-task-link" href="../Classes/TKTransportModes.html">TKTransportModes</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TKTripPattern.html">TKTripPattern</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/Trip.html">Trip</a>
               </li>
               <li class="nav-group-task">
@@ -510,6 +513,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/TKTripFetcher.html">TKTripFetcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKTripPattern.html">TKTripPattern</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/TKTripSegmentVisibility.html">TKTripSegmentVisibility</a>
@@ -1906,6 +1912,45 @@ do not specify a <code><a href="../Classes/TKRegion.html">TKRegion</a></code>.</
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:So8TKServerC7TripKitE3hit__4path5input7headers6region13encoderConfig07decoderJ0AbCE8ResponseVy_q_Gq_m_AbCE10HTTPMethodOSSxSDyS2SGSgAC8TKRegionCSgy10Foundation11JSONEncoderCXEyAU11JSONDecoderCXEtYaKSERzSeR_r0_lF"></a>
+                    <a name="//apple_ref/swift/Method/hit(_:_:path:input:headers:region:encoderConfig:decoderConfig:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So8TKServerC7TripKitE3hit__4path5input7headers6region13encoderConfig07decoderJ0AbCE8ResponseVy_q_Gq_m_AbCE10HTTPMethodOSSxSDyS2SGSgAC8TKRegionCSgy10Foundation11JSONEncoderCXEyAU11JSONDecoderCXEtYaKSERzSeR_r0_lF">hit(_:<wbr>_:<wbr>path:<wbr>input:<wbr>headers:<wbr>region:<wbr>encoderConfig:<wbr>decoderConfig:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hit</span><span class="o">&lt;</span><span class="kt">Input</span><span class="p">:</span> <span class="kt">Encodable</span><span class="p">,</span> <span class="kt">Output</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span>
+  <span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">Output</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+  <span class="n">_</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKServer/HTTPMethod.html">HTTPMethod</a></span> <span class="o">=</span> <span class="o">.</span><span class="kt">POST</span><span class="p">,</span>
+  <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+  <span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">,</span>
+  <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+  <span class="nv">region</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+  <span class="nv">encoderConfig</span><span class="p">:</span> <span class="p">(</span><span class="kt">JSONEncoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">},</span>
+  <span class="nv">decoderConfig</span><span class="p">:</span> <span class="p">(</span><span class="kt">JSONDecoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">}</span>
+<span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKServer/Response.html">Response</a></span><span class="o">&lt;</span><span class="kt">Output</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:So8TKServerC7TripKitE3hit__3url10parametersAbCE8ResponseVy_xGxm_AbCE10HTTPMethodO10Foundation3URLVSDySSypGSgtYaSeRzlF"></a>
                     <a name="//apple_ref/swift/Method/hit(_:_:url:parameters:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:So8TKServerC7TripKitE3hit__3url10parametersAbCE8ResponseVy_xGxm_AbCE10HTTPMethodO10Foundation3URLVSDySSypGSgtYaSeRzlF">hit(_:<wbr>_:<wbr>url:<wbr>parameters:<wbr>)</a>
@@ -1946,7 +1991,7 @@ do not specify a <code><a href="../Classes/TKRegion.html">TKRegion</a></code>.</
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-06-16)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-07-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
