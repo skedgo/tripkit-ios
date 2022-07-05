@@ -278,7 +278,7 @@ extension NSCoder {
 
 }
 
-// MAKR: - DeepLink
+// MARK: - DeepLink
 
 public protocol TKDeepLinkable {
   var deepLink: URL? { get }

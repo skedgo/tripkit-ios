@@ -20,7 +20,7 @@ fileprivate extension Result {
 /// Provides helper methods around TripGo API's `waypoint.json` endpoint
 ///
 /// For planning A-to-B-via-C trips, including building trip that follow a specific segment pattern.
-public class TKWaypointRouter: NSObject {
+public enum TKWaypointRouter {
   
   public enum WaypointError: Error {
     case cannotMoveToFrequencyBasedVisit
@@ -33,10 +33,6 @@ public class TKWaypointRouter: NSObject {
     case tripGotDisassociatedFromCoreData
     case fetchedResultsButGotNoTrip
     case serverFailedWithUnknownError
-  }
-  
-  private override init() {
-    super.init()
   }
   
 }
@@ -65,7 +61,7 @@ extension TKWaypointRouter {
       self.fetchTrip(waypointParas: paras, region: region, into: trip.tripGroup, completion: completion)
     }
   }
-    
+  
   /// Calculates a trip from the provided pattern. Departure time is the provided
   /// time or now, whichever is later.
   ///
@@ -124,8 +120,8 @@ extension TKWaypointRouter {
       }
       
       do {
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        let paras = try builder.build(moving: segment, to: visit, atStart: atStart)
+        let segments = try Self.segments(moving: segment, to: visit, atStart: atStart)
+        let paras = try buildParas(segments: segments, vehicles: vehicles)
         
         // Will have new pattern, so we'll add it to the request rather than
         // to the original trip group.
@@ -150,8 +146,8 @@ extension TKWaypointRouter {
       }
       
       do {
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        let paras = try builder.build(replacing: segment, with: entry, fallbackRegion: region)
+        let segments = try Self.segments(replacing: segment, with: entry, fallbackRegion: region)
+        let paras = try buildParas(segments: segments, vehicles: vehicles)
         
         // Will have the same pattern, so we'll add it to original trip group
         self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
@@ -196,15 +192,14 @@ extension TKWaypointRouter {
       }
       
       do {
-        let builder = WaypointParasBuilder(privateVehicles: vehicles)
-        
-        let paras: [String: Any]
+        let segments: [Segment]
         if isMovingStartOfSegment {
-          paras = try builder.build(movingStartOf: movingSegment, to: location)
+          segments = try Self.segments(movingStartOf: movingSegment, to: location)
         } else {
-          paras = try builder.build(movingEndOf: movingSegment, to: location)
+          segments = try Self.segments(movingEndOf: movingSegment, to: location)
         }
-        
+
+        let paras = try buildParas(segments: segments, vehicles: vehicles)
         self.fetchTrip(waypointParas: paras, region: region, into: segment.trip.tripGroup, completion: completion)
       } catch {
         completion(.failure(error))
@@ -311,25 +306,130 @@ extension TKWaypointRouter {
   
 }
 
-class WaypointParasBuilder {
+// MARK: - Input
+
+extension TKWaypointRouter {
   
-  private let vehicles: [TKVehicular]
-  
-  init(privateVehicles vehicles: [TKVehicular] = []) {
-    self.vehicles = vehicles
+  struct Input: Encodable {
+    var segments: [Segment]
+    var vehicles: [TKAPI.PrivateVehicle]
+    // var config: TKConfig
   }
   
-  func build(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [String: Any] {
+  enum Location {
+    case coordinate(CLLocationCoordinate2D)
+    case code(String, TKRegion)
+  }
+  
+  struct Segment: Encodable {
+    var start: Location
+    var end: Location
+    let modes: [String]
+
+    var startTime: Date?
+    var endTime: Date?
+
+    /// Private vehicles
+    var vehicleUUID: String?
+
+    /// Shared vehicles
+    var sharedVehicleID: String?
+    
+    /// Public transport
+    var serviceTripID: String?
+    var operatorID: String?
+    var operatorName: String?
+    
+    enum CodingKeys: String, CodingKey {
+      case start
+      case startRegion = "region"
+      case startTime
+      case end
+      case endRegion = "disembarkationRegion"
+      case endTime
+      case modes
+      case vehicleUUID
+      case sharedVehicleID
+      case serviceTripID
+      case operatorName = "operator"
+      case operatorID = "operatorID"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      
+      // required
+      switch start {
+      case .coordinate(let coordinate):
+        try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .start)
+      case .code(let string, let region):
+        try container.encode(string, forKey: .start)
+        try container.encode(region.name, forKey: .startRegion)
+      }
+      switch end {
+      case .coordinate(let coordinate):
+        try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .end)
+      case .code(let string, let region):
+        try container.encode(string, forKey: .end)
+        try container.encode(region.name, forKey: .endRegion)
+      }
+      try container.encode(modes, forKey: .modes)
+
+      // optional
+      try container.encodeIfPresent(startTime, forKey: .startTime)
+      try container.encodeIfPresent(endTime, forKey: .endTime)
+      try container.encodeIfPresent(vehicleUUID, forKey: .vehicleUUID)
+      try container.encodeIfPresent(sharedVehicleID, forKey: .sharedVehicleID)
+      try container.encodeIfPresent(serviceTripID, forKey: .serviceTripID)
+      try container.encodeIfPresent(operatorID, forKey: .operatorID)
+      try container.encodeIfPresent(operatorName, forKey: .operatorName)
+    }
+  }
+  
+}
+
+extension TKWaypointRouter.Segment {
+  
+  init(service: Service, mode: String, start: TKWaypointRouter.Location, end: TKWaypointRouter.Location, startTime: Date? = nil, endTime: Date? = nil) {
+    self.init(
+      start: start,
+      end: end,
+      modes: [mode],
+      startTime: startTime,
+      endTime: endTime,
+      serviceTripID: service.code,
+      operatorID: service.operatorID,
+      operatorName: service.operatorName
+    )
+  }
+  
+}
+
+extension TKWaypointRouter {
+  
+  static func buildParas(segments: [TKWaypointRouter.Segment], vehicles: [TKVehicular]) throws -> [String: Any] {
+    let input = TKWaypointRouter.Input(
+      segments: segments,
+      vehicles: vehicles.map { $0.toModel() }
+    )
+    
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .secondsSince1970
+#if DEBUG
+    encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+#endif
+    let data = try encoder.encode(input)
+    var object = try JSONSerialization.jsonObject(with: data) as? [String: Any] ?? [:]
+    object["config"] = TKSettings.config
+    return object
+  }
+  
+  static func segments(moving segmentToMatch: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [TKWaypointRouter.Segment] {
     
     assert(!segmentToMatch.isStationary, "Can't move stationary segments to a visit")
     assert(segmentToMatch.isPublicTransport, "Can only move public transport segments to a visit")
     
     guard let trip = segmentToMatch.trip else { preconditionFailure() }
-    
-    var paras: [String: Any] = [
-      "config": TKSettings.Config.userSettings().paras,
-      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
-    ]
     
     // Prune the segments, removing stationary segments...
     let nonStationary = trip.segments.filter { !$0.isStationary }
@@ -345,98 +445,90 @@ class WaypointParasBuilder {
           return true
         }
       }
-      .map { $0.element }
+      .map(\.element)
     
-    // Construct the paras on a segment by segment basis
+    // Construct the paras on a segment-by-segment basis
     var foundMatch = false
-    let unglued = try prunedSegments.map { segment -> (segment: TKSegment, paras: [String: Any]) in
+    let unglued = try prunedSegments.map { segment -> (segment: TKSegment, input: TKWaypointRouter.Segment) in
       if segmentToMatch == segment {
         foundMatch = true
-        let paras = try waypointParas(moving: segment, to: visit, atStart: atStart)
+        let paras = try waypointSegment(moving: segment, to: visit, atStart: atStart)
         return (segment, paras)
       } else {
-        let paras = try waypointParas(forNonStationary: segment)
+        let paras = try waypointSegment(forNonStationary: segment)
         return (segment, paras)
       }
     }
     assert(foundMatch)
     
     // Glue them together, making sure that start + end coordinates are matching
-    let arrayParas = unglued.enumerated().map { index, current -> [[String: Any]] in
+    return unglued.enumerated().flatMap { index, current -> [TKWaypointRouter.Segment] in
       
       // If the next segment is the one to change the embarkation, extend the
       // end to that location.
       if atStart, index+1 < unglued.count, unglued[index+1].segment == segmentToMatch  {
-        var paras = current.paras
-        paras["end"] = TKParserHelper.requestString(for: visit.coordinate)
-        return [paras]
+        var input = current.input
+        input.end = .coordinate(visit.coordinate) // not stop code, as this is a non-PT segment
+        return [input]
       }
       
       // If you change the embaraktion at the very start, we need to add an additional
       // walk.
       if atStart, index == 0, current.segment == segmentToMatch {
-        let walk: [String : Any] = [
-          "start": TKParserHelper.requestString(for: trip.request.fromLocation.coordinate),
-          "end": TKParserHelper.requestString(for: visit.coordinate),
-          "modes": ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
-        ]
-        return [walk, current.paras]
+        let walk = TKWaypointRouter.Segment(
+          start: .coordinate(trip.request.fromLocation.coordinate),
+          end: .coordinate(visit.coordinate), // not stop code, as this is a walking segment
+          modes: ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
+        )
+        return [walk, current.input]
       }
-      
       
       if !atStart, index > 0, unglued[index-1].segment == segmentToMatch {
-        var paras = current.paras
-        paras["start"] = TKParserHelper.requestString(for: visit.coordinate)
-        return [paras]
+        var input = current.input
+        input.start = .coordinate(visit.coordinate) // not stop code, as this is a non-PT segment
+        return [input]
       }
       if !atStart, index == unglued.count - 1, current.segment == segmentToMatch {
-        let walk: [String : Any] = [
-          "start": TKParserHelper.requestString(for: visit.coordinate),
-          "end": TKParserHelper.requestString(for: trip.request.toLocation.coordinate),
-          "modes": ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
-        ]
-        return [current.paras, walk]
+        let walk = TKWaypointRouter.Segment(
+          start: .coordinate(visit.coordinate), // not stop code, as this is a walking segment
+          end: .coordinate(trip.request.toLocation.coordinate),
+          modes: ["wa_wal"] // Ok, to send this even when on wheelchair. TKSettings take care of that.
+        )
+        return [current.input, walk]
       }
       
-      return [current.paras]
+      return [current.input]
     }
-    
-    paras["segments"] = Array(arrayParas.joined())
-    return paras
   }
   
-  private func waypointParas(forNonStationary segment: TKSegment) throws -> [String: Any] {
+  // MARK: - Public transport
+  
+  private static func segments(replacing prototype: TKSegment, with entry: DLSEntry, fallbackRegion: TKRegion) throws -> [TKWaypointRouter.Segment] {
+    guard let identifier = prototype.modeIdentifier else {
+      throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("segment.modeIdentifier")
+    }
+
+    // continuations are taken care of by the entry's send stop and segment's `finalSegment`
+    let relevantSegments = prototype.trip.segments.filter { !$0.isContinuation && !$0.isStationary }
+    return try relevantSegments.map { segment -> TKWaypointRouter.Segment in
+      if segment == prototype {
+        return try waypointSegment(for: entry, mode: identifier, fallbackRegion: fallbackRegion)
+      } else {
+        return try waypointSegment(forMoving: segment)
+      }
+    }
+  }
+  
+  private static func waypointSegment(forNonStationary segment: TKSegment) throws -> TKWaypointRouter.Segment {
     assert(!segment.isStationary)
     if segment.isPublicTransport {
-      return try waypointParas(forPublicTransport: segment)
+      return try waypointSegment(forPublicTransport: segment)
     } else {
-      return try waypointParas(forMoving: segment)
+      return try waypointSegment(forMoving: segment)
     }
   }
   
-  private func waypointParas(forMoving segment: TKSegment) throws -> [String: Any] {
-    guard
-      let start = segment.start?.coordinate,
-      let end = segment.end?.coordinate,
-      let privateMode = segment.modeIdentifier
-      else {
-        throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("Segment is missing start, end, or mode.")
-    }
-    
-    var paras: [String : Any] = [
-      "modes": [privateMode],
-      "start": TKParserHelper.requestString(for: start),
-      "end": TKParserHelper.requestString(for: end)
-    ]
-    
-    if let vehicleUUID = segment.reference?.vehicleUUID {
-      paras["vehicleUUID"] = vehicleUUID
-    }
-    
-    return paras
-  }
-  
-  private func waypointParas(forPublicTransport segment: TKSegment) throws -> [String: Any] {
+  private static func waypointSegment(forPublicTransport segment: TKSegment) throws -> TKWaypointRouter.Segment {
     precondition(segment.isPublicTransport)
     
     guard
@@ -448,183 +540,171 @@ class WaypointParasBuilder {
         throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("Segment is missing required public transport information.")
     }
     
-    let startRegion = segment.startRegion ?? .international
-    let endRegion   = segment.endRegion   ?? .international
-    
-    return [
-      "modes": [publicMode],
-      "serviceTripID": service.code,
-      "operator": service.operatorName ?? "",
-      "region": startRegion.name,
-      "disembarkationRegion": endRegion.name,
-      "start": startCode,
-      "end": endCode,
-      "startTime": segment.departureTime.timeIntervalSince1970,
-      "endTime": segment.arrivalTime.timeIntervalSince1970,
-    ]
+    return .init(
+      service: service,
+      mode: publicMode,
+      start: .code(startCode, segment.startRegion ?? .international),
+      end: .code(endCode, segment.endRegion   ?? .international),
+      startTime: segment.departureTime,
+      endTime: segment.arrivalTime
+    )
   }
   
-  private func waypointParas(moving segment: TKSegment, to visit: StopVisits, atStart: Bool) throws -> [String: Any] {
-    guard case .timetabled(let arrival, let departure) = visit.timing else {
-      throw TKWaypointRouter.WaypointError.cannotMoveToFrequencyBasedVisit
+  private static func waypointSegment(forMoving segment: TKSegment) throws -> TKWaypointRouter.Segment {
+    guard
+      let start = segment.start?.coordinate,
+      let end = segment.end?.coordinate,
+      let privateMode = segment.modeIdentifier
+      else {
+        throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("Segment is missing start, end, or mode.")
     }
     
-    var paras = try waypointParas(forPublicTransport: segment)
-    
-    if atStart {
-      guard let departure = departure else { throw TKWaypointRouter.WaypointError.timetabledVisitIsMissingTimes }
-      paras["start"] = visit.stop.stopCode
-      paras["startTime"] = departure.timeIntervalSince1970
-    
-    } else {
-      guard let arrival = arrival ?? departure else { throw TKWaypointRouter.WaypointError.timetabledVisitIsMissingTimes }
-      paras["end"] = visit.stop.stopCode
-      paras["endTime"] = arrival.timeIntervalSince1970
-    }
-    
-    return paras
+    return .init(
+      start: .coordinate(start),
+      end: .coordinate(end),
+      modes: [privateMode],
+      vehicleUUID: segment.reference?.vehicleUUID,
+      sharedVehicleID: segment.sharedVehicle?.identifier
+    )
   }
   
-  func build(replacing prototype: TKSegment, with entry: DLSEntry, fallbackRegion: TKRegion) throws -> [String: Any] {
-    guard let identifier = prototype.modeIdentifier else {
-      throw TKWaypointRouter.WaypointError.builderIsMissingRequiredInput("segment.modeIdentifier")
-    }
-    
-    var paras: [String: Any] = [
-      "config": TKSettings.Config.userSettings().paras,
-      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
-    ]
-
-    // continuations are taken care of by the entry's send stop and segment's `finalSegment`
-    let relevantSegments = prototype.trip.segments.filter { !$0.isContinuation && !$0.isStationary }
-    
-    let segmentParas = try relevantSegments.map { segment -> [String: Any] in
-      if segment == prototype {
-        return try waypointParas(for: entry, mode: identifier, fallbackRegion: fallbackRegion)
-      } else {
-        return try waypointParas(forMoving: segment)
-      }
-    }
-
-    paras["segments"] = segmentParas
-    return paras
-  }
-  
-  private func waypointParas(for entry: DLSEntry, mode: String, fallbackRegion: TKRegion) throws -> [String: Any] {
+  private static func waypointSegment(for entry: DLSEntry, mode: String, fallbackRegion: TKRegion) throws -> TKWaypointRouter.Segment {
     guard let departure = entry.departure, let arrival = entry.arrival else {
       throw TKWaypointRouter.WaypointError.cannotMoveToFrequencyBasedVisit
     }
+    
+    return .init(
+      service: entry.service,
+      mode: mode,
+      start: .code(entry.stop.stopCode, entry.stop.region ?? fallbackRegion),
+      end: .code(entry.endStop.stopCode, entry.endStop.region ?? fallbackRegion),
+      startTime: departure,
+      endTime: arrival
+    )
+  }
 
+  private static func waypointSegment(moving segment: TKSegment, to visit: StopVisits, atStart: Bool) throws -> TKWaypointRouter.Segment {
+    guard
+      case .timetabled(let arrival, let departure) = visit.timing,
+      let service = segment.service,
+      let mode = segment.modeIdentifier
+    else {
+      throw TKWaypointRouter.WaypointError.cannotMoveToFrequencyBasedVisit
+    }
+    
+    if atStart {
+      guard let departure = departure, let endCode = segment.scheduledEndStopCode else { throw TKWaypointRouter.WaypointError.timetabledVisitIsMissingTimes }
+      return .init(
+        service: service,
+        mode: mode,
+        start: .code(visit.stop.stopCode, visit.stop.region ?? segment.startRegion ?? .international),
+        end: .code(endCode, segment.endRegion ?? .international),
+        startTime: departure,
+        endTime: segment.arrivalTime
+      )
+
+    } else {
+      guard let arrival = arrival ?? departure, let startCode = segment.scheduledStartStopCode else { throw TKWaypointRouter.WaypointError.timetabledVisitIsMissingTimes }
+      return .init(
+        service: service,
+        mode: mode,
+        start: .code(startCode, segment.startRegion ?? .international),
+        end: .code(visit.stop.stopCode, visit.stop.region ?? segment.endRegion ?? .international),
+        startTime: segment.departureTime,
+        endTime: arrival
+      )
+    }
+  }
+  
+  private static func segments(movingStartOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [TKWaypointRouter.Segment] {
+    guard
+      let trip = prototype.trip,
+      let oldSharingMode = prototype.modeIdentifier,
+      let newSharingMode = location.stopModeInfo.identifier, // Might be different, when picking different provider
+      let segmentEnd = prototype.end?.coordinate
+      else { throw TKWaypointRouter.WaypointError.segmentNotEligible }
+    
+    var nonSharingModes = trip.usedModeIdentifiers
+    nonSharingModes.remove(oldSharingMode)
+    if nonSharingModes.isEmpty {
+      nonSharingModes.insert("wa_wal")
+    }
+    
+    let a: TKWaypointRouter.Location = .coordinate(trip.request.fromLocation.coordinate)
+    let b: TKWaypointRouter.Location = .coordinate(location.coordinate)
+    let c: TKWaypointRouter.Location = .coordinate(segmentEnd)
+    let d: TKWaypointRouter.Location = .coordinate(trip.request.toLocation.coordinate)
+    
     return [
-      "modes": [mode],
-      "start": entry.stop.stopCode,
-      "end": entry.endStop.stopCode,
-      "startTime": departure.timeIntervalSince1970,
-      "endTime": arrival.timeIntervalSince1970,
-      "serviceTripID": entry.service.code,
-      "operator": entry.service.operatorName ?? "",
-      "region": entry.stop.region?.name ?? fallbackRegion.name,
-      "disembarkationRegion": entry.endStop.region?.name ?? fallbackRegion.name
+      // 1. Get to the vehicle using non-sharing modes
+      .init(
+        start: a,
+        end: b,
+        modes: Array(nonSharingModes),
+        startTime: trip.departureTime
+      ),
+      
+      // 2. Use the vehicle to its destination
+      .init(
+        start: b,
+        end: c,
+        modes: [newSharingMode],
+        sharedVehicleID: (location as? TKFreeFloatingVehicleLocation)?.vehicle.identifier
+      ),
+      
+      // 3. From there, use the other non-sharing modes
+      .init(
+        start: c,
+        end: d,
+        modes: Array(nonSharingModes)
+      ),
     ]
   }
   
-  func build(movingEndOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [String: Any] {
+  private static func segments(movingEndOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [TKWaypointRouter.Segment] {
     guard
       let trip = prototype.trip,
       let sharingMode = prototype.modeIdentifier,
       let segmentStart = prototype.start?.coordinate
       else { throw TKWaypointRouter.WaypointError.segmentNotEligible }
     
-    var paras: [String: Any] = [
-      "config": TKSettings.Config.userSettings().paras,
-      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
-    ]
-    
     var nonSharingModes = trip.usedModeIdentifiers
     nonSharingModes.remove(sharingMode)
     if nonSharingModes.isEmpty {
       nonSharingModes.insert("wa_wal")
     }
     
-    var waypoints: [[String: Any]] = []
-    let a = TKParserHelper.requestString(for: trip.request.fromLocation.coordinate)
-    let b = TKParserHelper.requestString(for: segmentStart)
-    let c = TKParserHelper.requestString(for: location.coordinate)
-    let d = TKParserHelper.requestString(for: trip.request.toLocation.coordinate)
+    let a: TKWaypointRouter.Location = .coordinate(trip.request.fromLocation.coordinate)
+    let b: TKWaypointRouter.Location = .coordinate(segmentStart)
+    let c: TKWaypointRouter.Location = .coordinate(location.coordinate)
+    let d: TKWaypointRouter.Location = .coordinate(trip.request.toLocation.coordinate)
     
-    waypoints.append([
-      "modes": Array(nonSharingModes),
-      "start": a,
-      "end": b,
-      "startTime": trip.departureTime.timeIntervalSince1970
-    ])
-    
-    waypoints.append([
-      "modes": [sharingMode],
-      "start": b,
-      "end": c
-    ])
-    
-    waypoints.append([
-      "modes": Array(nonSharingModes),
-      "start": c,
-      "end": d
-    ])
-    
-    paras["segments"] = waypoints
-    
-    return paras
+    return [
+      // 1. Get to the vehicle using non-sharing modes
+      .init(
+        start: a,
+        end: b,
+        modes: Array(nonSharingModes),
+        startTime: trip.departureTime
+      ),
+      
+      // 2. Take the vehicle to the new destination destination
+      .init(
+        start: b,
+        end: c,
+        modes: [sharingMode],
+        sharedVehicleID: prototype.sharedVehicle?.identifier
+      ),
+      
+      // 3. From there, use the other non-sharing modes
+      .init(
+        start: c,
+        end: d,
+        modes: Array(nonSharingModes)
+      ),
+    ]
   }
   
-  func build(movingStartOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [String: Any] {
-    guard
-      let trip = prototype.trip,
-      let sharingMode = prototype.modeIdentifier,
-      let segmentEnd = prototype.end?.coordinate
-      else { throw TKWaypointRouter.WaypointError.segmentNotEligible }
-    
-    var paras: [String: Any] = [
-      "config": TKSettings.Config.userSettings().paras,
-      "vehicles": TKAPIToCoreDataConverter.vehiclesPayload(for: vehicles)
-    ]
-    
-    var nonSharingModes = trip.usedModeIdentifiers
-    nonSharingModes.remove(sharingMode)
-    if nonSharingModes.isEmpty {
-      nonSharingModes.insert("wa_wal")
-    }
 
-    var waypoints: [[String: Any]] = []
-    let a = TKParserHelper.requestString(for: trip.request.fromLocation.coordinate)
-    let b = TKParserHelper.requestString(for: location.coordinate)
-    let c = TKParserHelper.requestString(for: segmentEnd)
-    let d = TKParserHelper.requestString(for: trip.request.toLocation.coordinate)
-    
-    // 1. Get to the vehicle using non-sharing modes
-    waypoints.append([
-      "modes": Array(nonSharingModes),
-      "start": a,
-      "end": b,
-      "startTime": trip.departureTime.timeIntervalSince1970
-    ])
-    
-    // 2. Use the vehicle to its destination
-    waypoints.append([
-      "modes": [location.stopModeInfo.identifier!],
-      "start": b,
-      "end": c
-    ])
-    
-    // 3. From there, use the other non-sharing modes
-    waypoints.append([
-      "modes": Array(nonSharingModes),
-      "start": c,
-      "end": d
-    ])
-
-    paras["segments"] = waypoints
-
-    return paras
-  }
     
 }
