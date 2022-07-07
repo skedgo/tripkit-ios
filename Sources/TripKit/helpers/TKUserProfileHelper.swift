@@ -15,6 +15,7 @@ public class TKUserProfileHelper: NSObject {
     case sortedEnabled = "profileSortedModeIdentifiers"
     case hidden = "profileHiddenModeIdentifiers"
     case disliked = "profileDislikedTransitMode"
+    case enabled = "profileEnabledCyclingModes"
   }
   
   public typealias Identifier = String
@@ -132,5 +133,29 @@ public class TKUserProfileHelper: NSObject {
     }
   }
   
+  // MARK: - Mode by mode, Mode picker
+  
+  @objc public class func fetchPreferredAvailableModes(from identifiers: [Identifier]) -> Set<Identifier> {
+    let enabled = enabledSharedVehicleModes
+    let available = identifiers.filter { enabled.contains($0) }
+    return Set(available)
+  }
+  
+  @objc public class func isSharedVehicleModeEnabled(_ identifier: Identifier) -> Bool {
+    return enabledSharedVehicleModes.contains(identifier)
+  }
+  
+  @objc public class func setEnabledSharedVehicleModes(_ identifiers: [Identifier]) {
+    // Replace with set instead of appending / removing one to clean list - in case of any backend identifier change
+    UserDefaults.shared.set(identifiers, forKey: DefaultsKey.enabled.rawValue)
+  }
+    
+  @objc public class var enabledSharedVehicleModes: [Identifier] {
+    if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.enabled.rawValue) as? [Identifier] {
+      return disabled
+    } else {
+      return []
+    }
+  }
   
 }

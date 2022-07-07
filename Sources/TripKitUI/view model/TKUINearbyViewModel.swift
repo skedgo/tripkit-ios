@@ -49,6 +49,7 @@ public class TKUINearbyViewModel {
     }
   }
   
+  // TODO: Update parameter documentation
   /// Creates a new view model
   ///
   /// - Parameters:
