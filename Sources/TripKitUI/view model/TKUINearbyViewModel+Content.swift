@@ -129,15 +129,10 @@ extension TKUINearbyViewModel {
       
     } else {
       let byModes: [TKModeCoordinate]
-      if let enabled = modes {
-        TKUserProfileHelper.setEnabledSharedVehicleModes(enabled.compactMap { $0.identifier })
-        
-        byModes = content.locations.filter { location in
-          return enabled.contains { $0 == location.stopModeInfo }
-        }
-      } else {
-        byModes = content.locations
+      byModes = content.locations.filter  { location in
+        return TKUserProfileHelper.isSharedVehicleModeEnabled(mode: location.stopModeInfo)
       }
+      
       return ViewContent(locations: byModes, mapCenter: content.mapCenter)
     }
   }

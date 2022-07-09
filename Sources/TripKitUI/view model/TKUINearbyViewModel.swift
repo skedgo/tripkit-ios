@@ -89,7 +89,11 @@ public class TKUINearbyViewModel {
     
     /// Variant of `nearby` that's filtering according to `pickedModes`
     let pickedModes = cardInput.pickedModes.asObservable()
-      .map { $0 as Set<TKModeInfo>? }
+      .map {
+        let modes = $0 as Set<TKModeInfo>?
+        TKUserProfileHelper.setEnabledSharedVehicleModes(modes: modes ?? Set<TKModeInfo>())
+        return modes as Set<TKModeInfo>?
+      }
       .startWith(nil)
     
     let focused = mapInput.focus

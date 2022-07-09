@@ -15,7 +15,7 @@ public class TKUserProfileHelper: NSObject {
     case sortedEnabled = "profileSortedModeIdentifiers"
     case hidden = "profileHiddenModeIdentifiers"
     case disliked = "profileDislikedTransitMode"
-    case enabled = "profileEnabledCyclingModes"
+    case enabled = "profileEnabledSharedVehicleModes"
   }
   
   public typealias Identifier = String
@@ -135,24 +135,49 @@ public class TKUserProfileHelper: NSObject {
   
   // MARK: - Mode by mode, Mode picker
   
-  @objc public class func fetchPreferredAvailableModes(from identifiers: [Identifier]) -> Set<Identifier> {
-    let enabled = enabledSharedVehicleModes
-    let available = identifiers.filter { enabled.contains($0) }
-    return Set(available)
+  @objc public class func hasEnabledModes() -> Bool {
+    return enabledSharedVehicleModes.count > 0
   }
   
-  @objc public class func isSharedVehicleModeEnabled(_ identifier: Identifier) -> Bool {
+  @objc public class func isSharedVehicleModeEnabled(identifier: ModeIdentifier) -> Bool {
     return enabledSharedVehicleModes.contains(identifier)
   }
   
-  @objc public class func setEnabledSharedVehicleModes(_ identifiers: [Identifier]) {
+  @objc public class func isSharedVehicleModeEnabled(mode: TKModeInfo) -> Bool {
+    var isEnabled = false
+    enabledSharedVehicleModes.forEach { identifier in
+      let components = identifier.components(separatedBy: ":")
+      if components[0] == mode.identifier,
+         components[1] == mode.localImageName {
+        isEnabled = true
+      }
+    }
+    return isEnabled
+  }
+  
+  @objc public class func setEnabledSharedVehicleModes(modes: Set<TKModeInfo>) {
+    let identifiers = modes.compactMap { TKUserProfileHelper.identifier(from: $0) }
+    TKUserProfileHelper.setEnabledSharedVehicleModes(identifiers: identifiers)
+  }
+  
+  @objc public class func setEnabledSharedVehicleModes(identifiers: [ModeIdentifier]) {
     // Replace with set instead of appending / removing one to clean list - in case of any backend identifier change
     UserDefaults.shared.set(identifiers, forKey: DefaultsKey.enabled.rawValue)
   }
+  
+  // combined both identifier and imageName to identify the actual mode, since identifier is the same for both bike and scooter modes
+  @objc public class func identifier(from mode: TKModeInfo) -> String? {
+    guard let identifier = mode.identifier,
+          let imageName = mode.localImageName
+    else {
+      return nil
+    }
+    return identifier + ":" + imageName
+  }
     
-  @objc public class var enabledSharedVehicleModes: [Identifier] {
-    if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.enabled.rawValue) as? [Identifier] {
-      return disabled
+  @objc public class var enabledSharedVehicleModes: [ModeIdentifier] {
+    if let enabled = UserDefaults.shared.object(forKey: DefaultsKey.enabled.rawValue) as? [ModeIdentifier] {
+      return enabled
     } else {
       return []
     }
