@@ -15,7 +15,7 @@ public class TKUserProfileHelper: NSObject {
     case sortedEnabled = "profileSortedModeIdentifiers"
     case hidden = "profileHiddenModeIdentifiers"
     case disliked = "profileDislikedTransitMode"
-    case enabled = "profileEnabledSharedVehicleModes"
+    case disabled = "profileDisabledSharedVehicleModes"
   }
   
   public typealias Identifier = String
@@ -135,34 +135,49 @@ public class TKUserProfileHelper: NSObject {
   
   // MARK: - Mode by mode, Mode picker
   
-  @objc public class func hasEnabledModes() -> Bool {
-    return enabledSharedVehicleModes.count > 0
-  }
-  
   @objc public class func isSharedVehicleModeEnabled(identifier: ModeIdentifier) -> Bool {
-    return enabledSharedVehicleModes.contains(identifier)
+    return disabledSharedVehicleModes.contains(identifier)
   }
   
   @objc public class func isSharedVehicleModeEnabled(mode: TKModeInfo) -> Bool {
-    var isEnabled = false
-    enabledSharedVehicleModes.forEach { identifier in
+    var hasDisabled = false
+    disabledSharedVehicleModes.forEach { identifier in
       let components = identifier.components(separatedBy: ":")
       if components[0] == mode.identifier,
          components[1] == mode.localImageName {
-        isEnabled = true
+        hasDisabled = true
       }
     }
-    return isEnabled
+    return !hasDisabled
   }
   
-  @objc public class func setEnabledSharedVehicleModes(modes: Set<TKModeInfo>) {
-    let identifiers = modes.compactMap { TKUserProfileHelper.identifier(from: $0) }
-    TKUserProfileHelper.setEnabledSharedVehicleModes(identifiers: identifiers)
+  /// update picked modes provided with all reference modes to determine disabled modes
+  @objc public class func update(pickedModes: Set<TKModeInfo>, allModes: Set<TKModeInfo>) {
+    let pickedIds = pickedModes.compactMap { TKUserProfileHelper.identifier(from: $0) }
+    let allIds = allModes.compactMap { TKUserProfileHelper.identifier(from: $0) }
+    update(pickedIds: pickedIds, allIds: allIds)
   }
   
-  @objc public class func setEnabledSharedVehicleModes(identifiers: [ModeIdentifier]) {
-    // Replace with set instead of appending / removing one to clean list - in case of any backend identifier change
-    UserDefaults.shared.set(identifiers, forKey: DefaultsKey.enabled.rawValue)
+  @objc public class func update(pickedIds: [ModeIdentifier], allIds: [ModeIdentifier]) {
+    var modes = disabledSharedVehicleModes
+    
+    let toDisable = allIds.filter {
+      !pickedIds.contains($0)
+    }
+    
+    pickedIds.forEach { identifier in
+      if modes.contains(identifier) {
+        modes = modes.filter { identifier != $0 }
+      }
+    }
+    
+    toDisable.forEach {
+      if !modes.contains($0) {
+        modes.append($0)
+      }
+    }
+    
+    UserDefaults.shared.set(modes, forKey: DefaultsKey.disabled.rawValue)
   }
   
   // combined both identifier and imageName to identify the actual mode, since identifier is the same for both bike and scooter modes
@@ -174,10 +189,14 @@ public class TKUserProfileHelper: NSObject {
     }
     return identifier + ":" + imageName
   }
+  
+  @objc public class func hasDisabledSharedVehicle() -> Bool {
+    return disabledSharedVehicleModes.count > 0
+  }
     
-  @objc public class var enabledSharedVehicleModes: [ModeIdentifier] {
-    if let enabled = UserDefaults.shared.object(forKey: DefaultsKey.enabled.rawValue) as? [ModeIdentifier] {
-      return enabled
+  @objc public class var disabledSharedVehicleModes: [ModeIdentifier] {
+    if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.disabled.rawValue) as? [ModeIdentifier] {
+      return disabled
     } else {
       return []
     }

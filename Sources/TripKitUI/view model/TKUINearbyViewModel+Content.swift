@@ -120,7 +120,7 @@ extension TKUINearbyViewModel {
       .map { ViewContent(locations: $0.0, mapCenter: $0.1) }
   }
   
-  static func filterNearbyContent(_ content: ViewContent, modes: Set<TKModeInfo>?, focusOn annotation: MKAnnotation?) -> ViewContent {
+  static func filterNearbyContent(_ content: ViewContent, pickedModes: Set<TKModeInfo>?, allModes: [TKModeInfo], focusOn annotation: MKAnnotation?) -> ViewContent {
     if let focus = annotation {
       let byFocus = content.locations.filter { location in
         return location.coordinate.latitude == focus.coordinate.latitude && location.coordinate.longitude == focus.coordinate.longitude
@@ -129,6 +129,11 @@ extension TKUINearbyViewModel {
       
     } else {
       let byModes: [TKModeCoordinate]
+      
+      if let modes = pickedModes {
+        TKUserProfileHelper.update(pickedModes: modes, allModes: Set(allModes))
+      }
+      
       byModes = content.locations.filter  { location in
         return TKUserProfileHelper.isSharedVehicleModeEnabled(mode: location.stopModeInfo)
       }

@@ -92,7 +92,7 @@ public class TKUINearbyViewModel {
       .map {
         let modes = $0 as Set<TKModeInfo>?
         TKUserProfileHelper.setEnabledSharedVehicleModes(modes: modes ?? Set<TKModeInfo>())
-        return modes as Set<TKModeInfo>?
+        return modes
       }
       .startWith(nil)
     
