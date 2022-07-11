@@ -114,7 +114,8 @@ public class TKUINearbyViewModel {
     
     self.availableModes = nearby
       .map { content -> [TKModeInfo] in
-        let allModes = content.locations.compactMap { $0.stopModeInfo }
+        var allModes = content.locations.compactMap { $0.stopModeInfo }
+        allModes.sort(by: { (($0.identifier ?? "") < ($1.identifier ?? "")) })
         return allModes.tk_filterDuplicates { $0 == $1 }
       }
       .asDriver(onErrorJustReturn: [])
