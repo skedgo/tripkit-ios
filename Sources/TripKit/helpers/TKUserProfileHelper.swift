@@ -135,39 +135,20 @@ public class TKUserProfileHelper: NSObject {
   
   // MARK: - Mode by mode, Mode picker
   
-  @objc public class func isSharedVehicleModeEnabled(identifier: ModeIdentifier) -> Bool {
-    return disabledSharedVehicleModes.contains(identifier)
-  }
-  
-  @objc public class func isSharedVehicleModeEnabled(mode: TKModeInfo) -> Bool {
-    var hasDisabled = false
-    disabledSharedVehicleModes.forEach { identifier in
-      let components = identifier.components(separatedBy: ":")
-      if components[0] == mode.identifier,
-         components[1] == mode.localImageName {
-        hasDisabled = true
-      }
-    }
-    return !hasDisabled
-  }
-  
   /// update picked modes provided with all reference modes to determine disabled modes
   @objc public class func update(pickedModes: Set<TKModeInfo>, allModes: Set<TKModeInfo>) {
-    let pickedIds = pickedModes.compactMap { TKUserProfileHelper.identifier(from: $0) }
-    let allIds = allModes.compactMap { TKUserProfileHelper.identifier(from: $0) }
-    update(pickedIds: pickedIds, allIds: allIds)
-  }
-  
-  @objc public class func update(pickedIds: [ModeIdentifier], allIds: [ModeIdentifier]) {
     var modes = disabledSharedVehicleModes
+    
+    let pickedIds = pickedModes.compactMap { try? JSONEncoder().encode($0)  }
+    let allIds = allModes.compactMap { try? JSONEncoder().encode($0)  }
     
     let toDisable = allIds.filter {
       !pickedIds.contains($0)
     }
     
-    pickedIds.forEach { identifier in
-      if modes.contains(identifier) {
-        modes = modes.filter { identifier != $0 }
+    pickedIds.forEach { mode in
+      if modes.contains(mode) {
+        modes = modes.filter { mode != $0 }
       }
     }
     
@@ -179,23 +160,9 @@ public class TKUserProfileHelper: NSObject {
     
     UserDefaults.shared.set(modes, forKey: DefaultsKey.disabled.rawValue)
   }
-  
-  // combined both identifier and imageName to identify the actual mode, since identifier is the same for both bike and scooter modes
-  @objc public class func identifier(from mode: TKModeInfo) -> String? {
-    guard let identifier = mode.identifier,
-          let imageName = mode.localImageName
-    else {
-      return nil
-    }
-    return identifier + ":" + imageName
-  }
-  
-  @objc public class func hasDisabledSharedVehicle() -> Bool {
-    return disabledSharedVehicleModes.count > 0
-  }
     
-  @objc public class var disabledSharedVehicleModes: [ModeIdentifier] {
-    if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.disabled.rawValue) as? [ModeIdentifier] {
+  @objc public class var disabledSharedVehicleModes: [Data] {
+    if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.disabled.rawValue) as? [Data] {
       return disabled
     } else {
       return []

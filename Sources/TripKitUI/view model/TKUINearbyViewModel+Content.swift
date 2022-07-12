@@ -135,7 +135,7 @@ extension TKUINearbyViewModel {
       }
       
       byModes = content.locations.filter  { location in
-        return TKUserProfileHelper.isSharedVehicleModeEnabled(mode: location.stopModeInfo)
+        return location.stopModeInfo.isEnabled
       }
       
       return ViewContent(locations: byModes, mapCenter: content.mapCenter)

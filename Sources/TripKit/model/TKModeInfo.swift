@@ -49,6 +49,23 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     return rgbColor?.color
   }
   private let rgbColor: TKAPI.RGBColor?
+  
+  /// Determines if the saved mode is enabled or disabled.
+  @objc public var isEnabled: Bool {
+    let disabledSharedVehicleModes = TKUserProfileHelper.disabledSharedVehicleModes
+    guard let encoded = try? JSONEncoder().encode(self)
+    else {
+      return true
+    }
+    var hasDisabled = false
+    for mode in disabledSharedVehicleModes {
+      if encoded == mode {
+        hasDisabled = true
+        break
+      }
+    }
+    return !hasDisabled
+  }
 
   @objc(modeInfoForDictionary:)
   public class func modeInfo(for json: [String: Any]?) -> TKModeInfo? {
