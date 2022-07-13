@@ -137,31 +137,20 @@ public class TKUserProfileHelper: NSObject {
   
   /// update picked modes provided with all reference modes to determine disabled modes
   @objc public class func update(pickedModes: Set<TKModeInfo>, allModes: Set<TKModeInfo>) {
-    var modes = disabledSharedVehicleModes
+    var modes = Set(disabledSharedVehicleModes)
     
-    let pickedIds = pickedModes.compactMap { try? JSONEncoder().encode($0)  }
-    let allIds = allModes.compactMap { try? JSONEncoder().encode($0)  }
+    let picked = Set(pickedModes.compactMap { try? JSONEncoder().encode($0)  })
+    var toDisable = Set(allModes.compactMap { try? JSONEncoder().encode($0)  })
     
-    let toDisable = allIds.filter {
-      !pickedIds.contains($0)
-    }
+    toDisable.subtract(picked)
     
-    pickedIds.forEach { mode in
-      if modes.contains(mode) {
-        modes = modes.filter { mode != $0 }
-      }
-    }
+    modes.subtract(picked)
+    modes.formUnion(toDisable)
     
-    toDisable.forEach {
-      if !modes.contains($0) {
-        modes.append($0)
-      }
-    }
-    
-    UserDefaults.shared.set(modes, forKey: DefaultsKey.disabled.rawValue)
+    UserDefaults.shared.set(Array(modes), forKey: DefaultsKey.disabled.rawValue)
   }
     
-  @objc public class var disabledSharedVehicleModes: [Data] {
+  class var disabledSharedVehicleModes: [Data] {
     if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.disabled.rawValue) as? [Data] {
       return disabled
     } else {

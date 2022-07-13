@@ -57,14 +57,7 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     else {
       return true
     }
-    var hasDisabled = false
-    for mode in disabledSharedVehicleModes {
-      if encoded == mode {
-        hasDisabled = true
-        break
-      }
-    }
-    return !hasDisabled
+    return !disabledSharedVehicleModes.contains(encoded)
   }
 
   @objc(modeInfoForDictionary:)
