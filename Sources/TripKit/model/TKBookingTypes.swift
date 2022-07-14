@@ -30,13 +30,14 @@ public enum TKBooking {
       public init(from decoder: Decoder) throws {
         let single = try decoder.singleValueContainer()
         let string = try single.decode(String.self)
-        self = ActionType(rawValue: string.lowercased()) ?? .unknown
+        self = ActionType(rawValue: string) ?? .unknown
       }
       
-      case lock
-      case unlock
-      case cancel
-      case planNext = "requestanother"
+      case lock = "LOCK"
+      case unlock = "UNLOCK"
+      case cancel = "CANCEL"
+      case planNext = "REQUESTANOTHER"
+      case paymentRequired = "WAITINGPAYMENT"
       case unknown
     }
     
@@ -266,7 +267,49 @@ public enum TKBooking {
     @ISO8601OrSecondsSince1970 public var timestamp: Date
   }
   
+  public struct Location: Codable, Hashable {
+    public let latitude: CLLocationDegrees
+    public let longitude: CLLocationDegrees
+    
+    public let name: String
+    
+    public let address: String
+    
+    public enum CodingKeys: String, CodingKey {
+      case latitude = "lat"
+      case longitude = "lng"
+      case name
+      case address
+    }
+  }
+  
+  public struct TicketOption: Codable, Hashable {
+    public let id: String
+    public let name: String
+    public let details: String
+    
+    /// Price in cents
+    public let price: Int
+
+    public let currencyCode: String
+    
+    /// Number of tickets to pre-select
+    public let amount: Int?
+    
+    public enum CodingKeys: String, CodingKey {
+      case id
+      case name
+      case details = "description"
+      case price
+      case currencyCode = "currency"
+      case amount = "value"
+    }
+
+  }
+   
 }
+
+// MARK: - Helpers
 
 extension TKBooking.BookingInput {
   

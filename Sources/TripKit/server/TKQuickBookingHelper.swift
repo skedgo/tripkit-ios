@@ -25,6 +25,8 @@ public struct TKQuickBooking: Codable, Hashable {
   
   public var input: [TKBooking.BookingInput]
   
+  @DefaultEmptyArray public var tickets: [TKBooking.TicketOption]
+  
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
   public let bookingURL: URL
 
@@ -83,6 +85,7 @@ public struct TKQuickBooking: Codable, Hashable {
     case usdPrice = "USDPrice"
     case surgeString
     case surgeImageURL
+    case tickets
   }
   
 }
