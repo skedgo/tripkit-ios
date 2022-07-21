@@ -90,21 +90,13 @@ public class TKUINearbyViewModel {
     /// Variant of `nearby` that's filtering according to `pickedModes`
     let pickedModes = cardInput.pickedModes.asObservable()
       .map {
-        let modes = $0 as Set<TKModeInfo>?
-        TKUserProfileHelper.setEnabledSharedVehicleModes(modes: modes ?? Set<TKModeInfo>())
-        return modes
+        return $0 as Set<TKModeInfo>?
       }
       .startWith(nil)
     
     let focused = mapInput.focus
       .asObservable()
       .startWith(nil)
-    
-    let filteredNearby: Driver<ViewContent>
-    filteredNearby = Observable
-      .combineLatest(nearby, pickedModes, focused)
-      .map(Self.filterNearbyContent)
-      .asDriver(onErrorDriveWith: .empty())
     
     // Outputs
     
@@ -114,17 +106,24 @@ public class TKUINearbyViewModel {
     self.refreshPublisher = refresh
     
     self.error = errorPublisher.asDriver(onErrorDriveWith: Driver.empty())
-    
-    self.mapAnnotations = filteredNearby.map { $0.annotations }
-    
-    self.availableModes = nearby
+  
+    let allModes = nearby
       .map { content -> [TKModeInfo] in
         var allModes = content.locations.compactMap { $0.stopModeInfo }
         allModes.sort(by: { (($0.identifier ?? "") < ($1.identifier ?? "")) })
         return allModes.tk_filterDuplicates { $0 == $1 }
       }
-      .asDriver(onErrorJustReturn: [])
+
+    self.availableModes = allModes.asDriver(onErrorJustReturn: [])
     
+    let filteredNearby: Driver<ViewContent>
+    filteredNearby = Observable
+      .combineLatest(nearby, pickedModes, allModes, focused)
+      .map(Self.filterNearbyContent)
+      .asDriver(onErrorDriveWith: .empty())
+
+    self.mapAnnotations = filteredNearby.map { $0.annotations }
+
     self.sections = filteredNearby
       .map { Self.buildSections(content: $0, deviceLocation: deviceLocation, deviceHeading: deviceHeading, selectedLocationID: selectedLocationID) }
       .startWith( [.empty] )
