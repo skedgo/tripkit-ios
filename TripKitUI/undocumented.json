@@ -2186,49 +2186,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 227,
+      "line": 233,
       "symbol": "CLLocationCoordinate2D.bearing(from:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 301,
+      "line": 307,
       "symbol": "TKUINearbyViewModel.Item.Identity",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 303,
+      "line": 309,
       "symbol": "TKUINearbyViewModel.Item.identity",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 310,
+      "line": 316,
       "symbol": "TKUINearbyViewModel.Section.Item",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 311,
+      "line": 317,
       "symbol": "TKUINearbyViewModel.Section.Identity",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 313,
+      "line": 319,
       "symbol": "TKUINearbyViewModel.Section.init(original:items:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel+Content.swift",
-      "line": 318,
+      "line": 324,
       "symbol": "TKUINearbyViewModel.Section.identity",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -2347,56 +2347,56 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 158,
+      "line": 163,
       "symbol": "TKUINearbyViewModel.limitToMode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 160,
+      "line": 165,
       "symbol": "TKUINearbyViewModel.fixedLocation",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 165,
+      "line": 170,
       "symbol": "TKUINearbyViewModel.availableModes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 167,
+      "line": 172,
       "symbol": "TKUINearbyViewModel.error",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 169,
+      "line": 174,
       "symbol": "TKUINearbyViewModel.sections",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 171,
+      "line": 176,
       "symbol": "TKUINearbyViewModel.mapAnnotations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 173,
+      "line": 178,
       "symbol": "TKUINearbyViewModel.mapOverlays",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUINearbyViewModel.swift",
-      "line": 177,
+      "line": 182,
       "symbol": "TKUINearbyViewModel.next",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
