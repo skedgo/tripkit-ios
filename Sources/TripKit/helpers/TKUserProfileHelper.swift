@@ -15,6 +15,7 @@ public class TKUserProfileHelper: NSObject {
     case sortedEnabled = "profileSortedModeIdentifiers"
     case hidden = "profileHiddenModeIdentifiers"
     case disliked = "profileDislikedTransitMode"
+    case disabled = "profileDisabledSharedVehicleModes"
   }
   
   public typealias Identifier = String
@@ -132,5 +133,29 @@ public class TKUserProfileHelper: NSObject {
     }
   }
   
+  // MARK: - Mode by mode, Mode picker
+  
+  /// update picked modes provided with all reference modes to determine disabled modes
+  @objc public class func update(pickedModes: Set<TKModeInfo>, allModes: Set<TKModeInfo>) {
+    var modes = Set(disabledSharedVehicleModes)
+    
+    let picked = Set(pickedModes.compactMap { try? JSONEncoder().encode($0)  })
+    var toDisable = Set(allModes.compactMap { try? JSONEncoder().encode($0)  })
+    
+    toDisable.subtract(picked)
+    
+    modes.subtract(picked)
+    modes.formUnion(toDisable)
+    
+    UserDefaults.shared.set(Array(modes), forKey: DefaultsKey.disabled.rawValue)
+  }
+    
+  class var disabledSharedVehicleModes: [Data] {
+    if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.disabled.rawValue) as? [Data] {
+      return disabled
+    } else {
+      return []
+    }
+  }
   
 }
