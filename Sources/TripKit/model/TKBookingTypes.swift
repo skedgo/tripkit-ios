@@ -37,7 +37,6 @@ public enum TKBooking {
       case unlock = "UNLOCK"
       case cancel = "CANCEL"
       case planNext = "REQUESTANOTHER"
-      case paymentRequired = "WAITINGPAYMENT"
       case unknown
     }
     
@@ -271,7 +270,7 @@ public enum TKBooking {
     public let latitude: CLLocationDegrees
     public let longitude: CLLocationDegrees
     
-    public let name: String
+    public let name: String?
     
     public let address: String
     
@@ -294,7 +293,7 @@ public enum TKBooking {
     public let currencyCode: String
     
     /// Number of tickets to pre-select
-    public let amount: Int?
+    public var amount: Int?
     
     public enum CodingKeys: String, CodingKey {
       case id
