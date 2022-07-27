@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="QuantityStepperAccessoryView" customModule="TripGoAppKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="33"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="DCs-v1-XTZ">
+                    <rect key="frame" x="46" y="0.0" width="94" height="33"/>
+                </stepper>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSE-up-hcD">
+                    <rect key="frame" x="22" y="7.5" width="16" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-ZK-Mnz">
+                    <rect key="frame" x="12" y="7.5" width="8" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="DCs-v1-XTZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4ko-TD-Xey"/>
+                <constraint firstItem="YSE-up-hcD" firstAttribute="leading" secondItem="OLi-ZK-Mnz" secondAttribute="trailing" constant="2" id="CaD-7a-fRM"/>
+                <constraint firstItem="DCs-v1-XTZ" firstAttribute="leading" secondItem="YSE-up-hcD" secondAttribute="trailing" constant="8" id="H8K-bX-QkL"/>
+                <constraint firstItem="YSE-up-hcD" firstAttribute="centerY" secondItem="DCs-v1-XTZ" secondAttribute="centerY" id="V2X-Ub-C1h"/>
+                <constraint firstAttribute="bottom" secondItem="DCs-v1-XTZ" secondAttribute="bottom" id="Vku-v3-tO7"/>
+                <constraint firstItem="OLi-ZK-Mnz" firstAttribute="leading" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="hgW-g2-UmQ"/>
+                <constraint firstItem="OLi-ZK-Mnz" firstAttribute="centerY" secondItem="YSE-up-hcD" secondAttribute="centerY" id="n0S-mp-F8f"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DCs-v1-XTZ" secondAttribute="trailing" id="nsj-zM-GrM"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="quantityLabel" destination="YSE-up-hcD" id="rMf-up-gzJ"/>
+                <outlet property="stepper" destination="DCs-v1-XTZ" id="uyI-eJ-xcp"/>
+            </connections>
+            <point key="canvasLocation" x="-227.536231884058" y="-86.049107142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -373,3 +373,11 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
   }
   
 }
+
+extension TKBooking.TicketOption {
+  
+  public func priceValue() -> String {
+    return NSNumber(value: price).toMoneyString(currencyCode: currencyCode)
+  }
+  
+}
