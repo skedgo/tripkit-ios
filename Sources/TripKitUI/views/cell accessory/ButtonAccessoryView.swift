@@ -8,6 +8,9 @@
 
 import TripKit
 
+import RxSwift
+import RxCocoa
+
 class ButtonAccessoryView: UIView {
 
   @IBOutlet weak var button: UIButton!
@@ -35,3 +38,14 @@ class ButtonAccessoryView: UIView {
     button.titleLabel?.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
   }
 }
+
+// MARK: Observers
+
+extension ButtonAccessoryView {
+  
+  func buttonTapped() -> Observable<Void> {
+    return button.rx.tap.asObservable()
+  }
+  
+}
+

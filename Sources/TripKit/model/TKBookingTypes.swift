@@ -283,6 +283,8 @@ public enum TKBooking {
   }
   
   public struct TicketOption: Codable, Hashable {
+    public typealias TicketOptionId = String
+    
     public let id: String
     public let name: String
     public let details: String
@@ -303,7 +305,12 @@ public enum TKBooking {
       case currencyCode = "currency"
       case amount = "value"
     }
-
+    
+    public enum InputValue: Hashable {
+      case selection(TicketOptionId)
+      case amount(Int)
+    }
+    
   }
    
 }
@@ -377,6 +384,10 @@ extension TKBooking.TicketOption {
   
   public func priceValue() -> String {
     return NSNumber(value: price).toMoneyString(currencyCode: currencyCode)
+  }
+  
+  public func noAmount() -> Bool {
+    return amount ?? 0 == 0
   }
   
 }

@@ -5,13 +5,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="QuantityStepperAccessoryView" customModule="TripGoAppKit" customModuleProvider="target">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="QuantityStepperAccessoryView" customModule="TripGoAppKit" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="140" height="33"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -32,7 +31,7 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="DCs-v1-XTZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4ko-TD-Xey"/>
                 <constraint firstItem="YSE-up-hcD" firstAttribute="leading" secondItem="OLi-ZK-Mnz" secondAttribute="trailing" constant="2" id="CaD-7a-fRM"/>
@@ -50,12 +49,7 @@
                 <outlet property="quantityLabel" destination="YSE-up-hcD" id="rMf-up-gzJ"/>
                 <outlet property="stepper" destination="DCs-v1-XTZ" id="uyI-eJ-xcp"/>
             </connections>
-            <point key="canvasLocation" x="-227.536231884058" y="-86.049107142857139"/>
+            <point key="canvasLocation" x="-500" y="34"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
