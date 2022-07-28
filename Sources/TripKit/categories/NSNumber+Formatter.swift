@@ -19,6 +19,20 @@ extension NSNumber {
     return formatter
   }()
   
+  // TODO: Better name / distinction from toMoneyString
+  public func toCurrencyString(currencyCode: String) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.currencyCode = currencyCode
+    formatter.currencySymbol = nil
+    formatter.zeroSymbol = NSLocalizedString("Free", tableName: "Shared", bundle: .tripKit, comment: "Free as in beer")
+    formatter.roundingIncrement = NSNumber(value: 1)
+    formatter.maximumFractionDigits = 2
+    formatter.minimumFractionDigits = 2
+    formatter.usesGroupingSeparator = true
+    return formatter.string(from: self)!
+  }
+  
   public func toMoneyString(currencyCode: String) -> String {
     let formatter = Self.formatter
     formatter.numberStyle = .currency
