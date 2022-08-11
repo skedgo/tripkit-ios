@@ -144,6 +144,7 @@ public enum TKBooking {
     public let actions: [Action]?
     public let input: [BookingInput]?
     public let notes: [BookingNote]?
+    @DefaultEmptyArray public var tickets: [TicketOption]
   }
   
   public struct BookingInput: Codable, Hashable {
