@@ -25,7 +25,9 @@ extension NSNumber {
     formatter.currencyCode = currencyCode
     formatter.currencySymbol = nil
     formatter.zeroSymbol = NSLocalizedString("Free", tableName: "Shared", bundle: .tripKit, comment: "Free as in beer")
-    formatter.roundingIncrement = NSNumber(value: 1)
+    if decimalPlaces == 0 {
+      formatter.roundingIncrement = NSNumber(value: 1)
+    }
     formatter.maximumFractionDigits = decimalPlaces
     formatter.minimumFractionDigits = decimalPlaces
     formatter.usesGroupingSeparator = true
