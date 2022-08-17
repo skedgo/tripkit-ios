@@ -160,7 +160,20 @@ extension TKUIRoutingResultsViewModel {
         show = items
         action = nil
       }
-      return Section(items: show, badge: group.badge, costs: best.costValues, action: action)
+      
+      let badge: TKMetricClassifier.Classification?
+      if let candidate = group.badge, TKUIRoutingResultsCard.config.tripBadgesToShow.contains(candidate) {
+        badge = candidate
+      } else {
+        badge = nil
+      }
+      
+      return Section(
+        items: show,
+        badge: badge,
+        costs: best.costValues,
+        action: action
+      )
     }
 
     switch progress {

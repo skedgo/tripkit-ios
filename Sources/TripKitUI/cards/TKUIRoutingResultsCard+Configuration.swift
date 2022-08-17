@@ -87,6 +87,8 @@ public extension TKUIRoutingResultsCard {
     /// shown. In addition, the order specified here is the order in which the metrics
     /// will be displayed.
     ///
+    /// This setting is independent of `tripBadgesToShow`.
+    ///
     /// The default metrics to show are `price`, `calories` and `carbon`.
     public var tripMetricsToShow: [TKTripCostType] = {
       var metrics: [TKTripCostType] = [.price, .calories, .carbon]
@@ -95,6 +97,16 @@ public extension TKUIRoutingResultsCard {
       #endif
       return metrics
     }()
+    
+    /// Set this to the allowed badges to show on a trip group
+    ///
+    /// Badges will only be shown if the related scores for that metric are sufficiently different
+    /// for the trips.
+    ///
+    /// This setting is independent of `tripMetricsToShow`.
+    ///
+    /// By default all badges are shown.
+    public var tripBadgesToShow: Set<TKMetricClassifier.Classification> = Set(TKMetricClassifier.Classification.allCases)
     
   }
 
