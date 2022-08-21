@@ -161,10 +161,15 @@ public final class TKRoutingParser {
       throw ParserError.serverError(error)
     }
     
-    guard
-      let groups = response.groups,
-      let templates = response.segmentTemplates
-    else {
+    guard let groups = response.groups else {
+      throw ParserError.mismatchingResponse
+    }
+    
+    guard !groups.isEmpty else {
+      return []
+    }
+    
+    guard let templates = response.segmentTemplates else {
       throw ParserError.mismatchingResponse
     }
     
