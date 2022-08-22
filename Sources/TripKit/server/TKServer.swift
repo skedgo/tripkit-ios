@@ -185,6 +185,7 @@ extension TKServer {
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
+    decoderConfig: @escaping (JSONDecoder) -> Void = { _ in },
     completion: @escaping (Int, [String: Any], Result<Model, Error>) -> Void
   ) {
     hit(method: method,
@@ -192,7 +193,9 @@ extension TKServer {
         parameters: parameters)
     { status, headers, result in
       completion(status, headers, Result {
-        try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+        let decoder = JSONDecoder()
+        decoderConfig(decoder)
+        return try decoder.decode(Model.self, from: try result.get().orThrow(ServerError.noData))
       })
     }
   }

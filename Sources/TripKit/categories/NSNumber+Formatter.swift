@@ -19,13 +19,18 @@ extension NSNumber {
     return formatter
   }()
   
-  public func toMoneyString(currencyCode: String) -> String {
-    let formatter = Self.formatter
+  public func toMoneyString(currencyCode: String, decimalPlaces: Int = 0) -> String {
+    let formatter = NumberFormatter()
     formatter.numberStyle = .currency
     formatter.currencyCode = currencyCode
     formatter.currencySymbol = nil
     formatter.zeroSymbol = NSLocalizedString("Free", tableName: "Shared", bundle: .tripKit, comment: "Free as in beer")
-    formatter.roundingIncrement = NSNumber(value: 1)
+    if decimalPlaces == 0 {
+      formatter.roundingIncrement = NSNumber(value: 1)
+    }
+    formatter.maximumFractionDigits = decimalPlaces
+    formatter.minimumFractionDigits = decimalPlaces
+    formatter.usesGroupingSeparator = true
     return formatter.string(from: self)!
   }
   

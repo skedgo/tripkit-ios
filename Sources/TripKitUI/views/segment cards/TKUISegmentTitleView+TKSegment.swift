@@ -14,12 +14,12 @@ import TripKit
 
 extension TKUISegmentTitleView {
   
-  public func configure(for segment: TKSegment, preferredTitle: String? = nil, mode: TKUISegmentMode = .onSegment) {
-    update(for: segment, preferredTitle: preferredTitle, mode: mode)
-    monitorUpdates(for: segment, preferredTitle: preferredTitle, mode: mode)
+  public func configure(for segment: TKSegment, preferredTitle: String? = nil, showSubtitle: Bool = true, mode: TKUISegmentMode = .onSegment) {
+    update(for: segment, preferredTitle: preferredTitle, showSubtitle: showSubtitle, mode: mode)
+    monitorUpdates(for: segment, preferredTitle: preferredTitle, showSubtitle: showSubtitle, mode: mode)
   }
   
-  private func update(for segment: TKSegment, preferredTitle: String?, mode: TKUISegmentMode) {
+  private func update(for segment: TKSegment, preferredTitle: String?, showSubtitle: Bool, mode: TKUISegmentMode) {
     let title: String
     let subtitle: String?
     
@@ -35,7 +35,7 @@ extension TKUISegmentTitleView {
     }
     
     titleLabel.text = title
-    subtitleLabel.text = subtitle
+    subtitleLabel.text = showSubtitle ? subtitle : nil
     
     modeWrapper.backgroundColor = .clear
     modeWrapper.layer.borderWidth = 2
@@ -51,13 +51,13 @@ extension TKUISegmentTitleView {
     }
   }
   
-  private func monitorUpdates(for segment: TKSegment, preferredTitle: String?, mode: TKUISegmentMode) {
+  private func monitorUpdates(for segment: TKSegment, preferredTitle: String?, showSubtitle: Bool, mode: TKUISegmentMode) {
     disposeBag = DisposeBag()
     
     NotificationCenter.default.rx
       .notification(.TKUIUpdatedRealTimeData, object: segment)
       .subscribe(onNext: { [weak self] _ in
-        self?.update(for: segment, preferredTitle: preferredTitle, mode: mode)
+        self?.update(for: segment, preferredTitle: preferredTitle, showSubtitle: showSubtitle, mode: mode)
       })
       .disposed(by: disposeBag)    
   }
