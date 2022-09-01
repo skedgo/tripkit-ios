@@ -1879,20 +1879,20 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
       "line": 52,
-      "symbol": "Reactive.hit(_:_:url:parameters:)",
+      "symbol": "Reactive.hit(_:_:url:parameters:decoderConfig:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 67,
+      "line": 68,
       "symbol": "Reactive.hit(_:path:parameters:headers:region:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 93,
+      "line": 94,
       "symbol": "Reactive.stream(_:path:parameters:headers:region:repeatHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -3622,7 +3622,7 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/segment cards/TKUISegmentTitleView+TKSegment.swift",
       "line": 17,
-      "symbol": "TKUISegmentTitleView.configure(for:preferredTitle:mode:)",
+      "symbol": "TKUISegmentTitleView.configure(for:preferredTitle:showSubtitle:mode:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
