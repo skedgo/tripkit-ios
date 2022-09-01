@@ -53,11 +53,12 @@ extension Reactive where Base: TKServer {
     _ type: Model.Type,
     _ method: TKServer.HTTPMethod = .GET,
     url: URL,
-    parameters: [String: Any] = [:]
+    parameters: [String: Any] = [:],
+    decoderConfig: @escaping (JSONDecoder) -> Void = { _ in }
     ) -> Single<(Int, [String: Any], Model)>
   {
     Single.create { subscriber in
-      base.hit(type, url: url, parameters: parameters) { status, headers, result in
+      base.hit(type, method, url: url, parameters: parameters, decoderConfig: decoderConfig) { status, headers, result in
         subscriber(result.map { (status, headers, $0) })
       }
       return Disposables.create()
