@@ -27,6 +27,9 @@ public struct TKQuickBooking: Codable, Hashable {
   
   @DefaultEmptyArray public var tickets: [TKBooking.TicketOption]
   
+  /// `true` if billing/payments are supported, and `bookingURL` will return an appropriate response
+  @DefaultFalse public var billingEnabled: Bool
+  
   /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
   public let bookingURL: URL
 
@@ -73,6 +76,7 @@ public struct TKQuickBooking: Codable, Hashable {
     case subtitle
     case input
     case imageURL
+    case billingEnabled
     case bookingTitle
     case bookingURL
     case bookingURLIsDeepLink
