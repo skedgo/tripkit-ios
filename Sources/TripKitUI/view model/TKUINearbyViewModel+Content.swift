@@ -23,10 +23,10 @@ extension TKUINearbyViewModel {
     public let title: String
     public let providerIcon: UIImage?
     public let providerIconURL: URL?
-    public let modeIcon: UIImage?
-    // public let modeIconURL: URL?
+    
     public let identifier: String
-    public let batteryLevel: String?
+    
+    public let vehicle: TKAPI.SharedVehicleInfo?
     
     public let subtitle: Driver<String?>
     public let distance: Driver<CLLocationDistance?>
@@ -46,7 +46,6 @@ extension TKUINearbyViewModel {
     /// Items in this section, all instances of the `TKUINearbyViewModel.Item` enum
     public var items: [Item]
   }
-  
 }
 
 // MARK: - Build content
@@ -193,12 +192,9 @@ fileprivate extension TKUINearbyViewModel.Item {
     title = modeCoordinate.title ?? "Unknown"
     
     if let location = modeCoordinate as? TKFreeFloatingVehicleLocation {
-      let info = location.vehicle
-      batteryLevel = info.batteryText
-      modeIcon = info.vehicleType.image
+      vehicle = location.vehicle
     } else {
-      batteryLevel = ""
-      modeIcon = nil
+      vehicle = nil
     }
     
     providerIcon = modeCoordinate.stopModeInfo.image
