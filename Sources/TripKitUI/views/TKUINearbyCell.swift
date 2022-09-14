@@ -13,10 +13,13 @@ import MapKit
 import TripKit
 import RxSwift
 
- public class TKUINearbyCell: UITableViewCell {
-
+public class TKUINearbyCell: UITableViewCell {
+  
   @IBOutlet weak var modeIconView: UIImageView!
+  @IBOutlet weak var providerIconView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var batteryLabel: UILabel!
+  @IBOutlet weak var batteryIconView: UIImageView!
   @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var bearingIconView: UIImageView!
   @IBOutlet weak var distanceLabel: UILabel!
@@ -42,6 +45,8 @@ import RxSwift
     
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary
+    batteryLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    batteryLabel.textColor = .tkLabelSecondary
     subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     subtitleLabel.textColor = .tkLabelSecondary
   }
@@ -68,18 +73,22 @@ import RxSwift
     }
     
     disposeBag = DisposeBag()
-
+    
     titleLabel.text = item.title
+    batteryIconView.image = item.vehicle?.batteryImage
+    batteryLabel.text = item.vehicle?.batteryText
     subtitleLabel.isHidden = true
     distanceLabel.isHidden = true
     bearingIconView.isHidden = true
     
     // Use remote image if possible
     if let url = item.providerIconURL {
-      modeIconView.setImage(with: url, placeholder: item.providerIcon)
+      providerIconView.setImage(with: url, placeholder: item.providerIcon)
     } else {
-      modeIconView.image = item.providerIcon
+      providerIconView.image = item.providerIcon
     }
+    
+    modeIconView.image = item.vehicle?.vehicleType.image
     
     item.subtitle
       .drive(onNext: { [weak self] subtitle in
