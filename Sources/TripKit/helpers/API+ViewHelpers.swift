@@ -115,11 +115,11 @@ extension TKAPI.SharedVehicleInfo {
   public var batteryImage: TKImage? {
     if let level = batteryLevel {
       switch level {
-      case ..<12: return UIImage.iconBattery0
-      case ..<37: return UIImage.iconBattery25
-      case ..<62: return UIImage.iconBattery50
-      case ..<87: return UIImage.iconBattery75
-      default:    return UIImage.iconBattery100
+      case ..<12: return .iconBattery0
+      case ..<37: return .iconBattery25
+      case ..<62: return .iconBattery50
+      case ..<87: return .iconBattery75
+      default:    return .iconBattery100
       }
     } else if currentRange != nil {
       return .iconBattery

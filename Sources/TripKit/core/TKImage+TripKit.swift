@@ -50,12 +50,12 @@ extension TKImage {
   
   // Battery
   
-  public static let iconBattery0 = UIImage.named("icon-battery-0")
-  public static let iconBattery25 = UIImage.named("icon-battery-25")
-  public static let iconBattery50 = UIImage.named("icon-battery-50")
-  public static let iconBattery75 = UIImage.named("icon-battery-75")
-  public static let iconBattery100 = UIImage.named("icon-battery-100")
-  public static let iconBattery = UIImage.named("icon-battery")
+  public static let iconBattery0 = named("icon-battery-0")
+  public static let iconBattery25 = named("icon-battery-25")
+  public static let iconBattery50 = named("icon-battery-50")
+  public static let iconBattery75 = named("icon-battery-75")
+  public static let iconBattery100 = named("icon-battery-100")
+  public static let iconBattery = named("icon-battery")
 }
 
 extension TKImage {
