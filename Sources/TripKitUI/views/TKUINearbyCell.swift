@@ -75,10 +75,10 @@ import RxSwift
     bearingIconView.isHidden = true
     
     // Use remote image if possible
-    if let url = item.iconURL {
-      modeIconView.setImage(with: url, placeholder: item.icon)
+    if let url = item.providerIconURL {
+      modeIconView.setImage(with: url, placeholder: item.providerIcon)
     } else {
-      modeIconView.image = item.icon
+      modeIconView.image = item.providerIcon
     }
     
     item.subtitle

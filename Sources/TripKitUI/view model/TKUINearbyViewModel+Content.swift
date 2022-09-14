@@ -21,9 +21,12 @@ extension TKUINearbyViewModel {
     public let modeCoordinate: TKModeCoordinate
     
     public let title: String
-    public let icon: UIImage?
-    public let iconURL: URL?
+    public let providerIcon: UIImage?
+    public let providerIconURL: URL?
+    
     public let identifier: String
+    
+    public let vehicle: TKAPI.SharedVehicleInfo?
     
     public let subtitle: Driver<String?>
     public let distance: Driver<CLLocationDistance?>
@@ -43,7 +46,6 @@ extension TKUINearbyViewModel {
     /// Items in this section, all instances of the `TKUINearbyViewModel.Item` enum
     public var items: [Item]
   }
-  
 }
 
 // MARK: - Build content
@@ -153,7 +155,7 @@ extension TKUINearbyViewModel {
     // us to exclude elements that are `MKOverlay`, e.g., on-street parking locations. 
     var items = content.annotations.map { Item(for: $0, distanceFrom: deviceLocation, deviceHeading: deviceHeading) }
     
-    // We sort by the distance to the centre of the map; might not be idea.
+    // We sort by the distance to the centre of the map; might not be ideal.
     items.sort {
       if let first = $0.modeCoordinate.coordinate.distance(from: content.mapCenter), let second = $1.modeCoordinate.coordinate.distance(from: content.mapCenter) {
         return first < second
@@ -190,8 +192,15 @@ fileprivate extension TKUINearbyViewModel.Item {
     self.modeCoordinate = modeCoordinate
     
     title = modeCoordinate.title ?? "Unknown"
-    icon = modeCoordinate.stopModeInfo.image
-    iconURL = modeCoordinate.stopModeInfo.imageURL
+    
+    if let location = modeCoordinate as? TKFreeFloatingVehicleLocation {
+      vehicle = location.vehicle
+    } else {
+      vehicle = nil
+    }
+    
+    providerIcon = modeCoordinate.stopModeInfo.image
+    providerIconURL = modeCoordinate.stopModeInfo.imageURL
     
     if let locationID = modeCoordinate.locationID {
       identifier = locationID

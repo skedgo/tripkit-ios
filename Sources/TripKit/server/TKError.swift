@@ -64,7 +64,7 @@ public class TKError: NSError {
     }
     
     let userInfo: [String: Any] = [
-      NSLocalizedDescriptionKey: parsed.errorMessage,
+      NSLocalizedDescriptionKey: parsed.errorMessage ?? parsed.title ?? Loc.ServerError,
       "TKIsUserError": parsed.isUserError
     ]
     
@@ -92,20 +92,20 @@ public class TKError: NSError {
 
 extension TKAPI {
   public struct ServerError: Codable {
-    public let errorMessage: String
+    public let errorMessage: String?
     public let isUserError: Bool
     public let errorCode: Int?
     public let title: String?
     public let recovery: String?
     public let url: URL?
     public let option: Option?
-
+    
     public enum Option: String, Codable {
       case back   = "BACK"
       case retry  = "RETRY"
       case abort  = "ABORT"
     }
-        
+    
     enum CodingKeys: String, CodingKey {
       case errorMessage = "error"
       case isUserError = "usererror"

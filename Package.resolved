@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "0c02c46cfdc0656ce74fd0963a75e5000a0b7f23",
-          "version": "7.1.2"
+          "revision": "be1a1acb283a702b99b630f586877ba02234b4cb",
+          "version": "7.3.2"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": null,
-          "revision": "7c17a6ccca06b5c107cfa4284e634562ddaf5951",
-          "version": "6.2.0"
+          "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
+          "version": "6.5.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/skedgo/TGCardViewController.git",
         "state": {
           "branch": null,
-          "revision": "fbfe5e914812f8efe98a724005efb71b6d03c1ee",
-          "version": "2.1.0"
+          "revision": "ad4eadb5d359142db5df40d59487f6a15a13eef9",
+          "version": "2.2.2"
         }
       }
     ]
