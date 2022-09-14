@@ -3103,7 +3103,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKLocationManager.swift",
-      "line": 89,
+      "line": 85,
       "symbol": "TKLocationManager.authorizationAlertText()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -11965,7 +11965,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKSegment.swift",
-      "line": 117,
+      "line": 121,
       "symbol": "TKSegment",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -13540,49 +13540,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 54,
+      "line": 57,
       "symbol": "TKQuickBooking.price",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 65,
+      "line": 68,
       "symbol": "TKQuickBooking.surgeString",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 66,
+      "line": 69,
       "symbol": "TKQuickBooking.surgeImageURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 93,
+      "line": 97,
       "symbol": "TKQuickBookingHelper",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 118,
+      "line": 122,
       "symbol": "TKSegment.storedQuickBookings",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 129,
+      "line": 133,
       "symbol": "TKSegment.activeIndexQuickBooking",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKQuickBookingHelper.swift",
-      "line": 164,
+      "line": 168,
       "symbol": "TKSegment.storeQuickBookings(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
