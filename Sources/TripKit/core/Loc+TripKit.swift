@@ -31,7 +31,11 @@ extension Loc {
   public static var Vehicles: String {
     return NSLocalizedString("Vehicles", tableName: "TripKit", bundle: .tripKit, comment: "Title for showing the number of available vehicles (e.g., scooters, cars or bikes)")
   }
-  
+
+  public static var Vehicle: String {
+    return NSLocalizedString("Vehicle", tableName: "TripKit", bundle: .tripKit, comment: "Title for a vehicle of unspecified type")
+  }
+
   @objc
   public static var VehicleTypeBicycle: String {
     return NSLocalizedString("Bicycle", tableName: "TripKit", bundle: .tripKit, comment: "Text for vehicle of type: Bicycle")

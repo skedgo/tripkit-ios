@@ -2214,11 +2214,11 @@
 				3AFF26BA26C6975F007809CD /* NSBundle+ProductName.swift */,
 				3AFF26BF26C6975F007809CD /* NSDate+Formatting.swift */,
 				3AFF26BC26C6975F007809CD /* NSError+customError.swift */,
+				3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */,
 				3AFF26BE26C6975F007809CD /* NSManagedObjectContext+Fetch.swift */,
 				3AFF26BD26C6975F007809CD /* NSNumber+Formatter.swift */,
 				3AFF26C126C6975F007809CD /* NSUserDefaults+SharedDefaults.swift */,
 				3AB4E58027584632006D2363 /* String+NonEmpty.swift */,
-				3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -3170,7 +3170,7 @@
 			attributes = {
 				CLASSPREFIX = TK;
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "SkedGo Pty Ltd";
 				TargetAttributes = {
 					3A6DF06F202C8C6E0084CB2C = {
@@ -4290,6 +4290,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4324,6 +4325,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

@@ -47,6 +47,15 @@ extension TKImage {
   public static let iconModeUnicycle = named("icon-mode-unicycle")
   public static let iconModeWalk = named("icon-mode-walk")
   public static let iconModeWheelchair = named("icon-mode-wheelchair")
+  
+  // Battery
+  
+  public static let iconBattery0 = named("icon-battery-0")
+  public static let iconBattery25 = named("icon-battery-25")
+  public static let iconBattery50 = named("icon-battery-50")
+  public static let iconBattery75 = named("icon-battery-75")
+  public static let iconBattery100 = named("icon-battery-100")
+  public static let iconBattery = named("icon-battery")
 }
 
 extension TKImage {

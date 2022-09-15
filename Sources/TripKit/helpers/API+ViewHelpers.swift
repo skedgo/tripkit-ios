@@ -70,3 +70,62 @@ extension TKAPI.VehicleOccupancy {
 
 }
 
+extension TKAPI.VehicleTypeInfo {
+  public var localized: String {
+    if let name = name { return name }
+    
+    switch (formFactor, propulsionType) {
+    case (.bicycle, .electric),
+      (.bicycle, .electricAssist): return Loc.VehicleTypeEBike
+    case (.bicycle, _): return Loc.VehicleTypeBicycle
+    case (.car, _): return Loc.VehicleTypeCar
+    case (.scooter, _): return Loc.VehicleTypeKickScooter
+    case (.moped, _): return Loc.VehicleTypeMotoScooter
+    case (.other, _): return Loc.Vehicle
+    }
+  }
+  
+  public var image: TKImage? {
+    let imageName: String
+    switch (formFactor, propulsionType) {
+    case (.bicycle, .electric),
+      (.bicycle, .electricAssist): imageName = "bicycle-electric"
+    case (.bicycle, _): imageName = "bicycle"
+    case (.car, _): imageName = "car"
+    case (.scooter, _): imageName = "kickscooter"
+    case (.moped, _): imageName = "motoscooter"
+    case (.other, _): return nil
+    }
+    return TKStyleManager.image(forModeImageName: imageName)
+  }
+}
+
+extension TKAPI.SharedVehicleInfo {
+  
+  public var batteryText: String? {
+    if let currentRange = currentRange {
+      return MKDistanceFormatter().string(fromDistance: currentRange)
+    } else if let batteryLevel = batteryLevel {
+      return "\(batteryLevel)%"
+    } else {
+      return nil
+    }
+  }
+  
+  public var batteryImage: TKImage? {
+    if let level = batteryLevel {
+      switch level {
+      case ..<12: return .iconBattery0
+      case ..<37: return .iconBattery25
+      case ..<62: return .iconBattery50
+      case ..<87: return .iconBattery75
+      default:    return .iconBattery100
+      }
+    } else if currentRange != nil {
+      return .iconBattery
+    } else {
+      return nil
+    }
+  }
+  
+}
