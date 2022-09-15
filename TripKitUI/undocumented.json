@@ -2529,35 +2529,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUINearbyCell.swift",
-      "line": 26,
+      "line": 29,
       "symbol": "TKUINearbyCell.reuseIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUINearbyCell.swift",
-      "line": 30,
+      "line": 33,
       "symbol": "TKUINearbyCell.nib",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUINearbyCell.swift",
-      "line": 34,
+      "line": 37,
       "symbol": "TKUINearbyCell.awakeFromNib()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUINearbyCell.swift",
-      "line": 49,
+      "line": 54,
       "symbol": "TKUINearbyCell.prepareForReuse()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUINearbyCell.swift",
-      "line": 56,
+      "line": 61,
       "symbol": "TKUINearbyCell.nearbyItem",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
