@@ -7,18 +7,16 @@
 
 import Foundation
 
-import MapKit
-
-struct Point {
+struct Point: Hashable {
   // MARK: Point as a lat/long pair
-  let ll: (Double, Double)
   
-  init(ll: (Double, Double)) {
-    self.ll = ll
+  init(latitude: Double, longitude: Double) {
+    self.y = latitude
+    self.x = longitude
   }
   
-  var lat: Double { return ll.0 }
-  var lng: Double { return ll.1 }
+  var lat: Double { y }
+  var lng: Double { x }
   
   var description: String {
     String(format: "(%.6f,%.6f)", lat, lng)
@@ -26,12 +24,13 @@ struct Point {
   
   // MARK: Point as a x/y pair
   // It's easier to do math using own x/y values as lat/longs can be confusing mathematically as they don't follow the directions of the typical x/y coordinate system. latitudes are positive up, longitudes are positive right, while we'd like x to be positive right and y to be positive up.
-  var x: Double { return ll.1 }
   
-  var y: Double { return ll.0 }
+  let x: Double
+  let y: Double
   
   init(x: Double, y: Double) {
-    self.init(ll: (y, x))
+    self.x = x
+    self.y = y
   }
   
   // MARK: Pythagoras
@@ -40,27 +39,17 @@ struct Point {
     let delta_y = point.y - y
     return sqrt(delta_y * delta_y + delta_x * delta_x)
   }
-  
-  // MARK: MapKit
-  var coordinate: CLLocationCoordinate2D {
-    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-  }
-  
-  var annotation: MKPointAnnotation {
-    let point = MKPointAnnotation()
-    point.coordinate = self.coordinate
-    return point
-  }
 }
 
 extension Point: Equatable {}
 func ==(lhs: Point, rhs: Point) -> Bool {
   let epsilon = 0.000001
-  return abs(lhs.lat - rhs.lat) < epsilon && abs(lhs.lng - rhs.lng) < epsilon
+  return abs(lhs.lat - rhs.lat) < epsilon
+      && abs(lhs.lng - rhs.lng) < epsilon
 }
 
 /// A line is defined by two points
-struct Line {
+struct Line: Hashable {
   let start: Point
   let end: Point
 
@@ -68,8 +57,9 @@ struct Line {
   let m: Double
   let b: Double
   
-  
   init(start: Point, end: Point) {
+    assert(start != end)
+    
     self.start = start
     self.end = end
     
@@ -85,13 +75,6 @@ struct Line {
       b = start.y - m * start.x
     }
     
-  }
-  
-  // MARK: MapKit
-  
-  var polyline: MKPolyline {
-    var points = [start.coordinate, end.coordinate]
-    return MKPolyline(coordinates: &points, count: points.count)
   }
   
   // MARK: Mathmatical formula
@@ -171,16 +154,9 @@ struct Line {
   }
 }
 
-extension Line: Equatable {}
-func ==(lhs: Line, rhs: Line) -> Bool {
-  return lhs.start == rhs.start && lhs.end == rhs.end
-}
-
 extension Double {
   func inBetween(_ some: Double, and another: Double) -> Bool {
     let eps = 0.000001
     return self >= min(some, another) - eps && self <= max(some, another) + eps
   }
 }
-
-

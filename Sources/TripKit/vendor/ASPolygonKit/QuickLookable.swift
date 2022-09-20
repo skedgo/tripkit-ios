@@ -6,8 +6,15 @@
 //
 
 import Foundation
-import CoreGraphics
 
+#if canImport(CoreGraphics)
+
+#if os(iOS) || os(tvOS)
+  import UIKit
+#elseif os(OSX)
+  import Cocoa
+#endif
+  
 extension Polygon {
   
   var quickLookPath: CGPath {
@@ -100,4 +107,4 @@ extension Point {
   
 }
 
-
+#endif

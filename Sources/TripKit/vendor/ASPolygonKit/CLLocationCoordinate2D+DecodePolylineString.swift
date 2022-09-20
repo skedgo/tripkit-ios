@@ -5,10 +5,14 @@
 //
 //
 
-import CoreLocation
+import Foundation
 
-extension CLLocationCoordinate2D {
-  public static func decodePolyline(_ encodedString: String) -> [CLLocationCoordinate2D] {
+#if canImport(CoreLocation)
+import CoreLocation
+#endif
+
+extension Point {
+  public static func decodePolyline(_ encodedString: String) -> [Point] {
     guard let bytes = (encodedString as NSString).utf8String else {
       assertionFailure("Bad input string. Not UTF8!")
       return []
@@ -16,7 +20,7 @@ extension CLLocationCoordinate2D {
     let length = encodedString.lengthOfBytes(using: String.Encoding.utf8)
     var idx = 0
     
-    var array: [CLLocationCoordinate2D] = []
+    var array: [Point] = []
     
     var latitude = 0.0
     var longitude = 0.0
@@ -56,9 +60,17 @@ extension CLLocationCoordinate2D {
       
       let finalLat = latitude * 1E-5
       let finalLon = longitude * 1E-5
-      let coordinate = CLLocationCoordinate2D(latitude: finalLat, longitude: finalLon)
-      array.append(coordinate)
+      let point = Point(latitude: finalLat, longitude: finalLon)
+      array.append(point)
     }
     return array
   }
 }
+
+#if canImport(CoreLocation)
+extension CLLocationCoordinate2D {
+  public static func decodePolyline(_ encodedString: String) -> [CLLocationCoordinate2D] {
+    Point.decodePolyline(encodedString).map(\.coordinate)
+  }
+}
+#endif

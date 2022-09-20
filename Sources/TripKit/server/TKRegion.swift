@@ -118,7 +118,7 @@ public class TKRegion : NSObject, Codable {
   @objc(containsCoordinate:)
   public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
     guard let polygon = simplePolygon else { return false }
-    let point = Point(ll: (coordinate.latitude, coordinate.longitude))
+    let point = Point(latitude: coordinate.latitude, longitude: coordinate.longitude)
     return polygon.contains(point, onLine: false)
   }
   
@@ -174,7 +174,7 @@ public class TKRegion : NSObject, Codable {
       throw TKRegionParserError.badTimeZoneIdentifier(identifier)
     }
     
-    simplePolygon = Polygon(encodedPolygon: encodedPolygon)
+    simplePolygon = Polygon(points: Point.decodePolyline(encodedPolygon))
     
     super.init()
     
