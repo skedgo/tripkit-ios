@@ -360,11 +360,11 @@ public class TKSegment: NSObject {
       }
   }
 
-  public func startsAndEnds(inEncodedPolygon polygon: String) -> Bool {
-    let polygon = Polygon(encodedPolygon: polygon)
+  public func startsAndEnds(inEncodedPolygon encodedPolygon: String) -> Bool {
+    let polygon = Polygon(points: Point.decodePolyline(encodedPolygon))
     let candidates = [start?.coordinate, end?.coordinate].compactMap { $0 }
     return candidates.allSatisfy { coordinate in
-      polygon.contains(.init(ll: (coordinate.latitude, coordinate.longitude)), onLine: true)
+      polygon.contains(.init(latitude: coordinate.latitude, longitude: coordinate.longitude), onLine: true)
     }
   }
 
