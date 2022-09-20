@@ -7,18 +7,18 @@
 
 import Foundation
 
-public struct Point: Hashable {
+struct Point: Hashable {
   // MARK: Point as a lat/long pair
   
-  public init(latitude: Double, longitude: Double) {
+  init(latitude: Double, longitude: Double) {
     self.y = latitude
     self.x = longitude
   }
   
-  public var lat: Double { y }
-  public var lng: Double { x }
+  var lat: Double { y }
+  var lng: Double { x }
   
-  public var description: String {
+  var description: String {
     String(format: "(%.6f,%.6f)", lat, lng)
   }
   
@@ -34,7 +34,7 @@ public struct Point: Hashable {
   }
   
   // MARK: Pythagoras
-  public func distance(from point: Point) -> Double {
+  func distance(from point: Point) -> Double {
     let delta_x = point.x - x
     let delta_y = point.y - y
     return sqrt(delta_y * delta_y + delta_x * delta_x)
@@ -42,22 +42,22 @@ public struct Point: Hashable {
 }
 
 extension Point: Equatable {}
-public func ==(lhs: Point, rhs: Point) -> Bool {
+func ==(lhs: Point, rhs: Point) -> Bool {
   let epsilon = 0.000001
   return abs(lhs.lat - rhs.lat) < epsilon
       && abs(lhs.lng - rhs.lng) < epsilon
 }
 
 /// A line is defined by two points
-public struct Line: Hashable {
-  public let start: Point
-  public let end: Point
+struct Line: Hashable {
+  let start: Point
+  let end: Point
 
   // Inferred from start + end
   let m: Double
   let b: Double
   
-  public init(start: Point, end: Point) {
+  init(start: Point, end: Point) {
     assert(start != end)
     
     self.start = start
@@ -88,13 +88,13 @@ public struct Line: Hashable {
     }
   }
   
-  public var description: String {
+  var description: String {
     return String(format: "%@ - %@", start.description, end.description)
   }
   
   //MARK: Contains check
   
-  public func contains(_ point: Point) -> Bool {
+  func contains(_ point: Point) -> Bool {
     if m == Double.infinity {
       return inRange( (point.x, point.y) )
     }
@@ -117,7 +117,7 @@ public struct Line: Hashable {
         && y.inBetween(start.y, and: end.y)
   }
   
-  public func intersection(with line: Line) -> Point? {
+  func intersection(with line: Line) -> Point? {
     // The intersection is where the two lines meet. Mathematically that's by solving the two formulae. Since these lines have a specific start + end, we also need to check that the intersection lies within the range.
     // Special care needs to be taken where start.x == end.x, i.e., vertical lines.
     

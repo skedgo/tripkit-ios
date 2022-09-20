@@ -10,7 +10,7 @@ import MapKit
 #endif
 
 extension Polygon {
-  public static func union(_ polygons: [Polygon]) throws -> [Polygon] {
+  static func union(_ polygons: [Polygon]) throws -> [Polygon] {
     let sorted = polygons.sorted { first, second in
       if first.minY < second.minY {
         return true
@@ -26,7 +26,7 @@ extension Polygon {
     }
   }
   
-  public static func union(_ polygons: [Polygon], with polygon: Polygon) throws -> [Polygon] {
+  static func union(_ polygons: [Polygon], with polygon: Polygon) throws -> [Polygon] {
     var grower = polygon.clockwise()
     var newArray: [Polygon] = []
     
@@ -56,7 +56,7 @@ extension Polygon {
 #if canImport(MapKit)
 extension MKPolygon {
   
-  public class func union(_ polygons: [MKPolygon], completion: @escaping (Result<[MKPolygon], Error>) -> Void) {
+  class func union(_ polygons: [MKPolygon], completion: @escaping (Result<[MKPolygon], Error>) -> Void) {
     let queue = DispatchQueue(label: "MKPolygonUnionMerger", qos: .background)
     queue.async {
       let result = Result { try union(polygons) }
@@ -66,7 +66,7 @@ extension MKPolygon {
     }
   }
   
-  public class func union(_ polygons: [MKPolygon]) throws -> [MKPolygon] {
+  class func union(_ polygons: [MKPolygon]) throws -> [MKPolygon] {
     let sorted = polygons.sorted(by: { first, second in
       return first.boundingMapRect.distanceFromOrigin < second.boundingMapRect.distanceFromOrigin
     })
@@ -77,7 +77,7 @@ extension MKPolygon {
   }
 
   
-  public class func union(_ polygons: [MKPolygon], with polygon: MKPolygon) throws -> [MKPolygon] {
+  class func union(_ polygons: [MKPolygon], with polygon: MKPolygon) throws -> [MKPolygon] {
     var grower = Polygon(polygon)
     var newArray: [MKPolygon] = []
     
@@ -102,7 +102,7 @@ extension MKPolygon {
     return newArray
   }
   
-  public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
+  func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
     if (!boundingMapRect.contains(MKMapPoint(coordinate))) {
       return false
     }
@@ -116,7 +116,7 @@ extension MKPolygon {
 
 extension MKMapRect {
   
-  public var distanceFromOrigin: Double {
+  var distanceFromOrigin: Double {
     return sqrt( origin.x * origin.x + origin.y * origin.y )
   }
   
@@ -125,11 +125,11 @@ extension MKMapRect {
 //MARK: - Compatibility
 
 extension Point {
-  public var coordinate: CLLocationCoordinate2D {
+  var coordinate: CLLocationCoordinate2D {
     return CLLocationCoordinate2D(latitude: lat, longitude: lng)
   }
   
-  public var annotation: MKPointAnnotation {
+  var annotation: MKPointAnnotation {
     let point = MKPointAnnotation()
     point.coordinate = self.coordinate
     return point
@@ -137,7 +137,7 @@ extension Point {
 }
 
 extension Line {
-  public var polyline: MKPolyline {
+  var polyline: MKPolyline {
     var points = [start.coordinate, end.coordinate]
     return MKPolyline(coordinates: &points, count: points.count)
   }
@@ -145,7 +145,7 @@ extension Line {
 
 extension Polygon {
   /// Creates a new polygon from an `MKPolygon`, ignoring interior polygons
-  public init(_ polygon: MKPolygon) {
+  init(_ polygon: MKPolygon) {
     let count = polygon.pointCount
     var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: count)
     let range = NSRange(location: 0, length: count)
@@ -158,7 +158,7 @@ extension Polygon {
   }
   
   /// The polygon as an `MKPolygon`, ignoring interior polygons
-  public var polygon: MKPolygon {
+  var polygon: MKPolygon {
     var coordinates = points.map { point in
       point.coordinate
     }

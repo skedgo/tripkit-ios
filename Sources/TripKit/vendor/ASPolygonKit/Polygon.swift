@@ -11,6 +11,8 @@ import Foundation
 import CoreGraphics
 #endif
 
+typealias TKPolygon = Polygon
+
 enum PolygonUnionError: Error, CustomDebugStringConvertible {
   
   #if DEBUG
@@ -31,7 +33,7 @@ enum PolygonUnionError: Error, CustomDebugStringConvertible {
   
 }
 
-public struct Polygon {
+struct Polygon {
   #if DEBUG
   enum UnionStep {
     case start(Polygon, Polygon, [Intersection], start: Point)
@@ -41,7 +43,7 @@ public struct Polygon {
   }
   #endif
   
-  public internal(set) var points: [Point] {
+  var points: [Point] {
     didSet {
       firstLink = Polygon.firstLink(for: points)
     }
@@ -49,13 +51,13 @@ public struct Polygon {
   
   var firstLink: LinkedLine
   
-  public init(pairs: [(Double, Double)]) {
+  init(pairs: [(Double, Double)]) {
     self.init(points: pairs.map { pair in
       Point(latitude: pair.0, longitude: pair.1)
     })
   }
   
-  public init(points: [Point]) {
+  init(points: [Point]) {
     self.points = points
     firstLink = Polygon.firstLink(for: points)
   }
@@ -63,44 +65,44 @@ public struct Polygon {
   
   // MARK: Basic info
   
-  public var description: String? {
+  var description: String? {
     return points.reduce("[ ") { previous, point in
       let start = previous.utf8.count == 2 ? previous : previous + ", "
       return start + point.description
       } + " ]"
   }
   
-  public var minY: Double {
+  var minY: Double {
     return points.reduce(Double.infinity) { acc, point in
       return Double.minimum(acc, point.y)
     }
   }
   
-  public var maxY: Double {
+  var maxY: Double {
     return points.reduce(Double.infinity * -1) { acc, point in
       return Double.maximum(acc, point.y)
     }
   }
   
-  public var minX: Double {
+  var minX: Double {
     return points.reduce(Double.infinity) { acc, point in
       return Double.minimum(acc, point.x)
     }
   }
   
-  public var maxX: Double {
+  var maxX: Double {
     return points.reduce(Double.infinity * -1) { acc, point in
       return Double.maximum(acc, point.x)
     }
   }
   
   #if canImport(CoreGraphics)
-  public var boundingRect: CGRect {
+  var boundingRect: CGRect {
     return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
   }
   #endif
   
-  public func isClockwise() -> Bool {
+  func isClockwise() -> Bool {
     var points: [Point] = self.points
     if let first = points.first, first != points.last {
       points.append(first)
@@ -144,7 +146,7 @@ public struct Polygon {
   
   // MARK: Polygon to polygon intersections
   
-  public func intersects(_ polygon: Polygon) -> Bool {
+  func intersects(_ polygon: Polygon) -> Bool {
     return intersections(polygon).count > 0
   }
   
@@ -195,7 +197,7 @@ public struct Polygon {
   ///   - point: The point to check
   ///   - onLine: `true` if the contains check should succeed when the point is right on the edge of the polygon
   /// - Returns: Whether the polygon contains the point
-  public func contains(_ point: Point, onLine: Bool) -> Bool {
+  func contains(_ point: Point, onLine: Bool) -> Bool {
     if onLine {
       for link in firstLink {
         if link.line.contains(point) {
@@ -211,7 +213,7 @@ public struct Polygon {
   /// Checks if the polygon contains the provided polygon
   /// - Parameter polygon: The polygon to check for containment
   /// - Returns: Whether `self` contains `polygon`, ignoring interior polygons of either
-  public func contains(_ polygon: Polygon) -> Bool {
+  func contains(_ polygon: Polygon) -> Bool {
     for point in polygon.points {
       if !contains(point, onLine: false) {
         return false
@@ -468,7 +470,7 @@ func ==(lhs: LinkedLine, rhs: LinkedLine) -> Bool {
 
 // Let's calculate the intersections and keep for each intersection information about which line this intersection is with
 
-public struct Intersection {
+struct Intersection {
   let point: Point
   var mine: [LinkedLine]
   var yours: [LinkedLine]
