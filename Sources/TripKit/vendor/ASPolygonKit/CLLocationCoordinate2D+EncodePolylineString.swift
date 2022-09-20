@@ -1,9 +1,8 @@
 //
 //  CLLocationCoordinate2D+EncodePolylineString.swift
-//  TripKit
+//
 //
 //  Created by Adrian Schönig on 5/11/21.
-//  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
 import Foundation
@@ -15,25 +14,13 @@ extension Polygon {
   ///
   /// - returns: A `String` representing the encoded Polyline
   func encodeCoordinates(precision: Double = 1e5) -> String {
-    let coordinates = points.map(\.coordinate)
-    return coordinates.encodeCoordinates(precision: precision)
-  }
-}
-
-extension Array where Element == CLLocationCoordinate2D {
-  /// This function encodes an `[CLLocationCoordinate2D]` to a `String`
-  ///
-  /// - parameter precision: The precision used to encode coordinates (default: `1e5`)
-  ///
-  /// - returns: A `String` representing the encoded Polyline
-  func encodeCoordinates(precision: Double = 1e5) -> String {
     
     var previousCoordinate = IntegerCoordinates(0, 0)
     var encodedPolyline = ""
     
-    for coordinate in self {
-      let intLatitude  = Int(round(coordinate.latitude * precision))
-      let intLongitude = Int(round(coordinate.longitude * precision))
+    for coordinate in points {
+      let intLatitude  = Int(round(coordinate.lat * precision))
+      let intLongitude = Int(round(coordinate.lng * precision))
       
       let coordinatesDifference = (intLatitude - previousCoordinate.latitude, intLongitude - previousCoordinate.longitude)
       

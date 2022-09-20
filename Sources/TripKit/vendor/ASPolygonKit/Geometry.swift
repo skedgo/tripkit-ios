@@ -7,69 +7,59 @@
 
 import Foundation
 
-import MapKit
-
-struct Point {
+public struct Point: Hashable {
   // MARK: Point as a lat/long pair
-  let ll: (Double, Double)
   
-  init(ll: (Double, Double)) {
-    self.ll = ll
+  public init(latitude: Double, longitude: Double) {
+    self.y = latitude
+    self.x = longitude
   }
   
-  var lat: Double { return ll.0 }
-  var lng: Double { return ll.1 }
+  public var lat: Double { y }
+  public var lng: Double { x }
   
-  var description: String {
+  public var description: String {
     String(format: "(%.6f,%.6f)", lat, lng)
   }
   
   // MARK: Point as a x/y pair
   // It's easier to do math using own x/y values as lat/longs can be confusing mathematically as they don't follow the directions of the typical x/y coordinate system. latitudes are positive up, longitudes are positive right, while we'd like x to be positive right and y to be positive up.
-  var x: Double { return ll.1 }
   
-  var y: Double { return ll.0 }
+  let x: Double
+  let y: Double
   
   init(x: Double, y: Double) {
-    self.init(ll: (y, x))
+    self.x = x
+    self.y = y
   }
   
   // MARK: Pythagoras
-  func distance(from point: Point) -> Double {
+  public func distance(from point: Point) -> Double {
     let delta_x = point.x - x
     let delta_y = point.y - y
     return sqrt(delta_y * delta_y + delta_x * delta_x)
   }
-  
-  // MARK: MapKit
-  var coordinate: CLLocationCoordinate2D {
-    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-  }
-  
-  var annotation: MKPointAnnotation {
-    let point = MKPointAnnotation()
-    point.coordinate = self.coordinate
-    return point
-  }
 }
 
 extension Point: Equatable {}
-func ==(lhs: Point, rhs: Point) -> Bool {
+public func ==(lhs: Point, rhs: Point) -> Bool {
   let epsilon = 0.000001
-  return abs(lhs.lat - rhs.lat) < epsilon && abs(lhs.lng - rhs.lng) < epsilon
+  return abs(lhs.lat - rhs.lat) < epsilon
+      && abs(lhs.lng - rhs.lng) < epsilon
 }
 
 /// A line is defined by two points
-struct Line {
-  let start: Point
-  let end: Point
+public struct Line: Hashable {
+  public let start: Point
+  public let end: Point
 
   // Inferred from start + end
   let m: Double
   let b: Double
   
-  
-  init(start: Point, end: Point) {
+  public init(start: Point, end: Point) {
+    assert(start != end)
+    
     self.start = start
     self.end = end
     
@@ -87,13 +77,6 @@ struct Line {
     
   }
   
-  // MARK: MapKit
-  
-  var polyline: MKPolyline {
-    var points = [start.coordinate, end.coordinate]
-    return MKPolyline(coordinates: &points, count: points.count)
-  }
-  
   // MARK: Mathmatical formula
   // Special care needs to be taken where start.x == end.x, i.e., vertical lines.
   
@@ -105,13 +88,13 @@ struct Line {
     }
   }
   
-  var description: String {
+  public var description: String {
     return String(format: "%@ - %@", start.description, end.description)
   }
   
   //MARK: Contains check
   
-  func contains(_ point: Point) -> Bool {
+  public func contains(_ point: Point) -> Bool {
     if m == Double.infinity {
       return inRange( (point.x, point.y) )
     }
@@ -134,7 +117,7 @@ struct Line {
         && y.inBetween(start.y, and: end.y)
   }
   
-  func intersection(with line: Line) -> Point? {
+  public func intersection(with line: Line) -> Point? {
     // The intersection is where the two lines meet. Mathematically that's by solving the two formulae. Since these lines have a specific start + end, we also need to check that the intersection lies within the range.
     // Special care needs to be taken where start.x == end.x, i.e., vertical lines.
     
@@ -171,16 +154,9 @@ struct Line {
   }
 }
 
-extension Line: Equatable {}
-func ==(lhs: Line, rhs: Line) -> Bool {
-  return lhs.start == rhs.start && lhs.end == rhs.end
-}
-
 extension Double {
   func inBetween(_ some: Double, and another: Double) -> Bool {
     let eps = 0.000001
     return self >= min(some, another) - eps && self <= max(some, another) + eps
   }
 }
-
-

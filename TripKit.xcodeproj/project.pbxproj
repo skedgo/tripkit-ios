@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A0747B12730D4C3000D752F /* polygons-au-211102.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A0747B02730D4C3000D752F /* polygons-au-211102.json */; };
+		3A0A715228D99CAB00804EAC /* Polygon+GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A715128D99CAB00804EAC /* Polygon+GeoJSON.swift */; };
+		3A0A715328D99CAB00804EAC /* Polygon+GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A715128D99CAB00804EAC /* Polygon+GeoJSON.swift */; };
 		3A0F254C27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */; };
 		3A0F254D27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */; };
 		3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
@@ -951,6 +953,7 @@
 
 /* Begin PBXFileReference section */
 		3A0747B02730D4C3000D752F /* polygons-au-211102.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "polygons-au-211102.json"; sourceTree = "<group>"; };
+		3A0A715128D99CAB00804EAC /* Polygon+GeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polygon+GeoJSON.swift"; sourceTree = "<group>"; };
 		3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Safely.swift"; sourceTree = "<group>"; };
 		3A19BE2427ABA44500B4AA8C /* TKUITripTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripTitleView.swift; sourceTree = "<group>"; };
 		3A19BE2627ABA44D00B4AA8C /* TKUITripTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITripTitleView.xib; sourceTree = "<group>"; };
@@ -2282,6 +2285,7 @@
 				3AFF26DF26C6975F007809CD /* Geometry.swift */,
 				3AFF26E126C6975F007809CD /* MKPolygon+Union.swift */,
 				3AFF26E326C6975F007809CD /* Polygon.swift */,
+				3A0A715128D99CAB00804EAC /* Polygon+GeoJSON.swift */,
 				3AFF26E026C6975F007809CD /* QuickLookable.swift */,
 			);
 			path = ASPolygonKit;
@@ -3525,6 +3529,7 @@
 				3AFF294426C6980D007809CD /* TKNamedCoordinate+BuzzData.swift in Sources */,
 				3AFF29A726C6985D007809CD /* MKOverlay+NSCoding.m in Sources */,
 				3AFF28D526C697D9007809CD /* Trip+CoreDataProperties.swift in Sources */,
+				3A0A715328D99CAB00804EAC /* Polygon+GeoJSON.swift in Sources */,
 				3AFF28DB26C697D9007809CD /* TKAnnotations.swift in Sources */,
 				3AFF28D226C697D9007809CD /* TKMapTiles.swift in Sources */,
 				3AFF28B326C697D9007809CD /* SegmentReference+CoreDataClass.swift in Sources */,
@@ -3941,6 +3946,7 @@
 				3AFF291726C697DA007809CD /* TKTripPattern.swift in Sources */,
 				3AFF29F826C69993007809CD /* Date+Helpers.swift in Sources */,
 				3AFF283926C6977B007809CD /* StopVisits+Shareable.swift in Sources */,
+				3A0A715228D99CAB00804EAC /* Polygon+GeoJSON.swift in Sources */,
 				3AFF292D26C6980D007809CD /* TKRegionAutocompleter.swift in Sources */,
 				3AFF289626C697CB007809CD /* VehicleAPIModel.swift in Sources */,
 				3AFF28EC26C697DA007809CD /* TKAddressFormatter.swift in Sources */,

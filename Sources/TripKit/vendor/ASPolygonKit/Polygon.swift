@@ -7,81 +7,107 @@
 
 import Foundation
 
-import MapKit
+#if canImport(CoreGraphics)
+import CoreGraphics
+#endif
 
-enum PolygonUnionError: Error {
+enum PolygonUnionError: Error, CustomDebugStringConvertible {
   
+  #if DEBUG
+  case polygonTooComplex([Polygon.UnionStep])
+  #else
   case polygonTooComplex
+  #endif
   case polygonIsSubset
   case invalidPolygon
   
+  var debugDescription: String {
+    switch self {
+    case .polygonTooComplex: return "polygonTooComplex"
+    case .polygonIsSubset: return "polygonIsSubset"
+    case .invalidPolygon: return "invalidPolygon"
+    }
+  }
+  
 }
 
-struct Polygon {
-  var points: [Point] {
+public struct Polygon {
+  #if DEBUG
+  enum UnionStep {
+    case start(Polygon, Polygon, [Intersection], start: Point)
+    case extendMine(partial: [Point])
+    case extendYours(partial: [Point])
+    case intersect(Intersection, onMine: Bool)
+  }
+  #endif
+  
+  public internal(set) var points: [Point] {
     didSet {
-      firstLink = Polygon.firstLink(forPoints: points)
+      firstLink = Polygon.firstLink(for: points)
     }
   }
   
-  fileprivate var firstLink: LinkedLine
+  var firstLink: LinkedLine
   
-  init(pairs: [(Double, Double)]) {
-    points = pairs.map { pair in
-      Point(ll: pair)
-    }
-    firstLink = Polygon.firstLink(forPoints: points)
+  public init(pairs: [(Double, Double)]) {
+    self.init(points: pairs.map { pair in
+      Point(latitude: pair.0, longitude: pair.1)
+    })
   }
   
-  init(encodedPolygon: String) {
-    let coordinates = CLLocationCoordinate2D.decodePolyline(encodedPolygon)
-    points = coordinates.map { Point(ll: ($0.latitude, $0.longitude)) }
-    firstLink = Polygon.firstLink(forPoints: points)
+  public init(points: [Point]) {
+    self.points = points
+    firstLink = Polygon.firstLink(for: points)
   }
+
   
   // MARK: Basic info
   
-  var description: String? {
+  public var description: String? {
     return points.reduce("[ ") { previous, point in
       let start = previous.utf8.count == 2 ? previous : previous + ", "
       return start + point.description
       } + " ]"
   }
   
-  var minY: Double {
+  public var minY: Double {
     return points.reduce(Double.infinity) { acc, point in
       return Double.minimum(acc, point.y)
     }
   }
   
-  var maxY: Double {
+  public var maxY: Double {
     return points.reduce(Double.infinity * -1) { acc, point in
       return Double.maximum(acc, point.y)
     }
   }
   
-  var minX: Double {
+  public var minX: Double {
     return points.reduce(Double.infinity) { acc, point in
       return Double.minimum(acc, point.x)
     }
   }
   
-  var maxX: Double {
+  public var maxX: Double {
     return points.reduce(Double.infinity * -1) { acc, point in
       return Double.maximum(acc, point.x)
     }
   }
   
-  var boundingRect: CGRect {
+  #if canImport(CoreGraphics)
+  public var boundingRect: CGRect {
     return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
   }
+  #endif
   
-  func isClockwise() -> Bool {
-    var points = self.points
+  public func isClockwise() -> Bool {
+    var points: [Point] = self.points
     if let first = points.first, first != points.last {
       points.append(first)
     }
-    let signedArea = zip(points, Array(points[1...] + [points[0]])).reduce(0) { area, pair in
+    
+    let offsetPoints: [Point] = Array(points[1...] + [points[0]])
+    let signedArea: Double = zip(points, offsetPoints).reduce(0) { area, pair in
       area + pair.0.x * pair.1.y - pair.1.x * pair.0.y
     }
     // Note: Actual area is `signedArea / 2`, but we just care about sign
@@ -90,58 +116,35 @@ struct Polygon {
   }
   
   func clockwise() -> Polygon {
-    let result = isClockwise() ? self : Polygon(pairs: points.reversed().map(\.ll))
-    #if DEBUG
-    if !result.isClockwise() {
-      print("ASPolygonKit error: clockwise() failed.")
-    }
-    #endif
+    let result = isClockwise() ? self : Polygon(points: points.reversed())
+    assert(result.isClockwise())
     return result
-  }
-  
-  // MARK: MapKit / CoreLocation
-  
-  init(_ polygon: MKPolygon) {
-    let count = polygon.pointCount
-    var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: count)
-    let range = NSRange(location: 0, length: count)
-    polygon.getCoordinates(&coordinates, range: range)
-    
-    points = coordinates.map { coordinate in
-      Point(ll: (coordinate.latitude, coordinate.longitude))
-    }
-    firstLink = Polygon.firstLink(forPoints: points)
-  }
-  
-  var polygon: MKPolygon {
-    var coordinates = points.map { point in
-      point.coordinate
-    }
-    return MKPolygon(coordinates: &coordinates, count: coordinates.count)
   }
   
   // MARK: Polygon as list of lines
   
-  private static func firstLink(forPoints points: [Point]) -> LinkedLine {
+  static func firstLink(for points: [Point]) -> LinkedLine {
     var first: LinkedLine? = nil
     var previous: LinkedLine? = nil
     for (index, point) in points.enumerated() {
       let nextIndex = (index == points.endIndex - 1) ? points.startIndex : index + 1
       let next = points[nextIndex]
-      let line = Line(start: point, end: next)
-      let link = LinkedLine(line: line, next: nil)
-      if first == nil {
-        first = link
+      if next != point {
+        let line = Line(start: point, end: next)
+        let link = LinkedLine(line: line, next: nil)
+        if first == nil {
+          first = link
+        }
+        previous?.next = link
+        previous = link
       }
-      previous?.next = link
-      previous = link
     }
     return first!
   }
   
   // MARK: Polygon to polygon intersections
   
-  func intersects(_ polygon: Polygon) -> Bool {
+  public func intersects(_ polygon: Polygon) -> Bool {
     return intersections(polygon).count > 0
   }
   
@@ -187,7 +190,12 @@ struct Polygon {
     return count
   }
   
-  func contains(_ point: Point, onLine: Bool) -> Bool {
+  /// Check if the polygon contains a point
+  /// - Parameters:
+  ///   - point: The point to check
+  ///   - onLine: `true` if the contains check should succeed when the point is right on the edge of the polygon
+  /// - Returns: Whether the polygon contains the point
+  public func contains(_ point: Point, onLine: Bool) -> Bool {
     if onLine {
       for link in firstLink {
         if link.line.contains(point) {
@@ -196,11 +204,14 @@ struct Polygon {
       }
     }
     
-    let ray = Line(start: point, end: Point(ll: (0, 0))) // assuming no polygon contains the coast of africa
+    let ray = Line(start: point, end: Point(x: 0, y: 0)) // assuming no polygon contains the coast of africa
     return numberOfIntersections(ray) % 2 == 1
   }
   
-  func contains(_ polygon: Polygon) -> Bool {
+  /// Checks if the polygon contains the provided polygon
+  /// - Parameter polygon: The polygon to check for containment
+  /// - Returns: Whether `self` contains `polygon`, ignoring interior polygons of either
+  public func contains(_ polygon: Polygon) -> Bool {
     for point in polygon.points {
       if !contains(point, onLine: false) {
         return false
@@ -211,6 +222,10 @@ struct Polygon {
   
   // MARK: Union
   
+  @discardableResult
+  /// Merged the provided polygon into the caller
+  /// - Parameter polygon: Polygon to merge into `self`
+  /// - Returns: Whether the polygon was merged; return `false` if there's no overlap
   mutating func union(_ polygon: Polygon) throws -> Bool {
     let intersections = self.intersections(polygon)
     if intersections.count == 0 {
@@ -220,6 +235,7 @@ struct Polygon {
     return try union(polygon, with: intersections, allowInverting: true)
   }
   
+  @discardableResult
   mutating func union(_ polygon: Polygon, with intersections: [Intersection]) throws -> Bool {
     try union(polygon, with: intersections, allowInverting: true)
   }
@@ -268,14 +284,26 @@ struct Polygon {
     var remainingIntersections = intersections
     var newPoints: [Point] = []
     
+    #if DEBUG
+    var steps: [UnionStep] = [
+      .start(self, polygon, intersections, start: startPoint)
+    ]
+    #endif
+    
     repeat {
       Polygon.append(current.point, to: &newPoints)
+      
+      #if DEBUG
+      steps.append(current.onMine ? .extendMine(partial: newPoints) : .extendYours(partial: newPoints))
+      #endif
       
       if newPoints.count - points.count > polygon.points.count * 2 {
         #if DEBUG
         print("Could not merge\n\n\(polygon.encodeCoordinates())\n\ninto\n\n\(encodeCoordinates())\n\n")
-        #endif
+        throw PolygonUnionError.polygonTooComplex(steps)
+        #else
         throw PolygonUnionError.polygonTooComplex
+        #endif
       }
       
       let candidates = Polygon.potentialIntersections(
@@ -286,9 +314,13 @@ struct Polygon {
       )
 
       if let (index, closest, newOnMine) = closestIntersection(candidates, to: current.point), newOnMine != current.onMine {
+        #if DEBUG
+        steps.append(.intersect(closest, onMine: newOnMine))
+        #endif
+        
         remainingIntersections.remove(at: index)
         current = (point: closest.point, link: (newOnMine ? closest.mine : closest.yours).last!, onMine: newOnMine)
-
+      
       } else {
 
         // the linked lines do not wrap around themselves, so we do that here manually
@@ -305,13 +337,20 @@ struct Polygon {
       
     } while current.point != startPoint
     
-#if DEBUG
-    if newPoints.count <= 2 {
-      print("ASPolygonKit error: Should never end up with a line (or less) after merging.")
-    }
-#endif
-
+    assert(newPoints.count > 2, "Should never end up with a line (or less) after merging")
     points = newPoints
+    if points.first != points.last, let first = points.first {
+      points.append(first)
+    }
+    
+    #if DEBUG
+//    let stepsGeoJSON: [String: Any] = [
+//      "type": "FeatureCollection",
+//      "features": steps.flatMap { $0.toGeoJSON(startOnly: false) }
+//    ]
+//    print(String(decoding: try JSONSerialization.data(withJSONObject: stepsGeoJSON, options: []), as: UTF8.self))
+    #endif
+    
     return true
   }
   
@@ -348,7 +387,7 @@ struct Polygon {
             end = link.line.end
           }
           
-          let angle = angle(start: start, middle: point, end: end)
+          let angle = calculateAngle(start: start, middle: point, end: end)
           return (angle, end)
         }.min { $0.angle < $1.angle }!
       }
@@ -403,7 +442,7 @@ struct Polygon {
 
 // To find the polygon between the two polygons, we see if there's an intersection between each pair of lines between the polygons. First we need to get the lines in a polygon.
 
-private class LinkedLine: Sequence, Equatable {
+class LinkedLine: Sequence, Equatable {
   let line: Line
   var next: LinkedLine?
   
@@ -422,21 +461,21 @@ private class LinkedLine: Sequence, Equatable {
   }
 }
 
-private func ==(lhs: LinkedLine, rhs: LinkedLine) -> Bool {
+func ==(lhs: LinkedLine, rhs: LinkedLine) -> Bool {
   return lhs.line == rhs.line
 }
 
 
 // Let's calculate the intersections and keep for each intersection information about which line this intersection is with
 
-struct Intersection {
+public struct Intersection {
   let point: Point
-  fileprivate var mine: [LinkedLine]
-  fileprivate var yours: [LinkedLine]
+  var mine: [LinkedLine]
+  var yours: [LinkedLine]
   
   fileprivate func appliesTo(_ link: LinkedLine, start: Point) -> Bool {
     guard mine.contains(link) || yours.contains(link) else { return false }
-
+    
     let linkStart = link.line.start
     let toPoint = point.distance(from: linkStart)
     let toStart = start.distance(from: linkStart)
@@ -454,8 +493,7 @@ private func closestIntersection(_ intersections: [(Int, Intersection, Bool)], t
     return intersections.first
   } else {
     // the closest is the one with the least distance from the points to the intersection
-    return intersections.reduce(nil) {
-      prior, entry in
+    return intersections.reduce(nil) { prior, entry in
       if prior == nil || entry.1.point.distance(from: point) < prior!.1.point.distance(from: point) {
         return entry
       } else {
@@ -465,8 +503,7 @@ private func closestIntersection(_ intersections: [(Int, Intersection, Bool)], t
   }
 }
 
-
-private func angle(start: Point, middle: Point, end: Point) -> Double {
+private func calculateAngle(start: Point, middle: Point, end: Point) -> Double {
   let v1 = Point(x: start.x - middle.x, y: start.y - middle.y)
   let v2 = Point(x: end.x - middle.x, y: end.y - middle.y)
   let arg1 = v1.x * v2.y - v1.y * v2.x

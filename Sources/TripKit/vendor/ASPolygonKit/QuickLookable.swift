@@ -6,11 +6,18 @@
 //
 
 import Foundation
-import CoreGraphics
 
+#if canImport(CoreGraphics)
+
+#if os(iOS) || os(tvOS)
+  import UIKit
+#elseif os(OSX)
+  import Cocoa
+#endif
+  
 extension Polygon {
   
-  var quickLookPath: CGPath {
+  public var quickLookPath: CGPath {
     
     let maxLength: CGFloat = 200
     let factor = maxLength / CGFloat(Double.maximum(maxX - minX, maxY - minY))
@@ -30,7 +37,7 @@ extension Polygon {
   }
   
   #if os(OSX)
-  var bezierPath: NSBezierPath {
+  public var bezierPath: NSBezierPath {
     
     let maxLength: CGFloat = 200
     let factor = maxLength / CGFloat(Double.maximum(maxX - minX, maxY - minY))
@@ -65,7 +72,7 @@ extension Polygon {
   }
   
   
-  var debugQuickLookObject: Any {
+  public var debugQuickLookObject: Any {
     
     return quickLookImage ?? description!
     
@@ -77,7 +84,7 @@ extension Polygon {
 
 #if os(OSX)
 extension Polygon: CustomPlaygroundDisplayConvertible {
-  var playgroundDescription: Any {
+  public var playgroundDescription: Any {
     return quickLookImage ?? description ?? "Undefined polygon"
   }
 }
@@ -100,4 +107,4 @@ extension Point {
   
 }
 
-
+#endif
