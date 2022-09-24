@@ -68,12 +68,13 @@ NSString *const TKDefaultsKeyUserToken               = @"userToken";
 - (void)_hitURL:(NSURL *)url
          method:(NSString *)method
      parameters:(nullable NSDictionary<NSString *, id> *)parameters
+        headers:(nullable NSDictionary<NSString *, NSString *> *)headers
            info:(TKServerInfoBlock)info
      completion:(TKServerGenericBlock)completion
 {
   NSURLRequest *request;
   if ([method isEqual:@"GET"]) {
-    request = [self GETRequestWithSkedGoHTTPHeadersForURL:url paras:parameters];
+    request = [self GETRequestWithSkedGoHTTPHeadersForURL:url paras:parameters headers: headers];
   } else {
     request = [self POSTLikeRequestWithSkedGoHTTPHeadersForURL:url method:method paras:parameters headers:nil];
   }

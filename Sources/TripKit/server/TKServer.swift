@@ -185,12 +185,14 @@ extension TKServer {
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
     decoderConfig: @escaping (JSONDecoder) -> Void = { _ in },
     completion: @escaping (Int, [String: Any], Result<Model, Error>) -> Void
   ) {
     hit(method: method,
         url: url,
-        parameters: parameters)
+        parameters: parameters,
+        headers: headers)
     { status, headers, result in
       completion(status, headers, Result {
         let decoder = JSONDecoder()
@@ -204,11 +206,13 @@ extension TKServer {
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
     completion: @escaping (Int, [String: Any], Result<Data, Error>) -> Void
   ) {
     hit(method: method,
         url: url,
-        parameters: parameters)
+        parameters: parameters,
+        headers: headers)
     { status, headers, result in
       completion(status, headers, Result {
         try result.get().orThrow(ServerError.noData)
@@ -261,6 +265,161 @@ extension TKServer {
 
 }
 
+// MARK: - Async/await
+@available(iOS 13.0, macOS 11.0, *)
+extension TKServer {
+  /// Captures server response with HTTP status code, headers and typed response
+  public struct Response<T> {
+    
+    /// HTTP status code of response. Can be `nil` if request failed.
+    public var statusCode: Int?
+    
+    /// HTTP response headers. Can be empty if request failed.
+    public var headers: [String: Any]
+    
+    /// Typed response, which can encapsulate a failure if the server returned an error
+    /// or if the server's data couldn't be decoded as the appropriate type.
+    public var result: Result<T, Error>
+  }
+  
+  public func hit(
+    _ method: HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil
+  ) async -> Response<Data> {
+    await withCheckedContinuation { continuation in
+      hit(method: method,
+          url: url,
+          parameters: parameters,
+          headers: headers)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try result.get().orThrow(ServerError.noData)
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit(
+    _ method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil
+  ) async -> Response<Data> {
+    await withCheckedContinuation { continuation in
+      hit(method,
+          path: path,
+          parameters: parameters,
+          headers: headers,
+          region: region)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try result.get()
+          }
+        ))
+      }
+    }
+  }
+
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: HTTPMethod = .GET,
+    path: String,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil
+  ) async -> Response<Model> {
+    await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit<Input: Encodable, Output: Decodable>(
+    _ type: Output.Type,
+    _ method: HTTPMethod = .POST,
+    path: String,
+    input: Input,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil,
+    encoderConfig: (JSONEncoder) -> Void = { _ in },
+    decoderConfig: (JSONDecoder) -> Void = { _ in }
+  ) async throws -> Response<Output> {
+    let encoder = JSONEncoder()
+    encoderConfig(encoder)
+    let parameters = try encoder.encodeJSONObject(input) as? [String: Any]
+
+    let decoder = JSONDecoder()
+    decoderConfig(decoder)
+
+    return await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try decoder.decode(Output.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+  
+  public func hit<Model: Decodable>(
+    _ type: Model.Type,
+    _ method: HTTPMethod = .GET,
+    url: URL,
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil
+  ) async -> Response<Model> {
+    await withCheckedContinuation { continuation in
+      hit(method: method,
+          url: url,
+          parameters: parameters,
+          headers: headers)
+      { status, headers, result in
+        continuation.resume(returning: .init(
+          statusCode: status,
+          headers: headers,
+          result: Result {
+            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
+          }
+        ))
+      }
+    }
+  }
+}
+
 // MARK: - Calling to Objective-C
 
 extension TKServer {
@@ -294,7 +453,11 @@ extension TKServer {
     )
   }
   
-  private func hit(method: HTTPMethod, url: URL, parameters: [String: Any]?, completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
+  private func hit(method: HTTPMethod,
+                   url: URL,
+                   parameters: [String: Any]?,
+                   headers: [String: String]? = nil,
+                   completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
     
     if url.scheme == "file" {
       do {
@@ -319,6 +482,7 @@ extension TKServer {
       url,
       method: method.rawValue,
       parameters: parameters,
+      headers: headers,
       info: { uuid, request, response, data, error in
         if let response = response {
           TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
