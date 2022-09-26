@@ -10,5 +10,6 @@ import Foundation
 
 public enum TKUISegmentMode {
   case getReady
+  case book
   case onSegment
 }

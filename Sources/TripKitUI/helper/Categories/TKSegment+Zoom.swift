@@ -15,13 +15,17 @@ extension TKSegment {
   func annotationsToZoomToOnMap(mode: TKUISegmentMode? = nil) -> [MKAnnotation] {
     let mode = mode ?? defaultMode
     switch mode {
-    case .getReady:  return annotationsForEmbarking()
+    case .getReady, .book:  return annotationsForEmbarking()
     case .onSegment: return annotationsForOnService()
     }
   }
   
   private var defaultMode: TKUISegmentMode {
-    return isSelfNavigating ? .onSegment : .getReady
+    if bookingQuickInternalURL != nil {
+      return .book
+    } else {
+      return isSelfNavigating ? .onSegment : .getReady
+    }
   }
   
   private func annotationsForEmbarking() -> [MKAnnotation] {
