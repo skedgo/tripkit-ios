@@ -3622,6 +3622,13 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/segment cards/TKUISegmentMode.swift",
       "line": 13,
+      "symbol": "TKUISegmentMode.book",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/segment cards/TKUISegmentMode.swift",
+      "line": 14,
       "symbol": "TKUISegmentMode.onSegment",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
