@@ -137,7 +137,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let headerSegments = trip.headerSegments
     self.headerSegmentIndices = headerSegments.map { $0.index }
     
-    let initialPage = SegmentCardsInfo.cardIndices(ofSegmentAt: segment.index, in: segmentCards)?.lowerBound ?? 0
+    let initialPage = SegmentCardsInfo.cardIndex(ofSegmentAt: segment.index, mode: mode, in: segmentCards) ?? 0
     
     let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
     let actualInitialPage = min(initialPage, cards.count - 1)

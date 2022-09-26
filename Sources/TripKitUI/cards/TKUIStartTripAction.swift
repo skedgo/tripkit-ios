@@ -18,18 +18,22 @@ extension TKUITripOverviewCard {
   ///
   /// - Parameter actionHandler: Optional handler, passed to `TKUITripModeByModeCard.tripStartedHandler`.
   /// - Returns: A new trip action to be used on a `TKUITripOverviewCard`
-  public static func buildStartTripAction(actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
+  public static func buildStartTripAction(startingOn: TKSegment? = nil, mode: TKUISegmentMode = .onSegment, actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
     return TKUICardAction(
       title: Loc.ActionGo,
       icon: .iconArrowUp
     ) { _, card, trip, _ in
       guard let controller = card.controller else { assertionFailure(); return false }
       
-      let modeByModeCard: TKUITripModeByModeCard
+      var modeByModeCard: TKUITripModeByModeCard!
+      if let startingOn = startingOn {
+        modeByModeCard = try? TKUITripModeByModeCard(startingOn: startingOn, mode: mode, mapManager: card.mapManager as? TKUITripMapManager)
+      }
+      
       if let mapManager = card.mapManager as? TKUITripMapManager {
-        modeByModeCard = TKUITripModeByModeCard(mapManager: mapManager)
+        modeByModeCard = modeByModeCard ?? TKUITripModeByModeCard(mapManager: mapManager)
       } else {
-        modeByModeCard = TKUITripModeByModeCard(trip: trip)
+        modeByModeCard = modeByModeCard ?? TKUITripModeByModeCard(trip: trip)
       }
       modeByModeCard.tripStartedHandler = actionHandler
       modeByModeCard.modeByModeDelegate = card as? TKUITripOverviewCard
