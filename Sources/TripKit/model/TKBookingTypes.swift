@@ -273,7 +273,7 @@ public enum TKBooking {
     
     public let name: String?
     
-    public let address: String
+    public let address: String?
     
     public enum CodingKeys: String, CodingKey {
       case latitude = "lat"
@@ -286,7 +286,7 @@ public enum TKBooking {
   public struct TicketOption: Codable, Hashable {
     public typealias TicketOptionId = String
     
-    public let id: String
+    public let id: TicketOptionId
     public let name: String
     public let details: String
     
@@ -298,6 +298,9 @@ public enum TKBooking {
     /// Number of tickets to pre-select
     public var amount: Int?
     
+    /// The tickets that were purchased, empty if none purchased
+    @DefaultEmptyArray public var purchases: [TicketPurchase]
+    
     public enum CodingKeys: String, CodingKey {
       case id
       case name
@@ -305,6 +308,7 @@ public enum TKBooking {
       case price
       case currencyCode = "currency"
       case amount = "value"
+      case purchases = "purchasedTickets"
     }
     
     public enum InputValue: Hashable {
@@ -312,6 +316,14 @@ public enum TKBooking {
       case amount(Int)
     }
     
+  }
+  
+  public struct TicketPurchase: Codable, Hashable {
+    public typealias TicketPurchaseId = String
+    
+    public let id: TicketPurchaseId
+    
+    public let ticketURL: URL
   }
    
 }

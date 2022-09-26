@@ -61,6 +61,7 @@ FOUNDATION_EXPORT NSString *const TKDefaultsKeyDevelopmentServer;
 - (void)_hitURL:(NSURL *)url
          method:(NSString *)method
      parameters:(nullable NSDictionary<NSString *, id> *)parameters
+        headers:(nullable NSDictionary<NSString *, NSString *> *)headers
            info:(TKServerInfoBlock)info
      completion:(TKServerGenericBlock)completion NS_REFINED_FOR_SWIFT;
 

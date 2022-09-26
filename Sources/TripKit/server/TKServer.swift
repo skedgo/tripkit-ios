@@ -197,12 +197,14 @@ extension TKServer {
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
     decoderConfig: @escaping (JSONDecoder) -> Void = { _ in },
     completion: @escaping (Int, [String: Any], Result<Model, Error>) -> Void
   ) {
     hit(method: method,
         url: url,
-        parameters: parameters)
+        parameters: parameters,
+        headers: headers)
     { status, headers, result in
       completion(status, headers, Result {
         let decoder = JSONDecoder()
@@ -216,11 +218,13 @@ extension TKServer {
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil,
     completion: @escaping (Int, [String: Any], Result<Data, Error>) -> Void
   ) {
     hit(method: method,
         url: url,
-        parameters: parameters)
+        parameters: parameters,
+        headers: headers)
     { status, headers, result in
       completion(status, headers, Result {
         try result.get().orThrow(ServerError.noData)
@@ -276,7 +280,6 @@ extension TKServer {
 }
 
 // MARK: - Async/await
-
 extension TKServer {
   /// Captures server response with HTTP status code, headers and typed response
   public struct Response<T> {
@@ -295,12 +298,14 @@ extension TKServer {
   public func hit(
     _ method: HTTPMethod = .GET,
     url: URL,
-    parameters: [String: Any]? = nil
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil
   ) async -> Response<Data> {
     await withCheckedContinuation { continuation in
       hit(method: method,
           url: url,
-          parameters: parameters)
+          parameters: parameters,
+          headers: headers)
       { status, headers, result in
         continuation.resume(returning: .init(
           statusCode: status,
@@ -407,12 +412,14 @@ extension TKServer {
     _ type: Model.Type,
     _ method: HTTPMethod = .GET,
     url: URL,
-    parameters: [String: Any]? = nil
+    parameters: [String: Any]? = nil,
+    headers: [String: String]? = nil
   ) async -> Response<Model> {
     await withCheckedContinuation { continuation in
       hit(method: method,
           url: url,
-          parameters: parameters)
+          parameters: parameters,
+          headers: headers)
       { status, headers, result in
         continuation.resume(returning: .init(
           statusCode: status,
@@ -467,7 +474,11 @@ extension TKServer {
     )
   }
   
-  private func hit(method: HTTPMethod, url: URL, parameters: [String: Any]?, completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
+  private func hit(method: HTTPMethod,
+                   url: URL,
+                   parameters: [String: Any]?,
+                   headers: [String: String]? = nil,
+                   completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
     
     if url.scheme == "file" {
       do {
@@ -492,6 +503,7 @@ extension TKServer {
       url,
       method: method.rawValue,
       parameters: parameters,
+      headers: headers,
       info: { uuid, isResponse, request, response, data, error in
         if isResponse {
           TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
