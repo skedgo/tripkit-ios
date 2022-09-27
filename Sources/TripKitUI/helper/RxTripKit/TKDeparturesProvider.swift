@@ -54,7 +54,7 @@ extension TKDeparturesProvider {
       "config": TKSettings.Config.userSettings().paras
     ]
     if let date = fromDate {
-      paras["timeStamp"] = date.timeIntervalSince1970
+      paras["timeStamp"] = Int(date.timeIntervalSince1970)
     }
     
     return TKServer.shared.rx
@@ -115,7 +115,7 @@ extension TKDeparturesProvider {
     return [
       "region": table.startRegion.name,
       "disembarkationRegion": table.endRegion.name,
-      "timeStamp": fromDate.timeIntervalSince1970,
+      "timeStamp": Int(fromDate.timeIntervalSince1970),
       "embarkationStops": [table.startStopCode],
       "disembarkationStops": [table.endStopCode],
       "limit": limit,

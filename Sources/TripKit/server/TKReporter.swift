@@ -80,8 +80,8 @@ public class TKReporter {
 extension CLLocation {
   
   fileprivate var progressDict: [String: Any] {
-    var sample = [
-      "timestamp":  timestamp.timeIntervalSince1970,
+    var sample: [String: Any] = [
+      "timestamp":  Int(timestamp.timeIntervalSince1970),
       "latitude":   coordinate.latitude,
       "longitude":  coordinate.longitude
     ]
@@ -123,8 +123,8 @@ extension Trip {
       "hassle": totalHassle,
       "carbon": totalCarbon,
       "calories": totalCalories,
-      "arrivalTime": arrivalTime.timeIntervalSince1970,
-      "departureTime": departureTime.timeIntervalSince1970,
+      "arrivalTime": Int(arrivalTime.timeIntervalSince1970),
+      "departureTime": Int(departureTime.timeIntervalSince1970),
       "segments": segments(with: .inDetails).compactMap(\.choiceSetEntry)
     ]
 
