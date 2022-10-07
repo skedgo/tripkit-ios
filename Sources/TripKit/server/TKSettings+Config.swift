@@ -78,7 +78,7 @@ extension TKSettings {
           maximumWalkingMinutes = minutes.doubleValue
         }
 
-        minimumTransferMinutes = TKSettings.minimumTransferTime
+        minimumTransferMinutes = TKSettings.minimumTransferMinutes
 
         emissions = (shared.object(forKey: TKDefaultsKeyProfileTransportEmissions) as? [String: Double]) ?? [:]
         
