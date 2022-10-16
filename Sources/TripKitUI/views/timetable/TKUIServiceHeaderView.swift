@@ -142,9 +142,6 @@ class TKUIServiceHeaderView: UIView {
       trainOccupancyView.occupancies = components.map { $0.map { $0.occupancy ?? .unknown } }
       trainOccupancyHeightConstraint?.isActive = true
       trainOccupancyBottomConstraint?.isActive = true
-        trainOccupancyHeightConstraint?.constant = 10
-        trainOccupancyBottomConstraint?.constant = 6
-        print("JULES: ADD CONSTRAINT")
       
     } else if let component = components.first?.first, let occupancy = component.occupancy, occupancy != .unknown {
       occupancyWrapper.isHidden = false
@@ -155,7 +152,6 @@ class TKUIServiceHeaderView: UIView {
       trainOccupancyView.isHidden = true
       trainOccupancyHeightConstraint?.isActive = false
       trainOccupancyBottomConstraint?.isActive = false
-        print("JULES: REMOVE CONSTRAINT")
     } else {
       occupancyWrapper.isHidden = true
     }

@@ -274,7 +274,6 @@ extension TKUIServiceCard: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     let size = headerView?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-    print("HEIGHT FOR HEADER w: \(size?.width ?? 0) h:\(size?.height ?? 0)")
     return size?.height ?? 0
   }
   
