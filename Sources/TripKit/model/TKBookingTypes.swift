@@ -386,7 +386,7 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
         let formatter = ISO8601DateFormatter()
         return formatter.string(from: date)
       } else {
-        return TKStyleManager.string(for: date, for: timeZone, showDate: true, showTime: true)
+        return TKStyleManager.format(date, for: timeZone, showDate: true, showTime: true)
       }
     }
   }

@@ -26,7 +26,9 @@ extension TKColor {
 
 // MARK: - Colors
 
-extension TKStyleManager {
+public class TKStyleManager {
+  
+  private init() {}
   
   private static func color(for dict: [AnyHashable: Any]?) -> TKColor? {
     guard
@@ -252,6 +254,59 @@ extension TKStyleManager {
   @objc(exerciseStringForCalories:)
   public static func exerciseString(calories: Double) -> String {
     return exerciseFormatter.string(fromValue: calories, unit: .kilocalorie)
+  }
+  
+  public static func timeString(_ date: Date, for timeZone: TimeZone? = nil, relativeTo other: TimeZone? = nil) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .none
+    formatter.timeStyle = .short
+    formatter.locale = .current
+    formatter.timeZone = timeZone ?? .current
+    
+    let string = formatter.string(from: date)
+    let compact = string.replacingOccurrences(of: " ", with: "").localizedLowercase
+    
+    if let other, let abbreviation = timeZone?.abbreviation(for: date), other.abbreviation(for: date) != abbreviation {
+      return "\(compact) (\(abbreviation))"
+    } else {
+      return compact
+    }
+  }
+  
+  public static func dateString(_ date: Date, for timeZone: TimeZone? = nil) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .full
+    formatter.timeStyle = .none
+    formatter.doesRelativeDateFormatting = true
+    formatter.locale = .current
+    formatter.timeZone = timeZone ?? .current
+    return formatter.string(from: date).localizedCapitalized
+  }
+  
+  public static func format(_ date: Date, for timeZone: TimeZone? = nil, showDate: Bool, showTime: Bool) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = showDate ? .medium : .none
+    formatter.timeStyle = showTime ? .short : .none
+    formatter.locale = .current
+    formatter.timeZone = timeZone ?? .current
+    return formatter.string(from: date)
+  }
+  
+  public static func format(_ date: Date, for timeZone: TimeZone? = nil, forceFormat: String? = nil, forceStyle: DateFormatter.Style = .none) -> String {
+    let formatter = DateFormatter()
+    if let forceFormat {
+      formatter.dateFormat = forceFormat
+    } else {
+      formatter.dateStyle = forceStyle
+    }
+    formatter.locale = .current
+    formatter.timeZone = timeZone ?? .current
+    return formatter.string(from: date)
+  }
+  
+  @available(*, deprecated, renamed: "format(_:for:showDate:showTime:)")
+  public static func string(for date: Date, for timeZone: TimeZone? = nil, showDate: Bool, showTime: Bool) -> String {
+    format(date, for: timeZone, showDate: showDate, showTime: showTime)
   }
   
 }

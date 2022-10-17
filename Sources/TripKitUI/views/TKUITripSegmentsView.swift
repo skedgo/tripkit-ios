@@ -239,7 +239,7 @@ public class TKUITripSegmentsView : UIView {
         // We prefer the time + real-time indicator as the subtitle, and fall back
         // to the subtitle
         if let fixedTime = segment.tripSegmentFixedDepartureTime {
-          modeSubtitle = TKStyleManager.timeString(fixedTime, for: segment.tripSegmentTimeZone)
+          modeSubtitle = TKStyleManager.timeString(fixedTime, for: segment.tripSegmentTimeZone ?? .current)
         }
         if segment.tripSegmentTimesAreRealTime {
           modeSubtitleAccessoryImageViews.append(UIImageView(asRealTimeAccessoryImageAnimated: true, tintColor: lightTextColor))

@@ -33,7 +33,5 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 // Helpers
 #import "NSUserDefaults+SharedDefaults.h"
 
-#import "TKStyleManager.h"
-
 // Permissions
 #import "TKLocationManager.h"
