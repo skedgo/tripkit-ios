@@ -38,9 +38,3 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Permissions
 #import "TKLocationManager.h"
-
-// UI
-#if TARGET_OS_IPHONE
-#import "TKStyleManager+UIKit.h"
-#import "UIFont+CustomFonts.h"
-#endif
