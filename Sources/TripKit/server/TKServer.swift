@@ -535,16 +535,19 @@ extension TKServer {
     info(uuid, .request(request))
     
     URLSession.shared.dataTask(with: request) { data, response, error in
+      let status = (response as? HTTPURLResponse)?.statusCode
       let result: Result<Data?, Error>
       if let error {
         result = .failure(error)
+      } else if let status, let parsedError = TKError.error(from: data, statusCode: status) {
+        result = .failure(parsedError)
       } else  {
         result = .success(data)
       }
       info(uuid, .response(request, response, result))
 
       completion(.init(
-        statusCode: (response as? HTTPURLResponse)?.statusCode,
+        statusCode: status,
         headers: ((response as? HTTPURLResponse)?.allHeaderFields as? [String: Any]) ?? [:],
         result: result)
       )
