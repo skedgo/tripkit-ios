@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -49,3 +51,5 @@ extension SegmentReference {
     @NSManaged func removeFromRealTimeVehicleAlternatives(_ values: NSSet)
 
 }
+
+#endif

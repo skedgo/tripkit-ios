@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -66,3 +68,5 @@ extension Trip {
     @NSManaged func removeFromSegmentReferences(_ values: NSSet)
 
 }
+
+#endif

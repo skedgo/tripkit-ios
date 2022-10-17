@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -44,3 +46,4 @@ extension SegmentReference {
   
 }
 
+#endif

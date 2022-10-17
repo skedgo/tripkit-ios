@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -64,3 +66,5 @@ extension Shape {
     @NSManaged func removeFromVisits(_ values: NSSet)
 
 }
+
+#endif

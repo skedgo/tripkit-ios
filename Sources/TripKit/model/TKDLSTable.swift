@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -45,3 +47,5 @@ public class TKDLSTable: NSObject {
   }
   
 }
+
+#endif

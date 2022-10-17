@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -31,3 +33,5 @@ extension Alert {
     @NSManaged public var url: String?
 
 }
+
+#endif

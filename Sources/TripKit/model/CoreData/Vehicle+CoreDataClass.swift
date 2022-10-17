@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 import MapKit
@@ -122,3 +124,5 @@ extension Vehicle : MKAnnotation {
   }
   
 }
+
+#endif

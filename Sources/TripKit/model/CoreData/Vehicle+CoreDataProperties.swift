@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -65,3 +67,5 @@ extension Vehicle {
     @NSManaged func removeFromServiceAlternatives(_ values: NSSet)
 
 }
+
+#endif

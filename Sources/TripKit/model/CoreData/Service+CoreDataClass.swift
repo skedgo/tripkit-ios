@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -224,3 +226,5 @@ extension Service {
   }
 
 }
+
+#endif

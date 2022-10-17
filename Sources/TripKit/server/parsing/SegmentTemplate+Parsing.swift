@@ -6,6 +6,8 @@
 //  Copyright © 2018 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -129,3 +131,5 @@ extension SegmentTemplate {
   }
   
 }
+
+#endif

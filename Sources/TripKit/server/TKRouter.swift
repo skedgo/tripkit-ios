@@ -7,8 +7,13 @@
 //
 
 import Foundation
+
+#if canImport(CoreData)
+
 import MapKit
 import CoreData
+
+#endif
 
 /// A TKRouter calculates trips for routing requests, it talks to TripGo's `routing.json` API.
 @objc
@@ -65,6 +70,8 @@ public class TKRouter: NSObject {
   private var finishedWorkers: UInt = 0
   private var workerQueue: DispatchQueue?
   
+#if canImport(CoreData)
+
   /// The main method to call to have the router calculate trips.
   /// - Parameters:
   ///   - request: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
@@ -127,6 +134,8 @@ public class TKRouter: NSObject {
     }
   }
   
+#endif
+  
   public func cancelRequests() {
     if let queue = workerQueue {
       queue.async(execute: cancelRequestsWorker)
@@ -145,6 +154,8 @@ public class TKRouter: NSObject {
 }
 
 // MARK: - Multi-fetch
+
+#if canImport(CoreData)
 
 extension TKRouter {
   
@@ -345,6 +356,8 @@ extension TripRequest {
   }
 }
 
+#endif
+
 extension TKTransportModes {
   
   /// Groups the mode identifiers
@@ -402,13 +415,20 @@ public protocol TKRouterRequestable {
   var at: TKShareHelper.QueryDetails.Time { get }
   var modes: Set<String> { get }
   var additional: Set<URLQueryItem> { get }
+  
+#if canImport(CoreData)
   var context: NSManagedObjectContext? { get }
   
   func toTripRequest() -> TripRequest
+#endif
+  
 }
 
 fileprivate extension TKRouterRequestable {
   func perform(_ block: @escaping (Self) -> Void) {
+#if os(Linux)
+    block(self)
+#else
     if let context = context {
       context.perform {
         block(self)
@@ -416,9 +436,13 @@ fileprivate extension TKRouterRequestable {
     } else {
       block(self)
     }
+#endif
   }
   
   func performAndWait<R>(_ block: (Self) throws -> R) throws -> R {
+#if os(Linux)
+    return try block(self)
+#else
     if let context = context {
       var result: R! = nil
       var blockError: Error? = nil
@@ -437,8 +461,11 @@ fileprivate extension TKRouterRequestable {
     } else {
       return try block(self)
     }
+#endif
   }
 }
+
+#if canImport(CoreData)
 
 extension TKRouter.RoutingQuery: TKRouterRequestable {
   public func toTripRequest() -> TripRequest {
@@ -489,6 +516,7 @@ extension TripRequest: TKRouterRequestable {
   
   public func toTripRequest() -> TripRequest { self }
 }
+#endif
 
 extension TKRouter {
   
@@ -534,7 +562,29 @@ extension TKRouter {
     return paras
   }
   
+#if canImport(CoreData)
+
   private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+    fetchTripsResponse(for: request, bestOnly: bestOnly, additional: additional) { [weak self] result in
+      request.perform { [weak self] _ in
+        guard let self = self else { return }
+        
+        switch result {
+        case .success(let response):
+          let tripRequest = request.toTripRequest()
+          self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+          
+        case .failure(let error):
+          self.handleError(error, callbackQueue: callbackQueue, completion: completion)
+        }
+      }
+    }
+  }
+  
+#endif
+  
+  /// Alternative method to get the API response for fetching trips, without parsing them into a `Trip`
+  func fetchTripsResponse(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, callbackQueue: DispatchQueue? = nil, completion: @escaping (Result<TKAPI.RoutingResponse, Error>) -> Void) {
 
     // Mark as active early, to make sure we pass on errors
     self.isActive = true
@@ -589,19 +639,8 @@ extension TKRouter {
                    parameters: paras,
                    region: region,
                    callbackOnMain: false
-        ) { [weak self] _, _, result in
-          request.perform { [weak self] _ in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let response):
-              let tripRequest = request.toTripRequest()
-              self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
-              
-            case .failure(let error):
-              self.handleError(error, callbackQueue: callbackQueue, completion: completion)
-            }
-          }
+        ) { _, _, result in
+          completion(result)
         }
       }
     }
@@ -614,16 +653,22 @@ extension TKRouter {
 
 extension TKRouter {
 
-  private func handleError(_ error: Error, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  private func handleError<S>(_ error: Error, callbackQueue: DispatchQueue?, completion: @escaping (Result<S, Error>) -> Void) {
     // Ignore outdated request errors
     guard isActive else { return }
     
     isActive = false
     TKLog.debug("Request failed with error: \(error)")
-    callbackQueue.async {
+    if let callbackQueue = callbackQueue {
+      callbackQueue.async {
+        completion(.failure(error))
+      }
+    } else {
       completion(.failure(error))
     }
   }
+  
+#if canImport(CoreData)
   
   private func parse(_ response: TKAPI.RoutingResponse, for request: TripRequest, visibility: TripGroup.Visibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
@@ -642,5 +687,7 @@ extension TKRouter {
       }
     }
   }
+  
+#endif
   
 }

@@ -7,7 +7,10 @@
 //
 
 import Foundation
+
+#if canImport(CoreData)
 import CoreData
+#endif
 
 #if SWIFT_PACKAGE
 @_exported import TripKitObjc
@@ -25,10 +28,12 @@ public enum TripKit {
     #endif
   }()
   
+#if canImport(CoreData)
   public static func loadModel() -> NSManagedObjectModel? {
     let modelURL = TripKit.bundle.url(forResource: "TripKitModel", withExtension: "momd")
     return modelURL.flatMap(NSManagedObjectModel.init(contentsOf:))
   }
+#endif
   
   public static var apiKey: String {
     get {

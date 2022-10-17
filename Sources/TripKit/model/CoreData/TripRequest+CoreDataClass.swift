@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -284,3 +286,5 @@ extension TripRequest {
     return output
   }
 }
+
+#endif

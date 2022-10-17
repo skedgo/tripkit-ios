@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -47,3 +49,5 @@ extension TripRequest {
     @NSManaged func removeFromTripGroups(_ values: NSSet)
 
 }
+
+#endif

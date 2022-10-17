@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -76,3 +78,5 @@ extension SegmentTemplate {
     @NSManaged func removeFromShapes(_ values: NSSet)
 
 }
+
+#endif

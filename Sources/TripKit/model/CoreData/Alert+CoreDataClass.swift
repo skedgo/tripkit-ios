@@ -7,7 +7,10 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
+
 import CoreData
 import MapKit
 
@@ -75,3 +78,4 @@ extension Alert: MKAnnotation {
   }
   
 }
+#endif

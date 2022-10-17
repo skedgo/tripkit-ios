@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -89,3 +91,5 @@ extension StopLocation {
     @NSManaged func removeFromVisits(_ values: NSSet)
 
 }
+
+#endif

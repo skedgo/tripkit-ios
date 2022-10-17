@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -513,5 +515,7 @@ extension Trip: TKRealTimeUpdatable {
     }
     
   }
+
+#endif
 
 #endif

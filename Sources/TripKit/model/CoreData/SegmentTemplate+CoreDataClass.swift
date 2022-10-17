@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import CoreData
 import MapKit
 
@@ -115,3 +117,5 @@ extension SegmentTemplate {
   }
   
 }
+
+#endif
