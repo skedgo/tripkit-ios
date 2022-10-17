@@ -165,7 +165,7 @@ public class TKUISectionedAlertViewController: UIViewController {
   
   private func customizeSearchBar() {
     TKStyleManager.style(searchBar, includingBackground: false) { textField in
-      textField.tintColor = TKStyleManager.globalTintColor()
+      textField.tintColor = TKStyleManager.globalTintColor
       textField.textColor = .tkLabelPrimary
       textField.backgroundColor = .tkBackground
     }

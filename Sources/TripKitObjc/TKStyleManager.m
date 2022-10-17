@@ -19,36 +19,6 @@
 
 @implementation TKStyleManager
 
-+ (TKColor *)darkTextColor
-{
-  return [TKColor blackColor];
-  //  return [TKColor blueColor];
-}
-
-+ (TKColor *)lightTextColor
-{
-  return [TKColor colorWithWhite:148.f/255 alpha:1];
-  //  return [TKColor redColor];
-}
-
-#if TARGET_OS_IPHONE
-+ (UIButton *)cellAccessoryButtonWithImage:(TKImage *)image
-                                    target:(id)target
-                                    action:(SEL)selector
-{
-  UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-  UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-  button.frame = CGRectMake(0, 0, 44, 44);
-  imageView.frame = CGRectMake((CGRectGetMaxX(button.frame) - CGRectGetWidth(imageView.frame)) / 2, (CGRectGetMaxY(button.frame) - CGRectGetHeight(imageView.frame)) / 2, CGRectGetWidth(imageView.frame), CGRectGetHeight(imageView.frame));
-  [button addSubview:imageView];
-  [button addTarget:target
-             action:selector
-   forControlEvents:UIControlEventTouchUpInside];
-  
-  return button;
-}
-#endif
-
 + (NSBundle *)bundle
 {
   return [NSBundle bundleForClass:[TKStyleManager class]];
@@ -183,70 +153,6 @@ NSString * const kDateTimeDateFormatterKey = @"DateTimeDateFormatterKey";
 	}
 	
 	return [formatter stringFromDate:date];
-}
-
-@end
-
-@implementation TKStyleManager (Color)
-
-+ (TKColor *)globalTintColor
-{
-  NSDictionary *RGBs = [[TKConfig sharedInstance] globalTintColor];
-  if (RGBs != nil) {
-    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
-  } else {
-    return [TKColor colorWithRed:0/255.0f green:204/255.0f blue:102/255.0f alpha:1.0f];
-  }
-}
-
-+ (TKColor *)globalBarTintColor
-{
-  NSDictionary *RGBs = [[TKConfig sharedInstance] globalBarTintColor];
-  if (RGBs != nil) {
-    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
-  } else {
-    return [TKColor colorWithRed:42/255.0f green:58/255.0f blue:77/255.0f alpha:1.0f];
-  }
-}
-
-+ (TKColor *)globalSecondaryBarTintColor
-{
-  NSDictionary *RGBs = [[TKConfig sharedInstance] globalSecondaryBarTintColor];
-  if (RGBs != nil) {
-    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
-  } else {
-    return [TKColor colorWithRed:30/255.0f green:42/255.0f blue:54/255.0f alpha:1.0f];
-  }
-}
-
-+ (TKColor *)globalAccentColor
-{
-  NSDictionary *RGBs = [[TKConfig sharedInstance] globalAccentColor];
-  if (RGBs != nil) {
-    return [TKColor colorWithRed:[self redComponent:RGBs] green:[self greenComponent:RGBs] blue:[self blueComponent:RGBs] alpha:1];
-  } else {
-    return [self globalTintColor];
-  }
-}
-
-#pragma mark - Private
-
-+ (CGFloat)redComponent:(NSDictionary *)RGB
-{
-  NSUInteger red = [RGB[@"Red"] integerValue];
-  return red/255.0f;
-}
-
-+ (CGFloat)greenComponent:(NSDictionary *)RGB
-{
-  NSUInteger green = [RGB[@"Green"] integerValue];
-  return green/255.0f;
-}
-
-+ (CGFloat)blueComponent:(NSDictionary *)RGB
-{
-  NSUInteger blue = [RGB[@"Blue"] integerValue];
-  return blue/255.0f;
 }
 
 @end

@@ -74,7 +74,7 @@ class TKUIDepartureCell: UITableViewCell {
     timeToDepartUnitLabel.textColor = .tkStateSuccess
     
     selectionIndicator.isHidden = true
-    selectionIndicator.backgroundColor = TKStyleManager.globalTintColor()
+    selectionIndicator.backgroundColor = TKStyleManager.globalTintColor
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {

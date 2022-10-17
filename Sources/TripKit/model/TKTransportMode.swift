@@ -204,7 +204,7 @@ public extension TKTransportMode {
         return #colorLiteral(red: 0.2567383349, green: 0.5468673706, blue: 0.9439687133, alpha: 1)
       } else {
         print("Default colour missing for: \(String(describing: modeIdentifier))")
-        return TKStyleManager.globalTintColor()
+        return TKStyleManager.globalTintColor
       }
     }
 
