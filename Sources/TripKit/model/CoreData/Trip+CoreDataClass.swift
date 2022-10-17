@@ -104,7 +104,7 @@ extension Trip {
     guard
       let identifier = segment.modeIdentifier
       else { return false }
-    return TKTransportModes.modeIdentifierIsExpensive(identifier)
+    return TKTransportMode.modeIdentifierIsExpensive(identifier)
   }
   
   /// Offset in seconds from the specified departure/arrival time.

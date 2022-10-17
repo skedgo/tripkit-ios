@@ -56,7 +56,7 @@ extension TKAppleGeocoder: TKGeocoding {
     
     var updated = address
     for entry in replacement {
-      updated.replacingOccurrences(of: entry.key, with: entry.value, options: [.caseInsensitive, .regularExpression])
+      updated = updated.replacingOccurrences(of: entry.key, with: entry.value, options: [.caseInsensitive, .regularExpression])
     }
     return updated
   }

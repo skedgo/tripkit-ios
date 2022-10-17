@@ -253,7 +253,7 @@ extension TKRouter {
       throw RoutingError.invalidRequest("No modes enabled")
     }
     
-    let groupedIdentifier = TKTransportModes.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
+    let groupedIdentifier = TKTransportMode.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
     
     let tripRequest: TripRequest = try request.performAndWait {
       let tripRequest = $0.toTripRequest()
@@ -358,7 +358,7 @@ extension TripRequest {
 
 #endif
 
-extension TKTransportModes {
+extension TKTransportMode {
   
   /// Groups the mode identifiers
   /// - Parameters:
@@ -372,9 +372,9 @@ extension TKTransportModes {
     for mode in modes {
       if processedModes.contains(mode) {
         continue // added already, e.g., via implied modes
-      } else if mode == TKTransportModeIdentifierFlight, modes.count > 1 {
+      } else if mode == TKTransportMode.flight.modeIdentifier, modes.count > 1 {
         continue // don't add flights by themselves
-      } else if mode == TKTransportModeIdentifierWalking || mode == TKTransportModeIdentifierWheelchair {
+      } else if mode == TKTransportMode.walking.modeIdentifier || mode == TKTransportMode.wheelchair.modeIdentifier {
         includesWalkOnly = true
       }
       

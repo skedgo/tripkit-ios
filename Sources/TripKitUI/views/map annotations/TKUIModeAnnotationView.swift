@@ -123,7 +123,7 @@ fileprivate extension TKModeInfo {
     guard
       let identifier = self.identifier
       else { return TKStyleManager.globalTintColor() }
-    return TKTransportModes.color(for: identifier)
+    return TKTransportMode.color(for: identifier)
   }
   
 }

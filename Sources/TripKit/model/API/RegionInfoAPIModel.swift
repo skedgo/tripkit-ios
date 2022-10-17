@@ -22,7 +22,7 @@ extension TKAPI {
     /// Additional information for some of the modes in the region.
     /// Dictionary of a generic mode identifier to the details.
     ///
-    /// Use `TKTransportModes.genericModeIdentifier` to get the
+    /// Use `TKTransportMode.genericModeIdentifier` to get the
     /// generic part of any mode identifier.
     public let modes: [String: GenericModeDetails]
   }
@@ -123,7 +123,7 @@ extension TKAPI.RegionInfo {
   ///     (only returns something if it's a specific mode identifier, i.e.,
   ///     one with two underscores in it.)
   public func specificModeDetails(for modeIdentifier: String) -> TKAPI.SpecificModeDetails? {
-    let genericMode = TKTransportModes.genericModeIdentifier(forModeIdentifier: modeIdentifier)
+    let genericMode = TKTransportMode.genericModeIdentifier(forModeIdentifier: modeIdentifier)
     return modes[genericMode]?.specificModes.first { modeIdentifier == $0.identifier }
   }
   

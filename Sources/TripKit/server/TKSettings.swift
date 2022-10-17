@@ -239,15 +239,15 @@ extension TKSettings {
     let shared = UserDefaults.shared
     if let enabled = enabled {
       shared.set(enabled, forKey: DefaultsKey.sortedEnabled.rawValue)
-      if enabled.contains(TKTransportModeIdentifierWheelchair) {
+      if enabled.contains(TKTransportMode.wheelchair.modeIdentifier) {
         TKSettings.showWheelchairInformation = true
-      } else if enabled.contains(TKTransportModeIdentifierWalking) {
+      } else if enabled.contains(TKTransportMode.walking.modeIdentifier) {
         TKSettings.showWheelchairInformation = false
       }
     }
     if let hidden = hidden {
       shared.set(Array(hidden), forKey: DefaultsKey.hidden.rawValue)
-      if hidden.contains(TKTransportModeIdentifierWheelchair) {
+      if hidden.contains(TKTransportMode.wheelchair.modeIdentifier) {
         TKSettings.showWheelchairInformation = false
       }
     }
@@ -298,7 +298,7 @@ extension TKSettings {
     if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [String] {
       return Set(hidden)
     } else {
-      return [TKTransportModeIdentifierSchoolBuses]
+      return [TKTransportMode.schoolBuses.modeIdentifier]
     }
   }
   

@@ -17,7 +17,7 @@ public extension TKModeInfo {
     guard let identifier = identifier else {
       return nil
     }
-    return TKTransportModes.color(for: identifier)
+    return TKTransportMode.color(for: identifier)
   }
 }
 

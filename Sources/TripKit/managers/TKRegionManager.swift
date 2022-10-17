@@ -232,7 +232,7 @@ extension TKRegionManager {
     
     // Remove specific modes for which we have the generic one
     for mode in all {
-      let generic = TKTransportModes.genericModeIdentifier(forModeIdentifier: mode.identifier)
+      let generic = TKTransportMode.genericModeIdentifier(forModeIdentifier: mode.identifier)
       if generic != mode.identifier, added.contains(generic) {
         added.remove(mode.identifier)
         all.removeAll { $0.identifier == mode.identifier }

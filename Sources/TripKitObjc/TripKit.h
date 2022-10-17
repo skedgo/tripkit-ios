@@ -31,7 +31,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Server logic
 #import "TKServer.h"
-#import "TKTransportModes.h"
 #import "TKAutocompletionResult.h"
 
 // Helpers
@@ -40,7 +39,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "NSManagedObjectContext+SimpleFetch.h"
 #import "NSUserDefaults+SharedDefaults.h"
 
-#import "TKLocationHelper.h"
 #import "TKStyleManager.h"
 #import "TKSettings.h"
 

@@ -76,22 +76,22 @@ extension SegmentTemplate {
 
   var isWalking: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
-    return TKTransportModes.modeIdentifierIsWalking(modeIdentifier)
+    return TKTransportMode.modeIdentifierIsWalking(modeIdentifier)
   }
 
   var isWheelchair: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
-    return TKTransportModes.modeIdentifierIsWheelchair(modeIdentifier)
+    return TKTransportMode.modeIdentifierIsWheelchair(modeIdentifier)
   }
   
   var isCycling: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
-    return TKTransportModes.modeIdentifierIsCycling(modeIdentifier)
+    return TKTransportMode.modeIdentifierIsCycling(modeIdentifier)
   }
   
   var isDriving: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
-    return TKTransportModes.modeIdentifierIsDriving(modeIdentifier)
+    return TKTransportMode.modeIdentifierIsDriving(modeIdentifier)
   }
   
   var isStationary: Bool {
@@ -103,17 +103,17 @@ extension SegmentTemplate {
   }
   
   var isAffectedByTraffic: Bool {
-    return !isStationary && TKTransportModes.modeIdentifierIsAffected(byTraffic: modeIdentifier)
+    return !isStationary && TKTransportMode.modeIdentifierIsAffectedByTraffic(modeIdentifier)
   }
   
   var isSharedVehicle: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
-    return TKTransportModes.modeIdentifierIsSharedVehicle(modeIdentifier)
+    return TKTransportMode.modeIdentifierIsSharedVehicle(modeIdentifier)
   }
   
   var isFlight: Bool {
     guard let modeIdentifier = self.modeIdentifier else { return false }
-    return TKTransportModes.modeIdentifierIsFlight(modeIdentifier)
+    return TKTransportMode.modeIdentifierIsFlight(modeIdentifier)
   }
   
 }
