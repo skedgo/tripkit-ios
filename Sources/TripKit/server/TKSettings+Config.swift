@@ -77,7 +77,7 @@ extension TKSettings {
           maximumWalkingMinutes = duration / 60
         }
 
-        minimumTransferMinutes = TKSettings.minimumTransferTime
+        minimumTransferMinutes = TKSettings.minimumTransferMinutes
 
         emissions = TKSettings.transportEmissions
         

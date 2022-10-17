@@ -35,7 +35,7 @@ public enum TKBuzzInfoProvider {
         "region": region.name,
         "serviceTripID": service.code,
         "operator": service.operatorName ?? "",
-        "embarkationDate": embarkationDate.timeIntervalSince1970,
+        "embarkationDate": Int(embarkationDate.timeIntervalSince1970),
         "encode": true
       ]
       
