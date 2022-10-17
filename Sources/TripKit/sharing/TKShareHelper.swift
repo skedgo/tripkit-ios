@@ -144,11 +144,11 @@ extension TKShareHelper {
 
 extension TKShareHelper {
   
-  @objc public static func isQueryURL(_ url: URL) -> Bool {
+  public static func isQueryURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/go")
   }
 
-  @objc public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: TKTimeType, time: Date?) -> URL? {
+  public static func createQueryURL(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D, timeType: TKTimeType, time: Date?) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
     
     var urlString = "\(baseURL)/go?tlat=\(degrees: end.latitude)&tlng=\(degrees: end.longitude)"
@@ -170,11 +170,11 @@ extension TKShareHelper {
 
 extension TKShareHelper {
 
-  @objc public static func isMeetURL(_ url: URL) -> Bool {
+  public static func isMeetURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/meet")
   }
   
-  @objc public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date) -> URL? {
+  public static func createMeetURL(coordinate: CLLocationCoordinate2D, at time: Date) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
     let path = "/meet?lat=\(degrees: coordinate.latitude)&lng=\(degrees: coordinate.longitude)&at=\(Int(time.timeIntervalSince1970))"
     return URL(string: baseURL + path)
@@ -214,11 +214,11 @@ extension TKShareHelper {
 
 extension TKShareHelper {
 
-  @objc public static func isStopURL(_ url: URL) -> Bool {
+  public static func isStopURL(_ url: URL) -> Bool {
     return url.path.hasPrefix("/stop")
   }
 
-  @objc public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL? {
+  public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
     let path = "/stop/\(regionName)/\(escaping: stopCode)/\(escaping: filter ?? "")"
     return URL(string: baseURL + path)

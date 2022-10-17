@@ -10,14 +10,6 @@
 
 #import "TKCrossPlatform.h"
 
-typedef NS_ENUM(NSInteger, TKStyleModeIconType) {
-	TKStyleModeIconTypeListMainMode,
-  TKStyleModeIconTypeMapIcon,
-  TKStyleModeIconTypeResolutionIndependent, // SVGs! You probably need SVGKit to handle these.
-  TKStyleModeIconTypeVehicle,
-  TKStyleModeIconTypeAlert,
-};
-
 NS_ASSUME_NONNULL_BEGIN
 @interface TKStyleManager : NSObject
 
