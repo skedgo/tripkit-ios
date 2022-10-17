@@ -32,7 +32,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKAutocompletionResult.h"
 
 // Helpers
-#import "NSManagedObject+TKPersistence.h"
 #import "NSUserDefaults+SharedDefaults.h"
 
 #import "TKStyleManager.h"

@@ -28,7 +28,7 @@ class TKUITripOverviewViewModel {
     
     let tripChanged: Observable<Trip> = presentedTrip
       .asObservable()
-      .distinctUntilChanged { $0.persistentId() == $1.persistentId() }
+      .distinctUntilChanged { $0.objectID == $1.objectID }
     
     let servicesFetched = presentedTrip
       .asObservable()
