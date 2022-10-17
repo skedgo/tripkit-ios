@@ -79,7 +79,7 @@ public class TKRouter: NSObject {
   public func fetchTrips(for request: TripRequest, additional: Set<URLQueryItem>? = nil, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<Void, Error>) -> Void) {
     
     func abort() {
-      let error = NSError(code: Int(kTKErrorTypeInternal), message: "Trip request deleted.")
+      let error = NSError(code: Int(TKErrorCode.internalError.rawValue), message: "Trip request deleted.")
       callbackQueue.async { completion(.failure(error)) }
     }
     
@@ -524,8 +524,8 @@ extension TKRouter {
     let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil, config: nil)
     let baseURL = TKServer.fallbackBaseURL
     let fullURL = baseURL.appendingPathComponent("routing.json")
-    let request = TKServer.shared.getRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
-    return request.url?.absoluteString
+    let request = try? TKServer.shared.GETRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
+    return request?.url?.absoluteString
   }
   
   private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKSettings.Config?, bestOnly: Bool = false) -> [String: Any] {
@@ -591,10 +591,10 @@ extension TKRouter {
     
     // sanity checks
     guard request.from.coordinate.isValid else {
-      return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "Start location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
+      return handleError(NSError(code: TKErrorCode.userError.rawValue, message: "Start location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
     }
     guard request.to.coordinate.isValid else {
-      return handleError(NSError(code: Int(kTKServerErrorTypeUser), message: "End location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
+      return handleError(NSError(code: TKErrorCode.userError.rawValue, message: "End location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
     }
     
     TKRegionManager.shared.requireRegions { [weak self] regionsResult in

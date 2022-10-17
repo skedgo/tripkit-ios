@@ -10,12 +10,10 @@
 #import <TripKitObjc/TKTripKit.h>
 #import <TripKitObjc/NSUserDefaults+SharedDefaults.h>
 #import <TripKitObjc/TKConfig.h>
-#import <TripKitObjc/TKServer.h>
 #else
 #import "TKTripKit.h"
 #import "NSUserDefaults+SharedDefaults.h"
 #import "TKConfig.h"
-#import "TKServer.h"
 #endif
 
 #import "TKMacro.h"
@@ -79,6 +77,16 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
   return [NSBundle bundleForClass:[TKTripKit class]];
 }
 
++ (nullable NSString *)xTripGoVersion
+{
+  NSNumber *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+  if (version) {
+    return [NSString stringWithFormat:@"i%@", version];
+  } else {
+    return nil;
+  }
+}
+
 - (BOOL)didResetToday
 {
   NSString *currentReset = [self resetStringForToday];
@@ -96,7 +104,7 @@ NSString *const TKTripKitDidResetNotification = @"TKTripKitDidResetNotification"
 - (NSString *)resetStringForToday
 {
   NSString *dateString = [self.dateFormatter stringFromDate:[NSDate date]];
-  return [NSString stringWithFormat:@"%@-%@", [TKServer xTripGoVersion], dateString];
+  return [NSString stringWithFormat:@"%@-%@", [TKTripKit xTripGoVersion], dateString];
 }
 
 - (NSURL *)localDirectory

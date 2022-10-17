@@ -1,5 +1,5 @@
 //
-//  TKServer+Image.swift
+//  TKServer+ImageUpload.swift
 //  TripKit
 //
 //  Created by Brian Huang on 18/8/21.
@@ -18,8 +18,8 @@ extension TKServer {
     var request = URLRequest(url: baseURL.appendingPathComponent("data/user/image"))
     request.httpMethod = "POST"
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-    request.setValue(TKServer.userToken(), forHTTPHeaderField: "userToken")
-    request.setValue(TKServer.shared.apiKey, forHTTPHeaderField: "X-TripGo-Key")
+    request.setValue(userToken, forHTTPHeaderField: "userToken")
+    request.setValue(apiKey, forHTTPHeaderField: "X-TripGo-Key")
     request.setValue(TKServer.xTripGoVersion(), forHTTPHeaderField: "X-TripGo-Version")
     
     var data = Data()

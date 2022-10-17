@@ -18,6 +18,9 @@ enum TKErrorCode: Int {
   case timeTooOld                    = 1201
   case departureTimeTooOld           = 1202
   case arrivalTimeTooOld             = 1203
+  
+  case userError                     = 30051
+  case internalError                 = 30052
 }
 
 class TKUserError: TKError {
@@ -58,7 +61,7 @@ public class TKError: NSError {
   class func error(from data: Data, domain: String) -> TKError? {
     guard let parsed = try? JSONDecoder().decode(TKAPI.ServerError.self, from: data) else { return nil }
     
-    var code = Int(parsed.isUserError ? kTKServerErrorTypeUser : kTKErrorTypeInternal)
+    var code = Int(parsed.isUserError ? TKErrorCode.userError.rawValue : TKErrorCode.internalError.rawValue)
     if let errorCode = parsed.errorCode {
       code = errorCode
     }

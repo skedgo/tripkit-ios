@@ -68,7 +68,7 @@ extension TKServer {
     if result.statusCode != 200 {
       throw TKError.error(withCode: 16524, userInfo: [ NSLocalizedDescriptionKey: "Couldn't delete account. Status: \(String(describing: result.statusCode))" ])
     } else {
-      TKServer.updateUserToken(nil)
+      userToken = nil
     }
   }
   

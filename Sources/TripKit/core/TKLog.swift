@@ -231,7 +231,7 @@ extension TKLog.LogLevel {
 
 extension TKLog {
   
-  public typealias ServerResult = Result<(URLResponse, Data?), NSError>
+  public typealias ServerResult = Result<(URLResponse, Data?), Error>
   
   /// The URL request along with a UUID to identify each request sent
   public struct ServerRequest: Hashable {
@@ -258,7 +258,7 @@ extension TKLog {
       case (.success(let left), .success(let right)):
         return left == right
       case (.failure(let left), .failure(let right)):
-        return left === right
+        return left as NSError === right as NSError
       default:
         return false
       }
@@ -271,7 +271,7 @@ extension TKLog {
         hasher.combine(response)
         hasher.combine(data)
       case let .failure(error):
-        hasher.combine(error)
+        hasher.combine(error as NSError)
       }
     }
   }
@@ -289,7 +289,7 @@ extension TKLog {
 
   /// :nodoc: - Public for building CocoaPods-style
   @objc(log:response:data:orError:forRequest:UUID:)
-  public class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: NSError?, for request: URLRequest, uuid: UUID) {
+  public class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: Error?, for request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }
 
