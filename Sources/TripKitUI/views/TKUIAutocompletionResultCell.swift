@@ -60,7 +60,7 @@ extension TKUIAutocompletionResultCell {
     configure(title: autocompletion.title, subtitle: autocompletion.subtitle, image: autocompletion.image)
     contentView.alpha = autocompletion.showFaded ? 0.33 : 1
     
-    if let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
+    if #available(iOS 14.0, *), let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
       let button = UIButton(primaryAction: UIAction(image: accessoryImage) { _ in
         target(item)
       })
