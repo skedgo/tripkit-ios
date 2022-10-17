@@ -61,7 +61,6 @@ extension TKSettings {
     
     private init(fromDefaults: Bool) {
       if fromDefaults {
-        let shared = UserDefaults.shared
         distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
         weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
           ($0, TKSettings[$0])
@@ -74,25 +73,25 @@ extension TKSettings {
         cyclingSpeed = TKSettings.cyclingSpeed
         walkingSpeed = TKSettings.walkingSpeed
 
-        if let minutes = shared.object(forKey: TKDefaultsKeyProfileTransportWalkMaxDuration) as? NSNumber {
-          maximumWalkingMinutes = minutes.doubleValue
+        if let duration = TKSettings.maximumWalkingDuration {
+          maximumWalkingMinutes = duration / 60
         }
 
         minimumTransferMinutes = TKSettings.minimumTransferTime
 
-        emissions = (shared.object(forKey: TKDefaultsKeyProfileTransportEmissions) as? [String: Double]) ?? [:]
+        emissions = TKSettings.transportEmissions
         
-        #if DEBUG
-        if let setting = shared.object(forKey: TKDefaultsKeyProfileBookingsUseSandbox) as? NSNumber {
+#if DEBUG
+        if let setting = UserDefaults.shared.object(forKey: TKSettings.DefaultsKey.bookingsUseSandbox.rawValue) as? NSNumber {
           bookingSandbox = setting.boolValue
         } else {
           bookingSandbox = true // Default to sandbox while developing
         }
-        #else
-        if shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+#else
+        if UserDefaults.shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
           bookingSandbox = true
         }
-        #endif
+#endif
       
       } else {
         weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {

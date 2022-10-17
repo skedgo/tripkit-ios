@@ -27,7 +27,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 #import "TKEnums.h"
 #import "TKConfig.h"
 #import "TKCrossPlatform.h"
-#import "TKConstants.h"
 
 // Server logic
 #import "TKServer.h"
@@ -35,11 +34,9 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Helpers
 #import "NSManagedObject+TKPersistence.h"
-#import "NSManagedObjectContext+SimpleFetch.h"
 #import "NSUserDefaults+SharedDefaults.h"
 
 #import "TKStyleManager.h"
-#import "TKSettings.h"
 
 // Permissions
 #import "TKLocationManager.h"
