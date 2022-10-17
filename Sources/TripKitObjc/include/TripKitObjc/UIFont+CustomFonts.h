@@ -23,8 +23,6 @@
 
 + (nullable NSString *)preferredMediumFontName;
 
-+ (void)printIncludedCustomFontsByNames;
-
 @end
 
 #endif
