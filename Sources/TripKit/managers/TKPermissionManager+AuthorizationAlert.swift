@@ -14,24 +14,24 @@ import UIKit
 extension TKPermissionManager {
   
   public func tryAuthorization(sender: Any? = nil, in controller: UIViewController, completion: @escaping (Bool) -> Void) {
-    guard featureIsAvailable() else {
+    guard featureIsAvailable else {
       completion(false)
       return
     }
     
-    guard !isAuthorized() else {
+    guard !isAuthorized else {
       completion(true)
       return
     }
     
-    switch authorizationStatus() {
+    switch authorizationStatus {
     case .restricted,
          .denied:
       showAuthorizationAlert(sender: sender, in: controller)
       completion(false)
       
     case .notDetermined:
-      ask(forPermission: completion)
+      askForPermission(completion)
       
     case .authorized:
       assert(false, "How did we end up here?")
@@ -39,14 +39,14 @@ extension TKPermissionManager {
     }
   }
   
-  @objc(showAuthorizationAlertForSender:inViewController:)
+  
   public func showAuthorizationAlert(sender: Any? = nil, in controller: UIViewController) {
-    guard authorizationRestrictionsApply() else { return }
+    guard authorizationRestrictionsApply else { return }
     
     let message: String
-    switch authorizationStatus() {
+    switch authorizationStatus {
     case .denied:
-      message = authorizationAlertText()
+      message = authorizationAlertText
     case .restricted:
       message = NSLocalizedString("Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.", tableName: "Shared", bundle: .tripKit, comment: "Authorization restricted alert message")
     case .notDetermined,

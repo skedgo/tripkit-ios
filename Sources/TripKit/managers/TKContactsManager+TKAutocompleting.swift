@@ -53,7 +53,7 @@ extension TKContactsManager: TKAutocompleting {
   #if os(iOS) || os(tvOS)
   @objc
   public func additionalActionTitle() -> String? {
-    if isAuthorized() { return nil }
+    if isAuthorized { return nil }
     
     return NSLocalizedString("Include contacts", tableName: "Shared", bundle: .tripKit, comment: "Button to include contacts in search, too.")
   }

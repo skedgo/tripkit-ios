@@ -60,7 +60,7 @@ extension TKCalendarManager: TKAutocompleting {
   #if os(iOS) || os(tvOS)
   @objc
   public func additionalActionTitle() -> String? {
-    if isAuthorized() { return nil }
+    if isAuthorized { return nil }
     
     return NSLocalizedString("Include events", tableName: "Shared", bundle: .tripKit, comment: "Button to include events in search, too.")
   }

@@ -190,7 +190,17 @@ public class Loc : NSObject {
   public static var CurrentLocation: String {
     return NSLocalizedString("Current Location", tableName: "Shared", bundle: .tripKit, comment: "Title for user's current location")
   }
-  
+
+  @objc
+  public static var CouldNotFetchCurrentLocationTitle: String {
+    return NSLocalizedString("Could not determine your current location.", tableName: "Shared", bundle: .tripKit, comment: "Error title when GPS failed.")
+  }
+
+  @objc
+  public static var CouldNotFetchCurrentLocationRecovery: String {
+    return NSLocalizedString("Please try again or set your location manually.", tableName: "Shared", bundle: .tripKit, comment: "Error recovery suggestion when GPS fails.")
+  }
+
   @objc
   public static var TapToSetLocation: String {
     return NSLocalizedString("Tap to set location", tableName: "Shared", bundle: .tripKit, comment: "Tap to set location. (old key: SetLocation)")
