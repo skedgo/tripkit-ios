@@ -9,9 +9,6 @@
 import Foundation
 import MapKit
 
-@available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
-public typealias SGAppleGeocoder = TKAppleGeocoder
-
 public class TKAppleGeocoder: NSObject {
   
   enum GeocoderError: Error {
@@ -146,14 +143,14 @@ fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleter
 
 extension TKAutocompletionResult {
   
-  convenience init(_ completion: MKLocalSearchCompletion, forInput input: String, index: Int) {
-    self.init()
-    object = completion
-    title = completion.title
-    subtitle = completion.subtitle
-    image = TKAutocompletionResult.image(for: .pin)
-    
-    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 25, maximum: 65)) - index
+  init(_ completion: MKLocalSearchCompletion, forInput input: String, index: Int) {
+    self.init(
+      object: completion,
+      title: completion.title,
+      subtitle: completion.subtitle,
+      image: TKAutocompletionResult.image(for: .pin),
+      score: TKGeocodingResultScorer.calculateScore(title: completion.title, subtitle: completion.subtitle, searchTerm: input, minimum: 25, maximum: 65) - index
+    )
   }
   
 }

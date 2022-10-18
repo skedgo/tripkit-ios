@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 public class TKShareHelper: NSObject {
   private override init() {

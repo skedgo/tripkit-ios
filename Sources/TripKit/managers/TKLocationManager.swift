@@ -13,12 +13,12 @@ import MapKit
 
 public class TKLocationManager: NSObject, TKPermissionManager {
   
-  enum LocalizationError: Error {
+  public enum LocalizationError: Error {
     case featureNotAvailable
     case authorizationDenied
   }
   
-  static let shared = TKLocationManager()
+  public static let shared = TKLocationManager()
   
   public private(set) var lastKnownUserLocation: CLLocation? {
     didSet {
@@ -41,7 +41,7 @@ public class TKLocationManager: NSObject, TKPermissionManager {
     return manager
   }()
   
-  lazy var currentLocation: MKAnnotation = {
+  public lazy var currentLocation: MKAnnotation = {
     let annotation = MKPointAnnotation()
     annotation.coordinate = .invalid
     annotation.title = Loc.CurrentLocation
@@ -58,6 +58,7 @@ public class TKLocationManager: NSObject, TKPermissionManager {
   private override init() {
     super.init()
     
+#if canImport(UIKit)
     NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
       .sink { [weak self] _ in
         guard let self else { return }
@@ -73,6 +74,7 @@ public class TKLocationManager: NSObject, TKPermissionManager {
         self?.tellAllFetchersNow()
       }
       .store(in: &cancellables)
+#endif
   }
 
   public func annotationIsCurrentLocation(_ annotation: MKAnnotation, orCloseEnough: Bool) -> Bool {
@@ -271,7 +273,7 @@ extension TKLocationManager: CLLocationManagerDelegate {
     self.permissionBlock = nil
   }
   
-  @available(iOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, *)
   public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     updateForStaus(manager.authorizationStatus)
   }

@@ -165,7 +165,7 @@ extension TKTransportMode {
   init?(modeIdentifier: String) {
     if let exact = TKTransportMode(rawValue: modeIdentifier) {
       self = exact
-    } else if let prefix = TKTransportMode.allCases.first(where: { $0.modeIdentifier.hasPrefix(modeIdentifier) }) {
+    } else if let prefix = TKTransportMode.allCases.last(where: { modeIdentifier.hasPrefix($0.modeIdentifier) }) {
       self = prefix
     } else {
       return nil

@@ -30,7 +30,7 @@ class TKUIRoutingQueryInputViewModel {
   
   init(origin: MKAnnotation? = nil, destination: MKAnnotation? = nil, biasMapRect: MKMapRect = .null, startMode: TKUIRoutingResultsViewModel.SearchMode? = nil, inputs: UIInput, providers: [TKAutocompleting]? = nil) {
 
-    let includeCurrentLocation = TKLocationManager.shared.featureIsAvailable()
+    let includeCurrentLocation = TKLocationManager.shared.featureIsAvailable
     let start: MKAnnotation?
     if let provided = origin {
       start = provided

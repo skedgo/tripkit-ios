@@ -11,6 +11,7 @@
 
 import Foundation
 import CoreData
+import MapKit
 
 @objc(TripRequest)
 public class TripRequest: NSManagedObject {

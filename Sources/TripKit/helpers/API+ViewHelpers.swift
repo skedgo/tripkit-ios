@@ -8,6 +8,8 @@
 
 import Foundation
 
+import MapKit
+
 extension TKAPI.VehicleOccupancy {
   
   /// - Parameter all: Nested vehicle components

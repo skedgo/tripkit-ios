@@ -8,6 +8,8 @@
 
 import Foundation
 
+import CoreLocation
+
 @objc
 public class TKSettings: NSObject {
   

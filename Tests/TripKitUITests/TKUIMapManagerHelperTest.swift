@@ -7,6 +7,8 @@
 
 import XCTest
 
+import CoreLocation
+
 @testable import TripKit
 @testable import TripKitUI
 

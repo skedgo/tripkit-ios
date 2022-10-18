@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 import RxSwift
 import RxCocoa
@@ -136,8 +137,11 @@ public extension Array where Element == TKAutocompleting {
             .autocomplete(input.0, near: mapRect)
             .catchAndReturn([])
             .map { results -> [TKAutocompletionResult] in
-              results.forEach { $0.provider = provider as AnyObject }
-              return results
+              return results.map {
+                var updated = $0
+                updated.provider = provider as AnyObject
+                return updated
+              }
             }
             .asObservable()
             .startWith([])
@@ -208,13 +212,6 @@ extension ObservableType {
   }
   
 }
-
-extension TKAutocompletionResult: Comparable {
-  public static func < (lhs: TKAutocompletionResult, rhs: TKAutocompletionResult) -> Bool {
-    return lhs.compare(rhs) == .orderedAscending
-  }
-}
-
 
 // MARK: - Helpers
 

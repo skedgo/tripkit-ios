@@ -61,7 +61,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
     
     mapView.showsScale = true
     
-    let showCurrentLocation = TKLocationManager.shared.authorizationStatus() == .authorized
+    let showCurrentLocation = TKLocationManager.shared.authorizationStatus == .authorized
     mapView.showsUserLocation = showCurrentLocation
     
     if let searchResult = self.searchResult {

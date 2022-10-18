@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(iOS) || os(tvOS)
+import UIKit
+#endif
+
 extension TKColor {
   
   @objc public static var routeDashColorNonTravelled: TKColor {
@@ -235,7 +239,7 @@ extension TKStyleManager {
   public static func mediumCustomFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
     return font(textStyle: textStyle, weight: .medium)
   }
-  #endif
+#endif
 
 }
 

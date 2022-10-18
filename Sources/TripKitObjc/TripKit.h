@@ -25,10 +25,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Basics
 #import "TKConfig.h"
-#import "TKCrossPlatform.h"
-
-// Server logic
-#import "TKAutocompletionResult.h"
 
 // Helpers
 #import "NSUserDefaults+SharedDefaults.h"

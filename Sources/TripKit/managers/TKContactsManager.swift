@@ -24,7 +24,7 @@ public class TKContactsManager: NSObject, TKPermissionManager {
     }
   }
   
-  public struct ContactAddress {
+  public struct ContactAddress: Hashable {
     public let name: String
     public let image: TKImage?
     public let kind: AddressKind?

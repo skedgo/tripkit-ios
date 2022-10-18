@@ -195,9 +195,12 @@ extension TKUIRoutingQueryInputViewModelTest {
       case .route: routes.append(.next(time, ()))
       
       case .select(let text, let index):
-        let result = TKAutocompletionResult()
+        var result = TKAutocompletionResult(
+          object: text,
+          title: text,
+          image: .badgeHeart
+        )
         result.provider = faker
-        result.title = text
         let autocompletion = TKUIAutocompletionViewModel.AutocompletionItem(
           index: index, completion: result, includeAccessory: false
         )
@@ -288,13 +291,13 @@ fileprivate class FakeAutocompleter: TKAutocompleting {
     let results = Self.cities
       .filter { $0.starts(with: input) || input.isEmpty }
       .map { name -> TKAutocompletionResult in
-        let result = TKAutocompletionResult()
-        result.title = name
-        result.image = TKAutocompletionResult.image(for: .city)
-        result.accessoryButtonImage = TKAutocompletionResult.image(for: .history)
-        result.object = name
-        result.score = 100 - (Self.cities.firstIndex(of: name) ?? 100)
-        return result
+        return TKAutocompletionResult(
+          object: name,
+          title: name,
+          image: TKAutocompletionResult.image(for: .city),
+          accessoryButtonImage: TKAutocompletionResult.image(for: .history),
+          score: 100 - (Self.cities.firstIndex(of: name) ?? 100)
+        )
       }
     completion(.success(results))
   }

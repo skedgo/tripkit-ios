@@ -137,15 +137,15 @@ extension TKNamedCoordinate {
 
 extension TKAutocompletionResult {
   
-  fileprivate convenience init(from coordinate: TKNamedCoordinate) {
-    self.init()
-    
-    title = coordinate.title ?? Loc.Location
-    subtitle = coordinate.subtitle
-    object = coordinate
-    score = coordinate.sortScore
-    image = TKAutocompletionResult.image(for: .pin)
-    isInSupportedRegion = NSNumber(value: TKRegionManager.shared.coordinateIsPartOfAnyRegion(coordinate.coordinate))
+  fileprivate init(from coordinate: TKNamedCoordinate) {
+    self.init(
+      object: coordinate,
+      title: coordinate.title ?? Loc.Location,
+      subtitle: coordinate.subtitle,
+      image: TKAutocompletionResult.image(for: .pin),
+      score: coordinate.sortScore,
+      isInSupportedRegion: TKRegionManager.shared.coordinateIsPartOfAnyRegion(coordinate.coordinate)
+    )
   }
 
 }

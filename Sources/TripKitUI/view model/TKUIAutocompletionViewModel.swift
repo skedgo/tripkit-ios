@@ -68,7 +68,7 @@ class TKUIAutocompletionViewModel {
     var subtitle: String? { completion.subtitle }
     var accessoryAccessibilityLabel: String? { includeAccessory ? completion.accessoryAccessibilityLabel : nil }
     var accessoryImage: UIImage? { includeAccessory ? completion.accessoryButtonImage : nil }
-    var showFaded: Bool { completion.isInSupportedRegion?.boolValue == false }
+    var showFaded: Bool { !completion.isInSupportedRegion }
     var provider: TKAutocompleting? { completion.provider as? TKAutocompleting }
   }
   

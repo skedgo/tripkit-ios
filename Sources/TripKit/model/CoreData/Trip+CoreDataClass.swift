@@ -11,6 +11,7 @@
 
 import Foundation
 import CoreData
+import MapKit
 
 #if os(iOS)
 import UIKit

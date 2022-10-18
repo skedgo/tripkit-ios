@@ -8,6 +8,8 @@
 
 import Foundation
 
+import CoreLocation
+
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   

@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS) || os(tvOS)
+import UIKit
+#else
+import AppKit
+#endif
+
 extension TKServer {
   
   public static func imageURL(iconFileNamePart: String?, iconType: TKStyleModeIconType? = nil) -> URL? {
@@ -53,11 +59,11 @@ extension TKServer {
     let fileExtension = isPNG ? "png" : "svg"
     if isPNG {
       let scale: CGFloat
-      #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
       scale = UIScreen.main.scale
-      #elseif os(OSX)
+#elseif os(OSX)
       scale = NSScreen.main?.backingScaleFactor ?? 1
-      #endif
+#endif
       
       if scale >= 2.9 {
         fileNamePart.append("@3x")

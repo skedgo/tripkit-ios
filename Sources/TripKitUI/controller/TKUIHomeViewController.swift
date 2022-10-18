@@ -73,9 +73,7 @@ open class TKUIHomeViewController: TGCardViewController {
     
     // Here, we always route from user's current location, hence
     // make sure we ask for permission.
-    builder.askForLocationPermissions = { completion in
-      TKLocationManager.shared.ask(forPermission: completion)
-    }
+    builder.askForLocationPermissions =  TKLocationManager.shared.askForPermission
     
     // We can also select a different place for the current location
     // button

@@ -8,6 +8,8 @@
 
 import Foundation
 
+import CoreLocation
+
 fileprivate extension Result {
   func callHandler(_ handler: (Success?, Failure?) -> Void) {
     switch self {
