@@ -12,10 +12,6 @@ import Foundation
 import CoreData
 #endif
 
-#if SWIFT_PACKAGE
-@_exported import TripKitObjc
-#endif
-
 public enum TripKit {
   
   public static let shared = TKStore.shared

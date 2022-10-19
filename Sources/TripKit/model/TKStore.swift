@@ -98,7 +98,7 @@ public class TKStore {
 extension TKStore {
   
   private static var localDirectory: URL {
-    if let appGroupName = TKConfig.shared.configuration["AppGroupName"] as? String {
+    if let appGroupName = TKConfig.shared.appGroupName {
       if let groupDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupName) {
         return groupDirectory
       } else {

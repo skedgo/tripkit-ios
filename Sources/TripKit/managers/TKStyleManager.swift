@@ -34,31 +34,31 @@ public class TKStyleManager {
   
   private init() {}
   
-  private static func color(for dict: [AnyHashable: Any]?) -> TKColor? {
+  private static func color(for dict: [String: Int]?) -> TKColor? {
     guard
-      let red = dict?["Red"] as? NSNumber,
-      let green = dict?["Green"] as? NSNumber,
-      let blue = dict?["Blue"] as? NSNumber
+      let red = dict?["Red"],
+      let green = dict?["Green"],
+      let blue = dict?["Blue"]
     else { return nil }
-    return TKColor(red: red.doubleValue / 255, green: green.doubleValue / 255, blue: blue.doubleValue / 255, alpha: 1)
+    return TKColor(red: Double(red) / 255, green: Double(green) / 255, blue: Double(blue) / 255, alpha: 1)
   }
   
   public static var globalTintColor: TKColor = {
-    color(for: TKConfig.shared.globalTintColor()) ?? #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1)
+    color(for: TKConfig.shared.globalTintColor) ?? #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1)
   }()
   
   @available(*, deprecated, message: "Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI")
   public static var globalBarTintColor: TKColor = {
-    color(for: TKConfig.shared.globalBarTintColor()) ?? #colorLiteral(red: 0.1647058824, green: 0.2274509804, blue: 0.3019607843, alpha: 1)
+    color(for: TKConfig.shared.globalBarTintColor) ?? #colorLiteral(red: 0.1647058824, green: 0.2274509804, blue: 0.3019607843, alpha: 1)
   }()
   
   @available(*, deprecated, message: "Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI")
   public static var globalSecondaryBarTintColor: TKColor = {
-    color(for: TKConfig.shared.globalSecondaryBarTintColor()) ?? #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
+    color(for: TKConfig.shared.globalSecondaryBarTintColor) ?? #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
   }()
   
   public static var globalAccentColor: TKColor = {
-    color(for: TKConfig.shared.globalAccentColor()) ?? globalTintColor
+    color(for: TKConfig.shared.globalAccentColor) ?? globalTintColor
   }()
   
 }
@@ -154,13 +154,13 @@ extension TKStyleManager {
     var preferredFontName: String? {
       switch self {
       case .regular:
-        return TKConfig.shared.preferredFonts()?["Regular"] as? String
+        return TKConfig.shared.preferredFonts?["Regular"]
       case .medium:
-        return TKConfig.shared.preferredFonts()?["Medium"] as? String
+        return TKConfig.shared.preferredFonts?["Medium"]
       case .bold:
-        return TKConfig.shared.preferredFonts()?["Bold"] as? String
+        return TKConfig.shared.preferredFonts?["Bold"]
       case .semibold:
-        return TKConfig.shared.preferredFonts()?["Semibold"] as? String
+        return TKConfig.shared.preferredFonts?["Semibold"]
       }
     }
   }
