@@ -18,13 +18,13 @@ import CoreData
 
 public enum TripKit {
   
-  public static let shared = TKTripKit.__sharedInstance()
+  public static let shared = TKStore.shared
   
   public static let bundle: Bundle = {
     #if SWIFT_PACKAGE
     return Bundle.module
     #else
-    return Bundle(for: TKTripKit.self)
+    return Bundle(for: TKStore.self)
     #endif
   }()
   
@@ -91,22 +91,22 @@ public enum TripKit {
     NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "TKModeInfo")
     NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "ModeInfo")
     
-    // Give the main class a nudge to wake up
-    let _ = TripKit.shared
-    
     TKRegionManager.shared.updateRegions()
   }
   
 }
 
-extension TKTripKit {
-  @objc
-  public static func prepareForNewSession() {
-    TripKit.prepareForNewSession()
+@objc(TKTripKit)
+public class ObjcTripKit: NSObject {
+  
+  @objc(sharedInstance)
+  public static let shared = ObjcTripKit()
+  
+  private override init() {
+    super.init()
   }
   
-  @objc
-  public static func setAPIKey(_ key: String) {
-    TripKit.apiKey = key
+  public static var tripKitContext: NSManagedObjectContext {
+    TKStore.shared.viewContext
   }
 }

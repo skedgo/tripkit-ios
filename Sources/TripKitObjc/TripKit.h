@@ -21,8 +21,6 @@ FOUNDATION_EXPORT const unsigned char TripKitVersionString[];
 
 // Dependencies
 
-#import "TKTripKit.h"
-
 // Basics
 #import "TKConfig.h"
 

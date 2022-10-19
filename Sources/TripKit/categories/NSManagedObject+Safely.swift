@@ -6,7 +6,7 @@
 //  Copyright © 2022 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
 func tk_safeRead<S, V>(_ keyPath: KeyPath<S, V>, from target: S) -> V {
   var value: V!
