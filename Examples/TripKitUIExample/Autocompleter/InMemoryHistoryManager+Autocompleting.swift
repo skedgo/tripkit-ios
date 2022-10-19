@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 import TripKit
 import TripKitUI
@@ -50,11 +51,12 @@ extension InMemoryHistoryManager {
       let title = optionalTitle
       else { return nil }
     
-    let result = TKAutocompletionResult()
-    result.object = history
-    result.title = title
-    result.subtitle = history.annotation.subtitle ?? nil
-    result.image = TKAutocompletionResult.image(for: .history)
+    var result = TKAutocompletionResult(
+      object: (history as? AnyHashable) ?? history.annotation.description as AnyHashable,
+      title: title,
+      subtitle: history.annotation.subtitle ?? nil,
+      image: TKAutocompletionResult.image(for: .history)
+    )
     
     if history.annotation is TKUIStopAnnotation {
       result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
@@ -65,10 +67,10 @@ extension InMemoryHistoryManager {
       result.score = 90
       
     } else {
-      let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchText, candidate: result.title)
-      let locationScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: searchText, candidate: result.subtitle ?? "")
+      let titleScore = TKAutocompletionResult.nameScore(searchTerm: searchText, candidate: result.title)
+      let locationScore = TKAutocompletionResult.nameScore(searchTerm: searchText, candidate: result.subtitle ?? "")
       let rawScore = min(100, (titleScore + locationScore)/2)
-      result.score = Int(TKAutocompletionResult.rangedScore(forScore: UInt(rawScore), betweenMinimum: 50, andMaximum: 90))
+      result.score = Int(TKAutocompletionResult.rangedScore(for: rawScore, min: 50, max: 90))
     }
     
     return result

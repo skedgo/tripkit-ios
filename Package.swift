@@ -47,12 +47,6 @@ let package = Package(
       exclude: ["Supporting Files/Info.plist"]
     ),
     .testTarget(
-      name: "TripKitObjcTests",
-      dependencies: [
-        "TripKitObjc",
-      ]
-    ),
-    .testTarget(
       name: "TripKitTests",
       dependencies: [
         "TripKit",
