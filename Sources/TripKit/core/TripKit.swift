@@ -102,7 +102,8 @@ public class ObjcTripKit: NSObject {
     super.init()
   }
   
-  public static var tripKitContext: NSManagedObjectContext {
+  @objc
+  public var tripKitContext: NSManagedObjectContext {
     TKStore.shared.viewContext
   }
 }
