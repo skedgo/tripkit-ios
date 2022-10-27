@@ -35,21 +35,25 @@ extension TKUIHomeViewModel {
     }
     
     let nextFromSelection = searchViewModel.selection
-      .map { annotation -> NextAction in
-        if let city = annotation as? TKRegion.City {
-          return .handleSelection(city, component: nil)
-        } else {
+      .map { selection -> NextAction in
+        switch selection {
+        case .annotation(let city) where city is TKRegion.City:
+          return .handleSelection(selection, component: nil)
+        case .annotation(let annotation):
           return .push(TKUIRoutingResultsCard(destination: annotation), selection: annotation)
+        case .result:
+          return .handleSelection(selection, component: nil)
         }
       }
     
     let nextFromAccessory = searchViewModel.accessorySelection
-      .map { annotation -> NextAction in
-        switch annotation {
-        case let stop as TKUIStopAnnotation: return .push(TKUITimetableCard(stops: [stop]), selection: annotation)
-        default:
-          assertionFailure("Unexpected annotation: \(annotation)")
-          return .push(TKUIRoutingResultsCard(destination: annotation), selection: annotation)
+      .compactMap { selection -> NextAction? in
+        switch selection {
+        case .annotation(let stop as TKUIStopAnnotation):
+          return .push(TKUITimetableCard(stops: [stop]), selection: stop)
+        case .annotation, .result:
+          assertionFailure("Unexpected annotation: \(selection)")
+          return nil
         }
       }
     

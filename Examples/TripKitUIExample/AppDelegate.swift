@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    TripKit.apiKey = ProcessInfo.processInfo.environment["TRIPGO_API_KEY"] ?? "MY_API_KEY"
+    TripKit.apiKey = ProcessInfo.processInfo.environment["TRIPGO_API_KEY"] ?? preconditionFailure("Either add your TripGo API Key as an environment variable named `TRIPGO_API_KEY` or add it here, replacing this line.") as! String
     TripKit.prepareForNewSession()
     
     return true

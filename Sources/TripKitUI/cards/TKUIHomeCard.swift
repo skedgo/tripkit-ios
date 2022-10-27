@@ -271,35 +271,43 @@ extension TKUIHomeCard {
     case .showCustomizer(let items):
       showCustomizer(items: items)
       dismissSelection()
-
-    case let .handleSelection(annotation, component):
-      if let city = annotation as? TKRegion.City {
-        clearSearchBar()
-        
-        controller?.draggingCardEnabled = true
-        controller?.moveCard(to: .collapsed, animated: true) {
-          // Not animating this as it's typically a big jump
-          self.homeMapManager?.zoom(to: city, animated: false)
-        }
-        return
+      
+    case let .handleSelection(.annotation(city as TKRegion.City), _):
+      clearSearchBar()
+      
+      controller?.draggingCardEnabled = true
+      controller?.moveCard(to: .collapsed, animated: true) {
+        // Not animating this as it's typically a big jump
+        self.homeMapManager?.zoom(to: city, animated: false)
       }
       
+    case let .handleSelection(selection, component):
       switch Self.config.selectionMode {
       case .selectOnMap:
-        homeMapManager?.select(annotation)
-      case let .callback(handler):
-        if handler(annotation, component) {
-          focusedAnnotationPublisher.onNext(annotation)
+        switch selection {
+        case let .annotation(annotation):
+          homeMapManager?.select(annotation)
+        case .result:
+          assertionFailure("You are using a `TKAutocompleting` provider that does not return annotations for some of its results. In this case, make sure to use the callback selection mode.")
         }
+        
+      case let .callback(handler):
+        if handler(selection, component) {
+          if case let .annotation(annotation) = selection {
+            focusedAnnotationPublisher.onNext(annotation)
+          }
+        }
+        
       case .default:
         exitSearchMode()
-        let card: TGCard
-        if let stop = annotation as? TKUIStopAnnotation {
-          card = TKUITimetableCard(stops: [stop])
-        } else {
-          card = TKUIRoutingResultsCard(destination: annotation)
+        switch selection {
+        case let .annotation(stop as TKUIStopAnnotation):
+          cardController.push(TKUITimetableCard(stops: [stop]))
+        case let .annotation(annotation):
+          cardController.push(TKUIRoutingResultsCard(destination: annotation))
+        case .result:
+          assertionFailure("You are using a `TKAutocompleting` provider that does not return annotations for some of its results. In this case, make sure to use the callback selection mode.")
         }
-        cardController.push(card)
       }
       
     case let .handleAction(handler):

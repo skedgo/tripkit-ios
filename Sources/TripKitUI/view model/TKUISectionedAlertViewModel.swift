@@ -105,7 +105,7 @@ class TKUISectionedAlertViewModel {
 
 extension TKAPI.Route {
   var title: String {
-    return number ?? name ?? id
+    return shortName ?? routeName ?? id
   }
 }
 

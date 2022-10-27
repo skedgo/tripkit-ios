@@ -23,7 +23,7 @@ public extension TKUIHomeCard {
     /// Execute the provided callback on tap; the component will only be set if selected via
     /// the card itself and not something on the map. The closure returns a boolean indicating
     /// whether other annotations should be hidden when the selection is made.
-    case callback((MKAnnotation, TKUIHomeComponentViewModel?) -> Bool)
+    case callback((TKAutocompletionSelection, TKUIHomeComponentViewModel?) -> Bool)
     
     /// Default handling shows timetable for stops and routing results for others
     case `default`
