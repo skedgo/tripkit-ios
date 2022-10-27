@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// :nodoc:
-public enum TKJSONSanitizer {
+enum TKJSONSanitizer {
   
   /// Sanitizes the provided input to be JSON compatible03
   ///
@@ -16,7 +15,7 @@ public enum TKJSONSanitizer {
   ///
   /// - Parameter input: Any object that should be made JSON compatible
   /// - Returns: JSON compatible version or `nil` if not possible
-  public static func sanitize(_ input: Any) -> Any? {
+  static func sanitize(_ input: Any) -> Any? {
     switch input {
     
     case is String, is Int, is Double, is Float, is Bool:
