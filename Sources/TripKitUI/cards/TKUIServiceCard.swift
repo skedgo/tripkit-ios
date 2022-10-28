@@ -159,7 +159,14 @@ public class TKUIServiceCard: TKUITableCard {
         } else if let mini = self.headerView as? TKUIServiceHeaderMiniView {
           mini.configure(with: content)
         } else if let maxi = self.headerView as? TKUIServiceHeaderView {
-          maxi.configure(with: content)
+          maxi.configure(with: content) {
+            tableView.reloadData()
+            DispatchQueue.main.async {
+            // This is to reload the header view's height
+              tableView.beginUpdates()
+              tableView.endUpdates()
+            }
+          }
         }
 
       })
@@ -224,7 +231,14 @@ extension TKUIServiceCard: UITableViewDelegate {
   private func buildHeader(expanded: Bool, content: TKUIDepartureCellContent, for tableView: UITableView) {
     if expanded {
       let header = TKUIServiceHeaderView.newInstance()
-      header.configure(with: content)
+      header.configure(with: content) {
+        tableView.reloadData()
+        DispatchQueue.main.async {
+        // This is to reload the header view's height
+          tableView.beginUpdates()
+          tableView.endUpdates()
+        }
+      }
 
       header.expandyButton.rx.tap
         .subscribe(onNext: { [weak self] in

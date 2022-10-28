@@ -94,7 +94,7 @@ class TKUIServiceHeaderView: UIView {
     accessibilityTitleLabel.text = accessibility.title
   }
   
-  private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>?) {
+  private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>?, completion: @escaping () -> Void) {
     
     if let sampleAlert = alerts.first {
       alertWrapper.isHidden = false
@@ -115,6 +115,7 @@ class TKUIServiceHeaderView: UIView {
     components?
       .subscribe(onNext: { [weak self] in
         self?.updateOccupancies($0.0, lastUpdated: $0.1)
+        completion()
       })
       .disposed(by: disposeBag)
   }
@@ -151,7 +152,6 @@ class TKUIServiceHeaderView: UIView {
       trainOccupancyView.isHidden = true
       trainOccupancyHeightConstraint?.isActive = false
       trainOccupancyBottomConstraint?.isActive = false
-
     } else {
       occupancyWrapper.isHidden = true
     }
@@ -164,11 +164,13 @@ class TKUIServiceHeaderView: UIView {
 // MARK: - TKUIDepartureCellContent compatibility
 
 extension TKUIServiceHeaderView {
-  func configure(with model: TKUIDepartureCellContent) {
+  func configure(with model: TKUIDepartureCellContent, completion: @escaping () -> Void) {
     disposeBag = DisposeBag()
     
     updateAccessibility(model.wheelchairAccessibility)
-    updateRealTime(alerts: model.alerts, components: model.vehicleComponents)
+    updateRealTime(alerts: model.alerts,
+                   components: model.vehicleComponents,
+                   completion: completion)
     
     // stack views are weird; this should be in the front, but sometimes
     // gets put back
