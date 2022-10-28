@@ -57,7 +57,7 @@ extension InMemoryHistoryManager: TKUIHomeComponentViewModel {
   
   var nextAction: Signal<TKUIHomeCard.ComponentAction> {
     selection.map {
-      .handleSelection($0.annotation, component: self)
+      .handleSelection(.annotation($0.annotation), component: self)
     }
   }
   

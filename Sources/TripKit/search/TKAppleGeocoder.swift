@@ -78,7 +78,7 @@ extension TKAppleGeocoder: TKAutocompleting {
     }
   }
   
-  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     guard let searchCompletion = result.object as? MKLocalSearchCompletion else {
       completion(.failure(GeocoderError.unexpectedResult))
       return

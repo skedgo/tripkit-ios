@@ -121,7 +121,7 @@ extension TKTripGoGeocoder: TKAutocompleting {
     }
   }
   
-  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     guard let named = result.object as? TKNamedCoordinate else {
       assertionFailure()
       return completion(.failure(NSError(code: 97813, message: "Internal error")))

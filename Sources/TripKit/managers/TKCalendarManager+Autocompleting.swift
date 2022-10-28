@@ -26,7 +26,7 @@ extension TKCalendarManager: TKAutocompleting {
     completion(.success(results))
   }
   
-  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     
     guard let event = result.object as? EKEvent else {
       assertionFailure("Unexpected object: \(result.object).")

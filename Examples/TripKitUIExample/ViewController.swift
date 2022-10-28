@@ -80,7 +80,7 @@ extension MainViewController {
       return
     }
     
-    let resultsController = TKUIAutocompletionViewController(providers: [TKTripGoGeocoder()])
+    let resultsController = TKUIAutocompletionViewController(providers: [TKTripGoGeocoder(), TKRouteAutocompleter()])
     resultsController.biasMapRect = randomCity.centerBiasedMapRect
 
     resultsController.delegate = self
@@ -99,25 +99,33 @@ extension MainViewController {
 
 extension MainViewController: TKUIAutocompletionViewControllerDelegate {
   
-  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation) {
-    if let stop = annotation as? TKUIStopAnnotation {
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect selection: TKAutocompletionSelection) {
+    switch selection {
+    case let .annotation(stop as TKUIStopAnnotation):
       dismiss(animated: true) {
         self.showDepartures(stop: stop)
       }
       
-    } else {
+    case let .annotation(annotation):
       print("Selected \(annotation)")
+
+    case let .result(result):
+      print("Selected \(result.object)")
     }
   }
   
-  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation) {
-    if let stop = annotation as? TKUIStopAnnotation {
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor selection: TKAutocompletionSelection) {
+    switch selection {
+    case let .annotation(stop as TKUIStopAnnotation):
       dismiss(animated: true) {
         self.showDepartures(stop: stop)
       }
+      
+    case let .annotation(annotation):
+      print("Selected \(annotation)")
 
-    } else {
-      print("Selected accessor for \(annotation)")
+    case let .result(result):
+      print("Selected \(result.object)")
     }
   }
   

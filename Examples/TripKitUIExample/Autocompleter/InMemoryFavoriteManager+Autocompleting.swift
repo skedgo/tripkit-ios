@@ -18,7 +18,7 @@ extension InMemoryFavoriteManager: TKAutocompleting {
     completion(.success(results))
   }
   
-  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     guard let favorite = result.object as? Favorite else {
       preconditionFailure()
     }

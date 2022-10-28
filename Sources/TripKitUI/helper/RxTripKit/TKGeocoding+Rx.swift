@@ -69,7 +69,7 @@ public extension TKAutocompleting {
   /// - Parameter result: The result for which to fetch the annotation
   /// - Returns: Single-observable with the annotation for the result. Can error out if an unknown
   ///     result was passed in.
-  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation> {
+  func annotation(for result: TKAutocompletionResult) -> Single<MKAnnotation?> {
     return Single.create { subscriber in
       self.annotation(for: result) { result in
         switch result {

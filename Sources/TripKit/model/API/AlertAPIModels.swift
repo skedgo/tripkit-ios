@@ -67,16 +67,7 @@ extension TKAPI {
     public let routes: [TKAPI.Route]?
     public let modeInfo: TKModeInfo?
   }
-  
-  public struct Route: Codable, Hashable {
-    public let id: String
-    public let name: String?
-    public let number: String?
-    public let modeInfo: TKModeInfo
-    
-    /// This color applies to an individual service.
-    public var color: TKColor? { return modeInfo.color }
-  }
+
   
 }
 

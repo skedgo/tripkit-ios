@@ -25,8 +25,8 @@ public class TKRegionAutocompleter: TKAutocompleting {
             let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: input, candidate: name)
             guard titleScore > 0 else { return nil }
             let distanceScore = TKAutocompletionResult.scoreBasedOnDistance(from: city.coordinate, to: .init(mapRect), longDistance: true)
-            let rawSore = (titleScore * 9 + distanceScore) / 10
-            let score = TKAutocompletionResult.rangedScore(forScore: rawSore, betweenMinimum: 10, andMaximum: 70)
+            let rawScore = (titleScore * 9 + distanceScore) / 10
+            let score = TKAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: 10, andMaximum: 70)
             return (city, score)
           }
         }
@@ -47,7 +47,7 @@ public class TKRegionAutocompleter: TKAutocompleting {
     completion(.success(results))
   }
   
-  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     let city = result.object as! TKRegion.City
     completion(.success(city))
   }

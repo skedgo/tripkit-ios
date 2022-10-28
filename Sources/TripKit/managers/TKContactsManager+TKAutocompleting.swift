@@ -40,7 +40,7 @@ extension TKContactsManager: TKAutocompleting {
     }
   }
   
-  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     guard let contact = result.object as? TKContactsManager.ContactAddress else {
       preconditionFailure("Unexpected object. We require `result.object` to be `TKContactsManager.ContactAddress`, but got: \(result.object)")
     }
