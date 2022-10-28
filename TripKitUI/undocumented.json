@@ -800,21 +800,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 257,
+      "line": 271,
       "symbol": "TKUIServiceCard.tableView(_:viewForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 261,
+      "line": 275,
       "symbol": "TKUIServiceCard.tableView(_:heightForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 266,
+      "line": 280,
       "symbol": "TKUIServiceCard.scrollViewShouldScrollToTop(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
