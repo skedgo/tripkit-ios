@@ -205,7 +205,7 @@ extension MainViewController {
       InMemoryHistoryManager.shared,
     ]
     homeController.searchResultsDelegate = self
-    navigationController?.setNavigationBarHidden(true, animated: true)
+    navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.pushViewController(homeController, animated: true)
   }
   
