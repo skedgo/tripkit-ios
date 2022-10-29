@@ -352,6 +352,9 @@
                 <a class="nav-group-task-link" href="../Classes/TKReporter.html">TKReporter</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKRouteAutocompleter.html">TKRouteAutocompleter</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKRoutePolyline.html">TKRoutePolyline</a>
               </li>
               <li class="nav-group-task">
@@ -435,6 +438,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/TKAuthorizationStatus.html">TKAuthorizationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TKAutocompletionSelection.html">TKAutocompletionSelection</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/TKBooking.html">TKBooking</a>
@@ -700,9 +706,6 @@
                 <a class="nav-group-task-link" href="../Structs/TKAPI/AlertMapping.html">– AlertMapping</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/TKAPI/Route.html">– Route</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/CompanyInfo.html">– CompanyInfo</a>
               </li>
               <li class="nav-group-task">
@@ -772,6 +775,9 @@
                 <a class="nav-group-task-link" href="../Structs/TKAPI/SpecificModeDetails.html">– SpecificModeDetails</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKAPI/Route.html">– Route</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/RoutingResponse.html">– RoutingResponse</a>
               </li>
               <li class="nav-group-task">
@@ -827,6 +833,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/Stop.html">– Stop</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKAPI/Operator.html">– Operator</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/User.html">– User</a>
@@ -1193,6 +1202,102 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit18TKBuzzInfoProviderO11fetchRoutes9forRegion5query5modes10operatorIDSayAA5TKAPIV5RouteVGAA8TKRegionC_SSSgSaySSGAPtYaKFZ"></a>
+                    <a name="//apple_ref/swift/Method/fetchRoutes(forRegion:query:modes:operatorID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit18TKBuzzInfoProviderO11fetchRoutes9forRegion5query5modes10operatorIDSayAA5TKAPIV5RouteVGAA8TKRegionC_SSSgSaySSGAPtYaKFZ">fetchRoutes(forRegion:<wbr>query:<wbr>modes:<wbr>operatorID:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetches a list of routes in for the provided region, optionally filtered</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Calling this method without any of the filter parameters can result both in a
+slow, big response due to the large number of routes in certain regions.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fetchRoutes</span><span class="p">(</span><span class="n">forRegion</span> <span class="nv">region</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">,</span> <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">modes</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">operatorID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/TKAPI.html">TKAPI</a></span><span class="o">.</span><span class="kt">Route</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>region</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The region for which to fetch a list of routes</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Optional search string to filter routes by their short name (complete matches only)
+  or by their name (partial matches)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modes</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If provided, only routes using any of these mode identifiers will be returned, e.g., <code>pt_pub_bus</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operatorID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If provided, only routes for this operator will be returned</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>List of routes</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -1242,7 +1347,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-10-28)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-10-29)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
