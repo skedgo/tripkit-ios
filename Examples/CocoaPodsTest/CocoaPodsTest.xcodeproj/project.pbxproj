@@ -7,22 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A6BBD72232A305100D87E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6BBD71232A305100D87E99 /* AppDelegate.swift */; };
-		3A6BBD74232A305100D87E99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6BBD73232A305100D87E99 /* SceneDelegate.swift */; };
-		3A6BBD76232A305100D87E99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6BBD75232A305100D87E99 /* ContentView.swift */; };
+		3A50719E290CA88E00C5590F /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A507199290CA88E00C5590F /* InMemoryHistoryManager.swift */; };
+		3A50719F290CA88E00C5590F /* InMemoryHistoryManager+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50719A290CA88E00C5590F /* InMemoryHistoryManager+Home.swift */; };
+		3A5071A0290CA88E00C5590F /* InMemoryFavoriteManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50719B290CA88E00C5590F /* InMemoryFavoriteManager+Autocompleting.swift */; };
+		3A5071A1290CA88E00C5590F /* InMemoryHistoryManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50719C290CA88E00C5590F /* InMemoryHistoryManager+Autocompleting.swift */; };
+		3A5071A2290CA88E00C5590F /* InMemoryFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50719D290CA88E00C5590F /* InMemoryFavoriteManager.swift */; };
+		3A5071A6290CA8BB00C5590F /* ExampleCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5071A3290CA8BB00C5590F /* ExampleCustomizer.swift */; };
+		3A5071A7290CA8BB00C5590F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5071A4290CA8BB00C5590F /* AppDelegate.swift */; };
+		3A5071A8290CA8BB00C5590F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5071A5290CA8BB00C5590F /* ViewController.swift */; };
+		3A5071AB290CA8C100C5590F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5071A9290CA8C100C5590F /* Main.storyboard */; };
 		3A6BBD78232A305100D87E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A6BBD77232A305100D87E99 /* Assets.xcassets */; };
-		3A6BBD7B232A305100D87E99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A6BBD7A232A305100D87E99 /* Preview Assets.xcassets */; };
 		3A6BBD7E232A305100D87E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A6BBD7C232A305100D87E99 /* LaunchScreen.storyboard */; };
 		83B87E55C4668F0D436AD360 /* Pods_CocoaPodsTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D544A7703EE7BECA793C1D /* Pods_CocoaPodsTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A507199290CA88E00C5590F /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
+		3A50719A290CA88E00C5590F /* InMemoryHistoryManager+Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Home.swift"; sourceTree = "<group>"; };
+		3A50719B290CA88E00C5590F /* InMemoryFavoriteManager+Autocompleting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InMemoryFavoriteManager+Autocompleting.swift"; sourceTree = "<group>"; };
+		3A50719C290CA88E00C5590F /* InMemoryHistoryManager+Autocompleting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Autocompleting.swift"; sourceTree = "<group>"; };
+		3A50719D290CA88E00C5590F /* InMemoryFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteManager.swift; sourceTree = "<group>"; };
+		3A5071A3290CA8BB00C5590F /* ExampleCustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleCustomizer.swift; path = ../../TripKitUIExample/ExampleCustomizer.swift; sourceTree = "<group>"; };
+		3A5071A4290CA8BB00C5590F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../../TripKitUIExample/AppDelegate.swift; sourceTree = "<group>"; };
+		3A5071A5290CA8BB00C5590F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../TripKitUIExample/ViewController.swift; sourceTree = "<group>"; };
+		3A5071AA290CA8C100C5590F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../TripKitUIExample/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A6BBD6E232A305100D87E99 /* CocoaPodsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaPodsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A6BBD71232A305100D87E99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3A6BBD73232A305100D87E99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3A6BBD75232A305100D87E99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3A6BBD77232A305100D87E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3A6BBD7A232A305100D87E99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3A6BBD7D232A305100D87E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A6BBD7F232A305100D87E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47D544A7703EE7BECA793C1D /* Pods_CocoaPodsTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CocoaPodsTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +60,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A507198290CA88E00C5590F /* Autocompleter */ = {
+			isa = PBXGroup;
+			children = (
+				3A507199290CA88E00C5590F /* InMemoryHistoryManager.swift */,
+				3A50719A290CA88E00C5590F /* InMemoryHistoryManager+Home.swift */,
+				3A50719B290CA88E00C5590F /* InMemoryFavoriteManager+Autocompleting.swift */,
+				3A50719C290CA88E00C5590F /* InMemoryHistoryManager+Autocompleting.swift */,
+				3A50719D290CA88E00C5590F /* InMemoryFavoriteManager.swift */,
+			);
+			name = Autocompleter;
+			path = ../../TripKitUIExample/Autocompleter;
+			sourceTree = "<group>";
+		};
 		3A6BBD65232A305100D87E99 = {
 			isa = PBXGroup;
 			children = (
@@ -71,23 +94,16 @@
 		3A6BBD70232A305100D87E99 /* CocoaPodsTest */ = {
 			isa = PBXGroup;
 			children = (
-				3A6BBD71232A305100D87E99 /* AppDelegate.swift */,
-				3A6BBD73232A305100D87E99 /* SceneDelegate.swift */,
-				3A6BBD75232A305100D87E99 /* ContentView.swift */,
+				3A507198290CA88E00C5590F /* Autocompleter */,
+				3A5071A4290CA8BB00C5590F /* AppDelegate.swift */,
+				3A5071A3290CA8BB00C5590F /* ExampleCustomizer.swift */,
+				3A5071A5290CA8BB00C5590F /* ViewController.swift */,
+				3A5071A9290CA8C100C5590F /* Main.storyboard */,
 				3A6BBD77232A305100D87E99 /* Assets.xcassets */,
 				3A6BBD7C232A305100D87E99 /* LaunchScreen.storyboard */,
 				3A6BBD7F232A305100D87E99 /* Info.plist */,
-				3A6BBD79232A305100D87E99 /* Preview Content */,
 			);
 			path = CocoaPodsTest;
-			sourceTree = "<group>";
-		};
-		3A6BBD79232A305100D87E99 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				3A6BBD7A232A305100D87E99 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		B84D1EE64651EA1A13170318 /* Pods */ = {
@@ -160,8 +176,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6BBD7E232A305100D87E99 /* LaunchScreen.storyboard in Resources */,
-				3A6BBD7B232A305100D87E99 /* Preview Assets.xcassets in Resources */,
 				3A6BBD78232A305100D87E99 /* Assets.xcassets in Resources */,
+				3A5071AB290CA8C100C5590F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,15 +230,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6BBD72232A305100D87E99 /* AppDelegate.swift in Sources */,
-				3A6BBD74232A305100D87E99 /* SceneDelegate.swift in Sources */,
-				3A6BBD76232A305100D87E99 /* ContentView.swift in Sources */,
+				3A5071A1290CA88E00C5590F /* InMemoryHistoryManager+Autocompleting.swift in Sources */,
+				3A5071A6290CA8BB00C5590F /* ExampleCustomizer.swift in Sources */,
+				3A5071A0290CA88E00C5590F /* InMemoryFavoriteManager+Autocompleting.swift in Sources */,
+				3A50719E290CA88E00C5590F /* InMemoryHistoryManager.swift in Sources */,
+				3A5071A7290CA8BB00C5590F /* AppDelegate.swift in Sources */,
+				3A5071A2290CA88E00C5590F /* InMemoryFavoriteManager.swift in Sources */,
+				3A5071A8290CA8BB00C5590F /* ViewController.swift in Sources */,
+				3A50719F290CA88E00C5590F /* InMemoryHistoryManager+Home.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3A5071A9290CA8C100C5590F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A5071AA290CA8C100C5590F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		3A6BBD7C232A305100D87E99 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -354,7 +383,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"CocoaPodsTest/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CocoaPodsTest/Info.plist;
@@ -375,7 +403,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"CocoaPodsTest/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CocoaPodsTest/Info.plist;

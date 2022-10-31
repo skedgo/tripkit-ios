@@ -84,6 +84,9 @@ public class TKStopCoordinate: TKModeCoordinate {
     case services
     case shortName
     case popularity
+    case availableRoutes
+    case routes
+    case operators
   }
   
   @objc public class override var supportsSecureCoding: Bool { return true }
@@ -95,6 +98,9 @@ public class TKStopCoordinate: TKModeCoordinate {
     services = stop.services
     stopShortName = stop.shortName
     stopSortScore = stop.popularity
+    availableRoutes = stop.availableRoutes
+    routes = stop.routes
+    operators = stop.operators
   }
   
   init(_ stop: TKAPI.ShapeStop, modeInfo: TKModeInfo) {
@@ -109,12 +115,15 @@ public class TKStopCoordinate: TKModeCoordinate {
     isDraggable = false
     
     guard let values = try? decoder.container(keyedBy: CodingKeys.self) else { return }
-    if data["sg_services"] == nil {
+    if data["sg_stopCode"] == nil {
       // From the API these comes in the decoder rather than in the "data" field
       stopCode = try values.decode(String.self, forKey: .stopCode)
-      services = try? values.decode(String.self, forKey: .services)
-      stopShortName = try? values.decode(String.self, forKey: .shortName)
-      stopSortScore = try? values.decode(Int.self, forKey: .popularity)
+      services = try values.decodeIfPresent(String.self, forKey: .services)
+      stopShortName = try values.decodeIfPresent(String.self, forKey: .shortName)
+      stopSortScore = try values.decodeIfPresent(Int.self, forKey: .popularity)
+      availableRoutes = try values.decodeIfPresent(Int.self, forKey: .availableRoutes)
+      routes = try values.decodeIfPresent([TKAPI.Route].self, forKey: .routes)
+      operators = try values.decodeIfPresent([TKAPI.Operator].self, forKey: .operators)
     }
   }
   
@@ -151,4 +160,63 @@ public class TKStopCoordinate: TKModeCoordinate {
     set { data["sg_stopSortScore"] = newValue }
   }
   
+  var availableRoutes: Int? {
+    get { return data["sg_availableRoutes"] as? Int }
+    set { data["sg_availableRoutes"] = newValue }
+  }
+
+  private var _routes: [TKAPI.Route]?? = nil
+  public var routes: [TKAPI.Route]? {
+    get {
+      if let decoded = _routes {
+        return decoded
+      } else if let json = data["sg_routes"] as Any? {
+        if let sanitized = TKJSONSanitizer.sanitize(json), let decoded = try? JSONDecoder().decode([TKAPI.Route].self, withJSONObject: sanitized) {
+          _routes = decoded
+          return decoded
+        } else {
+          _routes = nil
+          return nil
+        }
+      } else {
+        _routes = nil
+        return nil
+      }
+    }
+    
+    set {
+      _routes = newValue
+      if let newValue {
+        data["sg_routes"] = try? JSONEncoder().encodeJSONObject(newValue)
+      }
+    }
+  }
+  
+  private var _operators: [TKAPI.Operator]?? = nil
+  public var operators: [TKAPI.Operator]? {
+    get {
+      if let decoded = _operators {
+        return decoded
+      } else if let json = data["sg_operators"] as Any? {
+        if let sanitized = TKJSONSanitizer.sanitize(json), let decoded = try? JSONDecoder().decode([TKAPI.Operator].self, withJSONObject: sanitized) {
+          _operators = decoded
+          return decoded
+        } else {
+          _operators = nil
+          return nil
+        }
+      } else {
+        _operators = nil
+        return nil
+      }
+    }
+    
+    set {
+      _operators = newValue
+      if let newValue {
+        data["sg_operators"] = try? JSONEncoder().encodeJSONObject(newValue)
+      }
+    }
+  }
+
 }

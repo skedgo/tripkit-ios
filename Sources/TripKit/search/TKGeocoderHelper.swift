@@ -44,6 +44,7 @@ public class TKGeocoderHelper: NSObject {
     case missingAddress
     case serverFoundNoMatch(String)
     case unknownServerError(String)
+    case outdatedResult
   }
   
   @objc(errorForNoLocationFoundForInput:)

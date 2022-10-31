@@ -43,15 +43,14 @@ public protocol TKAutocompleting {
   /// - Parameters:
   ///   - input: Query fragment typed by user
   ///   - mapRect: Last map rect the map view was zoomed to (can be `MKMapRectNull`)
-  /// - Returns: Autocompletion results for query fragment. Should fire with empty result or error out if nothing found. Needs to complete.
+  ///   - completion: Handled called with the autocompletion results for query fragment. Should fire with empty result or error out if nothing found. Needs to be called.
   func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void)
   
   /// Called to fetch the annotation for a previously returned autocompletion result
   ///
   /// - Parameter result: The result for which to fetch the annotation
-  /// - Returns: Single-observable with the annotation for the result. Can error out if an unknown
-  ///     result was passed in.
-  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void)
+  /// - Parameter completion: Completion handler that's called with the annotation for the result, if representable as such. Called with `nil` if not representable, or can also be called with an error if it is representable but the conversion failed. Needs to be called.
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void)
   
   #if os(iOS) || os(tvOS)
   /// Text and action for an additional row to display in the results, e.g., to request
@@ -65,6 +64,11 @@ public protocol TKAutocompleting {
   
   #endif
 
+}
+
+public enum TKAutocompletionSelection {
+  case annotation(MKAnnotation)
+  case result(TKAutocompletionResult)
 }
 
 extension TKAutocompleting {

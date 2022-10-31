@@ -41,7 +41,7 @@ extension TKUINearbyViewModel: TKUIHomeComponentViewModel {
   }
   
   public var nextAction: Signal<TKUIHomeCard.ComponentAction> {
-    return mapAnnotationToSelect.map { .handleSelection($0, component: self) }
+    return mapAnnotationToSelect.map { .handleSelection(.annotation($0), component: self) }
   }
 
   public func cell(for item: TKUIHomeComponentItem, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell? {

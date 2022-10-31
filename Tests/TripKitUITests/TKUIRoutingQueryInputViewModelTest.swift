@@ -302,7 +302,7 @@ fileprivate class FakeAutocompleter: TKAutocompleting {
     completion(.success(results))
   }
   
-  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     let annotation = MKPointAnnotation()
     annotation.title = result.title
     annotation.coordinate = kCLLocationCoordinate2DInvalid

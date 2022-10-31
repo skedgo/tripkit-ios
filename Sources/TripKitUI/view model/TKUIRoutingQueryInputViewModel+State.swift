@@ -12,6 +12,8 @@ import MapKit
 import RxSwift
 import RxCocoa
 
+import enum TripKit.TKAutocompletionSelection
+
 extension TKUIRoutingQueryInputViewModel {
   
   enum UserAction {
@@ -36,10 +38,15 @@ extension TKUIRoutingQueryInputViewModel {
     var mode: TKUIRoutingResultsViewModel.SearchMode?
   }
 
-  static func buildState(origin: MKAnnotation?, destination: MKAnnotation?, startMode: TKUIRoutingResultsViewModel.SearchMode?, inputs: UIInput, selection: Signal<MKAnnotation>) -> Observable<State> {
+  static func buildState(origin: MKAnnotation?, destination: MKAnnotation?, startMode: TKUIRoutingResultsViewModel.SearchMode?, inputs: UIInput, selection: Signal<TKAutocompletionSelection>) -> Observable<State> {
     
     let userActions: Observable<UserAction> = Observable.merge([
-        selection.asObservable().map { .selectResult($0) },
+        selection.asObservable().compactMap {
+          switch $0 {
+          case .annotation(let annotation): return .selectResult(annotation)
+          case .result: return nil
+          }
+        },
         inputs.tappedSwap.asObservable().map { .swap },
         inputs.searchText.distinctUntilChanged { $0.0 == $1.0 }.map { .typeText($0.0) },
         inputs.selectedSearchMode.asObservable().distinctUntilChanged().map { .selectMode($0) },

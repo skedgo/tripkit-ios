@@ -22,7 +22,7 @@ class TKUIAutocompletionViewModel {
     var title: String? = nil
   }
   
-  enum Item {
+  enum Item: Equatable {
     case currentLocation
     case autocompletion(AutocompletionItem)
     case action(ActionItem)
@@ -34,9 +34,9 @@ class TKUIAutocompletionViewModel {
       }
     }
     
-    fileprivate var annotation: Single<MKAnnotation>? {
+    fileprivate var selection: Single<TKAutocompletionSelection>? {
       switch self {
-      case .currentLocation: return .just(TKLocationManager.shared.currentLocation)
+      case .currentLocation: return .just(.annotation(TKLocationManager.shared.currentLocation))
       case .autocompletion(let item): return item.completion.annotation
       case .action: return nil
       }
@@ -58,7 +58,7 @@ class TKUIAutocompletionViewModel {
     }
   }
   
-  struct AutocompletionItem {
+  struct AutocompletionItem: Equatable {
     let index: Int
     let completion: TKAutocompletionResult
     let includeAccessory: Bool
@@ -72,7 +72,11 @@ class TKUIAutocompletionViewModel {
     var provider: TKAutocompleting? { completion.provider as? TKAutocompleting }
   }
   
-  struct ActionItem {
+  struct ActionItem: Equatable {
+    static func == (lhs: TKUIAutocompletionViewModel.ActionItem, rhs: TKUIAutocompletionViewModel.ActionItem) -> Bool {
+      lhs.title == rhs.title
+    }
+    
     fileprivate let provider: TKAutocompleting
     let title: String
     
@@ -98,9 +102,9 @@ class TKUIAutocompletionViewModel {
       .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
-      .compactMap(\.annotation)
+      .compactMap(\.selection)
       .asObservable()
-      .flatMapLatest { fetched -> Observable<MKAnnotation> in
+      .flatMapLatest { fetched -> Observable<TKAutocompletionSelection> in
         return fetched
           .asObservable()
           .catch { error in
@@ -113,7 +117,7 @@ class TKUIAutocompletionViewModel {
     accessorySelection = (accessorySelected  ?? .empty())
       .compactMap(\.result)
       .asObservable()
-      .flatMapLatest { result -> Observable<MKAnnotation> in
+      .flatMapLatest { result -> Observable<TKAutocompletionSelection> in
         return result.annotation
           .asObservable()
           .catch { error in
@@ -132,9 +136,9 @@ class TKUIAutocompletionViewModel {
   
   let sections: Driver<[Section]>
   
-  let selection: Signal<MKAnnotation>
+  let selection: Signal<TKAutocompletionSelection>
   
-  let accessorySelection: Signal<MKAnnotation>
+  let accessorySelection: Signal<TKAutocompletionSelection>
   
   /// Fires when user taps on the "additional action" element of a `TKAutocompleting`
   /// provider. If that's the case, you should call `triggerAdditional` on it.
@@ -191,30 +195,27 @@ extension Array where Element == TKAutocompletionResult {
 
 extension TKAutocompletionResult {
   
-  fileprivate var annotation: Single<MKAnnotation> {
+  fileprivate var annotation: Single<TKAutocompletionSelection> {
     guard let provider = provider as? TKAutocompleting else {
       assertionFailure()
       return Single.error(NSError(code: 18376, message: "Bad provider!"))
     }
     return provider.annotation(for: self)
+      .map { [weak self] in
+        if let annotation = $0 {
+          return .annotation(annotation)
+        } else if let self {
+          return .result(self)
+        } else {
+          throw TKGeocoderHelper.GeocodingError.outdatedResult
+        }
+      }
   }
   
 }
 
 
 // MARK: - RxDataSource protocol conformance
-
-func == (lhs: TKUIAutocompletionViewModel.Item, rhs: TKUIAutocompletionViewModel.Item) -> Bool {
-  switch (lhs, rhs) {
-  case (.autocompletion(let left), .autocompletion(let right)): return left.completion == right.completion
-  case (.action(let left), .action(let right)): return left.title == right.title
-  case (.currentLocation, .currentLocation): return true
-  default: return false
-  }
-}
-
-extension TKUIAutocompletionViewModel.Item: Equatable {
-}
 
 extension TKUIAutocompletionViewModel.Item: IdentifiableType {
   typealias Identity = String

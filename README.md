@@ -1,7 +1,7 @@
 <img src="api-mark-logo.png" alt="TripGo API" width="30" height="30">  SkedGo's TripKit for iOS
 ======================================
 
-![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS-333333.svg) [![CocoaPods](https://img.shields.io/cocoapods/v/TripKit.svg)]() [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fskedgo%2Ftripkit-ios%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/skedgo/tripkit-ios) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fskedgo%2Ftripkit-ios%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/skedgo/tripkit-ios) [![CocoaPods](https://img.shields.io/cocoapods/v/TripKit.svg)]() 
 
 - Documentation for this SDK is available on [TripGo iOS Developer page](https://ios.developer.tripgo.com/)
 - Additional documentation about the API is available on the [TripGo Developer page](https://developer.tripgo.com/)

@@ -27,6 +27,9 @@ extension TKAPI {
       case modeInfo
       case alertHashCodes
       case zoneID
+      case availableRoutes
+      case operators
+      case routes
     }
 
     public let code: String
@@ -40,13 +43,24 @@ extension TKAPI {
     public let services: String?
     public let popularity: Int?
     public let zoneID: String?
-    
+    public let availableRoutes: Int?
+
     public let wheelchairAccessible: Bool?
 
     @DefaultEmptyArray public var children: [Stop]
     public let modeInfo: TKModeInfo
     
+    public let operators: [Operator]?
+    
+    public let routes: [Route]?
+    
     @DefaultEmptyArray public var alertHashCodes: [Int]
+    
+  }
+  
+  public struct Operator: Codable, Hashable {
+    public let id: String?
+    public let name: String?
   }
   
 }

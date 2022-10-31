@@ -25,7 +25,7 @@ extension TKUINearbyMapManager: TKUICompatibleHomeMapManager {
     mapSelection
       .compactMap { [weak self] in
         guard let annotation = $0 else { return nil }
-        return .handleSelection(annotation, component: self?.viewModel)
+        return .handleSelection(.annotation(annotation), component: self?.viewModel)
       }
       .asObservable()
   }

@@ -120,7 +120,7 @@ extension TKPeliasGeocoder: TKAutocompleting {
     }
   }
   
-  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     guard let coordinate = result.object as? TKNamedCoordinate else { preconditionFailure() }
     completion(.success(coordinate))
   }

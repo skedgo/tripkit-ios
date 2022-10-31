@@ -15,9 +15,9 @@ import RxSwift
 import TripKit
 
 public protocol TKUIAutocompletionViewControllerDelegate: AnyObject {
-  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect annotation: MKAnnotation)
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelect selection: TKAutocompletionSelection)
 
-  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor annotation: MKAnnotation)
+  func autocompleter(_ controller: TKUIAutocompletionViewController, didSelectAccessoryFor selection: TKAutocompletionSelection)
 }
 
 

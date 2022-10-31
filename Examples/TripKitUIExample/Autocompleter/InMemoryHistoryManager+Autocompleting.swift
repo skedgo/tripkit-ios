@@ -19,7 +19,7 @@ extension InMemoryHistoryManager: TKAutocompleting {
     completion(.success(results))
   }
   
-  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation, Error>) -> Void) {
+  func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {
     guard let history = result.object as? History else {
       preconditionFailure()
     }
