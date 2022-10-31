@@ -43,22 +43,23 @@ public class TKRouteAutocompleter: TKAutocompleting {
         let rawScore = [route.shortName, route.routeName]
           .compactMap { $0 }
           .map {
-            TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: input, candidate: $0)
+            TKAutocompletionResult.nameScore(searchTerm: input, candidate: $0)
           }.max() ?? 0
-        let score = TKAutocompletionResult.rangedScore(forScore: rawScore, betweenMinimum: 30, andMaximum: 80)
+        let score = TKAutocompletionResult.rangedScore(for: rawScore, min: 30, max: 80)
         return (route, score)
       }
 
       let results = scored.map { (route, score) -> TKAutocompletionResult in
-        let result = TKAutocompletionResult()
-        result.object = route
-        result.title = [route.shortName, route.routeName]
+        let title = [route.shortName, route.routeName]
           .compactMap { $0 }
           .joined(separator: ": ")
-        result.image = route.modeInfo.image(type: .listMainMode) ?? TKImage.iconModePublicTransport
-        result.isInSupportedRegion = true
-        result.score = Int(score)
-        return result
+        
+        return TKAutocompletionResult(
+          object: route,
+          title: title,
+          image: route.modeInfo.image(type: .listMainMode) ?? TKImage.iconModePublicTransport,
+          score: score
+        )
       }
       
       completion(.success(results))
