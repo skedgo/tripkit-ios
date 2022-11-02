@@ -60,7 +60,9 @@ public extension TKAutocompleting {
           subscriber(.failure(error))
         }
       }
-      return Disposables.create()
+      return Disposables.create {
+        self.cancelAutocompletion()
+      }
     }
   }
   
@@ -173,7 +175,7 @@ extension ObservableType {
       let merged = Observable.merge(observables)
         .scan(into: []) { $0.append(contentsOf: $1) }
         .map { $0.sorted(by: comparer) }
-        .share(replay: 1, scope: .forever)
+        .share(replay: 1, scope: .whileConnected)
       
       // ... This represents 1.: What are the best X results when the timer first?
       let timeOut = Observable<Int>.timer(cutOff, scheduler: SharingScheduler.make())
