@@ -162,8 +162,7 @@ extension TKUIAutocompletionViewModel {
     let searchTrigger = refresh.asObservable().startWith(())
 
     return searchTrigger
-      .withLatestFrom(biasMapRect)
-      .flatMapLatest { providers.autocomplete(searchText, mapRect: $0) }
+      .flatMapLatest { providers.autocomplete(searchText, mapRect: biasMapRect.asObservable()) }
       .map { $0.buildSections(includeCurrentLocation: includeCurrentLocation, includeAccessory: includeAccessory) + additionalSection }
   }
   
