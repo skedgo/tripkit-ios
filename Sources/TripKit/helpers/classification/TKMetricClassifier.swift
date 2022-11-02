@@ -10,7 +10,7 @@ import Foundation
 
 public class TKMetricClassifier: NSObject {
   
-  public enum Classification: String {
+  public enum Classification: String, CaseIterable {
     case recommended
     case cheapest
     case fastest
