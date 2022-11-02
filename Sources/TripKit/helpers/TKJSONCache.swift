@@ -27,7 +27,8 @@ public class TKJSONCache: TKFileCache {
         NSArray.self,
         NSDictionary.self,
         NSDate.self,
-        NSString.self
+        NSString.self,
+        NSNumber.self,
       ], from: data) as? [String: AnyObject]
     
     } catch {
