@@ -17,11 +17,10 @@ jobs:
       - name: Prepare dependencies
         run: |
           brew install sourcekitten
-          brew install python
-          python --version
-          pip install --upgrade pip
-          pip install mkdocs
-          pip install pymdown-extensions     
+          python3 --version
+          pip3 install --upgrade pip
+          pip3 install mkdocs
+          pip3 install pymdown-extensions     
 
       - name: Build docs
         run: |
