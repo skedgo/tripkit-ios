@@ -20,7 +20,8 @@ jobs:
           python3 --version
           pip3 install --upgrade pip
           pip3 install mkdocs
-          pip3 install pymdown-extensions     
+          pip3 install pymdown-extensions
+          mkdocs --version
 
       - name: Build docs
         run: |
