@@ -706,6 +706,9 @@
                 <a class="nav-group-task-link" href="../Structs/TKAPI/AlertMapping.html">– AlertMapping</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKAPI/AlertRouteMapping.html">– AlertRouteMapping</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/CompanyInfo.html">– CompanyInfo</a>
               </li>
               <li class="nav-group-task">
@@ -776,6 +779,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/Route.html">– Route</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKAPI/Direction.html">– Direction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TKAPI/DirectionStop.html">– DirectionStop</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TKAPI/RoutingResponse.html">– RoutingResponse</a>
@@ -1864,9 +1873,59 @@ provided coordinate</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@TripKit@objc(cs)TKRegionManager(im)localRegionWithName:"></a>
+                    <a name="/s:7TripKit15TKRegionManagerC11localRegion5namedAA0C0CSgSS_tF"></a>
                     <a name="//apple_ref/swift/Method/localRegion(named:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@TripKit@objc(cs)TKRegionManager(im)localRegionWithName:">localRegion(named:<wbr>)</a>
+                    <a class="token" href="#/s:7TripKit15TKRegionManagerC11localRegion5namedAA0C0CSgSS_tF">localRegion(named:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, renamed: "localRegion(code:﹚")</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegion</span><span class="p">(</span><span class="n">named</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A region code</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The local (non-international) region matching the provided code</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@TripKit@objc(cs)TKRegionManager(im)localRegionWithName:"></a>
+                    <a name="//apple_ref/swift/Method/localRegion(code:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@TripKit@objc(cs)TKRegionManager(im)localRegionWithName:">localRegion(code:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1881,7 +1940,7 @@ provided coordinate</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc(localRegionWithName:)</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegion</span><span class="p">(</span><span class="n">named</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">?</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegion</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -2263,7 +2322,7 @@ return <code>nil</code> if the coordinate falls outside any supported region.</p
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-11-01)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-11-04)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

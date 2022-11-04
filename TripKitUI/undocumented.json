@@ -1318,14 +1318,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIAutocompletionViewController.swift",
-      "line": 126,
+      "line": 129,
       "symbol": "TKUIAutocompletionViewController.scrollViewDidScroll(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/controller/TKUIAutocompletionViewController.swift",
-      "line": 137,
+      "line": 140,
       "symbol": "TKUIAutocompletionViewController.updateSearchResults(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1724,21 +1724,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 86,
+      "line": 88,
       "symbol": "TKAutocompleting.triggerAdditional(presenter:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 101,
+      "line": 103,
       "symbol": "Reactive.geocode(_:using:near:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 223,
+      "line": 227,
       "symbol": "Reactive.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
