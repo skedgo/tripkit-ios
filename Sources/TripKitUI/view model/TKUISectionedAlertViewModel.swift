@@ -75,8 +75,8 @@ class TKUISectionedAlertViewModel {
     // Secondly, within each mode, we group alerts by route
     return groupedModes.mapValues { mappings -> [RouteAlerts] in
       
-      // Mappings are `[Alert: [Route]]`. Here we invert this to `[Route: [Alert]]`
-      let alertsByRoute: [String: (TKAPI.Route, [TKAPI.Alert])] = mappings.reduce(into: [:]) { acc, mapping in
+      // Mappings are `[Alert: [AlertRouteMapping]]`. Here we invert this to `[AlertRouteMapping: [Alert]]`
+      let alertsByRoute: [String: (TKAPI.AlertRouteMapping, [TKAPI.Alert])] = mappings.reduce(into: [:]) { acc, mapping in
         mapping.routes?.forEach { route in
           let previously = acc[route.id, default: (route, [])]
           acc[route.id] = (previously.0, previously.1 + [mapping.alert])
@@ -103,12 +103,11 @@ class TKUISectionedAlertViewModel {
 
 // MARK: -
 
-extension TKAPI.Route {
+extension TKAPI.AlertRouteMapping {
   var title: String {
-    return shortName ?? routeName ?? id
+    return number ?? name ?? id
   }
 }
-
 
 // MARK: -
 
@@ -144,7 +143,7 @@ extension ModeGroup: Hashable {
 struct RouteAlerts {
   /// Each group is identifiable by a route. The route is affected
   /// by the alerts in the group.
-  let route: TKAPI.Route
+  let route: TKAPI.AlertRouteMapping
   
   /// These are the alerts affecting the route.
   var alerts: [TKAPI.Alert]
