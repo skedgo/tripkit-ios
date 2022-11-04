@@ -11,17 +11,19 @@ jobs:
     name: Build docs
     runs-on: macos-12
     steps:
-      - name: Checkout master
+      - name: Checkout main
         uses: actions/checkout@v2
-
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
       - name: Prepare dependencies
         run: |
           brew install sourcekitten
-          python3 --version
-          pip3 install --upgrade pip
-          pip3 install mkdocs
-          pip3 install pymdown-extensions
-          mkdocs --version
+          python --version
+          pip install --upgrade pip
+          pip install mkdocs
+          pip install pymdown-extensions    
+          mkdocs --version 
 
       - name: Build docs
         run: |
