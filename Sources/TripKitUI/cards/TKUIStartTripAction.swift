@@ -18,7 +18,7 @@ extension TKUITripOverviewCard {
   ///
   /// - Parameter actionHandler: Optional handler, passed to `TKUITripModeByModeCard.tripStartedHandler`.
   /// - Returns: A new trip action to be used on a `TKUITripOverviewCard`
-  public static func buildStartTripAction(startingOn: TKSegment? = nil, mode: TKUISegmentMode = .onSegment, actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
+  public static func buildStartTripAction(startingOn: TKSegment? = nil, mode: TKUISegmentMode = .getReady, actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
     return TKUICardAction(
       title: Loc.ActionGo,
       icon: .iconArrowUp
