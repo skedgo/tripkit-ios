@@ -101,7 +101,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   /// mode-by-mode basis of a trip.
   ///
   /// - Parameter segment: Segment to focus on first
-  public init(startingOn segment: TKSegment, mode: TKUISegmentMode = .onSegment, mapManager: TKUITripMapManager? = nil, initialPosition: TGCardPosition = .peaking) throws {
+  public init(startingOn segment: TKSegment, mode: TKUISegmentMode = .getReady, mapManager: TKUITripMapManager? = nil, initialPosition: TGCardPosition = .peaking) throws {
     guard let trip = segment.trip else {
       throw Error.segmentHasNoTrip
     }
