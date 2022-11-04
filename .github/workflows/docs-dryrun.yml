@@ -17,6 +17,7 @@ jobs:
       - name: Prepare dependencies
         run: |
           brew install sourcekitten
+          brew install python
           python --version
           pip install --upgrade pip
           pip install mkdocs
