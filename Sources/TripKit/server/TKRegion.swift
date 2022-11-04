@@ -75,8 +75,11 @@ public class TKRegion : NSObject, Codable {
   }
   
   @objc public let timeZone: TimeZone
-  @objc public let name: String
+  @objc public let code: String
   @objc public let cities: [City]
+  
+  @available(*, deprecated, renamed: "code")
+  @objc public var name: String { code }
   
   /// A list of all the mode identifiers this region supports. This is sorted as defined by the server, as the server groups and sorts them in a sensible manner and we want to preserve this sorting.
   @objc public let modeIdentifiers: [String]
@@ -95,8 +98,8 @@ public class TKRegion : NSObject, Codable {
   ///     a region. Instead use the various helpers in
   ///     `TKRegionManager` instead.
   ///
-  public init(forTestingWithName name: String, modes: [String], cities: [City]) {
-    self.name = name
+  public init(forTestingWithCode code: String, modes: [String], cities: [City]) {
+    self.code = code
     self.modeIdentifiers = modes
     self.cities = cities
     self.urls = []
@@ -105,10 +108,10 @@ public class TKRegion : NSObject, Codable {
     self.timeZone = .current
   }
   
-  fileprivate init(asInternationalNamed name: String, modes: [String]) {
+  fileprivate init(asInternationalWithCode code: String, modes: [String]) {
     encodedPolygon        = ""
     simplePolygon         = nil
-    self.name             = name
+    self.code             = code
     urls                  = []
     timeZone              = .current
     cities                = []
@@ -148,7 +151,7 @@ public class TKRegion : NSObject, Codable {
   
   private enum CodingKeys: String, CodingKey {
     case timeZone = "timezone"
-    case name
+    case code = "name"
     case cities
     case modeIdentifiers = "modes"
     case urls
@@ -157,7 +160,7 @@ public class TKRegion : NSObject, Codable {
   
   public required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    name = try container.decode(String.self, forKey: .name)
+    code = try container.decode(String.self, forKey: .code)
     cities = try container.decode([City].self, forKey: .cities)
     modeIdentifiers = try container.decode([String].self, forKey: .modeIdentifiers)
     urls = try container.decode([URL].self, forKey: .urls)
@@ -187,7 +190,7 @@ public class TKRegion : NSObject, Codable {
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(timeZone.identifier, forKey: .timeZone)
-    try container.encode(name, forKey: .name)
+    try container.encode(code, forKey: .code)
     try container.encode(cities, forKey: .cities)
     try container.encode(modeIdentifiers, forKey: .modeIdentifiers)
     try container.encode(urls, forKey: .urls)
@@ -206,7 +209,7 @@ public class TKInternationalRegion : TKRegion {
       TKTransportModeIdentifierCar,
       TKTransportModeIdentifierMotorbike,
     ]
-    super.init(asInternationalNamed: "International", modes: modes)
+    super.init(asInternationalWithCode: "International", modes: modes)
   }
   
   public required init(from decoder: Decoder) throws {

@@ -39,7 +39,7 @@ extension Reactive where Base == TKBuzzInfoProvider {
   
   public static func fetchTransitAlertMappings(forRegion region: TKRegion) -> Single<[TKAPI.AlertMapping]> {
     let paras: [String: Any] = [
-      "region": region.name,
+      "region": region.code,
       "v": TKSettings.parserJsonVersion
     ]
     

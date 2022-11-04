@@ -11,8 +11,8 @@ import Foundation
 extension StopLocation: TKURLShareable {
   
   public var shareURL: URL? {
-    guard let regionName = region?.name else { return nil }
-    return TKShareHelper.createStopURL(stopCode: stopCode, inRegionNamed: regionName, filter: filter)
+    guard let code = region?.code else { return nil }
+    return TKShareHelper.createStopURL(stopCode: stopCode, regionCode: code, filter: filter)
   }
   
 }

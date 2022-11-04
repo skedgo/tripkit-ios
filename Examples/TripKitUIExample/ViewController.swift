@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SwiftUI
 
 import TGCardViewController
 import TripKit
@@ -110,7 +111,14 @@ extension MainViewController: TKUIAutocompletionViewControllerDelegate {
       print("Selected \(annotation)")
 
     case let .result(result):
-      print("Selected \(result.object)")
+      if #available(iOS 15.0, *), let route = result.object as? TKAPI.Route {
+        dismiss(animated: true) {
+          self.showRoute(route)
+        }
+        
+      } else {
+        print("Selected \(result.object)")
+      }
     }
   }
   
@@ -156,8 +164,70 @@ extension MainViewController: TKUITimetableViewControllerDelegate {
   
 }
 
+// MARK: - Route
 
-// MARK: - Routes
+extension MainViewController {
+  
+  @available(iOS 15.0, *)
+  func showRoute(_ route: TKAPI.Route) {
+    let controller = UIHostingController(rootView: RouteView(route: route))
+    navigationController?.setNavigationBarHidden(false, animated: true)
+    navigationController?.pushViewController(controller, animated: true)
+  }
+}
+
+@available(iOS 15.0, *)
+struct RouteView: View {
+  
+  let route: TKAPI.Route
+  
+  @State var directions: [TKAPI.Direction]?
+  
+  var title: String {
+    [route.shortName, route.routeName]
+      .compactMap { $0 }
+      .joined(separator: ": ")
+  }
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      Text(title)
+        .font(.title)
+      
+      if let directions {
+        ForEach(directions, id: \.id) { direction in
+          HStack {
+            Text(direction.name ?? direction.id)
+              .font(.body)
+            Text("\(direction.stops.count) stops")
+              .font(.body)
+              .foregroundColor(.secondary)
+          }
+          
+        }
+      } else {
+        ProgressView()
+      }
+      
+    }.task {
+      guard
+        directions == nil,
+        let region = TKRegionManager.shared.localRegion(code: route.regionCode)
+      else { return }
+      
+      do {
+        let route = try await TKBuzzInfoProvider.fetchRouteDetails(routeID: route.id, operatorID: route.operatorID, region: region)
+        directions = route.directions
+      } catch {
+        directions = []
+      }
+    }
+  }
+  
+}
+
+
+// MARK: - Routing
 
 extension MainViewController {
 

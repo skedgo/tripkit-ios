@@ -218,9 +218,15 @@ extension TKShareHelper {
     return url.path.hasPrefix("/stop")
   }
 
-  @objc public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL? {
+  @available(*, deprecated, renamed: "createStopURL(stopCode:regionCode:filter:)")
+  @objc
+  public static func createStopURL(stopCode: String, inRegionNamed regionName: String, filter: String?) -> URL? {
+    createStopURL(stopCode: stopCode, regionCode: regionName, filter: filter)
+  }
+    
+  public static func createStopURL(stopCode: String, regionCode: String, filter: String? = nil) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
-    let path = "/stop/\(regionName)/\(escaping: stopCode)/\(escaping: filter ?? "")"
+    let path = "/stop/\(regionCode)/\(escaping: stopCode)/\(escaping: filter ?? "")"
     return URL(string: baseURL + path)
   }
   
@@ -248,10 +254,15 @@ extension TKShareHelper {
     return url.path.hasPrefix("/service")
   }
   
+  @available(*, deprecated, renamed: "createServiceURL(serviceID:stopCode:regionCode:)")
   @objc
   public static func createServiceURL(serviceID: String, atStopCode stopCode: String, inRegionNamed regionName: String) -> URL? {
+    createServiceURL(serviceID: serviceID, stopCode: stopCode, regionCode: regionName)
+  }
+    
+  public static func createServiceURL(serviceID: String, stopCode: String, regionCode: String) -> URL? {
     guard let baseURL = TKShareHelper.baseURL else { return nil }
-    let path = "/service/\(regionName)/\(escaping: stopCode)/\(escaping: serviceID)"
+    let path = "/service/\(regionCode)/\(escaping: stopCode)/\(escaping: serviceID)"
     return URL(string: baseURL + path)
   }
   
