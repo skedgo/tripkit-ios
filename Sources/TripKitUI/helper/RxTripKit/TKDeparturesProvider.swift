@@ -48,7 +48,7 @@ extension TKDeparturesProvider {
     }
     
     var paras: [String: Any] = [
-      "region": region.name,
+      "region": region.code,
       "embarkationStops": stopCodes,
       "limit": limit,
       "config": TKSettings.Config.userSettings().paras
@@ -113,8 +113,8 @@ extension TKDeparturesProvider {
   @objc(queryParametersForDLSTable:fromDate:limit:)
   public class func queryParameters(for table: TKDLSTable, fromDate: Date, limit: Int) -> [String: Any] {
     return [
-      "region": table.startRegion.name,
-      "disembarkationRegion": table.endRegion.name,
+      "region": table.startRegion.code,
+      "disembarkationRegion": table.endRegion.code,
       "timeStamp": Int(fromDate.timeIntervalSince1970),
       "embarkationStops": [table.startStopCode],
       "disembarkationStops": [table.endStopCode],

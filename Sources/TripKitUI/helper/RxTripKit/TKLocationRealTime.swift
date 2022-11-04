@@ -46,7 +46,7 @@ public enum TKLocationRealTime {
     let paras: [String: Any]
     if let identifier = identifier {
       paras = [
-        "region": region.name,
+        "region": region.code,
         "identifier": identifier,
       ]
     } else {

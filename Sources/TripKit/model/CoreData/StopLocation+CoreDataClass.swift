@@ -46,7 +46,7 @@ public class StopLocation: NSManagedObject {
     var stop: StopLocation?
     var region: TKRegion?
     if let location = location, let anyRegion = location.regions.first {
-      stop = fetchStop(stopCode: stopCode, inRegion: anyRegion.name, requireCoordinate: false, in: context)
+      stop = fetchStop(stopCode: stopCode, inRegion: anyRegion.code, requireCoordinate: false, in: context)
       region = anyRegion
     }
       
@@ -55,11 +55,11 @@ public class StopLocation: NSManagedObject {
       stop.location = location
       stop.stopCode = stopCode
       stop.stopModeInfo = modeInfo ?? stop.stopModeInfo
-      stop.regionName = region?.name
+      stop.regionName = region?.code
       return stop
     } else {
       let stop = insertStop(stopCode: stopCode, modeInfo: modeInfo, at: location, in: context)
-      stop.regionName = region?.name
+      stop.regionName = region?.code
       return stop
     }
   }

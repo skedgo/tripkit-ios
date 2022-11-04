@@ -64,10 +64,19 @@ extension TKAPI {
     public let operators: [String]?
     public let serviceTripIDs: [String]?
     public let stopCodes: [String]?
-    public let routes: [TKAPI.Route]?
+    public let routes: [AlertRouteMapping]?
     public let modeInfo: TKModeInfo?
   }
-
+  
+  public struct AlertRouteMapping: Codable, Hashable {
+    public let id: String
+    public let name: String?
+    public let number: String?
+    public let modeInfo: TKModeInfo
+    
+    /// This color applies to an individual service.
+    public var color: TKColor? { return modeInfo.color }
+  }
   
 }
 
