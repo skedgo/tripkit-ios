@@ -15,6 +15,8 @@ public typealias TKSkedGoGeocoder = TKTripGoGeocoder
 public class TKTripGoGeocoder: NSObject {
   private var lastRect: MKMapRect = .null
   private var resultCache = NSCache<NSString, NSArray>()
+  
+  private var onCompletion: (String, (Result<[TKAutocompletionResult], Error>) -> Void)? = nil
 }
 
 extension TKTripGoGeocoder: TKGeocoding {
@@ -72,6 +74,9 @@ extension TKTripGoGeocoder: TKAutocompleting {
       }
     }
     
+    // Putting it into a local variable so that we can cancel this.
+    self.onCompletion = (input, completion)
+    
     var paras: [String: Any] = [
       "q": input,
       "a": true
@@ -81,44 +86,53 @@ extension TKTripGoGeocoder: TKAutocompleting {
     paras["near"] = coordinateRegion.center.isValid ? "\(coordinateRegion.center.latitude),\(coordinateRegion.center.longitude)" : nil
     
     let region = TKRegionManager.shared.region(containing: coordinateRegion)
+    
     TKServer.shared.hit(TKAPI.GeocodeResponse.self, path: "geocode.json", parameters: paras, region: region) { [weak self] _, _, result in
-      guard let self = self else { return }
-      
-      completion(
-        result.map { response in
-          let coordinates = response.choices.map(\.named)
-          let results = coordinates.compactMap { named -> TKAutocompletionResult? in
-            guard let name = named.name else { return nil }
-            let result = TKAutocompletionResult()
-            result.object = named
-            result.title = name
-            result.isInSupportedRegion = NSNumber(value: true)
-            result.score = Self.score(named, query: input) ?? 0
-            
-            if let stop = named as? TKStopCoordinate {
-              result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
-              result.accessoryAccessibilityLabel = Loc.ShowTimetable
-              result.image = TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin)
-              if stop.stopCode.contains(input) {
-                result.subtitle = stop.stopCode + " - " + (stop.services ?? "")
-              } else {
-                result.subtitle = stop.services
-              }
+      self?.process(result: result, for: input)
+    }
+  }
+  
+  private func process(result: Result<TKAPI.GeocodeResponse, Error>, for input: String) {
+    guard let onCompletion, input == onCompletion.0 else { return }
+    
+    onCompletion.1(
+      result.map { response in
+        let coordinates = response.choices.map(\.named)
+        let results = coordinates.compactMap { named -> TKAutocompletionResult? in
+          guard let name = named.name else { return nil }
+          let result = TKAutocompletionResult()
+          result.object = named
+          result.title = name
+          result.isInSupportedRegion = NSNumber(value: true)
+          result.score = Self.score(named, query: input) ?? 0
+          
+          if let stop = named as? TKStopCoordinate {
+            result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
+            result.accessoryAccessibilityLabel = Loc.ShowTimetable
+            result.image = TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin)
+            if stop.stopCode.contains(input) {
+              result.subtitle = stop.stopCode + " - " + (stop.services ?? "")
             } else {
-              result.subtitle = named.address
-              result.image = TKAutocompletionResult.image(for: .pin)
+              result.subtitle = stop.services
             }
-            
-            return result
+          } else {
+            result.subtitle = named.address
+            result.image = TKAutocompletionResult.image(for: .pin)
           }
           
-          if !results.isEmpty {
-            self.resultCache.setObject(results as NSArray, forKey: input as NSString)
-          }
-          return results
+          return result
         }
-      )
-    }
+        
+        if !results.isEmpty {
+          resultCache.setObject(results as NSArray, forKey: input as NSString)
+        }
+        return results
+      }
+    )
+  }
+  
+  public func cancelAutocompletion() {
+    self.onCompletion = nil
   }
   
   public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {

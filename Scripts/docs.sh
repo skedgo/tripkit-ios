@@ -2,6 +2,13 @@
 # Bash script to update documentation
 
 (
+  # Checking that we have mkdocs
+  mkdocs --version
+  if [[ $? -ne 0 ]]; then
+    echo "mkdocs is missing. Check the logs and install it."
+    exit 1
+  fi
+
   # echo "Building TripKit docs..."
   ./docs_tripkit.sh
 

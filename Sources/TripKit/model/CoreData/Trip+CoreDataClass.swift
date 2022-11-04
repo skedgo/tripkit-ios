@@ -126,7 +126,11 @@ extension Trip {
   @discardableResult
   func calculateDuration() -> TimeInterval {
     let minutes = arrivalTime.minutesSince(departureTime)
-    self.minutes = Int16(min(Double(INT16_MAX), Double(minutes)))
+    
+    // This can occasionally happen due to bad real-time data
+    guard minutes >= Int16.min, minutes <= Int16.max else { return 0 }
+    
+    self.minutes = Int16(min(Double(Int16.max), Double(minutes)))
     return TimeInterval(minutes * 60)
   }
 }

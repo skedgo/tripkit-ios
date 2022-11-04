@@ -29,7 +29,7 @@ class TKRegionManagerTest: XCTestCase {
   
   func testParsing() {
     XCTAssert(TKRegionManager.shared.hasRegions)
-    XCTAssertEqual(TKRegionManager.shared.regions.count, 143)
+    XCTAssertEqual(TKRegionManager.shared.regions.count, 195)
   }
   
   func testSavingToCache() throws {
@@ -53,7 +53,7 @@ class TKRegionManagerTest: XCTestCase {
     let cachedResponse = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
     TKRegionManager.shared.updateRegions(from: cachedResponse)
     XCTAssert(TKRegionManager.shared.hasRegions)
-    XCTAssertEqual(TKRegionManager.shared.regions.count, 143)
+    XCTAssertEqual(TKRegionManager.shared.regions.count, 195)
   }
   
   func testSortingModes() throws {
