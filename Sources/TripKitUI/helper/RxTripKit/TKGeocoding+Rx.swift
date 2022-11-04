@@ -60,7 +60,9 @@ public extension TKAutocompleting {
           subscriber(.failure(error))
         }
       }
-      return Disposables.create()
+      return Disposables.create {
+        self.cancelAutocompletion()
+      }
     }
   }
   
@@ -121,16 +123,18 @@ public extension Array where Element == TKAutocompleting {
   ///
   /// - Parameters:
   ///   - text: Input text, which should fire when user enters text
-  ///   - mapRect: Map rect to bias results towards
+  ///   - mapRect: Map rect to bias results towards, which should fire whenever map moves and
+  ///     provide an initial value
   /// - Returns: Stream of autocompletion results. For each input change, it
   ///     can fire multiple times as more results are found by different
   ///     providers (i.e., elements in this array).
-  func autocomplete(_ text: Observable<(String, forced: Bool)>, mapRect: MKMapRect) -> Observable<[TKAutocompletionResult]> {
+  func autocomplete(_ text: Observable<(String, forced: Bool)>, mapRect: Observable<MKMapRect>) -> Observable<[TKAutocompletionResult]> {
     
     return text
       .distinctUntilChanged( { $0.0 == $1.0 && $0.1 == $1.1} )
+      .withLatestFrom(mapRect) { ($0, $1) }
       .debounce(.milliseconds(200), scheduler: MainScheduler.asyncInstance)
-      .flatMapLatest { input -> Observable<[TKAutocompletionResult]> in
+      .flatMapLatest { input, mapRect -> Observable<[TKAutocompletionResult]> in
         let autocompletions = self.map { provider in
           provider
             .autocomplete(input.0, near: mapRect)

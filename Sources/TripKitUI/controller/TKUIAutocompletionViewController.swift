@@ -108,7 +108,10 @@ public class TKUIAutocompletionViewController: UITableViewController {
     
     viewModel.triggerAction
       .asObservable()
-      .flatMapLatest { $0.triggerAdditional(presenter: self).asObservable() }
+      .flatMapLatest { [weak self] provider -> Observable<Bool> in
+        guard let self = self else { return .empty() }
+        return provider.triggerAdditional(presenter: self).asObservable()
+      }
       .subscribe()
       .disposed(by: disposeBag)
     
