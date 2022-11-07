@@ -4631,7 +4631,7 @@
 			repositoryURL = "https://github.com/DataDog/dd-sdk-swift-testing";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		3AD3BA9127422A4C00E33015 /* XCRemoteSwiftPackageReference "TGCardViewController" */ = {
