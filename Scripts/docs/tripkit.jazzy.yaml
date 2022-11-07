@@ -39,6 +39,7 @@ custom_categories:
       - TKContactsManager
       - TKPeliasGeocoder
       - TKRegionAutocompleter
+      - TKRouteAutocompleter
       - TKTripGoGeocoder
       - TKAggregateGeocoder
   - name: POIs + Timetables
