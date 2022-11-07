@@ -89,8 +89,8 @@ public class TKServer {
 }
 
 extension TKServer {
-  
-  public enum HTTPMethod: String {
+
+  public enum HTTPMethod: String, Codable {
     case POST = "POST"
     case GET = "GET"
     case DELETE = "DELETE"
