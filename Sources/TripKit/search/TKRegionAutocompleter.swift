@@ -9,6 +9,10 @@
 import Foundation
 import MapKit
 
+/// An autocompleter for cities in supported TripGo regions
+///
+/// Implements ``TKAutocompleting``, providing instances of ``TKRegion/City`` in
+/// ``TKAutocompletionResult/object``.
 public class TKRegionAutocompleter: TKAutocompleting {
   public init() {
   }

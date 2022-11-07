@@ -12,6 +12,14 @@ import MapKit
 @available(*, unavailable, renamed: "TKTripGoGeocoder")
 public typealias TKSkedGoGeocoder = TKTripGoGeocoder
 
+/// An autocompleter and geocoder for transport-related POIs in supported TripGo regions
+///
+/// Implements ``TKAutocompleting``, providing instances of ``TKNamedCoordinate`` in
+/// ``TKAutocompletionResult/object``. It also implements ``TKGeocoding``, returning
+/// also a list of ``TKNamedCoordinate``. These search results can be of the subclass
+/// ``TKStopCoordinate`` for public transport stops matching the search.
+///
+/// This geocoder is a wrapper around the [`geocode.json` endpoint](https://developer.tripgo.com/specs/#tag/Geocode/paths/~1geocode.json/get) of the TripGo API.
 public class TKTripGoGeocoder: NSObject {
   private var lastRect: MKMapRect = .null
   private var resultCache = NSCache<NSString, NSArray>()
