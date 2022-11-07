@@ -298,6 +298,9 @@ public enum TKBooking {
     /// Number of tickets to pre-select
     public var amount: Int?
     
+    /// Maximum number of tickets that can be purchased of this type
+    public var max: Int?
+    
     /// The tickets that were purchased, empty if none purchased
     @DefaultEmptyArray public var purchases: [TicketPurchase]
     
@@ -309,6 +312,7 @@ public enum TKBooking {
       case currencyCode = "currency"
       case amount = "value"
       case purchases = "purchasedTickets"
+      case max
     }
     
     public enum InputValue: Hashable {
