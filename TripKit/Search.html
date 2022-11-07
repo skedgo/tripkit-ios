@@ -160,6 +160,9 @@
                 <a class="nav-group-task-link" href="Classes/TKRegionAutocompleter.html">TKRegionAutocompleter</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TKRouteAutocompleter.html">TKRouteAutocompleter</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TKTripGoGeocoder.html">TKTripGoGeocoder</a>
               </li>
               <li class="nav-group-task">
@@ -350,9 +353,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TKReporter.html">TKReporter</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/TKRouteAutocompleter.html">TKRouteAutocompleter</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TKRoutePolyline.html">TKRoutePolyline</a>
@@ -1027,7 +1027,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An autocompleter and geocoder powered by a Pelias backend</p>
+
+<p>Implements <code><a href="Protocols/TKAutocompleting.html">TKAutocompleting</a></code>, providing instances of <code><a href="Classes/TKNamedCoordinate.html">TKNamedCoordinate</a></code> in
+<code><a href="Classes/TKAutocompletionResult.html#/c:objc(cs)TKAutocompletionResult(py)object">object</a></code>. It also implements <code><a href="Protocols/TKGeocoding.html">TKGeocoding</a></code>, returning
+also a list of <code><a href="Classes/TKNamedCoordinate.html">TKNamedCoordinate</a></code>.</p>
+
+<p>This geocoder hits the Pelias instance hosted by SkedGo at <code>https://pelias.tripgo.com</code>.</p>
 
                         <a href="Classes/TKPeliasGeocoder.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1057,7 +1063,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An autocompleter for cities in supported TripGo regions</p>
+
+<p>Implements <code><a href="Protocols/TKAutocompleting.html">TKAutocompleting</a></code>, providing instances of <code><a href="Classes/TKRegion/City.html">City</a></code> in
+<code><a href="Classes/TKAutocompletionResult.html#/c:objc(cs)TKAutocompletionResult(py)object">object</a></code>.</p>
 
                         <a href="Classes/TKRegionAutocompleter.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1066,6 +1075,44 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TKRegionAutocompleter</span> <span class="p">:</span> <span class="kt"><a href="Protocols/TKAutocompleting.html">TKAutocompleting</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit20TKRouteAutocompleterC"></a>
+                    <a name="//apple_ref/swift/Class/TKRouteAutocompleter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit20TKRouteAutocompleterC">TKRouteAutocompleter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An autocompleter for public transport routes in supported TripGo regions</p>
+
+<p>Implements <code><a href="Protocols/TKAutocompleting.html">TKAutocompleting</a></code>, providing instances of <code><a href="Structs/TKAPI/Route.html">Route</a></code> in
+<code><a href="Classes/TKAutocompletionResult.html#/c:objc(cs)TKAutocompletionResult(py)object">object</a></code>.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    These autocompletion results cannot be turned into an <code>MKAnnotation</code>, and
+the implementation of <code>annotation(for:completion:)</code> will therefore call its completion
+handler with <code>nil</code>.
+
+</div>
+
+                        <a href="Classes/TKRouteAutocompleter.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TKRouteAutocompleter</span> <span class="p">:</span> <span class="kt"><a href="Protocols/TKAutocompleting.html">TKAutocompleting</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1085,7 +1132,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An autocompleter and geocoder for transport-related POIs in supported TripGo regions</p>
+
+<p>Implements <code><a href="Protocols/TKAutocompleting.html">TKAutocompleting</a></code>, providing instances of <code><a href="Classes/TKNamedCoordinate.html">TKNamedCoordinate</a></code> in
+<code><a href="Classes/TKAutocompletionResult.html#/c:objc(cs)TKAutocompletionResult(py)object">object</a></code>. It also implements <code><a href="Protocols/TKGeocoding.html">TKGeocoding</a></code>, returning
+also a list of <code><a href="Classes/TKNamedCoordinate.html">TKNamedCoordinate</a></code>. These search results can be of the subclass
+<code><a href="Classes/TKStopCoordinate.html">TKStopCoordinate</a></code> for public transport stops matching the search.</p>
+
+<p>This geocoder is a wrapper around the <a href="https://developer.tripgo.com/specs/#tag/Geocode/paths/%7E1geocode.json/get"><code>geocode.json</code> endpoint</a> of the TripGo API.</p>
 
                         <a href="Classes/TKTripGoGeocoder.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1139,7 +1193,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-11-04)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-11-07)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

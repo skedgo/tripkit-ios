@@ -13603,93 +13603,23 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKPeliasGeocoder.swift",
-      "line": 14,
-      "symbol": "TKPeliasGeocoder",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKPeliasGeocoder.swift",
-      "line": 16,
+      "line": 23,
       "symbol": "TKPeliasGeocoder.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKPeliasGeocoder.swift",
-      "line": 65,
-      "symbol": "TKPeliasGeocoder",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKPeliasGeocoder.swift",
-      "line": 92,
-      "symbol": "TKPeliasGeocoder",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKRegionAutocompleter.swift",
-      "line": 12,
-      "symbol": "TKRegionAutocompleter",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKRegionAutocompleter.swift",
-      "line": 13,
+      "line": 17,
       "symbol": "TKRegionAutocompleter.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKRouteAutocompleter.swift",
-      "line": 12,
-      "symbol": "TKRouteAutocompleter",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKRouteAutocompleter.swift",
-      "line": 13,
+      "line": 21,
       "symbol": "TKRouteAutocompleter.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKRouteAutocompleter.swift",
-      "line": 16,
-      "symbol": "TKRouteAutocompleter.operatorID",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKRouteAutocompleter.swift",
-      "line": 17,
-      "symbol": "TKRouteAutocompleter.modes",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKTripGoGeocoder.swift",
-      "line": 15,
-      "symbol": "TKTripGoGeocoder",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKTripGoGeocoder.swift",
-      "line": 22,
-      "symbol": "TKTripGoGeocoder",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKTripGoGeocoder.swift",
-      "line": 59,
-      "symbol": "TKTripGoGeocoder",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
