@@ -124,15 +124,13 @@ extension TKTripGoGeocoder: TKAutocompleting {
             }
           }
           
-          return result
+          if !results.isEmpty {
+            self.resultCache.setObject(results as NSArray, forKey: input as NSString)
+          }
+          return results
         }
-        
-        if !results.isEmpty {
-          resultCache.setObject(results as NSArray, forKey: input as NSString)
-        }
-        return results
-      }
-    )
+      )
+    }
   }
   
   public func cancelAutocompletion() {
