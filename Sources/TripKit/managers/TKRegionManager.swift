@@ -329,13 +329,13 @@ extension TKRegionManager {
   /// - Parameter name: A region code
   /// - Returns: The local (non-international) region matching the provided code
   @available(*, deprecated, renamed: "localRegion(code:)")
+  @objc(localRegionWithName:)
   public func localRegion(named name: String) -> TKRegion? {
     localRegion(code: name)
   }
   
-  /// - Parameter name: A region code
+  /// - Parameter code: A region code
   /// - Returns: The local (non-international) region matching the provided code
-  @objc(localRegionWithName:)
   public func localRegion(code: String) -> TKRegion? {
     return regions.first { $0.code == code }
   }
