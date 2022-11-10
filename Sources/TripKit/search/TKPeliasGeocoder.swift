@@ -11,6 +11,13 @@ import MapKit
 @available(*, unavailable, renamed: "TKPeliasGeocoder")
 public typealias TKMapZenGeocoder = TKPeliasGeocoder
 
+/// An autocompleter and geocoder powered by a Pelias backend
+///
+/// Implements ``TKAutocompleting``, providing instances of ``TKNamedCoordinate`` in
+/// ``TKAutocompletionResult/object``. It also implements ``TKGeocoding``, returning
+/// also a list of ``TKNamedCoordinate``.
+///
+/// This geocoder hits the Pelias instance hosted by SkedGo at `https://pelias.tripgo.com`.
 public class TKPeliasGeocoder: NSObject {
   
   public override init() {

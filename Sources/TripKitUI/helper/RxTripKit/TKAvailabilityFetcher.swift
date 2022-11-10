@@ -16,7 +16,7 @@ extension TKBuzzInfoProvider {
   
   public static func fetchVehicleAvailabilities(locationId: String, in region: TKRegion, start: Date? = nil, end: Date? = nil) -> Single<[TKAPI.CarAvailability]> {
     
-    var paras: [String: Any] = [ "identifier": locationId, "region": region.name ]
+    var paras: [String: Any] = [ "identifier": locationId, "region": region.code ]
     if let start = start {
       paras["start"] = ISO8601DateFormatter().string(from: start)
     }

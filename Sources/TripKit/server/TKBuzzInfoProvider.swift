@@ -33,7 +33,7 @@ public enum TKBuzzInfoProvider {
       }
       
       let paras: [String: Any] = [
-        "region": region.name,
+        "region": region.code,
         "serviceTripID": service.code,
         "operator": service.operatorName ?? "",
         "embarkationDate": Int(embarkationDate.timeIntervalSince1970),
@@ -86,31 +86,43 @@ public enum TKBuzzInfoProvider {
   /**
    Asynchronously fetches additional region information for the provided region.
    */
-  public static func fetchRegionInformation(forRegion region: TKRegion) async -> TKAPI.RegionInfo?
-  {
+  public static func fetchRegionInformation(for region: TKRegion) async -> TKAPI.RegionInfo? {
     try? await TKServer.shared.hit(
       RegionInfoResponse.self,
       .POST,
       path: "regionInfo.json",
-      parameters: ["region": region.name],
+      parameters: ["region": region.code],
       region: region
     ).result.get().regions.first
+  }
+  
+  @available(*, deprecated, renamed: "fetchRegionInformation(for:)")
+  public static func fetchRegionInformation(forRegion region: TKRegion) async -> TKAPI.RegionInfo? {
+    await fetchRegionInformation(for: region)
   }
   
   /**
    Asynchronously fetches paratransit information for the provided region.
    */
-  public static func fetchParatransitInformation(forRegion region: TKRegion) async -> TKAPI.Paratransit?
-  {
-    await fetchRegionInformation(forRegion: region)?.paratransit
+  public static func fetchParatransitInformation(for region: TKRegion) async -> TKAPI.Paratransit? {
+    await fetchRegionInformation(for: region)?.paratransit
   }
-  
+
+  @available(*, deprecated, renamed: "fetchParatransitInformation(for:)")
+  public static func fetchParatransitInformation(forRegion region: TKRegion) async -> TKAPI.Paratransit? {
+    await fetchParatransitInformation(for: region)
+  }
+
   /**
    Asynchronously fetches all available individual public transport modes for the provided region.
    */
-  public static func fetchPublicTransportModes(forRegion region: TKRegion) async -> [TKModeInfo]?
-  {
-    await fetchRegionInformation(forRegion: region)?.transitModes
+  public static func fetchPublicTransportModes(for region: TKRegion) async -> [TKModeInfo]? {
+    await fetchRegionInformation(for: region)?.transitModes
+  }
+  
+  @available(*, deprecated, renamed: "fetchPublicTransportModes(for:)")
+  public static func fetchPublicTransportModes(forRegion region: TKRegion) async throws -> [TKModeInfo]? {
+    await fetchPublicTransportModes(for: region)
   }
 
   /**
@@ -120,7 +132,7 @@ public enum TKBuzzInfoProvider {
     
     let paras: [String: Any]
     if let named = annotation as? TKNamedCoordinate, let identifier = named.locationID {
-      paras = [ "identifier": identifier, "region": region.name ]
+      paras = [ "identifier": identifier, "region": region.code ]
     } else {
       paras = [ "lat": annotation.coordinate.latitude, "lng": annotation.coordinate.longitude ]
     }
@@ -142,7 +154,7 @@ public enum TKBuzzInfoProvider {
       path: "locationInfo.json",
       parameters: [
         "identifier": locationID,
-        "region": region.name
+        "region": region.code
       ],
       region: region
     ).result.get()
@@ -162,9 +174,9 @@ public enum TKBuzzInfoProvider {
   /**
    Asynchronously fetches transit alerts for the provided region.
    */
-  public static func fetchTransitAlerts(forRegion region: TKRegion) async throws -> [TKAPI.AlertMapping] {
+  public static func fetchTransitAlerts(for region: TKRegion) async throws -> [TKAPI.AlertMapping] {
     let paras: [String: Any] = [
-      "region": region.name,
+      "region": region.code,
       "v": TKSettings.parserJsonVersion
     ]
 
@@ -175,6 +187,12 @@ public enum TKBuzzInfoProvider {
       region: region
     ).result.get().alerts
   }
+  
+  @available(*, deprecated, renamed: "fetchTransitAlerts(for:)")
+  public static func fetchTransitAlerts(forRegion region: TKRegion) async throws -> [TKAPI.AlertMapping] {
+    try await fetchTransitAlerts(for: region)
+  }
+
 }
 
 // MARK: - Response data model

@@ -9,11 +9,22 @@
 import Foundation
 import MapKit
 
+/// An autocompleter for public transport routes in supported TripGo regions
+///
+/// Implements ``TKAutocompleting``, providing instances of ``TKAPI/Route`` in
+/// ``TKAutocompletionResult/object``.
+///
+/// - warning: These autocompletion results cannot be turned into an `MKAnnotation`, and
+///  the implementation of ``annotation(for:completion:)`` will therefore call its completion
+///  handler with `nil`.
 public class TKRouteAutocompleter: TKAutocompleting {
   public init() {
   }
   
+  /// An optional operator ID to limit which routes are returned
   public var operatorID: String?
+  
+  /// An optional list of mode identifier to limit which routes are returned
   public var modes: [String] = []
   
   private var activeSearch: Task<Void, Never>? = nil

@@ -91,11 +91,11 @@ class TKUIGroupedAlertCell: UITableViewCell {
     
     serviceColorIndicator.backgroundColor = route.color
     
-    routeNumberLabel.text = route.shortName ?? route.routeName
+    routeNumberLabel.text = route.number ?? route.name
     routeNumberLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .body)
-    routeNameLabel.text = route.routeName
+    routeNameLabel.text = route.name
     routeNameLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    routeNameLabel.isHidden = (route.routeName == nil) || (routeNameLabel.text == routeNumberLabel.text)
+    routeNameLabel.isHidden = (route.name == nil) || (routeNameLabel.text == routeNumberLabel.text)
     
     let multipleAlerts = alertGroup.alerts.count > 1
     

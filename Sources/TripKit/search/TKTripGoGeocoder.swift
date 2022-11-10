@@ -12,9 +12,19 @@ import MapKit
 @available(*, unavailable, renamed: "TKTripGoGeocoder")
 public typealias TKSkedGoGeocoder = TKTripGoGeocoder
 
+/// An autocompleter and geocoder for transport-related POIs in supported TripGo regions
+///
+/// Implements ``TKAutocompleting``, providing instances of ``TKNamedCoordinate`` in
+/// ``TKAutocompletionResult/object``. It also implements ``TKGeocoding``, returning
+/// also a list of ``TKNamedCoordinate``. These search results can be of the subclass
+/// ``TKStopCoordinate`` for public transport stops matching the search.
+///
+/// This geocoder is a wrapper around the [`geocode.json` endpoint](https://developer.tripgo.com/specs/#tag/Geocode/paths/~1geocode.json/get) of the TripGo API.
 public class TKTripGoGeocoder: NSObject {
   private var lastRect: MKMapRect = .null
   private var resultCache = NSCache<NSString, NSArray>()
+  
+  private var onCompletion: (String, (Result<[TKAutocompletionResult], Error>) -> Void)? = nil
 }
 
 extension TKTripGoGeocoder: TKGeocoding {
@@ -72,6 +82,9 @@ extension TKTripGoGeocoder: TKAutocompleting {
       }
     }
     
+    // Putting it into a local variable so that we can cancel this.
+    self.onCompletion = (input, completion)
+    
     var paras: [String: Any] = [
       "q": input,
       "a": true
@@ -81,6 +94,7 @@ extension TKTripGoGeocoder: TKAutocompleting {
     paras["near"] = coordinateRegion.center.isValid ? "\(coordinateRegion.center.latitude),\(coordinateRegion.center.longitude)" : nil
     
     let region = TKRegionManager.shared.region(containing: coordinateRegion)
+    
     TKServer.shared.hit(TKAPI.GeocodeResponse.self, path: "geocode.json", parameters: paras, region: region) { [weak self] _, _, result in
       guard let self = self else { return }
       
@@ -110,13 +124,19 @@ extension TKTripGoGeocoder: TKAutocompleting {
             }
           }
           
-          if !results.isEmpty {
-            self.resultCache.setObject(results as NSArray, forKey: input as NSString)
-          }
-          return results
+          return result
         }
-      )
-    }
+        
+        if !results.isEmpty {
+          resultCache.setObject(results as NSArray, forKey: input as NSString)
+        }
+        return results
+      }
+    )
+  }
+  
+  public func cancelAutocompletion() {
+    self.onCompletion = nil
   }
   
   public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {

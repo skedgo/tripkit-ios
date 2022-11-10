@@ -24,7 +24,7 @@ extension TKBuzzInfoProvider {
   /// - Returns: List of routes
   public static func fetchRoutes(forRegion region: TKRegion, query: String? = nil, modes: [String] = [], operatorID: String? = nil) async throws -> [TKAPI.Route] {
     var paras: [String: Any] = [
-      "region": region.name
+      "region": region.code
     ]
     
     paras["query"] = query
@@ -35,6 +35,23 @@ extension TKBuzzInfoProvider {
       [TKAPI.Route].self,
       .POST,
       path: "info/routes.json",
+      parameters: paras,
+      region: region
+    ).result.get()
+  }
+  
+  /// Fetches the details and directions of a particular route by its ID
+  public static func fetchRouteDetails(routeID: String, operatorID: String, region: TKRegion) async throws -> TKAPI.Route {
+    let paras: [String: Any] = [
+      "region": region.code,
+      "operatorID": operatorID,
+      "routeID": routeID
+    ]
+
+    return try await TKServer.shared.hit(
+      TKAPI.Route.self,
+      .POST,
+      path: "info/routeInfo.json",
       parameters: paras,
       region: region
     ).result.get()

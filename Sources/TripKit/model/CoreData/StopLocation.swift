@@ -15,11 +15,11 @@ extension StopLocation {
   }
   
   @objc public var region: TKRegion? {
-    if let name = regionName {
-      return TKRegionManager.shared.localRegion(named: name)
+    if let code = regionName {
+      return TKRegionManager.shared.localRegion(code: code)
     } else {
       let region = location?.regions.first
-      regionName = region?.name
+      regionName = region?.code
       return region
     }
   }

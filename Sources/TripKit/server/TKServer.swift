@@ -382,7 +382,7 @@ extension TKServer {
     var adjustedHeaders: [String: String]? = headers
     if let region = region, region != .international {
       var headers = adjustedHeaders ?? [:]
-      headers["X-TripGo-Region"] = region.name
+      headers["X-TripGo-Region"] = region.code
       adjustedHeaders = headers
     }
     

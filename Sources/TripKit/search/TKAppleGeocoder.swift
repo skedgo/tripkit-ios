@@ -85,6 +85,10 @@ extension TKAppleGeocoder: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
+    guard !input.isEmpty else {
+      return completion(.success([]))
+    }
+    
     completerDelegate = LocalSearchCompleterDelegate { results in
       completion(results.map {
         $0.enumerated().map { TKAutocompletionResult($1, forInput: input, index: $0) }
@@ -100,6 +104,11 @@ extension TKAppleGeocoder: TKAutocompleting {
     } else {
       completer.filterType = .locationsOnly
     }
+  }
+  
+  public func cancelAutocompletion() {
+    completerDelegate = nil
+    completer.cancel()
   }
   
   public func annotation(for result: TKAutocompletionResult, completion: @escaping (Result<MKAnnotation?, Error>) -> Void) {

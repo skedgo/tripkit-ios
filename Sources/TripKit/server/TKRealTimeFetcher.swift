@@ -98,7 +98,7 @@ public class TKRealTimeFetcher {
     }
     
     let paras: [String: Any] = [
-      "region": region.name,
+      "region": region.code,
       "block": false,
       "services": serviceParas
     ]

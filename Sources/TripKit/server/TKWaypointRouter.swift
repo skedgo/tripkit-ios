@@ -306,7 +306,7 @@ extension TKWaypointRouter {
         return abs(left.latitude - right.latitude) < 0.0001
             && abs(left.longitude - right.longitude) < 0.0001
       case let (.code(leftCode, leftRegion), .code(rightCode, rightRegion)):
-        return leftCode == rightCode && leftRegion.name == rightRegion.name
+        return leftCode == rightCode && leftRegion.code == rightRegion.code
       default:
         return false
       }
@@ -362,14 +362,14 @@ extension TKWaypointRouter.Segment: Codable {
       try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .start)
     case .code(let string, let region):
       try container.encode(string, forKey: .start)
-      try container.encode(region.name, forKey: .startRegion)
+      try container.encode(region.code, forKey: .startRegion)
     }
     switch end {
     case .coordinate(let coordinate):
       try container.encode(TKParserHelper.requestString(for: coordinate), forKey: .end)
     case .code(let string, let region):
       try container.encode(string, forKey: .end)
-      try container.encode(region.name, forKey: .endRegion)
+      try container.encode(region.code, forKey: .endRegion)
     }
     try container.encode(modes, forKey: .modes)
 
@@ -387,7 +387,7 @@ extension TKWaypointRouter.Segment: Codable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     if container.contains(.startRegion) {
       let regionCode = try container.decode(String.self, forKey: .startRegion)
-      guard let region = TKRegionManager.shared.localRegion(named: regionCode) else {
+      guard let region = TKRegionManager.shared.localRegion(code: regionCode) else {
         throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid region: \(regionCode)"))
       }
       
@@ -404,7 +404,7 @@ extension TKWaypointRouter.Segment: Codable {
     }
     if container.contains(.endRegion) {
       let regionCode = try container.decode(String.self, forKey: .endRegion)
-      guard let region = TKRegionManager.shared.localRegion(named: regionCode) else {
+      guard let region = TKRegionManager.shared.localRegion(code: regionCode) else {
         throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid disembarkation region: \(regionCode)"))
       }
       
