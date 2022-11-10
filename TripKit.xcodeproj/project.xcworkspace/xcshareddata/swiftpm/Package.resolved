@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DataDog/dd-sdk-swift-testing",
       "state" : {
-        "revision" : "9fb2d3087afbe7337b4876a63c77ce8dd0e66a23",
-        "version" : "1.1.1"
+        "revision" : "6ccdc2fe1570de1ac1c02f0930532d4ad6218b4f",
+        "version" : "2.1.3"
       }
     },
     {
