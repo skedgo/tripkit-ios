@@ -7,8 +7,11 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
+import MapKit
 
 @objc(TripRequest)
 public class TripRequest: NSManagedObject {
@@ -284,3 +287,5 @@ extension TripRequest {
     return output
   }
 }
+
+#endif

@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import CoreData
 import CoreLocation
+import MapKit
 
 // MARK: - Query URLs
 

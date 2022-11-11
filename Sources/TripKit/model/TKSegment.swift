@@ -249,7 +249,7 @@ public class TKSegment: NSObject {
   @objc public var isDriving: Bool { template?.isDriving ?? false }
   @objc public var isFlight: Bool { template?.isFlight ?? false }
   @objc public var hasCarParks: Bool { template?.hasCarParks ?? false }
-  @objc public var isPlane: Bool { TKTransportModes.modeIdentifierIsFlight(modeIdentifier ?? "") }
+  @objc public var isPlane: Bool { TKTransportMode.modeIdentifierIsFlight(modeIdentifier ?? "") }
   @objc public var isPublicTransport: Bool { template?.isPublicTransport ?? false }
   @objc public var isSelfNavigating: Bool { template?.isSelfNavigating ?? false }
   @objc public var isAffectedByTraffic: Bool { template?.isAffectedByTraffic ?? false }
@@ -610,10 +610,10 @@ extension TKSegment {
   public var privateVehicleType: TKVehicleType {
     guard let identifier = modeIdentifier else { return .unknown }
     
-    switch identifier {
-    case TKTransportModeIdentifierCar: return .car
-    case TKTransportModeIdentifierBicycle: return .bicycle
-    case TKTransportModeIdentifierMotorbike: return .motorbike
+    switch TKTransportMode(modeIdentifier: identifier) {
+    case .car: return .car
+    case .bicycle, .micromobility: return .bicycle
+    case .motorbike: return .motorbike
     default: return .unknown
     }
   }

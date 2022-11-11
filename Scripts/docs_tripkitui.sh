@@ -4,8 +4,8 @@
 (
   cd ..
 
-  sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKitUI-iOS -sdk iphonesimulator > Scripts/docs/jazzy-temp.TKUISwift.json
+  sourcekitten doc -- -project TripKit.xcodeproj -scheme TripKitUI-iOS -sdk iphonesimulator > Scripts/docs/jazzy-temp.TripKitUI.json
   
   cd Scripts/docs
-  jazzy --sourcekitten-sourcefile jazzy-temp.TKUISwift.json --config tripkitui.jazzy.yaml
+  jazzy --sourcekitten-sourcefile jazzy-temp.TripKitUI.json --config tripkitui.jazzy.yaml
 )

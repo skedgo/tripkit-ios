@@ -8,73 +8,16 @@
 
 import Foundation
 
-extension TKServer {
+public class TKServer {
   
-  public static let shared = TKServer.__sharedInstance()
+  public static let shared = TKServer(isShared: true)
   
-  public static func imageURL(iconFileNamePart: String?, iconType: TKStyleModeIconType? = nil) -> URL? {
-    guard let iconFileNamePart = iconFileNamePart else { return nil }
-    let regionsURLString = TKServer.customBaseURL ?? "https://api.tripgo.com/v1"
+  init(isShared: Bool) {
+    self.isShared = isShared
     
-    let isPNG: Bool
-    let fileNamePrefix: String
-    if let iconType = iconType {
-      switch iconType {
-      case .mapIcon:
-        fileNamePrefix = "icon-map-info-"
-        isPNG = true
-        
-      case .listMainMode:
-        fileNamePrefix = "icon-mode-"
-        isPNG = true
-        
-      case .resolutionIndependent:
-        fileNamePrefix = "icon-mode-"
-        isPNG = false
-        
-      case .vehicle:
-        fileNamePrefix = "icon-vehicle-"
-        isPNG = true
-        
-      case .alert:
-        fileNamePrefix = "icon-alert-"
-        isPNG = true
-        
-      @unknown default:
-        assertionFailure("Unknown icon type: \(iconType)")
-        return nil
-      }
-
-    } else {
-      fileNamePrefix = ""
-      isPNG = true
+    if isShared {
+      userToken = UserDefaults.shared.string(forKey: "userToken")
     }
-
-    
-    var fileNamePart = iconFileNamePart
-    let fileExtension = isPNG ? "png" : "svg"
-    if isPNG {
-      let scale: CGFloat
-      #if os(iOS) || os(tvOS)
-      scale = UIScreen.main.scale
-      #elseif os(OSX)
-      scale = NSScreen.main?.backingScaleFactor ?? 1
-      #endif
-      
-      if scale >= 2.9 {
-        fileNamePart.append("@3x")
-      } else if scale >= 1.9 {
-        fileNamePart.append("@2x")
-      }
-    }
-    
-    var urlString = regionsURLString
-    urlString.append("/modeicons/")
-    urlString.append(fileNamePrefix)
-    urlString.append(fileNamePart)
-    urlString.append(".")
-    urlString.append(fileExtension)
-    return URL(string: urlString)
   }
   
   @available(*, unavailable, renamed: "customBaseURL")
@@ -103,7 +46,7 @@ extension TKServer {
       
       if newValue != oldValue {
         // User tokens are bound to servers, so we clear that, too
-        TKServer.updateUserToken(nil)
+        TKServer.shared.userToken = nil
       }
     }
   }
@@ -114,15 +57,49 @@ extension TKServer {
     customBaseURL.flatMap(URL.init) ?? URL(string: "https://api.tripgo.com/v1/")!
   }
   
+  let isShared: Bool
+  
+  /// Your TripGo API key
+  public var apiKey: String = ""
+  
+  /// Custom headers to use, passed allong with calls
+  public var customHeaders: [String: String]?
+  
+  public var userToken: String? {
+    didSet {
+      guard isShared else { return }
+      if let token = userToken?.nonEmpty {
+        UserDefaults.shared.set(token, forKey: "userToken")
+      } else {
+        UserDefaults.shared.removeObject(forKey: "userToken")
+      }
+    }
+  }
+  
+  func baseURLs(for region: TKRegion?) -> [URL] {
+    if let dev = Self.customBaseURL.flatMap(URL.init) {
+      return [dev]
+    } else if let urls = region?.urls, !urls.isEmpty {
+      return urls
+    } else {
+      return [URL(string: "https://api.tripgo.com/v1/")!]
+    }
+  }
+  
 }
 
 extension TKServer {
 
-  public enum HTTPMethod: String {
+  public enum HTTPMethod: String, Codable {
     case POST = "POST"
     case GET = "GET"
     case DELETE = "DELETE"
     case PUT = "PUT"
+  }
+  
+  public enum RequestError: Error {
+    case invalidURL
+    case noBaseURLs
   }
   
   public enum ServerError: Error {
@@ -133,18 +110,12 @@ extension TKServer {
     case repeatIn(TimeInterval)
     case repeatWithNewParameters(TimeInterval, [String: Any])
   }
-  
-  @objc // so that subclasses can override
-  func baseURLs(for region: TKRegion?) -> [URL] {
-    if let dev = Self.customBaseURL.flatMap(URL.init) {
-      return [dev]
-    } else if let urls = region?.urls, !urls.isEmpty {
-      return urls
-    } else {
-      return [URL(string: "https://api.tripgo.com/v1/")!]
-    }
-  }
+}
 
+// MARK: - Hit (Path)
+
+extension TKServer {
+  
   public func hit<Model: Decodable>(
     _ type: Model.Type,
     _ method: HTTPMethod = .GET,
@@ -153,7 +124,7 @@ extension TKServer {
     headers: [String: String]? = nil,
     region: TKRegion? = nil,
     callbackOnMain: Bool = true,
-    completion: @escaping (Int?, [String: Any], Result<Model, Error>) -> Void
+    completion: @escaping (Int, [String: Any], Result<Model, Error>) -> Void
   ) {
     hitSkedGo(
       method: method,
@@ -162,10 +133,11 @@ extension TKServer {
       headers: headers,
       region: region,
       callbackOnMain: callbackOnMain
-    ) { status, header, result in
-      completion(status, header, Result {
-        try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
-      })
+    ) { response in
+      response.map {
+        try JSONDecoder().decode(Model.self, from: $0.orThrow(ServerError.noData))
+        
+      }.call(completion)
     }
   }
   
@@ -176,7 +148,7 @@ extension TKServer {
     headers: [String: String]? = nil,
     region: TKRegion? = nil,
     callbackOnMain: Bool = true,
-    completion: @escaping (Int?, [String: Any], Result<Data, Error>) -> Void
+    completion: @escaping (Int, [String: Any], Result<Data, Error>) -> Void
   ) {
     hitSkedGo(
       method: method,
@@ -185,12 +157,16 @@ extension TKServer {
       headers: headers,
       region: region,
       callbackOnMain: callbackOnMain
-    ) { status, header, result in
-      completion(status, header, Result {
-        try result.get().orThrow(ServerError.noData)
-      })
+    ) { response in
+      response.map { try $0.orThrow(ServerError.noData) }.call(completion)
     }
   }
+  
+}
+
+// MARK: - Hit (URL)
+
+extension TKServer {
   
   public func hit<Model: Decodable>(
     _ type: Model.Type,
@@ -205,12 +181,12 @@ extension TKServer {
         url: url,
         parameters: parameters,
         headers: headers)
-    { status, headers, result in
-      completion(status, headers, Result {
+    { response in
+      response.map {
         let decoder = JSONDecoder()
         decoderConfig(decoder)
-        return try decoder.decode(Model.self, from: try result.get().orThrow(ServerError.noData))
-      })
+        return try decoder.decode(Model.self, from: $0.orThrow(ServerError.noData))
+      }.call(completion)
     }
   }
   
@@ -225,10 +201,8 @@ extension TKServer {
         url: url,
         parameters: parameters,
         headers: headers)
-    { status, headers, result in
-      completion(status, headers, Result {
-        try result.get().orThrow(ServerError.noData)
-      })
+    { response in
+      response.map { try $0.orThrow(ServerError.noData) }.call(completion)
     }
   }
   
@@ -248,38 +222,11 @@ extension TKServer {
     _ = semaphore.wait(timeout: .now() + .seconds(10))
     return try dataResult.orThrow(ServerError.noData).get()
   }
-  
-  /// :nodoc: - Public for Objective-C only
-  @objc(GET:paras:completion:)
-  public func _get(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
-    hit(.GET, url: url, parameters: parameters) { status, headers, result in
-      do {
-        let data = try result.get()
-        let json = try JSONSerialization.jsonObject(with: data, options: [])
-        completion(status, headers, json, data, nil)
-      } catch {
-        completion(status, headers, nil, nil, error)
-      }
-    }
-  }
-  
-  /// :nodoc: - Public for Objective-C only
-  @objc(POST:paras:completion:)
-  public func _post(url: URL, parameters: [String: Any]? = nil, completion: @escaping (Int, [String: Any], Any?, Data?, Error?) -> Void) {
-    hit(.POST, url: url, parameters: parameters) { status, headers, result in
-      do {
-        let data = try result.get()
-        let json = try JSONSerialization.jsonObject(with: data, options: [])
-        completion(status, headers, json, data, nil)
-      } catch {
-        completion(status, headers, nil, nil, error)
-      }
-    }
-  }
 
 }
 
 // MARK: - Async/await
+
 extension TKServer {
   /// Captures server response with HTTP status code, headers and typed response
   public struct Response<T> {
@@ -293,6 +240,18 @@ extension TKServer {
     /// Typed response, which can encapsulate a failure if the server returned an error
     /// or if the server's data couldn't be decoded as the appropriate type.
     public var result: Result<T, Error>
+    
+    func call(_ callback: (Int, [String: Any], Result<T, Error>) -> Void) {
+      callback(statusCode ?? 0, headers, result)
+    }
+    
+    func map<U>(_ transform: (T) throws -> U) -> Response<U> {
+      return .init(
+        statusCode: statusCode,
+        headers: headers,
+        result: Result { try transform(result.get()) }
+      )
+    }
   }
   
   public func hit(
@@ -306,14 +265,10 @@ extension TKServer {
           url: url,
           parameters: parameters,
           headers: headers)
-      { status, headers, result in
-        continuation.resume(returning: .init(
-          statusCode: status,
-          headers: headers,
-          result: Result {
-            try result.get().orThrow(ServerError.noData)
-          }
-        ))
+      { response in
+        continuation.resume(returning: response.map {
+          try $0.orThrow(ServerError.noData)
+        })
       }
     }
   }
@@ -326,19 +281,16 @@ extension TKServer {
     region: TKRegion? = nil
   ) async -> Response<Data> {
     await withCheckedContinuation { continuation in
-      hit(method,
-          path: path,
-          parameters: parameters,
-          headers: headers,
-          region: region)
-      { status, headers, result in
-        continuation.resume(returning: .init(
-          statusCode: status,
-          headers: headers,
-          result: Result {
-            try result.get()
-          }
-        ))
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region)
+      { response in
+        continuation.resume(returning: response.map {
+          try $0.orThrow(ServerError.noData)
+        })
       }
     }
   }
@@ -359,14 +311,10 @@ extension TKServer {
         headers: headers,
         region: region,
         callbackOnMain: false
-      ) { status, headers, result in
-        continuation.resume(returning: .init(
-          statusCode: status,
-          headers: headers,
-          result: Result {
-            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
-          }
-        ))
+      ) { response in
+        continuation.resume(returning: response.map {
+          try JSONDecoder().decode(Model.self, from: $0.orThrow(ServerError.noData))
+        })
       }
     }
   }
@@ -396,14 +344,10 @@ extension TKServer {
         headers: headers,
         region: region,
         callbackOnMain: false
-      ) { status, headers, result in
-        continuation.resume(returning: .init(
-          statusCode: status,
-          headers: headers,
-          result: Result {
-            try decoder.decode(Output.self, from: try result.get().orThrow(ServerError.noData))
-          }
-        ))
+      ) { response in
+        continuation.resume(returning: response.map {
+          try decoder.decode(Output.self, from: $0.orThrow(ServerError.noData))
+        })
       }
     }
   }
@@ -420,14 +364,10 @@ extension TKServer {
           url: url,
           parameters: parameters,
           headers: headers)
-      { status, headers, result in
-        continuation.resume(returning: .init(
-          statusCode: status,
-          headers: headers,
-          result: Result {
-            try JSONDecoder().decode(Model.self, from: try result.get().orThrow(ServerError.noData))
-          }
-        ))
+      { response in
+        continuation.resume(returning: response.map {
+          try JSONDecoder().decode(Model.self, from: $0.orThrow(ServerError.noData))
+        })
       }
     }
   }
@@ -437,7 +377,7 @@ extension TKServer {
 
 extension TKServer {
   
-  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, region: TKRegion?, callbackOnMain: Bool = true, completion: @escaping (Int?, [String: Any], Result<Data?, Error>) -> Void) {
+  private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, region: TKRegion?, callbackOnMain: Bool = true, completion: @escaping (Response<Data?>) -> Void) {
     
     var adjustedHeaders: [String: String]? = headers
     if let region = region, region != .international {
@@ -446,31 +386,24 @@ extension TKServer {
       adjustedHeaders = headers
     }
     
-    ___hitSkedGo(
-      withMethod: method.rawValue,
+    hitSkedGo(
       path: path,
+      method: method,
       parameters: parameters,
       headers: adjustedHeaders,
-      baseURLs: NSMutableArray(array: baseURLs(for: region).shuffled()),
+      baseURLs: baseURLs(for: region).shuffled(),
       callbackOnMain: callbackOnMain,
-      info: { uuid, isResponse, request, response, data, error in
-        if isResponse {
-          TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
-        } else {
+      info: { uuid, info in
+        switch info {
+        case .request(let request):
           TKLog.log("TKServer", request: request, uuid: uuid)
+        case let .response(request, response, .success(data)):
+          TKLog.log("TKServer", response: response, data: data, orError: nil, for: request, uuid: uuid)
+        case let .response(request, response, .failure(error)):
+          TKLog.log("TKServer", response: response, data: nil, orError: error as NSError, for: request, uuid: uuid)
         }
       },
-      success: { status, headers, data in
-        if let error = TKError.error(from: data, statusCode: status) {
-          completion(status, headers, .failure(error))
-        } else {
-          completion(status, headers, .success(data))
-        }
-        
-      },
-      failure: { error in
-        completion(nil, [:], .failure(error))
-      }
+      completion: completion
     )
   }
   
@@ -478,8 +411,8 @@ extension TKServer {
                    url: URL,
                    parameters: [String: Any]?,
                    headers: [String: String]? = nil,
-                   completion: @escaping (Int, [String: Any], Result<Data?, Error>) -> Void) {
-    
+                   completion: @escaping (Response<Data?>) -> Void) {
+#if DEBUG
     if url.scheme == "file" {
       do {
         let filename = (url.lastPathComponent as NSString).deletingPathExtension
@@ -491,36 +424,250 @@ extension TKServer {
           throw NSError(code: 14351, message: "Does not exit.")
         }
         let data = try Data(contentsOf: fileURL)
-        let json = try JSONSerialization.jsonObject(with: data)
-        let dict = json as? [String: Any] ?? [:]
-        return completion(200, dict, .success(data))
+        return completion(.init(statusCode: 200, headers: [:], result: .success(data)))
       } catch {
-        return completion(500, [:], .failure(error))
+        return completion(.init(statusCode: 500, headers: [:], result: .failure(error)))
       }
     }
+#endif
     
-    ___hit(
+    hit(
       url,
-      method: method.rawValue,
+      method: method,
       parameters: parameters,
       headers: headers,
-      info: { uuid, isResponse, request, response, data, error in
-        if isResponse {
-          TKLog.log("TKServer", response: response, data: data, orError: error as NSError?, for: request, uuid: uuid)
-        } else {
+      info: { uuid, info in
+        switch info {
+        case .request(let request):
           TKLog.log("TKServer", request: request, uuid: uuid)
+        case let .response(request, response, .success(data)):
+          TKLog.log("TKServer", response: response, data: data, orError: nil, for: request, uuid: uuid)
+        case let .response(request, response, .failure(error)):
+          TKLog.log("TKServer", response: response, data: nil, orError: error as NSError, for: request, uuid: uuid)
         }
       },
-      completion: { status, headers, data, error in
-        completion(status, headers, Result {
-          if let error = error ?? TKError.error(from: data, statusCode: status) {
-            throw error
-          } else {
-            return data
-          }
-        })
-      }
+      completion: completion
     )
   }
   
+}
+
+// MARK: - Actual requests
+
+extension TKServer {
+  
+  enum Info {
+    case request(URLRequest)
+    case response(URLRequest, URLResponse?, Result<Data?, Error>)
+  }
+  
+  private func hitSkedGo(
+    path: String, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]?,
+    baseURLs: [URL],
+    callbackOnMain: Bool,
+    info: @escaping ((UUID, Info) -> Void),
+    completion: @escaping (Response<Data?>) -> Void,
+    previousResponse: Response<Data?>? = nil)
+  {
+    
+    func callback(_ response: Response<Data?>) {
+      if callbackOnMain {
+        DispatchQueue.main.async {
+          completion(response)
+        }
+      } else {
+        completion(response)
+      }
+    }
+    
+    guard let baseURL = baseURLs.first else {
+      // no more server to try
+      if let previousResponse {
+        return callback(previousResponse)
+      } else {
+        assertionFailure("Don't call this without any URLs!")
+        return callback(.init(headers: [:], result: .failure(RequestError.noBaseURLs)))
+      }
+    }
+
+    let request: URLRequest
+    do {
+      request = try self.request(path: path, baseURL: baseURL, method: method, parameters: parameters, headers: headers)
+    } catch {
+      return callback(.init(headers: [:], result: .failure(error)))
+    }
+    
+    let onFail = { [weak self] (previously: Response<Data?>) -> Void in
+      self?.hitSkedGo(path: path, method: method, parameters: parameters, headers: headers, baseURLs: Array(baseURLs.dropFirst()), callbackOnMain: callbackOnMain, info: info, completion: completion, previousResponse: previously)
+    }
+    
+    Self.hit(request, info: info) { response in
+      switch (response.statusCode ?? 0 >= 500, response.result) {
+      case (_, .success):
+        // All good, no need for failover
+        callback(response)
+        
+      case (true, _):
+        onFail(response)
+        
+      case (_, .failure(let error)):
+        if error is TKUserError {
+          callback(response) // servers can't recover from user errors
+        } else {
+          onFail(response)
+        }
+      }
+    }
+    
+  }
+  
+  private func hit(_ url: URL, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]?, info: @escaping ((UUID, Info) -> Void), completion: @escaping (Response<Data?>) -> Void) {
+    do {
+      let request = try request(for: url, method: method, parameters: parameters, headers: headers)
+      Self.hit(request, info: info, completion: completion)
+    } catch {
+      completion(.init(headers: [:], result: .failure(error)))
+    }
+  }
+  
+  private static func hit(_ request: URLRequest, info: @escaping ((UUID, Info) -> Void), completion: @escaping (Response<Data?>) -> Void) {
+    let uuid = UUID()
+    info(uuid, .request(request))
+    
+    URLSession.shared.dataTask(with: request) { data, response, error in
+      let status = (response as? HTTPURLResponse)?.statusCode
+      let result: Result<Data?, Error>
+      if let error {
+        result = .failure(error)
+      } else if let status, let parsedError = TKError.error(from: data, statusCode: status) {
+        result = .failure(parsedError)
+      } else  {
+        result = .success(data)
+      }
+      info(uuid, .response(request, response, result))
+
+      completion(.init(
+        statusCode: status,
+        headers: ((response as? HTTPURLResponse)?.allHeaderFields as? [String: Any]) ?? [:],
+        result: result)
+      )
+      
+    }.resume()
+  }
+  
+}
+
+// MARK: - Building requests
+
+extension TKServer {
+  
+  private func request(path: String, baseURL: URL, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]?) throws -> URLRequest {
+    
+    switch method {
+    case .GET:
+      let fullURL = baseURL.appendingPathComponent(path)
+      return try request(for: fullURL, method: method, parameters: parameters, headers: headers)
+      
+    default:
+      let fullURL: URL
+      if path.contains("?") {
+        // Using the diversion over string rather than just calling
+        // `URLByAppendingPathComponent` to handle `POST`-paths that
+        // include a query-string components
+        let urlString = (baseURL.absoluteString as NSString).appendingPathComponent(path)
+        fullURL = try URL(string: urlString).orThrow(RequestError.invalidURL)
+      } else {
+        fullURL = baseURL.appendingPathComponent(path)
+      }
+      return try request(for: fullURL, method: method, parameters: parameters, headers: headers)
+    }
+    
+  }
+  
+  private func request(for url: URL, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]?) throws -> URLRequest {
+    
+    var request: URLRequest
+    
+    if case .GET = method, let parameters, !parameters.isEmpty {
+      var components = try URLComponents(url: url, resolvingAgainstBaseURL: false).orThrow(RequestError.invalidURL)
+      var queryItems = components.queryItems ?? []
+      for parameter in parameters {
+        queryItems.add(parameter: parameter.value, key: parameter.key)
+      }
+      components.queryItems = queryItems
+      let merged = try components.url.orThrow(RequestError.invalidURL)
+      request = URLRequest(url: merged)
+    } else {
+      request = URLRequest(url: url)
+    }
+    
+    request.httpMethod = method.rawValue
+    
+    for defaultHeader in buildSkedGoHeaders() {
+      request.addValue(defaultHeader.value, forHTTPHeaderField: defaultHeader.key)
+    }
+    
+    if let provided = headers {
+      for header in provided {
+        request.addValue(header.value, forHTTPHeaderField: header.key)
+      }
+    }
+    
+    if case .GET = method {
+      return request
+    }
+    
+    if let parameters {
+      request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      
+      request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+    }
+    return request
+
+  }
+  
+  static func xTripGoVersion() -> String? {
+    Bundle.main.infoDictionary?["CFBundleShortVersionString"].map { "i\($0)" }
+  }
+  
+  private func buildSkedGoHeaders() -> [String: String] {
+    guard !apiKey.isEmpty else {
+      assertionFailure("API key not specified!")
+      return [:]
+    }
+    
+    var headers: [String: String] = [
+      "X-TripGo-Key": apiKey,
+      "Accept": "application/json" // Force JSON as server otherwise might return XML
+    ]
+    
+    // Optional
+    headers["X-TripGo-Version"] = Self.xTripGoVersion()
+    headers["userToken"] = userToken
+    
+    if let customHeaders {
+      for header in customHeaders {
+        headers[header.key] = header.value
+      }
+    }
+    return headers
+  }
+  
+  func GETRequestWithSkedGoHTTPHeaders(for url: URL, paras: [String: Any]?) throws -> URLRequest {
+    try request(for: url, method: .GET, parameters: paras, headers: nil)
+  }
+  
+}
+
+fileprivate extension Array where Element == URLQueryItem {
+  mutating func add(parameter: Any, key: String) {
+    switch parameter {
+    case let array as [Any]:
+      for item in array {
+        add(parameter: item, key: key)
+      }
+    default:
+      append(.init(name: key, value: "\(parameter)"))
+    }
+  }
 }

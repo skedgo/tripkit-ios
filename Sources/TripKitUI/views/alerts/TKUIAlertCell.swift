@@ -93,13 +93,13 @@ class TKUIAlertCell: UITableViewCell {
     
     dateAddedLabel.isHidden = alert.startTime == nil
     if let dateAdded = alert.startTime {
-      dateAddedLabel.text = Loc.From(date: TKStyleManager.string(for: dateAdded, for: .autoupdatingCurrent, showDate: true, showTime: false))
+      dateAddedLabel.text = Loc.From(date: TKStyleManager.format(dateAdded, showDate: true, showTime: false))
       
     }
 
     lastUpdatedLabel.isHidden = alert.lastUpdated == nil
     if let lastUpdated = alert.lastUpdated {
-      lastUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.string(for: lastUpdated, for: .autoupdatingCurrent, showDate: true, showTime: false))
+      lastUpdatedLabel.text = Loc.LastUpdated(date: TKStyleManager.format(lastUpdated, showDate: true, showTime: false))
     }
     
     readMoreButton.isHidden = alert.infoURL == nil

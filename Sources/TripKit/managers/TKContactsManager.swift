@@ -9,7 +9,7 @@
 import Foundation
 import Contacts
 
-public class TKContactsManager: TKPermissionManager {
+public class TKContactsManager: NSObject, TKPermissionManager {
   
   public enum AddressKind {
     case home
@@ -24,7 +24,7 @@ public class TKContactsManager: TKPermissionManager {
     }
   }
   
-  public struct ContactAddress {
+  public struct ContactAddress: Hashable {
     public let name: String
     public let image: TKImage?
     public let kind: AddressKind?
@@ -47,6 +47,8 @@ public class TKContactsManager: TKPermissionManager {
   @objc(sharedInstance)
   public static let shared = TKContactsManager()
   
+  public var openSettingsHandler: (() -> Void)? = nil
+  
   let queue: DispatchQueue
   
   private let store: CNContactStore
@@ -66,7 +68,7 @@ public class TKContactsManager: TKPermissionManager {
   public func fetchContacts(searchString: String, kind: AddressKind? = nil) throws -> [ContactAddress] {
     assert(!Thread.isMainThread, "Don't call this on the main thread. It's slow.")
     
-    guard isAuthorized() else { return [] }
+    guard isAuthorized else { return [] }
     
     let predicate = CNContact.predicateForContacts(matchingName: searchString)
     let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: TKContactsManager.keysToFetch)
@@ -77,7 +79,7 @@ public class TKContactsManager: TKPermissionManager {
   public func fetchMyLocations(limitTo kind: AddressKind? = nil) throws -> [ContactAddress] {
     assert(!Thread.isMainThread, "Don't call this on the main thread. It's slow.")
     
-    guard isAuthorized() else { return [] }
+    guard isAuthorized else { return [] }
     
     #if os(iOS) || os(tvOS)
     return [] // not yet supported
@@ -87,23 +89,15 @@ public class TKContactsManager: TKPermissionManager {
     #endif
   }
   
-  // MARK: - TKPermissionManager overrides
+  // MARK: - TKPermissionManager
   
-  public override func featureIsAvailable() -> Bool {
-    return true
-  }
-
-  override public func ask(forPermission completion: @escaping (Bool) -> Void) {
+  public func askForPermission(_ completion: @escaping (Bool) -> Void) {
     store.requestAccess(for: .contacts) { granted, _ in
       completion(granted)
     }
   }
   
-  override public func authorizationRestrictionsApply() -> Bool {
-    return true
-  }
-  
-  override public func authorizationStatus() -> TKAuthorizationStatus {
+  public var authorizationStatus: TKAuthorizationStatus {
     switch CNContactStore.authorizationStatus(for: .contacts) {
     case .authorized: return .authorized
     case .denied: return .denied
@@ -115,7 +109,7 @@ public class TKContactsManager: TKPermissionManager {
     }
   }
   
-  override public func authorizationAlertText() -> String {
+  public var authorizationAlertText: String {
     return Loc.ContactsAuthorizationAlertText
   }
 }

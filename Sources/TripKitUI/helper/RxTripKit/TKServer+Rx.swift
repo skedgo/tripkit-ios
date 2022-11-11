@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 import RxSwift
 import RxCocoa
@@ -37,6 +38,7 @@ extension Reactive where Base: TKRegionManager {
   }
 }
 
+extension TKServer: ReactiveCompatible {}
 
 extension Reactive where Base: TKServer {
   

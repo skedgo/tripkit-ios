@@ -8,17 +8,12 @@
 
 import UIKit
 
-import RxSwift
-import RxCocoa
-
 import TripKit
 
 class TKUIAutocompletionResultCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUIAutocompletionResultCell"
   
-  private var disposeBag: DisposeBag!
-
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
 
@@ -47,8 +42,6 @@ extension TKUIAutocompletionResultCell {
   }
   
   func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: ((TKUIAutocompletionViewModel.Item) -> Void)? = nil) {
-    disposeBag = DisposeBag()
-    
     switch item {
     case .currentLocation: configureCurrentLocation(with: item)
     case .action: configureAction(with: item)
@@ -67,13 +60,12 @@ extension TKUIAutocompletionResultCell {
     configure(title: autocompletion.title, subtitle: autocompletion.subtitle, image: autocompletion.image)
     contentView.alpha = autocompletion.showFaded ? 0.33 : 1
     
-    if let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
-      let button = TKStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
+    if #available(iOS 14.0, *), let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
+      let button = UIButton(primaryAction: UIAction(image: accessoryImage) { _ in
+        target(item)
+      })
+      button.frame.size = CGSize(width: 44, height: 44)
       button.accessibilityLabel = autocompletion.accessoryAccessibilityLabel
-      button.rx.tap
-        .map { _ in item }
-        .subscribe(onNext: target)
-        .disposed(by: disposeBag)
       accessoryView = button
     }
   }

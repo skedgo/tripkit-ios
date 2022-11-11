@@ -26,14 +26,8 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "TripKitObjc",
-      dependencies: []
-    ),
-    .target(
       name: "TripKit",
-      dependencies: [
-        .target(name: "TripKitObjc")
-      ],
+      dependencies: [],
       exclude: ["Supporting Files/Info.plist"]
     ),
     .target(
@@ -45,12 +39,6 @@ let package = Package(
         "TGCardViewController",
       ],
       exclude: ["Supporting Files/Info.plist"]
-    ),
-    .testTarget(
-      name: "TripKitObjcTests",
-      dependencies: [
-        "TripKitObjc",
-      ]
     ),
     .testTarget(
       name: "TripKitTests",

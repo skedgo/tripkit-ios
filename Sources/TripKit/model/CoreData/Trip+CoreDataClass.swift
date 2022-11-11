@@ -7,8 +7,11 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
+import MapKit
 
 #if os(iOS)
 import UIKit
@@ -102,7 +105,7 @@ extension Trip {
     guard
       let identifier = segment.modeIdentifier
       else { return false }
-    return TKTransportModes.modeIdentifierIsExpensive(identifier)
+    return TKTransportMode.modeIdentifierIsExpensive(identifier)
   }
   
   /// Offset in seconds from the specified departure/arrival time.
@@ -347,6 +350,13 @@ extension Trip {
   public var costValues: [TKTripCostType : String] {
     return accessibilityCostValues(includeTime: true)
   }
+  
+  static func coordinate(_ first: CLLocationCoordinate2D, isNear second: CLLocationCoordinate2D) -> Bool {
+    let latDiff = first.latitude - second.latitude
+    let lngDiff = first.longitude - second.longitude
+    let maxDiff = 0.00005
+    return fabs(latDiff) < maxDiff && fabs(lngDiff) < maxDiff
+  }
 
   @objc
   public func constructPlainText() -> String {
@@ -362,7 +372,7 @@ extension Trip {
          let start = segment.start,
          let end = segment.end,
          let name = address(for: start),
-         !TKLocationHelper.coordinate(start.coordinate, isNear: end.coordinate) {
+         !Self.coordinate(start.coordinate, isNear: end.coordinate) {
           // simple case: start is far from end: add location
           text.append(name)
           text.append(", ")
@@ -510,5 +520,7 @@ extension Trip: TKRealTimeUpdatable {
     }
     
   }
+
+#endif
 
 #endif

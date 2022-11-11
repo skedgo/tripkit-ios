@@ -68,7 +68,7 @@ class ViewController: NSViewController {
     guard let from = from, let to = to else { return }
     
     router.modeIdentifiers = [
-      TKTransportModeIdentifierRegularPublicTransport
+      TKTransportMode.publicTransport.modeIdentifier
     ]
     
     let query = TKRouter.RoutingQuery(

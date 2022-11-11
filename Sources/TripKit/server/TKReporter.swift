@@ -26,7 +26,7 @@ public class TKReporter {
     paras["choiceSet"] = trip.request.buildChoiceSet(selected: trip)
     
     if includeUserID {
-      paras["userToken"] = TKServer.userToken()
+      paras["userToken"] = TKServer.shared.userToken
     }
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {

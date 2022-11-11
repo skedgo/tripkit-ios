@@ -9,9 +9,6 @@
 import Foundation
 import MapKit
 
-@available(iOS, introduced: 9.3, unavailable, renamed: "TKAppleGeocoder")
-public typealias SGAppleGeocoder = TKAppleGeocoder
-
 public class TKAppleGeocoder: NSObject {
   
   enum GeocoderError: Error {
@@ -34,9 +31,36 @@ public class TKAppleGeocoder: NSObject {
 
 extension TKAppleGeocoder: TKGeocoding {
   
+  private static func expandAbbreviation(in address: String) -> String {
+    // List of address words
+    let replacement = [
+      "(\\W)st(\\W|$)" : "$1Street ",
+      "(\\W)pde(\\W|$)" : "$1Parade ",
+      "(\\W)ally(\\W|$)" : "$1Alley ",
+      "(\\W)arc(\\W|$)" : "$1Arcade ",
+      "(\\W)ave(\\W|$)" : "$1Avenue ",
+      "(\\W)bvd(\\W|$)" : "$1Boulevard ",
+      "(\\W)cl(\\W|$)" : "$1Close ",
+      "(\\W)cres(\\W|$)" : "$1Crescent ",
+      "(\\W)dr(\\W|$)" : "$1Drive ",
+      "(\\W)esp(\\W|$)" : "$1Esplanade ",
+      "(\\W)hwy(\\W|$)" : "$1Highway ",
+      "(\\W)pl(\\W|$)" : "$1Place ",
+      "(\\W)rd(\\W|$)" : "$1Road ",
+      "(\\W)sq(\\W|$)" : "$1Square ",
+      "(\\W)tce(\\W|$)" : "$1Terrace ",
+    ]
+    
+    var updated = address
+    for entry in replacement {
+      updated = updated.replacingOccurrences(of: entry.key, with: entry.value, options: [.caseInsensitive, .regularExpression])
+    }
+    return updated
+  }
+  
   public func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     
-    let fullString = TKLocationHelper.expandAbbreviation(inAddressString: input)
+    let fullString = Self.expandAbbreviation(in: input)
     
     let request = MKLocalSearch.Request()
     request.naturalLanguageQuery = fullString
@@ -128,14 +152,14 @@ fileprivate class LocalSearchCompleterDelegate: NSObject, MKLocalSearchCompleter
 
 extension TKAutocompletionResult {
   
-  convenience init(_ completion: MKLocalSearchCompletion, forInput input: String, index: Int) {
-    self.init()
-    object = completion
-    title = completion.title
-    subtitle = completion.subtitle
-    image = TKAutocompletionResult.image(for: .pin)
-    
-    score = Int(TKGeocodingResultScorer.calculateScore(title: title, subtitle: subtitle, searchTerm: input, minimum: 25, maximum: 65)) - index
+  init(_ completion: MKLocalSearchCompletion, forInput input: String, index: Int) {
+    self.init(
+      object: completion,
+      title: completion.title,
+      subtitle: completion.subtitle,
+      image: TKAutocompletionResult.image(for: .pin),
+      score: TKGeocodingResultScorer.calculateScore(title: completion.title, subtitle: completion.subtitle, searchTerm: input, minimum: 25, maximum: 65) - index
+    )
   }
   
 }

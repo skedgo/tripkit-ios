@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -106,3 +108,5 @@ public class StopLocation: NSManagedObject {
   
   
 }
+
+#endif

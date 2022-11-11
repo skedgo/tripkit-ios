@@ -46,14 +46,14 @@ class TKUIRoutingSupportView: UIView {
       supportView.requestSupportButton.layer.cornerRadius = 8
       supportView.requestSupportButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24)
       supportView.requestSupportButton.setTitle(Loc.RequestSupport.uppercased(), for: .normal)
-      supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor()
+      supportView.requestSupportButton.backgroundColor = TKStyleManager.globalTintColor
       supportView.requestSupportButton.tintColor = .tkBackground
     }
     
     // Bottom button
     supportView.planNewTripButton.setTitle(Loc.PlanANewTrip.uppercased(), for: .normal)
     supportView.planNewTripButton.backgroundColor = .clear
-    supportView.planNewTripButton.tintColor = TKStyleManager.globalTintColor()
+    supportView.planNewTripButton.tintColor = TKStyleManager.globalTintColor
     
     // Both buttons
     supportView.requestSupportButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .heavy)

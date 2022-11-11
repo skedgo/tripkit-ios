@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 import CoreLocation
@@ -319,4 +321,6 @@ extension StopVisits: TKRealTimeUpdatable {
     
   }
   
+#endif
+
 #endif

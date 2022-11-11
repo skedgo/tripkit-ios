@@ -127,7 +127,7 @@ extension TKGeocoderHelper {
     return input.deduplicated().pruned(maximum: max)
   }
   
-  @objc public class func pruned(_ input:[TKAutocompletionResult], withMaximum max: Int) -> [TKAutocompletionResult] {
+  public class func pruned(_ input:[TKAutocompletionResult], withMaximum max: Int) -> [TKAutocompletionResult] {
     return input.pruned(maximum: max) { $0.score }
   }
 }

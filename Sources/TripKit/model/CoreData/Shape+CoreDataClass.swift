@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 import CoreLocation
@@ -218,3 +220,5 @@ extension Shape: TKDisplayableRoute {
   }
   
 }
+
+#endif

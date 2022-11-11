@@ -26,7 +26,7 @@ public extension Reactive where Base : TKLocationManager {
   /// - Parameter seconds: Maximum time to give GPS
   /// - Returns: Observable of user's current location; can error out
   func fetchCurrentLocation(within seconds: TimeInterval) -> Single<CLLocation> {
-    guard base.isAuthorized() else {
+    guard base.isAuthorized else {
       return tryAuthorization().flatMap { authorized -> Single<CLLocation> in
         if authorized {
           return self.fetchCurrentLocation(within: seconds)
@@ -37,12 +37,9 @@ public extension Reactive where Base : TKLocationManager {
     }
     
     return Single.create { observer in
-      self.base.fetchCurrentLocation(within: seconds, success: { (location) in
-        observer(.success(location))
-      }, failure: { (error) in
-        observer(.failure(error))
-      })
-      
+      self.base.fetch(within: seconds) {
+        observer($0)
+      }
       return Disposables.create()
     }
   }
@@ -63,8 +60,8 @@ public extension Reactive where Base : TKLocationManager {
       let components = calendar.dateComponents([.minute, .second], from: date)
       let identifier: NSString = "subscription-\(components.minute!)-\(components.second!)" as NSString
       
-      if self.base.isAuthorized() {
-        self.base.subscribe(toLocationUpdatesId: identifier) { location in
+      if self.base.isAuthorized {
+        self.base.subscribe(id: identifier) { location in
           subscriber.onNext(location)
         }
       } else {
@@ -72,7 +69,7 @@ public extension Reactive where Base : TKLocationManager {
       }
       
       return Disposables.create {
-        self.base.unsubscribe(fromLocationUpdates: identifier)
+        self.base.unsubscribe(id: identifier)
       }
     }
     
@@ -114,11 +111,11 @@ public extension Reactive where Base : TKLocationManager {
   
   func tryAuthorization() -> Single<Bool> {
     
-    if !base.featureIsAvailable() {
+    if !base.featureIsAvailable {
       return .error(TKLocationManager.LocalizationError.featureNotAvailable)
     }
     
-    switch base.authorizationStatus() {
+    switch base.authorizationStatus {
     case .restricted, .denied:
       return .error(TKLocationManager.LocalizationError.authorizationDenied)
       
@@ -127,9 +124,9 @@ public extension Reactive where Base : TKLocationManager {
       
     case .notDetermined:
       return Single.create { observer in
-        self.base.ask(forPermission: { success in
+        self.base.askForPermission { success in
           observer(.success(success))
-        })
+        }
         return Disposables.create()
       }
     }

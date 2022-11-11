@@ -23,8 +23,8 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
     static let `default` = SelectionStyle(
       defaultColor: nil,
       defaultBorderColor: nil,
-      selectedColor: TKStyleManager.globalTintColor(),
-      selectedBorderColor: TKStyleManager.globalTintColor().darker(by: 0.5),
+      selectedColor: TKStyleManager.globalTintColor,
+      selectedBorderColor: TKStyleManager.globalTintColor.darker(by: 0.5),
       deselectedColor: .tkLabelSecondary
     )
     

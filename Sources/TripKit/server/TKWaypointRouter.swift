@@ -8,6 +8,9 @@
 
 import Foundation
 
+import CoreData
+import CoreLocation
+
 fileprivate extension Result {
   func callHandler(_ handler: (Success?, Failure?) -> Void) {
     switch self {
@@ -74,12 +77,12 @@ extension TKWaypointRouter {
   ///   - tripKit: TripKit instance into which the new trip will be inserted
   ///   - region: The region where the trip starts
   ///   - completion: Handler called on success with a trip or on error (with optional `Error`)
-  public static func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKit: TKTripKit = TripKit.shared, in region: TKRegion, completion: @escaping (Result<Trip, Error>) -> Void) {
+  public static func fetchTrip(pattern: [TKSegmentPattern], departure: Date, usingPrivateVehicles vehicles: [TKVehicular] = [], into tripKitContext: NSManagedObjectContext = TripKit.shared.viewContext, in region: TKRegion, completion: @escaping (Result<Trip, Error>) -> Void) {
     
     var input = buildInput(segments: pattern, vehicles: vehicles)
     input.leaveAt = departure
 
-    fetchTrip(input: input, region: region, into: tripKit.tripKitContext, completion: completion)
+    fetchTrip(input: input, region: region, into: tripKitContext, completion: completion)
   }
   
 }

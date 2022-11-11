@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(iOS) || os(tvOS)
+import UIKit
+#endif
+
 extension Loc {
   
   @objc public static var Trip: String {
@@ -172,7 +176,7 @@ extension Loc {
 
   @objc(FromTime:toTime:)
   public static func fromTime(_ from: String, toTime to: String) -> String {
-    #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
     switch UIView.userInterfaceLayoutDirection(for: .unspecified) {
     case .leftToRight:
       return String(format: "%@ → %@", from, to)
@@ -182,9 +186,9 @@ extension Loc {
       assertionFailure("Unexpected case encountered")
       return String(format: "%@ → %@", from, to)
     }
-    #else
+#else
     return String(format: "%@ → %@", from, to)
-    #endif
+#endif
   }
   
   @objc(Stops:)

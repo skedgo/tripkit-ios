@@ -9,13 +9,15 @@
 import Foundation
 import EventKit
 
-public class TKCalendarManager: TKPermissionManager {
+public class TKCalendarManager: NSObject {
   
   @objc(sharedInstance)
   public static let shared = TKCalendarManager()
   
   @objc
   public private(set) var eventStore = EKEventStore()
+  
+  public var openSettingsHandler: (() -> Void)? = nil
   
   var helperGeocoder: TKGeocoding?
   
@@ -36,7 +38,7 @@ public class TKCalendarManager: TKPermissionManager {
   
   @objc(fetchEventsBetweenDate:andEndDate:fromCalendars:)
   public func fetchEvents(start: Date, end: Date, from calendars: [EKCalendar]? = nil) -> [EKEvent] {
-    guard isAuthorized() else { return [] }
+    guard isAuthorized else { return [] }
     let predicate = eventStore.predicateForEvents(withStart: start, end: end, calendars: calendars)
     return eventStore.events(matching: predicate)
   }
@@ -44,7 +46,7 @@ public class TKCalendarManager: TKPermissionManager {
   
   /// Fetches and returns all the users events between (roughly) yesterday and 1 week from now.
   public func fetchUpcomingEvents(from calendars: [EKCalendar]? = nil) -> [EKEvent] {
-    guard isAuthorized() else { return [] }
+    guard isAuthorized else { return [] }
     let previousMidnight = Date().midnight(in: .current)
     let start = previousMidnight.addingTimeInterval(-24 * 60 * 60)
     let end = previousMidnight.addingTimeInterval(7 * 24 * 60 * 60)
@@ -57,23 +59,18 @@ public class TKCalendarManager: TKPermissionManager {
       .lazy
       .filter { event in
         event.location?.lowercased().contains(needle) == true
-          || event.title?.lowercased().contains(needle) == true
+        || event.title?.lowercased().contains(needle) == true
       }
       .prefix(10)
     return Array(matches)
   }
+}
+
+//MARK: - TKPermissionManager overrides
+
+extension TKCalendarManager: TKPermissionManager {
   
-  //MARK: - TKPermissionManager overrides
-  
-  public override func featureIsAvailable() -> Bool {
-    return true
-  }
-  
-  public override func authorizationRestrictionsApply() -> Bool {
-    return true
-  }
-  
-  public override func authorizationStatus() -> TKAuthorizationStatus {
+  public var authorizationStatus: TKAuthorizationStatus {
     switch EKEventStore.authorizationStatus(for: .event) {
     case .notDetermined:
       return .notDetermined
@@ -88,7 +85,7 @@ public class TKCalendarManager: TKPermissionManager {
     }
   }
   
-  public override func ask(forPermission completion: @escaping (Bool) -> Void) {
+  public func askForPermission(_ completion: @escaping (Bool) -> Void) {
     let oldStore = self.eventStore
     oldStore.requestAccess(to: .event) { granted, _ in
       self.eventStore = .init()
@@ -98,7 +95,7 @@ public class TKCalendarManager: TKPermissionManager {
     }
   }
   
-  public override func authorizationAlertText() -> String {
+  public var authorizationAlertText: String {
     NSLocalizedString("You previously denied this app access to your calendar. Please go to the Settings app > Privacy > Calendar and authorise this app to use this feature.", tableName: "Shared", bundle: .tripKit, comment: "Calendar authorisation needed text")
   }
   

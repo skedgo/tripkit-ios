@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 public enum TKVehicleType: Int {
   

@@ -96,47 +96,41 @@ extension TKTripGoGeocoder: TKAutocompleting {
     let region = TKRegionManager.shared.region(containing: coordinateRegion)
     
     TKServer.shared.hit(TKAPI.GeocodeResponse.self, path: "geocode.json", parameters: paras, region: region) { [weak self] _, _, result in
-      self?.process(result: result, for: input)
-    }
-  }
-  
-  private func process(result: Result<TKAPI.GeocodeResponse, Error>, for input: String) {
-    guard let onCompletion, input == onCompletion.0 else { return }
-    
-    onCompletion.1(
-      result.map { response in
-        let coordinates = response.choices.map(\.named)
-        let results = coordinates.compactMap { named -> TKAutocompletionResult? in
-          guard let name = named.name else { return nil }
-          let result = TKAutocompletionResult()
-          result.object = named
-          result.title = name
-          result.isInSupportedRegion = NSNumber(value: true)
-          result.score = Self.score(named, query: input) ?? 0
-          
-          if let stop = named as? TKStopCoordinate {
-            result.accessoryButtonImage = TKStyleManager.image(named: "icon-search-timetable")
-            result.accessoryAccessibilityLabel = Loc.ShowTimetable
-            result.image = TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin)
-            if stop.stopCode.contains(input) {
-              result.subtitle = stop.stopCode + " - " + (stop.services ?? "")
+      guard let self = self else { return }
+      
+      completion(
+        result.map { response in
+          let coordinates = response.choices.map(\.named)
+          let results = coordinates.compactMap { named -> TKAutocompletionResult? in
+            guard let name = named.name else { return nil }
+            if let stop = named as? TKStopCoordinate {
+              return TKAutocompletionResult(
+                object: named,
+                title: name,
+                subtitle: stop.stopCode.contains(input) ? (stop.stopCode + " - " + (stop.services ?? "")) : stop.services,
+                image: TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin),
+                accessoryButtonImage: TKStyleManager.image(named: "icon-search-timetable"),
+                accessoryAccessibilityLabel: Loc.ShowTimetable,
+                score: Self.score(named, query: input)
+              )
             } else {
-              result.subtitle = stop.services
+              return TKAutocompletionResult(
+                object: named,
+                title: name,
+                subtitle: named.address,
+                image: TKAutocompletionResult.image(for: .pin),
+                score: Self.score(named, query: input)
+              )
             }
-          } else {
-            result.subtitle = named.address
-            result.image = TKAutocompletionResult.image(for: .pin)
           }
           
-          return result
+          if !results.isEmpty {
+            self.resultCache.setObject(results as NSArray, forKey: input as NSString)
+          }
+          return results
         }
-        
-        if !results.isEmpty {
-          resultCache.setObject(results as NSArray, forKey: input as NSString)
-        }
-        return results
-      }
-    )
+      )
+    }
   }
   
   public func cancelAutocompletion() {
@@ -157,29 +151,29 @@ extension TKTripGoGeocoder: TKAutocompleting {
 
 extension TKTripGoGeocoder {
   private static func assignScore(to named: TKNamedCoordinate, query: String? = nil) {
-    named.sortScore = score(named, query: query) ?? 0
+    named.sortScore = score(named, query: query)
   }
   
-  private static func score(_ named: TKNamedCoordinate, query: String? = nil) -> Int? {
+  private static func score(_ named: TKNamedCoordinate, query: String? = nil) -> Int {
     if let stop = named as? TKStopCoordinate {
       let popularity = stop.stopSortScore ?? 0
       let maxScore = 1_000
       let adjusted = min(popularity, maxScore) / (maxScore / 100)
-      var ranged = TKAutocompletionResult.rangedScore(forScore: UInt(adjusted), betweenMinimum: 50, andMaximum: 80)
+      var ranged = TKAutocompletionResult.rangedScore(for: adjusted, min: 50, max: 80)
       if popularity > maxScore {
-        let moreThanMax = adjusted / maxScore
-        ranged += TKAutocompletionResult.rangedScore(forScore: UInt(moreThanMax), betweenMinimum: 0, andMaximum: 10)
+        let moreThanMax = popularity / maxScore
+        ranged += TKAutocompletionResult.rangedScore(for: moreThanMax, min: 0, max: 10)
       }
-      return Int(ranged)
+      return ranged
     
     } else if let query = query, let name = named.name ?? named.title {
-      let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: query, candidate: name)
-      let ranged = TKAutocompletionResult.rangedScore(forScore: titleScore, betweenMinimum: 0, andMaximum: 50)
-      return Int(ranged)
+      let titleScore = TKAutocompletionResult.nameScore(searchTerm: query, candidate: name)
+      let ranged = TKAutocompletionResult.rangedScore(for: titleScore, min: 0, max: 50)
+      return ranged
 
     } else {
       assertionFailure("Unexpected geocoder result: \(named)")
-      return nil
+      return 0
     }
   }
 }

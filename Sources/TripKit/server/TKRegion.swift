@@ -203,13 +203,13 @@ public class TKRegion : NSObject, Codable {
 public class TKInternationalRegion : TKRegion {
   
   fileprivate init() {
-    let modes = [
-      TKTransportModeIdentifierFlight,
-      TKTransportModeIdentifierRegularPublicTransport,
-      TKTransportModeIdentifierCar,
-      TKTransportModeIdentifierMotorbike,
+    let modes: [TKTransportMode] = [
+      .flight,
+      .publicTransport,
+      .car,
+      .motorbike,
     ]
-    super.init(asInternationalWithCode: "International", modes: modes)
+    super.init(asInternationalWithCode: "International", modes: modes.map(\.modeIdentifier))
   }
   
   public required init(from decoder: Decoder) throws {

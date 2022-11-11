@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -29,3 +31,5 @@ extension DLSEntry {
   @NSManaged public var timetableEndPlatform: String?
   
 }
+
+#endif

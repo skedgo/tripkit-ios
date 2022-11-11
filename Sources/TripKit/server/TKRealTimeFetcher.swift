@@ -6,6 +6,8 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -200,3 +202,5 @@ public class TKRealTimeFetcher {
   }
   
 }
+
+#endif

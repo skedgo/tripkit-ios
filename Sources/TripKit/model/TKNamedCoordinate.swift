@@ -98,8 +98,15 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   }
   
   @objc public init(placemark: CLPlacemark) {
+    if let name = placemark.name {
+      self.name = name
+    } else if let poi = placemark.areasOfInterest?.first {
+      self.name = poi
+    } else {
+      self.name = nil
+    }
+    
     coordinate = placemark.location?.coordinate ?? kCLLocationCoordinate2DInvalid
-    name = TKLocationHelper.name(from: placemark)
     _address = placemark.address()
     _placemark = placemark
   }
@@ -258,7 +265,6 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
 fileprivate extension CLPlacemark {
   func address() -> String? {
     TKAddressFormatter.singleLineAddress(for: self)
-      ?? TKLocationHelper.address(for: self) // Deprecated fall-back using Australian standard
   }
 }
 

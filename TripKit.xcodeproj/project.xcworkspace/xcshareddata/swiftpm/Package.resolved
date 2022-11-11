@@ -1,21 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "dd-sdk-swift-testing",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/DataDog/dd-sdk-swift-testing",
-      "state" : {
-        "revision" : "9fb2d3087afbe7337b4876a63c77ce8dd0e66a23",
-        "version" : "1.1.1"
-      }
-    },
-    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "59eb199fdb8dd47733624e8b0277822d0232579e",
-        "version" : "7.2.2"
+        "revision" : "44e891bdb61426a95e31492a67c7c0dfad1f87c5",
+        "version" : "7.4.1"
       }
     },
     {
@@ -32,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/skedgo/TGCardViewController.git",
       "state" : {
-        "revision" : "19ade273d1d31b8e9e5a17c53249410fb1ca3de3",
-        "version" : "2.1.2"
+        "revision" : "ad4eadb5d359142db5df40d59487f6a15a13eef9",
+        "version" : "2.2.2"
       }
     }
   ],

@@ -1,5 +1,5 @@
 PODS:
-  - TripKit (4.0-rc2)
+  - TripKit (4.0.2)
 
 DEPENDENCIES:
   - TripKit (from `../../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  TripKit: 265c6fc273f3b322a7b589670800d1b9c568ea49
+  TripKit: 4ddfba1c68012ca2f4a126ac171677db2ff4859a
 
 PODFILE CHECKSUM: 6ba7ae61d763b02edf07ffd87a7665960dd15572
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

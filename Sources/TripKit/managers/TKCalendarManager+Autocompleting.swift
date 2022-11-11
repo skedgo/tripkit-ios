@@ -60,7 +60,7 @@ extension TKCalendarManager: TKAutocompleting {
   #if os(iOS) || os(tvOS)
   @objc
   public func additionalActionTitle() -> String? {
-    if isAuthorized() { return nil }
+    if isAuthorized { return nil }
     
     return NSLocalizedString("Include events", tableName: "Shared", bundle: .tripKit, comment: "Button to include events in search, too.")
   }
@@ -90,21 +90,22 @@ extension TKCalendarManager {
     
     guard let location = event.location, !location.isEmpty else { return nil }
 
-    let result = TKAutocompletionResult()
-    result.object = event
-    result.title = TKCalendarManager.title(for: event)
-    result.subtitle = location
-    result.image = TKAutocompletionResult.image(for: .calendar)
+    var result = TKAutocompletionResult(
+      object: event,
+      title: TKCalendarManager.title(for: event),
+      subtitle: location,
+      image: TKAutocompletionResult.image(for: .calendar)
+    )
     
     if search.isEmpty {
       result.score = 90
       
     } else {
       
-      let titleScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: search, candidate: result.title)
-      let locationScore = TKAutocompletionResult.scoreBased(onNameMatchBetweenSearchTerm: search, candidate: result.subtitle ?? "")
+      let titleScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: result.title)
+      let locationScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: result.subtitle ?? "")
       let rawScore = min(100, (titleScore + locationScore) / 2)
-      result.score = Int(TKAutocompletionResult.rangedScore(forScore: UInt(rawScore), betweenMinimum: 50, andMaximum: 90))
+      result.score = Int(TKAutocompletionResult.rangedScore(for:rawScore, min: 50, max: 90))
     }
     
     return result

@@ -122,8 +122,8 @@ fileprivate extension TKModeInfo {
   var defaultColor: TKColor {
     guard
       let identifier = self.identifier
-      else { return TKStyleManager.globalTintColor() }
-    return TKTransportModes.color(for: identifier)
+    else { return TKStyleManager.globalTintColor }
+    return TKTransportMode.color(for: identifier)
   }
   
 }

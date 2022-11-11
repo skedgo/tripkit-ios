@@ -9,7 +9,7 @@
 import UIKit
 
 import TripKit
-
+import MapKit
 
 extension TKInterAppCommunicator {
   

@@ -13,17 +13,12 @@ import Foundation
  */
 public class TKRoutingServer: TKServer {
   let baseURL: URL?
-  private var _apiKey: String
-  
-  public override var apiKey: String {
-    get { _apiKey }
-    set { _apiKey = newValue }
-  }
   
   public init(baseURL: URL?, apiKey: String?) {
     assert(baseURL != nil || apiKey != nil)
     self.baseURL = baseURL
-    self._apiKey = apiKey ?? TKServer.shared.apiKey
+    super.init(isShared: false)
+    self.apiKey = apiKey ?? TKServer.shared.apiKey
   }
   
   public override func baseURLs(for region: TKRegion?) -> [URL] {

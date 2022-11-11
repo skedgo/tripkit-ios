@@ -232,7 +232,7 @@ extension TKRegionManager {
     
     // Remove specific modes for which we have the generic one
     for mode in all {
-      let generic = TKTransportModes.genericModeIdentifier(forModeIdentifier: mode.identifier)
+      let generic = TKTransportMode.genericModeIdentifier(forModeIdentifier: mode.identifier)
       if generic != mode.identifier, added.contains(generic) {
         added.remove(mode.identifier)
         all.removeAll { $0.identifier == mode.identifier }
@@ -329,13 +329,13 @@ extension TKRegionManager {
   /// - Parameter name: A region code
   /// - Returns: The local (non-international) region matching the provided code
   @available(*, deprecated, renamed: "localRegion(code:)")
+  @objc(localRegionWithName:)
   public func localRegion(named name: String) -> TKRegion? {
     localRegion(code: name)
   }
   
-  /// - Parameter name: A region code
+  /// - Parameter code: A region code
   /// - Returns: The local (non-international) region matching the provided code
-  @objc(localRegionWithName:)
   public func localRegion(code: String) -> TKRegion? {
     return regions.first { $0.code == code }
   }

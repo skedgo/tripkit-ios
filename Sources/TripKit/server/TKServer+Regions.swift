@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 extension TKRegionManager {
   
@@ -69,7 +70,7 @@ extension TKRegionManager {
         return
       } else {
         let message = NSLocalizedString("Could not download supported regions from TripGo's server. Please try again later.", tableName: "Shared", bundle: .tripKit, comment: "Could not download supported regions warning.")
-        throw NSError(code: Int(kTKServerErrorTypeUser), message: message)
+        throw NSError(code: TKErrorCode.userError.rawValue, message: message)
       }
       
     case .failure(TKServer.ServerError.noData) where !forced:

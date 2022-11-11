@@ -8,6 +8,19 @@
 
 import Foundation
 
+@objc
+public enum TKStyleModeIconType: Int {
+  case listMainMode
+  case mapIcon
+  
+  /// SVGs! You probably need SVGKit to handle these.
+  case resolutionIndependent
+  
+  case vehicle
+  
+  case alert
+}
+
 extension TKModeInfo {
   
   public var image: TKImage? {
@@ -31,8 +44,6 @@ extension TKModeInfo {
       
     case .vehicle, .alert:
       return nil // not supported
-    @unknown default:
-      return nil
     }
     
     if let part = iconFileNamePart {

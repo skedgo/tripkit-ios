@@ -122,7 +122,7 @@ extension TKSegment {
   public var storedQuickBookings: [TKQuickBooking]? {
     get {
       if let key = cacheKey(),
-         let cached = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) as? NSData {
+         let cached = TripKit.shared.inMemoryCache.object(forKey: key as AnyObject) as? NSData {
         return try? JSONDecoder().decode([TKQuickBooking].self, from: cached as Data)
       } else {
         return nil
@@ -133,7 +133,7 @@ extension TKSegment {
   public var activeIndexQuickBooking: Int? {
     get {
       if let key = indexKey(),
-         let index = TripKit.shared.inMemoryCache().object(forKey: key as AnyObject) as? Int,
+         let index = TripKit.shared.inMemoryCache.object(forKey: key as AnyObject) as? Int,
          let bookings = storedQuickBookings,
          index < bookings.count {
         return index
@@ -145,7 +145,7 @@ extension TKSegment {
       guard let key = indexKey(),
             let index = newValue else { return }
       
-      TripKit.shared.inMemoryCache().setObject(index as AnyObject, forKey: key as AnyObject)
+      TripKit.shared.inMemoryCache.setObject(index as AnyObject, forKey: key as AnyObject)
     }
   }
 
@@ -170,7 +170,7 @@ extension TKSegment {
     
     do {
       let encoded = try JSONEncoder().encode(bookings)
-      TripKit.shared.inMemoryCache().setObject(encoded as NSData, forKey: key as AnyObject)
+      TripKit.shared.inMemoryCache.setObject(encoded as NSData, forKey: key as AnyObject)
     } catch {
       TKLog.warn("Couldn't encode quick bookings: \(error)")
     }

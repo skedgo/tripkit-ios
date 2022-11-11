@@ -8,9 +8,20 @@
 
 import Foundation
 
-extension TKConfig {
+public class TKConfig {
   
-  public static let shared = TKConfig.__sharedInstance()
+  public static let shared = TKConfig()
+  
+  private init() {
+    // Yes, main!
+    if let path = Bundle.main.url(forResource: "Config", withExtension: "plist"), let config = try? NSDictionary(contentsOf: path, error: ()) as? [String: AnyHashable] {
+      configuration = config
+    } else {
+      configuration = [:]
+    }
+  }
+  
+  public let configuration: [String: AnyHashable]
   
 }
 
@@ -54,6 +65,29 @@ extension TKConfig {
   @objc
   public var betaServerBaseURL: String {
     return configuration["BetaServerBaseURL"] as? String ?? "https://bigbang.buzzhives.com/satapp-beta/"
+  }
+
+}
+
+// MARK: - Style
+
+extension TKConfig {
+
+  var globalTintColor: [String: Int]? {
+    configuration["GlobalTintColor"] as? [String: Int]
+  }
+  var globalAccentColor: [String: Int]? {
+    configuration["GlobalAccentColor"] as? [String: Int]
+  }
+  var globalBarTintColor: [String: Int]? {
+    configuration["GlobalBarTintColor"] as? [String: Int]
+  }
+  var globalSecondaryBarTintColor: [String: Int]? {
+    configuration["GlobalSecondaryBarTintColor"] as? [String: Int]
+  }
+  
+  var preferredFonts: [String: String]? {
+    configuration["PreferredFonts"] as? [String: String]
   }
 
 }

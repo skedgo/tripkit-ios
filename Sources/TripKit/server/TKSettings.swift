@@ -8,7 +8,14 @@
 
 import Foundation
 
-extension TKSettings {
+import CoreLocation
+
+@objc
+public class TKSettings: NSObject {
+  
+  private override init() {
+    super.init()
+  }
   
   public enum DefaultsKey: String {
     case sortIndex = "internalSortIndex"
@@ -21,7 +28,11 @@ extension TKSettings {
     case cyclingSpeed = "profileTransportCycleSpeed"
     case walkingSpeed = "profileTransportWalkSpeed"
     case minimumTransferTime = "profileTransportTransferTime"
+    case maximumWalkDuration = "profileTransportWalkMaxDuration"
     case concessionPricing = "profileTransportConcessionPricing"
+    case transportEmissions = "profileTransportEmissions"
+    
+    case bookingsUseSandbox = "profileBookingsUseSandbox"
   }
   
   public static var sortOrder: TKTripCostType {
@@ -51,6 +62,16 @@ extension TKSettings {
     }
     set {
       minimumTransferTime = newValue.map { $0  * 60 }
+    }
+  }
+  
+  /// The maximum walking duration is a per-segment limit for mixed results, i.e., it does not apply to walking-only trips.
+  public static var maximumWalkingDuration: TimeInterval? {
+    get {
+      (UserDefaults.shared.object(forKey: DefaultsKey.maximumWalkDuration.rawValue) as? NSNumber)?.doubleValue
+    }
+    set {
+      UserDefaults.shared.set(newValue, forKey: DefaultsKey.maximumWalkDuration.rawValue)
     }
   }
   
@@ -239,15 +260,15 @@ extension TKSettings {
     let shared = UserDefaults.shared
     if let enabled = enabled {
       shared.set(enabled, forKey: DefaultsKey.sortedEnabled.rawValue)
-      if enabled.contains(TKTransportModeIdentifierWheelchair) {
+      if enabled.contains(TKTransportMode.wheelchair.modeIdentifier) {
         TKSettings.showWheelchairInformation = true
-      } else if enabled.contains(TKTransportModeIdentifierWalking) {
+      } else if enabled.contains(TKTransportMode.walking.modeIdentifier) {
         TKSettings.showWheelchairInformation = false
       }
     }
     if let hidden = hidden {
       shared.set(Array(hidden), forKey: DefaultsKey.hidden.rawValue)
-      if hidden.contains(TKTransportModeIdentifierWheelchair) {
+      if hidden.contains(TKTransportMode.wheelchair.modeIdentifier) {
         TKSettings.showWheelchairInformation = false
       }
     }
@@ -298,7 +319,7 @@ extension TKSettings {
     if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [String] {
       return Set(hidden)
     } else {
-      return [TKTransportModeIdentifierSchoolBuses]
+      return [TKTransportMode.schoolBuses.modeIdentifier]
     }
   }
   
@@ -358,4 +379,27 @@ extension TKSettings {
       return []
     }
   }
+}
+
+// MARK: - Emissions
+
+extension TKSettings {
+  
+  /// - Parameters:
+  ///   - gramsCO2PerKm: Emissions for supplied mode identifier in grams of CO2 per kilometre
+  ///   - modeIdentifier: Mode identifier for which to apply these emissions
+  public class func setEmissions(gramsCO2PerKm: Double, modeIdentifier: String) {
+    var updated = transportEmissions
+    updated[modeIdentifier] = gramsCO2PerKm
+    UserDefaults.shared.set(updated, forKey: DefaultsKey.transportEmissions.rawValue)
+  }
+  
+  public class func clearEmissions() {
+    UserDefaults.shared.removeObject(forKey: DefaultsKey.transportEmissions.rawValue)
+  }
+  
+  public class var transportEmissions: [String: Double] {
+    (UserDefaults.shared.object(forKey: DefaultsKey.transportEmissions.rawValue) as? [String: Double]) ?? [:]
+  }
+  
 }

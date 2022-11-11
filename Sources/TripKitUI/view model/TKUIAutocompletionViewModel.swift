@@ -68,7 +68,7 @@ class TKUIAutocompletionViewModel {
     var subtitle: String? { completion.subtitle }
     var accessoryAccessibilityLabel: String? { includeAccessory ? completion.accessoryAccessibilityLabel : nil }
     var accessoryImage: UIImage? { includeAccessory ? completion.accessoryButtonImage : nil }
-    var showFaded: Bool { completion.isInSupportedRegion?.boolValue == false }
+    var showFaded: Bool { !completion.isInSupportedRegion }
     var provider: TKAutocompleting? { completion.provider as? TKAutocompleting }
   }
   
@@ -197,13 +197,11 @@ extension TKAutocompletionResult {
       return Single.error(NSError(code: 18376, message: "Bad provider!"))
     }
     return provider.annotation(for: self)
-      .map { [weak self] in
+      .map {
         if let annotation = $0 {
           return .annotation(annotation)
-        } else if let self {
-          return .result(self)
         } else {
-          throw TKGeocoderHelper.GeocodingError.outdatedResult
+          return .result(self)
         }
       }
   }

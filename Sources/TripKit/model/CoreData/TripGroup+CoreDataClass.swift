@@ -7,6 +7,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -128,3 +130,5 @@ extension TripGroup {
   }
   
 }
+
+#endif

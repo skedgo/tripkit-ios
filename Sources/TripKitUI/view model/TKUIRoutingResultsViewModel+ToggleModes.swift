@@ -38,11 +38,11 @@ extension TKUIRoutingResultsViewModel {
       var newEnabled = Set(enabled)
       
       if TKSettings.showWheelchairInformation {
-        newEnabled.insert(TKTransportModeIdentifierWheelchair)
-        newEnabled.remove(TKTransportModeIdentifierWalking)
+        newEnabled.insert(TKTransportMode.wheelchair.modeIdentifier)
+        newEnabled.remove(TKTransportMode.walking.modeIdentifier)
       } else {
-        newEnabled.insert(TKTransportModeIdentifierWalking)
-        newEnabled.remove(TKTransportModeIdentifierWheelchair)
+        newEnabled.insert(TKTransportMode.walking.modeIdentifier)
+        newEnabled.remove(TKTransportMode.wheelchair.modeIdentifier)
       }
       enabledModes = newEnabled
     
@@ -67,7 +67,7 @@ extension TKUIRoutingResultsViewModel {
     
     // handle toggling wheelchair on and off
     let newWheelchairOn: Bool
-    switch (enabled.contains(TKTransportModeIdentifierWheelchair), enabled.contains(TKTransportModeIdentifierWalking)) {
+    switch (enabled.contains(TKTransportMode.wheelchair.modeIdentifier), enabled.contains(TKTransportMode.walking.modeIdentifier)) {
     case (true, true), (false, false): newWheelchairOn = !oldWheelchairOn
     case (true, false): newWheelchairOn = true
     case (false, true): newWheelchairOn = false
@@ -82,11 +82,11 @@ extension TKUIRoutingResultsViewModel {
 
     var newEnabled = Set(enabled)
     if newWheelchairOn {
-      newEnabled.insert(TKTransportModeIdentifierWheelchair)
-      newEnabled.remove(TKTransportModeIdentifierWalking)
+      newEnabled.insert(TKTransportMode.wheelchair.modeIdentifier)
+      newEnabled.remove(TKTransportMode.walking.modeIdentifier)
     } else {
-      newEnabled.insert(TKTransportModeIdentifierWalking)
-      newEnabled.remove(TKTransportModeIdentifierWheelchair)
+      newEnabled.insert(TKTransportMode.walking.modeIdentifier)
+      newEnabled.remove(TKTransportMode.wheelchair.modeIdentifier)
     }
     return AvailableModes(available: all, enabled: newEnabled)
   }

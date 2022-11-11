@@ -24,7 +24,7 @@ extension TKSegment {
       return specificImage
     
     } else if let modeIdentifier = modeIdentifier {
-      let genericImageName = TKTransportModes.modeImageName(forModeIdentifier: modeIdentifier)
+      let genericImageName = TKTransportMode.modeImageName(forModeIdentifier: modeIdentifier)
       return TKStyleManager.image(forModeImageName: genericImageName)
 
     } else {
