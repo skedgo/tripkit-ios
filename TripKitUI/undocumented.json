@@ -1717,35 +1717,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 40,
+      "line": 41,
       "symbol": "TKGeocoding.geocode(_:near:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 88,
+      "line": 89,
       "symbol": "TKAutocompleting.triggerAdditional(presenter:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 103,
+      "line": 104,
       "symbol": "Reactive.geocode(_:using:near:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 227,
+      "line": 224,
       "symbol": "Reactive.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKLocationManager+rx.swift",
-      "line": 115,
+      "line": 112,
       "symbol": "Reactive.tryAuthorization()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1850,49 +1850,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 17,
+      "line": 18,
       "symbol": "Reactive.requireRegion(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 24,
+      "line": 25,
       "symbol": "Reactive.requireRegion(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 31,
+      "line": 32,
       "symbol": "Reactive.requireRegions()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 43,
+      "line": 45,
       "symbol": "Reactive.hit(_:url:parameters:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 52,
+      "line": 54,
       "symbol": "Reactive.hit(_:_:url:parameters:decoderConfig:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 68,
+      "line": 70,
       "symbol": "Reactive.hit(_:path:parameters:headers:region:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKServer+Rx.swift",
-      "line": 94,
+      "line": 96,
       "symbol": "Reactive.stream(_:path:parameters:headers:region:repeatHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2410,42 +2410,42 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
-      "line": 18,
+      "line": 19,
       "symbol": "TKUIRoutingResultsViewModel.RouteBuilder",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
-      "line": 19,
+      "line": 20,
       "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
-      "line": 50,
+      "line": 51,
       "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time.leaveASAP",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
-      "line": 51,
+      "line": 52,
       "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time.leaveAfter(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
-      "line": 52,
+      "line": 53,
       "symbol": "TKUIRoutingResultsViewModel.RouteBuilder.Time.arriveBefore(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIRoutingResultsViewModel+CalculateRoutes.swift",
-      "line": 431,
+      "line": 432,
       "symbol": "TKUIRoutingResultsViewModel.RouteBuilder",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
