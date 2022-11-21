@@ -13,8 +13,16 @@ import TripKitUI
 
 class InMemoryFavoriteManager {
   
-  struct Favorite {
+  struct Favorite: Hashable {
     let annotation: MKAnnotation
+    
+    func hash(into hasher: inout Hasher) {
+      if let hashable = annotation as? AnyHashable {
+        hasher.combine(hashable)
+      } else {
+        hasher.combine(annotation.description)
+      }
+    }
   }
   
   static let shared = InMemoryFavoriteManager()

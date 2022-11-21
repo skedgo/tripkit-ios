@@ -52,7 +52,7 @@ extension InMemoryHistoryManager {
       else { return nil }
     
     var result = TKAutocompletionResult(
-      object: (history as? AnyHashable) ?? history.annotation.description as AnyHashable,
+      object: history,
       title: title,
       subtitle: history.annotation.subtitle ?? nil,
       image: TKAutocompletionResult.image(for: .history)

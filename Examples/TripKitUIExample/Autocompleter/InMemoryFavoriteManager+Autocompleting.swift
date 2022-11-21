@@ -46,7 +46,7 @@ extension InMemoryFavoriteManager {
       else { return nil }
     
     var result = TKAutocompletionResult(
-      object: (favorite as? AnyHashable) ?? favorite.annotation.description as AnyHashable,
+      object: favorite,
       title: title,
       subtitle: favorite.annotation.subtitle ?? nil,
       image: TKAutocompletionResult.image(for: .favorite)
