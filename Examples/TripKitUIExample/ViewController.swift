@@ -267,7 +267,7 @@ extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
 extension MainViewController {
   
   func showHome() {
-    let homeController = TKUIHomeViewController(mapManager: TKUINearbyMapManager())
+    let homeController = TKUIHomeViewController()
     homeController.autocompletionDataProviders = [
       TKAppleGeocoder(),
       TKTripGoGeocoder(),

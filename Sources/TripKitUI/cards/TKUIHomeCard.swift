@@ -41,10 +41,11 @@ open class TKUIHomeCard: TKUITableCard {
   
   private var dataSource: RxTableViewSectionedAnimatedDataSource<TKUIHomeViewModel.Section>!
   
-  private let homeMapManager: TKUICompatibleHomeMapManager?
+  private let homeMapManager: TKUICompatibleHomeMapManager
   
   public init(mapManager: TKUICompatibleHomeMapManager? = nil, initialPosition: TGCardPosition? = .peaking) {
-    self.homeMapManager = mapManager
+    let theMapManager = mapManager ?? TKUISimpleHomeMapManager()
+    self.homeMapManager = theMapManager
     
     let hasGrabHandle: Bool
     #if targetEnvironment(macCatalyst)
@@ -55,7 +56,7 @@ open class TKUIHomeCard: TKUITableCard {
     
     self.headerView = TKUIHomeHeaderView(hasGrabHandle: hasGrabHandle)
 
-    super.init(title: .custom(headerView, dismissButton: nil), mapManager: mapManager, initialPosition: initialPosition)
+    super.init(title: .custom(headerView, dismissButton: nil), mapManager: theMapManager, initialPosition: initialPosition)
     
     headerView.searchBar.placeholder = Loc.SearchForDestination
     headerView.searchBar.delegate = self
@@ -129,7 +130,7 @@ open class TKUIHomeCard: TKUITableCard {
     let builderInput = TKUIHomeComponentInput(
       homeCardWillAppear: cardAppearancePublisher,
       itemSelected: selectedItem(in: tableView, dataSource: dataSource).compactMap(\.componentItem),
-      mapRect: homeMapManager?.mapRect ?? .empty()
+      mapRect: homeMapManager.mapRect
     )
     
     // The Home view model is in essence a dumb aggregator that
@@ -153,7 +154,7 @@ open class TKUIHomeCard: TKUITableCard {
       itemSelected: selectedItem(in: tableView, dataSource: dataSource),
       itemAccessoryTapped: cellAccessoryTapped.asSignal(onErrorSignalWith: .empty()),
       refresh: refreshPublisher.asSignal(onErrorSignalWith: .never()),
-      biasMapRect: homeMapManager?.mapRect.startWith(.null) ?? .just(.null)
+      biasMapRect: homeMapManager.mapRect.startWith(.null)
     )
 
     viewModel = TKUIHomeViewModel(
@@ -186,7 +187,7 @@ open class TKUIHomeCard: TKUITableCard {
 
     // Map interaction
     
-    homeMapManager?.nextFromMap
+    homeMapManager.nextFromMap
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] in self?.actionTriggered.onNext($0) })
       .disposed(by: disposeBag)
@@ -206,7 +207,7 @@ open class TKUIHomeCard: TKUITableCard {
     focusedAnnotationPublisher.onNext(nil)
     
     // Remove any selection on the map
-    homeMapManager?.onHomeCardAppearance(true)
+    homeMapManager.onHomeCardAppearance(true)
     
     super.willAppear(animated: animated)
   }
@@ -278,7 +279,7 @@ extension TKUIHomeCard {
       controller?.draggingCardEnabled = true
       controller?.moveCard(to: .collapsed, animated: true) {
         // Not animating this as it's typically a big jump
-        self.homeMapManager?.zoom(to: city, animated: false)
+        self.homeMapManager.zoom(to: city, animated: false)
       }
       
     case let .handleSelection(selection, component):
@@ -286,7 +287,7 @@ extension TKUIHomeCard {
       case .selectOnMap:
         switch selection {
         case let .annotation(annotation):
-          homeMapManager?.select(annotation)
+          homeMapManager.select(annotation)
         case .result:
           assertionFailure("You are using a `TKAutocompleting` provider that does not return annotations for some of its results. In this case, make sure to use the callback selection mode.")
         }
