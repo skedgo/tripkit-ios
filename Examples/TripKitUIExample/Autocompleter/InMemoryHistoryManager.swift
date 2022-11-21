@@ -14,9 +14,18 @@ import RxCocoa
 
 final class InMemoryHistoryManager {
   
-  struct History {
+  struct History: Hashable {
     let annotation: MKAnnotation
     let date: Date
+    
+    func hash(into hasher: inout Hasher) {
+      if let hashable = annotation as? AnyHashable {
+        hasher.combine(hashable)
+      } else {
+        hasher.combine(annotation.description)
+      }
+      hasher.combine(date)
+    }
   }
   
   static let shared = InMemoryHistoryManager()
