@@ -2348,6 +2348,7 @@
 				3AFF26EB26C6975F007809CD /* TKUIServiceCard.swift */,
 				3AFF26F326C6975F007809CD /* TKUIServiceCard+Configuration.swift */,
 				3AFF270426C6975F007809CD /* TKUIServiceMapManager.swift */,
+				3A772558292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift */,
 				3AFF270126C6975F007809CD /* TKUIStartTripAction.swift */,
 				3AFF26F026C6975F007809CD /* TKUITableCard.swift */,
 				3AFF26EA26C6975F007809CD /* TKUITimetableCard.swift */,
@@ -2358,7 +2359,6 @@
 				3AFF270326C6975F007809CD /* TKUITripModeByModeCard+Configuration.swift */,
 				3AFF270526C6975F007809CD /* TKUITripOverviewCard.swift */,
 				3AFF26E726C6975F007809CD /* TKUITripOverviewCard+Configuration.swift */,
-				3A772558292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift */,
 			);
 			path = cards;
 			sourceTree = "<group>";
