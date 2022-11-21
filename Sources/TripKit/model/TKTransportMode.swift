@@ -43,7 +43,28 @@ public enum TKTransportMode: String, CaseIterable {
   
   /// - Returns: mode-related part of the image name
   static func modeImageName(forModeIdentifier identifier: String) -> String? {
-    switch TKTransportMode(modeIdentifier: identifier) {
+    if let mode = TKTransportMode(modeIdentifier: identifier) {
+      return modeImageName(for: mode)
+    } else {
+      switch identifier.components(separatedBy: "_").first {
+      case "pt":
+        return "public-transport"
+      case "me":
+        return "car"
+      case "cy":
+        return "bicycle"
+      case "wa":
+        return "walk"
+      case "in":
+        return "aeroplane"
+      default:
+        return nil // probably a stationary ID
+      }
+    }
+  }
+  
+  static func modeImageName(for mode: TKTransportMode) -> String? {
+    switch mode {
     case .flight:
       return "aeroplane"
     case .publicTransport, .schoolBuses:
@@ -76,21 +97,6 @@ public enum TKTransportMode: String, CaseIterable {
       return "walk"
     case .wheelchair:
       return "wheelchair"
-    case .none:
-      switch identifier.components(separatedBy: "_").first {
-      case "pt":
-        return "public-transport"
-      case "me":
-        return "car"
-      case "cy":
-        return "bicycle"
-      case "wa":
-        return "walk"
-      case "in":
-        return "aeroplane"
-      default:
-        return nil // probably a stationary ID
-      }
     }
   }
   
@@ -238,6 +244,12 @@ public extension TKTransportMode {
     }
 
   }
+  
+  static func image(for mode: TKTransportMode) -> TKImage? {
+    guard let part = self.modeImageName(for: mode) else { return nil }
+    return TKStyleManager.image(named: "icon-mode-\(part)")
+  }
+
   
   static func image(for modeIdentifier: String) -> TKImage? {
     guard let part = self.modeImageName(forModeIdentifier: modeIdentifier) else { return nil }
