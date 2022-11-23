@@ -43,9 +43,12 @@ import TGCardViewController
 
 public extension TKUITripOverviewCard {
   
-  static func buildStartTripAction(startingOn: TKSegment? = nil, mode: TKUISegmentMode = .getReady, actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
+  static func buildStartTripAction(startingOn: TKSegment? = nil,
+                                   label: String? = nil,
+                                   mode: TKUISegmentMode = .getReady,
+                                   actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
     return TKUICardAction(
-      title: Loc.ActionGo,
+      title: label ?? Loc.ActionGo,
       icon: .iconArrowUp
     ) { _, card, trip, _ in
       guard let controller = card.controller else { assertionFailure(); return false }
