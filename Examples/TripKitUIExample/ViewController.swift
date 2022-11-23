@@ -20,7 +20,7 @@ class MainViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    ExampleCustomizer.configureCards()
+    ExampleCustomizer.configureSharedCards()
     
     // Customizing the look of TripKitUI, showing how to integrate the
     // inter-app actions from TripKitInterApp
@@ -57,8 +57,11 @@ class MainViewController: UITableViewController {
       showRoutes()
       
     case "showHome":
-      showHome()
-      
+      showHome(nearby: false)
+
+    case "showHomeWithNearby":
+      showHome(nearby: true)
+
     default:
       preconditionFailure("Don't know what to do with \(id)")
     }
@@ -266,8 +269,19 @@ extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
 
 extension MainViewController {
   
-  func showHome() {
-    let homeController = TKUIHomeViewController(mapManager: TKUINearbyMapManager())
+  func showHome(nearby: Bool) {
+    if nearby {
+      TKUIHomeCard.config.componentViewModelClasses = [
+        TKUINearbyViewModel.self,
+        InMemoryHistoryManager.self,
+      ]
+    } else {
+      TKUIHomeCard.config.componentViewModelClasses = [
+        InMemoryHistoryManager.self,
+      ]
+    }
+    
+    let homeController = TKUIHomeViewController(mapManager: nearby ? TKUINearbyMapManager() : nil)
     homeController.autocompletionDataProviders = [
       TKAppleGeocoder(),
       TKTripGoGeocoder(),
