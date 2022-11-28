@@ -15,15 +15,15 @@ import TripKit
 
 extension TKDeparturesProvider {
 
-  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date, limit: Int = 10, in region: TKRegion) -> Single<TKAPI.Departures> {
+  public class func fetchDepartures(forStopCodes stopCodes: [String], fromDate: Date, filters: [Filter] = [], limit: Int = 10, in region: TKRegion) -> Single<TKAPI.Departures> {
     return Single.create {
-      try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, limit: limit, in: region)
+      try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters, limit: limit, in: region)
     }
   }
     
-  public class func downloadDepartures(for stops: [StopLocation], fromDate: Date, limit: Int = 10) -> Single<Bool> {
+  public class func downloadDepartures(for stops: [StopLocation], fromDate: Date, filters: [Filter] = [], limit: Int = 10) -> Single<Bool> {
     return Single.create {
-      try await Self.downloadDepartures(for: stops, fromDate: fromDate, limit: limit)
+      try await Self.downloadDepartures(for: stops, fromDate: fromDate, filters: filters, limit: limit)
     }
   }
   

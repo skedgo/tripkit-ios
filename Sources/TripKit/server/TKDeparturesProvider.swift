@@ -12,6 +12,16 @@ import CoreData
 @objc
 public class TKDeparturesProvider: NSObject {
   
+  /// Filter to apply to the results, treated as an "AND" condition.
+  public struct Filter: Codable {
+    /// Operator identifier
+    public let operatorID: String
+    /// Route identifier for the provided operator
+    public let routeID: String?
+    /// Direction for the provided route, if provided, `routeID` is also required
+    public let directionID: String?
+  }
+  
   public enum InputError: Error {
     case missingField(String)
     case emptyField(String)
@@ -31,19 +41,42 @@ public class TKDeparturesProvider: NSObject {
 
 extension TKDeparturesProvider {
   
-  public static func fetchDepartures(stopCodes: [String], fromDate: Date, limit: Int = 10, in region: TKRegion) async throws -> TKAPI.Departures {
+  /// Fetches departures from one or more stops, using the `departures.json` API
+  /// - Parameters:
+  ///   - stopCodes: Stop codes, which have to be in the same region
+  ///   - fromDate: Date of first departure to fetch
+  ///   - filters: Optional filters, that are treated as an "OR" condition.
+  ///   - limit: Maximum number of departures to fetch; not that API might return more than that if multiple departures are at the same time. Defaults to 10.
+  ///   - region: Region that the stops are in
+  /// - Returns: API response of departures from those stops
+  public static func fetchDepartures(stopCodes: [String], fromDate: Date, filters: [Filter] = [], limit: Int = 10, in region: TKRegion) async throws -> TKAPI.Departures {
     
     guard !stopCodes.isEmpty else {
       throw InputError.missingField("stopCodes")
     }
     
-    let paras: [String: Any] = [
+    var paras: [String: Any] = [
       "region": region.code,
       "embarkationStops": stopCodes,
       "timeStamp": Int(fromDate.timeIntervalSince1970),
       "limit": limit,
       "config": TKSettings.Config.userSettings().paras,
     ]
+    
+    if !filters.isEmpty {
+      paras["filters"] = filters.map { filter in
+        var inner: [String: String] = [
+          "operatorID": filter.operatorID
+        ]
+        if let routeID = filter.routeID {
+          inner["routeID"] = routeID
+        }
+        if let directionID = filter.directionID {
+          inner["directionID"] = directionID
+        }
+        return inner
+      }
+    }
     
     let response = await TKServer.shared.hit(
       TKAPI.Departures.self,
@@ -55,14 +88,14 @@ extension TKDeparturesProvider {
     return try response.result.get()
   }
   
-  public static func downloadDepartures(for stops: [StopLocation], fromDate: Date, limit: Int = 10) async throws -> Bool {
+  public static func downloadDepartures(for stops: [StopLocation], fromDate: Date, filters: [Filter] = [], limit: Int = 10) async throws -> Bool {
     
     let stopCodes = stops.map(\.stopCode)
     guard let region = stops.first?.region else {
       throw OutputError.couldNotFetchRegions
     }
     
-    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, limit: limit, in: region)
+    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters,, limit: limit, in: region)
     
     guard let context = stops.first?.managedObjectContext else {
       throw OutputError.stopSinceDeleted
