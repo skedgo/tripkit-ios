@@ -95,7 +95,7 @@ extension TKDeparturesProvider {
       throw OutputError.couldNotFetchRegions
     }
     
-    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters,, limit: limit, in: region)
+    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters, limit: limit, in: region)
     
     guard let context = stops.first?.managedObjectContext else {
       throw OutputError.stopSinceDeleted
