@@ -101,7 +101,7 @@ extension TKDeparturesProvider {
       throw OutputError.stopSinceDeleted
     }
     
-    if #available(iOS 15.0, *) {
+    if #available(iOS 15.0, macOS 12.0, *) {
       return await context.perform {
         TKDeparturesProvider.addDepartures(departures, to: stops)
       }
@@ -139,7 +139,7 @@ extension TKDeparturesProvider {
     let departures = try await fetchDepartures(for: table, fromDate: fromDate, limit: limit)
     
     let context = table.tripKitContext
-    if #available(iOS 15.0, *) {
+    if #available(iOS 15.0, macOS 12.0, *) {
       return await context.perform {
         TKDeparturesProvider.addDepartures(departures, into: context)
       }

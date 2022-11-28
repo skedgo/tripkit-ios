@@ -33,7 +33,7 @@ extension TKDeparturesProvider {
       return Observable.error(InputError.missingField("stopCodes"))
     }
     
-    var paras: [String: Any] = [
+    let paras: [String: Any] = [
       "region": region.code,
       "embarkationStops": stopCodes,
       "limit": limit,
