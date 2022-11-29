@@ -14,6 +14,11 @@ import TripKit
 import RxSwift
 import RxCocoa
 
+/// View model for a card that displays transport locations in a particular map region.
+///
+/// Can be used as a component on the home card as it implements ``TKUIHomeComponentViewModel``.
+/// The accompanying map manager is ``TKUINearbyMapManager`` and table view cell is
+/// ``TKUINearbyCell``.
 public class TKUINearbyViewModel {
   
   static var homeInstance: TKUINearbyViewModel? = nil

@@ -15,10 +15,9 @@ struct ExampleCustomizer {
   
   private init() {}
   
-  static func configureCards() {
+  static func configureSharedCards() {
     configureTimetableCard()
     configureRoutingResultsCard()
-    configureHomeCard()
   }
   
 }
@@ -26,13 +25,6 @@ struct ExampleCustomizer {
 // MARK: - Timetable cards
 
 extension ExampleCustomizer {
-  
-  private static func configureHomeCard() {
-    TKUIHomeCard.config.componentViewModelClasses = [
-      TKUINearbyViewModel.self,
-      InMemoryHistoryManager.self,
-    ]
-  }
   
   private static func configureRoutingResultsCard() {
     TKUIRoutingResultsCard.config.initialCardPosition = .collapsed
