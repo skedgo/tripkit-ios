@@ -20,8 +20,7 @@ class TKUITripModeByModeViewModel {
     
     self.realTimeUpdate = TKUITripModeByModeViewModel
       .fetchRealTime(for: trip)
-      .do(onNext: { update in
-        guard case .updated(let trip) = update else { return }
+      .do(onNext: { trip in
         NotificationCenter.default.post(name: .TKUIUpdatedRealTimeData, object: trip)
         
         // Segment changed, too
@@ -29,13 +28,17 @@ class TKUITripModeByModeViewModel {
           .map { Notification(name: .TKUIUpdatedRealTimeData, object: $0) }
           .forEach(NotificationCenter.default.post)
       })
+      .map { trip in
+        .updated(trip)
+      }
+      .startWith(.idle)
   }
   
   let trip: Trip
   
   let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Trip>>
   
-  private static func fetchRealTime(for trip: Trip) -> Driver<TKRealTimeUpdateProgress<Trip>> {
+  private static func fetchRealTime(for trip: Trip) -> Driver<Trip> {
     return TKRealTimeHelper.streamRealTime(for: trip, pause: .just(false))
       .asDriver(onErrorDriveWith: .empty())
   }
