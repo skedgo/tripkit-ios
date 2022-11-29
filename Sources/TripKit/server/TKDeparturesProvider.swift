@@ -11,9 +11,160 @@ import CoreData
 
 @objc
 public class TKDeparturesProvider: NSObject {
+  
+  /// Filter to apply to the results, treated as an "AND" condition.
+  public struct Filter: Codable {
+    /// Operator identifier
+    public let operatorID: String
+    /// Route identifier for the provided operator
+    public let routeID: String?
+    /// Direction for the provided route, if provided, `routeID` is also required
+    public let directionID: String?
+  }
+  
+  public enum InputError: Error {
+    case missingField(String)
+    case emptyField(String)
+  }
+  
+  public enum OutputError: Error {
+    case couldNotFetchRegions
+    case stopSinceDeleted
+  }
+
   private override init() {
     super.init()
   }
+}
+
+// MARK: - Departures.json for stops
+
+extension TKDeparturesProvider {
+  
+  /// Fetches departures from one or more stops, using the `departures.json` API
+  /// - Parameters:
+  ///   - stopCodes: Stop codes, which have to be in the same region
+  ///   - fromDate: Date of first departure to fetch
+  ///   - filters: Optional filters, that are treated as an "OR" condition.
+  ///   - limit: Maximum number of departures to fetch; not that API might return more than that if multiple departures are at the same time. Defaults to 10.
+  ///   - region: Region that the stops are in
+  /// - Returns: API response of departures from those stops
+  public static func fetchDepartures(stopCodes: [String], fromDate: Date, filters: [Filter] = [], limit: Int = 10, in region: TKRegion) async throws -> TKAPI.Departures {
+    
+    guard !stopCodes.isEmpty else {
+      throw InputError.missingField("stopCodes")
+    }
+    
+    var paras: [String: Any] = [
+      "region": region.code,
+      "embarkationStops": stopCodes,
+      "timeStamp": Int(fromDate.timeIntervalSince1970),
+      "limit": limit,
+      "config": TKSettings.Config.userSettings().paras,
+    ]
+    
+    if !filters.isEmpty {
+      paras["filters"] = filters.map { filter in
+        var inner: [String: String] = [
+          "operatorID": filter.operatorID
+        ]
+        if let routeID = filter.routeID {
+          inner["routeID"] = routeID
+        }
+        if let directionID = filter.directionID {
+          inner["directionID"] = directionID
+        }
+        return inner
+      }
+    }
+    
+    let response = await TKServer.shared.hit(
+      TKAPI.Departures.self,
+      .POST,
+      path: "departures.json",
+      parameters: paras,
+      region: region
+    )
+    return try response.result.get()
+  }
+  
+  public static func downloadDepartures(for stops: [StopLocation], fromDate: Date, filters: [Filter] = [], limit: Int = 10) async throws -> Bool {
+    
+    let stopCodes = stops.map(\.stopCode)
+    guard let region = stops.first?.region else {
+      throw OutputError.couldNotFetchRegions
+    }
+    
+    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters, limit: limit, in: region)
+    
+    guard let context = stops.first?.managedObjectContext else {
+      throw OutputError.stopSinceDeleted
+    }
+    
+    if #available(iOS 15.0, macOS 12.0, *) {
+      return await context.perform {
+        TKDeparturesProvider.addDepartures(departures, to: stops)
+      }
+    } else {
+      var result = false
+      context.performAndWait {
+        result = TKDeparturesProvider.addDepartures(departures, to:stops)
+      }
+      return result
+    }
+  }
+  
+}
+
+// MARK: - Departures.json for stop-to-stop
+
+extension TKDeparturesProvider {
+  
+  public static func fetchDepartures(for table: TKDLSTable, fromDate: Date = Date(), limit: Int = 10) async throws -> TKAPI.Departures {
+    
+    let paras = TKDeparturesProvider.queryParameters(for: table, fromDate: fromDate, limit: limit)
+    
+    let response = await TKServer.shared.hit(
+      TKAPI.Departures.self,
+      .POST,
+      path: "departures.json",
+      parameters: paras,
+      region: table.startRegion
+    )
+    return try response.result.get()
+  }
+  
+  public static func downloadDepartures(for table: TKDLSTable, fromDate: Date, limit: Int = 10) async throws -> Set<String> {
+    
+    let departures = try await fetchDepartures(for: table, fromDate: fromDate, limit: limit)
+    
+    let context = table.tripKitContext
+    if #available(iOS 15.0, macOS 12.0, *) {
+      return await context.perform {
+        TKDeparturesProvider.addDepartures(departures, into: context)
+      }
+    } else {
+      var result = Set<String>()
+      let context = table.tripKitContext
+      context.performAndWait {
+        result = TKDeparturesProvider.addDepartures(departures, into: context)
+      }
+      return result
+    }
+  }
+  
+  public static func queryParameters(for table: TKDLSTable, fromDate: Date, limit: Int) -> [String: Any] {
+    return [
+      "region": table.startRegion.code,
+      "disembarkationRegion": table.endRegion.code,
+      "timeStamp": Int(fromDate.timeIntervalSince1970),
+      "embarkationStops": [table.startStopCode],
+      "disembarkationStops": [table.endStopCode],
+      "limit": limit,
+      "config": TKSettings.Config.userSettings().paras
+    ]
+  }
+  
 }
 
 // MARK: - API to Core Data
