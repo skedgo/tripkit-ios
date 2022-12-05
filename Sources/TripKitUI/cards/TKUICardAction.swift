@@ -23,12 +23,14 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
     title: String,
     accessibilityLabel: String? = nil,
     icon: UIImage,
+    iconDiameter: CGFloat = 24,
     style: TKUICardActionStyle = .normal,
     handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
   ) {
     self.title = title
     self.accessibilityLabel = accessibilityLabel ?? title
     self.icon = icon
+    self.iconDiameter = iconDiameter
     self.style = style
     self.handler = handler
   }
@@ -41,6 +43,9 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
   
   /// Icon to display as the action. Should be a template image.
   open var icon: UIImage
+  
+  /// The width/height to use for the icon; defaults to 24 points
+  open var iconDiameter: CGFloat
   
   open var style: TKUICardActionStyle
 

@@ -120,6 +120,7 @@ extension TKUICardActionsView {
       let actionView = TKUIExtendedActionView.newInstance()
       actionView.tintColor = .tkAppTintColor
       actionView.imageView.image = action.icon
+      actionView.imageWidthConstraint.constant = action.iconDiameter
       actionView.label.text = action.title
       actionView.wrapper.isAccessibilityElement = true
       actionView.wrapper.accessibilityLabel = action.accessibilityLabel
@@ -173,6 +174,7 @@ extension TKUICompactActionCell {
     accessibilityLabel = action.accessibilityLabel
     accessibilityTraits = .button
     imageView.image = action.icon
+    imageWidthConstraint.constant = action.iconDiameter
     titleLabel.text = showTitle ? action.title : nil
     bold = action.style == .bold
     onTap = { [weak card, unowned self] sender in

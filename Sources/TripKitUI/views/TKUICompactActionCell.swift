@@ -16,6 +16,8 @@ class TKUICompactActionCell: UICollectionViewCell {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
   
+  @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+  
   static let identifier = "TKUICompactActionCell"
   
   static let nib = UINib(nibName: "TKUICompactActionCell", bundle: .tripKitUI)

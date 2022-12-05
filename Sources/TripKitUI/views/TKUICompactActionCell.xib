@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1L-Ir-ZXi">
                         <rect key="frame" x="31" y="0.0" width="44" height="44"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2FT-0J-Gik">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2FT-0J-Gik">
                                 <rect key="frame" x="10" y="10" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2FT-0J-Gik" secondAttribute="height" multiplier="1:1" id="Bbb-cg-d9v"/>
@@ -59,6 +59,7 @@
             <size key="customSize" width="106" height="64"/>
             <connections>
                 <outlet property="imageView" destination="2FT-0J-Gik" id="hb6-Ch-bEv"/>
+                <outlet property="imageWidthConstraint" destination="Pps-Q6-7I6" id="X5u-c3-t6H"/>
                 <outlet property="imageWrapper" destination="l1L-Ir-ZXi" id="LcW-6u-vNI"/>
                 <outlet property="titleLabel" destination="bwC-OB-6xU" id="I47-Cp-GzY"/>
             </connections>

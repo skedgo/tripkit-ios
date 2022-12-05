@@ -15,7 +15,8 @@ class TKUIExtendedActionView: UIView {
   @IBOutlet weak var wrapper: UIView!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var label: UILabel!
-  
+  @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+
   private var tapGestureRecognizer: UITapGestureRecognizer!
   
   var bold: Bool = false {
