@@ -18,12 +18,12 @@ extension TKAPI {
     }
     
     public struct Action: Hashable {
-      enum ActionType: Hashable {
+      public enum ActionType: Hashable {
         case reroute([String])
       }
       
-      let text: String
-      let type: ActionType
+      public let text: String
+      public let type: ActionType
     }
     
     public let title: String
@@ -36,9 +36,9 @@ extension TKAPI {
     public let severity: Severity
     public let hashCode: Int
 
-    let action: Action?    
-    let location: TKAPI.Location?
-    let serviceTripID: String?
+    public let action: Action?
+    public let location: TKAPI.Location?
+    public let serviceTripID: String?
     
     // MARK: - Codable
     public init(from decoder: Decoder) throws {
