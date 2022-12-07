@@ -270,18 +270,29 @@ extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
 extension MainViewController {
   
   func showHome(nearby: Bool) {
+    
+    let mapManager: TKUICompatibleHomeMapManager?
     if nearby {
       TKUIHomeCard.config.componentViewModelClasses = [
         TKUINearbyViewModel.self,
         InMemoryHistoryManager.self,
       ]
+      
+      mapManager = TKUINearbyMapManager(defaultMapRect:
+          .forCoordinateRegion(
+            .init(center: .init(latitude: -33.8, longitude: 151.1),
+                  span: .init(latitudeDelta: 1, longitudeDelta: 1))
+          ))
     } else {
       TKUIHomeCard.config.componentViewModelClasses = [
         InMemoryHistoryManager.self,
       ]
+      
+      mapManager = nil
     }
     
-    let homeController = TKUIHomeViewController(mapManager: nearby ? TKUINearbyMapManager() : nil)
+    let homeController = TKUIHomeViewController(mapManager: mapManager)
+    
     homeController.autocompletionDataProviders = [
       TKAppleGeocoder(),
       TKTripGoGeocoder(),
