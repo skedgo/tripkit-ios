@@ -101,4 +101,12 @@ class TKBuzzInfoProviderTest: XCTestCase {
     // additional checks on others
     XCTAssertEqual(wrappers[1].alert.url, URL(string: "http://www.transportnsw.info/transport-status"))
   }
+  
+  func testRoutesSF() throws {
+    let decoder = JSONDecoder()
+    let data = try dataFromJSON(named: "routes-sf")
+    let routes = try decoder.decode([TKAPI.Route].self, from: data)
+    
+    XCTAssertEqual(routes.count, 539)
+  }
 }

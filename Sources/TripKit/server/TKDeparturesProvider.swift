@@ -16,6 +16,12 @@ public class TKDeparturesProvider: NSObject {
   
   /// Filter to apply to the results, treated as an "AND" condition.
   public struct Filter: Codable {
+    public init(operatorID: String, routeID: String? = nil, directionID: String? = nil) {
+      self.operatorID = operatorID
+      self.routeID = routeID
+      self.directionID = directionID
+    }
+    
     /// Operator identifier
     public let operatorID: String
     /// Route identifier for the provided operator

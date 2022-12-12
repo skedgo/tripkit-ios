@@ -18,13 +18,18 @@ public class TKUINearbyMapManager: TKUIMapManager {
   
   public weak var viewModel: TKUINearbyViewModel?
   
-  public override init() {
+  /// - Parameter defaultMapRect: The map rect to show when the user hasn't granted access
+  ///   to their current location.
+  public init(defaultMapRect: MKMapRect = .null) {
+    self.defaultMapRect = defaultMapRect
+    
     super.init()
     
     self.preferredZoomLevel = .road
     self.showOverlayPolygon = true
   }
   
+  let defaultMapRect: MKMapRect
   private var mapTrackingPublisher = PublishSubject<MKUserTrackingMode>()
   private var mapRectPublisher = PublishSubject<MKMapRect>()
   
@@ -55,7 +60,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
     if viewModel == nil {
       viewModel = TKUINearbyViewModel.homeInstance
     }
-    guard let viewModel = viewModel else { assertionFailure(); return }
+    guard let viewModel else { assertionFailure(); return }
 
     // Default content on taking charge
     
@@ -64,7 +69,7 @@ public class TKUINearbyMapManager: TKUIMapManager {
     let showCurrentLocation = TKLocationManager.shared.authorizationStatus == .authorized
     mapView.showsUserLocation = showCurrentLocation
     
-    if let searchResult = self.searchResult {
+    if let searchResult {
       mapView.setUserTrackingMode(.none, animated: animated)
       mapView.addAnnotation(searchResult)
       zoom(to: [searchResult], animated: animated)
@@ -75,6 +80,9 @@ public class TKUINearbyMapManager: TKUIMapManager {
 
     } else if showCurrentLocation {
       mapView.setUserTrackingMode(.follow, animated: animated)
+      
+    } else if !MKMapRectEqualToRect(defaultMapRect, .null) {
+      mapView.setVisibleMapRect(defaultMapRect, animated: animated)
     }
 
     

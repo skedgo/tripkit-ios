@@ -401,9 +401,8 @@ extension TKUIMapManager {
     
     switch updateMode {
     case .updateSelection:
-      // updates visible views; new views updated from `mapView(_:didAdd:)`
-      let views = mapView.annotations(in: mapView.visibleMapRect)
-        .compactMap { $0 as? MKAnnotation }
+      // updates existing views; new views updated from `mapView(_:didAdd:)`
+      let views = mapView.annotations
         .compactMap { mapView.view(for: $0) }
       updateAnnotationsViewsForSelection(views)
     
