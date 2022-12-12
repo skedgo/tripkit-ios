@@ -20,7 +20,7 @@ class MainViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    ExampleCustomizer.configureCards()
+    ExampleCustomizer.configureSharedCards()
     
     // Customizing the look of TripKitUI, showing how to integrate the
     // inter-app actions from TripKitInterApp
@@ -57,8 +57,11 @@ class MainViewController: UITableViewController {
       showRoutes()
       
     case "showHome":
-      showHome()
-      
+      showHome(nearby: false)
+
+    case "showHomeWithNearby":
+      showHome(nearby: true)
+
     default:
       preconditionFailure("Don't know what to do with \(id)")
     }
@@ -266,14 +269,62 @@ extension MainViewController: TKUIRoutingResultsViewControllerDelegate {
 
 extension MainViewController {
   
-  func showHome() {
-    let homeController = TKUIHomeViewController(mapManager: TKUINearbyMapManager())
+  func showHome(nearby: Bool) {
+    
+    let mapManager: TKUICompatibleHomeMapManager?
+    if nearby {
+      TKUIHomeCard.config.componentViewModelClasses = [
+        TKUINearbyViewModel.self,
+        InMemoryHistoryManager.self,
+      ]
+      
+      mapManager = TKUINearbyMapManager(defaultMapRect:
+          .forCoordinateRegion(
+            .init(center: .init(latitude: -33.8, longitude: 151.1),
+                  span: .init(latitudeDelta: 1, longitudeDelta: 1))
+          ))
+    } else {
+      TKUIHomeCard.config.componentViewModelClasses = [
+        InMemoryHistoryManager.self,
+      ]
+      
+      mapManager = nil
+    }
+    
+    let homeController = TKUIHomeViewController(mapManager: mapManager)
+    
     homeController.autocompletionDataProviders = [
       TKAppleGeocoder(),
       TKTripGoGeocoder(),
+      TKRouteAutocompleter(),
       InMemoryFavoriteManager.shared,
       InMemoryHistoryManager.shared,
     ]
+    
+    TKUIHomeCard.config.selectionMode = .callback({ selection, _ in
+      switch selection {
+      case .result(let result):
+        if #available(iOS 15.0, *), let route = result.object as? TKAPI.Route {
+          // do something with the route
+          let controller = UIHostingController(rootView: RouteView(route: route))
+          homeController.present(controller, animated: false)
+
+        } else {
+          // handle other objects; shouldn't get there unless you implement your own auto-completer that passes `nil` from `annotation(for:completion:)`
+          assertionFailure()
+        }
+        return false
+
+      case let .annotation(stop as TKUIStopAnnotation):
+        homeController.push(TKUITimetableCard(stops: [stop]))
+        return false
+      case let .annotation(annotation):
+        homeController.push(TKUIRoutingResultsCard(destination: annotation))
+        return false
+      }
+    })
+
+    
     homeController.searchResultsDelegate = self
     navigationController?.setNavigationBarHidden(false, animated: true)
     navigationController?.pushViewController(homeController, animated: true)
