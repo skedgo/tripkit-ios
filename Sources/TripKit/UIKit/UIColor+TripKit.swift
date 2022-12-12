@@ -17,9 +17,9 @@ extension UIColor {
   
   @objc public static var tkAppTintColor: UIColor = .tripgoTintColor
   
-  @objc public static var tkBarBackgroundColor: UIColor = TKStyleManager.globalBarTintColor()
+  @objc public static var tkBarBackgroundColor: UIColor = TKStyleManager.globalBarTintColor
   
-  @objc public static var tkBarForegroundColor: UIColor = TKStyleManager.globalAccentColor()
+  @objc public static var tkBarForegroundColor: UIColor = TKStyleManager.globalAccentColor
   
   // MARK: - Labels
   
