@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           SkedGo&#39;s TripKit iOS - TripKitUI iOS
         </a>
-         (39% documented)
+         (40% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -577,9 +577,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit20TKDeparturesProviderC0aB2UIE15fetchDepartures12forStopCodes8fromDate5limit2in7RxSwift17PrimitiveSequenceVyAJ11SingleTraitOAA5TKAPIV0G0VGSaySSG_10Foundation0L0VSiAA8TKRegionCtFZ"></a>
-                    <a name="//apple_ref/swift/Method/fetchDepartures(forStopCodes:fromDate:limit:in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit20TKDeparturesProviderC0aB2UIE15fetchDepartures12forStopCodes8fromDate5limit2in7RxSwift17PrimitiveSequenceVyAJ11SingleTraitOAA5TKAPIV0G0VGSaySSG_10Foundation0L0VSiAA8TKRegionCtFZ">fetchDepartures(forStopCodes:<wbr>fromDate:<wbr>limit:<wbr>in:<wbr>)</a>
+                    <a name="/s:7TripKit20TKDeparturesProviderC0aB2UIE15fetchDepartures12forStopCodes8fromDate7filters5limit2in7RxSwift17PrimitiveSequenceVyAK11SingleTraitOAA5TKAPIV0G0VGSaySSG_10Foundation0L0VSayAC6FilterVGSiAA8TKRegionCtFZ"></a>
+                    <a name="//apple_ref/swift/Method/fetchDepartures(forStopCodes:fromDate:filters:limit:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit20TKDeparturesProviderC0aB2UIE15fetchDepartures12forStopCodes8fromDate7filters5limit2in7RxSwift17PrimitiveSequenceVyAK11SingleTraitOAA5TKAPIV0G0VGSaySSG_10Foundation0L0VSayAC6FilterVGSiAA8TKRegionCtFZ">fetchDepartures(forStopCodes:<wbr>fromDate:<wbr>filters:<wbr>limit:<wbr>in:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -594,7 +594,34 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">fetchDepartures</span><span class="p">(</span><span class="n">forStopCodes</span> <span class="nv">stopCodes</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">fromDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="k">in</span> <span class="nv">region</span><span class="p">:</span> <span class="kt">TKRegion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">TKAPI</span><span class="o">.</span><span class="kt">Departures</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">fetchDepartures</span><span class="p">(</span><span class="n">forStopCodes</span> <span class="nv">stopCodes</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">fromDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">filters</span><span class="p">:</span> <span class="p">[</span><span class="kt">Filter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="k">in</span> <span class="nv">region</span><span class="p">:</span> <span class="kt">TKRegion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">TKAPI</span><span class="o">.</span><span class="kt">Departures</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit20TKDeparturesProviderC0aB2UIE18downloadDepartures3for8fromDate7filters5limit7RxSwift17PrimitiveSequenceVyAJ11SingleTraitOSbGSayAA12StopLocationCG_10Foundation0J0VSayAC6FilterVGSitFZ"></a>
+                    <a name="//apple_ref/swift/Method/downloadDepartures(for:fromDate:filters:limit:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit20TKDeparturesProviderC0aB2UIE18downloadDepartures3for8fromDate7filters5limit7RxSwift17PrimitiveSequenceVyAJ11SingleTraitOSbGSayAA12StopLocationCG_10Foundation0J0VSayAC6FilterVGSitFZ">downloadDepartures(for:<wbr>fromDate:<wbr>filters:<wbr>limit:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">downloadDepartures</span><span class="p">(</span><span class="k">for</span> <span class="nv">stops</span><span class="p">:</span> <span class="p">[</span><span class="kt">StopLocation</span><span class="p">],</span> <span class="nv">fromDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">filters</span><span class="p">:</span> <span class="p">[</span><span class="kt">Filter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -628,33 +655,6 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7TripKit20TKDeparturesProviderC0aB2UIE18downloadDepartures3for8fromDate5limit7RxSwift17PrimitiveSequenceVyAI11SingleTraitOSbGSayAA12StopLocationCG_10Foundation0J0VSitFZ"></a>
-                    <a name="//apple_ref/swift/Method/downloadDepartures(for:fromDate:limit:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit20TKDeparturesProviderC0aB2UIE18downloadDepartures3for8fromDate5limit7RxSwift17PrimitiveSequenceVyAI11SingleTraitOSbGSayAA12StopLocationCG_10Foundation0J0VSitFZ">downloadDepartures(for:<wbr>fromDate:<wbr>limit:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">downloadDepartures</span><span class="p">(</span><span class="k">for</span> <span class="nv">stops</span><span class="p">:</span> <span class="p">[</span><span class="kt">StopLocation</span><span class="p">],</span> <span class="nv">fromDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -668,34 +668,6 @@
                 </div>
               </div>
               <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@CM@TripKitUI@TripKit@objc(cs)TKDeparturesProvider(cm)queryParametersForDLSTable:fromDate:limit:"></a>
-                    <a name="//apple_ref/swift/Method/queryParameters(for:fromDate:limit:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@TripKitUI@TripKit@objc(cs)TKDeparturesProvider(cm)queryParametersForDLSTable:fromDate:limit:">queryParameters(for:<wbr>fromDate:<wbr>limit:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(queryParametersForDLSTable:fromDate:limit:)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">queryParameters</span><span class="p">(</span><span class="k">for</span> <span class="nv">table</span><span class="p">:</span> <span class="kt">TKDLSTable</span><span class="p">,</span> <span class="nv">fromDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -758,7 +730,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-11-21)</p>
+      <p>&copy; 2022 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2022-12-12)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
