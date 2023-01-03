@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '14.0' # latest-stable
+        xcode-version: latest-stable
     - uses: actions/checkout@v2
     - name: Build TripKit Mac
       run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit-macOS"
@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '14.0' # latest-stable
+        xcode-version: latest-stable
     - uses: actions/checkout@v2
     - name: Run tests
       env:
@@ -59,7 +59,7 @@ jobs:
     steps:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '14.0' # latest-stable
+        xcode-version: latest-stable
     - uses: actions/checkout@v2
     - name: Build TripKitUIExample
       run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
