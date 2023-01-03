@@ -16,7 +16,7 @@ public enum TKBooking {
     public let subtitle: String?
     public let imageURL: URL?
   }
-
+  
   public struct Action: Codable, Hashable {
     public let title: String
     public let isDestructive: Bool
@@ -36,7 +36,16 @@ public enum TKBooking {
       case lock = "LOCK"
       case unlock = "UNLOCK"
       case cancel = "CANCEL"
+      
+      /// Tells the app to plan another trip, aka "request another"; no URL or external action provided
       case planNext = "REQUESTANOTHER"
+      
+      /// Tells the app to show the list of purchased tickets; no URL or external action provided
+      case showTickets = "SHOW_TICKETS"
+      
+      /// Tells the app that the action will activate tickets; comes with an internal URL or external action
+      case activateTickets = "ACTIVATE_TICKETS"
+      
       case unknown
     }
     
@@ -60,7 +69,7 @@ public enum TKBooking {
       case confirmationMessage
     }
   }
-
+  
   public struct TSPBranding: Codable, Hashable {
     private let rgbColor: TKAPI.RGBColor?
     private let logoImageName: String?
@@ -135,7 +144,7 @@ public enum TKBooking {
     }
     
   }
-
+  
   public struct Confirmation: Codable, Hashable {
     public let status: Detail
     public let provider: Detail?
@@ -144,7 +153,9 @@ public enum TKBooking {
     public let actions: [Action]?
     public let input: [BookingInput]?
     public let notes: [BookingNote]?
-    @DefaultEmptyArray public var tickets: [TicketOption]
+    
+    /// Tickets that were previously purchased, with information for which fare and their status
+    @DefaultEmptyArray public var purchasedTickets: [PurchasedTicket]
   }
   
   public struct BookingInput: Codable, Hashable {
@@ -283,10 +294,14 @@ public enum TKBooking {
     }
   }
   
-  public struct TicketOption: Codable, Hashable {
-    public typealias TicketOptionId = String
+}
+
+extension TKBooking {
+  
+  public struct Fare: Codable, Hashable {
+    public typealias Identifier = String
     
-    public let id: TicketOptionId
+    public let id: Identifier
     public let name: String
     public let details: String
     
@@ -294,16 +309,13 @@ public enum TKBooking {
     public let price: Int
 
     public let currencyCode: String
-    
-    /// Number of tickets to pre-select
+
+    /// Number of tickets to pre-select, can also be used to define how many tickets to purchase for this fare
     public var amount: Int?
-    
-    /// Maximum number of tickets that can be purchased of this type
+
+    /// Maximum number of tickets that can be purchased of this fare
     public var max: Int?
-    
-    /// The tickets that were purchased, empty if none purchased
-    @DefaultEmptyArray public var purchases: [TicketPurchase]
-    
+
     public enum CodingKeys: String, CodingKey {
       case id
       case name
@@ -311,23 +323,55 @@ public enum TKBooking {
       case price
       case currencyCode = "currency"
       case amount = "value"
-      case purchases = "purchasedTickets"
       case max
     }
     
     public enum InputValue: Hashable {
-      case selection(TicketOptionId)
+      case selection(Fare.Identifier)
       case amount(Int)
     }
-    
+
   }
   
-  public struct TicketPurchase: Codable, Hashable {
-    public typealias TicketPurchaseId = String
+  public struct PurchasedTicket: Codable, Hashable {
+    public enum Status: String, Codable {
+      case inactive = "UNACTIVATED"
+      case activated = "ACTIVE"
+      case stale = "STALE_TICKET"
+      case activeOnAnotherDevice = "ACTIVE_ON_ANOTHER_DEVICE"
+      case expired = "EXPIRED"
+      case unused = "UNUSED"
+      case refunded = "REFUNDED"
+      case invalid = "INVALID"
+      case fareCapped = "FARE_CAPPED"
+    }
     
-    public let id: TicketPurchaseId
+    public typealias Identifier = String
     
-    public let ticketURL: URL
+    public let id: Identifier
+    
+    public let status: Status
+
+    /// URL to activate a ticket, provided if `status == .inactive`
+    public let activationURL: URL?
+
+    /// URL to fetch ticket details, provided if `status == .activated`
+    public let ticketURL: URL?
+
+    /// Timestamp when an activated ticket expires, might be provided if `status == .activated`
+    @OptionalISO8601 public var ticketExpiration: Date?
+    
+    public let fare: Fare
+    
+    public enum CodingKeys: String, CodingKey {
+      case id
+      case status
+      case ticketURL
+      case activationURL = "activateURL"
+      case ticketExpiration = "ticketExpirationTimestamp"
+      case fare
+    }
+
   }
    
 }
@@ -397,12 +441,12 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
   
 }
 
-extension TKBooking.TicketOption {
+extension TKBooking.Fare {
   
   public func priceValue() -> String {
     return NSNumber(value: Float(price) / 100).toMoneyString(currencyCode: currencyCode, decimalPlaces: 2)
   }
-  
+
   public func noAmount() -> Bool {
     return amount ?? 0 == 0
   }
