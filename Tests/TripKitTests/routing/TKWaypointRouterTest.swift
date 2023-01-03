@@ -28,29 +28,24 @@ class TKWaypointRouterTest: TKTestCase {
     
     let waitara = (service.visits?.first { $0.stop.name!.hasPrefix("Waitara") })!
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(moving: trainSegment, to: waitara, atStart: true)
-    XCTAssertNotNil(paras)
+    let segments = try TKWaypointRouter.segments(moving: trainSegment, to: waitara, atStart: true)
+    XCTAssertEqual(segments.count, 3)
     
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 3)
-    
-    let walkInput = input.segments[0]
+    let walkInput = segments[0]
     XCTAssertEqual(walkInput.modes, ["wa_wal"])
 
     // There should be an end coordinate for the walk
-    guard let coordinate = walkInput.endCoordinate else { XCTFail(); return }
+    guard case .coordinate(let endCoordinate) = walkInput.end else { return XCTFail() }
 
     // End location of walk should match Waitara, not Hornsby
-    let endLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    let waitaraLocation = CLLocation(latitude: waitara.coordinate.latitude, longitude: waitara.coordinate.longitude)
-    XCTAssertLessThan(endLocation.distance(from: waitaraLocation), 50)
+    XCTAssertLessThan(endCoordinate.distance(from: waitara.coordinate)!, 50)
     
-    let trainJson = input.segments[1]
-    XCTAssertEqual(trainJson.modes, ["pt_pub"])
-    XCTAssertEqual(trainJson.serviceTripID, service.code)
-    XCTAssertEqual(trainJson.start, waitara.stop.stopCode)
-    XCTAssertEqual(trainJson.startTime!.timeIntervalSince1970, waitara.departure!.timeIntervalSince1970, accuracy: 0.1)
+    let trainInput = segments[1]
+    guard case .code(let startStopCode, _) = trainInput.start else { return XCTFail() }
+    XCTAssertEqual(trainInput.modes, ["pt_pub"])
+    XCTAssertEqual(trainInput.serviceTripID, service.code)
+    XCTAssertEqual(startStopCode, waitara.stop.stopCode)
+    XCTAssertEqual(trainInput.startTime!.timeIntervalSince1970, waitara.departure!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testGettingOffEarly() throws {
@@ -62,29 +57,24 @@ class TKWaypointRouterTest: TKTestCase {
     
     let milsons = (service.visits?.first { $0.stop.name!.hasPrefix("Milson") })!
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(moving: trainSegment, to: milsons, atStart: false)
-    XCTAssertNotNil(paras)
+    let segments = try TKWaypointRouter.segments(moving: trainSegment, to: milsons, atStart: false)
+    XCTAssertEqual(segments.count, 3)
     
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 3)
-    
-    let walkInput = input.segments[2]
+    let walkInput = segments[2]
     XCTAssertEqual(walkInput.modes, ["wa_wal"])
     
     // There should be a start coordinate for the walk
-    guard let coordinate = walkInput.startCoordinate else { XCTFail(); return }
-    
+    guard case .coordinate(let startCoordinate) = walkInput.start else { return XCTFail() }
+
     // Start location of walk should match Milson's Point, not Wynyard
-    let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    let milsonsLocation = CLLocation(latitude: milsons.coordinate.latitude, longitude: milsons.coordinate.longitude)
-    XCTAssertLessThan(startLocation.distance(from: milsonsLocation), 50)
+    XCTAssertLessThan(startCoordinate.distance(from: milsons.coordinate)!, 50)
     
-    let trainJson = input.segments[1]
-    XCTAssertEqual(trainJson.modes, ["pt_pub"])
-    XCTAssertEqual(trainJson.serviceTripID, service.code)
-    XCTAssertEqual(trainJson.end, milsons.stop.stopCode)
-    XCTAssertEqual(trainJson.endTime!.timeIntervalSince1970, milsons.arrival!.timeIntervalSince1970, accuracy: 0.1)
+    let trainInput = segments[1]
+    guard case .code(let endStopCode, _) = trainInput.end else { return XCTFail() }
+    XCTAssertEqual(trainInput.modes, ["pt_pub"])
+    XCTAssertEqual(trainInput.serviceTripID, service.code)
+    XCTAssertEqual(endStopCode, milsons.stop.stopCode)
+    XCTAssertEqual(trainInput.endTime!.timeIntervalSince1970, milsons.arrival!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testAddingWalkAtStart() throws {
@@ -96,33 +86,26 @@ class TKWaypointRouterTest: TKTestCase {
     
     let kuring = (service.visits?.first { $0.stop.name!.contains("Kuring") })!
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(moving: trainSegment, to: kuring, atStart: true)
-    XCTAssertNotNil(paras)
-    
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 2)
+    let segments = try TKWaypointRouter.segments(moving: trainSegment, to: kuring, atStart: true)
+    XCTAssertEqual(segments.count, 2)
 
-    let walkInput = input.segments[0]
+    let walkInput = segments[0]
     XCTAssertEqual(walkInput.modes, ["wa_wal"])
 
     // Checking start of walk against trip
-    guard let firstStart = walkInput.startCoordinate else { XCTFail(); return }
-    let startLocation = CLLocation(latitude: firstStart.latitude, longitude: firstStart.longitude)
-    let tripStartLocation = CLLocation(latitude: trip.request.fromLocation.coordinate.latitude, longitude: trip.request.fromLocation.coordinate.longitude)
-    XCTAssertLessThan(startLocation.distance(from: tripStartLocation), 50)
+    guard case .coordinate(let startCoordinate) = walkInput.start else { return XCTFail() }
+    XCTAssertLessThan(startCoordinate.distance(from: trip.request.fromLocation.coordinate)!, 50)
 
     // Checking end of walk against Mt Kuring-Gai
-    guard let firstEnd = walkInput.endCoordinate else { XCTFail(); return }
-    let endLocation = CLLocation(latitude: firstEnd.latitude, longitude: firstEnd.longitude)
-    let kuringLocation = CLLocation(latitude: kuring.coordinate.latitude, longitude: kuring.coordinate.longitude)
-    XCTAssertLessThan(endLocation.distance(from: kuringLocation), 50)
+    guard case .coordinate(let endCoordinate) = walkInput.end else { return XCTFail() }
+    XCTAssertLessThan(endCoordinate.distance(from: kuring.coordinate)!, 50)
     
-    let trainJson = input.segments[1]
-    XCTAssertEqual(trainJson.modes, ["pt_pub"])
-    XCTAssertEqual(trainJson.serviceTripID, service.code)
-    XCTAssertEqual(trainJson.start, kuring.stop.stopCode)
-    XCTAssertEqual(trainJson.startTime!.timeIntervalSince1970, kuring.departure!.timeIntervalSince1970, accuracy: 0.1)
+    let trainInput = segments[1]
+    guard case .code(let startStopCode, _) = trainInput.start else { return XCTFail() }
+    XCTAssertEqual(trainInput.modes, ["pt_pub"])
+    XCTAssertEqual(trainInput.serviceTripID, service.code)
+    XCTAssertEqual(startStopCode, kuring.stop.stopCode)
+    XCTAssertEqual(trainInput.startTime!.timeIntervalSince1970, kuring.departure!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testAddingWalkAtEnd() throws {
@@ -134,33 +117,26 @@ class TKWaypointRouterTest: TKTestCase {
     
     let asquith = try XCTUnwrap(service.visits?.first { $0.stop.name!.contains("Asquith") })
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(moving: trainSegment, to: asquith, atStart: false)
-    XCTAssertNotNil(paras)
+    let segments = try TKWaypointRouter.segments(moving: trainSegment, to: asquith, atStart: false)
+    XCTAssertEqual(segments.count, 2)
     
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 2)
-    
-    let walkInput = input.segments[1]
+    let walkInput = segments[1]
     XCTAssertEqual(walkInput.modes, ["wa_wal"])
 
     // Checking start of walk against Asquith
-    guard let firstStart = walkInput.startCoordinate else { XCTFail(); return }
-    let startLocation = CLLocation(latitude: firstStart.latitude, longitude: firstStart.longitude)
-    let asquithLocation = CLLocation(latitude: asquith.coordinate.latitude, longitude: asquith.coordinate.longitude)
-    XCTAssertLessThan(startLocation.distance(from: asquithLocation), 50)
+    guard case .coordinate(let startCoordinate) = walkInput.start else { return XCTFail() }
+    XCTAssertLessThan(startCoordinate.distance(from: asquith.coordinate)!, 50)
     
     // Checking end of walk against trip
-    guard let firstEnd = walkInput.endCoordinate else { XCTFail(); return }
-    let endLocation = CLLocation(latitude: firstEnd.latitude, longitude: firstEnd.longitude)
-    let tripEndLocation = CLLocation(latitude: trip.request.toLocation.coordinate.latitude, longitude: trip.request.toLocation.coordinate.longitude)
-    XCTAssertLessThan(endLocation.distance(from: tripEndLocation), 50)
+    guard case .coordinate(let endCoordinate) = walkInput.end else { return XCTFail() }
+    XCTAssertLessThan(endCoordinate.distance(from: trip.request.toLocation.coordinate)!, 50)
     
-    let trainJson = input.segments[0]
-    XCTAssertEqual(trainJson.modes, ["pt_pub"])
-    XCTAssertEqual(trainJson.serviceTripID, service.code)
-    XCTAssertEqual(trainJson.end, asquith.stop.stopCode)
-    XCTAssertEqual(trainJson.endTime!.timeIntervalSince1970, asquith.arrival!.timeIntervalSince1970, accuracy: 0.1)
+    let trainInput = segments[0]
+    guard case .code(let endStopCode, _) = trainInput.end else { return XCTFail() }
+    XCTAssertEqual(trainInput.modes, ["pt_pub"])
+    XCTAssertEqual(trainInput.serviceTripID, service.code)
+    XCTAssertEqual(endStopCode, asquith.stop.stopCode)
+    XCTAssertEqual(trainInput.endTime!.timeIntervalSince1970, asquith.arrival!.timeIntervalSince1970, accuracy: 0.1)
   }
   
   func testChangingEmbarkationWhenDriving() throws {
@@ -172,23 +148,17 @@ class TKWaypointRouterTest: TKTestCase {
     
     let waitara = (service.visits?.first { $0.stop.name!.contains("Waitara") })!
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(moving: trainSegment, to: waitara, atStart: true)
-    XCTAssertNotNil(paras)
-
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 5)
+    let segments = try TKWaypointRouter.segments(moving: trainSegment, to: waitara, atStart: true)
+    XCTAssertEqual(segments.count, 5)
     
-    let driveInput = input.segments[0]
+    let driveInput = segments[0]
     XCTAssertEqual(driveInput.modes, ["me_car"])
     
-    let afterDrive = input.segments[1]
+    let afterDrive = segments[1]
     XCTAssertEqual(afterDrive.modes, ["pt_pub"])
     
-    guard let driveEnd = driveInput.endCoordinate else { XCTFail(); return }
-    let endLocation = CLLocation(latitude: driveEnd.latitude, longitude: driveEnd.longitude)
-    let waitaraLocation = CLLocation(latitude: waitara.coordinate.latitude, longitude: waitara.coordinate.longitude)
-    XCTAssertLessThan(endLocation.distance(from: waitaraLocation), 50)
+    guard case .coordinate(let endCoordinate) = driveInput.end else { return XCTFail() }
+    XCTAssertLessThan(endCoordinate.distance(from: waitara.coordinate)!, 50)
   }
   
   func testChangingParkWhenDrivingGoGet() throws {
@@ -201,26 +171,20 @@ class TKWaypointRouterTest: TKTestCase {
     let parkingData = try dataFromJSON(named: "location-carParks")
     let parking = try decoder.decode(TKCarParkLocation.self, from: parkingData)
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(movingEndOf: driveGoGetSegment, to: parking)
-    XCTAssertNotNil(paras)
+    let segments = try TKWaypointRouter.segments(movingEndOf: driveGoGetSegment, to: parking)
+    XCTAssertEqual(segments.count, 3)
     
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 3)
-    
-    let beforeDrive = input.segments[0]
+    let beforeDrive = segments[0]
     XCTAssertEqual(beforeDrive.modes, ["wa_wal"])
     
-    let drive = input.segments[1]
+    let drive = segments[1]
     XCTAssertEqual(drive.modes, ["me_car-s_GOG"])
     
-    let afterDrive = input.segments[2]
+    let afterDrive = segments[2]
     XCTAssertEqual(afterDrive.modes, ["wa_wal"])
     
-    guard let driveEnd = drive.endCoordinate else { XCTFail(); return }
-    let endLocation = CLLocation(latitude: driveEnd.latitude, longitude: driveEnd.longitude)
-    let parkingLocation = CLLocation(latitude: parking.coordinate.latitude, longitude: parking.coordinate.longitude)
-    XCTAssertLessThan(endLocation.distance(from: parkingLocation), 50)
+    guard case .coordinate(let endCoordinate) = drive.end else { return XCTFail() }
+    XCTAssertLessThan(endCoordinate.distance(from: parking.coordinate)!, 50)
   }
   
   func testChangingVehicleWhenDrivingGoGet() throws {
@@ -233,79 +197,20 @@ class TKWaypointRouterTest: TKTestCase {
     let vehicleData = try dataFromJSON(named: "location-carPods")
     let vehicle = try decoder.decode(TKCarPodLocation.self, from: vehicleData)
     
-    let builder = WaypointParasBuilder()
-    let paras = try builder.build(movingStartOf: driveGoGetSegment, to: vehicle)
-    XCTAssertNotNil(paras)
+    let segments = try TKWaypointRouter.segments(movingStartOf: driveGoGetSegment, to: vehicle)
+    XCTAssertEqual(segments.count, 3)
     
-    let input = try decoder.decode(WaypointInput.self, withJSONObject: paras)
-    XCTAssertEqual(input.segments.count, 3)
-    
-    let beforeDrive = input.segments[0]
+    let beforeDrive = segments[0]
     XCTAssertEqual(beforeDrive.modes, ["wa_wal"])
     
-    let drive = input.segments[1]
+    let drive = segments[1]
     XCTAssertEqual(drive.modes, ["me_car-s_GOG"])
     
-    let afterDrive = input.segments[2]
+    let afterDrive = segments[2]
     XCTAssertEqual(afterDrive.modes, ["wa_wal"])
     
-    guard let driveStart = drive.startCoordinate else { XCTFail(); return }
-    let startLocation = CLLocation(latitude: driveStart.latitude, longitude: driveStart.longitude)
-    let vehicleLocation = CLLocation(latitude: vehicle.coordinate.latitude, longitude: vehicle.coordinate.longitude)
-    XCTAssertLessThan(startLocation.distance(from: vehicleLocation), 50)
+    guard case .coordinate(let startCoordinate) = drive.start else { return XCTFail() }
+    XCTAssertLessThan(startCoordinate.distance(from: vehicle.coordinate)!, 50)
   }
 
 }
-
-// MARK: -
-
-struct WaypointInput: Codable {
-  
-  let segments: [Segment]
-  
-  // Also:
-  // - "config" => TKSettings
-  // - "vehicles" => TKAPIToCoreDataConverter.vehiclesPayload
-
-  struct Segment: Codable {
-    // MARK: Required
-    
-    var start: String
-    var end: String
-    let modes: [String]
-    
-    // MARK: Optional
-    
-    let vehicleUUID: String?
-    let serviceTripID: String?
-    let `operator`: String?
-    let region: String?
-    let disembarkationRegion: String?
-    let startTime: Date?
-    let endTime: Date?
-    
-    // MARK: Helpers
-
-    var startCoordinate: CLLocationCoordinate2D? {
-      get {
-        return TKParserHelper.coordinate(forRequest: start)
-      }
-      set {
-        guard let newValue = newValue else { preconditionFailure("Set start directly, e.g., to a stop code") }
-        start = TKParserHelper.requestString(for: newValue)
-      }
-    }
-    
-    var endCoordinate: CLLocationCoordinate2D? {
-      get {
-        return TKParserHelper.coordinate(forRequest: end)
-      }
-      set {
-        guard let newValue = newValue else { preconditionFailure("Set end directly, e.g., to a stop code") }
-        end = TKParserHelper.requestString(for: newValue)
-      }
-    }
-  }
-  
-}
-
