@@ -616,7 +616,7 @@ extension TKWaypointRouter {
     }
   }
   
-  private static func segments(movingStartOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [TKWaypointRouter.Segment] {
+  static func segments(movingStartOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [TKWaypointRouter.Segment] {
     guard
       let trip = prototype.trip,
       let oldSharingMode = prototype.modeIdentifier,
@@ -661,7 +661,7 @@ extension TKWaypointRouter {
     ]
   }
   
-  private static func segments(movingEndOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [TKWaypointRouter.Segment] {
+  static func segments(movingEndOf prototype: TKSegment, to location: TKModeCoordinate) throws -> [TKWaypointRouter.Segment] {
     guard
       let trip = prototype.trip,
       let sharingMode = prototype.modeIdentifier,
