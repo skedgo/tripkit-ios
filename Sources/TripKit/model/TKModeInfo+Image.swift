@@ -31,8 +31,8 @@ extension TKModeInfo {
     return self.imageURL(type: .listMainMode)
   }
   
-  public func image(type: TKStyleModeIconType, isRealTime: Bool = false) -> TKImage? {
-    return TKStyleManager.image(forModeImageName: localImageName, isRealTime: isRealTime, of: type)
+  public func image(type: TKStyleModeIconType) -> TKImage? {
+    return TKStyleManager.image(forModeImageName: localImageName, of: type)
   }
   
   public func imageURL(type: TKStyleModeIconType) -> URL? {
