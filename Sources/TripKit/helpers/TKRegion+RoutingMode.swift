@@ -47,7 +47,7 @@ extension TKRegion.RoutingMode {
   }
   
   public func image(type: TKStyleModeIconType) -> TKImage? {
-    return TKStyleManager.image(forModeImageName: localImageName, isRealTime: false, of: type)
+    return TKStyleManager.image(forModeImageName: localImageName, of: type)
   }
   
   public func imageURL(type: TKStyleModeIconType) -> URL? {

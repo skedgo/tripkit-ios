@@ -97,11 +97,11 @@ extension TKStyleManager {
 #endif
   }
   
-  public static func image(forModeImageName imageName: String?, isRealTime: Bool = false, of iconType: TKStyleModeIconType = .listMainMode) -> TKImage? {
+  public static func image(forModeImageName imageName: String?, of iconType: TKStyleModeIconType = .listMainMode) -> TKImage? {
     guard let partName = imageName?.lowercased() else {
       return nil
     }
-    let key = "\(partName)-\(isRealTime)-\(iconType.rawValue)" as NSString
+    let key = "\(partName)-\(iconType.rawValue)" as NSString
     if let cached = imageCache.object(forKey: key) {
       return cached == dummyImage ? nil : cached
     }
@@ -112,7 +112,7 @@ extension TKStyleManager {
       assertionFailure("Not supported locally")
       return nil
     case .listMainMode:
-      fullName = isRealTime ? "icon-mode-\(partName)-realtime" : "icon-mode-\(partName)"
+      fullName = "icon-mode-\(partName)"
     case .alert:
       fullName = "icon-alert-yellow-map"
     @unknown default:
@@ -121,8 +121,6 @@ extension TKStyleManager {
     if let image = optionalImage(named: fullName) {
       imageCache.setObject(image, forKey: key)
       return image
-    } else if isRealTime {
-      return self.image(forModeImageName:imageName, isRealTime:false, of:iconType)
     } else {
       imageCache.setObject(dummyImage, forKey: key)
       return nil
