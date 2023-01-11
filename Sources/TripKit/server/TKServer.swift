@@ -498,7 +498,12 @@ extension TKServer {
     }
     
     let onFail = { [weak self] (previously: Response<Data?>) -> Void in
-      self?.hitSkedGo(path: path, method: method, parameters: parameters, headers: headers, baseURLs: Array(baseURLs.dropFirst()), callbackOnMain: callbackOnMain, info: info, completion: completion, previousResponse: previously)
+      self?.hitSkedGo(
+        path: path, method: method, parameters: parameters, headers: headers,
+        baseURLs: Array(baseURLs.dropFirst()),
+        callbackOnMain: callbackOnMain, info: info, completion: completion,
+        previousResponse: previously
+      )
     }
     
     Self.hit(request, info: info) { response in
