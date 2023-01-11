@@ -42,17 +42,17 @@ public class TKError: NSError {
   }
   
   public class func error(from data: Data?, statusCode: Int) -> TKError? {
-    if let data = data {
+    switch statusCode {
+    case 404, 500...599:
+      // These are always errors, regardless of the data
+      return TKError.error(withCode: statusCode, userInfo: nil)
+    default:
       // If there was a response body, we used that to see if it's an error
       // returned from the API.
-      return TKError.error(from: data, domain: "com.skedgo.serverkit")
-      
-    } else {
-      // Otherwise we check if the status code is indicating an error
-      switch statusCode {
-      case 404, 500...599:
-        return TKError.error(withCode: statusCode, userInfo: nil)
-      default:
+      if let data = data {
+        return TKError.error(from: data, domain: "com.skedgo.serverkit")
+      } else {
+        // Successful call with no response body
         return nil
       }
     }
