@@ -3692,153 +3692,153 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
       "line": 100,
-      "symbol": "TKStyleManager.image(forModeImageName:isRealTime:of:)",
+      "symbol": "TKStyleManager.image(forModeImageName:of:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 137,
+      "line": 135,
       "symbol": "TKStyleManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 139,
+      "line": 137,
       "symbol": "TKStyleManager.FontWeight",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 140,
+      "line": 138,
       "symbol": "TKStyleManager.FontWeight.regular",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 141,
+      "line": 139,
       "symbol": "TKStyleManager.FontWeight.medium",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 142,
+      "line": 140,
       "symbol": "TKStyleManager.FontWeight.bold",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 143,
+      "line": 141,
       "symbol": "TKStyleManager.FontWeight.semibold",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 203,
+      "line": 201,
       "symbol": "TKStyleManager.systemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 208,
+      "line": 206,
       "symbol": "TKStyleManager.boldSystemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 213,
+      "line": 211,
       "symbol": "TKStyleManager.semiboldSystemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 218,
+      "line": 216,
       "symbol": "TKStyleManager.mediumSystemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 224,
+      "line": 222,
       "symbol": "TKStyleManager.customFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 229,
+      "line": 227,
       "symbol": "TKStyleManager.boldCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 234,
+      "line": 232,
       "symbol": "TKStyleManager.semiboldCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 239,
+      "line": 237,
       "symbol": "TKStyleManager.mediumCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 248,
+      "line": 246,
       "symbol": "TKStyleManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 259,
+      "line": 257,
       "symbol": "TKStyleManager.exerciseString(calories:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 263,
+      "line": 261,
       "symbol": "TKStyleManager.timeString(_:for:relativeTo:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 280,
+      "line": 278,
       "symbol": "TKStyleManager.dateString(_:for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 290,
+      "line": 288,
       "symbol": "TKStyleManager.format(_:for:showDate:showTime:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 299,
+      "line": 297,
       "symbol": "TKStyleManager.format(_:for:forceFormat:forceStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 312,
+      "line": 310,
       "symbol": "TKStyleManager.string(for:for:showDate:showTime:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -12106,7 +12106,7 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKModeInfo+Image.swift",
       "line": 34,
-      "symbol": "TKModeInfo.image(type:isRealTime:)",
+      "symbol": "TKModeInfo.image(type:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
