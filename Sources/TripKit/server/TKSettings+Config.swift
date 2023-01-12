@@ -88,7 +88,7 @@ extension TKSettings {
           bookingSandbox = true // Default to sandbox while developing
         }
 #else
-        if UserDefaults.shared.bool(forKey: TKDefaultsKeyProfileBookingsUseSandbox) {
+        if UserDefaults.shared.bool(forKey: TKSettings.DefaultsKey.bookingsUseSandbox.rawValue) {
           bookingSandbox = true
         }
 #endif
