@@ -13,7 +13,7 @@ import RxCocoa
 
 import TripKit
 
-class TKUITripOverviewViewModel {
+class TKUITripOverviewViewModel: NSObject {
   
   struct UIInput {
     var selected: Signal<Item> = .empty()
@@ -85,6 +85,10 @@ class TKUITripOverviewViewModel {
   
   let next: Signal<Next>
   
+  let clManager: CLLocationManager = CLLocationManager()
+  
+  let locationStatusValue: BehaviorSubject<CLAuthorizationStatus> = .init(value: .notDetermined)
+  
 }
 
 extension TKUITripOverviewViewModel {
@@ -102,3 +106,19 @@ extension TKUITripOverviewViewModel {
     case showAlternativeRoutes(TripRequest)
   }
 }
+
+// MARK: - GeoMonitor
+
+extension TKUITripOverviewViewModel {
+  
+  public func enableAlerts(_ enable: Bool) {
+    // TODO: proper way of getting trip to pass here
+    TKGeoMonitorManager.shared.setAlertsEnabled(enable, for: <#T##Trip#>)
+  }
+  
+  private static func monitor(from trip: Trip) {
+    TKGeoMonitorManager.shared.monitorRegions(from: trip)
+  }
+    
+}
+      

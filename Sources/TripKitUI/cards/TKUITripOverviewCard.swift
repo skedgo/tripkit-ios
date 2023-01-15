@@ -167,6 +167,8 @@ public class TKUITripOverviewCard: TKUITableCard {
       .filter { $0 }
       .withLatestFrom(viewModel.dataSources)
       .drive(onNext: { [weak self] dataSources in
+        tableView.tableFooterView = self?.buildTableFooterView()
+        self?.showNotification(in: tableView)
         self?.showAttribution(for: dataSources, in: tableView)
       })
       .disposed(by: disposeBag)
@@ -259,14 +261,53 @@ extension TKUITripOverviewCard {
   
 }
 
+// MARK: - Table Footer
+
+extension TKUITripOverviewCard {
+  
+  private func buildTableFooterView() -> UIStackView {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.isUserInteractionEnabled = true
+    stackView.distribution = .equalSpacing
+    return stackView
+  }
+  
+}
+
+// MARK: - Notification
+
+extension TKUITripOverviewCard {
+  
+  private func showNotification(in tableView: UITableView) {
+    guard let tableFooterView = tableView.tableFooterView as? UIStackView
+    else {
+      return
+    }
+    
+    let footer = TKUINotificationView.newInstance()
+    footer.backgroundColor = tableView.backgroundColor
+    footer.configure(with: viewModel)
+    
+    tableFooterView.addArrangedSubview(footer)
+    tableFooterView.layoutIfNeeded()
+    tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+  }
+  
+}
+
 // MARK: - Attribution
 
 extension TKUITripOverviewCard {
   
   private func showAttribution(for sources: [TKAPI.DataAttribution], in tableView: UITableView) {
-    let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
-    footer?.backgroundColor = tableView.backgroundColor
+    guard let tableFooterView = tableView.tableFooterView as? UIStackView,
+          let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
+    else {
+      return
+    }
     
+    footer.backgroundColor = tableView.backgroundColor
     let tapper = UITapGestureRecognizer(target: nil, action: nil)
     tapper.rx.event
       .filter { $0.state == .ended }
@@ -274,10 +315,12 @@ extension TKUITripOverviewCard {
         self?.presentAttributions(for: sources, sender: footer)
       })
       .disposed(by: disposeBag)
-    footer?.addGestureRecognizer(tapper)
-    footer?.accessibilityTraits = .button
+    footer.addGestureRecognizer(tapper)
+    footer.accessibilityTraits = .button
     
-    tableView.tableFooterView = footer
+    tableFooterView.addArrangedSubview(footer)
+    tableFooterView.layoutIfNeeded()
+    tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
   }
   
   private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {   
