@@ -9,7 +9,8 @@
 import Foundation
 import GeoMonitor
 import CoreLocation
-import RxSwift
+
+import UserNotifications
 
 public class TKGeoMonitorManager: NSObject {
   
@@ -73,9 +74,9 @@ public class TKGeoMonitorManager: NSObject {
       return
     }
     
-    var identifiers = alertsEnabled ? [identifier] : []
+    let identifiers = alertsEnabled ? [identifier] : []
     
-    /* If needs multiple trips at once
+    /* LATER: If needs multiple trips at once; make the above a `var` and then:
     if alertsEnabled {
       identifiers.append(identifier)
     } else {
@@ -106,7 +107,7 @@ public class TKGeoMonitorManager: NSObject {
     var regions: [CLCircularRegion] = trip.segments.compactMap { segment in
       guard let coordinate = segment.start?.coordinate
       else {
-        return
+        return nil
       }
       
       let region: CLCircularRegion =
@@ -115,7 +116,7 @@ public class TKGeoMonitorManager: NSObject {
                      identifier: segment.order.identifier.rawValue)
       
       if segment.order == .end {
-        nearEndCoordinate = region.copy()
+        nearEndCoordinate = coordinate
       }
       
       return region

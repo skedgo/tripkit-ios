@@ -85,10 +85,6 @@ class TKUITripOverviewViewModel: NSObject {
   
   let next: Signal<Next>
   
-  let clManager: CLLocationManager = CLLocationManager()
-  
-  let locationStatusValue: BehaviorSubject<CLAuthorizationStatus> = .init(value: .notDetermined)
-  
 }
 
 extension TKUITripOverviewViewModel {
