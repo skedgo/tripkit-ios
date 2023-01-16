@@ -141,6 +141,7 @@ extension TKAPI {
     public let action: String?
     public var notes: String?
     @UnknownNil public var localCost: TKLocalCost? // Backend is sometimes sending this invalid without currency as of 2021-08-17
+    @DefaultEmptyArray public var geofences: [Geofence]
     var mini: TKMiniInstruction?
     @DefaultFalse var hideExactTimes: Bool
 
@@ -201,6 +202,7 @@ extension TKAPI {
       case from
       case to
       case shapes
+      case geofences
     }
   }
   
@@ -230,6 +232,99 @@ extension TKAPI {
       case .stationary: return .stationary
       case .scheduled: return .scheduled
       case .unscheduled: return .unscheduled
+      }
+    }
+  }
+  
+  public struct Geofence: Codable, Hashable {
+    public enum Kind: Hashable {
+      case circle(center: CLLocationCoordinate2D, radius: CLLocationDistance)
+
+      public static func == (lhs: TKAPI.Geofence.Kind, rhs: TKAPI.Geofence.Kind) -> Bool {
+        switch (lhs, rhs) {
+        case let (.circle(lc, lr), .circle(rc, rr)):
+          return lc.latitude == rc.latitude
+              && lc.longitude == rc.longitude
+              && lr == rr
+        }
+      }
+      
+      public func hash(into hasher: inout Hasher) {
+        switch self {
+        case let .circle(center, radius):
+          hasher.combine(center.latitude)
+          hasher.combine(center.longitude)
+          hasher.combine(radius)
+        }
+      }
+      
+    }
+    
+    struct Coordinate: Codable {
+      let lat: CLLocationDegrees
+      let lng: CLLocationDegrees
+    }
+    
+    public enum Trigger: String, Codable, Hashable {
+      case onEnter = "ENTER"
+      case onExit = "EXIT"
+    }
+    
+    public enum MessageKind: String, Codable, Hashable {
+      case tripEnd            = "TRIP_END"
+      case arrivingAtYourStop = "ARRIVING_AT_YOUR_STOP"
+      case nextStopIsYours    = "NEXT_STOP_IS_YOURS"
+    }
+    
+    public let id: String
+    public let kind: Kind
+    public let trigger: Trigger
+    public let messageKind: MessageKind
+    public let messageTitle: String
+    public let messageBody: String
+    
+    public enum CodingKeys: String, CodingKey {
+      case id
+      case kind = "type"
+      case trigger
+      case center
+      case radius
+      case messageKind = "messageType"
+      case messageTitle
+      case messageBody
+    }
+    
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      id = try container.decode(String.self, forKey: .id)
+      trigger = try container.decode(Trigger.self, forKey: .trigger)
+      messageKind = try container.decode(MessageKind.self, forKey: .messageKind)
+      messageTitle = try container.decode(String.self, forKey: .messageTitle)
+      messageBody = try container.decode(String.self, forKey: .messageBody)
+
+      let rawKind = try container.decode(String.self, forKey: .kind)
+      switch rawKind {
+      case "CIRCLE":
+        let coordinate = try container.decode(Coordinate.self, forKey: .center)
+        let radius = try container.decode(CLLocationDistance.self, forKey: .radius)
+        kind = .circle(center: .init(latitude: coordinate.lat, longitude: coordinate.lng), radius: radius)
+      default:
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected 'type' of value 'CIRCLE', but got '\(rawKind)'"))
+      }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(id, forKey: .id)
+      try container.encode(trigger, forKey: .trigger)
+      try container.encode(messageKind, forKey: .messageKind)
+      try container.encode(messageTitle, forKey: .messageTitle)
+      try container.encode(messageBody, forKey: .messageBody)
+      switch kind {
+      case let .circle(center, radius):
+        try container.encode("CIRCLE", forKey: .kind)
+        try container.encode(Coordinate(lat: center.latitude, lng: center.longitude), forKey: .center)
+        try container.encode(radius, forKey: .radius)
       }
     }
   }

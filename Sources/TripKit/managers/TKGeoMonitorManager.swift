@@ -103,6 +103,8 @@ public class TKGeoMonitorManager: NSObject {
   public func monitorRegions(from trip: Trip) {
     // Since only one trip can have notifications at a time, there is no need to save other trips, just need to replace the current one.
     
+    // FIXME: This should use `trip.segment.flatMap(\.geofences)` instead.
+    
     var nearEndCoordinate: CLLocationCoordinate2D?
     var regions: [CLCircularRegion] = trip.segments.compactMap { segment in
       guard let coordinate = segment.start?.coordinate
