@@ -25,13 +25,15 @@ class TKUINotificationView: UIView {
   @IBOutlet weak var detailView: UIView!
   
   // Assuming this is constant first
+  @IBOutlet weak var detailView1: UIView!
   @IBOutlet weak var detailItem1: UILabel!
+  @IBOutlet weak var detailView2: UIView!
   @IBOutlet weak var detailItem2: UILabel!
+  @IBOutlet weak var detailView3: UIView!
   @IBOutlet weak var detailItem3: UILabel!
+  @IBOutlet weak var detailView4: UIView!
   @IBOutlet weak var detailItem4: UILabel!
-  
-  private(set) var disposeBag = DisposeBag()
-  
+    
   class func newInstance() -> TKUINotificationView {
     return Bundle(for: self).loadNibNamed("TKUINotificationView",
                                           owner: self,
@@ -46,19 +48,12 @@ class TKUINotificationView: UIView {
     titleImageView.tintColor = .tkAppTintColor
   }
   
-}
-
-extension TKUINotificationView {
-  
-  func configure(with model: TKUITripOverviewViewModel) {
-    
-    
-    notificationSwitch.rx.value
-      .subscribe(onNext: { state in
-        model.enableAlerts(state)
-      })
-      .disposed(by: disposeBag)
+  func updateAvailableKinds(_ geofenceKinds: Set<TKAPI.Geofence.MessageKind>) {
+    detailView1.alpha = geofenceKinds.contains(.tripStart) ? 1 : 0.3
+    detailView2.alpha = geofenceKinds.contains(.arrivingAtYourStop) ? 1 : 0.3
+    detailView3.alpha = geofenceKinds.contains(.nextStopIsYours) ? 1 : 0.3
+    detailView4.alpha = geofenceKinds.contains(.tripEnd) ? 1 : 0.3
+    notificationSwitch.isEnabled = !geofenceKinds.isEmpty
   }
   
 }
-
