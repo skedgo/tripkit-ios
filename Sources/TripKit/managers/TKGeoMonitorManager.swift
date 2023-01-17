@@ -152,8 +152,7 @@ public class TKGeoMonitorManager: NSObject {
       trigger: nil // Fire right away
     )
     
-    TKNotificationManager.shared.requests.append(request)
-    // TODO: Send out this notification request to TripGo (This is in TripKit)
+    TKNotificationManager.shared.add(request: request)
   }
   
 }

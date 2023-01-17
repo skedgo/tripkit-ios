@@ -8,24 +8,30 @@
 
 import Foundation
 
-// Note: RxSwift public variables causes compilation errors, probably an import issue. Did not resolve this since this means making RxSwift public to the importing project. Used @Published instead
-// Note: Just made UNNotificationRequest as output instead of making a Custom Payload object so that in first glance it is recognizable as a Notification.
-
 public class TKNotificationManager: NSObject {
+  private typealias Publisher = () -> Void
   
   public static let identifier = "tripkit.notification"
+  
+  private var publisher: Publisher?
   
   @objc(sharedInstance)
   public static let shared = TKNotificationManager()
   
-  @Published public var requests: [UNNotificationRequest] = []
+  public var requests: [UNNotificationRequest] = []
   
   public func add(request: UNNotificationRequest) {
     requests.append(request)
+    
+    publisher?()
   }
   
   public func clearRequests() {
     requests.removeAll()
+  }
+  
+  public func subscribe(_ updates: @escaping () -> Void) {
+    self.publisher = updates
   }
   
 }
