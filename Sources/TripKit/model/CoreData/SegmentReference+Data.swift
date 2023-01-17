@@ -88,7 +88,7 @@ extension SegmentReference {
 
 extension SegmentReference {
   func populate(from api: TKAPI.SegmentReference) {
-    // transport
+    // Public transport
     departurePlatform = api.startPlatform
     arrivalPlatform = api.endPlatform
     serviceStops = api.serviceStops

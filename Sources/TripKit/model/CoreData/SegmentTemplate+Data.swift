@@ -39,6 +39,6 @@ extension SegmentTemplate {
   
   var geofences: [TKAPI.Geofence]? {
     get { decode([TKAPI.Geofence].self, key: "geofences") }
-    set { encode((newValue?.isEmpty != false) ? newValue : nil, key: "geofences") }
+    set { encode((newValue?.isEmpty == false) ? newValue : nil, key: "geofences") }
   }
 }
