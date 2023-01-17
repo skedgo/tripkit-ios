@@ -271,6 +271,7 @@ extension TKAPI {
     }
     
     public enum MessageKind: String, Codable, Hashable {
+      case tripStart          = "TRIP_START"
       case tripEnd            = "TRIP_END"
       case arrivingAtYourStop = "ARRIVING_AT_YOUR_STOP"
       case nextStopIsYours    = "NEXT_STOP_IS_YOURS"

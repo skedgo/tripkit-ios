@@ -12,6 +12,11 @@ import CoreLocation
 
 import UserNotifications
 
+/// The manager for geofence-based alerts for a trip, e.g., "get off at the next stop"
+///
+/// Requirements:
+/// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
+/// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 public class TKGeoMonitorManager: NSObject {
   
   private enum Keys {
@@ -108,19 +113,19 @@ public class TKGeoMonitorManager: NSObject {
       return stopMonitoring()
     }
     
-    self.geofences = geofences.map { geofence -> (TKAPI.Geofence, CLCircularRegion) in
+    let pairs = geofences.map { geofence -> (TKAPI.Geofence, CLCircularRegion) in
       switch geofence.kind {
       case let .circle(center, radius):
         let region = CLCircularRegion(center: center, radius: radius, identifier: geofence.id)
         return (geofence, region)
       }
     }
+    self.geofences = pairs
     
     startMonitoring()
     
     Task {
-      startMonitoring()
-      await geoMonitor.update(regions: self.geofences.map(\.1))
+      await geoMonitor.update(regions: pairs.map(\.1))
     }
   }
   
@@ -129,7 +134,7 @@ public class TKGeoMonitorManager: NSObject {
     geoMonitor.startMonitoring()
   }
   
-  private func stopMonitoring() {
+  public func stopMonitoring() {
     geoMonitor.enableInBackground = false
     geoMonitor.stopMonitoring()
   }

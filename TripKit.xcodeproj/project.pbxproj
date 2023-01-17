@@ -864,7 +864,6 @@
 		D3AB4794273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB4793273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift */; };
 		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
 		D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */; };
-		F13FD8EA297417DF006C338D /* TKUITripGetOffAlertsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8E9297417DF006C338D /* TKUITripGetOffAlertsViewModel.swift */; };
 		F13FD8ED29742308006C338D /* TKGeoMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKGeoMonitorManager.swift */; };
 		F13FD8EE29742310006C338D /* TKGeoMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKGeoMonitorManager.swift */; };
 		F18615CE2973E07E00632FD4 /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = F18615CD2973E07E00632FD4 /* GeoMonitor */; };
@@ -1649,7 +1648,6 @@
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
 		D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripSegmentModeTitleTest.swift; sourceTree = "<group>"; };
 		F11829FF2973DAC40043F4CD /* tripgo-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tripgo-ios"; path = ../..; sourceTree = "<group>"; };
-		F13FD8E9297417DF006C338D /* TKUITripGetOffAlertsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripGetOffAlertsViewModel.swift; sourceTree = "<group>"; };
 		F13FD8EB29741CF2006C338D /* TKGeoMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoMonitorManager.swift; sourceTree = "<group>"; };
 		F19723022973DB1F00C33217 /* tripgo-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tripgo-ios"; path = ../..; sourceTree = "<group>"; };
 		F1E9B01E29439010007F171A /* TKUINotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationView.swift; sourceTree = "<group>"; };
@@ -2426,7 +2424,6 @@
 				3AFF272526C6975F007809CD /* TKUITripOverviewViewModel.swift */,
 				3AFF272426C6975F007809CD /* TKUITripOverviewViewModel+Content.swift */,
 				3AFF273C26C6975F007809CD /* TKUITripOverviewViewModel+Fetch.swift */,
-				F13FD8E9297417DF006C338D /* TKUITripGetOffAlertsViewModel.swift */,
 			);
 			path = "view model";
 			sourceTree = "<group>";
@@ -3669,7 +3666,6 @@
 				3AFF2B9C26C69BC9007809CD /* TKUISegmentImpossibleCell.swift in Sources */,
 				3AFF2BDE26C69BFC007809CD /* ViewTransition.swift in Sources */,
 				3AFF2BB926C69BE7007809CD /* TKRouter+Rx.swift in Sources */,
-				F13FD8EA297417DF006C338D /* TKUITripGetOffAlertsViewModel.swift in Sources */,
 				3AFF2BAD26C69BE7007809CD /* TKShareHelper+Rx.swift in Sources */,
 				3AFF2BA526C69BDE007809CD /* UIColor+Variations.swift in Sources */,
 				3AFF2BC526C69BE7007809CD /* NSManagedObjectContext+Rx.swift in Sources */,

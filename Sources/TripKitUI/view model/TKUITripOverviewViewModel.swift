@@ -17,6 +17,7 @@ class TKUITripOverviewViewModel: NSObject {
   
   struct UIInput {
     var selected: Signal<Item> = .empty()
+    var alertsEnabled: Signal<Bool> = .empty()
     var isVisible: Driver<Bool> = .just(true)
   }
   
@@ -26,6 +27,10 @@ class TKUITripOverviewViewModel: NSObject {
       .asDriver(onErrorDriveWith: .empty())
       .map { $0.tripGroup.sources }
     
+    geofenceKinds = presentedTrip
+      .asDriver(onErrorDriveWith: .empty())
+      .map { Set($0.segments.flatMap(\.geofences).map(\.messageKind)) }
+
     let tripChanged: Observable<Trip> = presentedTrip
       .asObservable()
       .distinctUntilChanged { $0.persistentId() == $1.persistentId() }
@@ -58,7 +63,19 @@ class TKUITripOverviewViewModel: NSObject {
       }
       .asDriver(onErrorDriveWith: .never())
     
-    next = inputs.selected.compactMap { item -> Next? in
+    let nextFromAlertToggle = inputs.alertsEnabled.asObservable()
+      .withLatestFrom(tripUpdated) { ($1, $0) }
+      .compactMap { trip, enabled -> Next? in
+        if enabled {
+          TKGeoMonitorManager.shared.monitorRegions(from: trip)
+        } else {
+          TKGeoMonitorManager.shared.stopMonitoring()
+        }
+        return nil
+      }
+      .asSignal { _ in .empty() }
+    
+    let nextFromSelection = inputs.selected.compactMap { item -> Next? in
         switch item {
         case .impossible(let segment, _):
           let request = segment.insertRequestStartingHere()
@@ -73,6 +90,8 @@ class TKUITripOverviewViewModel: NSObject {
         }
       }
     
+    self.next = Signal.merge([nextFromSelection, nextFromAlertToggle])
+    
   }
     
   let sections: Driver<[Section]>
@@ -80,6 +99,8 @@ class TKUITripOverviewViewModel: NSObject {
   let actions: Driver<([TKUITripOverviewCard.TripAction], Trip)>
   
   let dataSources: Driver<[TKAPI.DataAttribution]>
+  
+  let geofenceKinds: Driver<Set<TKAPI.Geofence.MessageKind>>
   
   let refreshMap: Signal<Trip>
   
@@ -96,25 +117,11 @@ extension TKUITripOverviewViewModel {
 // MARK: - Navigation
 
 extension TKUITripOverviewViewModel {
+  
+  
   enum Next {
     case handleSelection(TKSegment)
     case showAlerts([TKAlert])
     case showAlternativeRoutes(TripRequest)
   }
 }
-
-// MARK: - GeoMonitor
-
-extension TKUITripOverviewViewModel {
-  
-  public func enableAlerts(_ enable: Bool) {
-    // TODO: proper way of getting trip to pass here
-    TKGeoMonitorManager.shared.setAlertsEnabled(enable, for: <#T##Trip#>)
-  }
-  
-  private static func monitor(from trip: Trip) {
-    TKGeoMonitorManager.shared.monitorRegions(from: trip)
-  }
-    
-}
-      

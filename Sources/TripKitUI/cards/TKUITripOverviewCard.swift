@@ -66,6 +66,8 @@ public class TKUITripOverviewCard: TKUITableCard {
   private var titleView: TKUITripTitleView?
   private weak var tableView: UITableView?
   
+  private lazy var notificationFooterView = TKUINotificationView.newInstance()
+  
   var tripMapManager: TKUITripMapManager? { mapManager as? TKUITripMapManager }
 
   public init(trip: Trip, index: Int? = nil) {
@@ -132,6 +134,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       presentedTrip: presentedTrip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
+        alertsEnabled: notificationFooterView.notificationSwitch.rx.value.asSignal(onErrorSignalWith: .empty()),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
@@ -162,13 +165,14 @@ public class TKUITripOverviewCard: TKUITableCard {
         tableView.tableHeaderView = self?.buildActionsView(from: actions.0, trip: actions.1)
       })
       .disposed(by: disposeBag)
-    
+
+    let footerContent = Driver.combineLatest(viewModel.dataSources, viewModel.geofenceKinds)
     isVisible.asDriver(onErrorJustReturn: true)
       .filter { $0 }
-      .withLatestFrom(viewModel.dataSources)
-      .drive(onNext: { [weak self] dataSources in
+      .withLatestFrom(footerContent)
+      .drive(onNext: { [weak self] dataSources, geofenceKinds in
         tableView.tableFooterView = self?.buildTableFooterView()
-        self?.showNotification(in: tableView)
+        self?.showNotification(for: geofenceKinds, in: tableView)
         self?.showAttribution(for: dataSources, in: tableView)
       })
       .disposed(by: disposeBag)
@@ -279,15 +283,15 @@ extension TKUITripOverviewCard {
 
 extension TKUITripOverviewCard {
   
-  private func showNotification(in tableView: UITableView) {
+  private func showNotification(for geofenceKinds: Set<TKAPI.Geofence.MessageKind>, in tableView: UITableView) {
     guard let tableFooterView = tableView.tableFooterView as? UIStackView
     else {
       return
     }
     
-    let footer = TKUINotificationView.newInstance()
+    let footer = self.notificationFooterView
+    footer.updateAvailableKinds(geofenceKinds)
     footer.backgroundColor = tableView.backgroundColor
-    footer.configure(with: viewModel)
     
     tableFooterView.addArrangedSubview(footer)
     tableFooterView.layoutIfNeeded()
