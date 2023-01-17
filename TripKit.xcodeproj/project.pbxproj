@@ -869,6 +869,8 @@
 		F18615CE2973E07E00632FD4 /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = F18615CD2973E07E00632FD4 /* GeoMonitor */; };
 		F1E9B01F29439010007F171A /* TKUINotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E9B01E29439010007F171A /* TKUINotificationView.swift */; };
 		F1E9B02129439032007F171A /* TKUINotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1E9B02029439032007F171A /* TKUINotificationView.xib */; };
+		F1EB54A7297706DD00CA4708 /* TKNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKNotificationManager.swift */; };
+		F1EB54A8297706DD00CA4708 /* TKNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKNotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1652,6 +1654,7 @@
 		F19723022973DB1F00C33217 /* tripgo-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tripgo-ios"; path = ../..; sourceTree = "<group>"; };
 		F1E9B01E29439010007F171A /* TKUINotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationView.swift; sourceTree = "<group>"; };
 		F1E9B02029439032007F171A /* TKUINotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUINotificationView.xib; sourceTree = "<group>"; };
+		F1EB54A6297706DD00CA4708 /* TKNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2034,6 +2037,7 @@
 				3AFF263926C6975F007809CD /* TKRegionManager.swift */,
 				3AFF263326C6975F007809CD /* TKStyleManager.swift */,
 				F13FD8EB29741CF2006C338D /* TKGeoMonitorManager.swift */,
+				F1EB54A6297706DD00CA4708 /* TKNotificationManager.swift */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -3459,6 +3463,7 @@
 				3AFF284E26C6978A007809CD /* Loc+TripKitBookings.swift in Sources */,
 				3AFF293E26C6980D007809CD /* TKAnnotationClusterer.swift in Sources */,
 				3AFF29A226C6985D007809CD /* NSManagedObject+TKPersistence.m in Sources */,
+				F1EB54A8297706DD00CA4708 /* TKNotificationManager.swift in Sources */,
 				3AFF298F26C69850007809CD /* LossyArray.swift in Sources */,
 				3AFF286926C697A3007809CD /* TKObjcDateHelper.swift in Sources */,
 				3AFF284326C6977C007809CD /* Trip+Shareable.swift in Sources */,
@@ -3947,6 +3952,7 @@
 				3AFF28A326C697CB007809CD /* AlertAPIModels.swift in Sources */,
 				3AFF297B26C69837007809CD /* TKStyleManager+UIKit.swift in Sources */,
 				3AFF28A226C697CB007809CD /* UserAPIModel.swift in Sources */,
+				F1EB54A7297706DD00CA4708 /* TKNotificationManager.swift in Sources */,
 				3AFF29B526C69863007809CD /* TKConstants.m in Sources */,
 				3AFF294826C6981D007809CD /* TKQuickBookingHelper.swift in Sources */,
 				3AFF290C26C697DA007809CD /* TKLocationTypes.swift in Sources */,

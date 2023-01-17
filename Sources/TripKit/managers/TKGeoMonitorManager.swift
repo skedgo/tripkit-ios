@@ -51,8 +51,9 @@ public class TKGeoMonitorManager: NSObject {
   }
   
   public func getPreference(for trip: Trip) -> Bool {
-    guard let identifiers = enabledIdentifiers(),
-          let identifier = identifier(from: trip)
+    let identifiers = enabledIdentifiers()
+    
+    guard let identifier = identifier(from: trip)
     else {
       return false
     }
@@ -93,8 +94,8 @@ public class TKGeoMonitorManager: NSObject {
   }
   
   /// This contains the list of trip ids that the user had set Alerts on.
-  private func enabledIdentifiers() -> [String]? {
-    return UserDefaults.shared.stringArray(forKey: Keys.alertsEnabled)
+  private func enabledIdentifiers() -> [String] {
+    return UserDefaults.shared.stringArray(forKey: Keys.alertsEnabled) ?? []
   }
   
   private func identifier(from trip: Trip) -> String? {
@@ -139,7 +140,7 @@ public class TKGeoMonitorManager: NSObject {
     geoMonitor.stopMonitoring()
   }
 
-  func notify(with geofence: TKAPI.Geofence) {
+  private func notify(with geofence: TKAPI.Geofence) {
     let notification = UNMutableNotificationContent()
     notification.title = geofence.messageTitle
     notification.body = geofence.messageBody
@@ -151,6 +152,7 @@ public class TKGeoMonitorManager: NSObject {
       trigger: nil // Fire right away
     )
     
+    TKNotificationManager.shared.requests.append(request)
     // TODO: Send out this notification request to TripGo (This is in TripKit)
   }
   
