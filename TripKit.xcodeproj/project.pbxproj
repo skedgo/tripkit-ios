@@ -1649,9 +1649,7 @@
 		D3AB4793273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIModePickerLayoutHelper.swift; sourceTree = "<group>"; };
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
 		D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripSegmentModeTitleTest.swift; sourceTree = "<group>"; };
-		F11829FF2973DAC40043F4CD /* tripgo-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tripgo-ios"; path = ../..; sourceTree = "<group>"; };
 		F13FD8EB29741CF2006C338D /* TKGeoMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGeoMonitorManager.swift; sourceTree = "<group>"; };
-		F19723022973DB1F00C33217 /* tripgo-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tripgo-ios"; path = ../..; sourceTree = "<group>"; };
 		F1E9B01E29439010007F171A /* TKUINotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationView.swift; sourceTree = "<group>"; };
 		F1E9B02029439032007F171A /* TKUINotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUINotificationView.xib; sourceTree = "<group>"; };
 		F1EB54A6297706DD00CA4708 /* TKNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKNotificationManager.swift; sourceTree = "<group>"; };
@@ -1736,8 +1734,6 @@
 		3AB6C6161D1CD0060089F687 = {
 			isa = PBXGroup;
 			children = (
-				F11829FF2973DAC40043F4CD /* tripgo-ios */,
-				F19723022973DB1F00C33217 /* tripgo-ios */,
 				3A6DF065202C8C1F0084CB2C /* Metadata */,
 				3AFF25E926C6975F007809CD /* Sources */,
 				3AFF2A0B26C69A96007809CD /* Tests */,
