@@ -13,39 +13,13 @@ typealias Publisher = ([UNNotificationRequest]) -> Void
 public class TKNotificationManager: NSObject {
   
   // List down Notification contexts here
-  let subscriptions: [NotificationSubscription] = [.init(context: .tripAlerts)]
+  let subscriptions: [TKNotificationSubscription] = [.init(context: .tripAlerts)]
   
   @objc(sharedInstance)
   public static let shared = TKNotificationManager()
   
-  public var requests: [UNNotificationRequest] = []
-  
-  public func isSubscribed(to context: NotificationSubscription.Context) -> Bool {
-    guard let subscription = getNotificationSubscription(from: context)
-    else {
-      return false
-    }
-    
-    return subscription.isSubscribed()
-  }
-  
-  public func add(request: UNNotificationRequest, for context: NotificationSubscription.Context) {
-    guard let subscription = getNotificationSubscription(from: context)
-    else {
-      TKLog.warn("Adding a request to a context that is not yet available yet or unrecognized")
-      return
-    }
-    
-    subscription.add(request: request)
-  }
-  
-  public func clearRequests() {
-    subscriptions.forEach { subscription in
-      subscription.clearRequests()
-    }
-  }
-  
-  public func subscribe(to context: NotificationSubscription.Context, updates: @escaping ([UNNotificationRequest]) -> Void) {
+  /// Clears all the requests for all notification subscriptions
+  public func subscribe(to context: TKNotificationSubscription.Context, updates: @escaping ([UNNotificationRequest]) -> Void) {
     guard let subscription = getNotificationSubscription(from: context)
     else {
       TKLog.warn("Subscribed to a context that is not yet available yet or unrecognized")
@@ -55,7 +29,55 @@ public class TKNotificationManager: NSObject {
     subscription.subscribe(updates)
   }
   
-  func getNotificationSubscription(from context: NotificationSubscription.Context) -> NotificationSubscription? {
+  /// Gets the list of requests that are pending for the provided notification context
+  public func getRequests(from context: TKNotificationSubscription.Context) -> [UNNotificationRequest] {
+    guard let subscription = getNotificationSubscription(from: context)
+    else {
+      return []
+    }
+    
+    return subscription.getRequests()
+  }
+  
+  /// Determines if the provided notification context is subscribed or not
+  public func isSubscribed(to context: TKNotificationSubscription.Context) -> Bool {
+    guard let subscription = getNotificationSubscription(from: context)
+    else {
+      return false
+    }
+    
+    return subscription.isSubscribed()
+  }
+  
+  /// Clears the requests for the provided notification context
+  public func clearRequests(of context: TKNotificationSubscription.Context) {
+    guard let subscription = getNotificationSubscription(from: context)
+    else {
+      return
+    }
+    
+    subscription.clearRequests()
+  }
+  
+  /// Clears all the requests for all notification subscriptions
+  public func clearAllRequests() {
+    subscriptions.forEach { subscription in
+      subscription.clearRequests()
+    }
+  }
+  
+  /// Adds a notification request for the provided context
+  func add(request: UNNotificationRequest, for context: TKNotificationSubscription.Context) {
+    guard let subscription = getNotificationSubscription(from: context)
+    else {
+      TKLog.warn("Adding a request to a context that is not yet available yet or unrecognized")
+      return
+    }
+    
+    subscription.add(request: request)
+  }
+  
+  func getNotificationSubscription(from context: TKNotificationSubscription.Context) -> TKNotificationSubscription? {
     guard let subscription = subscriptions.first(where: { $0.context == context })
     else {
       return nil
@@ -66,12 +88,12 @@ public class TKNotificationManager: NSObject {
   
 }
 
-public class NotificationSubscription {
+public class TKNotificationSubscription {
   public enum Context {
     case tripAlerts
     case none
     
-    var identifier: String {
+    public var identifier: String {
       let base = "tripkit.notification."
       var append: String
       switch self {
@@ -88,6 +110,10 @@ public class NotificationSubscription {
   
   init(context: Context) {
     self.context = context
+  }
+  
+  public func getRequests() -> [UNNotificationRequest] {
+    return requests
   }
   
   public func isSubscribed() -> Bool {
