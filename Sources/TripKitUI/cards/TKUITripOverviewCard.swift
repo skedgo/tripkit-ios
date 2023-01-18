@@ -284,7 +284,8 @@ extension TKUITripOverviewCard {
 extension TKUITripOverviewCard {
   
   private func showNotification(for geofenceKinds: Set<TKAPI.Geofence.MessageKind>, in tableView: UITableView) {
-    guard let tableFooterView = tableView.tableFooterView as? UIStackView
+    guard TKNotificationManager.shared.isSubscribed(to: .tripAlerts),
+          let tableFooterView = tableView.tableFooterView as? UIStackView
     else {
       return
     }

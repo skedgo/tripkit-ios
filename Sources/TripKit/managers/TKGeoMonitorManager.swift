@@ -62,6 +62,10 @@ public class TKGeoMonitorManager: NSObject {
   }
   
   public func setAlertsEnabled(_ enabled: Bool, for trip: Trip) {
+    if enabled,
+       !TKNotificationManager.shared.isSubscribed(to: .tripAlerts) {
+      TKLog.warn("TKNotificationManager is not subscribed yet, location updates will not be notified")
+    }
     setPreference(alertsEnabled: enabled, for: trip)
     
     guard enabled
@@ -152,7 +156,7 @@ public class TKGeoMonitorManager: NSObject {
       trigger: nil // Fire right away
     )
     
-    TKNotificationManager.shared.add(request: request)
+    TKNotificationManager.shared.add(request: request, for: .tripAlerts)
   }
   
 }

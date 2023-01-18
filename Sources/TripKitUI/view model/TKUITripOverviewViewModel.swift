@@ -13,7 +13,7 @@ import RxCocoa
 
 import TripKit
 
-class TKUITripOverviewViewModel: NSObject {
+class TKUITripOverviewViewModel {
   
   struct UIInput {
     var selected: Signal<Item> = .empty()
