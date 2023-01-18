@@ -8,6 +8,8 @@
 
 import Foundation
 
+import UserNotifications
+
 typealias Publisher = ([UNNotificationRequest]) -> Void
 
 public class TKNotificationManager: NSObject {
