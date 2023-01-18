@@ -9,7 +9,7 @@
 import Foundation
 
 public class TKNotificationManager: NSObject {
-  private typealias Publisher = () -> Void
+  private typealias Publisher = ([UNNotificationRequest]) -> Void
   
   public static let identifier = "tripkit.notification"
   
@@ -23,14 +23,14 @@ public class TKNotificationManager: NSObject {
   public func add(request: UNNotificationRequest) {
     requests.append(request)
     
-    publisher?()
+    publisher?(requests)
   }
   
   public func clearRequests() {
     requests.removeAll()
   }
   
-  public func subscribe(_ updates: @escaping () -> Void) {
+  public func subscribe(_ updates: @escaping ([UNNotificationRequest]) -> Void) {
     self.publisher = updates
   }
   
