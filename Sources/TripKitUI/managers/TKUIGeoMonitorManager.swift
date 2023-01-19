@@ -1,5 +1,5 @@
 //
-//  TKGeoMonitorManager.swift
+//  TKUIGeoMonitorManager.swift
 //  TripKitUI-iOS
 //
 //  Created by Jules Ian Gilos on 1/12/23.
@@ -17,14 +17,15 @@ import UserNotifications
 /// Requirements:
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
-public class TKGeoMonitorManager: NSObject {
+/// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
+public class TKUIGeoMonitorManager: NSObject {
   
   private enum Keys {
     static let alertsEnabled = "GODefaultGetOffAlertsEnabled"
   }
   
   @objc(sharedInstance)
-  public static let shared = TKGeoMonitorManager()
+  public static let shared = TKUIGeoMonitorManager()
   
   private lazy var geoMonitor: GeoMonitor = {
     return .init(enabledKey: Keys.alertsEnabled) { [weak self] _ in
@@ -63,8 +64,8 @@ public class TKGeoMonitorManager: NSObject {
   
   public func setAlertsEnabled(_ enabled: Bool, for trip: Trip) {
     if enabled,
-       !TKNotificationManager.shared.isSubscribed(to: .tripAlerts) {
-      TKLog.warn("TKNotificationManager is not subscribed yet, location updates will not be notified")
+       !TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
+      TKLog.warn("TKUINotificationManager is not subscribed yet, location updates will not be notified")
     }
     setPreference(alertsEnabled: enabled, for: trip)
     
@@ -156,7 +157,7 @@ public class TKGeoMonitorManager: NSObject {
       trigger: nil // Fire right away
     )
     
-    TKNotificationManager.shared.add(request: request, for: .tripAlerts)
+    TKUINotificationManager.shared.add(request: request, for: .tripAlerts)
   }
   
 }

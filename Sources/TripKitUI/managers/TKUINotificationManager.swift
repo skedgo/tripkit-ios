@@ -1,5 +1,5 @@
 //
-//  TKNotificationManager.swift
+//  TKUINotificationManager.swift
 //  TripKit
 //
 //  Created by Jules Ian Gilos on 1/16/23.
@@ -12,13 +12,13 @@ import UserNotifications
 
 typealias Publisher = ([UNNotificationRequest]) -> Void
 
-public class TKNotificationManager: NSObject {
+public class TKUINotificationManager: NSObject {
   
   // List down Notification contexts here
   let subscriptions: [TKNotificationSubscription] = [.init(context: .tripAlerts)]
   
   @objc(sharedInstance)
-  public static let shared = TKNotificationManager()
+  public static let shared = TKUINotificationManager()
   
   /// Clears all the requests for all notification subscriptions
   public func subscribe(to context: TKNotificationSubscription.Context, updates: @escaping ([UNNotificationRequest]) -> Void) {
@@ -129,7 +129,7 @@ public class TKNotificationSubscription {
   
   public func subscribe(_ updates: @escaping ([UNNotificationRequest]) -> Void) {
     if isSubscribed() {
-      TKLog.warn("TKNotificationManager is already subscribed, the old subscriber will not get updates anymore.")
+      TKLog.warn("TKUINotificationManager is already subscribed, the old subscriber will not get updates anymore.")
     }
     
     publisher = updates

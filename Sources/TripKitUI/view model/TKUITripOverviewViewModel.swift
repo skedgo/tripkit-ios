@@ -67,9 +67,9 @@ class TKUITripOverviewViewModel {
       .withLatestFrom(tripUpdated) { ($1, $0) }
       .compactMap { trip, enabled -> Next? in
         if enabled {
-          TKGeoMonitorManager.shared.monitorRegions(from: trip)
+          TKUIGeoMonitorManager.shared.monitorRegions(from: trip)
         } else {
-          TKGeoMonitorManager.shared.stopMonitoring()
+          TKUIGeoMonitorManager.shared.stopMonitoring()
         }
         return nil
       }
