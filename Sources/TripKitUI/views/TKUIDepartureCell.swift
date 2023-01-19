@@ -22,6 +22,7 @@ struct TKUIDepartureCellContent {
   var serviceShortName: String?
   var serviceColor: UIColor?
   var serviceIsCanceled: Bool
+  var serviceOperatorName: String?
 
   var accessibilityLabel: String?
   var accessibilityTimeText: String?
@@ -115,7 +116,16 @@ extension TKUIDepartureCell {
     serviceColorView.backgroundColor = serviceColor
     
     titleLabel.attributedText = dataSource.timeText
-    subtitleLabel.text = dataSource.lineText
+    
+    var subtitle = dataSource.lineText
+    if let operatorName = dataSource.serviceOperatorName {
+      if let existing = subtitle {
+        subtitle = existing + "\n" + operatorName
+      } else {
+        subtitle = operatorName
+      }
+    }
+    subtitleLabel.text = subtitle
     
     updateAccessibilitySection()
     updateRealTime()
