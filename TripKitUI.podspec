@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   }
   s.source       = { git: "https://github.com/skedgo/tripkit-ios.git", tag: "#{s.version}" }
   s.swift_version = '5.5'
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '14.0'
   s.requires_arc = true
   
   s.frameworks = ['UIKit', 'MapKit']
@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.dependency 'TripKit', "~> #{s.version}"
 
   s.dependency 'TGCardViewController', '>= 2.1'
+  s.dependency 'GeoMonitor', '~> 0.1'
   
   s.dependency 'RxSwift', '~> 6.5'
   s.dependency 'RxCocoa', '~> 6.5'
