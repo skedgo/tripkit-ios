@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,14 +17,14 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="25R-dz-Nwr">
                     <rect key="frame" x="16" y="8" width="302" height="102"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="E84 at 3:35pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="126.5" height="23"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="E84 at 3:35pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="143" height="26.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                             <color key="textColor" red="0.097280979160000003" green="0.090294875199999999" blue="0.23543129860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MfX-Iw-wtY">
-                            <rect key="frame" x="0.0" y="31" width="224.5" height="24"/>
+                            <rect key="frame" x="0.0" y="34.5" width="260" height="24"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r1s-7w-aJM">
                                     <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -33,10 +34,10 @@
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zTd-aC-Zmm">
-                                    <rect key="frame" x="28" y="5" width="31" height="14.5"/>
+                                    <rect key="frame" x="28" y="4" width="32.5" height="16"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="E84" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOr-po-JDX" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
-                                            <rect key="frame" x="4" y="0.0" width="23" height="14.5"/>
+                                            <rect key="frame" x="4" y="0.0" width="24.5" height="16"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" systemColor="lightTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -55,16 +56,22 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Stand C, Mona vale Junction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccR-Sw-Z6F" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
-                                    <rect key="frame" x="63" y="5" width="161.5" height="14.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Stand C, Mona vale Junction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccR-Sw-Z6F" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
+                                    <rect key="frame" x="64.5" y="3" width="195.5" height="18"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                         </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psb-f5-aiV" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="66.5" width="37.5" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" name="TKLabelSecondary"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-MQ-3CG">
-                            <rect key="frame" x="0.0" y="63" width="302" height="39"/>
+                            <rect key="frame" x="0.0" y="92.5" width="302" height="9.5"/>
                         </stackView>
                     </subviews>
                 </stackView>
@@ -92,6 +99,7 @@
                 <outlet property="dismissButton" destination="nv4-5c-QYr" id="ECc-j4-pAD"/>
                 <outlet property="serviceColorView" destination="zTd-aC-Zmm" id="d8Y-0z-2vS"/>
                 <outlet property="serviceImageView" destination="r1s-7w-aJM" id="flS-B7-Txx"/>
+                <outlet property="serviceOperatorLabel" destination="psb-f5-aiV" id="0ZY-CC-r6F"/>
                 <outlet property="serviceShortNameLabel" destination="hOr-po-JDX" id="WLR-84-OcN"/>
                 <outlet property="serviceTimeLabel" destination="ccR-Sw-Z6F" id="GeU-yw-IN9"/>
                 <outlet property="serviceTitleLabel" destination="wEO-Bf-P7i" id="5Eq-3z-LKU"/>
@@ -100,6 +108,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="TKLabelSecondary">
+            <color red="0.12549019607843137" green="0.15686274509803921" blue="0.20000000000000001" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="lightTextColor">
             <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

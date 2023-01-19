@@ -22,7 +22,12 @@ public extension TKUITimetableCard {
     private init() {}
     
     static let empty = Configuration()
-    
+
+    /// Set this to `true` to show the operator of each service on the timetable and service cards.
+    ///
+    /// Default is `false`.
+    public var showOperatorNames: Bool = false
+
     // MARK: - Customising timetable actions
     
     /// Set this to add a list of action buttons to a timeable card.
@@ -41,6 +46,7 @@ public extension TKUITimetableCard {
     /// - note: This only applies to actions that are arranged in a compact
     ///     layout
     public var showTimetableActionTitle: Bool = false
+    
   }
   
 }

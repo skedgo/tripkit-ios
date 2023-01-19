@@ -36,6 +36,7 @@ extension TKUIDepartureCellContent {
       serviceShortName: service.shortIdentifier,
       serviceColor: serviceColor,
       serviceIsCanceled: service.isCanceled,
+      serviceOperatorName: TKUITimetableCard.config.showOperatorNames ? service.operatorName : nil,
       accessibilityLabel: embarkation.accessibilityDescription(includeRealTime: true),
       accessibilityTimeText: embarkation.buildTimeText(spacer: ";").string,
       timeText: embarkation.buildTimeText(),

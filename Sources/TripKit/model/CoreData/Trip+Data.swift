@@ -15,4 +15,10 @@ extension Trip {
     get { decodePrimitive(String.self, key: "bundleId") }
     set { encodePrimitive(newValue, key: "bundleId") }
   }
+  
+  /// Unique ID of the trip, which may change if the trip is saved in permanent storage (although it is unlikely).
+  public var tripId: String? {
+    get { decodePrimitive(String.self, key: "tripId") }
+    set { encodePrimitive(newValue, key: "tripId") }
+  }
 }
