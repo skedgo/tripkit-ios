@@ -25,6 +25,8 @@
 		3A1AABB926CB7BB100FDDB06 /* TKVehicular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABB726CB7BB100FDDB06 /* TKVehicular.swift */; };
 		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
+		3A41FD2B2978F5DF00841E61 /* TKUIGeoMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKUIGeoMonitorManager.swift */; };
+		3A41FD2C2978F5DF00841E61 /* TKUINotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */; };
 		3A55D16626FC5C5800A3D6EB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A55D16526FC5C5800A3D6EB /* Kingfisher */; };
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
 		3AA1092126FABC6000C52879 /* TKReporter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */; };
@@ -865,12 +867,8 @@
 		D3AB4794273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB4793273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift */; };
 		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
 		D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */; };
-		F13FD8ED29742308006C338D /* TKUIGeoMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKUIGeoMonitorManager.swift */; };
-		F13FD8EE29742310006C338D /* TKUIGeoMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKUIGeoMonitorManager.swift */; };
 		F1E9B01F29439010007F171A /* TKUINotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E9B01E29439010007F171A /* TKUINotificationView.swift */; };
 		F1E9B02129439032007F171A /* TKUINotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1E9B02029439032007F171A /* TKUINotificationView.xib */; };
-		F1EB54A7297706DD00CA4708 /* TKUINotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */; };
-		F1EB54A8297706DD00CA4708 /* TKUINotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3467,7 +3465,6 @@
 				3AFF284E26C6978A007809CD /* Loc+TripKitBookings.swift in Sources */,
 				3AFF293E26C6980D007809CD /* TKAnnotationClusterer.swift in Sources */,
 				3AFF29A226C6985D007809CD /* NSManagedObject+TKPersistence.m in Sources */,
-				F1EB54A8297706DD00CA4708 /* TKUINotificationManager.swift in Sources */,
 				3AFF298F26C69850007809CD /* LossyArray.swift in Sources */,
 				3AFF286926C697A3007809CD /* TKObjcDateHelper.swift in Sources */,
 				3AFF284326C6977C007809CD /* Trip+Shareable.swift in Sources */,
@@ -3595,7 +3592,6 @@
 				3AFF2A0626C69994007809CD /* NSDate+Formatting.swift in Sources */,
 				3AFF299226C69850007809CD /* ISO8601OrSecondsSince1970.swift in Sources */,
 				3AFF28D626C697D9007809CD /* SegmentTemplate+Data.swift in Sources */,
-				F13FD8EE29742310006C338D /* TKUIGeoMonitorManager.swift in Sources */,
 				3AFF28B626C697D9007809CD /* StopLocation+CoreDataProperties.swift in Sources */,
 				3AFF293F26C6980D007809CD /* TKTripGoGeocoder.swift in Sources */,
 				3AFF29E026C69864007809CD /* TKSettings.m in Sources */,
@@ -3787,6 +3783,7 @@
 				3AFF2B0526C69B56007809CD /* TKUITripOverviewCard.swift in Sources */,
 				3AFF2B3226C69B85007809CD /* TKUIHomeViewModel+Next.swift in Sources */,
 				3AFF2B4C26C69BA4007809CD /* TKUIResultsSectionFooterView.swift in Sources */,
+				3A41FD2B2978F5DF00841E61 /* TKUIGeoMonitorManager.swift in Sources */,
 				3AFF2B0F26C69B63007809CD /* TKUIHomeViewController.swift in Sources */,
 				3AFF2B8A26C69BBE007809CD /* TKUICardActionsView.swift in Sources */,
 				3AFF2B9A26C69BC9007809CD /* TKUITrainOccupancyView.swift in Sources */,
@@ -3797,6 +3794,7 @@
 				3AFF2BBA26C69BE7007809CD /* StopVisits+RealTimeColor.swift in Sources */,
 				3AFF2AE826C69B56007809CD /* TKUISegmentInstructionsCard.swift in Sources */,
 				3AFF2B2D26C69B85007809CD /* TKUITimetableViewModel.swift in Sources */,
+				3A41FD2C2978F5DF00841E61 /* TKUINotificationManager.swift in Sources */,
 				3AFF2B1926C69B85007809CD /* TKUIRoutingResultsViewModel.swift in Sources */,
 				3AFF2BBE26C69BE7007809CD /* TKRealTimeHelper.swift in Sources */,
 				3AFF2BDA26C69BFC007809CD /* String+IdentifiableType.swift in Sources */,
@@ -3927,7 +3925,6 @@
 				3AFF284526C6978A007809CD /* Loc+TripKitBookings.swift in Sources */,
 				3AFF293026C6980D007809CD /* TKAnnotationClusterer.swift in Sources */,
 				3AFF299726C6985C007809CD /* NSManagedObject+TKPersistence.m in Sources */,
-				F13FD8ED29742308006C338D /* TKUIGeoMonitorManager.swift in Sources */,
 				3AFF298726C6984F007809CD /* LossyArray.swift in Sources */,
 				3AFF285B26C697A3007809CD /* TKObjcDateHelper.swift in Sources */,
 				3AFF283B26C6977B007809CD /* Trip+Shareable.swift in Sources */,
@@ -3956,7 +3953,6 @@
 				3AFF28A326C697CB007809CD /* AlertAPIModels.swift in Sources */,
 				3AFF297B26C69837007809CD /* TKStyleManager+UIKit.swift in Sources */,
 				3AFF28A226C697CB007809CD /* UserAPIModel.swift in Sources */,
-				F1EB54A7297706DD00CA4708 /* TKUINotificationManager.swift in Sources */,
 				3AFF29B526C69863007809CD /* TKConstants.m in Sources */,
 				3AFF294826C6981D007809CD /* TKQuickBookingHelper.swift in Sources */,
 				3AFF290C26C697DA007809CD /* TKLocationTypes.swift in Sources */,

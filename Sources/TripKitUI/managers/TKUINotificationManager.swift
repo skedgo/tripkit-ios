@@ -10,6 +10,8 @@ import Foundation
 
 import UserNotifications
 
+import TripKit
+
 typealias Publisher = ([UNNotificationRequest]) -> Void
 
 public class TKUINotificationManager: NSObject {

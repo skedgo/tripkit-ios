@@ -7,7 +7,7 @@ let package = Package(
   name: "TripKit",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v13),
+    .iOS(.v14),
     .macOS(.v11),
   ],
   products: [
