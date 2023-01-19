@@ -7,7 +7,7 @@ let package = Package(
   name: "TripKit",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v13),
+    .iOS(.v14),
     .macOS(.v11),
   ],
   products: [
@@ -22,6 +22,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.1.0")),
     .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.0.0")),
+    .package(url: "https://github.com/skedgo/GeoMonitor.git", .upToNextMajor(from: "0.1.0")),
     .package(url: "https://github.com/skedgo/TGCardViewController.git", .upToNextMajor(from: "2.1.0")),
   ],
   targets: [
@@ -43,6 +44,7 @@ let package = Package(
         "Kingfisher",
         .product(name: "RxCocoa", package: "RxSwift"),
         "TGCardViewController",
+        "GeoMonitor",
       ],
       exclude: ["Supporting Files/Info.plist"]
     ),
