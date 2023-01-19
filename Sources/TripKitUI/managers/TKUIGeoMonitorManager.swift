@@ -144,6 +144,9 @@ public class TKUIGeoMonitorManager: NSObject {
   public func stopMonitoring() {
     geoMonitor.enableInBackground = false
     geoMonitor.stopMonitoring()
+    
+    // inverse of `monitorRegion(from:)`
+    self.geofences = []
   }
 
   private func notify(with geofence: TKAPI.Geofence) {
