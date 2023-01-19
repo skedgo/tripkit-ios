@@ -129,7 +129,7 @@ public class TKSegment: NSObject {
   
   @objc public lazy var modeInfo: TKModeInfo? = template?.modeInfo
   
-  public lazy var geofences: [TKAPI.Geofence] = template?.geofences ?? []
+  public lazy var notifications: [TKAPI.TripNotification] = template?.notifications ?? []
   
   public var templateHashCode: Int { template?.hashCode?.intValue ?? 0 }
   

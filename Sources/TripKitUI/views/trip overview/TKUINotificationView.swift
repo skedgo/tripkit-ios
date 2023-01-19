@@ -48,12 +48,12 @@ class TKUINotificationView: UIView {
     titleImageView.tintColor = .tkAppTintColor
   }
   
-  func updateAvailableKinds(_ geofenceKinds: Set<TKAPI.Geofence.MessageKind>) {
-    detailView1.alpha = geofenceKinds.contains(.tripStart) ? 1 : 0.3
-    detailView2.alpha = geofenceKinds.contains(.arrivingAtYourStop) ? 1 : 0.3
-    detailView3.alpha = geofenceKinds.contains(.nextStopIsYours) ? 1 : 0.3
-    detailView4.alpha = geofenceKinds.contains(.tripEnd) ? 1 : 0.3
-    notificationSwitch.isEnabled = !geofenceKinds.isEmpty
+  func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>) {
+    detailView1.alpha = notificationKinds.contains(.tripStart) ? 1 : 0.3
+    detailView2.alpha = notificationKinds.contains(.arrivingAtYourStop) ? 1 : 0.3
+    detailView3.alpha = notificationKinds.contains(.nextStopIsYours) ? 1 : 0.3
+    detailView4.alpha = notificationKinds.contains(.tripEnd) ? 1 : 0.3
+    notificationSwitch.isEnabled = !notificationKinds.isEmpty
   }
   
 }

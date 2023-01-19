@@ -166,13 +166,13 @@ public class TKUITripOverviewCard: TKUITableCard {
       })
       .disposed(by: disposeBag)
 
-    let footerContent = Driver.combineLatest(viewModel.dataSources, viewModel.geofenceKinds)
+    let footerContent = Driver.combineLatest(viewModel.dataSources, viewModel.notificationKinds)
     isVisible.asDriver(onErrorJustReturn: true)
       .filter { $0 }
       .withLatestFrom(footerContent)
-      .drive(onNext: { [weak self] dataSources, geofenceKinds in
+      .drive(onNext: { [weak self] dataSources, notificationKinds in
         tableView.tableFooterView = self?.buildTableFooterView()
-        self?.showNotification(for: geofenceKinds, in: tableView)
+        self?.showNotification(for: notificationKinds, in: tableView)
         self?.showAttribution(for: dataSources, in: tableView)
       })
       .disposed(by: disposeBag)
@@ -283,7 +283,7 @@ extension TKUITripOverviewCard {
 
 extension TKUITripOverviewCard {
   
-  private func showNotification(for geofenceKinds: Set<TKAPI.Geofence.MessageKind>, in tableView: UITableView) {
+  private func showNotification(for notificationKinds: Set<TKAPI.TripNotification.MessageKind>, in tableView: UITableView) {
     guard TKUINotificationManager.shared.isSubscribed(to: .tripAlerts),
           let tableFooterView = tableView.tableFooterView as? UIStackView
     else {
@@ -291,7 +291,7 @@ extension TKUITripOverviewCard {
     }
     
     let footer = self.notificationFooterView
-    footer.updateAvailableKinds(geofenceKinds)
+    footer.updateAvailableKinds(notificationKinds)
     footer.backgroundColor = tableView.backgroundColor
     
     tableFooterView.addArrangedSubview(footer)

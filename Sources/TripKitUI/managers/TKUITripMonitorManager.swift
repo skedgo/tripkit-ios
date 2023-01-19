@@ -1,5 +1,5 @@
 //
-//  TKUIGeoMonitorManager.swift
+//  TKUITripMonitorManager.swift
 //  TripKitUI-iOS
 //
 //  Created by Jules Ian Gilos on 1/12/23.
@@ -13,20 +13,20 @@ import CoreLocation
 import GeoMonitor
 import TripKit
 
-/// The manager for geofence-based alerts for a trip, e.g., "get off at the next stop"
+/// The manager for geofence-based alerts for a trip, e.g., "get off at the next stop" or "your trip is about to start"
 ///
 /// Requirements:
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 /// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
-public class TKUIGeoMonitorManager: NSObject {
+public class TKUITripMonitorManager: NSObject {
   
   private enum Keys {
     static let alertsEnabled = "GODefaultGetOffAlertsEnabled"
   }
   
   @objc(sharedInstance)
-  public static let shared = TKUIGeoMonitorManager()
+  public static let shared = TKUITripMonitorManager()
   
   private lazy var geoMonitor: GeoMonitor = {
     return .init(enabledKey: Keys.alertsEnabled) { [weak self] _ in
@@ -46,7 +46,7 @@ public class TKUIGeoMonitorManager: NSObject {
     }
   }()
   
-  var geofences: [(TKAPI.Geofence, CLCircularRegion)] = []
+  var geofences: [(TKAPI.TripNotification, CLCircularRegion)] = []
   
   override init() {
     super.init()
@@ -115,16 +115,19 @@ public class TKUIGeoMonitorManager: NSObject {
   public func monitorRegions(from trip: Trip) {
     // Since only one trip can have notifications at a time, there is no need to save other trips, just need to replace the current one.
     
-    let geofences = trip.segments.flatMap(\.geofences)
+    let geofences = trip.segments.flatMap(\.notifications)
     guard !geofences.isEmpty else {
       return stopMonitoring()
     }
     
-    let pairs = geofences.map { geofence -> (TKAPI.Geofence, CLCircularRegion) in
+    let pairs = geofences.compactMap { geofence -> (TKAPI.TripNotification, CLCircularRegion)? in
       switch geofence.kind {
       case let .circle(center, radius):
         let region = CLCircularRegion(center: center, radius: radius, identifier: geofence.id)
         return (geofence, region)
+      case .time:
+        #warning("FIXME: Handle these")
+        return nil
       }
     }
     self.geofences = pairs
@@ -149,7 +152,7 @@ public class TKUIGeoMonitorManager: NSObject {
     self.geofences = []
   }
 
-  private func notify(with geofence: TKAPI.Geofence) {
+  private func notify(with geofence: TKAPI.TripNotification) {
     let notification = UNMutableNotificationContent()
     notification.title = geofence.messageTitle
     notification.body = geofence.messageBody

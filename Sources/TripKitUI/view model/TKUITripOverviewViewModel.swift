@@ -27,9 +27,9 @@ class TKUITripOverviewViewModel {
       .asDriver(onErrorDriveWith: .empty())
       .map { $0.tripGroup.sources }
     
-    geofenceKinds = presentedTrip
+    notificationKinds = presentedTrip
       .asDriver(onErrorDriveWith: .empty())
-      .map { Set($0.segments.flatMap(\.geofences).map(\.messageKind)) }
+      .map { Set($0.segments.flatMap(\.notifications).map(\.messageKind)) }
 
     let tripChanged: Observable<Trip> = presentedTrip
       .asObservable()
@@ -67,9 +67,9 @@ class TKUITripOverviewViewModel {
       .withLatestFrom(tripUpdated) { ($1, $0) }
       .compactMap { trip, enabled -> Next? in
         if enabled {
-          TKUIGeoMonitorManager.shared.monitorRegions(from: trip)
+          TKUITripMonitorManager.shared.monitorRegions(from: trip)
         } else {
-          TKUIGeoMonitorManager.shared.stopMonitoring()
+          TKUITripMonitorManager.shared.stopMonitoring()
         }
         return nil
       }
@@ -100,7 +100,7 @@ class TKUITripOverviewViewModel {
   
   let dataSources: Driver<[TKAPI.DataAttribution]>
   
-  let geofenceKinds: Driver<Set<TKAPI.Geofence.MessageKind>>
+  let notificationKinds: Driver<Set<TKAPI.TripNotification.MessageKind>>
   
   let refreshMap: Signal<Trip>
   

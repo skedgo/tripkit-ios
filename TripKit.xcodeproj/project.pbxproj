@@ -25,7 +25,7 @@
 		3A1AABB926CB7BB100FDDB06 /* TKVehicular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1AABB726CB7BB100FDDB06 /* TKVehicular.swift */; };
 		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
-		3A41FD2B2978F5DF00841E61 /* TKUIGeoMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKUIGeoMonitorManager.swift */; };
+		3A41FD2B2978F5DF00841E61 /* TKUITripMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */; };
 		3A41FD2C2978F5DF00841E61 /* TKUINotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */; };
 		3A55D16626FC5C5800A3D6EB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A55D16526FC5C5800A3D6EB /* Kingfisher */; };
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
@@ -1647,7 +1647,7 @@
 		D3AB4793273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIModePickerLayoutHelper.swift; sourceTree = "<group>"; };
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
 		D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripSegmentModeTitleTest.swift; sourceTree = "<group>"; };
-		F13FD8EB29741CF2006C338D /* TKUIGeoMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIGeoMonitorManager.swift; sourceTree = "<group>"; };
+		F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripMonitorManager.swift; sourceTree = "<group>"; };
 		F1E9B01E29439010007F171A /* TKUINotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationView.swift; sourceTree = "<group>"; };
 		F1E9B02029439032007F171A /* TKUINotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUINotificationView.xib; sourceTree = "<group>"; };
 		F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationManager.swift; sourceTree = "<group>"; };
@@ -1732,7 +1732,7 @@
 		3A9A4ABF2978F2CC0084168A /* managers */ = {
 			isa = PBXGroup;
 			children = (
-				F13FD8EB29741CF2006C338D /* TKUIGeoMonitorManager.swift */,
+				F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */,
 				F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */,
 			);
 			path = managers;
@@ -3783,7 +3783,7 @@
 				3AFF2B0526C69B56007809CD /* TKUITripOverviewCard.swift in Sources */,
 				3AFF2B3226C69B85007809CD /* TKUIHomeViewModel+Next.swift in Sources */,
 				3AFF2B4C26C69BA4007809CD /* TKUIResultsSectionFooterView.swift in Sources */,
-				3A41FD2B2978F5DF00841E61 /* TKUIGeoMonitorManager.swift in Sources */,
+				3A41FD2B2978F5DF00841E61 /* TKUITripMonitorManager.swift in Sources */,
 				3AFF2B0F26C69B63007809CD /* TKUIHomeViewController.swift in Sources */,
 				3AFF2B8A26C69BBE007809CD /* TKUICardActionsView.swift in Sources */,
 				3AFF2B9A26C69BC9007809CD /* TKUITrainOccupancyView.swift in Sources */,

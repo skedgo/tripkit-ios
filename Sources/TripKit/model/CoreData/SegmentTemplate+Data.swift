@@ -37,8 +37,8 @@ extension SegmentTemplate {
     set { encodePrimitive(newValue, key: "turnByTurnMode") }
   }
   
-  var geofences: [TKAPI.Geofence]? {
-    get { decode([TKAPI.Geofence].self, key: "geofences") }
-    set { encode((newValue?.isEmpty == false) ? newValue : nil, key: "geofences") }
+  var notifications: [TKAPI.TripNotification]? {
+    get { decode([TKAPI.TripNotification].self, key: "notifications") }
+    set { encode((newValue?.isEmpty == false) ? newValue : nil, key: "notifications") }
   }
 }
