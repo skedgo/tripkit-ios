@@ -13,7 +13,7 @@ import CoreLocation
 import GeoMonitor
 import TripKit
 
-/// The manager for geofence-based alerts for a trip, e.g., "get off at the next stop" or "your trip is about to start"
+/// The manager for trip notifications such as "get off at the next stop" or "your trip is about to start"
 ///
 /// Requirements:
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
@@ -37,7 +37,7 @@ public class TKUITripMonitorManager: NSObject {
       switch event {
       case .entered(let region, _):
         guard let match = self.geofences.first(where: { $0.1.identifier == region.identifier })?.0 else { return }
-        self.notify(with: match)
+        self.notify(with: match, trigger: nil)  // Fire right away
       case .manual(let region, let location):
         break
       case .status(let message, let status):
@@ -115,56 +115,87 @@ public class TKUITripMonitorManager: NSObject {
   public func monitorRegions(from trip: Trip) {
     // Since only one trip can have notifications at a time, there is no need to save other trips, just need to replace the current one.
     
-    let geofences = trip.segments.flatMap(\.notifications)
-    guard !geofences.isEmpty else {
+    let notifications = trip.segments.flatMap(\.notifications)
+    guard !notifications.isEmpty else {
       return stopMonitoring()
     }
     
-    let pairs = geofences.compactMap { geofence -> (TKAPI.TripNotification, CLCircularRegion)? in
-      switch geofence.kind {
-      case let .circle(center, radius):
-        let region = CLCircularRegion(center: center, radius: radius, identifier: geofence.id)
-        return (geofence, region)
+    startMonitoringRegions(from: notifications)
+    scheduleTimeBased(from: notifications)
+  }
+  
+  
+  public func stopMonitoring() {
+    stopMonitoringRegions()
+  }
+  
+  private func notify(with tripNotification: TKAPI.TripNotification, trigger: UNNotificationTrigger?) {
+    let notification = UNMutableNotificationContent()
+    notification.title = tripNotification.messageTitle
+    notification.body = tripNotification.messageBody
+    notification.sound = .default
+    
+    let request = UNNotificationRequest(
+      identifier: tripNotification.id,
+      content: notification,
+      trigger: trigger
+    )
+    
+    TKUINotificationManager.shared.add(request: request, for: .tripAlerts)
+  }
+  
+}
+
+// MARK: - Geofence-based alerts
+
+extension TKUITripMonitorManager {
+  
+  private func startMonitoringRegions(from notifications: [TKAPI.TripNotification]) {
+    let pairs: [(TKAPI.TripNotification, CLCircularRegion)] = notifications.compactMap { notification -> (TKAPI.TripNotification, CLCircularRegion)? in
+      switch notification.kind {
+      case let .circle(center, radius, _):
+        let region = CLCircularRegion(center: center, radius: radius, identifier: notification.id)
+        return (notification, region)
       case .time:
-        #warning("FIXME: Handle these")
         return nil
       }
     }
     self.geofences = pairs
     
-    startMonitoring()
+    guard !pairs.isEmpty else { return }
+    
+    geoMonitor.enableInBackground = true
+    geoMonitor.startMonitoring()
     
     Task {
       await geoMonitor.update(regions: pairs.map(\.1))
     }
   }
   
-  private func startMonitoring() {
-    geoMonitor.enableInBackground = true
-    geoMonitor.startMonitoring()
-  }
-  
-  public func stopMonitoring() {
+  private func stopMonitoringRegions() {
     geoMonitor.enableInBackground = false
     geoMonitor.stopMonitoring()
     
     // inverse of `monitorRegion(from:)`
     self.geofences = []
   }
+  
+}
 
-  private func notify(with geofence: TKAPI.TripNotification) {
-    let notification = UNMutableNotificationContent()
-    notification.title = geofence.messageTitle
-    notification.body = geofence.messageBody
-    notification.sound = .default
-    
-    let request = UNNotificationRequest(
-      identifier: geofence.id,
-      content: notification,
-      trigger: nil // Fire right away
-    )
-    
-    TKUINotificationManager.shared.add(request: request, for: .tripAlerts)
+// MARK: - Time-based alerts
+
+extension TKUITripMonitorManager {
+  
+  private func scheduleTimeBased(from notifications: [TKAPI.TripNotification]) {
+    for notification in notifications {
+      guard case let .time(fireDate) = notification.kind else { continue }
+      let fireIn = fireDate.timeIntervalSinceNow
+      
+      // Don't bother scheduling an alert for leaving sooner than a minute from now
+      guard fireIn > 60 else { continue }
+      
+      notify(with: notification, trigger: UNTimeIntervalNotificationTrigger(timeInterval: fireIn, repeats: false))
+    }
   }
   
 }

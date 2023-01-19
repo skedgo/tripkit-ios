@@ -17,13 +17,13 @@ typealias Publisher = ([UNNotificationRequest]) -> Void
 public class TKUINotificationManager: NSObject {
   
   // List down Notification contexts here
-  let subscriptions: [TKNotificationSubscription] = [.init(context: .tripAlerts)]
+  let subscriptions: [TKUINotificationSubscription] = [.init(context: .tripAlerts)]
   
   @objc(sharedInstance)
   public static let shared = TKUINotificationManager()
   
   /// Clears all the requests for all notification subscriptions
-  public func subscribe(to context: TKNotificationSubscription.Context, updates: @escaping ([UNNotificationRequest]) -> Void) {
+  public func subscribe(to context: TKUINotificationSubscription.Context, updates: @escaping ([UNNotificationRequest]) -> Void) {
     guard let subscription = getNotificationSubscription(from: context)
     else {
       TKLog.warn("Subscribed to a context that is not yet available yet or unrecognized")
@@ -34,7 +34,7 @@ public class TKUINotificationManager: NSObject {
   }
   
   /// Gets the list of requests that are pending for the provided notification context
-  public func getRequests(from context: TKNotificationSubscription.Context) -> [UNNotificationRequest] {
+  public func getRequests(from context: TKUINotificationSubscription.Context) -> [UNNotificationRequest] {
     guard let subscription = getNotificationSubscription(from: context)
     else {
       return []
@@ -44,7 +44,7 @@ public class TKUINotificationManager: NSObject {
   }
   
   /// Determines if the provided notification context is subscribed or not
-  public func isSubscribed(to context: TKNotificationSubscription.Context) -> Bool {
+  public func isSubscribed(to context: TKUINotificationSubscription.Context) -> Bool {
     guard let subscription = getNotificationSubscription(from: context)
     else {
       return false
@@ -54,7 +54,7 @@ public class TKUINotificationManager: NSObject {
   }
   
   /// Clears the requests for the provided notification context
-  public func clearRequests(of context: TKNotificationSubscription.Context) {
+  public func clearRequests(of context: TKUINotificationSubscription.Context) {
     guard let subscription = getNotificationSubscription(from: context)
     else {
       return
@@ -71,7 +71,7 @@ public class TKUINotificationManager: NSObject {
   }
   
   /// Adds a notification request for the provided context
-  func add(request: UNNotificationRequest, for context: TKNotificationSubscription.Context) {
+  func add(request: UNNotificationRequest, for context: TKUINotificationSubscription.Context) {
     guard let subscription = getNotificationSubscription(from: context)
     else {
       TKLog.warn("Adding a request to a context that is not yet available yet or unrecognized")
@@ -81,7 +81,7 @@ public class TKUINotificationManager: NSObject {
     subscription.add(request: request)
   }
   
-  func getNotificationSubscription(from context: TKNotificationSubscription.Context) -> TKNotificationSubscription? {
+  func getNotificationSubscription(from context: TKUINotificationSubscription.Context) -> TKUINotificationSubscription? {
     guard let subscription = subscriptions.first(where: { $0.context == context })
     else {
       return nil
@@ -92,7 +92,7 @@ public class TKUINotificationManager: NSObject {
   
 }
 
-public class TKNotificationSubscription {
+public class TKUINotificationSubscription {
   public enum Context {
     case tripAlerts
     case none

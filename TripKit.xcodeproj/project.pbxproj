@@ -1732,8 +1732,8 @@
 		3A9A4ABF2978F2CC0084168A /* managers */ = {
 			isa = PBXGroup;
 			children = (
-				F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */,
 				F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */,
+				F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */,
 			);
 			path = managers;
 			sourceTree = "<group>";
