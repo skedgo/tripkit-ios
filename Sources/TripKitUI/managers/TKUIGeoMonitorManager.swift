@@ -7,10 +7,11 @@
 //
 
 import Foundation
-import GeoMonitor
+import UserNotifications
 import CoreLocation
 
-import UserNotifications
+import GeoMonitor
+import TripKit
 
 /// The manager for geofence-based alerts for a trip, e.g., "get off at the next stop"
 ///
