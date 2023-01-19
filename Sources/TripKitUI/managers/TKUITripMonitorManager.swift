@@ -105,7 +105,7 @@ public class TKUITripMonitorManager: NSObject {
   }
   
   private func identifier(from trip: Trip) -> String? {
-    guard let identifier = trip.saveURL?.lastPathComponent
+    guard let identifier = trip.saveURL?.lastPathComponent ?? trip.tripId
     else {
       return nil
     }

@@ -33,6 +33,7 @@ extension TKAPI {
   }
   
   public struct Trip: Codable, Hashable {
+    public var id: String?
     @ISO8601OrSecondsSince1970 public var depart: Date
     @ISO8601OrSecondsSince1970 public var arrive: Date
     @DefaultFalse public var hideExactTimes: Bool
