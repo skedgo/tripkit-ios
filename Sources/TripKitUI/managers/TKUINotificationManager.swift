@@ -95,14 +95,12 @@ public class TKUINotificationManager: NSObject {
 public class TKUINotificationSubscription {
   public enum Context {
     case tripAlerts
-    case none
     
     public var identifier: String {
       let base = "tripkit.notification."
       var append: String
       switch self {
       case .tripAlerts: append = "trip_alerts"
-      case .none: append = "unknown"
       }
       return "\(base)\(append)"
     }
