@@ -66,6 +66,8 @@ public class TKUITripOverviewCard: TKUITableCard {
   private var titleView: TKUITripTitleView?
   private weak var tableView: UITableView?
   
+  private lazy var notificationFooterView = TKUINotificationView.newInstance()
+  
   var tripMapManager: TKUITripMapManager? { mapManager as? TKUITripMapManager }
 
   public init(trip: Trip, index: Int? = nil) {
@@ -132,6 +134,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       presentedTrip: presentedTrip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
+        alertsEnabled: notificationFooterView.notificationSwitch.rx.value.asSignal(onErrorSignalWith: .empty()),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
@@ -162,11 +165,14 @@ public class TKUITripOverviewCard: TKUITableCard {
         tableView.tableHeaderView = self?.buildActionsView(from: actions.0, trip: actions.1)
       })
       .disposed(by: disposeBag)
-    
+
+    let footerContent = Driver.combineLatest(viewModel.dataSources, viewModel.notificationKinds)
     isVisible.asDriver(onErrorJustReturn: true)
       .filter { $0 }
-      .withLatestFrom(viewModel.dataSources)
-      .drive(onNext: { [weak self] dataSources in
+      .withLatestFrom(footerContent)
+      .drive(onNext: { [weak self] dataSources, notificationKinds in
+        tableView.tableFooterView = self?.buildTableFooterView()
+        self?.showNotification(for: notificationKinds, in: tableView)
         self?.showAttribution(for: dataSources, in: tableView)
       })
       .disposed(by: disposeBag)
@@ -259,14 +265,54 @@ extension TKUITripOverviewCard {
   
 }
 
+// MARK: - Table Footer
+
+extension TKUITripOverviewCard {
+  
+  private func buildTableFooterView() -> UIStackView {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.isUserInteractionEnabled = true
+    stackView.distribution = .equalSpacing
+    return stackView
+  }
+  
+}
+
+// MARK: - Notification
+
+extension TKUITripOverviewCard {
+  
+  private func showNotification(for notificationKinds: Set<TKAPI.TripNotification.MessageKind>, in tableView: UITableView) {
+    guard TKUINotificationManager.shared.isSubscribed(to: .tripAlerts),
+          let tableFooterView = tableView.tableFooterView as? UIStackView
+    else {
+      return
+    }
+    
+    let footer = self.notificationFooterView
+    footer.updateAvailableKinds(notificationKinds)
+    footer.backgroundColor = tableView.backgroundColor
+    
+    tableFooterView.addArrangedSubview(footer)
+    tableFooterView.layoutIfNeeded()
+    tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+  }
+  
+}
+
 // MARK: - Attribution
 
 extension TKUITripOverviewCard {
   
   private func showAttribution(for sources: [TKAPI.DataAttribution], in tableView: UITableView) {
-    let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
-    footer?.backgroundColor = tableView.backgroundColor
+    guard let tableFooterView = tableView.tableFooterView as? UIStackView,
+          let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
+    else {
+      return
+    }
     
+    footer.backgroundColor = tableView.backgroundColor
     let tapper = UITapGestureRecognizer(target: nil, action: nil)
     tapper.rx.event
       .filter { $0.state == .ended }
@@ -274,10 +320,12 @@ extension TKUITripOverviewCard {
         self?.presentAttributions(for: sources, sender: footer)
       })
       .disposed(by: disposeBag)
-    footer?.addGestureRecognizer(tapper)
-    footer?.accessibilityTraits = .button
+    footer.addGestureRecognizer(tapper)
+    footer.accessibilityTraits = .button
     
-    tableView.tableFooterView = footer
+    tableFooterView.addArrangedSubview(footer)
+    tableFooterView.layoutIfNeeded()
+    tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
   }
   
   private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {   

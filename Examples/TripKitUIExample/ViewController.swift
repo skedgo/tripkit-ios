@@ -41,6 +41,13 @@ class MainViewController: UITableViewController {
         return actions
       }
     }
+    
+    // Enable trip notifications
+    TKUINotificationManager.shared.subscribe(to: .tripAlerts) { requests in
+      for request in requests {
+        UNUserNotificationCenter.current().add(request)
+      }
+    }
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

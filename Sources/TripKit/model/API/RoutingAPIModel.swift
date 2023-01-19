@@ -33,6 +33,7 @@ extension TKAPI {
   }
   
   public struct Trip: Codable, Hashable {
+    public var id: String?
     @ISO8601OrSecondsSince1970 public var depart: Date
     @ISO8601OrSecondsSince1970 public var arrive: Date
     @DefaultFalse public var hideExactTimes: Bool
@@ -141,6 +142,7 @@ extension TKAPI {
     public let action: String?
     public var notes: String?
     @UnknownNil public var localCost: TKLocalCost? // Backend is sometimes sending this invalid without currency as of 2021-08-17
+    @DefaultEmptyArray public var notifications: [TripNotification]
     var mini: TKMiniInstruction?
     @DefaultFalse var hideExactTimes: Bool
 
@@ -201,6 +203,7 @@ extension TKAPI {
       case from
       case to
       case shapes
+      case notifications = "geofences"
     }
   }
   
@@ -230,6 +233,120 @@ extension TKAPI {
       case .stationary: return .stationary
       case .scheduled: return .scheduled
       case .unscheduled: return .unscheduled
+      }
+    }
+  }
+  
+  public struct TripNotification: Codable, Hashable {
+    public enum Kind: Hashable {
+      case circle(center: CLLocationCoordinate2D, radius: CLLocationDistance, trigger: Trigger)
+      case time(Date)
+
+      public static func == (lhs: TKAPI.TripNotification.Kind, rhs: TKAPI.TripNotification.Kind) -> Bool {
+        switch (lhs, rhs) {
+        case let (.circle(lc, lr, lt), .circle(rc, rr, rt)):
+          return lc.latitude == rc.latitude
+              && lc.longitude == rc.longitude
+              && lr == rr
+              && lt == rt
+        case let (.time(lhs), .time(rhs)):
+          return lhs == rhs
+        default:
+          return false
+        }
+      }
+      
+      public func hash(into hasher: inout Hasher) {
+        switch self {
+        case let .circle(center, radius, trigger):
+          hasher.combine(center.latitude)
+          hasher.combine(center.longitude)
+          hasher.combine(radius)
+          hasher.combine(trigger)
+        case let .time(date):
+          hasher.combine(date)
+        }
+      }
+      
+    }
+    
+    struct Coordinate: Codable {
+      let lat: CLLocationDegrees
+      let lng: CLLocationDegrees
+    }
+    
+    public enum Trigger: String, Codable, Hashable {
+      case onEnter = "ENTER"
+      case onExit = "EXIT"
+    }
+    
+    public enum MessageKind: String, Codable, Hashable {
+      case tripStart          = "TRIP_START"
+      case tripEnd            = "TRIP_END"
+      case arrivingAtYourStop = "ARRIVING_AT_YOUR_STOP"
+      case nextStopIsYours    = "NEXT_STOP_IS_YOURS"
+    }
+    
+    public let id: String
+    public let kind: Kind
+    public let messageKind: MessageKind
+    public let messageTitle: String
+    public let messageBody: String
+    
+    public enum CodingKeys: String, CodingKey {
+      case id
+      case kind = "type"
+      case messageKind = "messageType"
+      case messageTitle
+      case messageBody
+      
+      // geofences
+      case center
+      case radius
+      case trigger
+
+      // time-based
+      case time
+    }
+    
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      id = try container.decode(String.self, forKey: .id)
+      
+      messageKind = try container.decode(MessageKind.self, forKey: .messageKind)
+      messageTitle = try container.decode(String.self, forKey: .messageTitle)
+      messageBody = try container.decode(String.self, forKey: .messageBody)
+
+      let rawKind = try container.decode(String.self, forKey: .kind)
+      switch rawKind {
+      case "CIRCLE":
+        let coordinate = try container.decode(Coordinate.self, forKey: .center)
+        let radius = try container.decode(CLLocationDistance.self, forKey: .radius)
+        let trigger = try container.decode(Trigger.self, forKey: .trigger)
+        kind = .circle(center: .init(latitude: coordinate.lat, longitude: coordinate.lng), radius: radius, trigger: trigger)
+      case "TIME":
+        let date = try container.decode(ISO8601OrSecondsSince1970.self, forKey: .time)
+        kind = .time(date.wrappedValue)
+      default:
+        throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected 'type' of value 'CIRCLE', but got '\(rawKind)'"))
+      }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(id, forKey: .id)
+      try container.encode(messageKind, forKey: .messageKind)
+      try container.encode(messageTitle, forKey: .messageTitle)
+      try container.encode(messageBody, forKey: .messageBody)
+      switch kind {
+      case let .circle(center, radius, trigger):
+        try container.encode("CIRCLE", forKey: .kind)
+        try container.encode(Coordinate(lat: center.latitude, lng: center.longitude), forKey: .center)
+        try container.encode(radius, forKey: .radius)
+        try container.encode(trigger, forKey: .trigger)
+      case let .time(date):
+        try container.encode("TIME", forKey: .kind)
+        try container.encode(date, forKey: .time)
       }
     }
   }

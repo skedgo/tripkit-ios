@@ -27,12 +27,18 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Search from or to your current location. Locate yourself on the map. Get notifications about your trip.</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Search from or to your current location. Locate yourself on the map. Get notifications about your trip.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Search from or to your current location. Locate yourself on the map. Get updated ETAs.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
