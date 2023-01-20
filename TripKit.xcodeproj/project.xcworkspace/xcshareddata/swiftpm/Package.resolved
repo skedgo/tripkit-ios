@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "geomonitor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/skedgo/GeoMonitor",
+      "state" : {
+        "revision" : "c411962eded60edc0e4104c29a361b747c9113cd",
+        "version" : "0.1.0"
+      }
+    },
+    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",

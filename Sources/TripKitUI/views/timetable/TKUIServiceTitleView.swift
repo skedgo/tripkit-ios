@@ -20,6 +20,7 @@ class TKUIServiceTitleView: UIView {
   @IBOutlet weak var serviceColorView: UIView!
   @IBOutlet weak var serviceShortNameLabel: TKUIStyledLabel!
   @IBOutlet weak var serviceTimeLabel: TKUIStyledLabel!
+  @IBOutlet weak var serviceOperatorLabel: TKUIStyledLabel!
   
   @IBOutlet weak var dismissButton: UIButton!
   
@@ -39,6 +40,7 @@ class TKUIServiceTitleView: UIView {
     serviceTitleLabel.text = nil
     
     serviceShortNameLabel.text = nil
+    serviceOperatorLabel.text = nil
 
     serviceTimeLabel.textColor = .tkLabelSecondary
     serviceTimeLabel.text = nil
@@ -61,6 +63,9 @@ extension TKUIServiceTitleView {
     serviceImageView.tintColor = model.imageTintColor ?? .tkLabelPrimary
     
     serviceShortNameLabel.text = model.serviceShortName
+    
+    serviceOperatorLabel.text = model.serviceOperatorName
+    serviceOperatorLabel.isHidden = model.serviceOperatorName == nil
 
     if let serviceColor = model.serviceColor {
       serviceShortNameLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight

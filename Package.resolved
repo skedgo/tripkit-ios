@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "GeoMonitor",
+        "repositoryURL": "https://github.com/skedgo/GeoMonitor.git",
+        "state": {
+          "branch": null,
+          "revision": "c411962eded60edc0e4104c29a361b747c9113cd",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "Kingfisher",
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
