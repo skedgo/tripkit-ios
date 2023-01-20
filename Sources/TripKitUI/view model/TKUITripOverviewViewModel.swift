@@ -17,6 +17,7 @@ class TKUITripOverviewViewModel {
   
   struct UIInput {
     var selected: Signal<Item> = .empty()
+    var alertsEnabled: Signal<Bool> = .empty()
     var isVisible: Driver<Bool> = .just(true)
   }
   
@@ -26,6 +27,10 @@ class TKUITripOverviewViewModel {
       .asDriver(onErrorDriveWith: .empty())
       .map { $0.tripGroup.sources }
     
+    notificationKinds = presentedTrip
+      .asDriver(onErrorDriveWith: .empty())
+      .map { Set($0.segments.flatMap(\.notifications).map(\.messageKind)) }
+
     let tripChanged: Observable<Trip> = presentedTrip
       .asObservable()
       .distinctUntilChanged { $0.objectID == $1.objectID }
@@ -58,7 +63,19 @@ class TKUITripOverviewViewModel {
       }
       .asDriver(onErrorDriveWith: .never())
     
-    next = inputs.selected.compactMap { item -> Next? in
+    let nextFromAlertToggle = inputs.alertsEnabled.asObservable()
+      .withLatestFrom(tripUpdated) { ($1, $0) }
+      .compactMap { trip, enabled -> Next? in
+        if enabled {
+          TKUITripMonitorManager.shared.monitorRegions(from: trip)
+        } else {
+          TKUITripMonitorManager.shared.stopMonitoring()
+        }
+        return nil
+      }
+      .asSignal { _ in .empty() }
+    
+    let nextFromSelection = inputs.selected.compactMap { item -> Next? in
         switch item {
         case .impossible(let segment, _):
           let request = segment.insertRequestStartingHere()
@@ -73,6 +90,8 @@ class TKUITripOverviewViewModel {
         }
       }
     
+    self.next = Signal.merge([nextFromSelection, nextFromAlertToggle])
+    
   }
     
   let sections: Driver<[Section]>
@@ -80,6 +99,8 @@ class TKUITripOverviewViewModel {
   let actions: Driver<([TKUITripOverviewCard.TripAction], Trip)>
   
   let dataSources: Driver<[TKAPI.DataAttribution]>
+  
+  let notificationKinds: Driver<Set<TKAPI.TripNotification.MessageKind>>
   
   let refreshMap: Signal<Trip>
   
@@ -96,6 +117,8 @@ extension TKUITripOverviewViewModel {
 // MARK: - Navigation
 
 extension TKUITripOverviewViewModel {
+  
+  
   enum Next {
     case handleSelection(TKSegment)
     case showAlerts([TKAlert])

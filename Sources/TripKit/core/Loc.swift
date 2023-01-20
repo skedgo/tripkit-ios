@@ -287,5 +287,5 @@ public class Loc : NSObject {
     let format = NSLocalizedString("%@ wheelchair friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for how wheelchair-friendly a wheelchair route is. Placeholder will get replaced with '75%'.")
     return String(format: format, percentage)
   }
-
+  
 }

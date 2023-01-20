@@ -277,6 +277,7 @@ public final class TKRoutingParser {
         trip.update(\.plannedURLString, value: apiTrip.plannedURL?.absoluteString)
         trip.update(\.logURLString, value: apiTrip.logURL?.absoluteString)
         trip.update(\.bundleId, value: apiTrip.bundleId)
+        trip.update(\.tripId, value: apiTrip.id)
         
         switch apiTrip.availability {
         case .missedPrebookingWindow: trip.missedBookingWindow = true
