@@ -1122,21 +1122,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 71,
+      "line": 73,
       "symbol": "TKUITripOverviewCard.init(trip:index:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 335,
+      "line": 383,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 337,
+      "line": 385,
       "symbol": "TKUITripOverviewCard.modeByModeCard(_:updatedTrip:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1986,6 +1986,118 @@
       "line": 72,
       "symbol": "TKUITripSegmentDisplayable.tripSegmentTimesAreRealTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 17,
+      "symbol": "TKUINotificationManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 23,
+      "symbol": "TKUINotificationManager.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 95,
+      "symbol": "TKUINotificationSubscription",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 96,
+      "symbol": "TKUINotificationSubscription.Context",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 97,
+      "symbol": "TKUINotificationSubscription.Context.tripAlerts",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 99,
+      "symbol": "TKUINotificationSubscription.Context.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 117,
+      "symbol": "TKUINotificationSubscription.getRequests()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 121,
+      "symbol": "TKUINotificationSubscription.isSubscribed()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 125,
+      "symbol": "TKUINotificationSubscription.add(request:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 130,
+      "symbol": "TKUINotificationSubscription.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 138,
+      "symbol": "TKUINotificationSubscription.clearRequests()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 29,
+      "symbol": "TKUITripMonitorManager.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 55,
+      "symbol": "TKUITripMonitorManager.getPreference(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 66,
+      "symbol": "TKUITripMonitorManager.setAlertsEnabled(_:for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 115,
+      "symbol": "TKUITripMonitorManager.monitorRegions(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 128,
+      "symbol": "TKUITripMonitorManager.stopMonitoring()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
