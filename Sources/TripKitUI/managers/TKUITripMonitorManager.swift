@@ -173,6 +173,8 @@ extension TKUITripMonitorManager {
   }
   
   private func stopMonitoringRegions() {
+    guard !geofences.isEmpty else { return }
+    
     geoMonitor.enableInBackground = false
     geoMonitor.stopMonitoring()
     
