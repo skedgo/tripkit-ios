@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TicketPurchase Structure Reference</title>
+    <title>PurchasedTicket Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Struct/TicketPurchase" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/PurchasedTicket" class="dashAnchor"></a>
 
-    <a title="TicketPurchase Structure Reference"></a>
+    <a title="PurchasedTicket Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../../index.html">TripKit Reference</a>
       <img class="carat" src="../../img/carat.png" alt=""/>
-      TicketPurchase Structure Reference
+      PurchasedTicket Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -445,10 +445,10 @@
                 <a class="nav-group-task-link" href="../../Enums/TKBooking/Location.html">– Location</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Enums/TKBooking/TicketOption.html">– TicketOption</a>
+                <a class="nav-group-task-link" href="../../Enums/TKBooking/Fare.html">– Fare</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Enums/TKBooking/TicketPurchase.html">– TicketPurchase</a>
+                <a class="nav-group-task-link" href="../../Enums/TKBooking/PurchasedTicket.html">– PurchasedTicket</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Enums/TKFileCacheDirectory.html">TKFileCacheDirectory</a>
@@ -874,11 +874,11 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>TicketPurchase</h1>
+            <h1>PurchasedTicket</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TicketPurchase</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PurchasedTicket</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
 
                 </div>
               </div>
@@ -894,9 +894,37 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit9TKBookingO14TicketPurchaseV0dE2Ida"></a>
-                    <a name="//apple_ref/swift/Alias/TicketPurchaseId" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit9TKBookingO14TicketPurchaseV0dE2Ida">TicketPurchaseId</a>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV6StatusO"></a>
+                    <a name="//apple_ref/swift/Enum/Status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV6StatusO">Status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../Enums/TKBooking/PurchasedTicket/Status.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV10Identifiera"></a>
+                    <a name="//apple_ref/swift/Alias/Identifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV10Identifiera">Identifier</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -911,7 +939,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">TicketPurchaseId</span> <span class="o">=</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Identifier</span> <span class="o">=</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -921,9 +949,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit9TKBookingO14TicketPurchaseV2idSSvp"></a>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV2idSSvp"></a>
                     <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit9TKBookingO14TicketPurchaseV2idSSvp">id</a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV2idSSvp">id</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -938,7 +966,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt"><a href="../../Enums/TKBooking/TicketPurchase.html#/s:7TripKit9TKBookingO14TicketPurchaseV0dE2Ida">TicketPurchaseId</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt"><a href="../../Enums/TKBooking/PurchasedTicket.html#/s:7TripKit9TKBookingO15PurchasedTicketV10Identifiera">Identifier</a></span></code></pre>
 
                         </div>
                       </div>
@@ -948,9 +976,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7TripKit9TKBookingO14TicketPurchaseV9ticketURL10Foundation0G0Vvp"></a>
-                    <a name="//apple_ref/swift/Property/ticketURL" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7TripKit9TKBookingO14TicketPurchaseV9ticketURL10Foundation0G0Vvp">ticketURL</a>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV6statusAE6StatusOvp"></a>
+                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV6statusAE6StatusOvp">status</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -965,7 +993,144 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">ticketURL</span><span class="p">:</span> <span class="kt">URL</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../../Enums/TKBooking/PurchasedTicket/Status.html">Status</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV13activationURL10Foundation0G0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/activationURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV13activationURL10Foundation0G0VSgvp">activationURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>URL to activate a ticket, provided if <code>status == .inactive</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">activationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV9ticketURL10Foundation0G0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/ticketURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV9ticketURL10Foundation0G0VSgvp">ticketURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>URL to fetch ticket details, provided if <code>status == .activated</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">ticketURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV16ticketExpiration10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/ticketExpiration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV16ticketExpiration10Foundation4DateVSgvp">ticketExpiration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Timestamp when an activated ticket expires, might be provided if <code>status == .activated</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@OptionalISO8601</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">ticketExpiration</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV4fareAC4FareVvp"></a>
+                    <a name="//apple_ref/swift/Property/fare" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV4fareAC4FareVvp">fare</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">fare</span><span class="p">:</span> <span class="kt"><a href="../../Enums/TKBooking/Fare.html">Fare</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit9TKBookingO15PurchasedTicketV10CodingKeysO"></a>
+                    <a name="//apple_ref/swift/Enum/CodingKeys" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit9TKBookingO15PurchasedTicketV10CodingKeysO">CodingKeys</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../Enums/TKBooking/PurchasedTicket/CodingKeys.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">CodingKeys</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">CodingKey</span></code></pre>
 
                         </div>
                       </div>
@@ -980,7 +1145,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-01-20)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-01-23)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
