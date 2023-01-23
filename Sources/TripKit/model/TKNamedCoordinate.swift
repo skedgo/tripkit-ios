@@ -149,29 +149,29 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
 
     // We support both lat/lng and latitude/longitude spellings, making this ugly
     let latitude: CLLocationDegrees
-    if let degrees = try? container.decode(CLLocationDegrees.self, forKey: .latitude) {
+    if let degrees = try container.decodeIfPresent(CLLocationDegrees.self, forKey: .latitude) {
       latitude = degrees
     } else {
       latitude = try container.decode(CLLocationDegrees.self, forKey: .lat)
     }
     let longitude: CLLocationDegrees
-    if let degrees = try? container.decode(CLLocationDegrees.self, forKey: .longitude) {
+    if let degrees = try container.decodeIfPresent(CLLocationDegrees.self, forKey: .longitude) {
       longitude = degrees
     } else {
       longitude = try container.decode(CLLocationDegrees.self, forKey: .lng)
     }
     coordinate = CLLocationCoordinate2DMake(latitude, longitude)
 
-    // All of these are often not provide, hence `try?` everywhere
-    name = try? container.decode(String.self, forKey: .name)
-    _address = try? container.decode(String.self, forKey: .address)
-    locationID = try? container.decode(String.self, forKey: .locationID)
-    timeZoneID = try? container.decode(String.self, forKey: .timeZoneID)
-    clusterIdentifier = try? container.decode(String.self, forKey: .clusterIdentifier)
-    isDraggable = (try? container.decode(Bool.self, forKey: .isDraggable)) ?? false
-    isSuburb = (try? container.decode(Bool.self, forKey: .isSuburb)) ?? false
+    // All of these are often not provide
+    name = try container.decodeIfPresent(String.self, forKey: .name)
+    _address = try container.decodeIfPresent(String.self, forKey: .address)
+    locationID = try container.decodeIfPresent(String.self, forKey: .locationID)
+    timeZoneID = try container.decodeIfPresent(String.self, forKey: .timeZoneID)
+    clusterIdentifier = try container.decodeIfPresent(String.self, forKey: .clusterIdentifier)
+    isDraggable = (try container.decodeIfPresent(Bool.self, forKey: .isDraggable)) ?? false
+    isSuburb = (try container.decodeIfPresent(Bool.self, forKey: .isSuburb)) ?? false
 
-    if let encodedData = try? container.decode(Data.self, forKey: .data), let data = try JSONSerialization.jsonObject(with: encodedData, options: []) as? [String: Any] {
+    if let encodedData = try container.decodeIfPresent(Data.self, forKey: .data), let data = try JSONSerialization.jsonObject(with: encodedData, options: []) as? [String: Any] {
       self.data = data
     } else {
       self.data = [:]
