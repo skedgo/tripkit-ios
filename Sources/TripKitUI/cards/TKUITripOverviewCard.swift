@@ -284,7 +284,7 @@ extension TKUITripOverviewCard {
 extension TKUITripOverviewCard {
   
   private func showNotification(for notificationKinds: Set<TKAPI.TripNotification.MessageKind>, in tableView: UITableView) {
-    guard TKUINotificationManager.shared.isSubscribed(to: .tripAlerts),
+    guard #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts),
           let tableFooterView = tableView.tableFooterView as? UIStackView
     else {
       return

@@ -63,17 +63,22 @@ class TKUITripOverviewViewModel {
       }
       .asDriver(onErrorDriveWith: .never())
     
-    let nextFromAlertToggle = inputs.alertsEnabled.asObservable()
-      .withLatestFrom(tripUpdated) { ($1, $0) }
-      .compactMap { trip, enabled -> Next? in
-        if enabled {
-          TKUITripMonitorManager.shared.monitorRegions(from: trip)
-        } else {
-          TKUITripMonitorManager.shared.stopMonitoring()
+    let nextFromAlertToggle: Signal<Next>
+    if #available(iOS 14.0, *) {
+      nextFromAlertToggle = inputs.alertsEnabled.asObservable()
+        .withLatestFrom(tripUpdated) { ($1, $0) }
+        .compactMap { trip, enabled -> Next? in
+          if enabled {
+            TKUITripMonitorManager.shared.monitorRegions(from: trip)
+          } else {
+            TKUITripMonitorManager.shared.stopMonitoring()
+          }
+          return nil
         }
-        return nil
-      }
-      .asSignal { _ in .empty() }
+        .asSignal { _ in .empty() }
+    } else {
+      nextFromAlertToggle = .empty()
+    }
     
     let nextFromSelection = inputs.selected.compactMap { item -> Next? in
         switch item {

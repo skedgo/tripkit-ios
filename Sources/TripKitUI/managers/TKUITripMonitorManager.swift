@@ -19,6 +19,7 @@ import TripKit
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 /// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
+@available(iOS 14.0, *)
 public class TKUITripMonitorManager: NSObject {
   
   private enum Keys {
@@ -148,6 +149,7 @@ public class TKUITripMonitorManager: NSObject {
 
 // MARK: - Geofence-based alerts
 
+@available(iOS 14.0, *)
 extension TKUITripMonitorManager {
   
   private func startMonitoringRegions(from notifications: [TKAPI.TripNotification]) {
@@ -186,6 +188,7 @@ extension TKUITripMonitorManager {
 
 // MARK: - Time-based alerts
 
+@available(iOS 14.0, *)
 extension TKUITripMonitorManager {
   
   private func scheduleTimeBased(from notifications: [TKAPI.TripNotification]) {
