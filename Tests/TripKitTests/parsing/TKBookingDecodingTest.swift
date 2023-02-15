@@ -30,4 +30,43 @@ class TKBookingDecodingTest: XCTestCase {
     XCTAssertNil(fake.purchase)
   }
   
+  func testBookingEURCurrency() throws {
+    let fare = try JSONDecoder().decode(TKBooking.Fare.self, from: Data("""
+      {
+        "id": "1",
+        "name": "In Euro",
+        "description": "A fare",
+        "price": 300,
+        "currency": "EUR"
+      }
+      """.utf8))
+    XCTAssertEqual(fare.priceValue(), "€3.00")
+  }
+
+  func testBookingUSDCurrency() throws {
+    let fare = try JSONDecoder().decode(TKBooking.Fare.self, from: Data("""
+      {
+        "id": "1",
+        "name": "In US Dollar",
+        "description": "A fare",
+        "price": 300,
+        "currency": "USD"
+      }
+      """.utf8))
+    XCTAssertEqual(fare.priceValue(), "$3.00")
+  }
+
+  func testBookingYenCurrency() throws {
+    let fare = try JSONDecoder().decode(TKBooking.Fare.self, from: Data("""
+      {
+        "id": "1",
+        "name": "In Yen",
+        "description": "A fare",
+        "price": 30000,
+        "currency": "JPY"
+      }
+      """.utf8))
+    XCTAssertEqual(fare.priceValue(), "¥300")
+  }
+
 }
