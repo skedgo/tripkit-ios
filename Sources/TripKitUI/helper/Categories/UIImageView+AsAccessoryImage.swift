@@ -26,7 +26,7 @@ extension UIImageView {
       self.image = images.first
     }
     self.accessibilityLabel = Loc.RealTime
-    if let tintColor = tintColor {
+    if let tintColor {
       self.tintColor = tintColor
     }
   }
