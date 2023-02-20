@@ -11,10 +11,10 @@ import UIKit
 import TripKit
 
 extension UIImageView {
-  convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
+  convenience init(asRealTimeAccessoryImageAnimated animated: Bool) {
     self.init()
     
-    let images = UIImageView.realTimeAccessoryImage(animated, tintColor: tintColor)
+    let images = UIImageView.realTimeAccessoryImage(animated)
     if animated {
       self.image = images.last
       self.animationImages = images
@@ -28,47 +28,20 @@ extension UIImageView {
     self.accessibilityLabel = Loc.RealTime
   }
   
-  private static func realTimeAccessoryImage(_ animated: Bool, tintColor: UIColor? = nil) -> [UIImage] {
-    if animated {
-      var image1 = TripKitUIBundle.imageNamed("icon-signal-bars1")
-      var image2 = TripKitUIBundle.imageNamed("icon-signal-bars2")
-      var image3 = TripKitUIBundle.imageNamed("icon-signal-bars3")
+  private static func realTimeAccessoryImage(_ animated: Bool) -> [UIImage] {
+    if #available(iOS 16.0, *), animated {
+      let image1 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 0.3)
+      let image2 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 0.7)
+      let image3 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 1.0)
+      return [image1, image2, image3, image3, image3, image3, image3, image3].compactMap { $0 }
       
-      if let tintColor = tintColor {
-        image1 = image1.applying(tintColor: tintColor)
-        image2 = image2.applying(tintColor: tintColor)
-        image3 = image3.applying(tintColor: tintColor)
-      }
-      return [image1, image2, image3, image3, image3, image3, image3, image3]
+    } else if #available(iOS 14.0, *) {
+      // Right-pointing, all bars
+      return [UIImage(systemName: "dot.radiowaves.forward")].compactMap { $0 }
+      
     } else {
-      return [TripKitUIBundle.imageNamed("icon-signal-bars3")]
+      // Up-pointing, like wifi, all bars
+      return [UIImage(systemName: "wifi")].compactMap { $0 }
     }
-  }
-}
-
-extension UIImage {
-  func applying(tintColor: UIColor) -> UIImage {
-    let drawRect = CGRect(origin: .zero, size: size)
-    UIGraphicsBeginImageContextWithOptions(drawRect.size, false, 0)
-    guard
-      let context = UIGraphicsGetCurrentContext(),
-      let cgImage = self.cgImage
-    else { return self }
-    
-    context.translateBy(x: 0, y: size.height)
-    context.scaleBy(x: 1, y: -1)
-    
-    // draw original image
-    context.setBlendMode(.normal)
-    context.draw(cgImage, in: drawRect)
-    
-    // draw color atop
-    context.setFillColor(tintColor.cgColor)
-    context.setBlendMode(.sourceAtop)
-    context.fill(drawRect)
-    
-    let tinted = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return tinted ?? self
   }
 }

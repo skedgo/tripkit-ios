@@ -242,7 +242,9 @@ public class TKUITripSegmentsView : UIView {
           modeSubtitle = TKStyleManager.timeString(fixedTime, for: segment.tripSegmentTimeZone)
         }
         if segment.tripSegmentTimesAreRealTime {
-          modeSubtitleAccessoryImageViews.append(UIImageView(asRealTimeAccessoryImageAnimated: true, tintColor: lightTextColor))
+          let imageView = UIImageView(asRealTimeAccessoryImageAnimated: true)
+          imageView.tintColor = .secondaryLabel
+          modeSubtitleAccessoryImageViews.append(imageView)
         }
         if modeSubtitle == nil, let subtitle = segment.tripSegmentModeSubtitle, !subtitle.isEmpty {
           modeSubtitle = subtitle
