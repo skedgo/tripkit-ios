@@ -141,7 +141,7 @@ public class TKUISemaphoreView: MKAnnotationView {
       accessoryImageView = UIImageView(image: TripKitUIBundle.imageNamed("repeat_icon"))
     case let .headWithTime(time, timeZone, isRealTime):
       timeLabel.text = TKStyleManager.timeString(time, for: timeZone)
-      accessoryImageView = isRealTime ? UIImageView(asRealTimeAccessoryImageAnimated: true) : nil
+      accessoryImageView = isRealTime ? UIImageView(asRealTimeAccessoryImageAnimated: true, tintColor: .white) : nil
     case .headOnly:
       timeLabel.text = ""
       return

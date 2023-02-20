@@ -11,7 +11,7 @@ import UIKit
 import TripKit
 
 extension UIImageView {
-  convenience init(asRealTimeAccessoryImageAnimated animated: Bool) {
+  convenience init(asRealTimeAccessoryImageAnimated animated: Bool, tintColor: UIColor? = nil) {
     self.init()
     
     let images = UIImageView.realTimeAccessoryImage(animated)
@@ -26,6 +26,9 @@ extension UIImageView {
       self.image = images.first
     }
     self.accessibilityLabel = Loc.RealTime
+    if let tintColor = tintColor {
+      self.tintColor = tintColor
+    }
   }
   
   private static func realTimeAccessoryImage(_ animated: Bool) -> [UIImage] {
