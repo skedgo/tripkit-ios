@@ -26,7 +26,13 @@ class TKUIResultsAccessoryView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    backgroundColor = UIColor.tkAppTintColor.withAlphaComponent(0.12)
+    backgroundColor = UIColor { traits in
+      if traits.accessibilityContrast == .high {
+        return UIColor.tkAppTintColor.withAlphaComponent(0.04)
+      } else {
+        return UIColor.tkAppTintColor.withAlphaComponent(0.12)
+      }
+    }
     
     timeButton.setTitle(nil, for: .normal)
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
