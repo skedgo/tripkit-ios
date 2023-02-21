@@ -2067,35 +2067,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 29,
+      "line": 30,
       "symbol": "TKUITripMonitorManager.shared",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 55,
+      "line": 56,
       "symbol": "TKUITripMonitorManager.getPreference(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 66,
+      "line": 67,
       "symbol": "TKUITripMonitorManager.setAlertsEnabled(_:for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 115,
+      "line": 116,
       "symbol": "TKUITripMonitorManager.monitorRegions(from:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 128,
+      "line": 129,
       "symbol": "TKUITripMonitorManager.stopMonitoring()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
