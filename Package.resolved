@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/skedgo/GeoMonitor.git",
         "state": {
           "branch": null,
-          "revision": "c411962eded60edc0e4104c29a361b747c9113cd",
-          "version": "0.1.0"
+          "revision": "03f3cab0eec2f1c8eb8ce00c64900e6033afba3a",
+          "version": "0.1.2"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "44e891bdb61426a95e31492a67c7c0dfad1f87c5",
-          "version": "7.4.1"
+          "revision": "90135885ef506506620c4911cefb55a95ca2a9a2",
+          "version": "7.5.0"
         }
       },
       {
