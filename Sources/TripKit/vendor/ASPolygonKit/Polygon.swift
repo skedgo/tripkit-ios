@@ -429,11 +429,13 @@ struct Polygon {
       
       if points.count - 2 >= 0 {
         let lastLast = points[points.count - 2]
-        let spanner = Line(start: lastLast, end: point)
-        let next = Line(start: last, end: point)
-        if (abs(spanner.m) > 1_000_000 && abs(next.m) > 1_000_000) // takes care of both being Infinity
-          || abs(spanner.m - next.m) < 0.0001 {
-          points.removeLast() // 3)
+        if point != lastLast {
+          let spanner = Line(start: lastLast, end: point)
+          let next = Line(start: last, end: point)
+          if (abs(spanner.m) > 1_000_000 && abs(next.m) > 1_000_000) // takes care of both being Infinity
+              || abs(spanner.m - next.m) < 0.0001 {
+            points.removeLast() // 3)
+          }
         }
       }
     }
