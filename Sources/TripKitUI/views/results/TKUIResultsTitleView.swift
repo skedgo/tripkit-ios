@@ -109,8 +109,15 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
       .foregroundColor, value: UIColor.tkLabelSecondary,
       range: NSRange(location: 0, length: (originText as NSString).length)
     )
+    let nameColor = UIColor { traits in
+      if traits.accessibilityContrast == .high {
+        return UIColor.tkLabelSecondary
+      } else {
+        return UIColor.tkAppTintColor
+      }
+    }
     attributedOrigin.addAttribute(
-      .foregroundColor, value: UIColor.tkAppTintColor,
+      .foregroundColor, value: nameColor,
       range: (originText as NSString).range(of: originName)
     )
     

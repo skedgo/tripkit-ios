@@ -52,7 +52,9 @@ extension TKWaypointRouter {
     
     TKRegionManager.shared.requireRegions { error in
       guard let region = trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        DispatchQueue.main.async {
+          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        }
         return
       }
       
@@ -101,11 +103,15 @@ extension TKWaypointRouter {
     
     TKRegionManager.shared.requireRegions { result in
       if case .failure(let error) = result {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
         return
       }
       guard let region = segment.trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        DispatchQueue.main.async {
+          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        }
         return
       }
       
@@ -118,7 +124,9 @@ extension TKWaypointRouter {
         self.fetchTrip(input: input, region: region, into: segment.trip.request, completion: completion)
       
       } catch {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
     }
   }
@@ -127,11 +135,15 @@ extension TKWaypointRouter {
     
     TKRegionManager.shared.requireRegions { result in
       if case .failure(let error) = result {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
         return
       }
       guard let region = segment.trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        DispatchQueue.main.async {
+          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        }
         return
       }
       
@@ -143,7 +155,9 @@ extension TKWaypointRouter {
         self.fetchTrip(input: input, region: region, into: segment.trip.tripGroup, completion: completion)
         
       } catch {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
     }
     
@@ -158,12 +172,16 @@ extension TKWaypointRouter {
   public static func fetchTrip(byMoving segment: TKSegment, to location: TKModeCoordinate, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     TKRegionManager.shared.requireRegions { result in
       if case .failure(let error) = result {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
         return
       }
       
       guard let region = segment.trip.request.startRegion else {
-        completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        DispatchQueue.main.async {
+          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+        }
         return
       }
       
@@ -192,7 +210,9 @@ extension TKWaypointRouter {
         let input = buildInput(segments: segments, vehicles: vehicles)
         self.fetchTrip(input: input, region: region, into: segment.trip.tripGroup, completion: completion)
       } catch {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
     }
   }
@@ -219,12 +239,15 @@ extension TKWaypointRouter {
         let response = try await fetchAndParse(input: input, region: region, into: context)
         let routingResponse = try response.result.get()
         TKRoutingParser.add(routingResponse, to: tripGroup, merge: false)  { parserResult in
+          dispatchPrecondition(condition: .onQueue(.main))
           completion(Result {
             try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
           })
         }
       } catch {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
     }
   }
@@ -245,12 +268,15 @@ extension TKWaypointRouter {
         let response = try await fetchAndParse(input: input, region: region, into: context)
         let routingResponse = try response.result.get()
         TKRoutingParser.add(routingResponse, to: request, merge: false) { parserResult in
+          dispatchPrecondition(condition: .onQueue(.main))
           completion(Result {
             try parserResult.get().first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
           })
         }
       } catch {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
     }
   }
@@ -262,12 +288,15 @@ extension TKWaypointRouter {
         let response = try await fetchAndParse(input: input, region: region, into: context)
         let routingResponse = try response.result.get()
         TKRoutingParser.add(routingResponse, into: context) { parserResult in
+          dispatchPrecondition(condition: .onQueue(.main))
           completion(Result {
             try parserResult.get().trips.first.orThrow(WaypointError.fetchedResultsButGotNoTrip)
           })
         }
       } catch {
-        completion(.failure(error))
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
     }
   }
