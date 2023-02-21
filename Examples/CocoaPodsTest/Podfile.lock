@@ -1,6 +1,6 @@
 PODS:
-  - GeoMonitor (0.1.1)
-  - Kingfisher (7.4.1)
+  - GeoMonitor (0.1.2)
+  - Kingfisher (7.6.1)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -8,16 +8,16 @@ PODS:
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - TGCardViewController (2.1.2)
-  - TripKit (4.3.0)
-  - TripKitInterApp (4.3.0):
-    - TripKit (~> 4.3.0)
-  - TripKitUI (4.3.0):
-    - GeoMonitor (~> 0.1)
+  - TripKit (4.4.2)
+  - TripKitInterApp (4.4.2):
+    - TripKit (~> 4.4.2)
+  - TripKitUI (4.4.2):
+    - GeoMonitor (~> 0.1.2)
     - Kingfisher (~> 7.0)
     - RxCocoa (~> 6.5)
     - RxSwift (~> 6.5)
     - TGCardViewController (>= 2.1)
-    - TripKit (~> 4.3.0)
+    - TripKit (~> 4.4.2)
 
 DEPENDENCIES:
   - TripKit (from `../../`)
@@ -42,15 +42,15 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  GeoMonitor: 4f71326249934ee41b16772546f79e93205cac45
-  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  GeoMonitor: 3af6b577d3f55007c3570c05ed20d0b97b18267e
+  Kingfisher: 93a3c6d0d551658a31e19f21747e1d15cb39d525
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   TGCardViewController: a19c5fad9f8352f75a7cd0663292d63c693b9947
-  TripKit: fca5aab1f4a6b2a4e2e2bb9d236192a528cc6ea7
-  TripKitInterApp: 4a61bcde573c741d107cd973dcbb15a3eba61026
-  TripKitUI: 309c28ef02d05a3111da454d6e990322abf9f7a6
+  TripKit: 529557ef943f1d2731c04b74ac92e326383d1637
+  TripKitInterApp: c038c575f9a490dd993200be8950dbe8ae936f78
+  TripKitUI: cdac5df250bede3dccbfe736bf06d44c3aaac7b9
 
 PODFILE CHECKSUM: fd67bcba748ae215ff8d7ed6cf43555a3235bd4a
 
