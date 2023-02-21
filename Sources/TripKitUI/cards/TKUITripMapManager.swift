@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 
 import RxSwift
+import RxCocoa
 import TGCardViewController
 
 import TripKit
@@ -19,6 +20,12 @@ public protocol TKUITripMapManagerType: TGCompatibleMapManager {}
 public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   
   private(set) var trip: Trip
+  
+  private var dropPinRecognizer = UILongPressGestureRecognizer()
+  private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
+  var droppedPin: Signal<CLLocationCoordinate2D> {
+    return droppedPinPublisher.asSignal(onErrorSignalWith: .empty())
+  }
   
   private var disposeBag = DisposeBag()
   
@@ -56,16 +63,29 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
         self.updateDynamicAnnotation(trip: trip)
       })
       .disposed(by: disposeBag)
+    
+    // Interaction
+    
+    mapView.addGestureRecognizer(dropPinRecognizer)
+    dropPinRecognizer.rx.event
+      .filter { $0.state == .began }
+      .map { [unowned mapView] in
+        let point = $0.location(in: mapView)
+        return mapView.convert(point, toCoordinateFrom: mapView)
+      }
+      .bind(to: droppedPinPublisher)
+      .disposed(by: disposeBag)
   }
   
-  
   public override func cleanUp(_ mapView: MKMapView, animated: Bool) {
-    super.cleanUp(mapView, animated: animated)
-    
     // Reset the dispose bag, if this is not done, then any observable
     // subscriptions happen during `takeCharge` will trigger multiple
     // times.
     disposeBag = DisposeBag()
+    
+    mapView.removeGestureRecognizer(dropPinRecognizer)
+
+    super.cleanUp(mapView, animated: animated)
   }
   
   override open func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {

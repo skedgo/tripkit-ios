@@ -135,6 +135,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
         alertsEnabled: notificationFooterView.notificationSwitch.rx.value.asSignal(onErrorSignalWith: .empty()),
+        droppedPin: tripMapManager?.droppedPin ?? .empty(),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
@@ -372,6 +373,10 @@ extension TKUITripOverviewCard {
     case .showAlternativeRoutes(let request):
       let card = TKUIRoutingResultsCard(request: request)
       card.onSelection = selectedAlternativeTripCallback
+      controller?.push(card)
+
+    case .showAlternative(let trip):
+      let card = TKUITripOverviewCard(trip: trip)
       controller?.push(card)
     }
   }

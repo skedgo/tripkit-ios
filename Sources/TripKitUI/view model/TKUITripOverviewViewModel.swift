@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 import RxSwift
 import RxCocoa
@@ -18,6 +19,7 @@ class TKUITripOverviewViewModel {
   struct UIInput {
     var selected: Signal<Item> = .empty()
     var alertsEnabled: Signal<Bool> = .empty()
+    var droppedPin: Signal<CLLocationCoordinate2D> = .empty()
     var isVisible: Driver<Bool> = .just(true)
   }
   
@@ -95,7 +97,22 @@ class TKUITripOverviewViewModel {
         }
       }
     
-    self.next = Signal.merge([nextFromSelection, nextFromAlertToggle])
+    let nextFromPinDrop = inputs.droppedPin
+      .asObservable()
+      .withLatestFrom(tripUpdated) { ($1, $0 )}
+      .asyncMap { trip, pin -> Next? in
+        do {
+          let trip = try await TKWaypointRouter.fetchTrip(addingStopOver: pin, to: trip)
+          return .showAlternative(trip)
+        } catch {
+          print(error)
+          return nil
+        }
+      }
+      .compactMap { $0 }
+      .asSignal { _ in .empty() }
+    
+    self.next = Signal.merge([nextFromSelection, nextFromAlertToggle, nextFromPinDrop])
     
   }
     
@@ -128,5 +145,6 @@ extension TKUITripOverviewViewModel {
     case handleSelection(TKSegment)
     case showAlerts([TKAlert])
     case showAlternativeRoutes(TripRequest)
+    case showAlternative(Trip)
   }
 }
