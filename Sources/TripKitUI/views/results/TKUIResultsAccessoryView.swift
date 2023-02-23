@@ -34,13 +34,21 @@ class TKUIResultsAccessoryView: UIView {
       }
     }
     
+    let foregroundColor = UIColor { traits in
+      if traits.accessibilityContrast == .high {
+        return #colorLiteral(red: 0.2384867668, green: 0.442800492, blue: 0.3663875461, alpha: 1)
+      } else {
+        return UIColor.tkAppTintColor
+      }
+    }
+    
     timeButton.setTitle(nil, for: .normal)
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    timeButton.tintColor = .tkAppTintColor
+    timeButton.tintColor = foregroundColor
     
     transportButton.setTitle(" \(Loc.Transport)", for: .normal)
     transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    transportButton.tintColor = .tkAppTintColor
+    transportButton.tintColor = foregroundColor
 
     let config = UIImage.SymbolConfiguration(pointSize: 10)
     timeButton.setImage(.init(systemName: "clock", withConfiguration: config), for: .normal)
