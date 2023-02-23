@@ -34,6 +34,14 @@ class TKUIResultsAccessoryView: UIView {
       }
     }
     
+    let foregroundColor = UIColor { traits in
+      if traits.accessibilityContrast == .high {
+        return #colorLiteral(red: 0.2384867668, green: 0.442800492, blue: 0.3663875461, alpha: 1)
+      } else {
+        return UIColor.tkAppTintColor
+      }
+    }
+    
     timeButton.setTitle(nil, for: .normal)
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     timeButton.tintColor = .tkAppTintColor
