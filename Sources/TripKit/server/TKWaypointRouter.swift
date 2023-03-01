@@ -56,7 +56,7 @@ extension TKWaypointRouter {
     TKRegionManager.shared.requireRegions { error in
       guard let region = trip.request.startRegion else {
         DispatchQueue.main.async {
-          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
+          completion(.failure(WaypointError.couldNotFindRegionForTrip))
         }
         return
       }
@@ -105,20 +105,11 @@ extension TKWaypointRouter {
   public static func fetchTrip(moving segment: TKSegment, to visit: StopVisits, atStart: Bool, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
     TKRegionManager.shared.requireRegions { result in
-      if case .failure(let error) = result {
-        DispatchQueue.main.async {
-          completion(.failure(error))
-        }
-        return
-      }
-      guard let region = segment.trip.request.startRegion else {
-        DispatchQueue.main.async {
-          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
-        }
-        return
-      }
-      
       do {
+        let _ = try result.get()
+        let region = try segment.trip.request.startRegion
+          .orThrow(WaypointError.couldNotFindRegionForTrip)
+
         let segments = try Self.segments(moving: segment, to: visit, atStart: atStart)
         let input = buildInput(segments: segments, vehicles: vehicles)
         
@@ -137,20 +128,11 @@ extension TKWaypointRouter {
   public static func fetchTrip(replacing segment: TKSegment, with entry: DLSEntry, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
     
     TKRegionManager.shared.requireRegions { result in
-      if case .failure(let error) = result {
-        DispatchQueue.main.async {
-          completion(.failure(error))
-        }
-        return
-      }
-      guard let region = segment.trip.request.startRegion else {
-        DispatchQueue.main.async {
-          completion(.failure(TKWaypointRouter.WaypointError.couldNotFindRegionForTrip))
-        }
-        return
-      }
-      
       do {
+        let _ = try result.get()
+        let region = try segment.trip.request.startRegion
+          .orThrow(WaypointError.couldNotFindRegionForTrip)
+        
         let segments = try Self.segments(replacing: segment, with: entry, fallbackRegion: region)
         let input = buildInput(segments: segments, vehicles: vehicles)
         
@@ -222,6 +204,52 @@ extension TKWaypointRouter {
   
 }
 
+// MARK: - A-to-B-to-C Routing
+
+extension TKWaypointRouter {
+  
+  @available(*, renamed: "fetchTrip(addingStopOver:to:usingPrivateVehicles:)")
+  public static func fetchTrip(addingStopOver stopOver: CLLocationCoordinate2D, to trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = [], completion: @escaping (Result<Trip, Error>) -> Void) {
+    TKRegionManager.shared.requireRegions { result in
+      do {
+        let _ = try result.get()
+        let region =  try trip.request.startRegion
+          .orThrow(WaypointError.couldNotFindRegionForTrip)
+        let context = try trip.managedObjectContext
+          .orThrow(WaypointError.tripGotDisassociatedFromCoreData)
+        let start =   try trip.segments.first
+          .orThrow(WaypointError.segmentNotEligible)
+        let end =     try trip.segments.last
+          .orThrow(WaypointError.segmentNotEligible)
+
+        let modes = Array(trip.usedModeIdentifiers)
+        let segments: [Segment] = [
+          .init(start: .coordinate(start.coordinate), end: .coordinate(stopOver), modes: modes, startTime: trip.request.departureTime),
+          .init(start: .coordinate(stopOver), end: .coordinate(end.coordinate), modes: modes, endTime: trip.request.arrivalTime)
+        ]
+        
+        let input = buildInput(segments: segments, vehicles: vehicles)
+        self.fetchTrip(input: input, region: region, into: context, completion: completion)
+        
+      } catch {
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
+      }
+    }
+  }
+  
+  public static func fetchTrip(addingStopOver stopOver: CLLocationCoordinate2D, to trip: Trip, usingPrivateVehicles vehicles: [TKVehicular] = []) async throws -> Trip {
+    return try await withCheckedThrowingContinuation { continuation in
+      fetchTrip(addingStopOver: stopOver, to: trip, usingPrivateVehicles: vehicles) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+  
+  
+}
+
 // MARK: - Helpers
 
 extension TKWaypointRouter {
@@ -233,7 +261,7 @@ extension TKWaypointRouter {
   ///     if it's using the same modes and same/similar stops.
   private static func fetchTrip(input: TKWaypointRouter.Input, region: TKRegion, into tripGroup: TripGroup, completion: @escaping (Result<Trip, Error>) -> Void) {
     guard let context = tripGroup.managedObjectContext else {
-      completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
+      completion(.failure(WaypointError.tripGotDisassociatedFromCoreData))
       return
     }
     
@@ -262,7 +290,7 @@ extension TKWaypointRouter {
   ///     as the request as this will not be checked separately.
   private static func fetchTrip(input: TKWaypointRouter.Input, region: TKRegion, into request: TripRequest, completion: @escaping (Result<Trip, Error>) -> Void) {
     guard let context = request.managedObjectContext else {
-      completion(.failure(TKWaypointRouter.WaypointError.tripGotDisassociatedFromCoreData))
+      completion(.failure(WaypointError.tripGotDisassociatedFromCoreData))
       return
     }
     
