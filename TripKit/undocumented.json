@@ -16683,35 +16683,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
-      "line": 137,
+      "line": 128,
       "symbol": "TKWaypointRouter.fetchTrip(replacing:with:usingPrivateVehicles:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
-      "line": 175,
+      "line": 157,
       "symbol": "TKWaypointRouter.fetchTrip(byMoving:to:usingPrivateVehicles:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
-      "line": 324,
+      "line": 212,
+      "symbol": "TKWaypointRouter.fetchTrip(addingStopOver:to:usingPrivateVehicles:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
+      "line": 242,
+      "symbol": "TKWaypointRouter.fetchTrip(addingStopOver:to:usingPrivateVehicles:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
+      "line": 352,
       "symbol": "TKWaypointRouter.Input",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
-      "line": 348,
+      "line": 376,
       "symbol": "TKWaypointRouter.Segment",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKWaypointRouter.swift",
-      "line": 369,
+      "line": 397,
       "symbol": "TKWaypointRouter.Segment",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
