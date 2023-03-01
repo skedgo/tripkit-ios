@@ -69,7 +69,8 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     mapView.addGestureRecognizer(dropPinRecognizer)
     dropPinRecognizer.rx.event
       .filter { $0.state == .began }
-      .map { [unowned mapView] in
+      .compactMap { [unowned mapView] in
+        guard TKUITripOverviewCard.config.enableDropToAddStopover else { return nil }
         let point = $0.location(in: mapView)
         return mapView.convert(point, toCoordinateFrom: mapView)
       }

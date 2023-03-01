@@ -87,5 +87,14 @@ public extension TKUITripOverviewCard {
     
     /// Set this to limit how many alerts are shown for a segment
     public var maximumAlertsPerSegment: Int = 3
+    
+    // MARK: - Example features
+    
+    /// Enables long-tap gesture on the map which will then add a stopover and push a new
+    /// card.
+    ///
+    /// - warning: The UX isn't refined for this, so this is meant as a demo more than a
+    /// feature to add to production apps.
+    public var enableDropToAddStopover: Bool = false
   }
 }
