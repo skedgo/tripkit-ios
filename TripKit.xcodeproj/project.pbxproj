@@ -40,6 +40,7 @@
 		3A89090C27E47414005A49B1 /* TKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090A27E47414005A49B1 /* TKServer+UserAccount.swift */; };
 		3A96B93B293F102800556A44 /* routes-sf.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A96B93A293F102800556A44 /* routes-sf.json */; };
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
+		3A9C6A8629B58AC4000D43B2 /* TKAPIParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */; };
 		3AA1092126FABC6000C52879 /* TKReporter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */; };
 		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
 		3AB424DF2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
@@ -989,6 +990,7 @@
 		3A96B93A293F102800556A44 /* routes-sf.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routes-sf.json"; sourceTree = "<group>"; };
 		3A9AC27E27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Shared.strings; sourceTree = "<group>"; };
 		3A9AC27F27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/TripKit.strings; sourceTree = "<group>"; };
+		3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAPIParsingTest.swift; sourceTree = "<group>"; };
 		3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKReporter+Rx.swift"; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -2934,7 +2936,6 @@
 				3AFF2A3926C69A96007809CD /* RoutingAPIParserTest.swift */,
 				3AFF2A3126C69A96007809CD /* TKAlertModelTest.swift */,
 				3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */,
-				D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */,
 				3AFF2A3426C69A96007809CD /* TKBookingAvailabilityTest.swift */,
 				3AFF2A3226C69A96007809CD /* TKBookingDecodingTest.swift */,
 				3AFF2A3826C69A96007809CD /* TKBuzzInfoProviderTest.swift */,
@@ -2944,6 +2945,8 @@
 				3AFF2A3526C69A96007809CD /* TKModeHelperTest.swift */,
 				3AFF2A3B26C69A96007809CD /* TKPolylineDecoderTest.swift */,
 				3AFF2A3726C69A96007809CD /* TKRegionManagerTest.swift */,
+				D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */,
+				3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */,
 			);
 			path = parsing;
 			sourceTree = "<group>";
@@ -4178,6 +4181,7 @@
 				3AFF2AA526C69A96007809CD /* RoutingAPIParserTest.swift in Sources */,
 				3ACD91F726CCC47B0075CCF3 /* RxTest.swift in Sources */,
 				3ACD91FB26CCC47B0075CCF3 /* AtomicInt.swift in Sources */,
+				3A9C6A8629B58AC4000D43B2 /* TKAPIParsingTest.swift in Sources */,
 				3AFF2A9E26C69A96007809CD /* TKBookingDecodingTest.swift in Sources */,
 				3AFF2A9D26C69A96007809CD /* TKAlertModelTest.swift in Sources */,
 				3ACD91F826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift in Sources */,
