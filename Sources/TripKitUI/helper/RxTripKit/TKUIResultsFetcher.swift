@@ -110,6 +110,8 @@ public class TKUIResultsFetcher {
     return TKNamedCoordinate(coordinate: location.coordinate)
   }
   
+  /// Replace the set of provided modes with the modes returned by the `Single`, called before
+  /// by `streamTrips` at the very start and information is not cached.
   public static var modeReplacementHandler: ((TKRegion, Set<String>) -> Single<Set<String>>)? = nil
   
 }
