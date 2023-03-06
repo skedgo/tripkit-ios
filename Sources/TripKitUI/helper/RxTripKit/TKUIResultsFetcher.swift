@@ -53,6 +53,7 @@ public class TKUIResultsFetcher {
   ///
   /// - Parameters:
   ///   - request: The request for which to fetch trips
+  ///   - modes: The modes to enable. If set to `nil` then it'll use the modes as set in the user defaults (see `TKUserProfileHelper` for more)
   ///   - classifier: Optional classifier, see `TKTripClassifier` for more
   /// - Returns: Stream of fetching the results, multiple call backs as different
   ///     modes are fetched.
@@ -64,23 +65,32 @@ public class TKUIResultsFetcher {
     }
     
     // 1. Fetch current location if necessary
-    let prepared: Single<TripRequest>
+    var prepared: Single<(TripRequest, Set<String>?)>
     if request.usesCurrentLocation {
       prepared = TKLocationManager.shared.rx
         .fetchCurrentLocation(within: Constants.secondsToRefine)
         .map { location in
           request.override(currentLocation: location)
-          return request
+          return (request, nil)
         }
       
     } else {
-      prepared = .just(request)
+      prepared = .just((request, nil))
+    }
+    
+    if let modeAdjuster = Self.modeReplacementHandler {
+      prepared = prepared.flatMap { (request: TripRequest, _) in
+        let modesToAdjust: Set<String> = modes ?? request.modes
+        let region = request.startRegion ?? request.spanningRegion
+        return modeAdjuster(region, modesToAdjust)
+          .map { (request, $0) }
+      }
     }
     
     // 2. Then we can kick off the requests
     return prepared
       .asObservable()
-      .flatMapLatest { request -> Observable<Progress> in
+      .flatMapLatest { (request, modes) -> Observable<Progress> in
         return TKRouter.rx.multiFetchRequest(
           for: request, modes: modes,
           classifier: classifier,
@@ -99,6 +109,8 @@ public class TKUIResultsFetcher {
   public static var replacementHandler: (CLLocation) -> TKNamedCoordinate = { location in
     return TKNamedCoordinate(coordinate: location.coordinate)
   }
+  
+  public static var modeReplacementHandler: ((TKRegion, Set<String>) -> Single<Set<String>>)? = nil
   
 }
 
