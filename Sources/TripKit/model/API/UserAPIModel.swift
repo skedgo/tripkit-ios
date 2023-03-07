@@ -17,6 +17,7 @@ extension TKAPI {
     public let address1: String?
     public let address2: String?
     public let postCode: String?
+    public let phone: String?
     public let phones: [Phone]?
     public let highResProfilePictureURL: URL?
     public let lowResProfilePictureURL: URL?
@@ -34,6 +35,7 @@ extension TKAPI {
       case address1
       case address2
       case postCode
+      case phone
       case phones
       case highResProfilePictureURL = "largeImageURL"
       case lowResProfilePictureURL = "smallImageURL"
