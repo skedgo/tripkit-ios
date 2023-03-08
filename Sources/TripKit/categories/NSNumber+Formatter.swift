@@ -20,15 +20,14 @@ extension NSNumber {
   }()
     
   /// formats the NSNumber to a readable currency formatted string that auto handles the decimal places.
-  public func toMoneyString(currencyCode: String) -> String {
+  public func toMoneyString(currencyCode: String, locale: Locale = .current) -> String {
     let formatter = moneyFormatter(with: currencyCode)
-    formatter.locale = .current
-    
+    formatter.locale = locale
     return formatter.string(from: self)!
   }
   
   /// formats the NSNumber to a readable currency formatted string that forces the number of decimal places.
-  public func toMoneyString(currencyCode: String, decimalPlaces: Int = 0) -> String {
+  public func toMoneyString(currencyCode: String, decimalPlaces: Int) -> String {
     let formatter = moneyFormatter(with: currencyCode)
     formatter.currencySymbol = nil
     
