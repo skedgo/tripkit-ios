@@ -22,6 +22,8 @@ extension NSNumber {
   /// formats the NSNumber to a readable currency formatted string that auto handles the decimal places.
   public func toMoneyString(currencyCode: String) -> String {
     let formatter = moneyFormatter(with: currencyCode)
+    formatter.locale = .current
+    
     return formatter.string(from: self)!
   }
   
