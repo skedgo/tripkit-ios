@@ -780,251 +780,258 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
       "line": 31,
-      "symbol": "Loc.Password",
+      "symbol": "Loc.Phone",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
       "line": 35,
-      "symbol": "Loc.Change",
+      "symbol": "Loc.Password",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
       "line": 39,
-      "symbol": "Loc.SignIn",
+      "symbol": "Loc.Change",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
       "line": 43,
-      "symbol": "Loc.SignUp",
+      "symbol": "Loc.SignIn",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
       "line": 47,
+      "symbol": "Loc.SignUp",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
+      "line": 51,
       "symbol": "Loc.OpenSettings",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 57,
+      "line": 61,
       "symbol": "Loc.UpdatingTrip",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 61,
+      "line": 65,
       "symbol": "Loc.JohnAppleseed",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 65,
+      "line": 69,
       "symbol": "Loc.ExampleMail",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 69,
+      "line": 73,
       "symbol": "Loc.OpenInSafari",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 79,
+      "line": 83,
       "symbol": "Loc.FirstName",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 83,
+      "line": 87,
       "symbol": "Loc.LastName",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 87,
+      "line": 91,
       "symbol": "Loc.PrimaryEmailNotSet",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 91,
+      "line": 95,
       "symbol": "Loc.AttemptToChangePasswordWithoutEmailVerified",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 95,
+      "line": 99,
       "symbol": "Loc.Sent",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 99,
+      "line": 103,
       "symbol": "Loc.FailedToSend",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 103,
+      "line": 107,
       "symbol": "Loc.PasswordIsEmpty",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 107,
+      "line": 111,
       "symbol": "Loc.InvalidCredentials",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 111,
+      "line": 115,
       "symbol": "Loc.MissingUserToken",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 115,
+      "line": 119,
       "symbol": "Loc.ResponseContainsNoData",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 119,
+      "line": 123,
       "symbol": "Loc.EditAccount",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 123,
+      "line": 127,
       "symbol": "Loc.Error",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 127,
+      "line": 131,
       "symbol": "Loc.ServerError",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 131,
+      "line": 135,
       "symbol": "Loc.DataError",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 135,
+      "line": 139,
       "symbol": "Loc.VerifyPassword",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 139,
+      "line": 143,
       "symbol": "Loc.EnterNewPassword",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 143,
+      "line": 147,
       "symbol": "Loc.PleaseEnterCurrentPasswordForYourSecurity",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 147,
+      "line": 151,
       "symbol": "Loc.PleaseEnterYourRegisteredEmailToResetPassword",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 151,
+      "line": 155,
       "symbol": "Loc.PasswordResetInstructionSentByEmail",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 155,
+      "line": 159,
       "symbol": "Loc.SecurePasswordAreAtLeastFiveCharatersLongAndIncludeNumbersAndSymbols",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 159,
+      "line": 163,
       "symbol": "Loc.Verify",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 163,
+      "line": 167,
       "symbol": "Loc.ResetPassword",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 167,
+      "line": 171,
       "symbol": "Loc.ForgotPassword",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 171,
+      "line": 175,
       "symbol": "Loc.Update",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 175,
+      "line": 179,
       "symbol": "Loc.ConfirmPassword",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 179,
+      "line": 183,
       "symbol": "Loc.OptionalReferralCode",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitBookings.swift",
-      "line": 183,
+      "line": 187,
       "symbol": "Loc.resendVerificationEmail",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
@@ -1619,16 +1626,16 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 55,
-      "symbol": "Loc",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 56,
+      "symbol": "Loc.Done",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 56,
-      "symbol": "Loc.Done",
-      "symbol_kind": "source.lang.swift.decl.var.static",
+      "line": 59,
+      "symbol": "Loc",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -1661,16 +1668,16 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 77,
-      "symbol": "Loc",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 80,
+      "symbol": "Loc.RealTime",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc.swift",
-      "line": 80,
-      "symbol": "Loc.RealTime",
-      "symbol_kind": "source.lang.swift.decl.var.static",
+      "line": 81,
+      "symbol": "Loc",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -7934,118 +7941,125 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
       "line": 20,
-      "symbol": "TKAPI.User.phones",
+      "symbol": "TKAPI.User.phone",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
       "line": 21,
-      "symbol": "TKAPI.User.highResProfilePictureURL",
+      "symbol": "TKAPI.User.phones",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
       "line": 22,
-      "symbol": "TKAPI.User.lowResProfilePictureURL",
+      "symbol": "TKAPI.User.highResProfilePictureURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
       "line": 23,
+      "symbol": "TKAPI.User.lowResProfilePictureURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
+      "line": 24,
       "symbol": "TKAPI.User.appData",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 51,
+      "line": 53,
       "symbol": "TKAPI.User.userId",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 53,
+      "line": 55,
       "symbol": "TKAPI.User.emails",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 60,
+      "line": 62,
       "symbol": "TKAPI.Phone",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 61,
+      "line": 63,
       "symbol": "TKAPI.Phone.countryCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 62,
+      "line": 64,
       "symbol": "TKAPI.Phone.number",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 64,
+      "line": 66,
       "symbol": "TKAPI.Phone.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 65,
+      "line": 67,
       "symbol": "TKAPI.Phone.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 67,
+      "line": 69,
       "symbol": "TKAPI.Phone.init(number:countryCode:validated:type:id:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 86,
+      "line": 88,
       "symbol": "TKAPI.Email",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 87,
+      "line": 89,
       "symbol": "TKAPI.Email.address",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 88,
+      "line": 90,
       "symbol": "TKAPI.Email.verified",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 89,
+      "line": 91,
       "symbol": "TKAPI.Email.primary",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 91,
+      "line": 93,
       "symbol": "TKAPI.Email.init(address:validated:primary:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
