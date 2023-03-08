@@ -21,18 +21,7 @@ extension NSNumber {
     
   /// formats the NSNumber to a readable currency formatted string that auto handles the decimal places.
   public func toMoneyString(currencyCode: String) -> String {
-    let locale = Locale.availableIdentifiers
-      .map { Locale(identifier: $0) }
-      .first { $0.currencyCode == currencyCode }
-    
-    guard let locale
-    else {
-        return toMoneyString(currencyCode: currencyCode, decimalPlaces: 2)
-    }
-    
     let formatter = moneyFormatter(with: currencyCode)
-    formatter.locale = locale
-    
     return formatter.string(from: self)!
   }
   
