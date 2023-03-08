@@ -28,6 +28,10 @@ extension Loc {
     return NSLocalizedString("Email", tableName: "Shared", bundle: .tripKit, comment: "For email address")
   }
 
+  @objc public static var Phone: String {
+    return NSLocalizedString("Phone", tableName: "Shared", bundle: .tripKit, comment: "For phone numbers")
+  }
+
   @objc public static var Password: String {
     return NSLocalizedString("Password", tableName: "Shared", bundle: .tripKit, comment: "")
   }
