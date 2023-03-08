@@ -473,7 +473,7 @@ extension TKRouter {
         if list.count == 1, let first = list.first {
           return first.value
         } else {
-          return list.map(\.value)
+          return list.compactMap(\.value)
         }
       }
     paras.merge(fromQueryItems) { old, _ in old }
