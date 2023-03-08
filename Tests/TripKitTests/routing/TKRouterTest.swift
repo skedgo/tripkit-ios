@@ -235,5 +235,24 @@ class TKRouterTest: TKTestCase {
     }
   }
   
+  func testURLWithAdditionalParameterArray() {
+    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    
+    let request = TKRouter.RoutingQuery(
+      from: TKNamedCoordinate(coordinate: .init(latitude: -31.8875, longitude: 115.9443)),
+      to: TKNamedCoordinate(coordinate: .init(latitude: -31.8408, longitude: 115.92)),
+      modes: ["me_car"],
+      additional: [
+        .init(name: "neverAllowModes", value: "wa_wal"),
+        .init(name: "neverAllowModes", value: "me_mot"),
+      ],
+      context: context
+    )
+    
+    let paras = TKRouter.requestParameters(for: request, modeIdentifiers: nil, additional: nil)
+    // Make sure this doesn't end up as a `[String?]` or `[String?]?`
+    XCTAssertEqual(paras["neverAllowModes"] as? [String]?, ["wa_wal", "me_mot"])
+  }
+  
 }
 
