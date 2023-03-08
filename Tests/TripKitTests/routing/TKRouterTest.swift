@@ -251,7 +251,7 @@ class TKRouterTest: TKTestCase {
     
     let paras = TKRouter.requestParameters(for: request, modeIdentifiers: nil, additional: nil)
     // Make sure this doesn't end up as a `[String?]` or `[String?]?`
-    XCTAssertEqual(paras["neverAllowModes"] as? [String]?, ["wa_wal", "me_mot"])
+    XCTAssertEqual((paras["neverAllowModes"] as? [String]?)??.sorted(), ["me_mot", "wa_wal"].sorted())
   }
   
 }
