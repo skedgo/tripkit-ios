@@ -446,7 +446,7 @@ extension TKRouter {
     return request.url?.absoluteString
   }
   
-  private static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, bestOnly: Bool = false) -> [String: Any] {
+  static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, bestOnly: Bool = false) -> [String: Any] {
     var paras = TKSettings.config
     let modes = modeIdentifiers ?? request.modes
     paras["modes"] = modes.sorted()
@@ -473,7 +473,7 @@ extension TKRouter {
         if list.count == 1, let first = list.first {
           return first.value
         } else {
-          return list.map(\.value)
+          return list.compactMap(\.value)
         }
       }
     paras.merge(fromQueryItems) { old, _ in old }
