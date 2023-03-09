@@ -18,20 +18,36 @@ extension NSNumber {
     formatter.roundingMode = .up
     return formatter
   }()
+    
+  /// formats the NSNumber to a readable currency formatted string that auto handles the decimal places.
+  public func toMoneyString(currencyCode: String, locale: Locale = .current) -> String {
+    let formatter = moneyFormatter(with: currencyCode)
+    formatter.locale = locale
+    return formatter.string(from: self)!
+  }
   
-  public func toMoneyString(currencyCode: String, decimalPlaces: Int = 0) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    formatter.currencyCode = currencyCode
+  /// formats the NSNumber to a readable currency formatted string that forces the number of decimal places.
+  public func toMoneyString(currencyCode: String, decimalPlaces: Int) -> String {
+    let formatter = moneyFormatter(with: currencyCode)
     formatter.currencySymbol = nil
-    formatter.zeroSymbol = NSLocalizedString("Free", tableName: "Shared", bundle: .tripKit, comment: "Free as in beer")
+    
     if decimalPlaces == 0 {
       formatter.roundingIncrement = NSNumber(value: 1)
     }
     formatter.maximumFractionDigits = decimalPlaces
     formatter.minimumFractionDigits = decimalPlaces
-    formatter.usesGroupingSeparator = true
+    
     return formatter.string(from: self)!
+  }
+  
+  private func moneyFormatter(with currencyCode: String) -> NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.currencyCode = currencyCode
+    formatter.zeroSymbol = NSLocalizedString("Free", tableName: "Shared", bundle: .tripKit, comment: "Free as in beer")
+    formatter.usesGroupingSeparator = true
+    
+    return formatter
   }
   
   public func toCarbonString() -> String {
