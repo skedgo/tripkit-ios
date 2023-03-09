@@ -387,14 +387,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/categories/NSNumber+Formatter.swift",
-      "line": 22,
-      "symbol": "NSNumber.toMoneyString(currencyCode:decimalPlaces:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/categories/NSNumber+Formatter.swift",
-      "line": 37,
+      "line": 53,
       "symbol": "NSNumber.toCarbonString()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -11574,7 +11567,7 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKBookingTypes.swift",
       "line": 448,
-      "symbol": "TKBooking.Fare.priceValue()",
+      "symbol": "TKBooking.Fare.priceValue(locale:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -11692,63 +11685,63 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 92,
+      "line": 93,
       "symbol": "TKStopCoordinate.supportsSecureCoding",
       "symbol_kind": "source.lang.swift.decl.var.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 94,
+      "line": 95,
       "symbol": "TKStopCoordinate.init(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 113,
+      "line": 116,
       "symbol": "TKStopCoordinate.init(from:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 130,
+      "line": 139,
       "symbol": "TKStopCoordinate.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 134,
+      "line": 143,
       "symbol": "TKStopCoordinate.subtitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 143,
+      "line": 152,
       "symbol": "TKStopCoordinate.services",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 148,
+      "line": 157,
       "symbol": "TKStopCoordinate.stopCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 169,
+      "line": 178,
       "symbol": "TKStopCoordinate.routes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKCoordinates.swift",
-      "line": 196,
+      "line": 205,
       "symbol": "TKStopCoordinate.operators",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
