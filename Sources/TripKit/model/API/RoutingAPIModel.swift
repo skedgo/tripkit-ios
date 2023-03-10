@@ -27,7 +27,7 @@ extension TKAPI {
   }
   
   public struct TripGroup: Codable, Hashable {
-    public let trips: [Trip]
+    public var trips: [Trip]
     public var frequency: Int?
     @DefaultEmptyArray public var sources: [DataAttribution]
   }
@@ -290,8 +290,8 @@ extension TKAPI {
     public let id: String
     public let kind: Kind
     public let messageKind: MessageKind
-    public let messageTitle: String
-    public let messageBody: String
+    public var messageTitle: String
+    public var messageBody: String
     
     public enum CodingKeys: String, CodingKey {
       case id
