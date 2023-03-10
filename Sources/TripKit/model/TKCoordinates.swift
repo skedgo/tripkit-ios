@@ -87,6 +87,7 @@ public class TKStopCoordinate: TKModeCoordinate {
     case availableRoutes
     case routes
     case operators
+    case wheelchairAccessibility
   }
   
   @objc public class override var supportsSecureCoding: Bool { return true }
@@ -101,6 +102,7 @@ public class TKStopCoordinate: TKModeCoordinate {
     availableRoutes = stop.availableRoutes
     routes = stop.routes
     operators = stop.operators
+    wheelchairAccessibility = TKWheelchairAccessibility(bool: stop.wheelchairAccessible)
   }
   
   init(_ stop: TKAPI.ShapeStop, modeInfo: TKModeInfo) {
@@ -108,6 +110,7 @@ public class TKStopCoordinate: TKModeCoordinate {
     isDraggable = false
     stopCode = stop.code
     stopShortName = stop.shortName
+    wheelchairAccessibility = TKWheelchairAccessibility(bool: stop.wheelchairAccessible)
   }
   
   public required init(from decoder: Decoder) throws {
@@ -124,6 +127,12 @@ public class TKStopCoordinate: TKModeCoordinate {
       availableRoutes = try values.decodeIfPresent(Int.self, forKey: .availableRoutes)
       routes = try values.decodeIfPresent([TKAPI.Route].self, forKey: .routes)
       operators = try values.decodeIfPresent([TKAPI.Operator].self, forKey: .operators)
+      
+      if let rawAccessibility = try values.decodeIfPresent(Int.self, forKey: .popularity) {
+        wheelchairAccessibility = .init(rawValue: rawAccessibility) ?? .unknown
+      } else {
+        wheelchairAccessibility = .unknown
+      }
     }
   }
   
@@ -217,6 +226,15 @@ public class TKStopCoordinate: TKModeCoordinate {
         data["sg_operators"] = try? JSONEncoder().encodeJSONObject(newValue)
       }
     }
+  }
+  
+  /// Accessibility of the stop. Note that whether you can get onto a specific service it'll also depend on the accessibility of the service. See `StopVisits.getWheelchairAccessibility()`
+  public internal(set) var wheelchairAccessibility: TKWheelchairAccessibility {
+    get {
+      return (data["sg_wheelchairAccessibility"] as? Int).flatMap { .init(rawValue: $0) }
+        ?? .unknown
+    }
+    set { data["sg_wheelchairAccessibility"] = newValue.rawValue }
   }
 
 }
