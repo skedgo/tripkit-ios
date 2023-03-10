@@ -90,9 +90,9 @@ public class TKSegment: NSObject {
       guard trip != nil else { return Date() }
 
       switch order {
-      case .start:    return trip.departureTime
+      case .start:    return trip?.departureTime ?? Date()
       case .regular:  return reference?.startTime ?? Date()
-      case .end:      return trip.arrivalTime
+      case .end:      return trip?.arrivalTime ?? Date()
       }
     }
     set {
@@ -561,7 +561,7 @@ extension TKSegment {
     switch order {
     case .start:
       guard
-        let queryFrom = trip?.request.fromLocation.coordinate,
+        let queryFrom = trip?.request?.fromLocation.coordinate,
         let start = start?.coordinate,
         let distance = start.distance(from: queryFrom)
         else { return true }
@@ -569,7 +569,7 @@ extension TKSegment {
       
     case .end:
       guard
-        let queryTo = trip?.request.toLocation.coordinate,
+        let queryTo = trip?.request?.toLocation.coordinate,
         let end = end?.coordinate,
         let distance = end.distance(from: queryTo)
         else { return true }
