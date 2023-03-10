@@ -97,28 +97,21 @@ extension TKDeparturesProvider {
   }
   
   public static func downloadDepartures(for stops: [StopLocation], fromDate: Date, filters: [Filter] = [], limit: Int = 10) async throws -> Bool {
-    
-    let stopCodes = stops.map(\.stopCode)
-    guard let region = stops.first?.region else {
-      throw OutputError.couldNotFetchRegions
-    }
-    
-    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters, limit: limit, in: region)
-    
     guard let context = stops.first?.managedObjectContext else {
       throw OutputError.stopSinceDeleted
     }
     
-    if #available(iOS 15.0, macOS 12.0, *) {
-      return await context.perform {
-        TKDeparturesProvider.addDepartures(departures, to: stops)
+    let (region, stopCodes) = try await context.tk_performThrowing {
+      guard let region = stops.first?.region else {
+        throw OutputError.couldNotFetchRegions
       }
-    } else {
-      var result = false
-      context.performAndWait {
-        result = TKDeparturesProvider.addDepartures(departures, to:stops)
-      }
-      return result
+      return (region, stops.map(\.stopCode))
+    }
+    
+    let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters, limit: limit, in: region)
+    
+    return await context.tk_perform {
+      TKDeparturesProvider.addDepartures(departures, to: stops)
     }
   }
   
@@ -145,19 +138,9 @@ extension TKDeparturesProvider {
   public static func downloadDepartures(for table: TKDLSTable, fromDate: Date, limit: Int = 10) async throws -> Set<String> {
     
     let departures = try await fetchDepartures(for: table, fromDate: fromDate, limit: limit)
-    
     let context = table.tripKitContext
-    if #available(iOS 15.0, macOS 12.0, *) {
-      return await context.perform {
-        TKDeparturesProvider.addDepartures(departures, into: context)
-      }
-    } else {
-      var result = Set<String>()
-      let context = table.tripKitContext
-      context.performAndWait {
-        result = TKDeparturesProvider.addDepartures(departures, into: context)
-      }
-      return result
+    return await context.tk_perform {
+      TKDeparturesProvider.addDepartures(departures, into: context)
     }
   }
   

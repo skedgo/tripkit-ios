@@ -245,12 +245,12 @@ extension TKSegment {
     case .end:
       let isTimeDependent = includingTime && trip.departureTimeIsFixed
       let name: String?
-      if let named = trip.request.toLocation.name {
+      if let named = trip.request?.toLocation.name {
         name = named
       } else if isPublicTransport, let next = (previous?.end?.title ?? nil) {
         name = next
       } else {
-        name = trip.request.toLocation.address ?? (previous?.end?.title ?? nil)
+        name = trip.request?.toLocation.address ?? (previous?.end?.title ?? nil)
       }
       if matchesQuery() {
         let time = isTimeDependent ? TKStyleManager.timeString(arrivalTime, for: timeZone) : nil

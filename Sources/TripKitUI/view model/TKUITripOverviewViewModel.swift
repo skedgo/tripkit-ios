@@ -54,6 +54,7 @@ class TKUITripOverviewViewModel {
           .catchAndReturn($0)
       }
       .share(replay: 1, scope: .forever)
+      .observe(on: MainScheduler.instance)
         
     sections = tripUpdated
       .map(Self.buildSections)

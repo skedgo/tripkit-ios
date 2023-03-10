@@ -225,8 +225,7 @@ extension Trip {
   
   private func buildSortedSegments() -> [TKSegment] {
     guard let references = segmentReferences else {
-      assertionFailure()
-      return []
+      return [] // Can happen during state restoration, if trip was since removed from store.
     }
     
     let sorted = references.sorted { $0.index < $1.index }

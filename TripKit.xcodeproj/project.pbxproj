@@ -46,6 +46,8 @@
 		3AB0EFE328FCEF8A003A4ED5 /* TKTransportMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0EFE128FCEF8A003A4ED5 /* TKTransportMode.swift */; };
 		3AB0EFE928FD0250003A4ED5 /* TKServer+ModeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0EFE828FD0250003A4ED5 /* TKServer+ModeImage.swift */; };
 		3AB0EFEA28FD0250003A4ED5 /* TKServer+ModeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0EFE828FD0250003A4ED5 /* TKServer+ModeImage.swift */; };
+		3AB19E9229AEFB56004DCC98 /* NSManagedObjectContext+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB19E9129AEFB56004DCC98 /* NSManagedObjectContext+Async.swift */; };
+		3AB19E9329AEFB56004DCC98 /* NSManagedObjectContext+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB19E9129AEFB56004DCC98 /* NSManagedObjectContext+Async.swift */; };
 		3AB424DF2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
 		3AB424E02734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
 		3AB4E58127584632006D2363 /* String+NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4E58027584632006D2363 /* String+NonEmpty.swift */; };
@@ -929,6 +931,7 @@
 		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AB0EFE128FCEF8A003A4ED5 /* TKTransportMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTransportMode.swift; sourceTree = "<group>"; };
 		3AB0EFE828FD0250003A4ED5 /* TKServer+ModeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKServer+ModeImage.swift"; sourceTree = "<group>"; };
+		3AB19E9129AEFB56004DCC98 /* NSManagedObjectContext+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Async.swift"; sourceTree = "<group>"; };
 		3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+EncodePolylineString.swift"; sourceTree = "<group>"; };
 		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
 		3AB4E58027584632006D2363 /* String+NonEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NonEmpty.swift"; sourceTree = "<group>"; };
@@ -2157,6 +2160,7 @@
 				3AFF26BF26C6975F007809CD /* NSDate+Formatting.swift */,
 				3AFF26BC26C6975F007809CD /* NSError+customError.swift */,
 				3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */,
+				3AB19E9129AEFB56004DCC98 /* NSManagedObjectContext+Async.swift */,
 				3AFF26BE26C6975F007809CD /* NSManagedObjectContext+Fetch.swift */,
 				3AFF26BD26C6975F007809CD /* NSNumber+Formatter.swift */,
 				3AB4E58027584632006D2363 /* String+NonEmpty.swift */,
@@ -3430,6 +3434,7 @@
 				3A89090927E473EE005A49B1 /* TKLocationProvider.swift in Sources */,
 				3AFF283D26C6977C007809CD /* TKShareURLProvider.swift in Sources */,
 				3AFF286F26C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */,
+				3AB19E9329AEFB56004DCC98 /* NSManagedObjectContext+Async.swift in Sources */,
 				3AFF28E126C697D9007809CD /* TKLocalCost.swift in Sources */,
 				3AFF28BE26C697D9007809CD /* Alert+CoreDataClass.swift in Sources */,
 				3AFF288226C697CA007809CD /* LocationAPIModel.swift in Sources */,
@@ -3885,6 +3890,7 @@
 				3AFF28F826C697DA007809CD /* TKColoredRoute.swift in Sources */,
 				3AFF284A26C6978A007809CD /* TKConfig.swift in Sources */,
 				3AFF283526C6977B007809CD /* TKShareURLProvider.swift in Sources */,
+				3AB19E9229AEFB56004DCC98 /* NSManagedObjectContext+Async.swift in Sources */,
 				3AFF286126C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */,
 				3AFF292026C697DA007809CD /* TKLocalCost.swift in Sources */,
 				3AFF28FD26C697DA007809CD /* Alert+CoreDataClass.swift in Sources */,
