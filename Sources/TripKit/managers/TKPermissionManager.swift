@@ -39,7 +39,7 @@ extension TKPermissionManager {
   
   public var isAuthorized: Bool {
     guard featureIsAvailable else { return false }
-    guard !authorizationRestrictionsApply else { return true }
+    guard authorizationRestrictionsApply else { return true }
     return authorizationStatus == .authorized
   }
   
