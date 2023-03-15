@@ -45,6 +45,7 @@ extension UIColor {
   static let tripgoBackgroundTile      = UIColor.tkBackground
   static let tripgoBackgroundBelowTile = UIColor.tkBackgroundSecondary
   static let tripgoBackgroundGrouped   = UIColor.tkBackgroundSecondary
+  static let tripgoBarSecondary = UIColor(named: "TKBarSecondary", in: .tripKit, compatibleWith: nil)!
   
   static let tripgoBackgroundSelected: UIColor = {
     if #available(iOS 13.0, *) {
