@@ -34,6 +34,11 @@ class TKUINotificationView: UIView {
   @IBOutlet weak var detailView4: UIView!
   @IBOutlet weak var detailItem4: UILabel!
     
+  @IBOutlet weak var separator: UIView!
+  
+  @IBOutlet var labels: [UILabel]!
+  @IBOutlet var detailImageViews: [UIImageView]!
+  
   class func newInstance() -> TKUINotificationView {
     return Bundle(for: self).loadNibNamed("TKUINotificationView",
                                           owner: self,
@@ -42,10 +47,8 @@ class TKUINotificationView: UIView {
 
   override func awakeFromNib() {
     super.awakeFromNib()
-    
-    backgroundColor = .clear
     contentWrapper.layer.cornerRadius = 6.0
-    titleImageView.tintColor = .tkAppTintColor
+    setupColors()
   }
   
   func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>) {
@@ -54,6 +57,16 @@ class TKUINotificationView: UIView {
     detailView3.alpha = notificationKinds.contains(.nextStopIsYours) ? 1 : 0.3
     detailView4.alpha = notificationKinds.contains(.tripEnd) ? 1 : 0.3
     notificationSwitch.isEnabled = !notificationKinds.isEmpty
+  }
+    
+  func setupColors() {
+    // Xib selected custom colors only use the selected color and does not use the dark mode color when in dark mode. These are programatically set so that the dark mode colors are used.
+    backgroundColor = .clear
+    contentWrapper.backgroundColor = .tkBackgroundSecondary
+    separator.backgroundColor = .tkBarSecondary
+    titleImageView.tintColor = .tkAppTintColor
+    labels.forEach { $0.textColor = .tkLabelPrimary }
+    detailImageViews.forEach { $0.tintColor = .tkLabelPrimary }
   }
   
 }
