@@ -565,7 +565,7 @@ extension TKRouter {
 #if canImport(CoreData)
 
   private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
-    fetchTripsResponse(for: request, bestOnly: bestOnly, additional: additional) { [weak self] result in
+    fetchTripsResponse(for: request, bestOnly: bestOnly, additional: additional, callbackQueue: callbackQueue) { [weak self] result in
       request.perform { [weak self] _ in
         guard let self = self else { return }
         
@@ -575,7 +575,10 @@ extension TKRouter {
           self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
           
         case .failure(let error):
-          self.handleError(error, callbackQueue: callbackQueue, completion: completion)
+          // Do NOT `handleError` again, as that's already called by
+          // `fetchTripsResponse`, which marks this router as inactive,
+          // and calling it again will mean nothing happens.
+          completion(.failure(error))
         }
       }
     }
@@ -639,8 +642,15 @@ extension TKRouter {
                    parameters: paras,
                    region: region,
                    callbackOnMain: false
-        ) { _, _, result in
-          completion(result)
+        ) { [weak self] _, _, result in
+            switch result {
+            case .success(let success):
+              completion(.success(success))
+            case .failure(let error):
+              // For consistency, all errors from this method should go through
+              // `handleError`
+              self?.handleError(error, callbackQueue: callbackQueue, completion: completion)
+            }
         }
       }
     }
