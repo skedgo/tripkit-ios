@@ -86,10 +86,10 @@
                                             <rect key="frame" x="16" y="30.333333333333321" width="540" height="97.666666666666686"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmB-UW-By8" userLabel="Detail 1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="540" height="30.666666666666668"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="540" height="14.333333333333334"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.north.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ruA-P7-CKU">
-                                                            <rect key="frame" x="0.0" y="7.6666666666666767" width="16" height="15.000000000000002"/>
+                                                            <rect key="frame" x="0.0" y="-0.33333333333332327" width="16" height="15.000000000000002"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="OJS-Xf-RUB"/>
@@ -97,7 +97,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="The trip is about to start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhb-eD-3zR">
-                                                            <rect key="frame" x="22" y="0.0" width="518" height="30.666666666666668"/>
+                                                            <rect key="frame" x="22" y="0.0" width="518" height="14.333333333333334"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" name="TKLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
@@ -113,7 +113,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCA-VW-qBv" userLabel="Detail 2">
-                                                    <rect key="frame" x="0.0" y="38.666666666666671" width="540" height="14.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="22.333333333333329" width="540" height="14.333333333333336"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zo9-87-Vjv">
                                                             <rect key="frame" x="0.0" y="0.66666666666667673" width="16" height="14.000000000000002"/>
@@ -140,10 +140,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVQ-PA-Qtc" userLabel="Detail 3">
-                                                    <rect key="frame" x="0.0" y="61.000000000000021" width="540" height="14.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="44.666666666666671" width="540" height="14.333333333333336"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AQj-Ng-cha">
-                                                            <rect key="frame" x="0.0" y="0.66666666666664831" width="16" height="14.000000000000002"/>
+                                                            <rect key="frame" x="0.0" y="0.66666666666667673" width="16" height="14.000000000000002"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="RrP-zw-K6c"/>
@@ -167,10 +167,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KG-2y-hCb" userLabel="Detail 4">
-                                                    <rect key="frame" x="0.0" y="83.333333333333329" width="540" height="14.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="67.000000000000014" width="540" height="30.666666666666671"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-Wa-ncU">
-                                                            <rect key="frame" x="0.0" y="-0.66666666666665719" width="16" height="16"/>
+                                                            <rect key="frame" x="0.0" y="7.3333333333333144" width="16" height="16"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="Klh-gk-Vof"/>
@@ -178,7 +178,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="About to arrive the final destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4E-71-ewA">
-                                                            <rect key="frame" x="22" y="0.0" width="518" height="14.333333333333334"/>
+                                                            <rect key="frame" x="22" y="0.0" width="518" height="30.666666666666668"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" name="TKLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
@@ -243,8 +243,19 @@
                 <outlet property="detailView3" destination="WVQ-PA-Qtc" id="BlR-72-J2r"/>
                 <outlet property="detailView4" destination="2KG-2y-hCb" id="A1w-uW-IOb"/>
                 <outlet property="notificationSwitch" destination="8XR-B9-N29" id="ofm-Xb-q8H"/>
+                <outlet property="separator" destination="rzS-YU-yFK" id="ZYv-Qo-J4F"/>
                 <outlet property="titleImageView" destination="1hS-SZ-wkW" id="lJu-hh-S7C"/>
                 <outlet property="titleLabel" destination="kGq-xy-KL6" id="Mgb-Nu-9uW"/>
+                <outletCollection property="labels" destination="Xhb-eD-3zR" collectionClass="NSMutableArray" id="FvN-Uh-f9C"/>
+                <outletCollection property="labels" destination="NCZ-t5-edC" collectionClass="NSMutableArray" id="HYA-8O-EiB"/>
+                <outletCollection property="labels" destination="LvQ-jF-6YF" collectionClass="NSMutableArray" id="seL-ps-1nq"/>
+                <outletCollection property="labels" destination="t4E-71-ewA" collectionClass="NSMutableArray" id="f9k-JZ-1wT"/>
+                <outletCollection property="labels" destination="4m9-ST-AzW" collectionClass="NSMutableArray" id="QmV-hE-Lpg"/>
+                <outletCollection property="labels" destination="kGq-xy-KL6" collectionClass="NSMutableArray" id="umL-8m-wry"/>
+                <outletCollection property="detailImageViews" destination="ruA-P7-CKU" collectionClass="NSMutableArray" id="wJe-b1-bEN"/>
+                <outletCollection property="detailImageViews" destination="zo9-87-Vjv" collectionClass="NSMutableArray" id="UGO-IO-gQ3"/>
+                <outletCollection property="detailImageViews" destination="AQj-Ng-cha" collectionClass="NSMutableArray" id="wyp-P0-997"/>
+                <outletCollection property="detailImageViews" destination="LCk-Wa-ncU" collectionClass="NSMutableArray" id="sxp-AE-8QI"/>
             </connections>
             <point key="canvasLocation" x="-70.229007633587784" y="-263.38028169014086"/>
         </view>
