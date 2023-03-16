@@ -65,6 +65,9 @@ extension UIColor {
   /// as its background colour.
   @objc public static var tkBackgroundGrouped: UIColor = .tripgoBackgroundGrouped
   
+  /// The background colour for separators
+  @objc public static var tkBarSecondary: UIColor = .tripgoBarSecondary
+  
   // MARK: - Accessories
 
   @objc public static var tkSeparator: UIColor = .tripgoSeparator

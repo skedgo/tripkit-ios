@@ -243,8 +243,19 @@
                 <outlet property="detailView3" destination="WVQ-PA-Qtc" id="BlR-72-J2r"/>
                 <outlet property="detailView4" destination="2KG-2y-hCb" id="A1w-uW-IOb"/>
                 <outlet property="notificationSwitch" destination="8XR-B9-N29" id="ofm-Xb-q8H"/>
+                <outlet property="separator" destination="rzS-YU-yFK" id="ZYv-Qo-J4F"/>
                 <outlet property="titleImageView" destination="1hS-SZ-wkW" id="lJu-hh-S7C"/>
                 <outlet property="titleLabel" destination="kGq-xy-KL6" id="Mgb-Nu-9uW"/>
+                <outletCollection property="labels" destination="Xhb-eD-3zR" collectionClass="NSMutableArray" id="FvN-Uh-f9C"/>
+                <outletCollection property="labels" destination="NCZ-t5-edC" collectionClass="NSMutableArray" id="HYA-8O-EiB"/>
+                <outletCollection property="labels" destination="LvQ-jF-6YF" collectionClass="NSMutableArray" id="seL-ps-1nq"/>
+                <outletCollection property="labels" destination="t4E-71-ewA" collectionClass="NSMutableArray" id="f9k-JZ-1wT"/>
+                <outletCollection property="labels" destination="4m9-ST-AzW" collectionClass="NSMutableArray" id="QmV-hE-Lpg"/>
+                <outletCollection property="labels" destination="kGq-xy-KL6" collectionClass="NSMutableArray" id="umL-8m-wry"/>
+                <outletCollection property="detailImageViews" destination="ruA-P7-CKU" collectionClass="NSMutableArray" id="wJe-b1-bEN"/>
+                <outletCollection property="detailImageViews" destination="zo9-87-Vjv" collectionClass="NSMutableArray" id="UGO-IO-gQ3"/>
+                <outletCollection property="detailImageViews" destination="AQj-Ng-cha" collectionClass="NSMutableArray" id="wyp-P0-997"/>
+                <outletCollection property="detailImageViews" destination="LCk-Wa-ncU" collectionClass="NSMutableArray" id="sxp-AE-8QI"/>
             </connections>
             <point key="canvasLocation" x="-70.229007633587784" y="-263.38028169014086"/>
         </view>
