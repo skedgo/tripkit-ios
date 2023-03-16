@@ -149,70 +149,70 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 70,
+      "line": 73,
       "symbol": "UIColor.tkSeparator",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 76,
+      "line": 79,
       "symbol": "UIColor.tkMapOverlay",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 77,
+      "line": 80,
       "symbol": "UIColor.tkSheetOverlay",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 78,
+      "line": 81,
       "symbol": "UIColor.tkStatusBarOverlay",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 82,
+      "line": 85,
       "symbol": "UIColor.tkNeutral",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 83,
+      "line": 86,
       "symbol": "UIColor.tkNeutral1",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 84,
+      "line": 87,
       "symbol": "UIColor.tkNeutral2",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 85,
+      "line": 88,
       "symbol": "UIColor.tkNeutral3",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 86,
+      "line": 89,
       "symbol": "UIColor.tkNeutral4",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 87,
+      "line": 90,
       "symbol": "UIColor.tkNeutral5",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
