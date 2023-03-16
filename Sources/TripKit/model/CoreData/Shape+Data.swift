@@ -44,6 +44,8 @@ extension Shape {
     case sideRoad = "SIDE-ROAD"
     case sharedRoad = "SHARED-ROAD"
     //case unpavedOrUnsealed = "UNPAVED/UNSEALED" -- fine to ignore
+    case streetLight = "STREET-LIGHT"
+    case CCTVCamera = "CCTV-CAMERA"
     
     public var localized: String {
       switch self {
@@ -55,6 +57,8 @@ extension Shape {
       case .sideRoad: return "Side Road"
       case .sharedRoad: return "Shared Road"
       case .mainRoad: return "Main Road"
+      case .streetLight: return "Street Light"
+      case .CCTVCamera: return "CCTV Camera"
       }
     }
     
@@ -68,7 +72,9 @@ extension Shape {
         return .designated
       case .sideWalk,
            .sideRoad,
-           .sharedRoad:
+           .sharedRoad,
+           .streetLight,
+           .CCTVCamera:
         return .neutral
       case .mainRoad:
         return .hostile
