@@ -62,11 +62,11 @@ extension Loc {
     return NSLocalizedString("Plan Trip", tableName: "TripKit", bundle: .tripKit, comment: "Title of page to plan a trip")
   }
   
-  @objc public static var PlanANewTrip: String {
+  public static var PlanANewTrip: String {
     return NSLocalizedString("Plan a new trip", tableName: "TripKit", bundle: .tripKit, comment: "Title for button that allows users to plan a new trip")
   }
 
-  @objc public static var Route: String {
+  public static var Route: String {
     return NSLocalizedString("Route", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to plan a route")
   }
   
@@ -74,7 +74,7 @@ extension Loc {
     return NSLocalizedString("Change Route", tableName: "TripKit", bundle: .tripKit, comment: "Title of page to change the from/to of the routing results")
   }
 
-  @objc public static var Trips: String {
+  public static var Trips: String {
     return NSLocalizedString("Trips", tableName: "TripKit", bundle: .tripKit, comment: "Title of page that shows routing results")
   }
   
@@ -182,22 +182,22 @@ extension Loc {
     }
   }
 
-  @objc public static var YouMightNotMakeThisTransfer: String {
+  public static var YouMightNotMakeThisTransfer: String {
     return NSLocalizedString("You might not make this transfer.", tableName: "TripKit", bundle: .tripKit, comment: "Alert if service running late/early, meaning that the user might not make the next service")
   }
 
-  @objc public static var ServiceHasBeenChancelled: String {
+  public static var ServiceHasBeenChancelled: String {
     return NSLocalizedString("Service has been cancelled.", tableName: "TripKit", bundle: .tripKit, comment: "Alert if service has been cancelled, meaning that the user can't take it and find an alternative")
   }
 
-  @objc public static var AlternativeRoutes: String {
+  public static var AlternativeRoutes: String {
     return NSLocalizedString("Alternative routes", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to see alternative options for the case where you cant make the next connection")
   }
   
 
   // MARK: - Departures + Services
 
-  @objc public static var Timetable: String {
+  public static var Timetable: String {
     return NSLocalizedString("Timetable", tableName: "TripKit", bundle: .tripKit, comment: "Title of button to access timetable")
   }
   
@@ -230,17 +230,15 @@ extension Loc {
   
   // MARK: -
   
-  @objc public static var Now: String {
+  public static var Now: String {
     return NSLocalizedString("Now", tableName: "Shared", bundle: .tripKit, comment: "Countdown cell 'now' indicator")
   }
   
-  @objc(InDurationString:)
   public static func In(duration: String) -> String {
     let format = NSLocalizedString("In %@", tableName: "TripKit", bundle: .tripKit, comment: "Title for something to happen in a certain timeframe, e.g., 'In 5 mins'")
     return String(format: format, duration)
   }
   
-  @objc(AgoDurationString:)
   public static func Ago(duration: String) -> String {
     let format = NSLocalizedString("%@ ago", tableName: "TripKit", bundle: .tripKit, comment: "Title for something that happened a certain timeframe ago, e.g., '5 mins ago'")
     return String(format: format, duration)
@@ -259,6 +257,12 @@ extension Loc {
   
   public static var CustomizeHome: String {
     return NSLocalizedString("Customise home", tableName: "TripKit", bundle: .tripKit, comment: "Title for button to customise the home card")
+  }
+  
+  // MARK: - Nearby
+
+  public static var NearMe: String {
+    return NSLocalizedString("Near Me", tableName: "TripKit", bundle: .tripKit, comment: "Title for the 'Near Me'/Nearby card")
   }
   
   
