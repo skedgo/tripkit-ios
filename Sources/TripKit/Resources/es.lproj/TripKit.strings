@@ -108,7 +108,7 @@
 "Car" = "coche";
 
 /* Title of page to change the from/to of the routing results */
-"Change Route" = "Change Route";
+"Change Route" = "Modificar Ruta";
 
 /* Trip badge: Cheapest */
 "Cheapest" = "Más barato";
@@ -135,7 +135,7 @@
 "Direction" = "Dirección";
 
 /* Status indicator that a mode is not enabled */
-"Disabled" = "Disabled";
+"Disabled" = "Deshabilitado";
 
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Desconectar";
@@ -156,7 +156,7 @@
 "Empty" = "Vacío";
 
 /* Status indicator that a mode is enabled */
-"Enabled" = "Enabled";
+"Enabled" = "Habilitado";
 
 /* Placeholder name for destination (then replaced with address or name) */
 "End location" = "Destino final";
@@ -301,7 +301,7 @@
 "On time" = "A tiempo";
 
 /* Indicating no return trip is required. */
-"One-way only" = "One-way only";
+"One-way only" = "Sólo ida";
 
 /* Action title open app of name '@%' */
 "Open %@" = "Abrir %@";
@@ -325,10 +325,10 @@
 "Plan Trip" = "Planifica un viaje";
 
 /* Confirmation text to open app of name '@%' */
-"Please confirm switching to %@ to get directions." = "Please confirm switching to %@ to get directions.";
+"Please confirm switching to %@ to get directions." = "Confirme el cambio a %@ para obtener indicaciones.";
 
 /* No comment provided by engineer. */
-"Powered by" = "Powered by tripAdvisor";
+"Powered by" = "Powered by";
 
 /* No comment provided by engineer. */
 "Powered by %@" = "Desarrollado por %@";
@@ -428,6 +428,9 @@
 
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Actualizado hace %@";
+
+/* Title for showing the details of vehicle */
+"Vehicle" = "Vehículo";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "Vehículo %1$@ actualizado hace %2$@";
