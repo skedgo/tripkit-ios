@@ -285,6 +285,9 @@
 /* Text for vehicle of type: Motorbike */
 "Motorbike" = "Motorrad";
 
+/* Title for the 'Near Me'/Nearby card */
+"Near Me" = "In meiner Nähe";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Keine Routen geplant";
 
@@ -428,6 +431,9 @@
 
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Aktualisiert vor %@";
+
+/* Title for showing the details of vehicle */
+"Vehicle" = "Fahrzeug";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "Fahrzeug %1$@, aktualisiert vor %2$@";

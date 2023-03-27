@@ -214,6 +214,9 @@
 /* No comment provided by engineer. */
 "Password" = "Contraseña";
 
+/* For phone numbers */
+"Phone" = "Teléfono";
+
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Por favor ingrese su dirección de correo electrónico registrado. Luego le enviaremos instrucciones sobre cómo restablecer la contraseña";
 
@@ -317,7 +320,7 @@
 "SUV" = "SUV";
 
 /* Accessibility hint for routing results screen. */
-"Tap to change start and end locations" = "Tap to change start and end locations";
+"Tap to change start and end locations" = "Toque para cambiar las ubicaciones de inicio y fin.";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Seleccione ubicación";
