@@ -214,6 +214,9 @@
 /* No comment provided by engineer. */
 "Password" = "Passwort";
 
+/* For phone numbers */
+"Phone" = "Telefon";
+
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Bitte gib deine registrierte E-Mail-Adresse an. Wir senden dann Anweisungen zum Zurücksetzen des Passworts";
 
