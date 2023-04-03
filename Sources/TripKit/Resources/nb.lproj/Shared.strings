@@ -43,23 +43,14 @@
 /* Accessibility label for 'back' or 'previous' button */
 "Back" = "Tilbake";
 
-/* Type of vehicle : bicycle */
-"Bicycle" = "Sykkel";
-
 /* Cancel action */
 "Cancel" = "Avbryt";
 
 /* Label for when a service is cancelled. */
 "Cancelled" = "Avbrutt";
 
-/* Type of vehicle : car */
-"Car" = "Bil";
-
 /* Instruction for changing password */
 "Change" = "Endre";
-
-/* Accessibility - user location button - hint */
-"Change tracking options" = "Endre sporingsalternativer";
 
 /* Accessibility title for a checkmark/tick button */
 "Checkmark" = "Markering";
@@ -130,9 +121,6 @@
 /* 'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'. (old key: EveryDayFormat) */
 "Every %@" = "Hvert %@";
 
-/* Everyday in context of repetitions (especially recurring events) */
-"Everyday" = "Hver dag";
-
 /* Email placeholder text */
 "example@example.com" = "example@example.com";
 
@@ -169,9 +157,6 @@
 /* Include events. */
 "Include events" = "Inkluder hendelser";
 
-/* Instant results proposal */
-"Instant results" = "Direkte resultater";
-
 /* A footnote that instructs users to check their emails for reset instructions */
 "Instructions on how to reset password has been sent to the above email address." = "Instruksjoner for hvordan du tilbakestiller passord ble sendt til ovennevnte e-postadresse.";
 
@@ -190,9 +175,6 @@
 /* Indicator for real-time information */
 "Live traffic" = "Trafikk i sanntid";
 
-/* Title on the button that indicates to the user that booking is in progressing */
-"Loading" = "Laster";
-
 /* Title for unnamed location */
 "Location" = "Sted";
 
@@ -201,12 +183,6 @@
 
 /* Reminder to leave preference */
 "Minutes before trip" = "Minutter før reisen";
-
-/* More results proposal */
-"More results" = "Flere resultater";
-
-/* Type of vehicle : motorbike */
-"Motorbike" = "Motorsykkel";
 
 /* Title for name of something (or someone) */
 "Name" = "Navn";
@@ -237,6 +213,9 @@
 
 /* No comment provided by engineer. */
 "Password" = "Passord";
+
+/* For phone numbers */
+"Phone" = "Telefon";
 
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Skriv inn din registrerte e-postadresse. Vi sender deg deretter instruksjoner om hvordan du tilbakestiller passordet";
@@ -307,9 +286,6 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'…" = "Søker etter '%@ ' …";
 
-/* A footnote that tells recommends the format of a secure password. */
-"Secure passwords are at least five characters long and include numbers and symbols" = "Secure passwords are at least five characters long and include numbers and symbols";
-
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Sendt";
 
@@ -340,9 +316,6 @@
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
 
-/* Accessibility hint for routing results screen. */
-"Tap to change start and end locations" = "Tap to change start and end locations";
-
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Trykk for å angi sted";
 
@@ -354,15 +327,6 @@
 
 /* to %date. (old key: DateToFormat) */
 "to %@" = "til %@";
-
-/* Accessibility - user location button - off */
-"Tracking - off" = "Sporing - av";
-
-/* user location button - follow */
-"Tracking - on" = "Sporing - på";
-
-/* user location button - follow with heading */
-"Tracking - on with heading" = "Sporing - på med overskrift";
 
 /* Up to %date. (old key: DateToFormat) */
 "Up to %@" = "Opptil %@";

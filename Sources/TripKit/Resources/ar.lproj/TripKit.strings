@@ -429,6 +429,9 @@
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "تم التحديث قبل %@";
 
+/* Title for showing the details of vehicle */
+"Vehicle" = "السيارة";
+
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "تم تحديث السيارة %1$@ منذ %2$@";
 
