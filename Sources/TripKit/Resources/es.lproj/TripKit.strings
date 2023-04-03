@@ -285,6 +285,9 @@
 /* Text for vehicle of type: Motorbike */
 "Motorbike" = "moto";
 
+/* Title for the 'Near Me'/Nearby card */
+"Near Me" = "Cerca de mí";
+
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Ningún viaje planeado";
 
