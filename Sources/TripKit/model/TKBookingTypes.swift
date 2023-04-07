@@ -24,6 +24,7 @@ public enum TKBooking {
     public let externalAction: String?
     public let type: ActionType?
     public let confirmationMessage: String?
+    public let confirmation: ActionConfirmation?
     public var input: [ActionInput]?
     
     public enum ActionType: String, Codable, CaseIterable {
@@ -65,8 +66,29 @@ public enum TKBooking {
       case internalURL
       case externalAction = "externalURL"
       case type
-      case input
       case confirmationMessage
+      case confirmation
+      case input
+    }
+  }
+    
+  public struct ActionConfirmation: Codable, Hashable {
+    public let message: String
+    public let abortActionTitle: String
+    public let confirmActionTitle: String
+    
+    private enum CodingKeys: String, CodingKey {
+      case message
+      case abortActionTitle
+      case confirmActionTitle
+    }
+    
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      
+      message = try container.decode(String.self, forKey: .message)
+      abortActionTitle = try container.decode(String.self, forKey: .abortActionTitle)
+      confirmActionTitle = try container.decode(String.self, forKey: .confirmActionTitle)
     }
   }
   
