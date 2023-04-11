@@ -61,6 +61,7 @@ public class TKSegment: NSObject {
     self.start = location
     self.end = location
     self.reference = nil
+    self.templateHashCode = 0
     
     super.init()
   }
@@ -76,6 +77,7 @@ public class TKSegment: NSObject {
     assert(template?.end != nil, "Template is missing end: \(String(describing: template))")
     self.start = template?.start
     self.end = template?.end
+    self.templateHashCode = template?.hashCode?.intValue ?? 0
     
     super.init()
   }
@@ -143,7 +145,7 @@ public class TKSegment: NSObject {
   
   public lazy var notifications: [TKAPI.TripNotification] = template?.notifications ?? []
   
-  public var templateHashCode: Int { template?.hashCode?.intValue ?? 0 }
+  public var templateHashCode: Int
   
   public var color: TKColor {
     if let color = service?.color {
@@ -486,6 +488,7 @@ extension TKSegment {
     return segment.arrivalTime.timeIntervalSince(departureTime)
   }
   
+  /// - Returns: The next segment after the current one that is not a continuation; if there's no segment after returns `self`
   @objc
   public func finalSegmentIncludingContinuation() -> TKSegment {
     var segment: TKSegment? = self
@@ -497,6 +500,7 @@ extension TKSegment {
     return segment ?? self
   }
   
+  /// - Returns: The segment before the current one that is not a continuation; if there's no segment before returns `self`
   @objc
   public func originalSegmentIncludingContinuation() -> TKSegment {
     var segment: TKSegment? = self

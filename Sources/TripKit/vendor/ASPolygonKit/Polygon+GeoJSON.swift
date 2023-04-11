@@ -88,7 +88,7 @@ extension Polygon.UnionStep {
               yours.geoJSON,
               start.geoJSON
             ]
-          ]
+          ] as [String : Any]
         ]]
       }
       
@@ -101,7 +101,7 @@ extension Polygon.UnionStep {
         "geometry": [
           "type": "LineString",
           "coordinates": points.map { [$0.x, $0.y] }
-        ]
+        ] as [String : Any]
       ]]
 
     case let .extendMine(points):
@@ -113,7 +113,7 @@ extension Polygon.UnionStep {
         "geometry": [
           "type": "LineString",
           "coordinates": points.map { [$0.x, $0.y] }
-        ]
+        ] as [String : Any]
       ]]
       
     case let .intersect(intersection, onMine):

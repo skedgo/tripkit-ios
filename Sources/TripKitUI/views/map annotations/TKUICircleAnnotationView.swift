@@ -9,6 +9,12 @@
 import Foundation
 import MapKit
 
+public protocol TKUICircleDisplayable: MKAnnotation {
+  var circleColor: UIColor { get }
+  var isTravelled: Bool { get }
+  var asLarge: Bool { get }
+}
+
 open class TKUICircleAnnotationView: MKAnnotationView {
   private enum Constants {
     static let circleSize: CGFloat   = 12.0
@@ -29,7 +35,6 @@ open class TKUICircleAnnotationView: MKAnnotationView {
     
     let radius = Constants.circleSize * (drawLarge ? 1 : Constants.smallFactor)
     frame.size = CGSize(width: radius, height: radius)
-    isOpaque = true
     backgroundColor = .clear
   }
   

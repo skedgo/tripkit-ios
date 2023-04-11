@@ -25,7 +25,8 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
       defaultBorderColor: nil,
       selectedColor: TKStyleManager.globalTintColor(),
       selectedBorderColor: TKStyleManager.globalTintColor().darker(by: 0.5),
-      deselectedColor: .tkLabelSecondary
+      deselectedColor: .tkLabelSecondary,
+      deselectedBorderColor: .tkLabelSecondary
     )
     
     var defaultColor: UIColor?
@@ -33,6 +34,7 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
     var selectedColor: UIColor
     var selectedBorderColor: UIColor
     var deselectedColor: UIColor
+    var deselectedBorderColor: UIColor
   }
   
   /// Whether there should be a background behind dashes
@@ -159,7 +161,7 @@ open class TKUIPolylineRenderer: MKPolylineRenderer {
 
       } else {
         strokeColor = selectionStyle.deselectedColor
-        borderColor = selectionStyle.deselectedColor
+        borderColor = selectionStyle.deselectedBorderColor
         alpha = 0.3
         lineWidth = 12
       }
