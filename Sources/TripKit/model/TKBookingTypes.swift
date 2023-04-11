@@ -23,6 +23,7 @@ public enum TKBooking {
     public let internalURL: URL?
     public let externalAction: String?
     public let type: ActionType?
+    @available(*, deprecated, message: "confirmationMessage property is deprecated, please use confirmation.message instead.")
     public let confirmationMessage: String?
     public let confirmation: ActionConfirmation?
     public var input: [ActionInput]?
@@ -76,20 +77,6 @@ public enum TKBooking {
     public let message: String
     public let abortActionTitle: String
     public let confirmActionTitle: String
-    
-    private enum CodingKeys: String, CodingKey {
-      case message
-      case abortActionTitle
-      case confirmActionTitle
-    }
-    
-    public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-      
-      message = try container.decode(String.self, forKey: .message)
-      abortActionTitle = try container.decode(String.self, forKey: .abortActionTitle)
-      confirmActionTitle = try container.decode(String.self, forKey: .confirmActionTitle)
-    }
   }
   
   public struct TSPBranding: Codable, Hashable {
