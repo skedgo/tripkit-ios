@@ -40,9 +40,9 @@ public class TKUITripMonitorManager: NSObject {
         guard let match = self.geofences.first(where: { $0.1.identifier == region.identifier })?.0 else { return }
         self.notify(with: match, trigger: nil)  // Fire right away
       case .manual(let region, let location):
-        break
+        break // This happens we starting in a region. Ignore.
       case .status(let message, let status):
-        break
+        TKLog.info("TKUITripMonitorManager", text: message)
       }
     }
   }()
@@ -166,8 +166,13 @@ extension TKUITripMonitorManager {
     
     guard !pairs.isEmpty else { return }
     
-    geoMonitor.enableInBackground = true
     geoMonitor.startMonitoring()
+    
+    // Keep GPS active and enable blue indicator, which allows the app to
+    // keep monitoring in the background, even when only using "When in use"
+    // permissions. This will then also allow alerts to fire from the
+    // background. Also, user can tap status bar indicator to re-open app.
+    geoMonitor.isTracking = true
     
     Task {
       await geoMonitor.update(regions: pairs.map(\.1))
@@ -177,7 +182,7 @@ extension TKUITripMonitorManager {
   private func stopMonitoringRegions() {
     guard !geofences.isEmpty else { return }
     
-    geoMonitor.enableInBackground = false
+    geoMonitor.isTracking = false
     geoMonitor.stopMonitoring()
     
     // inverse of `monitorRegion(from:)`
