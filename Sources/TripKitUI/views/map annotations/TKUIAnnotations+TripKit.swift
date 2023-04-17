@@ -10,7 +10,7 @@ import Foundation
 
 import TripKit
 
-// MARK: - TKModeCoordinate
+// MARK: - Protocols for TKModeCoordinate
 
 // MARK: TKUIModeAnnotation
 
@@ -49,14 +49,14 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
 }
 
 
-// MARK: - TKStopCoordinate
+// MARK: - Protocols for TKStopCoordinate
 
 // MARK: TKUIStopAnnotation
 
 extension TKStopCoordinate: TKUIStopAnnotation {}
 
 
-// MARK: - Alert
+// MARK: - Protocols for Alert
 
 // MARK: TKUIImageAnnotation
 
@@ -69,7 +69,7 @@ extension Alert: TKUIImageAnnotation {
 }
 
 
-// MARK: - StopLocation
+// MARK: - Protocols for StopLocation
 
 // MARK: TKUIModeAnnotation
 
@@ -88,7 +88,7 @@ extension StopLocation: TKUIModeAnnotation {
 
 extension StopLocation: TKUIStopAnnotation {}
 
-// MARK: - StopVisits
+// MARK: - Protocols for StopVisits
 
 // MARK: TKUIModeAnnotation
 
@@ -102,38 +102,30 @@ extension StopVisits: TKUIModeAnnotation {
   }
 }
 
-// MARK: TKUISemaphoreDisplayable
 
-extension StopVisits: TKUISemaphoreDisplayable {
-  public var selectionIdentifier: String? {
-    return nil
-  }
-  
-  public var semaphoreMode: TKUISemaphoreView.Mode? {
-    return .none
-  }
-  
-  public var isTerminal: Bool {
-    return false
-  }
-}
+// MARK: - Protocols for TKSegment
 
-
-// MARK: - TKSegment
-
-// MARK: - TKUIModeAnnotation
+// MARK: TKUIModeAnnotation
 
 extension TKSegment: TKUIModeAnnotation {
   public var clusterIdentifier: String? {
     return nil
   }
+  
+  public var image: TKImage? {
+    switch order {
+    case .start: return nil
+    case .end: return .iconPin
+    case .regular: return tripSegmentModeImage
+    }
+  }
 }
 
-// MARK: - TKUISemaphoreDisplayable
+// MARK: TKUISemaphoreDisplayable
 
 extension TKSegment: TKUISemaphoreDisplayable {
   public var selectionIdentifier: String? {
-    // Should match the definition in TripKit => Shape
+    // Should match the definition in TripKit => Shape+CoreDataClass
     switch order {
     case .start: return "start"
     case .regular: return String(originalSegmentIncludingContinuation().templateHashCode)
@@ -141,16 +133,24 @@ extension TKSegment: TKUISemaphoreDisplayable {
     }
   }
   
-  public var semaphoreMode: TKUISemaphoreView.Mode? {
+  func semaphoreMode(atStart: Bool) -> TKUISemaphoreView.Mode {
     if let frequency = self.frequency?.intValue {
-      if !isTerminal {
+      if !isTerminal, atStart {
         return .headWithFrequency(minutes: frequency)
       } else {
         return .headOnly
       }
+      
+    } else if !trip.hideExactTimes, self.tripSegmentFixedDepartureTime != nil {
+      return .headWithTime(atStart ? departureTime : arrivalTime, timeZone, isRealTime: timesAreRealTime)
+      
     } else {
-      return trip.hideExactTimes ? .headOnly : .headWithTime(departureTime, timeZone, isRealTime: timesAreRealTime)
+      return .headOnly
     }
+  }
+  
+  public var semaphoreMode: TKUISemaphoreView.Mode {
+    semaphoreMode(atStart: true)
   }
   
   public var canFlipImage: Bool {
@@ -163,7 +163,9 @@ extension TKSegment: TKUISemaphoreDisplayable {
   }
 }
 
-// MARK: - TKRegion.City
+// MARK: - Protocols for TKRegion.City
+
+// MARK: TKUIImageAnnotation
 
 extension TKRegion.City: TKUIImageAnnotation {
   public var image: TKImage? { return TKStyleManager.image(named: "icon-map-info-city") }

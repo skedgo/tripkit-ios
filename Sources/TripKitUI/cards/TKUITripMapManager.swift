@@ -73,15 +73,6 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     super.mapView(mapView, didAdd: views)
   }
   
-  override public func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
-    let builder = super.annotationBuilder(for: annotation, in: mapView)
-    if let visit = annotation as? StopVisits {
-      let isVisited = trip.uses(visit)
-      builder.drawCircleAsTravelled(isVisited)
-    }
-    return builder
-  }
-  
   public func showTrip(animated: Bool) {
     deselectSegment(animated: animated)
     zoom(to: annotationsToZoomToOnTakingCharge, animated: animated)
@@ -98,8 +89,6 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     
     let annos = segment.annotationsToZoomToOnMap(mode: mode)
     zoom(to: annos, animated: animated)
-    
-    mapView?.selectAnnotation(segment, animated: animated)
   }
   
   public func refresh(with trip: Trip) {
@@ -128,10 +117,8 @@ private extension TKUITripMapManager {
     for segment in trip.segments {
       annotations.append(contentsOf: TKUIMapManagerHelper.additionalMapAnnotations(for: segment))
       
-      // semaphore
-      if segment.hasVisibility(.onMap), segment.coordinate.isValid {
-        annotations.append(segment)
-      }
+      // start/end annotations for the segment itself
+      annotations.append(contentsOf: TKUIMapManagerHelper.annotations(for: segment))
       
       // shapes (+ visits)
       if let toAdd = TKUIMapManagerHelper.shapeAnnotations(for: segment) {

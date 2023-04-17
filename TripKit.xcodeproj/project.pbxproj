@@ -32,6 +32,7 @@
 		3A41FD2B2978F5DF00841E61 /* TKUITripMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */; };
 		3A41FD2C2978F5DF00841E61 /* TKUINotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */; };
 		3A55D16626FC5C5800A3D6EB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A55D16526FC5C5800A3D6EB /* Kingfisher */; };
+		3A5E8EEE29E522F100B08DE0 /* MKAnnotationView+Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E8EED29E522F100B08DE0 /* MKAnnotationView+Selectable.swift */; };
 		3A772559292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A772558292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift */; };
 		3A89090627E4739D005A49B1 /* Rx+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090527E4739D005A49B1 /* Rx+Concurrency.swift */; };
 		3A89090827E473EE005A49B1 /* TKLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090727E473EE005A49B1 /* TKLocationProvider.swift */; };
@@ -976,6 +977,7 @@
 		3A1AABB226CB78DE00FDDB06 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
 		3A1AABB326CB78DE00FDDB06 /* pelias-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-de.json"; sourceTree = "<group>"; };
 		3A1AABB726CB7BB100FDDB06 /* TKVehicular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKVehicular.swift; sourceTree = "<group>"; };
+		3A5E8EED29E522F100B08DE0 /* MKAnnotationView+Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKAnnotationView+Selectable.swift"; sourceTree = "<group>"; };
 		3A6DF068202C8C340084CB2C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF069202C8C340084CB2C /* TripKitUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitUI.podspec; sourceTree = "<group>"; };
 		3A6DF06A202C8C340084CB2C /* TripKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKit.podspec; sourceTree = "<group>"; };
@@ -2605,6 +2607,7 @@
 				3AFF279626C6975F007809CD /* TKUISemaphoreView.swift */,
 				3AFF279926C6975F007809CD /* TKUIVehicleAnnotationView.swift */,
 				3AFF279326C6975F007809CD /* TKUIVehicleView.swift */,
+				3A5E8EED29E522F100B08DE0 /* MKAnnotationView+Selectable.swift */,
 			);
 			path = "map annotations";
 			sourceTree = "<group>";
@@ -3777,6 +3780,7 @@
 				3AFF2B1026C69B63007809CD /* TKUITimetableViewController.swift in Sources */,
 				3AFF2AEE26C69B56007809CD /* TKUICardAction.swift in Sources */,
 				3AFF2B7626C69BB9007809CD /* TKUIServiceTitleView+Rx.swift in Sources */,
+				3A5E8EEE29E522F100B08DE0 /* MKAnnotationView+Selectable.swift in Sources */,
 				3AFF2BB126C69BE7007809CD /* TKUICustomization.swift in Sources */,
 				3AFF2B5B26C69BA4007809CD /* TKUIProgressCell.swift in Sources */,
 				3AFF2B1F26C69B85007809CD /* TKUINearbyViewModel.swift in Sources */,

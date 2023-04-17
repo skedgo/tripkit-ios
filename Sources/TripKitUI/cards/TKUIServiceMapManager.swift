@@ -41,9 +41,7 @@ class TKUIServiceMapManager: TKUIMapManager {
       .disposed(by: disposeBag)
     
     viewModel.selectAnnotation
-      .drive(onNext: { [weak self] in
-        self?.mapView?.selectAnnotation($0, animated: true)
-      })
+      .drive(onNext: { [weak self] in self?.select($0) })
       .disposed(by: disposeBag)
 
     viewModel.realTimeUpdate
@@ -69,16 +67,17 @@ class TKUIServiceMapManager: TKUIMapManager {
     (embarkation as? TKUIServiceViewModel.ServiceEmbarkation)?.triggerRealTimeKVO()
     (disembarkation as? TKUIServiceViewModel.ServiceEmbarkation)?.triggerRealTimeKVO()
   }
+  
+  private func select(_ annotation: TKUIIdentifiableAnnotation) {
+    guard
+      let mapView,
+      let match = mapView.annotations.first(where: { ($0 as? TKUIIdentifiableAnnotation)?.identity == annotation.identity })
+    else { return }
 
-  override func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
-    let builder = super.annotationBuilder(for: annotation, in: mapView)
-    if let visitable = annotation as? TKUIServiceMapContentVisited {
-      builder.circleColor(visitable.color)
-      builder.drawCircleAsTravelled(visitable.isVisited)
-      builder.drawImageAnnotationAsCircle(true)
-    }
-    return builder
+    self.zoom(to: [match], animated: false) // Not animated, so that we can select
+    self.mapView?.selectAnnotation(match, animated: true)
   }
+
 }
 
 // MARK: - Adding the service

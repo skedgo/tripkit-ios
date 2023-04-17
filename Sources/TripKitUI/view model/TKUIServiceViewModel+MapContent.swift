@@ -11,11 +11,6 @@ import MapKit
 
 import TripKit
 
-protocol TKUIServiceMapContentVisited {
-  var color: UIColor { get }
-  var isVisited: Bool { get }
-}
-
 extension TKUIServiceViewModel {
   
   /// All the content to display about a service on a map
@@ -32,7 +27,7 @@ extension TKUIServiceViewModel {
     let shapes: [TKDisplayableRoute]
     
     /// All stops along the route
-    let stops: [TKUIModeAnnotation & TKUIServiceMapContentVisited]
+    let stops: [TKUIModeAnnotation & TKUICircleDisplayable]
     
     /// Annotations for vehicles servicing the route
     ///
@@ -67,7 +62,7 @@ extension TKUIServiceViewModel {
 }
 
 extension TKUIServiceViewModel.MapContent {
-  func findStop(_ item: TKUIServiceViewModel.Item) -> MKAnnotation? {
+  func findStop(_ item: TKUIServiceViewModel.Item) -> TKUIIdentifiableAnnotation? {
     return stops
       .compactMap { $0 as? TKUIServiceViewModel.ServiceVisit }
       .first { $0.visit == item.dataModel }
@@ -98,14 +93,22 @@ extension TKUIServiceViewModel {
   }
 }
 
-extension TKUIServiceViewModel.ServiceVisit: TKUIServiceMapContentVisited {}
+extension TKUIServiceViewModel.ServiceVisit: TKUICircleDisplayable {
+  var circleColor: UIColor { color }
+  var isTravelled: Bool { isVisited }
+  var asLarge: Bool { false }
+}
 
 extension TKUIServiceViewModel.ServiceVisit: TKUIModeAnnotation {
   var title: String? { return visit.title }
   var subtitle: String? { return visit.subtitle }
   var coordinate: CLLocationCoordinate2D { return visit.coordinate }
   var modeInfo: TKModeInfo! { return visit.modeInfo }
-  var clusterIdentifier: String? { return visit.clusterIdentifier}
+  var clusterIdentifier: String? { return visit.clusterIdentifier }
+}
+
+extension TKUIServiceViewModel.ServiceVisit: TKUIIdentifiableAnnotation {
+  var identity: String? { visit.stop.stopCode } // We assume you don't visit the same stop code again
 }
 
 // MARK: Embarkations
@@ -154,7 +157,7 @@ extension TKUIServiceViewModel.ServiceEmbarkation: TKUIModeAnnotation {
 }
 
 extension TKUIServiceViewModel.ServiceEmbarkation: TKUISemaphoreDisplayable {
-  var semaphoreMode: TKUISemaphoreView.Mode? {
+  var semaphoreMode: TKUISemaphoreView.Mode {
     switch (visit.timing, action) {
     case (.frequencyBased(let frequency, _, _, _), .embark):
       return .headWithFrequency(minutes: Int(frequency / 60))
@@ -178,5 +181,4 @@ extension TKUIServiceViewModel.ServiceEmbarkation: TKUISemaphoreDisplayable {
   }
   
   var isTerminal: Bool { return action == .disembark }
-  var selectionIdentifier: String? { return visit.selectionIdentifier }
 }

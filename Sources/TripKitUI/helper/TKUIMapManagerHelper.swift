@@ -62,7 +62,7 @@ class TKUIMapManagerHelper: NSObject {
     -> (points: [MKAnnotation], overlays: [MKOverlay], requestVisits: Bool)?
   {
     guard !segment.isStationary else { return nil }
-    guard !segment.isFlight else { return geodesicShapeAnnotations(for: segment) }
+    if segment.isFlight { return geodesicShapeAnnotations(for: segment) }
     
     let shapes = segment.shapes
     let allEmpty = segment.isPublicTransport && shapes.isEmpty
@@ -77,7 +77,15 @@ class TKUIMapManagerHelper: NSObject {
       if service.hasServiceData {
         let visits = service.visits ?? []
         for visit in visits where segment.shouldShow(visit) {
-          points.append(visit)
+          points.append(TKUICircleAnnotation(
+            coordinate: visit.coordinate,
+            title: visit.title,
+            circleColor: service.color ?? .tkAppTintColor,
+            isTravelled: segment.uses(visit),
+            asLarge: true,
+            selectionIdentifier: segment.selectionIdentifier,
+            selectionCondition: .ifSelectedOrNoSelection
+          ))
         }
       } else {
         requestVisits = true
@@ -111,7 +119,147 @@ class TKUIMapManagerHelper: NSObject {
     }
   }
   
+  static func annotations(for segment: TKSegment) -> [MKAnnotation] {
+    guard segment.coordinate.isValid else { return [] }
+   
+    if segment.isStationary {
+      // Display these as regular semaphores, but only if this segment is
+      // selected on the map.
+      return [TKUISemaphoreAnnotation(
+        coordinate: segment.coordinate, title: segment.title!,
+        image: segment.image, imageURL: segment.imageURL,
+        imageIsTemplate: segment.imageIsTemplate,
+        semaphoreMode: .headOnly,
+        selectionIdentifier: segment.selectionIdentifier,
+        selectionCondition: .onlyIfSelected
+      )]
+      
+    } else if segment.hasVisibility(.onMap) {
+      
+      // This is to get only the *icon* of the destination, could be a car
+      // park for driving, or a walking icon for bus.
+      var nextMoving = segment.next
+      while nextMoving != nil && (nextMoving!.isContinuation || !nextMoving!.hasVisibility(.inDetails)) {
+        nextMoving = nextMoving?.next
+      }
+      
+      let nextMode: TKUISemaphoreView.Mode
+      if segment.tripSegmentFixedDepartureTime != nil {
+        // Arrival time of PT
+        nextMode = segment.semaphoreMode(atStart: false)
+      } else {
+        // Potentially departure time of PT
+        nextMode = nextMoving?.semaphoreMode(atStart: true) ?? .headOnly
+      }
+      
+      return [
+        // The segment as regular, if selected or nothing selected
+        segment,
+        
+        // Plus the following icon with our arrival time, only if selected
+        TKUISemaphoreAnnotation(
+          coordinate: segment.end.coordinate,
+          image: nextMoving?.image, imageURL: nextMoving?.imageURL,
+          imageIsTemplate: nextMoving?.imageIsTemplate ?? false,
+          semaphoreMode: nextMode,
+          isTerminal: true,
+          selectionIdentifier: segment.selectionIdentifier,
+          selectionCondition: .onlyIfSelected
+        ),
+        
+        // Plus a circle, but only if something else is selected
+        TKUICircleAnnotation(
+          coordinate: segment.coordinate,
+          circleColor: .tkBackground.withAlphaComponent(0.3),
+          isTravelled: true,
+          asLarge: true,
+          selectionIdentifier: segment.selectionIdentifier,
+          selectionCondition: .onlyIfSomethingElseIsSelected
+        )
+      ]
+
+    } else {
+      return []
+    }
+    
+  }
+  
 }
+
+fileprivate class TKUICircleAnnotation: NSObject, TKUICircleDisplayable, TKUISelectableOnMap {
+  internal init(coordinate: CLLocationCoordinate2D, title: String? = nil, circleColor: UIColor, isTravelled: Bool, asLarge: Bool, selectionIdentifier: String?, selectionCondition: TKUISelectionCondition) {
+    self.coordinate = coordinate
+    self.title = title
+    self.circleColor = circleColor
+    self.isTravelled = isTravelled
+    self.asLarge = asLarge
+    self.selectionIdentifier = selectionIdentifier
+    self.selectionCondition = selectionCondition
+
+    super.init()
+  }
+  
+  
+  // MARK: MKAnnotation
+  
+  var coordinate: CLLocationCoordinate2D
+  var title: String?
+  
+  // MARK: TKUICircleDisplayable
+  
+  var circleColor: UIColor
+  var isTravelled: Bool
+  var asLarge: Bool
+  
+  // MARK: TKUISelectableOnMap
+
+  var selectionIdentifier: String?
+  var selectionCondition: TKUISelectionCondition
+  
+}
+
+fileprivate class TKUISemaphoreAnnotation: NSObject, TKUISemaphoreDisplayable {
+  
+  init(coordinate: CLLocationCoordinate2D, title: String? = nil, image: TKImage? = nil, imageURL: URL? = nil, imageIsTemplate: Bool = false, semaphoreMode: TKUISemaphoreView.Mode, bearing: NSNumber? = nil, isTerminal: Bool = false, selectionIdentifier: String?, selectionCondition: TKUISelectionCondition) {
+    self.coordinate = coordinate
+    self.title = title
+    self.image = image
+    self.imageURL = imageURL
+    self.semaphoreMode = semaphoreMode
+    self.bearing = bearing
+    self.imageIsTemplate = imageIsTemplate
+    self.isTerminal = isTerminal
+    self.selectionIdentifier = selectionIdentifier
+    self.selectionCondition = selectionCondition
+    
+    super.init()
+  }
+  
+  
+  // MARK: MKAnnotation
+  
+  var coordinate: CLLocationCoordinate2D
+  var title: String?
+  
+  // MARK: TKUIImageAnnotation
+  
+  var image: TKImage?
+  var imageURL: URL?
+
+  // MARK: TKUISemaphoreDisplayable
+  
+  var semaphoreMode: TKUISemaphoreView.Mode
+  var bearing: NSNumber?
+  var imageIsTemplate: Bool
+  var isTerminal: Bool
+  
+  // MARK: TKUISelectableOnMap
+
+  var selectionIdentifier: String?
+  var selectionCondition: TKUISelectionCondition
+
+}
+
 
 // MARK: - Overlays
 

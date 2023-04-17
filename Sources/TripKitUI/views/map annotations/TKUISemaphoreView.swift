@@ -16,12 +16,19 @@ import TripKit
 
 /// An annotation that can be displayed using TripKitUI's `TKUISemaphoreView`
 /// or just as a point on the map.
-public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation {
-  var semaphoreMode: TKUISemaphoreView.Mode? { get }
+public protocol TKUISemaphoreDisplayable: TKUIImageAnnotation, TKUISelectableOnMap {
   var bearing: NSNumber? { get }
   var imageIsTemplate: Bool { get }
   var isTerminal: Bool { get }
-  var selectionIdentifier: String? { get }
+  var semaphoreMode: TKUISemaphoreView.Mode { get }
+}
+
+extension TKUISemaphoreDisplayable {
+  public var selectionIdentifier: String? { nil }
+  
+  public var isTerminal: Bool { false }
+  
+  public var selectionCondition: TKUISelectionCondition { .ifSelectedOrNoSelection }
 }
 
 public class TKUISemaphoreView: MKAnnotationView {
@@ -160,17 +167,18 @@ public class TKUISemaphoreView: MKAnnotationView {
       timeLabelX += baseHeadOverlap
     }
     
-    if let imageView = accessoryImageView, let image = imageView.image {
+    if let imageView = accessoryImageView {
       var imageViewX = horizontalPadding
       if label == .onRight {
         imageViewX += baseHeadOverlap
       }
-      imageView.frame.size = image.size
+      let imageSize = CGSize(width: 14, height: 14)
+      imageView.frame.size = imageSize
       imageView.frame.origin.x = imageViewX
-      imageView.frame.origin.y = (timeViewHeight - image.size.height) / 2
+      imageView.frame.origin.y = (timeViewHeight - imageSize.height) / 2
       
       // make space for the image
-      let space = image.size.width + horizontalPadding / 3
+      let space = imageSize.width + horizontalPadding / 3
       timeViewWidth += space
       timeLabelX += space
       if label == .onLeft {
@@ -288,14 +296,7 @@ extension TKUISemaphoreView {
       self.modeImageView = modeImageView
     }
   }
-  
-  func updateSelection(for identifier: String?) {
-    guard let displayable = annotation as? TKUISemaphoreDisplayable else { return }
-    guard let target = identifier else { alpha = 1; return }
-    
-    let selected = displayable.selectionIdentifier == target
-    alpha = selected ? 1 : 0.3
-  }
+
   
   func rotateHead(magneticHeading: CLLocationDirection) {
     guard let bearing = (annotation as? TKUISemaphoreDisplayable)?.bearing?.floatValue else { return }

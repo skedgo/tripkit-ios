@@ -18,14 +18,9 @@ public typealias TKAnnotationViewBuilder = TKUIAnnotationViewBuilder
 
 open class TKUIAnnotationViewBuilder: NSObject {
   
-  fileprivate var asLarge: Bool
-  fileprivate var asTravelled: Bool = true
   fileprivate var heading: CLLocationDirection?
-  fileprivate var alpha: CGFloat = 1
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
-  fileprivate var drawImageAnnotationAsCircle: Bool = false
-  fileprivate var circleColor: UIColor? = nil
 
   @objc public let annotation: MKAnnotation
   @objc public let mapView: MKMapView
@@ -34,42 +29,11 @@ open class TKUIAnnotationViewBuilder: NSObject {
   public init(for annotation: MKAnnotation, in mapView: MKMapView) {
     self.annotation = annotation
     self.mapView = mapView
-    self.asLarge = annotation is StopVisits
     self.heading = mapView.camera.heading
     
     // TODO: Then also handle `regionDidChangeAnimated` as in RMM
     
     super.init()
-  }
-  
-  @objc @discardableResult
-  public func drawCircleAsTravelled(_ travelled: Bool) -> TKUIAnnotationViewBuilder {
-    self.asTravelled = travelled
-    return self
-  }
-
-  @objc @discardableResult
-  public func circleColor(_ color: UIColor) -> TKUIAnnotationViewBuilder {
-    self.circleColor = color
-    return self
-  }
-
-  @objc @discardableResult
-  public func drawCircleAsLarge(_ asLarge: Bool) -> TKUIAnnotationViewBuilder {
-    self.asLarge = asLarge
-    return self
-  }
-
-  @objc @discardableResult
-  public func drawImageAnnotationAsCircle(_ asCircle: Bool) -> TKUIAnnotationViewBuilder {
-    self.drawImageAnnotationAsCircle = asCircle
-    return self
-  }
-  
-  @objc @discardableResult
-  public func withAlpha(_ alpha: CGFloat) -> TKUIAnnotationViewBuilder {
-    self.alpha = alpha
-    return self
   }
   
   @objc @discardableResult
@@ -99,21 +63,14 @@ open class TKUIAnnotationViewBuilder: NSObject {
     } else if let vehicle = annotation as? Vehicle {
       return build(for: vehicle)      
 
-    } else if let timePoint = annotation as? TKUISemaphoreDisplayable, timePoint.semaphoreMode != .none {
-      return buildSemaphore(for: timePoint)
-    
-    } else if let segment = annotation as? TKSegment {
-      return buildSemaphore(for: segment)
+    } else if let semaphore = annotation as? TKUISemaphoreDisplayable {
+      return buildSemaphore(for: semaphore)
 
-    } else if let visit = annotation as? StopVisits {
-      return buildCircle(for: visit)
+    } else if let circle = annotation as? TKUICircleDisplayable {
+      return buildCircle(for: circle)
 
     } else if let mode = annotation as? TKUIModeAnnotation {
-      if drawImageAnnotationAsCircle {
-        return buildCircle(for: annotation)
-      } else {
-        return build(for: mode, enableClustering: enableClustering)
-      }
+      return build(for: mode, enableClustering: enableClustering)
     
     } else if let image = annotation as? TKUIImageAnnotation {
       return build(for: image)
@@ -168,7 +125,7 @@ private extension TKUIAnnotationViewBuilder {
       view.clusteringIdentifier =
         enableClustering && modeAnnotation.priority.rawValue < 500
         ? modeAnnotation.clusterIdentifier : nil
-      view.displayPriority = asTravelled ? modeAnnotation.priority : .defaultLow
+      // view.displayPriority = asTravelled ? modeAnnotation.priority : .defaultLow
     }
     
     return view
@@ -297,8 +254,8 @@ fileprivate extension TKUISemaphoreView {
 
 fileprivate extension TKUIAnnotationViewBuilder {
   
-  func buildCircle(for annotation: MKAnnotation) -> MKAnnotationView {
-    let identifier = asLarge ? "LargeCircleView" : "SmallCircleView"
+  func buildCircle(for annotation: TKUICircleDisplayable) -> MKAnnotationView {
+    let identifier = annotation.asLarge ? "LargeCircleView" : "SmallCircleView"
     
     let circleView: TKUICircleAnnotationView
     if let recycled = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? TKUICircleAnnotationView {
@@ -306,22 +263,21 @@ fileprivate extension TKUIAnnotationViewBuilder {
       circleView.alpha = 1
       circleView.annotation = annotation
     } else {
-      circleView = TKUICircleAnnotationView(annotation: annotation, drawLarge: asLarge, reuseIdentifier: identifier)
+      circleView = TKUICircleAnnotationView(annotation: annotation, drawLarge: annotation.asLarge, reuseIdentifier: identifier)
     }
     
-    circleView.isFaded = !asTravelled
-    if asTravelled, let color = circleColor ?? (annotation as? TKUIModeAnnotation)?.modeInfo.color {
-      circleView.circleColor = color
+    circleView.isFaded = !annotation.isTravelled
+    if annotation.isTravelled  {
+      circleView.circleColor = annotation.circleColor
     } else {
       circleView.circleColor = .routeDashColorNonTravelled
     }
-    circleView.alpha = alpha
     circleView.setNeedsDisplay()
 
     circleView.canShowCallout = annotation.title != nil
     circleView.isEnabled = true
     
-    circleView.displayPriority = asLarge ? .defaultHigh : .defaultLow
+    circleView.displayPriority = annotation.asLarge ? .required : .defaultLow
     
     return circleView
   }

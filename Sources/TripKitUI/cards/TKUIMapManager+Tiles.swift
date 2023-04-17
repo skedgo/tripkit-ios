@@ -90,9 +90,15 @@ extension TKUIMapManager {
       mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
     }
     
+    cleanUpAttributionView(from: mapView)
+  }
+  
+  func cleanUpAttributionView(from mapView: MKMapView) {
     mapView.subviews
       .compactMap { subview -> UIView? in
-        if let visual = subview as? UIVisualEffectView, visual.contentView.subviews.contains(where: { $0 is TKUIAttributionView }) {
+        if subview is TKUIAttributionView {
+          return subview
+        } else if let visual = subview as? UIVisualEffectView, visual.contentView.subviews.contains(where: { $0 is TKUIAttributionView }) {
           return visual
         } else {
           return nil
