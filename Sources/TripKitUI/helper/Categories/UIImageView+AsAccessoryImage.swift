@@ -32,20 +32,23 @@ extension UIImageView {
   
   private static func realTimeAccessoryImage(_ animated: Bool, tintColor: UIColor?) -> [UIImage] {
     if #available(iOS 16.0, *), animated {
+     let name = "dot.radiowaves.forward"
+     let image1 = UIImage(systemName: name, variableValue: 0.3)
+     let image2 = UIImage(systemName: name, variableValue: 0.7)
+     let image3 = UIImage(systemName: name, variableValue: 1.0)
+        
+     let images = [image1, image2, image3, image3, image3, image3, image3, image3]
+        
       if let tintColor {
         let config = UIImage.SymbolConfiguration(hierarchicalColor: tintColor)
-        let image1 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 0.3)
-        let image2 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 0.7)
-        let image3 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 1.0)
-        return [image1, image2, image3, image3, image3, image3, image3, image3]
+       
+        return images
           .compactMap { $0?.applyingSymbolConfiguration(config)?.pngData() }
           .compactMap { UIImage(data: $0) }
 
       } else {
-        let image1 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 0.3)
-        let image2 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 0.7)
-        let image3 = UIImage(systemName: "dot.radiowaves.forward", variableValue: 1.0)
-        return [image1, image2, image3, image3, image3, image3, image3, image3].compactMap { $0 }
+        return images
+           .compactMap { $0 }
       }
       
     } else if #available(iOS 14.0, *) {
