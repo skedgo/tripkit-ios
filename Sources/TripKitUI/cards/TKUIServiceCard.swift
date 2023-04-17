@@ -20,8 +20,6 @@ import TripKit
 /// highlights where to get off.
 public class TKUIServiceCard: TKUITableCard {
   
-  typealias ServiceCardActionsView = TKUICardActionsView<TKUIServiceCard, EmbarkationPair>
-  
   public static var config = Configuration.empty
   
   private var dataInput: TKUIServiceViewModel.DataInput
@@ -137,9 +135,8 @@ public class TKUIServiceCard: TKUITableCard {
     if let titleView = self.titleView, let factory = Self.config.serviceActionsFactory, case let .visits(embarkation, disembarkation) = dataInput {
       let pair: TKUIServiceCard.EmbarkationPair = (embarkation, disembarkation)
       let actions = factory(pair)
-      let actionsView = ServiceCardActionsView()
-      actionsView.configure(with: actions, model: pair, card: self)
-      actionsView.hideSeparator = true
+
+      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: self, model: pair, container: tableView)
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }
 
@@ -180,7 +177,12 @@ public class TKUIServiceCard: TKUITableCard {
     
     showAlertsPublisher.withLatestFrom(viewModel.header.asObservable()) { ($1) }
       .subscribe(onNext: { [weak self] content in
-        self?.showAlerts(content.alerts)
+        let alerts = content.alerts
+        guard let self, !alerts.isEmpty else { return }
+
+        let alertController = TKUIAlertViewController(style: .plain)
+        alertController.alerts = alerts
+        self.controller?.present(alertController, inNavigator: true)
       })
       .disposed(by: disposeBag)
 
@@ -284,20 +286,6 @@ extension TKUIServiceCard: UITableViewDelegate {
     
     scrollToTopPublisher.onNext(())
     return false
-  }
-  
-}
-
-// MARK: - Alerts
-
-extension TKUIServiceCard {
-  
-  private func showAlerts(_ alerts: [Alert]) {
-    guard !alerts.isEmpty else { return }
-
-    let alertController = TKUIAlertViewController(style: .plain)
-    alertController.alerts = alerts
-    controller?.present(alertController, inNavigator: true)
   }
   
 }

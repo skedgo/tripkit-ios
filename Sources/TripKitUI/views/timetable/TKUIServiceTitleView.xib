@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="25R-dz-Nwr">
-                    <rect key="frame" x="16" y="8" width="302" height="102"/>
+                    <rect key="frame" x="16" y="8" width="302" height="84.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="E84 at 3:35pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-Bf-P7i" customClass="TKUIStyledLabel" customModule="TripKitUI" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="143" height="26.5"/>
@@ -70,10 +70,10 @@
                             <color key="textColor" name="TKLabelSecondary"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-MQ-3CG">
-                            <rect key="frame" x="0.0" y="92.5" width="302" height="9.5"/>
-                        </stackView>
                     </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-MQ-3CG">
+                    <rect key="frame" x="0.0" y="100.5" width="372" height="9.5"/>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-5c-QYr">
                     <rect key="frame" x="324" y="-11" width="44" height="44"/>
@@ -87,10 +87,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="8" id="EEO-k5-Isf"/>
+                <constraint firstAttribute="trailing" secondItem="8pT-MQ-3CG" secondAttribute="trailing" id="GBj-n0-pgV"/>
+                <constraint firstItem="8pT-MQ-3CG" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" id="IKJ-gG-7rW"/>
+                <constraint firstItem="8pT-MQ-3CG" firstAttribute="top" secondItem="25R-dz-Nwr" secondAttribute="bottom" constant="8" id="Nb6-0E-rR1"/>
                 <constraint firstAttribute="trailing" secondItem="nv4-5c-QYr" secondAttribute="trailing" constant="4" id="OjM-FW-aM6"/>
                 <constraint firstItem="25R-dz-Nwr" firstAttribute="leading" secondItem="VGo-lB-GoV" secondAttribute="leading" constant="16" id="eJw-uI-ol2"/>
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="leading" secondItem="25R-dz-Nwr" secondAttribute="trailing" constant="6" id="hya-Iy-LcG"/>
-                <constraint firstAttribute="bottom" secondItem="25R-dz-Nwr" secondAttribute="bottom" constant="8" id="nug-4o-Q8i"/>
+                <constraint firstAttribute="bottom" secondItem="8pT-MQ-3CG" secondAttribute="bottom" constant="8" id="igj-ea-slD"/>
                 <constraint firstItem="nv4-5c-QYr" firstAttribute="top" secondItem="VGo-lB-GoV" secondAttribute="top" constant="-11" id="sJG-UB-pP2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

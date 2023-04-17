@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TKUICardActionStyle {
+public enum TKUICardActionStyle: Equatable {
   /// Highlights the button with the tint colour as a circular background
   case bold
 

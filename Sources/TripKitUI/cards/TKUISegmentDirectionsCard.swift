@@ -19,8 +19,6 @@ import TripKit
 
 public class TKUISegmentDirectionsCard: TGTableCard {
   
-  typealias SegmentActionsView = TKUICardActionsView<TKUISegmentDirectionsCard, TKSegment>
-  
   public static func canShowInstructions(for segment: TKSegment) -> Bool {
     return TKUISegmentDirectionsViewModel.canShowInstructions(for: segment)
   }
@@ -66,8 +64,7 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     
     if let factory = Self.config.actionFactory {
       let actions = factory(segment)
-      let actionsView = SegmentActionsView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
-      actionsView.configure(with: actions, model: segment, card: self)
+      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: self, model: segment, container: tableView)
       actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
       tableView.tableHeaderView = actionsView
     } else {
