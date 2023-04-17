@@ -362,6 +362,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/TKUISegmentMode.html">TKUISegmentMode</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TKUISelectionCondition.html">TKUISelectionCondition</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -504,6 +507,9 @@
             <a class="nav-group-name-link" href="Other%20Protocols.html">Other Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TKUICircleDisplayable.html">TKUICircleDisplayable</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/TKUICompatibleHomeMapManager.html">TKUICompatibleHomeMapManager</a>
               </li>
               <li class="nav-group-task">
@@ -526,6 +532,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/TKUIRoutingResultsMapManagerType.html">TKUIRoutingResultsMapManagerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TKUISelectableOnMap.html">TKUISelectableOnMap</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/TKUISemaphoreDisplayable.html">TKUISemaphoreDisplayable</a>
@@ -892,6 +901,34 @@ to take control of the map in a <code><a href="Classes/TKUIHomeCard.html">TKUIHo
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9TripKitUI19TKUISelectableOnMapP"></a>
+                    <a name="//apple_ref/swift/Protocol/TKUISelectableOnMap" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI19TKUISelectableOnMapP">TKUISelectableOnMap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Protocols/TKUISelectableOnMap.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TKUISelectableOnMap</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@M@TripKitUI@objc(pl)TKUIModeAnnotation"></a>
                     <a name="//apple_ref/swift/Protocol/TKUIModeAnnotation" class="dashAnchor"></a>
                     <a class="token" href="#/c:@M@TripKitUI@objc(pl)TKUIModeAnnotation">TKUIModeAnnotation</a>
@@ -950,6 +987,34 @@ to take control of the map in a <code><a href="Classes/TKUIHomeCard.html">TKUIHo
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9TripKitUI21TKUICircleDisplayableP"></a>
+                    <a name="//apple_ref/swift/Protocol/TKUICircleDisplayable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI21TKUICircleDisplayableP">TKUICircleDisplayable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Protocols/TKUICircleDisplayable.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TKUICircleDisplayable</span> <span class="p">:</span> <span class="kt">MKAnnotation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9TripKitUI24TKUISemaphoreDisplayableP"></a>
                     <a name="//apple_ref/swift/Protocol/TKUISemaphoreDisplayable" class="dashAnchor"></a>
                     <a class="token" href="#/s:9TripKitUI24TKUISemaphoreDisplayableP">TKUISemaphoreDisplayable</a>
@@ -969,7 +1034,7 @@ or just as a point on the map.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TKUISemaphoreDisplayable</span> <span class="p">:</span> <span class="kt"><a href="Protocols/TKUIImageAnnotation.html">TKUIImageAnnotation</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TKUISemaphoreDisplayable</span> <span class="p">:</span> <span class="kt"><a href="Protocols/TKUIImageAnnotation.html">TKUIImageAnnotation</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/TKUISelectableOnMap.html">TKUISelectableOnMap</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1012,7 +1077,7 @@ or just as a point on the map.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-03-16)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-04-17)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

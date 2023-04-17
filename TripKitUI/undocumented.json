@@ -359,49 +359,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 125,
+      "line": 129,
       "symbol": "TKUIMapManager.selectionMode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 241,
+      "line": 247,
       "symbol": "TKUIMapManager.annotationBuilder(for:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 422,
+      "line": 431,
       "symbol": "TKUIMapManager.mapView(_:didAdd:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 444,
+      "line": 453,
       "symbol": "TKUIMapManager.mapView(_:viewFor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 454,
+      "line": 463,
       "symbol": "TKUIMapManager.mapView(_:rendererFor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 498,
+      "line": 514,
       "symbol": "TKUIMapManager.mapView(_:regionDidChangeAnimated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 523,
+      "line": 539,
       "symbol": "TKUIMapManager.mapView(_:didSelect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -955,34 +955,27 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripMapManager.swift",
       "line": 97,
-      "symbol": "TKUITripMapManager.annotationBuilder(for:in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripMapManager.swift",
-      "line": 106,
       "symbol": "TKUITripMapManager.showTrip(animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripMapManager.swift",
-      "line": 111,
+      "line": 102,
       "symbol": "TKUITripMapManager.deselectSegment(animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripMapManager.swift",
-      "line": 115,
+      "line": 106,
       "symbol": "TKUITripMapManager.show(_:animated:mode:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripMapManager.swift",
-      "line": 126,
+      "line": 115,
       "symbol": "TKUITripMapManager.refresh(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1129,14 +1122,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 388,
+      "line": 390,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 390,
+      "line": 392,
       "symbol": "TKUITripOverviewCard.modeByModeCard(_:updatedTrip:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2669,14 +2662,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUIPolylineRenderer.swift",
-      "line": 76,
+      "line": 78,
       "symbol": "TKUIPolylineRenderer.init(polyline:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUIPolylineRenderer.swift",
-      "line": 109,
+      "line": 111,
       "symbol": "TKUIPolylineRenderer.draw(_:zoomScale:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2823,98 +2816,63 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 30,
+      "line": 25,
       "symbol": "TKUIAnnotationViewBuilder.annotation",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 31,
+      "line": 26,
       "symbol": "TKUIAnnotationViewBuilder.mapView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 34,
+      "line": 29,
       "symbol": "TKUIAnnotationViewBuilder.init(for:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 46,
-      "symbol": "TKUIAnnotationViewBuilder.drawCircleAsTravelled(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 52,
-      "symbol": "TKUIAnnotationViewBuilder.circleColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 58,
-      "symbol": "TKUIAnnotationViewBuilder.drawCircleAsLarge(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 64,
-      "symbol": "TKUIAnnotationViewBuilder.drawImageAnnotationAsCircle(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 70,
-      "symbol": "TKUIAnnotationViewBuilder.withAlpha(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 76,
+      "line": 40,
       "symbol": "TKUIAnnotationViewBuilder.withHeading(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 82,
+      "line": 46,
       "symbol": "TKUIAnnotationViewBuilder.enableClustering(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 88,
+      "line": 52,
       "symbol": "TKUIAnnotationViewBuilder.preferMarker(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 95,
+      "line": 59,
       "symbol": "TKUIAnnotationViewBuilder.build()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 408,
+      "line": 364,
       "symbol": "TKUIAnnotationViewBuilder",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotationViewBuilder.swift",
-      "line": 410,
+      "line": 366,
       "symbol": "TKUIAnnotationViewBuilder.update(annotationView:forHeading:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -2991,42 +2949,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 108,
-      "symbol": "StopVisits.selectionIdentifier",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 112,
-      "symbol": "StopVisits.semaphoreMode",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 116,
-      "symbol": "StopVisits.isTerminal",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 127,
+      "line": 111,
       "symbol": "TKSegment.clusterIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 135,
-      "symbol": "TKSegment.selectionIdentifier",
+      "line": 115,
+      "symbol": "TKSegment.image",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 144,
+      "line": 152,
       "symbol": "TKSegment.semaphoreMode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -3047,14 +2984,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 169,
+      "line": 171,
       "symbol": "TKRegion.City.image",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations+TripKit.swift",
-      "line": 170,
+      "line": 172,
       "symbol": "TKRegion.City.imageURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -3103,56 +3040,91 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 29,
+      "symbol": "TKUISelectionCondition",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 30,
+      "symbol": "TKUISelectionCondition.onlyIfSomethingElseIsSelected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 31,
+      "symbol": "TKUISelectionCondition.onlyIfSelected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
       "line": 32,
+      "symbol": "TKUISelectionCondition.ifSelectedOrNoSelection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 35,
+      "symbol": "TKUISelectableOnMap",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
+      "line": 49,
       "symbol": "TKUIModeAnnotation.modeInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 33,
+      "line": 50,
       "symbol": "TKUIModeAnnotation.clusterIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 37,
+      "line": 54,
       "symbol": "TKUIModeAnnotation.image",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 38,
+      "line": 55,
       "symbol": "TKUIModeAnnotation.imageURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 39,
+      "line": 56,
       "symbol": "TKUIModeAnnotation.imageIsTemplate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 43,
+      "line": 60,
       "symbol": "TKUIStopAnnotation",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 44,
+      "line": 61,
       "symbol": "TKUIStopAnnotation.stopCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 45,
+      "line": 62,
       "symbol": "TKUIStopAnnotation.timeZone",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -3160,55 +3132,83 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
       "line": 12,
+      "symbol": "TKUICircleDisplayable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 13,
+      "symbol": "TKUICircleDisplayable.circleColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 14,
+      "symbol": "TKUICircleDisplayable.isTravelled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 15,
+      "symbol": "TKUICircleDisplayable.asLarge",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
+      "line": 18,
       "symbol": "TKUICircleAnnotationView",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 19,
+      "line": 25,
       "symbol": "TKUICircleAnnotationView.isLarge",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 21,
+      "line": 27,
       "symbol": "TKUICircleAnnotationView.circleColor",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 22,
+      "line": 28,
       "symbol": "TKUICircleAnnotationView.borderColor",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 23,
+      "line": 29,
       "symbol": "TKUICircleAnnotationView.isFaded",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 25,
+      "line": 31,
       "symbol": "TKUICircleAnnotationView.init(annotation:drawLarge:reuseIdentifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 36,
+      "line": 41,
       "symbol": "TKUICircleAnnotationView.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUICircleAnnotationView.swift",
-      "line": 40,
+      "line": 45,
       "symbol": "TKUICircleAnnotationView.draw(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -3251,167 +3251,167 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
       "line": 20,
-      "symbol": "TKUISemaphoreDisplayable.semaphoreMode",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 21,
       "symbol": "TKUISemaphoreDisplayable.bearing",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 22,
+      "line": 21,
       "symbol": "TKUISemaphoreDisplayable.imageIsTemplate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 23,
+      "line": 22,
       "symbol": "TKUISemaphoreDisplayable.isTerminal",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 24,
-      "symbol": "TKUISemaphoreDisplayable.selectionIdentifier",
+      "line": 23,
+      "symbol": "TKUISemaphoreDisplayable.semaphoreMode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 27,
+      "line": 29,
+      "symbol": "TKUISemaphoreDisplayable.isTerminal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
+      "line": 34,
       "symbol": "TKUISemaphoreView",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 28,
+      "line": 35,
       "symbol": "TKUISemaphoreView.LabelSide",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 29,
+      "line": 36,
       "symbol": "TKUISemaphoreView.LabelSide.onLeft",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 30,
+      "line": 37,
       "symbol": "TKUISemaphoreView.LabelSide.onRight",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 32,
+      "line": 39,
       "symbol": "TKUISemaphoreView.LabelSide.defaultDirection",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 40,
+      "line": 47,
       "symbol": "TKUISemaphoreView.Mode",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 41,
+      "line": 48,
       "symbol": "TKUISemaphoreView.Mode.headWithTime(_:_:isRealTime:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 42,
+      "line": 49,
       "symbol": "TKUISemaphoreView.Mode.headWithFrequency(minutes:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 43,
+      "line": 50,
       "symbol": "TKUISemaphoreView.Mode.headOnly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 56,
+      "line": 63,
       "symbol": "TKUISemaphoreView.init(annotation:reuseIdentifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 60,
+      "line": 67,
       "symbol": "TKUISemaphoreView.init(annotation:reuseIdentifier:withHeading:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 89,
+      "line": 96,
       "symbol": "TKUISemaphoreView.prepareForReuse()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 105,
+      "line": 112,
       "symbol": "TKUISemaphoreView.annotation",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 193,
+      "line": 201,
       "symbol": "TKUISemaphoreView",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 221,
+      "line": 229,
       "symbol": "TKUISemaphoreView.update(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 335,
+      "line": 336,
       "symbol": "TKUISemaphoreView",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 337,
+      "line": 338,
       "symbol": "TKUISemaphoreView.customHeadTintColor",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 338,
+      "line": 339,
       "symbol": "TKUISemaphoreView.customHeadImage",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 339,
+      "line": 340,
       "symbol": "TKUISemaphoreView.customPointerImage",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
