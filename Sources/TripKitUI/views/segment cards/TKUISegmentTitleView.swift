@@ -16,8 +16,6 @@ import TripKit
 public class TKUISegmentTitleView: UIView, TGPreferrableView {
   
   public typealias Action = TKUICardAction<TGCard, TKSegment>
-  
-  typealias SegmentTitleActionsView = TKUICardActionsView<TGCard, TKSegment>
 
   @IBOutlet weak var modeWrapper: UIView!
   @IBOutlet weak var modeIcon: UIImageView!
@@ -81,9 +79,7 @@ public class TKUISegmentTitleView: UIView, TGPreferrableView {
     if actions.isEmpty {
       showActionsWrapper(false)
     } else {
-      let actionsView = SegmentTitleActionsView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 80))
-      actionsView.configure(with: actions, model: model, card: card)
-      actionsView.hideSeparator = true
+      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: card, model: model, container: actionsWrapper)
       actionsWrapper.addSubview(actionsView)
       
       actionsView.translatesAutoresizingMaskIntoConstraints = false
