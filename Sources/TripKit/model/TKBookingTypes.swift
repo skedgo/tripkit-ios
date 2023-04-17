@@ -23,7 +23,9 @@ public enum TKBooking {
     public let internalURL: URL?
     public let externalAction: String?
     public let type: ActionType?
+    @available(*, deprecated, message: "confirmationMessage property is deprecated, please use confirmation.message instead.")
     public let confirmationMessage: String?
+    public let confirmation: ActionConfirmation?
     public var input: [ActionInput]?
     
     public enum ActionType: String, Codable, CaseIterable {
@@ -65,9 +67,16 @@ public enum TKBooking {
       case internalURL
       case externalAction = "externalURL"
       case type
-      case input
       case confirmationMessage
+      case confirmation
+      case input
     }
+  }
+    
+  public struct ActionConfirmation: Codable, Hashable {
+    public let message: String
+    public let abortActionTitle: String
+    public let confirmActionTitle: String
   }
   
   public struct TSPBranding: Codable, Hashable {
