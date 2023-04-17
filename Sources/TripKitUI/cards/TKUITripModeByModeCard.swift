@@ -367,6 +367,10 @@ extension TKUITripModeByModeCard {
       // Update ETA in header
       headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
       
+      // Important to update the map, too, as template hash codes can change
+      // an the map uses those for selection handling
+      (mapManager as? TKUITripMapManager)?.refresh(with: trip)
+      
     } else {
       // We use the index here as the identifier would have changed. The index
       // gives us a good guess for finding the corresponding segment in the new

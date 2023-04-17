@@ -90,17 +90,21 @@ open class TKUIMapManager: TGMapManager {
         mapView?.removeOverlay(previous)
         tileOverlay = nil
       }
-      if let mapView = mapView, let toRestore = settingsToRestore {
-        self.restore(toRestore, on: mapView)
-        settingsToRestore = nil
+      if let mapView {
+        if let settingsToRestore {
+          restore(settingsToRestore, on: mapView)
+        } else {
+          cleanUpAttributionView(from: mapView)
+        }
+        self.settingsToRestore = nil
       }
       
       // add new content
-      if let tiles = self.tiles {
-        self.tileOverlay = self.buildTileOverlay(tiles: tiles)
+      if let tiles {
+        tileOverlay = buildTileOverlay(tiles: tiles)
 
-        if let mapView = mapView, let overlay = self.tileOverlay {
-          settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
+        if let mapView, let tileOverlay {
+          settingsToRestore = accommodateTileOverlay(tileOverlay, sources: tiles.sources, on: mapView)
         }
       }
       
@@ -229,6 +233,8 @@ open class TKUIMapManager: TGMapManager {
     if let toRestore = settingsToRestore {
       self.restore(toRestore, on: mapView)
       settingsToRestore = nil
+    } else {
+      self.cleanUpAttributionView(from: mapView)
     }
 
     mapView.removeOverlays(overlays)
@@ -358,17 +364,16 @@ extension TKUIMapManager {
     // way for handling this more like the renderer:
     // 1. Add a `selectionHandler` to TKUIAnnoationViewBuilder
     // 2. Pass that on from there to views that handle it
-    // 3. Call `setNeedsDisplay()` here (removing lines marked with *)
+    // 3. Call `setNeedsDisplay()` here (removing the line marked with *)
     //    and adding instead `.forEach { $0.setNeedsDisplay() }`
     views
-      .compactMap { $0 as? TKUISemaphoreView }                   // *
       .forEach { $0.updateSelection(for: selectionIdentifier ) } // *
   }
   
   private func updateSelectionForTapping(_ view: MKAnnotationView) {
     guard
-      let displayable = view.annotation as? TKUISemaphoreDisplayable,
-      let identifier = displayable.selectionIdentifier
+      let selectable = view.annotation as? TKUISelectableOnMap,
+      let identifier = selectable.selectionIdentifier
       else { return }
     
     self.selectionIdentifier = identifier
@@ -394,7 +399,7 @@ extension TKUIMapManager {
   }
   
   private func updateOverlays(updateMode: UpdateMode) {
-    guard let mapView = mapView else { return }
+    guard let mapView else { return }
     
     // this updates the renderers
     renderers.removeAll(where: { $0.renderer == nil })
@@ -409,7 +414,11 @@ extension TKUIMapManager {
     case .updateDashPatterns:
       renderers.forEach {
         guard let renderer = $0.renderer else { return }
-        Self.style(renderer: renderer, onOverlay: tileOverlay != nil, dashPattern: $0.routeDashPattern)
+        Self.style(
+          renderer: renderer,
+          onOverlay: tileOverlay != nil,
+          dashPattern: $0.routeDashPattern
+        )
       }
     }
     
@@ -462,6 +471,8 @@ extension TKUIMapManager {
       var style = TKUIPolylineRenderer.SelectionStyle.default
       style.defaultColor = polyline.route.routeColor
       style.defaultBorderColor = polyline.route.routeColor?.darker(by: 0.5)
+      style.deselectedColor = style.defaultColor ?? style.deselectedColor
+      style.deselectedBorderColor = style.defaultBorderColor ?? style.deselectedBorderColor
       
       renderer.selectionMode = selectionMode
       renderer.selectionStyle = style
@@ -470,7 +481,12 @@ extension TKUIMapManager {
         guard let target = self?.selectionIdentifier else { return nil }
         return $0 == target
       }
-      Self.style(renderer: renderer, onOverlay: tileOverlay != nil, dashPattern: polyline.route.routeDashPattern)
+      
+      Self.style(
+        renderer: renderer,
+        onOverlay: tileOverlay != nil,
+        dashPattern: polyline.route.routeDashPattern
+      )
       
       renderers.append(WeakRenderers(renderer: renderer, routeDashPattern: polyline.route.routeDashPattern))
       

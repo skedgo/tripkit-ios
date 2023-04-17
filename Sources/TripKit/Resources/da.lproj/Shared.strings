@@ -214,6 +214,9 @@
 /* No comment provided by engineer. */
 "Password" = "Adgangskode";
 
+/* For phone numbers */
+"Phone" = "Telefon";
+
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Indtast din registrerede e-mailadresse. Vi vil derefter sende dig instruktioner til, hvordan du nulstiller adgangskode";
 
@@ -283,9 +286,6 @@
 /* Placeholder text while waiting for server response when searching for a location. */
 "Searching for '%@'…" = "Søger efter '%@'…";
 
-/* A footnote that tells recommends the format of a secure password. */
-"Secure passwords are at least five characters long and include numbers and symbols" = "Secure passwords are at least five characters long and include numbers and symbols";
-
 /* Text often displayed in a HUD, informing users some request has successfully been sent, e.g., a request to resend a verification email */
 "Sent" = "Sendt";
 
@@ -315,9 +315,6 @@
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "SUV";
-
-/* Accessibility hint for routing results screen. */
-"Tap to change start and end locations" = "Tap to change start and end locations";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Tryk for at indstille placering";

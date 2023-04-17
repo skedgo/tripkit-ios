@@ -79,7 +79,7 @@ class TKUIServiceViewModel {
   let mapContent: Driver<MapContent?>
   
   /// Annotation matching the user's selection in the list.
-  let selectAnnotation: Driver<MKAnnotation>
+  let selectAnnotation: Driver<TKUIIdentifiableAnnotation>
   
   /// Status of real-time update
   ///

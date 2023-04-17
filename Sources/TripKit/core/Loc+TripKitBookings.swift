@@ -12,15 +12,15 @@ import Foundation
 
 extension Loc {
   
-  @objc public static var AlreadyHaveAnAccount: String {
+  public static var AlreadyHaveAnAccount: String {
     return NSLocalizedString("Already have an account?", tableName: "Shared", bundle: .tripKit, comment: "Option for users if they already owned a SkedGo account")
   }
 
-  @objc public static var DontHaveAnAccount: String {
+  public static var DontHaveAnAccount: String {
     return NSLocalizedString("Don't have an account?", tableName: "Shared", bundle: .tripKit, comment: "Option for users if they don't yet have a SkedGo account")
   }
 
-  @objc public static var SignOut: String {
+  public static var SignOut: String {
     return NSLocalizedString("Sign out", tableName: "Shared", bundle: .tripKit, comment: "Instruction for signing out user account")
   }
 
@@ -28,7 +28,7 @@ extension Loc {
     return NSLocalizedString("Email", tableName: "Shared", bundle: .tripKit, comment: "For email address")
   }
 
-  @objc public static var Phone: String {
+  public static var Phone: String {
     return NSLocalizedString("Phone", tableName: "Shared", bundle: .tripKit, comment: "For phone numbers")
   }
 
@@ -36,19 +36,19 @@ extension Loc {
     return NSLocalizedString("Password", tableName: "Shared", bundle: .tripKit, comment: "")
   }
   
-  @objc public static var Change: String {
+  public static var Change: String {
     return NSLocalizedString("Change", tableName: "Shared", bundle: .tripKit, comment: "Instruction for changing password")
   }
 
-  @objc public static var SignIn: String {
+  public static var SignIn: String {
     return NSLocalizedString("Sign in", tableName: "Shared", bundle: .tripKit, comment: "Title of page or button to sign in")
   }
   
-  @objc public static var SignUp: String {
+  public static var SignUp: String {
     return NSLocalizedString("Sign up", tableName: "Shared", bundle: .tripKit, comment: "Title of page or button to sign up")
   }
   
-  @objc public static var OpenSettings: String {
+  public static var OpenSettings: String {
     return NSLocalizedString("Open Settings", tableName: "Shared", bundle: .tripKit, comment: "Button that goes to the Setting's app")
   }
   
@@ -58,7 +58,7 @@ extension Loc {
 
 extension Loc {
   
-  @objc public static var UpdatingTrip: String {
+  public static var UpdatingTrip: String {
     return NSLocalizedString("Updating trip", tableName: "Shared", bundle: .tripKit, comment: "Message that shows app is updating trip after user finalised bookings")
   }
 
@@ -70,7 +70,7 @@ extension Loc {
     return NSLocalizedString("example@example.com", tableName: "Shared", bundle: .tripKit, comment: "Email placeholder text")
   }
   
-  @objc public static var OpenInSafari: String {
+  public static var OpenInSafari: String {
     return NSLocalizedString("Open in Safari", tableName: "Shared", bundle: .tripKit, comment: "Open in Safari action")
   }
   

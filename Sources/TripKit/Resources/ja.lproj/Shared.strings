@@ -214,6 +214,9 @@
 /* No comment provided by engineer. */
 "Password" = "パスワード";
 
+/* For phone numbers */
+"Phone" = "電話番号";
+
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "登録したメールアドレスを入力してください。パスワードをリセットする手順を送信します";
 

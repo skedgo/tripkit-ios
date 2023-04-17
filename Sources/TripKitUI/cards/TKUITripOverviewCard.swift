@@ -146,6 +146,8 @@ public class TKUITripOverviewCard: TKUITableCard {
     
     viewModel.refreshMap
       .emit(onNext: { [weak tripMapManager] trip in
+        // Important to update the map, too, as template hash codes can change
+        // an the map uses those for selection handling
         tripMapManager?.refresh(with: trip)
       })
       .disposed(by: disposeBag)

@@ -215,7 +215,7 @@ extension TKRegionOverlayHelper {
                 [$0.longitude, $0.latitude]
               }
             ]
-          ]
+          ] as [String : Any]
         ]
       }
       let geojson: [String: Any] = [

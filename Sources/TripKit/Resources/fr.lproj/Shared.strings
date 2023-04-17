@@ -214,6 +214,9 @@
 /* No comment provided by engineer. */
 "Password" = "Mot de passe ";
 
+/* For phone numbers */
+"Phone" = "Téléphone";
+
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "Veuillez entrer votre adresse e-mail enregistrée. Nous vous enverrons ensuite les instructions pour réinitialiser le mot de passe";
 
@@ -315,9 +318,6 @@
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "4x4";
-
-/* Accessibility hint for routing results screen. */
-"Tap to change start and end locations" = "Tap to change start and end locations";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Appuyer pour définir la position";

@@ -429,6 +429,9 @@
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "%@ 前に更新";
 
+/* Title for showing the details of vehicle */
+"Vehicle" = "車両";
+
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "車両 %1$@ が %2$@ 前に更新されました";
 

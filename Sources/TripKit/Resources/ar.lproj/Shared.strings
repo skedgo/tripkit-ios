@@ -214,6 +214,9 @@
 /* No comment provided by engineer. */
 "Password" = "كلمة المرور";
 
+/* For phone numbers */
+"Phone" = "الهاتف";
+
 /* A footnote that asks users for their email addresses in order to reset password */
 "Please enter your registered email address. We will then send you instructions on how to reset password" = "يرجى إدخال عنوان بريدك الإلكتروني المسجل. سنرسل إليك بعد ذلك تعليمات حول كيفية إعادة تعيين كلمة المرور";
 

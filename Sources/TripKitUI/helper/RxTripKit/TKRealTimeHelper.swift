@@ -32,7 +32,7 @@ public enum TKRealTimeHelper {
         return TKRealTimeFetcher.rx.update(trip)
           .map { trip, _ in (trip, trip.updateURLString) }
           .asObservable()
-          .catch { _ in .empty() } // Can happen if Internet collection dropped briefly
+          .catchAndReturn((trip, trip.updateURLString))
       }
       .distinctUntilChanged {
         // We compare the update URLs between each time we fire rather than
