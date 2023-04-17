@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 import TGCardViewController
 
@@ -82,40 +83,40 @@ struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
 
 
 struct TKUICardActionButton<C, M>: View where C: TGCard {
-  let action: TKUICardAction<C, M>
+  init(action: TKUICardAction<C, M>, info: TKUICardActionHandlerInfo<C, M>, big: Bool = true) {
+    self.action = action
+    self.info = info
+    self.big = big
+  }
+  
+  @ObservedObject var action: TKUICardAction<C, M>
   let info: TKUICardActionHandlerInfo<C, M>
   var big: Bool = true
-  
-  @State private var changeCount: Int = 0
   
   var body: some View {
     Button {
       guard let card = info.card, let container = info.container else { return }
-      let changed = action.handler(action, card, info.model, container)
-      if changed {
-        withAnimation {
-          changeCount += 1
-        }
+      withAnimation {
+        let _ = action.handler(action, card, info.model, container)
       }
     } label: {
       HStack(spacing: 4) {
-        Image(uiImage: action.icon)
+        Image(uiImage: action.content.icon)
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 18, height: 18)
         
         if big {
-          Text(action.title)
+          Text(action.content.title)
             .font(.subheadline.weight(.semibold))
         }
       }
-      .id(changeCount) // Force update when action said it wants a redraw
-      .accessibility(label: Text(action.accessibilityLabel))
+      .accessibility(label: Text(action.content.accessibilityLabel ?? action.content.title))
       .padding(.horizontal, big ? 12 : 8)
       .padding(.vertical, 8)
     }
-    .foregroundColor(action.style == .bold ? .white : .accentColor)
-    .background(action.style == .bold ? Color.accentColor : Color.accentColor.opacity(0.15))
+    .foregroundColor(action.content.style == .bold ? .white : .accentColor)
+    .background(action.content.style == .bold ? Color.accentColor : Color.accentColor.opacity(0.15))
     .clipShape(Capsule())
 //    .background(Capsule().stroke(Color.accentColor, lineWidth: 2))
   }
@@ -124,7 +125,7 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
 #if DEBUG
 
 @MainActor
-class PreviewData {
+class PreviewData: ObservableObject {
   static let shared = PreviewData()
 
   init() {
@@ -133,11 +134,23 @@ class PreviewData {
     self.context = TKUICardActionHandlerInfo(card: card, model: "", container: container)
   }
   
-  var isFavorite: Bool = false
+  @Published var isFavorite: Bool = false
   
   let card: TGNoCard
   let container: UIView
   let context: TKUICardActionHandlerInfo<TGNoCard, String>
+  
+  var content: AnyPublisher<TKUICardActionContent, Never> {
+    _isFavorite.projectedValue
+      .map { newValue in
+        TKUICardActionContent(
+          title: newValue ? "Remove Favourite" : "Add Favourite",
+          icon: UIImage(systemName: newValue ? "star.slash.fill" : "star.fill")!.withRenderingMode(.alwaysTemplate) ,
+          style: .normal
+        )
+      }
+      .eraseToAnyPublisher()
+  }
 }
 
 @available(iOS 16.0, *)
@@ -145,39 +158,6 @@ struct TKUICardActions_Previews: PreviewProvider {
   
   static var previews: some View {
     Group {
-      TKUIScrollingCardActions<TGNoCard, String>(actions: [
-        .init(
-          title: "Share",
-          icon: .iconShare,
-          handler: { _, _, _, _ in false }
-        ),
-      ], info: PreviewData.shared.context)
-
-      TKUIScrollingCardActions<TGNoCard, String>(actions: [
-        .init(
-          title: "Go",
-          icon: .iconCompass,
-          style: .bold,
-          handler: { _, _, _, _ in false }
-        ),
-        .init(
-          title: { PreviewData.shared.isFavorite ? "Remove Favourite" : "Add Favourite" },
-          icon: { UIImage(systemName: PreviewData.shared.isFavorite ? "star.slash.fill" : "star.fill")!.withRenderingMode(.alwaysTemplate) },
-          handler: { _, _, _ in PreviewData.shared.isFavorite.toggle() }
-        ),
-        .init(
-          title: "Share",
-          icon: .iconShare,
-          handler: { _, _, _, _ in false }
-        ),
-        .init(
-          title: "Alternatives",
-          icon: UIImage(systemName: "arrow.triangle.branch")!.withRenderingMode(.alwaysTemplate),
-          handler: { _, _, _, _ in false }
-        ),
-      ], info: PreviewData.shared.context)
-      
-      
       VStack {
         TKUIAdaptiveCardActions<TGNoCard, String>(actions: [
           .init(
@@ -186,11 +166,9 @@ struct TKUICardActions_Previews: PreviewProvider {
             style: .bold,
             handler: { _, _, _, _ in false }
           ),
-          .init(
-            title: { PreviewData.shared.isFavorite ? "Remove Favourite" : "Add Favourite" },
-            icon: { UIImage(systemName: PreviewData.shared.isFavorite ? "star.slash.fill" : "star.fill")!.withRenderingMode(.alwaysTemplate) },
-            handler: { _, _, _ in PreviewData.shared.isFavorite.toggle() }
-          ),
+          .init(content: PreviewData.shared.content) { _, _, _ in
+            PreviewData.shared.isFavorite.toggle()
+          },
           .init(
             title: "Share",
             icon: .iconShare,
@@ -210,11 +188,9 @@ struct TKUICardActions_Previews: PreviewProvider {
             style: .bold,
             handler: { _, _, _, _ in false }
           ),
-          .init(
-            title: { PreviewData.shared.isFavorite ? "Remove Favourite" : "Add Favourite" },
-            icon: { UIImage(systemName: PreviewData.shared.isFavorite ? "star.slash.fill" : "star.fill")!.withRenderingMode(.alwaysTemplate) },
-            handler: { _, _, _ in PreviewData.shared.isFavorite.toggle() }
-          ),
+          .init(content: PreviewData.shared.content) { _, _, _ in
+            PreviewData.shared.isFavorite.toggle()
+          },
           .init(
             title: "Share",
             icon: .iconShare,
@@ -231,7 +207,37 @@ struct TKUICardActions_Previews: PreviewProvider {
         ], info: PreviewData.shared.context)
       }
       
-      Spacer()
+      TKUIScrollingCardActions<TGNoCard, String>(actions: [
+        .init(
+          title: "Share",
+          icon: .iconShare,
+          handler: { _, _, _, _ in false }
+        ),
+      ], info: PreviewData.shared.context)
+
+      TKUIScrollingCardActions<TGNoCard, String>(actions: [
+        .init(
+          title: "Go",
+          icon: .iconCompass,
+          style: .bold,
+          handler: { _, _, _, _ in false }
+        ),
+        .init(content: PreviewData.shared.content) { _, _, _ in
+          PreviewData.shared.isFavorite.toggle()
+        },
+        .init(
+          title: "Share",
+          icon: .iconShare,
+          handler: { _, _, _, _ in false }
+        ),
+        .init(
+          title: "Alternatives",
+          icon: UIImage(systemName: "arrow.triangle.branch")!.withRenderingMode(.alwaysTemplate),
+          handler: { _, _, _, _ in false }
+        ),
+      ], info: PreviewData.shared.context)
+      
+      
     }
     .accentColor(Color(.tkAppTintColor))
     .previewLayout(.fixed(width: 420, height: 200))

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 import TGCardViewController
 
@@ -35,7 +36,25 @@ import TGCardViewController
 /// }
 ///
 /// ```
-open class TKUICardAction<Card, Model> where Card: TGCard {
+open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
+  
+  /// Initialises a new card action, which can be used to add custom buttons to a card that reflect some
+  /// external state.
+  ///
+  /// - Parameters:
+  ///   - content: Publisher of the content for the button
+  ///   - handler: Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.
+  public init(
+    content: AnyPublisher<TKUICardActionContent, Never>,
+    handler: @escaping @MainActor (Card, Model, UIView) -> Void
+  ) {
+    self.handler = { _, card, model, view in
+      handler(card, model, view)
+      return true
+    }
+    self.content = .init(title: "", accessibilityLabel: "", icon: UIImage(), style: .normal)
+    self.cancellable = content.assign(to: \.content, on: self)
+  }
   
   /// Initialises a new card action, which can be used to add custom buttons to a card.
   ///
@@ -52,10 +71,12 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
     style: TKUICardActionStyle = .normal,
     handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
   ) {
-    self.title = title
-    self.accessibilityLabel = accessibilityLabel ?? title
-    self.icon = icon
-    self.style = style
+    self.content = .init(
+      title: title,
+      accessibilityLabel: accessibilityLabel,
+      icon: icon,
+      style: style
+    )
     self.handler = handler
   }
   
@@ -83,24 +104,42 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
       style: style?() ?? .normal
     ) { action, card, model, view in
       handler(card, model, view)
-      action.title = title()
-      action.accessibilityLabel = accessibilityLabel?() ?? title()
-      action.icon = icon()
-      action.style = style?() ?? .normal
+      action.content = .init(
+        title: title(),
+        accessibilityLabel: accessibilityLabel?() ?? title(),
+        icon: icon(),
+        style: style?() ?? .normal
+      )
       return true
     }
   }
   
+  @Published var content: TKUICardActionContent
+  
+  private var cancellable: AnyCancellable?
+  
   /// Title of the button
-  open var title: String
+  public var title: String {
+    get { content.title }
+    set { content.title = newValue }
+  }
   
   /// Accessibility label to use for the button
-  open var accessibilityLabel: String
+  public var accessibilityLabel: String {
+    get { content.accessibilityLabel ?? content.title }
+    set { content.accessibilityLabel = newValue }
+  }
   
   /// Icon to display as the action. Should be a template image.
-  open var icon: UIImage
+  public var icon: UIImage {
+    get { content.icon }
+    set { content.icon = newValue }
+  }
   
-  open var style: TKUICardActionStyle
+  public var style: TKUICardActionStyle {
+    get { content.style }
+    set { content.style = newValue }
+  }
 
   /// Handler executed when user taps on the button, providing the
   /// corresponding card and model instance. Should return whether the button
@@ -109,4 +148,24 @@ open class TKUICardAction<Card, Model> where Card: TGCard {
   ///
   /// Parameters are the action itself, the owning card, the model instance, and the sender.
   public let handler: @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
+}
+
+public struct TKUICardActionContent {
+  public init(title: String, accessibilityLabel: String? = nil, icon: UIImage, style: TKUICardActionStyle) {
+    self.title = title
+    self.accessibilityLabel = accessibilityLabel
+    self.icon = icon
+    self.style = style
+  }
+  
+  /// Title of the button
+  public var title: String
+  
+  /// Accessibility label to use for the button, falls back to `title` if not provided
+  public var accessibilityLabel: String?
+  
+  /// Icon to display as the action. Should be a template image.
+  public var icon: UIImage
+  
+  public var style: TKUICardActionStyle
 }
