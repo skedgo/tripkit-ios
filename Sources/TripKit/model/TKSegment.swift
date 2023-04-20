@@ -617,10 +617,14 @@ extension TKSegment {
     guard let identifier = modeIdentifier else { return .unknown }
     
     switch TKTransportMode(modeIdentifier: identifier) {
-    case .car: return .car
-    case .bicycle, .micromobility: return .bicycle
-    case .motorbike: return .motorbike
-    default: return .unknown
+    case .car:
+      return .car
+    case .bicycle, .micromobility, .bicycleDeprecated:
+      return .bicycle
+    case .motorbike:
+      return .motorbike
+    default:
+      return .unknown
     }
   }
   
