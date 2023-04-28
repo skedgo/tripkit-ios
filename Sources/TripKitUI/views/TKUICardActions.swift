@@ -166,7 +166,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             style: .bold,
             handler: { _, _, _, _ in false }
           ),
-          .init(content: PreviewData.shared.content) { _, _, _ in
+          .init(content: PreviewData.shared.content) { _, _, _, _ in
             PreviewData.shared.isFavorite.toggle()
           },
           .init(
@@ -188,7 +188,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             style: .bold,
             handler: { _, _, _, _ in false }
           ),
-          .init(content: PreviewData.shared.content) { _, _, _ in
+          .init(content: PreviewData.shared.content) { _, _, _, _ in
             PreviewData.shared.isFavorite.toggle()
           },
           .init(
@@ -222,7 +222,7 @@ struct TKUICardActions_Previews: PreviewProvider {
           style: .bold,
           handler: { _, _, _, _ in false }
         ),
-        .init(content: PreviewData.shared.content) { _, _, _ in
+        .init(content: PreviewData.shared.content) { _, _, _, _ in
           PreviewData.shared.isFavorite.toggle()
         },
         .init(

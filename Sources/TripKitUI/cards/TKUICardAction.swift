@@ -46,10 +46,10 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   ///   - handler: Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.
   public init(
     content: AnyPublisher<TKUICardActionContent, Never>,
-    handler: @escaping @MainActor (Card, Model, UIView) -> Void
+    handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Void
   ) {
-    self.handler = { _, card, model, view in
-      handler(card, model, view)
+    self.handler = { action, card, model, view in
+      handler(action, card, model, view)
       return true
     }
     self.content = .init(title: "", accessibilityLabel: "", icon: UIImage(), style: .normal)
