@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 import RxSwift
 import RxCocoa
@@ -54,6 +55,7 @@ public class TKUITripOverviewCard: TKUITableCard {
   private let disposeBag = DisposeBag()
   
   private let alternativesTapped = PublishSubject<IndexPath>()
+  private let alertsToggled = PublishSubject<Bool>()
   private let isVisible = BehaviorSubject<Bool>(value: false)
   
   // The trip being presented may be changing as a result of user actions
@@ -132,7 +134,8 @@ public class TKUITripOverviewCard: TKUITableCard {
       presentedTrip: presentedTrip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
-        alertsEnabled: notificationFooterView.notificationSwitch.rx.value.asSignal(onErrorSignalWith: .empty()),
+        alertsEnabled: alertsToggled.asSignal(onErrorSignalWith: .empty()),
+        droppedPin: tripMapManager?.droppedPin ?? .empty(),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
@@ -293,7 +296,27 @@ extension TKUITripOverviewCard {
     let footer = self.notificationFooterView
     footer.updateAvailableKinds(notificationKinds)
     footer.backgroundColor = tableView.backgroundColor
+
+    // Footer => View Model
+    // It's important here to use `controlEvent(.valueChanged)` and not
+    // `value` as `value` will fire just from initialisation, and this
+    // shouldn't be treated as a user action.
+    footer.notificationSwitch.rx.controlEvent(.valueChanged)
+      .subscribe(onNext: { [weak self, weak footer] isOn in
+        guard let self, let footer else { return }
+        self.alertsToggled.onNext(footer.notificationSwitch.isOn)
+      })
+      .disposed(by: disposeBag)
     
+    // View Model => Toggle button
+    // Update button state to reflect external changes, e.g., when toggled
+    // via some other means or when another trip gets monitored instead.
+    viewModel.notificationsEnabled
+      .drive(onNext: { [weak footer] isOn in
+        footer?.notificationSwitch.isOn = isOn
+      })
+      .disposed(by: disposeBag)
+
     tableFooterView.addArrangedSubview(footer)
     tableFooterView.layoutIfNeeded()
     tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
@@ -394,6 +417,27 @@ extension TKUITripOverviewCard {
   
   private func buildActionsView(from actions: [TKUITripOverviewCard.TripAction], trip: Trip) -> UIView? {
     var mutable = actions
+    
+    if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
+      let publisher = viewModel.notificationsEnabled
+        .publisher
+        .catch { _ in Just(false) }
+        .map { isOn in
+          if isOn {
+            return TKUICardActionContent(title: "Mute", icon: .iconAlert, style: .destructive)
+          } else {
+            return TKUICardActionContent(title: "Alert Me", icon: .iconAlert, style: .bold)
+          }
+        }
+        .eraseToAnyPublisher()
+      
+      
+      mutable.append(TripAction(content: publisher) { (action, card, _, _) in
+        let isOn = action.title != "Mute"
+        (card as? TKUITripOverviewCard)?.alertsToggled.onNext(isOn)
+      })
+    }
+    
     if selectedAlternativeTripCallback != nil {
       mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
         trip.request.expandForFavorite = true

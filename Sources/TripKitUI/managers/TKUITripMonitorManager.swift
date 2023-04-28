@@ -20,10 +20,16 @@ import TripKit
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 /// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
 @available(iOS 14.0, *)
-public class TKUITripMonitorManager: NSObject {
+public class TKUITripMonitorManager: NSObject, ObservableObject {
   
   private enum Keys {
     static let alertsEnabled = "GODefaultGetOffAlertsEnabled"
+  }
+  
+  struct MonitoredTrip: Codable, Hashable {
+    let tripID: String?
+    let tripURL: URL
+    let notifications: [TKAPI.TripNotification]
   }
   
   @objc(sharedInstance)
@@ -31,13 +37,14 @@ public class TKUITripMonitorManager: NSObject {
   
   private lazy var geoMonitor: GeoMonitor = {
     return .init(enabledKey: Keys.alertsEnabled) { [weak self] _ in
-      guard let self else { return [] }
-      return self.geofences.map(\.1)
+      guard let monitoredTrip = self?.monitoredTrip else { return [] }
+      return monitoredTrip.notifications.compactMap(\.region)
+      
     } onEvent: { [weak self] event in
-      guard let self else { return }
+      guard let self, let monitoredTrip = self.monitoredTrip else { return }
       switch event {
       case .entered(let region, _):
-        guard let match = self.geofences.first(where: { $0.1.identifier == region.identifier })?.0 else { return }
+        guard let match = monitoredTrip.notifications.first(where: { $0.id == region.identifier }) else { return }
         self.notify(with: match, trigger: nil)  // Fire right away
       case .manual(let region, let location):
         break // This happens we starting in a region. Ignore.
@@ -47,7 +54,7 @@ public class TKUITripMonitorManager: NSObject {
     }
   }()
   
-  var geofences: [(TKAPI.TripNotification, CLCircularRegion)] = []
+  @Published var monitoredTrip: MonitoredTrip?
   
   override init() {
     super.init()
@@ -121,7 +128,11 @@ public class TKUITripMonitorManager: NSObject {
       return stopMonitoring()
     }
     
-    startMonitoringRegions(from: notifications)
+    startMonitoringRegions(from: .init(
+      tripID: trip.tripId,
+      tripURL: trip.tripURL,
+      notifications: notifications)
+    )
     scheduleTimeBased(from: notifications)
   }
   
@@ -149,22 +160,33 @@ public class TKUITripMonitorManager: NSObject {
 
 // MARK: - Geofence-based alerts
 
+extension Trip {
+  var tripURL: URL {
+    shareURL
+      ?? temporaryURLString.flatMap { URL(string: $0) }
+      ?? objectID.uriRepresentation()
+  }
+}
+
+extension TKAPI.TripNotification {
+  var region: CLCircularRegion? {
+    switch kind {
+    case let .circle(center, radius, _):
+      return CLCircularRegion(center: center, radius: radius, identifier: id)
+    case .time:
+      return nil
+    }
+  }
+}
+
 @available(iOS 14.0, *)
 extension TKUITripMonitorManager {
   
-  private func startMonitoringRegions(from notifications: [TKAPI.TripNotification]) {
-    let pairs: [(TKAPI.TripNotification, CLCircularRegion)] = notifications.compactMap { notification -> (TKAPI.TripNotification, CLCircularRegion)? in
-      switch notification.kind {
-      case let .circle(center, radius, _):
-        let region = CLCircularRegion(center: center, radius: radius, identifier: notification.id)
-        return (notification, region)
-      case .time:
-        return nil
-      }
-    }
-    self.geofences = pairs
+  private func startMonitoringRegions(from monitored: MonitoredTrip) {
+    self.monitoredTrip = monitored
     
-    guard !pairs.isEmpty else { return }
+    let regions = monitored.notifications.compactMap(\.region)
+    guard !regions.isEmpty else { return }
     
     geoMonitor.startMonitoring()
     
@@ -175,18 +197,18 @@ extension TKUITripMonitorManager {
     geoMonitor.isTracking = true
     
     Task {
-      await geoMonitor.update(regions: pairs.map(\.1))
+      await geoMonitor.update(regions: regions)
     }
   }
   
   private func stopMonitoringRegions() {
-    guard !geofences.isEmpty else { return }
+    guard monitoredTrip != nil else { return }
     
     geoMonitor.isTracking = false
     geoMonitor.stopMonitoring()
     
     // inverse of `monitorRegion(from:)`
-    self.geofences = []
+    self.monitoredTrip = nil
   }
   
 }

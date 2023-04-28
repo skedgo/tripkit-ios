@@ -27,10 +27,6 @@ class TKUITripOverviewViewModel {
       .asDriver(onErrorDriveWith: .empty())
       .map { $0.tripGroup.sources }
     
-    notificationKinds = presentedTrip
-      .asDriver(onErrorDriveWith: .empty())
-      .map { Set($0.segments.flatMap(\.notifications).map(\.messageKind)) }
-
     let tripChanged: Observable<Trip> = presentedTrip
       .asObservable()
       .distinctUntilChanged { $0.persistentId() == $1.persistentId() }
@@ -76,8 +72,20 @@ class TKUITripOverviewViewModel {
           return nil
         }
         .asSignal { _ in .empty() }
+      
+      notificationsEnabled = TKUITripMonitorManager.shared.rx_monitoredTrip
+        .withLatestFrom(tripUpdated) { $0?.tripID == $1.tripId }
+        .asDriver(onErrorJustReturn: false)
+      
+      notificationKinds = presentedTrip
+        .asDriver(onErrorDriveWith: .empty())
+        .map { Set($0.segments.flatMap(\.notifications).map(\.messageKind)) }
+
     } else {
       nextFromAlertToggle = .empty()
+      
+      notificationsEnabled = .just(false)
+      notificationKinds = .just([])
     }
     
     let nextFromSelection = inputs.selected.compactMap { item -> Next? in
@@ -106,6 +114,8 @@ class TKUITripOverviewViewModel {
   let dataSources: Driver<[TKAPI.DataAttribution]>
   
   let notificationKinds: Driver<Set<TKAPI.TripNotification.MessageKind>>
+  
+  let notificationsEnabled: Driver<Bool>
   
   let refreshMap: Signal<Trip>
   
