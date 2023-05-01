@@ -30,6 +30,8 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
   private var viewModel: TKUIRoutingQueryInputViewModel!
   private let didAppear = PublishSubject<Void>()
   private let routeTriggered = PublishSubject<Void>()
+  private let accessoryTapped: PublishSubject<TKUIRoutingQueryInputViewModel.Item>?
+  private let accessoryCallback = PublishSubject<(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode)>()
   private let disposeBag = DisposeBag()
   
   private let titleView: TKUIRoutingQueryInputTitleView
@@ -39,6 +41,12 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     self.destination = destination
     self.biasMapRect = biasMapRect
     self.titleView = TKUIRoutingQueryInputTitleView.newInstance()
+    
+    if TKUICustomization.shared.locationInfoTapHandler != nil {
+      accessoryTapped = .init()
+    } else {
+      accessoryTapped = nil
+    }
     
     super.init(title: .custom(titleView, dismissButton: titleView.closeButton))
   }
@@ -51,11 +59,15 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
         // Thanks to https://stackoverflow.com/a/59716978
         return UIAccessibility.isReduceMotionEnabled ? .reload : .animated
       },
-      configureCell: { _, tv, ip, item in
+      configureCell: { [weak accessoryTapped] _, tv, ip, item in
         guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
           preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
         }
-        cell.configure(with: item)
+        if let accessoryTapped {
+          cell.configure(with: item, onAccessoryTapped: { accessoryTapped.onNext($0) })
+        } else {
+          cell.configure(with: item)
+        }
         cell.accessibilityTraits = .button
         return cell
       },
@@ -85,7 +97,9 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
         tappedRoute: route,
         selected: selectedItem(in: tableView, dataSource: dataSource),
         selectedSearchMode: titleView.rx.selectedSearchMode,
-        tappedSwap: titleView.swapButton.rx.tap.asSignal()
+        tappedSwap: titleView.swapButton.rx.tap.asSignal(),
+        accessoryTapped: accessoryTapped?.asSignal(onErrorSignalWith: .empty()),
+        accessoryCallback: accessoryCallback.asSignal(onErrorSignalWith: .empty())
       )
     )
     
@@ -128,11 +142,8 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
       .subscribe()
       .disposed(by: disposeBag)
     
-    viewModel.selections
-      .emit(onNext: { [weak self] origin, destination in
-        guard let self = self, let delegate = self.queryDelegate else { return }
-        delegate.routingQueryInput(card: self, selectedOrigin: origin, destination: destination)
-      })
+    viewModel.next
+      .emit(onNext: { [weak self] in self?.handle($0) })
       .disposed(by: disposeBag)
 
     tableView.rx.setDelegate(self)
@@ -162,6 +173,19 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
   
   @objc func triggerRoute() {
     routeTriggered.onNext(())
+  }
+  
+  private func handle(_ next: TKUIRoutingQueryInputViewModel.Next) {
+    switch next {
+    case let .route(origin, destination):
+      queryDelegate?.routingQueryInput(card: self, selectedOrigin: origin, destination: destination)
+    case let .push(card):
+      controller?.push(card, animated: true)
+    case let .popBack(select, mode, route):
+      controller?.pop(animated: !route) {
+        self.accessoryCallback.onNext((select, mode))
+      }
+    }
   }
 }
 

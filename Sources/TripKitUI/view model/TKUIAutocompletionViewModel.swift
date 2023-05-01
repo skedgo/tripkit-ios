@@ -66,10 +66,31 @@ class TKUIAutocompletionViewModel {
     var image: UIImage { completion.image }
     var title: String { completion.title }
     var subtitle: String? { completion.subtitle }
-    var accessoryAccessibilityLabel: String? { includeAccessory ? completion.accessoryAccessibilityLabel : nil }
-    var accessoryImage: UIImage? { includeAccessory ? completion.accessoryButtonImage : nil }
     var showFaded: Bool { completion.isInSupportedRegion?.boolValue == false }
     var provider: TKAutocompleting? { completion.provider as? TKAutocompleting }
+
+    var accessoryAccessibilityLabel: String? {
+      guard includeAccessory else { return nil }
+      
+      if let provided = completion.accessoryAccessibilityLabel {
+        return provided
+      } else if TKUICustomization.shared.locationInfoTapHandler != nil {
+        return title
+      } else {
+        return nil
+      }
+    }
+    var accessoryImage: UIImage? {
+      guard includeAccessory else { return nil }
+
+      if let provided = completion.accessoryButtonImage {
+        return provided
+      } else if provider?.allowLocationInfoButton == true, TKUICustomization.shared.locationInfoTapHandler != nil {
+        return UIImage(systemName: "info.circle")
+      } else {
+        return nil
+      }
+    }
   }
   
   struct ActionItem {
