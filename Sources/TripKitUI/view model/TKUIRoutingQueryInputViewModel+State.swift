@@ -108,6 +108,7 @@ extension TKUIRoutingQueryInputViewModel {
           state.mode = mode
         
         case (.swap, _):
+          state.mode = state.mode ?? .destination
           (state.origin, state.destination) = (state.destination, state.origin)
           (state.originText, state.destinationText) = (state.destinationText, state.originText)
         }
