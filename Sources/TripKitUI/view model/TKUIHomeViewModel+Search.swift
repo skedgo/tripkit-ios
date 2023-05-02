@@ -48,8 +48,15 @@ extension TKUIHomeViewModel {
         switch annotation {
         case let stop as TKUIStopAnnotation: return .push(TKUITimetableCard(stops: [stop]))
         default:
-          assertionFailure("Unexpected annotation: \(annotation)")
-          return .push(TKUIRoutingResultsCard(destination: annotation))
+          if let tapHandler = TKUICustomization.shared.locationInfoTapHandler {
+            switch tapHandler(.init(annotation: annotation, routeButton: .allowed)) {
+            case .push(let card):
+              return .push(card)
+            }
+          } else {
+            assertionFailure("Unexpected annotation: \(annotation)")
+            return .push(TKUIRoutingResultsCard(destination: annotation))
+          }
         }
       }
     

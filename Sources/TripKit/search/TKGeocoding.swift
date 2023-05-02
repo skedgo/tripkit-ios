@@ -48,10 +48,14 @@ public protocol TKAutocompleting {
   func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void)
   
   #endif
+  
+  var allowLocationInfoButton: Bool { get }
 
 }
 
 extension TKAutocompleting {
+  
+  public var allowLocationInfoButton: Bool { true }
   
   #if os(iOS) || os(tvOS)
   public func additionalActionTitle() -> String? {

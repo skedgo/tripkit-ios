@@ -11,6 +11,8 @@ import UIKit
 
 import TGCardViewController
 
+import TripKit
+
 /// This class let's you customise various aspects of TripKitUI that apply across multiple view controllers
 /// or cards. You can do this by setting the various parts of `TKUICustomization.shared`, which should
 /// be done before displaying any view controllers or cards.
@@ -66,4 +68,32 @@ public class TKUICustomization {
   /// Default to `false`.
   public var colorCodeTransitIcons: Bool = false
   
+  
+  /// Provide a tap handler here to add an (i) accessory button next to
+  /// autocompletion results, that otherwise don't get an accessory button.
+  ///
+  /// This handler is called when that button is tapped.
+  public var locationInfoTapHandler: ((TKUILocationInfo) -> TKUILocationHandlerAction)? = nil
+  
+}
+
+public struct TKUILocationInfo {
+  public enum RouteButton {
+    /// If this is present, then the location info should include a route button, which the provided
+    /// title and tap handler. If there's already a route button in the location info screen, then
+    /// this should replace it.
+    case replace(title: String, onTap: () -> Void)
+
+    case allowed
+
+    case notAllowed
+  }
+  
+  public let annotation: MKAnnotation
+  
+  public let routeButton: RouteButton
+}
+
+public enum TKUILocationHandlerAction {
+  case push(TGCard)
 }

@@ -73,6 +73,11 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
   var selectedMapRoute: Signal<TKUIRoutingResultsMapRouteItem> {
     return selectedRoutePublisher.asSignal(onErrorSignalWith: .empty())
   }
+  
+  private var tappedPinPublisher = PublishSubject<(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode?)>()
+  var tappedPin: Signal<(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode?)> {
+    return tappedPinPublisher.asSignal(onErrorSignalWith: .empty())
+  }
 
   private var disposeBag = DisposeBag()
   
@@ -128,19 +133,31 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
   override func takeCharge(of mapView: MKMapView, animated: Bool) {
     super.takeCharge(of: mapView, animated: animated)
     
-    guard let viewModel = viewModel else { assertionFailure(); return }
+    guard let viewModel else { assertionFailure(); return }
     
     let zoomTo = [originAnnotation, destinationAnnotation].compactMap { $0 }
     if zoomToDestination, !zoomTo.isEmpty {
-      self.zoom(to: zoomTo, animated: true)
+      self.zoom(to: zoomTo, animated: animated)
     }
     
     viewModel.originAnnotation
-      .drive(onNext: { [weak self] in self?.originAnnotation = $0 })
+      .drive(onNext: { [weak self] annotation, select in
+        guard let self else { return }
+        self.originAnnotation = annotation
+        if select, let annotation {
+          self.mapView?.selectAnnotation(annotation, animated: true)
+        }
+      })
       .disposed(by: disposeBag)
     
     viewModel.destinationAnnotation
-      .drive(onNext: { [weak self] in self?.destinationAnnotation = $0 })
+      .drive(onNext: { [weak self] annotation, select in
+        guard let self else { return }
+        self.destinationAnnotation = annotation
+        if select, let annotation {
+          self.mapView?.selectAnnotation(annotation, animated: true)
+        }
+      })
       .disposed(by: disposeBag)
     
     viewModel.mapRoutes
@@ -237,7 +254,29 @@ extension TKUIRoutingResultsMapManager {
     view.alpha = 1
     view.canShowCallout = true
     
+    if TKUICustomization.shared.locationInfoTapHandler != nil {
+      let button = UIButton(type: .detailDisclosure)
+      button.tintColor = TKStyleManager.globalTintColor()
+      view.rightCalloutAccessoryView = button
+    } else {
+      view.rightCalloutAccessoryView = nil
+    }
+    
     return view
+  }
+  
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    guard let annotation = view.annotation else { return assertionFailure() }
+    
+    let mode: TKUIRoutingResultsViewModel.SearchMode?
+    if annotation === originAnnotation {
+      mode = .origin
+    } else if annotation === destinationAnnotation {
+      mode = .destination
+    } else {
+      mode = .none
+    }
+    tappedPinPublisher.onNext((annotation, mode))
   }
   
 }
