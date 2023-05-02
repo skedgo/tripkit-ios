@@ -158,6 +158,9 @@
 /* Status indicator that a mode is enabled */
 "Enabled" = "Habilitado";
 
+/* Action button title to plan a route ending at this location */
+"End Here" = "Termina aquí";
+
 /* Placeholder name for destination (then replaced with address or name) */
 "End location" = "Destino final";
 
@@ -395,6 +398,9 @@
 
 /* Title of button to start a trip (primarily after pausing) */
 "Start" = "Inicio";
+
+/* Action button title to plan a route starting at this location */
+"Start Here" = "Comienza aquí";
 
 /* Placeholder name for origin (then replaced with address or name) */
 "Start location" = "Ubicación inicial";
