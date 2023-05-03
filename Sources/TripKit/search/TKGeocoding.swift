@@ -67,6 +67,8 @@ public protocol TKAutocompleting {
   func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void)
   
   #endif
+  
+  var allowLocationInfoButton: Bool { get }
 
 }
 
@@ -76,6 +78,8 @@ public enum TKAutocompletionSelection {
 }
 
 extension TKAutocompleting {
+  
+  public var allowLocationInfoButton: Bool { true }
   
   public func cancelAutocompletion() {}
   

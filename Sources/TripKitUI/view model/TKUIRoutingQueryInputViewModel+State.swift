@@ -20,6 +20,7 @@ extension TKUIRoutingQueryInputViewModel {
     case typeText(String)
     case selectMode(TKUIRoutingResultsViewModel.SearchMode)
     case selectResult(MKAnnotation)
+    case select(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode)
     case swap
   }
   
@@ -50,6 +51,7 @@ extension TKUIRoutingQueryInputViewModel {
         inputs.tappedSwap.asObservable().map { .swap },
         inputs.searchText.distinctUntilChanged { $0.0 == $1.0 }.map { .typeText($0.0) },
         inputs.selectedSearchMode.asObservable().distinctUntilChanged().map { .selectMode($0) },
+        inputs.accessoryCallback.asObservable().map { .select($0, $1) }
       ])
 
     let initialState = State(
@@ -88,7 +90,8 @@ extension TKUIRoutingQueryInputViewModel {
             state.destination = nil
           }
 
-        case (.selectResult(let selection), .origin):
+        case (.selectResult(let selection), .origin),
+             (.select(let selection, .origin), _):
           state.origin = selection
           state.originText = (selection.title ?? nil) ?? ""
           
@@ -97,7 +100,8 @@ extension TKUIRoutingQueryInputViewModel {
           state.searchMode = state.destination == nil ? .destination : .origin
           state.mode = state.destination == nil ? .destination : nil
         
-        case (.selectResult(let selection), .destination):
+        case (.selectResult(let selection), .destination),
+             (.select(let selection, .destination), _):
           state.destination = selection
           state.destinationText = (selection.title ?? nil) ?? ""
 
@@ -111,6 +115,7 @@ extension TKUIRoutingQueryInputViewModel {
           state.mode = mode
         
         case (.swap, _):
+          state.mode = state.mode ?? .destination
           (state.origin, state.destination) = (state.destination, state.origin)
           (state.originText, state.destinationText) = (state.destinationText, state.originText)
         }

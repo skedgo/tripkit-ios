@@ -194,7 +194,8 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     let mapInput: TKUIRoutingResultsViewModel.MapInput = (
       tappedMapRoute: mapManager.selectedMapRoute,
-      droppedPin: mapManager.droppedPin
+      droppedPin: mapManager.droppedPin,
+      tappedPin: (mapManager as? TKUIRoutingResultsMapManager)?.tappedPin ?? .empty()
     )
     
     let viewModel: TKUIRoutingResultsViewModel
@@ -666,7 +667,7 @@ private extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func navigate(to next: TKUIRoutingResultsViewModel.Next) {
-    guard let controller = controller else { return }
+    guard let controller else { return }
     
     switch next {
     case .showTrip(let trip):
@@ -692,6 +693,15 @@ private extension TKUIRoutingResultsCard {
       
     case .trigger(let action, let group):
       _ = action.handler(action, self, group, controller.view)
+      
+    case .showLocation(let annotation, _):
+      guard let handler = TKUICustomization.shared.locationInfoTapHandler else {
+        return assertionFailure("Shouldn't show that disclosure icon without a tap handler")
+      }
+      switch handler(.init(annotation: annotation, routeButton: .notAllowed)) {
+      case .push(let card):
+        controller.push(card)
+      }
     }
   }
   

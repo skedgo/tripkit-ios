@@ -91,7 +91,7 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
         .select("Nuremberg", index: 0),
         .mode(.destination),
         .type("B"),
-        .select("Bahia Blanca", index: 0),
+        .select("Bahia Blanca", index: 0), // => Triggers route automatically
       ])
     
     XCTAssertEqual(results, [
@@ -100,6 +100,7 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
       "Nuremberg -- ",
       "Nuremberg -- B",
       "Nuremberg -- Bahia Blanca",
+      "✅ Nuremberg -- Bahia Blanca",
     ])
   }
 
@@ -141,18 +142,21 @@ class TKUIRoutingQueryInputViewModelTest: XCTestCase {
   func testSwapping() throws {
     let results = run([
         .type("N"),
-        .select("Nuremberg", index: 0),
+        .select("Nuremberg", index: 0), // => Trigger route automatically
+        
+        // Come back then swap
         .swap,
         .mode(.destination),
         .type("B"),
-        .select("Bahia Blanca", index: 0),
-        .route
+        .select("Bahia Blanca", index: 0), // => Triggger route automatically
       ])
     
     XCTAssertEqual(results, [
       "\(Loc.CurrentLocation) -- ",
       "\(Loc.CurrentLocation) -- N",
       "\(Loc.CurrentLocation) -- Nuremberg",
+      "✅ \(Loc.CurrentLocation) -- Nuremberg",
+      
       "Nuremberg -- \(Loc.CurrentLocation)",
       "Nuremberg -- B",
       "Nuremberg -- Bahia Blanca",
@@ -189,10 +193,14 @@ extension TKUIRoutingQueryInputViewModelTest {
     for (index, action) in actions.enumerated() {
       let time: TestTime = (index + 1) * 100
       switch action {
-      case .type(let text): searches.append(.next(time, (text, forced: false)))
-      case .mode(let mode): modes.append(.next(time, mode))
-      case .swap: swaps.append(.next(time, ()))
-      case .route: routes.append(.next(time, ()))
+      case .type(let text):
+        searches.append(.next(time, (text, forced: false)))
+      case .mode(let mode):
+        modes.append(.next(time, mode))
+      case .swap:
+        swaps.append(.next(time, ()))
+      case .route:
+        routes.append(.next(time, ()))
       
       case .select(let text, let index):
         var result = TKAutocompletionResult(
@@ -225,10 +233,9 @@ extension TKUIRoutingQueryInputViewModelTest {
       .bind(to: observer)
       .disposed(by: bag)
     
-    viewModel.selections
+    viewModel.next
       .asObservable()
-      .map { (($0.0.title ?? nil) ?? "", ($0.1.title ?? nil) ?? "") }
-      .map { "✅ \($0) -- \($1)" }
+      .map(\.title)
       .bind(to: observer)
       .disposed(by: bag)
     
@@ -275,6 +282,19 @@ fileprivate extension TKUIRoutingQueryInputViewModel.Item {
     switch self {
     case .action, .currentLocation: return nil
     case .autocompletion(let item): return item.accessoryImage
+    }
+  }
+}
+
+fileprivate extension TKUIRoutingQueryInputViewModel.Next {
+  var title: String {
+    switch self {
+    case let .route(origin, destination):
+      return "✅ \((origin.title ?? nil) ?? "") -- \((destination.title ?? nil) ?? "")"
+    case .push:
+      return "✅ Push card"
+    case .popBack:
+      return "✅ Pop back"
     }
   }
 }

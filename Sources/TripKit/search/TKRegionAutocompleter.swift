@@ -17,6 +17,8 @@ public class TKRegionAutocompleter: TKAutocompleting {
   public init() {
   }
   
+  public var allowLocationInfoButton: Bool { false }
+  
   public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
     let scoredMatches = TKRegionManager.shared.regions
