@@ -13,9 +13,20 @@ import TGCardViewController
 
 import TripKit
 
+/// Used as namespace
 public enum TKUICardActionsViewFactory {
   
-  public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, showSeparator: Bool = false, padding: Edge.Set = []) -> UIView {
+  /// Creates a view that lays out the buttons described by `actions` horizontally
+  ///
+  /// - Parameters:
+  ///   - actions: Actions to display, displayed in same order as provided
+  ///   - card: Card where this view will be embedded, will be passed to each action on tap
+  ///   - model: Data model that the card is presenting, will be passed to each action on tap
+  ///   - container: Container view that will host this view, will be passed to each action on tap
+  ///   - padding: Padding to add around this view
+  ///
+  /// - Returns: Returns the view, ready to be added to the container
+  public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, padding: Edge.Set = []) -> UIView {
     
     let actionsView: UIView
     

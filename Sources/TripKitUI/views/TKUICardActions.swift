@@ -68,15 +68,6 @@ struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
       .padding(.horizontal)
       
       TKUIScrollingCardActions(actions: actions, info: info)
-    
-//      HStack {
-//        ForEach(actions, id: \.title) { action in
-//          TKUICardActionButton(action: action, info: info, big: false)
-//        }
-//
-//        Spacer()
-//      }
-//      .padding(.horizontal)
     }
   }
 }
