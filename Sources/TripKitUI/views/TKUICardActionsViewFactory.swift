@@ -11,9 +11,11 @@ import SwiftUI
 
 import TGCardViewController
 
+import TripKit
+
 public enum TKUICardActionsViewFactory {
   
-  public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, showSeparator: Bool = false) -> UIView {
+  public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, showSeparator: Bool = false, padding: Edge.Set = []) -> UIView {
     
     let actionsView: UIView
     
@@ -22,6 +24,7 @@ public enum TKUICardActionsViewFactory {
         rootView: TKUIAdaptiveCardActions(
           actions: actions,
           info: .init(card: card, model: model, container: container))
+        .padding(padding)
       ).view
       
     } else {
@@ -29,11 +32,12 @@ public enum TKUICardActionsViewFactory {
         rootView: TKUIScrollingCardActions(
           actions: actions,
           info: .init(card: card, model: model, container: container))
+        .padding(padding)
       ).view
     }
     
+    actionsView.tintColor = TKColor.tkAppTintColor
     return actionsView
-    
   }
   
 }
