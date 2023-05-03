@@ -41,7 +41,8 @@ class TKUIRoutingResultsViewModel {
   
   typealias MapInput = (
     tappedMapRoute: Signal<TKUIRoutingResultsMapRouteItem>,
-    droppedPin: Signal<CLLocationCoordinate2D>  // => call dropPin()
+    droppedPin: Signal<CLLocationCoordinate2D>,  // => call dropPin()
+    tappedPin: Signal<(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode?)>
   )
   
   convenience init(destination: MKAnnotation, origin: MKAnnotation? = nil, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
@@ -167,13 +168,13 @@ class TKUIRoutingResultsViewModel {
       .asDriver(onErrorDriveWith: .empty())
 
     originAnnotation = builderChanged
-      .map { $0.origin }
-      .distinctUntilChanged { $0 === $1 }
+      .map { ($0.origin, $0.select == .origin) }
+      .distinctUntilChanged { $0.0 === $1.0 }
       .asDriver(onErrorDriveWith: .empty())
 
     destinationAnnotation = builderChanged
-      .map { $0.destination }
-      .distinctUntilChanged { $0 === $1 }
+      .map { ($0.destination, $0.select == .destination) }
+      .distinctUntilChanged { $0.0 === $1.0 }
       .asDriver(onErrorDriveWith: .empty())
 
     mapRoutes = Observable.combineLatest(
@@ -239,8 +240,11 @@ class TKUIRoutingResultsViewModel {
       .withLatestFrom(builderChanged)
       .map { Next.showSearch(origin: $0.origin, destination: $0.destination, mode: $0.mode) }
       .asSignal(onErrorSignalWith: .empty())
+    
+    let presentLocationInfo = mapInput.tappedPin
+      .map { Next.showLocation($0, mode: $1) }
 
-    next = Signal.merge(showSelection, presentSearch, presentTime, presentTimeAutomatically, presentModes, triggerAction)
+    next = Signal.merge(showSelection, presentSearch, presentTime, presentTimeAutomatically, presentModes, presentLocationInfo, triggerAction)
   }
   
   let request: Driver<TripRequest>
@@ -285,9 +289,9 @@ class TKUIRoutingResultsViewModel {
   
   let error: Signal<Error>
   
-  let originAnnotation: Driver<MKAnnotation?>
+  let originAnnotation: Driver<(MKAnnotation?, select: Bool)>
 
-  let destinationAnnotation: Driver<MKAnnotation?>
+  let destinationAnnotation: Driver<(MKAnnotation?, select: Bool)>
   
   let mapRoutes: Driver<MapContent>
   
@@ -301,6 +305,7 @@ extension TKUIRoutingResultsViewModel {
     case showTrip(Trip)
     case showAlert(TKAPI.Alert)
     case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
+    case showLocation(MKAnnotation, mode: SearchMode?)
     case presentModeConfigurator(modes: [String], region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)

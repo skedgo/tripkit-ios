@@ -31,6 +31,8 @@ import RxSwift
   extension Reactive where Base: NSManagedObjectContext {
     public func fetchObjects<E: NSManagedObject>(_ entity: E.Type, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate? = nil, relationshipKeyPathsForPrefetching: [String]? = nil) -> Observable<[E]> {
       
+      let base = self.base
+      
       return Observable.create { observer in
         
         // configure the request
@@ -45,7 +47,7 @@ import RxSwift
         var delegate: FetchedResultsControllerDelegateProxy<E>?
         
         // set up the work and delegate forwarding messages to the delegate proxy
-        controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.base, sectionNameKeyPath: nil, cacheName: nil)
+        controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: base, sectionNameKeyPath: nil, cacheName: nil)
         delegate = FetchedResultsControllerDelegateProxy<E>(observer)
         controller!.delegate = delegate
         do {

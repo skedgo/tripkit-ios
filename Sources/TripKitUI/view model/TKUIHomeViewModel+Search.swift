@@ -48,10 +48,16 @@ extension TKUIHomeViewModel {
     
     let nextFromAccessory = searchViewModel.accessorySelection
       .compactMap { selection -> NextAction? in
-        switch selection {
-        case .annotation(let stop as TKUIStopAnnotation):
+        switch (selection, TKUICustomization.shared.locationInfoTapHandler) {
+        case (.annotation(let stop as TKUIStopAnnotation), _):
           return .push(TKUITimetableCard(stops: [stop]), selection: stop)
-        case .annotation, .result:
+        case (.annotation(let annotation), .some(let tapHandler)):
+          switch tapHandler(.init(annotation: annotation, routeButton: .allowed)) {
+          case .push(let card):
+            return .push(card, selection: annotation)
+          }
+          
+        case (.annotation, _), (.result, _):
           assertionFailure("Unexpected annotation: \(selection)")
           return nil
         }

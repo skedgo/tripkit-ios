@@ -26,6 +26,8 @@ extension TKContactsManager {
 
 extension TKContactsManager: TKAutocompleting {
   
+  public var allowLocationInfoButton: Bool { false }
+  
   public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
     guard !input.isEmpty else {

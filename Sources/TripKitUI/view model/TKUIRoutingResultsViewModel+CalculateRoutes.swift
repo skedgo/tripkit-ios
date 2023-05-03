@@ -15,14 +15,14 @@ import TripKit
 
 extension TKUIRoutingResultsViewModel {
   
-  public struct RouteBuilder: Codable {
-    public enum Time: Equatable, Codable {
+  struct RouteBuilder: Codable {
+    enum Time: Equatable, Codable {
       private enum CodingKeys: String, CodingKey {
         case type
         case date
       }
       
-      public init(from decoder: Decoder) throws {
+      init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
         let date = try? container.decode(Date.self, forKey: .date)
@@ -33,7 +33,7 @@ extension TKUIRoutingResultsViewModel {
         }
       }
       
-      public func encode(to encoder: Encoder) throws {
+      func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
         case .leaveASAP:
@@ -54,6 +54,7 @@ extension TKUIRoutingResultsViewModel {
     
     init(destination: MKAnnotation, origin: MKAnnotation? = nil) {
       self.mode = origin == nil ? .origin : .destination
+      self.select = .destination
       self.origin = origin.map(TKNamedCoordinate.namedCoordinate(for:))
       self.destination = TKNamedCoordinate.namedCoordinate(for: destination)
       self.time = TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP ? .leaveASAP : nil
@@ -67,6 +68,7 @@ extension TKUIRoutingResultsViewModel {
     }
     
     fileprivate(set) var mode: TKUIRoutingResultsViewModel.SearchMode
+    fileprivate(set) var select: TKUIRoutingResultsViewModel.SearchMode?
     fileprivate(set) var origin: TKNamedCoordinate?
     fileprivate(set) var destination: TKNamedCoordinate?
     fileprivate(set) var time: Time?
@@ -134,6 +136,7 @@ extension TKUIRoutingResultsViewModel {
         }
         
         if let pin = change.pin {
+          updated.select = updated.mode
           updated.dropPin(at: pin)
         }
         
@@ -143,6 +146,7 @@ extension TKUIRoutingResultsViewModel {
           } else {
             updated.destination = TKNamedCoordinate.namedCoordinate(for: search.location)
           }
+          updated.select = .none
         }
         
         return (updated, id: Self.buildId(for: updated, force: change.forceRefresh) )

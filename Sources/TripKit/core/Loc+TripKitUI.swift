@@ -70,6 +70,14 @@ extension Loc {
     return NSLocalizedString("Route", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to plan a route")
   }
   
+  public static var StartHere: String {
+    return NSLocalizedString("Start Here", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to plan a route starting at this location")
+  }
+
+  public static var EndHere: String {
+    return NSLocalizedString("End Here", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to plan a route ending at this location")
+  }
+
   public static var ChangeRoute: String {
     return NSLocalizedString("Change Route", tableName: "TripKit", bundle: .tripKit, comment: "Title of page to change the from/to of the routing results")
   }
