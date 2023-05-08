@@ -19,27 +19,33 @@ import CoreLocation
 ///
 /// - collection: GeoJSON's "FeatureCollection" type
 /// - feature: GeoJSON's "Feature" type
-enum TKGeoJSON {
+public enum TKGeoJSON {
 
   case collection([Feature])
   case feature(Feature)
   
   /// Details of a geometrical Feature
-  struct Feature {
-    let geometry: Geometry
-    let properties: Decodable?
+  public struct Feature {
+    public let geometry: Geometry
+    public let properties: Decodable?
   }
   
-  struct Position {
-    let latitude: CLLocationDegrees
-    let longitude: CLLocationDegrees
-    let altitude: CLLocationDistance?
+  public struct Position: Hashable {
+    public let latitude: CLLocationDegrees
+    public let longitude: CLLocationDegrees
+    public let altitude: CLLocationDistance?
   }
   
-  enum Geometry {
+  public struct Polygon: Hashable {
+    public let exterior: [Position]
+    public let interiors: [[Position]]
+  }
+  
+  public enum Geometry: Hashable {
     case point(Position)
     case lineString([Position])
-    case polygon([Position])
+    case polygon(Polygon)
+    case multiPolygon([Polygon])
   }
   
 }
@@ -87,7 +93,7 @@ extension TKGeoJSON: Decodable {
     case collection = "FeatureCollection"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let type = try values.decode(FeatureType.self, forKey: .type)
     
@@ -110,7 +116,7 @@ extension TKGeoJSON.Feature: Decodable {
     case properties
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     
     self.geometry = try values.decode(TKGeoJSON.Geometry.self, forKey: .geometry)
@@ -124,6 +130,25 @@ extension TKGeoJSON.Feature: Decodable {
   
 }
 
+extension TKGeoJSON.Position {
+  init?(_ coordinates: [Double]) {
+    guard coordinates.count >= 2 else { return nil }
+    let altitude = coordinates.count >= 3 ? coordinates[2] : nil
+    self.init(latitude: coordinates[1], longitude: coordinates[0], altitude: altitude)
+  }
+}
+
+extension TKGeoJSON.Polygon {
+  init?(_ coordinates: [[[Double]]]) {
+    guard let exterior = coordinates.first else { return nil }
+    self.init(
+      exterior: exterior.compactMap(TKGeoJSON.Position.init),
+      interiors: coordinates.dropFirst().map {
+        $0.compactMap(TKGeoJSON.Position.init)
+      }
+    )
+  }
+}
 
 extension TKGeoJSON.Geometry: Decodable {
 
@@ -136,22 +161,35 @@ extension TKGeoJSON.Geometry: Decodable {
     case lineString = "LineString"
     case point = "Point"
     case polygon = "Polygon"
+    case multiPolygon = "MultiPolygon"
   }
 
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
     let type = try values.decode(GeometryType.self, forKey: .type)
-    let coordinates = try values.decode(Array<CLLocationDegrees>.self, forKey: .coordinates)
     
     switch type {
     case .point:
-      guard coordinates.count >= 2 else { throw TKGeoJSON.DecodingError.missingCoordinates }
-      let altitude = coordinates.count >= 3 ? coordinates[2] : nil
-      let position = TKGeoJSON.Position(latitude: coordinates[1], longitude: coordinates[0], altitude: altitude)
+      let coordinates = try values.decode([Double].self, forKey: .coordinates)
+      guard let position = TKGeoJSON.Position(coordinates) else {
+        throw TKGeoJSON.DecodingError.missingCoordinates
+      }
       self = .point(position)
       
-    default:
-      throw TKGeoJSON.DecodingError.missingCoordinates
+    case .lineString:
+      let coordinates = try values.decode([[Double]].self, forKey: .coordinates)
+      self = .lineString(coordinates.compactMap(TKGeoJSON.Position.init))
+
+    case .polygon:
+      let coordinates = try values.decode([[[Double]]].self, forKey: .coordinates)
+      guard let polygon = TKGeoJSON.Polygon(coordinates) else {
+        throw TKGeoJSON.DecodingError.missingCoordinates
+      }
+      self = .polygon(polygon)
+      
+    case .multiPolygon:
+      let coordinates = try values.decode([[[[Double]]]].self, forKey: .coordinates)
+      self = .multiPolygon(coordinates.compactMap(TKGeoJSON.Polygon.init))
     }
   }
   
