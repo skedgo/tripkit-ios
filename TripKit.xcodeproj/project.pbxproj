@@ -41,6 +41,8 @@
 		3A89090927E473EE005A49B1 /* TKLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090727E473EE005A49B1 /* TKLocationProvider.swift */; };
 		3A89090B27E47414005A49B1 /* TKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090A27E47414005A49B1 /* TKServer+UserAccount.swift */; };
 		3A89090C27E47414005A49B1 /* TKServer+UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090A27E47414005A49B1 /* TKServer+UserAccount.swift */; };
+		3A8A9BBC2A0B460900BF4603 /* TKOneOffLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8A9BBB2A0B460900BF4603 /* TKOneOffLocationManager.swift */; };
+		3A8A9BBD2A0B460900BF4603 /* TKOneOffLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8A9BBB2A0B460900BF4603 /* TKOneOffLocationManager.swift */; };
 		3A96B93B293F102800556A44 /* routes-sf.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A96B93A293F102800556A44 /* routes-sf.json */; };
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
 		3A9C6A8629B58AC4000D43B2 /* TKAPIParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */; };
@@ -925,6 +927,7 @@
 		3A89090527E4739D005A49B1 /* Rx+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Concurrency.swift"; sourceTree = "<group>"; };
 		3A89090727E473EE005A49B1 /* TKLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationProvider.swift; sourceTree = "<group>"; };
 		3A89090A27E47414005A49B1 /* TKServer+UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKServer+UserAccount.swift"; sourceTree = "<group>"; };
+		3A8A9BBB2A0B460900BF4603 /* TKOneOffLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKOneOffLocationManager.swift; sourceTree = "<group>"; };
 		3A963D6026D46AD300C328A1 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/TripKit.strings"; sourceTree = "<group>"; };
 		3A96B93A293F102800556A44 /* routes-sf.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routes-sf.json"; sourceTree = "<group>"; };
 		3A9AC27E27753E1C004B8A52 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Shared.strings; sourceTree = "<group>"; };
@@ -1958,6 +1961,7 @@
 				3AFF263726C6975F007809CD /* TKContactsManager.swift */,
 				3AFF263526C6975F007809CD /* TKContactsManager+TKAutocompleting.swift */,
 				3AFF263826C6975F007809CD /* TKLocationManager.swift */,
+				3A8A9BBB2A0B460900BF4603 /* TKOneOffLocationManager.swift */,
 				3AD653E628FE872900A846C5 /* TKPermissionManager.swift */,
 				3AFF263226C6975F007809CD /* TKPermissionManager+AuthorizationAlert.swift */,
 				3AFF263926C6975F007809CD /* TKRegionManager.swift */,
@@ -3307,6 +3311,7 @@
 				3AFF28D126C697D9007809CD /* TKCoordinates.swift in Sources */,
 				3AFF298126C69845007809CD /* CLLocationCoordinate2D+DecodePolylineString.swift in Sources */,
 				3AFF289126C697CA007809CD /* AlertAPIModels.swift in Sources */,
+				3A8A9BBD2A0B460900BF4603 /* TKOneOffLocationManager.swift in Sources */,
 				3AFF297826C69836007809CD /* TKStyleManager+UIKit.swift in Sources */,
 				3AFF289026C697CA007809CD /* UserAPIModel.swift in Sources */,
 				3AFF295F26C6981E007809CD /* TKQuickBookingHelper.swift in Sources */,
@@ -3766,6 +3771,7 @@
 				3A1AABAC26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift in Sources */,
 				3AFF283726C6977B007809CD /* TKSegment+Shareable.swift in Sources */,
 				3AFF289526C697CB007809CD /* DeparturesAPIModel.swift in Sources */,
+				3A8A9BBC2A0B460900BF4603 /* TKOneOffLocationManager.swift in Sources */,
 				3AFF291026C697DA007809CD /* TKCoordinates.swift in Sources */,
 				3AFF297C26C69845007809CD /* CLLocationCoordinate2D+DecodePolylineString.swift in Sources */,
 				3AFF28A326C697CB007809CD /* AlertAPIModels.swift in Sources */,
