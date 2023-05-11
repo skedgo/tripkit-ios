@@ -37,8 +37,6 @@ class TKUITripsPageCard: TGPageCard {
 
 public class TKUITripOverviewCard: TKUITableCard {
   
-  typealias TripOverviewCardActionsView = TKUICardActionsView<TGCard, Trip>
-  
   public static var config = Configuration.empty
   
   private let initialTrip: Trip
@@ -394,7 +392,7 @@ extension TKUITripOverviewCard: TKUITripModeByModeCardDelegate {
 
 extension TKUITripOverviewCard {
   
-  private func buildActionsView(from actions: [TKUITripOverviewCard.TripAction], trip: Trip) -> TripOverviewCardActionsView? {
+  private func buildActionsView(from actions: [TKUITripOverviewCard.TripAction], trip: Trip) -> UIView? {
     var mutable = actions
     if selectedAlternativeTripCallback != nil {
       mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
@@ -406,8 +404,10 @@ extension TKUITripOverviewCard {
     
     guard !mutable.isEmpty else { return nil }
     
-    let actionsView = TripOverviewCardActionsView(frame: CGRect(x: 0, y: 0, width: 414, height: 80))
-    actionsView.configure(with: mutable, model: trip, card: self)
+    let actionsView = TKUICardActionsViewFactory.build(
+      actions: mutable,
+      card: self, model: trip, container: tableView!
+    )
     actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     return actionsView
   }
