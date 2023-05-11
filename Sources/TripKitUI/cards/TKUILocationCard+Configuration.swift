@@ -1,24 +1,24 @@
 //
-//  TKUISegmentDirectionCard+Configuration.swift
+//  TKUILocationCard+Configuration.swift
 //  TripKitUI-iOS
 //
-//  Created by Brian Huang on 31/3/20.
-//  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
+//  Created by Adrian Schönig on 3/5/2023.
+//  Copyright © 2023 SkedGo Pty Ltd. All rights reserved.
 //
 
 import Foundation
 
 import TripKit
 
-public extension TKUISegmentDirectionsCard {
+public extension TKUILocationCard {
   
-  typealias Action = TKUICardAction<TKUISegmentDirectionsCard, TKSegment>
+  typealias Action = TKUICardAction<TKUILocationCard, TKNamedCoordinate>
   
-  /// Configurtion of any `TKUISegmentDirectionCard`. Use this to add
+  /// Configuration of any `TKUILocationCard`. Use this to add
   /// custom actions.
   ///
   /// This isn't created directly, but rather you modify the static instance
-  /// accessible from `TKUISegmentDirectionCard.config`.
+  /// accessible from `TKUILocationCard.config`.
   struct Configuration {
     private init() {}
     
@@ -29,7 +29,7 @@ public extension TKUISegmentDirectionsCard {
     /// Set this to add a list of action buttons to a direction card.
     ///
     /// Called when a direction card gets presented.
-    public var actionFactory: ((TKSegment) -> [Action])?
+    public var actionFactory: ((TKNamedCoordinate) -> [Action])?
   }
   
 }

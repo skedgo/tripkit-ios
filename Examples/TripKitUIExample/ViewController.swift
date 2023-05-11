@@ -43,6 +43,12 @@ class MainViewController: UITableViewController {
       }
     }
     
+    // Inject location details card
+    TKUICustomization.shared.locationInfoTapHandler = { info in
+      let named = TKNamedCoordinate.namedCoordinate(for: info.annotation)
+      return .push(TKUILocationCard(for: named, routeButton: info.routeButton))
+    }
+    
     // Enable trip notifications
     TKUINotificationManager.shared.subscribe(to: .tripAlerts) { requests in
       for request in requests {

@@ -285,5 +285,12 @@ extension Loc {
   public static var MoreResults: String {
     return NSLocalizedString("More results", tableName: "TripKit", bundle: .tripKit, comment: "'More results' section in autocompletion")
   }
+  
+  // MARK: - Locationd etails
+  
+  public static var What3wordsAddress: String {
+    return NSLocalizedString("what3words address", tableName: "TripKit", bundle: .tripKit, comment: "Description of a what3words address, which is an addressing-sytem alternative to GPS or regular addresses based on 3 word pairs, e.g., 'gazed-across-like`.")
+  }
+
 
 }

@@ -70,6 +70,7 @@ extension TKUIAutocompletionResultCell {
     if let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {
       let button = TKStyleManager.cellAccessoryButton(with: accessoryImage, target: nil, action: nil)
       button.accessibilityLabel = autocompletion.accessoryAccessibilityLabel
+      button.tintColor = .tkLabelTertiary
       button.rx.tap
         .map { _ in item }
         .subscribe(onNext: target)
