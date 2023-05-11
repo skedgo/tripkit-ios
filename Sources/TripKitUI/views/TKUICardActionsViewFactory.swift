@@ -34,7 +34,9 @@ public enum TKUICardActionsViewFactory {
       actionsView = UIHostingController(
         rootView: TKUIAdaptiveCardActions(
           actions: actions,
-          info: .init(card: card, model: model, container: container))
+          info: .init(card: card, model: model, container: container),
+          normalStyle: TKUICustomization.shared.cardActionNormalStyle
+        )
         .padding(padding)
       ).view
       
@@ -42,7 +44,9 @@ public enum TKUICardActionsViewFactory {
       actionsView = UIHostingController(
         rootView: TKUIScrollingCardActions(
           actions: actions,
-          info: .init(card: card, model: model, container: container))
+          info: .init(card: card, model: model, container: container),
+          normalStyle: TKUICustomization.shared.cardActionNormalStyle
+        )
         .padding(padding)
       ).view
     }
