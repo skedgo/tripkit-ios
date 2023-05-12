@@ -21,6 +21,8 @@ public class TKRouteAutocompleter: TKAutocompleting {
   public init() {
   }
   
+  public let allowLocationInfoButton: Bool = false
+  
   /// An optional operator ID to limit which routes are returned
   public var operatorID: String?
   

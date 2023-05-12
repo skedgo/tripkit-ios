@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 import TGCardViewController
 
@@ -33,6 +34,11 @@ public class TKUICustomization {
     style.subtitleTextColor = .tkLabelSecondary
     return style
   }()
+  
+  /// How card actions of style `.normal` should be displayed
+  ///
+  /// Defaults to `.outline`
+  public var cardActionNormalStyle: TKUICardActionNormalStyle = .outline
 
   /// Called whenever a view controller or card is displaying a new object,
   /// which can be used to attaching debugging information to bug reports.

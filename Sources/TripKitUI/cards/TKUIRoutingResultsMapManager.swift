@@ -256,7 +256,7 @@ extension TKUIRoutingResultsMapManager {
     
     if TKUICustomization.shared.locationInfoTapHandler != nil {
       let button = UIButton(type: .detailDisclosure)
-      button.tintColor = TKStyleManager.globalTintColor()
+      button.tintColor = TKStyleManager.globalTintColor
       view.rightCalloutAccessoryView = button
     } else {
       view.rightCalloutAccessoryView = nil

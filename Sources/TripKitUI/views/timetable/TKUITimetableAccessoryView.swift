@@ -11,8 +11,6 @@ import UIKit
 import TripKit
 
 class TKUITimetableAccessoryView: UIView {
-  
-  typealias TimetableCardActionsView = TKUICardActionsView<TKUITimetableCard, [TKUIStopAnnotation]>
 
   struct Line: Hashable {
     let text: String
@@ -99,17 +97,15 @@ class TKUITimetableAccessoryView: UIView {
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
       
-      let actionView = TimetableCardActionsView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 80))
-      actionView.configure(with: actions, model: model, card: card)
-      actionView.hideSeparator = true
-      customActionView.addSubview(actionView)
+      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: card, model: model, container: customActionView)
+      customActionView.addSubview(actionsView)
       
-      actionView.translatesAutoresizingMaskIntoConstraints = false
+      actionsView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-        actionView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
-        actionView.topAnchor.constraint(equalTo: customActionView.topAnchor),
-        actionView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
-        actionView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
+        actionsView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
+        actionsView.topAnchor.constraint(equalTo: customActionView.topAnchor),
+        actionsView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
+        actionsView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
       ])
     }
   }

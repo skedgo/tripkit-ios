@@ -39,10 +39,10 @@ class TKRegionManagerTest: XCTestCase {
     
     // Then save empty regions data
     let rubbish = try JSONDecoder().decode(TKAPI.RegionsResponse.self, withJSONObject: [
-      "regions": [],
-      "modes": [:],
+      "regions": [AnyHashable](),
+      "modes": [String: AnyHashable](),
       "hashCode": 0
-      ])
+    ] as [String : Any])
     let rubbishData = try JSONEncoder().encode(rubbish)
     TKRegionManager.shared.updateRegions(from: rubbish)
     TKRegionManager.saveToCache(rubbishData)

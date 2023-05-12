@@ -50,7 +50,7 @@ class TKLocationRestorationTest: XCTestCase {
       "stopType": "train",
       "timezone": "Australia/Sydney",
       "wheelchairAccessible": true
-      ]
+    ] as [String : Any]
     )
     
     let archiver = NSKeyedArchiver(requiringSecureCoding: true)
@@ -81,14 +81,14 @@ class TKLocationRestorationTest: XCTestCase {
           "name": "Car Next Door",
           "remoteIcon": "carnextdoor",
           "website": "http://www.carnextdoor.com.au"
-        ],
+        ] as [String : Any],
         "vehicles": [
           [
             "description": "Volkswagen Golf\n2006 Grey Volkswagen Golf MANUAL",
             "name": "Car Next Door"
           ]
         ]
-      ],
+      ] as [String : Any],
       "class": "CarPodLocation",
       "id": "CND-AU_NSW_Sydney-418",
       "lat": -33.86199,
@@ -104,10 +104,10 @@ class TKLocationRestorationTest: XCTestCase {
         "identifier": "me_car-s_CND",
         "localIcon": "car-share",
         "remoteIcon": "carnextdoor"
-      ],
+      ] as [String : Any],
       "name": "Car Next Door",
       "timezone": "Australia/Sydney"
-      ]
+    ] as [String : Any]
     )
     
     let archiver = NSKeyedArchiver(requiringSecureCoding: true)
@@ -205,7 +205,7 @@ class TKLocationRestorationTest: XCTestCase {
                   "opens": "6:00"
                 ]
               ]
-            ],
+            ] as [String : Any],
             [
               "name": "SUNDAY",
               "times": [
@@ -217,7 +217,7 @@ class TKLocationRestorationTest: XCTestCase {
             ]
           ],
           "timeZone": "Australia/Sydney"
-        ],
+        ] as [String : Any],
         "operator": [
           "name": "Hilton Sydney",
           "website": "http://au.parkopedia.com/parking/carpark/hilton_sydney/2000/sydney_cbd/"
@@ -241,10 +241,10 @@ class TKLocationRestorationTest: XCTestCase {
                 "duration": 86400,
                 "label": "",
                 "price": 29.0
-              ]
+              ] as [String : Any]
             ],
             "title": "Mon-Fri 17:00-24:00 | Sat-Sun 6:00-24:00"
-          ],
+          ] as [String : Any],
           [
             "currency": "AUD",
             "currencySymbol": "$",
@@ -273,12 +273,12 @@ class TKLocationRestorationTest: XCTestCase {
                 "duration": 86400,
                 "label": "",
                 "price": 84.0
-              ]
+              ] as [String : Any]
             ],
             "title": "Mon-Fri 24hs"
           ]
         ]
-      ],
+      ] as [String : Any],
       "class": "CarParkLocation",
       "id": "CAR_PARK_20827842",
       "lat": -33.87312,
@@ -289,7 +289,7 @@ class TKLocationRestorationTest: XCTestCase {
       ],
       "name": "Hilton Sydney",
       "timezone": "Australia/Sydney"
-      ]
+    ] as [String : Any]
     )
     
     let archiver = NSKeyedArchiver(requiringSecureCoding: true)

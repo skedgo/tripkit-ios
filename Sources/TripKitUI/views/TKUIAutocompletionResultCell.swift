@@ -66,6 +66,7 @@ extension TKUIAutocompletionResultCell {
       })
       button.frame.size = CGSize(width: 44, height: 44)
       button.accessibilityLabel = autocompletion.accessoryAccessibilityLabel
+      button.tintColor = .tkLabelTertiary
       accessoryView = button
     }
   }
