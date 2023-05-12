@@ -438,7 +438,7 @@
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Aktualisiert vor %@";
 
-/* Title for showing the details of vehicle */
+/* Title for showing the details of vehicle; also used for vehicle of unspecified type */
 "Vehicle" = "Fahrzeug";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
@@ -452,6 +452,9 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Wir halten dich hier mit den neuesten Warnungen auf dem Laufenden";
+
+/* Description of a what3words address, which is an addressing-sytem alternative to GPS or regular addresses based on 3 word pairs, e.g., 'gazed-across-like`. */
+"what3words address" = "3-Wörter-Adresse";
 
 /* Alert if service running late/early, meaning that the user might not make the next service */
 "You might not make this transfer." = "Anschluss wird ggf. nicht erreicht.";
