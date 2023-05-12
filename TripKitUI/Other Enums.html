@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
           SkedGo&#39;s TripKit iOS - TripKitUI iOS
         </a>
-         (40% documented)
+         (41% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -214,9 +214,6 @@
                 <a class="nav-group-task-link" href="Classes/TKUIAttributionView/Style.html">– Style</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/TKUICardActionsView.html">TKUICardActionsView</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TKUICircleAnnotationView.html">TKUICircleAnnotationView</a>
               </li>
               <li class="nav-group-task">
@@ -227,6 +224,15 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TKUIImageAnnotationView.html">TKUIImageAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TKUILocationCard.html">TKUILocationCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TKUILocationCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TKUILocationMapManager.html">TKUILocationMapManager</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TKUIModeAnnotationView.html">TKUIModeAnnotationView</a>
@@ -357,7 +363,16 @@
                 <a class="nav-group-task-link" href="Enums/TKRealTimeHelper.html">TKRealTimeHelper</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TKUICardActionNormalStyle.html">TKUICardActionNormalStyle</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/TKUICardActionStyle.html">TKUICardActionStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TKUICardActionsViewFactory.html">TKUICardActionsViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/TKUILocationHandlerAction.html">TKUILocationHandlerAction</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/TKUISegmentMode.html">TKUISegmentMode</a>
@@ -476,6 +491,9 @@
                 <a class="nav-group-task-link" href="Other%20Extensions.html#/TKUIHomeViewModel">TKUIHomeViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20Extensions.html#/TKUIRoutingResultsViewModel">TKUIRoutingResultsViewModel</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Other%20Extensions.html#/TKUISectionedAlertViewModel">TKUISectionedAlertViewModel</a>
               </li>
               <li class="nav-group-task">
@@ -563,10 +581,19 @@
             <a class="nav-group-name-link" href="Other%20Structs.html">Other Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TKUICardActionContent.html">TKUICardActionContent</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/TKUIEventCallback.html">TKUIEventCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/TKUIEventCallback/Event.html">– Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TKUILocationInfo.html">TKUILocationInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TKUILocationInfo/RouteButton.html">– RouteButton</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/TKUIRoutingResultsMapRouteItem.html">TKUIRoutingResultsMapRouteItem</a>
@@ -610,7 +637,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKUICardActionStyle</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKUICardActionStyle</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -667,6 +694,90 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKRealTimeHelper</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI25TKUILocationHandlerActionO"></a>
+                    <a name="//apple_ref/swift/Enum/TKUILocationHandlerAction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI25TKUILocationHandlerActionO">TKUILocationHandlerAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Enums/TKUILocationHandlerAction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKUILocationHandlerAction</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI25TKUICardActionNormalStyleO"></a>
+                    <a name="//apple_ref/swift/Enum/TKUICardActionNormalStyle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI25TKUICardActionNormalStyleO">TKUICardActionNormalStyle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Enums/TKUICardActionNormalStyle.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKUICardActionNormalStyle</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI26TKUICardActionsViewFactoryO"></a>
+                    <a name="//apple_ref/swift/Enum/TKUICardActionsViewFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI26TKUICardActionsViewFactoryO">TKUICardActionsViewFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used as namespace</p>
+
+                        <a href="Enums/TKUICardActionsViewFactory.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TKUICardActionsViewFactory</span></code></pre>
 
                         </div>
                       </div>
@@ -737,7 +848,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-04-28)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-05-12)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
