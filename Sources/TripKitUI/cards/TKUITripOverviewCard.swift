@@ -135,7 +135,6 @@ public class TKUITripOverviewCard: TKUITableCard {
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
         alertsEnabled: alertsToggled.asSignal(onErrorSignalWith: .empty()),
-        droppedPin: tripMapManager?.droppedPin ?? .empty(),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       )
     )
