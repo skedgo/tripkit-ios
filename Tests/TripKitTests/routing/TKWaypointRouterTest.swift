@@ -212,5 +212,11 @@ class TKWaypointRouterTest: TKTestCase {
     guard case .coordinate(let startCoordinate) = drive.start else { return XCTFail() }
     XCTAssertLessThan(startCoordinate.distance(from: vehicle.coordinate)!, 50)
   }
+  
+  func testParsingCoordinateFromText() throws {
+    let parsed = try XCTUnwrap(TKParserHelper.coordinate(forRequest: "(-33.799670,151.285940)\"1 Wentworth Street, Manly NSW 2095, Australia\""))
+    XCTAssertEqual(parsed.latitude, -33.799670)
+    XCTAssertEqual(parsed.longitude, 151.285940)
+  }
 
 }
