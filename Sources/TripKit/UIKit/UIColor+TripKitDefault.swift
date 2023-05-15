@@ -14,20 +14,18 @@ import UIKit
 extension UIColor {
   
   static let tripgoTintColor: UIColor = {
-    #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
     // Catalyst prefers the system accent color, which we can get like this
     let dummyButton = UIButton()
     return dummyButton.tintColor
-    #else
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch traits.userInterfaceStyle {
-        case .dark: return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1)
-        case _: return #colorLiteral(red: 0.003921568627, green: 0.5215686275, blue: 0.2588235294, alpha: 1)
-        }
+#else
+    return UIColor { traits in
+      switch traits.userInterfaceStyle {
+      case .dark: return #colorLiteral(red: 0, green: 0.8, blue: 0.4, alpha: 1)
+      case _: return #colorLiteral(red: 0.003921568627, green: 0.5215686275, blue: 0.2588235294, alpha: 1)
       }
-    } else { return #colorLiteral(red: 0.003921568627, green: 0.5215686275, blue: 0.2588235294, alpha: 1) }
-    #endif
+    }
+#endif
   }()
   
   
@@ -48,17 +46,13 @@ extension UIColor {
   static let tripgoBarSecondary = UIColor(named: "TKBarSecondary", in: .tripKit, compatibleWith: nil)!
   
   static let tripgoBackgroundSelected: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch traits.userInterfaceStyle {
-        case .dark:
-          return #colorLiteral(red: 0.2274509804, green: 0.2274509804, blue: 0.2352941176, alpha: 1)
-        case _:
-          return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
-        }
+    return UIColor { traits in
+      switch traits.userInterfaceStyle {
+      case .dark:
+        return #colorLiteral(red: 0.2274509804, green: 0.2274509804, blue: 0.2352941176, alpha: 1)
+      case _:
+        return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
       }
-    } else {
-      return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.8392156863, alpha: 1)
     }
   }()
   
@@ -78,70 +72,50 @@ extension UIColor {
   // MARK: - Accessories
   
   static let tripgoSeparator: UIColor = {
-    if #available(iOS 13.0, *) {
-      return .separator
-    } else {
-      return #colorLiteral(red: 0.8196078431, green: 0.8196078431, blue: 0.831372549, alpha: 1)
-    }
+    return .separator
   }()
   
   static let tripgoSeparatorSubtle: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch traits.userInterfaceStyle {
-        case .dark:
-          return #colorLiteral(red: 0.1000000015, green: 0.1000000015, blue: 0.1000000015, alpha: 1)
-        case _:
-          return #colorLiteral(red: 0.9053974748, green: 0.9053974748, blue: 0.9053974748, alpha: 1)
-        }
+    return UIColor { traits in
+      switch traits.userInterfaceStyle {
+      case .dark:
+        return #colorLiteral(red: 0.1000000015, green: 0.1000000015, blue: 0.1000000015, alpha: 1)
+      case _:
+        return #colorLiteral(red: 0.9053974748, green: 0.9053974748, blue: 0.9053974748, alpha: 1)
       }
-    } else {
-      return #colorLiteral(red: 0.9053974748, green: 0.9053974748, blue: 0.9053974748, alpha: 1)
     }
   }()
   
   static let tripgoMapOverlay: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch (traits.userInterfaceStyle, traits.accessibilityContrast) {
-        case (.dark, _):
-          return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.9)
-        case (_, _):
-          return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.5)
-        }
+    return UIColor { traits in
+      switch (traits.userInterfaceStyle, traits.accessibilityContrast) {
+      case (.dark, _):
+        return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.9)
+      case (_, _):
+        return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.5)
       }
-    } else {
-      return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.5)
     }
   }()
   
   static let tripgoSheetOverlay: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch (traits.userInterfaceStyle, traits.accessibilityContrast) {
-        case (.dark, _):
-          return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8)
-        case (_, _):
-          return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.8)
-        }
+    return UIColor { traits in
+      switch (traits.userInterfaceStyle, traits.accessibilityContrast) {
+      case (.dark, _):
+        return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8)
+      case (_, _):
+        return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.8)
       }
-    } else {
-      return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.8)
     }
   }()
   
   static let tripgoStatusBarOverlay: UIColor = {
-    if #available(iOS 13.0, *) {
-      return UIColor { traits in
-        switch (traits.userInterfaceStyle, traits.accessibilityContrast) {
-        case (.dark, _):
-          return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8)
-        case (_, _):
-          return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.7)
-        }
+    return UIColor { traits in
+      switch (traits.userInterfaceStyle, traits.accessibilityContrast) {
+      case (.dark, _):
+        return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8)
+      case (_, _):
+        return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.7)
       }
-    } else {
-      return #colorLiteral(red: 0.2039215686, green: 0.3058823529, blue: 0.4274509804, alpha: 0.7)
     }
   }()
   

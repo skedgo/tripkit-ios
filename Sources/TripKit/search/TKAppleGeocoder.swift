@@ -99,11 +99,7 @@ extension TKAppleGeocoder: TKAutocompleting {
     completer.region = MKCoordinateRegion(mapRect)
     completer.queryFragment = input
     
-    if #available(iOS 13, macOS 10.15, *) {
-      completer.resultTypes = [.address, .pointOfInterest]
-    } else {
-      completer.filterType = .locationsOnly
-    }
+    completer.resultTypes = [.address, .pointOfInterest]
   }
   
   public func cancelAutocompletion() {
