@@ -215,7 +215,7 @@ struct RouteView: View {
           HStack {
             Text(direction.name ?? direction.id)
               .font(.body)
-            Text("\(direction.stops.count) stops")
+            Text(Loc.Stops(direction.stops.count))
               .font(.body)
               .foregroundColor(.secondary)
           }
