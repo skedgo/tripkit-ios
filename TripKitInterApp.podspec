@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TripKitInterApp"
-  s.version      = "4.5.0"
+  s.version      = "4.6.0"
   s.summary      = "Add-ons to SkedGo's TripKit"
   s.homepage     = "https://github.com/skedgo/tripkit-ios"
   s.license      = { type: "Apache-2.0", file: "LICENSE" }
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '13.0'
   s.requires_arc = true
 
-  s.dependency 'TripKit', "~> #{s.version}"
+  s.dependency 'TripKit', '>= 4.4'
 
   s.source_files = "Sources/TripKitInterApp/**/*.{swift}"
 end
