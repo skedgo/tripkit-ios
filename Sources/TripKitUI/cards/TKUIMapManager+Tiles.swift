@@ -85,10 +85,8 @@ extension TKUIMapManager {
   
   func restore(_ mapSettings: TKUIMapSettings, on mapView: MKMapView) {
     mapView.mapType = mapSettings.mapType
-    if #available(iOS 13.0, *) {
-      mapView.overrideUserInterfaceStyle = .unspecified
-      mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
-    }
+    mapView.overrideUserInterfaceStyle = .unspecified
+    mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
     
     cleanUpAttributionView(from: mapView)
   }
