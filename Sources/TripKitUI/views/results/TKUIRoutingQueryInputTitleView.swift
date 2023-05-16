@@ -58,13 +58,12 @@ class TKUIRoutingQueryInputTitleView: UIView {
       // Don't show search icon, i.e., the magnifying glass
       searchBar.setImage(nil, for: .search, state: .normal)
       
-      TKStyleManager.style(searchBar) { textField in
-        // This is to remove the space occupied by the magnifying glass.
-        textField.accessibilityLabel = label
-        textField.leftView = UIImageView()
-        textField.tintColor = .tkLabelPrimary
-        textField.textColor = .tkLabelPrimary
-      }
+      // This is to remove the space occupied by the magnifying glass.
+      let textField = searchBar.searchTextField
+      textField.accessibilityLabel = label
+      textField.leftView = UIImageView()
+      textField.tintColor = .tkLabelPrimary
+      textField.textColor = .tkLabelPrimary
     }
     
     style(fromSearchBar, label: Loc.StartLocation)

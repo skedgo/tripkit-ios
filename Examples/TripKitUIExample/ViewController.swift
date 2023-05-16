@@ -24,23 +24,21 @@ class MainViewController: UITableViewController {
     
     // Customizing the look of TripKitUI, showing how to integrate the
     // inter-app actions from TripKitInterApp
-     if #available(iOS 13.0, *) {
-      TKUITripOverviewCard.config.segmentActionsfactory = { segment in
-        var actions = [TKUITripOverviewCard.SegmentAction]()
-        
-        if segment.isPublicTransport {
-          actions.append(Self.buildTimetableAction())
-        }
-        
-        for action in TKInterAppCommunicator.shared.externalActions(for: segment) {
-          actions.append(Self.buildExternalAction(action: action))
-        }
-        
-        if TKInterAppCommunicator.canOpenInMapsApp(segment) {
-          actions.append(Self.buildDirectionsAction())
-        }
-        return actions
+    TKUITripOverviewCard.config.segmentActionsfactory = { segment in
+      var actions = [TKUITripOverviewCard.SegmentAction]()
+      
+      if segment.isPublicTransport {
+        actions.append(Self.buildTimetableAction())
       }
+      
+      for action in TKInterAppCommunicator.shared.externalActions(for: segment) {
+        actions.append(Self.buildExternalAction(action: action))
+      }
+      
+      if TKInterAppCommunicator.canOpenInMapsApp(segment) {
+        actions.append(Self.buildDirectionsAction())
+      }
+      return actions
     }
     
     // Inject location details card
@@ -215,7 +213,7 @@ struct RouteView: View {
           HStack {
             Text(direction.name ?? direction.id)
               .font(.body)
-            Text("\(direction.stops.count) stops")
+            Text(Loc.Stops(direction.stops.count))
               .font(.body)
               .foregroundColor(.secondary)
           }
@@ -355,7 +353,6 @@ extension MainViewController: TKUIHomeCardSearchResultsDelegate {
 
 // MARK: - Segment actions
 
-@available(iOS 13.0, *)
 extension MainViewController {
   private static func buildExternalAction(action: TKInterAppCommunicator.ExternalAction) -> TKUITripOverviewCard.SegmentAction {
     var icon: UIImage {

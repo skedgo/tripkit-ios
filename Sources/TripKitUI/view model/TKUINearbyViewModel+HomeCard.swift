@@ -29,13 +29,13 @@ extension TKUINearbyViewModel: TKUIHomeComponentViewModel {
   public var identity: String { "single-nearby-section" }
   
   public var customizerItem: TKUIHomeCardCustomizerItem? {
-    .init(name: "Nearby", icon: .iconArrowUp) // TODO: Localise
+    .init(name: Loc.NearMe, icon: .iconArrowUp)
   }
 
   public var homeCardSection: Driver<TKUIHomeComponentContent> {
     sections.map { sections in
       let nearbyItems = sections.flatMap(\.items).prefix(5)
-      let configuration = TKUIHomeHeaderConfiguration(title: "Nearby") // TODO: Localise
+      let configuration = TKUIHomeHeaderConfiguration(title: Loc.NearMe)
       return TKUIHomeComponentContent(items: Array(nearbyItems), header: configuration)
     }
   }

@@ -50,7 +50,8 @@ struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
         .padding(.horizontal)
       }
       .layoutPriority(1)
-      
+      .background(Color(.tkBackground))
+
       HStack {
         Spacer()
         
@@ -77,6 +78,7 @@ struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
         Spacer()
       }
       .padding(.horizontal)
+      .background(Color(.tkBackground))
       
       TKUIScrollingCardActions(actions: actions, info: info, normalStyle: normalStyle)
     }
