@@ -16,7 +16,7 @@ class TKSettingsTest: XCTestCase {
     let config = TKSettings.Config.defaultValues()
     XCTAssertEqual(config.version, TKSettings.parserJsonVersion)
     XCTAssertEqual(config.distanceUnit, .auto)
-    XCTAssertEqual(config.weights, [.money: 1.0, .carbon: 1.0, .time: 1.0, .hassle: 1.0, .exercise: 1.0])
+    XCTAssertEqual(config.weights, .init(money: 1.0, carbon: 1.0, time: 1.0, hassle: 1.0, exercise: 1.0))
     XCTAssertEqual(config.avoidModes, [])
     XCTAssertEqual(config.concession, false)
     XCTAssertEqual(config.wheelchair, false)
@@ -29,10 +29,31 @@ class TKSettingsTest: XCTestCase {
     XCTAssertEqual(config.twoWayHireCostIncludesReturn, false)
   }
   
+  func testRoundtripCoding() throws {
+    let config = TKSettings.Config.defaultValues()
+    let encoded = try JSONEncoder().encode(config)
+    let restored = try JSONDecoder().decode(TKSettings.Config.self, from: encoded)
+    XCTAssertEqual(config, restored)
+  }
+  
+  func testWeightsToJSON() throws {
+    let config = TKSettings.Config.defaultValues()
+    
+    let encoded = try JSONEncoder().encode(config)
+    let restored = try XCTUnwrap(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
+    XCTAssertEqual(restored["weights"] as? [String: AnyHashable], [
+      "money": 1.0,
+      "carbon": 1.0,
+      "time": 1.0,
+      "hassle": 1.0,
+      "exercise": 1.0
+    ] as [String: AnyHashable])
+  }
+  
   func testReadPerformance() {
-      self.measure {
-        _ = TKSettings.Config.userSettings()
-      }
+    self.measure {
+      _ = TKSettings.Config.userSettings()
+    }
   }
     
 }
