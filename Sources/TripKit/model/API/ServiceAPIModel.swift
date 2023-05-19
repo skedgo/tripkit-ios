@@ -36,6 +36,7 @@ extension TKAPI {
     // information about the service
     public let serviceTripID: String
     public let operatorID: String?
+    public let routeID: String?
     
     public let operatorName: String
     public let number: String?
@@ -69,6 +70,7 @@ extension TKAPI {
     private enum CodingKeys: String, CodingKey {
       case serviceTripID
       case operatorID
+      case routeID = "routeId"
       
       case operatorName = "operator"
       case color = "serviceColor"
