@@ -70,7 +70,7 @@ extension TKAPI {
     private enum CodingKeys: String, CodingKey {
       case serviceTripID
       case operatorID
-      case routeID = "routeId"
+      case routeID
       
       case operatorName = "operator"
       case color = "serviceColor"

@@ -395,7 +395,7 @@ extension TKAPI {
       case wheelchairAccessible
       case operatorName = "operator"
       case operatorID
-      case routeID = "routeId"
+      case routeID
       case stops
       case name
       case dismount
