@@ -16292,134 +16292,162 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
       "line": 19,
+      "symbol": "TKSettings.Config.Weights",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
+      "line": 27,
       "symbol": "TKSettings.Config.version",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 20,
+      "line": 28,
       "symbol": "TKSettings.Config.distanceUnit",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 21,
+      "line": 29,
       "symbol": "TKSettings.Config.weights",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 22,
+      "line": 30,
       "symbol": "TKSettings.Config.avoidModes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 23,
+      "line": 31,
       "symbol": "TKSettings.Config.concession",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 24,
+      "line": 32,
       "symbol": "TKSettings.Config.wheelchair",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 25,
+      "line": 33,
       "symbol": "TKSettings.Config.cyclingSpeed",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 26,
+      "line": 34,
       "symbol": "TKSettings.Config.walkingSpeed",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 27,
+      "line": 35,
       "symbol": "TKSettings.Config.maximumWalkingMinutes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 28,
+      "line": 36,
       "symbol": "TKSettings.Config.minimumTransferMinutes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 29,
+      "line": 37,
       "symbol": "TKSettings.Config.emissions",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 30,
+      "line": 38,
       "symbol": "TKSettings.Config.bookingSandbox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 31,
+      "line": 39,
       "symbol": "TKSettings.Config.twoWayHireCostIncludesReturn",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 49,
+      "line": 41,
       "symbol": "TKSettings.Config.userSettings()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 53,
+      "line": 45,
       "symbol": "TKSettings.Config.defaultValues()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 58,
+      "line": 50,
       "symbol": "TKSettings.Config.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 103,
+      "line": 97,
       "symbol": "TKSettings.Config.paras",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 123,
+      "line": 117,
       "symbol": "TKSettings.parserJsonVersion",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
-      "line": 126,
+      "line": 120,
       "symbol": "TKSettings.config",
       "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
+      "line": 126,
+      "symbol": "TKSettings.Config",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
+      "line": 146,
+      "symbol": "TKSettings.Config.Weights",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings+Config.swift",
+      "line": 147,
+      "symbol": "TKSettings.Config.Weights.subscript(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
       "warning": "undocumented"
     },
     {
