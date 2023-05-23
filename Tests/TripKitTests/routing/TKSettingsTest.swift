@@ -50,6 +50,15 @@ class TKSettingsTest: XCTestCase {
     ] as [String: AnyHashable])
   }
   
+  func testSpeed() throws {
+    XCTAssertEqual(TKSettings.Speed(apiValue: -1), .impaired)
+    XCTAssertEqual(TKSettings.Speed(apiValue: 0), .slow)
+    XCTAssertEqual(TKSettings.Speed(apiValue: 1), .medium)
+    XCTAssertEqual(TKSettings.Speed(apiValue: 2), .fast)
+
+    XCTAssertEqual(TKSettings.Speed(apiValue: "4mps"), .custom(4))
+  }
+  
   func testReadPerformance() {
     self.measure {
       _ = TKSettings.Config.userSettings()

@@ -207,10 +207,10 @@ extension TKSettings.Speed {
   public init?(apiValue: Any?) {
     if let int = apiValue as? Int {
       switch int {
-      case -1: self = .impaired
-      case 0: self = .slow
-      case 1: self = .medium
-      case 2: self = .fast
+      case -1: self = .impaired; return
+      case 0: self = .slow; return
+      case 1: self = .medium; return
+      case 2: self = .fast; return
       default: return nil
       }
     }
