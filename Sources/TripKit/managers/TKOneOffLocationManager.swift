@@ -10,7 +10,7 @@ import Foundation
 
 import CoreLocation
 
-@available(iOS 14.0, *)
+@available(iOS 14.0, macOS 11.0,  *)
 public class TKOneOffLocationManager: NSObject {
   
   public override init() {
@@ -151,7 +151,7 @@ public class TKOneOffLocationManager: NSObject {
 
 // MARK: - CLLocationManagerDelegate
 
-@available(iOS 14.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension TKOneOffLocationManager: CLLocationManagerDelegate {
   
   public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
