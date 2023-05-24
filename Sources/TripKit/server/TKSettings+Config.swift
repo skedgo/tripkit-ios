@@ -9,16 +9,24 @@
 import Foundation
 
 extension TKSettings {
-  public struct Config: Codable {
+  public struct Config: Equatable {
     public enum DistanceUnit: String, Codable {
       case auto
       case metric
       case imperial
     }
     
+    public struct Weights: Codable, Equatable {
+      var money: Double = 1.0
+      var carbon: Double = 1.0
+      var time: Double = 1.0
+      var hassle: Double = 1.0
+      var exercise: Double = 1.0
+    }
+    
     public let version: Int = TKSettings.parserJsonVersion
     public var distanceUnit: DistanceUnit = .auto
-    public var weights: [Weight: Double]
+    public var weights: Weights
     public var avoidModes: [String] = []
     public var concession: Bool = false
     public var wheelchair: Bool = false
@@ -30,22 +38,6 @@ extension TKSettings {
     public var bookingSandbox: Bool = false
     public var twoWayHireCostIncludesReturn: Bool = false
 
-    private enum CodingKeys: String, CodingKey {
-      case version = "v"
-      case distanceUnit = "unit"
-      case weights
-      case avoidModes = "avoid"
-      case walkingSpeed
-      case cyclingSpeed
-      case concession = "conc"
-      case wheelchair
-      case maximumWalkingMinutes = "wm"
-      case minimumTransferMinutes = "tt"
-      case emissions = "co2"
-      case bookingSandbox = "bsb"
-      case twoWayHireCostIncludesReturn = "2wirc"
-    }
-    
     public static func userSettings() -> Self {
       return .init(fromDefaults: true)
     }
@@ -62,9 +54,13 @@ extension TKSettings {
     private init(fromDefaults: Bool) {
       if fromDefaults {
         distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
-        weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
-          ($0, TKSettings[$0])
-        })
+        weights = .init(
+          money: TKSettings[.money],
+          carbon: TKSettings[.carbon],
+          time: TKSettings[.time],
+          hassle: TKSettings[.hassle],
+          exercise: TKSettings[.exercise]
+        )
         avoidModes = Array(TKSettings.dislikedTransitModes)
         concession = TKSettings.useConcessionPricing
         wheelchair = TKSettings.showWheelchairInformation
@@ -94,16 +90,14 @@ extension TKSettings {
 #endif
       
       } else {
-        weights = Dictionary(uniqueKeysWithValues: Weight.allCases.map {
-          ($0, 1)
-        })
+        weights = .init()
       }
     }
     
     public var paras: [String: Any] {
       var paras: [String: Any] = [
         "v": version,
-        "wp": "(\(weights[.money] ?? 1.0),\(weights[.carbon] ?? 1.0),\(weights[.time] ?? 1.0),\(weights[.hassle] ?? 1.0))",
+        "wp": "(\(weights[.money]),\(weights[.carbon]),\(weights[.time]),\(weights[.hassle]))",
       ]
       if twoWayHireCostIncludesReturn { paras["2wirc"] = twoWayHireCostIncludesReturn }
       if distanceUnit != .auto { paras["unit"] = distanceUnit.rawValue }
@@ -129,3 +123,34 @@ extension TKSettings {
 
 }
 
+extension TKSettings.Config: Codable {
+  
+  private enum CodingKeys: String, CodingKey {
+    case version = "v"
+    case distanceUnit = "unit"
+    case weights
+    case avoidModes = "avoid"
+    case walkingSpeed
+    case cyclingSpeed
+    case concession = "conc"
+    case wheelchair
+    case maximumWalkingMinutes = "wm"
+    case minimumTransferMinutes = "tt"
+    case emissions = "co2"
+    case bookingSandbox = "bsb"
+    case twoWayHireCostIncludesReturn = "2wirc"
+  }
+  
+}
+
+extension TKSettings.Config.Weights {
+  public subscript(weight: TKSettings.Weight) -> Double {
+    switch weight {
+    case .money: return money
+    case .carbon: return carbon
+    case .time: return time
+    case .hassle: return hassle
+    case .exercise: return exercise
+    }
+  }
+}
