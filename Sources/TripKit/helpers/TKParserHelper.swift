@@ -42,7 +42,8 @@ enum TKParserHelper {
   
   /// Inverse of `TKParserHelper.requestString(for:)`
   static func coordinate(forRequest string: String) -> CLLocationCoordinate2D? {
-    let pruned = string
+    let numberPart = string.split(separator: ")").first.map(String.init) ?? string
+    let pruned = numberPart
       .replacingOccurrences(of: "(", with: "")
       .replacingOccurrences(of: ")", with: "")
     let numbers = pruned.components(separatedBy: ",")
