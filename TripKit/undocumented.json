@@ -3361,6 +3361,90 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 14,
+      "symbol": "TKOneOffLocationManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 16,
+      "symbol": "TKOneOffLocationManager.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 25,
+      "symbol": "TKOneOffLocationManager.LocationFetchError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 26,
+      "symbol": "TKOneOffLocationManager.LocationFetchError.accessNotProvided",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 72,
+      "symbol": "TKOneOffLocationManager.ask(forBackground:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 95,
+      "symbol": "TKOneOffLocationManager.ask(forBackground:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 105,
+      "symbol": "TKOneOffLocationManager.currentLocation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 111,
+      "symbol": "TKOneOffLocationManager.fetchCurrentLocation()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 155,
+      "symbol": "TKOneOffLocationManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 157,
+      "symbol": "TKOneOffLocationManager.locationManager(_:didUpdateLocations:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 173,
+      "symbol": "TKOneOffLocationManager.locationManager(_:didFailWithError:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKOneOffLocationManager.swift",
+      "line": 177,
+      "symbol": "TKOneOffLocationManager.locationManagerDidChangeAuthorization(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKPermissionManager+AuthorizationAlert.swift",
       "line": 16,
       "symbol": "TKPermissionManager.tryAuthorization(sender:in:completion:)",
