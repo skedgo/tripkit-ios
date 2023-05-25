@@ -43,9 +43,11 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   ///
   /// - Parameters:
   ///   - content: Publisher of the content for the button
+  ///   - priority: Priority of action to determine ordering in a list
   ///   - handler: Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.
   public init(
     content: AnyPublisher<TKUICardActionContent, Never>,
+    priority: Int = 0,
     handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Void
   ) {
     self.handler = { action, card, model, view in
@@ -53,6 +55,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
       return true
     }
     self.content = .init(title: "", accessibilityLabel: "", icon: UIImage(), style: .normal)
+    self.priority = priority
     self.cancellable = content.assign(to: \.content, on: self)
   }
   
@@ -63,12 +66,14 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   ///   - accessibilityLabel: Accessibility label to use for the button. Uses `title` if not provided.
   ///   - icon: Icon to display as the action. Should be a template image.
   ///   - style: Style for the button.
+  ///   - priority: Priority of action to determine ordering in a list
   ///   - handler: Handler executed when user taps on the button. Parameters are the action itself, the owning card, the model instance, and the sender. Should return whether the button should be refreshed, by calling the relevant "actions factory" again.
   public init(
     title: String,
     accessibilityLabel: String? = nil,
     icon: UIImage,
     style: TKUICardActionStyle = .normal,
+    priority: Int = 0,
     handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
   ) {
     self.content = .init(
@@ -78,6 +83,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
       style: style
     )
     self.handler = handler
+    self.priority = priority
   }
   
   /// Initialises a new card action where the properties change depending on the handler.
@@ -89,19 +95,22 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   ///   - accessibilityLabel: Provider of accessibility label for the button. Uses `title` if not provided.
   ///   - icon: Provider of icon for the button. Should be a template image.
   ///   - style: Provider of style for the button.
+  ///   - priority: Priority of action to determine ordering in a list
   ///   - handler: Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.
   public convenience init(
     title: @escaping () -> String,
     accessibilityLabel: (() -> String)? = nil,
     icon: @escaping () -> UIImage,
     style: (() -> TKUICardActionStyle)?  = nil,
+    priority: Int = 0,
     handler: @escaping @MainActor (Card, Model, UIView) -> Void
   ) {
     self.init(
       title: title(),
       accessibilityLabel: accessibilityLabel?(),
       icon: icon(),
-      style: style?() ?? .normal
+      style: style?() ?? .normal,
+      priority: priority
     ) { action, card, model, view in
       handler(card, model, view)
       action.content = .init(
@@ -140,6 +149,12 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     get { content.style }
     set { content.style = newValue }
   }
+  
+  /// Priority of the action to determine ordering in a list. Defaults to 0.
+  ///
+  /// If multiple actions have the same priority, then `.bold` style is
+  /// preferred and otherwise by insertion order.
+  public var priority: Int
 
   /// Handler executed when user taps on the button, providing the
   /// corresponding card and model instance. Should return whether the button

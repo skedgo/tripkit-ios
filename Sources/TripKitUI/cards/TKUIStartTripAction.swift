@@ -20,11 +20,14 @@ extension TKUITripOverviewCard {
   /// - Returns: A new trip action to be used on a `TKUITripOverviewCard`
   public static func buildStartTripAction(startingOn: TKSegment? = nil, 
                                           label: String? = nil,
-                                          mode: TKUISegmentMode = .getReady, 
+                                          mode: TKUISegmentMode = .getReady,
+                                          style: TKUICardActionStyle = .bold,
                                           actionHandler: TKUITripModeByModeCard.TripStartedActionHandler? = nil) -> TKUITripOverviewCard.TripAction {
     return TKUICardAction(
       title: label ?? Loc.ActionGo,
-      icon: .iconArrowUp
+      icon: .iconArrowUp,
+      style: style,
+      priority: TKUITripOverviewCard.DefaultActionPriority.go.rawValue
     ) { _, card, trip, _ in
       guard let controller = card.controller else { assertionFailure(); return false }
       

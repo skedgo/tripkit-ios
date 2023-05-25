@@ -38,6 +38,12 @@ class TKUITripsPageCard: TGPageCard {
 
 public class TKUITripOverviewCard: TKUITableCard {
   
+  public enum DefaultActionPriority: Int {
+    case go = 15
+    case notify = 10
+    case alternatives = 5
+  }
+  
   public static var config = Configuration.empty
   
   private let initialTrip: Trip
@@ -422,6 +428,7 @@ extension TKUITripOverviewCard {
         .publisher
         .catch { _ in Just(false) }
         .map { isOn in
+          // TODO: Localise
           if isOn {
             return TKUICardActionContent(title: "Mute", icon: .iconAlert, style: .destructive)
           } else {
@@ -431,14 +438,16 @@ extension TKUITripOverviewCard {
         .eraseToAnyPublisher()
       
       
-      mutable.append(TripAction(content: publisher) { (action, card, _, _) in
+      mutable.append(TripAction(content: publisher, priority: TKUITripOverviewCard.DefaultActionPriority.notify.rawValue) { (action, card, _, _) in
+        // TODO: Localise
         let isOn = action.title != "Mute"
         (card as? TKUITripOverviewCard)?.alertsToggled.onNext(isOn)
       })
     }
     
     if selectedAlternativeTripCallback != nil {
-      mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
+      // TODO: Localise
+      mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative, priority: TKUITripOverviewCard.DefaultActionPriority.alternatives.rawValue) { [weak self] (_, _, trip, _) -> Bool in
         trip.request.expandForFavorite = true
         self?.handle(.showAlternativeRoutes(trip.request))
         return false
