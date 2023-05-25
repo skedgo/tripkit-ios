@@ -24,6 +24,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   
   private enum Keys {
     static let alertsEnabled = "GODefaultGetOffAlertsEnabled"
+    static let monitoredTrip = "GOMonitoredTrip"
   }
   
   struct MonitoredTrip: Codable, Hashable {
@@ -54,73 +55,33 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     }
   }()
   
-  @Published var monitoredTrip: MonitoredTrip?
+  @Published var monitoredTrip: MonitoredTrip? {
+    didSet {
+      do {
+        if let monitoredTrip {
+          let data = try JSONEncoder().encode(monitoredTrip)
+          UserDefaults.shared.set(data, forKey: Keys.monitoredTrip)
+        } else {
+          UserDefaults.shared.removeObject(forKey: Keys.monitoredTrip)
+        }
+      } catch {
+        TKLog.error("TKUITripMonitorManager", text: "Failed to persist monitored trip: \(error)")
+      }
+    }
+  }
   
   override init() {
     super.init()
+    
+    if let data = UserDefaults.shared.data(forKey: Keys.monitoredTrip) {
+      // Save to ignore errors here which might haven if app is updated
+      // and old data model doesn't match anymore.
+      self.monitoredTrip = try? JSONDecoder().decode(MonitoredTrip.self, from: data)
+    }
   }
   
-  public func getPreference(for trip: Trip) -> Bool {
-    let identifiers = enabledIdentifiers()
-    
-    guard let identifier = identifier(from: trip)
-    else {
-      return false
-    }
-    
-    return identifiers.contains(identifier)
-  }
-  
-  public func setAlertsEnabled(_ enabled: Bool, for trip: Trip) {
-    if enabled,
-       !TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
-      TKLog.warn("TKUINotificationManager is not subscribed yet, location updates will not be notified")
-    }
-    setPreference(alertsEnabled: enabled, for: trip)
-    
-    guard enabled
-    else {
-      stopMonitoring()
-      return
-    }
-    
-    monitorRegions(from: trip)
-  }
-  
-  private func setPreference(alertsEnabled: Bool, for trip: Trip) {
-    guard let identifier = identifier(from: trip)
-    else {
-      assertionFailure("Failed to set Identifier, check saveURL's existence")
-      return
-    }
-    
-    let identifiers = alertsEnabled ? [identifier] : []
-    
-    /* LATER: If needs multiple trips at once; make the above a `var` and then:
-    if alertsEnabled {
-      identifiers.append(identifier)
-    } else {
-      identifiers.removeAll { $0 == identifier }
-    }
-    */
-    
-    UserDefaults.shared.set(identifiers, forKey: Keys.alertsEnabled)
-  }
-  
-  /// This contains the list of trip ids that the user had set Alerts on.
-  private func enabledIdentifiers() -> [String] {
-    return UserDefaults.shared.stringArray(forKey: Keys.alertsEnabled) ?? []
-  }
-  
-  private func identifier(from trip: Trip) -> String? {
-    guard let identifier = trip.saveURL?.lastPathComponent ?? trip.tripId
-    else {
-      return nil
-    }
-    return identifier
-  }
-  
-  public func monitorRegions(from trip: Trip) {
+  @MainActor
+  public func monitorRegions(from trip: Trip) async {
     // Since only one trip can have notifications at a time, there is no need to save other trips, just need to replace the current one.
     
     let notifications = trip.segments.flatMap(\.notifications)
@@ -128,9 +89,17 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
       return stopMonitoring()
     }
     
+    let tripURL: URL
+    do {
+      tripURL = try await TKShareURLProvider.getShareURL(for: trip)
+    } catch {
+      // Typically due to missing save URL, which is expected
+      tripURL = trip.tripURL
+    }
+    
     startMonitoringRegions(from: .init(
       tripID: trip.tripId,
-      tripURL: trip.tripURL,
+      tripURL: tripURL,
       notifications: notifications)
     )
     scheduleTimeBased(from: notifications)
@@ -159,14 +128,6 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
 }
 
 // MARK: - Geofence-based alerts
-
-extension Trip {
-  var tripURL: URL {
-    shareURL
-      ?? temporaryURLString.flatMap { URL(string: $0) }
-      ?? objectID.uriRepresentation()
-  }
-}
 
 extension TKAPI.TripNotification {
   var region: CLCircularRegion? {

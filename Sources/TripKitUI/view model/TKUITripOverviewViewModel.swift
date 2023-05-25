@@ -40,7 +40,7 @@ class TKUITripOverviewViewModel {
     refreshMap = Observable.merge(tripChanged, servicesFetched)
       .asSignal(onErrorSignalWith: .empty())
     
-    let tripUpdated: Observable<Trip> = presentedTrip
+    let tripUpdated: Infallible<Trip> = presentedTrip
       .asObservable()
       .flatMapLatest {
         return TKRealTimeFetcher.rx.streamUpdates($0, active: inputs.isVisible.asObservable())
@@ -48,6 +48,9 @@ class TKUITripOverviewViewModel {
           .catchAndReturn($0)
       }
       .share(replay: 1, scope: .forever)
+      .asObservable()
+      .observe(on: MainScheduler.instance)
+      .asInfallible { _ in .empty() }
         
     sections = tripUpdated
       .map(Self.buildSections)
@@ -63,17 +66,17 @@ class TKUITripOverviewViewModel {
     if #available(iOS 14.0, *) {
       nextFromAlertToggle = inputs.alertsEnabled.asObservable()
         .withLatestFrom(tripUpdated) { ($1, $0) }
-        .compactMap { trip, enabled -> Next? in
+        .asyncMap { trip, enabled in
           if enabled {
-            TKUITripMonitorManager.shared.monitorRegions(from: trip)
+            await TKUITripMonitorManager.shared.monitorRegions(from: trip)
           } else {
             TKUITripMonitorManager.shared.stopMonitoring()
           }
-          return nil
         }
+        .compactMap { nil } // No `Next
         .asSignal { _ in .empty() }
       
-      notificationsEnabled = TKUITripMonitorManager.shared.rx_monitoredTrip
+      notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip
         .withLatestFrom(tripUpdated) { $0?.tripID == $1.tripId }
         .asDriver(onErrorJustReturn: false)
       

@@ -430,9 +430,9 @@ extension TKUITripOverviewCard {
         .map { isOn in
           // TODO: Localise
           if isOn {
-            return TKUICardActionContent(title: "Mute", icon: .iconAlert, style: .destructive)
+            return TKUICardActionContent(title: "Mute", icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive)
           } else {
-            return TKUICardActionContent(title: "Alert Me", icon: .iconAlert, style: .bold)
+            return TKUICardActionContent(title: "Alert Me", icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold)
           }
         }
         .eraseToAnyPublisher()

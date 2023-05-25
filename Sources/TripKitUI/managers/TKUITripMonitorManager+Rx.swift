@@ -10,11 +10,26 @@ import Foundation
 
 import RxSwift
 
+import TripKit
+
 @available(iOS 14.0, *)
-extension TKUITripMonitorManager {
+extension Reactive where Base == TKUITripMonitorManager {
+
+  var monitoredTrip: Infallible<TKUITripMonitorManager.MonitoredTrip?> {
+    base.$monitoredTrip
+      .asObservable()
+      .observe(on: MainScheduler.instance)
+      .asInfallible { _ in .empty() }
+  }
   
-  var rx_monitoredTrip: Observable<MonitoredTrip?> {
-    $monitoredTrip.asObservable()
+  public var trip: Infallible<Trip?> {
+    monitoredTrip
+      .map { monitored in
+        guard let tripURL = monitored?.tripURL else { return nil }
+        let candidate = Trip.find(tripURL: tripURL, in: TripKit.shared.tripKitContext)
+        guard candidate?.tripId != nil, candidate?.departureTime != nil else { return nil } // Since deleted
+        return candidate
+      }
   }
   
 }
