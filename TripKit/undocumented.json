@@ -13939,21 +13939,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKStore.swift",
-      "line": 37,
+      "line": 47,
       "symbol": "TKStore.tripKitContext",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKStore.swift",
-      "line": 41,
+      "line": 51,
       "symbol": "TKStore.viewContext",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKStore.swift",
-      "line": 121,
+      "line": 131,
       "symbol": "TKStore",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
