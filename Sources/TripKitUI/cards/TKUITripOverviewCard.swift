@@ -57,6 +57,11 @@ public class TKUITripOverviewCard: TKUITableCard {
   /// that gets pushed, and returning `false` will do nothing, i.e., the callback handles displaying it.
   public var selectedAlternativeTripCallback: ((Trip) -> Bool)? = nil
   
+  /// Controls the "Get ready to leave" notifications when monitoring a trip that starts in the future.
+  ///
+  /// Defaults to `true`, but can be turned off via this setting.
+  public var includeTimeToLeaveNotification: Bool = true
+  
   fileprivate var viewModel: TKUITripOverviewViewModel!
   private let disposeBag = DisposeBag()
   
@@ -142,7 +147,8 @@ public class TKUITripOverviewCard: TKUITableCard {
         selected: mergedSelection,
         alertsEnabled: alertsToggled.asSignal(onErrorSignalWith: .empty()),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
-      )
+      ),
+      includeTimeToLeaveNotification: includeTimeToLeaveNotification
     )
 
     viewModel.sections
@@ -299,7 +305,7 @@ extension TKUITripOverviewCard {
     }
     
     let footer = self.notificationFooterView
-    footer.updateAvailableKinds(notificationKinds)
+    footer.updateAvailableKinds(notificationKinds, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
     footer.backgroundColor = tableView.backgroundColor
 
     // Footer => View Model

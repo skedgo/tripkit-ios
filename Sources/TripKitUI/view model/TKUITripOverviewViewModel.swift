@@ -21,7 +21,7 @@ class TKUITripOverviewViewModel {
     var isVisible: Driver<Bool> = .just(true)
   }
   
-  init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput()) {
+  init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput(), includeTimeToLeaveNotification: Bool) {
     
     dataSources = presentedTrip
       .asDriver(onErrorDriveWith: .empty())
@@ -68,7 +68,7 @@ class TKUITripOverviewViewModel {
         .withLatestFrom(tripUpdated) { ($1, $0) }
         .asyncMap { trip, enabled in
           if enabled {
-            await TKUITripMonitorManager.shared.monitorRegions(from: trip)
+            await TKUITripMonitorManager.shared.monitorRegions(from: trip, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
           } else {
             TKUITripMonitorManager.shared.stopMonitoring()
           }
@@ -82,7 +82,13 @@ class TKUITripOverviewViewModel {
       
       notificationKinds = presentedTrip
         .asDriver(onErrorDriveWith: .empty())
-        .map { Set($0.segments.flatMap(\.notifications).map(\.messageKind)) }
+        .map {
+          Set($0.segments
+            .flatMap(\.notifications)
+            .map(\.messageKind)
+            .filter { includeTimeToLeaveNotification || $0 != .tripStart }
+          )
+        }
 
     } else {
       nextFromAlertToggle = .empty()
@@ -127,8 +133,8 @@ class TKUITripOverviewViewModel {
 }
 
 extension TKUITripOverviewViewModel {
-  convenience init(initialTrip: Trip) {
-    self.init(presentedTrip: .just(initialTrip))
+  convenience init(initialTrip: Trip, includeTimeToLeaveNotification: Bool = true) {
+    self.init(presentedTrip: .just(initialTrip), includeTimeToLeaveNotification: includeTimeToLeaveNotification)
   }
 }
 

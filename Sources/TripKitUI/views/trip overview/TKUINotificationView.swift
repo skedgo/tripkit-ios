@@ -51,11 +51,12 @@ class TKUINotificationView: UIView {
     setupColors()
   }
   
-  func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>) {
+  func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>, includeTimeToLeaveNotification: Bool = true) {
     detailView1.alpha = notificationKinds.contains(.tripStart) ? 1 : 0.3
     detailView2.alpha = notificationKinds.contains(.arrivingAtYourStop) ? 1 : 0.3
     detailView3.alpha = notificationKinds.contains(.nextStopIsYours) ? 1 : 0.3
     detailView4.alpha = notificationKinds.contains(.tripEnd) ? 1 : 0.3
+    detailView1.isHidden = !includeTimeToLeaveNotification
     notificationSwitch.isEnabled = !notificationKinds.isEmpty
   }
     
