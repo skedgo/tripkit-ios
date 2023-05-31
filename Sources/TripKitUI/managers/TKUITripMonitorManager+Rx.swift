@@ -12,6 +12,7 @@ import RxSwift
 
 import TripKit
 
+@MainActor
 @available(iOS 14.0, *)
 extension Reactive where Base == TKUITripMonitorManager {
 

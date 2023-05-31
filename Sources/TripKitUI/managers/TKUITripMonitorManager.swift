@@ -19,6 +19,7 @@ import TripKit
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 /// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
+@MainActor
 @available(iOS 14.0, *)
 public class TKUITripMonitorManager: NSObject, ObservableObject {
   
@@ -107,7 +108,6 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
       scheduleTimeBased(from: notifications)
     }
   }
-  
   
   public func stopMonitoring() {
     stopMonitoringRegions()

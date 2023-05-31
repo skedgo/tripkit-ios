@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/skedgo/GeoMonitor",
       "state" : {
-        "revision" : "03f3cab0eec2f1c8eb8ce00c64900e6033afba3a",
-        "version" : "0.1.2"
+        "revision" : "6bd6092fb4e85727d483fe244a11b882c2997f63",
+        "version" : "0.2.0"
       }
     },
     {
