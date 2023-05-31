@@ -166,6 +166,15 @@ extension TKUITripMonitorManager {
     let regions = monitored.notifications.compactMap(\.region)
     guard !regions.isEmpty else { return }
     
+    guard geoMonitor.hasAccess else {
+      geoMonitor.ask() { [unowned self] success in
+        if success {
+          self.startMonitoringRegions(from: monitored)
+        }
+      }
+      return
+    }
+    
     geoMonitor.startMonitoring()
     
     // Keep GPS active and enable blue indicator, which allows the app to
