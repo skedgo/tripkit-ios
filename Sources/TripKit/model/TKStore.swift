@@ -29,10 +29,20 @@ public class TKStore {
     let modelURL = Bundle.tripKit.url(forResource: "TripKitModel", withExtension: "momd")!
     return NSManagedObjectModel(contentsOf: modelURL)!
   }()
-  
-  private lazy var container: (NSPersistentContainer, Date) = {
-    reloadContainer(reset: !didResetToday)
-  }()
+
+  // This is done this way for thread safety, as a `lazy var` is not thread-safe
+  private var _container: (NSPersistentContainer, Date)?
+  private let containerLock = NSLock()
+  private var container: (NSPersistentContainer, Date) {
+    if _container == nil {
+      containerLock.withLock {
+        if _container == nil {
+          _container = reloadContainer(reset: !didResetToday)
+        }
+      }
+    }
+    return _container!
+  }
   
   public var tripKitContext: NSManagedObjectContext {
     viewContext
@@ -123,7 +133,7 @@ extension TKStore {
   /// Wipes TripKit and effectively clears the cache. Following calls to the context and coordinator will return
   /// new instances, so make sure you clear local references to those.
   public func reset() {
-    self.container = reloadContainer(reset: true)
+    _container = reloadContainer(reset: true)
   }
   
   private var didResetToday: Bool {
