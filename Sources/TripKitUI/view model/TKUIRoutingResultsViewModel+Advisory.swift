@@ -16,7 +16,7 @@ extension TKUIRoutingResultsViewModel {
   static func fetchAdvisory(for request: Observable<TripRequest>) -> Observable<TKAPI.Alert?> {
     
     return request
-      .map(\.toLocation)
+      .compactMap(\.toLocation)
       .flatMapLatest {
         TKLocationRealTime
           .streamRealTime(for: $0)
