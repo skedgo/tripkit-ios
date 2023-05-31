@@ -128,6 +128,20 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     TKUINotificationManager.shared.add(request: request, for: .tripAlerts)
   }
   
+  public func match(geofenceID: String) -> (Trip, TKSegment)? {
+    guard
+      let monitoredTrip,
+      let trip = Trip.find(tripURL: monitoredTrip.tripURL, in: TripKit.shared.tripKitContext)
+    else { return nil }
+    
+    if let segment = trip.segments.first(where: { $0.notifications.map(\.id).contains(geofenceID) }) {
+      return (trip, segment)
+    } else {
+      TKLog.warn("TKUITripMonitorManager", text: "Could not find matching notification for \(geofenceID).")
+      return nil
+    }
+  }
+  
 }
 
 // MARK: - Geofence-based alerts

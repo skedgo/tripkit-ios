@@ -99,7 +99,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       }
     }
   }
-
+  
   override public func didBuild(tableView: UITableView, cardView: TGCardView) {
     super.didBuild(tableView: tableView, cardView: cardView)
     
@@ -222,6 +222,12 @@ public class TKUITripOverviewCard: TKUITableCard {
   public override func willDisappear(animated: Bool) {
     super.willDisappear(animated: animated)
     isVisible.onNext(false)
+  }
+  
+  public func shows(_ trip: Trip) -> Bool {
+    // The trip map manager keeps a reference to the latest trip, so we can show this
+    return initialTrip.tripURL == trip.tripURL
+        || tripMapManager?.trip.tripURL == trip.tripURL
   }
   
 }
