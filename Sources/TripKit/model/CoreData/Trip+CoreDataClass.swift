@@ -137,7 +137,7 @@ extension Trip {
 
 extension Trip {
   public static func find(tripURL: URL, in context: NSManagedObjectContext) -> Trip? {
-    if let objectID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: tripURL), let trip = context.object(with: objectID) as? Trip {
+    if tripURL.scheme == "x-coredata", let objectID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: tripURL), let trip = context.object(with: objectID) as? Trip {
       return trip
     }
     
