@@ -496,8 +496,8 @@ extension TKRouter.RoutingQuery: TKRouterRequestable {
 
 extension TripRequest: TKRouterRequestable {
   public var context: NSManagedObjectContext? { managedObjectContext }
-  public var from: MKAnnotation { fromLocation }
-  public var to: MKAnnotation { toLocation }
+  public var from: MKAnnotation { fromLocation ?? .init(coordinate: .invalid) }
+  public var to: MKAnnotation { toLocation ?? .init(coordinate: .invalid) }
   
   public var modes: Set<String> { TKSettings.enabledModeIdentifiers(applicableModeIdentifiers) }
 
