@@ -2571,21 +2571,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TripKit.swift",
-      "line": 96,
+      "line": 99,
       "symbol": "ObjcTripKit",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TripKit.swift",
-      "line": 99,
+      "line": 102,
       "symbol": "ObjcTripKit.shared",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TripKit.swift",
-      "line": 106,
+      "line": 109,
       "symbol": "ObjcTripKit.tripKitContext",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -13953,7 +13953,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKStore.swift",
-      "line": 131,
+      "line": 135,
       "symbol": "TKStore",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
