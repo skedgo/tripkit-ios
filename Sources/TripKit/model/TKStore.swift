@@ -63,6 +63,10 @@ public class TKStore {
   var inMemoryCache = NSCache<AnyObject, AnyObject>()
   
   private func reloadContainer(reset: Bool) ->  (NSPersistentContainer, Date) {
+#if DEBUG
+    dispatchPrecondition(condition: .onQueue(.main))
+#endif
+    
     let resetDate: Date
     if reset, let newlyReset = removeLocalFiles() {
       resetDate = newlyReset

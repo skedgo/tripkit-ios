@@ -87,6 +87,9 @@ public enum TripKit {
     NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "TKModeInfo")
     NSKeyedUnarchiver.setClass(TKModeInfo.self, forClassName: "ModeInfo")
     
+    // Wake up context
+    _ = TripKit.shared.tripKitContext
+
     TKRegionManager.shared.updateRegions()
   }
   
