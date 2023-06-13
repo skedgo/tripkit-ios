@@ -489,12 +489,9 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
       return nil
     }
 
-    let formatter = TKUITripCell.Formatter()
-    formatter.costColor = footerView.costLabel.textColor
-
     let section = dataSource.sectionModels[section]
-    footerView.attributedCost = formatter.costString(costs: section.costs)
-    footerView.costLabel.accessibilityLabel = formatter.costAccessibilityLabel(costs: section.costs)
+    footerView.cost = TKUITripCell.Formatter.costString(costs: section.costs)
+    footerView.costLabel.accessibilityLabel = TKUITripCell.Formatter.costAccessibilityLabel(costs: section.costs)
     
     if let buttonContent = section.action {
       footerView.button.isHidden = false

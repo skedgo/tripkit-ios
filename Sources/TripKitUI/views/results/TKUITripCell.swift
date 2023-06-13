@@ -34,11 +34,10 @@ public class TKUITripCell: UITableViewCell {
 
     backgroundColor = .tkBackground
     
-    formatter = Formatter()
-    formatter?.primaryColor = .tkLabelPrimary
-    formatter?.primaryFont = TKStyleManager.customFont(forTextStyle: .body)
-    formatter?.secondaryColor = .tkLabelSecondary
-    formatter?.secondaryFont = TKStyleManager.customFont(forTextStyle: .body)
+    if #available(iOS 15.0, *) {
+      titleLabel.maximumContentSizeCategory = .accessibilityLarge
+      subtitleLabel.maximumContentSizeCategory = .accessibilityLarge
+    }
     
     mainSegmentActionButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
     mainSegmentActionButton.tintColor = .tkAppTintColor
@@ -84,11 +83,13 @@ public class TKUITripCell: UITableViewCell {
   }
   
   func configure(_ model: Model) {
-    guard let formatter = self.formatter else { return }
+    titleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    titleLabel.textColor = .tkLabelPrimary
     
-    titleLabel.attributedText = model.hideExactTimes ? nil : formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
-    
-    subtitleLabel.attributedText = model.hideExactTimes ? nil : formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    subtitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    subtitleLabel.textColor = .tkLabelSecondary
     
     segmentView.isCanceled = model.isCancelled
     segmentView.configure(model.segments)
