@@ -32,7 +32,7 @@ public class TKUIAttributionView: UIView {
     case mapAnnotation
   }
   
-  @IBOutlet public weak var title: UITextView!
+  @IBOutlet public weak var title: UILabel!
   @IBOutlet public weak var logo: UIImageView!
   
   public var contentAlignment: Alignment = .leading
@@ -58,17 +58,14 @@ public class TKUIAttributionView: UIView {
   fileprivate func didInit() {
     backgroundColor = .tkBackground
     
-    let textView = UITextView()
-    textView.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    textView.backgroundColor = .clear
-    textView.textColor = .tkLabelSecondary
-    textView.isEditable = false
-    textView.isScrollEnabled = false
-    textView.isPagingEnabled = false
-    textView.dataDetectorTypes = [.phoneNumber, .link, .address]
-    textView.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(textView)
-    title = textView
+    let label = UILabel()
+    label.numberOfLines = 0
+    label.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    label.backgroundColor = .clear
+    label.textColor = .tkLabelSecondary
+    label.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(label)
+    title = label
     
     let imageView = UIImageView()
     imageView.backgroundColor = .clear
@@ -77,23 +74,23 @@ public class TKUIAttributionView: UIView {
     addSubview(imageView)
     logo = imageView
     
-    imageView.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 4).isActive = true
-    imageView.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 4).isActive = true
+    imageView.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
     imageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     imageView.topAnchor.constraint(equalTo: topAnchor, constant: 24).isActive = true
     imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
     
     switch contentAlignment {
     case .leading:
-      textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+      label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
       trailingAnchor.constraint(greaterThanOrEqualTo: imageView.trailingAnchor, constant: 16).isActive = true
     case .trailing:
-      textView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
+      label.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
       trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8).isActive = true
     case .center:
-      textView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
+      label.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8).isActive = true
       trailingAnchor.constraint(greaterThanOrEqualTo: imageView.trailingAnchor, constant: 8).isActive = true
-      textView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+      label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
   }
   
@@ -159,9 +156,10 @@ public class TKUIAttributionView: UIView {
   public static func newView(_ sources: [TKAPI.DataAttribution], wording: Wording = .dataProvidedBy, fitsIn view: UIView? = nil, alignment: Alignment = .leading, style: Style = .regular) -> TKUIAttributionView? {
     guard !sources.isEmpty else { return nil }
     
-    let names = sources.map(\.provider.name).joined(separator: ", ")
+    let names = sources.map(\.provider.name)
+    guard let title = ListFormatter().string(from: names) else { return nil }
 
-    let attributionView = newView(title: names, alignment: alignment, wording: wording, style: style)
+    let attributionView = newView(title: title + ".", alignment: alignment, wording: wording, style: style)
     
     if let containingView = view {
       attributionView.frame.size.width = containingView.frame.width
