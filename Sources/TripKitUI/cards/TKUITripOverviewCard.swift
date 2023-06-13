@@ -201,6 +201,10 @@ public class TKUITripOverviewCard: TKUITableCard {
     } else {
       tripMapManager?.deselectSegment(animated: animated)
     }
+
+    if let controller {
+      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
     
     TKUIEventCallback.handler(.cardAppeared(self))
   }

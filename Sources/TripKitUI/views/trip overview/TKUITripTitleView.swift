@@ -45,6 +45,10 @@ class TKUITripTitleView: UIView {
     dismissButton.setTitle(nil, for: .normal)
     dismissButton.accessibilityLabel = Loc.Close
   }
+  
+  func update(preferredContentSizeCategory: UIContentSizeCategory) {
+    timeStack.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
+  }
 
 }
 

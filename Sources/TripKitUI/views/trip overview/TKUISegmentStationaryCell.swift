@@ -17,6 +17,7 @@ class TKUISegmentStationaryCell: UITableViewCell {
   @IBOutlet weak var timeStack: UIStackView!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var timeEndLabel: UILabel!
+  @IBOutlet weak var timeAccessibilityLabel: UILabel!
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
@@ -199,27 +200,41 @@ extension TKUISegmentStationaryCell {
   func configure(with item: TKUITripOverviewViewModel.StationaryItem, for card: TKUITripOverviewCard) {
     let startText = item.startTime?.timeString(for: item.timeZone)
     let endText = item.endTime?.timeString(for: item.timeZone)
-
+    
+    let isVeryLarge = card.controller?.traitCollection.preferredContentSizeCategory.isAccessibilityCategory ?? false
+    
     if !item.timesAreFixed {
       timeStack.isHidden = true
+      timeAccessibilityLabel.isHidden = true
 
     } else if let start = startText, let end = endText, start.1 != end.1 {
-      timeStack.isHidden = false
+      timeStack.isHidden = isVeryLarge
+      timeAccessibilityLabel.isHidden = !isVeryLarge
+      
       timeEndLabel.isHidden = false
       timeLabel.attributedText = start.0
       timeLabel.accessibilityLabel = Loc.Arrives(atTime: start.1)
       timeEndLabel.attributedText = end.0
       timeEndLabel.accessibilityLabel = Loc.Departs(atTime: end.1)
+      
+      let combined = NSMutableAttributedString(attributedString: start.0)
+      combined.append(.init(string: " - "))
+      combined.append(end.0)
+      timeAccessibilityLabel.attributedText = combined
 
     } else if let time = startText ?? endText {
-      timeStack.isHidden = false
+      timeStack.isHidden = isVeryLarge
+      timeAccessibilityLabel.isHidden = !isVeryLarge
+
       timeEndLabel.isHidden = true
+      timeEndLabel.text = nil
       timeLabel.attributedText = time.0
       timeLabel.accessibilityLabel = Loc.At(time: time.1)
-      timeEndLabel.text = nil
+      timeAccessibilityLabel.attributedText = time.0
     
     } else {
       timeStack.isHidden = true
+      timeAccessibilityLabel.isHidden = true
     }
     labelStackTrailingConstraint.constant = timeStack.isHidden ? 16 : 82
 
@@ -247,13 +262,18 @@ extension TKUISegmentStationaryCell {
   
   func configure(with item: TKUITripOverviewViewModel.TerminalItem, for card: TKUITripOverviewCard) {
     timeEndLabel.isHidden = true
+    
+    let isVeryLarge = card.controller?.traitCollection.preferredContentSizeCategory.isAccessibilityCategory ?? false
 
     if item.timesAreFixed, let text = item.time?.timeString(for: item.timeZone) {
-      timeStack.isHidden = false
+      timeStack.isHidden = isVeryLarge
+      timeAccessibilityLabel.isHidden = !isVeryLarge
       timeLabel.attributedText = text.0
       timeLabel.accessibilityLabel = text.1
+      timeAccessibilityLabel.attributedText = text.0
     } else {
       timeStack.isHidden = true
+      timeAccessibilityLabel.isHidden = true
     }
     labelStackTrailingConstraint.constant = timeStack.isHidden ? 16 : 82
 
