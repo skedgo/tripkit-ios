@@ -162,6 +162,10 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     
     TKUIEventCallback.handler(.cardAppeared(self))
 
+    if let controller {
+      titleView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+
     self.didAppear.onNext(())
   }
   
