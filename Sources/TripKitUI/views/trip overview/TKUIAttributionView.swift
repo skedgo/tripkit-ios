@@ -99,11 +99,7 @@ public class TKUIAttributionView: UIView {
   public static func newView(title: String, icon: UIImage? = nil, iconURL: URL? = nil, url: URL? = nil, alignment: Alignment = .leading, wording: Wording, style: Style = .regular) -> TKUIAttributionView {
     let view = TKUIAttributionView(contentAlignment: alignment)
     
-    let font: UIFont
-    switch style {
-    case .regular: font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
-    case .mapAnnotation: font = TKStyleManager.semiboldCustomFont(forTextStyle: .caption2)
-    }
+    let (attributedTitle, interactiveTitle, font) = Self.attribution(text: title, url: url, wording: wording, style: style)
     
     if let icon = icon {
       // Powered by `provider` where provider logo is used.
@@ -120,33 +116,8 @@ public class TKUIAttributionView: UIView {
       view.title.font = font
 
     } else {
-      // Powered by `provider`, where provider is a text.
-      let plain: String
-      switch wording {
-      case .poweredBy: plain = Loc.PoweredBy(title)
-      case .dataProvidedBy: plain = Loc.DataProvided(by: title)
-      case .mapBy: plain = Loc.MapBy(title)
-      }
-      
-      let attributedTitle = NSMutableAttributedString(string: plain)
-      attributedTitle.addAttribute(.font, value: font, range: NSRange(location: 0, length: plain.count))
-      attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkLabelSecondary, range: NSRange(location: 0, length: plain.count))
-      
-      let range = (plain as NSString).range(of: title)
-      if let url = url, range.location != NSNotFound {
-        attributedTitle.addAttribute(.link, value: url, range: range)
-        view.title.isUserInteractionEnabled = true
-      } else {
-        switch style {
-        case .regular:
-          attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkAppTintColor, range: range)
-        case .mapAnnotation:
-          attributedTitle.addAttribute(.underlineStyle, value: NSNumber(value: NSUnderlineStyle.single.rawValue), range: range)
-        }
-        view.title.isUserInteractionEnabled = false
-      }
-      
       view.logo.image = nil
+      view.title.isUserInteractionEnabled = interactiveTitle
       view.title.attributedText = attributedTitle
     }
     
@@ -154,10 +125,7 @@ public class TKUIAttributionView: UIView {
   }
   
   public static func newView(_ sources: [TKAPI.DataAttribution], wording: Wording = .dataProvidedBy, fitsIn view: UIView? = nil, alignment: Alignment = .leading, style: Style = .regular) -> TKUIAttributionView? {
-    guard !sources.isEmpty else { return nil }
-    
-    let names = sources.map(\.provider.name)
-    guard let title = ListFormatter().string(from: names) else { return nil }
+    guard let title = self.sourceText(for: sources) else { return nil }
 
     let attributionView = newView(title: title + ".", alignment: alignment, wording: wording, style: style)
     
@@ -180,6 +148,59 @@ public class TKUIAttributionView: UIView {
     }
     
     return attributionView
+  }
+  
+}
+
+extension TKUIAttributionView {
+  
+  static func attribution(for sources: [TKAPI.DataAttribution], wording: Wording) -> NSAttributedString? {
+    guard let title = self.sourceText(for: sources) else { return nil }
+    return attribution(text: title + ".", wording: wording, style: .regular).0
+  }
+  
+  fileprivate static func sourceText(for sources: [TKAPI.DataAttribution]) -> String? {
+    guard !sources.isEmpty else { return nil }
+    
+    let names = sources.map(\.provider.name)
+    return ListFormatter().string(from: names)
+  }
+  
+  fileprivate static func attribution(text: String, url: URL? = nil, wording: Wording, style: Style) -> (NSAttributedString, Bool, UIFont) {
+    
+    let font: UIFont
+    switch style {
+    case .regular: font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
+    case .mapAnnotation: font = TKStyleManager.semiboldCustomFont(forTextStyle: .caption2)
+    }
+    
+    // Powered by `provider`, where provider is a text.
+    let plain: String
+    switch wording {
+    case .poweredBy: plain = Loc.PoweredBy(text)
+    case .dataProvidedBy: plain = Loc.DataProvided(by: text)
+    case .mapBy: plain = Loc.MapBy(text)
+    }
+    
+    let attributedTitle = NSMutableAttributedString(string: plain)
+    attributedTitle.addAttribute(.font, value: font, range: NSRange(location: 0, length: plain.count))
+    attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkLabelSecondary, range: NSRange(location: 0, length: plain.count))
+    
+    let range = (plain as NSString).range(of: text)
+    let interactive: Bool
+    if let url, range.location != NSNotFound {
+      attributedTitle.addAttribute(.link, value: url, range: range)
+      interactive = true
+    } else {
+      switch style {
+      case .regular:
+        attributedTitle.addAttribute(.foregroundColor, value: UIColor.tkAppTintColor, range: range)
+      case .mapAnnotation:
+        attributedTitle.addAttribute(.underlineStyle, value: NSNumber(value: NSUnderlineStyle.single.rawValue), range: range)
+      }
+      interactive = false
+    }
+    return (attributedTitle, interactive, font)
   }
   
 }
