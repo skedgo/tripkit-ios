@@ -85,7 +85,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     let coordinate = annotation.coordinate
     if let name = annotation.title ?? nil,
        let address = annotation.subtitle ?? nil {
-      return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address)
+      return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address.nonEmpty)
     } else {
       return TKNamedCoordinate(coordinate: coordinate)
     }
