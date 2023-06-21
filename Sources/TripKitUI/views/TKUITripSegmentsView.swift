@@ -341,7 +341,7 @@ public class TKUITripSegmentsView : UIView {
       if allowSubtitles {
         desiredSize = .init(width: nextX, height: maxHeight)
       }
-      if limitSize, nextX > frame.width {
+      if limitSize, nextX > frame.width || modeTitleSize.height + modeSubtitleSize.height > frame.height {
         // try to shrink
         if allowSubtitles {
           configure(segments, allowTitles: allowTitles, allowSubtitles: false, allowInfoIcons: allowInfoIcons)
