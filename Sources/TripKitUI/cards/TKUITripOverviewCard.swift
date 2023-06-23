@@ -188,6 +188,14 @@ public class TKUITripOverviewCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
+  public override func willAppear(animated: Bool) {
+    super.willAppear(animated: animated)
+
+    if let controller {
+      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+  
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
@@ -199,14 +207,18 @@ public class TKUITripOverviewCard: TKUITableCard {
     } else {
       tripMapManager?.deselectSegment(animated: animated)
     }
-
-    if let controller {
-      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
-    }
     
     TKUIEventCallback.handler(.cardAppeared(self))
   }
-  
+
+  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    if let controller {
+      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+
   public override func willDisappear(animated: Bool) {
     super.willDisappear(animated: animated)
     isVisible.onNext(false)

@@ -339,18 +339,30 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
+  public override func willAppear(animated: Bool) {
+    super.willAppear(animated: animated)
+
+    if let controller {
+      accessoryView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+  
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
     TKUIEventCallback.handler(.cardAppeared(self))
 
-    if let controller {
-      accessoryView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
-    }
-
     viewModel.realTimeUpdate
       .drive()
       .disposed(by: realTimeBag)
+  }
+  
+  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    if let controller {
+      accessoryView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
   }
   
   public override func willDisappear(animated: Bool) {
