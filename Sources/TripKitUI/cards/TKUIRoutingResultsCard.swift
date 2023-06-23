@@ -344,6 +344,10 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     TKUIEventCallback.handler(.cardAppeared(self))
 
+    if let controller {
+      accessoryView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+
     viewModel.realTimeUpdate
       .drive()
       .disposed(by: realTimeBag)

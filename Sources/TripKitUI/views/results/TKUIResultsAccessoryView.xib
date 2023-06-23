@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,27 +13,30 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
-                    <rect key="frame" x="16" y="0.0" width="132" height="52"/>
-                    <state key="normal" title="Arriving at 9:00 am"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvC-c0-UQp">
-                    <rect key="frame" x="305" y="0.0" width="54" height="52"/>
-                    <state key="normal" title="Options"/>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yLd-hK-EAw">
+                    <rect key="frame" x="16" y="0.0" width="343" height="52"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
+                            <rect key="frame" x="0.0" y="0.0" width="281" height="52"/>
+                            <state key="normal" title="Arriving at 9:00 am"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvC-c0-UQp">
+                            <rect key="frame" x="289" y="0.0" width="54" height="52"/>
+                            <state key="normal" title="Options"/>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <constraints>
-                <constraint firstItem="XvC-c0-UQp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="HtY-HX-xyv"/>
-                <constraint firstAttribute="trailing" secondItem="XvC-c0-UQp" secondAttribute="trailing" constant="16" id="MBn-Md-qh0"/>
-                <constraint firstItem="MLD-Td-WnO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="j2P-qP-XPB"/>
-                <constraint firstItem="XvC-c0-UQp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MLD-Td-WnO" secondAttribute="trailing" constant="8" symbolic="YES" id="nOT-FD-TOR"/>
-                <constraint firstAttribute="bottomMargin" secondItem="MLD-Td-WnO" secondAttribute="bottom" id="nzd-hp-r6C"/>
-                <constraint firstItem="MLD-Td-WnO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="xFL-y6-cTy"/>
-                <constraint firstAttribute="bottomMargin" secondItem="XvC-c0-UQp" secondAttribute="bottom" id="zEi-gd-roo"/>
+                <constraint firstItem="yLd-hK-EAw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Es0-06-0Db"/>
+                <constraint firstItem="yLd-hK-EAw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="P2c-sl-zbq"/>
+                <constraint firstAttribute="trailing" secondItem="yLd-hK-EAw" secondAttribute="trailing" constant="16" id="ZJs-Ia-0Ls"/>
+                <constraint firstAttribute="bottom" secondItem="yLd-hK-EAw" secondAttribute="bottom" id="ldf-o5-SCS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="stackView" destination="yLd-hK-EAw" id="hBe-Ih-EDb"/>
                 <outlet property="timeButton" destination="MLD-Td-WnO" id="9gE-eM-VJL"/>
                 <outlet property="transportButton" destination="XvC-c0-UQp" id="7Dc-gb-srY"/>
             </connections>

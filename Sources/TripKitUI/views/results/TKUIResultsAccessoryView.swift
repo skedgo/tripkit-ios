@@ -12,6 +12,7 @@ import TripKit
 
 class TKUIResultsAccessoryView: UIView {
 
+  @IBOutlet var stackView: UIStackView!
   @IBOutlet weak var timeButton: UIButton!
   @IBOutlet weak var transportButton: UIButton!
   
@@ -57,6 +58,10 @@ class TKUIResultsAccessoryView: UIView {
   
   func hideTransportButton() {
     transportButton.isHidden = true
+  }
+  
+  func update(preferredContentSizeCategory: UIContentSizeCategory) {
+    stackView.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
   }
   
 }
