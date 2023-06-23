@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'TripKit', "~> #{s.version}"
 
-  s.dependency 'TGCardViewController', '>= 2.1'
+  s.dependency 'TGCardViewController', '>= 2.2.10'
   s.dependency 'GeoMonitor', '~> 0.1.2'
   
   s.dependency 'RxSwift', '~> 6.5'

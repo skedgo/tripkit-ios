@@ -63,6 +63,10 @@ public class TKUITripCell: UITableViewCell {
       self.contentView.backgroundColor = highlighted ? .tkBackgroundSelected : self.backgroundColor
     }
   }
+  
+  func update(preferredContentSizeCategory: UIContentSizeCategory) {
+    titleStackView.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
+  }
 
 
   // MARK: - Model
@@ -82,7 +86,9 @@ public class TKUITripCell: UITableViewCell {
     var accessibilityLabel: String?
   }
   
-  func configure(_ model: Model) {
+  func configure(_ model: Model, preferredContentSizeCategory: UIContentSizeCategory) {
+    update(preferredContentSizeCategory: preferredContentSizeCategory)
+    
     titleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary

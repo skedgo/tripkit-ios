@@ -59,9 +59,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   
   private let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
-  private let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
-    configureCell: TKUIRoutingResultsCard.cell
-  )
+  private var dataSource: RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>!
   
   private let showSearch = PublishSubject<Void>()
   private let changedTime = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
@@ -178,6 +176,13 @@ public class TKUIRoutingResultsCard: TKUITableCard {
         titleView?.locationTapped.asObservable()
       ].compactMap { $0 }
     )
+    
+    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIRoutingResultsViewModel.Section>(
+      configureCell: { [unowned self] in
+        self.configureCell(dataSource: $0, tableView: $1, indexPath: $2, item: $3)
+      }
+    )
+    self.dataSource = dataSource
     
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
       selected: selectedItem(in: tableView, dataSource: dataSource),
@@ -334,6 +339,14 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
+  public override func willAppear(animated: Bool) {
+    super.willAppear(animated: animated)
+
+    if let controller {
+      accessoryView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+  
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
@@ -342,6 +355,14 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     viewModel.realTimeUpdate
       .drive()
       .disposed(by: realTimeBag)
+  }
+  
+  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    if let controller {
+      accessoryView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
   }
   
   public override func willDisappear(animated: Bool) {
@@ -404,7 +425,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
 
 extension TKUIRoutingResultsCard {
   
-  static func cell(dataSource: TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {    
+  func configureCell(dataSource: TableViewSectionedDataSource<TKUIRoutingResultsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUIRoutingResultsViewModel.Item) -> UITableViewCell {
+    let preferredContentSizeCategory = controller?.traitCollection.preferredContentSizeCategory ?? .unspecified
+    
     switch item {
     case .progress:
       let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell
@@ -413,7 +436,7 @@ extension TKUIRoutingResultsCard {
       
     case .trip(let trip):
       let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
-      tripCell.configure(trip)
+      tripCell.configure(trip, preferredContentSizeCategory: preferredContentSizeCategory)
       tripCell.separatorView.isHidden = !(dataSource.sectionModels[indexPath.section].items.count > 1)
       #if targetEnvironment(macCatalyst)
       tripCell.accessoryType = .disclosureIndicator
@@ -432,8 +455,8 @@ extension TKUIRoutingResultsCard {
 }
 
 extension TKUITripCell {
-  public func configure(_ trip: Trip, allowFading: Bool = true, isArriveBefore: Bool? = nil) {
-    configure(.init(trip, allowFading: allowFading, isArriveBefore: isArriveBefore))
+  public func configure(_ trip: Trip, allowFading: Bool = true, isArriveBefore: Bool? = nil, preferredContentSizeCategory: UIContentSizeCategory) {
+    configure(.init(trip, allowFading: allowFading, isArriveBefore: isArriveBefore), preferredContentSizeCategory: preferredContentSizeCategory)
   }
 }
 
@@ -490,8 +513,13 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
     }
 
     let section = dataSource.sectionModels[section]
-    footerView.cost = TKUITripCell.Formatter.costString(costs: section.costs)
-    footerView.costLabel.accessibilityLabel = TKUITripCell.Formatter.costAccessibilityLabel(costs: section.costs)
+    if controller?.traitCollection.preferredContentSizeCategory.isAccessibilityCategory == true {
+      footerView.cost = nil
+      footerView.costLabel.accessibilityLabel = nil
+    } else {
+      footerView.cost = TKUITripCell.Formatter.costString(costs: section.costs)
+      footerView.costLabel.accessibilityLabel = TKUITripCell.Formatter.costAccessibilityLabel(costs: section.costs)
+    }
     
     if let buttonContent = section.action {
       footerView.button.isHidden = false
