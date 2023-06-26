@@ -134,8 +134,9 @@ extension TKServer {
       region: region,
       callbackOnMain: callbackOnMain
     ) { response in
-      response.map {
-        try JSONDecoder().decode(Model.self, from: $0.orThrow(ServerError.noData))
+      response.map  { data in
+        guard let data, !data.isEmpty else { throw ServerError.noData }
+        return try JSONDecoder().decode(Model.self, from: data)
         
       }.call(completion)
     }
@@ -158,7 +159,12 @@ extension TKServer {
       region: region,
       callbackOnMain: callbackOnMain
     ) { response in
-      response.map { try $0.orThrow(ServerError.noData) }.call(completion)
+      response
+        .map { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return data
+        }
+        .call(completion)
     }
   }
   
@@ -182,10 +188,11 @@ extension TKServer {
         parameters: parameters,
         headers: headers)
     { response in
-      response.map {
+      response.map { data in
+        guard let data, !data.isEmpty else { throw ServerError.noData }
         let decoder = JSONDecoder()
         decoderConfig(decoder)
-        return try decoder.decode(Model.self, from: $0.orThrow(ServerError.noData))
+        return try decoder.decode(Model.self, from: data)
       }.call(completion)
     }
   }
@@ -202,7 +209,12 @@ extension TKServer {
         parameters: parameters,
         headers: headers)
     { response in
-      response.map { try $0.orThrow(ServerError.noData) }.call(completion)
+      response
+        .map { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return data
+        }
+        .call(completion)
     }
   }
   
@@ -220,7 +232,9 @@ extension TKServer {
       semaphore.signal()
     }
     _ = semaphore.wait(timeout: .now() + .seconds(10))
-    return try dataResult.orThrow(ServerError.noData).get()
+    let data = try dataResult.orThrow(ServerError.noData).get()
+    guard !data.isEmpty else { throw ServerError.noData }
+    return data
   }
 
 }
@@ -266,8 +280,9 @@ extension TKServer {
           parameters: parameters,
           headers: headers)
       { response in
-        continuation.resume(returning: response.map {
-          try $0.orThrow(ServerError.noData)
+        continuation.resume(returning: response.map  { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return try data
         })
       }
     }
@@ -288,8 +303,9 @@ extension TKServer {
         headers: headers,
         region: region)
       { response in
-        continuation.resume(returning: response.map {
-          try $0.orThrow(ServerError.noData)
+        continuation.resume(returning: response.map { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return data
         })
       }
     }
@@ -312,8 +328,9 @@ extension TKServer {
         region: region,
         callbackOnMain: false
       ) { response in
-        continuation.resume(returning: response.map {
-          try JSONDecoder().decode(Model.self, from: $0.orThrow(ServerError.noData))
+        continuation.resume(returning: response.map { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return try JSONDecoder().decode(Model.self, from: data)
         })
       }
     }
@@ -345,8 +362,9 @@ extension TKServer {
         region: region,
         callbackOnMain: false
       ) { response in
-        continuation.resume(returning: response.map {
-          try decoder.decode(Output.self, from: $0.orThrow(ServerError.noData))
+        continuation.resume(returning: response.map  { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return try decoder.decode(Output.self, from: data)
         })
       }
     }
@@ -365,8 +383,9 @@ extension TKServer {
           parameters: parameters,
           headers: headers)
       { response in
-        continuation.resume(returning: response.map {
-          try JSONDecoder().decode(Model.self, from: $0.orThrow(ServerError.noData))
+        continuation.resume(returning: response.map  { data in
+          guard let data, !data.isEmpty else { throw ServerError.noData }
+          return try JSONDecoder().decode(Model.self, from: data)
         })
       }
     }
