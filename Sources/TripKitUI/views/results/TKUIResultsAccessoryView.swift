@@ -12,6 +12,7 @@ import TripKit
 
 class TKUIResultsAccessoryView: UIView {
 
+  @IBOutlet var stackView: UIStackView!
   @IBOutlet weak var timeButton: UIButton!
   @IBOutlet weak var transportButton: UIButton!
   
@@ -44,19 +45,25 @@ class TKUIResultsAccessoryView: UIView {
     
     timeButton.setTitle(nil, for: .normal)
     timeButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+    timeButton.titleLabel?.adjustsFontForContentSizeCategory = true
     timeButton.tintColor = foregroundColor
     
     transportButton.setTitle(" \(Loc.Transport)", for: .normal)
     transportButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+    transportButton.titleLabel?.adjustsFontForContentSizeCategory = true
     transportButton.tintColor = foregroundColor
 
-    let config = UIImage.SymbolConfiguration(pointSize: 10)
+    let config = UIImage.SymbolConfiguration(textStyle: .subheadline, scale: .small)
     timeButton.setImage(.init(systemName: "clock", withConfiguration: config), for: .normal)
     transportButton.setImage(.init(systemName: "ellipsis.circle", withConfiguration: config), for: .normal)
   }
   
   func hideTransportButton() {
     transportButton.isHidden = true
+  }
+  
+  func update(preferredContentSizeCategory: UIContentSizeCategory) {
+    stackView.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
   }
   
 }

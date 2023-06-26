@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <accessibilityOverrides dynamicTypePreference="6"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,21 +14,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="E3S-qb-7f1" customClass="TKUINotificationView" customModule="TripKitUI" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="588" height="216"/>
+            <rect key="frame" x="0.0" y="0.0" width="336" height="289"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQO-Nj-Ppq">
-                    <rect key="frame" x="16" y="16" width="556" height="200"/>
+                    <rect key="frame" x="16" y="16" width="304" height="273"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="K5t-Ik-1Z2">
-                            <rect key="frame" x="0.0" y="0.0" width="556" height="196"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K5t-Ik-1Z2">
+                            <rect key="frame" x="0.0" y="0.0" width="304" height="269"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7l-Cc-ZeA" userLabel="Setting View">
-                                    <rect key="frame" x="0.0" y="0.0" width="556" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="304" height="60"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-xy-KL6">
-                                            <rect key="frame" x="44" y="20" width="140.33333333333334" height="20.333333333333329"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Trip Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGq-xy-KL6">
+                                            <rect key="frame" x="44" y="20" width="136.33333333333334" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" name="TKLabelPrimary"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -40,12 +41,13 @@
                                             </constraints>
                                         </imageView>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8XR-B9-N29">
-                                            <rect key="frame" x="495" y="14.666666666666668" width="51" height="31.000000000000004"/>
+                                            <rect key="frame" x="243" y="14.666666666666668" width="51" height="31.000000000000004"/>
                                             <color key="tintColor" name="BrandColor"/>
                                             <color key="onTintColor" name="BrandColor"/>
                                         </switch>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="8XR-B9-N29" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kGq-xy-KL6" secondAttribute="trailing" constant="8" symbolic="YES" id="5j9-6O-woV"/>
                                         <constraint firstAttribute="height" constant="60" id="Hwd-tZ-BVP"/>
                                         <constraint firstItem="1hS-SZ-wkW" firstAttribute="leading" secondItem="f7l-Cc-ZeA" secondAttribute="leading" constant="12" id="ZjI-Sj-mAd"/>
                                         <constraint firstItem="kGq-xy-KL6" firstAttribute="centerY" secondItem="f7l-Cc-ZeA" secondAttribute="centerY" id="ehi-gN-17I"/>
@@ -56,20 +58,20 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="InB-ZZ-Ghc" userLabel="Details">
-                                    <rect key="frame" x="0.0" y="60" width="556" height="136"/>
+                                    <rect key="frame" x="0.0" y="60" width="304" height="209"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzS-YU-yFK" userLabel="Separator">
-                                            <rect key="frame" x="16" y="0.0" width="540" height="1"/>
+                                            <rect key="frame" x="16" y="0.0" width="288" height="1"/>
                                             <color key="backgroundColor" name="TKBarSecondary"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="mGL-kG-2bD"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="hde-1W-a1e" userLabel="Detail Header">
-                                            <rect key="frame" x="16" y="0.0" width="540" height="30.333333333333332"/>
+                                            <rect key="frame" x="16" y="0.0" width="288" height="30.333333333333332"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Get notifications when:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4m9-ST-AzW">
-                                                    <rect key="frame" x="0.0" y="8" width="540" height="14.333333333333336"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Get notifications when:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4m9-ST-AzW">
+                                                    <rect key="frame" x="0.0" y="8" width="288" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" name="TKLabelPrimary"/>
                                                     <nil key="highlightedColor"/>
@@ -82,11 +84,11 @@
                                                 <constraint firstItem="4m9-ST-AzW" firstAttribute="leading" secondItem="hde-1W-a1e" secondAttribute="leading" id="zGh-2U-xDk"/>
                                             </constraints>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WS0-Qn-H2b">
-                                            <rect key="frame" x="16" y="30.333333333333321" width="540" height="97.666666666666686"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WS0-Qn-H2b">
+                                            <rect key="frame" x="16" y="30.333333333333329" width="288" height="170.66666666666669"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmB-UW-By8" userLabel="Detail 1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="540" height="14.333333333333334"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="14.333333333333334"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.north.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ruA-P7-CKU">
                                                             <rect key="frame" x="0.0" y="-0.33333333333332327" width="16" height="15.000000000000002"/>
@@ -96,8 +98,8 @@
                                                                 <constraint firstAttribute="height" constant="16" id="p39-j6-DvX"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="The trip is about to start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhb-eD-3zR">
-                                                            <rect key="frame" x="22" y="0.0" width="518" height="14.333333333333334"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="The trip is about to start" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhb-eD-3zR">
+                                                            <rect key="frame" x="22" y="0.0" width="266" height="14.333333333333334"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" name="TKLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
@@ -113,18 +115,18 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCA-VW-qBv" userLabel="Detail 2">
-                                                    <rect key="frame" x="0.0" y="22.333333333333329" width="540" height="14.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="46.666666666666671" width="288" height="30.333333333333329"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zo9-87-Vjv">
-                                                            <rect key="frame" x="0.0" y="0.66666666666667673" width="16" height="14.000000000000002"/>
+                                                            <rect key="frame" x="0.0" y="8.6666666666666767" width="16" height="14.000000000000002"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="JSd-hQ-xh2"/>
                                                                 <constraint firstAttribute="width" constant="16" id="qrN-Ya-D7w"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Getting within 500m of the disembarkation point" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCZ-t5-edC">
-                                                            <rect key="frame" x="22" y="0.0" width="518" height="14.333333333333334"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Getting within 500m of the disembarkation point" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCZ-t5-edC">
+                                                            <rect key="frame" x="22" y="0.0" width="266" height="30.333333333333332"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" name="TKLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
@@ -140,18 +142,18 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVQ-PA-Qtc" userLabel="Detail 3">
-                                                    <rect key="frame" x="0.0" y="44.666666666666671" width="540" height="14.333333333333336"/>
+                                                    <rect key="frame" x="0.0" y="109.66666666666667" width="288" height="14.333333333333329"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AQj-Ng-cha">
-                                                            <rect key="frame" x="0.0" y="0.66666666666667673" width="16" height="14.000000000000002"/>
+                                                            <rect key="frame" x="0.0" y="0.33333333333333393" width="16" height="14.000000000000002"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="RrP-zw-K6c"/>
                                                                 <constraint firstAttribute="height" constant="16" id="mbw-VF-akk"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Passed by the previous stop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvQ-jF-6YF">
-                                                            <rect key="frame" x="22" y="0.0" width="518" height="14.333333333333334"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Passed by the previous stop" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvQ-jF-6YF">
+                                                            <rect key="frame" x="22" y="0.0" width="266" height="14.333333333333334"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" name="TKLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
@@ -167,18 +169,18 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KG-2y-hCb" userLabel="Detail 4">
-                                                    <rect key="frame" x="0.0" y="67.000000000000014" width="540" height="30.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="156.33333333333337" width="288" height="14.333333333333343"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-Wa-ncU">
-                                                            <rect key="frame" x="0.0" y="7.3333333333333144" width="16" height="16"/>
+                                                            <rect key="frame" x="0.0" y="-0.66666666666668561" width="16" height="16"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="Klh-gk-Vof"/>
                                                                 <constraint firstAttribute="height" constant="16" id="ipM-w1-VPA"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="About to arrive at the final destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4E-71-ewA">
-                                                            <rect key="frame" x="22" y="0.0" width="518" height="30.666666666666668"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="About to arrive at the final destination" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4E-71-ewA">
+                                                            <rect key="frame" x="22" y="0.0" width="266" height="14.333333333333334"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" name="TKLabelPrimary"/>
                                                             <nil key="highlightedColor"/>
@@ -257,7 +259,7 @@
                 <outletCollection property="detailImageViews" destination="AQj-Ng-cha" collectionClass="NSMutableArray" id="wyp-P0-997"/>
                 <outletCollection property="detailImageViews" destination="LCk-Wa-ncU" collectionClass="NSMutableArray" id="sxp-AE-8QI"/>
             </connections>
-            <point key="canvasLocation" x="-70.229007633587784" y="-263.38028169014086"/>
+            <point key="canvasLocation" x="-262.59541984732823" y="-238.38028169014086"/>
         </view>
     </objects>
     <resources>

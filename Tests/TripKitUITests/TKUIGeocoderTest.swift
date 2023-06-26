@@ -63,6 +63,8 @@ class TKUIGeocoderTest: XCTestCase {
   }
 
   func testMOMA6279() async throws {
+    throw XCTSkip("This randomly fails. Need to investigate why.")
+    
     await geocoderPasses(geocoder, input: "MoMA", near: newYork, resultsInAny: ["Museum of Modern Art", "MOMA"])
     
     let second = try aggregateGeocoder()

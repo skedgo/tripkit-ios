@@ -171,9 +171,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       .filter { $0 }
       .withLatestFrom(footerContent)
       .drive(onNext: { [weak self] dataSources, notificationKinds in
-        tableView.tableFooterView = self?.buildTableFooterView()
-        self?.showNotification(for: notificationKinds, in: tableView)
-        self?.showAttribution(for: dataSources, in: tableView)
+        self?.showFooter(notifications: notificationKinds, dataSources: dataSources, in: tableView)
       })
       .disposed(by: disposeBag)
     
@@ -190,6 +188,14 @@ public class TKUITripOverviewCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
+  public override func willAppear(animated: Bool) {
+    super.willAppear(animated: animated)
+
+    if let controller {
+      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+  
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
@@ -204,7 +210,15 @@ public class TKUITripOverviewCard: TKUITableCard {
     
     TKUIEventCallback.handler(.cardAppeared(self))
   }
-  
+
+  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    if let controller {
+      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+
   public override func willDisappear(animated: Bool) {
     super.willDisappear(animated: animated)
     isVisible.onNext(false)
@@ -265,70 +279,65 @@ extension TKUITripOverviewCard {
   
 }
 
-// MARK: - Table Footer
+// MARK: - Table Footer: Notifications & Attributions
 
 extension TKUITripOverviewCard {
   
-  private func buildTableFooterView() -> UIStackView {
+  private func showFooter(notifications: Set<TKAPI.TripNotification.MessageKind>, dataSources: [TKAPI.DataAttribution], in tableView: UITableView) {
+    
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.isUserInteractionEnabled = true
     stackView.distribution = .equalSpacing
-    return stackView
-  }
-  
-}
 
-// MARK: - Notification
-
-extension TKUITripOverviewCard {
-  
-  private func showNotification(for notificationKinds: Set<TKAPI.TripNotification.MessageKind>, in tableView: UITableView) {
-    guard #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts),
-          let tableFooterView = tableView.tableFooterView as? UIStackView
-    else {
-      return
+    if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
+      let notificationView = self.notificationFooterView
+      notificationView.frame.size.width = tableView.frame.width
+      notificationView.updateAvailableKinds(notifications)
+      notificationView.backgroundColor = tableView.backgroundColor
+      stackView.addArrangedSubview(notificationView)
     }
     
-    let footer = self.notificationFooterView
-    footer.updateAvailableKinds(notificationKinds)
-    footer.backgroundColor = tableView.backgroundColor
-    
-    tableFooterView.addArrangedSubview(footer)
-    tableFooterView.layoutIfNeeded()
-    tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-  }
-  
-}
+    if let attributionText = TKUIAttributionView.attribution(for: dataSources, wording: .dataProvidedBy) {
+      let label = UILabel()
+      label.numberOfLines = 0
+      label.attributedText = attributionText
+      label.translatesAutoresizingMaskIntoConstraints = false
 
-// MARK: - Attribution
+      let tapper = UITapGestureRecognizer(target: nil, action: nil)
+      tapper.rx.event
+        .filter { $0.state == .ended }
+        .subscribe(onNext: { [weak self] _ in
+          self?.presentAttributions(for: dataSources, sender: label)
+        })
+        .disposed(by: disposeBag)
+      label.addGestureRecognizer(tapper)
+      label.accessibilityTraits = .button
+      label.isUserInteractionEnabled = true
+      
+      let wrapper = UIView()
+      wrapper.addSubview(label)
+      NSLayoutConstraint.activate([
+        label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
+        label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 4),
+        wrapper.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 16),
+        wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 4)
+      ])
 
-extension TKUITripOverviewCard {
-  
-  private func showAttribution(for sources: [TKAPI.DataAttribution], in tableView: UITableView) {
-    guard let tableFooterView = tableView.tableFooterView as? UIStackView,
-          let footer = TKUIAttributionView.newView(sources, fitsIn: tableView)
-    else {
-      return
+      stackView.addArrangedSubview(wrapper)
     }
     
-    footer.backgroundColor = tableView.backgroundColor
-    let tapper = UITapGestureRecognizer(target: nil, action: nil)
-    tapper.rx.event
-      .filter { $0.state == .ended }
-      .subscribe(onNext: { [weak self] _ in
-        self?.presentAttributions(for: sources, sender: footer)
-      })
-      .disposed(by: disposeBag)
-    footer.addGestureRecognizer(tapper)
-    footer.accessibilityTraits = .button
+    stackView.widthAnchor.constraint(lessThanOrEqualToConstant: tableView.frame.width).isActive = true
+    stackView.setNeedsLayout()
+    stackView.layoutIfNeeded()
+    let newSize = stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     
-    tableFooterView.addArrangedSubview(footer)
-    tableFooterView.layoutIfNeeded()
-    tableFooterView.frame.size.height = tableFooterView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    stackView.frame.size.height = newSize.height
+
+    tableView.tableFooterView = stackView
   }
   
-  private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {   
+  private func presentAttributions(for sources: [TKAPI.DataAttribution], sender: Any?) {
     let attributor = TKUIAttributionTableViewController(attributions: sources)    
     let navigator = UINavigationController(rootViewController: attributor)
     present(navigator, sender: sender)

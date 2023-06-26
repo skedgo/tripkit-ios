@@ -157,12 +157,28 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
+  public override func willAppear(animated: Bool) {
+    super.willAppear(animated: animated)
+
+    if let controller {
+      titleView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
+  }
+  
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
     
     TKUIEventCallback.handler(.cardAppeared(self))
 
     self.didAppear.onNext(())
+  }
+  
+  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    if let controller {
+      titleView.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
+    }
   }
   
   public override var preferredView: UIView? {
