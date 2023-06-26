@@ -16263,77 +16263,77 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 144,
+      "line": 145,
       "symbol": "TKServer.hit(_:path:parameters:headers:region:callbackOnMain:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 169,
+      "line": 175,
       "symbol": "TKServer",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 171,
+      "line": 177,
       "symbol": "TKServer.hit(_:_:url:parameters:headers:decoderConfig:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 193,
+      "line": 200,
       "symbol": "TKServer.hit(_:url:parameters:headers:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 209,
+      "line": 221,
       "symbol": "TKServer.hitSync(_:url:parameters:timeout:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 230,
+      "line": 244,
       "symbol": "TKServer",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 257,
+      "line": 271,
       "symbol": "TKServer.hit(_:url:parameters:headers:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 276,
+      "line": 291,
       "symbol": "TKServer.hit(_:path:parameters:headers:region:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 298,
+      "line": 314,
       "symbol": "TKServer.hit(_:_:path:parameters:headers:region:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 322,
+      "line": 339,
       "symbol": "TKServer.hit(_:_:path:input:headers:region:encoderConfig:decoderConfig:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
-      "line": 355,
+      "line": 373,
       "symbol": "TKServer.hit(_:_:url:parameters:headers:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
