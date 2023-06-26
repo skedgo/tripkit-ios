@@ -569,21 +569,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 172,
+      "line": 188,
       "symbol": "TKUIRoutingQueryInputCard.keyCommands",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 206,
+      "line": 222,
       "symbol": "TKUIRoutingQueryInputCard.tableView(_:didSelectRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingQueryInputCard.swift",
-      "line": 210,
+      "line": 226,
       "symbol": "TKUIRoutingQueryInputCard.scrollViewDidScroll(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -625,112 +625,112 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 113,
+      "line": 111,
       "symbol": "TKUIRoutingResultsCard.init(request:editable:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 355,
+      "line": 376,
       "symbol": "TKUIRoutingResultsCard.keyCommands",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 364,
+      "line": 385,
       "symbol": "TKUIRoutingResultsCard.canPerformAction(_:withSender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 377,
+      "line": 398,
       "symbol": "TKUIRoutingResultsCard.debugActionCopyPrimaryRequest(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 435,
-      "symbol": "TKUITripCell.configure(_:allowFading:isArriveBefore:)",
+      "line": 458,
+      "symbol": "TKUITripCell.configure(_:allowFading:isArriveBefore:preferredContentSizeCategory:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 481,
+      "line": 504,
       "symbol": "TKUIRoutingResultsCard.tableView(_:viewForFooterInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 515,
+      "line": 540,
       "symbol": "TKUIRoutingResultsCard.tableView(_:heightForFooterInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 519,
+      "line": 544,
       "symbol": "TKUIRoutingResultsCard.tableView(_:estimatedHeightForFooterInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 533,
+      "line": 558,
       "symbol": "TKUIRoutingResultsCard.tableView(_:viewForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 548,
+      "line": 573,
       "symbol": "TKUIRoutingResultsCard.tableView(_:heightForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 552,
+      "line": 577,
       "symbol": "TKUIRoutingResultsCard.tableView(_:estimatedHeightForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 570,
+      "line": 595,
       "symbol": "TKUIRoutingResultsCard.tableView(_:contextMenuConfigurationForRowAt:point:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 727,
+      "line": 752,
       "symbol": "TKUIRoutingResultsCard.routingQueryInput(card:selectedOrigin:destination:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 782,
+      "line": 807,
       "symbol": "TKUIRoutingResultsCard.timePicker(_:pickedDate:for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 786,
+      "line": 811,
       "symbol": "TKUIRoutingResultsCard.timePickerRequestsResign(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard.swift",
-      "line": 810,
+      "line": 835,
       "symbol": "TKUIRoutingResultsCard.refreshForUpdatedModes()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1185,14 +1185,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 388,
+      "line": 397,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 390,
+      "line": 399,
       "symbol": "TKUITripOverviewCard.modeByModeCard(_:updatedTrip:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -3705,21 +3705,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITripCell.swift",
-      "line": 56,
+      "line": 55,
       "symbol": "TKUITripCell.setSelected(_:animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITripCell.swift",
-      "line": 61,
+      "line": 60,
       "symbol": "TKUITripCell.setHighlighted(_:animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITripCell.swift",
-      "line": 434,
+      "line": 457,
       "symbol": "TKUITripCell",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -3943,21 +3943,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/trip overview/TKUIAttributionView.swift",
-      "line": 102,
+      "line": 99,
       "symbol": "TKUIAttributionView.newView(title:icon:iconURL:url:alignment:wording:style:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/trip overview/TKUIAttributionView.swift",
-      "line": 159,
+      "line": 127,
       "symbol": "TKUIAttributionView.newView(_:wording:fitsIn:alignment:style:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/trip overview/TKUIAttributionView.swift",
-      "line": 174,
+      "line": 140,
       "symbol": "TKUIAttributionView.newView(_:wording:fitsIn:alignment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
