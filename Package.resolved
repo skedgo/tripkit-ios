@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/skedgo/GeoMonitor.git",
         "state": {
           "branch": null,
-          "revision": "03f3cab0eec2f1c8eb8ce00c64900e6033afba3a",
-          "version": "0.1.2"
+          "revision": "18fcf08c365cd3ddcff8921f19e71fa5988c2638",
+          "version": "0.1.3"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "90135885ef506506620c4911cefb55a95ca2a9a2",
-          "version": "7.5.0"
+          "revision": "c1f60c63f356d364f4284ba82961acbe7de79bcc",
+          "version": "7.8.1"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": null,
-          "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
-          "version": "6.5.0"
+          "revision": "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
+          "version": "6.6.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/skedgo/TGCardViewController.git",
         "state": {
           "branch": null,
-          "revision": "ad4eadb5d359142db5df40d59487f6a15a13eef9",
-          "version": "2.2.2"
+          "revision": "b96668ef9bd28972f75ff9087b822fad8fb0ad84",
+          "version": "2.2.10"
         }
       }
     ]

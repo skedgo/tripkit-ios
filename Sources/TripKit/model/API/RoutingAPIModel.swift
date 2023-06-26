@@ -368,6 +368,7 @@ extension TKAPI {
     public var wheelchairAccessible: Bool?
     public var operatorName: String?
     public var operatorID: String?
+    public var routeID: String?
     @DefaultEmptyArray public var stops: [TKAPI.ShapeStop]
     
     // unscheduled
@@ -394,6 +395,7 @@ extension TKAPI {
       case wheelchairAccessible
       case operatorName = "operator"
       case operatorID
+      case routeID
       case stops
       case name
       case dismount

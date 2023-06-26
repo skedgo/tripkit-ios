@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,11 +25,17 @@
                             <constraint firstAttribute="width" constant="3" id="a9j-KI-k41"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R4b-AK-zvO">
-                        <rect key="frame" x="16" y="11" width="91.5" height="17"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R4b-AK-zvO">
+                        <rect key="frame" x="16" y="11" width="288" height="20.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="04:59 - 05:35" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-d9-TCI">
-                                <rect key="frame" x="0.0" y="0.0" width="91.5" height="17"/>
+                                <rect key="frame" x="0.0" y="0.0" width="227" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="36mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJE-k6-hxt">
+                                <rect key="frame" x="231" y="0.0" width="57" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,7 +43,7 @@
                         </subviews>
                     </stackView>
                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="y8N-RR-3eg" customClass="TKUITripSegmentsView" customModule="TripKitUI" customModuleProvider="target">
-                        <rect key="frame" x="16" y="36" width="288" height="40"/>
+                        <rect key="frame" x="16" y="39.5" width="288" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" priority="999" constant="40" id="7cL-bg-n3k"/>
                         </constraints>
@@ -50,12 +56,6 @@
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <state key="normal" title="CTA"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="36mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJE-k6-hxt">
-                        <rect key="frame" x="256" y="11" width="48" height="17"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83m-f5-90i">
                         <rect key="frame" x="0.0" y="136" width="320" height="1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -65,9 +65,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="qJE-k6-hxt" secondAttribute="trailing" constant="16" id="5gG-GF-aTN"/>
                     <constraint firstItem="R4b-AK-zvO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="OQ9-UQ-lKV"/>
                     <constraint firstAttribute="trailing" secondItem="83m-f5-90i" secondAttribute="trailing" id="R82-zg-5LE"/>
+                    <constraint firstAttribute="trailing" secondItem="R4b-AK-zvO" secondAttribute="trailing" constant="16" id="Wbd-MT-ahk"/>
                     <constraint firstItem="FLO-Ou-7xp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y8N-RR-3eg" secondAttribute="bottom" constant="4" id="Zby-L3-prb"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="leading" secondItem="R4b-AK-zvO" secondAttribute="leading" id="bQY-pT-hzj"/>
                     <constraint firstAttribute="trailing" secondItem="y8N-RR-3eg" secondAttribute="trailing" constant="16" id="i3x-g7-jRq"/>
@@ -78,8 +78,6 @@
                     <constraint firstAttribute="bottom" secondItem="83m-f5-90i" secondAttribute="bottom" id="pGV-cc-dwn"/>
                     <constraint firstAttribute="bottom" secondItem="s1t-2l-9F6" secondAttribute="bottom" id="qlG-ws-JBa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="FLO-Ou-7xp" secondAttribute="trailing" id="t5U-pR-ivj"/>
-                    <constraint firstItem="qJE-k6-hxt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R4b-AK-zvO" secondAttribute="trailing" constant="8" id="tQW-rn-22E"/>
-                    <constraint firstItem="qJE-k6-hxt" firstAttribute="centerY" secondItem="vsO-d9-TCI" secondAttribute="centerY" id="toW-MB-Pql"/>
                     <constraint firstItem="y8N-RR-3eg" firstAttribute="top" secondItem="R4b-AK-zvO" secondAttribute="bottom" constant="8" id="vcV-gE-m03"/>
                     <constraint firstItem="83m-f5-90i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yyc-XN-iBU"/>
                 </constraints>

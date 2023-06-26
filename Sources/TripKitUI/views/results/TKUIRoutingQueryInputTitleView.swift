@@ -20,6 +20,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
     return Bundle.tripKitUI.loadNibNamed("TKUIRoutingQueryInputTitleView", owner: self, options: nil)?.first as! TKUIRoutingQueryInputTitleView
   }
   
+  @IBOutlet weak var buttonStack: UIStackView!
   @IBOutlet weak var closeButton: UIButton!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var routeButton: UIButton!
@@ -103,6 +104,10 @@ class TKUIRoutingQueryInputTitleView: UIView {
     accessibilityElements = [
       closeButton, titleLabel, routeButton, fromSearchBar, swapButton, toSearchBar
     ].compactMap { $0 }
+  }
+  
+  func update(preferredContentSizeCategory: UIContentSizeCategory) {
+    titleLabel.isHidden = preferredContentSizeCategory.isAccessibilityCategory
   }
   
   func setText(origin: String, destination: String) {
