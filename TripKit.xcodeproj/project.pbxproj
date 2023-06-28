@@ -1014,7 +1014,6 @@
 		3AB4E58027584632006D2363 /* String+NonEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NonEmpty.swift"; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		3ABE9D6C290A0F8D0001231F /* TKRouteAutocompleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRouteAutocompleter.swift; sourceTree = "<group>"; };
 		3ABE9D72290A1EC70001231F /* RouteAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAPIModel.swift; sourceTree = "<group>"; };
 		3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Home.swift"; sourceTree = "<group>"; };
@@ -1752,7 +1751,6 @@
 		3A6DF065202C8C1F0084CB2C /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				3ABA80AB204F1AC100E67BC7 /* CHANGELOG.md */,
 				3A6DF068202C8C340084CB2C /* README.md */,
 				3ADCB5F626CDFCC400E4C13A /* Package.swift */,
 				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
@@ -4992,8 +4990,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/skedgo/GeoMonitor";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

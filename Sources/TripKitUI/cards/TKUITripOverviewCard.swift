@@ -313,7 +313,7 @@ extension TKUITripOverviewCard {
     if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
       let notificationView = self.notificationFooterView
       notificationView.frame.size.width = tableView.frame.width      
-      notificationView.updateAvailableKinds(notificationKinds, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
+      notificationView.updateAvailableKinds(notifications, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
       notificationView.backgroundColor = tableView.backgroundColor
 
       // Footer => View Model
@@ -321,9 +321,9 @@ extension TKUITripOverviewCard {
       // `value` as `value` will fire just from initialisation, and this
       // shouldn't be treated as a user action.
       notificationView.notificationSwitch.rx.controlEvent(.valueChanged)
-        .subscribe(onNext: { [weak self, weak footer] isOn in
-          guard let self, let footer else { return }
-          self.alertsToggled.onNext(footer.notificationSwitch.isOn)
+        .subscribe(onNext: { [weak self, weak notificationView] isOn in
+          guard let self, let notificationView else { return }
+          self.alertsToggled.onNext(notificationView.notificationSwitch.isOn)
         })
         .disposed(by: disposeBag)
       
@@ -331,7 +331,7 @@ extension TKUITripOverviewCard {
       // Update button state to reflect external changes, e.g., when toggled
       // via some other means or when another trip gets monitored instead.
       viewModel.notificationsEnabled
-        .drive(onNext: { [weak footer] isOn in
+        .drive(onNext: { [weak notificationView] isOn in
           notificationView?.notificationSwitch.isOn = isOn
         })
         .disposed(by: disposeBag)
