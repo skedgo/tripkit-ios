@@ -97,9 +97,4 @@ class TKUIResultsSectionFooterView: UITableViewHeaderFooterView {
     set { costLabel.text = newValue }
   }
   
-  var attributedCost: NSAttributedString? {
-    get { costLabel.attributedText }
-    set { costLabel.attributedText = newValue }
-  }
-  
 }

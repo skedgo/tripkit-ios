@@ -13,70 +13,46 @@ import TripKit
 
 extension TKUITripCell {
   
-  class Formatter: NSObject {
-    var primaryFont: UIFont?
-    var primaryColor: UIColor = .tkLabelPrimary
+  enum Formatter {
     
-    var secondaryFont: UIFont?
-    var secondaryColor: UIColor = .tkLabelSecondary
-    
-    var costColor: UIColor = .tkLabelSecondary
-    
-    override init() {
-      super.init()
-    }
-    
-    func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
-      let attributes = [
-        NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .body),
-        NSAttributedString.Key.foregroundColor: UIColor.tkLabelPrimary
-      ]
-      
+    static func primaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> String {
       if focusOnDuration {
-        return NSAttributedString(string: arrival.durationSince(departure), attributes: attributes)
+        return arrival.durationSince(departure)
       } else {
         var fullText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
         fullText.append(" - ")
         fullText.append(TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone))
-        return NSAttributedString(string: fullText, attributes: attributes)
+        return fullText
       }
     }
     
-    func secondaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> NSAttributedString {
-      let attributes = [
-          NSAttributedString.Key.font: TKStyleManager.customFont(forTextStyle: .subheadline),
-          NSAttributedString.Key.foregroundColor: UIColor.tkLabelSecondary
-      ]
-      
+    static func secondaryTimeString(departure: Date, arrival: Date, departureTimeZone: TimeZone, arrivalTimeZone: TimeZone, focusOnDuration: Bool, isArriveBefore: Bool) -> String {
       if focusOnDuration {
         if isArriveBefore {
           let timeText = TKStyleManager.timeString(departure, for: departureTimeZone, relativeTo: arrivalTimeZone)
-          let fullText = "\(Loc.Departs(atTime: timeText))"
-          return NSAttributedString(string: fullText, attributes: attributes)
+          return Loc.Departs(atTime: timeText)
         } else {
           let timeText = TKStyleManager.timeString(arrival, for: arrivalTimeZone, relativeTo: departureTimeZone)
-          let fullText = "\(Loc.Arrives(atTime: timeText))"
-          return NSAttributedString(string: fullText, attributes: attributes)
+          return Loc.Arrives(atTime: timeText)
         }
       } else {
-        return NSAttributedString(string: arrival.durationSince(departure), attributes: attributes)
+        return arrival.durationSince(departure)
       }
     }
     
-    func costString(costs: [TKTripCostType: String]) -> NSAttributedString {
+    static func costString(costs: [TKTripCostType: String]) -> String {
       let displayable = displayableMetrics(for: costs)
-      guard !displayable.isEmpty else { return NSAttributedString(string: " ") }
-      let joint = displayable.joined(separator: " ⋅ ")
-      return NSAttributedString(string: joint, attributes: [.foregroundColor: costColor])
+      guard !displayable.isEmpty else { return " " }
+      return displayable.joined(separator: " ⋅ ")
     }
     
-    func costAccessibilityLabel(costs: [TKTripCostType: String]) -> String {
+    static func costAccessibilityLabel(costs: [TKTripCostType: String]) -> String {
       return displayableMetrics(for: costs)
         .map { $0.replacingOccurrences(of: "CO₂", with: "C-O-2") } // Don't say "Co subscript 2"
         .joined(separator: "; ")
     }
     
-    private func displayableMetrics(for costs: [TKTripCostType: String]) -> [String] {
+    static private func displayableMetrics(for costs: [TKTripCostType: String]) -> [String] {
       var metricValues: [String] = []
       
       for metricKey in TKUIRoutingResultsCard.config.tripMetricsToShow {

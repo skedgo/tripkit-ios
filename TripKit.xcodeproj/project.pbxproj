@@ -743,7 +743,6 @@
 		3AFF2B5B26C69BA4007809CD /* TKUIProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF277426C6975F007809CD /* TKUIProgressCell.swift */; };
 		3AFF2B5C26C69BA4007809CD /* TKUITripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF277126C6975F007809CD /* TKUITripCell.swift */; };
 		3AFF2B5D26C69BA4007809CD /* TKUITripCell+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF276526C6975F007809CD /* TKUITripCell+Formatter.swift */; };
-		3AFF2B5E26C69BA4007809CD /* TKUITripCell+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF277326C6975F007809CD /* TKUITripCell+Rx.swift */; };
 		3AFF2B5F26C69BA9007809CD /* TKUIRoutingQueryInputTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF275526C6975F007809CD /* TKUIRoutingQueryInputTitleView.swift */; };
 		3AFF2B6026C69BB1007809CD /* TKUISegmentInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF274B26C6975F007809CD /* TKUISegmentInstructionsView.swift */; };
 		3AFF2B6126C69BB1007809CD /* TKUISegmentDirectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF275026C6975F007809CD /* TKUISegmentDirectionCell.swift */; };
@@ -1443,7 +1442,6 @@
 		3AFF277026C6975F007809CD /* TKUIResultsSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIResultsSectionHeaderView.swift; sourceTree = "<group>"; };
 		3AFF277126C6975F007809CD /* TKUITripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripCell.swift; sourceTree = "<group>"; };
 		3AFF277226C6975F007809CD /* TKUIResultsAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIResultsAccessoryView.swift; sourceTree = "<group>"; };
-		3AFF277326C6975F007809CD /* TKUITripCell+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKUITripCell+Rx.swift"; sourceTree = "<group>"; };
 		3AFF277426C6975F007809CD /* TKUIProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIProgressCell.swift; sourceTree = "<group>"; };
 		3AFF277526C6975F007809CD /* TKUIResultsAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUIResultsAccessoryView.xib; sourceTree = "<group>"; };
 		3AFF277626C6975F007809CD /* TKUIStyledLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIStyledLabel.swift; sourceTree = "<group>"; };
@@ -2608,7 +2606,6 @@
 				3AFF277126C6975F007809CD /* TKUITripCell.swift */,
 				3AFF276C26C6975F007809CD /* TKUITripCell.xib */,
 				3AFF276526C6975F007809CD /* TKUITripCell+Formatter.swift */,
-				3AFF277326C6975F007809CD /* TKUITripCell+Rx.swift */,
 			);
 			path = results;
 			sourceTree = "<group>";
@@ -3827,7 +3824,6 @@
 				3AFF2B7E26C69BBE007809CD /* TKUITripSegmentsView.swift in Sources */,
 				3AFF2B9526C69BC9007809CD /* TKUISegmentCellHelper.swift in Sources */,
 				3AFF2BAA26C69BE7007809CD /* TKUIDebugActionHandler.swift in Sources */,
-				3AFF2B5E26C69BA4007809CD /* TKUITripCell+Rx.swift in Sources */,
 				3AFF2BE126C69C15007809CD /* TripKitUIBundle.swift in Sources */,
 				3AFF2BAE26C69BE7007809CD /* TGCardViewController+Present.swift in Sources */,
 				3AFF2B1026C69B63007809CD /* TKUITimetableViewController.swift in Sources */,
@@ -4996,7 +4992,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/skedgo/GeoMonitor";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 0.1.0;
 			};
 		};

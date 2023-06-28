@@ -21,8 +21,6 @@ class TKUITripTitleView: UIView {
 
   @IBOutlet weak var dismissButton: UIButton!
   
-  private var formatter: TKUITripCell.Formatter? = nil
-
   static func newInstance() -> TKUITripTitleView {
     return Bundle(for: TKUITripTitleView.self).loadNibNamed("TKUITripTitleView", owner: self, options: nil)?.first as! TKUITripTitleView
   }
@@ -31,12 +29,6 @@ class TKUITripTitleView: UIView {
     super.awakeFromNib()
     
     backgroundColor = .tkBackground
-    
-    formatter = .init()
-    formatter?.primaryColor = .tkLabelPrimary
-    formatter?.primaryFont = TKStyleManager.customFont(forTextStyle: .body)
-    formatter?.secondaryColor = .tkLabelSecondary
-    formatter?.secondaryFont = TKStyleManager.customFont(forTextStyle: .body)
 
     timeTitleLabel.text = nil
     timeSubtitleLabel.text = nil
@@ -45,6 +37,10 @@ class TKUITripTitleView: UIView {
     dismissButton.setTitle(nil, for: .normal)
     dismissButton.accessibilityLabel = Loc.Close
   }
+  
+  func update(preferredContentSizeCategory: UIContentSizeCategory) {
+    timeStack.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
+  }
 
 }
 
@@ -52,12 +48,14 @@ class TKUITripTitleView: UIView {
 
 extension TKUITripTitleView {
   func configure(with model: TKUITripCell.Model) {
-    guard let formatter = self.formatter else { return }
+    timeTitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    timeTitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    timeTitleLabel.textColor = .tkLabelPrimary
 
-    timeTitleLabel.attributedText = model.hideExactTimes ? nil : formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
-    
-    timeSubtitleLabel.attributedText = model.hideExactTimes ? nil : formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
-    
+    timeSubtitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    timeSubtitleLabel.textColor = .tkLabelSecondary
+
     segmentView.isCanceled = model.isCancelled
     segmentView.configure(model.segments)
     
