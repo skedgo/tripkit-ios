@@ -121,28 +121,28 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUICardAction.swift",
-      "line": 139,
+      "line": 148,
       "symbol": "TKUICardAction.style",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUICardAction.swift",
-      "line": 153,
+      "line": 168,
       "symbol": "TKUICardActionContent",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUICardAction.swift",
-      "line": 154,
+      "line": 169,
       "symbol": "TKUICardActionContent.init(title:accessibilityLabel:icon:style:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUICardAction.swift",
-      "line": 170,
+      "line": 185,
       "symbol": "TKUICardActionContent.style",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -1135,6 +1135,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripModeByModeCard.swift",
+      "line": 221,
+      "symbol": "TKUITripModeByModeCard.shows(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard+Configuration.swift",
       "line": 15,
       "symbol": "TKUITripOverviewCard.TripAction",
@@ -1164,35 +1171,70 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 38,
+      "line": 39,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 40,
+      "line": 41,
+      "symbol": "TKUITripOverviewCard.DefaultActionPriority",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 42,
+      "symbol": "TKUITripOverviewCard.DefaultActionPriority.go",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 43,
+      "symbol": "TKUITripOverviewCard.DefaultActionPriority.notify",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 44,
+      "symbol": "TKUITripOverviewCard.DefaultActionPriority.alternatives",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 47,
       "symbol": "TKUITripOverviewCard.config",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 71,
+      "line": 84,
       "symbol": "TKUITripOverviewCard.init(trip:index:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 397,
+      "line": 241,
+      "symbol": "TKUITripOverviewCard.shows(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
+      "line": 437,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 399,
+      "line": 439,
       "symbol": "TKUITripOverviewCard.modeByModeCard(_:updatedTrip:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2178,38 +2220,45 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager+Rx.swift",
+      "line": 26,
+      "symbol": "Reactive.trip",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 30,
+      "line": 38,
       "symbol": "TKUITripMonitorManager.shared",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 56,
-      "symbol": "TKUITripMonitorManager.getPreference(for:)",
+      "line": 85,
+      "symbol": "TKUITripMonitorManager.monitorRegions(from:includeTimeToLeaveNotification:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 67,
-      "symbol": "TKUITripMonitorManager.setAlertsEnabled(_:for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 116,
-      "symbol": "TKUITripMonitorManager.monitorRegions(from:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 129,
+      "line": 112,
       "symbol": "TKUITripMonitorManager.stopMonitoring()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 131,
+      "symbol": "TKUITripMonitorManager.match(geofenceID:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/vendor/RxCombine/Combine+Rx/Subject+Rx.swift",
+      "line": 21,
+      "symbol": "AnyObserverConvertible.Output",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
       "warning": "undocumented"
     },
     {

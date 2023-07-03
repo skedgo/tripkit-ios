@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           SkedGo&#39;s TripKit iOS - TripKitUI iOS
         </a>
-         (41% documented)
+         (42% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -76,6 +76,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard.html">TKUITripOverviewCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard/DefaultActionPriority.html">– DefaultActionPriority</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard/Configuration.html">– Configuration</a>
@@ -195,6 +198,9 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Other%20Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RxPublisher.html">RxPublisher</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKUIAnnotationViewBuilder.html">TKUIAnnotationViewBuilder</a>
               </li>
@@ -395,13 +401,28 @@
                 <a class="nav-group-task-link" href="../Extensions/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Combine.html">Combine</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Combine/Publisher.html">– Publisher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/s:7Combine19CurrentValueSubjectC">CurrentValueSubject</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Notification.html">Notification</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Notification/Name.html">– Name</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ObservableConvertibleType.html">ObservableConvertibleType</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/ObservableType.html">ObservableType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/s:7Combine18PassthroughSubjectC">PassthroughSubject</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/PrimitiveSequenceType.html">PrimitiveSequenceType</a>
@@ -525,6 +546,9 @@
             <a class="nav-group-name-link" href="../Other%20Protocols.html">Other Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/AnyObserverConvertible.html">AnyObserverConvertible</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TKUICircleDisplayable.html">TKUICircleDisplayable</a>
               </li>
               <li class="nav-group-task">
@@ -627,6 +651,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9TripKitUI20TKUITripOverviewCardC21DefaultActionPriorityO"></a>
+                    <a name="//apple_ref/swift/Enum/DefaultActionPriority" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI20TKUITripOverviewCardC21DefaultActionPriorityO">DefaultActionPriority</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Classes/TKUITripOverviewCard/DefaultActionPriority.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">DefaultActionPriority</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9TripKitUI20TKUITripOverviewCardC6configAC13ConfigurationVvpZ"></a>
                     <a name="//apple_ref/swift/Variable/config" class="dashAnchor"></a>
                     <a class="token" href="#/s:9TripKitUI20TKUITripOverviewCardC6configAC13ConfigurationVvpZ">config</a>
@@ -676,6 +728,35 @@ that gets pushed, and returning <code>false</code> will do nothing, i.e., the ca
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">selectedAlternativeTripCallback</span><span class="p">:</span> <span class="p">((</span><span class="kt">Trip</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI20TKUITripOverviewCardC30includeTimeToLeaveNotificationSbvp"></a>
+                    <a name="//apple_ref/swift/Property/includeTimeToLeaveNotification" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI20TKUITripOverviewCardC30includeTimeToLeaveNotificationSbvp">includeTimeToLeaveNotification</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Controls the &ldquo;Get ready to leave&rdquo; notifications when monitoring a trip that starts in the future.</p>
+
+<p>Defaults to <code>true</code>, but can be turned off via this setting.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">includeTimeToLeaveNotification</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -842,9 +923,36 @@ that gets pushed, and returning <code>false</code> will do nothing, i.e., the ca
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI20TKUITripOverviewCardC010buildStartA6Action10startingOn5label4mode13actionHandlerAA08TKUICardI0Cy20TGCardViewController0Q0C0aB00A0CGAN9TKSegmentCSg_SSSgAA15TKUISegmentModeOyAA0dv2ByvF0C_APtcSgtFZ"></a>
-                    <a name="//apple_ref/swift/Method/buildStartTripAction(startingOn:label:mode:actionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI20TKUITripOverviewCardC010buildStartA6Action10startingOn5label4mode13actionHandlerAA08TKUICardI0Cy20TGCardViewController0Q0C0aB00A0CGAN9TKSegmentCSg_SSSgAA15TKUISegmentModeOyAA0dv2ByvF0C_APtcSgtFZ">buildStartTripAction(startingOn:<wbr>label:<wbr>mode:<wbr>actionHandler:<wbr>)</a>
+                    <a name="/s:9TripKitUI20TKUITripOverviewCardC5showsySb0aB00A0CF"></a>
+                    <a name="//apple_ref/swift/Method/shows(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI20TKUITripOverviewCardC5showsySb0aB00A0CF">shows(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">shows</span><span class="p">(</span><span class="n">_</span> <span class="nv">trip</span><span class="p">:</span> <span class="kt">Trip</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI20TKUITripOverviewCardC010buildStartA6Action10startingOn5label4mode5style13actionHandlerAA08TKUICardI0Cy20TGCardViewController0R0C0aB00A0CGAO9TKSegmentCSg_SSSgAA15TKUISegmentModeOAA0qI5StyleOyAA0dw2BywF0C_AQtcSgtFZ"></a>
+                    <a name="//apple_ref/swift/Method/buildStartTripAction(startingOn:label:mode:style:actionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI20TKUITripOverviewCardC010buildStartA6Action10startingOn5label4mode5style13actionHandlerAA08TKUICardI0Cy20TGCardViewController0R0C0aB00A0CGAO9TKSegmentCSg_SSSgAA15TKUISegmentModeOAA0qI5StyleOyAA0dw2BywF0C_AQtcSgtFZ">buildStartTripAction(startingOn:<wbr>label:<wbr>mode:<wbr>style:<wbr>actionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -861,7 +969,8 @@ that gets pushed, and returning <code>false</code> will do nothing, i.e., the ca
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">buildStartTripAction</span><span class="p">(</span><span class="nv">startingOn</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> 
                                         <span class="nv">label</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-                                        <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/TKUISegmentMode.html">TKUISegmentMode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">getReady</span><span class="p">,</span> 
+                                        <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/TKUISegmentMode.html">TKUISegmentMode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">getReady</span><span class="p">,</span>
+                                        <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">bold</span><span class="p">,</span>
                                         <span class="nv">actionHandler</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKUITripModeByModeCard.html">TKUITripModeByModeCard</a></span><span class="o">.</span><span class="kt">TripStartedActionHandler</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">TKUITripOverviewCard</span><span class="o">.</span><span class="kt"><a href="../Classes/TKUITripOverviewCard.html#/s:9TripKitUI20TKUITripOverviewCardC0A6Actiona">TripAction</a></span></code></pre>
 
                         </div>
@@ -1026,7 +1135,7 @@ accessible from <code><a href="../Classes/TKUITripOverviewCard.html#/s:9TripKitU
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-06-26)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-07-03)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

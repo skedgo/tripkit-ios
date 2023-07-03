@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           SkedGo&#39;s TripKit iOS - TripKitUI iOS
         </a>
-         (41% documented)
+         (42% documented)
       </p>
     
       <div class="header-col--secondary">
@@ -76,6 +76,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard.html">TKUITripOverviewCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard/DefaultActionPriority.html">– DefaultActionPriority</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKUITripOverviewCard/Configuration.html">– Configuration</a>
@@ -195,6 +198,9 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Other%20Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RxPublisher.html">RxPublisher</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TKUIAnnotationViewBuilder.html">TKUIAnnotationViewBuilder</a>
               </li>
@@ -395,13 +401,28 @@
                 <a class="nav-group-task-link" href="../Extensions/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Combine.html">Combine</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Combine/Publisher.html">– Publisher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/s:7Combine19CurrentValueSubjectC">CurrentValueSubject</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Notification.html">Notification</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Notification/Name.html">– Name</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ObservableConvertibleType.html">ObservableConvertibleType</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/ObservableType.html">ObservableType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/s:7Combine18PassthroughSubjectC">PassthroughSubject</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/PrimitiveSequenceType.html">PrimitiveSequenceType</a>
@@ -525,6 +546,9 @@
             <a class="nav-group-name-link" href="../Other%20Protocols.html">Other Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/AnyObserverConvertible.html">AnyObserverConvertible</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TKUICircleDisplayable.html">TKUICircleDisplayable</a>
               </li>
               <li class="nav-group-task">
@@ -647,9 +671,9 @@ taken that this is reflected:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI14TKUICardActionC7content7handlerACyxq_G7Combine12AnyPublisherVyAA0dE7ContentVs5NeverOG_yAF_xq_So6UIViewCtScMYcctcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(content:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC7content7handlerACyxq_G7Combine12AnyPublisherVyAA0dE7ContentVs5NeverOG_yAF_xq_So6UIViewCtScMYcctcfc">init(content:<wbr>handler:<wbr>)</a>
+                    <a name="/s:9TripKitUI14TKUICardActionC7content8priority7handlerACyxq_G7Combine12AnyPublisherVyAA0dE7ContentVs5NeverOG_SiyAG_xq_So6UIViewCtScMYcctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(content:priority:handler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC7content8priority7handlerACyxq_G7Combine12AnyPublisherVyAA0dE7ContentVs5NeverOG_SiyAG_xq_So6UIViewCtScMYcctcfc">init(content:<wbr>priority:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -667,6 +691,7 @@ external state.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
   <span class="nv">content</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TKUICardActionContent.html">TKUICardActionContent</a></span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
   <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">TKUICardAction</span><span class="o">&lt;</span><span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
 <span class="p">)</span></code></pre>
 
@@ -691,6 +716,18 @@ external state.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>priority</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Priority of action to determine ordering in a list</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>handler</em>
                                 </code>
                               </td>
@@ -709,9 +746,9 @@ external state.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSbAI_xq_So6UIViewCtScMYcctcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSbAI_xq_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>handler:<wbr>)</a>
+                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSiSbAJ_xq_So6UIViewCtScMYcctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:priority:handler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSiSbAJ_xq_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>priority:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -731,6 +768,7 @@ external state.</p>
   <span class="nv">accessibilityLabel</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
   <span class="nv">icon</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
   <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">normal</span><span class="p">,</span>
+  <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
   <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">TKUICardAction</span><span class="o">&lt;</span><span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
 <span class="p">)</span></code></pre>
 
@@ -791,6 +829,18 @@ external state.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>priority</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Priority of action to determine ordering in a list</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>handler</em>
                                 </code>
                               </td>
@@ -809,9 +859,9 @@ external state.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgyx_q_So6UIViewCtScMYcctcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgyx_q_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>handler:<wbr>)</a>
+                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgSiyx_q_So6UIViewCtScMYcctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:priority:handler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgSiyx_q_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>priority:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -833,6 +883,7 @@ external state.</p>
   <span class="nv">accessibilityLabel</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
   <span class="nv">icon</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span><span class="p">,</span>
   <span class="nv">style</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a></span><span class="p">)?</span>  <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+  <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
   <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
 <span class="p">)</span></code></pre>
 
@@ -887,6 +938,18 @@ external state.</p>
                               <td>
                                 <div>
                                   <p>Provider of style for the button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>priority</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Priority of action to determine ordering in a list</p>
                                 </div>
                               </td>
                             </tr>
@@ -1019,6 +1082,36 @@ external state.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9TripKitUI14TKUICardActionC8prioritySivp"></a>
+                    <a name="//apple_ref/swift/Property/priority" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC8prioritySivp">priority</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Priority of the action to determine ordering in a list. Defaults to 0.</p>
+
+<p>If multiple actions have the same priority, then <code>.bold</code> style is
+preferred and otherwise by insertion order.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9TripKitUI14TKUICardActionC7handlerySbACyxq_G_xq_So6UIViewCtScMYccvp"></a>
                     <a name="//apple_ref/swift/Property/handler" class="dashAnchor"></a>
                     <a class="token" href="#/s:9TripKitUI14TKUICardActionC7handlerySbACyxq_G_xq_So6UIViewCtScMYccvp">handler</a>
@@ -1056,7 +1149,7 @@ toggle actions such as adding or removing a reminder or favourite).</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-06-26)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-07-03)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
