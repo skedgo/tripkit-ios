@@ -14,6 +14,7 @@ import RxCocoa
 @testable import TripKit
 @testable import TripKitUI
 
+@MainActor
 class TKUITripOverviewViewModelTest: TKTestCase {
 
   func testFirstSegmentWhenStartingAtStation() throws {

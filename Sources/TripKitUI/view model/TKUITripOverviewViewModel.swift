@@ -13,6 +13,7 @@ import RxCocoa
 
 import TripKit
 
+@MainActor
 class TKUITripOverviewViewModel {
   
   struct UIInput {
@@ -21,16 +22,12 @@ class TKUITripOverviewViewModel {
     var isVisible: Driver<Bool> = .just(true)
   }
   
-  init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput()) {
+  init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput(), includeTimeToLeaveNotification: Bool) {
     
     dataSources = presentedTrip
       .asDriver(onErrorDriveWith: .empty())
       .map { $0.tripGroup.sources }
     
-    notificationKinds = presentedTrip
-      .asDriver(onErrorDriveWith: .empty())
-      .map { Set($0.segments.flatMap(\.notifications).map(\.messageKind)) }
-
     let tripChanged: Observable<Trip> = presentedTrip
       .asObservable()
       .distinctUntilChanged { $0.persistentId() == $1.persistentId() }
@@ -44,7 +41,7 @@ class TKUITripOverviewViewModel {
     refreshMap = Observable.merge(tripChanged, servicesFetched)
       .asSignal(onErrorSignalWith: .empty())
     
-    let tripUpdated: Observable<Trip> = presentedTrip
+    let tripUpdated: Infallible<Trip> = presentedTrip
       .asObservable()
       .flatMapLatest {
         return TKRealTimeFetcher.rx.streamUpdates($0, active: inputs.isVisible.asObservable())
@@ -52,6 +49,9 @@ class TKUITripOverviewViewModel {
           .catchAndReturn($0)
       }
       .share(replay: 1, scope: .forever)
+      .asObservable()
+      .observe(on: MainScheduler.instance)
+      .asInfallible { _ in .empty() }
         
     sections = tripUpdated
       .map(Self.buildSections)
@@ -67,17 +67,35 @@ class TKUITripOverviewViewModel {
     if #available(iOS 14.0, *) {
       nextFromAlertToggle = inputs.alertsEnabled.asObservable()
         .withLatestFrom(tripUpdated) { ($1, $0) }
-        .compactMap { trip, enabled -> Next? in
+        .asyncMap { trip, enabled in
           if enabled {
-            TKUITripMonitorManager.shared.monitorRegions(from: trip)
+            await TKUITripMonitorManager.shared.monitorRegions(from: trip, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
           } else {
             TKUITripMonitorManager.shared.stopMonitoring()
           }
-          return nil
         }
+        .compactMap { nil } // No `Next
         .asSignal { _ in .empty() }
+      
+      notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip
+        .withLatestFrom(tripUpdated) { $0?.tripID == $1.tripId }
+        .asDriver(onErrorJustReturn: false)
+      
+      notificationKinds = presentedTrip
+        .asDriver(onErrorDriveWith: .empty())
+        .map {
+          Set($0.segments
+            .flatMap(\.notifications)
+            .map(\.messageKind)
+            .filter { includeTimeToLeaveNotification || $0 != .tripStart }
+          )
+        }
+
     } else {
       nextFromAlertToggle = .empty()
+      
+      notificationsEnabled = .just(false)
+      notificationKinds = .just([])
     }
     
     let nextFromSelection = inputs.selected.compactMap { item -> Next? in
@@ -107,6 +125,8 @@ class TKUITripOverviewViewModel {
   
   let notificationKinds: Driver<Set<TKAPI.TripNotification.MessageKind>>
   
+  let notificationsEnabled: Driver<Bool>
+  
   let refreshMap: Signal<Trip>
   
   let next: Signal<Next>
@@ -114,8 +134,8 @@ class TKUITripOverviewViewModel {
 }
 
 extension TKUITripOverviewViewModel {
-  convenience init(initialTrip: Trip) {
-    self.init(presentedTrip: .just(initialTrip))
+  convenience init(initialTrip: Trip, includeTimeToLeaveNotification: Bool = true) {
+    self.init(presentedTrip: .just(initialTrip), includeTimeToLeaveNotification: includeTimeToLeaveNotification)
   }
 }
 

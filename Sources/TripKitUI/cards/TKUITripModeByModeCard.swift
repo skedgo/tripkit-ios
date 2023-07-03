@@ -218,6 +218,10 @@ public class TKUITripModeByModeCard: TGPageCard {
     return modeIndex
   }
   
+  public func shows(_ trip: Trip) -> Bool {
+    return viewModel.trip.tripURL == trip.tripURL
+  }
+  
   deinit {
     let cards = self.cards
     DispatchQueue.main.async {

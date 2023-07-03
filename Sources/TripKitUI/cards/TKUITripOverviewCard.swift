@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 import RxSwift
 import RxCocoa
@@ -37,6 +38,12 @@ class TKUITripsPageCard: TGPageCard {
 
 public class TKUITripOverviewCard: TKUITableCard {
   
+  public enum DefaultActionPriority: Int {
+    case go = 15
+    case notify = 10
+    case alternatives = 5
+  }
+  
   public static var config = Configuration.empty
   
   private let initialTrip: Trip
@@ -50,10 +57,16 @@ public class TKUITripOverviewCard: TKUITableCard {
   /// that gets pushed, and returning `false` will do nothing, i.e., the callback handles displaying it.
   public var selectedAlternativeTripCallback: ((Trip) -> Bool)? = nil
   
+  /// Controls the "Get ready to leave" notifications when monitoring a trip that starts in the future.
+  ///
+  /// Defaults to `true`, but can be turned off via this setting.
+  public var includeTimeToLeaveNotification: Bool = true
+  
   fileprivate var viewModel: TKUITripOverviewViewModel!
   private let disposeBag = DisposeBag()
   
   private let alternativesTapped = PublishSubject<IndexPath>()
+  private let alertsToggled = PublishSubject<Bool>()
   private let isVisible = BehaviorSubject<Bool>(value: false)
   
   // The trip being presented may be changing as a result of user actions
@@ -86,7 +99,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       }
     }
   }
-
+  
   override public func didBuild(tableView: UITableView, cardView: TGCardView) {
     super.didBuild(tableView: tableView, cardView: cardView)
     
@@ -132,9 +145,10 @@ public class TKUITripOverviewCard: TKUITableCard {
       presentedTrip: presentedTrip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
-        alertsEnabled: notificationFooterView.notificationSwitch.rx.value.asSignal(onErrorSignalWith: .empty()),
+        alertsEnabled: alertsToggled.asSignal(onErrorSignalWith: .empty()),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
-      )
+      ),
+      includeTimeToLeaveNotification: includeTimeToLeaveNotification
     )
 
     viewModel.sections
@@ -224,6 +238,12 @@ public class TKUITripOverviewCard: TKUITableCard {
     isVisible.onNext(false)
   }
   
+  public func shows(_ trip: Trip) -> Bool {
+    // The trip map manager keeps a reference to the latest trip, so we can show this
+    return initialTrip.tripURL == trip.tripURL
+        || tripMapManager?.trip.tripURL == trip.tripURL
+  }
+  
 }
 
 // MARK: - Configuring cells
@@ -292,9 +312,30 @@ extension TKUITripOverviewCard {
 
     if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
       let notificationView = self.notificationFooterView
-      notificationView.frame.size.width = tableView.frame.width
-      notificationView.updateAvailableKinds(notifications)
+      notificationView.frame.size.width = tableView.frame.width      
+      notificationView.updateAvailableKinds(notifications, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
       notificationView.backgroundColor = tableView.backgroundColor
+
+      // Footer => View Model
+      // It's important here to use `controlEvent(.valueChanged)` and not
+      // `value` as `value` will fire just from initialisation, and this
+      // shouldn't be treated as a user action.
+      notificationView.notificationSwitch.rx.controlEvent(.valueChanged)
+        .subscribe(onNext: { [weak self, weak notificationView] isOn in
+          guard let self, let notificationView else { return }
+          self.alertsToggled.onNext(notificationView.notificationSwitch.isOn)
+        })
+        .disposed(by: disposeBag)
+      
+      // View Model => Toggle button
+      // Update button state to reflect external changes, e.g., when toggled
+      // via some other means or when another trip gets monitored instead.
+      viewModel.notificationsEnabled
+        .drive(onNext: { [weak notificationView] isOn in
+          notificationView?.notificationSwitch.isOn = isOn
+        })
+        .disposed(by: disposeBag)
+
       stackView.addArrangedSubview(notificationView)
     }
     
@@ -403,8 +444,32 @@ extension TKUITripOverviewCard {
   
   private func buildActionsView(from actions: [TKUITripOverviewCard.TripAction], trip: Trip) -> UIView? {
     var mutable = actions
+    
+    if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
+      let publisher = viewModel.notificationsEnabled
+        .publisher
+        .catch { _ in Just(false) }
+        .map { isOn in
+          // TODO: Localise
+          if isOn {
+            return TKUICardActionContent(title: "Mute", icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive)
+          } else {
+            return TKUICardActionContent(title: "Alert Me", icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold)
+          }
+        }
+        .eraseToAnyPublisher()
+      
+      
+      mutable.append(TripAction(content: publisher, priority: TKUITripOverviewCard.DefaultActionPriority.notify.rawValue) { (action, card, _, _) in
+        // TODO: Localise
+        let isOn = action.title != "Mute"
+        (card as? TKUITripOverviewCard)?.alertsToggled.onNext(isOn)
+      })
+    }
+    
     if selectedAlternativeTripCallback != nil {
-      mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative) { [weak self] (_, _, trip, _) -> Bool in
+      // TODO: Localise
+      mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative, priority: TKUITripOverviewCard.DefaultActionPriority.alternatives.rawValue) { [weak self] (_, _, trip, _) -> Bool in
         trip.request.expandForFavorite = true
         self?.handle(.showAlternativeRoutes(trip.request))
         return false

@@ -135,6 +135,23 @@ extension Trip {
   }
 }
 
+extension Trip {
+  public static func find(tripURL: URL, in context: NSManagedObjectContext) -> Trip? {
+    if tripURL.scheme == "x-coredata", let objectID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: tripURL), let trip = context.object(with: objectID) as? Trip {
+      return trip
+    }
+    
+    let needle = tripURL.absoluteString
+    return context.fetchUniqueObject(Trip.self, predicate: NSPredicate(format: "temporaryURLString == %@ OR shareURLString == %@", needle, needle))
+  }
+  
+  public var tripURL: URL {
+    shareURL
+      ?? temporaryURLString.flatMap { URL(string: $0) }
+      ?? objectID.uriRepresentation()
+  }
+}
+
 // MARK: - Similar trips
 
 extension Trip {

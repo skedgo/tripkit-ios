@@ -29,11 +29,12 @@ public enum TKUICardActionsViewFactory {
   public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, padding: Edge.Set = []) -> UIView {
     
     let actionsView: UIView
+    let sorted = sort(actions: actions)
     
     if #available(iOS 16.0, *) {
       actionsView = UIHostingController(
         rootView: TKUIAdaptiveCardActions(
-          actions: actions,
+          actions: sorted,
           info: .init(card: card, model: model, container: container),
           normalStyle: TKUICustomization.shared.cardActionNormalStyle
         )
@@ -43,7 +44,7 @@ public enum TKUICardActionsViewFactory {
     } else {
       actionsView = UIHostingController(
         rootView: TKUIScrollingCardActions(
-          actions: actions,
+          actions: sorted,
           info: .init(card: card, model: model, container: container),
           normalStyle: TKUICustomization.shared.cardActionNormalStyle
         )
@@ -54,5 +55,18 @@ public enum TKUICardActionsViewFactory {
     actionsView.tintColor = TKColor.tkAppTintColor
     return actionsView
   }
-  
+
+  static func sort<C, M>(actions: [TKUICardAction<C, M>]) -> [TKUICardAction<C, M>] {
+    return actions.enumerated().sorted { lhs, rhs in
+      if lhs.element.priority != rhs.element.priority {
+        return lhs.element.priority > rhs.element.priority
+      } else {
+        switch (lhs.element.style, rhs.element.style) {
+        case (.bold, _):  return true
+        case (_, .bold):  return false
+        default:          return lhs.offset < rhs.offset
+        }
+      }
+    }.map(\.element)
+  }
 }
