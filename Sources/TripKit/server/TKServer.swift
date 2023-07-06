@@ -282,7 +282,7 @@ extension TKServer {
       { response in
         continuation.resume(returning: response.map  { data in
           guard let data, !data.isEmpty else { throw ServerError.noData }
-          return try data
+          return data
         })
       }
     }
