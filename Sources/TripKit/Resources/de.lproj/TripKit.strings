@@ -43,6 +43,9 @@
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 Stop";
 
+/* Action button to turn on alerts for a trip */
+"Alert Me" = "Alarmieren";
+
 /* No comment provided by engineer. */
 "Alerts" = "Warnungen";
 
@@ -52,8 +55,8 @@
 /* Instruction to follow unnamed street */
 "Along unnamed street" = "Entlang unbenannter Straße";
 
-/* Action button title to see alternative options for the case where you cant make the next connection */
-"Alternative routes" = "Alternative Routen";
+/* Action button title to see alternative options, e.g., for the case where you can't make the next connection */
+"Alternatives" = "Alternativen";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Karten";
@@ -287,6 +290,9 @@
 
 /* Text for vehicle of type: Motorbike */
 "Motorbike" = "Motorrad";
+
+/* Action button to turn off alerts for a trip */
+"Mute" = "Stummschalten";
 
 /* Title for the 'Near Me'/Nearby card */
 "Near Me" = "In meiner Nähe";
