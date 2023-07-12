@@ -32,7 +32,7 @@ class TKUISegmentImpossibleCell: UITableViewCell {
     titleLabel.textColor = TKColor.tkLabelPrimary
     titleLabel.text = Loc.YouMightNotMakeThisTransfer
     
-    button.setTitle(Loc.AlternativeRoutes, for: .normal)
+    button.setTitle(Loc.Alternatives, for: .normal)
     button.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     button.tintColor = TKColor.tkLabelPrimary
     

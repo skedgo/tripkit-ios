@@ -198,10 +198,18 @@ extension Loc {
     return NSLocalizedString("Service has been cancelled.", tableName: "TripKit", bundle: .tripKit, comment: "Alert if service has been cancelled, meaning that the user can't take it and find an alternative")
   }
 
-  public static var AlternativeRoutes: String {
-    return NSLocalizedString("Alternative routes", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to see alternative options for the case where you cant make the next connection")
+  public static var Alternatives: String {
+    return NSLocalizedString("Alternatives", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to see alternative options, e.g., for the case where you can't make the next connection")
   }
-  
+
+  public static var AlertMe: String {
+    return NSLocalizedString("Alert Me", tableName: "TripKit", bundle: .tripKit, comment: "Action button to turn on alerts for a trip")
+  }
+
+  public static var Mute: String {
+    return NSLocalizedString("Mute", tableName: "TripKit", bundle: .tripKit, comment: "Action button to turn off alerts for a trip")
+  }
+
 
   // MARK: - Departures + Services
 
