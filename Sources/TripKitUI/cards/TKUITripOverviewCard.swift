@@ -454,26 +454,23 @@ extension TKUITripOverviewCard {
         .publisher
         .catch { _ in Just(false) }
         .map { isOn in
-          // TODO: Localise
           if isOn {
-            return TKUICardActionContent(title: "Mute", icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive)
+            return TKUICardActionContent(title: Loc.Mute, icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive)
           } else {
-            return TKUICardActionContent(title: "Alert Me", icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold)
+            return TKUICardActionContent(title: Loc.AlertMe, icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold)
           }
         }
         .eraseToAnyPublisher()
       
       
       mutable.append(TripAction(content: publisher, priority: TKUITripOverviewCard.DefaultActionPriority.notify.rawValue) { (action, card, _, _) in
-        // TODO: Localise
-        let isOn = action.title != "Mute"
+        let isOn = action.title != Loc.Mute
         (card as? TKUITripOverviewCard)?.alertsToggled.onNext(isOn)
       })
     }
     
     if selectedAlternativeTripCallback != nil {
-      // TODO: Localise
-      mutable.append(TripAction(title: "Alternatives", icon: .iconAlternative, priority: TKUITripOverviewCard.DefaultActionPriority.alternatives.rawValue) { [weak self] (_, _, trip, _) -> Bool in
+      mutable.append(TripAction(title: Loc.Alternatives, icon: .iconAlternative, priority: TKUITripOverviewCard.DefaultActionPriority.alternatives.rawValue) { [weak self] (_, _, trip, _) -> Bool in
         trip.request.expandForFavorite = true
         self?.handle(.showAlternativeRoutes(trip.request))
         return false

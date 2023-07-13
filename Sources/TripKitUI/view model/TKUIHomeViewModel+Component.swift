@@ -24,7 +24,10 @@ public struct TKUIHomeHeaderConfiguration {
 
 
 public struct TKUIHomeComponentInput {
+  /// Fires whenever the home card will appear *or disappear*, providing `true` on appearance
+  /// and `false` on disappearance.
   public let homeCardWillAppear: Observable<Bool>
+  
   public let itemSelected: Signal<TKUIHomeComponentItem>
   public let mapRect: Driver<MKMapRect>
 }
