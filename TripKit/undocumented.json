@@ -1438,111 +1438,125 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
       "line": 201,
-      "symbol": "Loc.AlternativeRoutes",
+      "symbol": "Loc.Alternatives",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 208,
+      "line": 205,
+      "symbol": "Loc.AlertMe",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
+      "line": 209,
+      "symbol": "Loc.Mute",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
+      "line": 216,
       "symbol": "Loc.Timetable",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 212,
+      "line": 220,
       "symbol": "Loc.Every(prefix:repetition:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 222,
+      "line": 230,
       "symbol": "Loc.At(what:time:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 227,
+      "line": 235,
       "symbol": "Loc.At(time:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 232,
+      "line": 240,
       "symbol": "Loc.More(count:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 241,
+      "line": 249,
       "symbol": "Loc.Now",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 245,
+      "line": 253,
       "symbol": "Loc.In(duration:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 250,
+      "line": 258,
       "symbol": "Loc.Ago(duration:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 255,
+      "line": 263,
       "symbol": "Loc.Checkmark",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 259,
+      "line": 267,
       "symbol": "Loc.Showing(_:ofTransportModes:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 266,
+      "line": 274,
       "symbol": "Loc.CustomizeHome",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 272,
+      "line": 280,
       "symbol": "Loc.NearMe",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 280,
+      "line": 288,
       "symbol": "Loc.InstantResults",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 285,
+      "line": 293,
       "symbol": "Loc.MoreResults",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/Loc+TripKitUI.swift",
-      "line": 291,
+      "line": 299,
       "symbol": "Loc.What3wordsAddress",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
