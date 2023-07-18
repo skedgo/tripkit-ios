@@ -203,6 +203,9 @@
 /* Instruction to get a service towards provided destination */
 "Get on service to %@" = "Tomar el servicio a %@";
 
+/* Title of notification for an upcoming trip */
+"Get ready to leave" = "Prepárate para salir";
+
 /* Title of button to start a trip */
 "Go" = "Ir";
 
@@ -407,6 +410,9 @@
 
 /* Text for vehicle of type: SUV */
 "SUV" = "SUV";
+
+/* Notification message for a trip. Provided is %time you need to leave. */
+"Time to leave! Your trip commences at %@" = "Hora de Salir! Su viaje comienza a las %@";
 
 /* Title of button to access timetable */
 "Timetable" = "Horarios";
