@@ -271,6 +271,18 @@ extension Loc {
     return String(format: format, name)
   }
   
+  public static func TimeToLeave(destination: String? = nil, time: String) -> String {
+    if let destination {
+      return String(format: NSLocalizedString("Time to leave! Your trip to %@ commences at %@", tableName: "TripKit", bundle: .tripKit, comment: "Notification message for a trip. Provided is %destination and %time you need to leave."), destination, time)
+    } else {
+      return String(format: NSLocalizedString("Time to leave! Your trip commences at %@", tableName: "TripKit", bundle: .tripKit, comment: "Notification message for a trip. Provided is %time you need to leave."), time)
+    }
+  }
+  
+  public static var GetReadyToLeave: String {
+    return NSLocalizedString("Get ready to leave", tableName: "TripKit", bundle: .tripKit, comment: "Title of notification for an upcoming trip")
+  }
+  
 }
 
 // MARK: - Alerts
