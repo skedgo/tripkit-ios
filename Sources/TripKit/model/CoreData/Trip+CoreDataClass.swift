@@ -321,6 +321,24 @@ extension Trip {
   }
 }
 
+// MARK: - Notifications
+
+extension Trip {
+  public func notifications(includeTimeToLeaveNotification: Bool = true) -> Set<TKAPI.TripNotification> {
+    var regular = Set(segments.flatMap(\.notifications))
+    if includeTimeToLeaveNotification, departureTime.timeIntervalSinceNow > 15 * 60, let departureTime {
+      regular.insert(.init(
+        id: "depart-\(self.tripURL.absoluteString)",
+        kind: .time(departureTime.addingTimeInterval(-15 * 60)),
+        messageKind: .tripStart,
+        messageTitle: Loc.GetReadyToLeave,
+        messageBody: Loc.TimeToLeave(destination: request?.toLocation?.title, time: TKStyleManager.timeString(departureTime, for: departureTimeZone))
+      ))
+    }
+    return regular
+  }
+}
+
 // MARK: - Vehicles
 
 extension Trip {

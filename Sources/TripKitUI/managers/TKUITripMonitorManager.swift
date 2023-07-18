@@ -85,7 +85,9 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   public func monitorRegions(from trip: Trip, includeTimeToLeaveNotification: Bool = true) async {
     // Since only one trip can have notifications at a time, there is no need to save other trips, just need to replace the current one.
     
-    let notifications = trip.segments.flatMap(\.notifications)
+    let notifications = trip
+      .notifications(includeTimeToLeaveNotification: includeTimeToLeaveNotification)
+      .sorted { $0.messageKind.rawValue < $1.messageKind.rawValue }
     guard !notifications.isEmpty else {
       return stopMonitoring()
     }
