@@ -332,7 +332,7 @@ extension Trip {
         kind: .time(departureTime.addingTimeInterval(-15 * 60)),
         messageKind: .tripStart,
         messageTitle: Loc.GetReadyToLeave,
-        messageBody: Loc.TimeToLeave(destination: request?.toLocation?.title, time: TKStyleManager.timeString(departureTime))
+        messageBody: Loc.TimeToLeave(destination: request?.toLocation?.title, time: TKStyleManager.timeString(departureTime, for: departureTimeZone))
       ))
     }
     return regular
