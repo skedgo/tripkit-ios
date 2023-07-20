@@ -2228,28 +2228,56 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 38,
+      "line": 39,
       "symbol": "TKUITripMonitorManager.shared",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 85,
+      "line": 94,
       "symbol": "TKUITripMonitorManager.monitorRegions(from:includeTimeToLeaveNotification:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 114,
+      "line": 124,
       "symbol": "TKUITripMonitorManager.stopMonitoring()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 133,
+      "line": 143,
+      "symbol": "TKUITripMonitorManager.GeofenceMatch",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 144,
+      "symbol": "TKUITripMonitorManager.GeofenceMatch.trip",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 145,
+      "symbol": "TKUITripMonitorManager.GeofenceMatch.segment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 146,
+      "symbol": "TKUITripMonitorManager.GeofenceMatch.notification",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
+      "line": 149,
       "symbol": "TKUITripMonitorManager.match(geofenceID:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
