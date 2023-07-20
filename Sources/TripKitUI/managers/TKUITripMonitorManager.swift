@@ -32,6 +32,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     let tripID: String?
     let tripURL: URL
     let notifications: [TKAPI.TripNotification]
+    let departureTime: Date?
   }
   
   @objc(sharedInstance)
@@ -40,6 +41,14 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   private lazy var geoMonitor: GeoMonitor = {
     return .init(enabledKey: Keys.alertsEnabled) { [weak self] _ in
       guard let monitoredTrip = self?.monitoredTrip else { return [] }
+      
+      if let departureTime = monitoredTrip.departureTime, departureTime.timeIntervalSinceNow > 6 * 3600 {
+        // Ignore location-based notifications for trips departing more than 6
+        // hours from now. This closure should get called again within those
+        // 6 hours and the regions get added then.
+        return []
+      }
+      
       return monitoredTrip.notifications.compactMap(\.region)
       
     } onEvent: { [weak self] event in
@@ -103,8 +112,9 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     startMonitoringRegions(from: .init(
       tripID: trip.tripId,
       tripURL: tripURL,
-      notifications: notifications)
-    )
+      notifications: notifications,
+      departureTime: trip.departureTime
+    ))
     
     if includeTimeToLeaveNotification {
       scheduleTimeBased(from: notifications)
