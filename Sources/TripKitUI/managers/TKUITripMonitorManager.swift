@@ -32,6 +32,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     let tripID: String?
     let tripURL: URL
     let notifications: [TKAPI.TripNotification]
+    let departureTime: Date?
   }
   
   @objc(sharedInstance)
@@ -40,6 +41,14 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   private lazy var geoMonitor: GeoMonitor = {
     return .init(enabledKey: Keys.alertsEnabled) { [weak self] _ in
       guard let monitoredTrip = self?.monitoredTrip else { return [] }
+      
+      if let departureTime = monitoredTrip.departureTime, departureTime.timeIntervalSinceNow > 6 * 3600 {
+        // Ignore location-based notifications for trips departing more than 6
+        // hours from now. This closure should get called again within those
+        // 6 hours and the regions get added then.
+        return []
+      }
+      
       return monitoredTrip.notifications.compactMap(\.region)
       
     } onEvent: { [weak self] event in
@@ -70,7 +79,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
       }
     }
   }
-  
+    
   override init() {
     super.init()
     
@@ -103,8 +112,9 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     startMonitoringRegions(from: .init(
       tripID: trip.tripId,
       tripURL: tripURL,
-      notifications: notifications)
-    )
+      notifications: notifications,
+      departureTime: trip.departureTime
+    ))
     
     if includeTimeToLeaveNotification {
       scheduleTimeBased(from: notifications)
@@ -130,18 +140,26 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     TKUINotificationManager.shared.add(request: request, for: .tripAlerts)
   }
   
-  public func match(geofenceID: String) -> (Trip, TKSegment)? {
+  public struct GeofenceMatch {
+    public let trip: Trip
+    public let segment: TKSegment
+    public let notification: TKAPI.TripNotification
+  }
+  
+  public func match(geofenceID: String) -> GeofenceMatch? {
     guard
       let monitoredTrip,
       let trip = Trip.find(tripURL: monitoredTrip.tripURL, in: TripKit.shared.tripKitContext)
     else { return nil }
     
-    if let segment = trip.segments.first(where: { $0.notifications.map(\.id).contains(geofenceID) }) {
-      return (trip, segment)
-    } else {
-      TKLog.warn("TKUITripMonitorManager", text: "Could not find matching notification for \(geofenceID).")
-      return nil
+    for segment in trip.segments {
+      if let notification = segment.notifications.first(where: { $0.id == geofenceID }) {
+        return .init(trip: trip, segment: segment, notification: notification)
+      }
     }
+
+    TKLog.warn("TKUITripMonitorManager", text: "Could not find matching notification for \(geofenceID).")
+    return nil
   }
   
 }
