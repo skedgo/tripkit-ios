@@ -215,9 +215,6 @@
 /* Trip badge: Greenest */
 "Greenest" = "Grün";
 
-/* Trip badge: Healthiest */
-"Healthiest" = "Gesund";
-
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
 "I'll arrive at %@ at %@" = "Ich komme bei %1$@ um %2$@ an.";
 
@@ -284,6 +281,9 @@
 
 /* 'More results' section in autocompletion */
 "More results" = "Mehr Ergebnisse";
+
+/* Trip badge: Most Active */
+"Most Active" = "Aktiv";
 
 /* Text for vehicle of type: Moto Scooter */
 "Moto Scooter" = "Roller";
