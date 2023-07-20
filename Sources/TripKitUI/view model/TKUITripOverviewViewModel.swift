@@ -86,10 +86,9 @@ class TKUITripOverviewViewModel {
       notificationKinds = presentedTrip
         .asDriver(onErrorDriveWith: .empty())
         .map {
-          Set($0.segments
-            .flatMap(\.notifications)
+          Set($0
+            .notifications(includeTimeToLeaveNotification: includeTimeToLeaveNotification)
             .map(\.messageKind)
-            .filter { includeTimeToLeaveNotification || $0 != .tripStart }
           )
         }
 
