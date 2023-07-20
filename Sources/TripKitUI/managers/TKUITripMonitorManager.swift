@@ -79,7 +79,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
       }
     }
   }
-  
+    
   override init() {
     super.init()
     
@@ -140,18 +140,26 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     TKUINotificationManager.shared.add(request: request, for: .tripAlerts)
   }
   
-  public func match(geofenceID: String) -> (Trip, TKSegment)? {
+  public struct GeofenceMatch {
+    public let trip: Trip
+    public let segment: TKSegment
+    public let notification: TKAPI.TripNotification
+  }
+  
+  public func match(geofenceID: String) -> GeofenceMatch? {
     guard
       let monitoredTrip,
       let trip = Trip.find(tripURL: monitoredTrip.tripURL, in: TripKit.shared.tripKitContext)
     else { return nil }
     
-    if let segment = trip.segments.first(where: { $0.notifications.map(\.id).contains(geofenceID) }) {
-      return (trip, segment)
-    } else {
-      TKLog.warn("TKUITripMonitorManager", text: "Could not find matching notification for \(geofenceID).")
-      return nil
+    for segment in trip.segments {
+      if let notification = segment.notifications.first(where: { $0.id == geofenceID }) {
+        return .init(trip: trip, segment: segment, notification: notification)
+      }
     }
+
+    TKLog.warn("TKUITripMonitorManager", text: "Could not find matching notification for \(geofenceID).")
+    return nil
   }
   
 }
