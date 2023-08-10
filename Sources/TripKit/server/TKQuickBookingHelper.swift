@@ -27,6 +27,8 @@ public struct TKQuickBooking: Codable, Hashable {
   
   @DefaultEmptyArray public var fares: [TKBooking.Fare]
   
+  @DefaultEmptyArray public var riders: [TKBooking.Rider]
+  
   /// `true` if billing/payments are supported, and `bookingURL` will return an appropriate response
   @DefaultFalse public var billingEnabled: Bool
   
@@ -89,7 +91,8 @@ public struct TKQuickBooking: Codable, Hashable {
     case usdPrice = "USDPrice"
     case surgeString
     case surgeImageURL
-    case fares = "tickets"
+    case fares
+    case riders
   }
   
 }

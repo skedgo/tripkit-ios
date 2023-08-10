@@ -310,6 +310,23 @@ public enum TKBooking {
 extension TKBooking {
   
   public struct Fare: Codable, Hashable {
+    public enum Status: String, Codable {
+      case inactive = "UNACTIVATED"
+      case activated = "ACTIVE"
+      case stale = "STALE_TICKET"
+      case activeOnAnotherDevice = "ACTIVE_ON_ANOTHER_DEVICE"
+      case expired = "EXPIRED"
+      case unused = "UNUSED"
+      case refunded = "REFUNDED"
+      case invalid = "INVALID"
+      case fareCapped = "FARE_CAPPED"
+    }
+    
+    public enum RideType: String, Codable {
+      case single = "single_ride"
+      case multiple = "multiple_rides"
+    }
+    
     public typealias Identifier = String
     
     public let id: Identifier
@@ -326,6 +343,13 @@ extension TKBooking {
 
     /// Maximum number of tickets that can be purchased of this fare
     public var max: Int?
+    
+    /// list of riders under the fare for filtering purposes
+    @DefaultEmptyArray public var riders: [TKBooking.Rider]
+    
+    public let status: Status?
+    
+    public let type: RideType
 
     public enum CodingKeys: String, CodingKey {
       case id
@@ -335,6 +359,9 @@ extension TKBooking {
       case currencyCode = "currency"
       case amount = "value"
       case max
+      case riders
+      case status
+      case type
     }
     
     public enum InputValue: Hashable {
@@ -342,6 +369,20 @@ extension TKBooking {
       case amount(Int)
     }
 
+  }
+  
+  public struct Rider: Codable, Hashable {
+    public typealias Identifier = String
+    
+    public let id: Identifier
+    public let name: String
+    public let description: String?
+
+    public enum CodingKeys: String, CodingKey {
+      case id
+      case name
+      case description
+    }
   }
   
   public struct PurchasedTicket: Codable, Hashable {
