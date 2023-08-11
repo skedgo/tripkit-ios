@@ -349,7 +349,7 @@ extension TKBooking {
     
     public let status: Status?
     
-    public let type: RideType
+    public let type: RideType?
 
     public enum CodingKeys: String, CodingKey {
       case id
