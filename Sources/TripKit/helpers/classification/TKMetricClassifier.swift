@@ -117,18 +117,23 @@ extension TKMetricClassifier: TKTripClassifier {
     guard min == value else { return false }
     
     // max has to be more than 25% of min, i.e., don't give the label
-    // if everything is so clsoe
-    return max > min * 1.25
-  }
-
-  
-  private func matches(min: Float, max: Float, value: Float?) -> Bool {
-    guard let value = value else { return false }
-    guard min == value else { return false }
+    // if everything is so close
+    guard max > min * 1.25 else {
+      return false
+    }
     
-    // max has to be more than 25% of min, i.e., don't give the label
-    // if everything is so clsoe
-    return max > min * 1.25
+    // max also needs to exceed minimum absolute difference for some metrics
+    let delta = max - min
+    switch classification {
+    case .greenest, .recommended:
+      return true // ignore absolute
+    case .cheapest, .easiest:
+      return delta > 5 // USD-equivalent
+    case .fastest:
+      return delta > 10 // minutes; good if saving 10 mins
+    case .healthiest:
+      return delta > 40 // kcal; 40 ~~ 15 mins of walking
+    }
   }
   
 }
@@ -136,7 +141,7 @@ extension TKMetricClassifier: TKTripClassifier {
 fileprivate extension Trip {
   func value(for classification: TKMetricClassifier.Classification) -> Float? {
     switch classification {
-    case .cheapest: return totalPrice?.floatValue
+    case .cheapest: return totalPriceUSD?.floatValue
     case .recommended: return totalScore
     case .fastest: return Float(minutes)
     case .easiest: return totalHassle
