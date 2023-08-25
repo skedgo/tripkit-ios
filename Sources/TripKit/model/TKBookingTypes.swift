@@ -347,6 +347,9 @@ extension TKBooking {
     /// list of riders under the fare for filtering purposes
     @DefaultEmptyArray public var riders: [TKBooking.Rider]
     
+    /// Selected rider to filter
+    public var rider: TKBooking.Rider?
+    
     public let status: Status?
     
     public let type: RideType?
@@ -374,9 +377,9 @@ extension TKBooking {
   public struct Rider: Codable, Hashable {
     public typealias Identifier = String
     
-    public let id: Identifier
-    public let name: String
-    public let description: String?
+    public var id: Identifier
+    public var name: String
+    public var description: String?
 
     public enum CodingKeys: String, CodingKey {
       case id

@@ -29,6 +29,9 @@ public struct TKQuickBooking: Codable, Hashable {
   
   @DefaultEmptyArray public var riders: [TKBooking.Rider]
   
+  /// Current selected rider filter
+  public var rider: TKBooking.Rider?
+  
   /// `true` if billing/payments are supported, and `bookingURL` will return an appropriate response
   @DefaultFalse public var billingEnabled: Bool
   
