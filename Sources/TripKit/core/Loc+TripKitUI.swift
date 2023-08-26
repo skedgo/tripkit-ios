@@ -144,7 +144,7 @@ extension Loc {
   }
 
   public static var BadgeHealthiest: String {
-    return NSLocalizedString("Healthiest", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Healthiest")
+    return NSLocalizedString("Most Active", tableName: "TripKit", bundle: .tripKit, comment: "Trip badge: Most Active")
   }
 
   public static var BadgeCheapest: String {

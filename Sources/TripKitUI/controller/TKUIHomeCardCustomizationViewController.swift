@@ -102,6 +102,8 @@ fileprivate class DataSource: RxTableViewSectionedReloadDataSource<TKUIHomeCardC
       ? UIImage(systemName: "checkmark.circle.fill")
       : UIImage(systemName: "circle")
     
+    cell.stateImageView.alpha = item.canBeHidden ? 1 : 0.3
+    
     if item.isEnabled {
       cell.accessibilityTraits.insert(.selected)
     } else {

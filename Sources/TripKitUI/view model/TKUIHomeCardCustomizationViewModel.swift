@@ -58,12 +58,14 @@ extension TKUIHomeCardCustomizationViewModel {
     let title: String
     let icon: UIImage
     let isEnabled: Bool
+    let canBeHidden: Bool
     
     init(_ customized: TKUIHomeCard.CustomizedItem) {
       self.identity = customized.id
       self.title = customized.item.name
       self.icon = customized.item.icon
       self.isEnabled = customized.isEnabled
+      self.canBeHidden = customized.item.canBeHidden
     }
   }
   
@@ -90,7 +92,7 @@ extension TKUIHomeCardCustomizationViewModel {
       let item = updated.remove(at: move.sourceIndex.row)
       updated.insert(item, at: move.destinationIndex.row)
     case .selection(let selection):
-      if let index = items.firstIndex(where: { $0.id == selection.identity}) {
+      if let index = items.firstIndex(where: { $0.id == selection.identity}), updated[index].item.canBeHidden {
         updated[index].isEnabled = !updated[index].isEnabled
       }
     }
