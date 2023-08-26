@@ -389,17 +389,7 @@ extension TKBooking {
   }
   
   public struct PurchasedTicket: Codable, Hashable {
-    public enum Status: String, Codable {
-      case inactive = "UNACTIVATED"
-      case activated = "ACTIVE"
-      case stale = "STALE_TICKET"
-      case activeOnAnotherDevice = "ACTIVE_ON_ANOTHER_DEVICE"
-      case expired = "EXPIRED"
-      case unused = "UNUSED"
-      case refunded = "REFUNDED"
-      case invalid = "INVALID"
-      case fareCapped = "FARE_CAPPED"
-    }
+    public typealias Status = Fare.Status
     
     public typealias Identifier = String
     
@@ -408,6 +398,7 @@ extension TKBooking {
     public let status: Status
 
     /// URL to activate a ticket, provided if `status == .inactive`
+    /// Needs to be hit with a POST
     public let activationURL: URL?
 
     /// URL to fetch ticket details, provided if `status == .activated`
@@ -416,15 +407,23 @@ extension TKBooking {
     /// Timestamp when an activated ticket expires, might be provided if `status == .activated`
     @OptionalISO8601 public var ticketExpiration: Date?
     
+    @OptionalISO8601 public var purchased: Date?
+    @OptionalISO8601 public var validFrom: Date?
+    @OptionalISO8601 public var validUntil: Date?
+    
     public let fare: Fare
     
     public enum CodingKeys: String, CodingKey {
       case id
+      case fare
       case status
       case ticketURL
       case activationURL = "activateURL"
+
       case ticketExpiration = "ticketExpirationTimestamp"
-      case fare
+      case purchased = "purchasedTimestamp"
+      case validFrom = "validFromTimestamp"
+      case validUntil = "validUntilTimestamp"
     }
 
   }
