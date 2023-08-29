@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 import TripKit
 
@@ -43,9 +44,14 @@ extension TKSegment {
     }
     
     if canShowPathFriendliness {
-      let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
-      pathFriendlinessView.segment = self
-      accessoryViews.append(pathFriendlinessView)
+      if #available(iOS 16.0, *), let chart = self.buildFriendliness() {
+        let host = UIHostingController(rootView: chart)
+        accessoryViews.append(host.view)
+      } else {
+        let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
+        pathFriendlinessView.segment = self
+        accessoryViews.append(pathFriendlinessView)
+      }
     }
     
     return accessoryViews

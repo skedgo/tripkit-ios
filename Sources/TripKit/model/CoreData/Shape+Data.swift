@@ -75,13 +75,13 @@ extension Shape {
         return .safe
       case .cycleLane,
            .cycleNetwork,
-           .bicycleBoulevard:
+           .bicycleBoulevard,
+           .CCTVCamera:
         return .designated
       case .sideWalk,
            .sideRoad,
            .sharedRoad,
-           .streetLight,
-           .CCTVCamera:
+           .streetLight:
         return .neutral
       case .mainRoad:
         return .hostile

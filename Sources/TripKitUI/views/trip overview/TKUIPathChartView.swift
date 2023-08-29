@@ -15,8 +15,10 @@ import class TripKit.Shape
 
 @available(iOS 16.0, *)
 struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
-  init(values: [TKUIPathChartView.ChartValue<V>], totalDistance: CLLocationDistance? = nil) {
-    self.values = values
+  init?(values: [TKUIPathChartView.ChartValue<V>], totalDistance: CLLocationDistance? = nil) {
+    let longEnough = values.filter { $0.distance > 25 }
+    guard !longEnough.isEmpty else { return nil }
+    self.values = longEnough
     
     if let total = totalDistance {
       self.totalDistance = total
@@ -26,27 +28,30 @@ struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
   }
   
   struct ChartValue<V>: Hashable where V: TKUIPathChartable & Hashable {
-    let value: V
-    let distance: CLLocationDistance
+    var value: V
+    var distance: CLLocationDistance
   }
 
   let values: [ChartValue<V>]
   let totalDistance: CLLocationDistance
   
   var body: some View {
-    Chart(Array(values.sorted { $0.distance > $1.distance }) , id: \.value) { // Array(values.sorted(by: \.percentage))
+    Chart(Array(values.sorted { $0.distance > $1.distance }) , id: \.value) {
       BarMark(
         x: .value("Count", $0.distance),
-        y: .value("Value", $0.value.chartTitle)
+        y: .value("Value", $0.value.chartTitle),
+        width: .fixed(5)
       )
       .foregroundStyle(Color($0.value.chartColor))
     }
-    .chartXScale(domain: 0.1 ... totalDistance)
+    .chartXScale(domain: 0 ... totalDistance)
     .chartXAxis {
-      AxisMarks(preset: .aligned, position: .bottom, values: .automatic(desiredCount: 2)) { value in
+      AxisMarks(preset: .aligned, position: .bottom, values: .automatic(desiredCount: 3)) { value in
         let distance = value.as(Double.self)!
         AxisGridLine()
-        AxisValueLabel(MKDistanceFormatter().string(fromDistance: distance))
+        if distance > 0 { // Looks weird if that says 0 feet or 0 metres
+          AxisValueLabel(MKDistanceFormatter().string(fromDistance: distance))
+        }
       }
     }
     .chartYAxis {
@@ -54,6 +59,8 @@ struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
         AxisValueLabel(value.as(String.self)!)
       }
     }
+    .frame(height: Double(values.count + 1) * 24) // + 1 is for the legend
+    .background(Color(.tkBackground))
   }
 }
 
