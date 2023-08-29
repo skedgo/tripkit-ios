@@ -397,12 +397,10 @@ extension TKBooking {
     
     public let status: Status
 
-    /// URL to activate a ticket, provided if `status == .inactive`
-    /// Needs to be hit with a POST
-    public let activationURL: URL?
-
     /// URL to fetch ticket details, provided if `status == .activated`
     public let ticketURL: URL?
+
+    @DefaultEmptyArray public var actions: [Action]
 
     /// Timestamp when an activated ticket expires, might be provided if `status == .activated`
     @OptionalISO8601 public var ticketExpiration: Date?
@@ -418,7 +416,7 @@ extension TKBooking {
       case fare
       case status
       case ticketURL
-      case activationURL = "activateURL"
+      case actions
 
       case ticketExpiration = "ticketExpirationTimestamp"
       case purchased = "purchasedTimestamp"
