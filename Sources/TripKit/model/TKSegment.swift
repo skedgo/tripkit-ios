@@ -243,6 +243,8 @@ public class TKSegment: NSObject {
   
   public var titleWithoutTime: String? { singleLineInstructionWithoutTime }
   
+  public var sources: [TKAPI.DataAttribution] { template?.sources ?? [] }
+  
 
   // MARK: - Inferred properties: Simple
   

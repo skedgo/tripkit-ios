@@ -142,6 +142,7 @@ extension TKAPI {
     public let action: String?
     public var notes: String?
     @UnknownNil public var localCost: TKLocalCost? // Backend is sometimes sending this invalid without currency as of 2021-08-17
+    @DefaultEmptyArray public var sources: [DataAttribution]
     @DefaultEmptyArray public var notifications: [TripNotification]
     var mini: TKMiniInstruction?
     @DefaultFalse var hideExactTimes: Bool
@@ -204,6 +205,7 @@ extension TKAPI {
       case to
       case shapes
       case notifications = "geofences"
+      case sources
     }
   }
   
