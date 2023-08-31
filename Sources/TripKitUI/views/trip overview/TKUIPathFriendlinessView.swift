@@ -11,6 +11,7 @@ import MapKit
 
 import TripKit
 
+@available(iOS, deprecated: 16.0, message: "Use TKUIPathChartView")
 class TKUIPathFriendlinessView: UIView {
   
   // Bar chart

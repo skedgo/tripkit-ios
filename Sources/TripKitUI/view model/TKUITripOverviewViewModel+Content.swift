@@ -131,6 +131,7 @@ extension TKUITripOverviewViewModel {
     case averageOccupancy(TKAPI.VehicleOccupancy, title: String)
     case carriageOccupancies([[TKAPI.VehicleOccupancy]])
     case pathFriendliness(TKSegment)
+    case roadTags(TKSegment)
   }
 }
 
@@ -386,6 +387,9 @@ fileprivate extension TKSegment {
     if canShowPathFriendliness {
       accessories.append(.pathFriendliness(self))
     }
+    
+    // Save to always add this as it'll only show if there's information
+    accessories.append(.roadTags(self))
     
     return TKUITripOverviewViewModel.MovingItem(
       title: titleWithoutTime ?? "",
