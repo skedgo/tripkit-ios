@@ -42,8 +42,8 @@ extension SegmentTemplate {
     set { encode((newValue?.isEmpty == false) ? newValue : nil, key: "notifications") }
   }
   
-  var sources: [TKAPI.DataAttribution]? {
-    get { decode([TKAPI.DataAttribution].self, key: "sources") }
-    set { encode((newValue?.isEmpty == false) ? newValue : nil, key: "sources") }
+  var operatorInfo: TKAPI.CompanyInfo? {
+    get { decode(TKAPI.CompanyInfo.self, key: "operatorInfo") }
+    set { encode(newValue, key: "operatorInfo") }
   }
 }
