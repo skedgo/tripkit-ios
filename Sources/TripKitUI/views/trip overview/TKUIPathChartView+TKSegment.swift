@@ -34,21 +34,11 @@ extension TKSegment {
   }
   
   func buildRoadTags() -> TKUIPathChartView<TripKit.Shape.RoadTag>? {
-    guard let total = distanceInMetres?.doubleValue else {
+    guard let total = distanceInMetres?.doubleValue, let distanceByRoadTags else {
       return nil
     }
-    
-    var distancesByTag = [TripKit.Shape.RoadTag: Double]()
-    for shape in shapes {
-      if let tags = shape.roadTags, let distance = shape.metres?.doubleValue {
-        for tag in tags {
-          distancesByTag[tag, default: 0] += distance
-        }
-      }
-    }
-    
     return TKUIPathChartView<TripKit.Shape.RoadTag>(
-      values: distancesByTag.map { .init(value: $0, distance: $1) },
+      values: distanceByRoadTags.map { .init(value: $0, distance: $1) },
       totalDistance: total
     )
   }
