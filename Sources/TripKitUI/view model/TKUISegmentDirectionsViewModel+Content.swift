@@ -21,7 +21,7 @@ extension TKUISegmentDirectionsViewModel {
   }
   
   struct Item {
-    fileprivate let index: Int
+    let index: Int
     
     let streetName: String?
     let image: UIImage?
@@ -94,7 +94,7 @@ fileprivate extension Array where Element == TKUISegmentDirectionsViewModel.Item
   }
 }
 
-fileprivate extension Shape.Instruction {
+extension Shape.Instruction {
   var image: UIImage? {
     let part: String
     var flip = false

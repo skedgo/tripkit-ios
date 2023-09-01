@@ -18,7 +18,17 @@ struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
   init?(values: [TKUIPathChartView.ChartValue<V>], totalDistance: CLLocationDistance? = nil) {
     let longEnough = values.filter { $0.distance > 25 }
     guard !longEnough.isEmpty else { return nil }
-    self.values = longEnough
+    
+    self.values = longEnough.sorted { lhs, rhs in
+      switch lhs.value.chartOrderCompared(to: rhs.value) {
+      case .orderedSame:
+        return lhs.value.chartTitle < rhs.value.chartTitle
+      case .orderedAscending:
+        return true
+      case .orderedDescending:
+        return false
+      }
+    }
     
     if let total = totalDistance {
       self.totalDistance = total
@@ -36,7 +46,7 @@ struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
   let totalDistance: CLLocationDistance
   
   var body: some View {
-    Chart(Array(values.sorted { $0.distance > $1.distance }) , id: \.value) {
+    Chart(values , id: \.value) {
       BarMark(
         x: .value("Count", $0.distance),
         y: .value("Value", $0.value.chartTitle),
