@@ -10,6 +10,7 @@ import UIKit
 
 import TripKit
 
+@available(iOS, deprecated: 16.0, message: "Use TKUISegmentDirectionView")
 class TKUISegmentDirectionCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUISegmentDirectionCell"

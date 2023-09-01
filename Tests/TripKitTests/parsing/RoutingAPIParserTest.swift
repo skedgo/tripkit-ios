@@ -115,6 +115,7 @@ class RoutingAPIParserTest: XCTestCase {
     XCTAssertEqual(shape.roadTags, [.cycleLane,
                                     .cycleTrack,
                                     .cycleNetwork,
+                                    .bicycleDesignated,
                                     .bicycleBoulevard,
                                     .sideWalk,
                                     .mainRoad,

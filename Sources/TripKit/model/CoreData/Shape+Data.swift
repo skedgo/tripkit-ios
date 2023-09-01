@@ -47,7 +47,7 @@ extension Shape {
     case cycleLane = "CYCLE-LANE"
     case cycleTrack = "CYCLE-TRACK"
     case cycleNetwork = "CYCLE-NETWORK"
-    //case bicycleDesignated = "BICYCLE-DESIGNATED" -- not sure what this is
+    case bicycleDesignated = "BICYCLE-DESIGNATED"
     case bicycleBoulevard = "BICYCLE-BOULEVARD"
     case sideWalk = "SIDE-WALK"
     case mainRoad = "MAIN-ROAD"
@@ -63,6 +63,7 @@ extension Shape {
       case .cycleLane: return "Cycle Lane"
       case .cycleTrack: return "Cycle Track"
       case .cycleNetwork: return "Cycle Network"
+      case .bicycleDesignated: return "Designated for Cyclists"
       case .bicycleBoulevard: return "Bicycle Boulevard"
       case .sideWalk: return "Side Walk"
       case .sideRoad: return "Side Road"
@@ -80,6 +81,7 @@ extension Shape {
         return .safe
       case .cycleLane,
            .cycleNetwork,
+           .bicycleDesignated,
            .bicycleBoulevard,
            .CCTVCamera:
         return .designated
