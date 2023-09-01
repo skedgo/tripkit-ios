@@ -786,21 +786,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
-      "line": 20,
+      "line": 21,
       "symbol": "TKUISegmentDirectionsCard",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
-      "line": 22,
+      "line": 23,
       "symbol": "TKUISegmentDirectionsCard.canShowInstructions(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUISegmentDirectionsCard.swift",
-      "line": 26,
+      "line": 27,
       "symbol": "TKUISegmentDirectionsCard.config",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
@@ -4029,6 +4029,13 @@
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/trip overview/TKUIAttributionView.swift",
       "line": 140,
       "symbol": "TKUIAttributionView.newView(_:wording:fitsIn:alignment:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/trip overview/TKUIPathChartable.swift",
+      "line": 22,
+      "symbol": "TKPathFriendliness.<(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     }

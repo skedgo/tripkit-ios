@@ -9298,6 +9298,13 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
+      "line": 50,
+      "symbol": "Shape.RoadTag.bicycleDesignated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
       "line": 51,
       "symbol": "Shape.RoadTag.bicycleBoulevard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
@@ -9361,14 +9368,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 77,
+      "line": 78,
       "symbol": "Shape.RoadTag.safety",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 106,
+      "line": 108,
       "symbol": "Shape.roadTags",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
