@@ -157,7 +157,27 @@ public class TKSegment: NSObject {
     } else {
       return TKColor.lightGray // was 214, 214, 214
     }
+  }
+  
+  private var _distanceByRoadTags: [Shape.RoadTag: Double]?? = nil
+  public var distanceByRoadTags: [Shape.RoadTag: Double]? {
+    if let cached = _distanceByRoadTags { return cached }
     
+    var distancesByTag = [Shape.RoadTag: Double]()
+    for shape in shapes {
+      if let shapeTags = shape.distanceByRoadTag() {
+        for (tag, distance) in shapeTags {
+          distancesByTag[tag, default: 0] += distance
+        }
+      }
+    }
+    guard distancesByTag.count > 1 || distancesByTag.keys.first != .other else {
+      _distanceByRoadTags = nil
+      return nil
+    }
+    
+    _distanceByRoadTags = distancesByTag
+    return distancesByTag
   }
   
   /// A singe line instruction which is used on the map screen.

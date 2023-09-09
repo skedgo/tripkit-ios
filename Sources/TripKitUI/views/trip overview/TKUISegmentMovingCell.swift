@@ -6,6 +6,7 @@
 //  Copyright © 2018 SkedGo Pty Ltd. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 
 import RxSwift
@@ -107,14 +108,14 @@ extension TKUISegmentMovingCell {
     line.backgroundColor = item.connection?.color
     line.isHidden = !hasLine
     
-    let accessories = item.accessories.map(TKUISegmentMovingCell.buildView)
+    let accessories = item.accessories.compactMap(TKUISegmentMovingCell.buildView)
     accessoryViewStack.resetViews(accessories)
     
     let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
     buttonStackView.resetViews(buttons)
   }
   
-  private static func buildView(for segmentAccessory: TKUITripOverviewViewModel.SegmentAccessory) -> UIView {
+  private static func buildView(for segmentAccessory: TKUITripOverviewViewModel.SegmentAccessory) -> UIView? {
     switch segmentAccessory {
     case .averageOccupancy(let occupancy, let title):
       return TKUIOccupancyView(with: .occupancy(occupancy, title: title, simple: true))
@@ -125,10 +126,22 @@ extension TKUISegmentMovingCell {
       return trainView
 
     case .pathFriendliness(let segment):
-      let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
-      pathFriendlinessView.segment = segment
-      return pathFriendlinessView
+      if #available(iOS 16.0, *) {
+        return nil // will show road tags instead
+      } else {
+        let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
+        pathFriendlinessView.segment = segment
+        return pathFriendlinessView
+      }
 
+    case .roadTags(let segment):
+      if #available(iOS 16.0, *), let chart = segment.buildRoadTags() {
+        let host = UIHostingController(rootView: chart.frame(minWidth: 300))
+        return host.view
+      } else {
+        return nil
+      }
+      
     case .wheelchairAccessibility(let accessibility):
       return TKUIOccupancyView(with: .wheelchair(accessibility))
     }

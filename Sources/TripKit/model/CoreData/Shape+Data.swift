@@ -28,6 +28,8 @@ extension Shape {
     /// Shared, and busy
     case hostile
     
+    case unknown
+    
     #if os(iOS) || os(tvOS)
     public var color: UIColor {
       switch self {
@@ -35,6 +37,7 @@ extension Shape {
       case .designated: return .blue
       case .neutral: return #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
       case .hostile: return .tkStateWarning
+      case .unknown: return .systemGray
       }
     }
     #endif
@@ -44,7 +47,7 @@ extension Shape {
     case cycleLane = "CYCLE-LANE"
     case cycleTrack = "CYCLE-TRACK"
     case cycleNetwork = "CYCLE-NETWORK"
-    //case bicycleDesignated = "BICYCLE-DESIGNATED" -- not sure what this is
+    case bicycleDesignated = "BICYCLE-DESIGNATED"
     case bicycleBoulevard = "BICYCLE-BOULEVARD"
     case sideWalk = "SIDE-WALK"
     case mainRoad = "MAIN-ROAD"
@@ -53,12 +56,14 @@ extension Shape {
     //case unpavedOrUnsealed = "UNPAVED/UNSEALED" -- fine to ignore
     case streetLight = "STREET-LIGHT"
     case CCTVCamera = "CCTV-CAMERA"
+    case other = "OTHER"
     
     public var localized: String {
       switch self {
       case .cycleLane: return "Cycle Lane"
       case .cycleTrack: return "Cycle Track"
       case .cycleNetwork: return "Cycle Network"
+      case .bicycleDesignated: return "Designated for Cyclists"
       case .bicycleBoulevard: return "Bicycle Boulevard"
       case .sideWalk: return "Side Walk"
       case .sideRoad: return "Side Road"
@@ -66,6 +71,7 @@ extension Shape {
       case .mainRoad: return "Main Road"
       case .streetLight: return "Street Light"
       case .CCTVCamera: return "CCTV Camera"
+      case .other: return "Other"
       }
     }
     
@@ -75,16 +81,19 @@ extension Shape {
         return .safe
       case .cycleLane,
            .cycleNetwork,
-           .bicycleBoulevard:
+           .bicycleDesignated,
+           .bicycleBoulevard,
+           .CCTVCamera:
         return .designated
       case .sideWalk,
            .sideRoad,
            .sharedRoad,
-           .streetLight,
-           .CCTVCamera:
+           .streetLight:
         return .neutral
       case .mainRoad:
         return .hostile
+      case .other:
+        return .unknown
       }
     }
   }
@@ -99,6 +108,20 @@ extension Shape {
   public var roadTags: [RoadTag]? {
     get { decode([RoadTag].self, key: "roadTags") }
     set { encode(newValue, key: "roadTags") }
+  }
+  
+  func distanceByRoadTag() -> [RoadTag: Double]? {
+    guard routeIsTravelled, let distance = metres?.doubleValue else { return nil }
+    
+    var distancesByTag = [RoadTag: Double]()
+    if let tags = roadTags, !tags.isEmpty {
+      for tag in tags {
+        distancesByTag[tag, default: 0] += distance
+      }
+    } else {
+      distancesByTag[.other, default: 0] += distance
+    }
+    return distancesByTag
   }
 
 }

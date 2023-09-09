@@ -9,6 +9,7 @@
 import Foundation
 import class MapKit.MKDistanceFormatter
 import UIKit
+import SwiftUI
 
 import TGCardViewController
 
@@ -54,7 +55,12 @@ public class TKUISegmentDirectionsCard: TGTableCard {
 
     viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     
-    tableView.register(TKUISegmentDirectionCell.nib, forCellReuseIdentifier: TKUISegmentDirectionCell.reuseIdentifier)
+    if #available(iOS 16.0, *) {
+      // default cells
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
+    } else {
+      tableView.register(TKUISegmentDirectionCell.nib, forCellReuseIdentifier: TKUISegmentDirectionCell.reuseIdentifier)
+    }
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)
     
@@ -90,23 +96,99 @@ extension TKUISegmentDirectionsCard {
   
   static func configureCell(dataSource: TableViewSectionedDataSource<TKUISegmentDirectionsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUISegmentDirectionsViewModel.Item) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentDirectionCell.reuseIdentifier, for: indexPath) as! TKUISegmentDirectionCell
+    if #available(iOS 16.0, *) {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
+      cell.contentConfiguration = UIHostingConfiguration {
+        TKUISegmentDirectionView(item: item)
+      }
+      return cell
+      
+    } else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentDirectionCell.reuseIdentifier, for: indexPath) as! TKUISegmentDirectionCell
+      cell.iconView?.image = item.image
+      cell.durationLabel?.textColor = .tkLabelPrimary
 
-    cell.iconView?.image = item.image
-    cell.durationLabel?.textColor = .tkLabelPrimary
-
-    if let distance = item.distance {
-      let distanceFormatter = MKDistanceFormatter()
-      distanceFormatter.unitStyle = .abbreviated
-      cell.durationLabel?.text = distanceFormatter.string(fromDistance: distance)
+      if let distance = item.distance {
+        let distanceFormatter = MKDistanceFormatter()
+        distanceFormatter.unitStyle = .abbreviated
+        cell.durationLabel?.text = distanceFormatter.string(fromDistance: distance)
+      }
+      
+      cell.nameLabel?.textColor = .tkLabelSecondary
+      cell.nameLabel?.text = item.streetInstruction
+      
+      cell.setBubbles(item.bubbles)
+      
+      return cell
     }
-    
-    cell.nameLabel?.textColor = .tkLabelSecondary
-    cell.nameLabel?.text = item.streetInstruction
-    
-    cell.setBubbles(item.bubbles)
-    
-    return cell
   }
   
+}
+
+@available(iOS 16.0, *)
+struct TKUISegmentDirectionView: View {
+  let item: TKUISegmentDirectionsViewModel.Item
+  
+  var distance: String? {
+    guard let distance = item.distance else { return nil }
+    let distanceFormatter = MKDistanceFormatter()
+    distanceFormatter.unitStyle = .abbreviated
+    return distanceFormatter.string(fromDistance: distance)
+  }
+  
+  var body: some View {
+    HStack(spacing: 8) {
+      if let image = item.image {
+        Image(uiImage: image)
+          .resizable()
+          .scaledToFit()
+          .frame(width: 32)
+          .foregroundColor(Color(.tkAppTintColor))
+      } else {
+        Color.clear
+          .frame(width: 32)
+      }
+      
+      VStack(alignment: .leading, spacing: 4) {
+        if let distance {
+          Text(distance)
+            .foregroundColor(Color(.tkLabelPrimary))
+            .font(Font(TKStyleManager.boldCustomFont(forTextStyle: .body)))
+        }
+        
+        Text(item.streetInstruction)
+          .foregroundColor(Color(.tkLabelSecondary))
+          .font(Font(TKStyleManager.customFont(forTextStyle: .body)))
+        
+        FlowLayout(alignment: .leading, spacing: 4) {
+          ForEach(Array(item.bubbles.enumerated()), id: \.offset) { _, item in
+            Text(item.0)
+              .font(Font(TKStyleManager.customFont(forTextStyle: .caption1)))
+              .padding(.horizontal, 8)
+              .foregroundColor(item.1.isDark ? .white : .black)
+              .background(Capsule().foregroundColor(Color(item.1)))
+          }
+        }
+      }
+    }.background(Color(.tkBackground))
+  }
+}
+
+@available(iOS 16.0, *)
+struct TKUISegmentDirectionView_Previews: PreviewProvider {
+  static var previews: some View {
+    List {
+      TKUISegmentDirectionView(item: .init(
+        index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.turnSlightyLeft.image, distance: 1_000, bubbles: [
+          ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue), ("Main Road", .systemOrange)
+        ]
+      ))
+
+      TKUISegmentDirectionView(item: .init(
+        index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.headTowards.image, distance: 600, bubbles: [
+          ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue)
+        ]
+      ))
+    }.listStyle(.plain)
+  }
 }

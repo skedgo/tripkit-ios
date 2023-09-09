@@ -180,6 +180,13 @@ extension Shape: TKDisplayableRoute {
     if let bestTag = roadTags?.first {
       return bestTag.safety.color
     }
+    
+    // This reflects "Do we show the little chart of road tag", i.e., are there
+    // any tags on this segment to show other than just "Other". If so, we
+    // default no tags to "Other" for the colour here.
+    if segment?.distanceByRoadTags != nil {
+      return RoadTag.other.safety.color
+    }
     #endif
     
     switch friendliness {
