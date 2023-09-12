@@ -42,6 +42,7 @@ extension SegmentTemplate {
     template.miniInstruction  = model.mini
     template.turnByTurnMode   = model.turnByTurn
     template.notifications    = model.notifications
+    template.operatorInfo     = model.operatorInfo
     
     template.notesRaw         = model.notes
     template.durationWithoutTraffic = model.durationWithoutTraffic.map(NSNumber.init)

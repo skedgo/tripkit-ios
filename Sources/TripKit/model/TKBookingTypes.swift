@@ -310,6 +310,23 @@ public enum TKBooking {
 extension TKBooking {
   
   public struct Fare: Codable, Hashable {
+    public enum Status: String, Codable {
+      case inactive = "UNACTIVATED"
+      case activated = "ACTIVE"
+      case stale = "STALE_TICKET"
+      case activeOnAnotherDevice = "ACTIVE_ON_ANOTHER_DEVICE"
+      case expired = "EXPIRED"
+      case unused = "UNUSED"
+      case refunded = "REFUNDED"
+      case invalid = "INVALID"
+      case fareCapped = "FARE_CAPPED"
+    }
+    
+    public enum RideType: String, Codable {
+      case single = "single_ride"
+      case multiple = "multiple_rides"
+    }
+    
     public typealias Identifier = String
     
     public let id: Identifier
@@ -326,6 +343,16 @@ extension TKBooking {
 
     /// Maximum number of tickets that can be purchased of this fare
     public var max: Int?
+    
+    /// list of riders under the fare for filtering purposes
+    @DefaultEmptyArray public var riders: [TKBooking.Rider]
+    
+    /// Selected rider to filter
+    public var rider: TKBooking.Rider?
+    
+    public let status: Status?
+    
+    public let type: RideType?
 
     public enum CodingKeys: String, CodingKey {
       case id
@@ -335,6 +362,9 @@ extension TKBooking {
       case currencyCode = "currency"
       case amount = "value"
       case max
+      case riders
+      case status
+      case type
     }
     
     public enum InputValue: Hashable {
@@ -344,18 +374,22 @@ extension TKBooking {
 
   }
   
-  public struct PurchasedTicket: Codable, Hashable {
-    public enum Status: String, Codable {
-      case inactive = "UNACTIVATED"
-      case activated = "ACTIVE"
-      case stale = "STALE_TICKET"
-      case activeOnAnotherDevice = "ACTIVE_ON_ANOTHER_DEVICE"
-      case expired = "EXPIRED"
-      case unused = "UNUSED"
-      case refunded = "REFUNDED"
-      case invalid = "INVALID"
-      case fareCapped = "FARE_CAPPED"
+  public struct Rider: Codable, Hashable {
+    public typealias Identifier = String
+    
+    public var id: Identifier
+    public var name: String
+    public var description: String?
+
+    public enum CodingKeys: String, CodingKey {
+      case id
+      case name
+      case description
     }
+  }
+  
+  public struct PurchasedTicket: Codable, Hashable {
+    public typealias Status = Fare.Status
     
     public typealias Identifier = String
     
@@ -363,24 +397,31 @@ extension TKBooking {
     
     public let status: Status
 
-    /// URL to activate a ticket, provided if `status == .inactive`
-    public let activationURL: URL?
-
     /// URL to fetch ticket details, provided if `status == .activated`
     public let ticketURL: URL?
 
+    @DefaultEmptyArray public var actions: [Action]
+
     /// Timestamp when an activated ticket expires, might be provided if `status == .activated`
     @OptionalISO8601 public var ticketExpiration: Date?
+    
+    @OptionalISO8601 public var purchased: Date?
+    @OptionalISO8601 public var validFrom: Date?
+    @OptionalISO8601 public var validUntil: Date?
     
     public let fare: Fare
     
     public enum CodingKeys: String, CodingKey {
       case id
+      case fare
       case status
       case ticketURL
-      case activationURL = "activateURL"
+      case actions
+
       case ticketExpiration = "ticketExpirationTimestamp"
-      case fare
+      case purchased = "purchasedTimestamp"
+      case validFrom = "validFromTimestamp"
+      case validUntil = "validUntilTimestamp"
     }
 
   }

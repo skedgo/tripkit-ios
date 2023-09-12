@@ -41,4 +41,9 @@ extension SegmentTemplate {
     get { decode([TKAPI.TripNotification].self, key: "notifications") }
     set { encode((newValue?.isEmpty == false) ? newValue : nil, key: "notifications") }
   }
+  
+  var operatorInfo: TKAPI.CompanyInfo? {
+    get { decode(TKAPI.CompanyInfo.self, key: "operatorInfo") }
+    set { encode(newValue, key: "operatorInfo") }
+  }
 }

@@ -263,6 +263,8 @@ public class TKSegment: NSObject {
   
   public var titleWithoutTime: String? { singleLineInstructionWithoutTime }
   
+  public var operatorInfo: TKAPI.CompanyInfo? { template?.operatorInfo }
+  
 
   // MARK: - Inferred properties: Simple
   
