@@ -16355,6 +16355,13 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
       "line": 523,
+      "symbol": "TKRouter.urlRequest(for:modes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRouter.swift",
+      "line": 531,
       "symbol": "TKRouter.routingRequestURL(for:modes:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
