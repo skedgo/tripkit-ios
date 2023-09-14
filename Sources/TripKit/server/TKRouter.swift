@@ -520,24 +520,32 @@ extension TripRequest: TKRouterRequestable {
 
 extension TKRouter {
 
-  public static func urlRequest(for request: TKRouterRequestable, modes: Set<String>? = nil) throws -> URLRequest {
-    let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil, config: nil)
+  public static func urlRequest(for request: TKRouterRequestable, modes: Set<String>? = nil, includeAddress: Bool = false) throws -> URLRequest {
+    let paras = requestParameters(
+      for: request, modeIdentifiers: modes,
+      additional: nil, config: nil,
+      includeAddress: includeAddress
+    )
     let baseURL = TKServer.fallbackBaseURL
     let fullURL = baseURL.appendingPathComponent("routing.json")
     return try TKServer.shared.GETRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
   }
-
   
-  public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil) -> String? {
-    try? urlRequest(for: request, modes: modes).url?.absoluteString
+  public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil, includeAddress: Bool = true) -> String? {
+    try? urlRequest(for: request, modes: modes, includeAddress: includeAddress).url?.absoluteString
   }
   
-  static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKSettings.Config?, bestOnly: Bool = false) -> [String: Any] {
+  static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKSettings.Config?, bestOnly: Bool = false, includeAddress: Bool = true) -> [String: Any] {
     var paras = (config ?? .userSettings()).paras
     let modes = modeIdentifiers ?? request.modes
     paras["modes"] = modes.sorted()
-    paras["from"] = TKParserHelper.requestString(for: request.from)
-    paras["to"] = TKParserHelper.requestString(for: request.to)
+    if includeAddress {
+      paras["from"] = TKParserHelper.requestString(for: request.from)
+      paras["to"] = TKParserHelper.requestString(for: request.to)
+    } else {
+      paras["from"] = TKParserHelper.requestString(for: request.from.coordinate)
+      paras["to"] = TKParserHelper.requestString(for: request.to.coordinate)
+    }
     
     switch request.at {
     case .arriveBy(let arrival):
