@@ -519,13 +519,17 @@ extension TripRequest: TKRouterRequestable {
 #endif
 
 extension TKRouter {
-  
-  public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil) -> String? {
+
+  public static func urlRequest(for request: TKRouterRequestable, modes: Set<String>? = nil) throws -> URLRequest {
     let paras = requestParameters(for: request, modeIdentifiers: modes, additional: nil, config: nil)
     let baseURL = TKServer.fallbackBaseURL
     let fullURL = baseURL.appendingPathComponent("routing.json")
-    let request = try? TKServer.shared.GETRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
-    return request?.url?.absoluteString
+    return try TKServer.shared.GETRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
+  }
+
+  
+  public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil) -> String? {
+    try? urlRequest(for: request, modes: modes).url?.absoluteString
   }
   
   static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKSettings.Config?, bestOnly: Bool = false) -> [String: Any] {
