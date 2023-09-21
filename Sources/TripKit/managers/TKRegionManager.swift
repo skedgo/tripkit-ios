@@ -40,8 +40,8 @@ public class TKRegionManager: NSObject {
       let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
       updateRegions(from: response)
     } catch {
-      assertionFailure()
       TKLog.warn("Couldn't load regions from cache: \(error)")
+      assertionFailure()
     }
   }
   
