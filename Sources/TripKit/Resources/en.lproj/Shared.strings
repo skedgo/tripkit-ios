@@ -23,7 +23,7 @@
 "Alert" = "Alert";
 
 /* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Already have an account? Sign in";
+"Already have an account? Sign in" = "Already have an account? Log in";
 
 /* Source where the account was derived, e.g., Facebook */
 "Authentication" = "Authentication";
@@ -212,10 +212,10 @@
 "Searching for '%@'…" = "Searching for '%@'…";
 
 /* Title of page or button to sign in */
-"Sign in" = "Sign in";
+"Sign in" = "Log in";
 
 /* Instruction for signing out user account */
-"Sign out" = "Sign out";
+"Sign out" = "Log out";
 
 /* Title of page or button to sign up */
 "Sign up" = "Sign up";
