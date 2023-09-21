@@ -17,6 +17,8 @@ extension TKRegionManager {
   
   /// Fetched the list of regions and updates `TKRegionManager`'s cache
   ///
+  /// Equivalent to `updateRegions(forced:) async throws`, but ignores the error.
+  ///
   /// Recommended to call from the application delegate.
   /// - Parameter forced: Set true to force overwriting the internal cache
   public func updateRegions(forced: Bool = false) {
@@ -24,7 +26,7 @@ extension TKRegionManager {
       try? await fetchRegions(forced: forced)
     }
   }
-  
+
   @available(*, renamed: "requireRegions()")
   public func requireRegions(completion: @escaping (Result<Void, Error>) -> Void) {
     guard !hasRegions else {
@@ -46,7 +48,13 @@ extension TKRegionManager {
     }
   }
   
-  private func fetchRegions(forced: Bool) async throws {
+  /// Fetched the list of regions and updates `TKRegionManager`'s cache
+  ///
+  /// Equivalent to `updateRegions(forced:)`.
+  ///
+  /// Recommended to call from the application delegate.
+  /// - Parameter forced: Set true to force overwriting the internal cache
+  public func fetchRegions(forced: Bool) async throws {
     let regionsURL: URL
     if let customBaseURL = TKServer.customBaseURL {
       guard let url = URL(string: customBaseURL) else {
