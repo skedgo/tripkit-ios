@@ -49,6 +49,8 @@ class TKUINotificationView: UIView {
     super.awakeFromNib()
     contentWrapper.layer.cornerRadius = 6.0
     setupColors()
+    
+    titleLabel.text = Loc.TripNotifications
   }
   
   func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>, includeTimeToLeaveNotification: Bool = true) {
