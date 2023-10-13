@@ -31,6 +31,7 @@ public class TKSettings: NSObject {
     case maximumWalkDuration = "profileTransportWalkMaxDuration"
     case concessionPricing = "profileTransportConcessionPricing"
     case transportEmissions = "profileTransportEmissions"
+    case timeToLeaveHeadway = "profileTimeToLeaveHeadway"
     
     case bookingsUseSandbox = "profileBookingsUseSandbox"
   }
@@ -400,6 +401,22 @@ extension TKSettings {
   
   public class var transportEmissions: [String: Double] {
     (UserDefaults.shared.object(forKey: DefaultsKey.transportEmissions.rawValue) as? [String: Double]) ?? [:]
+  }
+  
+}
+
+// MARK: - Notifications
+
+extension TKSettings {
+  
+  /// The minutes before a trip's start that the "Time to leave" notification should fire. Defaults to 15 (minutes)
+  public static var notificationTimeToLeaveHeadway: Int {
+    get {
+      (UserDefaults.shared.object(forKey: DefaultsKey.timeToLeaveHeadway.rawValue) as? NSNumber)?.intValue ?? 15
+    }
+    set {
+      UserDefaults.shared.set(newValue, forKey: DefaultsKey.timeToLeaveHeadway.rawValue)
+    }
   }
   
 }

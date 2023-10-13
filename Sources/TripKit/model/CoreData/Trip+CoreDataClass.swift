@@ -327,11 +327,13 @@ extension Trip {
 
 extension Trip {
   public func notifications(includeTimeToLeaveNotification: Bool = true) -> Set<TKAPI.TripNotification> {
+    let timeToLeaveHeadway = TKSettings.notificationTimeToLeaveHeadway
+    
     var regular = Set(segments.flatMap(\.notifications))
-    if includeTimeToLeaveNotification, departureTime.timeIntervalSinceNow > 15 * 60, let departureTime {
+    if includeTimeToLeaveNotification, departureTime.timeIntervalSinceNow > TimeInterval(timeToLeaveHeadway) * 60, let departureTime {
       regular.insert(.init(
         id: "depart-\(self.tripURL.absoluteString)",
-        kind: .time(departureTime.addingTimeInterval(-15 * 60)),
+        kind: .time(departureTime.addingTimeInterval(-60 * TimeInterval(timeToLeaveHeadway))),
         messageKind: .tripStart,
         messageTitle: Loc.GetReadyToLeave,
         messageBody: Loc.TimeToLeave(destination: request?.toLocation?.title, time: TKStyleManager.timeString(departureTime, for: departureTimeZone))
