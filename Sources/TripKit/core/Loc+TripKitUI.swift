@@ -202,6 +202,10 @@ extension Loc {
     return NSLocalizedString("Alternatives", tableName: "TripKit", bundle: .tripKit, comment: "Action button title to see alternative options, e.g., for the case where you can't make the next connection")
   }
 
+  public static var TripNotifications: String {
+    return NSLocalizedString("Trip Notifications", tableName: "TripKit", bundle: .tripKit, comment: "Title with section for trip notifications, such as 'time to get off' alerts")
+  }
+
   public static var AlertMe: String {
     return NSLocalizedString("Alert Me", tableName: "TripKit", bundle: .tripKit, comment: "Action button to turn on alerts for a trip")
   }
