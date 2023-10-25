@@ -167,6 +167,10 @@ public class TKUITripOverviewCard: TKUITableCard {
       .emit(onNext: { [weak self] in self?.handle($0) })
       .disposed(by: disposeBag)
     
+    viewModel.error
+      .emit(onNext: { [weak self] in self?.controller?.show($0) })
+      .disposed(by: disposeBag)
+
     // We check if the view is visible before showing attribution
     // and card actions view, otherwise we'd get AL warnings due
     // to the table view hasn't had the correct size when the card's

@@ -54,6 +54,7 @@ class TKUINotificationView: UIView {
     setupColors()
     
     titleLabel.text = Loc.TripNotifications
+    detailTitleLabel.text = Loc.TripNotificationsSubtitle
   }
   
   func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>, includeTimeToLeaveNotification: Bool = true) {
@@ -93,19 +94,18 @@ class TKUINotificationView: UIView {
 }
 
 extension TKAPI.TripNotification.MessageKind {
-  #warning("TODO: Localise")
   var label: String {
     switch self {
     case .tripStart:
-      return "The trip is about to start"
+      return Loc.TripNotificationsTripStart
     case .vehicleIsApproaching:
-      return "Vehicle is approaching your boarding stop"
+      return Loc.TripNotificationsVehicleApproaching
     case .arrivingAtYourStop:
-      return "Getting within 500m of the disembarkation stop"
+      return Loc.TripNotificationsArrivingAtStop
     case .nextStopIsYours:
-      return "Passed by the previous stop"
+      return Loc.TripNotificationsNextStop
     case .tripEnd:
-      return "About to arrive at the final destination"
+      return Loc.TripNotificationsTripEnd
     }
   }
 }

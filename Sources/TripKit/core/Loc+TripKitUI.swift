@@ -206,6 +206,30 @@ extension Loc {
     return NSLocalizedString("Trip Notifications", tableName: "TripKit", bundle: .tripKit, comment: "Title with section for trip notifications, such as 'time to get off' alerts")
   }
 
+  public static var TripNotificationsSubtitle: String {
+    return NSLocalizedString("Get notifications when:", tableName: "TripKit", bundle: .tripKit, comment: "Description of section for trip notifications, such as 'time to get off' alerts")
+  }
+
+  public static var TripNotificationsTripStart: String {
+    return NSLocalizedString("The trip is about to start", tableName: "TripKit", bundle: .tripKit, comment: "Generic description of this type of trip notification. The actual notification text will be specific to the trip.")
+  }
+
+  public static var TripNotificationsTripEnd: String {
+    return NSLocalizedString("About to arrive at the final destination", tableName: "TripKit", bundle: .tripKit, comment: "Generic description of this type of trip notification. The actual notification text will be specific to the trip.")
+  }
+
+  public static var TripNotificationsVehicleApproaching: String {
+    return NSLocalizedString("Vehicle is approaching your boarding stop", tableName: "TripKit", bundle: .tripKit, comment: "Generic description of this type of trip notification. The actual notification text will be specific to the trip.")
+  }
+
+  public static var TripNotificationsArrivingAtStop: String {
+    return NSLocalizedString("Getting within 500m of the disembarkation stop", tableName: "TripKit", bundle: .tripKit, comment: "Generic description of this type of trip notification. The actual notification text will be specific to the trip.")
+  }
+
+  public static var TripNotificationsNextStop: String {
+    return NSLocalizedString("Passed by the previous stop", tableName: "TripKit", bundle: .tripKit, comment: "Generic description of this type of trip notification. The actual notification text will be specific to the trip.")
+  }
+
   public static var AlertMe: String {
     return NSLocalizedString("Alert Me", tableName: "TripKit", bundle: .tripKit, comment: "Action button to turn on alerts for a trip")
   }

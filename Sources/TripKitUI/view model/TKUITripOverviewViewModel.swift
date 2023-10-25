@@ -28,9 +28,7 @@ class TKUITripOverviewViewModel {
   
   init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput(), includeTimeToLeaveNotification: Bool) {
     
-    let errorPublisher = PublishSubject<Error>()
-    let catcher = errorPublisher.onNext
-    self.error = errorPublisher.asAssertingSignal()
+    //MARK: Content
     
     dataSources = presentedTrip
       .asDriver(onErrorDriveWith: .empty())
@@ -70,12 +68,18 @@ class TKUITripOverviewViewModel {
         (TKUITripOverviewCard.config.tripActionsFactory?(updated) ?? [], updated)
       }
       .asDriver(onErrorDriveWith: .never())
+
+    //MARK: User interaction
+    
+    let errorPublisher = PublishSubject<Error>()
+    let catcher = errorPublisher.onNext
+    self.error = errorPublisher.asAssertingSignal()
     
     let nextFromAlertToggle: Signal<TriggerResult>
     if #available(iOS 14.0, *) {
       nextFromAlertToggle = inputs.alertsEnabled
         .with(tripUpdated) { ($1, $0) }
-        .safeMap(catchError: catcher) { await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
+        .safeMap(catchError: catcher) { try await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
         }
       
       notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip
@@ -149,7 +153,6 @@ extension TKUITripOverviewViewModel {
 // MARK: - Navigation
 
 extension TKUITripOverviewViewModel {
-  
   
   enum Next {
     case handleSelection(TKSegment)
