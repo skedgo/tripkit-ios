@@ -65,18 +65,18 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
   private var dropPinRecognizer = UILongPressGestureRecognizer()
   private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
   var droppedPin: Signal<CLLocationCoordinate2D> {
-    return droppedPinPublisher.asSignal(onErrorSignalWith: .empty())
+    return droppedPinPublisher.asAssertingSignal()
   }
 
   private var tapRecognizer = UITapGestureRecognizer()
   private var selectedRoutePublisher = PublishSubject<TKUIRoutingResultsMapRouteItem>()
   var selectedMapRoute: Signal<TKUIRoutingResultsMapRouteItem> {
-    return selectedRoutePublisher.asSignal(onErrorSignalWith: .empty())
+    return selectedRoutePublisher.asAssertingSignal()
   }
   
   private var tappedPinPublisher = PublishSubject<(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode?)>()
   var tappedPin: Signal<(MKAnnotation, TKUIRoutingResultsViewModel.SearchMode?)> {
-    return tappedPinPublisher.asSignal(onErrorSignalWith: .empty())
+    return tappedPinPublisher.asAssertingSignal()
   }
 
   private var disposeBag = DisposeBag()

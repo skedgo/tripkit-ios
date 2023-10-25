@@ -88,12 +88,12 @@ class TKUIRoutingQueryInputViewModel {
       .withLatestFrom(state)
       .filter { $0.origin != nil && $0.destination != nil }
       .map { Next.route(origin: $0.origin!, destination: $0.destination!) }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     let routeASAP = state
       .filter { $0.mode == nil && $0.origin != nil && $0.destination != nil }
       .map { Next.route(origin: $0.origin!, destination: $0.destination!) }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
 
     // If we have a `TKUICustomization.shared.locationInfoTapHandler` set, we:
     // - Add an (i) in the TKUIAutocompletionViewModel, which then triggers
@@ -136,7 +136,7 @@ class TKUIRoutingQueryInputViewModel {
           }
         }
         .compactMap { $0 }
-        .asSignal(onErrorSignalWith: Signal<Next>.empty())
+        .asAssertingSignal()
     } else {
       accessoryTaps = .empty()
     }
@@ -145,7 +145,7 @@ class TKUIRoutingQueryInputViewModel {
       routeASAP,
       selections,
       accessoryTaps,
-      tapInfoRoutePublisher.asSignal(onErrorSignalWith: .empty())
+      tapInfoRoutePublisher.asAssertingSignal()
     ])
 }
   

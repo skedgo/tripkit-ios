@@ -186,15 +186,15 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     let inputs: TKUIRoutingResultsViewModel.UIInput = (
       selected: selectedItem(in: tableView, dataSource: dataSource),
-      tappedSectionButton: tappedSectionButton.asSignal(onErrorSignalWith: .empty()),
-      tappedSearch: searchTriggers.asSignal(onErrorSignalWith: .empty()),
+      tappedSectionButton: tappedSectionButton.asAssertingSignal(),
+      tappedSearch: searchTriggers.asAssertingSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
       tappedShowModeOptions: .empty(),
-      changedDate: changedTime.asSignal(onErrorSignalWith: .empty()),
-      changedModes: changedModes.asSignal(onErrorSignalWith: .empty()),
+      changedDate: changedTime.asAssertingSignal(),
+      changedModes: changedModes.asAssertingSignal(),
       changedSortOrder: .empty(),
-      changedSearch: changedSearch.asSignal(onErrorSignalWith: .empty())
+      changedSearch: changedSearch.asAssertingSignal()
     )
     
     let mapInput: TKUIRoutingResultsViewModel.MapInput = (

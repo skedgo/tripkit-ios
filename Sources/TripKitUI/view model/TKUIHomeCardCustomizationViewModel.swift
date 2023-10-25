@@ -37,7 +37,7 @@ class TKUIHomeCardCustomizationViewModel {
     next = done
       .asObservable()
       .withLatestFrom(updatedItems) { Next.done($1) }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
   }
     
   let sections: Driver<[Section]>

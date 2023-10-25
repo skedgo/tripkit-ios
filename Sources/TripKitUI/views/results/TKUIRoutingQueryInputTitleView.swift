@@ -282,13 +282,13 @@ extension Reactive where Base == TKUIRoutingQueryInputTitleView {
   }
   
   var selectedSearchMode: Signal<TKUIRoutingResultsViewModel.SearchMode> {
-    base.switchMode.asSignal(onErrorSignalWith: .empty())
+    base.switchMode.asAssertingSignal()
   }
   
   var route: Signal<Void> {
     return Signal.merge(
       base.routeButton.rx.tap.asSignal(),
-      base.route.asSignal(onErrorSignalWith: .empty())
+      base.route.asAssertingSignal()
     )
   }
 }

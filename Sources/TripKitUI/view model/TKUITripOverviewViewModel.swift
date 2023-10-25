@@ -47,7 +47,7 @@ class TKUITripOverviewViewModel {
       }
 
     refreshMap = Observable.merge(tripChanged, servicesFetched)
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     let tripUpdated: Infallible<Trip> = presentedTrip
       .asObservable()

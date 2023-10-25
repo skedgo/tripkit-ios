@@ -267,7 +267,7 @@ public class TKUIModePicker<Item>: UIView where Item: TKUIModePickerItem {
   public var rx_pickedModes: Signal<Set<Item>> {
     return tap
       .map { [weak self] in self?.pickedModes ?? [] }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
   }
   
   /// Visible modes that are currently enabled
