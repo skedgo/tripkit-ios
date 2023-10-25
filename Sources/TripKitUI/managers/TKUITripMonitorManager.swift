@@ -126,6 +126,8 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   }
   
   private func notify(with tripNotification: TKAPI.TripNotification, trigger: UNNotificationTrigger?) {
+    assert(tripNotification.kind != .pushNotification, "Push notifications should only be triggered by backend; not locally!")
+    
     let notification = UNMutableNotificationContent()
     notification.title = tripNotification.messageTitle
     notification.body = tripNotification.messageBody
@@ -171,7 +173,7 @@ extension TKAPI.TripNotification {
     switch kind {
     case let .circle(center, radius, _):
       return CLCircularRegion(center: center, radius: radius, identifier: id)
-    case .time:
+    case .time, .pushNotification:
       return nil
     }
   }

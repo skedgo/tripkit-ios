@@ -17,6 +17,8 @@ import TripKit
 @MainActor
 class TKUITripOverviewViewModel {
   
+  typealias TriggerResult = TKUIInteractionResult<Never, Next>
+  
   struct UIInput {
     var selected: Signal<Item> = .empty()
     var alertsEnabled: Signal<Bool> = .empty()
@@ -25,6 +27,10 @@ class TKUITripOverviewViewModel {
   }
   
   init(presentedTrip: Infallible<Trip>, inputs: UIInput = UIInput(), includeTimeToLeaveNotification: Bool) {
+    
+    let errorPublisher = PublishSubject<Error>()
+    let catcher = errorPublisher.onNext
+    self.error = errorPublisher.asAssertingSignal()
     
     dataSources = presentedTrip
       .asDriver(onErrorDriveWith: .empty())
@@ -65,19 +71,12 @@ class TKUITripOverviewViewModel {
       }
       .asDriver(onErrorDriveWith: .never())
     
-    let nextFromAlertToggle: Signal<Next>
+    let nextFromAlertToggle: Signal<TriggerResult>
     if #available(iOS 14.0, *) {
-      nextFromAlertToggle = inputs.alertsEnabled.asObservable()
-        .withLatestFrom(tripUpdated) { ($1, $0) }
-        .asyncMap { trip, enabled in
-          if enabled {
-            await TKUITripMonitorManager.shared.monitorRegions(from: trip, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
-          } else {
-            TKUITripMonitorManager.shared.stopMonitoring()
-          }
+      nextFromAlertToggle = inputs.alertsEnabled
+        .with(tripUpdated) { ($1, $0) }
+        .safeMap(catchError: catcher) { await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
         }
-        .compactMap { nil } // No `Next
-        .asSignal { _ in .empty() }
       
       notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip
         .withLatestFrom(tripUpdated) { $0?.tripID == $1.tripId }
@@ -99,37 +98,27 @@ class TKUITripOverviewViewModel {
       notificationKinds = .just([])
     }
     
-    let nextFromSelection = inputs.selected.compactMap { item -> Next? in
+    let nextFromSelection = inputs.selected.compactMap { item -> TriggerResult? in
         switch item {
         case .impossible(let segment, _):
           let request = segment.insertRequestStartingHere()
-          return .showAlternativeRoutes(request)
+          return .navigation(.showAlternativeRoutes(request))
         
         case .alert(let item):
-          return .showAlerts(item.alerts)
+          return .navigation(.showAlerts(item.alerts))
           
         case .moving, .stationary, .terminal:
           guard let segment = item.segment else { return nil }
-          return .handleSelection(segment)
+          return .navigation(.handleSelection(segment))
         }
       }
     
     let nextFromPinDrop = inputs.droppedPin
-      .asObservable()
-      .withLatestFrom(tripUpdated) { ($1, $0 )}
-      .asyncMap { trip, pin -> Next? in
-        do {
-          let trip = try await TKWaypointRouter.fetchTrip(addingStopOver: pin, to: trip)
-          return .showAlternative(trip)
-        } catch {
-          print(error)
-          return nil
-        }
-      }
-      .compactMap { $0 }
-      .asSignal { _ in .empty() }
+      .with(tripUpdated) { ($1, $0 )}
+      .safeMap(catchError: catcher) { try await Self.calculateTripWithStopOver(at: $1, trip: $0) }
     
-    self.next = Signal.merge([nextFromSelection, nextFromAlertToggle, nextFromPinDrop])
+    let merged = Signal.merge([nextFromSelection, nextFromAlertToggle, nextFromPinDrop])
+    next = merged.compactMap(\.next)
     
   }
     
@@ -144,6 +133,8 @@ class TKUITripOverviewViewModel {
   let notificationsEnabled: Driver<Bool>
   
   let refreshMap: Signal<Trip>
+  
+  let error: Signal<Error>
   
   let next: Signal<Next>
   

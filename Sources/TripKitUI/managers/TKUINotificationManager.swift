@@ -17,7 +17,7 @@ typealias Publisher = ([UNNotificationRequest]) -> Void
 public class TKUINotificationManager: NSObject {
   
   // List down Notification contexts here
-  let subscriptions: [TKUINotificationSubscription] = [.init(context: .tripAlerts)]
+  let subscriptions: [TKUINotificationSubscription] = [.init(context: .tripAlerts), .init(context: .pushNotifications)]
   
   @objc(sharedInstance)
   public static let shared = TKUINotificationManager()
@@ -95,12 +95,14 @@ public class TKUINotificationManager: NSObject {
 public class TKUINotificationSubscription {
   public enum Context {
     case tripAlerts
+    case pushNotifications
     
     public var identifier: String {
       let base = "tripkit.notification."
       var append: String
       switch self {
       case .tripAlerts: append = "trip_alerts"
+      case .pushNotifications: append = "push_notifications"
       }
       return "\(base)\(append)"
     }

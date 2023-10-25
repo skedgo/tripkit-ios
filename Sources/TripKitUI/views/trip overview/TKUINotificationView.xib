@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <accessibilityOverrides dynamicTypePreference="6"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -114,11 +114,38 @@
                                                         <constraint firstItem="Xhb-eD-3zR" firstAttribute="leading" secondItem="ruA-P7-CKU" secondAttribute="trailing" constant="6" id="ypB-9k-44o"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwv-UD-wv8" userLabel="Detail 5">
+                                                    <rect key="frame" x="0.0" y="35.000000000000014" width="288" height="14.333333333333336"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-fX-ItE">
+                                                            <rect key="frame" x="0.0" y="0.66666666666664831" width="16" height="14.000000000000002"/>
+                                                            <color key="tintColor" name="TKLabelPrimary"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="16" id="Dsu-Jh-b74"/>
+                                                                <constraint firstAttribute="width" constant="16" id="vYz-1I-csu"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Vehicle is approaching your boarding stop" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-HT-8iP">
+                                                            <rect key="frame" x="22" y="0.0" width="266" height="14.333333333333334"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <color key="textColor" name="TKLabelPrimary"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Lyb-fX-ItE" firstAttribute="centerY" secondItem="Wwv-UD-wv8" secondAttribute="centerY" id="NgV-ZT-WT1"/>
+                                                        <constraint firstItem="Lyb-fX-ItE" firstAttribute="leading" secondItem="Wwv-UD-wv8" secondAttribute="leading" id="Pmj-Ia-l7r"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5MN-HT-8iP" secondAttribute="bottom" id="e79-pK-NLh"/>
+                                                        <constraint firstItem="5MN-HT-8iP" firstAttribute="top" secondItem="Wwv-UD-wv8" secondAttribute="top" id="ezJ-eS-DDz"/>
+                                                        <constraint firstItem="5MN-HT-8iP" firstAttribute="leading" secondItem="Lyb-fX-ItE" secondAttribute="trailing" constant="6" id="oM3-Zi-g2u"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5MN-HT-8iP" secondAttribute="trailing" id="wlE-lE-fJv"/>
+                                                    </constraints>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCA-VW-qBv" userLabel="Detail 2">
-                                                    <rect key="frame" x="0.0" y="46.666666666666671" width="288" height="30.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="70.333333333333329" width="288" height="30.333333333333329"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zo9-87-Vjv">
-                                                            <rect key="frame" x="0.0" y="8.6666666666666767" width="16" height="14.000000000000002"/>
+                                                            <rect key="frame" x="0.0" y="8.3333333333333339" width="16" height="14.000000000000002"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="JSd-hQ-xh2"/>
@@ -142,7 +169,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVQ-PA-Qtc" userLabel="Detail 3">
-                                                    <rect key="frame" x="0.0" y="109.66666666666667" width="288" height="14.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="121.33333333333333" width="288" height="14.333333333333329"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="AQj-Ng-cha">
                                                             <rect key="frame" x="0.0" y="0.33333333333333393" width="16" height="14.000000000000002"/>
@@ -172,7 +199,7 @@
                                                     <rect key="frame" x="0.0" y="156.33333333333337" width="288" height="14.333333333333343"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-Wa-ncU">
-                                                            <rect key="frame" x="0.0" y="-0.66666666666668561" width="16" height="16"/>
+                                                            <rect key="frame" x="0.0" y="-2.0000000000000213" width="16" height="17.333333333333336"/>
                                                             <color key="tintColor" name="TKLabelPrimary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="Klh-gk-Vof"/>
@@ -238,12 +265,15 @@
                 <outlet property="detailItem2" destination="NCZ-t5-edC" id="eOQ-Gx-UrZ"/>
                 <outlet property="detailItem3" destination="LvQ-jF-6YF" id="e9Y-Tm-gpP"/>
                 <outlet property="detailItem4" destination="t4E-71-ewA" id="sWe-aJ-ZSY"/>
+                <outlet property="detailItem5" destination="5MN-HT-8iP" id="pIU-MB-jo0"/>
                 <outlet property="detailTitleLabel" destination="4m9-ST-AzW" id="x5E-0G-kKv"/>
                 <outlet property="detailView" destination="InB-ZZ-Ghc" id="VaB-M7-lbY"/>
                 <outlet property="detailView1" destination="fmB-UW-By8" id="hpr-aA-V6Q"/>
                 <outlet property="detailView2" destination="vCA-VW-qBv" id="Ze2-hh-dK9"/>
                 <outlet property="detailView3" destination="WVQ-PA-Qtc" id="BlR-72-J2r"/>
                 <outlet property="detailView4" destination="2KG-2y-hCb" id="A1w-uW-IOb"/>
+                <outlet property="detailView5" destination="Wwv-UD-wv8" id="wqW-1M-3xR"/>
+                <outlet property="notificationKindStack" destination="WS0-Qn-H2b" id="bG7-GZ-SpV"/>
                 <outlet property="notificationSwitch" destination="8XR-B9-N29" id="ofm-Xb-q8H"/>
                 <outlet property="separator" destination="rzS-YU-yFK" id="ZYv-Qo-J4F"/>
                 <outlet property="titleImageView" destination="1hS-SZ-wkW" id="lJu-hh-S7C"/>
@@ -259,14 +289,14 @@
                 <outletCollection property="detailImageViews" destination="AQj-Ng-cha" collectionClass="NSMutableArray" id="wyp-P0-997"/>
                 <outletCollection property="detailImageViews" destination="LCk-Wa-ncU" collectionClass="NSMutableArray" id="sxp-AE-8QI"/>
             </connections>
-            <point key="canvasLocation" x="-262.59541984732823" y="-238.38028169014086"/>
+            <point key="canvasLocation" x="-263" y="-236"/>
         </view>
     </objects>
     <resources>
         <image name="bell.fill" catalog="system" width="123" height="128"/>
         <image name="location.fill.viewfinder" catalog="system" width="128" height="115"/>
         <image name="location.north.fill" catalog="system" width="110" height="128"/>
-        <image name="mappin.and.ellipse" catalog="system" width="117" height="128"/>
+        <image name="mappin.and.ellipse" catalog="system" width="110" height="128"/>
         <namedColor name="BrandColor">
             <color red="0.082000002264976501" green="0.71399998664855957" blue="0.48600000143051147" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
