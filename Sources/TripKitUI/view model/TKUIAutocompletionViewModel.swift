@@ -133,7 +133,7 @@ class TKUIAutocompletionViewModel {
             return Observable.empty()
         }
       }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     accessorySelection = (accessorySelected  ?? .empty())
       .compactMap(\.result)
@@ -146,13 +146,13 @@ class TKUIAutocompletionViewModel {
             return Observable.empty()
         }
       }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
 
     triggerAction = selected
       .filter(\.isAction)
       .compactMap(\.provider)
     
-    error = errorPublisher.asSignal(onErrorSignalWith: .never())
+    error = errorPublisher.asAssertingSignal()
   }
   
   let sections: Driver<[Section]>

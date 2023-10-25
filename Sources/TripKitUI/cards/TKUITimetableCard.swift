@@ -181,14 +181,14 @@ public class TKUITimetableCard : TKUITableCard {
     
     let loadMoreAfter = loadMorePublisher
       .map { dataSource[$0] }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     accessoryView.searchBar.text = filter
     let filterObservable = accessoryView.searchBar.rx.text.orEmpty
     
     let input: TKUITimetableViewModel.UIInput = (
       selected: selectedItem(in: tableView, dataSource: dataSource),
-      showAlerts: cellAlertPublisher.asSignal(onErrorSignalWith: .empty()),
+      showAlerts: cellAlertPublisher.asAssertingSignal(),
       filter: filterObservable.asDriver(),
       date: datePublisher.asDriver(onErrorDriveWith: .empty()),
       refresh: .empty(),

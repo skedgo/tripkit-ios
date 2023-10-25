@@ -66,7 +66,7 @@ extension TKUIHomeViewModel {
     componentActions.asObservable()
       .withLatestFrom(customization) { ($0, $1) }
       .compactMap(Self.buildNext(for:customization:))
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
   }
 
   

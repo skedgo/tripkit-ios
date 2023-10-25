@@ -60,7 +60,7 @@ class TKUIRoutingResultsViewModel {
       .share(replay: 1, scope: .forever)
 
     let errorPublisher = PublishSubject<Error>()
-    self.error = errorPublisher.asSignal(onErrorSignalWith: .empty())
+    self.error = errorPublisher.asAssertingSignal()
     
     // Monitor the builder's annotation's coordinates
     let originOrDestinationChanged = builderChangedWithID
@@ -205,7 +205,7 @@ class TKUIRoutingResultsViewModel {
         let region = Self.regionForModes(for: tuple.1)
         return Next.presentModeConfigurator(modes: modes, region: region)
       }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     let presentTime = inputs.tappedDate.asObservable()
       .withLatestFrom(builderChanged)
@@ -220,7 +220,7 @@ class TKUIRoutingResultsViewModel {
         }
         return .presentDatePicker(time: time, timeZone: builder.timeZone)
       }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     let presentTimeAutomatically = builderChanged
       .compactMap { builder -> Next? in
@@ -233,13 +233,13 @@ class TKUIRoutingResultsViewModel {
         }
         return .presentDatePicker(time: time, timeZone: builder.timeZone)
       }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
 
     let presentSearch = inputs.tappedSearch
       .asObservable()
       .withLatestFrom(builderChanged)
       .map { Next.showSearch(origin: $0.origin, destination: $0.destination, mode: $0.mode) }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     let presentLocationInfo = mapInput.tappedPin
       .map { Next.showLocation($0, mode: $1) }

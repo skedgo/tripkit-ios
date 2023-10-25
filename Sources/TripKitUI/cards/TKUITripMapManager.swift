@@ -24,7 +24,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
   private var dropPinRecognizer = UILongPressGestureRecognizer()
   private var droppedPinPublisher = PublishSubject<CLLocationCoordinate2D>()
   var droppedPin: Signal<CLLocationCoordinate2D> {
-    return droppedPinPublisher.asSignal(onErrorSignalWith: .empty())
+    return droppedPinPublisher.asAssertingSignal()
   }
   
   private var disposeBag = DisposeBag()

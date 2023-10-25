@@ -138,7 +138,7 @@ public class TKUINearbyViewModel {
     self.mapAnnotationToSelect = cardInput.selection
       .asObservable()
       .compactMap { $0.mapAnnotation }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
     
     self.mapOverlays = filteredNearby.map { $0.overlays }
     
@@ -160,7 +160,7 @@ public class TKUINearbyViewModel {
           return nil
         }
       }
-      .asSignal(onErrorSignalWith: .empty())
+      .asAssertingSignal()
   }
   
   fileprivate let refreshPublisher: PublishSubject<Void>

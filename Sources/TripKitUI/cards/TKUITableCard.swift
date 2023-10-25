@@ -34,7 +34,7 @@ open class TKUITableCard: TGTableCard {
   
   public func selectedIndex(in tableView: UITableView) -> Signal<IndexPath> {
     #if targetEnvironment(macCatalyst)
-    return highlighted.asSignal(onErrorSignalWith: .empty())
+    return highlighted.asAssertingSignal()
     #else
     return tableView.rx.itemSelected.asSignal()
     #endif

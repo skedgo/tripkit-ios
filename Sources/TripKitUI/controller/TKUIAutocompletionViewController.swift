@@ -83,8 +83,8 @@ public class TKUIAutocompletionViewController: UITableViewController {
     viewModel = TKUIAutocompletionViewModel(
       providers: providers,
       searchText: searchText,
-      selected: tableView.rx.itemSelected.map { dataSource[$0] }.asSignal(onErrorSignalWith: .empty()),
-      accessorySelected: accessoryTapped.asSignal(onErrorSignalWith: .empty()),
+      selected: tableView.rx.itemSelected.map { dataSource[$0] }.asAssertingSignal(),
+      accessorySelected: accessoryTapped.asAssertingSignal(),
       biasMapRect: .just(biasMapRect)
     )
     
