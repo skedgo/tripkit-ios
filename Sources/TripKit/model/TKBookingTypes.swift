@@ -40,7 +40,10 @@ public enum TKBooking {
       case lock = "LOCK"
       case unlock = "UNLOCK"
       case cancel = "CANCEL"
-      
+
+      /// Tells the app to show another trip when tapped; comes with an internal URL
+      case showTrip = "SHOW_RELATED_TRIP"
+
       /// Tells the app to plan another trip, aka "request another"; no URL or external action provided
       case planNext = "REQUESTANOTHER"
       
