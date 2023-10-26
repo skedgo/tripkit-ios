@@ -422,49 +422,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 129,
+      "line": 138,
       "symbol": "TKUIMapManager.selectionMode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 247,
+      "line": 256,
       "symbol": "TKUIMapManager.annotationBuilder(for:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 431,
+      "line": 441,
       "symbol": "TKUIMapManager.mapView(_:didAdd:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 453,
+      "line": 463,
       "symbol": "TKUIMapManager.mapView(_:viewFor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 463,
+      "line": 473,
       "symbol": "TKUIMapManager.mapView(_:rendererFor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 514,
+      "line": 524,
       "symbol": "TKUIMapManager.mapView(_:regionDidChangeAnimated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 539,
+      "line": 549,
       "symbol": "TKUIMapManager.mapView(_:didSelect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1129,14 +1129,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripModeByModeCard.swift",
-      "line": 212,
+      "line": 214,
       "symbol": "TKUITripModeByModeCard.offsetToReach(mode:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripModeByModeCard.swift",
-      "line": 221,
+      "line": 223,
       "symbol": "TKUITripModeByModeCard.shows(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1220,21 +1220,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 241,
+      "line": 246,
       "symbol": "TKUITripOverviewCard.shows(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 437,
+      "line": 442,
       "symbol": "TKUITripOverviewCard",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripOverviewCard.swift",
-      "line": 439,
+      "line": 444,
       "symbol": "TKUITripOverviewCard.modeByModeCard(_:updatedTrip:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
