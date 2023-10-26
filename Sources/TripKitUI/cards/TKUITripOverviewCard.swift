@@ -457,11 +457,12 @@ extension TKUITripOverviewCard {
       let publisher = viewModel.notificationsEnabled
         .publisher
         .catch { _ in Just(false) }
-        .map { isOn in
+        .combineLatest(TKUITripMonitorManager.shared.isTogglingAlertPublisher)
+        .map { isOn, isToggling in
           if isOn {
-            return TKUICardActionContent(title: Loc.Mute, icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive)
+            return TKUICardActionContent(title: Loc.Mute, icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive, isInProgress: isToggling)
           } else {
-            return TKUICardActionContent(title: Loc.AlertMe, icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold)
+            return TKUICardActionContent(title: Loc.AlertMe, icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold, isInProgress: isToggling)
           }
         }
         .eraseToAnyPublisher()

@@ -9,6 +9,7 @@
 import Foundation
 import UserNotifications
 import CoreLocation
+import Combine
 
 import GeoMonitor
 import TripKit
@@ -64,6 +65,12 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
       }
     }
   }()
+  
+  @Published var isTogglingAlert: Bool = false
+  
+  var isTogglingAlertPublisher: AnyPublisher<Bool, Never> {
+    _isTogglingAlert.projectedValue.eraseToAnyPublisher()
+  }
   
   @Published var monitoredTrip: MonitoredTrip? {
     didSet {

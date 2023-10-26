@@ -79,7 +79,8 @@ class TKUITripOverviewViewModel {
     if #available(iOS 14.0, *) {
       nextFromAlertToggle = inputs.alertsEnabled
         .with(tripUpdated) { ($1, $0) }
-        .safeMap(catchError: catcher) { try await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
+        .safeMap(catchError: catcher) {
+          try await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
         }
       
       notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip

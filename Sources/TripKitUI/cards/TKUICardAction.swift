@@ -150,6 +150,11 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     set { content.style = newValue }
   }
   
+  public var isInProgress: Bool {
+    get { content.isInProgress }
+    set { content.isInProgress = newValue }
+  }
+  
   /// Priority of the action to determine ordering in a list. Defaults to 0.
   ///
   /// If multiple actions have the same priority, then `.bold` style is
@@ -166,11 +171,12 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
 }
 
 public struct TKUICardActionContent {
-  public init(title: String, accessibilityLabel: String? = nil, icon: UIImage, style: TKUICardActionStyle) {
+  public init(title: String, accessibilityLabel: String? = nil, icon: UIImage, style: TKUICardActionStyle = .normal, isInProgress: Bool = false) {
     self.title = title
     self.accessibilityLabel = accessibilityLabel
     self.icon = icon
     self.style = style
+    self.isInProgress = isInProgress
   }
   
   /// Title of the button
@@ -183,4 +189,6 @@ public struct TKUICardActionContent {
   public var icon: UIImage
   
   public var style: TKUICardActionStyle
+  
+  public var isInProgress: Bool
 }

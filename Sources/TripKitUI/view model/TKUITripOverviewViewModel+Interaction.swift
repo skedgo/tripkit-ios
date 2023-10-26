@@ -20,6 +20,9 @@ extension TKUITripOverviewViewModel {
 
   @available(iOS 14.0, *)
   static func toggleNotifications(enabled: Bool, trip: Trip, includeTimeToLeaveNotification: Bool) async throws -> TriggerResult {
+    TKUITripMonitorManager.shared.isTogglingAlert = true
+    defer { TKUITripMonitorManager.shared.isTogglingAlert = false }
+    
     if enabled {
       if let subscribeURL = trip.subscribeURL {
         // If this fails, it'll abort enabling notifications
