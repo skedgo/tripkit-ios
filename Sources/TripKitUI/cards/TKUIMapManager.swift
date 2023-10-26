@@ -119,6 +119,15 @@ open class TKUIMapManager: TGMapManager {
   /// Cache of renderers, used to update styling when selection changes
   private var renderers: [WeakRenderers] = []
   
+  /// Whether user interaction for selecting annotation is enabled, defaults to `true`.
+  open var annotationSelectionEnabled: Bool = true {
+    didSet {
+      if !annotationSelectionEnabled {
+        selectionIdentifier = nil
+      }
+    }
+  }
+  
   /// The identifier for what should be drawn as selected on the map
   public var selectionIdentifier: String? {
     didSet {
@@ -372,6 +381,7 @@ extension TKUIMapManager {
   
   private func updateSelectionForTapping(_ view: MKAnnotationView) {
     guard
+      annotationSelectionEnabled,
       let selectable = view.annotation as? TKUISelectableOnMap,
       let identifier = selectable.selectionIdentifier
       else { return }
