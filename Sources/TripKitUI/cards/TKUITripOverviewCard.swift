@@ -226,6 +226,11 @@ public class TKUITripOverviewCard: TKUITableCard {
       tripMapManager?.deselectSegment(animated: animated)
     }
     
+    // Annotation selection on the trip map manager is used by the mode-by-mode
+    // card, but not the overview card; as it doesn't do anything useful, and
+    // you can't undo it.
+    tripMapManager?.annotationSelectionEnabled = false
+    
     TKUIEventCallback.handler(.cardAppeared(self))
   }
 
