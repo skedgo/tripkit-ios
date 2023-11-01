@@ -188,6 +188,8 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
+    
+    tripMapManager.annotationSelectionEnabled = true
 
     TKUIEventCallback.handler(.cardAppeared(self))
     if let controller = self.controller {

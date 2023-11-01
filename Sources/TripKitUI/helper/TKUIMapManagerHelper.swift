@@ -80,6 +80,7 @@ class TKUIMapManagerHelper: NSObject {
           points.append(TKUICircleAnnotation(
             coordinate: visit.coordinate,
             title: visit.title,
+            subtitle: visit.subtitle,
             circleColor: service.color ?? .tkAppTintColor,
             isTravelled: segment.uses(visit),
             asLarge: true,
@@ -187,9 +188,10 @@ class TKUIMapManagerHelper: NSObject {
 }
 
 fileprivate class TKUICircleAnnotation: NSObject, TKUICircleDisplayable, TKUISelectableOnMap {
-  internal init(coordinate: CLLocationCoordinate2D, title: String? = nil, circleColor: UIColor, isTravelled: Bool, asLarge: Bool, selectionIdentifier: String?, selectionCondition: TKUISelectionCondition) {
+  internal init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, circleColor: UIColor, isTravelled: Bool, asLarge: Bool, selectionIdentifier: String?, selectionCondition: TKUISelectionCondition) {
     self.coordinate = coordinate
     self.title = title
+    self.subtitle = subtitle
     self.circleColor = circleColor
     self.isTravelled = isTravelled
     self.asLarge = asLarge
@@ -204,6 +206,7 @@ fileprivate class TKUICircleAnnotation: NSObject, TKUICircleDisplayable, TKUISel
   
   var coordinate: CLLocationCoordinate2D
   var title: String?
+  var subtitle: String?
   
   // MARK: TKUICircleDisplayable
   
