@@ -152,14 +152,14 @@ open class TKUIHomeCard: TKUITableCard {
       searchInProgress: searchInProgress.startWith(false).asDriver(onErrorJustReturn: false),
       searchText: searchTextPublisher,
       itemSelected: selectedItem(in: tableView, dataSource: dataSource),
-      itemAccessoryTapped: cellAccessoryTapped.asSignal(onErrorSignalWith: .empty()),
-      refresh: refreshPublisher.asSignal(onErrorSignalWith: .never()),
+      itemAccessoryTapped: cellAccessoryTapped.asAssertingSignal(),
+      refresh: refreshPublisher.asAssertingSignal(),
       biasMapRect: homeMapManager.mapRect.startWith(.null)
     )
 
     viewModel = TKUIHomeViewModel(
       componentViewModels: components,
-      actionInput: actionTriggered.asSignal(onErrorSignalWith: .empty()),
+      actionInput: actionTriggered.asAssertingSignal(),
       searchInput: searchInput
     )
     

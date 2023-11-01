@@ -91,7 +91,7 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     
     let route = Signal.merge(
       titleView.rx.route,
-      routeTriggered.asSignal(onErrorSignalWith: .empty())
+      routeTriggered.asAssertingSignal()
     )
     
     viewModel = TKUIRoutingQueryInputViewModel(
@@ -105,8 +105,8 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
         selected: selectedItem(in: tableView, dataSource: dataSource),
         selectedSearchMode: titleView.rx.selectedSearchMode,
         tappedSwap: titleView.swapButton.rx.tap.asSignal(),
-        accessoryTapped: accessoryTapped?.asSignal(onErrorSignalWith: .empty()),
-        accessoryCallback: accessoryCallback.asSignal(onErrorSignalWith: .empty())
+        accessoryTapped: accessoryTapped?.asAssertingSignal(),
+        accessoryCallback: accessoryCallback.asAssertingSignal()
       )
     )
     

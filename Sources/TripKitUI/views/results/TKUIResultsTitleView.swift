@@ -31,7 +31,7 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
   
   private let locationSearchPublisher = PublishSubject<Void>()
   var locationTapped: Signal<Void> {
-    return locationSearchPublisher.asSignal(onErrorSignalWith: .empty())
+    return locationSearchPublisher.asAssertingSignal()
   }
   
   public var preferredView: UIView? {

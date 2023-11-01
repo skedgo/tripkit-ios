@@ -139,13 +139,13 @@ public class TKUITripOverviewCard: TKUITableCard {
     let mergedSelection = Observable.merge(
         selectedItem(in: tableView, dataSource: dataSource).asObservable(),
         alternativesTapped.map { dataSource[$0] }
-      ).asSignal(onErrorSignalWith: .empty())
+      ).asAssertingSignal()
     
     viewModel = TKUITripOverviewViewModel(
       presentedTrip: presentedTrip,
       inputs: TKUITripOverviewViewModel.UIInput(
         selected: mergedSelection,
-        alertsEnabled: alertsToggled.asSignal(onErrorSignalWith: .empty()),
+        alertsEnabled: alertsToggled.asAssertingSignal(),
         isVisible: isVisible.asDriver(onErrorJustReturn: true)
       ),
       includeTimeToLeaveNotification: includeTimeToLeaveNotification

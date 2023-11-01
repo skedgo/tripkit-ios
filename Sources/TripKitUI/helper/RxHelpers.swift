@@ -29,6 +29,15 @@ extension Driver where SharingStrategy == DriverSharingStrategy {
   
 }
 
+extension ObservableConvertibleType {
+  func asAssertingSignal() -> Signal<Element> {
+    return asSignal { error in
+      assertionFailure("Shouldn't have errored but did, with: \(error)")
+      return .empty()
+    }
+  }
+}
+
 extension TableViewSectionedDataSource where Section : SectionModelType, Section.Item : Equatable {
   
   func indexPath(of needle: Section.Item?) -> IndexPath? {
@@ -43,4 +52,14 @@ extension TableViewSectionedDataSource where Section : SectionModelType, Section
     return nil
   }
   
+}
+
+// MARK: - .with
+
+extension Signal {
+  func with<D, S, O>(_ driver: O, combiner: @escaping (Element, D) -> S) -> Signal<S> where O: ObservableConvertibleType, O.Element == D {
+    asObservable()
+      .withLatestFrom(driver, resultSelector: combiner)
+      .asAssertingSignal()
+  }
 }
