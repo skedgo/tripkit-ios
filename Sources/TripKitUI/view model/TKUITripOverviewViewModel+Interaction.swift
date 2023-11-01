@@ -16,7 +16,6 @@ extension TKUITripOverviewViewModel {
     let trip = try await TKWaypointRouter.fetchTrip(addingStopOver: coordinate, to: trip)
     return .navigation(.showAlternative(trip))
   }
-  
 
   @available(iOS 14.0, *)
   static func toggleNotifications(enabled: Bool, trip: Trip, includeTimeToLeaveNotification: Bool) async throws -> TriggerResult {
@@ -24,20 +23,9 @@ extension TKUITripOverviewViewModel {
     defer { TKUITripMonitorManager.shared.isTogglingAlert = false }
     
     if enabled {
-      if let subscribeURL = trip.subscribeURL {
-        // If this fails, it'll abort enabling notifications
-        let _ = try await URLSession.shared.data(from: subscribeURL)
-      }
-
-      await TKUITripMonitorManager.shared.monitorRegions(from: trip, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
-      
+      try await TKUITripMonitorManager.shared.monitorRegions(from: trip, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
     } else {
-      if let unsubscribeURL = trip.unsubscribeURL {
-        // If this fails, we'll disable the local notifications anyway
-        let _ = try? await URLSession.shared.data(from: unsubscribeURL)
-      }
-
-      TKUITripMonitorManager.shared.stopMonitoring()
+      await TKUITripMonitorManager.shared.stopMonitoring()
     }
     
     return .success
