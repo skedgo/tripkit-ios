@@ -36,6 +36,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   /// Will be set on `UNNotificationRequest.content.categoryIdentifier`
   ///
   /// These notifications will also get `UNNotificationRequest.identifier` set to `TKAPI.TripNotification.id`
+  nonisolated
   public static let tripNotificationCategoryIdentifier: String = "TKUITripMonitorManager.trip-notification"
   
   private enum Keys {
