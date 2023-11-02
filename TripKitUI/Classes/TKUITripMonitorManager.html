@@ -582,6 +582,9 @@
                 <a class="nav-group-task-link" href="../Protocols/TKUIModePickerItem.html">TKUIModePickerItem</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TKUINotificationPushProvider.html">TKUINotificationPushProvider</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TKUIRoutingResultsMapManagerType.html">TKUIRoutingResultsMapManagerType</a>
               </li>
               <li class="nav-group-task">
@@ -650,13 +653,21 @@
                 </div>
               </div>
             <p>The manager for trip notifications such as &ldquo;get off at the next stop&rdquo; or &ldquo;your trip is about to start&rdquo;</p>
-
-<p>Requirements:</p>
+<h3 id='requirements' class='heading'>Requirements:</h3>
 
 <ul>
 <li>Project &gt; Your Target &gt; Capabilities &gt; Background Modes: Enable &ldquo;Location Updates&rdquo;</li>
 <li>Project &gt; Your Target &gt; Info: Include both <code>NSLocationAlwaysAndWhenInUseUsageDescription</code> and <code>NSLocationWhenInUseUsageDescription</code></li>
 <li>Then call <code>TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }</code> in your app.</li>
+</ul>
+<h3 id='push-notifications' class='heading'>Push notifications:</h3>
+
+<p>An additional feature is server-side notifications related to a trip being monitored. This requires additional
+set-up:</p>
+
+<ul>
+<li>Implement <code><a href="../Protocols/TKUINotificationPushProvider.html">TKUINotificationPushProvider</a></code> and set it on <code>TKUINotificationManager.shared.pushProvider</code></li>
+<li>Lastly, call <code>TKUINotificationManager.shared.subscribe(to: .pushNotifications) { _ in }</code></li>
 </ul>
 
           </div>
@@ -666,6 +677,35 @@
           <div class="section-content">
             <div class="task-group">
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI22TKUITripMonitorManagerC34tripNotificationCategoryIdentifierSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/tripNotificationCategoryIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITripMonitorManagerC34tripNotificationCategoryIdentifierSSvpZ">tripNotificationCategoryIdentifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Will be set on <code>UNNotificationRequest.content.categoryIdentifier</code></p>
+
+<p>These notifications will also get <code>UNNotificationRequest.identifier</code> set to <code>TKAPI.TripNotification.id</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="n">nonisolated</span> <span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">tripNotificationCategoryIdentifier</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -697,9 +737,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI22TKUITripMonitorManagerC14monitorRegions4from30includeTimeToLeaveNotificationy0aB00A0C_SbtYaF"></a>
+                    <a name="/s:9TripKitUI22TKUITripMonitorManagerC14monitorRegions4from30includeTimeToLeaveNotificationy0aB00A0C_SbtYaKF"></a>
                     <a name="//apple_ref/swift/Method/monitorRegions(from:includeTimeToLeaveNotification:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI22TKUITripMonitorManagerC14monitorRegions4from30includeTimeToLeaveNotificationy0aB00A0C_SbtYaF">monitorRegions(from:<wbr>includeTimeToLeaveNotification:<wbr>)</a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITripMonitorManagerC14monitorRegions4from30includeTimeToLeaveNotificationy0aB00A0C_SbtYaKF">monitorRegions(from:<wbr>includeTimeToLeaveNotification:<wbr>)</a>
                     </code>
                       <span class="declaration-note">
                         Asynchronous
@@ -718,7 +758,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">monitorRegions</span><span class="p">(</span><span class="n">from</span> <span class="nv">trip</span><span class="p">:</span> <span class="kt">Trip</span><span class="p">,</span> <span class="nv">includeTimeToLeaveNotification</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="n">async</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">monitorRegions</span><span class="p">(</span><span class="n">from</span> <span class="nv">trip</span><span class="p">:</span> <span class="kt">Trip</span><span class="p">,</span> <span class="nv">includeTimeToLeaveNotification</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -728,10 +768,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI22TKUITripMonitorManagerC14stopMonitoringyyF"></a>
+                    <a name="/s:9TripKitUI22TKUITripMonitorManagerC14stopMonitoringyyYaF"></a>
                     <a name="//apple_ref/swift/Method/stopMonitoring()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI22TKUITripMonitorManagerC14stopMonitoringyyF">stopMonitoring()</a>
+                    <a class="token" href="#/s:9TripKitUI22TKUITripMonitorManagerC14stopMonitoringyyYaF">stopMonitoring()</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -745,7 +788,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stopMonitoring</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stopMonitoring</span><span class="p">()</span> <span class="n">async</span></code></pre>
 
                         </div>
                       </div>
@@ -815,7 +858,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-11-01)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-11-02)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
