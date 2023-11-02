@@ -428,7 +428,7 @@ extension TKAPI.TripNotification: Codable {
     case "PUSH":
       kind = .pushNotification
     default:
-      throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected 'type' of value 'CIRCLE' or 'TIME', but got '\(rawKind)'"))
+      throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected 'type' of value 'CIRCLE', 'TIME' or 'PUSH', but got '\(rawKind)'"))
     }
   }
   
