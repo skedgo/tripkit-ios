@@ -21,4 +21,14 @@ extension Trip {
     get { decodePrimitive(String.self, key: "tripId") }
     set { encodePrimitive(newValue, key: "tripId") }
   }
+  
+  public var subscribeURL: URL? {
+    get { decodePrimitive(String.self, key: "subscribeURL").flatMap { URL(string: $0) } }
+    set { encodePrimitive(newValue?.absoluteString, key: "subscribeURL") }
+  }
+  
+  public var unsubscribeURL: URL? {
+    get { decodePrimitive(String.self, key: "unsubscribeURL").flatMap { URL(string: $0) } }
+    set { encodePrimitive(newValue?.absoluteString, key: "unsubscribeURL") }
+  }
 }

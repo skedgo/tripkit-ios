@@ -276,6 +276,8 @@ public final class TKRoutingParser {
         trip.update(\.progressURLString, value: apiTrip.progressURL?.absoluteString)
         trip.update(\.plannedURLString, value: apiTrip.plannedURL?.absoluteString)
         trip.update(\.logURLString, value: apiTrip.logURL?.absoluteString)
+        trip.update(\.subscribeURL, value: apiTrip.subscribeURL)
+        trip.update(\.unsubscribeURL, value: apiTrip.unsubscribeURL)
         trip.update(\.bundleId, value: apiTrip.bundleId)
         trip.update(\.tripId, value: apiTrip.id)
         

@@ -59,6 +59,8 @@ extension TKAPI {
     public var progressURL: URL?
     public var plannedURL: URL?
     public var logURL: URL?
+    public var subscribeURL: URL?
+    public var unsubscribeURL: URL?
     
     @UnknownNil public var availability: TripAvailability?
   }
@@ -243,6 +245,7 @@ extension TKAPI {
     public enum Kind: Hashable {
       case circle(center: CLLocationCoordinate2D, radius: CLLocationDistance, trigger: Trigger)
       case time(Date)
+      case pushNotification
 
       public static func == (lhs: TKAPI.TripNotification.Kind, rhs: TKAPI.TripNotification.Kind) -> Bool {
         switch (lhs, rhs) {
@@ -261,12 +264,16 @@ extension TKAPI {
       public func hash(into hasher: inout Hasher) {
         switch self {
         case let .circle(center, radius, trigger):
+          hasher.combine("CIRCLE")
           hasher.combine(center.latitude)
           hasher.combine(center.longitude)
           hasher.combine(radius)
           hasher.combine(trigger)
         case let .time(date):
+          hasher.combine("TIME")
           hasher.combine(date)
+        case .pushNotification:
+          hasher.combine("PUSH")
         }
       }
       
@@ -282,11 +289,12 @@ extension TKAPI {
       case onExit = "EXIT"
     }
     
-    public enum MessageKind: String, Codable, Hashable {
+    public enum MessageKind: String, Codable, Hashable, CaseIterable {
       case tripStart          = "TRIP_START"
-      case tripEnd            = "TRIP_END"
+      case vehicleIsApproaching = "VEHICLE_IS_APPROACHING"
       case arrivingAtYourStop = "ARRIVING_AT_YOUR_STOP"
       case nextStopIsYours    = "NEXT_STOP_IS_YOURS"
+      case tripEnd            = "TRIP_END"
     }
     
     public let id: String
@@ -417,8 +425,10 @@ extension TKAPI.TripNotification: Codable {
     case "TIME":
       let date = try container.decode(ISO8601OrSecondsSince1970.self, forKey: .time)
       kind = .time(date.wrappedValue)
+    case "PUSH":
+      kind = .pushNotification
     default:
-      throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected 'type' of value 'CIRCLE', but got '\(rawKind)'"))
+      throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Expected 'type' of value 'CIRCLE', 'TIME' or 'PUSH', but got '\(rawKind)'"))
     }
   }
   
@@ -437,6 +447,8 @@ extension TKAPI.TripNotification: Codable {
     case let .time(date):
       try container.encode("TIME", forKey: .kind)
       try container.encode(date, forKey: .time)
+    case .pushNotification:
+      try container.encode("PUSH", forKey: .kind)
     }
   }
   

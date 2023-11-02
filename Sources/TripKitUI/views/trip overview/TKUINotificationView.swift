@@ -23,6 +23,7 @@ class TKUINotificationView: UIView {
   @IBOutlet weak var detailTitleLabel: UILabel!
   
   @IBOutlet weak var detailView: UIView!
+  @IBOutlet var notificationKindStack: UIStackView!
   
   // Assuming this is constant first
   @IBOutlet weak var detailView1: UIView!
@@ -33,7 +34,9 @@ class TKUINotificationView: UIView {
   @IBOutlet weak var detailItem3: UILabel!
   @IBOutlet weak var detailView4: UIView!
   @IBOutlet weak var detailItem4: UILabel!
-    
+  @IBOutlet weak var detailView5: UIView!
+  @IBOutlet weak var detailItem5: UILabel!
+
   @IBOutlet weak var separator: UIView!
   
   @IBOutlet var labels: [UILabel]!
@@ -51,14 +54,30 @@ class TKUINotificationView: UIView {
     setupColors()
     
     titleLabel.text = Loc.TripNotifications
+    detailTitleLabel.text = Loc.TripNotificationsSubtitle
   }
   
   func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>, includeTimeToLeaveNotification: Bool = true) {
-    detailView1.alpha = notificationKinds.contains(.tripStart) ? 1 : 0.3
-    detailView2.alpha = notificationKinds.contains(.arrivingAtYourStop) ? 1 : 0.3
-    detailView3.alpha = notificationKinds.contains(.nextStopIsYours) ? 1 : 0.3
-    detailView4.alpha = notificationKinds.contains(.tripEnd) ? 1 : 0.3
-    detailView1.isHidden = !includeTimeToLeaveNotification
+    
+    func views(for kind: TKAPI.TripNotification.MessageKind) -> (UIView, UILabel) {
+      switch kind {
+      case .arrivingAtYourStop: return (detailView2, detailItem2)
+      case .nextStopIsYours: return (detailView3, detailItem3)
+      case .tripEnd: return (detailView4, detailItem4)
+      case .tripStart: return (detailView1, detailItem1)
+      case .vehicleIsApproaching: return (detailView5, detailItem5)
+      }
+    }
+    
+    for kind in TKAPI.TripNotification.MessageKind.allCases {
+      let (view, label) = views(for: kind)
+      view.alpha = notificationKinds.contains(kind) ? 1 : 0.3
+      label.text = kind.label
+    }
+    
+    views(for: .tripStart).0.isHidden = !includeTimeToLeaveNotification
+    views(for: .vehicleIsApproaching).0.isHidden = !TKUINotificationManager.shared.isSubscribed(to: .pushNotifications)
+    
     notificationSwitch.isEnabled = !notificationKinds.isEmpty
   }
     
@@ -72,4 +91,21 @@ class TKUINotificationView: UIView {
     detailImageViews.forEach { $0.tintColor = .tkLabelPrimary }
   }
   
+}
+
+extension TKAPI.TripNotification.MessageKind {
+  var label: String {
+    switch self {
+    case .tripStart:
+      return Loc.TripNotificationsTripStart
+    case .vehicleIsApproaching:
+      return Loc.TripNotificationsVehicleApproaching
+    case .arrivingAtYourStop:
+      return Loc.TripNotificationsArrivingAtStop
+    case .nextStopIsYours:
+      return Loc.TripNotificationsNextStop
+    case .tripEnd:
+      return Loc.TripNotificationsTripEnd
+    }
+  }
 }

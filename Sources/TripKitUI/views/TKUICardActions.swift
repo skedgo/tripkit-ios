@@ -107,10 +107,15 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
       }
     } label: {
       HStack(spacing: 4) {
-        Image(uiImage: action.content.icon)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(width: 18, height: 18)
+        if #available(iOS 14.0, *), action.content.isInProgress {
+          ProgressView()
+            .frame(width: 18, height: 18)
+        } else {
+          Image(uiImage: action.content.icon)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 18, height: 18)
+        }
         
         if big {
           Text(action.content.title)
@@ -121,6 +126,7 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
       .padding(.horizontal, big ? 12 : 8)
       .padding(.vertical, 8)
     }
+    .disabled(action.content.isInProgress)
     .foregroundColor(action.content.style == .bold
                      ? .white
                      : (normalStyle == .fadedTint ? .accentColor : Color(.tkLabelPrimary)))
@@ -134,6 +140,7 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
         lineWidth: action.content.style == .normal && normalStyle == .outline ? 2 : 0
       )
     )
+    .opacity(action.content.isInProgress ? 0.3 : 1)
   }
 }
 
@@ -160,8 +167,7 @@ class PreviewData: ObservableObject {
       .map { newValue in
         TKUICardActionContent(
           title: newValue ? "Remove Favourite" : "Add Favourite",
-          icon: UIImage(systemName: newValue ? "star.slash.fill" : "star.fill")!.withRenderingMode(.alwaysTemplate) ,
-          style: .normal
+          icon: UIImage(systemName: newValue ? "star.slash.fill" : "star.fill")!.withRenderingMode(.alwaysTemplate)
         )
       }
       .eraseToAnyPublisher()

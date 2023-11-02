@@ -339,6 +339,17 @@ extension Trip {
         messageBody: Loc.TimeToLeave(destination: request?.toLocation?.title, time: TKStyleManager.timeString(departureTime, for: departureTimeZone))
       ))
     }
+    
+    if subscribeURL != nil {
+      regular.insert(.init(
+        id: "push",
+        kind: .pushNotification,
+        messageKind: .vehicleIsApproaching,
+        messageTitle: "", // Irrelevant, sent by backend
+        messageBody: ""  // Irrelevant, sent by backend
+      ))
+    }
+    
     return regular
   }
 }

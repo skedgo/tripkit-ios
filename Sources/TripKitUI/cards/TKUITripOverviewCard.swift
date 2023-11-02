@@ -167,6 +167,10 @@ public class TKUITripOverviewCard: TKUITableCard {
       .emit(onNext: { [weak self] in self?.handle($0) })
       .disposed(by: disposeBag)
     
+    viewModel.error
+      .emit(onNext: { [weak self] in self?.controller?.show($0) })
+      .disposed(by: disposeBag)
+
     // We check if the view is visible before showing attribution
     // and card actions view, otherwise we'd get AL warnings due
     // to the table view hasn't had the correct size when the card's
@@ -458,11 +462,12 @@ extension TKUITripOverviewCard {
       let publisher = viewModel.notificationsEnabled
         .publisher
         .catch { _ in Just(false) }
-        .map { isOn in
+        .combineLatest(TKUITripMonitorManager.shared.isTogglingAlertPublisher)
+        .map { isOn, isToggling in
           if isOn {
-            return TKUICardActionContent(title: Loc.Mute, icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive)
+            return TKUICardActionContent(title: Loc.Mute, icon: UIImage(systemName: "bell.slash.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .destructive, isInProgress: isToggling)
           } else {
-            return TKUICardActionContent(title: Loc.AlertMe, icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold)
+            return TKUICardActionContent(title: Loc.AlertMe, icon: UIImage(systemName: "bell.fill")?.withRenderingMode(.alwaysTemplate) ?? .iconAlert, style: .bold, isInProgress: isToggling)
           }
         }
         .eraseToAnyPublisher()

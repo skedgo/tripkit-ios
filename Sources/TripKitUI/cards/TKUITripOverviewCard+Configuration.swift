@@ -75,6 +75,7 @@ public extension TKUITripOverviewCard {
     ///     layout
     public var showTripActionTitle: Bool = false
     
+    
     // MARK: - Customising segment actions
     
     /// Set this to add a list of action buttons to a segment on the trip overview card.
@@ -88,7 +89,8 @@ public extension TKUITripOverviewCard {
     /// Set this to limit how many alerts are shown for a segment
     public var maximumAlertsPerSegment: Int = 3
     
-    // MARK: - Example features
+    
+    // MARK: - Beta features
     
     /// Enables long-tap gesture on the map which will then add a stopover and push a new
     /// card.

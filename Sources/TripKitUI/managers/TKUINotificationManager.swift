@@ -16,8 +16,10 @@ typealias Publisher = ([UNNotificationRequest]) -> Void
 
 public class TKUINotificationManager: NSObject {
   
+  public weak var pushProvider: TKUINotificationPushProvider?
+  
   // List down Notification contexts here
-  let subscriptions: [TKUINotificationSubscription] = [.init(context: .tripAlerts)]
+  let subscriptions: [TKUINotificationSubscription] = [.init(context: .tripAlerts), .init(context: .pushNotifications)]
   
   @objc(sharedInstance)
   public static let shared = TKUINotificationManager()
@@ -92,15 +94,28 @@ public class TKUINotificationManager: NSObject {
   
 }
 
+public protocol TKUINotificationPushProvider: AnyObject {
+  
+  /// - Returns: Whether push notifications are enabled for this device and permissions are granted
+  func notificationPushEnabled() -> Bool
+  
+  /// Called before subscribing to push notifications for a specifc trip. This should then make sure
+  /// that `TKServer.shared.userToken` is set before returning. If this can't be set, it
+  /// should throw an error.
+  func notificationRequireUserToken() async throws
+}
+
 public class TKUINotificationSubscription {
   public enum Context {
     case tripAlerts
+    case pushNotifications
     
     public var identifier: String {
       let base = "tripkit.notification."
       var append: String
       switch self {
       case .tripAlerts: append = "trip_alerts"
+      case .pushNotifications: append = "push_notifications"
       }
       return "\(base)\(append)"
     }

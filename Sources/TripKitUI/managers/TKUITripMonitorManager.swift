@@ -9,19 +9,35 @@
 import Foundation
 import UserNotifications
 import CoreLocation
+import Combine
 
 import GeoMonitor
 import TripKit
 
 /// The manager for trip notifications such as "get off at the next stop" or "your trip is about to start"
 ///
-/// Requirements:
+/// ### Requirements:
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 /// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
+///
+/// ### Push notifications:
+///
+/// An additional feature is server-side notifications related to a trip being monitored. This requires additional
+/// set-up:
+///
+/// - Implement `TKUINotificationPushProvider` and set it on `TKUINotificationManager.shared.pushProvider`
+/// - Lastly, call `TKUINotificationManager.shared.subscribe(to: .pushNotifications) { _ in }`
+///
 @MainActor
 @available(iOS 14.0, *)
 public class TKUITripMonitorManager: NSObject, ObservableObject {
+  
+  /// Will be set on `UNNotificationRequest.content.categoryIdentifier`
+  ///
+  /// These notifications will also get `UNNotificationRequest.identifier` set to `TKAPI.TripNotification.id`
+  nonisolated
+  public static let tripNotificationCategoryIdentifier: String = "TKUITripMonitorManager.trip-notification"
   
   private enum Keys {
     static let alertsEnabled = "GODefaultGetOffAlertsEnabled"
@@ -31,6 +47,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   struct MonitoredTrip: Codable, Hashable {
     let tripID: String?
     let tripURL: URL
+    let unsubscribeURL: URL?
     let notifications: [TKAPI.TripNotification]
     let departureTime: Date?
   }
@@ -65,6 +82,12 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     }
   }()
   
+  @Published var isTogglingAlert: Bool = false
+  
+  var isTogglingAlertPublisher: AnyPublisher<Bool, Never> {
+    _isTogglingAlert.projectedValue.eraseToAnyPublisher()
+  }
+  
   @Published var monitoredTrip: MonitoredTrip? {
     didSet {
       do {
@@ -91,15 +114,28 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   }
   
   @MainActor
-  public func monitorRegions(from trip: Trip, includeTimeToLeaveNotification: Bool = true) async {
+  public func monitorRegions(from trip: Trip, includeTimeToLeaveNotification: Bool = true) async throws {
     // Since only one trip can have notifications at a time, there is no need to save other trips, just need to replace the current one.
-    
+
+    if monitoredTrip != nil {
+      await stopMonitoring()
+    }
+
     let notifications = trip
       .notifications(includeTimeToLeaveNotification: includeTimeToLeaveNotification)
       .sorted { $0.messageKind.rawValue < $1.messageKind.rawValue }
     guard !notifications.isEmpty else {
-      return stopMonitoring()
+      return
     }
+
+    // Subscribe to push-notifications, if enabled
+    if let provider = TKUINotificationManager.shared.pushProvider, provider.notificationPushEnabled(), let subscribeURL = trip.subscribeURL {
+      // If this fails, it'll abort enabling notifications
+      try await provider.notificationRequireUserToken()
+      let _ = await TKServer.shared.hit(url: subscribeURL)
+    }
+
+    // ... and then start the location the trip notifications
     
     let tripURL: URL
     do {
@@ -111,7 +147,8 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     
     startMonitoringRegions(from: .init(
       tripID: trip.tripId,
-      tripURL: tripURL,
+      tripURL: tripURL, 
+      unsubscribeURL: trip.unsubscribeURL,
       notifications: notifications,
       departureTime: trip.departureTime
     ))
@@ -121,12 +158,21 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     }
   }
   
-  public func stopMonitoring() {
+  public func stopMonitoring() async {
+    if let provider = TKUINotificationManager.shared.pushProvider, let monitoredTrip, let unsubscribeURL = monitoredTrip.unsubscribeURL {
+      // If this fails, we'll disable the local notifications anyway
+      try? await provider.notificationRequireUserToken()
+      let _ = await TKServer.shared.hit(url: unsubscribeURL)
+    }
+
     stopMonitoringRegions()
   }
   
   private func notify(with tripNotification: TKAPI.TripNotification, trigger: UNNotificationTrigger?) {
+    assert(tripNotification.kind != .pushNotification, "Push notifications should only be triggered by backend; not locally!")
+    
     let notification = UNMutableNotificationContent()
+    notification.categoryIdentifier = Self.tripNotificationCategoryIdentifier
     notification.title = tripNotification.messageTitle
     notification.body = tripNotification.messageBody
     notification.sound = .default
@@ -171,7 +217,7 @@ extension TKAPI.TripNotification {
     switch kind {
     case let .circle(center, radius, _):
       return CLCircularRegion(center: center, radius: radius, identifier: id)
-    case .time:
+    case .time, .pushNotification:
       return nil
     }
   }
