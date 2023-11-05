@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "已有帳號了嗎？";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "已經註冊？立即登錄！";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "抵達時刻 %@";
 

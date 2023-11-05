@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "Onko sinulla jo tili?";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Sinulla on jo tili? Kirjaudu sisään";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "saapuu klo %@";
 

@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "Vous avez déjà un compte ?";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Vous avez déjà un compte ? Connectez-vous";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "arrivée %@";
 

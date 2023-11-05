@@ -218,9 +218,6 @@
 /* Trip badge: Greenest */
 "Greenest" = "Más verde";
 
-/* Trip badge: Healthiest */
-"Healthiest" = "Más saludable";
-
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
 "I'll arrive at %@ at %@" = "Voy a llegar a %1$@ a las %2$@.";
 

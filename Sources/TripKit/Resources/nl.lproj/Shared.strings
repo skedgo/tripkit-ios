@@ -26,10 +26,7 @@
 "all-day" = "hele dag";
 
 /* Option for users if they already owned a SkedGo account */
-"Already have an account?" = "Already have an account?";
-
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Heb je al een account? Aanmelden";
+"Already have an account?" = "Heb je al een account?";
 
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "aankomst %@";
