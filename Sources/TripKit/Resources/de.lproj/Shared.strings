@@ -302,7 +302,7 @@
 "Sign in" = "Einloggen";
 
 /* Instruction for signing out user account */
-"Sign out" = "Abmelden";
+"Sign out" = "Ausloggen";
 
 /* Title of page or button to sign up */
 "Sign up" = "Anmelden";
