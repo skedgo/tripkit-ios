@@ -43,6 +43,9 @@
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 parada";
 
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"About to arrive at the final destination" = "A punto de llegar al destino final";
+
 /* Action button to turn on alerts for a trip */
 "Alert Me" = "Alertame";
 
@@ -203,6 +206,9 @@
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Obtener instrucciones";
 
+/* Description of section for trip notifications, such as 'time to get off' alerts */
+"Get notifications when:" = "Recibir notificaciones cuando:";
+
 /* Instruction to get a service towards provided destination */
 "Get on service to %@" = "Tomar el servicio a %@";
 
@@ -284,6 +290,9 @@
 
 /* 'More results' section in autocompletion */
 "More results" = "Más resultados";
+
+/* Trip badge: Most Active */
+"Most Active" = "Más activos";
 
 /* Text for vehicle of type: Moto Scooter */
 "Moto Scooter" = "Moto Scooter";
@@ -414,8 +423,14 @@
 /* Text for vehicle of type: SUV */
 "SUV" = "SUV";
 
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"The trip is about to start" = "Tu viaje está por comenzar";
+
 /* Notification message for a trip. Provided is %time you need to leave. */
 "Time to leave! Your trip commences at %@" = "Hora de Salir! Su viaje comienza a las %@";
+
+/* Notification message for a trip. Provided is %destination and %time you need to leave. */
+"Time to leave! Your trip to %@ commences at %@" = "¡Hora de Salir! Su viaje hacia %1$@ comienza a las %2$@";
 
 /* Title of button to access timetable */
 "Timetable" = "Horarios";
@@ -431,6 +446,9 @@
 
 /* Title for trip of provided index */
 "Trip %@" = "Viaje %@";
+
+/* Title with section for trip notifications, such as 'time to get off' alerts */
+"Trip Notifications" = "Notificaciones del Viaje";
 
 /* Title of page that shows routing results */
 "Trips" = "Viajes";
@@ -452,6 +470,9 @@
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "Vehículo %1$@ actualizado hace %2$@";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Vehicle is approaching your boarding stop" = "El vehículo se acerca a su parada de embarque";
 
 /* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
 "Vehicles" = "Vehículos";
