@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "Har du redan ett konto?";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Har du redan ett konto? Logga in";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "anländer %@";
 

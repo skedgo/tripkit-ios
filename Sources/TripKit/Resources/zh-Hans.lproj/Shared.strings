@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "已经有帐户？";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "已经有账户了？登录";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "%@到达";
 

@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "هل لديك حساب بالفعل؟";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "هل لديك حساب بالفعل؟ تسجيل الدخول";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "يصل %@";
 

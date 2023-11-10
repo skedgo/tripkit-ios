@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "Zaten bir hesabınız var mı?";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Zaten hesabınız mı var? Oturum açın";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "%@ varılacak";
 

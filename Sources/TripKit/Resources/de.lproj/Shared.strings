@@ -28,9 +28,6 @@
 /* Option for users if they already owned a SkedGo account */
 "Already have an account?" = "Du hast schon ein Konto?";
 
-/* Option for users if they already owned a SkedGo account */
-"Already have an account? Sign in" = "Du hast schon ein Konto? Einloggen";
-
 /* Estimated time of arrival; parameter is time, e.g., 'arrives 15:30' */
 "arrives %@" = "Ankunft %@";
 
@@ -305,7 +302,7 @@
 "Sign in" = "Einloggen";
 
 /* Instruction for signing out user account */
-"Sign out" = "Abmelden";
+"Sign out" = "Ausloggen";
 
 /* Title of page or button to sign up */
 "Sign up" = "Anmelden";
