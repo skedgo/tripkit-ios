@@ -43,6 +43,9 @@
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 Stop";
 
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"About to arrive at the final destination" = "Kurz vor der Ankunft am Zielort";
+
 /* Action button to turn on alerts for a trip */
 "Alert Me" = "Alarmieren";
 
@@ -203,11 +206,17 @@
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Navigieren";
 
+/* Description of section for trip notifications, such as 'time to get off' alerts */
+"Get notifications when:" = "Bekomme Benachrichtigungen wenn:";
+
 /* Instruction to get a service towards provided destination */
 "Get on service to %@" = "Einsteigen in Richtung %@";
 
 /* Title of notification for an upcoming trip */
 "Get ready to leave" = "Mach dich bereit zu gehen";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Getting within 500m of the disembarkation stop" = "Annäherung an die Ausstiegshaltestelle auf 500 m";
 
 /* Title of button to start a trip */
 "Go" = "Los";
@@ -330,6 +339,9 @@
 /* Title for opening hours */
 "Opening Hours" = "Öffnungszeiten";
 
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Passed by the previous stop" = "An der vorherigen Haltestelle vorbeigefahren";
+
 /* Title for button that allows users to plan a new trip */
 "Plan a new trip" = "Neuen Trip planen";
 
@@ -417,6 +429,9 @@
 /* Text for vehicle of type: SUV */
 "SUV" = "Jeep";
 
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"The trip is about to start" = "Der Trip beginnt gleich";
+
 /* Notification message for a trip. Provided is %time you need to leave. */
 "Time to leave! Your trip commences at %@" = "Zeit zu gehen! Dein Trip beginnt um %@";
 
@@ -438,6 +453,9 @@
 /* Title for trip of provided index */
 "Trip %@" = "Trip %@";
 
+/* Title with section for trip notifications, such as 'time to get off' alerts */
+"Trip Notifications" = "Trip Benachrichtigungen";
+
 /* Title of page that shows routing results */
 "Trips" = "Trips";
 
@@ -458,6 +476,9 @@
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "Fahrzeug %1$@, aktualisiert vor %2$@";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Vehicle is approaching your boarding stop" = "Das Fahrzeug nähert sich der Einstiegshaltestelle";
 
 /* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
 "Vehicles" = "Fahrzeuge";
