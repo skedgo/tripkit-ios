@@ -20,13 +20,13 @@ import TripKit
 /// - Project > Your Target > Capabilities > Background Modes: Enable "Location Updates"
 /// - Project > Your Target > Info: Include both `NSLocationAlwaysAndWhenInUseUsageDescription` and `NSLocationWhenInUseUsageDescription`
 /// - Then call `TKUINotificationManager.shared.subscribe(to: .tripAlerts) { ... }` in your app.
+/// - Implement `TKUINotificationManagerDelegate` and set it on `TKUINotificationManager.shared.delegate`
 ///
 /// ### Push notifications:
 ///
 /// An additional feature is server-side notifications related to a trip being monitored. This requires additional
 /// set-up:
 ///
-/// - Implement `TKUINotificationPushProvider` and set it on `TKUINotificationManager.shared.pushProvider`
 /// - Lastly, call `TKUINotificationManager.shared.subscribe(to: .pushNotifications) { _ in }`
 ///
 @MainActor
@@ -127,11 +127,15 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     guard !notifications.isEmpty else {
       return
     }
+    
+    guard let delegate = TKUINotificationManager.shared.delegate, await delegate.notificationsPermissionsNeeded() else {
+      return
+    }
 
     // Subscribe to push-notifications, if enabled
-    if let provider = TKUINotificationManager.shared.pushProvider, provider.notificationPushEnabled(), let subscribeURL = trip.subscribeURL {
+    if let subscribeURL = trip.subscribeURL {
       // If this fails, it'll abort enabling notifications
-      try await provider.notificationRequireUserToken()
+      try await delegate.notificationRequireUserToken()
       let _ = await TKServer.shared.hit(url: subscribeURL)
     }
 
@@ -159,9 +163,9 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
   }
   
   public func stopMonitoring() async {
-    if let provider = TKUINotificationManager.shared.pushProvider, let monitoredTrip, let unsubscribeURL = monitoredTrip.unsubscribeURL {
+    if let delegate = TKUINotificationManager.shared.delegate, let monitoredTrip, let unsubscribeURL = monitoredTrip.unsubscribeURL {
       // If this fails, we'll disable the local notifications anyway
-      try? await provider.notificationRequireUserToken()
+      try? await delegate.notificationRequireUserToken()
       let _ = await TKServer.shared.hit(url: unsubscribeURL)
     }
 

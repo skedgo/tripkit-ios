@@ -16,7 +16,7 @@ typealias Publisher = ([UNNotificationRequest]) -> Void
 
 public class TKUINotificationManager: NSObject {
   
-  public weak var pushProvider: TKUINotificationPushProvider?
+  public weak var delegate: TKUINotificationManagerDelegate?
   
   // List down Notification contexts here
   let subscriptions: [TKUINotificationSubscription] = [.init(context: .tripAlerts), .init(context: .pushNotifications)]
@@ -94,15 +94,25 @@ public class TKUINotificationManager: NSObject {
   
 }
 
-public protocol TKUINotificationPushProvider: AnyObject {
+public protocol TKUINotificationManagerDelegate: AnyObject {
   
-  /// - Returns: Whether push notifications are enabled for this device and permissions are granted
-  func notificationPushEnabled() -> Bool
+  /// Check and, if necessary, ask for notification permissions. If no permissions are granted, this
+  /// should then also directly show an appropriate alert about how to enable them.
+  ///
+  /// - Returns: Whether notifications are enabled for this device or permissions are not determined
+  func notificationsPermissionsNeeded() async -> Bool
   
-  /// Called before subscribing to push notifications for a specifc trip. This should then make sure
-  /// that `TKServer.shared.userToken` is set before returning. If this can't be set, it
-  /// should throw an error.
+  /// Called before subscribing to push notifications for a specifc trip.
+  ///
+  /// This should then make sure that `TKServer.shared.userToken` is set before returning.
+  /// If this can't be set, it should throw an error.
+  ///
+  /// Only needed to implement, when enabling push notification-based trip notifications
   func notificationRequireUserToken() async throws
+}
+
+extension TKUINotificationManagerDelegate {
+  public func notificationRequireUserToken() async throws {}
 }
 
 public class TKUINotificationSubscription {
