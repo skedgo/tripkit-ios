@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TKUINotificationPushProvider Protocol Reference</title>
+    <title>TKUINotificationManagerDelegate Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Protocol/TKUINotificationPushProvider" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Protocol/TKUINotificationManagerDelegate" class="dashAnchor"></a>
 
-    <a title="TKUINotificationPushProvider Protocol Reference"></a>
+    <a title="TKUINotificationManagerDelegate Protocol Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">TripKitUI Reference</a>
       <img class="carat" src="../img/carat.png" alt=""/>
-      TKUINotificationPushProvider Protocol Reference
+      TKUINotificationManagerDelegate Protocol Reference
     </p>
 
     <div class="content-wrapper">
@@ -582,7 +582,7 @@
                 <a class="nav-group-task-link" href="../Protocols/TKUIModePickerItem.html">TKUIModePickerItem</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/TKUINotificationPushProvider.html">TKUINotificationPushProvider</a>
+                <a class="nav-group-task-link" href="../Protocols/TKUINotificationManagerDelegate.html">TKUINotificationManagerDelegate</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TKUIRoutingResultsMapManagerType.html">TKUIRoutingResultsMapManagerType</a>
@@ -642,11 +642,11 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>TKUINotificationPushProvider</h1>
+            <h1>TKUINotificationManagerDelegate</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TKUINotificationPushProvider</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TKUINotificationManagerDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
 
                 </div>
               </div>
@@ -662,39 +662,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI28TKUINotificationPushProviderP012notificationE7EnabledSbyF"></a>
-                    <a name="//apple_ref/swift/Method/notificationPushEnabled()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI28TKUINotificationPushProviderP012notificationE7EnabledSbyF">notificationPushEnabled()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">notificationPushEnabled</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Whether push notifications are enabled for this device and permissions are granted</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:9TripKitUI28TKUINotificationPushProviderP28notificationRequireUserTokenyyYaKF"></a>
-                    <a name="//apple_ref/swift/Method/notificationRequireUserToken()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI28TKUINotificationPushProviderP28notificationRequireUserTokenyyYaKF">notificationRequireUserToken()</a>
+                    <a name="/s:9TripKitUI31TKUINotificationManagerDelegateP30notificationsPermissionsNeededSbyYaF"></a>
+                    <a name="//apple_ref/swift/Method/notificationsPermissionsNeeded()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI31TKUINotificationManagerDelegateP30notificationsPermissionsNeededSbyYaF">notificationsPermissionsNeeded()</a>
                     </code>
                       <span class="declaration-note">
                         Asynchronous
@@ -705,10 +675,52 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called before subscribing to push notifications for a specifc trip. This should then make sure
-that <code>TKServer.shared.userToken</code> is set before returning. If this can&rsquo;t be set, it
-should throw an error.</p>
+                        <p>Check and, if necessary, ask for notification permissions. If no permissions are granted, this
+should then also directly show an appropriate alert about how to enable them.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">notificationsPermissionsNeeded</span><span class="p">()</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Whether notifications are enabled for this device or permissions are not determined</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9TripKitUI31TKUINotificationManagerDelegateP28notificationRequireUserTokenyyYaKF"></a>
+                    <a name="//apple_ref/swift/Method/notificationRequireUserToken()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI31TKUINotificationManagerDelegateP28notificationRequireUserTokenyyYaKF">notificationRequireUserToken()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation, asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called before subscribing to push notifications for a specifc trip.</p>
+
+<p>This should then make sure that <code>TKServer.shared.userToken</code> is set before returning.
+If this can&rsquo;t be set, it should throw an error.</p>
+
+<p>Only needed to implement, when enabling push notification-based trip notifications</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -729,7 +741,7 @@ should throw an error.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-11-10)</p>
+      <p>&copy; 2023 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2023-11-16)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

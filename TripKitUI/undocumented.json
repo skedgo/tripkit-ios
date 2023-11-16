@@ -2166,7 +2166,7 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
       "line": 19,
-      "symbol": "TKUINotificationManager.pushProvider",
+      "symbol": "TKUINotificationManager.delegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -2180,76 +2180,83 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
       "line": 97,
-      "symbol": "TKUINotificationPushProvider",
+      "symbol": "TKUINotificationManagerDelegate",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 108,
+      "line": 114,
+      "symbol": "TKUINotificationManagerDelegate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
+      "line": 118,
       "symbol": "TKUINotificationSubscription",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 109,
+      "line": 119,
       "symbol": "TKUINotificationSubscription.Context",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 110,
+      "line": 120,
       "symbol": "TKUINotificationSubscription.Context.tripAlerts",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 111,
+      "line": 121,
       "symbol": "TKUINotificationSubscription.Context.pushNotifications",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 113,
+      "line": 123,
       "symbol": "TKUINotificationSubscription.Context.identifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 132,
+      "line": 142,
       "symbol": "TKUINotificationSubscription.getRequests()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 136,
+      "line": 146,
       "symbol": "TKUINotificationSubscription.isSubscribed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 140,
+      "line": 150,
       "symbol": "TKUINotificationSubscription.add(request:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 145,
+      "line": 155,
       "symbol": "TKUINotificationSubscription.subscribe(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUINotificationManager.swift",
-      "line": 153,
+      "line": 163,
       "symbol": "TKUINotificationSubscription.clearRequests()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -2277,42 +2284,42 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 161,
+      "line": 165,
       "symbol": "TKUITripMonitorManager.stopMonitoring()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 189,
+      "line": 193,
       "symbol": "TKUITripMonitorManager.GeofenceMatch",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 190,
+      "line": 194,
       "symbol": "TKUITripMonitorManager.GeofenceMatch.trip",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 191,
+      "line": 195,
       "symbol": "TKUITripMonitorManager.GeofenceMatch.segment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 192,
+      "line": 196,
       "symbol": "TKUITripMonitorManager.GeofenceMatch.notification",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/managers/TKUITripMonitorManager.swift",
-      "line": 195,
+      "line": 199,
       "symbol": "TKUITripMonitorManager.match(geofenceID:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
