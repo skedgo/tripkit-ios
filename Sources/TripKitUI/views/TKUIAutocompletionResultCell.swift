@@ -28,24 +28,43 @@ class TKUIAutocompletionResultCell: UITableViewCell {
   
 }
 
+extension UILabel {
+  fileprivate func set(text: String?, highlightRanges: [NSRange], textColor: UIColor) {
+    guard let text else {
+      self.attributedText = nil
+      return
+    }
+    
+    var attributed = NSMutableAttributedString(string: text, attributes: [
+      .foregroundColor: textColor,
+      .font: TKStyleManager.customFont(forTextStyle: .body),
+    ])
+    for range in highlightRanges {
+      attributed.addAttribute(.font, value: TKStyleManager.boldCustomFont(forTextStyle: .body), range: range)
+    }
+    self.attributedText = attributed
+  }
+}
+
 extension TKUIAutocompletionResultCell {
   
-  func configure(title: String, subtitle: String? = nil, image: UIImage? = nil) {
+  private func configure(title: String, titleHighlightRanges: [NSRange] = [], subtitle: String? = nil, subtitleHighlightRanges: [NSRange] = [], image: UIImage? = nil) {
     imageView?.image = image
     imageView?.tintColor = .tkLabelPrimary
-    textLabel?.text = title
-    textLabel?.textColor = .tkLabelPrimary
-    detailTextLabel?.text = subtitle
-    detailTextLabel?.textColor = .tkLabelSecondary
+    textLabel?.set(text: title, highlightRanges: titleHighlightRanges, textColor: .tkLabelPrimary)
+    detailTextLabel?.set(text: subtitle, highlightRanges: subtitleHighlightRanges, textColor: .tkLabelSecondary)
     contentView.alpha = 1
     accessoryView = nil
   }
   
   func configure(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: ((TKUIAutocompletionViewModel.Item) -> Void)? = nil) {
     switch item {
-    case .currentLocation: configureCurrentLocation(with: item)
-    case .action: configureAction(with: item)
-    case .autocompletion: configureAutocompletion(with: item, onAccessoryTapped: onAccessoryTapped)
+    case .currentLocation: 
+      configureCurrentLocation(with: item)
+    case .action: 
+      configureAction(with: item)
+    case .autocompletion: 
+      configureAutocompletion(with: item, onAccessoryTapped: onAccessoryTapped)
     }
   }
   
@@ -57,7 +76,13 @@ extension TKUIAutocompletionResultCell {
   private func configureAutocompletion(with item: TKUIAutocompletionViewModel.Item, onAccessoryTapped: ((TKUIAutocompletionViewModel.Item) -> Void)?) {
     guard case .autocompletion(let autocompletion) = item else { assertionFailure(); return  }
     
-    configure(title: autocompletion.title, subtitle: autocompletion.subtitle, image: autocompletion.image)
+    configure(
+      title: autocompletion.title,
+      titleHighlightRanges: autocompletion.completion.titleHighlightRanges,
+      subtitle: autocompletion.subtitle,
+      subtitleHighlightRanges: autocompletion.completion.subtitleHighlightRanges,
+      image: autocompletion.image
+    )
     contentView.alpha = autocompletion.showFaded ? 0.33 : 1
     
     if #available(iOS 14.0, *), let accessoryImage = autocompletion.accessoryImage, let target = onAccessoryTapped {

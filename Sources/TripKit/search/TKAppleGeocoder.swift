@@ -152,7 +152,9 @@ extension TKAutocompletionResult {
     self.init(
       object: completion,
       title: completion.title,
+      titleHighlightRanges: completion.titleHighlightRanges.map(\.rangeValue),
       subtitle: completion.subtitle,
+      subtitleHighlightRanges: completion.subtitleHighlightRanges.map(\.rangeValue),
       image: TKAutocompletionResult.image(for: .pin),
       score: TKGeocodingResultScorer.calculateScore(title: completion.title, subtitle: completion.subtitle, searchTerm: input, minimum: 25, maximum: 65) - index
     )
