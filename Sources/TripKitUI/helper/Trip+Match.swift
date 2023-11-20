@@ -6,14 +6,15 @@
 //  Copyright © 2023 SkedGo Pty Ltd. All rights reserved.
 //
 
+import Foundation
 import TripKit
 
 extension Trip {
-  func matches(_ other: Trip) -> Bool {
-    if tripURL == other.tripURL {
+  func matches(tripURL: URL, tripID: String?) -> Bool {
+    if self.tripURL == tripURL {
       return true
-    } else if let myID = tripId {
-      return other.tripId == myID
+    } else if let myID = self.tripId {
+      return myID == tripID
     } else {
       return false
     }

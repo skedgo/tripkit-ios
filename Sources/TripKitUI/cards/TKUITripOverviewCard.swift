@@ -247,9 +247,9 @@ public class TKUITripOverviewCard: TKUITableCard {
     isVisible.onNext(false)
   }
   
-  public func shows(_ trip: Trip) -> Bool {
+  public func shows(tripURL: URL, tripID: String?) -> Bool {
     // The trip map manager keeps a reference to the latest trip, so we can show this
-    return initialTrip.matches(trip) || tripMapManager?.trip.matches(trip) == true
+    return initialTrip.matches(tripURL: tripURL, tripID: tripID) || tripMapManager?.trip.matches(tripURL: tripURL, tripID: tripID) == true
   }
   
 }
