@@ -221,7 +221,7 @@ public class TKUITripModeByModeCard: TGPageCard {
   }
   
   public func shows(_ trip: Trip) -> Bool {
-    return viewModel.trip.tripURL == trip.tripURL
+    return viewModel.trip.matches(trip)
   }
   
   deinit {

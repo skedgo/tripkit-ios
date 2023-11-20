@@ -46,7 +46,7 @@ public class TKUITripOverviewCard: TKUITableCard {
   
   public static var config = Configuration.empty
   
-  private let initialTrip: Trip
+  public let initialTrip: Trip
   private let index: Int? // for restoring
   private var zoomToTrip: Bool = false // for restoring
 
@@ -249,8 +249,7 @@ public class TKUITripOverviewCard: TKUITableCard {
   
   public func shows(_ trip: Trip) -> Bool {
     // The trip map manager keeps a reference to the latest trip, so we can show this
-    return initialTrip.tripURL == trip.tripURL
-        || tripMapManager?.trip.tripURL == trip.tripURL
+    return initialTrip.matches(trip) || tripMapManager?.trip.matches(trip) == true
   }
   
 }
