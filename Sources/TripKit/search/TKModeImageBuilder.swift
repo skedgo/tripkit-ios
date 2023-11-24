@@ -36,12 +36,12 @@ public class TKModeImageFactory: NSObject {
   private func buildImage(for modeInfo: TKModeInfo) -> TKImage? {
     guard let overlayImage = modeInfo.image else { return nil }
     
-    #if os(iOS) || os(tvOS)
+#if canImport(UIKit)
     return TKImageBuilder.drawCircularImage(insideOverlay: overlayImage, background: #colorLiteral(red: 0.795085609, green: 0.8003450036, blue: 0.7956672311, alpha: 1))
 
-    #elseif os(OSX)
+#elseif os(macOS)
     return nil
-    #endif
+#endif
   }
 
 }

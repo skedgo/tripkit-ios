@@ -10,8 +10,7 @@ podspec: ../../TripKitUI.podspec
 
 exclude:
   - /*/TripKitUI/helper/Categories/*
-  - /*/TripKitUI/vendor/Differentiator/*
-  - /*/TripKitUI/vendor/RxDataSources/*
+  - /*/TripKitUI/vendor/*
 
 custom_categories:
   - name: Trip Planning

@@ -11,7 +11,7 @@ import CoreData
 
 import RxSwift
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 
   fileprivate class FetchedResultsControllerDelegateProxy<E: NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
     

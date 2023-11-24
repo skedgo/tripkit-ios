@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -168,7 +168,7 @@ extension Loc {
   }
 
   public static func fromTime(_ from: String, toTime to: String) -> String {
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
     switch UIView.userInterfaceLayoutDirection(for: .unspecified) {
     case .leftToRight:
       return String(format: "%@ → %@", from, to)

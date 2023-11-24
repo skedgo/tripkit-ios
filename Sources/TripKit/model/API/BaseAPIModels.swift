@@ -83,7 +83,7 @@ extension TKAPI {
       return TKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
     
-    #if os(iOS) || os(tvOS)
+#if canImport(UIKit)
       public init?(for color: TKColor?) {
         guard let color = color else { return nil }
         var red: CGFloat = 0
@@ -97,7 +97,7 @@ extension TKAPI {
           return nil
         }
       }
-    #elseif os(OSX)
+#elseif canImport(AppKit)
     public init?(for color: TKColor?) {
       guard let color = color else { return nil }
       var red: CGFloat = 0
@@ -108,7 +108,7 @@ extension TKAPI {
       self.green = Int(green * 255)
       self.blue = Int(blue * 255)
     }
-    #endif
+#endif
   }
   
 }
