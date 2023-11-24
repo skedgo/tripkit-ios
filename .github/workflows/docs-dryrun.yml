@@ -24,6 +24,7 @@ jobs:
           pip install mkdocs
           pip install pymdown-extensions    
           mkdocs --version 
+          bundle install
 
       - name: Build docs
         run: |
