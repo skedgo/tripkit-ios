@@ -76,9 +76,9 @@ extension TKCalendarManager: TKPermissionManager {
       return .notDetermined
     case .restricted:
       return .restricted
-    case .denied:
+    case .denied, .writeOnly:
       return .denied
-    case .authorized:
+    case .authorized, .fullAccess:
       return .authorized
     @unknown default:
       return .notDetermined
@@ -87,10 +87,19 @@ extension TKCalendarManager: TKPermissionManager {
   
   public func askForPermission(_ completion: @escaping (Bool) -> Void) {
     let oldStore = self.eventStore
-    oldStore.requestAccess(to: .event) { granted, _ in
-      self.eventStore = .init()
-      DispatchQueue.main.async {
-        completion(granted)
+    if #available(iOS 17.0, macOS 14.0, *) {
+      oldStore.requestFullAccessToEvents { granted, _ in
+        self.eventStore = .init()
+        DispatchQueue.main.async {
+          completion(granted)
+        }
+      }
+    } else {
+      oldStore.requestAccess(to: .event) { granted, _ in
+        self.eventStore = .init()
+        DispatchQueue.main.async {
+          completion(granted)
+        }
       }
     }
   }
