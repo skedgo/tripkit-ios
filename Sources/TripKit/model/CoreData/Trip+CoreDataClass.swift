@@ -13,7 +13,7 @@ import Foundation
 import CoreData
 import MapKit
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 import UIKit
 #endif
 
@@ -476,7 +476,7 @@ extension Trip {
 
 // MARK: - Accessibility
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 extension Trip {
   public override var accessibilityLabel: String? {
     get {
@@ -542,7 +542,7 @@ extension Trip: TKRealTimeUpdatable {
 
 // MARK: - UIActivityItemSource
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   
   extension Trip: UIActivityItemSource {
     

@@ -81,12 +81,12 @@ public class TKContactsManager: NSObject, TKPermissionManager {
     
     guard isAuthorized else { return [] }
     
-    #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     return [] // not yet supported
-    #elseif os(OSX)
+#elseif os(macOS)
     let contact = try store.unifiedMeContactWithKeys(toFetch: TKContactsManager.keysToFetch)
     return contact.toContactAddresses().filter { $0.matches(kind) }
-    #endif
+#endif
   }
   
   // MARK: - TKPermissionManager
@@ -130,12 +130,12 @@ extension CNContact {
   }
   
   fileprivate func circularThumbnail() -> TKImage? {
-    #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     guard let data = thumbnailImageData, let thumbnail = TKImage(data: data) else { return nil }
     return TKImageBuilder.drawCircularImage(insideImage: thumbnail)
 
-    #elseif os(OSX)
+#elseif os(macOS)
     return nil
-    #endif
+#endif
   }
 }

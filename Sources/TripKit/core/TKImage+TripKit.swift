@@ -62,10 +62,10 @@ extension TKImage {
   
   private static func named(_ name: String) -> TKImage {
     
-    #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     return TKImage(named: name, in: .tripKit, compatibleWith: nil)!
-    #elseif os(OSX)
+#elseif os(macOS)
     return TripKit.bundle.image(forResource: name)!
-    #endif
+#endif
   }
 }

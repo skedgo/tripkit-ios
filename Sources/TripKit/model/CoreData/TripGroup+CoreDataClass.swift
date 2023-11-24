@@ -100,7 +100,7 @@ extension TripGroup {
 
 // MARK: - Accessibility
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 extension TripGroup {
   public override var accessibilityLabel: String? {
     get {

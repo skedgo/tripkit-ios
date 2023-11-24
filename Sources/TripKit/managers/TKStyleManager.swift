@@ -8,16 +8,16 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 import UIKit
 #endif
 
 extension TKColor {
   
   @objc public static var routeDashColorNonTravelled: TKColor {
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     return .secondarySystemFill
-#elseif os(OSX)
+#elseif os(macOS)
     return TKColor.lightGray.withAlphaComponent(0.25)
 #endif
   }
@@ -68,12 +68,12 @@ extension TKStyleManager {
   
   public static func activityImage(_ partial: String) -> TKImage {
     let name: String
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     switch UIDevice.current.userInterfaceIdiom {
     case .phone: name = "icon-actionBar-\(partial)-30"
     default: name = "icon-actionBar-\(partial)-38"
     }
-#elseif os(OSX)
+#elseif os(macOS)
     name = "icon-actionBar-\(partial)-38"
 #endif
     return image(named: name)
@@ -86,9 +86,9 @@ extension TKStyleManager {
   }
   
   public static func optionalImage(named: String) -> TKImage? {
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     return TKImage(named: named, in: .tripKit, compatibleWith: nil)
-#elseif os(OSX)
+#elseif os(macOS)
     return TripKit.bundle.image(forResource: named)
 #endif
   }
@@ -174,7 +174,7 @@ extension TKStyleManager {
     }
   }
   
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   //// This method returns a font with custom font face for a given text style and weight.
   /// If there's no custom font face specified in the plist, system font face is used.
   /// This method is typically used on `UILabel`, `UITextField`, and `UITextView` but
@@ -213,7 +213,7 @@ extension TKStyleManager {
     return font(size: size, weight: .medium)
   }
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   // @available(*, deprecated, renamed: "font(textStyle:weight:)")
   public static func customFont(forTextStyle textStyle: UIFont.TextStyle) -> UIFont {
     return font(textStyle: textStyle, weight: .regular)

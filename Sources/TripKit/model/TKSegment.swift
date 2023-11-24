@@ -662,7 +662,7 @@ extension TKSegment {
 
 // MARK: - UIActivityItemSource
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 
   extension TKSegment: UIActivityItemSource {
   

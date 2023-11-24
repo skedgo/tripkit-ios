@@ -8,12 +8,12 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   import UIKit
   public typealias TKColor = UIColor
   public typealias TKImage = UIImage
   public typealias TKFont  = UIFont
-#elseif os(OSX)
+#elseif os(macOS)
   import AppKit
   public typealias TKColor = NSColor
   public typealias TKImage = NSImage

@@ -48,7 +48,7 @@ extension StopLocation: MKAnnotation {
 
 // MARK: - UIActivityItemSource
 
-#if os(iOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 
   extension StopLocation: UIActivityItemSource {
     public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {

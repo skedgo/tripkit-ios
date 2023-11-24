@@ -52,7 +52,7 @@ extension TKContactsManager: TKAutocompleting {
     }
   }
   
-  #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   @objc
   public func additionalActionTitle() -> String? {
     if isAuthorized { return nil }
@@ -63,7 +63,7 @@ extension TKContactsManager: TKAutocompleting {
   public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
     tryAuthorization(in: presenter, completion: completion)
   }
-  #endif
+#endif
   
   private static func geocode(_ contact: ContactAddress, completion: @escaping (Result<TKNamedCoordinate, Error>) -> Void) {
     let geocoder = CLGeocoder()
