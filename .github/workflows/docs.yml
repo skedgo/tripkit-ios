@@ -9,10 +9,10 @@ on:
 jobs:
   build_docs:
     name: Build and deploy docs
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - name: Checkout main
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x

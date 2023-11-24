@@ -14,7 +14,7 @@ import Foundation
   public typealias TKImage = UIImage
   public typealias TKFont  = UIFont
 #elseif os(OSX)
-  import Cocoa
+  import AppKit
   public typealias TKColor = NSColor
   public typealias TKImage = NSImage
   public typealias TKFont  = NSFont

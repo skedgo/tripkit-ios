@@ -12,7 +12,7 @@ import Foundation
 #if os(iOS) || os(tvOS)
   import UIKit
 #elseif os(OSX)
-  import Cocoa
+  import AppKit
 #endif
   
 extension Polygon {
