@@ -40,7 +40,7 @@ let package = Package(
         "TGCardViewController",
         "GeoMonitor",
       ],
-      exclude: ["Supporting Files/Info.plist"]
+      exclude: ["Supporting Files/Info.plist", "vendor/RxCombine/LICENSE"]
     ),
     .testTarget(
       name: "TripKitTests",
