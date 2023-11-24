@@ -14,7 +14,7 @@ import CoreData
 import CoreLocation
 import MapKit
 
-#if os(iOS) || os(tvOS) || os(visionOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -286,7 +286,7 @@ extension StopVisits: TKRealTimeUpdatable {
 
 // MARK: - UIActivityItemSource
 
-#if os(iOS) || os(tvOS) || os(visionOS)
+#if canImport(UIKit)
   
   extension StopVisits: UIActivityItemSource {
     

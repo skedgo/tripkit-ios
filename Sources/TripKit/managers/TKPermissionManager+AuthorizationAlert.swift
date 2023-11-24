@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS) || os(visionOS)
+#if canImport(UIKit)
 import UIKit
 
 extension TKPermissionManager {

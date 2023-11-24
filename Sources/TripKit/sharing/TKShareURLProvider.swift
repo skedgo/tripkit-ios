@@ -23,7 +23,7 @@ extension TKAPI {
   }
 }
 
-#if os(iOS) || os(tvOS) || os(visionOS)
+#if canImport(UIKit)
 
 import UIKit
 import CoreData
