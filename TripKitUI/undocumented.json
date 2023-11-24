@@ -2332,13 +2332,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/vendor/RxCombine/Combine+Rx/Subject+Rx.swift",
-      "line": 21,
-      "symbol": "AnyObserverConvertible.Output",
-      "symbol_kind": "source.lang.swift.decl.associatedtype",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/view model/TKUIHomeViewModel+Component.swift",
       "line": 15,
       "symbol": "TKUIHomeHeaderConfiguration",
