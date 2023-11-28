@@ -14,9 +14,9 @@ import RxCocoa
 
 public struct TKUIHomeHeaderConfiguration {
   public let title: String
-  public var action: (title: String, handler: () -> TKUIHomeCard.ComponentAction)?
+  public var action: (title: String, handler: (TKUIHomeCard) -> TKUIHomeCard.ComponentAction)?
   
-  public init(title: String, action: (String, () -> TKUIHomeCard.ComponentAction)? = nil) {
+  public init(title: String, action: (String, (TKUIHomeCard) -> TKUIHomeCard.ComponentAction)? = nil) {
     self.title = title
     self.action = action
   }
