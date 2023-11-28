@@ -17355,14 +17355,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKTripFetcher.swift",
-      "line": 21,
+      "line": 22,
       "symbol": "TKTripFetcher.downloadTrip(_:identifier:into:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKTripFetcher.swift",
-      "line": 63,
+      "line": 64,
+      "symbol": "TKTripFetcher.downloadTrip(_:identifier:into:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKTripFetcher.swift",
+      "line": 73,
       "symbol": "TKTripFetcher.update(_:url:aborter:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
