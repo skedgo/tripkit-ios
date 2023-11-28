@@ -18,6 +18,7 @@ public enum TKTripFetcher {
     case serverError(String? = nil)
   }
   
+  @available(*, renamed: "downloadTrip(_:identifier:into:)")
   public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext, completion: @escaping (Result<Trip, Error>) -> Void) {
     
     let identifier = identifier ?? String(url.absoluteString.hash)
@@ -59,6 +60,15 @@ public enum TKTripFetcher {
     }
     
   }
+  
+  public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) async throws -> Trip {
+    return try await withCheckedThrowingContinuation { continuation in
+      downloadTrip(url, identifier: identifier, into: context) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+  
   
   public static func update(_ trip: Trip, url: URL? = nil, aborter: @escaping ((URL) -> Bool) = { _ in false }, completion: @escaping (Result<(Trip, URL, didUpdate: Bool), Error>) -> Void) {
     let url = url ?? trip.updateURLString.flatMap( { URL(string: $0) })
