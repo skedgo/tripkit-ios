@@ -34,11 +34,11 @@ public class TKServer {
       UserDefaults.shared.string(forKey: "developmentServer")
     }
     set {
+      let newValue = newValue.map { value in
+        value.hasSuffix("/") ? value : value.appending("/")
+      }
       let oldValue = customBaseURL
       if var newValue = newValue, !newValue.isEmpty {
-        if !newValue.hasSuffix("/") {
-          newValue.append("/")
-        }
         UserDefaults.shared.set(newValue, forKey: "developmentServer")
       } else {
         UserDefaults.shared.removeObject(forKey: "developmentServer")
