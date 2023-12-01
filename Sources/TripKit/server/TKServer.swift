@@ -38,7 +38,7 @@ public class TKServer {
         value.hasSuffix("/") ? value : value.appending("/")
       }
       let oldValue = customBaseURL
-      if var newValue = newValue, !newValue.isEmpty {
+      if let newValue = newValue, !newValue.isEmpty {
         UserDefaults.shared.set(newValue, forKey: "developmentServer")
       } else {
         UserDefaults.shared.removeObject(forKey: "developmentServer")
