@@ -53,14 +53,14 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     disposeBag = DisposeBag()
   }
   
-  func configure(with configuration: TKUIHomeHeaderConfiguration?, onTap: @escaping (TKUIHomeCard.ComponentAction) -> Void) {
+  func configure(with configuration: TKUIHomeHeaderConfiguration?, homeCard: TKUIHomeCard, onTap: @escaping (TKUIHomeCard.ComponentAction) -> Void) {
     if let configuration = configuration {
       label.text = configuration.title
       if let action = configuration.action {
         button.isHidden = false
         button.setTitle(action.title, for: .normal)
         button.rx.tap
-          .subscribe(onNext: { _ in onTap(action.handler()) })
+          .subscribe(onNext: { _ in onTap(action.handler(homeCard)) })
           .disposed(by: disposeBag)
       } else {
         button.isHidden = true

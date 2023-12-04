@@ -30,6 +30,7 @@ public enum TKRealTimeHelper {
         // pass back the update URL as that will change between updates if
         // the trip itself changed.
         return TKRealTimeFetcher.rx.update(trip)
+          .observe(on: MainScheduler.instance)
           .map { trip, _ in (trip, trip.updateURLString) }
           .asObservable()
           .catchAndReturn((trip, trip.updateURLString))

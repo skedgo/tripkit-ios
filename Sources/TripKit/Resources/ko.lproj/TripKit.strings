@@ -11,7 +11,7 @@
 "%@ cycle friendly" = "%@ 자전거 이용 가능";
 
 /* Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes' */
-"%@ every %@" = "%$1@ %$2@마다";
+"%@ every %@" = "%1$@ %2$@마다";
 
 /* Text for an 'x more' indication if there's more content. '%@' will be replaced with a number */
 "%@ more" = "%@ more";
