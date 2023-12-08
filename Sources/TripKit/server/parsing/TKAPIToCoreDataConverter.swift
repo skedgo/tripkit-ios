@@ -255,9 +255,13 @@ extension Shape {
         service.wheelchairAccessibility = TKWheelchairAccessibility(bool: apiShape.wheelchairAccessible)
         service.isBicycleAccessible = apiShape.bicycleAccessible
         
-        if previous != service {
+        // Assign the progenitor, i.e., inverse of "continuation", but do
+        // not reset it to `nil` as we might have just received an update
+        // for the continuation without requesting the progenitor.
+        if previous != service, service.progenitor == nil || previous != nil {
           service.progenitor = previous
         }
+        
         if clearRealTime {
           service.isRealTime = false
         }
