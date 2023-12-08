@@ -14912,7 +14912,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKVehicular.swift",
-      "line": 488,
+      "line": 492,
       "symbol": "TKVehicular",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -17488,21 +17488,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/parsing/TKAPIToCoreDataConverter.swift",
-      "line": 499,
+      "line": 503,
       "symbol": "TKVehicular.toModel()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/parsing/TKAPIToCoreDataConverter.swift",
-      "line": 512,
+      "line": 516,
       "symbol": "TKAPIToCoreDataConverter.vehiclesModel(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/parsing/TKAPIToCoreDataConverter.swift",
-      "line": 517,
+      "line": 521,
       "symbol": "TKAPIToCoreDataConverter.vehiclesPayload(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
