@@ -241,6 +241,14 @@ public final class TKRoutingParser {
       var newTrips = Set<Trip>()
       
       for apiTrip in apiGroup.trips {
+        // Sanity check first if this is useable
+        let missingHashCode = apiTrip.segments.map(\.segmentTemplateHashCode)
+          .first(where: { !templateByHashCodes.keys.contains($0) })
+        if let missingHashCode {
+          TKLog.error("TKRoutingParser", text: "Skipping trip due to missing template for \(missingHashCode) using mode: \(mode). Templates: \(templates).")
+          continue
+        }
+        
         let trip: Trip
         var unmatchedSegmentReferencesByHashCode: [Int: SegmentReference] = [:]
         switch mode {
@@ -294,8 +302,7 @@ public final class TKRoutingParser {
         for (index, apiReference) in apiTrip.segments.enumerated() {
           let hashCode = apiReference.segmentTemplateHashCode
           guard let apiTemplate = templateByHashCodes[hashCode] else {
-            assertionFailure("Missing template for \(hashCode)")
-            continue
+            preconditionFailure("Sanity check above failed")
           }
           let isNewTemplate = !existingTemplateHashCodes.contains(hashCode)
           
