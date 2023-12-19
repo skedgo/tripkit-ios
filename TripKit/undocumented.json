@@ -16474,7 +16474,14 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer+ImageUpload.swift",
       "line": 13,
-      "symbol": "TKServer.upload(_:onComplete:)",
+      "symbol": "TKServer.upload(imageData:contentType:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer+ImageUpload.swift",
+      "line": 55,
+      "symbol": "TKServer.removeImage()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
