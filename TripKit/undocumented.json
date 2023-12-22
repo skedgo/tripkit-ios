@@ -3110,14 +3110,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKCalendarManager.swift",
-      "line": 88,
+      "line": 94,
       "symbol": "TKCalendarManager.askForPermission(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKCalendarManager.swift",
-      "line": 107,
+      "line": 122,
       "symbol": "TKCalendarManager.authorizationAlertText",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
