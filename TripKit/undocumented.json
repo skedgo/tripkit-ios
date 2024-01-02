@@ -2907,35 +2907,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 13,
+      "line": 12,
       "symbol": "TKRegionOverlayHelper",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 16,
+      "line": 14,
       "symbol": "TKRegionOverlayHelper.shared",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 28,
+      "line": 25,
       "symbol": "TKRegionOverlayHelper.regionsPolygon(forceUpdate:completion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 150,
+      "line": 151,
       "symbol": "TKRegionOverlayHelper",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 152,
+      "line": 153,
       "symbol": "TKRegionOverlayHelper.cacheURL",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
@@ -3663,147 +3663,133 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 14,
-      "symbol": "NSNotification.Name.TKRegionManagerUpdatedRegions",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 17,
+      "line": 18,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 19,
+      "line": 20,
       "symbol": "TKRegionManager.shared",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 22,
-      "symbol": "TKRegionManager.UpdatedRegionsNotification",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 37,
+      "line": 40,
       "symbol": "TKRegionManager.loadRegionsFromCache()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 48,
+      "line": 56,
       "symbol": "TKRegionManager.hasRegions",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 52,
+      "line": 60,
       "symbol": "TKRegionManager.regions",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 56,
+      "line": 64,
       "symbol": "TKRegionManager.regionsHash",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 69,
+      "line": 77,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 88,
+      "line": 98,
       "symbol": "TKRegionManager.cacheURL",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 93,
+      "line": 103,
       "symbol": "TKRegionManager.readLocalCache()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 95,
-      "symbol": "TKRegionManager",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 97,
+      "line": 107,
       "symbol": "TKRegionManager.saveToCache(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 105,
+      "line": 111,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 176,
+      "line": 115,
+      "symbol": "TKRegionManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
+      "line": 186,
       "symbol": "TKRegionManager.remoteImageIsTemplate(forModeIdentifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 180,
+      "line": 190,
       "symbol": "TKRegionManager.remoteImageIsBranding(forModeIdentifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 185,
+      "line": 195,
       "symbol": "TKRegionManager.imageURL(forModeIdentifier:iconType:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 206,
+      "line": 216,
       "symbol": "TKRegionManager.sortedModes(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 249,
+      "line": 259,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 252,
+      "line": 262,
       "symbol": "TKRegionManager.coordinateIsPartOfAnyRegion(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 278,
+      "line": 288,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -16501,21 +16487,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer+Regions.swift",
-      "line": 45,
+      "line": 46,
       "symbol": "TKRegionManager.requireRegions()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer+Regions.swift",
-      "line": 96,
+      "line": 113,
       "symbol": "TKRegionManager.requireRegion(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer+Regions.swift",
-      "line": 101,
+      "line": 119,
       "symbol": "TKRegionManager.requireRegion(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
