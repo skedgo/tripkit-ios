@@ -26,6 +26,8 @@ public class TKRegionManager: NSObject {
   }
   
   private var _requiredForModes: [String: [String]]?
+  
+  var fetchTask: Task<Void, Error>? = nil
 
   private override init() {
     super.init()

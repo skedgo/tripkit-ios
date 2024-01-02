@@ -57,6 +57,18 @@ extension TKRegionManager {
   /// - Parameter forced: Set true to force overwriting the internal cache
   @MainActor
   public func fetchRegions(forced: Bool) async throws {
+    if let fetchTask, !forced {
+      return try await fetchTask.value
+    } else {
+      fetchTask?.cancel()
+      fetchTask = Task {
+        try await self.fetchRegionsWorker(forced: forced)
+      }
+    }
+  }
+    
+  @MainActor
+  private func fetchRegionsWorker(forced: Bool) async throws {
     let regionsURL: URL
     if let customBaseURL = TKServer.customBaseURL {
       guard let url = URL(string: customBaseURL) else {
@@ -73,6 +85,8 @@ extension TKRegionManager {
     }
     
     let response = await TKServer.shared.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras)
+    try Task.checkCancellation()
+    
     switch response.result {
     case .success(let model):
       await updateRegions(from: model)
