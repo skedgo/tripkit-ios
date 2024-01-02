@@ -55,6 +55,7 @@ public class TKUISegmentInstructionCard: TGPlainCard {
     // accessory views depend on real-time data, so let's update
     NotificationCenter.default.rx
       .notification(.TKUIUpdatedRealTimeData, object: segment)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let segment = self?.segment else { return }
         self?.updateAccessoryViews(for: segment)
