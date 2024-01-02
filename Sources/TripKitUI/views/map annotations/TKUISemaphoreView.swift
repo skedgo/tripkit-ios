@@ -205,7 +205,9 @@ extension TKUISemaphoreView {
     
     guard annotation is NSObject, annotation is TKUISemaphoreDisplayable else { return }
 
-    NotificationCenter.default.rx.notification(.TKUIUpdatedRealTimeData, object: annotation)
+    NotificationCenter.default.rx
+      .notification(.TKUIUpdatedRealTimeData, object: annotation)
+      .observe(on: MainScheduler.instance)
       .filter { $0.object is TKUISemaphoreDisplayable }
       .map { ($0.object as? TKUISemaphoreDisplayable)?.semaphoreMode }
       .bind(to: rx.mode)

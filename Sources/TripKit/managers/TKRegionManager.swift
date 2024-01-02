@@ -11,15 +11,13 @@ import CoreLocation
 import MapKit
 
 public extension NSNotification.Name {
+  /// Always posted on the main thread
   static let TKRegionManagerUpdatedRegions = NSNotification.Name(rawValue: "TKRegionManagerRegionsUpdatedNotification")
 }
 
 public class TKRegionManager: NSObject {
   @objc
   public static let shared = TKRegionManager()
-  
-  @objc
-  public static let UpdatedRegionsNotification = NSNotification.Name.TKRegionManagerUpdatedRegions
   
   private var response: TKAPI.RegionsResponse? {
     didSet {
@@ -31,14 +29,22 @@ public class TKRegionManager: NSObject {
 
   private override init() {
     super.init()
-    loadRegionsFromCache()
+    Task {
+      await loadRegionsFromCache()
+    }
   }
   
-  public func loadRegionsFromCache() {
-    guard let data = TKRegionManager.readLocalCache() else { return }
+  @MainActor
+  public func loadRegionsFromCache() async {
     do {
-      let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
-      updateRegions(from: response)
+      let response = try await Task<TKAPI.RegionsResponse?, Error>.detached(priority: .utility) {
+        guard let data = TKRegionManager.readLocalCache() else { return nil }
+        return try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
+      }.value
+      if let response {
+        await updateRegions(from: response)
+      }
+
     } catch {
       TKLog.warn("Couldn't load regions from cache: \(error)")
       assertionFailure()
@@ -68,7 +74,8 @@ public class TKRegionManager: NSObject {
 
 extension TKRegionManager {
 
-  func updateRegions(from response: TKAPI.RegionsResponse) {
+  @MainActor
+  func updateRegions(from response: TKAPI.RegionsResponse) async {
     // Silently ignore obviously bad data
     guard response.modes != nil, response.regions != nil else {
       // This asset isn't valid, due to race conditions
@@ -77,12 +84,13 @@ extension TKRegionManager {
     }
     
     self.response = response
-    
-    if let encoded = try? JSONEncoder().encode(response) {
-      TKRegionManager.saveToCache(encoded)
-    }
-    
     NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
+    
+    Task.detached(priority: .utility) {
+      if let encoded = try? JSONEncoder().encode(response) {
+        TKRegionManager.saveToCache(encoded)
+      }
+    }
   }
   
   public static var cacheURL: URL {

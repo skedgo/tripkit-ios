@@ -220,6 +220,7 @@ open class TKUIMapManager: TGMapManager {
     TKRegionOverlayHelper.shared.regionsPolygon(completion: updateOverlay)
     NotificationCenter.default.rx
       .notification(.TKRegionManagerUpdatedRegions)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { _ in
         TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
       })

@@ -42,6 +42,7 @@ extension TKRegionManager {
     }
   }
   
+  @MainActor
   public func requireRegions() async throws {
     if !hasRegions {
       try await fetchRegions(forced: false)
@@ -54,6 +55,7 @@ extension TKRegionManager {
   ///
   /// Recommended to call from the application delegate.
   /// - Parameter forced: Set true to force overwriting the internal cache
+  @MainActor
   public func fetchRegions(forced: Bool) async throws {
     let regionsURL: URL
     if let customBaseURL = TKServer.customBaseURL {
@@ -73,7 +75,7 @@ extension TKRegionManager {
     let response = await TKServer.shared.hit(TKAPI.RegionsResponse.self, .POST, url: regionsURL, parameters: paras)
     switch response.result {
     case .success(let model):
-      updateRegions(from: model)
+      await updateRegions(from: model)
       if hasRegions {
         return
       } else {
@@ -93,11 +95,13 @@ extension TKRegionManager {
 // MARK: - Convenience methods
 
 extension TKRegionManager {
+  @MainActor
   public func requireRegion(for coordinate: CLLocationCoordinate2D) async throws -> TKRegion {
     try await requireRegions()
     return self.region(containing: coordinate, coordinate)
   }
 
+  @MainActor
   public func requireRegion(for coordinateRegion: MKCoordinateRegion) async throws -> TKRegion {
     try await requireRegions()
     return self.region(containing: coordinateRegion)

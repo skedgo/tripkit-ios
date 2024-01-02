@@ -56,6 +56,7 @@ extension TKUISegmentTitleView {
     
     NotificationCenter.default.rx
       .notification(.TKUIUpdatedRealTimeData, object: segment)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         self?.update(for: segment, preferredTitle: preferredTitle, showSubtitle: showSubtitle, mode: mode)
       })

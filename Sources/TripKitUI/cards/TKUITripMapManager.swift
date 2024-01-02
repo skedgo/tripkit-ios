@@ -54,6 +54,7 @@ public class TKUITripMapManager: TKUIMapManager, TKUITripMapManagerType {
     
     NotificationCenter.default.rx
       .notification(.TKUIUpdatedRealTimeData, object: trip)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] notification in
         guard
           let self = self,

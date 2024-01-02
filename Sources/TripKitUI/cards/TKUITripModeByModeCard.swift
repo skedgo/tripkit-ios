@@ -182,6 +182,7 @@ public class TKUITripModeByModeCard: TGPageCard {
       .map { $0.userInfo?["selection"] as? String }
       .filter { $0 != nil}
       .map { $0! }
+      .observe(on: MainScheduler.asyncInstance)
       .subscribe(onNext: { [weak self] in self?.reactToMapSelectionChange($0) })
       .disposed(by: disposeBag)
   }
