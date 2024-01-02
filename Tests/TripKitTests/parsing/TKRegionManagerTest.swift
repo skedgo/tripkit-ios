@@ -14,12 +14,12 @@ class TKRegionManagerTest: XCTestCase {
   
   var regionData: Data! = nil
   
-  override func setUpWithError() throws {
-    super.setUp()
+  override func setUp() async throws {
+    try await super.setUp()
     
     regionData = try dataFromJSON(named: "regions")
     let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
-    TKRegionManager.shared.updateRegions(from: response)
+    await TKRegionManager.shared.updateRegions(from: response)
   }
   
   override func tearDown() {
@@ -32,7 +32,7 @@ class TKRegionManagerTest: XCTestCase {
     XCTAssertEqual(TKRegionManager.shared.regions.count, 195)
   }
   
-  func testSavingToCache() throws {
+  func testSavingToCache() async throws {
     // First read the good data
     let data = TKRegionManager.readLocalCache()
     XCTAssertNotNil(data)
@@ -44,14 +44,14 @@ class TKRegionManagerTest: XCTestCase {
       "hashCode": 0
     ] as [String : Any])
     let rubbishData = try JSONEncoder().encode(rubbish)
-    TKRegionManager.shared.updateRegions(from: rubbish)
+    await TKRegionManager.shared.updateRegions(from: rubbish)
     TKRegionManager.saveToCache(rubbishData)
     XCTAssert(TKRegionManager.shared.hasRegions)
     XCTAssertEqual(TKRegionManager.shared.regions.count, 0)
 
     // Then read the good data in again
     let cachedResponse = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
-    TKRegionManager.shared.updateRegions(from: cachedResponse)
+    await TKRegionManager.shared.updateRegions(from: cachedResponse)
     XCTAssert(TKRegionManager.shared.hasRegions)
     XCTAssertEqual(TKRegionManager.shared.regions.count, 195)
   }
