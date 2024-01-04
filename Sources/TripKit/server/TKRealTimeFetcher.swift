@@ -174,13 +174,14 @@ public class TKRealTimeFetcher {
         
         var delay: TimeInterval = 0
         for visit in service.sortedVisits {
-          if let newArrival = arrivals[visit.stop.stopCode] {
+          guard let stopCode = visit.stop?.stopCode else { continue }
+          if let newArrival = arrivals[stopCode] {
             if let arrival = visit.arrival {
               delay = newArrival.timeIntervalSince(arrival)
             }
             visit.arrival = newArrival
           }
-          if let newDeparture = departures[visit.stop.stopCode] {
+          if let newDeparture = departures[stopCode] {
             if let departure = visit.departure {
               delay = newDeparture.timeIntervalSince(departure)
             }
@@ -188,10 +189,10 @@ public class TKRealTimeFetcher {
             visit.departure = newDeparture
             visit.triggerRealTimeKVO()
           }
-          if arrivals[visit.stop.stopCode] == nil, let arrival = visit.arrival, abs(delay) > 1 {
+          if arrivals[stopCode] == nil, let arrival = visit.arrival, abs(delay) > 1 {
             visit.arrival = arrival.addingTimeInterval(delay)
           }
-          if departures[visit.stop.stopCode] == nil, let departure = visit.departure, abs(delay) > 1 {
+          if departures[stopCode] == nil, let departure = visit.departure, abs(delay) > 1 {
             // use time for KVO
             visit.departure = departure.addingTimeInterval(delay)
             visit.triggerRealTimeKVO()
