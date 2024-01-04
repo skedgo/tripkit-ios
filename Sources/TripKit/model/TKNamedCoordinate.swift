@@ -91,7 +91,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     }
   }
   
-  @objc public init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String?, address: String?) {
+  @objc public init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String? = nil, address: String? = nil) {
     coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     self.name = name
     _address = address
