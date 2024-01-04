@@ -36,9 +36,13 @@ public extension TKUITripOverviewCard {
       guard let mapManager = card.mapManager as? TKUITripMapManager else {
         assertionFailure(); return
       }
-      let pageCard = try! TKUITripModeByModeCard(startingOn: segment, mapManager: mapManager)
-      pageCard.modeByModeDelegate = card
-      card.controller?.push(pageCard)
+      do {
+        let pageCard = try TKUITripModeByModeCard(startingOn: segment, mapManager: mapManager)
+        pageCard.modeByModeDelegate = card
+        card.controller?.push(pageCard)
+      } catch {
+        TKLog.error("TKUITripOverViewCard", text: "Cannot present segment, due to: \(error).")
+      }
     }
     
     /// Set this to use your own map manager. You can use this in combination
