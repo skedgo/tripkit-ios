@@ -38,7 +38,7 @@ extension InMemoryHistoryManager: TKUIHomeComponentViewModel {
           header: .init(
             title: "Search history",
             action: (
-              "Clear all", {
+              "Clear all", { _ in
                 self.history.onNext([])
                 return .success
               }

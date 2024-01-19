@@ -182,6 +182,7 @@ public class TKUITripModeByModeCard: TGPageCard {
       .map { $0.userInfo?["selection"] as? String }
       .filter { $0 != nil}
       .map { $0! }
+      .observe(on: MainScheduler.asyncInstance)
       .subscribe(onNext: { [weak self] in self?.reactToMapSelectionChange($0) })
       .disposed(by: disposeBag)
   }
@@ -220,8 +221,8 @@ public class TKUITripModeByModeCard: TGPageCard {
     return modeIndex
   }
   
-  public func shows(_ trip: Trip) -> Bool {
-    return viewModel.trip.tripURL == trip.tripURL
+  public func shows(tripURL: URL, tripID: String?) -> Bool {
+    return viewModel.trip.matches(tripURL: tripURL, tripID: tripID)
   }
   
   deinit {

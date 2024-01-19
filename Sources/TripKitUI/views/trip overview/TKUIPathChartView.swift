@@ -15,7 +15,7 @@ import class TripKit.Shape
 
 @available(iOS 16.0, *)
 struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
-  init?(values: [TKUIPathChartView.ChartValue<V>], totalDistance: CLLocationDistance? = nil) {
+  init?(values: [TKUIPathChartView.ChartValue], totalDistance: CLLocationDistance? = nil) {
     let longEnough = values.filter { $0.distance > 25 }
     guard !longEnough.isEmpty else { return nil }
     
@@ -37,12 +37,12 @@ struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
     }
   }
   
-  struct ChartValue<V>: Hashable where V: TKUIPathChartable & Hashable {
+  struct ChartValue: Hashable {
     var value: V
     var distance: CLLocationDistance
   }
 
-  let values: [ChartValue<V>]
+  let values: [ChartValue]
   let totalDistance: CLLocationDistance
   
   var body: some View {

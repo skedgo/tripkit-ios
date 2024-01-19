@@ -6,7 +6,7 @@
 //  Copyright © 2017 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 
 import TripKit
 

@@ -30,11 +30,11 @@ extension TKModeCoordinate: TKUIGlyphableAnnotation {
   
   public var glyphImage: TKImage? {
     let image = stopModeInfo.image
-    #if os(iOS) || os(tvOS)
+#if canImport(UIKit)
     return image?.withRenderingMode(.alwaysTemplate)
-    #else
+#else
     return image
-    #endif
+#endif
   }
   
   public var glyphImageURL: URL? {

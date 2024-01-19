@@ -40,17 +40,18 @@ class TKUIHomeViewModel {
     
     let fullContent = Self.fullContent(for: componentViewModels)
     
-    let customizationFromDefaults =
-      NotificationCenter.default.rx.notification(.TKUIHomeComponentsCustomized)
-        .map { _ in }
-        .startWith(())
-        .map { () -> [TKUIHomeCard.CustomizedItem] in
-          let unsorted = componentViewModels.compactMap { component in
-            component.customizerItem.map { TKUIHomeCard.CustomizedItem(fromUserDefaultsWithId: component.identity, item: $0) }
-          }
-          return TKUIHomeCard.sortedAsInDefaults(unsorted)
+    let customizationFromDefaults = NotificationCenter.default.rx
+      .notification(.TKUIHomeComponentsCustomized)
+      .map { _ in }
+      .startWith(())
+      .observe(on: MainScheduler.asyncInstance)
+      .map { () -> [TKUIHomeCard.CustomizedItem] in
+        let unsorted = componentViewModels.compactMap { component in
+          component.customizerItem.map { TKUIHomeCard.CustomizedItem(fromUserDefaultsWithId: component.identity, item: $0) }
         }
-        .share(replay: 1, scope: .whileConnected)
+        return TKUIHomeCard.sortedAsInDefaults(unsorted)
+      }
+      .share(replay: 1, scope: .whileConnected)
 
     let baseContent = Self.customizedContent(full: fullContent, customization: customizationFromDefaults)
     

@@ -9,10 +9,10 @@ import Foundation
 
 #if canImport(CoreGraphics)
 
-#if os(iOS) || os(tvOS)
-  import UIKit
-#elseif os(OSX)
-  import Cocoa
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
 #endif
   
 extension Polygon {

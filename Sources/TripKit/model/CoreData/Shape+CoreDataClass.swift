@@ -176,7 +176,7 @@ extension Shape: TKDisplayableRoute {
       return color
     }
     
-    #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
     if let bestTag = roadTags?.first {
       return bestTag.safety.color
     }
@@ -187,7 +187,7 @@ extension Shape: TKDisplayableRoute {
     if segment?.distanceByRoadTags != nil {
       return RoadTag.other.safety.color
     }
-    #endif
+#endif
     
     switch friendliness {
     case .friendly, .unfriendly, .dismount:

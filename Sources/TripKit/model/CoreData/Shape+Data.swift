@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -30,7 +30,7 @@ extension Shape {
     
     case unknown
     
-    #if os(iOS) || os(tvOS)
+#if canImport(UIKit)
     public var color: UIColor {
       switch self {
       case .safe: return .tkStateSuccess
@@ -40,7 +40,7 @@ extension Shape {
       case .unknown: return .systemGray
       }
     }
-    #endif
+#endif
   }
   
   public enum RoadTag: String, Codable {

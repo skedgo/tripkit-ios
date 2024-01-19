@@ -59,7 +59,7 @@ extension TKCalendarManager: TKAutocompleting {
     }
   }
   
-  #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   @objc
   public func additionalActionTitle() -> String? {
     if isAuthorized { return nil }
@@ -70,7 +70,7 @@ extension TKCalendarManager: TKAutocompleting {
   public func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void) {
     tryAuthorization(in: presenter, completion: completion)
   }
-  #endif
+#endif
   
 }
 

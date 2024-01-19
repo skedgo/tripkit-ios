@@ -56,7 +56,7 @@ public protocol TKAutocompleting {
   /// up resources.
   func cancelAutocompletion()
   
-  #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   /// Text and action for an additional row to display in the results, e.g., to request
   /// user permissions if the autocompletion provider can't provide results without that.
   ///
@@ -66,7 +66,7 @@ public protocol TKAutocompleting {
   
   func triggerAdditional(presenter: UIViewController, completion: @escaping (Bool) -> Void)
   
-  #endif
+#endif
   
   var allowLocationInfoButton: Bool { get }
 
@@ -83,7 +83,7 @@ extension TKAutocompleting {
   
   public func cancelAutocompletion() {}
   
-  #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
   public func additionalActionTitle() -> String? {
     return nil
   }
@@ -92,6 +92,6 @@ extension TKAutocompleting {
     assertionFailure()
     completion(false)
   }
-  #endif
+#endif
   
 }

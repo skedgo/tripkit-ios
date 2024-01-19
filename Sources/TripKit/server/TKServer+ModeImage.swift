@@ -8,9 +8,9 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
-#else
+#elseif canImport(AppKit)
 import AppKit
 #endif
 
@@ -59,9 +59,9 @@ extension TKServer {
     let fileExtension = isPNG ? "png" : "svg"
     if isPNG {
       let scale: CGFloat
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
       scale = UIScreen.main.scale
-#elseif os(OSX)
+#elseif canImport(AppKit)
       scale = NSScreen.main?.backingScaleFactor ?? 1
 #endif
       

@@ -397,7 +397,7 @@ extension TKUIHomeCard: UITableViewDelegate {
       return nil
     }
     
-    header.configure(with: dataSource.sectionModels[section].headerConfiguration) { [weak self] in
+    header.configure(with: dataSource.sectionModels[section].headerConfiguration, homeCard: self) { [weak self] in
       self?.actionTriggered.onNext($0)
     }
     return header

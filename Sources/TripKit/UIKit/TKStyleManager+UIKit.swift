@@ -6,7 +6,7 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 
 import UIKit
 

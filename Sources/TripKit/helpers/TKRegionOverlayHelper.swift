@@ -9,10 +9,8 @@
 import Foundation
 import MapKit
 
-@objc
 public class TKRegionOverlayHelper: NSObject {
 
-  @objc(sharedInstance)
   public static let shared = TKRegionOverlayHelper()
   
   private var regionsOverlay: MKPolygon?
@@ -24,8 +22,8 @@ public class TKRegionOverlayHelper: NSObject {
     super.init()
   }
   
-  @objc(regionsPolygonForcingUpdate:completion:)
   public func regionsPolygon(forceUpdate: Bool = false, completion: @escaping (MKPolygon?) -> Void) {
+    dispatchPrecondition(condition: .onQueue(.main))
 
     if (forceUpdate) {
       regionsOverlay = nil
@@ -52,15 +50,18 @@ public class TKRegionOverlayHelper: NSObject {
       let calculationToken = TKRegionManager.shared.regionsHash?.intValue
       self.calculationToken = calculationToken
       
-      MKPolygon.union(polygons) { result in
+      MKPolygon.union(polygons) { [weak self] result in
+        dispatchPrecondition(condition: .onQueue(.main))
+        
         // Ignore callbacks for since outdated regions (e.g., switching servers quickly)
-        guard calculationToken == self.calculationToken else { return }
+        guard let self, calculationToken == self.calculationToken else { return }
         
         switch result {
         case .success(let regionPolygons):
           // create outside polygon removing the regions (to show which area is covered)
           let encodable = regionPolygons.map(EncodablePolygon.init)
           TKRegionOverlayHelper.savePolygonsToCacheFile(encodable)
+          
           let overlay = MKPolygon(rectangle: .world, interiorPolygons: regionPolygons)
           self.regionsOverlay = overlay
           for callback in self.callbacks {
@@ -194,7 +195,7 @@ extension TKRegionOverlayHelper {
       else { return }
     
     do {
-      #if DEBUG
+#if DEBUG
       // Output GeoJSON, too.
       let secondary = FileManager.default
         .urls(for: .cachesDirectory, in: .userDomainMask)
@@ -225,7 +226,7 @@ extension TKRegionOverlayHelper {
       let geojsonData = try JSONSerialization.data(withJSONObject: geojson, options: [])
       try geojsonData.write(to: secondary)
       print("Saved GeoJSON to \(secondary)")
-      #endif
+#endif
 
       let archiver = NSKeyedArchiver(requiringSecureCoding: false)
       archiver.encode(polygons, forKey: "polygons")

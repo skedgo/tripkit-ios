@@ -18,13 +18,12 @@ abstract: api/*.md
 custom_categories:
   - name: Setup & Configuration
     children:
-      - TKTripKit
+      - TripKit
       - TKConfig
       - TKRegion
       - TKRegionManager
       - TKServer
       - TKSettings
-      - TKUserProfileHelper
   - name: Trip Planning
     children:
       - TKRouter

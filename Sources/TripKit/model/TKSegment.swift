@@ -662,7 +662,7 @@ extension TKSegment {
 
 // MARK: - UIActivityItemSource
 
-#if os(iOS)
+#if canImport(UIKit)
 
   extension TKSegment: UIActivityItemSource {
   

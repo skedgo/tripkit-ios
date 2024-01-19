@@ -398,7 +398,7 @@ extension TKBooking {
     
     public let id: Identifier
     
-    public let status: Status
+    public let status: Status?
 
     /// URL to fetch ticket details, provided if `status == .activated`
     public let ticketURL: URL?
