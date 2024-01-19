@@ -50,6 +50,12 @@ extension TKAutocompletionResult {
   }
   
   public struct ScoreHighlights {
+    public init(score: Int, titleHighlight: [NSRange] = [], subtitleHighlight: [NSRange] = []) {
+      self.score = score
+      self.titleHighlight = titleHighlight
+      self.subtitleHighlight = subtitleHighlight
+    }
+    
     public let score: Int
     public var titleHighlight: [NSRange] = []
     public var subtitleHighlight: [NSRange] = []
