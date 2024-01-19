@@ -186,6 +186,7 @@ public enum TKBooking {
       case multipleSelections = "MULTIPLE_CHOICE"
       case requestReturnTrip = "RETURN_TRIP"
       case number = "NUMBER"
+      case terms = "TERMS"
     }
     
     public enum ReturnTripDateValue: Hashable {
@@ -200,6 +201,7 @@ public enum TKBooking {
       case longText(String)
       case returnTripDate(ReturnTripDateValue)
       case number(Int, min: Int?, max: Int?)
+      case terms(URL, accepted: Bool)
     }
     
     public let required: Bool
@@ -215,6 +217,7 @@ public enum TKBooking {
       case .multipleSelections: return .multipleSelections
       case .returnTripDate: return .requestReturnTrip
       case .number: return .number
+      case .terms: return .terms
       }
     }
     
@@ -257,6 +260,9 @@ public enum TKBooking {
         let minValue = try container.decodeIfPresent(Int.self, forKey: .minValue)
         let maxValue = try container.decodeIfPresent(Int.self, forKey: .maxValue)
         value = .number(Int(rawValue) ?? 0, min: minValue, max: maxValue)
+      case .terms:
+        let url = try container.decode(URL.self, forKey: .value)
+        value = .terms(url, accepted: false)
       }
     }
     
