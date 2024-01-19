@@ -56,7 +56,7 @@ public class TKRouteAutocompleter: TKAutocompleting {
         let rawScore = [route.shortName, route.routeName]
           .compactMap { $0 }
           .map {
-            TKAutocompletionResult.nameScore(searchTerm: input, candidate: $0)
+            TKAutocompletionResult.nameScore(searchTerm: input, candidate: $0).score
           }.max() ?? 0
         let score = TKAutocompletionResult.rangedScore(for: rawScore, min: 30, max: 80)
         return (route, score)

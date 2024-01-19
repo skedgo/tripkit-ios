@@ -22,18 +22,18 @@ public class TKRegionAutocompleter: TKAutocompleting {
   public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
     let scoredMatches = TKRegionManager.shared.regions
-      .flatMap { region -> [(TKRegion.City, score: Int)] in
+      .flatMap { region -> [(TKRegion.City, score: TKAutocompletionResult.ScoreHighlights)] in
         if input.isEmpty {
-          return region.cities.map { ($0, 100) }
+          return region.cities.map { ($0, .init(score: 100)) }
         } else {
-          return region.cities.compactMap { city in
+          return region.cities.compactMap { city -> (TKRegion.City, score: TKAutocompletionResult.ScoreHighlights)? in
             guard let name = city.title else { return nil }
             let titleScore = TKAutocompletionResult.nameScore(searchTerm: input, candidate: name)
-            guard titleScore > 0 else { return nil }
+            guard titleScore.score > 0 else { return nil }
             let distanceScore = TKAutocompletionResult.distanceScore(from: city.coordinate, to: .init(mapRect), longDistance: true)
-            let rawScore = (titleScore * 9 + distanceScore) / 10
+            let rawScore = (titleScore.score * 9 + distanceScore) / 10
             let score = TKAutocompletionResult.rangedScore(for: rawScore, min: 10, max: 70)
-            return (city, score)
+            return (city, .init(score: score, titleHighlight: titleScore.ranges))
           }
         }
       }
@@ -43,8 +43,9 @@ public class TKRegionAutocompleter: TKAutocompleting {
       return TKAutocompletionResult(
         object: tuple.0,
         title: tuple.0.title!, // we filtered those out without a name
+        titleHighlightRanges: tuple.score.titleHighlight,
         image: image,
-        score: tuple.score
+        score: tuple.score.score
       )
     }
     
