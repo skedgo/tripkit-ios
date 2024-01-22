@@ -3033,14 +3033,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKCalendarManager+Autocompleting.swift",
-      "line": 143,
+      "line": 145,
       "symbol": "TKNamedCoordinate.eventStartTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKCalendarManager+Autocompleting.swift",
-      "line": 148,
+      "line": 150,
       "symbol": "TKNamedCoordinate.eventEndTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -3271,7 +3271,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKContactsManager.swift",
-      "line": 113,
+      "line": 114,
       "symbol": "TKContactsManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -13162,16 +13162,16 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 118,
-      "symbol": "TKNamedCoordinate",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 119,
+      "symbol": "TKNamedCoordinate.init(name:address:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 119,
-      "symbol": "TKNamedCoordinate.init(name:address:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "line": 120,
+      "symbol": "TKNamedCoordinate",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -15031,7 +15031,70 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
-      "line": 138,
+      "line": 38,
+      "symbol": "TKAutocompletionResult.Score",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 39,
+      "symbol": "TKAutocompletionResult.Score.score",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 40,
+      "symbol": "TKAutocompletionResult.Score.ranges",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 42,
+      "symbol": "TKAutocompletionResult.Score.init(score:ranges:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 52,
+      "symbol": "TKAutocompletionResult.ScoreHighlights",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 53,
+      "symbol": "TKAutocompletionResult.ScoreHighlights.init(score:titleHighlight:subtitleHighlight:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 59,
+      "symbol": "TKAutocompletionResult.ScoreHighlights.score",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 60,
+      "symbol": "TKAutocompletionResult.ScoreHighlights.titleHighlight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 61,
+      "symbol": "TKAutocompletionResult.ScoreHighlights.subtitleHighlight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
+      "line": 172,
       "symbol": "TKAutocompletionResult.rangedScore(for:min:max:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -15060,71 +15123,78 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
       "line": 12,
-      "symbol": "TKAutocompletionResult.init(object:title:subtitle:image:accessoryButtonImage:accessoryAccessibilityLabel:score:isInSupportedRegion:)",
+      "symbol": "TKAutocompletionResult.init(object:title:titleHighlightRanges:subtitle:subtitleHighlightRanges:image:accessoryButtonImage:accessoryAccessibilityLabel:score:isInSupportedRegion:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
-      "line": 23,
+      "line": 25,
       "symbol": "TKAutocompletionResult.provider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
-      "line": 25,
+      "line": 27,
       "symbol": "TKAutocompletionResult.object",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
-      "line": 27,
+      "line": 29,
       "symbol": "TKAutocompletionResult.title",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
-      "line": 29,
-      "symbol": "TKAutocompletionResult.subtitle",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
       "line": 31,
-      "symbol": "TKAutocompletionResult.image",
+      "symbol": "TKAutocompletionResult.titleHighlightRanges",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
       "line": 33,
-      "symbol": "TKAutocompletionResult.accessoryButtonImage",
+      "symbol": "TKAutocompletionResult.subtitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
       "line": 35,
-      "symbol": "TKAutocompletionResult.accessoryAccessibilityLabel",
+      "symbol": "TKAutocompletionResult.subtitleHighlightRanges",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
       "line": 37,
-      "symbol": "TKAutocompletionResult.isInSupportedRegion",
+      "symbol": "TKAutocompletionResult.image",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
-      "line": 50,
-      "symbol": "TKAutocompletionResult",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 39,
+      "symbol": "TKAutocompletionResult.accessoryButtonImage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
+      "line": 41,
+      "symbol": "TKAutocompletionResult.accessoryAccessibilityLabel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
+      "line": 43,
+      "symbol": "TKAutocompletionResult.isInSupportedRegion",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -15136,7 +15206,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
-      "line": 65,
+      "line": 62,
+      "symbol": "TKAutocompletionResult",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult.swift",
+      "line": 71,
       "symbol": "TKAutocompletionResult",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -15465,7 +15542,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKGeocodingResultScorer.swift",
-      "line": 38,
+      "line": 43,
       "symbol": "TKGeocodingResultScorer.calculateScore(title:subtitle:searchTerm:minimum:maximum:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
