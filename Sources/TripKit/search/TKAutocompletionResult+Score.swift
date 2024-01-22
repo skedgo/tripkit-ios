@@ -16,7 +16,7 @@ extension TKAutocompletionResult {
     if abs(world.span.latitudeDelta - region.span.latitudeDelta) < 1, abs(world.span.longitudeDelta - region.span.longitudeDelta) < 1 {
       return 100
     }
-
+    
     if region.contains(coordinate) {
       return 100
     }
@@ -35,6 +35,32 @@ extension TKAutocompletionResult {
     return Int(proportion * 100)
   }
   
+  public struct Score: ExpressibleByIntegerLiteral {
+    public let score: Int
+    public var ranges: [NSRange] = []
+
+    public init(score: Int, ranges: [NSRange] = []) {
+      self.score = score
+      self.ranges = ranges
+    }
+    
+    public init(integerLiteral value: IntegerLiteralType) {
+      self.score = value
+    }
+  }
+  
+  public struct ScoreHighlights {
+    public init(score: Int, titleHighlight: [NSRange] = [], subtitleHighlight: [NSRange] = []) {
+      self.score = score
+      self.titleHighlight = titleHighlight
+      self.subtitleHighlight = subtitleHighlight
+    }
+    
+    public let score: Int
+    public var titleHighlight: [NSRange] = []
+    public var subtitleHighlight: [NSRange] = []
+  }
+  
   /// 0:   not match, e.g., we're missing a word
   /// 25:  same words but wrong order
   /// 33:  has all target words but missing a completed one
@@ -42,7 +68,7 @@ extension TKAutocompletionResult {
   /// 66:  contains all words in right order
   /// 75:  matches start of word in search term (but starts don't match)
   /// 100: exact match at start
-  public static func nameScore(searchTerm fullTarget: String, candidate fullCandidate: String) -> Int {
+  public static func nameScore(searchTerm fullTarget: String, candidate fullCandidate: String) -> Score {
     let target = stringForScoring(fullTarget)
     let candidate = stringForScoring(fullCandidate)
     
@@ -54,7 +80,7 @@ extension TKAutocompletionResult {
     }
     
     if target == candidate {
-      return 100
+      return .init(score: 100, ranges: [.init(location: 0, length: candidate.utf8.count)])
     }
     
     if target.isAbbreviation(for: candidate) || target.isAbbreviation(for: stringForScoring(fullCandidate, removeBrackets: true)) {
@@ -65,36 +91,44 @@ extension TKAutocompletionResult {
       return 90
     }
     
+    // exact phrase matches
     let excess = candidate.utf8.count - target.utf8.count
     if let range = candidate.range(of: target) {
+      let nsRange = NSRange(location: candidate.distance(from: candidate.startIndex, to: range.lowerBound), length: target.utf8.count)
       if range.lowerBound == candidate.startIndex {
         // matches right at start
-        return score(100, penalty: excess, min: 75)
+        return .init(score: score(100, penalty: excess, min: 75), ranges: [nsRange])
       }
       
       let before = candidate[candidate.index(before: range.lowerBound)]
       if before.isWhitespace {
         // matches beginning of word
         let offset = candidate.distance(from: candidate.startIndex, to: range.lowerBound)
-        return score(75, penalty: offset * 2 + excess, min: 33)
+        return .init(score: score(75, penalty: offset * 2 + excess, min: 33), ranges: [nsRange])
         
       } else {
         // in-word match
-        return score(25, penalty: excess, min: 5)
+        return .init(score: score(25, penalty: excess, min: 5), ranges: [nsRange])
       }
     }
     
     // non-subscring matches
     let targetWords = target.components(separatedBy: " ")
     var lastMatch: String.Index = candidate.startIndex
+    var ranges: [NSRange] = []
     for word in targetWords {
       if let match = candidate.range(of: word) {
+        ranges.append(NSRange(
+          location: candidate.distance(from: candidate.startIndex, to: match.lowerBound),
+          length: word.utf8.count
+        ))
+        
         if match.lowerBound >= lastMatch {
           // still in order, keep going
           lastMatch = match.lowerBound
         } else {
           // wrong order, abort with penalty
-          return score(10, penalty: excess, min: 0)
+          return .init(score: score(10, penalty: excess, min: 0), ranges: ranges)
         }
         
       } else {
@@ -119,12 +153,12 @@ extension TKAutocompletionResult {
           // full word match, continue with next
         } else {
           // candidate doesn't have a completed word
-          return score(33, penalty: excess, min: 10)
+          return .init(score: score(33, penalty: excess, min: 10), ranges: ranges)
         }
       }
     }
     
-    return score(66, penalty: excess, min: 40)
+    return .init(score: score(66, penalty: excess, min: 40), ranges: ranges)
   }
   
   private static func score(_ maximum: Int, penalty: Int, min: Int) -> Int {

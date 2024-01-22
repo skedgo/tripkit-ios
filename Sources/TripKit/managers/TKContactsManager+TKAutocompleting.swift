@@ -81,19 +81,20 @@ extension TKContactsManager: TKAutocompleting {
 
 extension TKContactsManager.ContactAddress {
   fileprivate func toResult(provider: TKAutocompleting, search: String) -> TKAutocompletionResult {
-    var result = TKAutocompletionResult(
+    let nameScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: locationName)
+    let addressScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: address)
+    let textScore = min(100, (nameScore.score + addressScore.score) / 2)
+    let score = Int(TKAutocompletionResult.rangedScore(for: textScore, min: 50, max: 90))
+    
+    return .init(
       object: self,
       title: locationName,
+      titleHighlightRanges: nameScore.ranges,
       subtitle: address,
-      image: image ?? TKAutocompletionResult.image(for: .contact)
+      subtitleHighlightRanges: addressScore.ranges,
+      image: image ?? TKAutocompletionResult.image(for: .contact),
+      score: score
     )
-
-    let nameScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: name)
-    let addressScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: address)
-    let textScore = min(100, (nameScore + addressScore) / 2)
-    result.score = Int(TKAutocompletionResult.rangedScore(for: textScore, min: 50, max: 90))
-    
-    return result
   }
 }
 
