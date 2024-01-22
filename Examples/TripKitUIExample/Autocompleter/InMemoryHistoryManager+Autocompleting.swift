@@ -67,8 +67,8 @@ extension InMemoryHistoryManager {
       result.score = 90
       
     } else {
-      let titleScore = TKAutocompletionResult.nameScore(searchTerm: searchText, candidate: result.title)
-      let locationScore = TKAutocompletionResult.nameScore(searchTerm: searchText, candidate: result.subtitle ?? "")
+      let titleScore = TKAutocompletionResult.nameScore(searchTerm: searchText, candidate: result.title).score
+      let locationScore = TKAutocompletionResult.nameScore(searchTerm: searchText, candidate: result.subtitle ?? "").score
       let rawScore = min(100, (titleScore + locationScore)/2)
       result.score = Int(TKAutocompletionResult.rangedScore(for: rawScore, min: 50, max: 90))
     }
