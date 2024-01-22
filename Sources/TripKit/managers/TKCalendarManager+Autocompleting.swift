@@ -104,9 +104,11 @@ extension TKCalendarManager {
       
     } else {
       
-      let titleScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: result.title).score
-      let locationScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: result.subtitle ?? "").score
-      let rawScore = min(100, (titleScore + locationScore) / 2)
+      let titleScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: result.title)
+      result.titleHighlightRanges = titleScore.ranges
+      let locationScore = TKAutocompletionResult.nameScore(searchTerm: search, candidate: result.subtitle ?? "")
+      result.subtitleHighlightRanges = locationScore.ranges
+      let rawScore = min(100, (titleScore.score + locationScore.score) / 2)
       result.score = Int(TKAutocompletionResult.rangedScore(for:rawScore, min: 50, max: 90))
     }
     
