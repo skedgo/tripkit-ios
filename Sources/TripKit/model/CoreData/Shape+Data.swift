@@ -56,6 +56,7 @@ extension Shape {
     //case unpavedOrUnsealed = "UNPAVED/UNSEALED" -- fine to ignore
     case streetLight = "STREET-LIGHT"
     case CCTVCamera = "CCTV-CAMERA"
+    case litRoute = "LIT-ROUTE"
     case other = "OTHER"
     
     public var localized: String {
@@ -71,6 +72,7 @@ extension Shape {
       case .mainRoad: return "Main Road"
       case .streetLight: return "Street Light"
       case .CCTVCamera: return "CCTV Camera"
+      case .litRoute: return "Lit Route"
       case .other: return "Other"
       }
     }
@@ -83,7 +85,8 @@ extension Shape {
            .cycleNetwork,
            .bicycleDesignated,
            .bicycleBoulevard,
-           .CCTVCamera:
+           .CCTVCamera,
+           .litRoute:
         return .designated
       case .sideWalk,
            .sideRoad,
