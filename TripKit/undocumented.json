@@ -9425,27 +9425,34 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
       "line": 59,
+      "symbol": "Shape.RoadTag.litRoute",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
+      "line": 60,
       "symbol": "Shape.RoadTag.other",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 61,
+      "line": 62,
       "symbol": "Shape.RoadTag.localized",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 78,
+      "line": 80,
       "symbol": "Shape.RoadTag.safety",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 108,
+      "line": 111,
       "symbol": "Shape.roadTags",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
