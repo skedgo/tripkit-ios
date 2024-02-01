@@ -263,8 +263,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       .disposed(by: disposeBag)
 
     viewModel.timeTitle
-      .map { " \($0) "} // padding :(
-      .drive(accessoryView.timeButton.rx.title())
+      .drive(onNext: { [weak self] in
+        self?.accessoryView.setTimeLabel($0.text, highlight: $0.highlight)
+      })
       .disposed(by: disposeBag)
     
     viewModel.availableModes
@@ -621,6 +622,8 @@ extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
+    accessoryView.setTransport(isOpen: !modes.available.isEmpty)
+    
     guard !modes.available.isEmpty else {
       tableView.tableHeaderView = emptyHeader
       self.modePicker = nil

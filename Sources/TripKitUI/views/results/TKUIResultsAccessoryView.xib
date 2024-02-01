@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,37 +13,52 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yLd-hK-EAw">
-                    <rect key="frame" x="16" y="0.0" width="343" height="46"/>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yLd-hK-EAw">
+                    <rect key="frame" x="16" y="0.0" width="343" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
-                            <rect key="frame" x="0.0" y="0.0" width="281" height="46"/>
+                            <rect key="frame" x="0.0" y="6.5" width="290" height="27"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="kdY-T8-uu1"/>
                             </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <state key="normal" title="Arriving at 9:00 am"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="kdY-T8-uu1"/>
+                                </mask>
+                            </variation>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvC-c0-UQp">
-                            <rect key="frame" x="289" y="0.0" width="54" height="46"/>
+                            <rect key="frame" x="298" y="6.5" width="45" height="27"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="r3e-9o-yan"/>
                             </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                             <state key="normal" title="Options"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="r3e-9o-yan"/>
+                                </mask>
+                            </variation>
                         </button>
                     </subviews>
                 </stackView>
             </subviews>
             <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yLd-hK-EAw" secondAttribute="trailing" constant="16" id="4JJ-Os-gVC"/>
                 <constraint firstItem="yLd-hK-EAw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Es0-06-0Db"/>
                 <constraint firstItem="yLd-hK-EAw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="P2c-sl-zbq"/>
                 <constraint firstAttribute="trailing" secondItem="yLd-hK-EAw" secondAttribute="trailing" constant="16" id="ZJs-Ia-0Ls"/>
-                <constraint firstAttribute="bottom" secondItem="yLd-hK-EAw" secondAttribute="bottom" id="ldf-o5-SCS"/>
+                <constraint firstAttribute="bottom" secondItem="yLd-hK-EAw" secondAttribute="bottom" constant="6" id="ldf-o5-SCS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="stackView" destination="yLd-hK-EAw" id="hBe-Ih-EDb"/>
                 <outlet property="timeButton" destination="MLD-Td-WnO" id="9gE-eM-VJL"/>
+                <outlet property="trailingConstraint" destination="ZJs-Ia-0Ls" id="NUf-dp-Iv8"/>
+                <outlet property="trailingConstraintNew" destination="4JJ-Os-gVC" id="922-El-hzl"/>
                 <outlet property="transportButton" destination="XvC-c0-UQp" id="7Dc-gb-srY"/>
             </connections>
             <point key="canvasLocation" x="136.80000000000001" y="153.82308845577214"/>
