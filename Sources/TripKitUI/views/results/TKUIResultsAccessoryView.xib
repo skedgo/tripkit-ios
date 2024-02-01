@@ -10,37 +10,27 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIResultsAccessoryView" customModule="TripKitUI" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yLd-hK-EAw">
-                    <rect key="frame" x="16" y="0.0" width="343" height="40"/>
+                    <rect key="frame" x="16" y="0.0" width="343" height="54"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
-                            <rect key="frame" x="0.0" y="5" width="281" height="30"/>
+                            <rect key="frame" x="0.0" y="5" width="281" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="kdY-T8-uu1"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="mVN-1E-4zv"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="Arriving at 9:00 am"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="kdY-T8-uu1"/>
-                                </mask>
-                            </variation>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvC-c0-UQp">
-                            <rect key="frame" x="289" y="5" width="54" height="30"/>
+                            <rect key="frame" x="289" y="5" width="54" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="r3e-9o-yan"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="pm4-78-V1A"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="Options"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="r3e-9o-yan"/>
-                                </mask>
-                            </variation>
                         </button>
                     </subviews>
                 </stackView>
@@ -55,13 +45,16 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="bottomConstraint" destination="ldf-o5-SCS" id="jP1-29-G67"/>
                 <outlet property="stackView" destination="yLd-hK-EAw" id="hBe-Ih-EDb"/>
                 <outlet property="timeButton" destination="MLD-Td-WnO" id="9gE-eM-VJL"/>
+                <outlet property="timeHeightConstraint" destination="mVN-1E-4zv" id="JhM-cv-8WD"/>
                 <outlet property="trailingConstraint" destination="ZJs-Ia-0Ls" id="NUf-dp-Iv8"/>
                 <outlet property="trailingConstraintNew" destination="4JJ-Os-gVC" id="922-El-hzl"/>
                 <outlet property="transportButton" destination="XvC-c0-UQp" id="7Dc-gb-srY"/>
+                <outlet property="transportHeightConstraint" destination="pm4-78-V1A" id="VAa-6K-qrn"/>
             </connections>
-            <point key="canvasLocation" x="136.80000000000001" y="153.82308845577214"/>
+            <point key="canvasLocation" x="136.80000000000001" y="160.11994002998503"/>
         </view>
     </objects>
 </document>

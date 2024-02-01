@@ -15,8 +15,11 @@ class TKUIResultsAccessoryView: UIView {
   @IBOutlet var stackView: UIStackView!
   @IBOutlet weak var timeButton: UIButton!
   @IBOutlet weak var transportButton: UIButton!
+  @IBOutlet var timeHeightConstraint: NSLayoutConstraint!
+  @IBOutlet var transportHeightConstraint: NSLayoutConstraint!
   @IBOutlet var trailingConstraint: NSLayoutConstraint!
   @IBOutlet var trailingConstraintNew: NSLayoutConstraint!
+  @IBOutlet var bottomConstraint: NSLayoutConstraint!
   
   static func instantiate() -> TKUIResultsAccessoryView {
     let bundle = Bundle(for: self)
@@ -41,12 +44,18 @@ class TKUIResultsAccessoryView: UIView {
       // Align buttons to leading edge
       trailingConstraint.isActive = false
       trailingConstraintNew.isActive = true
+      timeHeightConstraint.isActive = false
+      transportHeightConstraint.isActive = false
+      bottomConstraint.constant = 6
 
     } else {
       // Use full space for buttons
       trailingConstraint.isActive = true
       trailingConstraintNew.isActive = false
-      
+      timeHeightConstraint.isActive = true
+      transportHeightConstraint.isActive = true
+      bottomConstraint.constant = 0
+
       self.backgroundColor = backgroundColor
     }
     
