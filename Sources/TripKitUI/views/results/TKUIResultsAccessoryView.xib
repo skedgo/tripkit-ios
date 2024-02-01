@@ -17,11 +17,11 @@
                     <rect key="frame" x="16" y="0.0" width="343" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLD-Td-WnO">
-                            <rect key="frame" x="0.0" y="6.5" width="290" height="27"/>
+                            <rect key="frame" x="0.0" y="5" width="281" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="kdY-T8-uu1"/>
                             </constraints>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="Arriving at 9:00 am"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -30,11 +30,11 @@
                             </variation>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvC-c0-UQp">
-                            <rect key="frame" x="298" y="6.5" width="45" height="27"/>
+                            <rect key="frame" x="289" y="5" width="54" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="r3e-9o-yan"/>
                             </constraints>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="Options"/>
                             <variation key="default">
                                 <mask key="constraints">

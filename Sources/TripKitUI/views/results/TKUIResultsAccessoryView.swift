@@ -57,7 +57,7 @@ class TKUIResultsAccessoryView: UIView {
   
   private func style(_ button: UIButton, title: String? = nil, systemImageName: String, imagePlacement: NSDirectionalRectEdge, highlight: Bool = false) {
     
-    let config = UIImage.SymbolConfiguration(textStyle: .caption1, scale: .default)
+    let config = UIImage.SymbolConfiguration(textStyle: .subheadline, scale: .default)
     button.setImage(.init(systemName: systemImageName, withConfiguration: config), for: .normal)
     
     let foregroundColor = UIColor { traits in
@@ -76,7 +76,7 @@ class TKUIResultsAccessoryView: UIView {
       config.imagePlacement = imagePlacement
       config.titleTextAttributesTransformer = .init { container in
         var updated = container
-        updated.font = highlight ? TKStyleManager.semiboldCustomFont(forTextStyle: .caption1) : TKStyleManager.customFont(forTextStyle: .caption1)
+        updated.font = highlight ? TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline) : TKStyleManager.customFont(forTextStyle: .subheadline)
         return updated
       }
       button.configuration = config
@@ -92,7 +92,7 @@ class TKUIResultsAccessoryView: UIView {
     } else {
       // Legacy style - Highlight not supported
       
-      button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .caption1)
+      button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
       button.titleLabel?.adjustsFontForContentSizeCategory = true
       
       timeButton.tintColor = foregroundColor
