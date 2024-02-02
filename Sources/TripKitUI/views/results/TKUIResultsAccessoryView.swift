@@ -132,6 +132,12 @@ class TKUIResultsAccessoryView: UIView {
   
   func setTransport(isOpen: Bool) {
     style(transportButton, title: Loc.Transport, systemImageName: isOpen ? "chevron.up" : "chevron.down", imagePlacement: .trailing)
+    
+    if isOpen {
+      transportButton.accessibilityTraits.insert(.selected)
+    } else {
+      transportButton.accessibilityTraits.remove(.selected)
+    }
   }
   
   func hideTransportButton() {
