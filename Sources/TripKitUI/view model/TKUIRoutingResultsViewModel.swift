@@ -254,7 +254,7 @@ class TKUIRoutingResultsViewModel {
   
   let originDestination: Driver<(origin: String?, destination: String?)>
   
-  let timeTitle: Driver<String>
+  let timeTitle: Driver<(text: String, highlight: Bool)>
   
   let availableModes: Driver<AvailableModes>
   
