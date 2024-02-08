@@ -113,11 +113,12 @@ class TKUIResultsAccessoryView: UIView {
   
   override func layoutSubviews() {
     // We switch dynamically to vertical layout if the natural size doesn't
-    // fit horizontally OR if the time button is taller than wide.
+    // fit horizontally OR if the either button is taller than wide.
     let timeSize = timeButton.intrinsicContentSize
     let transportSize = transportButton.intrinsicContentSize
     let fits = timeSize.width + transportSize.width + 32 < frame.width
             && timeSize.height < timeSize.width * 1.1
+            && transportSize.height < transportSize.width * 1.1
     stackView.axis = fits ? .horizontal : .vertical
     
     super.layoutSubviews()
