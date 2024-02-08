@@ -501,6 +501,27 @@ extension TKUIRoutingResultsCard {
 }
 
 extension TKUIRoutingResultsCard: UITableViewDelegate {
+
+  typealias FooterContent = TKUIResultsSectionFooterView.Content
+  
+  private func footer(for sectionIndex: Int) -> FooterContent? {
+    // progress cell does not need a footer
+    let items = dataSource.sectionModels[sectionIndex].items
+    guard let firstTrip = items.first?.trip else {
+      return nil
+    }
+
+    let section = dataSource.sectionModels[sectionIndex]
+    var content = FooterContent(action: section.action)
+    if items.count == 1, let info = firstTrip.availabilityInfo {
+      content.cost = info
+      content.isWarning = true
+    } else if controller?.traitCollection.preferredContentSizeCategory.isAccessibilityCategory != true {
+      content.cost = TKUITripCell.Formatter.costString(costs: section.costs)
+      content.costAccessibility = TKUITripCell.Formatter.costAccessibilityLabel(costs: section.costs)
+    }
+    return content
+  }
   
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TKUIResultsSectionFooterView.reuseIdentifier) as? TKUIResultsSectionFooterView else {
@@ -508,54 +529,24 @@ extension TKUIRoutingResultsCard: UITableViewDelegate {
       return nil
     }
    
-    // progress cell does not need a footer
-    guard dataSource.sectionModels[section].items.first?.trip != nil else {
-      return nil
-    }
-
-    let section = dataSource.sectionModels[section]
-    if controller?.traitCollection.preferredContentSizeCategory.isAccessibilityCategory == true {
-      footerView.cost = nil
-      footerView.costLabel.accessibilityLabel = nil
-    } else {
-      footerView.cost = TKUITripCell.Formatter.costString(costs: section.costs)
-      footerView.costLabel.accessibilityLabel = TKUITripCell.Formatter.costAccessibilityLabel(costs: section.costs)
-    }
-    
-    if let buttonContent = section.action {
-      footerView.button.isHidden = false
-      footerView.button.setTitle(buttonContent.title, for: .normal)
-      footerView.button.rx.tap
-        .subscribe(onNext: { [unowned tappedSectionButton] in
-          tappedSectionButton.onNext(buttonContent.payload)
-        })
-        .disposed(by: footerView.disposeBag)
-
-    } else {
-      footerView.button.isHidden = true
+    guard let content = footer(for: section) else { return nil }
+    footerView.configure(content) { [unowned tappedSectionButton] action in
+      tappedSectionButton.onNext(action.payload)
     }
     
     return footerView
   }
   
   public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return getFooterHeight(from: section)
+    let content = footer(for: section)
+    return TKUIResultsSectionFooterView.height(for: content, maxWidth: tableView.frame.width)
   }
   
   public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-    return getFooterHeight(from: section)
+    let content = footer(for: section)
+    return TKUIResultsSectionFooterView.height(for: content, maxWidth: tableView.frame.width)
   }
   
-  private func getFooterHeight(from section: Int) -> CGFloat {
-    if dataSource.sectionModels[section].items.first?.trip == nil {
-      return .leastNonzeroMagnitude
-    } else {
-      let sizingFooter = TKUIResultsSectionFooterView.forSizing
-      let size = sizingFooter.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-      return size.height
-    }
-  }
-
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let section = dataSource.sectionModels[section]
     guard let content = section.badge?.footerContent else {

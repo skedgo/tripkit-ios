@@ -11,6 +11,13 @@ import Foundation
 extension Trip: DataAttachable {}
 
 extension Trip {
+  /// Additional information when a trip is not available, e.g., due to missing the booking window or
+  /// it being cancelled. This is localised and meant to be user-facing.
+  public var availabilityInfo: String? {
+    get { decodePrimitive(String.self, key: "availabilityInfo") }
+    set { encodePrimitive(newValue, key: "availabilityInfo") }
+  }
+
   public var bundleId: String? {
     get { decodePrimitive(String.self, key: "bundleId") }
     set { encodePrimitive(newValue, key: "bundleId") }
