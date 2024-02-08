@@ -740,9 +740,9 @@ external state.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSiSbAJ_xq_So6UIViewCtScMYcctcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:priority:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSiSbAJ_xq_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>priority:<wbr>handler:<wbr>)</a>
+                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority9isEnabled7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSiS2bAK_xq_So6UIViewCtScMYcctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:priority:isEnabled:handler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority9isEnabled7handlerACyxq_GSS_SSSgSo7UIImageCAA0dE5StyleOSiS2bAK_xq_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>priority:<wbr>isEnabled:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -763,6 +763,7 @@ external state.</p>
   <span class="nv">icon</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
   <span class="nv">style</span><span class="p">:</span> <span class="kt"><a href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">normal</span><span class="p">,</span>
   <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nv">isEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
   <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">TKUICardAction</span><span class="o">&lt;</span><span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
 <span class="p">)</span></code></pre>
 
@@ -835,6 +836,18 @@ external state.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>isEnabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Set to <code>false</code> to show the button but disable it</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>handler</em>
                                 </code>
                               </td>
@@ -853,9 +866,9 @@ external state.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgSiyx_q_So6UIViewCtScMYcctcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:priority:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgSiyx_q_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>priority:<wbr>handler:<wbr>)</a>
+                    <a name="/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority9isEnabled7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgSiSbyx_q_So6UIViewCtScMYcctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(title:accessibilityLabel:icon:style:priority:isEnabled:handler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC5title18accessibilityLabel4icon5style8priority9isEnabled7handlerACyxq_GSSyc_SSycSgSo7UIImageCycAA0dE5StyleOycSgSiSbyx_q_So6UIViewCtScMYcctcfc">init(title:<wbr>accessibilityLabel:<wbr>icon:<wbr>style:<wbr>priority:<wbr>isEnabled:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -878,6 +891,7 @@ external state.</p>
   <span class="nv">icon</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span><span class="p">,</span>
   <span class="nv">style</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/TKUICardActionStyle.html">TKUICardActionStyle</a></span><span class="p">)?</span>  <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
   <span class="nv">priority</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nv">isEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
   <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">Card</span><span class="p">,</span> <span class="kt">Model</span><span class="p">,</span> <span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
 <span class="p">)</span></code></pre>
 
@@ -944,6 +958,18 @@ external state.</p>
                               <td>
                                 <div>
                                   <p>Priority of action to determine ordering in a list</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isEnabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Set to <code>false</code> to show the button but disable it</p>
                                 </div>
                               </td>
                             </tr>
@@ -1103,6 +1129,33 @@ external state.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:9TripKitUI14TKUICardActionC9isEnabledSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isEnabled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9TripKitUI14TKUICardActionC9isEnabledSbvp">isEnabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:9TripKitUI14TKUICardActionC8prioritySivp"></a>
                     <a name="//apple_ref/swift/Property/priority" class="dashAnchor"></a>
                     <a class="token" href="#/s:9TripKitUI14TKUICardActionC8prioritySivp">priority</a>
@@ -1170,7 +1223,7 @@ toggle actions such as adding or removing a reminder or favourite).</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2024 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2024-02-02)</p>
+      <p>&copy; 2024 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2024-02-08)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

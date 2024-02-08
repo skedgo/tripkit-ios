@@ -6498,1008 +6498,1015 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 68,
+      "line": 66,
+      "symbol": "TKAPI.Trip.availabilityInfo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
+      "line": 69,
       "symbol": "TKAPI.TripAvailability",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 69,
+      "line": 70,
       "symbol": "TKAPI.TripAvailability.missedPrebookingWindow",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 70,
+      "line": 71,
       "symbol": "TKAPI.TripAvailability.canceled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 73,
+      "line": 74,
       "symbol": "TKAPI.SegmentReference",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 74,
+      "line": 75,
       "symbol": "TKAPI.SegmentReference.segmentTemplateHashCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 75,
+      "line": 76,
       "symbol": "TKAPI.SegmentReference.startTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 76,
+      "line": 77,
       "symbol": "TKAPI.SegmentReference.endTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 77,
+      "line": 78,
       "symbol": "TKAPI.SegmentReference.timesAreRealTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 78,
+      "line": 79,
       "symbol": "TKAPI.SegmentReference.alertHashCodes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 80,
+      "line": 81,
       "symbol": "TKAPI.SegmentReference.bookingHashCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 83,
+      "line": 84,
       "symbol": "TKAPI.SegmentReference.serviceTripID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 84,
+      "line": 85,
       "symbol": "TKAPI.SegmentReference.serviceColor",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 85,
+      "line": 86,
       "symbol": "TKAPI.SegmentReference.frequency",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 86,
+      "line": 87,
       "symbol": "TKAPI.SegmentReference.lineName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 87,
+      "line": 88,
       "symbol": "TKAPI.SegmentReference.direction",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 88,
+      "line": 89,
       "symbol": "TKAPI.SegmentReference.number",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 89,
+      "line": 90,
       "symbol": "TKAPI.SegmentReference.bicycleAccessible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 90,
+      "line": 91,
       "symbol": "TKAPI.SegmentReference.wheelchairAccessible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 91,
+      "line": 92,
       "symbol": "TKAPI.SegmentReference.startPlatform",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 92,
+      "line": 93,
       "symbol": "TKAPI.SegmentReference.endPlatform",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 93,
+      "line": 94,
       "symbol": "TKAPI.SegmentReference.serviceStops",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 94,
+      "line": 95,
       "symbol": "TKAPI.SegmentReference.ticketWebsite",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 95,
+      "line": 96,
       "symbol": "TKAPI.SegmentReference.ticket",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 96,
+      "line": 97,
       "symbol": "TKAPI.SegmentReference.timetableStartTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 97,
+      "line": 98,
       "symbol": "TKAPI.SegmentReference.timetableEndTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 98,
+      "line": 99,
       "symbol": "TKAPI.SegmentReference.realTimeStatus",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 101,
+      "line": 102,
       "symbol": "TKAPI.SegmentReference.realTimeVehicle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 102,
+      "line": 103,
       "symbol": "TKAPI.SegmentReference.realTimeVehicleAlternatives",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 103,
+      "line": 104,
       "symbol": "TKAPI.SegmentReference.sharedVehicle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 104,
+      "line": 105,
       "symbol": "TKAPI.SegmentReference.vehicleUUID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 137,
+      "line": 138,
       "symbol": "TKAPI.SegmentTemplate",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 138,
+      "line": 139,
       "symbol": "TKAPI.SegmentTemplate.hashCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 139,
+      "line": 140,
       "symbol": "TKAPI.SegmentTemplate.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 140,
+      "line": 141,
       "symbol": "TKAPI.SegmentTemplate.visibility",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 141,
+      "line": 142,
       "symbol": "TKAPI.SegmentTemplate.modeIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 142,
+      "line": 143,
       "symbol": "TKAPI.SegmentTemplate.modeInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 144,
+      "line": 145,
       "symbol": "TKAPI.SegmentTemplate.action",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 145,
+      "line": 146,
       "symbol": "TKAPI.SegmentTemplate.notes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 146,
+      "line": 147,
       "symbol": "TKAPI.SegmentTemplate.localCost",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 147,
+      "line": 148,
       "symbol": "TKAPI.SegmentTemplate.operatorInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 148,
+      "line": 149,
       "symbol": "TKAPI.SegmentTemplate.notifications",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 153,
+      "line": 154,
       "symbol": "TKAPI.SegmentTemplate.location",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 154,
+      "line": 155,
       "symbol": "TKAPI.SegmentTemplate.hasCarParks",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 157,
+      "line": 158,
       "symbol": "TKAPI.SegmentTemplate.bearing",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 158,
+      "line": 159,
       "symbol": "TKAPI.SegmentTemplate.from",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 159,
+      "line": 160,
       "symbol": "TKAPI.SegmentTemplate.to",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 162,
+      "line": 163,
       "symbol": "TKAPI.SegmentTemplate.metres",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 163,
+      "line": 164,
       "symbol": "TKAPI.SegmentTemplate.metresSafe",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 164,
+      "line": 165,
       "symbol": "TKAPI.SegmentTemplate.metresUnsafe",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 165,
+      "line": 166,
       "symbol": "TKAPI.SegmentTemplate.metresDismount",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 166,
+      "line": 167,
       "symbol": "TKAPI.SegmentTemplate.durationWithoutTraffic",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 167,
+      "line": 168,
       "symbol": "TKAPI.SegmentTemplate.mapTiles",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 168,
+      "line": 169,
       "symbol": "TKAPI.SegmentTemplate.turnByTurn",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 169,
+      "line": 170,
       "symbol": "TKAPI.SegmentTemplate.streets",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 172,
+      "line": 173,
       "symbol": "TKAPI.SegmentTemplate.stopCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 173,
+      "line": 174,
       "symbol": "TKAPI.SegmentTemplate.endStopCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 174,
+      "line": 175,
       "symbol": "TKAPI.SegmentTemplate.operatorName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 175,
+      "line": 176,
       "symbol": "TKAPI.SegmentTemplate.operatorID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 176,
+      "line": 177,
       "symbol": "TKAPI.SegmentTemplate.isContinuation",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 177,
+      "line": 178,
       "symbol": "TKAPI.SegmentTemplate.shapes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 214,
+      "line": 215,
       "symbol": "TKAPI.SegmentVisibility",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 215,
+      "line": 216,
       "symbol": "TKAPI.SegmentVisibility.inSummary",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 216,
+      "line": 217,
       "symbol": "TKAPI.SegmentVisibility.onMap",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 217,
+      "line": 218,
       "symbol": "TKAPI.SegmentVisibility.inDetails",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 218,
+      "line": 219,
       "symbol": "TKAPI.SegmentVisibility.hidden",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 230,
+      "line": 231,
       "symbol": "TKAPI.SegmentType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 231,
+      "line": 232,
       "symbol": "TKAPI.SegmentType.scheduled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 232,
+      "line": 233,
       "symbol": "TKAPI.SegmentType.unscheduled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 233,
+      "line": 234,
       "symbol": "TKAPI.SegmentType.stationary",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 244,
+      "line": 245,
       "symbol": "TKAPI.TripNotification",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 245,
+      "line": 246,
       "symbol": "TKAPI.TripNotification.Kind",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 246,
+      "line": 247,
       "symbol": "TKAPI.TripNotification.Kind.circle(center:radius:trigger:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 247,
+      "line": 248,
       "symbol": "TKAPI.TripNotification.Kind.time(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 248,
+      "line": 249,
       "symbol": "TKAPI.TripNotification.Kind.pushNotification",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 287,
+      "line": 288,
       "symbol": "TKAPI.TripNotification.Trigger",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 288,
+      "line": 289,
       "symbol": "TKAPI.TripNotification.Trigger.onEnter",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 289,
+      "line": 290,
       "symbol": "TKAPI.TripNotification.Trigger.onExit",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 292,
+      "line": 293,
       "symbol": "TKAPI.TripNotification.MessageKind",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 293,
+      "line": 294,
       "symbol": "TKAPI.TripNotification.MessageKind.tripStart",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 294,
+      "line": 295,
       "symbol": "TKAPI.TripNotification.MessageKind.vehicleIsApproaching",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 295,
+      "line": 296,
       "symbol": "TKAPI.TripNotification.MessageKind.arrivingAtYourStop",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 296,
+      "line": 297,
       "symbol": "TKAPI.TripNotification.MessageKind.nextStopIsYours",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 297,
+      "line": 298,
       "symbol": "TKAPI.TripNotification.MessageKind.tripEnd",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 300,
+      "line": 301,
       "symbol": "TKAPI.TripNotification.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 301,
+      "line": 302,
       "symbol": "TKAPI.TripNotification.kind",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 302,
+      "line": 303,
       "symbol": "TKAPI.TripNotification.messageKind",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 303,
+      "line": 304,
       "symbol": "TKAPI.TripNotification.messageTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 304,
+      "line": 305,
       "symbol": "TKAPI.TripNotification.messageBody",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 307,
+      "line": 308,
       "symbol": "TKAPI.SegmentShape",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 308,
+      "line": 309,
       "symbol": "TKAPI.SegmentShape.encodedWaypoints",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 310,
+      "line": 311,
       "symbol": "TKAPI.SegmentShape.modeInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 311,
+      "line": 312,
       "symbol": "TKAPI.SegmentShape.travelled",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 314,
+      "line": 315,
       "symbol": "TKAPI.SegmentShape.serviceTripID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 315,
+      "line": 316,
       "symbol": "TKAPI.SegmentShape.serviceColor",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 316,
+      "line": 317,
       "symbol": "TKAPI.SegmentShape.frequency",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 317,
+      "line": 318,
       "symbol": "TKAPI.SegmentShape.lineName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 318,
+      "line": 319,
       "symbol": "TKAPI.SegmentShape.direction",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 319,
+      "line": 320,
       "symbol": "TKAPI.SegmentShape.number",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 320,
+      "line": 321,
       "symbol": "TKAPI.SegmentShape.bicycleAccessible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 321,
+      "line": 322,
       "symbol": "TKAPI.SegmentShape.wheelchairAccessible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 322,
+      "line": 323,
       "symbol": "TKAPI.SegmentShape.operatorName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 323,
+      "line": 324,
       "symbol": "TKAPI.SegmentShape.operatorID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 324,
+      "line": 325,
       "symbol": "TKAPI.SegmentShape.routeID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 325,
+      "line": 326,
       "symbol": "TKAPI.SegmentShape.stops",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 328,
+      "line": 329,
       "symbol": "TKAPI.SegmentShape.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 329,
+      "line": 330,
       "symbol": "TKAPI.SegmentShape.dismount",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 330,
+      "line": 331,
       "symbol": "TKAPI.SegmentShape.hop",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 331,
+      "line": 332,
       "symbol": "TKAPI.SegmentShape.metres",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 332,
+      "line": 333,
       "symbol": "TKAPI.SegmentShape.cyclingNetwork",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 333,
+      "line": 334,
       "symbol": "TKAPI.SegmentShape.safe",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 334,
+      "line": 335,
       "symbol": "TKAPI.SegmentShape.instruction",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 335,
+      "line": 336,
       "symbol": "TKAPI.SegmentShape.roadTags",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 364,
+      "line": 365,
       "symbol": "TKAPI.ShapeStop",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 365,
+      "line": 366,
       "symbol": "TKAPI.ShapeStop.lat",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 366,
+      "line": 367,
       "symbol": "TKAPI.ShapeStop.lng",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 367,
+      "line": 368,
       "symbol": "TKAPI.ShapeStop.code",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 368,
+      "line": 369,
       "symbol": "TKAPI.ShapeStop.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 369,
+      "line": 370,
       "symbol": "TKAPI.ShapeStop.shortName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 371,
+      "line": 372,
       "symbol": "TKAPI.ShapeStop.arrival",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 372,
+      "line": 373,
       "symbol": "TKAPI.ShapeStop.departure",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 373,
+      "line": 374,
       "symbol": "TKAPI.ShapeStop.relativeArrival",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 374,
+      "line": 375,
       "symbol": "TKAPI.ShapeStop.relativeDeparture",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 375,
+      "line": 376,
       "symbol": "TKAPI.ShapeStop.bearing",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 376,
+      "line": 377,
       "symbol": "TKAPI.ShapeStop.wheelchairAccessible",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 379,
+      "line": 380,
       "symbol": "TKAPI.ShapeInstruction",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 380,
+      "line": 381,
       "symbol": "TKAPI.ShapeInstruction.headTowards",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 381,
+      "line": 382,
       "symbol": "TKAPI.ShapeInstruction.continueStraight",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 382,
+      "line": 383,
       "symbol": "TKAPI.ShapeInstruction.turnSlightyLeft",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 383,
+      "line": 384,
       "symbol": "TKAPI.ShapeInstruction.turnLeft",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 384,
+      "line": 385,
       "symbol": "TKAPI.ShapeInstruction.turnSharplyLeft",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 385,
+      "line": 386,
       "symbol": "TKAPI.ShapeInstruction.turnSlightlyRight",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 386,
+      "line": 387,
       "symbol": "TKAPI.ShapeInstruction.turnRight",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 387,
+      "line": 388,
       "symbol": "TKAPI.ShapeInstruction.turnSharplyRight",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 392,
+      "line": 393,
       "symbol": "TKAPI.TripNotification",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 394,
+      "line": 395,
       "symbol": "TKAPI.TripNotification.CodingKeys",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 395,
+      "line": 396,
       "symbol": "TKAPI.TripNotification.CodingKeys.id",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 396,
+      "line": 397,
       "symbol": "TKAPI.TripNotification.CodingKeys.kind",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 397,
+      "line": 398,
       "symbol": "TKAPI.TripNotification.CodingKeys.messageKind",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 398,
+      "line": 399,
       "symbol": "TKAPI.TripNotification.CodingKeys.messageTitle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 399,
+      "line": 400,
       "symbol": "TKAPI.TripNotification.CodingKeys.messageBody",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 402,
+      "line": 403,
       "symbol": "TKAPI.TripNotification.CodingKeys.center",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 403,
+      "line": 404,
       "symbol": "TKAPI.TripNotification.CodingKeys.radius",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 404,
+      "line": 405,
       "symbol": "TKAPI.TripNotification.CodingKeys.trigger",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/RoutingAPIModel.swift",
-      "line": 407,
+      "line": 408,
       "symbol": "TKAPI.TripNotification.CodingKeys.time",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -10320,21 +10327,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+Data.swift",
-      "line": 14,
+      "line": 21,
       "symbol": "Trip.bundleId",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+Data.swift",
-      "line": 25,
+      "line": 32,
       "symbol": "Trip.subscribeURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+Data.swift",
-      "line": 30,
+      "line": 37,
       "symbol": "Trip.unsubscribeURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
