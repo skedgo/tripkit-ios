@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TKServiceTiming: Equatable {
+public enum TKServiceTiming: Hashable {
   case timetabled(arrival: Date?, departure: Date?)
   case frequencyBased(frequency: TimeInterval, start: Date?, end: Date?, totalTravelTime: TimeInterval?)
 }

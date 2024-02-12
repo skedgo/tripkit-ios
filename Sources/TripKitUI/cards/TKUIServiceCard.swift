@@ -20,13 +20,17 @@ import TripKit
 /// highlights where to get off.
 public class TKUIServiceCard: TKUITableCard {
   
+  typealias DataSource = UITableViewDiffableDataSource<TKUIServiceViewModel.Section, TKUIServiceViewModel.Item>
+  
   public static var config = Configuration.empty
   
   private var dataInput: TKUIServiceViewModel.DataInput
   private var viewModel: TKUIServiceViewModel!
+  private var dataSource: DataSource!
   private let serviceMapManager: TKUIServiceMapManager
   private let disposeBag = DisposeBag()
   
+  private let itemSelected = PublishSubject<TKUIServiceViewModel.Item>()
   private let scrollToTopPublisher = PublishSubject<Void>()
   private let toggleHeaderPublisher = PublishSubject<Bool>()
   private let showAlertsPublisher = PublishSubject<Void>()
@@ -113,19 +117,18 @@ public class TKUIServiceCard: TKUITableCard {
     
     tableView.register(TKUIServiceVisitCell.nib, forCellReuseIdentifier: TKUIServiceVisitCell.reuseIdentifier)
     
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUIServiceViewModel.Section>(
-      configureCell: { ds, tv, ip, item in
-        let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
-        cell.configure(with: item)
-        return cell
-      }
-    )
+    let dataSource = DataSource(tableView: tableView) { tv, ip, item in
+      let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
+      cell.configure(with: item)
+      return cell
+    }
+    self.dataSource = dataSource
     
     // Build the view model
     
     viewModel = TKUIServiceViewModel(
       dataInput: dataInput,
-      itemSelected: selectedItem(in: tableView, dataSource: dataSource)
+      itemSelected: itemSelected.asAssertingSignal()
     )
     
     serviceMapManager.viewModel = viewModel
@@ -187,22 +190,21 @@ public class TKUIServiceCard: TKUITableCard {
       .disposed(by: disposeBag)
 
     viewModel.sections
-      .drive(tableView.rx.items(dataSource: dataSource))
+      .drive { [weak self, weak tableView] sections in
+        guard let self, let tableView else { return }
+        self.applySnapshot(for: sections) { [weak tableView] isInitial in
+          // When initially populating, scroll to the first embarkation
+          guard
+            let tableView,
+            isInitial,
+            let embarkation = TKUIServiceViewModel.embarkationIndexPath(in: sections)
+          else { return }
+          tableView.scrollToRow(at: embarkation, at: .top, animated: false)
+        }
+      }
       .disposed(by: disposeBag)
     
     // Additional customisations
-    
-    // When initially populating, scroll to the top, but wait a little
-    // while to give the table view a chance to populate itself
-    viewModel.sections
-      .asObservable()
-      .compactMap(TKUIServiceViewModel.embarkationIndexPath)
-      .take(1)
-      .delay(.milliseconds(250), scheduler: MainScheduler.instance)
-      .subscribe(onNext: { [weak tableView] indexPath in
-        tableView?.scrollToRow(at: indexPath, at: .top, animated: false)
-      })
-      .disposed(by: disposeBag)
     
     scrollToTopPublisher
       .withLatestFrom(viewModel.sections)
@@ -222,6 +224,20 @@ public class TKUIServiceCard: TKUITableCard {
     super.didAppear(animated: animated)
     
     TKUIEventCallback.handler(.cardAppeared(self))
+  }
+  
+  private func applySnapshot(for sections: [(TKUIServiceViewModel.Section, [TKUIServiceViewModel.Item])], completion: @escaping (Bool) -> Void) {
+    let isInitial = dataSource.snapshot().numberOfItems == 0
+    
+    var snapshot = NSDiffableDataSourceSnapshot<TKUIServiceViewModel.Section, TKUIServiceViewModel.Item>()
+    snapshot.appendSections(sections.map(\.0))
+    for section in sections {
+      snapshot.appendItems(section.1, toSection: section.0)
+    }
+    
+    dataSource.apply(snapshot, animatingDifferences: isInitial) {
+      completion(isInitial)
+    }
   }
   
 }
@@ -286,6 +302,11 @@ extension TKUIServiceCard: UITableViewDelegate {
     
     scrollToTopPublisher.onNext(())
     return false
+  }
+  
+  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+    itemSelected.onNext(item)
   }
   
 }
