@@ -57,7 +57,7 @@ extension TKUIServiceViewModel {
     
     let items = embarkation.service
       .visitsIncludingContinuation()
-      .map { Item($0, embarkation: embarkation, disembarkation: disembarkation) }
+      .compactMap { Item($0, embarkation: embarkation, disembarkation: disembarkation) }
     
     return [Section(items: items)]
   }
@@ -81,7 +81,12 @@ extension Service {
 }
 
 extension TKUIServiceViewModel.Item {
-  fileprivate init(_ visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
+  fileprivate init?(_ visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
+    guard
+      let service = visit.service,
+      let embarkationService = embarkation.service,
+      let stop = visit.stop
+    else { return nil }
     
     var isVisited = visit >= embarkation
     if let disembarkation = disembarkation, isVisited {
@@ -90,9 +95,9 @@ extension TKUIServiceViewModel.Item {
     
     // Important to use service from `embarkation`, not the one from `visit`,
     // as `visit.service` might be a continuation of `embarkation.service`
-    let sortedVisits = embarkation.service.visitsIncludingContinuation()
+    let sortedVisits = embarkationService.visitsIncludingContinuation()
 
-    let serviceColor = visit.service.color ?? .black
+    let serviceColor = service.color ?? .black
 
     let topConnectionColor: UIColor?
     if visit == sortedVisits.first {
@@ -110,7 +115,7 @@ extension TKUIServiceViewModel.Item {
     
     self.init(
       dataModel: visit,
-      title: visit.stop.title ?? visit.stop.stopCode,
+      title: stop.title ?? stop.stopCode,
       timing: visit.timing,
       timeZone: visit.timeZone,
       realTimeStatus: visit.realTimeStatus,

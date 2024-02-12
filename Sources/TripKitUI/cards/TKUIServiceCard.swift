@@ -199,8 +199,8 @@ public class TKUIServiceCard: TKUITableCard {
       .compactMap(TKUIServiceViewModel.embarkationIndexPath)
       .take(1)
       .delay(.milliseconds(250), scheduler: MainScheduler.instance)
-      .subscribe(onNext: { indexPath in
-        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+      .subscribe(onNext: { [weak tableView] indexPath in
+        tableView?.scrollToRow(at: indexPath, at: .top, animated: false)
       })
       .disposed(by: disposeBag)
     
