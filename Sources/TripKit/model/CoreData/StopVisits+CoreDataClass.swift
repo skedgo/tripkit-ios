@@ -176,7 +176,7 @@ extension StopVisits {
     self.timing = timing
   }
   
-  public enum RealTime: Equatable {
+  public enum RealTime: Hashable {
     /// We don't have real-time for this kind of service
     case notApplicable
     
