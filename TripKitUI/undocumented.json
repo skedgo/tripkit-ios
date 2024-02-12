@@ -877,29 +877,36 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 23,
+      "line": 25,
       "symbol": "TKUIServiceCard.config",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 273,
+      "line": 275,
       "symbol": "TKUIServiceCard.tableView(_:viewForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 277,
+      "line": 279,
       "symbol": "TKUIServiceCard.tableView(_:heightForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 282,
+      "line": 284,
       "symbol": "TKUIServiceCard.scrollViewShouldScrollToTop(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
+      "line": 293,
+      "symbol": "TKUIServiceCard.tableView(_:didSelectRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -3796,7 +3803,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITimePickerSheet.swift",
-      "line": 261,
+      "line": 260,
       "symbol": "TKUITimePickerSheet.tappedOverlay(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
