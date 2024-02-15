@@ -299,7 +299,7 @@
 "Showing %@ of %@ transport modes" = "Liste %1$@ des modes de transport %2$@";
 
 /* Title of page or button to sign in */
-"Sign in" = "S'identifier";
+"Sign in" = "Se connecter";
 
 /* Instruction for signing out user account */
 "Sign out" = "Se déconnecter";
@@ -315,6 +315,9 @@
 
 /* Sports utility vehicle abbreviation */
 "SUV" = "4x4";
+
+/* Accessibility hint for routing results screen. */
+"Tap to change start and end locations" = "Appuyez pour modifier les points de départ et d'arrivée";
 
 /* Tap to set location. (old key: SetLocation) */
 "Tap to set location" = "Appuyer pour définir la position";

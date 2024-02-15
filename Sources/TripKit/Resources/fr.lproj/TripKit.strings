@@ -43,6 +43,12 @@
 /* Number of stops before you get off a stop, if there's just 1 stop. */
 "1 stop" = "1 arrêt";
 
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"About to arrive at the final destination" = "Vous êtes sur le point d'arriver à la destination finale";
+
+/* Action button to turn on alerts for a trip */
+"Alert Me" = "M'alerter";
+
 /* No comment provided by engineer. */
 "Alerts" = "Alertes";
 
@@ -52,8 +58,8 @@
 /* Instruction to follow unnamed street */
 "Along unnamed street" = "Le long d'une rue sans nom";
 
-/* Action button title to see alternative options for the case where you cant make the next connection */
-"Alternative routes" = "Itinéraires alternatifs";
+/* Action button title to see alternative options, e.g., for the case where you can't make the next connection */
+"Alternatives" = "Alternatives";
 
 /* apple maps directions action */
 "Apple Maps" = "Apple Maps";
@@ -107,6 +113,9 @@
 /* Text for vehicle of type: Car */
 "Car" = "Voiture";
 
+/* Title of page to change the from/to of the routing results */
+"Change Route" = "Changer d'itinéraire";
+
 /* Trip badge: Cheapest */
 "Cheapest" = "Le moins cher";
 
@@ -115,6 +124,9 @@
 
 /* Error title when server could not find a given transit stop. */
 "Could not find transit stop." = "Impossible de trouver l'arrêt intermédiaire.";
+
+/* Title for button to customise the home card */
+"Customise home" = "Personnaliser l'accueil";
 
 /* Text for attributing data sources. The list of providers will be used instead of '%@' */
 "Data provided by %@" = "Données fournies par %@";
@@ -127,6 +139,9 @@
 
 /* Destination of the bus */
 "Direction" = "Direction";
+
+/* Status indicator that a mode is not enabled */
+"Disabled" = "Désactivé";
 
 /* To disconnect/unlink from a service provider, e.g., Uber */
 "Disconnect" = "Se déconnecter";
@@ -145,6 +160,12 @@
 
 /* As in 'this bus/train is empty' */
 "Empty" = "Vide";
+
+/* Status indicator that a mode is enabled */
+"Enabled" = "Activé";
+
+/* Action button title to plan a route ending at this location */
+"End Here" = "Terminer ici";
 
 /* Placeholder name for destination (then replaced with address or name) */
 "End location" = "Destination";
@@ -185,8 +206,17 @@
 /* Action button title for getting turn-by-turn directions */
 "Get directions" = "Obtenir les itinéraires";
 
+/* Description of section for trip notifications, such as 'time to get off' alerts */
+"Get notifications when:" = "Recevez des notifications quand :";
+
 /* Instruction to get a service towards provided destination */
 "Get on service to %@" = "Monter en direction de %@";
+
+/* Title of notification for an upcoming trip */
+"Get ready to leave" = "Se préparer à partir";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Getting within 500m of the disembarkation stop" = "Vous vous trouvez à moins de 500 m du point de débarquement";
 
 /* Title of button to start a trip */
 "Go" = "Allez";
@@ -196,9 +226,6 @@
 
 /* Trip badge: Greenest */
 "Greenest" = "Le plus vert";
-
-/* Trip badge: Healthiest */
-"Healthiest" = "Plus sain";
 
 /* First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime) */
 "I'll arrive at %@ at %@" = "J'arriverai à %1$@ à %2$@";
@@ -243,6 +270,9 @@
 /* Leave ASAP/now option */
 "Leave now" = "Partir maintenant";
 
+/* Title of button to show fewer results */
+"Less" = "Moins";
+
 /* As in 'this bus/train is so full, there's only limited standing room' */
 "Limited standing room only" = "Places debout limitées";
 
@@ -251,6 +281,9 @@
 
 /* As in 'this bus/train has many seats available' */
 "Many seats available" = "De nombreux sièges disponibles";
+
+/* No comment provided by engineer. */
+"Map by %@" = "Carte par %@";
 
 /* Title of button to show additional results */
 "More" = "Plus";
@@ -261,11 +294,20 @@
 /* 'More results' section in autocompletion */
 "More results" = "Plus de résultats";
 
+/* Trip badge: Most Active */
+"Most Active" = "Le plus actif";
+
 /* Text for vehicle of type: Moto Scooter */
 "Moto Scooter" = "Scooter";
 
 /* Text for vehicle of type: Motorbike */
 "Motorbike" = "Moto";
+
+/* Action button to turn off alerts for a trip */
+"Mute" = "Mettre en sourdine";
+
+/* Title for the 'Near Me'/Nearby card */
+"Near Me" = "Proche de moi";
 
 /* Indicating no trips have been planned within the next 24 hrs */
 "No planned trips" = "Pas de voyages planifiés";
@@ -282,14 +324,23 @@
 /* Indicator to show when a service is on time according to real-time data. */
 "On time" = "À l'heure";
 
+/* Indicating no return trip is required. */
+"One-way only" = "Aller simple uniquement";
+
 /* Action title open app of name '@%' */
 "Open %@" = "Ouvrir %@";
 
 /* Title for button that opens an external app. */
 "Open app" = "Ouvrir l'application";
 
+/* Action button title for opening something in another app. Tapping this button will show a list of app names. */
+"Open in…" = "Ouvrir dans…";
+
 /* Title for opening hours */
 "Opening Hours" = "Heures d’ouverture";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Passed by the previous stop" = "L'arrêt précédent a été dépassé";
 
 /* Title for button that allows users to plan a new trip */
 "Plan a new trip" = "Planifier un nouveau trajet";
@@ -300,11 +351,14 @@
 /* Title of page to plan a trip */
 "Plan Trip" = "Planifier un Trajet";
 
+/* Confirmation text to open app of name '@%' */
+"Please confirm switching to %@ to get directions." = "Veuillez confirmer le passage à %@ pour obtenir des directions.";
+
 /* No comment provided by engineer. */
 "Powered by" = "Réalisé avec";
 
 /* No comment provided by engineer. */
-"Powered by %@" = "Réalisé avec %@";
+"Powered by %@" = "Réalisé avec %s";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Jour férié";
@@ -329,6 +383,9 @@
 
 /* Label to indicate that the time for a service is the scheduled time, i.e., displayed as on the timetable with no real-time data available. */
 "Scheduled" = "Prévu";
+
+/* No comment provided by engineer. */
+"Search for destination" = "Rechercher une destination";
 
 /* Error recovery suggestion for when when server could not find a given transit stop. */
 "Search for this stop again or try again later.." = "Rechercher cet arrêt ou réessayer plus tard ..";
@@ -363,11 +420,23 @@
 /* Title of button to start a trip (primarily after pausing) */
 "Start" = "Départ";
 
+/* Action button title to plan a route starting at this location */
+"Start Here" = "Commencer ici";
+
 /* Placeholder name for origin (then replaced with address or name) */
 "Start location" = "Lieu de départ";
 
 /* Text for vehicle of type: SUV */
 "SUV" = "4x4";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"The trip is about to start" = "Le trajet va commencer";
+
+/* Notification message for a trip. Provided is %time you need to leave. */
+"Time to leave! Your trip commences at %@" = "C'est l'heure de partir ! Votre voyage commence à %@";
+
+/* Notification message for a trip. Provided is %destination and %time you need to leave. */
+"Time to leave! Your trip to %@ commences at %@" = "Il est l'heure de partir ! Votre trajet vers %1$@ commence à %2$@";
 
 /* Title of button to access timetable */
 "Timetable" = "Calendrier";
@@ -384,6 +453,9 @@
 /* Title for trip of provided index */
 "Trip %@" = "Trajet :";
 
+/* Title with section for trip notifications, such as 'time to get off' alerts */
+"Trip Notifications" = "Notifications de trajet";
+
 /* Title of page that shows routing results */
 "Trips" = "Trajets";
 
@@ -393,14 +465,20 @@
 /* Indicating the wheelchair/cycling friendliness of a path is unknown */
 "Unknown" = "À déterminer";
 
+/* Title for button that unlocks a shared vehicle. */
+"Unlock" = "Déverrouiller";
+
 /* Vehicle updated. (old key: VehicleUpdated) */
 "Updated %@ ago" = "Mis à jour il y a %@";
 
-/* Title for showing the details of vehicle */
+/* Title for showing the details of vehicle; also used for vehicle of unspecified type */
 "Vehicle" = "Véhicule";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "Véhicule %1$@ mis à jour il y a %2$@";
+
+/* Generic description of this type of trip notification. The actual notification text will be specific to the trip. */
+"Vehicle is approaching your boarding stop" = "Le véhicule approche votre point d'embarquement";
 
 /* Title for showing the number of available vehicles (e.g., scooters, cars or bikes) */
 "Vehicles" = "Véhicules";
@@ -410,6 +488,9 @@
 
 /* No comment provided by engineer. */
 "We'll keep you updated with the latest transit alerts here" = "Nous vous tiendrons informés des dernières alertes du service des transports";
+
+/* Description of a what3words address, which is an addressing-sytem alternative to GPS or regular addresses based on 3 word pairs, e.g., 'gazed-across-like`. */
+"what3words address" = "adresse What3words";
 
 /* Alert if service running late/early, meaning that the user might not make the next service */
 "You might not make this transfer." = "Vous n'aurez peut-être pas la possibilité de prendre cette correspondance.";
