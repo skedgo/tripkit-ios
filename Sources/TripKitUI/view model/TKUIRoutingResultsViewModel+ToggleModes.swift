@@ -84,6 +84,16 @@ extension TKUIRoutingResultsViewModel {
     if newWheelchairOn {
       newEnabled.insert(TKTransportMode.wheelchair.modeIdentifier)
       newEnabled.remove(TKTransportMode.walking.modeIdentifier)
+      
+      // Also disable modes unlikely to use on wheelchair/pram
+      // Cycling, micromobility, and motorbike
+      newEnabled.remove(TKTransportMode.bicycle.modeIdentifier)
+      newEnabled.remove(TKTransportMode.bicycleShared.modeIdentifier)
+      newEnabled.remove(TKTransportMode.bicycleDeprecated.modeIdentifier)
+      newEnabled.remove(TKTransportMode.bikeShareDeprecated.modeIdentifier)
+      newEnabled.remove(TKTransportMode.motorbike.modeIdentifier)
+      newEnabled.remove(TKTransportMode.micromobility.modeIdentifier)
+      newEnabled.remove(TKTransportMode.micromobilityShared.modeIdentifier)
     } else {
       newEnabled.insert(TKTransportMode.walking.modeIdentifier)
       newEnabled.remove(TKTransportMode.wheelchair.modeIdentifier)
