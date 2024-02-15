@@ -60,11 +60,6 @@ extension TKUIRoutingResultsViewModel {
     // check this first, in case that TKSettings messes with it
     let oldWheelchairOn = TKSettings.showWheelchairInformation
 
-    // handle regular modes
-    var hidden = all.map(\.identifier)
-    hidden.removeAll(where: enabled.contains)
-    TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
-    
     // handle toggling wheelchair on and off
     let newWheelchairOn: Bool
     switch (enabled.contains(TKTransportMode.wheelchair.modeIdentifier), enabled.contains(TKTransportMode.walking.modeIdentifier)) {
@@ -73,6 +68,11 @@ extension TKUIRoutingResultsViewModel {
     case (false, true): newWheelchairOn = false
     }
     guard newWheelchairOn != oldWheelchairOn else {
+      // handle regular modes
+      var hidden = all.map(\.identifier)
+      hidden.removeAll(where: enabled.contains)
+      TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
+      
       // no changes in wheelchair preference, so just return the
       // existing `enabled`.
       return AvailableModes(available: all, enabled: Set(enabled))
@@ -98,6 +98,11 @@ extension TKUIRoutingResultsViewModel {
       newEnabled.insert(TKTransportMode.walking.modeIdentifier)
       newEnabled.remove(TKTransportMode.wheelchair.modeIdentifier)
     }
+    
+    var hidden = all.map(\.identifier)
+    hidden.removeAll(where: newEnabled.contains)
+    TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
+    
     return AvailableModes(available: all, enabled: newEnabled)
   }
   
