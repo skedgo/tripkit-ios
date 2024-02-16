@@ -34,18 +34,7 @@ extension TKUIRoutingResultsViewModel {
       
     let enabledModes: Set<String>
     if mutable {
-      let enabled = TKSettings.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all.map { $0.identifier })
-      var newEnabled = Set(enabled)
-      
-      if TKSettings.showWheelchairInformation {
-        newEnabled.insert(TKTransportMode.wheelchair.modeIdentifier)
-        newEnabled.remove(TKTransportMode.walking.modeIdentifier)
-      } else {
-        newEnabled.insert(TKTransportMode.walking.modeIdentifier)
-        newEnabled.remove(TKTransportMode.wheelchair.modeIdentifier)
-      }
-      enabledModes = newEnabled
-    
+      enabledModes = TKSettings.adjustedEnabledModeIdentifiers(all.map(\.identifier))
     } else {
       // Make sure we enable all the modes, to not hide any results
       enabledModes = request.trips.reduce(into: Set()) { $0.formUnion($1.usedModeIdentifiers) }
@@ -57,14 +46,31 @@ extension TKUIRoutingResultsViewModel {
   static func updateAvailableModes(enabled: [String]?, request: TripRequest?) -> AvailableModes? {
     guard let enabled = enabled, let all = request.map(Self.modes(for:)) else { return nil }
 
+    let adjusted = TKSettings.updateAdjustedEnabledModeIdentifiers(enabled: enabled, all: all.map(\.identifier))
+    return AvailableModes(available: all, enabled: adjusted)
+  }
+  
+}
+
+extension TKSettings {
+  static func adjustedEnabledModeIdentifiers(_ all: [String]) -> Set<String> {
+    let enabled = TKSettings.orderedEnabledModeIdentifiersForAvailableModeIdentifiers(all)
+    var adjusted = Set(enabled)
+    
+    if TKSettings.showWheelchairInformation {
+      adjusted.insert(TKTransportMode.wheelchair.modeIdentifier)
+      adjusted.remove(TKTransportMode.walking.modeIdentifier)
+    } else {
+      adjusted.insert(TKTransportMode.walking.modeIdentifier)
+      adjusted.remove(TKTransportMode.wheelchair.modeIdentifier)
+    }
+    return adjusted
+  }
+  
+  static func updateAdjustedEnabledModeIdentifiers(enabled: [String], all: [String]) -> Set<String> {
     // check this first, in case that TKSettings messes with it
     let oldWheelchairOn = TKSettings.showWheelchairInformation
 
-    // handle regular modes
-    var hidden = all.map(\.identifier)
-    hidden.removeAll(where: enabled.contains)
-    TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
-    
     // handle toggling wheelchair on and off
     let newWheelchairOn: Bool
     switch (enabled.contains(TKTransportMode.wheelchair.modeIdentifier), enabled.contains(TKTransportMode.walking.modeIdentifier)) {
@@ -73,9 +79,14 @@ extension TKUIRoutingResultsViewModel {
     case (false, true): newWheelchairOn = false
     }
     guard newWheelchairOn != oldWheelchairOn else {
+      // handle regular modes
+      var hidden = all
+      hidden.removeAll(where: enabled.contains)
+      TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
+      
       // no changes in wheelchair preference, so just return the
       // existing `enabled`.
-      return AvailableModes(available: all, enabled: Set(enabled))
+      return Set(enabled)
     }
     
     TKSettings.showWheelchairInformation = newWheelchairOn
@@ -84,11 +95,24 @@ extension TKUIRoutingResultsViewModel {
     if newWheelchairOn {
       newEnabled.insert(TKTransportMode.wheelchair.modeIdentifier)
       newEnabled.remove(TKTransportMode.walking.modeIdentifier)
+      
+      // Also disable modes unlikely to use on wheelchair/pram
+      // Cycling, micromobility, and motorbike
+      newEnabled.remove(TKTransportMode.bicycle.modeIdentifier)
+      newEnabled.remove(TKTransportMode.bicycleShared.modeIdentifier)
+      newEnabled.remove(TKTransportMode.bicycleDeprecated.modeIdentifier)
+      newEnabled.remove(TKTransportMode.bikeShareDeprecated.modeIdentifier)
+      newEnabled.remove(TKTransportMode.motorbike.modeIdentifier)
+      newEnabled.remove(TKTransportMode.micromobility.modeIdentifier)
+      newEnabled.remove(TKTransportMode.micromobilityShared.modeIdentifier)
     } else {
       newEnabled.insert(TKTransportMode.walking.modeIdentifier)
       newEnabled.remove(TKTransportMode.wheelchair.modeIdentifier)
     }
-    return AvailableModes(available: all, enabled: newEnabled)
+    
+    var hidden = all
+    hidden.removeAll(where: newEnabled.contains)
+    TKSettings.updateTransportModesWithEnabledOrder(nil, hidden: Set(hidden))
+    return newEnabled
   }
-  
 }
