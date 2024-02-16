@@ -302,8 +302,6 @@ extension TKSettings {
     update(hiddenModeIdentifiers, forKey: .hidden, modeIdentifier: modeIdentifier, include: hidden)
   }
   
-  
-  
   private static func update(_ identifiers: Set<String>, forKey key: DefaultsKey, modeIdentifier: String, include: Bool) {
     var modes = identifiers
     
@@ -316,11 +314,20 @@ extension TKSettings {
     UserDefaults.shared.set(Array(modes), forKey: key.rawValue)
   }
   
-  public static var hiddenModeIdentifiers: Set<String> {
-    if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [String] {
-      return Set(hidden)
-    } else {
-      return [TKTransportMode.schoolBuses.modeIdentifier]
+  public static internal(set) var hiddenModeIdentifiers: Set<String> {
+    get {
+      if let hidden = UserDefaults.shared.object(forKey: DefaultsKey.hidden.rawValue) as? [String] {
+        return Set(hidden)
+      } else {
+        return [TKTransportMode.schoolBuses.modeIdentifier]
+      }
+    }
+    set {
+      if newValue.isEmpty {
+        UserDefaults.shared.removeObject(forKey: DefaultsKey.hidden.rawValue)
+      } else {
+        UserDefaults.shared.set(Array(newValue), forKey: DefaultsKey.hidden.rawValue)
+      }
     }
   }
   
@@ -349,7 +356,11 @@ extension TKSettings {
       }
     }
     set {
-      UserDefaults.shared.set(Array(newValue), forKey: DefaultsKey.disliked.rawValue)
+      if newValue.isEmpty {
+        UserDefaults.shared.removeObject(forKey: DefaultsKey.disliked.rawValue)
+      } else {
+        UserDefaults.shared.set(Array(newValue), forKey: DefaultsKey.disliked.rawValue)
+      }
     }
   }
   
