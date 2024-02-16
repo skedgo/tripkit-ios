@@ -17362,70 +17362,70 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 319,
+      "line": 317,
       "symbol": "TKSettings.hiddenModeIdentifiers",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 331,
+      "line": 338,
       "symbol": "TKSettings",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 333,
+      "line": 340,
       "symbol": "TKSettings.setTransitMode(_:asDisliked:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 343,
+      "line": 350,
       "symbol": "TKSettings.dislikedTransitModes",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 360,
+      "line": 371,
       "symbol": "TKSettings",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 362,
+      "line": 373,
       "symbol": "TKSettings.update(pickedModes:allModes:)",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 387,
+      "line": 398,
       "symbol": "TKSettings",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 398,
+      "line": 409,
       "symbol": "TKSettings.clearEmissions()",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 402,
+      "line": 413,
       "symbol": "TKSettings.transportEmissions",
       "symbol_kind": "source.lang.swift.decl.var.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKSettings.swift",
-      "line": 410,
+      "line": 421,
       "symbol": "TKSettings",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
