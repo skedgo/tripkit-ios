@@ -57,7 +57,7 @@ extension TKAlertAPIAlertClassWrapper: TKAlert {
 
 // MARK: -
 
-class TKUIAlertViewController: UITableViewController {
+public class TKUIAlertViewController: UITableViewController {
   
   weak var alertControllerDelegate: TKUIAlertViewControllerDelegate?
   
@@ -65,7 +65,7 @@ class TKUIAlertViewController: UITableViewController {
   
   private let disposeBag = DisposeBag()
   
-  func setAlerts(_ alerts: [TKAPI.Alert]) {
+  public func setAlerts(_ alerts: [TKAPI.Alert]) {
     self.alerts = alerts.map(TKAlertAPIAlertClassWrapper.init)
   }
   
@@ -96,7 +96,7 @@ class TKUIAlertViewController: UITableViewController {
   
   // MARK: - View lifecycle
   
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
     
     self.title = Loc.Alerts
@@ -108,7 +108,7 @@ class TKUIAlertViewController: UITableViewController {
     tableView.separatorStyle = .none
   }
   
-  override func viewWillAppear(_ animated: Bool) {
+  public override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     if let navigator = navigationController,
@@ -118,7 +118,7 @@ class TKUIAlertViewController: UITableViewController {
     }
   }
   
-  override func viewDidAppear(_ animated: Bool) {
+  public override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
     TKUIEventCallback.handler(.screenAppeared(name: "Alerts", controller: self))
@@ -130,15 +130,15 @@ class TKUIAlertViewController: UITableViewController {
   
   // MARK: - UITableViewDataSource
   
-  override func numberOfSections(in tableView: UITableView) -> Int {
+  public override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return sortedAlerts.count
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard indexPath.row < sortedAlerts.count else {
       preconditionFailure("Index path refers to a non-existent alert")
     }
@@ -162,7 +162,7 @@ class TKUIAlertViewController: UITableViewController {
   
   // MARK: - Table view delegate
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.row < sortedAlerts.count else {
       return
     }

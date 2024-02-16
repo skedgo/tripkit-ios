@@ -218,7 +218,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIProgressCell.nib, forCellReuseIdentifier: TKUIProgressCell.reuseIdentifier)
-    tableView.register(TKUICompactAlertCell.self, forCellReuseIdentifier: TKUICompactAlertCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
 
@@ -445,11 +444,11 @@ extension TKUIRoutingResultsCard {
       tripCell.accessibilityTraits = .button
       return tripCell
     
-    case .advisory(let alert):
-      let advisoryCell = tableView.dequeueReusableCell(withIdentifier: TKUICompactAlertCell.reuseIdentifier, for: indexPath) as! TKUICompactAlertCell
-      advisoryCell.configure(alert)
-      advisoryCell.accessibilityTraits = .button
-      return advisoryCell
+    case .customItem(let item):
+      guard let provider = TKUIRoutingResultsCard.config.customItemProvider else {
+        assertionFailure(); return UITableViewCell()
+      }
+      return provider.cell(for: item, tableView: tableView, indexPath: indexPath)
     }
   }
   
@@ -696,10 +695,8 @@ private extension TKUIRoutingResultsCard {
         controller.push(TKUITripsPageCard(highlighting: trip))
       }
       
-    case .showAlert(let alert):
-      let alerter = TKUIAlertViewController(style: .plain)
-      alerter.alerts = [TKAlertAPIAlertClassWrapper(alert: alert)]
-      controller.present(alerter, inNavigator: true)
+    case .showCustomItem(let item):
+      TKUIRoutingResultsCard.config.customItemProvider?.show(item, presenter: controller)
       
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)

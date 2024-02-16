@@ -122,13 +122,18 @@ class TKUIRoutingResultsViewModel {
     }
     fetchProgress = progress
     
-    let advisory = Self.fetchAdvisory(for: requestToShow)
-      .observe(on: MainScheduler.instance)
+    let customItem: Observable<TKUIRoutingResultsCard.CustomItem?>
+    if let provider = TKUIRoutingResultsCard.config.customItemProvider {
+      customItem = provider.item(for: Observable.combineLatest(requestToShow, tripGroupsChanged.map(\.0)) { ($0, $1) })
+        .observe(on: MainScheduler.instance)
+    } else {
+      customItem = .empty()
+    }
 
     realTimeUpdate = Self.fetchRealTimeUpdates(for: tripGroupsChanged.map(\.0))
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = Self.buildSections(tripGroupsChanged, inputs: inputs, progress: progress.asObservable(), advisory: advisory)
+    sections = Self.buildSections(tripGroupsChanged, inputs: inputs, progress: progress.asObservable(), customItem: customItem)
       .asDriver(onErrorJustReturn: [])
 
     let selection = mapInput.tappedMapRoute.startOptional() // default selection
@@ -303,7 +308,7 @@ class TKUIRoutingResultsViewModel {
 extension TKUIRoutingResultsViewModel {
   enum Next {
     case showTrip(Trip)
-    case showAlert(TKAPI.Alert)
+    case showCustomItem(TKUIRoutingResultsCard.CustomItem)
     case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
     case showLocation(MKAnnotation, mode: SearchMode?)
     case presentModeConfigurator(modes: [String], region: TKRegion)
@@ -312,7 +317,7 @@ extension TKUIRoutingResultsViewModel {
     
     init?(selection: Item) {
       switch selection {
-      case .advisory(let alert): self = .showAlert(alert)
+      case .customItem(let customItem): self = .showCustomItem(customItem)
       case .trip(let trip): self = .showTrip(trip)
       default: return nil
       }
