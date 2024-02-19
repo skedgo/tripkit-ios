@@ -56,6 +56,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   private weak var errorView: UIView?
+  private weak var tableView: UITableView?
   
   private let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
@@ -169,6 +170,8 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     guard let mapManager = mapManager as? TKUIRoutingResultsMapManagerType else { preconditionFailure() }
     
+    self.tableView = tableView
+    
     // Build the view model
     
     let searchTriggers = Observable.merge([
@@ -220,6 +223,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     tableView.register(TKUIProgressCell.nib, forCellReuseIdentifier: TKUIProgressCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
+    TKUIRoutingResultsCard.config.customItemProvider?.registerCell(with: tableView)
 
     tableView.backgroundColor = .tkBackgroundGrouped
     tableView.separatorStyle = .none
@@ -697,7 +701,10 @@ private extension TKUIRoutingResultsCard {
       
     case .showCustomItem(let item):
       TKUIRoutingResultsCard.config.customItemProvider?.show(item, presenter: controller)
-      
+      if let tableView, let selection = tableView.indexPathForSelectedRow {
+        tableView.deselectRow(at: selection, animated: true)
+      }
+
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       

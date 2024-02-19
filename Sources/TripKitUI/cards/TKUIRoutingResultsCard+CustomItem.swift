@@ -19,7 +19,7 @@ public protocol TKUIRoutingResultsCustomItemProvider {
   func item(for results: Observable<(TripRequest, [TripGroup])>) -> Observable<TKUIRoutingResultsCard.CustomItem?>
 
   @MainActor
-  func registerCell(for tableView: UITableView)
+  func registerCell(with tableView: UITableView)
   
   @MainActor
   func cell(for item: TKUIRoutingResultsCard.CustomItem, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
@@ -28,9 +28,9 @@ public protocol TKUIRoutingResultsCustomItemProvider {
   func show(_ item: TKUIRoutingResultsCard.CustomItem, presenter: TGCardViewController)
 }
 
-extension TKUIRoutingResultsCustomItemProvider {
+public extension TKUIRoutingResultsCustomItemProvider {
   @MainActor
-  func registerCell(for tableView: UITableView) {}
+  func registerCell(with tableView: UITableView) {}
 }
 
 extension TKUIRoutingResultsCard {
