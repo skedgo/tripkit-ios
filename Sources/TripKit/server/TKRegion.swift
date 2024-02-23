@@ -135,16 +135,18 @@ public class TKRegion : NSObject, Codable {
     guard let simplePolygon = simplePolygon else { return true }
     
     let needle = Polygon(
-      pairs: [
+      points: [
         MKMapPoint(x: mapRect.minX, y: mapRect.minY),
         MKMapPoint(x: mapRect.minX, y: mapRect.maxY),
         MKMapPoint(x: mapRect.maxX, y: mapRect.maxY),
         MKMapPoint(x: mapRect.maxX, y: mapRect.minY),
       ]
       .map(\.coordinate)
-      .map { ($0.latitude, $0.longitude) }
+      .map { Point(latitude: $0.latitude, longitude: $0.longitude) }
     )
-    return simplePolygon.contains(needle) || simplePolygon.intersects(needle)
+    return simplePolygon.contains(needle)
+        || needle.contains(simplePolygon)
+        || simplePolygon.intersects(needle)
   }
   
   // MARK: Codable
