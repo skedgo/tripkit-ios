@@ -16277,21 +16277,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRegion.swift",
-      "line": 203,
+      "line": 205,
       "symbol": "TKInternationalRegion",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRegion.swift",
-      "line": 215,
+      "line": 217,
       "symbol": "TKInternationalRegion.init(from:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKRegion.swift",
-      "line": 219,
+      "line": 221,
       "symbol": "TKInternationalRegion.contains(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
