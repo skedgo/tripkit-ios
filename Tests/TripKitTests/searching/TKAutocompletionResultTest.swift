@@ -149,5 +149,22 @@ final class TKAutocompletionResultTest: XCTestCase {
     score = TKAutocompletionResult.nameScore(searchTerm: "mc", candidate:"Melbourne Cricket")
     XCTAssertEqual(score.score, 0) // abbreviation is too short
   }
+  
+  func testRanges() {
+    XCTAssertEqual(
+      TKAutocompletionResult.nameScore(searchTerm: "that", candidate:"This & That").ranges.first,
+      .init(location: 7, length: 4)
+    )
+    
+    XCTAssertEqual(
+      TKAutocompletionResult.nameScore(searchTerm: "this", candidate:"This & That").ranges.first,
+      .init(location: 0, length: 4)
+    )
+    
+    XCTAssertEqual(
+      TKAutocompletionResult.nameScore(searchTerm: "that", candidate:"This is not that").ranges.first,
+      .init(location: 12, length: 4)
+    )
+  }
 
 }
