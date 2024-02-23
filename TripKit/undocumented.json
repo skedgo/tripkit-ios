@@ -15108,7 +15108,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAutocompletionResult+Score.swift",
-      "line": 172,
+      "line": 177,
       "symbol": "TKAutocompletionResult.rangedScore(for:min:max:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
