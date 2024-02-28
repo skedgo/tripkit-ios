@@ -91,24 +91,30 @@ extension TKAutocompletionResult {
       return 90
     }
     
+    func nsRange(of string: String) -> NSRange? {
+      let haystack = fullCandidate.lowercased()
+      let needle = string.lowercased()
+      let range = (haystack as NSString).range(of: needle)
+      return  range.location == NSNotFound ? nil : range
+    }
+    
     // exact phrase matches
     let excess = candidate.utf8.count - target.utf8.count
     if let range = candidate.range(of: target) {
-      let nsRange = NSRange(location: candidate.distance(from: candidate.startIndex, to: range.lowerBound), length: target.utf8.count)
       if range.lowerBound == candidate.startIndex {
         // matches right at start
-        return .init(score: score(100, penalty: excess, min: 75), ranges: [nsRange])
+        return .init(score: score(100, penalty: excess, min: 75), ranges: [nsRange(of: target)].compactMap({$0}))
       }
       
       let before = candidate[candidate.index(before: range.lowerBound)]
       if before.isWhitespace {
         // matches beginning of word
         let offset = candidate.distance(from: candidate.startIndex, to: range.lowerBound)
-        return .init(score: score(75, penalty: offset * 2 + excess, min: 33), ranges: [nsRange])
+        return .init(score: score(75, penalty: offset * 2 + excess, min: 33), ranges: [nsRange(of: target)].compactMap({$0}))
         
       } else {
         // in-word match
-        return .init(score: score(25, penalty: excess, min: 5), ranges: [nsRange])
+        return .init(score: score(25, penalty: excess, min: 5), ranges: [nsRange(of: target)].compactMap({$0}))
       }
     }
     
@@ -118,10 +124,9 @@ extension TKAutocompletionResult {
     var ranges: [NSRange] = []
     for word in targetWords {
       if let match = candidate.range(of: word) {
-        ranges.append(NSRange(
-          location: candidate.distance(from: candidate.startIndex, to: match.lowerBound),
-          length: word.utf8.count
-        ))
+        if let nsRange = nsRange(of: word) {
+          ranges.append(nsRange)
+        }
         
         if match.lowerBound >= lastMatch {
           // still in order, keep going
