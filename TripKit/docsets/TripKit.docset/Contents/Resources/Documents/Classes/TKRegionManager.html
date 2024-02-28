@@ -982,7 +982,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">loadRegionsFromCache</span><span class="p">()</span> <span class="n">async</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">loadRegionsFromCache</span><span class="p">()</span> <span class="k">async</span></code></pre>
 
                         </div>
                       </div>
@@ -1430,7 +1430,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(impliedModeIdentifiers:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">impliedModeIdentifiers</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">impliedModes</span><span class="p">(</span><span class="n">byModeIdentifer</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
@@ -1461,7 +1461,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(dependentModeIdentifiers:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">dependentModeIdentifiers</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">dependentModeIdentifier</span><span class="p">(</span><span class="n">forModeIdentifier</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
@@ -1547,7 +1547,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(imageURLForModeIdentifier:ofIconType:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">imageURLForModeIdentifier</span><span class="p">:</span><span class="nv">ofIconType</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">imageURL</span><span class="p">(</span><span class="n">forModeIdentifier</span> <span class="nv">mode</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">iconType</span><span class="p">:</span> <span class="kt"><a href="../Enums/TKStyleModeIconType.html">TKStyleModeIconType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URL</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1615,7 +1615,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(coordinateIsPartOfAnyRegion:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">coordinateIsPartOfAnyRegion</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">coordinateIsPartOfAnyRegion</span><span class="p">(</span><span class="n">_</span> <span class="nv">coordinate</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
@@ -1643,7 +1643,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(mapRectIntersectsAnyRegion:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">mapRectIntersectsAnyRegion</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">mapRectIntersectsAnyRegion</span><span class="p">(</span><span class="n">_</span> <span class="nv">mapRect</span><span class="p">:</span> <span class="kt">MKMapRect</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
@@ -1683,7 +1683,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(regionContainingCoordinateRegion:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">regionContainingCoordinateRegion</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">region</span><span class="p">(</span><span class="n">containing</span> <span class="nv">region</span><span class="p">:</span> <span class="kt">MKCoordinateRegion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span></code></pre>
 
                         </div>
@@ -1715,7 +1715,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(localRegionsForStart:andEnd:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">localRegionsForStart</span><span class="p">:</span><span class="nv">andEnd</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegions</span><span class="p">(</span><span class="nv">start</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">]</span></code></pre>
 
                         </div>
@@ -1780,7 +1780,7 @@ one for the end coordinates).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(localRegionsOverlappingCoordinateRegion:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">localRegionsOverlappingCoordinateRegion</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegions</span><span class="p">(</span><span class="n">overlapping</span> <span class="nv">region</span><span class="p">:</span> <span class="kt">MKCoordinateRegion</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">]</span></code></pre>
 
                         </div>
@@ -1811,7 +1811,7 @@ one for the end coordinates).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(localRegionsContainingCoordinate:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">localRegionsContainingCoordinate</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegions</span><span class="p">(</span><span class="n">containing</span> <span class="nv">coordinate</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
@@ -1862,8 +1862,8 @@ provided coordinate</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, renamed: "localRegion(code:﹚")</span>
-<span class="kd">@objc(localRegionWithName:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">renamed</span><span class="p">:</span> <span class="s">"localRegion(code:﹚"</span><span class="p">)</span>
+<span class="kd">@objc</span><span class="p">(</span><span class="nv">localRegionWithName</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">localRegion</span><span class="p">(</span><span class="n">named</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="p">?</span></code></pre>
 
                         </div>
@@ -1963,7 +1963,7 @@ provided coordinate</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(regionContainingCoordinate:andOther:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">regionContainingCoordinate</span><span class="p">:</span><span class="nv">andOther</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">region</span><span class="p">(</span><span class="n">containing</span> <span class="nv">first</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">,</span> <span class="n">_</span> <span class="nv">second</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span></code></pre>
 
                         </div>
@@ -2026,7 +2026,7 @@ international region instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(timeZoneForCoordinate:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">timeZoneForCoordinate</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">timeZone</span><span class="p">(</span><span class="k">for</span> <span class="nv">coordinate</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">TimeZone</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -2078,7 +2078,7 @@ return <code>nil</code> if the coordinate falls outside any supported region.</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(cityNearestToCoordinate:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">cityNearestToCoordinate</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">city</span><span class="p">(</span><span class="n">nearestTo</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span><span class="o">.</span><span class="kt">City</span><span class="p">?</span></code></pre>
 
                         </div>
@@ -2210,7 +2210,7 @@ return <code>nil</code> if the coordinate falls outside any supported region.</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">requireRegions</span><span class="p">()</span> <span class="n">async</span> <span class="k">throws</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">requireRegions</span><span class="p">()</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -2245,7 +2245,7 @@ return <code>nil</code> if the coordinate falls outside any supported region.</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchRegions</span><span class="p">(</span><span class="nv">forced</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchRegions</span><span class="p">(</span><span class="nv">forced</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -2308,7 +2308,7 @@ return <code>nil</code> if the coordinate falls outside any supported region.</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">requireRegion</span><span class="p">(</span><span class="k">for</span> <span class="nv">coordinate</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">requireRegion</span><span class="p">(</span><span class="k">for</span> <span class="nv">coordinate</span><span class="p">:</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2339,7 +2339,7 @@ return <code>nil</code> if the coordinate falls outside any supported region.</p
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@MainActor</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">requireRegion</span><span class="p">(</span><span class="k">for</span> <span class="nv">coordinateRegion</span><span class="p">:</span> <span class="kt">MKCoordinateRegion</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">requireRegion</span><span class="p">(</span><span class="k">for</span> <span class="nv">coordinateRegion</span><span class="p">:</span> <span class="kt">MKCoordinateRegion</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TKRegion.html">TKRegion</a></span></code></pre>
 
                         </div>
                       </div>

@@ -143,7 +143,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(sharedInstance)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="n">sharedInstance</span><span class="p">)</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">TKInterAppCommunicator</span></code></pre>
 
                         </div>
@@ -310,7 +310,7 @@ both on whether there&rsquo;s a relevant handler registered for it <em>and</em> 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(canHandleExternalActions:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">canHandleExternalActions</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">canHandleExternalActions</span><span class="p">(</span><span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
@@ -462,7 +462,7 @@ there&rsquo;s a relevant handler registered for it <em>and</em> whether the devi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(handleExternalActions:presenter:initiatedBy:completionHandler:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">handleExternalActions</span><span class="p">:</span><span class="nv">presenter</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:</span><span class="nv">completionHandler</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">handleExternalActions</span><span class="p">(</span><span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">,</span> <span class="nv">presenter</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">((</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
@@ -545,7 +545,7 @@ there&rsquo;s a relevant handler registered for it <em>and</em> whether the devi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(performExternalAction:forSegment:presenter:initiatedBy:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">performExternalAction</span><span class="p">:</span><span class="nv">forSegment</span><span class="p">:</span><span class="nv">presenter</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">performExternalAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">?,</span> <span class="nv">presenter</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
@@ -710,7 +710,7 @@ there&rsquo;s a relevant handler registered for it <em>and</em> whether the devi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(canOpenInMapsApp:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">canOpenInMapsApp</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">canOpenInMapsApp</span><span class="p">(</span><span class="n">_</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
@@ -765,7 +765,7 @@ prompt for using Google Maps or Waze.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc(openSegmentInMapsApp:forViewController:initiatedBy:currentLocationHandler:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">openSegmentInMapsApp</span><span class="p">:</span><span class="nv">forViewController</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:</span><span class="nv">currentLocationHandler</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">openSegmentInMapsApp</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">,</span>
     <span class="n">forViewController</span> <span class="nv">controller</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
