@@ -15,6 +15,7 @@ import TripKit
 
 enum TKUISegmentCellHelper {
   
+  @MainActor
   static func buildView(for action: TKUICardAction<TKUITripOverviewCard, TKSegment>, model: TKSegment, for card: TKUITripOverviewCard, tintColor: UIColor, disposeBag: DisposeBag) -> UIView {
     let button = UIButton(type: .custom)
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)

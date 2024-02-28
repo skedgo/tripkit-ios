@@ -16,6 +16,7 @@ import TripKit
 
 /// View model for displaying and interacting with public
 /// transport departures from an stop (or list thereof).
+@MainActor
 class TKUITimetableViewModel: NSObject {
   
   enum Constants {

@@ -13,6 +13,7 @@ import RxCocoa
 
 import TripKit
 
+@MainActor
 class TKUISegmentDirectionsViewModel {
   
   static func canShowInstructions(for segment: TKSegment) -> Bool {

@@ -90,6 +90,7 @@ public struct TKUIHomeCardCustomizerItem {
 
 /// This protocol defines the requirements for any view models that may display
 /// their contents in a `TKUIHomeCard`.
+@MainActor
 public protocol TKUIHomeComponentViewModel {
 
   /// This builds an instance of a view model whose contents may be displayed

@@ -14,6 +14,7 @@ import RxSwift
 
 import TripKit
 
+@MainActor
 class TKUIAutocompletionViewModel {
   
   struct Section {

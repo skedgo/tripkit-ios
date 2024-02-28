@@ -19,6 +19,7 @@ import RxCocoa
 /// Can be used as a component on the home card as it implements ``TKUIHomeComponentViewModel``.
 /// The accompanying map manager is ``TKUINearbyMapManager`` and table view cell is
 /// ``TKUINearbyCell``.
+@MainActor
 public class TKUINearbyViewModel {
   
   static var homeInstance: TKUINearbyViewModel? = nil

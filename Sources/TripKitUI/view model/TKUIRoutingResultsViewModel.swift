@@ -14,6 +14,7 @@ import RxCocoa
 
 import TripKit
 
+@MainActor
 class TKUIRoutingResultsViewModel {
   
   enum SearchMode: String, Equatable, Codable {

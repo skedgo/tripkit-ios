@@ -13,6 +13,7 @@ import RxCocoa
 
 import TripKit
 
+@MainActor
 class TKUITripModeByModeViewModel {
   
   init(trip: Trip) {
