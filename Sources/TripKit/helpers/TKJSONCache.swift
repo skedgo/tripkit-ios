@@ -51,6 +51,29 @@ public class TKJSONCache: TKFileCache {
   }
 }
 
+public class TKCodableCache<Content>: TKFileCache where Content: Codable {
+  public static func read(_ id: String, directory: TKFileCacheDirectory, subdirectory: String? = nil) -> Content? {
+
+    guard let data = TKFileCache.read(id, directory: directory, subdirectory: subdirectory) else { return nil }
+    
+    do {
+      return try PropertyListDecoder().decode(Content.self, from: data)
+    } catch {
+      assertionFailure("Error while reading: \(error)")
+      return nil
+    }
+  }
+
+  public static func save(_ id: String, content: Codable, directory: TKFileCacheDirectory, subdirectory: String? = nil) {
+    do {
+      let data = try PropertyListEncoder().encode(content)
+      TKFileCache.save(id, data: data, directory: directory, subdirectory: subdirectory)
+    } catch {
+      assertionFailure("Error while saving: \(error)")
+    }
+  }
+}
+
 public class TKFileCache: NSObject {
   
   public static func read(_ id: String, directory: TKFileCacheDirectory, subdirectory: String? = nil) -> Data? {
