@@ -56,6 +56,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   private let accessoryView = TKUIResultsAccessoryView.instantiate()
   private weak var modePicker: RoutingModePicker?
   private weak var errorView: UIView?
+  private weak var tableView: UITableView?
   
   private let emptyHeader = UIView(frame: CGRect(x:0, y:0, width: 100, height: CGFloat.leastNonzeroMagnitude))
   
@@ -169,6 +170,8 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     guard let mapManager = mapManager as? TKUIRoutingResultsMapManagerType else { preconditionFailure() }
     
+    self.tableView = tableView
+    
     // Build the view model
     
     let searchTriggers = Observable.merge([
@@ -218,9 +221,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
     tableView.register(TKUIProgressCell.nib, forCellReuseIdentifier: TKUIProgressCell.reuseIdentifier)
-    tableView.register(TKUICompactAlertCell.self, forCellReuseIdentifier: TKUICompactAlertCell.reuseIdentifier)
     tableView.register(TKUIResultsSectionFooterView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionFooterView.reuseIdentifier)
     tableView.register(TKUIResultsSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: TKUIResultsSectionHeaderView.reuseIdentifier)
+    TKUIRoutingResultsCard.config.customItemProvider?.registerCell(with: tableView)
 
     tableView.backgroundColor = .tkBackgroundGrouped
     tableView.separatorStyle = .none
@@ -445,11 +448,11 @@ extension TKUIRoutingResultsCard {
       tripCell.accessibilityTraits = .button
       return tripCell
     
-    case .advisory(let alert):
-      let advisoryCell = tableView.dequeueReusableCell(withIdentifier: TKUICompactAlertCell.reuseIdentifier, for: indexPath) as! TKUICompactAlertCell
-      advisoryCell.configure(alert)
-      advisoryCell.accessibilityTraits = .button
-      return advisoryCell
+    case .customItem(let item):
+      guard let provider = TKUIRoutingResultsCard.config.customItemProvider else {
+        assertionFailure(); return UITableViewCell()
+      }
+      return provider.cell(for: item, tableView: tableView, indexPath: indexPath)
     }
   }
   
@@ -696,11 +699,12 @@ private extension TKUIRoutingResultsCard {
         controller.push(TKUITripsPageCard(highlighting: trip))
       }
       
-    case .showAlert(let alert):
-      let alerter = TKUIAlertViewController(style: .plain)
-      alerter.alerts = [TKAlertAPIAlertClassWrapper(alert: alert)]
-      controller.present(alerter, inNavigator: true)
-      
+    case .showCustomItem(let item):
+      TKUIRoutingResultsCard.config.customItemProvider?.show(item, presenter: controller)
+      if let tableView, let selection = tableView.indexPathForSelectedRow {
+        tableView.deselectRow(at: selection, animated: true)
+      }
+
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       

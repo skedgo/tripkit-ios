@@ -38,6 +38,9 @@ extension TKUIHomeCard {
     /// Hides the home card component of the matching identifier.
     case hideSection(identifier: String)
     
+    /// A custom handler that should be triggered, providing the home card view controller
+    case trigger((UIViewController) -> Void)
+    
     case success
   }
 }
@@ -60,6 +63,9 @@ extension TKUIHomeViewModel {
     /// subscribe to the `Single` that it is returning and if that emits a `true`, call
     /// refresh on the home card.
     case handleAction(handler: (UIViewController) -> Single<Bool>)
+    
+    /// A custom handler that should be triggered, providing the home card view controller
+    case trigger((UIViewController) -> Void)
   }
 
   static func buildNext(for componentActions: Signal<TKUIHomeCard.ComponentAction>, customization: Observable<[TKUIHomeCard.CustomizedItem]>) -> Signal<NextAction> {
@@ -72,6 +78,8 @@ extension TKUIHomeViewModel {
   
   static func buildNext(for componentAction: TKUIHomeCard.ComponentAction, customization: [TKUIHomeCard.CustomizedItem]) -> NextAction? {
     switch componentAction {
+    case let .trigger(handler):
+      return .trigger(handler)
     case let .push(card, selection):
       return .push(card, selection: selection)
     case let .present(controller, inNavigator):
