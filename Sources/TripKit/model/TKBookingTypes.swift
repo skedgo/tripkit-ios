@@ -229,6 +229,7 @@ public enum TKBooking {
       case title
       case value
       case values
+      case urlValue
       case minValue
       case maxValue
     }
@@ -261,8 +262,9 @@ public enum TKBooking {
         let maxValue = try container.decodeIfPresent(Int.self, forKey: .maxValue)
         value = .number(Int(rawValue) ?? 0, min: minValue, max: maxValue)
       case .terms:
-        let url = try container.decode(URL.self, forKey: .value)
-        value = .terms(url, accepted: false)
+        let accepted = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
+        let url = try container.decode(URL.self, forKey: .urlValue)
+        value = .terms(url, accepted: accepted)
       }
     }
     
@@ -284,10 +286,13 @@ public enum TKBooking {
         try container.encode(optionIds, forKey: .values)
       case .returnTripDate(let returnDate):
         try container.encode(returnDate.toString(), forKey: .value)
-      case .number(let number, let min, let max):
+      case let .number(number, min, max):
         try container.encode(String(number), forKey: .value)
         try container.encode(min, forKey: .minValue)
         try container.encode(max, forKey: .maxValue)
+      case let .terms(url, accepted):
+        try container.encode(accepted, forKey: .value)
+        try container.encode(url, forKey: .urlValue)
       }
     }
   }
