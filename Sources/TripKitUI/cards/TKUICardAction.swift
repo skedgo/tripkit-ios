@@ -36,6 +36,7 @@ import TGCardViewController
 /// }
 ///
 /// ```
+@MainActor
 open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   
   /// Initialises a new card action, which can be used to add custom buttons to a card that reflect some

@@ -16,6 +16,7 @@ import TripKit
 
 /// View model for displaying and interacting with an individual
 /// transport service.
+@MainActor
 class TKUIServiceViewModel {
   
   enum DataInput {

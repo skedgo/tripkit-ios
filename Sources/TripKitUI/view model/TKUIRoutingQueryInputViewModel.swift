@@ -16,6 +16,7 @@ import TGCardViewController
 
 import TripKit
 
+@MainActor
 class TKUIRoutingQueryInputViewModel {
   
   typealias Item = TKUIAutocompletionViewModel.Item

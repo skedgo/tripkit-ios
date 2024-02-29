@@ -96,7 +96,7 @@ extension TKInterAppCommunicator {
   ///   - presenter: A controller to present the optional action sheet on
   ///   - sender: An optional sender on which to anchor the optional action sheet
   ///   - completion: Called when any action is triggered.
-  @objc(handleExternalActions:presenter:initiatedBy:completionHandler:)
+  @MainActor @objc(handleExternalActions:presenter:initiatedBy:completionHandler:)
   public func handleExternalActions(for segment: TKSegment, presenter: UIViewController, sender: Any?, completion: ((String) -> Void)?) {
     
     let handlers = self.externalActions(for: segment)
@@ -126,7 +126,7 @@ extension TKInterAppCommunicator {
   ///   - segment: Optional segment for things like start/end locations to pass to a turn-by-turn app
   ///   - presenter: A controller to present the optional action sheet on
   ///   - sender: An optional sender on which to anchor views as required by the handler
-  @objc(performExternalAction:forSegment:presenter:initiatedBy:)
+  @MainActor @objc(performExternalAction:forSegment:presenter:initiatedBy:)
   public func performExternalAction(_ action: String, for segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     guard let handler = handlers.first(where: { $0.canHandle(action) }) else { assertionFailure(); return }
     handler.performAction(for: action, segment: segment, presenter: presenter, sender: sender)
@@ -139,6 +139,7 @@ extension TKInterAppCommunicator {
   ///   - segment: Optional segment for things like start/end locations to pass to a turn-by-turn app
   ///   - presenter: A controller to present the optional action sheet on
   ///   - sender: An optional sender on which to anchor views as required by the handler
+  @MainActor
   public func perform(_ action: ExternalAction, for segment: TKSegment?, presenter: UIViewController, sender: Any?) {
     action.handler.performAction(for: action.action, segment: segment, presenter: presenter, sender: sender)
   }

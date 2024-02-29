@@ -32,6 +32,7 @@ class TKUICardActionHandlerInfo<C, M> where C: TGCard {
   weak var container: UIView!
 }
 
+@MainActor
 struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
   let actions: [TKUICardAction<C, M>]
   let info: TKUICardActionHandlerInfo<C, M>
@@ -63,6 +64,7 @@ struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
 }
 
 @available(iOS 16.0, *)
+@MainActor
 struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
   let actions: [TKUICardAction<C, M>]
   let info: TKUICardActionHandlerInfo<C, M>
@@ -85,7 +87,7 @@ struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
   }
 }
 
-
+@MainActor
 struct TKUICardActionButton<C, M>: View where C: TGCard {
   init(action: TKUICardAction<C, M>, info: TKUICardActionHandlerInfo<C, M>, big: Bool = true, normalStyle: TKUICardActionNormalStyle) {
     self.action = action

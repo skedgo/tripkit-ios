@@ -33,7 +33,7 @@ public extension TKUITimetableCard {
     /// Set this to add a list of action buttons to a timeable card.
     ///
     /// Called when a timetable card gets presented.
-    public var timetableActionsFactory: (([TKUIStopAnnotation]) -> [Action])?
+    public var timetableActionsFactory: (@MainActor ([TKUIStopAnnotation])-> [Action])?
 
     /// This controls whether the title is visible underneath an action icon.
     ///

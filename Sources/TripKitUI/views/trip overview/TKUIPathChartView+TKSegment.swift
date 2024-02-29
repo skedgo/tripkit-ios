@@ -15,6 +15,7 @@ import class TripKit.Shape
 @available(iOS 16.0, *)
 extension TKSegment {
   
+  @MainActor
   func buildFriendliness() -> TKUIPathChartView<TKPathFriendliness>? {
     guard
       let total = distanceInMetres?.doubleValue,
@@ -33,6 +34,7 @@ extension TKSegment {
     )
   }
   
+  @MainActor
   func buildRoadTags() -> TKUIPathChartView<TripKit.Shape.RoadTag>? {
     guard let total = distanceInMetres?.doubleValue, let distanceByRoadTags else {
       return nil
