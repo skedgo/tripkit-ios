@@ -233,7 +233,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitInterApp/TKInterAppExternalActionHandler.swift",
-      "line": 30,
+      "line": 31,
       "symbol": "TKInterAppExternalActionHandler.performAction(for:segment:presenter:sender:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

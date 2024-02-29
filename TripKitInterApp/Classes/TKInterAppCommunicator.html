@@ -154,9 +154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:15TripKitInterApp07TKInterD12CommunicatorC14openURLHandleryy10Foundation3URLV_SSSo16UIViewControllerCtcvp"></a>
+                    <a name="/s:15TripKitInterApp07TKInterD12CommunicatorC14openURLHandleryy10Foundation3URLV_SSSo16UIViewControllerCtScMYccvp"></a>
                     <a name="//apple_ref/swift/Property/openURLHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15TripKitInterApp07TKInterD12CommunicatorC14openURLHandleryy10Foundation3URLV_SSSo16UIViewControllerCtcvp">openURLHandler</a>
+                    <a class="token" href="#/s:15TripKitInterApp07TKInterD12CommunicatorC14openURLHandleryy10Foundation3URLV_SSSo16UIViewControllerCtScMYccvp">openURLHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,7 +172,7 @@ website. By default just opens the webpage in Safari.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">openURLHandler</span><span class="p">:</span> <span class="p">(</span><span class="kt">URL</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">openURLHandler</span><span class="p">:</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">URL</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
@@ -182,9 +182,9 @@ website. By default just opens the webpage in Safari.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:15TripKitInterApp07TKInterD12CommunicatorC16openStoreHandleryySi_So16UIViewControllerCtcvp"></a>
+                    <a name="/s:15TripKitInterApp07TKInterD12CommunicatorC16openStoreHandleryySi_So16UIViewControllerCtScMYccvp"></a>
                     <a name="//apple_ref/swift/Property/openStoreHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15TripKitInterApp07TKInterD12CommunicatorC16openStoreHandleryySi_So16UIViewControllerCtcvp">openStoreHandler</a>
+                    <a class="token" href="#/s:15TripKitInterApp07TKInterD12CommunicatorC16openStoreHandleryySi_So16UIViewControllerCtScMYccvp">openStoreHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -199,7 +199,7 @@ website. By default just opens the webpage in Safari.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">openStoreHandler</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">openStoreHandler</span><span class="p">:</span> <span class="kd">@MainActor</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">UIViewController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
@@ -462,7 +462,8 @@ there&rsquo;s a relevant handler registered for it <em>and</em> whether the devi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">handleExternalActions</span><span class="p">:</span><span class="nv">presenter</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:</span><span class="nv">completionHandler</span><span class="p">:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">@objc</span><span class="p">(</span><span class="nv">handleExternalActions</span><span class="p">:</span><span class="nv">presenter</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:</span><span class="nv">completionHandler</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">handleExternalActions</span><span class="p">(</span><span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">,</span> <span class="nv">presenter</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">((</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
@@ -545,7 +546,8 @@ there&rsquo;s a relevant handler registered for it <em>and</em> whether the devi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="nv">performExternalAction</span><span class="p">:</span><span class="nv">forSegment</span><span class="p">:</span><span class="nv">presenter</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:)</span>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">@objc</span><span class="p">(</span><span class="nv">performExternalAction</span><span class="p">:</span><span class="nv">forSegment</span><span class="p">:</span><span class="nv">presenter</span><span class="p">:</span><span class="nv">initiatedBy</span><span class="p">:)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">performExternalAction</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">?,</span> <span class="nv">presenter</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
@@ -628,7 +630,8 @@ there&rsquo;s a relevant handler registered for it <em>and</em> whether the devi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKInterAppCommunicator/ExternalAction.html">ExternalAction</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">?,</span> <span class="nv">presenter</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@MainActor</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">_</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Classes/TKInterAppCommunicator/ExternalAction.html">ExternalAction</a></span><span class="p">,</span> <span class="k">for</span> <span class="nv">segment</span><span class="p">:</span> <span class="kt">TKSegment</span><span class="p">?,</span> <span class="nv">presenter</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -889,7 +892,7 @@ prompt for using Google Maps or Waze.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2024 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2024-02-28)</p>
+      <p>&copy; 2024 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2024-02-29)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
