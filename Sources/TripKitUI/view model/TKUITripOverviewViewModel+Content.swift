@@ -274,6 +274,7 @@ fileprivate extension TKSegment {
     return TKUITripOverviewViewModel.TimeInfo(actualTime: arrivalTime, timetableTime: self.scheduledTimetableEndTime)
   }
   
+  @MainActor
   func toTerminal(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.TerminalItem {
     let isStart = order == .start
     let subtitle = platformInfo(previous: previous, next: next)
@@ -292,6 +293,7 @@ fileprivate extension TKSegment {
   }
   
   /// Create a stationary item for a stationary segment
+  @MainActor
   func toStationary(previous: TKSegment?, next: TKSegment?) -> TKUITripOverviewViewModel.StationaryItem {
     assert(isStationary)
     
@@ -343,6 +345,7 @@ fileprivate extension TKSegment {
   }
   
   /// Create a stationary item (bridge) for a non-stationary segment
+  @MainActor
   func toStationaryBridge(to next: TKSegment) -> TKUITripOverviewViewModel.StationaryItem {
     assert(!isStationary && !next.isStationary)
     
@@ -365,10 +368,12 @@ fileprivate extension TKSegment {
     )
   }
   
+  @MainActor
   func toAlert() -> TKUITripOverviewViewModel.AlertItem {
     return TKUITripOverviewViewModel.AlertItem(connection: line, segment: self)
   }
   
+  @MainActor
   func toMoving() -> TKUITripOverviewViewModel.MovingItem {
     var accessories: [TKUITripOverviewViewModel.SegmentAccessory] = []
     

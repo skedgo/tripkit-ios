@@ -65,7 +65,7 @@ public extension TKUITripOverviewCard {
     ///     more than that will be ignored.
     ///
     /// Called when a trip overview card gets presented.
-    public var tripActionsFactory: ((Trip) -> [TripAction])?
+    public var tripActionsFactory: (@MainActor (Trip) -> [TripAction])?
     
     /// This controls whether the title is visible underneath an action icon.
     ///
@@ -88,7 +88,7 @@ public extension TKUITripOverviewCard {
     ///     more than that will be ignored.
     ///
     /// Called when a trip overview card gets presented.
-    public var segmentActionsfactory: ((TKSegment) -> [SegmentAction])?
+    public var segmentActionsfactory: (@MainActor (TKSegment) -> [SegmentAction])?
     
     /// Set this to limit how many alerts are shown for a segment
     public var maximumAlertsPerSegment: Int = 3

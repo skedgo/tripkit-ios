@@ -9,10 +9,12 @@
 import Foundation
 
 public struct TKAutocompletionResult {
-  public init(object: AnyHashable, title: String, subtitle: String? = nil, image: TKImage, accessoryButtonImage: TKImage? = nil, accessoryAccessibilityLabel: String? = nil, score: Int = 0, isInSupportedRegion: Bool = true) {
+  public init(object: AnyHashable, title: String, titleHighlightRanges: [NSRange] = [], subtitle: String? = nil, subtitleHighlightRanges: [NSRange] = [], image: TKImage, accessoryButtonImage: TKImage? = nil, accessoryAccessibilityLabel: String? = nil, score: Int = 0, isInSupportedRegion: Bool = true) {
     self.object = object
     self.title = title
+    self.titleHighlightRanges = titleHighlightRanges
     self.subtitle = subtitle
+    self.subtitleHighlightRanges = subtitleHighlightRanges
     self.image = image
     self.accessoryButtonImage = accessoryButtonImage
     self.accessoryAccessibilityLabel = accessoryAccessibilityLabel
@@ -26,7 +28,11 @@ public struct TKAutocompletionResult {
   
   public let title: String
   
+  public var titleHighlightRanges: [NSRange] = []
+  
   public var subtitle: String? = nil
+  
+  public var subtitleHighlightRanges: [NSRange] = []
   
   public let image: TKImage
   

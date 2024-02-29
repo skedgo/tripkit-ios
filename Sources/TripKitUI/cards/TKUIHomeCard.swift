@@ -254,6 +254,9 @@ extension TKUIHomeCard {
     }
     
     switch next {
+    case .trigger(let handler):
+      handler(cardController)
+      
     case .present(let controller, let inNavigator):
       cardController.present(controller, inNavigator: inNavigator)
       dismissSelection()

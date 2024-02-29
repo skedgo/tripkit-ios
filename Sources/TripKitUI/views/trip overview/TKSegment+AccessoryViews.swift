@@ -22,6 +22,7 @@ extension TKSegment {
   /// - `TKUIPathFriendlinessView`
   ///
   /// - Returns: List of accessory view instances; can be empty
+  @MainActor
   func buildAccessoryViews() -> [UIView] {
     
     var accessoryViews: [UIView] = []

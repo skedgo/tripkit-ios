@@ -126,6 +126,7 @@ extension TKUISegmentDirectionsCard {
 }
 
 @available(iOS 16.0, *)
+@MainActor
 struct TKUISegmentDirectionView: View {
   let item: TKUISegmentDirectionsViewModel.Item
   

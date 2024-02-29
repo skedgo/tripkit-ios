@@ -343,9 +343,9 @@ extension TKBooking {
     public let details: String
     
     /// Price in cents
-    public let price: Int
+    public let price: Int?
 
-    public let currencyCode: String
+    public let currencyCode: String?
 
     /// Number of tickets to pre-select, can also be used to define how many tickets to purchase for this fare
     public var amount: Int?
@@ -408,6 +408,8 @@ extension TKBooking {
 
     /// URL to fetch ticket details, provided if `status == .activated`
     public let ticketURL: URL?
+    
+    public let qrCode: String?
 
     @DefaultEmptyArray public var actions: [Action]
 
@@ -426,6 +428,7 @@ extension TKBooking {
       case status
       case ticketURL
       case actions
+      case qrCode
 
       case ticketExpiration = "ticketExpirationTimestamp"
       case purchased = "purchasedTimestamp"
@@ -504,7 +507,8 @@ extension TKBooking.BookingInput.ReturnTripDateValue {
 
 extension TKBooking.Fare {
   
-  public func priceValue(locale: Locale = .current) -> String {
+  public func priceValue(locale: Locale = .current) -> String? {
+    guard let price, let currencyCode else { return nil }
     return NSNumber(value: Float(price) / 100).toMoneyString(currencyCode: currencyCode, locale: locale)
   }
 

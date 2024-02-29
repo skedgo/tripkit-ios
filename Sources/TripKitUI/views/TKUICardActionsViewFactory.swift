@@ -26,6 +26,7 @@ public enum TKUICardActionsViewFactory {
   ///   - padding: Padding to add around this view
   ///
   /// - Returns: Returns the view, ready to be added to the container
+  @MainActor
   public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, padding: Edge.Set = []) -> UIView {
     
     let actionsView: UIView
@@ -56,6 +57,7 @@ public enum TKUICardActionsViewFactory {
     return actionsView
   }
 
+  @MainActor
   static func sort<C, M>(actions: [TKUICardAction<C, M>]) -> [TKUICardAction<C, M>] {
     return actions.enumerated().sorted { lhs, rhs in
       if lhs.element.priority != rhs.element.priority {

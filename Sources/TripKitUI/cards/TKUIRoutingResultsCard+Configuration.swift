@@ -108,6 +108,8 @@ public extension TKUIRoutingResultsCard {
     /// By default all badges are shown.
     public var tripBadgesToShow: Set<TKMetricClassifier.Classification> = Set(TKMetricClassifier.Classification.allCases)
     
+    public var customItemProvider: TKUIRoutingResultsCustomItemProvider? = nil
+    
   }
 
 }

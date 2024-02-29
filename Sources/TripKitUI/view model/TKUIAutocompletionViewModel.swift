@@ -14,6 +14,7 @@ import RxSwift
 
 import TripKit
 
+@MainActor
 class TKUIAutocompletionViewModel {
   
   struct Section {
@@ -119,8 +120,15 @@ class TKUIAutocompletionViewModel {
   ) {
     let errorPublisher = PublishSubject<Error>()
     
-    sections = Self.buildSections(providers, searchText: searchText, refresh: refresh, biasMapRect: biasMapRect, includeCurrentLocation: includeCurrentLocation, includeAccessory: accessorySelected != nil)
-      .asDriver(onErrorDriveWith: Driver.empty())
+    sections = Self.buildSections(
+      providers, 
+      searchText: searchText,
+      refresh: refresh,
+      biasMapRect: biasMapRect,
+      includeCurrentLocation: includeCurrentLocation,
+      includeAccessory: accessorySelected != nil
+    )
+    .asDriver(onErrorDriveWith: Driver.empty())
     
     selection = selected
       .compactMap(\.selection)
@@ -175,16 +183,21 @@ extension TKUIAutocompletionViewModel {
   
   private static func buildSections(_ providers: [TKAutocompleting], searchText: Observable<(String, forced: Bool)>, refresh: Signal<Void>, biasMapRect: Driver<MKMapRect>, includeCurrentLocation: Bool, includeAccessory: Bool) -> Observable<[Section]> {
     
-    let additionalItems = providers
-      .compactMap(ActionItem.init)
-      .map { Item.action($0) }
-    let additionalSection = additionalItems.isEmpty ? [] : [Section(identifier: "actions", items: additionalItems, title: Loc.MoreResults)]
+    func additionalSections() -> [Section] {
+      let additionalItems = providers
+        .compactMap(ActionItem.init)
+        .map { Item.action($0) }
+      return additionalItems.isEmpty ? [] : [Section(identifier: "actions", items: additionalItems, title: Loc.MoreResults)]
+    }
     
-    let searchTrigger = refresh.asObservable().startWith(())
+    let searchTrigger = Observable.combineLatest(
+      searchText,
+      refresh.asObservable().map { true }.startWith(false)) { ($0.0, forced: $0.1 || $1) }
 
-    return searchTrigger
-      .flatMapLatest { providers.autocomplete(searchText, mapRect: biasMapRect.asObservable()) }
-      .map { $0.buildSections(includeCurrentLocation: includeCurrentLocation, includeAccessory: includeAccessory) + additionalSection }
+    return providers.autocomplete(searchTrigger, mapRect: biasMapRect.asObservable())
+      .map { completions in
+        return completions.buildSections(includeCurrentLocation: includeCurrentLocation, includeAccessory: includeAccessory) + additionalSections()
+      }
   }
   
 }

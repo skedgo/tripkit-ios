@@ -63,6 +63,7 @@ extension TKAPI {
     public var unsubscribeURL: URL?
     
     @UnknownNil public var availability: TripAvailability?
+    public var availabilityInfo: String?
   }
   
   public enum TripAvailability: String, Codable, Hashable {

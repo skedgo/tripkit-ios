@@ -19,7 +19,7 @@ public extension TKUIServiceCard {
     
     static let empty = Configuration()
     
-    public var serviceActionsFactory: ((EmbarkationPair) -> [TKUICardAction<TKUIServiceCard, EmbarkationPair>])?
+    public var serviceActionsFactory: (@MainActor (EmbarkationPair) -> [TKUICardAction<TKUIServiceCard, EmbarkationPair>])?
   }
   
 }

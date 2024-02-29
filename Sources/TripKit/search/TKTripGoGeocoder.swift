@@ -103,23 +103,28 @@ extension TKTripGoGeocoder: TKAutocompleting {
           let coordinates = response.choices.map(\.named)
           let results = coordinates.compactMap { named -> TKAutocompletionResult? in
             guard let name = named.name else { return nil }
+            let tuple = Self.score(named, query: input)
             if let stop = named as? TKStopCoordinate {
               return TKAutocompletionResult(
                 object: named,
                 title: name,
+                titleHighlightRanges: tuple.titleHighlight,
                 subtitle: stop.stopCode.contains(input) ? (stop.stopCode + " - " + (stop.services ?? "")) : stop.services,
+                subtitleHighlightRanges: tuple.subtitleHighlight,
                 image: TKModeImageFactory.shared.image(for: stop.stopModeInfo) ?? TKAutocompletionResult.image(for: .pin),
                 accessoryButtonImage: TKStyleManager.image(named: "icon-search-timetable"),
                 accessoryAccessibilityLabel: Loc.ShowTimetable,
-                score: Self.score(named, query: input)
+                score: tuple.score
               )
             } else {
               return TKAutocompletionResult(
                 object: named,
                 title: name,
+                titleHighlightRanges: tuple.titleHighlight,
                 subtitle: named.address,
+                subtitleHighlightRanges: tuple.subtitleHighlight,
                 image: TKAutocompletionResult.image(for: .pin),
-                score: Self.score(named, query: input)
+                score: tuple.score
               )
             }
           }
@@ -151,10 +156,10 @@ extension TKTripGoGeocoder: TKAutocompleting {
 
 extension TKTripGoGeocoder {
   private static func assignScore(to named: TKNamedCoordinate, query: String? = nil) {
-    named.sortScore = score(named, query: query)
+    named.sortScore = score(named, query: query).score
   }
   
-  private static func score(_ named: TKNamedCoordinate, query: String? = nil) -> Int {
+  private static func score(_ named: TKNamedCoordinate, query: String? = nil) -> TKAutocompletionResult.ScoreHighlights {
     if let stop = named as? TKStopCoordinate {
       let popularity = stop.stopSortScore ?? 0
       let maxScore = 1_000
@@ -164,16 +169,19 @@ extension TKTripGoGeocoder {
         let moreThanMax = popularity / maxScore
         ranged += TKAutocompletionResult.rangedScore(for: moreThanMax, min: 0, max: 10)
       }
-      return ranged
+      let highlight = query.map {
+        TKAutocompletionResult.nameScore(searchTerm: $0, candidate: stop.title ?? "").ranges
+      }
+      return .init(score: ranged, titleHighlight: highlight ?? [])
     
     } else if let query = query, let name = named.name ?? named.title {
       let titleScore = TKAutocompletionResult.nameScore(searchTerm: query, candidate: name)
-      let ranged = TKAutocompletionResult.rangedScore(for: titleScore, min: 0, max: 50)
-      return ranged
+      let ranged = TKAutocompletionResult.rangedScore(for: titleScore.score, min: 0, max: 50)
+      return .init(score: ranged, titleHighlight: titleScore.ranges)
 
     } else {
       assertionFailure("Unexpected geocoder result: \(named)")
-      return 0
+      return .init(score: 0)
     }
   }
 }

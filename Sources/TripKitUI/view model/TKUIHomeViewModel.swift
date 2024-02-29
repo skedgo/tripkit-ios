@@ -15,6 +15,7 @@ import TGCardViewController
 
 import TripKit
 
+@MainActor
 class TKUIHomeViewModel {
   
   struct SearchInput {

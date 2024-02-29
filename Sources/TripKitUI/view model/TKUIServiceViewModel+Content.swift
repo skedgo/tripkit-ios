@@ -14,14 +14,13 @@ import TripKit
 extension TKUIServiceViewModel {
   
   /// Section in a table view
-  struct Section: Equatable {
-    /// Items in this section
-    var items: [Item]
+  enum Section: Hashable {
+    case single
   }
   
   /// For individual cells in a table view, representing a stop along the
   /// route
-  struct Item: Equatable {
+  struct Item: Hashable {
     let dataModel: StopVisits
     
     /// Title of the stop
@@ -53,13 +52,13 @@ extension TKUIServiceViewModel {
 
 extension TKUIServiceViewModel {
   
-  static func buildSections(for embarkation: StopVisits, disembarkation: StopVisits?) -> [Section] {
+  static func buildSections(for embarkation: StopVisits, disembarkation: StopVisits?) -> [(Section, [Item])] {
     
     let items = embarkation.service
       .visitsIncludingContinuation()
-      .map { Item($0, embarkation: embarkation, disembarkation: disembarkation) }
+      .compactMap { Item($0, embarkation: embarkation, disembarkation: disembarkation) }
     
-    return [Section(items: items)]
+    return [(.single, items)]
   }
   
 }
@@ -81,7 +80,12 @@ extension Service {
 }
 
 extension TKUIServiceViewModel.Item {
-  fileprivate init(_ visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
+  fileprivate init?(_ visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
+    guard
+      let service = visit.service,
+      let embarkationService = embarkation.service,
+      let stop = visit.stop
+    else { return nil }
     
     var isVisited = visit >= embarkation
     if let disembarkation = disembarkation, isVisited {
@@ -90,9 +94,9 @@ extension TKUIServiceViewModel.Item {
     
     // Important to use service from `embarkation`, not the one from `visit`,
     // as `visit.service` might be a continuation of `embarkation.service`
-    let sortedVisits = embarkation.service.visitsIncludingContinuation()
+    let sortedVisits = embarkationService.visitsIncludingContinuation()
 
-    let serviceColor = visit.service.color ?? .black
+    let serviceColor = service.color ?? .black
 
     let topConnectionColor: UIColor?
     if visit == sortedVisits.first {
@@ -110,7 +114,7 @@ extension TKUIServiceViewModel.Item {
     
     self.init(
       dataModel: visit,
-      title: visit.stop.title ?? visit.stop.stopCode,
+      title: stop.title ?? stop.stopCode,
       timing: visit.timing,
       timeZone: visit.timeZone,
       realTimeStatus: visit.realTimeStatus,
@@ -118,28 +122,5 @@ extension TKUIServiceViewModel.Item {
       topConnection: topConnectionColor,
       bottomConnection: bottomConnectionColor
     )
-  }
-}
-
-// MARK: - RxDataSource protocol conformance
-
-extension TKUIServiceViewModel.Item: IdentifiableType {
-  typealias Identity = String
-  var identity: Identity {
-    return dataModel.objectID.uriRepresentation().absoluteString
-  }
-}
-
-extension TKUIServiceViewModel.Section: AnimatableSectionModelType {
-  typealias Identity = String
-  typealias Item = TKUIServiceViewModel.Item
-  
-  init(original: TKUIServiceViewModel.Section, items: [Item]) {
-    self = original
-    self.items = items
-  }
-  
-  var identity: Identity {
-    return "single-section"
   }
 }

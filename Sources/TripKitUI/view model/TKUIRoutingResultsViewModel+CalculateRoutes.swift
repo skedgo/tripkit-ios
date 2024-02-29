@@ -383,8 +383,14 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
     )
   }
   
-  var timeString: String {
-    return time?.timeString(in: timeZone) ?? Loc.SetTime
+  var timeString: (text: String, highlight: Bool) {
+    switch time {
+    case .some(let time):
+      return (time.timeString(in: timeZone), time != .leaveASAP)
+
+    case .none:
+      return (Loc.SetTime, true)
+    }
   }
   
 }

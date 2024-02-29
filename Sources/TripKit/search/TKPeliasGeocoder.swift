@@ -88,7 +88,9 @@ extension TKPeliasGeocoder: TKGeocoding {
     
     hitSearch(components) { result in
       completion(result.map { coordinates in
-        coordinates.forEach { $0.setScore(searchTerm: input, near: region) }
+        coordinates.forEach {
+          $0.sortScore = $0.score(searchTerm: input, near: region).score
+        }
         return TKGeocoderHelper.mergedAndPruned(coordinates, withMaximum: 10)
       })
     }
@@ -115,14 +117,19 @@ extension TKPeliasGeocoder: TKAutocompleting {
     
     hitSearch(components) { result in
       completion(result.map { coordinates in
-        coordinates.forEach { $0.setScore(searchTerm: input, near: region) }
-        
         // Pelias likes coming back with similar locations near each
         // other, so we cluster them.
         let clusters = TKAnnotationClusterer.cluster(coordinates)
         let unique = clusters.compactMap(TKNamedCoordinate.namedCoordinate(for:))
         let pruned = TKGeocoderHelper.mergedAndPruned(unique, withMaximum: 7)
-        return pruned.map(TKAutocompletionResult.init)
+        return pruned.map {
+          let score = $0.score(searchTerm: input, near: region)
+          var result = TKAutocompletionResult(from: $0)
+          result.score = score.score
+          result.titleHighlightRanges = score.titleHighlight
+          result.subtitleHighlightRanges = score.subtitleHighlight
+          return result
+        }
       })
     }
   }
@@ -134,10 +141,10 @@ extension TKPeliasGeocoder: TKAutocompleting {
   
 }
 
-extension TKNamedCoordinate {
+extension MKAnnotation {
   
-  func setScore(searchTerm: String, near region: MKCoordinateRegion) {
-    self.sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: searchTerm, near: region, allowLongDistance: false, minimum: 10, maximum: 60))
+  func score(searchTerm: String, near region: MKCoordinateRegion) -> TKAutocompletionResult.ScoreHighlights {
+    TKGeocodingResultScorer.calculateScore(for: self, searchTerm: searchTerm, near: region, allowLongDistance: false, minimum: 10, maximum: 60)
   }
   
 }
@@ -150,7 +157,6 @@ extension TKAutocompletionResult {
       title: coordinate.title ?? Loc.Location,
       subtitle: coordinate.subtitle,
       image: TKAutocompletionResult.image(for: .pin),
-      score: coordinate.sortScore,
       isInSupportedRegion: TKRegionManager.shared.coordinateIsPartOfAnyRegion(coordinate.coordinate)
     )
   }

@@ -23,13 +23,13 @@ public class TKInterAppCommunicator: NSObject {
   
   /// Will be called if the user selects an action that requires opening a
   /// website. By default just opens the webpage in Safari.
-  public var openURLHandler: (URL, String, UIViewController) -> Void = { url, _, _ in
+  public var openURLHandler: @MainActor (URL, String, UIViewController) -> Void = { url, _, _ in
     UIApplication.shared.open(url)
   }
   
   // Will be called with an iTunes app ID if the user select an action that
   // requires installing an app. By default deep-links into the App Store app
-  public var openStoreHandler: (Int, UIViewController) -> Void = { id, _ in
+  public var openStoreHandler: @MainActor (Int, UIViewController) -> Void = { id, _ in
     let urlString = String(format: "https://itunes.apple.com/app/id%d?mt=8", id)
     guard let url = URL(string: urlString) else { assertionFailure(); return }
     UIApplication.shared.open(url)

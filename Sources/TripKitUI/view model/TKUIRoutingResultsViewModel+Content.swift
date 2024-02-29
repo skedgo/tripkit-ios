@@ -74,7 +74,7 @@ extension TKUIRoutingResultsViewModel {
     }
   }
   
-  static func buildSections(_ groups: Observable<([TripGroup], mutable: Bool)>, inputs: UIInput, progress: Observable<TKUIResultsFetcher.Progress>, advisory: Observable<TKAPI.Alert?>) -> Observable<[Section]> {
+  static func buildSections(_ groups: Observable<([TripGroup], mutable: Bool)>, inputs: UIInput, progress: Observable<TKUIResultsFetcher.Progress>, customItem: Observable<TKUIRoutingResultsCard.CustomItem?>) -> Observable<[Section]> {
     
     let expand = inputs.tappedSectionButton
       .filter { action -> Bool in
@@ -95,22 +95,22 @@ extension TKUIRoutingResultsViewModel {
         inputs.changedSortOrder.startWith(.score).asObservable(),
         expand.startWith(nil).asObservable(),
         progress,
-        advisory.startWith(nil)
+        customItem.startWith(nil)
       )
       .map(sections)
   }
   
-  private static func sections(for groups: ([TripGroup], mutable: Bool), sortBy: TKTripCostType, expand: TripGroup?, progress: TKUIResultsFetcher.Progress, advisory: TKAPI.Alert?) -> [Section] {
+  private static func sections(for groups: ([TripGroup], mutable: Bool), sortBy: TKTripCostType, expand: TripGroup?, progress: TKUIResultsFetcher.Progress, customItem: TKUIRoutingResultsCard.CustomItem?) -> [Section] {
     
     let progressIndicatorSection = Section(items: [.progress])
-    let advisorySection = advisory.flatMap { Section(items: [.advisory($0)]) }
+    let customItemSection = customItem.flatMap { (Section(items: [.customItem($0)]), $0.preferredIndex) }
     
     guard let first = groups.0.first else {
       if case .finished = progress {
         return []
       } else {
         // happens when progress is `locating` and `start`
-        return [advisorySection, progressIndicatorSection].compactMap { $0 }
+        return [customItemSection?.0, progressIndicatorSection].compactMap { $0 }
       }
     }
     
@@ -135,15 +135,16 @@ extension TKUIRoutingResultsViewModel {
       let action: SectionAction?
       if let primaryAction = TKUIRoutingResultsCard.config.tripGroupActionFactory?(group) {
         show = items
-        action = (
+        action = .init(
           title: primaryAction.title,
           accessibilityLabel: primaryAction.accessibilityLabel,
-          payload: .trigger(primaryAction, group)
+          payload: .trigger(primaryAction, group),
+          isEnabled: primaryAction.isEnabled
         )
       
       } else if items.count > 2, expand == group {
         show = items
-        action = (title: Loc.Less, accessibilityLabel: nil, payload: .collapse)
+        action = .init(title: Loc.Less, payload: .collapse)
       
       } else if items.count > 2 {
         let good = items
@@ -154,7 +155,7 @@ extension TKUIRoutingResultsViewModel {
         } else {
           show = Array(good.prefix(2))
         }
-        action = (title: Loc.More, accessibilityLabel: nil, payload: .expand(group))
+        action = .init(title: Loc.More, payload: .expand(group))
 
       } else {
         show = items
@@ -181,8 +182,8 @@ extension TKUIRoutingResultsViewModel {
     default: sections.insert(progressIndicatorSection, at: 0)
     }
 
-    if let advisory = advisorySection {
-      sections.insert(advisory, at: 0)
+    if let customItemSection {
+      sections.insert(customItemSection.0, at: customItemSection.1)
     }
 
     return sections
@@ -222,18 +223,18 @@ extension TKUIRoutingResultsViewModel {
     
     case progress
     
-    case advisory(TKAPI.Alert)
+    case customItem(TKUIRoutingResultsCard.CustomItem)
     
     var trip: Trip? {
       switch self {
       case .trip(let trip): return trip
-      case .progress, .advisory: return nil
+      case .progress, .customItem: return nil
       }
     }
     
-    var alert: TKAPI.Alert? {
+    var customItem: TKUIRoutingResultsCard.CustomItem? {
       switch self {
-      case .advisory(let alert): return alert
+      case .customItem(let customItem): return customItem
       case .trip, .progress: return nil
       }
     }
@@ -246,7 +247,12 @@ extension TKUIRoutingResultsViewModel {
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
   }
   
-  typealias SectionAction = (title: String, accessibilityLabel: String?, payload: ActionPayload)
+  struct SectionAction {
+    var title: String
+    var accessibilityLabel: String? = nil
+    var payload: ActionPayload
+    var isEnabled: Bool = true
+  }
   
   /// A section on the results screen, which consists of various sorted items
   struct Section {
@@ -345,7 +351,7 @@ func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.
   switch (lhs, rhs) {
   case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
   case (.progress, .progress): return true
-  case (.advisory(let left), .advisory(let right)): return left.hashCode == right.hashCode
+  case (.customItem(let left), .customItem(let right)): return left == right
   default: return false
   }
 }
@@ -357,7 +363,7 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
     switch self {
     case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
     case .progress: return "progress_indicator"
-    case .advisory: return "advisory" // should only ever have one
+    case .customItem: return "customItem" // should only ever have one
     }
   }
 }

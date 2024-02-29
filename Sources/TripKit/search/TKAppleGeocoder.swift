@@ -152,9 +152,11 @@ extension TKAutocompletionResult {
     self.init(
       object: completion,
       title: completion.title,
+      titleHighlightRanges: completion.titleHighlightRanges.map(\.rangeValue),
       subtitle: completion.subtitle,
+      subtitleHighlightRanges: completion.subtitleHighlightRanges.map(\.rangeValue),
       image: TKAutocompletionResult.image(for: .pin),
-      score: TKGeocodingResultScorer.calculateScore(title: completion.title, subtitle: completion.subtitle, searchTerm: input, minimum: 25, maximum: 65) - index
+      score: TKGeocodingResultScorer.calculateScore(title: completion.title, subtitle: completion.subtitle, searchTerm: input, minimum: 25, maximum: 65).score - index
     )
   }
   
@@ -168,7 +170,7 @@ extension TKNamedCoordinate {
     url = mapItem.url
     
     if let input = input, let region = region {
-      sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: input, near: region, allowLongDistance: false, minimum: 15, maximum: 65))
+      sortScore = Int(TKGeocodingResultScorer.calculateScore(for: self, searchTerm: input, near: region, allowLongDistance: false, minimum: 15, maximum: 65).score)
     }
   }
   

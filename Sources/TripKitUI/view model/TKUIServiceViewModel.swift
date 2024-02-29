@@ -16,6 +16,7 @@ import TripKit
 
 /// View model for displaying and interacting with an individual
 /// transport service.
+@MainActor
 class TKUIServiceViewModel {
   
   enum DataInput {
@@ -72,7 +73,7 @@ class TKUIServiceViewModel {
   
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.
-  let sections: Driver<[Section]>
+  let sections: Driver<[(Section, [Item])]>
   
   /// Stops and route of the service, for display on a map.
   /// Can change with real-time data.
@@ -133,9 +134,9 @@ extension TKUIServiceViewModel {
 
 extension TKUIServiceViewModel {
   
-  static func embarkationIndexPath(in sections: [Section]) -> IndexPath? {
+  static func embarkationIndexPath(in sections: [(Section, [Item])]) -> IndexPath? {
     for (s, section) in sections.enumerated() {
-      for (i, item) in section.items.enumerated() {
+      for (i, item) in section.1.enumerated() {
         if item.isVisited {
           return IndexPath(item: i, section: s)
         }

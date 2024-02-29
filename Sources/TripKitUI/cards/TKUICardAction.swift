@@ -36,6 +36,7 @@ import TGCardViewController
 /// }
 ///
 /// ```
+@MainActor
 open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   
   /// Initialises a new card action, which can be used to add custom buttons to a card that reflect some
@@ -67,6 +68,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   ///   - icon: Icon to display as the action. Should be a template image.
   ///   - style: Style for the button.
   ///   - priority: Priority of action to determine ordering in a list
+  ///   - isEnabled: Set to `false` to show the button but disable it
   ///   - handler: Handler executed when user taps on the button. Parameters are the action itself, the owning card, the model instance, and the sender. Should return whether the button should be refreshed, by calling the relevant "actions factory" again.
   public init(
     title: String,
@@ -74,13 +76,15 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     icon: UIImage,
     style: TKUICardActionStyle = .normal,
     priority: Int = 0,
+    isEnabled: Bool = true,
     handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
   ) {
     self.content = .init(
       title: title,
       accessibilityLabel: accessibilityLabel,
       icon: icon,
-      style: style
+      style: style,
+      isEnabled: isEnabled
     )
     self.handler = handler
     self.priority = priority
@@ -96,6 +100,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   ///   - icon: Provider of icon for the button. Should be a template image.
   ///   - style: Provider of style for the button.
   ///   - priority: Priority of action to determine ordering in a list
+  ///   - isEnabled: Set to `false` to show the button but disable it
   ///   - handler: Handler executed when user taps on the button. Parameters are the owning card, the model instance, and the sender.
   public convenience init(
     title: @escaping () -> String,
@@ -103,6 +108,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     icon: @escaping () -> UIImage,
     style: (() -> TKUICardActionStyle)?  = nil,
     priority: Int = 0,
+    isEnabled: Bool = true,
     handler: @escaping @MainActor (Card, Model, UIView) -> Void
   ) {
     self.init(
@@ -110,7 +116,8 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
       accessibilityLabel: accessibilityLabel?(),
       icon: icon(),
       style: style?() ?? .normal,
-      priority: priority
+      priority: priority,
+      isEnabled: isEnabled
     ) { action, card, model, view in
       handler(card, model, view)
       action.content = .init(
@@ -155,6 +162,11 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     set { content.isInProgress = newValue }
   }
   
+  public var isEnabled: Bool {
+    get { content.isEnabled }
+    set { content.isEnabled = newValue }
+  }
+  
   /// Priority of the action to determine ordering in a list. Defaults to 0.
   ///
   /// If multiple actions have the same priority, then `.bold` style is
@@ -171,12 +183,13 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
 }
 
 public struct TKUICardActionContent {
-  public init(title: String, accessibilityLabel: String? = nil, icon: UIImage, style: TKUICardActionStyle = .normal, isInProgress: Bool = false) {
+  public init(title: String, accessibilityLabel: String? = nil, icon: UIImage, style: TKUICardActionStyle = .normal, isInProgress: Bool = false,  isEnabled: Bool = true) {
     self.title = title
     self.accessibilityLabel = accessibilityLabel
     self.icon = icon
     self.style = style
     self.isInProgress = isInProgress
+    self.isEnabled = isEnabled
   }
   
   /// Title of the button
@@ -191,4 +204,6 @@ public struct TKUICardActionContent {
   public var style: TKUICardActionStyle
   
   public var isInProgress: Bool
+  
+  public var isEnabled: Bool
 }

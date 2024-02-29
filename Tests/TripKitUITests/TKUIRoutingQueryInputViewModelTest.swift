@@ -15,6 +15,7 @@ import RxCocoa
 @testable import TripKit
 @testable import TripKitUI
 
+@MainActor
 class TKUIRoutingQueryInputViewModelTest: XCTestCase {
   
   func testStartsOnDestination() throws {

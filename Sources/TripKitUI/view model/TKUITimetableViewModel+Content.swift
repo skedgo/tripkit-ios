@@ -21,7 +21,7 @@ extension TKUITimetableViewModel {
     var items: [Item]
     
     var title: String {
-      let timeZone = items.first?.dataModel.stop.timeZone ?? .current
+      let timeZone = items.first?.dataModel.stop?.timeZone ?? .current
       var calendar = Calendar.current
       calendar.timeZone = timeZone
       

@@ -294,6 +294,7 @@ public final class TKRoutingParser {
         case .canceled: trip.isCanceled = true
         case .none: break
         }
+        trip.update(\.availabilityInfo, value: apiTrip.availabilityInfo)
         
         // updated trip isn't strictly speaking new, but we want to process it
         // as a successful match.

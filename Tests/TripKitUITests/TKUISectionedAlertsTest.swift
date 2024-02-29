@@ -11,6 +11,7 @@ import XCTest
 @testable import TripKit
 @testable import TripKitUI
 
+@MainActor
 class TKUISectionedAlertsTest: XCTestCase {
 
   var response: TKBuzzInfoProvider.AlertsTransitResponse!

@@ -41,6 +41,7 @@ extension ExampleCustomizer {
     }
   }
   
+  @MainActor
   private static func buildFavoriteStopAction(stop: TKUIStopAnnotation) -> TKUITimetableCard.Action {
     
     func isFavorite() -> Bool { InMemoryFavoriteManager.shared.hasFavorite(for: stop) }
