@@ -265,7 +265,7 @@ public enum TKBooking {
         value = .number(number, min: minValue, max: maxValue)
       case .terms:
         // SIC. `value` is always a string!
-        let rawValue = try container.decode(String.self, forKey: .value)
+        let rawValue = try container.decodeIfPresent(String.self, forKey: .value) ?? "false"
         let accepted = rawValue == "true"
         let url = try container.decode(URL.self, forKey: .urlValue)
         value = .terms(url, accepted: accepted)
@@ -291,11 +291,13 @@ public enum TKBooking {
       case .returnTripDate(let returnDate):
         try container.encode(returnDate.toString(), forKey: .value)
       case let .number(number, min, max):
+        // SIC. Turn number back into a String.
         try container.encode(String(number), forKey: .value)
         try container.encode(min, forKey: .minValue)
         try container.encode(max, forKey: .maxValue)
       case let .terms(url, accepted):
-        try container.encode(accepted, forKey: .value)
+        // SIC. Turn boolean back into a String.
+        try container.encode(accepted ? "true" : "false", forKey: .value)
         try container.encode(url, forKey: .urlValue)
       }
     }

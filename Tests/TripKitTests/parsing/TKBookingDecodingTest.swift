@@ -90,5 +90,41 @@ class TKBookingDecodingTest: XCTestCase {
     XCTAssertEqual(fare.priceValue(locale: .init(identifier: "en_US")), "¥300")
     XCTAssertEqual(fare.priceValue(locale: .init(identifier: "de_DE")), "300 ¥")
   }
+  
+  func testBookingTermsInput() throws {
+    let freshInput = try JSONDecoder().decode(TKBooking.BookingInput.self, from: Data("""
+      {
+        "id": "terms",
+        "type": "TERMS",
+        "title": "Review Terms and Conditions",
+        "urlValue": "https://example.com/legal/terms",
+        "required": false
+      }
+      """.utf8))
+    
+    XCTAssertEqual(freshInput.type, .terms)
+    XCTAssertEqual(freshInput.value, .terms(URL(string: "https://example.com/legal/terms")!, accepted: false))
+    
+    let encodedInput = try JSONEncoder().encode(freshInput)
+    let decodedInput = try JSONDecoder().decode(TKBooking.BookingInput.self, from: encodedInput)
+    XCTAssertEqual(freshInput, decodedInput)
+  }
+    
+  func testBookingAcceptedTermsInput() throws {
+    let freshInput = try JSONDecoder().decode(TKBooking.BookingInput.self, from: Data("""
+      {
+        "id": "terms",
+        "type": "TERMS",
+        "title": "Review Terms and Conditions",
+        "urlValue": "https://example.com/legal/terms",
+        "value": "true",
+        "required": false
+      }
+      """.utf8))
+    
+    let encodedInput = try JSONEncoder().encode(freshInput)
+    let decodedInput = try JSONDecoder().decode(TKBooking.BookingInput.self, from: encodedInput)
+    XCTAssertEqual(freshInput, decodedInput)
+  }
 
 }
