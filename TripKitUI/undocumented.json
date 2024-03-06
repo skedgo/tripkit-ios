@@ -1157,14 +1157,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripModeByModeCard+Configuration.swift",
-      "line": 45,
+      "line": 44,
       "symbol": "TKUIDefaultPageBuilder",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripModeByModeCard+Configuration.swift",
-      "line": 47,
+      "line": 46,
       "symbol": "TKUIDefaultPageBuilder.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1206,7 +1206,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUITripModeByModeCard.swift",
-      "line": 75,
+      "line": 76,
       "symbol": "TKUITripModeByModeCard",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
