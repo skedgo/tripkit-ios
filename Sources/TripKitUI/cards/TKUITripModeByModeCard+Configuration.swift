@@ -41,14 +41,15 @@ public protocol TKUITripModeByModePageBuilder {
 }
 
 // MARK: - Default MxM page builder
-
 open class TKUIDefaultPageBuilder: TKUITripModeByModePageBuilder {
   
   public init() {}
   
   /// The default page builder does nothing during clean up
+  @MainActor
   open func cleanUp(existingCards: [TGCard]) {}
   
+  @MainActor
   open func cards(for segment: TKSegment, mapManager: TKUITripMapManager) -> [(TGCard, TKUISegmentMode)] {
     if segment.order != .regular {
       return []
