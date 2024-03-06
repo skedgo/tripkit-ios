@@ -257,12 +257,16 @@ public enum TKBooking {
         let specifiedReturnDate = try container.decode(String.self, forKey: .value)
         value = Self.convertStringReturnDateToInputValue(specifiedReturnDate)
       case .number:
+        // SIC. `value` is always a string!
         let rawValue = try container.decode(String.self, forKey: .value)
+        let number = Int(rawValue) ?? 0
         let minValue = try container.decodeIfPresent(Int.self, forKey: .minValue)
         let maxValue = try container.decodeIfPresent(Int.self, forKey: .maxValue)
-        value = .number(Int(rawValue) ?? 0, min: minValue, max: maxValue)
+        value = .number(number, min: minValue, max: maxValue)
       case .terms:
-        let accepted = try container.decodeIfPresent(Bool.self, forKey: .value) ?? false
+        // SIC. `value` is always a string!
+        let rawValue = try container.decode(String.self, forKey: .value)
+        let accepted = rawValue == "true"
         let url = try container.decode(URL.self, forKey: .urlValue)
         value = .terms(url, accepted: accepted)
       }
