@@ -35,7 +35,7 @@ extension UILabel {
       return
     }
     
-    var attributed = NSMutableAttributedString(string: text, attributes: [
+    let attributed = NSMutableAttributedString(string: text, attributes: [
       .foregroundColor: textColor,
       .font: TKStyleManager.customFont(forTextStyle: .body),
     ])
