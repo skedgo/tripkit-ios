@@ -101,6 +101,14 @@ extension Loc {
   
   // MARK: - Permission manager
   
+  public static var AuthorizationNeeded: String {
+    NSLocalizedString("Authorisation needed", tableName: "Shared", bundle: .tripKit, comment: "Authorisation needed title")
+  }
+
+  public static var AuthorizationNeededDescription: String {
+    NSLocalizedString("Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.", tableName: "Shared", bundle: .tripKit, comment: "Authorization restricted alert message")
+  }
+
   public static var ContactsAuthorizationAlertText: String {
     return NSLocalizedString("You previously denied this app access to your contacts. Please go to the Settings app > Privacy > Contacts and authorise this app to use this feature.", tableName: "Shared", bundle: .tripKit, comment: "Contacts authorisation needed text")
   }

@@ -48,13 +48,13 @@ extension TKPermissionManager {
     case .denied:
       message = authorizationAlertText
     case .restricted:
-      message = NSLocalizedString("Access to this feature has been restricted for your device. Please check the Settings app > General > Restrictions or ask your device provider.", tableName: "Shared", bundle: .tripKit, comment: "Authorization restricted alert message")
+      message = Loc.AuthorizationNeededDescription
     case .notDetermined,
          .authorized:
       return
     }
     
-    let alert = UIAlertController(title: NSLocalizedString("Authorisation needed", tableName: "Shared", bundle: .tripKit, comment: "Authorisation needed title"), message: message, preferredStyle: .alert)
+    let alert = UIAlertController(title: Loc.AuthorizationNeeded, message: message, preferredStyle: .alert)
     
     if let handler = openSettingsHandler {
       alert.addAction(.init(title: Loc.Cancel, style: .cancel))
