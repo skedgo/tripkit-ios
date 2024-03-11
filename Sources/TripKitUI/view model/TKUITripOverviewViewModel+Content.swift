@@ -128,6 +128,7 @@ extension TKUITripOverviewViewModel {
   
   enum SegmentAccessory: Equatable {
     case wheelchairAccessibility(TKWheelchairAccessibility)
+    case bicycleAccessibility(TKBicycleAccessibility)
     case averageOccupancy(TKAPI.VehicleOccupancy, title: String)
     case carriageOccupancies([[TKAPI.VehicleOccupancy]])
     case pathFriendliness(TKSegment)
@@ -387,6 +388,10 @@ fileprivate extension TKSegment {
     
     if let accessibility = wheelchairAccessibility, accessibility.showInUI() {
       accessories.append(.wheelchairAccessibility(accessibility))
+    }
+    
+    if let accessibility = bicycleAccessibility, accessibility.showInUI() {
+      accessories.append(.bicycleAccessibility(accessibility))
     }
     
     if canShowPathFriendliness {

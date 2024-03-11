@@ -153,7 +153,7 @@ extension SegmentReference {
   
   var wheelchairAccessibility: TKWheelchairAccessibility {
     get {
-      switch (wheelchairAccessible, wheelchairInaccessible) {
+      switch (isWheelchairAccessible, isWheelchairInaccessible) {
       case (false, false): return .unknown
       case (true, false): return .accessible
       case (false, true): return .notAccessible
@@ -167,14 +167,14 @@ extension SegmentReference {
     set {
       switch newValue {
       case .accessible:
-        wheelchairAccessible = true
-        wheelchairInaccessible = false
+        isWheelchairAccessible = true
+        isWheelchairInaccessible = false
       case .notAccessible:
-        wheelchairAccessible = false
-        wheelchairInaccessible = true
+        isWheelchairAccessible = false
+        isWheelchairInaccessible = true
       case .unknown:
-        wheelchairAccessible = false
-        wheelchairInaccessible = false
+        isWheelchairAccessible = false
+        isWheelchairInaccessible = false
       }
     }
   }

@@ -31,6 +31,7 @@ struct TKUIDepartureCellContent {
 
   var approximateTimeToDepart: Date?
   var wheelchairAccessibility: TKWheelchairAccessibility
+  var bicycleAccessibility: TKBicycleAccessibility
   var alerts: [Alert]
   var vehicleComponents: Observable<([[TKAPI.VehicleComponents]], Date)>?
 }
@@ -146,10 +147,18 @@ extension TKUIDepartureCell {
   private func updateAccessibilitySection() {
     guard let dataSource = dataSource else { return }
     
+    // It's fine to just show one of the two, as wheelchair + bicycle is not
+    // a valid combination
     if dataSource.wheelchairAccessibility.showInUI() {
       accessibleImageView.isHidden = false
       accessibleImageView.image = dataSource.wheelchairAccessibility.icon
       accessibleImageView.accessibilityLabel = dataSource.wheelchairAccessibility.title
+      
+    } else if dataSource.bicycleAccessibility.showInUI() {
+      accessibleImageView.isHidden = false
+      accessibleImageView.image = dataSource.bicycleAccessibility.icon
+      accessibleImageView.accessibilityLabel = dataSource.bicycleAccessibility.title
+      
     } else {
       accessibleImageView.isHidden = true
     }    

@@ -15,17 +15,17 @@ extension SegmentReference {
     set { set(.timesAreRealTime, to: newValue) }
   }
 
-  var bicycleAccessible: Bool {
+  var isBicycleAccessible: Bool {
     get { has(.bicycleAccessible) }
     set { set(.bicycleAccessible, to: newValue) }
   }
   
-  var wheelchairAccessible: Bool {
+  var isWheelchairAccessible: Bool {
     get { has(.wheelchairAccessible) }
     set { set(.wheelchairAccessible, to: newValue) }
   }
   
-  var wheelchairInaccessible: Bool {
+  var isWheelchairInaccessible: Bool {
     get { has(.wheelchairInaccessible) }
     set { set(.wheelchairInaccessible, to: newValue) }
   }

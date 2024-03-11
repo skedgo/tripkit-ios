@@ -1,9 +1,9 @@
 //
-//  TKWheelchairAccessibility+UI.swift
+//  TKBicycleAccessibility+UI.swift
 //  TripKitUI-iOS
 //
-//  Created by Adrian Schönig on 19.02.20.
-//  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
+//  Created by Adrian Schönig on 11.03.24.
+//  Copyright © 2024 SkedGo Pty Ltd. All rights reserved.
 //
 
 import Foundation
@@ -11,10 +11,11 @@ import UIKit
 
 import TripKit
 
-extension TKWheelchairAccessibility {
+extension TKBicycleAccessibility {
   func showInUI() -> Bool {
-    return self == .notAccessible
-      || TKSettings.showWheelchairInformation
+    return self == .accessible
+      && !TKSettings.modeIdentifierIsHidden("cy_bic")
+      && !TKSettings.modeIdentifierIsHidden("me_mic")
   }
   
   /// Used stand-alone, typically next to `.title`
@@ -26,8 +27,6 @@ extension TKWheelchairAccessibility {
       return TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
     case .notAccessible:
       return TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
-    case .unknown:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
     }
   }
   
@@ -41,9 +40,6 @@ extension TKWheelchairAccessibility {
     
     case .notAccessible:
       return nil // Can be added at a later stage, when needed
-    
-    case .unknown:
-      return nil
     }
   }
 
@@ -52,7 +48,6 @@ extension TKWheelchairAccessibility {
     switch self {
     case .accessible:     return #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
     case .notAccessible:  return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
-    case .unknown:        return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
     }
   }
 }

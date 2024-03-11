@@ -45,8 +45,8 @@ class TKUIServiceHeaderMiniView: UIView {
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .down, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
   }
   
-  private func updateAccessibility(_ accessibility: TKWheelchairAccessibility) {
-    accessibilityImageView.image = accessibility.icon
+  private func updateAccessibility(wheelchair: TKWheelchairAccessibility? = nil, bicycle: TKBicycleAccessibility? = nil) {
+    accessibilityImageView.image = wheelchair?.icon ?? bicycle?.icon
   }
   
   private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>? = nil) {
@@ -77,7 +77,11 @@ extension TKUIServiceHeaderMiniView {
   func configure(with model: TKUIDepartureCellContent) {
     disposeBag = DisposeBag()
 
-    updateAccessibility(model.wheelchairAccessibility)
+    if model.bicycleAccessibility.showInUI() {
+      updateAccessibility(bicycle: model.bicycleAccessibility)
+    } else {
+      updateAccessibility(wheelchair: model.wheelchairAccessibility)
+    }
     updateRealTime(alerts: model.alerts, components: model.vehicleComponents)
     
     // stack views are weird; this should be in the front, but sometimes

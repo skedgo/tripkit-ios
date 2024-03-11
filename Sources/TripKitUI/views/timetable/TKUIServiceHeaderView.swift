@@ -89,9 +89,9 @@ class TKUIServiceHeaderView: UIView {
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .up, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
   }
   
-  private func updateAccessibility(_ accessibility: TKWheelchairAccessibility) {
-    accessibilityImageView.image = accessibility.icon
-    accessibilityTitleLabel.text = accessibility.title
+  private func updateAccessibility(wheelchair: TKWheelchairAccessibility? = nil, bicycle: TKBicycleAccessibility? = nil) {
+    accessibilityImageView.image = wheelchair?.icon ?? bicycle?.icon
+    accessibilityTitleLabel.text = wheelchair?.title ?? bicycle?.title
   }
   
   private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>?) {
@@ -166,7 +166,11 @@ extension TKUIServiceHeaderView {
   func configure(with model: TKUIDepartureCellContent) {
     disposeBag = DisposeBag()
     
-    updateAccessibility(model.wheelchairAccessibility)
+    if model.bicycleAccessibility.showInUI() {
+      updateAccessibility(bicycle: model.bicycleAccessibility)
+    } else {
+      updateAccessibility(wheelchair: model.wheelchairAccessibility)
+    }
     updateRealTime(
       alerts: model.alerts,
       components: model.vehicleComponents

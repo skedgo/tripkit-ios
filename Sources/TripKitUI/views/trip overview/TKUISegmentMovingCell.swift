@@ -144,6 +144,9 @@ extension TKUISegmentMovingCell {
       
     case .wheelchairAccessibility(let accessibility):
       return TKUIOccupancyView(with: .wheelchair(accessibility))
+
+    case .bicycleAccessibility(let accessibility):
+      return TKUIOccupancyView(with: .bicycle(accessibility))
     }
   }
 

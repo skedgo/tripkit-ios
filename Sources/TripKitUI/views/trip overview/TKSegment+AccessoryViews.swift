@@ -44,6 +44,11 @@ extension TKSegment {
       accessoryViews.append(wheelchairView)
     }
     
+    if let accessibility = bicycleAccessibility, accessibility.showInUI() {
+      let wheelchairView = TKUIOccupancyView(with: .bicycle(accessibility))
+      accessoryViews.append(wheelchairView)
+    }
+    
     if canShowPathFriendliness {
       if #available(iOS 16.0, *), let chart = self.buildFriendliness() {
         let host = UIHostingController(rootView: chart)
