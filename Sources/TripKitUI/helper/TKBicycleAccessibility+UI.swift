@@ -21,12 +21,12 @@ extension TKBicycleAccessibility {
   /// Used stand-alone, typically next to `.title`
   ///
   /// This is *not* a template image
-  var icon: UIImage {
+  var icon: UIImage? {
     switch self {
     case .accessible:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-accessible")
+      return TKUIServiceCard.config.bicycleAccessibilityImage
     case .notAccessible:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
+      return nil // Just omit it
     }
   }
   
@@ -36,7 +36,7 @@ extension TKBicycleAccessibility {
   var miniIcon: UIImage? {
     switch self {
     case .accessible:
-      return TripKitUIBundle.imageNamed("icon-wheelchair-mini")
+      return TKUIServiceCard.config.bicycleAccessibilityImageMini
     
     case .notAccessible:
       return nil // Can be added at a later stage, when needed
@@ -46,7 +46,7 @@ extension TKBicycleAccessibility {
   var color: UIColor {
     // Same as icons
     switch self {
-    case .accessible:     return #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
+    case .accessible:     return #colorLiteral(red: 0.137254902, green: 0.6941176471, blue: 0.368627451, alpha: 1)
     case .notAccessible:  return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
     }
   }
