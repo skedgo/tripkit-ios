@@ -14,9 +14,13 @@ import TGCardViewController
 import TripKit
 
 class TKUIServiceHeaderView: UIView {
-  @IBOutlet weak var accessibilityWrapper: UIView!
-  @IBOutlet weak var accessibilityImageView: UIImageView!
-  @IBOutlet weak var accessibilityTitleLabel: UILabel!
+  @IBOutlet weak var wheelchairAccessibilityWrapper: UIView!
+  @IBOutlet weak var wheelchairAccessibilityImageView: UIImageView!
+  @IBOutlet weak var wheelchairAccessibilityTitleLabel: UILabel!
+
+  @IBOutlet weak var bicycleAccessibilityWrapper: UIView!
+  @IBOutlet weak var bicycleAccessibilityImageView: UIImageView!
+  @IBOutlet weak var bicycleAccessibilityTitleLabel: UILabel!
 
   @IBOutlet weak var occupancyWrapper: UIView!
   @IBOutlet weak var occupancyImageView: UIImageView!
@@ -55,7 +59,7 @@ class TKUIServiceHeaderView: UIView {
     
     backgroundColor = .tkBackground
     
-    accessibilityTitleLabel.textColor = .tkLabelPrimary
+    wheelchairAccessibilityTitleLabel.textColor = .tkLabelPrimary
     
     occupancyLabel.textColor = .tkLabelPrimary
     occupancyUpdatedLabel.textColor = .tkLabelSecondary
@@ -89,9 +93,14 @@ class TKUIServiceHeaderView: UIView {
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .up, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
   }
   
-  private func updateAccessibility(wheelchair: TKWheelchairAccessibility? = nil, bicycle: TKBicycleAccessibility? = nil) {
-    accessibilityImageView.image = wheelchair?.icon ?? bicycle?.icon
-    accessibilityTitleLabel.text = wheelchair?.title ?? bicycle?.title
+  private func updateAccessibility(wheelchair: TKWheelchairAccessibility?, bicycle: TKBicycleAccessibility?) {
+    wheelchairAccessibilityImageView.image = wheelchair?.icon
+    wheelchairAccessibilityTitleLabel.text = wheelchair?.title
+    wheelchairAccessibilityWrapper.isHidden = wheelchair?.title == nil
+    
+    bicycleAccessibilityImageView.image = bicycle?.icon
+    bicycleAccessibilityTitleLabel.text = bicycle?.title
+    bicycleAccessibilityWrapper.isHidden = bicycle?.title == nil
   }
   
   private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>?) {
@@ -166,11 +175,12 @@ extension TKUIServiceHeaderView {
   func configure(with model: TKUIDepartureCellContent) {
     disposeBag = DisposeBag()
     
-    if model.bicycleAccessibility.showInUI() {
-      updateAccessibility(bicycle: model.bicycleAccessibility)
-    } else {
-      updateAccessibility(wheelchair: model.wheelchairAccessibility)
-    }
+    // Always show these on the service card, regardless of `showInUI`
+    updateAccessibility(
+      wheelchair: model.wheelchairAccessibility,
+      bicycle: model.bicycleAccessibility
+    )
+    
     updateRealTime(
       alerts: model.alerts,
       components: model.vehicleComponents

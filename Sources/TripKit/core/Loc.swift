@@ -101,10 +101,6 @@ public class Loc : NSObject {
     return NSLocalizedString("Bicycle accessible", tableName: "Shared", bundle: .tripKit, comment: "Indicator for bicycle accessible services")
   }
   
-  public static var BicycleNotAccessible: String {
-    return NSLocalizedString("Not bicycle accessible", tableName: "Shared", bundle: .tripKit, comment: "Indicator for bicycle not accessible services")
-  }
-
   public static var ContactSupport: String {
     return NSLocalizedString("Contact support", tableName: "Shared", bundle: .tripKit, comment: "Title for button that allows users to contact our support team to help resolve some error in the app.")
   }

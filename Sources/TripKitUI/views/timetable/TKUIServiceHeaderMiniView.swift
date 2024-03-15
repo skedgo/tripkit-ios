@@ -14,7 +14,8 @@ import TGCardViewController
 import TripKit
 
 class TKUIServiceHeaderMiniView: UIView {
-  @IBOutlet weak var accessibilityImageView: UIImageView!
+  @IBOutlet weak var wheelchairAccessibilityImageView: UIImageView!
+  @IBOutlet weak var bicycleAccessibilityImageView: UIImageView!
   @IBOutlet weak var occupancyImageView: UIImageView!
   @IBOutlet weak var alertImageView: UIImageView!
   
@@ -45,8 +46,9 @@ class TKUIServiceHeaderMiniView: UIView {
     expandyButton.setImage(TGCard.arrowButtonImage(direction: .down, background: tintColor.withAlphaComponent(0.12), arrow: tintColor), for: .normal)
   }
   
-  private func updateAccessibility(wheelchair: TKWheelchairAccessibility? = nil, bicycle: TKBicycleAccessibility? = nil) {
-    accessibilityImageView.image = wheelchair?.icon ?? bicycle?.icon
+  private func updateAccessibility(wheelchair: TKWheelchairAccessibility?, bicycle: TKBicycleAccessibility?) {
+    wheelchairAccessibilityImageView.image = wheelchair?.icon
+    bicycleAccessibilityImageView.image = bicycle?.icon
   }
   
   private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>? = nil) {
@@ -77,11 +79,12 @@ extension TKUIServiceHeaderMiniView {
   func configure(with model: TKUIDepartureCellContent) {
     disposeBag = DisposeBag()
 
-    if model.bicycleAccessibility.showInUI() {
-      updateAccessibility(bicycle: model.bicycleAccessibility)
-    } else {
-      updateAccessibility(wheelchair: model.wheelchairAccessibility)
-    }
+    // Always show these on the service card, regardless of `showInUI`
+    updateAccessibility(
+      wheelchair: model.wheelchairAccessibility,
+      bicycle: model.bicycleAccessibility
+    )
+    
     updateRealTime(alerts: model.alerts, components: model.vehicleComponents)
     
     // stack views are weird; this should be in the front, but sometimes

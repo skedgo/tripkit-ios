@@ -14,15 +14,15 @@ public enum TKBicycleAccessibility: Int {
   case accessible
   
   /// Known to not be accessible *or* unknown
-  case notAccessible
+  case unknown
   
   /// Localised title
-  public var title: String {
+  public var title: String? {
     switch self {
     case .accessible:
       return Loc.BicycleAccessible
-    case .notAccessible:
-      return Loc.BicycleNotAccessible
+    case .unknown:
+      return nil
     }
   }
   
@@ -30,8 +30,8 @@ public enum TKBicycleAccessibility: Int {
   public init(bool: Bool?) {
     switch bool {
     case .some(true):   self = .accessible
-    case .some(false):  self = .notAccessible
-    case .none:         self = .notAccessible
+    case .some(false):  self = .unknown
+    case .none:         self = .unknown
     }
   }
 }
@@ -41,14 +41,14 @@ public extension Service {
   /// service will also depend on the accessibility of the stop. See `StopVisits.getWheelchairAccessibility()`
   internal(set) var bicycleAccessibility: TKBicycleAccessibility {
     get {
-      isBicycleAccessible ? .accessible : .notAccessible
+      isBicycleAccessible ? .accessible : .unknown
     }
     
     set {
       switch newValue {
       case .accessible:
         isBicycleAccessible = true
-      case .notAccessible:
+      case .unknown:
         isBicycleAccessible = false
       }
     }
@@ -74,14 +74,14 @@ extension SegmentReference {
   
   var bicycleAccessibility: TKBicycleAccessibility {
     get {
-      isBicycleAccessible ? .accessible : .notAccessible
+      isBicycleAccessible ? .accessible : .unknown
     }
     
     set {
       switch newValue {
       case .accessible:
         isBicycleAccessible = true
-      case .notAccessible:
+      case .unknown:
         isBicycleAccessible = false
       }
     }

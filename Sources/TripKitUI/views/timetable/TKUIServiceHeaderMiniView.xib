@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8rJ-Jd-GL9">
-                    <rect key="frame" x="16" y="16" width="72" height="21"/>
+                    <rect key="frame" x="16" y="16" width="98" height="21"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S1c-5o-te0">
                             <rect key="frame" x="0.0" y="0.5" width="20" height="20"/>
@@ -24,17 +24,22 @@
                                 <constraint firstAttribute="height" constant="20" id="RUQ-AU-WRH"/>
                             </constraints>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qWX-SA-XNI">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q2C-1M-LJM">
                             <rect key="frame" x="26" y="0.5" width="20" height="20"/>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert" translatesAutoresizingMaskIntoConstraints="NO" id="kT9-FC-8x4">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qWX-SA-XNI">
                             <rect key="frame" x="52" y="0.5" width="20" height="20"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-alert" translatesAutoresizingMaskIntoConstraints="NO" id="kT9-FC-8x4">
+                            <rect key="frame" x="78" y="0.5" width="20" height="20"/>
                         </imageView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="kT9-FC-8x4" firstAttribute="width" secondItem="S1c-5o-te0" secondAttribute="width" id="7ct-iI-Rhm"/>
+                        <constraint firstItem="q2C-1M-LJM" firstAttribute="width" secondItem="S1c-5o-te0" secondAttribute="width" id="G2x-PS-4Pk"/>
                         <constraint firstItem="kT9-FC-8x4" firstAttribute="height" secondItem="S1c-5o-te0" secondAttribute="height" id="Yrf-ha-oFj"/>
                         <constraint firstItem="qWX-SA-XNI" firstAttribute="width" secondItem="S1c-5o-te0" secondAttribute="width" id="Z5k-Qm-rQz"/>
+                        <constraint firstItem="q2C-1M-LJM" firstAttribute="height" secondItem="S1c-5o-te0" secondAttribute="height" id="cfB-8j-mFp"/>
                         <constraint firstItem="qWX-SA-XNI" firstAttribute="height" secondItem="S1c-5o-te0" secondAttribute="height" id="jXD-4r-51X"/>
                     </constraints>
                 </stackView>
@@ -45,7 +50,7 @@
                         <constraint firstAttribute="height" constant="1" id="5KX-bT-UUO"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13U-pb-ltM">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13U-pb-ltM">
                     <rect key="frame" x="359" y="4" width="51" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="RCf-40-Qy3"/>
@@ -54,6 +59,7 @@
                     <state key="normal" title="Expand"/>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="13U-pb-ltM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8rJ-Jd-GL9" secondAttribute="trailing" constant="4" id="04l-7A-r3Z"/>
@@ -67,13 +73,13 @@
                 <constraint firstItem="8rJ-Jd-GL9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="u8M-lj-TAk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="accessibilityImageView" destination="S1c-5o-te0" id="w0e-et-43g"/>
                 <outlet property="alertImageView" destination="kT9-FC-8x4" id="ubI-gy-ZTF"/>
+                <outlet property="bicycleAccessibilityImageView" destination="q2C-1M-LJM" id="HBC-SU-3s1"/>
                 <outlet property="expandyButton" destination="13U-pb-ltM" id="QOh-kS-4Za"/>
                 <outlet property="occupancyImageView" destination="qWX-SA-XNI" id="tyA-MH-V6S"/>
                 <outlet property="separator" destination="KIn-iB-HC6" id="3QE-YJ-Yjl"/>
+                <outlet property="wheelchairAccessibilityImageView" destination="S1c-5o-te0" id="51N-9R-Ogp"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="-141.29464285714286"/>
         </view>

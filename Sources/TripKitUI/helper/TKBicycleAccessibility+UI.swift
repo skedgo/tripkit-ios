@@ -25,7 +25,7 @@ extension TKBicycleAccessibility {
     switch self {
     case .accessible:
       return TKUIServiceCard.config.bicycleAccessibilityImage
-    case .notAccessible:
+    case .unknown:
       return nil // Just omit it
     }
   }
@@ -38,7 +38,7 @@ extension TKBicycleAccessibility {
     case .accessible:
       return TKUIServiceCard.config.bicycleAccessibilityImageMini
     
-    case .notAccessible:
+    case .unknown:
       return nil // Can be added at a later stage, when needed
     }
   }
@@ -47,7 +47,7 @@ extension TKBicycleAccessibility {
     // Same as icons
     switch self {
     case .accessible:     return #colorLiteral(red: 0.137254902, green: 0.6941176471, blue: 0.368627451, alpha: 1)
-    case .notAccessible:  return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
+    case .unknown:  return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
     }
   }
 }
