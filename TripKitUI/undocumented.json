@@ -2284,35 +2284,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/TKUITripSegmentDisplayable.swift",
-      "line": 60,
+      "line": 63,
       "symbol": "TKUITripSegmentDisplayable",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/TKUITripSegmentDisplayable.swift",
-      "line": 61,
+      "line": 64,
       "symbol": "TKUITripSegmentDisplayable.tripSegmentModeColor",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/TKUITripSegmentDisplayable.swift",
-      "line": 62,
+      "line": 65,
       "symbol": "TKUITripSegmentDisplayable.tripSegmentModeImage",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/TKUITripSegmentDisplayable.swift",
-      "line": 63,
+      "line": 66,
       "symbol": "TKUITripSegmentDisplayable.tripSegmentModeImageURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/TKUITripSegmentDisplayable.swift",
-      "line": 72,
+      "line": 75,
       "symbol": "TKUITripSegmentDisplayable.tripSegmentTimesAreRealTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -3068,49 +3068,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 37,
+      "line": 41,
       "symbol": "TKUITripSegmentsView.init(frame:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 41,
+      "line": 45,
       "symbol": "TKUITripSegmentsView.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 45,
+      "line": 49,
       "symbol": "TKUITripSegmentsView.configure(_:allowSubtitles:allowInfoIcons:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 49,
+      "line": 53,
       "symbol": "TKUITripSegmentsView.selectSegment(atIndex:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 62,
+      "line": 66,
       "symbol": "TKUITripSegmentsView.segmentIndex(atX:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 67,
+      "line": 71,
       "symbol": "TKUITripSegmentsView.intrinsicContentSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/TKUITripSegmentsView.swift",
-      "line": 76,
+      "line": 80,
       "symbol": "TKUITripSegmentsView.layoutSubviews()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -3691,35 +3691,35 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 231,
+      "line": 239,
       "symbol": "TKUISemaphoreView.update(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 338,
+      "line": 346,
       "symbol": "TKUISemaphoreView",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 340,
+      "line": 348,
       "symbol": "TKUISemaphoreView.customHeadTintColor",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 341,
+      "line": 349,
       "symbol": "TKUISemaphoreView.customHeadImage",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUISemaphoreView.swift",
-      "line": 342,
+      "line": 350,
       "symbol": "TKUISemaphoreView.customPointerImage",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
@@ -3971,14 +3971,14 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITripCell.swift",
-      "line": 55,
+      "line": 56,
       "symbol": "TKUITripCell.setSelected(_:animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITripCell.swift",
-      "line": 60,
+      "line": 61,
       "symbol": "TKUITripCell.setHighlighted(_:animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
