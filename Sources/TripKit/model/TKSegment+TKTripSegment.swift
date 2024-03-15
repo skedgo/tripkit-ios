@@ -95,6 +95,10 @@ extension TKSegment {
     return self.wheelchairAccessibility ?? .unknown
   }
   
+  public var tripSegmentBicycleAccessibility: TKBicycleAccessibility? {
+    self.bicycleAccessibility
+  }
+  
   public var tripSegmentFixedDepartureTime: Date? {
     if isPublicTransport {
       if let frequency = frequency?.intValue, frequency > 0 {

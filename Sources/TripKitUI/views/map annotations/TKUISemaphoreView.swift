@@ -215,17 +215,25 @@ extension TKUISemaphoreView {
   }
 
   static func accessibilityImageView(for displayable: TKUITripSegmentDisplayable) -> UIImageView? {
-    let accessibility = displayable.tripSegmentWheelchairAccessibility
+    let wheelchair = displayable.tripSegmentWheelchairAccessibility
     
     // Not using `accessibility.showInUI()` as it's a bit much to show the
     // not accessible icons for all users here.
-    guard accessibility != .unknown, accessibility.showInUI() else { return nil }
-
-    guard let image = accessibility.miniIcon else { return nil }
-    let imageView = UIImageView(image: image)
-    imageView.tintColor = .tkLabelPrimary
-    imageView.accessibilityLabel = accessibility.title
-    return imageView
+    if wheelchair != .unknown, wheelchair.showInUI(), let image = wheelchair.miniIcon {
+      let imageView = UIImageView(image: image)
+      imageView.tintColor = .tkLabelPrimary
+      imageView.accessibilityLabel = wheelchair.title
+      return imageView
+    }
+    
+    if let bicycle = displayable.tripSegmentBicycleAccessibility, bicycle.showInUI(), let image = bicycle.miniIcon {
+      let imageView = UIImageView(image: image)
+      imageView.tintColor = .tkLabelPrimary
+      imageView.accessibilityLabel = bicycle.title
+      return imageView
+    }
+    
+    return nil
   }
 
   public func update(for annotation: MKAnnotation?) {

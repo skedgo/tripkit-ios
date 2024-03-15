@@ -343,7 +343,7 @@ public final class TKRoutingParser {
             service.number = apiReference.number ?? service.number
             reference.service = service
             
-            reference.bicycleAccessible = apiReference.bicycleAccessible
+            reference.bicycleAccessibility = TKBicycleAccessibility(bool: apiReference.bicycleAccessible)
             reference.wheelchairAccessibility = TKWheelchairAccessibility(bool: apiReference.wheelchairAccessible)
             
             // If we have any time-tabled service, the whole trip is timetabled

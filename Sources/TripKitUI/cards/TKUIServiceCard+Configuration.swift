@@ -6,7 +6,7 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 import TripKit
 
@@ -20,6 +20,16 @@ public extension TKUIServiceCard {
     static let empty = Configuration()
     
     public var serviceActionsFactory: (@MainActor (EmbarkationPair) -> [TKUICardAction<TKUIServiceCard, EmbarkationPair>])?
+    
+    /// Used stand-alone or next to a description
+    ///
+    /// This is *not* a template image
+    public var bicycleAccessibilityImage: UIImage = TripKitUIBundle.imageNamed("icon-bike-accessible-small")
+    
+    /// Used in trip segments view, as a miniature icon next to the vehicle
+    ///
+    /// This is a template image
+    public var bicycleAccessibilityImageMini: UIImage = TripKitUIBundle.imageNamed("icon-bike-mini")
   }
   
 }

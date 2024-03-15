@@ -20,6 +20,10 @@ public class TKUITripSegmentsView : UIView {
   /// - default: `false`
   public var allowWheelchairIcon: Bool = false
   
+  /// Whether to show bicycle accessibility icon
+  /// - default: `false`
+  public var allowBicycleAccessibilityIcon: Bool = false
+  
   /// This property determines if the transit icon in the view should be color coded.
   public var colorCodingTransitIcon: Bool = false
   
@@ -231,7 +235,7 @@ public class TKUITripSegmentsView : UIView {
         ?? color.map { _ in .init(width: 10, height: 10) }
         ?? .zero
       
-      let modeTitleAccessoryImageView = allowTitles && allowWheelchairIcon ? TKUISemaphoreView.accessibilityImageView(for: segment) : nil
+      let modeTitleAccessoryImageView = allowTitles && (allowWheelchairIcon || allowBicycleAccessibilityIcon) ? TKUISemaphoreView.accessibilityImageView(for: segment) : nil
  
       var modeSubtitle: String? = nil
       var modeSubtitleAccessoryImageViews: [UIImageView] = []

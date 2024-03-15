@@ -14,7 +14,7 @@ import TripKit
 extension TKWheelchairAccessibility {
   func showInUI() -> Bool {
     return self == .notAccessible
-    || TKSettings.showWheelchairInformation
+      || TKSettings.showWheelchairInformation
   }
   
   /// Used stand-alone, typically next to `.title`

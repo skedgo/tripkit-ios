@@ -21,9 +21,9 @@ extension TKUIDepartureCellContent {
 
     // Note, for DLS entries `disembarkation` will be nil, but the accessibility
     // is already handled then under `disembarkation`.
-    var accessibility = embarkation.wheelchairAccessibility
+    var wheelchairAccessibility = embarkation.wheelchairAccessibility
     if let atEnd = disembarkation?.wheelchairAccessibility {
-      accessibility = accessibility.combine(with: atEnd)
+      wheelchairAccessibility = wheelchairAccessibility.combine(with: atEnd)
     }
     
     let serviceColor = service.color
@@ -42,7 +42,8 @@ extension TKUIDepartureCellContent {
       timeText: embarkation.buildTimeText(),
       lineText: embarkation.buildLineText(),
       approximateTimeToDepart: embarkation.countdownDate,
-      wheelchairAccessibility: accessibility,
+      wheelchairAccessibility: wheelchairAccessibility,
+      bicycleAccessibility: service.bicycleAccessibility,
       alerts: service.allAlerts(),
       vehicleComponents: service.vehicle?.rx.components
     )

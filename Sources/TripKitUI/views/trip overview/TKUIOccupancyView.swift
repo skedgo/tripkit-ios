@@ -94,6 +94,7 @@ extension TKUIOccupancyView {
   enum Purpose {
     case occupancy(TKAPI.VehicleOccupancy, title: String, simple: Bool = false)
     case wheelchair(TKWheelchairAccessibility)
+    case bicycle(TKBicycleAccessibility)
   }
   
   convenience init(with purpose: Purpose) {
@@ -139,6 +140,16 @@ extension TKUIOccupancyView {
       
       icon.image = accessibility.icon
       icon.layer.cornerRadius = 0
+
+    case .bicycle(let accessibility):
+      accessibilityLabel = accessibility.title
+
+      label.text = accessibility.title
+      label.textColor = accessibility.color
+      
+      icon.image = accessibility.icon
+      icon.layer.cornerRadius = 0
+
     }
   }
   

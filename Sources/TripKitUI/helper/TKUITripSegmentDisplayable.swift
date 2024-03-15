@@ -55,6 +55,9 @@ public protocol TKUITripSegmentDisplayable {
   /// Wheelchair accessibility of the segment. If it doesn't apply, just return `.unknown`,
   /// as an `.unknown` value will always be ignored.
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { get }
+  
+  /// Bicycle accessibility of the segment. If it doesn't apply, just return nil.
+  var tripSegmentBicycleAccessibility: TKBicycleAccessibility? { get }
 }
 
 public extension TKUITripSegmentDisplayable {
@@ -71,6 +74,7 @@ public extension TKUITripSegmentDisplayable {
   var tripSegmentTimeZone: TimeZone? { nil }
   var tripSegmentTimesAreRealTime: Bool { false }
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { .unknown }
+  var tripSegmentBicycleAccessibility: TKBicycleAccessibility? { nil }
 }
 
 extension TKSegment: TKUITripSegmentDisplayable {}
