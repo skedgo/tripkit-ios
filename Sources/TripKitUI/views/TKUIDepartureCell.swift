@@ -48,6 +48,7 @@ class TKUIDepartureCell: UITableViewCell {
   @IBOutlet weak var timeToDepartTextLabel: TKUIStyledLabel!
   @IBOutlet weak var timeToDepartUnitLabel: TKUIStyledLabel!
   
+  @IBOutlet var accessibilityHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var accessibleImageView: UIImageView!
   @IBOutlet weak var alertImageView: UIImageView!
   @IBOutlet weak var occupancyImageView: UIImageView!
@@ -161,7 +162,8 @@ extension TKUIDepartureCell {
       
     } else {
       accessibleImageView.isHidden = true
-    }    
+    }
+    accessibilityHeightConstraint.isActive = !accessibleImageView.isHidden
   }
   
   private func updateRealTime() {

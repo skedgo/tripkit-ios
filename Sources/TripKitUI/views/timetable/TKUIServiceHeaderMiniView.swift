@@ -48,7 +48,9 @@ class TKUIServiceHeaderMiniView: UIView {
   
   private func updateAccessibility(wheelchair: TKWheelchairAccessibility?, bicycle: TKBicycleAccessibility?) {
     wheelchairAccessibilityImageView.image = wheelchair?.icon
+    wheelchairAccessibilityImageView.isHidden = wheelchair?.icon == nil
     bicycleAccessibilityImageView.image = bicycle?.icon
+    bicycleAccessibilityImageView.isHidden = bicycle?.icon == nil
   }
   
   private func updateRealTime(alerts: [Alert] = [], components: Observable<([[TKAPI.VehicleComponents]], Date)>? = nil) {
