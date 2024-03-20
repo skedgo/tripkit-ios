@@ -50,8 +50,6 @@ open class TKModeCoordinate: TKNamedCoordinate {
     super.init(coder: aDecoder)
   }
   
-  public var priority: Float?
-  
   private var _stopModeInfo: TKModeInfo? = nil
   @objc public var stopModeInfo: TKModeInfo {
     get {

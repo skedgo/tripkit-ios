@@ -385,15 +385,17 @@ extension TKAPI {
       public let carRentals: [TKCarRentalLocation]?
       public let freeFloating: [TKFreeFloatingVehicleLocation]?
       public let onStreetParking: [TKOnStreetParkingLocation]?
+      public let facilities: [TKFacilityLocation]?
 
-      public var all: [TKModeCoordinate] {
-        return (stops ?? [])        as [TKModeCoordinate]
-          + (bikePods ?? [])        as [TKModeCoordinate]
-          + (carPods ?? [])         as [TKModeCoordinate]
-          + (carParks ?? [])        as [TKModeCoordinate]
-          + (carRentals ?? [])      as [TKModeCoordinate]
-          + (freeFloating ?? [])    as [TKModeCoordinate]
-          + (onStreetParking ?? []) as [TKModeCoordinate]
+      public var all: [TKNamedCoordinate] {
+        return (stops ?? [])        as [TKNamedCoordinate]
+          + (bikePods ?? [])        as [TKNamedCoordinate]
+          + (carPods ?? [])         as [TKNamedCoordinate]
+          + (carParks ?? [])        as [TKNamedCoordinate]
+          + (carRentals ?? [])      as [TKNamedCoordinate]
+          + (freeFloating ?? [])    as [TKNamedCoordinate]
+          + (onStreetParking ?? []) as [TKNamedCoordinate]
+          + (facilities ?? [])      as [TKNamedCoordinate]
       }
         
     }

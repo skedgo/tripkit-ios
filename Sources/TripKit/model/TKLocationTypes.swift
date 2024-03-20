@@ -259,6 +259,53 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
   
 }
 
+public class TKFacilityLocation: TKNamedCoordinate {
+  
+  public enum FacilityType: String, Codable {
+    case parkAndRide = "Park-and-Ride"
+  }
+  
+  public var facilityType: FacilityType
+  
+  private enum CodingKeys: String, CodingKey {
+    case facilityID = "id"
+    case facilityType
+  }
+  
+  public required init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    facilityType = try values.decode(FacilityType.self, forKey: .facilityType)
+    try super.init(from: decoder)
+    locationID = try values.decode(String.self, forKey: .facilityID)
+  }
+  
+  public override func encode(to encoder: Encoder) throws {
+    try super.encode(to: encoder)
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(facilityType, forKey: .facilityType)
+    try container.encode(locationID, forKey: .facilityID)
+  }
+  
+  @objc public class override var supportsSecureCoding: Bool { true }
+
+  public required init?(coder aDecoder: NSCoder) {
+    guard 
+      let info = try? aDecoder.decode(FacilityType.self, forKey: CodingKeys.facilityType.rawValue),
+      let facilityID = try? aDecoder.decode(String.self, forKey: CodingKeys.facilityID.rawValue)
+    else { return nil }
+    facilityType = info
+    super.init(coder: aDecoder)
+    locationID = facilityID
+  }
+  
+  public override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    try? aCoder.encode(encodable: facilityType, forKey: CodingKeys.facilityType.rawValue)
+    try? aCoder.encode(encodable: locationID, forKey: CodingKeys.facilityType.rawValue)
+  }
+  
+}
+
 extension NSCoder {
   
   enum CoderError: Error {

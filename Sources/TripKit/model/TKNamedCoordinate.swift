@@ -76,6 +76,8 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   @objc public var isSuburb: Bool = false
   
+  public var priority: Float?
+
   @objc(namedCoordinateForAnnotation:)
   public static func namedCoordinate(for annotation: MKAnnotation) -> TKNamedCoordinate {
     if let named = annotation as? TKNamedCoordinate {
