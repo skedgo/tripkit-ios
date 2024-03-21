@@ -114,7 +114,7 @@ extension TKUINearbyViewModel {
             limit: fixedLocation != nil ? 1000 : 100,
             modes: mode.flatMap { [$0] },
             strictModeMatch: strictModeMatch
-          )
+          ).compactMap { $0 as? TKModeCoordinate }
           return (locations, mapRect.centerCoordinate)
         } catch {
           errorPublisher.onNext(error)

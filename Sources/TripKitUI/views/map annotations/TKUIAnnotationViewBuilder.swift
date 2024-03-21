@@ -350,7 +350,7 @@ fileprivate extension TKUIAnnotationViewBuilder {
 fileprivate extension MKAnnotation {
   
   var priority: MKFeatureDisplayPriority {
-    if let mode = self as? TKModeCoordinate, let priority = mode.priority {
+    if let mode = self as? TKNamedCoordinate, let priority = mode.priority {
       return MKFeatureDisplayPriority(priority)
     } else {
       return .required

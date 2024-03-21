@@ -378,22 +378,25 @@ extension TKAPI {
     public struct Group: Codable, Hashable {
       public let key: String
       public let hashCode: Int
-      public let stops: [TKStopCoordinate]?
-      public let bikePods: [TKBikePodLocation]?
-      public let carPods: [TKCarPodLocation]?
-      public let carParks: [TKCarParkLocation]?
-      public let carRentals: [TKCarRentalLocation]?
-      public let freeFloating: [TKFreeFloatingVehicleLocation]?
-      public let onStreetParking: [TKOnStreetParkingLocation]?
+      
+      @EmptyLossyArray @LossyArray public var stops: [TKStopCoordinate]
+      @EmptyLossyArray @LossyArray public var bikePods: [TKBikePodLocation]
+      @EmptyLossyArray @LossyArray public var carPods: [TKCarPodLocation]
+      @EmptyLossyArray @LossyArray public var carParks: [TKCarParkLocation]
+      @EmptyLossyArray @LossyArray public var carRentals: [TKCarRentalLocation]
+      @EmptyLossyArray @LossyArray public var freeFloating: [TKFreeFloatingVehicleLocation]
+      @EmptyLossyArray @LossyArray public var onStreetParking: [TKOnStreetParkingLocation]
+      @EmptyLossyArray @LossyArray public var facilities: [TKFacilityLocation]
 
-      public var all: [TKModeCoordinate] {
-        return (stops ?? [])        as [TKModeCoordinate]
-          + (bikePods ?? [])        as [TKModeCoordinate]
-          + (carPods ?? [])         as [TKModeCoordinate]
-          + (carParks ?? [])        as [TKModeCoordinate]
-          + (carRentals ?? [])      as [TKModeCoordinate]
-          + (freeFloating ?? [])    as [TKModeCoordinate]
-          + (onStreetParking ?? []) as [TKModeCoordinate]
+      public var all: [TKNamedCoordinate] {
+        return stops        as [TKNamedCoordinate]
+          + bikePods        as [TKNamedCoordinate]
+          + carPods         as [TKNamedCoordinate]
+          + carParks        as [TKNamedCoordinate]
+          + carRentals      as [TKNamedCoordinate]
+          + freeFloating    as [TKNamedCoordinate]
+          + onStreetParking as [TKNamedCoordinate]
+          + facilities      as [TKNamedCoordinate]
       }
         
     }

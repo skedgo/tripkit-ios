@@ -27,7 +27,7 @@ extension SegmentTemplate {
     set { encode(newValue, key: "miniInstruction") }
   }
   
-  @objc var modeInfo: TKModeInfo? {
+  var modeInfo: TKModeInfo? {
     get { decode(TKModeInfo.self, key: "modeInfo") }
     set { encode(newValue, key: "modeInfo") }
   }

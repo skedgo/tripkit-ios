@@ -103,7 +103,7 @@ extension TKUIServiceViewModel.ServiceVisit: TKUIModeAnnotation {
   var title: String? { return visit.title }
   var subtitle: String? { return visit.subtitle }
   var coordinate: CLLocationCoordinate2D { return visit.coordinate }
-  var modeInfo: TKModeInfo! { return visit.modeInfo }
+  var modeInfo: TKModeInfo? { return visit.modeInfo }
   var clusterIdentifier: String? { return visit.clusterIdentifier }
 }
 
@@ -147,7 +147,7 @@ extension TKUIServiceViewModel {
 }
 
 extension TKUIServiceViewModel.ServiceEmbarkation: TKUIModeAnnotation {
-  var modeInfo: TKModeInfo! {
+  var modeInfo: TKModeInfo? {
     return visit.modeInfo
   }
   

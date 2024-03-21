@@ -28,7 +28,7 @@ public enum TKLocationProvider {
   ///   - modes: Modes for which to fetch locations. If not provided, will use all.
   ///   - strictModeMatch: Should `modes` be treated strictly, or should related results also be returned?
   /// - Returns: Observable of fetched locations; always returns empty array for international region; can error out
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true) async throws -> [TKModeCoordinate] {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true) async throws -> [TKNamedCoordinate] {
     
     let region = try await TKRegionManager.shared.requireRegion(for: center)
     return try await TKLocationProvider.fetchLocations(
@@ -41,7 +41,7 @@ public enum TKLocationProvider {
     )
   }
   
-  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true, in region: TKRegion) async throws -> [TKModeCoordinate] {
+  public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true, in region: TKRegion) async throws -> [TKNamedCoordinate] {
 
     guard region != .international else {
       return []
