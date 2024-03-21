@@ -3383,56 +3383,56 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 49,
+      "line": 48,
       "symbol": "TKUIModeAnnotation.modeInfo",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 50,
+      "line": 49,
       "symbol": "TKUIModeAnnotation.clusterIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 54,
+      "line": 53,
       "symbol": "TKUIModeAnnotation.image",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 55,
+      "line": 54,
       "symbol": "TKUIModeAnnotation.imageURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 56,
+      "line": 55,
       "symbol": "TKUIModeAnnotation.imageIsTemplate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 60,
+      "line": 58,
       "symbol": "TKUIStopAnnotation",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 61,
+      "line": 59,
       "symbol": "TKUIStopAnnotation.stopCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/map annotations/TKUIAnnotations.swift",
-      "line": 62,
+      "line": 60,
       "symbol": "TKUIStopAnnotation.timeZone",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
