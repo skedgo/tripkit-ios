@@ -44,9 +44,8 @@ public protocol TKUISelectableOnMap {
 }
 
 /// For displaying an annotation in a `TKUIModeAnnotationView`
-@objc
-public protocol TKUIModeAnnotation: MKAnnotation {
-  var modeInfo: TKModeInfo! { get }
+public protocol TKUIModeAnnotation: TKUIImageAnnotation {
+  var modeInfo: TKModeInfo? { get }
   var clusterIdentifier: String? { get }
 }
 
@@ -56,7 +55,6 @@ public extension TKUIModeAnnotation {
   var imageIsTemplate: Bool { return modeInfo?.remoteImageIsTemplate ?? false }
 }
 
-@objc
 public protocol TKUIStopAnnotation: TKUIModeAnnotation {
   var stopCode: String { get }
   var timeZone: TimeZone? { get }

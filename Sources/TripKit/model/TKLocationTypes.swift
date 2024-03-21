@@ -261,20 +261,22 @@ public class TKOnStreetParkingLocation: TKModeCoordinate {
 
 public class TKFacilityLocation: TKNamedCoordinate {
   
-  public enum FacilityType: String, Codable {
-    case parkAndRide = "Park-and-Ride"
-  }
-  
-  public var facilityType: FacilityType
+  public var facilityType: String
+  public var primaryType: String?
+  public var secondaryType: String?
   
   private enum CodingKeys: String, CodingKey {
     case facilityID = "id"
     case facilityType
+    case primaryType = "type"
+    case secondaryType = "subType"
   }
   
   public required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    facilityType = try values.decode(FacilityType.self, forKey: .facilityType)
+    facilityType = try values.decode(String.self, forKey: .facilityType)
+    primaryType = try values.decodeIfPresent(String.self, forKey: .primaryType)
+    secondaryType = try values.decodeIfPresent(String.self, forKey: .secondaryType)
     try super.init(from: decoder)
     locationID = try values.decode(String.self, forKey: .facilityID)
   }
@@ -284,16 +286,22 @@ public class TKFacilityLocation: TKNamedCoordinate {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(facilityType, forKey: .facilityType)
     try container.encode(locationID, forKey: .facilityID)
+    try container.encode(primaryType, forKey: .primaryType)
+    try container.encode(secondaryType, forKey: .secondaryType)
   }
   
   @objc public class override var supportsSecureCoding: Bool { true }
 
   public required init?(coder aDecoder: NSCoder) {
     guard 
-      let info = try? aDecoder.decode(FacilityType.self, forKey: CodingKeys.facilityType.rawValue),
+      let facilityType = try? aDecoder.decode(String.self, forKey: CodingKeys.facilityType.rawValue),
       let facilityID = try? aDecoder.decode(String.self, forKey: CodingKeys.facilityID.rawValue)
     else { return nil }
-    facilityType = info
+    
+    self.facilityType = facilityType
+    self.primaryType = try? aDecoder.decode(String.self, forKey: CodingKeys.primaryType.rawValue)
+    self.secondaryType = try? aDecoder.decode(String.self, forKey: CodingKeys.secondaryType.rawValue)
+    
     super.init(coder: aDecoder)
     locationID = facilityID
   }
@@ -301,7 +309,9 @@ public class TKFacilityLocation: TKNamedCoordinate {
   public override func encode(with aCoder: NSCoder) {
     super.encode(with: aCoder)
     try? aCoder.encode(encodable: facilityType, forKey: CodingKeys.facilityType.rawValue)
-    try? aCoder.encode(encodable: locationID, forKey: CodingKeys.facilityType.rawValue)
+    try? aCoder.encode(encodable: locationID, forKey: CodingKeys.facilityID.rawValue)
+    try? aCoder.encode(encodable: primaryType, forKey: CodingKeys.primaryType.rawValue)
+    try? aCoder.encode(encodable: secondaryType, forKey: CodingKeys.secondaryType.rawValue)
   }
   
 }

@@ -15,7 +15,7 @@ import TripKit
 // MARK: TKUIModeAnnotation
 
 extension TKModeCoordinate: TKUIModeAnnotation {
-  public var modeInfo: TKModeInfo! {
+  public var modeInfo: TKModeInfo? {
     return stopModeInfo
   }
 }
@@ -74,7 +74,7 @@ extension Alert: TKUIImageAnnotation {
 // MARK: TKUIModeAnnotation
 
 extension StopLocation: TKUIModeAnnotation {
-  public var modeInfo: TKModeInfo! {
+  public var modeInfo: TKModeInfo? {
     return stopModeInfo
   }
 
@@ -93,7 +93,7 @@ extension StopLocation: TKUIStopAnnotation {}
 // MARK: TKUIModeAnnotation
 
 extension StopVisits: TKUIModeAnnotation {
-  public var modeInfo: TKModeInfo! {
+  public var modeInfo: TKModeInfo? {
     return service.findModeInfo() ?? .unknown
   }
   
