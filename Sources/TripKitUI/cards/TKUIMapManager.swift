@@ -72,6 +72,9 @@ open class TKUIMapManager: TGMapManager {
   /// - default: TKUIAnnotationViewBuilder
   public static var annotationBuilderFactory: ((MKAnnotation, MKMapView) -> TKUIAnnotationViewBuilder) = TKUIAnnotationViewBuilder.init
   
+  /// The POI categories from Apple Maps to never show on the map, e.g., as they are added separately.
+  public static var pointsOfInterestsToExclude: [MKPointOfInterestCategory] = [.publicTransport]
+  
   static var tileOverlays: [String: MKTileOverlay] = [:]
   
   /// Callback that fires when attributions need to be displayed. In particular when using `tiles`.
@@ -199,7 +202,7 @@ open class TKUIMapManager: TGMapManager {
     // Keep heading
     heading = mapView.camera.heading
     
-    mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: [.publicTransport])
+    mapView.pointOfInterestFilter = MKPointOfInterestFilter(excluding: TKUIMapManager.pointsOfInterestsToExclude)
 
     // Add content
     mapView.addOverlays(overlays, level: overlayLevel)
