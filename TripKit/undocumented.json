@@ -3754,21 +3754,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 98,
+      "line": 96,
       "symbol": "TKRegionManager.cacheURL",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 103,
+      "line": 101,
       "symbol": "TKRegionManager.readLocalCache()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 107,
+      "line": 105,
       "symbol": "TKRegionManager.saveToCache(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -3782,56 +3782,56 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 115,
+      "line": 113,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 186,
+      "line": 184,
       "symbol": "TKRegionManager.remoteImageIsTemplate(forModeIdentifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 190,
+      "line": 188,
       "symbol": "TKRegionManager.remoteImageIsBranding(forModeIdentifier:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 195,
+      "line": 193,
       "symbol": "TKRegionManager.imageURL(forModeIdentifier:iconType:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 216,
+      "line": 214,
       "symbol": "TKRegionManager.sortedModes(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 259,
+      "line": 257,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 262,
+      "line": 260,
       "symbol": "TKRegionManager.coordinateIsPartOfAnyRegion(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKRegionManager.swift",
-      "line": 288,
+      "line": 286,
       "symbol": "TKRegionManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -3909,160 +3909,167 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
       "line": 88,
-      "symbol": "TKStyleManager.optionalImage(named:)",
+      "symbol": "TKStyleManager.image(systemName:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
       "line": 98,
+      "symbol": "TKStyleManager.optionalImage(named:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
+      "line": 108,
       "symbol": "TKStyleManager.image(forModeImageName:of:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 133,
+      "line": 143,
       "symbol": "TKStyleManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 135,
+      "line": 145,
       "symbol": "TKStyleManager.FontWeight",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 136,
+      "line": 146,
       "symbol": "TKStyleManager.FontWeight.regular",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 137,
+      "line": 147,
       "symbol": "TKStyleManager.FontWeight.medium",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 138,
+      "line": 148,
       "symbol": "TKStyleManager.FontWeight.bold",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 139,
+      "line": 149,
       "symbol": "TKStyleManager.FontWeight.semibold",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 199,
+      "line": 209,
       "symbol": "TKStyleManager.systemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 204,
+      "line": 214,
       "symbol": "TKStyleManager.boldSystemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 209,
+      "line": 219,
       "symbol": "TKStyleManager.semiboldSystemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 214,
+      "line": 224,
       "symbol": "TKStyleManager.mediumSystemFont(size:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 220,
+      "line": 230,
       "symbol": "TKStyleManager.customFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 225,
+      "line": 235,
       "symbol": "TKStyleManager.boldCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 230,
+      "line": 240,
       "symbol": "TKStyleManager.semiboldCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 235,
+      "line": 245,
       "symbol": "TKStyleManager.mediumCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 244,
+      "line": 254,
       "symbol": "TKStyleManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 255,
+      "line": 265,
       "symbol": "TKStyleManager.exerciseString(calories:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 259,
+      "line": 269,
       "symbol": "TKStyleManager.timeString(_:for:relativeTo:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 276,
+      "line": 286,
       "symbol": "TKStyleManager.dateString(_:for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 286,
+      "line": 296,
       "symbol": "TKStyleManager.format(_:for:showDate:showTime:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 295,
+      "line": 305,
       "symbol": "TKStyleManager.format(_:for:forceFormat:forceStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 308,
+      "line": 318,
       "symbol": "TKStyleManager.string(for:for:showDate:showTime:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -13289,35 +13296,42 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
       "line": 79,
+      "symbol": "TKNamedCoordinate.klass",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
+      "line": 81,
+      "symbol": "TKNamedCoordinate.modeIdentifiers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
+      "line": 83,
       "symbol": "TKNamedCoordinate.priority",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 82,
+      "line": 86,
       "symbol": "TKNamedCoordinate.namedCoordinate(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 96,
+      "line": 100,
       "symbol": "TKNamedCoordinate.init(latitude:longitude:name:address:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 102,
+      "line": 106,
       "symbol": "TKNamedCoordinate.init(placemark:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 116,
-      "symbol": "TKNamedCoordinate.init(coordinate:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -13330,112 +13344,119 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 121,
+      "line": 120,
+      "symbol": "TKNamedCoordinate.init(coordinate:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
+      "line": 125,
       "symbol": "TKNamedCoordinate.init(name:address:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 203,
+      "line": 213,
       "symbol": "TKNamedCoordinate.supportsSecureCoding",
       "symbol_kind": "source.lang.swift.decl.var.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 206,
+      "line": 216,
       "symbol": "TKNamedCoordinate.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 251,
+      "line": 265,
       "symbol": "TKNamedCoordinate.encode(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 273,
+      "line": 289,
       "symbol": "TKNamedCoordinate",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 275,
+      "line": 291,
       "symbol": "TKNamedCoordinate.phone",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 280,
+      "line": 296,
       "symbol": "TKNamedCoordinate.url",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 288,
+      "line": 304,
       "symbol": "TKNamedCoordinate.isDropped",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 297,
+      "line": 313,
       "symbol": "TKNamedCoordinate",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 299,
+      "line": 315,
       "symbol": "TKNamedCoordinate.title",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 314,
+      "line": 330,
       "symbol": "TKNamedCoordinate.subtitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 327,
+      "line": 343,
       "symbol": "TKNamedCoordinate.sortScore",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 334,
+      "line": 350,
       "symbol": "TKNamedCoordinate",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 336,
+      "line": 352,
       "symbol": "TKNamedCoordinate.addressForGeocoding",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 338,
+      "line": 354,
       "symbol": "TKNamedCoordinate.needsForwardGeocoding",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKNamedCoordinate.swift",
-      "line": 340,
+      "line": 356,
       "symbol": "TKNamedCoordinate.assign(_:forAddress:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
