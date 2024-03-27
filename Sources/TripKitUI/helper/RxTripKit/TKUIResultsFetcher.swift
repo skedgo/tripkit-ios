@@ -82,7 +82,7 @@ public class TKUIResultsFetcher {
       prepared = prepared.flatMap { (request: TripRequest, _) in
         let modesToAdjust: Set<String> = modes ?? request.modes
         let region = request.startRegion ?? request.spanningRegion
-        return modeAdjuster(region, modesToAdjust)
+        return modeAdjuster(region, modesToAdjust, request)
           .map { (request, $0) }
       }
     }
@@ -112,7 +112,7 @@ public class TKUIResultsFetcher {
   
   /// Replace the set of provided modes with the modes returned by the `Single`, called before
   /// by `streamTrips` at the very start and information is not cached.
-  public static var modeReplacementHandler: ((TKRegion, Set<String>) -> Single<Set<String>>)? = nil
+  public static var modeReplacementHandler: ((TKRegion, Set<String>, TripRequest) -> Single<Set<String>>)? = nil
   
 }
 

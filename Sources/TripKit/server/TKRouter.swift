@@ -242,13 +242,13 @@ extension TKRouter {
     
     let includesAllModes = try request.performAndWait { $0.additional.contains { $0.name == "allModes" } }
     
+    let enabledModes = try modes ?? request.performAndWait(\.modes)
     if includesAllModes {
-      modeIdentifiers = try modes ?? request.performAndWait(\.modes)
+      modeIdentifiers = enabledModes
       fetchTrips(for: request, bestOnly: false, additional: nil, callbackQueue: queue, completion: completion)
       return 1
     }
     
-    let enabledModes = try modes ?? request.performAndWait(\.modes)
     guard !enabledModes.isEmpty else {
       throw RoutingError.invalidRequest("No modes enabled")
     }

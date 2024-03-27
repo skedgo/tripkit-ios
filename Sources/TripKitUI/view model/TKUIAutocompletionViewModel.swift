@@ -87,7 +87,7 @@ class TKUIAutocompletionViewModel {
       if let provided = completion.accessoryButtonImage {
         return provided
       } else if provider?.allowLocationInfoButton == true, TKUICustomization.shared.locationInfoTapHandler != nil {
-        return UIImage(systemName: "info.circle")
+        return UIImage(systemName: "info.circle")?.withRenderingMode(.alwaysTemplate)
       } else {
         return nil
       }
@@ -192,7 +192,8 @@ extension TKUIAutocompletionViewModel {
     
     let searchTrigger = Observable.combineLatest(
       searchText,
-      refresh.asObservable().map { true }.startWith(false)) { ($0.0, forced: $0.1 || $1) }
+      refresh.asObservable().map { true }.startWith(false)
+    ) { ($0.0, forced: $0.1 || $1) }
 
     return providers.autocomplete(searchTrigger, mapRect: biasMapRect.asObservable())
       .map { completions in

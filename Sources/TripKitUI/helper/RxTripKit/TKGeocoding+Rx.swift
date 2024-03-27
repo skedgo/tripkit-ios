@@ -132,7 +132,10 @@ public extension Array where Element == TKAutocompleting {
   func autocomplete(_ text: Observable<(String, forced: Bool)>, mapRect: Observable<MKMapRect>) -> Observable<[TKAutocompletionResult]> {
     
     return text
-      .distinctUntilChanged { $0.0 == $1.0 && $0.forced == $1.forced && !$1.forced }
+      .map { ($0.0 == Loc.CurrentLocation || $0.0 == Loc.Location) ? ("", forced: $0.1) : $0 }
+      .distinctUntilChanged { (lhs: (String, forced: Bool), rhs: (String, forced: Bool)) -> Bool in
+        lhs.0 == rhs.0 && lhs.forced == rhs.forced && !rhs.forced
+      }
       .withLatestFrom(mapRect) { ($0, $1) }
       .debounce(.milliseconds(200), scheduler: MainScheduler.asyncInstance)
       .flatMapLatest { input, mapRect -> Observable<[TKAutocompletionResult]> in
