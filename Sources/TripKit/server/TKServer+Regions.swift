@@ -89,7 +89,7 @@ extension TKRegionManager {
     
     switch response.result {
     case .success(let model):
-      await updateRegions(from: model)
+      updateRegions(from: model)
       if hasRegions {
         return
       } else {

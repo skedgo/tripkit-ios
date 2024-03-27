@@ -44,7 +44,7 @@ public class TKRegionManager: NSObject {
         return try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
       }.value
       if let response {
-        await updateRegions(from: response)
+        updateRegions(from: response)
       }
 
     } catch {
@@ -77,7 +77,7 @@ public class TKRegionManager: NSObject {
 extension TKRegionManager {
 
   @MainActor
-  func updateRegions(from response: TKAPI.RegionsResponse) async {
+  func updateRegions(from response: TKAPI.RegionsResponse) {
     // Silently ignore obviously bad data
     guard response.modes != nil, response.regions != nil else {
       // This asset isn't valid, due to race conditions
@@ -88,10 +88,8 @@ extension TKRegionManager {
     self.response = response
     NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
     
-    Task.detached(priority: .utility) {
-      if let encoded = try? JSONEncoder().encode(response) {
-        TKRegionManager.saveToCache(encoded)
-      }
+    if let encoded = try? JSONEncoder().encode(response) {
+      TKRegionManager.saveToCache(encoded)
     }
   }
   
