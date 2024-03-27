@@ -21,7 +21,15 @@ public typealias TKSkedGoGeocoder = TKTripGoGeocoder
 ///
 /// This geocoder is a wrapper around the [`geocode.json` endpoint](https://developer.tripgo.com/specs/#tag/Geocode/paths/~1geocode.json/get) of the TripGo API.
 public class TKTripGoGeocoder: NSObject {
-  private var lastRect: MKMapRect = .null
+  private struct CacheToken: Equatable {
+    static func == (lhs: TKTripGoGeocoder.CacheToken, rhs: TKTripGoGeocoder.CacheToken) -> Bool {
+      MKMapRectEqualToRect(lhs.lastRect, rhs.lastRect) && lhs.modes == rhs.modes
+    }
+    
+    var lastRect: MKMapRect = .null
+    var modes: Set<String> = []
+  }
+  private var resultCacheToken: CacheToken?
   private var resultCache = NSCache<NSString, NSArray>()
   
   private var onCompletion: (String, (Result<[TKAutocompletionResult], Error>) -> Void)? = nil
@@ -51,7 +59,13 @@ extension TKTripGoGeocoder: TKGeocoding {
       }
       
       let region = coordinateRegion.flatMap(TKRegionManager.shared.region)
-      TKServer.shared.hit(TKAPI.GeocodeResponse.self, path: "geocode.json", parameters: paras, region: region) { _, _, result in
+      
+      var parasWithModes = paras
+      if let available = region?.modeIdentifiers {
+        parasWithModes["modes"] = Array(TKSettings.enabledModeIdentifiers(available))
+      }
+      
+      TKServer.shared.hit(TKAPI.GeocodeResponse.self, path: "geocode.json", parameters: parasWithModes, region: region) { _, _, result in
         completion(
           result.map { response in
             let coordinates = response.choices.map(\.named)
@@ -71,10 +85,25 @@ extension TKTripGoGeocoder: TKAutocompleting {
       return
     }
     
-    if lastRect.isNull || !lastRect.contains(mapRect) {
+    var paras: [String: Any] = [
+      "q": input,
+      "a": true
+    ]
+    
+    let coordinateRegion = MKCoordinateRegion(mapRect)
+    paras["near"] = coordinateRegion.center.isValid ? "\(coordinateRegion.center.latitude),\(coordinateRegion.center.longitude)" : nil
+
+    let region = TKRegionManager.shared.region(containing: coordinateRegion)
+    let modes = TKSettings.enabledModeIdentifiers(region.modeIdentifiers)
+    paras["modes"] = Array(modes)
+    
+    let cacheToken = CacheToken(lastRect: mapRect, modes: modes)
+    
+    if resultCacheToken != cacheToken {
       // invalidate the cache
       resultCache.removeAllObjects()
-      lastRect = mapRect
+      resultCacheToken = cacheToken
+
     } else {
       if let cached = resultCache.object(forKey: input as NSString) as? [TKAutocompletionResult] {
         completion(.success(cached))
@@ -84,16 +113,6 @@ extension TKTripGoGeocoder: TKAutocompleting {
     
     // Putting it into a local variable so that we can cancel this.
     self.onCompletion = (input, completion)
-    
-    var paras: [String: Any] = [
-      "q": input,
-      "a": true
-    ]
-    
-    let coordinateRegion = MKCoordinateRegion(mapRect)
-    paras["near"] = coordinateRegion.center.isValid ? "\(coordinateRegion.center.latitude),\(coordinateRegion.center.longitude)" : nil
-    
-    let region = TKRegionManager.shared.region(containing: coordinateRegion)
     
     TKServer.shared.hit(TKAPI.GeocodeResponse.self, path: "geocode.json", parameters: paras, region: region) { [weak self] _, _, result in
       guard let self = self else { return }
