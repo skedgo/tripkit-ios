@@ -135,14 +135,23 @@ extension TKTripGoGeocoder: TKAutocompleting {
                 accessoryAccessibilityLabel: Loc.ShowTimetable,
                 score: tuple.score
               )
+              
             } else {
+              let preferredImage: TKImage?
+              switch named.klass {
+              case "SchoolLocation":
+                preferredImage = TKStyleManager.image(systemName: "graduationcap.fill")
+              default:
+                preferredImage = nil
+              }
+              
               return TKAutocompletionResult(
                 object: named,
                 title: name,
                 titleHighlightRanges: tuple.titleHighlight,
                 subtitle: named.address,
                 subtitleHighlightRanges: tuple.subtitleHighlight,
-                image: TKAutocompletionResult.image(for: .pin),
+                image: preferredImage ?? TKAutocompletionResult.image(for: .pin),
                 score: tuple.score
               )
             }
@@ -194,8 +203,13 @@ extension TKTripGoGeocoder {
       return .init(score: ranged, titleHighlight: highlight ?? [])
     
     } else if let query = query, let name = named.name ?? named.title {
+      var boost: Int = 0
+      // Rank those higher which get special modal functionality
+      if named.modeIdentifiers != nil {
+        boost += 20
+      }
       let titleScore = TKAutocompletionResult.nameScore(searchTerm: query, candidate: name)
-      let ranged = TKAutocompletionResult.rangedScore(for: titleScore.score, min: 0, max: 50)
+      let ranged = TKAutocompletionResult.rangedScore(for: titleScore.score, min: 0 + boost, max: 50 + boost)
       return .init(score: ranged, titleHighlight: titleScore.ranges)
 
     } else {

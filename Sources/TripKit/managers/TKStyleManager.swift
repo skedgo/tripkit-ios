@@ -85,6 +85,16 @@ extension TKStyleManager {
     return image!
   }
   
+  public static func image(systemName: String) -> TKImage? {
+#if canImport(UIKit)
+    return TKImage(systemName: systemName)?.withRenderingMode(.alwaysTemplate)
+#elseif os(macOS)
+    return nil
+#else
+    return nil
+#endif
+  }
+  
   public static func optionalImage(named: String) -> TKImage? {
 #if canImport(UIKit)
     return TKImage(named: named, in: .tripKit, compatibleWith: nil)

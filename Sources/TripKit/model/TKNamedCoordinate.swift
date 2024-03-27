@@ -76,6 +76,8 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   @objc public var isSuburb: Bool = false
   
+  public var klass: String? = nil
+  
   public var modeIdentifiers: [String]? = nil
   
   public var priority: Float?
@@ -147,6 +149,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     case isSuburb
     case clusterIdentifier
     case modeIdentifiers
+    case klass = "class"
   }
   
   public required init(from decoder: Decoder) throws {
@@ -174,6 +177,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     timeZoneID = try container.decodeIfPresent(String.self, forKey: .timeZoneID)
     clusterIdentifier = try container.decodeIfPresent(String.self, forKey: .clusterIdentifier)
     modeIdentifiers = try container.decodeIfPresent([String].self, forKey: .modeIdentifiers)
+    klass = try container.decodeIfPresent(String.self, forKey: .klass)
     isDraggable = (try container.decodeIfPresent(Bool.self, forKey: .isDraggable)) ?? false
     isSuburb = (try container.decodeIfPresent(Bool.self, forKey: .isSuburb)) ?? false
 
@@ -194,6 +198,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     try container.encode(timeZoneID, forKey: .timeZoneID)
     try container.encode(clusterIdentifier, forKey: .clusterIdentifier)
     try container.encode(modeIdentifiers, forKey: .modeIdentifiers)
+    try container.encode(klass, forKey: .klass)
     try container.encode(isDraggable, forKey: .isDraggable)
     try container.encode(isSuburb, forKey: .isSuburb)
 
@@ -220,6 +225,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
         self.timeZoneID = decoded.timeZoneID
         self.clusterIdentifier = decoded.clusterIdentifier
         self.modeIdentifiers = decoded.modeIdentifiers
+        self.klass = decoded.klass
         self.data = decoded.data
         self.isSuburb = decoded.isSuburb
         self.isDraggable = decoded.isDraggable
@@ -242,6 +248,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
       timeZoneID = aDecoder.decodeObject(of: NSString.self, forKey: "timeZone") as String?
       clusterIdentifier = aDecoder.decodeObject(of: NSString.self, forKey: "clusterIdentifier") as String?
       modeIdentifiers = aDecoder.decodeObject(of: [NSString.self, NSArray.self], forKey: "modeIdentifiers") as? [String]
+      klass = aDecoder.decodeObject(of: NSString.self, forKey: "klass") as String?
       _placemark = aDecoder.decodeObject(of: CLPlacemark.self, forKey: "placemark")
       isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
       isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
@@ -264,6 +271,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     aCoder.encode(timeZoneID, forKey: "timeZone")
     aCoder.encode(clusterIdentifier, forKey: "clusterIdentifier")
     aCoder.encode(modeIdentifiers, forKey: "modeIdentifiers")
+    aCoder.encode(klass, forKey: "klass")
     aCoder.encode(_placemark, forKey: "placemark")
     aCoder.encode(isDraggable, forKey: "isDraggable")
     aCoder.encode(isSuburb, forKey: "isSuburb")
