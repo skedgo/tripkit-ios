@@ -10,6 +10,7 @@ import UIKit
 
 import TripKit
 
+@available(iOS, deprecated: 16.0, message: "Use TKUIAutocompletionResultView")
 class TKUIAutocompletionResultCell: UITableViewCell {
   
   static let reuseIdentifier = "TKUIAutocompletionResultCell"
@@ -50,7 +51,7 @@ extension TKUIAutocompletionResultCell {
   
   private func configure(title: String, titleHighlightRanges: [NSRange] = [], subtitle: String? = nil, subtitleHighlightRanges: [NSRange] = [], image: UIImage? = nil) {
     imageView?.image = image
-    imageView?.tintColor = .tkLabelPrimary
+    imageView?.tintColor = .tkLabelTertiary // Matches icons
     textLabel?.set(text: title, highlightRanges: titleHighlightRanges, textColor: .tkLabelPrimary)
     detailTextLabel?.set(text: subtitle, highlightRanges: subtitleHighlightRanges, textColor: .tkLabelSecondary)
     contentView.alpha = 1

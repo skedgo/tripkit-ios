@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import SwiftUI
 
 import TGCardViewController
 import RxSwift
@@ -67,16 +68,27 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
         return UIAccessibility.isReduceMotionEnabled ? .reload : .animated
       },
       configureCell: { [weak accessoryTapped] _, tv, ip, item in
-        guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
-          preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
-        }
-        if let accessoryTapped {
-          cell.configure(with: item, onAccessoryTapped: { accessoryTapped.onNext($0) })
+        if #available(iOS 16, *) {
+          let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
+          cell.contentConfiguration = UIHostingConfiguration {
+            TKUIAutocompletionResultView(item: item) { [weak accessoryTapped] in
+              accessoryTapped?.onNext($0)
+            }
+          }
+          return cell
+          
         } else {
-          cell.configure(with: item)
+          guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
+            preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
+          }
+          if let accessoryTapped {
+            cell.configure(with: item, onAccessoryTapped: { accessoryTapped.onNext($0) })
+          } else {
+            cell.configure(with: item)
+          }
+          cell.accessibilityTraits = .button
+          return cell
         }
-        cell.accessibilityTraits = .button
-        return cell
       },
       titleForHeaderInSection: { ds, index in
         return ds.sectionModels[index].title
@@ -87,7 +99,11 @@ public class TKUIRoutingQueryInputCard: TKUITableCard {
     tableView.delegate = nil
     tableView.dataSource = nil
 
-    tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
+    if #available(iOS 16, *) {
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
+    } else {
+      tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
+    }
     
     let route = Signal.merge(
       titleView.rx.route,
