@@ -18,6 +18,9 @@ let package = Package(
     .library(
       name: "TripKitUI",
       targets: ["TripKitUI"]),
+    .library(
+      name: "TripKitInterApp",
+      targets: ["TripKitInterApp"]),
   ],
   dependencies: [
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.1.0")),
@@ -41,6 +44,11 @@ let package = Package(
         "GeoMonitor",
       ],
       exclude: ["Supporting Files/Info.plist", "vendor/RxCombine/LICENSE"]
+    ),
+    .target(
+      name: "TripKitInterApp",
+      dependencies: [],
+      exclude: ["Supporting Files/Info.plist"]
     ),
     .testTarget(
       name: "TripKitTests",
