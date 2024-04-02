@@ -38,7 +38,7 @@ class TKUISegmentStationaryCell: UITableViewCell {
   /// between 82 and 16 depending on whether there's a time stack.
   @IBOutlet weak var labelStackTrailingConstraint: NSLayoutConstraint!
   
-  static let nib = UINib(nibName: "TKUISegmentStationaryCell", bundle: Bundle(for: TKUISegmentStationaryCell.self))
+  static let nib = UINib(nibName: "TKUISegmentStationaryCell", bundle: .tripKitUI)
   
   static let reuseIdentifier = "TKUISegmentStationaryCell"
   

@@ -49,7 +49,7 @@ class TKUIServiceHeaderView: UIView {
   }
   
   static func newInstance() -> TKUIServiceHeaderView {
-    return Bundle(for: TKUIServiceHeaderView.self).loadNibNamed("TKUIServiceHeaderView", owner: self, options: nil)?.first as! TKUIServiceHeaderView
+    return Bundle.tripKitUI.loadNibNamed("TKUIServiceHeaderView", owner: self, options: nil)?.first as! TKUIServiceHeaderView
   }
   
   override func awakeFromNib() {

@@ -37,7 +37,7 @@ let package = Package(
     .target(
       name: "TripKitUI",
       dependencies: [
-        .target(name: "TripKit"),
+        "TripKit",
         "Kingfisher",
         .product(name: "RxCocoa", package: "RxSwift"),
         "TGCardViewController",
@@ -47,7 +47,9 @@ let package = Package(
     ),
     .target(
       name: "TripKitInterApp",
-      dependencies: [],
+      dependencies: [
+        "TripKit",
+      ],
       exclude: ["Supporting Files/Info.plist"]
     ),
     .testTarget(

@@ -22,9 +22,8 @@ class TKUIResultsAccessoryView: UIView {
   @IBOutlet var bottomConstraint: NSLayoutConstraint!
   
   static func instantiate() -> TKUIResultsAccessoryView {
-    let bundle = Bundle(for: self)
     guard
-      let view = bundle.loadNibNamed("TKUIResultsAccessoryView", owner: nil, options: nil)!.first as? TKUIResultsAccessoryView
+      let view = Bundle.tripKitUI.loadNibNamed("TKUIResultsAccessoryView", owner: nil, options: nil)!.first as? TKUIResultsAccessoryView
       else { preconditionFailure() }
     return view
   }

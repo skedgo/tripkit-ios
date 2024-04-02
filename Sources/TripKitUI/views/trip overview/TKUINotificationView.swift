@@ -43,9 +43,9 @@ class TKUINotificationView: UIView {
   @IBOutlet var detailImageViews: [UIImageView]!
   
   class func newInstance() -> TKUINotificationView {
-    return Bundle(for: self).loadNibNamed("TKUINotificationView",
-                                          owner: self,
-                                          options: nil)?.first as! TKUINotificationView
+    return Bundle.tripKitUI.loadNibNamed("TKUINotificationView",
+                                         owner: self,
+                                         options: nil)?.first as! TKUINotificationView
   }
 
   override func awakeFromNib() {
