@@ -25,7 +25,7 @@ class TKUISegmentMovingCell: UITableViewCell {
   @IBOutlet weak var lineWrapper: UIView!
   @IBOutlet weak var line: UIView!
   
-  static let nib = UINib(nibName: "TKUISegmentMovingCell", bundle: Bundle(for: TKUISegmentMovingCell.self))
+  static let nib = UINib(nibName: "TKUISegmentMovingCell", bundle: .tripKitUI)
   
   static let reuseIdentifier = "TKUISegmentMovingCell"
   
