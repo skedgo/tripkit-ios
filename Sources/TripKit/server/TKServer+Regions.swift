@@ -57,7 +57,7 @@ extension TKRegionManager {
   /// - Parameter forced: Set true to force overwriting the internal cache
   @MainActor
   public func fetchRegions(forced: Bool) async throws {
-    if fetchTask == nil || !forced {
+    if fetchTask == nil || forced {
       fetchTask?.cancel()
       fetchTask = Task {
         try await self.fetchRegionsWorker(forced: forced)
