@@ -204,9 +204,10 @@ extension TKTripGoGeocoder {
     
     } else if let query = query, let name = named.name ?? named.title {
       var boost: Int = 0
-      // Rank those higher which get special modal functionality
+      // Rank those higher which get special modal functionality. However, keep
+      // below 90 as 90-100 is reserved for favourites.
       if named.modeIdentifiers != nil {
-        boost += 20
+        boost += 40
       }
       let titleScore = TKAutocompletionResult.nameScore(searchTerm: query, candidate: name)
       let ranged = TKAutocompletionResult.rangedScore(for: titleScore.score, min: 0 + boost, max: 50 + boost)
