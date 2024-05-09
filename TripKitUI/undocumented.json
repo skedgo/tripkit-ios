@@ -450,49 +450,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 141,
+      "line": 138,
       "symbol": "TKUIMapManager.selectionMode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 260,
+      "line": 230,
       "symbol": "TKUIMapManager.annotationBuilder(for:in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 445,
+      "line": 399,
       "symbol": "TKUIMapManager.mapView(_:didAdd:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 467,
+      "line": 421,
       "symbol": "TKUIMapManager.mapView(_:viewFor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 477,
+      "line": 431,
       "symbol": "TKUIMapManager.mapView(_:rendererFor:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 528,
+      "line": 482,
       "symbol": "TKUIMapManager.mapView(_:regionDidChangeAnimated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIMapManager.swift",
-      "line": 553,
+      "line": 507,
       "symbol": "TKUIMapManager.mapView(_:didSelect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -520,49 +520,49 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 36,
+      "line": 35,
       "symbol": "TKUINearbyMapManager.mapCenter",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 46,
+      "line": 45,
       "symbol": "TKUINearbyMapManager.mapSelection",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 50,
+      "line": 49,
       "symbol": "TKUINearbyMapManager.searchResult",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 181,
+      "line": 180,
       "symbol": "TKUINearbyMapManager",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 183,
+      "line": 182,
       "symbol": "TKUINearbyMapManager.mapView(_:didChange:animated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 187,
+      "line": 186,
       "symbol": "TKUINearbyMapManager.mapView(_:regionDidChangeAnimated:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUINearbyMapManager.swift",
-      "line": 193,
+      "line": 192,
       "symbol": "TKUINearbyMapManager.mapView(_:didSelect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

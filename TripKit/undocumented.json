@@ -2948,41 +2948,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 12,
-      "symbol": "TKRegionOverlayHelper",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 14,
-      "symbol": "TKRegionOverlayHelper.shared",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 25,
-      "symbol": "TKRegionOverlayHelper.regionsPolygon(forceUpdate:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 151,
-      "symbol": "TKRegionOverlayHelper",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/TKRegionOverlayHelper.swift",
-      "line": 153,
-      "symbol": "TKRegionOverlayHelper.cacheURL",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/helpers/classification/TKMetricClassifier.swift",
       "line": 11,
       "symbol": "TKMetricClassifier",
