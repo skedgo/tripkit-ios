@@ -21,7 +21,6 @@ public class TKUILocationMapManager: TKUIMapManager {
     super.init()
     
     self.preferredZoomLevel = .road
-    self.showOverlayPolygon = true
     
     self.annotations = [coordinate]
   }

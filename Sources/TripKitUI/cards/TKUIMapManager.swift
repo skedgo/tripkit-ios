@@ -80,9 +80,6 @@ open class TKUIMapManager: TGMapManager {
   /// Callback that fires when attributions need to be displayed. In particular when using `tiles`.
   public var attributionDisplayer: (([TKAPI.DataAttribution], _ sender: UIView) -> Void)? = nil
   
-  /// Whether to show the coverage polygon which greys out areas outside the coverage
-  open var showOverlayPolygon = false
-  
   /// Tiles to use instead of Apple Maps tiles
   var tiles: TKUIMapTiles? = nil {
     didSet {
@@ -149,14 +146,6 @@ open class TKUIMapManager: TGMapManager {
   /// *and* regular overlays better to set this to `.aboveLabels`.
   var overlayLevel: MKOverlayLevel = .aboveRoads
 
-  fileprivate var overlayPolygon: MKPolygon? {
-    didSet {
-      guard oldValue != overlayPolygon else { return }
-      removeOverlay(oldValue)
-      addOverlay()
-    }
-  }
-  
   /// Overlays on the map, which are typically routes in TripKit
   ///
   /// As soon as you set this, the routes will be added to the map.
@@ -211,28 +200,9 @@ open class TKUIMapManager: TGMapManager {
     if let overlay = self.tileOverlay, let tiles = self.tiles {
       settingsToRestore = self.accommodateTileOverlay(overlay, sources: tiles.sources, on: mapView)
     }
-    
-    // Fetching and updating polygons which can be slow
-    if let _ = self.overlayPolygon {
-      addOverlay()
-    }
-    
-    let updateOverlay = { [weak self] (polygon: MKPolygon?) -> Void in
-      self?.overlayPolygon = polygon
-    }
-    TKRegionOverlayHelper.shared.regionsPolygon(completion: updateOverlay)
-    NotificationCenter.default.rx
-      .notification(.TKRegionManagerUpdatedRegions)
-      .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { _ in
-        TKRegionOverlayHelper.shared.regionsPolygon(forceUpdate: true, completion: updateOverlay)
-      })
-      .disposed(by: disposeBag)
   }
   
   override open func cleanUp(_ mapView: MKMapView, animated: Bool) {
-    removeOverlay(overlayPolygon)
-    
     if let tileOverlay = self.tileOverlay {
       mapView.removeOverlay(tileOverlay)
       // When we have custom map title, we also add an attribution view. We need to
@@ -259,22 +229,6 @@ open class TKUIMapManager: TGMapManager {
   
   open func annotationBuilder(for annotation: MKAnnotation, in mapView: MKMapView) -> TKUIAnnotationViewBuilder {
     return TKUIMapManager.annotationBuilderFactory(annotation, mapView)
-  }
-  
-}
-
-// MARK: - Overlay polygon
-
-extension TKUIMapManager {
-  
-  private func addOverlay() {
-    guard let polygon = overlayPolygon, isActive, showOverlayPolygon else { return }
-    mapView?.addOverlay(polygon, level: .aboveLabels)
-  }
-  
-  private func removeOverlay(_ polygon: MKPolygon?) {
-    guard let polygon = polygon, isActive else { return }
-    mapView?.removeOverlay(polygon)
   }
   
 }
