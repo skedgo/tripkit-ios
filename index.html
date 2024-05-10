@@ -129,9 +129,10 @@
 </ul>
 <p>TripKit contains the core logic, and the other two depend on it..</p>
 <h2 id="installation">Installation</h2>
-<h3 id="swift-package-manager-recommended">Swift Package Manager (recommended)</h3>
+<h3 id="swift-package-manager">Swift Package Manager</h3>
+<p>Full support for SPM is incoming in the upcoming version 5.0. For now, you can use the <code>main</code> branch.</p>
 <p>Add it to your dependencies:</p>
-<pre class="highlight"><code class="language-swift">.package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", from: "4.0.0")</code></pre>
+<pre class="highlight"><code class="language-swift">.package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", branch: "main")</code></pre>
 <p>And then add the TripKit, TripKitUI, and/or TripKitInterApp dependencies to your target, as appropriate.</p>
 <h3 id="cocoapods">Cocoapods</h3>
 <p>Add desired pods to your <code>Podfile</code>:</p>
@@ -141,6 +142,7 @@ pod 'TripKit'
 pod 'TripKitUI'
 pod 'TripKitInterApp'</code></pre>
 <p>Then run <code>pod update</code> and you're set.</p>
+<p>If you get a "Sandbox" error, make sure that your <code>ENABLE_USER_SCRIPT_SANDBOXING</code> is set to 'No', see <a href="https://stackoverflow.com/questions/76590131/error-while-build-ios-app-in-xcode-sandbox-rsync-samba-13105-deny1-file-w">Stack Overflow</a>.</p>
 <h3 id="manually">Manually</h3>
 <ul>
 <li>Drag the files into your project.</li>
