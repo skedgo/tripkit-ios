@@ -26,7 +26,6 @@ public class TKUINearbyMapManager: TKUIMapManager {
     super.init()
     
     self.preferredZoomLevel = .road
-    self.showOverlayPolygon = true
   }
   
   let defaultMapRect: MKMapRect

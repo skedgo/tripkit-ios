@@ -59,7 +59,6 @@ class TKUIRoutingResultsMapManager: TKUIMapManager, TKUIRoutingResultsMapManager
 
     self.destinationAnnotation = destination
     self.preferredZoomLevel = .road
-    self.showOverlayPolygon = true
   }
   
   private var dropPinRecognizer = UILongPressGestureRecognizer()

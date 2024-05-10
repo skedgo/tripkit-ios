@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -51,7 +51,6 @@
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
 		3A9C6A8629B58AC4000D43B2 /* TKAPIParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */; };
 		3AA1092126FABC6000C52879 /* TKReporter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1092026FABC6000C52879 /* TKReporter+Rx.swift */; };
-		3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */; };
 		3AB424DF2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
 		3AB424E02734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB424DE2734F7D800AA0CF1 /* CLLocationCoordinate2D+EncodePolylineString.swift */; };
 		3AB4E58127584632006D2363 /* String+NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4E58027584632006D2363 /* String+NonEmpty.swift */; };
@@ -159,7 +158,6 @@
 		3AFF285D26C697A3007809CD /* TKTripClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C826C6975F007809CD /* TKTripClassifier.swift */; };
 		3AFF285E26C697A3007809CD /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CA26C6975F007809CD /* TKModeHelper.swift */; };
 		3AFF285F26C697A3007809CD /* TripRequest+Classify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C626C6975F007809CD /* TripRequest+Classify.swift */; };
-		3AFF286126C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */; };
 		3AFF286226C697A3007809CD /* TKImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D126C6975F007809CD /* TKImageBuilder.swift */; };
 		3AFF286326C697A3007809CD /* TKJSONSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */; };
 		3AFF286426C697A3007809CD /* TKRegion+RoutingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D226C6975F007809CD /* TKRegion+RoutingMode.swift */; };
@@ -171,7 +169,6 @@
 		3AFF286B26C697A3007809CD /* TKTripClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C826C6975F007809CD /* TKTripClassifier.swift */; };
 		3AFF286C26C697A3007809CD /* TKModeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CA26C6975F007809CD /* TKModeHelper.swift */; };
 		3AFF286D26C697A3007809CD /* TripRequest+Classify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26C626C6975F007809CD /* TripRequest+Classify.swift */; };
-		3AFF286F26C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */; };
 		3AFF287026C697A3007809CD /* TKImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D126C6975F007809CD /* TKImageBuilder.swift */; };
 		3AFF287126C697A3007809CD /* TKJSONSanitizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */; };
 		3AFF287226C697AA007809CD /* TKContactsManager+TKAutocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF263526C6975F007809CD /* TKContactsManager+TKAutocompleting.swift */; };
@@ -1296,7 +1293,6 @@
 		3AFF26C926C6975F007809CD /* DataAttachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAttachable.swift; sourceTree = "<group>"; };
 		3AFF26CA26C6975F007809CD /* TKModeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKModeHelper.swift; sourceTree = "<group>"; };
 		3AFF26CC26C6975F007809CD /* TKJSONCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKJSONCache.swift; sourceTree = "<group>"; };
-		3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKRegionOverlayHelper.swift; sourceTree = "<group>"; };
 		3AFF26CE26C6975F007809CD /* TKParserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKParserHelper.swift; sourceTree = "<group>"; };
 		3AFF26CF26C6975F007809CD /* API+ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+ViewHelpers.swift"; sourceTree = "<group>"; };
 		3AFF26D026C6975F007809CD /* TKJSONSanitizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKJSONSanitizer.swift; sourceTree = "<group>"; };
@@ -1724,7 +1720,6 @@
 			files = (
 				3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */,
 				3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */,
-				3AB3A60826E84A7E006C2AD1 /* DatadogSDKTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2322,7 +2317,6 @@
 				3AFF26CA26C6975F007809CD /* TKModeHelper.swift */,
 				3AFF26CE26C6975F007809CD /* TKParserHelper.swift */,
 				3AFF26D226C6975F007809CD /* TKRegion+RoutingMode.swift */,
-				3AFF26CD26C6975F007809CD /* TKRegionOverlayHelper.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -3233,7 +3227,6 @@
 			);
 			name = TripKitTests;
 			packageProductDependencies = (
-				3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */,
 			);
 			productName = TripKitTests;
 			productReference = 3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */;
@@ -3329,7 +3322,6 @@
 			mainGroup = 3AB6C6161D1CD0060089F687;
 			packageReferences = (
 				3A1F72CF25C7E54800C72CEE /* XCRemoteSwiftPackageReference "RxSwift" */,
-				3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */,
 				3A55D16426FC5C5800A3D6EB /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3AD3BA9127422A4C00E33015 /* XCRemoteSwiftPackageReference "TGCardViewController" */,
 				F18615CC2973E07E00632FD4 /* XCRemoteSwiftPackageReference "GeoMonitor" */,
@@ -3696,7 +3688,6 @@
 				3AFF285326C6978A007809CD /* TKConfig.swift in Sources */,
 				3A89090927E473EE005A49B1 /* TKLocationProvider.swift in Sources */,
 				3AFF283D26C6977C007809CD /* TKShareURLProvider.swift in Sources */,
-				3AFF286F26C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */,
 				3AFF28E126C697D9007809CD /* TKLocalCost.swift in Sources */,
 				3AFF28BE26C697D9007809CD /* Alert+CoreDataClass.swift in Sources */,
 				3AFF288226C697CA007809CD /* LocationAPIModel.swift in Sources */,
@@ -4173,7 +4164,6 @@
 				3AFF28F826C697DA007809CD /* TKColoredRoute.swift in Sources */,
 				3AFF284A26C6978A007809CD /* TKConfig.swift in Sources */,
 				3AFF283526C6977B007809CD /* TKShareURLProvider.swift in Sources */,
-				3AFF286126C697A3007809CD /* TKRegionOverlayHelper.swift in Sources */,
 				3AFF292026C697DA007809CD /* TKLocalCost.swift in Sources */,
 				3AFF28FD26C697DA007809CD /* Alert+CoreDataClass.swift in Sources */,
 				3AFF289426C697CB007809CD /* LocationAPIModel.swift in Sources */,
@@ -4970,14 +4960,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/DataDog/dd-sdk-swift-testing";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		3AD3BA9127422A4C00E33015 /* XCRemoteSwiftPackageReference "TGCardViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/skedgo/TGCardViewController.git";
@@ -5011,11 +4993,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F18615CC2973E07E00632FD4 /* XCRemoteSwiftPackageReference "GeoMonitor" */;
 			productName = GeoMonitor;
-		};
-		3AB3A60726E84A7E006C2AD1 /* DatadogSDKTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3AB3A60626E84A7E006C2AD1 /* XCRemoteSwiftPackageReference "dd-sdk-swift-testing" */;
-			productName = DatadogSDKTesting;
 		};
 		3AD3BA9227422A4C00E33015 /* TGCardViewController */ = {
 			isa = XCSwiftPackageProductDependency;
