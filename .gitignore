@@ -22,6 +22,8 @@ xcbaselines
 .swiftpm
 .build
 
+# Xcode left-overs
+TripKit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 # Examples
 /Examples/MiniMap/Pods
