@@ -1,14 +1,6 @@
 {
+  "originHash" : "361472fc56e1fd3a3b0fe3351eb9129c9c8becd69704fa5a2130d4f9198b3ea7",
   "pins" : [
-    {
-      "identity" : "dd-sdk-swift-testing",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/DataDog/dd-sdk-swift-testing",
-      "state" : {
-        "revision" : "9fb2d3087afbe7337b4876a63c77ce8dd0e66a23",
-        "version" : "1.1.1"
-      }
-    },
     {
       "identity" : "geomonitor",
       "kind" : "remoteSourceControl",
@@ -23,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "c1f60c63f356d364f4284ba82961acbe7de79bcc",
-        "version" : "7.8.1"
+        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
+        "version" : "7.11.0"
       }
     },
     {
@@ -32,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
-        "version" : "6.6.0"
+        "revision" : "b06a8c8596e4c3e8e7788e08e720e3248563ce6a",
+        "version" : "6.7.1"
       }
     },
     {
@@ -41,10 +33,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/skedgo/TGCardViewController.git",
       "state" : {
-        "revision" : "b96668ef9bd28972f75ff9087b822fad8fb0ad84",
-        "version" : "2.2.10"
+        "revision" : "b43774fcd0f4fd7c618e39baee3fe7ce76eb3507",
+        "version" : "2.3.1"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
