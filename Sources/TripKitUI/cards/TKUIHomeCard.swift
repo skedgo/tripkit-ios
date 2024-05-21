@@ -214,9 +214,9 @@ open class TKUIHomeCard: TKUITableCard {
     // If the search text is empty when the card appears,
     // try loading autocompletion results.
     if let text = headerView.searchBar.text, 
-        text.isEmpty,
-       headerView.searchBar.isFirstResponder {
-      searchTextPublisher.onNext(("", forced: true))
+        text.isEmpty {
+      let forced = headerView.searchBar.isFirstResponder
+      searchTextPublisher.onNext(("", forced: forced))
     }
     
     cardAppearancePublisher.onNext(true)
