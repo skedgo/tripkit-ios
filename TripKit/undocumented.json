@@ -15102,20 +15102,27 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAppleGeocoder.swift",
       "line": 22,
+      "symbol": "TKAppleGeocoder.pointsOfInterestsToExclude",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAppleGeocoder.swift",
+      "line": 24,
       "symbol": "TKAppleGeocoder.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAppleGeocoder.swift",
-      "line": 32,
+      "line": 34,
       "symbol": "TKAppleGeocoder",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKAppleGeocoder.swift",
-      "line": 84,
+      "line": 87,
       "symbol": "TKAppleGeocoder",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
