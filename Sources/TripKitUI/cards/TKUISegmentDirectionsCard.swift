@@ -101,6 +101,7 @@ extension TKUISegmentDirectionsCard {
       cell.contentConfiguration = UIHostingConfiguration {
         TKUISegmentDirectionView(item: item)
       }
+      cell.backgroundColor = .tkBackground
       return cell
       
     } else {
