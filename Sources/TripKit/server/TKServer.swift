@@ -375,9 +375,14 @@ extension TKServer {
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
-    headers: [String: String]? = nil
+    headers: [String: String]? = nil,
+    decoderConfig: (JSONDecoder) -> Void = { _ in }
   ) async -> Response<Model> {
-    await withCheckedContinuation { continuation in
+    
+    let decoder = JSONDecoder()
+    decoderConfig(decoder)
+    
+    return await withCheckedContinuation { continuation in
       hit(method: method,
           url: url,
           parameters: parameters,
@@ -385,7 +390,7 @@ extension TKServer {
       { response in
         continuation.resume(returning: response.map  { data in
           guard let data, !data.isEmpty else { throw ServerError.noData }
-          return try JSONDecoder().decode(Model.self, from: data)
+          return try decoder.decode(Model.self, from: data)
         })
       }
     }
