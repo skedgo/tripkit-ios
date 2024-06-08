@@ -157,7 +157,10 @@ public extension Array where Element == TKAutocompleting {
         if input.forced {
           return Observable.combineLatest(autocompletions).map { $0.flatMap { $0 } }
         } else {
-          return Observable.stableRace(autocompletions)
+          return Observable.stableRace(autocompletions, 
+                                       comparer: { $0.score > $1.score },
+                                       threshold: 3,
+                                       getTitle: { $0.title })
         }
       }
   }
@@ -166,7 +169,12 @@ public extension Array where Element == TKAutocompleting {
 
 extension ObservableType {
 
-  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3, comparer: @escaping (Self.Element, Self.Element) -> Bool) -> Observable<[Self.Element]>
+  static func stableRace<Collection: Swift.Collection>(_ collection: Collection,
+                                                       cutOff: RxTimeInterval = .milliseconds(1000),
+                                                       fastSpots: Int = 3, 
+                                                       comparer: @escaping (Self.Element, Self.Element) -> Bool,
+                                                       threshold: Int, 
+                                                       getTitle: @escaping (Self.Element) -> String) -> Observable<[Self.Element]>
     where Collection.Element: Observable<[Self.Element]>, Element: Equatable {
 
       // Structure:
@@ -183,7 +191,10 @@ extension ObservableType {
       
       let merged = Observable.merge(observables)
         .scan(into: []) { $0.append(contentsOf: $1) }
-        .map { $0.sorted(by: comparer) }
+        .map { mergeSimilarElements($0.sorted(by: comparer),
+                                    threshold: threshold,
+                                    getTitle: getTitle,
+                                    comparer: comparer) }
         .share(replay: 1, scope: .forever)
       
       // ... This represents 1.: What are the best X results when the timer first?
@@ -215,7 +226,42 @@ extension ObservableType {
   
   static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3) -> Observable<[Element]>
     where Collection.Element: Observable<[Element]>, Element: Comparable {
-      return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <)
+      return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <, threshold: 3, getTitle: { _ in "" })
+  }
+  
+  /// merges elements using Levenshtein Distance (string), location similarity not included
+  static func mergeSimilarElements<T: Equatable>(_ elements: [T], threshold: Int, getTitle: (T) -> String, comparer: (T, T) -> Bool) -> [T] {
+    var mergedElements = [T]()
+    
+    for element in elements {
+      if let existingIndex = mergedElements.firstIndex(where: { existingElement in
+        let distance = computeLevenshteinDistance(getTitle(existingElement), getTitle(element))
+        return distance < threshold
+      }) {
+        if comparer(mergedElements[existingIndex], element) {
+          mergedElements[existingIndex] = element
+        }
+      } else {
+        mergedElements.append(element)
+      }
+    }
+    
+    return mergedElements
+  }
+  
+  // Maybe put this on a Util
+  static func computeLevenshteinDistance(_ str1: String, _ str2: String) -> Int {
+      let empty = [Int](repeating: 0, count: str2.count)
+      var last = [Int](0...str2.count)
+
+      for (i, tLhs) in str1.enumerated() {
+          var cur = [i + 1] + empty
+          for (j, tRhs) in str2.enumerated() {
+              cur[j + 1] = tLhs == tRhs ? last[j] : Swift.min(last[j], last[j + 1], cur[j]) + 1
+          }
+          last = cur
+      }
+      return last.last!
   }
   
 }
