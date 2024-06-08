@@ -159,7 +159,7 @@ public extension Array where Element == TKAutocompleting {
         } else {
           return Observable.stableRace(autocompletions, 
                                        comparer: { $0.score > $1.score },
-                                       threshold: 3,
+                                       threshold: 4,
                                        getTitle: { $0.title })
         }
       }
@@ -226,7 +226,7 @@ extension ObservableType {
   
   static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3) -> Observable<[Element]>
     where Collection.Element: Observable<[Element]>, Element: Comparable {
-      return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <, threshold: 3, getTitle: { _ in "" })
+      return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <, threshold: 4, getTitle: { _ in "" })
   }
   
   /// merges elements using Levenshtein Distance (string), location similarity not included
