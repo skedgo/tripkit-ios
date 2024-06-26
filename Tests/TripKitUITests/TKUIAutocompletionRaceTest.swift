@@ -135,20 +135,20 @@ class TKUIAutocompletionRaceTest: XCTestCase {
   
   func testStableRace() throws {
     let inputs: [([TKAutocompletionResult], at: TestTime)] = [
-      ([TKAutocompletionResult(object: "1", title: "Campbell High School", image: .iconAlert, score: 10)], at: 100),
-      ([TKAutocompletionResult(object: "2", title: "Highway 17", image: .iconAlert, score: 20)], at: 200),
-      ([TKAutocompletionResult(object: "3", title: "Campbell High School", image: .iconAlert, score: 15)], at: 300),
-      ([TKAutocompletionResult(object: "4", title: "Campbell High School Athletics", image: .iconAlert, score: 25)], at: 400),
-      ([TKAutocompletionResult(object: "5", title: "Campbell High School", image: .iconAlert, score: 5)], at: 500),
+      ([TKAutocompletionResult(object: "1", title: "Campbell High School", image: .iconAlert, score: 50)], at: 100),
+      ([TKAutocompletionResult(object: "2", title: "Highway 17", image: .iconAlert, score: 5)], at: 200),
+      ([TKAutocompletionResult(object: "3", title: "Campbell High School", image: .iconAlert, score: 45)], at: 300),
+      ([TKAutocompletionResult(object: "4", title: "Campbell High School Athletics", image: .iconAlert, score: 40)], at: 400),
+      ([TKAutocompletionResult(object: "5", title: "Campbell High School", image: .iconAlert, score: 35)], at: 500),
       ([TKAutocompletionResult(object: "6", title: "Campbell HS - Basketball Courts", image: .iconAlert, score: 30)], at: 600)
     ]
     
     let expected: [Recorded<Event<[TKAutocompletionResult]>>] = [
       .next(600, [
+        TKAutocompletionResult(object: "5", title: "Campbell High School", image: .iconAlert, score: 50),
+        TKAutocompletionResult(object: "4", title: "Campbell High School Athletics", image: .iconAlert, score: 40),
         TKAutocompletionResult(object: "6", title: "Campbell HS - Basketball Courts", image: .iconAlert, score: 30),
-        TKAutocompletionResult(object: "4", title: "Campbell High School Athletics", image: .iconAlert, score: 25),
-        TKAutocompletionResult(object: "2", title: "Highway 17", image: .iconAlert, score: 20),
-        TKAutocompletionResult(object: "5", title: "Campbell High School", image: .iconAlert, score: 5)
+        TKAutocompletionResult(object: "2", title: "Highway 17", image: .iconAlert, score: 5)
       ]),
       .completed(600)
     ]
