@@ -16978,7 +16978,7 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKServer.swift",
       "line": 373,
-      "symbol": "TKServer.hit(_:_:url:parameters:headers:)",
+      "symbol": "TKServer.hit(_:_:url:parameters:headers:decoderConfig:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -17607,8 +17607,15 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKTripFetcher.swift",
-      "line": 73,
+      "line": 74,
       "symbol": "TKTripFetcher.update(_:url:aborter:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKTripFetcher.swift",
+      "line": 99,
+      "symbol": "TKTripFetcher.update(_:url:aborter:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },

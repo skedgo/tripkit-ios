@@ -625,7 +625,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIRoutingResultsCard+Configuration.swift",
-      "line": 111,
+      "line": 112,
       "symbol": "TKUIRoutingResultsCard.Configuration.customItemProvider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
