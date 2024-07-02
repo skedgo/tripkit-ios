@@ -173,7 +173,7 @@ extension ObservableType {
                                                        cutOff: RxTimeInterval = .milliseconds(1000),
                                                        fastSpots: Int = 3, 
                                                        comparer: @escaping (Self.Element, Self.Element) -> Bool,
-                                                       threshold: Int, 
+                                                       threshold: Int?, 
                                                        getTitle: @escaping (Self.Element) -> String) -> Observable<[Self.Element]>
     where Collection.Element: Observable<[Self.Element]>, Element: Equatable {
 
@@ -191,10 +191,16 @@ extension ObservableType {
       
       let merged = Observable.merge(observables)
         .scan(into: []) { $0.append(contentsOf: $1) }
-        .map { mergeSimilarElements($0.sorted(by: comparer),
-                                    threshold: threshold,
-                                    getTitle: getTitle,
-                                    comparer: comparer) }
+        .map { 
+          if let threshold { // has threshold for Levenshtein Distance
+            return mergeSimilarElements($0.sorted(by: comparer),
+                                        threshold: threshold,
+                                        getTitle: getTitle,
+                                        comparer: comparer)
+          } else {
+            return $0.sorted(by: comparer)
+          }
+        }
         .share(replay: 1, scope: .forever)
       
       // ... This represents 1.: What are the best X results when the timer first?
@@ -224,9 +230,10 @@ extension ObservableType {
       return Observable.amb([all, fastThenAll])
   }
   
-  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3) -> Observable<[Element]>
+  // Levenshtein distance threshold default is set to 4. If set to nil, levenshtein distance handling is ignored and items are appended.
+  static func stableRace<Collection: Swift.Collection>(_ collection: Collection, cutOff: RxTimeInterval = .milliseconds(1000), fastSpots: Int = 3, threshold: Int? = 4) -> Observable<[Element]>
     where Collection.Element: Observable<[Element]>, Element: Comparable {
-      return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <, threshold: 4, getTitle: { _ in "" })
+      return stableRace(collection, cutOff: cutOff, fastSpots: fastSpots, comparer: <, threshold: threshold, getTitle: { _ in "" })
   }
   
   /// merges elements using Levenshtein Distance (string), location similarity not included

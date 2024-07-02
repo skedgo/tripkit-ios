@@ -190,7 +190,8 @@ extension TKUIAutocompletionRaceTest {
         .map(scheduler.createHotObservable)
         .map { $0.asObservable() }
       
-      let processed = Observable.stableRace(observables, cutOff: .seconds(cutOff), fastSpots: fastSpots)
+      // Threshold set to nil to ignore Levenshtein distance handling for this simulation
+      let processed = Observable.stableRace(observables, cutOff: .seconds(cutOff), fastSpots: fastSpots, threshold: nil)
       
       processed
         .bind(to: observer)
@@ -226,7 +227,7 @@ extension TKUIAutocompletionRaceTest {
         .map(scheduler.createHotObservable)
         .map { $0.asObservable() }
               
-      let processed = Observable.stableRace(observables, cutOff: .seconds(cutOff), fastSpots: fastSpots, comparer: { $0.score > $1.score }, threshold: 3, getTitle: { $0.title })
+      let processed = Observable.stableRace(observables, cutOff: .seconds(cutOff), fastSpots: fastSpots, comparer: { $0.score > $1.score }, threshold: 4, getTitle: { $0.title })
               
       processed
         .bind(to: observer)
