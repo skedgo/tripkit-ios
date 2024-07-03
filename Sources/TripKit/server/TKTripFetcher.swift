@@ -70,6 +70,7 @@ public enum TKTripFetcher {
   }
   
   
+  @available(*, renamed: "update(_:url:aborter:)")
   public static func update(_ trip: Trip, url: URL? = nil, aborter: @escaping ((URL) -> Bool) = { _ in false }, completion: @escaping (Result<(Trip, URL, didUpdate: Bool), Error>) -> Void) {
     let url = url ?? trip.updateURLString.flatMap( { URL(string: $0) })
     guard let updateURL = url else {
@@ -94,6 +95,15 @@ public enum TKTripFetcher {
       }
     }
   }
+  
+  public static func update(_ trip: Trip, url: URL? = nil, aborter: @escaping ((URL) -> Bool) = { _ in false }) async throws -> (Trip, URL, didUpdate: Bool) {
+    return try await withCheckedThrowingContinuation { continuation in
+      update(trip, url: url, aborter: aborter) { result in
+        continuation.resume(with: result)
+      }
+    }
+  }
+  
   
   private static func downloadTripData(from url: URL, includeStops: Bool, completion: @escaping (Result<(Data?, shareURL: URL), Error>) -> Void) {
     
