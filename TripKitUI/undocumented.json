@@ -1997,7 +1997,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/helper/RxTripKit/TKGeocoding+Rx.swift",
-      "line": 227,
+      "line": 280,
       "symbol": "Reactive.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
