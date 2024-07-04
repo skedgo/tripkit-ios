@@ -38,7 +38,7 @@ public class TKRouter: NSObject {
     public var additional: Set<URLQueryItem> = []
     public var context: NSManagedObjectContext?
 
-    public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: NSManagedObjectContext) {
+    public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: NSManagedObjectContext? = nil) {
       self.from = from
       self.to = to
       self.at = time
