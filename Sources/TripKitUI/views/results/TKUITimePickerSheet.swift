@@ -137,6 +137,8 @@ public class TKUITimePickerSheet: TKUISheet {
     
     if let earliest = config.minimumDate {
       timePicker.minimumDate = earliest
+    } else if config.removeDateLimits {
+      timePicker.minimumDate = nil
     } else if showTime {
       // A month ago
       timePicker.minimumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * -31)
@@ -144,6 +146,8 @@ public class TKUITimePickerSheet: TKUISheet {
     
     if let latest = config.maximumDate {
       timePicker.maximumDate = latest
+    } else if config.removeDateLimits {
+      timePicker.maximumDate = nil
     } else if showTime {
       // A month from now
       timePicker.maximumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * 31)
@@ -184,8 +188,10 @@ public class TKUITimePickerSheet: TKUISheet {
           selector.tintColor = tint
           selector.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] _ in
-              guard let self = self else { return }
-              self.removeOverlay(animated: true)
+              guard let self else { return }
+              if self.config.shouldDismissPicker {
+                self.removeOverlay(animated: true)
+              }
               handler(self.timePicker.date)
             })
             .disposed(by: disposeBag)
@@ -312,6 +318,7 @@ public class TKUITimePickerSheet: TKUISheet {
     doneSelector.selectedSegmentIndex = -1
     
     if isBeingOverlaid {
+      guard config.shouldDismissPicker else { return }
       tappedOverlay(sender)
     } else if let delegate = delegate {
       delegate.timePickerRequestsResign(self)
