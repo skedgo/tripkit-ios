@@ -43,11 +43,12 @@ public extension TKUITimePickerSheet {
     /// Allows customizig the "Arrive by" time type label
     public var arriveByLabel: String = Loc.ArriveBy
     
-    /// Controls wether the picker should dismiss when done is tapped.
-    public var shouldDismissPicker: Bool = true
-    
     /// This controls wether minimum and maximum date is set to 1 month if set to nil
     public var removeDateLimits: Bool = false
+    
+    /// Allows selection of dates that are below or beyond minimum and maximum date respectively.
+    /// This makes the selector button be disabled wether current date selected is out of range.
+    public var allowsOutOfRangeSelection: Bool = false
   }
   
 }
