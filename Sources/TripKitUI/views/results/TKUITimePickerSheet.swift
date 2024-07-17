@@ -189,6 +189,7 @@ public class TKUITimePickerSheet: TKUISheet {
           selector.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] _ in
               guard let self else { return }
+              self.removeOverlay(animated: true)
               handler(self.timePicker.date)
             })
             .disposed(by: disposeBag)
