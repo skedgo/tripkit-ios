@@ -8228,97 +8228,104 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
       "line": 24,
+      "symbol": "TKAPI.User.userType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
+      "line": 25,
       "symbol": "TKAPI.User.appData",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 53,
+      "line": 55,
       "symbol": "TKAPI.User.userId",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 55,
+      "line": 57,
       "symbol": "TKAPI.User.emails",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 62,
+      "line": 64,
       "symbol": "TKAPI.Phone",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 63,
+      "line": 65,
       "symbol": "TKAPI.Phone.countryCode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 64,
+      "line": 66,
       "symbol": "TKAPI.Phone.number",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 66,
+      "line": 68,
       "symbol": "TKAPI.Phone.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 67,
+      "line": 69,
       "symbol": "TKAPI.Phone.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 69,
+      "line": 71,
       "symbol": "TKAPI.Phone.init(number:countryCode:validated:type:id:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 88,
+      "line": 90,
       "symbol": "TKAPI.Email",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 89,
+      "line": 91,
       "symbol": "TKAPI.Email.address",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 90,
+      "line": 92,
       "symbol": "TKAPI.Email.verified",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 91,
+      "line": 93,
       "symbol": "TKAPI.Email.primary",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/API/UserAPIModel.swift",
-      "line": 93,
+      "line": 95,
       "symbol": "TKAPI.Email.init(address:validated:primary:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
