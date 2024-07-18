@@ -21,6 +21,7 @@ extension TKAPI {
     public let phones: [Phone]?
     public let highResProfilePictureURL: URL?
     public let lowResProfilePictureURL: URL?
+    public let userType: String?
     public var appData: [String : Any]?
     private let rawUserId: String?
     private let rawEmail: String?
@@ -45,6 +46,7 @@ extension TKAPI {
       case phones
       case highResProfilePictureURL = "largeImageURL"
       case lowResProfilePictureURL = "smallImageURL"
+      case userType
       case rawEmail = "email"
       case rawEmails = "emails"
       case rawUserId = "userID"
