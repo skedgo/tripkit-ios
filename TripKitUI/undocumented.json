@@ -3874,7 +3874,7 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITimePickerSheet.swift",
       "line": 39,
-      "symbol": "TKUITimePickerSheet.ToolbarElement.button(title:tint:handler:)",
+      "symbol": "TKUITimePickerSheet.ToolbarElement.button(title:tint:isSelector:handler:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -3936,7 +3936,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/views/results/TKUITimePickerSheet.swift",
-      "line": 260,
+      "line": 269,
       "symbol": "TKUITimePickerSheet.tappedOverlay(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
