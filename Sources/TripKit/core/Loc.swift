@@ -125,11 +125,11 @@ public class Loc : NSObject {
     return NSLocalizedString("On time", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show when a service is on time according to real-time data.")
   }
   
-  public static var TimeSelectionBelow: String {
+  public static var DateTimeSelectionBelow: String {
     return NSLocalizedString("Below earliest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is below the minimum datetime.")
   }
   
-  public static var TimeSelectionAbove: String {
+  public static var DateTimeSelectionAbove: String {
     return NSLocalizedString("Beyond furthest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is above the maximum datetime.")
   }
   

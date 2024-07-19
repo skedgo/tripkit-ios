@@ -346,10 +346,10 @@ public class TKUITimePickerSheet: TKUISheet {
     var isEnabled = true
     
     if let earliestDate = config.minimumDate, selectedDate < earliestDate {
-      title = Loc.TimeSelectionBelow
+      title = Loc.DateTimeSelectionBelow
       isEnabled = false
     } else if let latestDate = config.maximumDate, selectedDate > latestDate {
-      title = Loc.TimeSelectionAbove
+      title = Loc.DateTimeSelectionAbove
     }
     
     selector.setTitle(title, forSegmentAt: 0)
