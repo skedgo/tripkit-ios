@@ -125,8 +125,12 @@ public class Loc : NSObject {
     return NSLocalizedString("On time", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show when a service is on time according to real-time data.")
   }
   
-  public static var InvalidTime: String {
-    return NSLocalizedString("The selected time is not valid for your trip. Please choose a time within the allowed range.", tableName: "TripKit", bundle: .tripKit, comment: "Notice displayed when user selects and validates an invalid time on a date-time picker.")
+  public static var TimeSelectionBelow: String {
+    return NSLocalizedString("Below earliest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is below the minimum datetime.")
+  }
+  
+  public static var TimeSelectionAbove: String {
+    return NSLocalizedString("Beyond furthest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is above the maximum datetime.")
   }
   
   public static func LateService(minutes: Int, service: String?) -> String {

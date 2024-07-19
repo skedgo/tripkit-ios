@@ -322,7 +322,6 @@ public class TKUITimePickerSheet: TKUISheet {
   func doneButtonPressed(sender: Any) {
     guard doneSelector.isEnabled 
     else {
-      // TODO: Alert?
       return
     }
     
@@ -347,10 +346,10 @@ public class TKUITimePickerSheet: TKUISheet {
     var isEnabled = true
     
     if let earliestDate = config.minimumDate, selectedDate < earliestDate {
-      title = "Below earliest date"
+      title = Loc.TimeSelectionBelow
       isEnabled = false
     } else if let latestDate = config.maximumDate, selectedDate > latestDate {
-      title = "Beyond furthest date"
+      title = Loc.TimeSelectionAbove
     }
     
     selector.setTitle(title, forSegmentAt: 0)
