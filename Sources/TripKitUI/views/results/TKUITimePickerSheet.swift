@@ -36,7 +36,7 @@ public class TKUITimePickerSheet: TKUISheet {
   }
   
   public enum ToolbarElement {
-    case button(title: String, tint: UIColor? = nil, handler: (Date) -> Void)
+    case button(title: String, tint: UIColor? = nil, isSelector: Bool = true, handler: (Date) -> Void)
     case spacer
     case picker
   }
@@ -135,15 +135,19 @@ public class TKUITimePickerSheet: TKUISheet {
       timePicker.sizeToFit()
     }
     
-    if let earliest = config.minimumDate {
+    if let earliest = config.minimumDate, !config.allowsOutOfRangeSelection {
       timePicker.minimumDate = earliest
+    } else if config.removeDateLimits {
+      timePicker.minimumDate = nil
     } else if showTime {
       // A month ago
       timePicker.minimumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * -31)
     }
     
-    if let latest = config.maximumDate {
+    if let latest = config.maximumDate, !config.allowsOutOfRangeSelection {
       timePicker.maximumDate = latest
+    } else if config.removeDateLimits {
+      timePicker.maximumDate = nil
     } else if showTime {
       // A month from now
       timePicker.maximumDate = .init(timeIntervalSinceNow: 60 * 60 * 24 * 31)
@@ -175,20 +179,25 @@ public class TKUITimePickerSheet: TKUISheet {
       toolbar.bottomAnchor.constraint(equalTo: timePicker.topAnchor)
     ])
     
-    // Use default time seletor if no custom tool bar items are provided.
+    // Use default time selector if no custom tool bar items are provided.
     if let builder = toolbarBuilder {
       toolbar.items = builder.elements.compactMap { element -> UIBarButtonItem? in
         switch element {
-        case let .button(title, tint, handler):
+        case let .button(title, tint, isSelector, handler):
           let selector = UISegmentedControl(items: [title])
           selector.tintColor = tint
           selector.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] _ in
-              guard let self = self else { return }
+              guard let self else { return }
               self.removeOverlay(animated: true)
               handler(self.timePicker.date)
             })
             .disposed(by: disposeBag)
+          
+          if isSelector {
+            self.doneSelector = selector
+          }
+          
           return .init(customView: selector)
         
         case .spacer:
@@ -201,7 +210,7 @@ public class TKUITimePickerSheet: TKUISheet {
       
       self.accessibilityElements = builder.accessibilityElements.compactMap { element in
         switch element {
-        case let .button(title, _, _):
+        case let .button(title, _, _, _):
           return toolbar.items?
             .compactMap { $0.customView as? UISegmentedControl }
             .first { $0.titleForSegment(at: 0) == title }
@@ -275,6 +284,8 @@ public class TKUITimePickerSheet: TKUISheet {
     if selectedTimeType == .leaveASAP {
       selectedTimeType = .leaveAfter
     }
+    
+    updateDoneButtonState(selector: doneSelector, handler: { _ in })
   }
   
   @objc
@@ -309,15 +320,42 @@ public class TKUITimePickerSheet: TKUISheet {
 
   @objc
   func doneButtonPressed(sender: Any) {
+    guard doneSelector.isEnabled 
+    else {
+      return
+    }
+    
     doneSelector.selectedSegmentIndex = -1
     
     if isBeingOverlaid {
       tappedOverlay(sender)
-    } else if let delegate = delegate {
+    } else if let delegate {
       delegate.timePickerRequestsResign(self)
     } else {
       assertionFailure("Done pressed, but don't know what to do. Set a delegate?")
     }
+  }
+  
+  private func updateDoneButtonState(selector: UISegmentedControl?,
+                                     handler: @escaping (Date) -> Void) {
+    guard let selector else { return }
+    
+    let selectedDate = timePicker.date
+    
+    var title = Loc.Done
+    var isEnabled = true
+    
+    if let earliestDate = config.minimumDate, selectedDate < earliestDate {
+      title = Loc.DateTimeSelectionBelow
+      isEnabled = false
+    } else if let latestDate = config.maximumDate, selectedDate > latestDate {
+      title = Loc.DateTimeSelectionAbove
+    }
+    
+    selector.setTitle(title, forSegmentAt: 0)
+    selector.isEnabled = isEnabled
+    selector.invalidateIntrinsicContentSize()
+    selector.sizeToFit()
   }
   
 }
