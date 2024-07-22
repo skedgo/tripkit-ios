@@ -427,7 +427,7 @@
 "Unlock" = "Unlock";
 
 /* Vehicle updated. (old key: VehicleUpdated) */
-"Updated %@ ago" = "%s 전에 업데이트 됨";
+"Updated %@ ago" = "%@ 전에 업데이트 됨";
 
 /* Vehicle 'x' updated. (old key: VehicleCalledUpdated) */
 "Vehicle %@ updated %@ ago" = "%1$@이 %2$@ 전에 업데이트 됨";
