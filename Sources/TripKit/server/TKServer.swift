@@ -370,6 +370,32 @@ extension TKServer {
     }
   }
   
+  public func hit<Input: Encodable>(
+    _ method: HTTPMethod = .POST,
+    path: String,
+    input: Input,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil,
+    encoderConfig: (JSONEncoder) -> Void = { _ in }
+  ) async throws -> Response<Data?> {
+    let encoder = JSONEncoder()
+    encoderConfig(encoder)
+    let parameters = try encoder.encodeJSONObject(input) as? [String: Any]
+
+    return await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { response in
+        continuation.resume(returning: response)
+      }
+    }
+  }
+  
   public func hit<Model: Decodable>(
     _ type: Model.Type,
     _ method: HTTPMethod = .GET,
