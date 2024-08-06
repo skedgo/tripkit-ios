@@ -154,9 +154,6 @@
 /* Include events. */
 "Include events" = "Inclure les évènements";
 
-/* A footnote that instructs users to check their emails for reset instructions */
-"Instructions on how to reset password has been sent to the above email address." = "Les instructions pour réinitialiser votre mot de passe ont été envoyées par e-mail à %s";
-
 /* Name placeholder text */
 "John Appleseed" = "John Appleseed";
 
