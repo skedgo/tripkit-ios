@@ -356,7 +356,7 @@ extension TKWaypointRouter {
     var leaveAt: Date?
   }
   
-  enum Location: Equatable {
+  enum Location: Hashable {
     static func == (lhs: TKWaypointRouter.Location, rhs: TKWaypointRouter.Location) -> Bool {
       switch (lhs, rhs) {
       case let (.coordinate(left), .coordinate(right)):
@@ -369,11 +369,22 @@ extension TKWaypointRouter {
       }
     }
     
+    func hash(into hasher: inout Hasher) {
+      switch self {
+      case .coordinate(let coordinate):
+        hasher.combine(coordinate.latitude)
+        hasher.combine(coordinate.longitude)
+      case let .code(code, region):
+        hasher.combine(code)
+        hasher.combine(region)
+      }
+    }
+    
     case coordinate(CLLocationCoordinate2D)
     case code(String, TKRegion)
   }
   
-  public struct Segment: Equatable {
+  public struct Segment: Hashable {
     var start: Location
     var end: Location
     let modes: [String]
