@@ -300,4 +300,21 @@ public class Loc : NSObject {
     return String(format: format, percentage)
   }
   
+  public static func MoreLocationInfo(_ address: String) -> String {
+    let format = NSLocalizedString("More information about %@", tableName: "Shared", bundle: .tripKit, comment: "Accessibility label for the information button next to addresses in an autocomplete item.")
+    return String(format: format, address)
+  }
+
+  public static var TapToLearnLocationInfo: String {
+    return NSLocalizedString("Tap to learn more about this location.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for info button which provides additional information.")
+  }
+  
+  public static var TapToSelectAddress: String {
+    return NSLocalizedString("Tap to select this address as origin or destination.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for an autocomplete item to provide selection capability.")
+  }
+  
+  public static var TapToSelectCurrentLocation: String {
+    return NSLocalizedString("Tap to select your current location as the destination or origin.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for an current location item to provide selection capability.")
+  }
+  
 }
