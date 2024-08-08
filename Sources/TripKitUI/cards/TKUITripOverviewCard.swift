@@ -39,6 +39,7 @@ class TKUITripsPageCard: TGPageCard {
 public class TKUITripOverviewCard: TKUITableCard {
   
   public enum DefaultActionPriority: Int {
+    case book = 20
     case go = 15
     case notify = 10
     case alternatives = 5

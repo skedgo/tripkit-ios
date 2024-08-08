@@ -446,6 +446,17 @@ extension TKUIRoutingResultsCard {
       tripCell.accessoryType = .disclosureIndicator
       #endif
       tripCell.accessibilityTraits = .button
+      
+      tripCell.actionButton.rx.tap
+        .subscribe(onNext: { [weak self] in
+          guard
+            let self,
+            let primaryAction = TKUITripOverviewCard.config.tripActionsFactory?(trip).first(where: { $0.priority >= TKUITripOverviewCard.DefaultActionPriority.book.rawValue }),
+            let view = self.controller?.view else { return }
+          let _ = primaryAction.handler(primaryAction, self, trip, view)
+        })
+        .disposed(by: tripCell.disposeBag)
+      
       return tripCell
     
     case .customItem(let item):
@@ -466,7 +477,10 @@ extension TKUITripCell {
 
 extension TKUITripCell.Model {
 
+  @MainActor
   init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool? = nil) {
+    let primaryAction = TKUITripOverviewCard.config.tripActionsFactory?(trip).first(where: { $0.priority >= TKUITripOverviewCard.DefaultActionPriority.book.rawValue })
+    
     self.init(
       departure: trip.departureTime,
       arrival: trip.arrivalTime,
@@ -478,6 +492,7 @@ extension TKUITripCell.Model {
       isCancelled: trip.isCanceled,
       hideExactTimes: trip.hideExactTimes,
       segments: trip.segments(with: .inSummary),
+      primaryAction: primaryAction?.title,
       accessibilityLabel: trip.accessibilityLabel
     )
   }
