@@ -82,16 +82,10 @@ public class TKUITripModeByModeCard: TGPageCard {
   private let viewModel: TKUITripModeByModeViewModel
   
   private let segmentCards: [SegmentCardsInfo]
-  private let headerSegmentIndices: [Int]
   
-  private var headerSegmentsView: TKUITripSegmentsView? {
-    return TKUITripModeByModeCard.findSubview(TKUITripSegmentsView.self, in: headerAccessoryView)
+  private var headerView: TKUITripModeByModeHeader? {
+    headerAccessoryView as? TKUITripModeByModeHeader
   }
-  private var headerETALabel: UILabel? {
-    return TKUITripModeByModeCard.findSubview(UILabel.self, in: headerAccessoryView)
-  }
-
-  private let feedbackGenerator = UISelectionFeedbackGenerator()
 
   private let tripMapManager: TKUITripMapManager
   
@@ -134,16 +128,16 @@ public class TKUITripModeByModeCard: TGPageCard {
       return (previous.0 + [info], range.upperBound)
     }.0
 
-    let headerSegments = trip.headerSegments
-    self.headerSegmentIndices = headerSegments.map { $0.index }
-    
     let initialPage = SegmentCardsInfo.cardIndex(ofSegmentAt: segment.index, mode: mode, in: segmentCards) ?? 0
     
     let cards = segmentCards.flatMap { $0.cards.map { $0.0 } }
     let actualInitialPage = min(initialPage, cards.count - 1)
     super.init(cards: cards, initialPage: actualInitialPage, initialPosition: initialPosition)
 
-    self.headerAccessoryView = buildSegmentsView(segments: headerSegments, selecting: segment.index, trip: trip)
+    let headerView = TKUITripModeByModeHeader.newInstance()
+    headerView.configure(trip: trip, selecting: segment.index)
+    headerView.tapHandler = { [weak self] in self?.selectSegment(index: $0) }
+    self.headerAccessoryView = headerView
     
     // Little hack for starting with selecting the first page on the map, too
     didMoveToPage(index: actualInitialPage)
@@ -166,6 +160,13 @@ public class TKUITripModeByModeCard: TGPageCard {
   
   public override func didBuild(cardView: TGCardView?, headerView: TGHeaderView?) {
     super.didBuild(cardView: cardView, headerView: headerView)
+    
+    if let pageHeader = headerView, let modeByModeHeader = self.headerView {
+      pageHeader.cornerRadius = 0
+      let widthConstraint = modeByModeHeader.widthAnchor.constraint(equalTo: pageHeader.widthAnchor, constant: -16)
+      widthConstraint.priority = .required
+      widthConstraint.isActive = true
+    }
     
     tripStartedHandler?(self, viewModel.trip)
     
@@ -201,15 +202,35 @@ public class TKUITripModeByModeCard: TGPageCard {
   public override func didMoveToPage(index: Int) {
     super.didMoveToPage(index: index)
    
-    guard let cardsInfo = SegmentCardsInfo.cardsInfo(ofCardAtIndex: index, in: segmentCards) else { assertionFailure(); return }
-    let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= cardsInfo.segmentIndex } // segment on card might not be in header
-    headerSegmentsView?.selectSegment(atIndex: selectedHeaderIndex ?? 0)
+    guard 
+      let cardsInfo = SegmentCardsInfo.cardsInfo(ofCardAtIndex: index, in: segmentCards),
+      let headerView
+    else { assertionFailure(); return }
+    let selectedHeaderIndex = headerView.segmentIndices.firstIndex { $0 >= cardsInfo.segmentIndex } // segment on card might not be in header
+    headerView.segmentsView?.selectSegment(atIndex: selectedHeaderIndex ?? 0)
     
     if let segment = tripMapManager.trip.segments.first(where: { Self.config.builder.cardIdentifier(for: $0) == cardsInfo.segmentIdentifier }) {
       let offset = index - cardsInfo.cardsRange.lowerBound
       let mode = cardsInfo.cards[offset].1
       tripMapManager.show(segment, animated: true, mode: mode)
     }
+  }
+  
+  private func selectSegment(index: Int) {
+    guard let cardIndices = SegmentCardsInfo.cardIndices(ofSegmentAt: index, in: segmentCards)
+      else { assertionFailure(); return }
+    
+    let target: Int
+    if cardIndices.contains(currentPageIndex), cardIndices.count > 1 {
+      target = (currentPageIndex == cardIndices.upperBound - 1)
+        ? cardIndices.lowerBound
+        : currentPageIndex + 1
+    } else if !cardIndices.contains(currentPageIndex) {
+      target = cardIndices.lowerBound
+    } else {
+      return // Only a single card which is already selected
+    }
+    move(to: target)
   }
   
   public func offsetToReach(mode: TKUISegmentMode, in segment: TKSegment) -> Int? {
@@ -230,99 +251,6 @@ public class TKUITripModeByModeCard: TGPageCard {
     DispatchQueue.main.async {
       TKUITripModeByModeCard.config.builder.cleanUp(existingCards: cards)
     }
-  }
-  
-}
-
-// MARK: - Segments view in header
-
-fileprivate extension Trip {
-  var headerSegments: [TKSegment] {
-    return segments(with: .inSummary)
-  }
-}
-
-extension TKUITripModeByModeCard {
-  
-  private static func findSubview<V: UIView>(_ type: V.Type, in header: UIView?) -> V? {
-    guard let stack = header as? UIStackView else { return nil }
-    return stack.arrangedSubviews.compactMap { $0 as? V }.first
-  }
-  
-  private static func headerTimeText(for trip: Trip) -> String {
-    guard !trip.hideExactTimes else { return "" }
-    let departure = TKStyleManager.timeString(trip.departureTime, for: trip.departureTimeZone)
-    let arrival   = TKStyleManager.timeString(trip.arrivalTime, for: trip.arrivalTimeZone ?? trip.departureTimeZone, relativeTo: trip.departureTimeZone)
-    return "\(departure) - \(arrival)"
-  }
-
-  private func buildSegmentsView(segments: [TKSegment], selecting index: Int, trip: Trip) -> UIView {
-    // the segments view
-    let selectedHeaderIndex = headerSegmentIndices.firstIndex { $0 >= index } // exact segment might not be available!
-
-    let segmentsView = TKUITripSegmentsView(frame: .zero)
-    segmentsView.darkTextColor  = .tkLabelPrimary
-    segmentsView.lightTextColor = .tkLabelSecondary
-    segmentsView.configure(segments, allowInfoIcons: false)
-    segmentsView.selectSegment(atIndex: selectedHeaderIndex ?? 0)
-
-    let tapper = UITapGestureRecognizer(target: self, action: #selector(segmentTapped))
-    segmentsView.addGestureRecognizer(tapper)
-    
-    feedbackGenerator.prepare()
-    
-    // the label
-    let label = UILabel()
-    label.text = TKUITripModeByModeCard.headerTimeText(for: trip)
-    label.textColor = .tkLabelSecondary
-    label.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    label.textAlignment = .center
-    
-    // this is the placeholder view to create a space between the
-    // the header (what we are building here) and the botom of
-    // the view that is going to contain it.
-    let spacer = UIView()
-    spacer.backgroundColor = .clear
-    spacer.heightAnchor.constraint(equalToConstant: 8).isActive = true
-    
-    // combine them
-    let stack = UIStackView(arrangedSubviews: [segmentsView, label, spacer])
-    stack.axis = .vertical
-    stack.distribution = .fill
-    
-    if segments.count == 1 {
-      stack.accessibilityElements = []
-    }
-    
-    return stack
-  }
-  
-  @objc
-  private func segmentTapped(_ recognizer: UITapGestureRecognizer) {
-    guard let segmentsView = self.headerSegmentsView
-      else { assertionFailure(); return }
-    
-    let x = recognizer.location(in: segmentsView).x
-    let headerIndex = segmentsView.segmentIndex(atX: x)
-    
-    let segmentIndex = headerSegmentIndices[headerIndex]
-    guard let cardIndices = SegmentCardsInfo.cardIndices(ofSegmentAt: segmentIndex, in: segmentCards)
-      else { assertionFailure(); return }
-    
-    let target: Int
-    if cardIndices.contains(currentPageIndex), cardIndices.count > 1 {
-      target = (currentPageIndex == cardIndices.upperBound - 1)
-        ? cardIndices.lowerBound
-        : currentPageIndex + 1
-    } else if !cardIndices.contains(currentPageIndex) {
-      target = cardIndices.lowerBound
-    } else {
-      return // Only a single card which is already selected
-    }
-    move(to: target)
-    
-    feedbackGenerator.selectionChanged()
-    feedbackGenerator.prepare()
   }
   
 }
@@ -368,11 +296,8 @@ extension TKUITripModeByModeCard {
     let cardSegments = trip.segments(with: .inDetails)
     
     if segmentsMatch(cardSegments) {
-      // Update segment view in header
-      headerSegmentsView?.configure(trip.headerSegments, allowInfoIcons: false)
-      
-      // Update ETA in header
-      headerETALabel?.text = TKUITripModeByModeCard.headerTimeText(for: trip)
+      // Update the header
+      headerView?.update(trip: trip)
       
       // Important to update the map, too, as template hash codes can change
       // an the map uses those for selection handling

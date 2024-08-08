@@ -42,6 +42,8 @@
 		3A7491252B9EB6D100AE3A89 /* TKBicycleAccessibility+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7491242B9EB6D100AE3A89 /* TKBicycleAccessibility+UI.swift */; };
 		3A772559292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A772558292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift */; };
 		3A7F54932BB3EE8D00FCA71E /* TKUIAutocompletionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F54922BB3EE8D00FCA71E /* TKUIAutocompletionResultView.swift */; };
+		3A83D4CE2C64978D007100E1 /* TKUITripModeByModeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A83D4CD2C64978D007100E1 /* TKUITripModeByModeHeader.swift */; };
+		3A83D4D02C649F89007100E1 /* TKUITripModeByModeHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A83D4CF2C649F89007100E1 /* TKUITripModeByModeHeader.xib */; };
 		3A855DA82B0B3DC500D923AE /* Trip+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A855DA72B0B3DC500D923AE /* Trip+Match.swift */; };
 		3A89090627E4739D005A49B1 /* Rx+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090527E4739D005A49B1 /* Rx+Concurrency.swift */; };
 		3A89090827E473EE005A49B1 /* TKLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89090727E473EE005A49B1 /* TKLocationProvider.swift */; };
@@ -937,6 +939,8 @@
 		3A7491242B9EB6D100AE3A89 /* TKBicycleAccessibility+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKBicycleAccessibility+UI.swift"; sourceTree = "<group>"; };
 		3A772558292B2FBE002F2C60 /* TKUISimpleHomeMapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUISimpleHomeMapManager.swift; sourceTree = "<group>"; };
 		3A7F54922BB3EE8D00FCA71E /* TKUIAutocompletionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionResultView.swift; sourceTree = "<group>"; };
+		3A83D4CD2C64978D007100E1 /* TKUITripModeByModeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripModeByModeHeader.swift; sourceTree = "<group>"; };
+		3A83D4CF2C649F89007100E1 /* TKUITripModeByModeHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITripModeByModeHeader.xib; sourceTree = "<group>"; };
 		3A855DA72B0B3DC500D923AE /* Trip+Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+Match.swift"; sourceTree = "<group>"; };
 		3A89090527E4739D005A49B1 /* Rx+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Concurrency.swift"; sourceTree = "<group>"; };
 		3A89090727E473EE005A49B1 /* TKLocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationProvider.swift; sourceTree = "<group>"; };
@@ -2460,6 +2464,8 @@
 				3AFF279B26C6975F007809CD /* TKUIStyleKit.swift */,
 				3AFF275326C6975F007809CD /* TKUITripBoyView.swift */,
 				3AFF274126C6975F007809CD /* TKUITripBoyView.xib */,
+				3A83D4CD2C64978D007100E1 /* TKUITripModeByModeHeader.swift */,
+				3A83D4CF2C649F89007100E1 /* TKUITripModeByModeHeader.xib */,
 				3AFF274526C6975F007809CD /* TKUITripSegmentsView.swift */,
 			);
 			path = views;
@@ -3194,6 +3200,7 @@
 				3AFF2B8E26C69BC9007809CD /* TKUISegmentAlertCell.xib in Resources */,
 				3AFF2B8626C69BBE007809CD /* TKUIDepartureCell.xib in Resources */,
 				3AFF2B3A26C69B94007809CD /* TKUISectionedAlertTableHeader.xib in Resources */,
+				3A83D4D02C649F89007100E1 /* TKUITripModeByModeHeader.xib in Resources */,
 				3AFF2B9B26C69BC9007809CD /* TKUISegmentImpossibleCell.xib in Resources */,
 				F1E9B02129439032007F171A /* TKUINotificationView.xib in Resources */,
 				3AFF2B8C26C69BC9007809CD /* TKUIAttributionCell.xib in Resources */,
@@ -3648,6 +3655,7 @@
 				3AFF2B3226C69B85007809CD /* TKUIHomeViewModel+Next.swift in Sources */,
 				3AFF2B4C26C69BA4007809CD /* TKUIResultsSectionFooterView.swift in Sources */,
 				3A41FD2B2978F5DF00841E61 /* TKUITripMonitorManager.swift in Sources */,
+				3A83D4CE2C64978D007100E1 /* TKUITripModeByModeHeader.swift in Sources */,
 				3A56B3D72B7F1BC100237CB9 /* TKUIRoutingResultsCard+CustomItem.swift in Sources */,
 				3AFF2B0F26C69B63007809CD /* TKUIHomeViewController.swift in Sources */,
 				3AFF2B9A26C69BC9007809CD /* TKUITrainOccupancyView.swift in Sources */,
