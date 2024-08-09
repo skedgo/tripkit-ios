@@ -23,6 +23,7 @@ class TKUITripModeByModeHeader: UIView {
   @IBOutlet var actionButton: UIButton!
   
   var tapHandler: (Int) -> Void = { _ in }
+  var actionHandler: () -> Void = {}
   
   static func newInstance() -> TKUITripModeByModeHeader {
     let view = Bundle(for: self).loadNibNamed("TKUITripModeByModeHeader", owner: self, options: nil)?.first as! TKUITripModeByModeHeader
@@ -36,13 +37,12 @@ class TKUITripModeByModeHeader: UIView {
     segmentsView.lightTextColor = .tkLabelSecondary
 
     titleLabel.text = ""
-    titleLabel.textColor = .tkLabelSecondary
-    titleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    titleLabel.textColor = .tkLabelPrimary
+    titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     
     subtitleLabel.text = ""
     subtitleLabel.textColor = .tkLabelSecondary
-    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    subtitleLabel.isHidden = true
+    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
   }
   
   func configure(trip: Trip, selecting index: Int) {
@@ -56,18 +56,23 @@ class TKUITripModeByModeHeader: UIView {
     let tapper = UITapGestureRecognizer(target: self, action: #selector(segmentTapped))
     segmentsView.addGestureRecognizer(tapper)
     
-    titleLabel.text = Self.headerTimeText(for: trip)
-    
-    // TODO: Add subtitle
-    
-    // TODO: Add action button
+    update(trip: trip)
     
     feedbackGenerator.prepare()
   }
   
   func update(trip: Trip) {
-    segmentsView.configure(trip.headerSegments, allowInfoIcons: false)
-    titleLabel.text = Self.headerTimeText(for: trip)
+    let cellModel = TKUITripCell.Model(trip, allowFading: false)
+    titleLabel.text = cellModel.primaryTimeString
+    subtitleLabel.text = cellModel.secondaryTimeString
+    
+    if let action = cellModel.primaryAction {
+      actionButton.setTitle(action, for: .normal)
+      actionButton.isHidden = false
+    } else {
+      actionButton.setTitle("", for: .normal)
+      actionButton.isHidden = true
+    }
   }
   
   @objc
@@ -80,21 +85,13 @@ class TKUITripModeByModeHeader: UIView {
     
     feedbackGenerator.selectionChanged()
   }
+  
+  @IBAction func buttonTapped(_ sender: Any) {
+    actionHandler()
+  }
+  
 }
 
 extension Trip {
   fileprivate var headerSegments: [TKSegment] { segments(with: .inSummary) }
-}
-
-extension TKUITripModeByModeHeader {
-  
-  private static func headerTimeText(for trip: Trip) -> String {
-    guard !trip.hideExactTimes else { return "" }
-    
-    // TODO: Use same logic as TripOverviewCard
-    let departure = TKStyleManager.timeString(trip.departureTime, for: trip.departureTimeZone)
-    let arrival   = TKStyleManager.timeString(trip.arrivalTime, for: trip.arrivalTimeZone ?? trip.departureTimeZone, relativeTo: trip.departureTimeZone)
-    return "\(departure) - \(arrival)"
-  }
-
 }

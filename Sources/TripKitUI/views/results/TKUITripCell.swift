@@ -81,21 +81,6 @@ public class TKUITripCell: UITableViewCell {
 
   // MARK: - Model
   
-  struct Model {
-    let departure: Date
-    let arrival: Date
-    let departureTimeZone: TimeZone
-    let arrivalTimeZone: TimeZone
-    let focusOnDuration: Bool
-    let isArriveBefore: Bool
-    let showFaded: Bool
-    let isCancelled: Bool
-    let hideExactTimes: Bool
-    let segments: [TKUITripSegmentDisplayable]
-    var primaryAction: String?
-    var accessibilityLabel: String?
-  }
-  
   func configure(_ model: Model, preferredContentSizeCategory: UIContentSizeCategory) {
     update(preferredContentSizeCategory: preferredContentSizeCategory)
     

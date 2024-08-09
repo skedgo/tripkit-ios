@@ -137,6 +137,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     let headerView = TKUITripModeByModeHeader.newInstance()
     headerView.configure(trip: trip, selecting: segment.index)
     headerView.tapHandler = { [weak self] in self?.selectSegment(index: $0) }
+    headerView.actionHandler = { [weak self] in self?.triggerPrimaryAction() }
     self.headerAccessoryView = headerView
     
     // Little hack for starting with selecting the first page on the map, too
@@ -231,6 +232,16 @@ public class TKUITripModeByModeCard: TGPageCard {
       return // Only a single card which is already selected
     }
     move(to: target)
+  }
+  
+  private func triggerPrimaryAction() {
+    let trip = viewModel.trip
+    guard
+      let primaryAction = TKUITripOverviewCard.config.tripActionsFactory?(trip).first(where: { $0.priority >= TKUITripOverviewCard.DefaultActionPriority.book.rawValue }),
+      let view = self.controller?.view
+    else { return }
+    
+    let _ = primaryAction.handler(primaryAction, self, trip, view)
   }
   
   public func offsetToReach(mode: TKUISegmentMode, in segment: TKSegment) -> Int? {

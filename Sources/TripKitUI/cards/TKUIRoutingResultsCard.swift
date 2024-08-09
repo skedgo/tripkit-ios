@@ -475,30 +475,6 @@ extension TKUITripCell {
   }
 }
 
-extension TKUITripCell.Model {
-
-  @MainActor
-  init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool? = nil) {
-    let primaryAction = TKUITripOverviewCard.config.tripActionsFactory?(trip).first(where: { $0.priority >= TKUITripOverviewCard.DefaultActionPriority.book.rawValue })
-    
-    self.init(
-      departure: trip.departureTime,
-      arrival: trip.arrivalTime,
-      departureTimeZone: trip.departureTimeZone,
-      arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
-      focusOnDuration: !trip.departureTimeIsFixed,
-      isArriveBefore: isArriveBefore ?? trip.isArriveBefore,
-      showFaded: allowFading && trip.showFaded,
-      isCancelled: trip.isCanceled,
-      hideExactTimes: trip.hideExactTimes,
-      segments: trip.segments(with: .inSummary),
-      primaryAction: primaryAction?.title,
-      accessibilityLabel: trip.accessibilityLabel
-    )
-  }
-
-}
-
 extension TKMetricClassifier.Classification {
   
   fileprivate var footerContent: (UIImage?, String, UIColor) {

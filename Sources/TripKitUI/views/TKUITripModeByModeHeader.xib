@@ -42,6 +42,9 @@
                     <buttonConfiguration key="configuration" style="filled" title="CTA" cornerStyle="capsule">
                         <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="buttonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="XgZ-Te-k9U"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
