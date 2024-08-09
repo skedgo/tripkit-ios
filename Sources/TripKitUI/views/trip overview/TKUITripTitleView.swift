@@ -48,11 +48,11 @@ class TKUITripTitleView: UIView {
 
 extension TKUITripTitleView {
   func configure(with model: TKUITripCell.Model) {
-    timeTitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    timeTitleLabel.text = model.primaryTimeString
     timeTitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     timeTitleLabel.textColor = .tkLabelPrimary
 
-    timeSubtitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    timeSubtitleLabel.text = model.secondaryTimeString
     timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     timeSubtitleLabel.textColor = .tkLabelSecondary
 
