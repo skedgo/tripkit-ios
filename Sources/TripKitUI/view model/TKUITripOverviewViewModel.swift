@@ -75,33 +75,24 @@ class TKUITripOverviewViewModel {
     let catcher = errorPublisher.onNext
     self.error = errorPublisher.asAssertingSignal()
     
-    let nextFromAlertToggle: Signal<TriggerResult>
-    if #available(iOS 14.0, *) {
-      nextFromAlertToggle = inputs.alertsEnabled
-        .with(tripUpdated) { ($1, $0) }
-        .safeMap(catchError: catcher) {
-          try await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
-        }
-      
-      notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip
-        .withLatestFrom(tripUpdated) { $0?.tripID == $1.tripId }
-        .asDriver(onErrorJustReturn: false)
-      
-      notificationKinds = presentedTrip
-        .asDriver(onErrorDriveWith: .empty())
-        .map {
-          Set($0
-            .notifications(includeTimeToLeaveNotification: includeTimeToLeaveNotification)
-            .map(\.messageKind)
-          )
-        }
-
-    } else {
-      nextFromAlertToggle = .empty()
-      
-      notificationsEnabled = .just(false)
-      notificationKinds = .just([])
-    }
+    let nextFromAlertToggle = inputs.alertsEnabled
+      .with(tripUpdated) { ($1, $0) }
+      .safeMap(catchError: catcher) {
+        try await Self.toggleNotifications(enabled: $1, trip: $0, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
+      }
+    
+    notificationsEnabled = TKUITripMonitorManager.shared.rx.monitoredTrip
+      .withLatestFrom(tripUpdated) { $0?.tripID == $1.tripId }
+      .asDriver(onErrorJustReturn: false)
+    
+    notificationKinds = presentedTrip
+      .asDriver(onErrorDriveWith: .empty())
+      .map {
+        Set($0
+          .notifications(includeTimeToLeaveNotification: includeTimeToLeaveNotification)
+          .map(\.messageKind)
+        )
+      }
     
     let nextFromSelection = inputs.selected.compactMap { item -> TriggerResult? in
         switch item {
