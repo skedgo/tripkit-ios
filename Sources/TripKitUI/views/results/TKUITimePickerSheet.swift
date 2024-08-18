@@ -12,14 +12,29 @@ import TripKit
 import RxSwift
 
 public protocol TKUITimePickerSheetDelegate: AnyObject {
-
+  
   func timePicker(_ picker: TKUITimePickerSheet, pickedDate: Date, for type: TKTimeType)
-
+  
   func timePickerRequestsResign(_ picker: TKUITimePickerSheet)
+  
+}
 
+public protocol TKUITimePickerSheetSelectionStateDelegate: AnyObject {
+  
+  func timePicker(_ picker: TKUITimePickerSheet, statusChanged: TKUITimePickerSheet.SelectionStatus)
+  
 }
 
 public class TKUITimePickerSheet: TKUISheet {
+  
+  public enum SelectionStatus {
+    case valid(Date)
+    case special(String)
+    case above
+    case below
+  }
+  
+  public var selectionStatus: SelectionStatus = .valid(Date())
   
   public struct ToolbarBuilder {
     /// Builder for custom toolbar elements
@@ -50,6 +65,7 @@ public class TKUITimePickerSheet: TKUISheet {
   public var selectAction: (TKTimeType, Date) -> Void = { _, _ in }
   
   public weak var delegate: TKUITimePickerSheetDelegate?
+  public weak var selectionStateDelegate: TKUITimePickerSheetSelectionStateDelegate?
   
   public var selectedDate: Date {
     get {
@@ -67,9 +83,9 @@ public class TKUITimePickerSheet: TKUISheet {
       switch (timeTypeSelector?.selectedSegmentIndex, config.allowsASAP) {
       case (0, true):   return .leaveASAP
       case (1, true),
-           (0, false):  return .leaveAfter
+        (0, false):  return .leaveAfter
       case (2, true),
-           (1, false):  return .arriveBefore
+        (1, false):  return .arriveBefore
       default:          return .none
       }
     }
@@ -78,17 +94,17 @@ public class TKUITimePickerSheet: TKUISheet {
       case (.leaveASAP, true):
         timeTypeSelector?.selectedSegmentIndex = 0
         timePicker.setDate(.init(), animated: true)
-      
+        
       case (.leaveAfter, true):
         timeTypeSelector?.selectedSegmentIndex = 1
       case (.leaveAfter, false):
         timeTypeSelector?.selectedSegmentIndex = 0
-      
+        
       case (.arriveBefore, true):
         timeTypeSelector?.selectedSegmentIndex = 2
       case (.arriveBefore, false):
         timeTypeSelector?.selectedSegmentIndex = 1
-      
+        
       default:
         break
       }
@@ -104,8 +120,9 @@ public class TKUITimePickerSheet: TKUISheet {
   private let disposeBag = DisposeBag()
   private weak var timePicker: UIDatePicker!
   private weak var timeTypeSelector: UISegmentedControl!
+  private weak var toolbarSelector: UISegmentedControl?
   private weak var doneSelector: UISegmentedControl!
-
+  
   public convenience init(date: Date, timeZone: TimeZone, toolbarBuilder: ToolbarBuilder? = nil, config: Configuration = .default) {
     self.init(date: date, showTime: false, mode: .date, timeZone: timeZone, toolbarBuilder: toolbarBuilder, config: config)
   }
@@ -118,7 +135,7 @@ public class TKUITimePickerSheet: TKUISheet {
     didSetTime = false
     self.mode = mode
     self.config = config
-
+    
     super.init(frame: .zero)
     
     overlayColor = .tkSheetOverlay
@@ -190,6 +207,7 @@ public class TKUITimePickerSheet: TKUISheet {
             .subscribe(onNext: { [weak self] _ in
               guard let self else { return }
               self.removeOverlay(animated: true)
+              self.updateSpecialSelectionState(with: title)
               handler(self.timePicker.date)
             })
             .disposed(by: disposeBag)
@@ -198,8 +216,10 @@ public class TKUITimePickerSheet: TKUISheet {
             self.doneSelector = selector
           }
           
+          self.toolbarSelector = selector
+          
           return .init(customView: selector)
-        
+          
         case .spacer:
           return .init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
           
@@ -238,7 +258,7 @@ public class TKUITimePickerSheet: TKUISheet {
         // this sets the selected section index
         self.timeTypeSelector = selector
         self.selectedTimeType = timeType
-
+        
       case .time, .date:
         selector = UISegmentedControl(items: [Loc.Now])
         selector.addTarget(self, action: #selector(timeSelectorChanged(sender:)), for: .valueChanged)
@@ -285,7 +305,9 @@ public class TKUITimePickerSheet: TKUISheet {
       selectedTimeType = .leaveAfter
     }
     
-    updateDoneButtonState(selector: doneSelector, handler: { _ in })
+    toolbarSelector?.selectedSegmentIndex = -1 // This deselects everything from the custom toolbar
+    
+    updateSelectionState(for: timePicker.date)
   }
   
   @objc
@@ -299,7 +321,7 @@ public class TKUITimePickerSheet: TKUISheet {
       break // do nothing
     }
   }
-
+  
   @objc
   func nowButtonPressed(sender: Any) {
     selectAction(.leaveASAP, .init())
@@ -317,10 +339,10 @@ public class TKUITimePickerSheet: TKUISheet {
       // We updated the time picker above
     }
   }
-
+  
   @objc
   func doneButtonPressed(sender: Any) {
-    guard doneSelector.isEnabled 
+    guard doneSelector.isEnabled
     else {
       return
     }
@@ -336,24 +358,44 @@ public class TKUITimePickerSheet: TKUISheet {
     }
   }
   
-  private func updateDoneButtonState(selector: UISegmentedControl?,
-                                     handler: @escaping (Date) -> Void) {
-    guard let selector else { return }
-    
-    let selectedDate = timePicker.date
-    
-    var title = Loc.Done
-    var isEnabled = true
+  public func updateSpecialSelectionState(with id: String) {
+    let status: SelectionStatus = .special(id)
+    selectionStatus = status
+    selectionStateDelegate?.timePicker(self, statusChanged: status)
+  }
+  
+  private func updateSelectionState(for selectedDate: Date) {
+    var status: SelectionStatus = .valid(selectedDate)
     
     if let earliestDate = config.minimumDate, selectedDate < earliestDate {
-      title = Loc.DateTimeSelectionBelow
-      isEnabled = false
+      status = .below
     } else if let latestDate = config.maximumDate, selectedDate > latestDate {
-      title = Loc.DateTimeSelectionAbove
+      status = .above
     }
     
-    selector.setTitle(title, forSegmentAt: 0)
-    selector.isEnabled = isEnabled
+    selectionStatus = status
+    
+    updateDoneButton(from: status)
+    selectionStateDelegate?.timePicker(self, statusChanged: status)
+  }
+  
+  private func updateDoneButton(from status: SelectionStatus) {
+    guard let selector = doneSelector else { return }
+    
+    switch status {
+    case .valid:
+      selector.setTitle(Loc.Done, forSegmentAt: 0)
+      selector.isEnabled = true
+    case .special:
+      break
+    case .above:
+      selector.setTitle(Loc.DateTimeSelectionAbove, forSegmentAt: 0)
+      selector.isEnabled = false
+    case .below:
+      selector.setTitle(Loc.DateTimeSelectionBelow, forSegmentAt: 0)
+      selector.isEnabled = false
+    }
+    
     selector.invalidateIntrinsicContentSize()
     selector.sizeToFit()
   }

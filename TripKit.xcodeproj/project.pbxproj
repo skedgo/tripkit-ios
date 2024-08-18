@@ -828,6 +828,7 @@
 		D3AB4794273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB4793273DEAED0086C956 /* TKUIModePickerLayoutHelper.swift */; };
 		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
 		D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */; };
+		F1604BA12C72738300DE4C94 /* TKUITimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1604BA02C72738300DE4C94 /* TKUITimePickerViewController.swift */; };
 		F1E9B01F29439010007F171A /* TKUINotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E9B01E29439010007F171A /* TKUINotificationView.swift */; };
 		F1E9B02129439032007F171A /* TKUINotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1E9B02029439032007F171A /* TKUINotificationView.xib */; };
 /* End PBXBuildFile section */
@@ -1594,6 +1595,7 @@
 		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
 		D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripSegmentModeTitleTest.swift; sourceTree = "<group>"; };
 		F13FD8EB29741CF2006C338D /* TKUITripMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripMonitorManager.swift; sourceTree = "<group>"; };
+		F1604BA02C72738300DE4C94 /* TKUITimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITimePickerViewController.swift; sourceTree = "<group>"; };
 		F1E9B01E29439010007F171A /* TKUINotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationView.swift; sourceTree = "<group>"; };
 		F1E9B02029439032007F171A /* TKUINotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUINotificationView.xib; sourceTree = "<group>"; };
 		F1EB54A6297706DD00CA4708 /* TKUINotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUINotificationManager.swift; sourceTree = "<group>"; };
@@ -2528,6 +2530,7 @@
 				3AFF276C26C6975F007809CD /* TKUITripCell.xib */,
 				3AFF276526C6975F007809CD /* TKUITripCell+Formatter.swift */,
 				3A2999862C65C1DC00EEE8EA /* TKUITripCell+Model.swift */,
+				F1604BA02C72738300DE4C94 /* TKUITimePickerViewController.swift */,
 			);
 			path = results;
 			sourceTree = "<group>";
@@ -3549,6 +3552,7 @@
 				3AFF2B4226C69B9C007809CD /* TKUIImageAnnotationView.swift in Sources */,
 				3AFF2BBC26C69BE7007809CD /* TKUIResultsFetcher.swift in Sources */,
 				3AFF2B3526C69B85007809CD /* TKUISectionedAlertViewModel.swift in Sources */,
+				F1604BA12C72738300DE4C94 /* TKUITimePickerViewController.swift in Sources */,
 				3AFF2BD526C69BFC007809CD /* IntegerType+IdentifiableType.swift in Sources */,
 				3ACBC0DE2A9D98C600C66CD7 /* TKUIPathChartView+TKSegment.swift in Sources */,
 				3AFF2B0026C69B56007809CD /* TKUIMapManager.swift in Sources */,

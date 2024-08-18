@@ -58,6 +58,11 @@ public class Loc : NSObject {
   }
   
   @objc
+  public static var Select: String {
+    return NSLocalizedString("Select", tableName: "Shared", bundle: .tripKit, comment: "Select action")
+  }
+  
+  @objc
   public static var Next: String {
     return NSLocalizedString("Next", tableName: "Shared", bundle: .tripKit, comment: "Next action")
   }
@@ -315,6 +320,10 @@ public class Loc : NSObject {
   
   public static var TapToSelectCurrentLocation: String {
     return NSLocalizedString("Tap to select your current location as the destination or origin.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for an current location item to provide selection capability.")
+  }
+  
+  public static var SelectTime: String {
+    return NSLocalizedString("Select Time", tableName: "Shared", bundle: .tripKit, comment: "Title for Date Time selection.")
   }
   
 }
