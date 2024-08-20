@@ -34,6 +34,13 @@ public class TKUITimePickerSheet: TKUISheet {
     case below
   }
   
+  public enum Style {
+    /// the default style of date pickers
+    case sheet
+    /// alternative style for embedding date picker to view controllers without it still looking like bottom sheet
+    case embed
+  }
+  
   public var selectionStatus: SelectionStatus = .valid(Date())
   
   public struct ToolbarBuilder {
@@ -185,6 +192,9 @@ public class TKUITimePickerSheet: TKUISheet {
     let toolbar = UIToolbar(frame: .zero)
     toolbar.translatesAutoresizingMaskIntoConstraints = false
     toolbar.setBackgroundImage(.init(), forToolbarPosition: .any, barMetrics: .default)
+    if config.style == .embed {
+      toolbar.setShadowImage(UIImage(), forToolbarPosition: .any)
+    }
     toolbar.backgroundColor = self.backgroundColor
     addSubview(toolbar)
     

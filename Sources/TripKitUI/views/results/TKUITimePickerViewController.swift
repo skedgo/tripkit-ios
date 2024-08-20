@@ -39,6 +39,7 @@ public class TKUITimePickerViewController: UIViewController {
     self.timeZone = timeZone
     self.items = items
     self.config = config
+    self.config.style = .embed
     self.onSelection = onSelection
     super.init(nibName: nil, bundle: nil)
   }

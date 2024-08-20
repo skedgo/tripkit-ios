@@ -49,6 +49,11 @@ public extension TKUITimePickerSheet {
     /// Allows selection of dates that are below or beyond minimum and maximum date respectively.
     /// This makes the selector button be disabled wether current date selected is out of range.
     public var allowsOutOfRangeSelection: Bool = false
+    
+    /// Customizes the time picker use for either sheet or embed (for other view / view controller use)
+    ///
+    ///  Defaults to .sheet
+    public var style: Style = .sheet
   }
   
 }
