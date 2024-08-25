@@ -138,6 +138,14 @@ public class Loc : NSObject {
     return NSLocalizedString("Beyond furthest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is above the maximum datetime.")
   }
   
+  public static var Date: String {
+    return NSLocalizedString("Date", tableName: "TripKit", bundle: .tripKit, comment: "Title for Date Picker")
+  }
+  
+  public static var SelectReturnDate: String {
+    return NSLocalizedString("Select Return Date", tableName: "TripKit", bundle: .tripKit, comment: "Header title for Date Picker")
+  }
+  
   public static func LateService(minutes: Int, service: String?) -> String {
     if let service = service {
       let format = NSLocalizedString("%1$@ late (%2$@ service)", tableName: "TripKit", bundle: .tripKit, comment: "Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').")
