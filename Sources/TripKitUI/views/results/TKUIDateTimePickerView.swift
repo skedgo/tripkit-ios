@@ -92,10 +92,10 @@ private struct DatePickerView: View {
   
   var content: some View {
     VStack(alignment: .leading) {
-      // TODO: minimum and maximum dates (config)
       if #available(iOSApplicationExtension 14.0, *) {
         DatePicker(viewModel.dateTitle(), 
                    selection: $viewModel.selectedDateTime,
+                   in: viewModel.allowedDateRange(),
                    displayedComponents: [.date])
           .datePickerStyle(GraphicalDatePickerStyle())
           .accentColor(Color(.tkAppTintColor))
@@ -103,6 +103,7 @@ private struct DatePickerView: View {
       } else {
         DatePicker(viewModel.dateTitle(), 
                    selection: $viewModel.selectedDateTime, 
+                   in: viewModel.allowedDateRange(),
                    displayedComponents: [.date])
           .accentColor(Color(.tkAppTintColor))
           .padding(.horizontal, 16)
@@ -162,10 +163,10 @@ struct ConfirmButton: View {
 
 struct TKUIDateTimePickerView_Previews: PreviewProvider {
   static var previews: some View {
-    let viewModel = TKUIDateTimePickerViewModel(items: [
-      .init(name: "One-way only"),
-      .init(name: "Round-trip")
-    ])
+    let min = Calendar.current.date(byAdding: .day, value: -15, to: Date())
+    let viewModel = TKUIDateTimePickerViewModel(items: [.init(name: "One-way only"),
+                                                        .init(name: "Round-trip")],
+                                                minimumDate: min)
     
     return Group {
       TKUIDateTimePickerView(viewModel: viewModel)

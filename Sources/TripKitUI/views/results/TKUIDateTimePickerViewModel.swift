@@ -12,6 +12,10 @@ import TripKit
 
 public class TKUIDateTimePickerViewModel: ObservableObject {
   
+  enum Constants {
+    static let maxDateRange = 3
+  }
+  
   public struct ToggleItem: Identifiable {
     public let id = UUID()
     let name: String
@@ -70,6 +74,25 @@ public class TKUIDateTimePickerViewModel: ObservableObject {
     } else {
       onConfirm?(.dateTime(selectedDateTime))
     }
+  }
+  
+  func allowedDateRange() -> ClosedRange<Date> {
+    let minimum: Date
+    let maximum: Date
+    
+    if let min = minimumDate {
+      minimum = min
+    } else {
+      minimum = Calendar.current.date(byAdding: .month, value: -Constants.maxDateRange, to: Date()) ?? Date()
+    }
+    
+    if let max = maximumDate {
+      maximum = max
+    } else {
+      maximum = Calendar.current.date(byAdding: .month, value: Constants.maxDateRange, to: Date()) ?? Date()
+    }
+    
+    return minimum...maximum
   }
   
   private func updateDatePickerVisibility() {
