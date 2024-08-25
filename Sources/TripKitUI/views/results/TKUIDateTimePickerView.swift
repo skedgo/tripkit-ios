@@ -13,19 +13,24 @@ public struct TKUIDateTimePickerView: View {
   
   public var body: some View {
     VStack {
-      Container {
-        ToggleListView(viewModel: viewModel)
+      VStack {
+        Container {
+          ToggleListView(viewModel: viewModel)
+        }
+        .padding(.bottom, 32)
+        
+        DatePickerView(viewModel: viewModel)
+        
+        Spacer()
+        
+        ConfirmButton(viewModel: viewModel)
+          .padding(.bottom)
       }
-      .padding(.bottom, 32)
-      
-      DatePickerView(viewModel: viewModel)
-      
-      Spacer()
-      
-      ConfirmButton(viewModel: viewModel)
-        .padding(.bottom)
+      .padding(.top, 16)
+      .padding(.horizontal, 16)
+
     }
-    .padding(.horizontal, 16)
+    .background(Color(.tkBackgroundGrouped))
     .navigationBarTitle(Text(viewModel.navigationTitle()), displayMode: .inline)
   }
 }
@@ -59,7 +64,7 @@ private struct ToggleListView: View {
       }
     }
     .padding(.vertical, 12)
-    .background(Color(.tkBackgroundGrouped))
+    .background(Color(.tkBackground))
   }
 }
 
@@ -85,16 +90,20 @@ private struct DatePickerView: View {
     .padding(.leading, 16)
   }
   
-  // TODO: Timezone
   var content: some View {
     VStack(alignment: .leading) {
+      // TODO: minimum and maximum dates (config)
       if #available(iOSApplicationExtension 14.0, *) {
-        DatePicker(viewModel.dateTitle(), selection: $viewModel.selectedDateTime, displayedComponents: [.date])
+        DatePicker(viewModel.dateTitle(), 
+                   selection: $viewModel.selectedDateTime,
+                   displayedComponents: [.date])
           .datePickerStyle(GraphicalDatePickerStyle())
           .accentColor(Color(.tkAppTintColor))
           .padding(.horizontal, 16)
       } else {
-        DatePicker(viewModel.dateTitle(), selection: $viewModel.selectedDateTime, displayedComponents: [.date])
+        DatePicker(viewModel.dateTitle(), 
+                   selection: $viewModel.selectedDateTime, 
+                   displayedComponents: [.date])
           .accentColor(Color(.tkAppTintColor))
           .padding(.horizontal, 16)
       }
@@ -127,7 +136,7 @@ private struct Container<Content: View>: View {
     VStack {
       content()
     }
-    .background(Color(.tkBackgroundGrouped))
+    .background(Color(.tkBackground))
     .cornerRadius(8)
   }
 }
@@ -144,9 +153,6 @@ struct ConfirmButton: View {
         .foregroundColor(.white)
         .frame(maxWidth: .infinity)
         .padding()
-      
-      
-        .padding(.horizontal)
     }
     .background(Color(.tkAppTintColor))
     .frame(height: 40)
