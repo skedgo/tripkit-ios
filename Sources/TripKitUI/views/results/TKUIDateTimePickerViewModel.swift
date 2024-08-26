@@ -110,11 +110,11 @@ extension TKUIDateTimePickerViewModel {
   }
   
   func dateTitle() -> String {
-    return Loc.Date
+    return Loc.PickerDateTitle
   }
   
   func timeTitle() -> String {
-    return "Time"
+    return Loc.PickerTimeTitle
   }
   
   func returnDateTimeHeaderTitle() -> String {

@@ -138,8 +138,12 @@ public class Loc : NSObject {
     return NSLocalizedString("Beyond furthest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is above the maximum datetime.")
   }
   
-  public static var Date: String {
+  public static var PickerDateTitle: String {
     return NSLocalizedString("Date", tableName: "TripKit", bundle: .tripKit, comment: "Title for Date Picker")
+  }
+  
+  public static var PickerTimeTitle: String {
+    return NSLocalizedString("Time", tableName: "TripKit", bundle: .tripKit, comment: "Title for Time Picker")
   }
   
   public static var SelectReturnDate: String {
