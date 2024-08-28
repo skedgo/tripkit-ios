@@ -174,6 +174,11 @@ extension Loc {
     let format = NSLocalizedString("To %@", tableName: "TripKit", bundle: .tripKit, comment: "Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)")
     return String(format: format, to)
   }
+  
+  public static func Add(location: String) -> String {
+    let format = NSLocalizedString("Add %@", tableName: "TripKit", bundle: .tripKit, comment: "Title for buttons that requires adding a location")
+    return String(format: format, location)
+  }
 
   public static func fromTime(_ from: String, toTime to: String) -> String {
 #if canImport(UIKit)
