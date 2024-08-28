@@ -27,20 +27,20 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Gkn-IV-uTT" customClass="TKUITripSegmentsView" customModule="TripKitUI" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="75" width="332" height="38"/>
+                    <rect key="frame" x="0.0" y="75" width="328" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="999" constant="40" id="ONx-Uq-7BP"/>
                     </constraints>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwk-Vd-RlZ">
-                    <rect key="frame" x="336" y="79" width="49" height="30"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwk-Vd-RlZ">
+                    <rect key="frame" x="332" y="79" width="53" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="999" constant="30" id="2vO-cd-U0f"/>
                     </constraints>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                     <state key="normal" title="CTA"/>
                     <buttonConfiguration key="configuration" style="filled" title="CTA" cornerStyle="capsule">
-                        <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
+                        <fontDescription key="titleFontDescription" style="UICTFontTextStyleSubhead"/>
                     </buttonConfiguration>
                     <connections>
                         <action selector="buttonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="XgZ-Te-k9U"/>

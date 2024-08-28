@@ -43,6 +43,19 @@ class TKUITripModeByModeHeader: UIView {
     subtitleLabel.text = ""
     subtitleLabel.textColor = .tkLabelSecondary
     subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    
+    if #available(iOS 15.0, *) {
+      var config = UIButton.Configuration.filled()
+      config.titleTextAttributesTransformer = .init { incoming in
+        var outgoing = incoming
+        outgoing.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
+        return outgoing
+      }
+      config.cornerStyle = .capsule
+      actionButton.configuration = config
+    } else {
+      actionButton.titleLabel?.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
+    }
   }
   
   func configure(trip: Trip, selecting index: Int) {
