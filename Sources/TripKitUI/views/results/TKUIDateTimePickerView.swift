@@ -97,6 +97,7 @@ private struct DatePickerView: View {
                    selection: $viewModel.selectedDateTime,
                    in: viewModel.allowedDateRange(),
                    displayedComponents: [.date])
+          .environment(\.timeZone, viewModel.timeZone)
           .datePickerStyle(GraphicalDatePickerStyle())
           .accentColor(Color(.tkAppTintColor))
           .padding(.horizontal, 16)
@@ -105,6 +106,7 @@ private struct DatePickerView: View {
                    selection: $viewModel.selectedDateTime, 
                    in: viewModel.allowedDateRange(),
                    displayedComponents: [.date])
+          .environment(\.timeZone, viewModel.timeZone)
           .accentColor(Color(.tkAppTintColor))
           .padding(.horizontal, 16)
       }
@@ -120,7 +122,11 @@ private struct DatePickerView: View {
   
   var timePicker: some View {
     HStack {
-      DatePicker(viewModel.timeTitle(), selection: $viewModel.selectedDateTime, displayedComponents: [.hourAndMinute])
+      DatePicker(viewModel.timeTitle(), 
+                 selection: $viewModel.selectedDateTime,
+                 in: viewModel.allowedDateRange(),
+                 displayedComponents: [.hourAndMinute])
+        .environment(\.timeZone, viewModel.timeZone)
         .accentColor(Color(.tkAppTintColor))
     }
   }
