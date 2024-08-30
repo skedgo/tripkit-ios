@@ -66,7 +66,13 @@ public protocol TKUIHomeComponentItem {
 
 extension TKUIHomeComponentItem {
   public var canEdit: Bool { false }
-  public var equalityToken: String { identity }
+  public var equalityToken: String {
+    if let hashable = self as? any Hashable {
+      return "\(hashable.hashValue)"
+    } else {
+      return identity
+    }
+  }
   public var isAction: Bool { true }
 }
 
