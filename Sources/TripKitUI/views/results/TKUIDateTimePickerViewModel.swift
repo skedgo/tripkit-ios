@@ -17,11 +17,12 @@ public class TKUIDateTimePickerViewModel: ObservableObject {
   }
   
   public struct ToggleItem: Identifiable {
-    public let id = UUID()
+    public let id: String
     let name: String
     var isSelected: Bool = false
     
     public init(name: String, isSelected: Bool = false) {
+      self.id = name // Let the name be the id
       self.name = name
       self.isSelected = isSelected
     }
@@ -41,19 +42,28 @@ public class TKUIDateTimePickerViewModel: ObservableObject {
   var maximumDate: Date?
   var onConfirm: ((Selection) -> Void)?
   
-  init(selectedDateTime: Date = Date(),
+  init(selection: Selection = .dateTime(Date()),
        timeZone: TimeZone = TimeZone.current,
        items: [ToggleItem] = [],
        minimumDate: Date? = nil,
        maximumDate: Date? = nil,
        onConfirm: ((Selection) -> Void)? = nil) {
-    
-    self.selectedDateTime = selectedDateTime
+    self.selectedDateTime = minimumDate ?? Date()
     self.timeZone = timeZone
     self.toggleItems = items
     self.minimumDate = minimumDate
     self.maximumDate = maximumDate
     self.onConfirm = onConfirm
+    
+    switch selection {
+    case .dateTime(let date):
+      self.selectedDateTime = date
+    case .special(let id):
+      for item in self.toggleItems where item.id == id {
+        selectToggle(item)
+      }
+    }
+    
     updateDatePickerVisibility()
   }
   

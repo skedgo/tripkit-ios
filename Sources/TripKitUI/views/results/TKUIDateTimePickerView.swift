@@ -170,9 +170,11 @@ struct ConfirmButton: View {
 struct TKUIDateTimePickerView_Previews: PreviewProvider {
   static var previews: some View {
     let min = Calendar.current.date(byAdding: .day, value: -15, to: Date())
-    let viewModel = TKUIDateTimePickerViewModel(items: [.init(name: "One-way only"),
-                                                        .init(name: "Round-trip")],
-                                                minimumDate: min)
+    let viewModel = TKUIDateTimePickerViewModel(
+      selection: .special("One-way only"),
+      items: [.init(name: "One-way only"),
+              .init(name: "Round-trip")],
+      minimumDate: min)
     
     return Group {
       TKUIDateTimePickerView(viewModel: viewModel)

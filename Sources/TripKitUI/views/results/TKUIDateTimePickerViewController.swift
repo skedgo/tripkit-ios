@@ -30,7 +30,7 @@ public class TKUIDateTimePickerViewController: UIHostingController<TKUIDateTimeP
 public extension TKUIDateTimePickerViewController {
   
   static func build(
-    time: Date = Date(),
+    selection: TKUIDateTimePickerViewModel.Selection = .dateTime(Date()),
     timeZone: TimeZone = .current,
     items: [TKUIDateTimePickerViewModel.ToggleItem],
     minimumDate: Date? = nil,
@@ -38,7 +38,7 @@ public extension TKUIDateTimePickerViewController {
     onConfirm: @escaping (TKUIDateTimePickerViewModel.Selection) -> Void
   ) -> TKUIDateTimePickerViewController {
     let viewModel = TKUIDateTimePickerViewModel(
-      selectedDateTime: time,
+      selection: selection,
       timeZone: timeZone,
       items: items,
       minimumDate: minimumDate,
