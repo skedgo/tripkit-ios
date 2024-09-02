@@ -8,6 +8,7 @@
 
 import UIKit
 
+import RxSwift
 import TripKit
 
 public class TKUITripCell: UITableViewCell {
@@ -20,12 +21,14 @@ public class TKUITripCell: UITableViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var subtitleLabel: UILabel!
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
-  @IBOutlet weak var mainSegmentActionButton: UIButton!
   @IBOutlet weak var selectionIndicator: UIView!
   @IBOutlet weak var separatorView: UIView!
   
-  @IBOutlet private weak var mainSegmentActionButtonTopSpacing: NSLayoutConstraint!
-  @IBOutlet weak var mainSegmentActionButtonHeight: NSLayoutConstraint!
+  @IBOutlet var segmentTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet var segmentToActionConstraint: NSLayoutConstraint!
+  @IBOutlet var actionButton: UIButton!
+  
+  private(set) var disposeBag = DisposeBag()
   
   private var formatter: Formatter?
   
@@ -39,8 +42,8 @@ public class TKUITripCell: UITableViewCell {
       subtitleLabel.maximumContentSizeCategory = .accessibilityLarge
     }
     
-    mainSegmentActionButton.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    mainSegmentActionButton.tintColor = .tkAppTintColor
+    actionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
+    actionButton.tintColor = .tkAppTintColor
     
     selectionIndicator.isHidden = true
     selectionIndicator.backgroundColor = .tkAppTintColor
@@ -51,6 +54,12 @@ public class TKUITripCell: UITableViewCell {
     // - just if something is known to be inaccessible
     segmentView.allowWheelchairIcon = true
     segmentView.allowBicycleAccessibilityIcon = true
+  }
+  
+  public override func prepareForReuse() {
+    disposeBag = .init()
+    
+    super.prepareForReuse()
   }
 
   override public func setSelected(_ selected: Bool, animated: Bool) {
@@ -72,21 +81,6 @@ public class TKUITripCell: UITableViewCell {
 
   // MARK: - Model
   
-  struct Model {
-    let departure: Date
-    let arrival: Date
-    let departureTimeZone: TimeZone
-    let arrivalTimeZone: TimeZone
-    let focusOnDuration: Bool
-    let isArriveBefore: Bool
-    let showFaded: Bool
-    let isCancelled: Bool
-    let hideExactTimes: Bool
-    let segments: [TKUITripSegmentDisplayable]
-    var action: String?
-    var accessibilityLabel: String?
-  }
-  
   func configure(_ model: Model, preferredContentSizeCategory: UIContentSizeCategory) {
     update(preferredContentSizeCategory: preferredContentSizeCategory)
     
@@ -104,17 +98,18 @@ public class TKUITripCell: UITableViewCell {
     let alpha: CGFloat = model.showFaded ? 0.2 : 1
     titleLabel.alpha = alpha
     segmentView.alpha = alpha
-    mainSegmentActionButton.alpha = alpha
+    actionButton.alpha = alpha
     
-    if let action = model.action {
-      mainSegmentActionButton.isHidden = false
-      mainSegmentActionButtonTopSpacing.constant = 4
-      mainSegmentActionButton.setTitle(action, for: .normal)
-      mainSegmentActionButtonHeight.constant = mainSegmentActionButton.intrinsicContentSize.height
+    if let action = model.primaryAction {
+      actionButton.isHidden = false
+      actionButton.setTitle(action, for: .normal)
+      segmentTrailingConstraint.priority = .defaultLow
+      segmentToActionConstraint.priority = .required
     } else {
-      mainSegmentActionButton.isHidden = true
-      mainSegmentActionButtonTopSpacing.constant = 0
-      mainSegmentActionButtonHeight.constant = 0
+      actionButton.isHidden = true
+      actionButton.setTitle("", for: .normal)
+      segmentTrailingConstraint.priority = .required
+      segmentToActionConstraint.priority = .defaultLow
     }
     
     accessibilityLabel = model.accessibilityLabel
