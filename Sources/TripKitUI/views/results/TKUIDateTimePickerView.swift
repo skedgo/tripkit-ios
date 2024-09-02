@@ -92,7 +92,7 @@ private struct DatePickerView: View {
   
   var content: some View {
     VStack(alignment: .leading) {
-      if #available(iOSApplicationExtension 14.0, *) {
+      if #available(iOS 14.0, *) {
         DatePicker(viewModel.dateTitle(), 
                    selection: $viewModel.selectedDateTime,
                    in: viewModel.allowedDateRange(),
