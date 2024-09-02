@@ -58,6 +58,11 @@ public class Loc : NSObject {
   }
   
   @objc
+  public static var Select: String {
+    return NSLocalizedString("Select", tableName: "Shared", bundle: .tripKit, comment: "Select action")
+  }
+  
+  @objc
   public static var Next: String {
     return NSLocalizedString("Next", tableName: "Shared", bundle: .tripKit, comment: "Next action")
   }
@@ -131,6 +136,18 @@ public class Loc : NSObject {
   
   public static var DateTimeSelectionAbove: String {
     return NSLocalizedString("Beyond furthest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is above the maximum datetime.")
+  }
+  
+  public static var PickerDateTitle: String {
+    return NSLocalizedString("Date", tableName: "TripKit", bundle: .tripKit, comment: "Title for Date Picker")
+  }
+  
+  public static var PickerTimeTitle: String {
+    return NSLocalizedString("Time", tableName: "TripKit", bundle: .tripKit, comment: "Title for Time Picker")
+  }
+  
+  public static var SelectReturnDate: String {
+    return NSLocalizedString("Select Return Date", tableName: "TripKit", bundle: .tripKit, comment: "Header title for Date Picker")
   }
   
   public static func LateService(minutes: Int, service: String?) -> String {
@@ -315,6 +332,10 @@ public class Loc : NSObject {
   
   public static var TapToSelectCurrentLocation: String {
     return NSLocalizedString("Tap to select your current location as the destination or origin.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for an current location item to provide selection capability.")
+  }
+  
+  public static var SelectTime: String {
+    return NSLocalizedString("Select Time", tableName: "Shared", bundle: .tripKit, comment: "Title for Date Time selection.")
   }
   
 }
