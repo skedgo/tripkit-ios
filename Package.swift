@@ -56,7 +56,6 @@ let package = Package(
       ],
       exclude: [
         "Data",
-        "polygon/data",
         "Supporting Files/Info.plist",
       ]
     ),
