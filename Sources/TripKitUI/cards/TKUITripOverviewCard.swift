@@ -319,7 +319,7 @@ extension TKUITripOverviewCard {
     stackView.isUserInteractionEnabled = true
     stackView.distribution = .equalSpacing
 
-    if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
+    if TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
       let notificationView = self.notificationFooterView
       notificationView.frame.size.width = tableView.frame.width      
       notificationView.updateAvailableKinds(notifications, includeTimeToLeaveNotification: includeTimeToLeaveNotification)
@@ -458,7 +458,7 @@ extension TKUITripOverviewCard {
   private func buildActionsView(from actions: [TKUITripOverviewCard.TripAction], trip: Trip) -> UIView? {
     var mutable = actions
     
-    if #available(iOS 14.0, *), TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
+    if TKUINotificationManager.shared.isSubscribed(to: .tripAlerts) {
       let publisher = viewModel.notificationsEnabled
         .publisher
         .catch { _ in Just(false) }

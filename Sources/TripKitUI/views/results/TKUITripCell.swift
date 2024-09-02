@@ -37,10 +37,8 @@ public class TKUITripCell: UITableViewCell {
 
     backgroundColor = .tkBackground
     
-    if #available(iOS 15.0, *) {
-      titleLabel.maximumContentSizeCategory = .accessibilityLarge
-      subtitleLabel.maximumContentSizeCategory = .accessibilityLarge
-    }
+    titleLabel.maximumContentSizeCategory = .accessibilityLarge
+    subtitleLabel.maximumContentSizeCategory = .accessibilityLarge
     
     actionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
     actionButton.tintColor = .tkAppTintColor

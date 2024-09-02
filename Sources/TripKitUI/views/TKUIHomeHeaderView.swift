@@ -40,35 +40,28 @@ class TKUIHomeHeaderView: UIView {
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.searchBarStyle = .minimal
     
-    let directionsButton: UIButton?
-    let stackedViews: [UIView]
-    if #available(iOS 14.0, *) {
-      directionsButton = UIButton(type: .custom)
-      directionsButton?.translatesAutoresizingMaskIntoConstraints = false
-      directionsButton!.setImage(UIImage(systemName: "arrow.triangle.turn.up.right.diamond.fill"), for: .normal)
-      directionsButton!.tintColor = .white
-      directionsButton!.backgroundColor = .tkAppTintColor
-      directionsButton!.layer.cornerRadius = 16
-      
-      let directionsWrapper = UIView()
-      directionsWrapper.backgroundColor = .clear
-      directionsWrapper.translatesAutoresizingMaskIntoConstraints = false
-      self.directionsWrapper = directionsWrapper
-      
-      directionsWrapper.addSubview(directionsButton!)
-      NSLayoutConstraint.activate([
-        directionsWrapper.widthAnchor.constraint(equalToConstant: 44),
-        directionsButton!.widthAnchor.constraint(equalToConstant: 32),
-        directionsButton!.heightAnchor.constraint(equalTo: directionsButton!.widthAnchor),
-        directionsWrapper.centerYAnchor.constraint(equalTo: directionsButton!.centerYAnchor),
-        directionsWrapper.centerXAnchor.constraint(equalTo: directionsButton!.centerXAnchor),
-      ])
-      
-      stackedViews = [searchBar, directionsWrapper]
-    } else {
-      directionsButton = nil // would be easy to add with right icon
-      stackedViews = [searchBar]
-    }
+    let directionsButton = UIButton(type: .custom)
+    directionsButton.translatesAutoresizingMaskIntoConstraints = false
+    directionsButton.setImage(UIImage(systemName: "arrow.triangle.turn.up.right.diamond.fill"), for: .normal)
+    directionsButton.tintColor = .white
+    directionsButton.backgroundColor = .tkAppTintColor
+    directionsButton.layer.cornerRadius = 16
+    
+    let directionsWrapper = UIView()
+    directionsWrapper.backgroundColor = .clear
+    directionsWrapper.translatesAutoresizingMaskIntoConstraints = false
+    self.directionsWrapper = directionsWrapper
+    
+    directionsWrapper.addSubview(directionsButton)
+    NSLayoutConstraint.activate([
+      directionsWrapper.widthAnchor.constraint(equalToConstant: 44),
+      directionsButton.widthAnchor.constraint(equalToConstant: 32),
+      directionsButton.heightAnchor.constraint(equalTo: directionsButton.widthAnchor),
+      directionsWrapper.centerYAnchor.constraint(equalTo: directionsButton.centerYAnchor),
+      directionsWrapper.centerXAnchor.constraint(equalTo: directionsButton.centerXAnchor),
+    ])
+    
+    let stackedViews: [UIView] = [searchBar, directionsWrapper]
     
     let stackView = UIStackView(arrangedSubviews: stackedViews)
     stackView.translatesAutoresizingMaskIntoConstraints = false
