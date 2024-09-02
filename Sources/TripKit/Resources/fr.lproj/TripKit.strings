@@ -358,7 +358,7 @@
 "Powered by" = "Réalisé avec";
 
 /* No comment provided by engineer. */
-"Powered by %@" = "Réalisé avec %s";
+"Powered by %@" = "Réalisé avec %@";
 
 /* No comment provided by engineer. */
 "Public holiday" = "Jour férié";

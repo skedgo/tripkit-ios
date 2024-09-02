@@ -109,7 +109,7 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
       }
     } label: {
       HStack(spacing: 4) {
-        if #available(iOS 14.0, *), action.content.isInProgress {
+        if action.content.isInProgress {
           ProgressView()
             .frame(width: 18, height: 18)
         } else {

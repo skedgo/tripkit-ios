@@ -148,3 +148,9 @@ extension TKAPI.Location {
   }
   
 }
+
+extension TKNamedCoordinate {
+  public convenience init(_ remote: TKAPI.Location) {
+    self.init(latitude: remote.lat, longitude: remote.lng, name: remote.name, address: remote.address)
+  }
+}

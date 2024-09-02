@@ -28,6 +28,7 @@ struct TKUIAutocompletionResultView: View {
           .scaledToFit()
           .frame(width: 19)
           .foregroundStyle(Color(uiColor: .tkLabelTertiary))
+          .accessibilityHidden(true)
         
         VStack(alignment: .leading) {
           Text.build(result.title, highlightRanges: result.titleHighlightRanges, textColor: .tkLabelPrimary)
@@ -36,6 +37,10 @@ struct TKUIAutocompletionResultView: View {
             Text.build(subtitle, highlightRanges: result.subtitleHighlightRanges, textColor: .tkLabelSecondary)
           }
         }
+        .accessibilityElement()
+        .accessibilityLabel("\(result.title), \(result.subtitle ?? "")")
+        .accessibilityHint(Loc.TapToSelectAddress)
+        .accessibilityAddTraits(.isButton)
         
         Spacer(minLength: 0)
         
@@ -49,11 +54,13 @@ struct TKUIAutocompletionResultView: View {
               .scaledToFit()
               .frame(width: 24)
               .foregroundStyle(Color(uiColor: .tkLabelTertiary))
+              .accessibilityLabel(Loc.MoreLocationInfo(result.title))
+              .accessibilityHint(Loc.TapToLearnLocationInfo)
           }
         }
       }
       .opacity(autocompletionItem.showFaded ? 0.33 : 1)
-      
+
     case .action(let action):
       HStack {
         Image(uiImage: TKAutocompletionResult.image(for: .currentLocation))
@@ -76,6 +83,10 @@ struct TKUIAutocompletionResultView: View {
         
         Text(verbatim: Loc.CurrentLocation)
       }
+      .accessibilityElement(children: .combine)
+      .accessibilityLabel(Loc.CurrentLocation)
+      .accessibilityHint(Loc.TapToSelectCurrentLocation)
+      .accessibilityAddTraits(.isButton)
       
     }
   }

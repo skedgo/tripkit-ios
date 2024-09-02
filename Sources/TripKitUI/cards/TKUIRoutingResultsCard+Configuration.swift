@@ -44,12 +44,12 @@ public extension TKUIRoutingResultsCard {
     ///
     /// If this is set, the routing card will not display the Transport button,
     /// which allows users to show or hide transport modes when results are
-    /// presented
+    /// presented.
     ///
     /// Defaults to nil, which means the SDK will read from `TKSettings`
     public var limitToModes: Set<String>? = nil
     
-    /// Set this to add a button for a trip group
+    /// Set this to add a button for a trip group.
     ///
     /// Called when a results card gets presented.
     public var tripGroupActionFactory: ((TripGroup) -> TripGroupAction?)?
@@ -72,11 +72,12 @@ public extension TKUIRoutingResultsCard {
     /// An optional list of autocompletion data providers. This list will be used by an instance of
     /// `TKUILocationSearchViewController`, which is presented when users click on
     /// the origin or destination labels. If none was provided, the `TKAppleGeocoder` and
-    /// `TKTripGoGeocoder` will be used
+    /// `TKTripGoGeocoder` will be used.
     public var autocompletionDataProviders: [TKAutocompleting] = [TKAppleGeocoder(), TKTripGoGeocoder()]
     
-    /// Optional configuration of the time picker used on the routing results card
-    /// Note: this will also be re-used in the mode-by-mode card
+    /// Optional configuration of the time picker used on the routing results card.
+    ///
+    /// Note: this will also be re-used in the mode-by-mode card.
     public var timePickerConfig: TKUITimePickerSheet.Configuration = .default
     
     /// Set this to select which trip metrics to show for each trip group in the routing
@@ -98,7 +99,7 @@ public extension TKUIRoutingResultsCard {
       return metrics
     }()
     
-    /// Set this to the allowed badges to show on a trip group
+    /// Set this to the allowed badges to show on a trip group.
     ///
     /// Badges will only be shown if the related scores for that metric are sufficiently different
     /// for the trips.

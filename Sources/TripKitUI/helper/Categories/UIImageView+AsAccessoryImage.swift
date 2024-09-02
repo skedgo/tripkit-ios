@@ -51,13 +51,9 @@ extension UIImageView {
            .compactMap { $0 }
       }
       
-    } else if #available(iOS 14.0, *) {
+    } else {
       // Right-pointing, all bars
       return [UIImage(systemName: "dot.radiowaves.forward")].compactMap { $0 }
-      
-    } else {
-      // Up-pointing, like wifi, all bars
-      return [UIImage(systemName: "wifi")].compactMap { $0 }
     }
   }
 }

@@ -31,33 +31,12 @@ class TKUIResultsAccessoryView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    let backgroundColor = UIColor { traits in
-      if traits.accessibilityContrast == .high {
-        return UIColor.tkAppTintColor.withAlphaComponent(0.04)
-      } else {
-        return UIColor.tkAppTintColor.withAlphaComponent(0.12)
-      }
-    }
-    
-    if #available(iOS 15.0, *) {
-      // Align buttons to leading edge
-      trailingConstraint.isActive = false
-      trailingConstraintNew.isActive = true
-      timeHeightConstraint.isActive = false
-      transportHeightConstraint.isActive = false
-      bottomConstraint.constant = 6
-
-    } else {
-      // Use full space for buttons
-      trailingConstraint.isActive = true
-      trailingConstraintNew.isActive = false
-      timeHeightConstraint.isActive = true
-      transportHeightConstraint.isActive = true
-      bottomConstraint.constant = 0
-
-      self.backgroundColor = backgroundColor
-    }
-    
+    // Align buttons to leading edge
+    trailingConstraint.isActive = false
+    trailingConstraintNew.isActive = true
+    timeHeightConstraint.isActive = false
+    transportHeightConstraint.isActive = false
+    bottomConstraint.constant = 6
     
     style(timeButton, title: nil, systemImageName: "clock", imagePlacement: .leading)
     style(transportButton, title: Loc.Transport, systemImageName: "chevron.down", imagePlacement: .trailing)
@@ -65,8 +44,8 @@ class TKUIResultsAccessoryView: UIView {
   
   private func style(_ button: UIButton, title: String? = nil, systemImageName: String, imagePlacement: NSDirectionalRectEdge, highlight: Bool = false) {
     
-    let config = UIImage.SymbolConfiguration(textStyle: .subheadline, scale: .default)
-    button.setImage(.init(systemName: systemImageName, withConfiguration: config), for: .normal)
+    let symbolConfig = UIImage.SymbolConfiguration(textStyle: .subheadline, scale: .default)
+    button.setImage(.init(systemName: systemImageName, withConfiguration: symbolConfig), for: .normal)
     
     let foregroundColor = UIColor { traits in
       if traits.accessibilityContrast == .high {
@@ -76,38 +55,25 @@ class TKUIResultsAccessoryView: UIView {
       }
     }
     
-    if #available(iOS 15.0, *) {
-      var config = highlight ? UIButton.Configuration.borderedTinted() : UIButton.Configuration.plain()
-      config.buttonSize = .mini
-      config.imagePadding = 4
-      config.cornerStyle = .capsule
-      config.imagePlacement = imagePlacement
-      config.titleTextAttributesTransformer = .init { container in
-        var updated = container
-        updated.font = highlight ? TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline) : TKStyleManager.customFont(forTextStyle: .subheadline)
-        return updated
-      }
-      button.configuration = config
-
-      button.layer.borderWidth = highlight ? 0 : 0.5
-      button.layer.borderColor = TKColor.tkSeparatorSubtle.cgColor
-      button.layer.cornerCurve = .continuous
-      
-      button.tintColor = highlight ? foregroundColor : .tkLabelPrimary
-      
-      button.setTitle(title, for: .normal)
-
-    } else {
-      // Legacy style - Highlight not supported
-      
-      button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-      button.titleLabel?.adjustsFontForContentSizeCategory = true
-      
-      timeButton.tintColor = foregroundColor
-      transportButton.tintColor = foregroundColor
-      
-      button.setTitle(title.map { " \($0) " }, for: .normal)
+    var config = highlight ? UIButton.Configuration.borderedTinted() : UIButton.Configuration.plain()
+    config.buttonSize = .mini
+    config.imagePadding = 4
+    config.cornerStyle = .capsule
+    config.imagePlacement = imagePlacement
+    config.titleTextAttributesTransformer = .init { container in
+      var updated = container
+      updated.font = highlight ? TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline) : TKStyleManager.customFont(forTextStyle: .subheadline)
+      return updated
     }
+    button.configuration = config
+
+    button.layer.borderWidth = highlight ? 0 : 0.5
+    button.layer.borderColor = TKColor.tkSeparatorSubtle.cgColor
+    button.layer.cornerCurve = .continuous
+    
+    button.tintColor = highlight ? foregroundColor : .tkLabelPrimary
+    
+    button.setTitle(title, for: .normal)
   }
   
   override func layoutSubviews() {

@@ -19,6 +19,8 @@ public class TKAppleGeocoder: NSObject {
   private let completer: MKLocalSearchCompleter
   private var completerDelegate: LocalSearchCompleterDelegate!
   
+  public static var pointsOfInterestsToExclude: [MKPointOfInterestCategory] = [.publicTransport]
+  
   public override init() {
     self.completer = MKLocalSearchCompleter()
     
@@ -65,6 +67,7 @@ extension TKAppleGeocoder: TKGeocoding {
     let request = MKLocalSearch.Request()
     request.naturalLanguageQuery = fullString
     request.region = MKCoordinateRegion(mapRect)
+    request.pointOfInterestFilter = MKPointOfInterestFilter(excluding: TKAppleGeocoder.pointsOfInterestsToExclude)
     
     MKLocalSearch(request: request).start { results, error in
       if let error = error {
@@ -97,9 +100,9 @@ extension TKAppleGeocoder: TKAutocompleting {
     
     completer.delegate = completerDelegate
     completer.region = MKCoordinateRegion(mapRect)
-    completer.queryFragment = input
-    
+    completer.queryFragment = input    
     completer.resultTypes = [.address, .pointOfInterest]
+    completer.pointOfInterestFilter = MKPointOfInterestFilter(excluding: TKAppleGeocoder.pointsOfInterestsToExclude)
   }
   
   public func cancelAutocompletion() {
