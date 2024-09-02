@@ -11,16 +11,12 @@ let package = Package(
     .macOS(.v11),
   ],
   products: [
-    .library(
-      name: "TripKit",
-      targets: ["TripKit"]
-    ),
-    .library(
-      name: "TripKitUI",
-      targets: ["TripKitUI"]),
-    .library(
-      name: "TripKitInterApp",
-      targets: ["TripKitInterApp"]),
+    .library(name: "TripKit", targets: ["TripKit"]),
+    .library(name: "TripKitUI", targets: ["TripKitUI"]),
+    .library(name: "TripKitInterApp", targets: ["TripKitInterApp"]),
+    .library(name: "TripKit-Dynamic", type: .dynamic, targets: ["TripKit"]),
+    .library(name: "TripKitUI-Dynamic", type: .dynamic, targets: ["TripKitUI"]),
+    .library(name: "TripKitInterApp-Dynamic", type: .dynamic, targets: ["TripKitInterApp"]),
   ],
   dependencies: [
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.1.0")),
