@@ -13,7 +13,7 @@ import TripKit
 
 public class TKUITripCell: UITableViewCell {
 
-  public static let nib = UINib(nibName: "TKUITripCell", bundle: Bundle(for: TKUITripCell.self))
+  public static let nib = UINib(nibName: "TKUITripCell", bundle: .tripKitUI)
   
   public static let reuseIdentifier: String = "TKUITripCell"
 

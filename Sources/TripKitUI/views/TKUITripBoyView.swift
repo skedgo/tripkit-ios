@@ -17,8 +17,7 @@ public class TKUITripBoyView: UIView {
   @IBOutlet public weak var retryButton: UIButton!
   
   public static func newInstance() -> TKUITripBoyView {
-    let view = Bundle(for: self).loadNibNamed("TKUITripBoyView", owner: self, options: nil)?.first as! TKUITripBoyView
-    return view
+    return Bundle.tripKitUI.loadNibNamed("TKUITripBoyView", owner: self, options: nil)?.first as! TKUITripBoyView
   }
 
   public func configure(title: String?, description: String?, actionTitle: String?, isHappy: Bool, allowRetry: Bool) {

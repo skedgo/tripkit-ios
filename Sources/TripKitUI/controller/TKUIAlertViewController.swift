@@ -103,7 +103,7 @@ public class TKUIAlertViewController: UITableViewController {
     
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 150
-    tableView.register(UINib(nibName: "TKUIAlertCell", bundle: Bundle(for: TKUIAlertCell.self)), forCellReuseIdentifier: "TKUIAlertCell")
+    tableView.register(UINib(nibName: "TKUIAlertCell", bundle: .tripKitUI), forCellReuseIdentifier: "TKUIAlertCell")
     tableView.backgroundColor = .tkBackgroundGrouped
     tableView.separatorStyle = .none
   }

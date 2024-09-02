@@ -21,7 +21,7 @@ class TKUISegmentAlertCell: UITableViewCell {
   @IBOutlet weak var chevronView: UIImageView!
   @IBOutlet weak var titlesStackView: UIStackView!
   
-  static let nib = UINib(nibName: "TKUISegmentAlertCell", bundle: Bundle(for: TKUISegmentAlertCell.self))
+  static let nib = UINib(nibName: "TKUISegmentAlertCell", bundle: .tripKitUI)
   
   static let reuseIdentifier = "TKUISegmentAlertCell"
 

@@ -38,7 +38,7 @@ public class TKUISegmentTitleView: UIView, TGPreferrableView {
   var disposeBag: DisposeBag!
   
   public static func newInstance() -> TKUISegmentTitleView {
-    return Bundle(for: TKUISegmentTitleView.self).loadNibNamed("TKUISegmentTitleView", owner: self, options: nil)?.first as! TKUISegmentTitleView
+    return Bundle.tripKitUI.loadNibNamed("TKUISegmentTitleView", owner: self, options: nil)?.first as! TKUISegmentTitleView
   }
   
   public override func awakeFromNib() {

@@ -17,7 +17,7 @@ class TKUISegmentImpossibleCell: UITableViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var button: UIButton!
   
-  static let nib = UINib(nibName: "TKUISegmentImpossibleCell", bundle: Bundle(for: TKUISegmentImpossibleCell.self))
+  static let nib = UINib(nibName: "TKUISegmentImpossibleCell", bundle: .tripKitUI)
   
   static let reuseIdentifier = "TKUISegmentImpossibleCell"
   
