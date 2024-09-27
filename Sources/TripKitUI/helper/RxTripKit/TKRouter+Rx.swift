@@ -13,7 +13,7 @@ import RxSwift
 
 import TripKit
 
-extension TKTripFetcher: ReactiveCompatible {}
+extension TKTripFetcher: @retroactive ReactiveCompatible {}
 extension Reactive where Base == TKTripFetcher {
   public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
     return Single.create { observer in

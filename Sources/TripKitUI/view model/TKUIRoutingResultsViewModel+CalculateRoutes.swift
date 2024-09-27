@@ -53,6 +53,7 @@ extension TKUIRoutingResultsViewModel {
       case arriveBefore(Date)
     }
     
+    @MainActor
     init(destination: MKAnnotation, origin: MKAnnotation? = nil) {
       self.mode = origin == nil ? .origin : .destination
       self.select = .destination
@@ -61,6 +62,7 @@ extension TKUIRoutingResultsViewModel {
       self.time = TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP ? .leaveASAP : nil
     }
     
+    @MainActor
     fileprivate init(mode: TKUIRoutingResultsViewModel.SearchMode, origin: TKNamedCoordinate? = nil, destination: TKNamedCoordinate? = nil, time: Time? = nil) {
       self.mode = mode
       self.origin = origin
@@ -74,7 +76,7 @@ extension TKUIRoutingResultsViewModel {
     fileprivate(set) var destination: TKNamedCoordinate?
     fileprivate(set) var time: Time?
 
-    fileprivate static var empty = RouteBuilder(mode: .destination)
+    @MainActor fileprivate static var empty = RouteBuilder(mode: .destination)
   }
   
 }
@@ -257,6 +259,7 @@ extension TKUIRoutingResultsViewModel {
 
 extension TripRequest {
   
+  @MainActor
   var builder: TKUIRoutingResultsViewModel.RouteBuilder {
     
     let time: TKUIRoutingResultsViewModel.RouteBuilder.Time
