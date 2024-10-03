@@ -57,7 +57,7 @@ jobs:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
         run: |
           xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -resultBundlePath TestResults
-      - uses: kishikawakatsumi/xcresulttool@v1.0.3
+      - uses: kishikawakatsumi/xcresulttool@v1
         with:
           path: TestResults.xcresult
         if: success() || failure()
