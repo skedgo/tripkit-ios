@@ -111,4 +111,27 @@ class TKRegionManagerTest: XCTestCase {
     ])
   }
   
+  func testGroupingSchoolBusModes() {
+    let inputModes: Set<String> = [
+      "pt_pub",
+      "pt_ltd_SCHOOLBUS_1",
+      "pt_ltd_SCHOOLBUS_2",
+      "pt_ltd_SCHOOLBUS_3",
+      "wa_wal",
+      "cy_bic"]
+    
+    let groupedModes = TKTransportMode.groupModeIdentifiers(inputModes, includeGroupForAll: false)
+    
+    let expectedGroups: Set<Set<String>> = [
+      ["pt_pub"],
+      ["pt_ltd_SCHOOLBUS_1",
+       "pt_ltd_SCHOOLBUS_2",
+       "pt_ltd_SCHOOLBUS_3"],
+      ["wa_wal"],
+      ["cy_bic"]
+    ]
+    
+    XCTAssertEqual(groupedModes, expectedGroups, "The grouped modes are not correct")
+  }
+  
 }

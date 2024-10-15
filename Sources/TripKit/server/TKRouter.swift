@@ -38,7 +38,7 @@ public class TKRouter: NSObject {
     public var additional: Set<URLQueryItem> = []
     public var context: NSManagedObjectContext?
 
-    public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: NSManagedObjectContext) {
+    public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: NSManagedObjectContext? = nil) {
       self.from = from
       self.to = to
       self.at = time
@@ -368,7 +368,9 @@ extension TKTransportMode {
   static func groupModeIdentifiers(_ modes: Set<String>, includeGroupForAll: Bool) -> Set<Set<String>> {
     var result: Set<Set<String>> = []
     var processedModes: Set<String> = []
+    var schoolBuses: Set<String> = []
     var includesWalkOnly = false
+    
     for mode in modes {
       if processedModes.contains(mode) {
         continue // added already, e.g., via implied modes
@@ -376,6 +378,10 @@ extension TKTransportMode {
         continue // don't add flights by themselves
       } else if mode == TKTransportMode.walking.modeIdentifier || mode == TKTransportMode.wheelchair.modeIdentifier {
         includesWalkOnly = true
+      } else if mode.hasPrefix(TKTransportMode.schoolBuses.modeIdentifier) {
+        schoolBuses.insert(mode)
+        processedModes.insert(mode)
+        continue
       }
       
       var group: Set<String> = [mode]
@@ -397,6 +403,10 @@ extension TKTransportMode {
       }
       
       processedModes.formUnion(group)
+    }
+    
+    if !schoolBuses.isEmpty {
+      result.insert(schoolBuses)
     }
     
     if includeGroupForAll, result.count > 1 + (includesWalkOnly ? 1 : 0) {

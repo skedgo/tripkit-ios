@@ -58,6 +58,11 @@ public class Loc : NSObject {
   }
   
   @objc
+  public static var Select: String {
+    return NSLocalizedString("Select", tableName: "Shared", bundle: .tripKit, comment: "Select action")
+  }
+  
+  @objc
   public static var Next: String {
     return NSLocalizedString("Next", tableName: "Shared", bundle: .tripKit, comment: "Next action")
   }
@@ -123,6 +128,26 @@ public class Loc : NSObject {
 
   public static var OnTime: String {
     return NSLocalizedString("On time", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show when a service is on time according to real-time data.")
+  }
+  
+  public static var DateTimeSelectionBelow: String {
+    return NSLocalizedString("Below earliest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is below the minimum datetime.")
+  }
+  
+  public static var DateTimeSelectionAbove: String {
+    return NSLocalizedString("Beyond furthest date", tableName: "TripKit", bundle: .tripKit, comment: "Indicator to show if the selected datetime is above the maximum datetime.")
+  }
+  
+  public static var PickerDateTitle: String {
+    return NSLocalizedString("Date", tableName: "TripKit", bundle: .tripKit, comment: "Title for Date Picker")
+  }
+  
+  public static var PickerTimeTitle: String {
+    return NSLocalizedString("Time", tableName: "TripKit", bundle: .tripKit, comment: "Title for Time Picker")
+  }
+  
+  public static var SelectReturnDate: String {
+    return NSLocalizedString("Select Return Date", tableName: "TripKit", bundle: .tripKit, comment: "Header title for Date Picker")
   }
   
   public static func LateService(minutes: Int, service: String?) -> String {
@@ -290,6 +315,27 @@ public class Loc : NSObject {
   public static func PercentWheelchairFriendly(_ percentage: String) -> String {
     let format = NSLocalizedString("%@ wheelchair friendly", tableName: "TripKit", bundle: .tripKit, comment: "Indicator for how wheelchair-friendly a wheelchair route is. Placeholder will get replaced with '75%'.")
     return String(format: format, percentage)
+  }
+  
+  public static func MoreLocationInfo(_ address: String) -> String {
+    let format = NSLocalizedString("More information about %@", tableName: "Shared", bundle: .tripKit, comment: "Accessibility label for the information button next to addresses in an autocomplete item.")
+    return String(format: format, address)
+  }
+
+  public static var TapToLearnLocationInfo: String {
+    return NSLocalizedString("Tap to learn more about this location.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for info button which provides additional information.")
+  }
+  
+  public static var TapToSelectAddress: String {
+    return NSLocalizedString("Tap to select this address as origin or destination.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for an autocomplete item to provide selection capability.")
+  }
+  
+  public static var TapToSelectCurrentLocation: String {
+    return NSLocalizedString("Tap to select your current location as the destination or origin.", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for an current location item to provide selection capability.")
+  }
+  
+  public static var SelectTime: String {
+    return NSLocalizedString("Select Time", tableName: "Shared", bundle: .tripKit, comment: "Title for Date Time selection.")
   }
   
 }

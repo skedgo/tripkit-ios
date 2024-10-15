@@ -42,6 +42,18 @@ public extension TKUITimePickerSheet {
     
     /// Allows customizig the "Arrive by" time type label
     public var arriveByLabel: String = Loc.ArriveBy
+    
+    /// This controls wether minimum and maximum date is set to 1 month if set to nil
+    public var removeDateLimits: Bool = false
+    
+    /// Allows selection of dates that are below or beyond minimum and maximum date respectively.
+    /// This makes the selector button be disabled wether current date selected is out of range.
+    public var allowsOutOfRangeSelection: Bool = false
+    
+    /// Customizes the time picker use for either sheet or embed (for other view / view controller use)
+    ///
+    ///  Defaults to .sheet
+    public var style: Style = .sheet
   }
   
 }

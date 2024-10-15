@@ -41,6 +41,8 @@ extension TKUIHomeCard {
     /// A custom handler that should be triggered, providing the home card view controller
     case trigger((UIViewController) -> Void)
     
+    case enterSearchMode
+    
     case success
   }
 }
@@ -63,6 +65,8 @@ extension TKUIHomeViewModel {
     /// subscribe to the `Single` that it is returning and if that emits a `true`, call
     /// refresh on the home card.
     case handleAction(handler: (UIViewController) -> Single<Bool>)
+    
+    case enterSearchMode
     
     /// A custom handler that should be triggered, providing the home card view controller
     case trigger((UIViewController) -> Void)
@@ -91,6 +95,8 @@ extension TKUIHomeViewModel {
     case .hideSection(let identifier):
       TKUIHomeCard.hideComponent(id: identifier)
       return nil
+    case .enterSearchMode:
+      return .enterSearchMode
     case .success:
       return nil
     }

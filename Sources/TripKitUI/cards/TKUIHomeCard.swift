@@ -304,6 +304,9 @@ extension TKUIHomeCard {
         self.homeMapManager.zoom(to: city, animated: false)
       }
       
+    case .enterSearchMode:
+      enterSearchMode()
+      
     case let .handleSelection(selection, component):
       switch Self.config.selectionMode {
       case .selectOnMap:

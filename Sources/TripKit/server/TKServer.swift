@@ -370,14 +370,45 @@ extension TKServer {
     }
   }
   
+  public func hit<Input: Encodable>(
+    _ method: HTTPMethod = .POST,
+    path: String,
+    input: Input,
+    headers: [String: String]? = nil,
+    region: TKRegion? = nil,
+    encoderConfig: (JSONEncoder) -> Void = { _ in }
+  ) async throws -> Response<Data?> {
+    let encoder = JSONEncoder()
+    encoderConfig(encoder)
+    let parameters = try encoder.encodeJSONObject(input) as? [String: Any]
+
+    return await withCheckedContinuation { continuation in
+      hitSkedGo(
+        method: method,
+        path: path,
+        parameters: parameters,
+        headers: headers,
+        region: region,
+        callbackOnMain: false
+      ) { response in
+        continuation.resume(returning: response)
+      }
+    }
+  }
+  
   public func hit<Model: Decodable>(
     _ type: Model.Type,
     _ method: HTTPMethod = .GET,
     url: URL,
     parameters: [String: Any]? = nil,
-    headers: [String: String]? = nil
+    headers: [String: String]? = nil,
+    decoderConfig: (JSONDecoder) -> Void = { _ in }
   ) async -> Response<Model> {
-    await withCheckedContinuation { continuation in
+    
+    let decoder = JSONDecoder()
+    decoderConfig(decoder)
+    
+    return await withCheckedContinuation { continuation in
       hit(method: method,
           url: url,
           parameters: parameters,
@@ -385,7 +416,7 @@ extension TKServer {
       { response in
         continuation.resume(returning: response.map  { data in
           guard let data, !data.isEmpty else { throw ServerError.noData }
-          return try JSONDecoder().decode(Model.self, from: data)
+          return try decoder.decode(Model.self, from: data)
         })
       }
     }

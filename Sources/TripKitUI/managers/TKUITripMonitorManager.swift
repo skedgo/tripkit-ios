@@ -30,7 +30,6 @@ import TripKit
 /// - Lastly, call `TKUINotificationManager.shared.subscribe(to: .pushNotifications) { _ in }`
 ///
 @MainActor
-@available(iOS 14.0, *)
 public class TKUITripMonitorManager: NSObject, ObservableObject {
   
   /// Will be set on `UNNotificationRequest.content.categoryIdentifier`
@@ -227,7 +226,6 @@ extension TKAPI.TripNotification {
   }
 }
 
-@available(iOS 14.0, *)
 extension TKUITripMonitorManager {
   
   private func startMonitoringRegions(from monitored: MonitoredTrip) {
@@ -272,7 +270,6 @@ extension TKUITripMonitorManager {
 
 // MARK: - Time-based alerts
 
-@available(iOS 14.0, *)
 extension TKUITripMonitorManager {
   
   private func scheduleTimeBased(from notifications: [TKAPI.TripNotification]) {

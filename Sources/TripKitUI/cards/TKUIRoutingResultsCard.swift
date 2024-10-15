@@ -446,6 +446,17 @@ extension TKUIRoutingResultsCard {
       tripCell.accessoryType = .disclosureIndicator
       #endif
       tripCell.accessibilityTraits = .button
+      
+      tripCell.actionButton.rx.tap
+        .subscribe(onNext: { [weak self] in
+          guard
+            let self,
+            let primaryAction = TKUITripOverviewCard.config.tripActionsFactory?(trip).first(where: { $0.priority >= TKUITripOverviewCard.DefaultActionPriority.book.rawValue }),
+            let view = self.controller?.view else { return }
+          let _ = primaryAction.handler(primaryAction, self, trip, view)
+        })
+        .disposed(by: tripCell.disposeBag)
+      
       return tripCell
     
     case .customItem(let item):
@@ -462,26 +473,6 @@ extension TKUITripCell {
   public func configure(_ trip: Trip, allowFading: Bool = true, isArriveBefore: Bool? = nil, preferredContentSizeCategory: UIContentSizeCategory) {
     configure(.init(trip, allowFading: allowFading, isArriveBefore: isArriveBefore), preferredContentSizeCategory: preferredContentSizeCategory)
   }
-}
-
-extension TKUITripCell.Model {
-
-  init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool? = nil) {
-    self.init(
-      departure: trip.departureTime,
-      arrival: trip.arrivalTime,
-      departureTimeZone: trip.departureTimeZone,
-      arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
-      focusOnDuration: !trip.departureTimeIsFixed,
-      isArriveBefore: isArriveBefore ?? trip.isArriveBefore,
-      showFaded: allowFading && trip.showFaded,
-      isCancelled: trip.isCanceled,
-      hideExactTimes: trip.hideExactTimes,
-      segments: trip.segments(with: .inSummary),
-      accessibilityLabel: trip.accessibilityLabel
-    )
-  }
-
 }
 
 extension TKMetricClassifier.Classification {
