@@ -21,20 +21,28 @@ public class TKRegionAutocompleter: TKAutocompleting {
   
   public func autocomplete(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKAutocompletionResult], Error>) -> Void) {
     
-    let scoredMatches = TKRegionManager.shared.regions
-      .flatMap { region -> [(TKRegion.City, score: TKAutocompletionResult.ScoreHighlights)] in
+    let cities = TKRegionManager.shared.regions.flatMap(\.cities)
+    let maxScore = input.isEmpty ? 85 : 70
+    
+    guard !input.isEmpty || cities.count < 20 else {
+      // If we show the default list with no input, don't spam it with lots of
+      // cities if this app works everywhere.
+      completion(.success([]))
+      return
+    }
+    
+    let scoredMatches = cities
+      .compactMap { city -> (TKRegion.City, score: TKAutocompletionResult.ScoreHighlights)? in
         if input.isEmpty {
-          return region.cities.map { ($0, .init(score: 100)) }
+          return (city, .init(score: maxScore))
         } else {
-          return region.cities.compactMap { city -> (TKRegion.City, score: TKAutocompletionResult.ScoreHighlights)? in
-            guard let name = city.title else { return nil }
-            let titleScore = TKAutocompletionResult.nameScore(searchTerm: input, candidate: name)
-            guard titleScore.score > 0 else { return nil }
-            let distanceScore = TKAutocompletionResult.distanceScore(from: city.coordinate, to: .init(mapRect), longDistance: true)
-            let rawScore = (titleScore.score * 9 + distanceScore) / 10
-            let score = TKAutocompletionResult.rangedScore(for: rawScore, min: 10, max: 70)
-            return (city, .init(score: score, titleHighlight: titleScore.ranges))
-          }
+          guard let name = city.title else { return nil }
+          let titleScore = TKAutocompletionResult.nameScore(searchTerm: input, candidate: name)
+          guard titleScore.score > 0 else { return nil }
+          let distanceScore = TKAutocompletionResult.distanceScore(from: city.coordinate, to: .init(mapRect), longDistance: true)
+          let rawScore = (titleScore.score * 9 + distanceScore) / 10
+          let score = TKAutocompletionResult.rangedScore(for: rawScore, min: 10, max: maxScore)
+          return (city, .init(score: score, titleHighlight: titleScore.ranges))
         }
       }
     

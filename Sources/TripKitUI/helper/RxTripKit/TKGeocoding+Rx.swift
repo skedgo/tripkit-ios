@@ -155,7 +155,10 @@ public extension Array where Element == TKAutocompleting {
           }
         
         if input.forced {
-          return Observable.combineLatest(autocompletions).map { $0.flatMap { $0 } }
+          return Observable.combineLatest(autocompletions)
+            .map { unsorted in
+              unsorted.flatMap { $0 }.sorted(by: <)
+            }
         } else {
           return Observable.stableRace(autocompletions)
         }

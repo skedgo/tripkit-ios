@@ -94,7 +94,7 @@ open class TKUIHomeCard: TKUITableCard {
       configureCell: { [weak self] _, tv, ip, item -> UITableViewCell in
         var fallback: UITableViewCell { UITableViewCell(style: .default, reuseIdentifier: nil) }
         
-        guard let self = self else {
+        guard let self else {
           // Shouldn't but can happen on dealloc
           return fallback
         }
@@ -162,7 +162,7 @@ open class TKUIHomeCard: TKUITableCard {
     // We will be hiding some sections while search in progress. The
     // Home view model thus needs to know this event.
     let searchInProgress = searchTextPublisher
-      .map { !$0.0.isEmpty }
+      .map { !$0.0.isEmpty || $0.forced }
       .asSignal(onErrorJustReturn: false)
 
     let searchInput = TKUIHomeViewModel.SearchInput(
@@ -213,8 +213,10 @@ open class TKUIHomeCard: TKUITableCard {
   open override func willAppear(animated: Bool) {
     // If the search text is empty when the card appears,
     // try loading autocompletion results.
-    if let text = headerView.searchBar.text, text.isEmpty {
-      searchTextPublisher.onNext(("", forced: true))
+    if let text = headerView.searchBar.text, 
+        text.isEmpty {
+      let forced = headerView.searchBar.isFirstResponder
+      searchTextPublisher.onNext(("", forced: forced))
     }
     
     cardAppearancePublisher.onNext(true)
@@ -370,7 +372,8 @@ extension TKUIHomeCard: TKUIRoutingQueryInputCardDelegate {
 extension TKUIHomeCard: UISearchBarDelegate {
   
   public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    searchTextPublisher.onNext((searchText, forced: false))
+    let forced = searchText.isEmpty && searchBar.isFirstResponder
+    searchTextPublisher.onNext((searchText, forced: forced))
   }
   
   public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -378,6 +381,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
     headerView.hideDirectionButton(true)
     controller?.moveCard(to: .extended, animated: true)
     controller?.draggingCardEnabled = false
+    searchTextPublisher.onNext(("", forced: true))
   }
   
   public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

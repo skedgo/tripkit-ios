@@ -70,7 +70,11 @@ extension TKAutocompletionResult: Hashable {
 
 extension TKAutocompletionResult: Comparable {
   public static func < (lhs: TKAutocompletionResult, rhs: TKAutocompletionResult) -> Bool {
-    lhs.score >= rhs.score // Yes, highest score first
+    if lhs.score == rhs.score {
+      return lhs.title < rhs.title
+    } else {
+      return lhs.score >= rhs.score // Yes, highest score first
+    }
   }
 }
 
