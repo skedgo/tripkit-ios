@@ -14,6 +14,11 @@ import Kingfisher
 import TripKit
 
 extension UIImageView {
+  
+  public static func resetCaches() {
+    KingfisherManager.shared.cache.clearMemoryCache()
+    KingfisherManager.shared.cache.clearDiskCache()
+  }
 
   public func setImage(with url: URL?, asTemplate: Bool = false, placeholder: TKImage? = nil, completion: ((Bool) -> Void)? = nil) {
     
