@@ -12,6 +12,7 @@ let package = Package(
   ],
   products: [
     .library(name: "TripKit", targets: ["TripKit"]),
+    .library(name: "TripKitAPI", targets: ["TripKitAPI"]),
     .library(name: "TripKitUI", targets: ["TripKitUI"]),
     .library(name: "TripKitInterApp", targets: ["TripKitInterApp"]),
     .library(name: "TripKit-Dynamic", type: .dynamic, targets: ["TripKit"]),
@@ -26,8 +27,12 @@ let package = Package(
   ],
   targets: [
     .target(
+      name: "TripKitAPI",
+      dependencies: []
+    ),
+    .target(
       name: "TripKit",
-      dependencies: [],
+      dependencies: ["TripKitAPI"],
       exclude: ["Supporting Files/Info.plist"]
     ),
     .target(
@@ -77,7 +82,7 @@ let package = Package(
 )
 
 #if os(Linux)
-package.targets = package.targets.filter { $0.name == "TripKit" || $0.name == "TripKitTests" }
-package.products = package.products.filter { $0.name == "TripKit" }
-package.dependencies = package.dependencies.filter { $0.url?.contains("RxSwift") == true }
+package.targets = package.targets.filter { $0.name == "TripKitAPI" }
+package.products = package.products.filter { $0.name == "TripKitAPI" }
+package.dependencies = []
 #endif

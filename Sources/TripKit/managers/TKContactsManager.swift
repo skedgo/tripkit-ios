@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if canImport(Contactts)
+#if canImport(Contacts)
 import Contacts
 
 public class TKContactsManager: NSObject, TKPermissionManager {

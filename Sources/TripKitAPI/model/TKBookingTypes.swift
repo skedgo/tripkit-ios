@@ -84,7 +84,7 @@ public enum TKBooking {
   
   public struct TSPBranding: Codable, Hashable {
     private let rgbColor: TKAPI.RGBColor?
-    private let logoImageName: String?
+    public let logoImageName: String?
     
     private enum CodingKeys: String, CodingKey {
       case rgbColor = "color"
@@ -93,11 +93,6 @@ public enum TKBooking {
     
     public var color: TKColor? {
       return rgbColor?.color
-    }
-    
-    public var downloadableLogoURL: URL? {
-      guard let fileNamePart = logoImageName else { return nil }
-      return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
     }
   }
   
@@ -287,7 +282,7 @@ public enum TKBooking {
       case .multipleSelections(let optionIds):
         try container.encode(optionIds, forKey: .values)
       case .returnTripDate(let returnDate):
-        try container.encode(returnDate.toString(), forKey: .value)
+        try container.encode(returnDate.toJSONString(), forKey: .value)
       case let .number(number, min, max):
         // SIC. Turn number back into a String.
         try container.encode(String(number), forKey: .value)
@@ -449,39 +444,11 @@ extension TKBooking {
    
 }
 
-// MARK: - Helpers
-
 extension TKBooking.BookingInput {
-  
-  public var longText: String? {
-    switch value {
-    case .longText(let value): return value
-    default: return nil
-    }
-  }
-  
-  public var singleSelection: String? {
-    switch value {
-    case .singleSelection(let value): return value
-    default: return nil
-    }
-  }
-  
-  public var multipleSelections: [String]? {
-    switch value {
-    case .multipleSelections(let values): return values
-    default: return nil
-    }
-  }
-  
-  public func displayTitle(for optionId: InputOptionId) -> String? {
-    return options?.first(where: { $0.id == optionId })?.title
-  }
-  
   private static func convertStringReturnDateToInputValue(_ returnDateString: String) -> InputValue {
     if returnDateString.isEmpty {
       return .returnTripDate(.unspecified)
-    } else if returnDateString == Loc.OneWayOnly {
+    } else if returnDateString == "One-way only" {
       return .returnTripDate(.oneWayTrip)
     } else {
       let formatter = ISO8601DateFormatter()
@@ -493,36 +460,18 @@ extension TKBooking.BookingInput {
       }
     }
   }
-  
 }
 
 extension TKBooking.BookingInput.ReturnTripDateValue {
   
-  public func toString(forJSONEncoding: Bool = true, timeZone: TimeZone = .autoupdatingCurrent) -> String {
+  public func toJSONString() -> String {
     switch self {
     case .unspecified: return ""
-    case .oneWayTrip: return Loc.OneWayOnly
+    case .oneWayTrip: return "One-way only"
     case .date(let date):
-      if forJSONEncoding {
-        let formatter = ISO8601DateFormatter()
-        return formatter.string(from: date)
-      } else {
-        return TKStyleManager.format(date, for: timeZone, showDate: true, showTime: true)
-      }
+      let formatter = ISO8601DateFormatter()
+      return formatter.string(from: date)
     }
-  }
-  
-}
-
-extension TKBooking.Fare {
-  
-  public func priceValue(locale: Locale = .current) -> String? {
-    guard let price, let currencyCode else { return nil }
-    return NSNumber(value: Float(price) / 100).toMoneyString(currencyCode: currencyCode, locale: locale)
-  }
-
-  public func noAmount() -> Bool {
-    return amount ?? 0 == 0
   }
   
 }

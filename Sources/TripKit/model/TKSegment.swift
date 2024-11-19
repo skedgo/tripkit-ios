@@ -160,11 +160,11 @@ public class TKSegment: NSObject {
     }
   }
   
-  private var _distanceByRoadTags: [Shape.RoadTag: Double]?? = nil
-  public var distanceByRoadTags: [Shape.RoadTag: Double]? {
+  private var _distanceByRoadTags: [TKAPI.RoadTag: Double]?? = nil
+  public var distanceByRoadTags: [TKAPI.RoadTag: Double]? {
     if let cached = _distanceByRoadTags { return cached }
     
-    var distancesByTag = [Shape.RoadTag: Double]()
+    var distancesByTag = [TKAPI.RoadTag: Double]()
     for shape in shapes {
       if let shapeTags = shape.distanceByRoadTag() {
         for (tag, distance) in shapeTags {
@@ -391,7 +391,7 @@ public class TKSegment: NSObject {
     let polygon = Polygon(points: Point.decodePolyline(encodedPolygon))
     let candidates = [start?.coordinate, end?.coordinate].compactMap { $0 }
     return candidates.allSatisfy { coordinate in
-      polygon.contains(.init(latitude: coordinate.latitude, longitude: coordinate.longitude), onLine: true)
+      polygon.contains(Point(latitude: coordinate.latitude, longitude: coordinate.longitude), onLine: true)
     }
   }
 
@@ -454,11 +454,11 @@ public class TKSegment: NSObject {
   
   // MARK: - Inferred properties: Booking
   
-  private lazy var bookingDataCache: (data: BookingData?, hashCode: Int?) = {
+  private lazy var bookingDataCache: (data: TKBookingData?, hashCode: Int?) = {
     return (data: reference?.bookingData, hashCode: reference.map { Int($0.bookingHashCode) } )
   }()
   
-  private var bookingData: BookingData? {
+  private var bookingData: TKBookingData? {
     guard let newHashCode = reference?.bookingHashCode else { return bookingDataCache.data }
     
     if let oldHashCode = bookingDataCache.hashCode, oldHashCode == newHashCode {

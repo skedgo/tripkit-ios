@@ -8,6 +8,8 @@
 
 import Foundation
 
+@_exported import TripKitAPI
+
 #if canImport(CoreData)
 import CoreData
 #endif

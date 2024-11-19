@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Point: Hashable {
+public struct Point: Hashable {
   // MARK: Point as a lat/long pair
   
-  init(latitude: Double, longitude: Double) {
+  public init(latitude: Double, longitude: Double) {
     self.y = latitude
     self.x = longitude
   }
@@ -42,7 +42,7 @@ struct Point: Hashable {
 }
 
 extension Point: Equatable {}
-func ==(lhs: Point, rhs: Point) -> Bool {
+public func ==(lhs: Point, rhs: Point) -> Bool {
   let epsilon = 0.000001
   return abs(lhs.lat - rhs.lat) < epsilon
       && abs(lhs.lng - rhs.lng) < epsilon

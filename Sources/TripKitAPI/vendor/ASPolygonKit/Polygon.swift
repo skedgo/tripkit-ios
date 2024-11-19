@@ -33,7 +33,7 @@ enum PolygonUnionError: Error, CustomDebugStringConvertible {
   
 }
 
-struct Polygon {
+public struct Polygon {
   #if DEBUG
   enum UnionStep {
     case start(Polygon, Polygon, [Intersection], start: Point)
@@ -57,7 +57,7 @@ struct Polygon {
     })
   }
   
-  init(points: [Point]) {
+  public init(points: [Point]) {
     self.points = points
     firstLink = Polygon.firstLink(for: points)
   }
@@ -146,7 +146,7 @@ struct Polygon {
   
   // MARK: Polygon to polygon intersections
   
-  func intersects(_ polygon: Polygon) -> Bool {
+  public func intersects(_ polygon: Polygon) -> Bool {
     return intersections(polygon).count > 0
   }
   
@@ -197,7 +197,7 @@ struct Polygon {
   ///   - point: The point to check
   ///   - onLine: `true` if the contains check should succeed when the point is right on the edge of the polygon
   /// - Returns: Whether the polygon contains the point
-  func contains(_ point: Point, onLine: Bool) -> Bool {
+  public func contains(_ point: Point, onLine: Bool) -> Bool {
     if onLine {
       for link in firstLink {
         if link.line.contains(point) {
@@ -213,7 +213,7 @@ struct Polygon {
   /// Checks if the polygon contains the provided polygon
   /// - Parameter polygon: The polygon to check for containment
   /// - Returns: Whether `self` contains `polygon`, ignoring interior polygons of either
-  func contains(_ polygon: Polygon) -> Bool {
+  public func contains(_ polygon: Polygon) -> Bool {
     for point in polygon.points {
       if !contains(point, onLine: false) {
         return false

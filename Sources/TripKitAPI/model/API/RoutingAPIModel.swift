@@ -19,8 +19,8 @@ extension TKAPI {
   }
   
   public struct Query: Codable, Hashable {
-    public let from: TKNamedCoordinate
-    public let to: TKNamedCoordinate
+    public let from: Location
+    public let to: Location
     @OptionalISO8601OrSecondsSince1970 public var depart: Date?
     @OptionalISO8601OrSecondsSince1970 public var arrive: Date?
   }
@@ -69,6 +69,75 @@ extension TKAPI {
     case missedPrebookingWindow = "MISSED_PREBOOKING_WINDOW"
     case canceled               = "CANCELLED"
   }
+  
+  public enum RoadSafety: Comparable {
+    /// Just for this mode
+    case safe
+    
+    /// Designated for this mode, but not exclusively
+    case designated
+    
+    /// Shared, but could be worse, e.g., it's quiet or others are aware of you
+    case neutral
+    
+    /// Shared, and busy
+    case hostile
+    
+    case unknown
+  }
+  
+  public enum RoadTag: String, Codable {
+    case cycleLane = "CYCLE-LANE"
+    case cycleTrack = "CYCLE-TRACK"
+    case cycleNetwork = "CYCLE-NETWORK"
+    case bicycleDesignated = "BICYCLE-DESIGNATED"
+    case bicycleBoulevard = "BICYCLE-BOULEVARD"
+    case sideWalk = "SIDE-WALK"
+    case mainRoad = "MAIN-ROAD"
+    case sideRoad = "SIDE-ROAD"
+    case sharedRoad = "SHARED-ROAD"
+    //case unpavedOrUnsealed = "UNPAVED/UNSEALED" -- fine to ignore
+    case streetLight = "STREET-LIGHT"
+    case CCTVCamera = "CCTV-CAMERA"
+    case litRoute = "LIT-ROUTE"
+    case other = "OTHER"
+    
+    public var safety: RoadSafety {
+      switch self {
+      case .cycleTrack:
+        return .safe
+      case .cycleLane,
+           .cycleNetwork,
+           .bicycleDesignated,
+           .bicycleBoulevard,
+           .CCTVCamera,
+           .litRoute:
+        return .designated
+      case .sideWalk,
+           .sideRoad,
+           .sharedRoad,
+           .streetLight:
+        return .neutral
+      case .mainRoad:
+        return .hostile
+      case .other:
+        return .unknown
+      }
+    }
+  }
+  
+  /// Ticket information, for public transport segments
+  public struct Ticket: Codable, Hashable {
+    /// User-friendly name of the ticket
+    public let name: String
+    
+    /// ID of the ticket, where available this is the same as defined in GTFS
+    public let fareID: String?
+    
+    /// Cost of the ticket, in the currency of the trip
+    /// `nil` for re-used tickets
+    public let cost: Decimal?
+  }
 
   public struct SegmentReference: Codable, Hashable {
     public let segmentTemplateHashCode: Int
@@ -76,7 +145,7 @@ extension TKAPI {
     @ISO8601OrSecondsSince1970 public var endTime: Date
     @DefaultFalse public var timesAreRealTime: Bool
     @DefaultEmptyArray public var alertHashCodes: [Int]
-    var booking: BookingData?
+    public var booking: TKBookingData?
     public var bookingHashCode: Int?
     
     // Public transport
@@ -92,7 +161,7 @@ extension TKAPI {
     public var endPlatform: String?
     public var serviceStops: Int?
     @UnknownNil public var ticketWebsite: URL? // Backend might send empty string, which is not a valid URL
-    public var ticket: TKSegment.Ticket?
+    public var ticket: Ticket?
     @OptionalISO8601OrSecondsSince1970 public var timetableStartTime: Date?
     @OptionalISO8601OrSecondsSince1970 public var timetableEndTime: Date?
     @UnknownNil public var realTimeStatus: RealTimeStatus?
@@ -146,17 +215,17 @@ extension TKAPI {
     @UnknownNil public var localCost: TKLocalCost? // Backend is sometimes sending this invalid without currency as of 2021-08-17
     public let operatorInfo: CompanyInfo?
     @DefaultEmptyArray public var notifications: [TripNotification]
-    var mini: TKMiniInstruction?
-    @DefaultFalse var hideExactTimes: Bool
+    public var mini: TKMiniInstruction?
+    @DefaultFalse public var hideExactTimes: Bool
 
     // stationary
-    public var location: TKNamedCoordinate?
+    public var location: Location?
     @DefaultFalse public var hasCarParks: Bool
 
     // moving
     public var bearing: Int?
-    public var from: TKNamedCoordinate?
-    public var to: TKNamedCoordinate?
+    public var from: Location?
+    public var to: Location?
 
     // moving.unscheduled
     public var metres: Distance?
@@ -216,29 +285,12 @@ extension TKAPI {
     case onMap = "on map"
     case inDetails = "in details"
     case hidden
-    
-    var tkVisibility: TKTripSegmentVisibility {
-      switch self {
-      case .inSummary: return .inSummary
-      case .onMap: return .onMap
-      case .inDetails: return .inDetails
-      case .hidden: return .hidden
-      }
-    }
   }
   
   public enum SegmentType: String, Codable, Hashable {
     case scheduled
     case unscheduled
     case stationary
-    
-    var tkType: TKSegmentType {
-      switch self {
-      case .stationary: return .stationary
-      case .scheduled: return .scheduled
-      case .unscheduled: return .unscheduled
-      }
-    }
   }
   
   public struct TripNotification: Hashable {
@@ -277,9 +329,14 @@ extension TKAPI {
       
     }
     
-    struct Coordinate: Codable, Hashable {
-      let lat: Degrees
-      let lng: Degrees
+    public struct Coordinate: Codable, Hashable {
+      public let latitude: Degrees
+      public let longitude: Degrees
+      
+      public enum CodingKeys: String, CodingKey {
+        case latitude = "lat"
+        case longitude = "lng"
+      }
     }
     
     public enum Trigger: String, Codable, Hashable {
@@ -293,6 +350,14 @@ extension TKAPI {
       case arrivingAtYourStop = "ARRIVING_AT_YOUR_STOP"
       case nextStopIsYours    = "NEXT_STOP_IS_YOURS"
       case tripEnd            = "TRIP_END"
+    }
+    
+    public init(id: String, kind: Kind, messageKind: MessageKind, messageTitle: String, messageBody: String) {
+      self.id = id
+      self.kind = kind
+      self.messageKind = messageKind
+      self.messageTitle = messageTitle
+      self.messageBody = messageBody
     }
     
     public let id: String
@@ -326,11 +391,11 @@ extension TKAPI {
     public var name: String?
     @DefaultFalse public var dismount: Bool
     @DefaultFalse public var hop: Bool
-    public var metres: CLLocationDistance?
+    public var metres: Distance?
     public var cyclingNetwork: String?
     public var safe: Bool?
     @UnknownNil public var instruction: ShapeInstruction?
-    @EmptyLossyArray @LossyArray public var roadTags: [Shape.RoadTag]
+    @EmptyLossyArray @LossyArray public var roadTags: [RoadTag]
     
     enum CodingKeys: String, CodingKey {
       case encodedWaypoints
@@ -417,9 +482,9 @@ extension TKAPI.TripNotification: Codable {
     switch rawKind {
     case "CIRCLE":
       let coordinate = try container.decode(Coordinate.self, forKey: .center)
-      let radius = try container.decode(CLLocationDistance.self, forKey: .radius)
+      let radius = try container.decode(TKAPI.Distance.self, forKey: .radius)
       let trigger = try container.decode(Trigger.self, forKey: .trigger)
-      kind = .circle(center: .init(latitude: coordinate.lat, longitude: coordinate.lng), radius: radius, trigger: trigger)
+      kind = .circle(center: coordinate, radius: radius, trigger: trigger)
     case "TIME":
       let date = try container.decode(ISO8601OrSecondsSince1970.self, forKey: .time)
       kind = .time(date.wrappedValue)
@@ -439,7 +504,7 @@ extension TKAPI.TripNotification: Codable {
     switch kind {
     case let .circle(center, radius, trigger):
       try container.encode("CIRCLE", forKey: .kind)
-      try container.encode(Coordinate(lat: center.latitude, lng: center.longitude), forKey: .center)
+      try container.encode(center, forKey: .center)
       try container.encode(radius, forKey: .radius)
       try container.encode(trigger, forKey: .trigger)
     case let .time(date):

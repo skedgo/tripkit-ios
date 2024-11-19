@@ -37,12 +37,10 @@ public class TKLocalCost: NSObject, Codable {
   
 }
 
-public enum TKLocalCostAccuracy: String {
+public enum TKLocalCostAccuracy: String, Codable {
   
   case internalEstimate = "internal_estimate"
   case externalEstimate = "external_estimate"
   case confirmed = "confirmed"
   
 }
-
-extension TKLocalCostAccuracy: Codable { }

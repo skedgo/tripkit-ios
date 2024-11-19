@@ -84,7 +84,7 @@ extension Polygon {
 
 #if os(OSX)
 extension Polygon: CustomPlaygroundDisplayConvertible {
-  var playgroundDescription: Any {
+  public var playgroundDescription: Any {
     return quickLookImage ?? description ?? "Undefined polygon"
   }
 }

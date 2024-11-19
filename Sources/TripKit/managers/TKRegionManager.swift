@@ -140,7 +140,7 @@ extension TKRegionManager {
   /// - Returns: The color as defined by the server
   @objc
   public func color(forModeIdentifier mode: String) -> TKColor? {
-    return response?.modes?[mode]?.color
+    return response?.modes?[mode]?.rgbColor.color
   }
   
   /// - Returns: If specified mode identifier is required and can't get disabled.

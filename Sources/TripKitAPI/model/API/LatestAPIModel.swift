@@ -10,21 +10,21 @@ import Foundation
 
 extension TKAPI {
   
-  struct LatestResponse: Codable {
-    let services: [LatestService]
+  public struct LatestResponse: Codable {
+    public let services: [LatestService]
   }
   
-  struct LatestService: Codable {
-    let code: String
+  public struct LatestService: Codable {
+    public let code: String
     
     @OptionalISO8601OrSecondsSince1970 public var startTime: Date?
     @OptionalISO8601OrSecondsSince1970 public var endTime: Date?
     
-    let primaryVehicle: Vehicle?
-    @DefaultEmptyArray var alternativeVehicles: [Vehicle]
-    @DefaultEmptyArray var alerts: [Alert]
+    public let primaryVehicle: Vehicle?
+    @DefaultEmptyArray public var alternativeVehicles: [Vehicle]
+    @DefaultEmptyArray public var alerts: [Alert]
     
-    @DefaultEmptyArray var stops: [LatestStop]
+    @DefaultEmptyArray public var stops: [LatestStop]
 
     private enum CodingKeys: String, CodingKey {
       case code = "serviceTripID"
@@ -37,10 +37,10 @@ extension TKAPI {
     }
   }
   
-  struct LatestStop: Codable {
-    let stopCode: String
-    @OptionalISO8601OrSecondsSince1970 var arrival: Date?
-    @OptionalISO8601OrSecondsSince1970 var departure: Date?
+  public struct LatestStop: Codable {
+    public let stopCode: String
+    @OptionalISO8601OrSecondsSince1970 public var arrival: Date?
+    @OptionalISO8601OrSecondsSince1970 public var departure: Date?
   }
   
 }

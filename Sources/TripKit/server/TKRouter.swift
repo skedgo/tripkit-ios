@@ -39,8 +39,8 @@ public class TKRouter: NSObject {
 #endif
 
     public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: NSManagedObjectContext? = nil) {
-      self.from = from
-      self.to = to
+      self.from = .init(annotation: from)
+      self.to = .init(annotation: to)
       self.at = time
       self.modes = modes
       self.additional = additional
@@ -420,8 +420,8 @@ extension TKTransportMode {
 // MARK: - Hitting API
 
 public protocol TKRouterRequestable {
-  var from: MKAnnotation { get }
-  var to: MKAnnotation { get }
+  var from: TKAPI.Location { get }
+  var to: TKAPI.Location { get }
   var at: TKShareHelper.QueryDetails.Time { get }
   var modes: Set<String> { get }
   var additional: Set<URLQueryItem> { get }
@@ -496,8 +496,8 @@ extension TKRouter.RoutingQuery: TKRouterRequestable {
     }
     
     return TripRequest.insert(
-      from: from,
-      to: to,
+      from: TKNamedCoordinate(from),
+      to: TKNamedCoordinate(to),
       for: date, timeType: timeType,
       into: context
     )
@@ -506,8 +506,8 @@ extension TKRouter.RoutingQuery: TKRouterRequestable {
 
 extension TripRequest: TKRouterRequestable {
   public var context: NSManagedObjectContext? { managedObjectContext }
-  public var from: MKAnnotation { fromLocation ?? .init(coordinate: .invalid) }
-  public var to: MKAnnotation { toLocation ?? .init(coordinate: .invalid) }
+  public var from: TKAPI.Location { TKAPI.Location(annotation: fromLocation ?? .init(coordinate: .invalid)) }
+  public var to: TKAPI.Location { TKAPI.Location(annotation: toLocation ?? .init(coordinate: .invalid)) }
   
   public var modes: Set<String> { TKSettings.enabledModeIdentifiers(applicableModeIdentifiers) }
 
@@ -549,13 +549,8 @@ extension TKRouter {
     var paras = (config ?? .userSettings()).paras
     let modes = modeIdentifiers ?? request.modes
     paras["modes"] = modes.sorted()
-    if includeAddress {
-      paras["from"] = TKParserHelper.requestString(for: request.from)
-      paras["to"] = TKParserHelper.requestString(for: request.to)
-    } else {
-      paras["from"] = TKParserHelper.requestString(for: request.from.coordinate)
-      paras["to"] = TKParserHelper.requestString(for: request.to.coordinate)
-    }
+    paras["from"] = TKParserHelper.requestString(for: request.from, includeAddress: includeAddress)
+    paras["to"] = TKParserHelper.requestString(for: request.to, includeAddress: includeAddress)
     
     switch request.at {
     case .arriveBy(let arrival):
@@ -682,6 +677,12 @@ extension TKRouter {
 
 
 // MARK: - Handling response
+
+extension TKAPI.Location {
+  var coordinate: CLLocationCoordinate2D {
+    CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+  }
+}
 
 extension TKRouter {
 

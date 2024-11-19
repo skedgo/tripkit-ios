@@ -29,7 +29,12 @@ extension TKRoutingParser {
 
   @discardableResult
   static func populate(_ request: TripRequest, using query: TKAPI.Query?) -> Bool {
-    populate(request, start: query?.from, end: query?.to, leaveAfter: query?.depart, arriveBy: query?.arrive)
+    populate(
+      request,
+      start: query.map { TKNamedCoordinate($0.from) },
+      end: query.map { TKNamedCoordinate($0.to) },
+      leaveAfter: query?.depart,
+      arriveBy: query?.arrive)
   }
   
   /// Helper method to fill in a request wich the specified location.
@@ -55,7 +60,7 @@ extension TKRoutingParser {
       return false
     }
     
-    if let start = start, start.coordinate.isValid {
+    if let start, start.coordinate.isValid {
       let named = TKNamedCoordinate.namedCoordinate(for: start)
       request.fromLocation = named
     } else {
@@ -63,7 +68,7 @@ extension TKRoutingParser {
       guard let start = segment.start?.coordinate else { return false }
       request.fromLocation = TKNamedCoordinate(coordinate: start)
     }
-    if let end = end, end.coordinate.isValid {
+    if let end, end.coordinate.isValid {
       let named = TKNamedCoordinate.namedCoordinate(for: end)
       request.toLocation = named
     } else {

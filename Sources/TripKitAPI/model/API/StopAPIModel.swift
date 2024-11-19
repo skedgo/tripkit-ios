@@ -47,6 +47,7 @@ extension TKAPI {
     public let wheelchairAccessible: Bool?
 
     @DefaultEmptyArray public var children: [Stop]
+    
     public let modeInfo: TKModeInfo
     
     public let operators: [Operator]?

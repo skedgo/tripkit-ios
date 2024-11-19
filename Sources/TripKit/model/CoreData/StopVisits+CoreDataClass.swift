@@ -278,7 +278,7 @@ extension StopVisits: MKAnnotation {
 
 /// :nodoc:
 extension StopVisits: TKRealTimeUpdatable {
-  public var wantsRealTimeUpdates: Bool {
+  @objc public var wantsRealTimeUpdates: Bool {
     return service.wantsRealTimeUpdates
   }
 }

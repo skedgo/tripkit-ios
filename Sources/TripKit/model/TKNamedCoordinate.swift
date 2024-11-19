@@ -131,7 +131,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   }
   
   convenience init(from: TKAPI.Location) {
-    self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
+    self.init(latitude: from.latitude, longitude: from.longitude, name: from.name, address: from.address)
   }
 
   // MARK: - Codable

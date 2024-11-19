@@ -115,16 +115,3 @@ extension TKAPI {
   }
   
 }
-
-extension TKAPI.RegionInfo {
-  
-  /// - Parameter modeIdentifier: A mode identifier
-  /// - Returns: The specific mode details for this this mode identifier
-  ///     (only returns something if it's a specific mode identifier, i.e.,
-  ///     one with two underscores in it.)
-  public func specificModeDetails(for modeIdentifier: String) -> TKAPI.SpecificModeDetails? {
-    let genericMode = TKTransportMode.genericModeIdentifier(forModeIdentifier: modeIdentifier)
-    return modes[genericMode]?.specificModes.first { modeIdentifier == $0.identifier }
-  }
-  
-}

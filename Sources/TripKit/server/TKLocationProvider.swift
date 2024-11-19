@@ -45,7 +45,7 @@ public enum TKLocationProvider {
   
   public static func fetchLocations(center: CLLocationCoordinate2D, radius: CLLocationDistance, limit: Int = 100, modes: [String]? = nil, strictModeMatch: Bool = true, in region: TKRegion) async throws -> [TKNamedCoordinate] {
 
-    guard region != .international else {
+    guard region != TKInternationalRegion.shared else {
       return []
     }
     

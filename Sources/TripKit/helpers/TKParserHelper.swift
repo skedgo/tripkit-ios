@@ -30,6 +30,14 @@ enum TKParserHelper {
     }
   }
   
+  static func requestString(for location: TKAPI.Location, includeAddress: Bool = true) -> String {
+    guard includeAddress, let address = location.address else {
+      return String(format: "(%f,%f)", location.latitude, location.longitude)
+    }
+    
+    return String(format: "(%f,%f)\"%@\"", location.latitude, location.longitude, address)
+  }
+  
 #if canImport(MapKit)
   static func requestString(for coordinate: CLLocationCoordinate2D) -> String {
     return String(format: "(%f,%f)", coordinate.latitude, coordinate.longitude)

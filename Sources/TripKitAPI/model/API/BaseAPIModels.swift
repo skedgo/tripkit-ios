@@ -15,7 +15,7 @@ import MapKit
 
 extension TKAPI {
 
-  #if canImport(CoreLocation)
+#if canImport(CoreLocation)
   public typealias Degrees = CLLocationDegrees
   public typealias Direction = CLLocationDirection
   public typealias Distance = CLLocationDistance
@@ -27,6 +27,18 @@ extension TKAPI {
   public typealias Speed = Double
 #endif
   
+  public struct AppInfo: Codable, Hashable {
+    public let name: String?
+    public let downloadURL: URL?
+    public let deepLink: URL?
+    
+    public enum CodingKeys: String, CodingKey {
+      case name
+      case deepLink
+      case downloadURL = "appURLiOS"
+    }
+  }  
+
   public struct CompanyInfo: Codable, Hashable {
     public let name: String
     public let website: URL?
@@ -73,11 +85,27 @@ extension TKAPI {
   }
 
   public struct Location: Codable, Hashable {
-    let lat: Degrees
-    let lng: Degrees
-    let bearing: Direction?
-    let name: String?
-    let address: String?
+    public let latitude: Degrees
+    public let longitude: Degrees
+    public let bearing: Direction?
+    public let name: String?
+    public let address: String?
+    
+    public init(latitude: Degrees, longitude: Degrees, bearing: Direction?, name: String?, address: String?) {
+      self.latitude = latitude
+      self.longitude = longitude
+      self.bearing = bearing
+      self.name = name
+      self.address = address
+    }
+    
+    public enum CodingKeys: String, CodingKey {
+      case latitude = "lat"
+      case longitude = "lng"
+      case bearing
+      case name
+      case address
+    }
   }
   
   public enum RealTimeStatus: String, Codable, Equatable {
@@ -128,49 +156,3 @@ extension TKAPI {
   }
   
 }
-
-
-extension TKAPI.CompanyInfo {
-  
-  public var remoteIconURL: URL? {
-    guard let fileNamePart = remoteIcon else {
-      return nil
-    }
-    
-    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
-  }
-  
-  public var remoteDarkIconURL: URL? {
-    guard let fileNamePart = remoteDarkIcon else {
-      return nil
-    }
-    
-    return TKServer.imageURL(iconFileNamePart: fileNamePart, iconType: .listMainMode)
-  }
-  
-}
-
-// MARK - Helpers
-
-#if canImport(MapKit)
-
-extension TKAPI.Location {
-  
-  public init?(annotation: MKAnnotation?) {
-    guard let annotation = annotation else { return nil }
-    self.lat = annotation.coordinate.latitude
-    self.lng = annotation.coordinate.longitude
-    self.name = (annotation.title ?? nil)
-    self.address = (annotation.subtitle ?? nil)
-    self.bearing = nil
-  }
-  
-}
-
-extension TKNamedCoordinate {
-  public convenience init(_ remote: TKAPI.Location) {
-    self.init(latitude: remote.lat, longitude: remote.lng, name: remote.name, address: remote.address)
-  }
-}
-
-#endif
