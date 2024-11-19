@@ -6,6 +6,8 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 #if canImport(UIKit)
@@ -128,3 +130,5 @@ extension Shape {
   }
 
 }
+
+#endif

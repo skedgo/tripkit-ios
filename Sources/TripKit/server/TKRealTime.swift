@@ -15,11 +15,10 @@ public enum TKRealTimeUpdateProgress<E> {
 }
 
 /// :nodoc:
-@objc
 public protocol TKRealTimeUpdatable {
   
   /// Whether the particular objects should be updated at all
-  @objc var wantsRealTimeUpdates: Bool { get }
+  var wantsRealTimeUpdates: Bool { get }
 }
 
 extension TKRealTimeUpdatable {

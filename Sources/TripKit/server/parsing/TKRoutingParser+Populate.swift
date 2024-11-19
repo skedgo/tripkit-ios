@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -94,3 +96,5 @@ extension TKRoutingParser {
   }
   
 }
+
+#endif

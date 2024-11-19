@@ -8,8 +8,6 @@
 
 import Foundation
 
-import CoreLocation
-
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   
@@ -310,8 +308,8 @@ public enum TKBooking {
   }
   
   public struct Location: Codable, Hashable {
-    public let latitude: CLLocationDegrees
-    public let longitude: CLLocationDegrees
+    public let latitude: TKAPI.Degrees
+    public let longitude: TKAPI.Degrees
     
     public let name: String?
     

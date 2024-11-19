@@ -6,6 +6,7 @@
 //
 //
 
+#if canImport(CoreData)
 import Foundation
 import MapKit
 
@@ -684,3 +685,5 @@ extension TKSegment {
   }
   
 #endif
+
+#endif // CoreData

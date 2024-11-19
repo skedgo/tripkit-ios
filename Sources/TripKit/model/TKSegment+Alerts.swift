@@ -6,6 +6,8 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 extension TKSegment {
@@ -31,3 +33,5 @@ extension TKSegment {
   }
   
 }
+
+#endif

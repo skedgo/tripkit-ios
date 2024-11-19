@@ -8,8 +8,6 @@
 
 import Foundation
 
-import CoreLocation
-
 @objc
 public class TKSettings: NSObject {
   
@@ -149,7 +147,7 @@ extension TKSettings {
     case slow
     case medium
     case fast
-    case custom(CLLocationSpeed)
+    case custom(TKAPI.Speed)
   }
   
   /// The cycling speed. Slow is roughly 8km/h, average 12km/h, fast 25km/h.
@@ -188,7 +186,7 @@ extension TKSettings.Speed: Codable {
     case "slow": self = .slow
     case "medium": self = .medium
     case "fast": self = .fast
-    case "custom": self = .custom(try container.decode(CLLocationSpeed.self, forKey: .speed))
+    case "custom": self = .custom(try container.decode(TKAPI.Speed.self, forKey: .speed))
     default: throw TKSettings.DecodingError.unknownType(type)
     }
   }
@@ -238,7 +236,7 @@ extension TKSettings.Speed {
     }
     
     if let string = apiValue as? String,
-      let speed = CLLocationSpeed(string.replacingOccurrences(of: "mps", with: "")) {
+      let speed = TKAPI.Speed(string.replacingOccurrences(of: "mps", with: "")) {
       self = .custom(speed)
     } else {
       return nil

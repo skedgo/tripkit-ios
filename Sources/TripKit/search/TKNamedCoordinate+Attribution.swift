@@ -6,6 +6,8 @@
 //  Copyright © 2016 SkedGo. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 
 public extension TKNamedCoordinate {
@@ -29,3 +31,5 @@ public extension TKNamedCoordinate {
     }
   }
 }
+
+#endif

@@ -33,10 +33,9 @@ class TKServerError: TKError, @unchecked Sendable {
 }
 
 public class TKError: NSError, @unchecked Sendable {
-  @objc public var title: String?
+  public var title: String?
   public var details: TKAPI.ServerError?
   
-  @objc
   public class func error(withCode code: Int, userInfo dict: [String: Any]?) -> TKError {
     return TKError(domain: "com.skedgo.serverkit", code: code, userInfo: dict)
   }
@@ -82,7 +81,6 @@ public class TKError: NSError, @unchecked Sendable {
     return error
   }
   
-  @objc
   public var isUserError: Bool {
     if let userError = userInfo["TKIsUserError"] as? Bool {
       return userError

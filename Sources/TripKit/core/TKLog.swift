@@ -8,7 +8,9 @@
 
 import Foundation
 
+#if canImport(os.log)
 import os.log
+#endif
 
 /// A `TKLogger` is used by `TKLog` to perform the outputting and processing of log statements.
 ///
@@ -103,8 +105,12 @@ public class TKConsoleLogger: TKLogger {
     }
     let shortIdentifier = smartIdentifier.prefix(10).padding(toLength: 10, withPad: " ", startingAt: 0)
     let message = "\(level.prefix) \(message)"
+#if canImport(os.log)
     let log = OSLog(subsystem: subsystem, category: shortIdentifier)
     os_log("%@", log: log, type: level.toOSLog, message)
+#else
+    print(message)
+#endif
   }
 }
 
@@ -214,6 +220,7 @@ public class TKLog : NSObject {
   }
 }
 
+#if canImport(os.log)
 extension TKLog.LogLevel {
   
   var toOSLog: OSLogType {
@@ -226,6 +233,7 @@ extension TKLog.LogLevel {
   }
   
 }
+#endif
 
 // MARK: - Server requests
 

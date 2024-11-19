@@ -7,8 +7,11 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import CoreLocation
 import MapKit
+#endif
 
 enum TKParserHelper {
   
@@ -27,6 +30,7 @@ enum TKParserHelper {
     }
   }
   
+#if canImport(MapKit)
   static func requestString(for coordinate: CLLocationCoordinate2D) -> String {
     return String(format: "(%f,%f)", coordinate.latitude, coordinate.longitude)
   }
@@ -57,5 +61,6 @@ enum TKParserHelper {
     else { return nil }
     return CLLocationCoordinate2D(latitude: lat, longitude: lng)
   }
+#endif
   
 }

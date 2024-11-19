@@ -8,7 +8,9 @@
 
 import Foundation
 
+#if canImport(MapKit)
 import MapKit
+#endif
 
 extension TKAPI.VehicleOccupancy {
   
@@ -105,8 +107,12 @@ extension TKAPI.VehicleTypeInfo {
 extension TKAPI.SharedVehicleInfo {
   
   public var batteryText: String? {
-    if let currentRange = currentRange {
+    if let currentRange {
+#if canImport(MapKit)
       return MKDistanceFormatter().string(fromDistance: currentRange)
+#else 
+      return "\(currentRange) m"
+#endif
     } else if let batteryLevel = batteryLevel {
       return "\(batteryLevel)%"
     } else {

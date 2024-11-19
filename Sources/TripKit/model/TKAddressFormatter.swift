@@ -6,6 +6,8 @@
 //  Copyright © 2019 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(Contacts)
+
 import Foundation
 import Contacts
 import CoreLocation
@@ -29,3 +31,5 @@ public class TKAddressFormatter: NSObject {
     return singleLineAddress(for: postalAddress)
   }
 }
+
+#endif

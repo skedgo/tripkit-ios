@@ -7,7 +7,10 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import MapKit
+#endif
 
 extension TKRegionManager {
   
@@ -108,6 +111,8 @@ extension TKRegionManager {
 
 // MARK: - Convenience methods
 
+#if canImport(MapKit)
+
 extension TKRegionManager {
   @MainActor
   public func requireRegion(for coordinate: CLLocationCoordinate2D) async throws -> TKRegion {
@@ -121,3 +126,5 @@ extension TKRegionManager {
     return self.region(containing: coordinateRegion)
   }
 }
+
+#endif

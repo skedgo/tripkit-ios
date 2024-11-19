@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if canImport(MapKit)
+
 import Combine
 import MapKit
 
@@ -316,3 +318,4 @@ extension TKLocationManager.LocalizationError: LocalizedError {
   }
 }
 
+#endif

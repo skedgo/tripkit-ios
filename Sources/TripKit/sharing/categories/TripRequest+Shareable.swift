@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 extension TripRequest: TKURLShareable {
@@ -15,3 +17,5 @@ extension TripRequest: TKURLShareable {
   }
   
 }
+
+#endif

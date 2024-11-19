@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 extension TKAPI {
 
@@ -160,10 +159,10 @@ extension TKAPI {
     public var to: TKNamedCoordinate?
 
     // moving.unscheduled
-    public var metres: CLLocationDistance?
-    public var metresSafe: CLLocationDistance?
-    public var metresUnsafe: CLLocationDistance?
-    public var metresDismount: CLLocationDistance?
+    public var metres: Distance?
+    public var metresSafe: Distance?
+    public var metresUnsafe: Distance?
+    public var metresDismount: Distance?
     public var durationWithoutTraffic: TimeInterval?
     public var mapTiles: TKMapTiles?
     @UnknownNil public var turnByTurn: TKTurnByTurnMode?
@@ -244,15 +243,14 @@ extension TKAPI {
   
   public struct TripNotification: Hashable {
     public enum Kind: Hashable {
-      case circle(center: CLLocationCoordinate2D, radius: CLLocationDistance, trigger: Trigger)
+      case circle(center: Coordinate, radius: Distance, trigger: Trigger)
       case time(Date)
       case pushNotification
 
       public static func == (lhs: TKAPI.TripNotification.Kind, rhs: TKAPI.TripNotification.Kind) -> Bool {
         switch (lhs, rhs) {
         case let (.circle(lc, lr, lt), .circle(rc, rr, rt)):
-          return lc.latitude == rc.latitude
-              && lc.longitude == rc.longitude
+          return lc == rc
               && lr == rr
               && lt == rt
         case let (.time(lhs), .time(rhs)):
@@ -266,8 +264,7 @@ extension TKAPI {
         switch self {
         case let .circle(center, radius, trigger):
           hasher.combine("CIRCLE")
-          hasher.combine(center.latitude)
-          hasher.combine(center.longitude)
+          hasher.combine(center)
           hasher.combine(radius)
           hasher.combine(trigger)
         case let .time(date):
@@ -280,9 +277,9 @@ extension TKAPI {
       
     }
     
-    struct Coordinate: Codable {
-      let lat: CLLocationDegrees
-      let lng: CLLocationDegrees
+    struct Coordinate: Codable, Hashable {
+      let lat: Degrees
+      let lng: Degrees
     }
     
     public enum Trigger: String, Codable, Hashable {
@@ -363,8 +360,8 @@ extension TKAPI {
   }
   
   public struct ShapeStop: Codable, Hashable {
-    public let lat: CLLocationDegrees
-    public let lng: CLLocationDegrees
+    public let lat: Degrees
+    public let lng: Degrees
     public let code: String
     public let name: String
     public let shortName: String?

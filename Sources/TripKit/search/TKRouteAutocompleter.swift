@@ -6,6 +6,8 @@
 //  Copyright © 2022 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -85,3 +87,4 @@ public class TKRouteAutocompleter: TKAutocompleting {
   
 }
 
+#endif

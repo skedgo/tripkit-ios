@@ -6,6 +6,7 @@
 //  Copyright © 2016 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreLocation)
 import Foundation
 import CoreLocation
 
@@ -19,4 +20,4 @@ public protocol TKGeocodable {
 @available(*, unavailable, renamed: "TKGeocodable")
 public typealias SGKGeocodable = TKGeocodable
 
-
+#endif

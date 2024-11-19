@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreLocation
 import MapKit
@@ -330,3 +332,5 @@ extension MKAnnotation {
   }
   
 }
+
+#endif

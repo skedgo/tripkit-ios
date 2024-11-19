@@ -7,6 +7,8 @@
 
 import Foundation
 
+#if canImport(MapKit)
+
 import MapKit
 import CoreLocation
 
@@ -58,3 +60,4 @@ extension MKMapRect {
   }
 }
 
+#endif

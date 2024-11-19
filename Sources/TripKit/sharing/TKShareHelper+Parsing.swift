@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 import CoreLocation
@@ -197,3 +199,5 @@ public extension TKShareHelper {
   }
 
 }
+
+#endif

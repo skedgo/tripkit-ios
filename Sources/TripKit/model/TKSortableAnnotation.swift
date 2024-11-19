@@ -6,6 +6,8 @@
 //  Copyright © 2016 SkedGo. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -13,3 +15,5 @@ import MapKit
 public protocol TKSortableAnnotation : MKAnnotation {
   var sortScore: Int { get }
 }
+
+#endif

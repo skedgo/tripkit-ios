@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreLocation)
+
 import Foundation
 import CoreLocation
 
@@ -60,3 +62,5 @@ public enum TKLocationProvider {
   }
   
 }
+
+#endif

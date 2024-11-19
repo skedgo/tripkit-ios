@@ -7,7 +7,10 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import MapKit
+#endif
 
 public enum TKVehicleType: Int {
   
@@ -19,6 +22,8 @@ public enum TKVehicleType: Int {
   case kickscooter = 5
   
 }
+
+#if canImport(MapKit)
 
 public protocol TKVehicular {
   
@@ -73,6 +78,8 @@ extension TKVehicular {
   }
   
 }
+
+#endif
 
 extension TKVehicleType {
   public var title: String {

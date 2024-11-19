@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 extension TKAPI {
 
@@ -33,8 +32,8 @@ extension TKAPI {
     }
 
     public let code: String
-    public let lat: CLLocationDegrees
-    public let lng: CLLocationDegrees
+    public let lat: Degrees
+    public let lng: Degrees
     public let timeZoneName: String
 
     public let name: String

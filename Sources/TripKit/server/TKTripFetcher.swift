@@ -6,6 +6,8 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreData
 
@@ -196,3 +198,5 @@ fileprivate extension Array where Element == URLQueryItem {
     append(.init(name: name, value: value()))
   }
 }
+
+#endif

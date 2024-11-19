@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(Contactts)
 import CoreLocation
 import MapKit
 
@@ -144,3 +146,5 @@ extension TKContactsManager: TKGeocoding {
   }
   
 }
+
+#endif

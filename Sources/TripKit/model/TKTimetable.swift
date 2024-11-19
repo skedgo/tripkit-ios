@@ -6,6 +6,8 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -28,3 +30,5 @@ public struct TKTimetable {
   }
   
 }
+
+#endif

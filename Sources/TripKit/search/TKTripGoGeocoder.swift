@@ -6,6 +6,8 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -228,3 +230,5 @@ extension TKAPI.GeocodeChoice {
     }
   }
 }
+
+#endif

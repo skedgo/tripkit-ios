@@ -7,8 +7,11 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import CoreLocation
 import MapKit
+#endif
 
 public extension NSNotification.Name {
   /// Always posted on the main thread
@@ -256,6 +259,7 @@ extension TKRegionManager {
 
 extension TKRegionManager {
  
+#if canImport(CoreLocation)
   @objc(coordinateIsPartOfAnyRegion:)
   public func coordinateIsPartOfAnyRegion(_ coordinate: CLLocationCoordinate2D) -> Bool {
     for region in regions {
@@ -265,7 +269,9 @@ extension TKRegionManager {
     }
     return false
   }
+#endif
   
+#if canImport(MapKit)
   /// Used to check if user can route in that area.
   @objc(mapRectIntersectsAnyRegion:)
   public func mapRectIntersectsAnyRegion(_ mapRect: MKMapRect) -> Bool {
@@ -277,20 +283,43 @@ extension TKRegionManager {
     }
     return false
   }
+#endif
 }
 
 // MARK: - Getting regions by coordinates, etc.
 
-
-
 extension TKRegionManager {
+
+  /// - Parameter name: A region code
+  /// - Returns: The local (non-international) region matching the provided code
+  @available(*, deprecated, renamed: "localRegion(code:)")
+  @objc(localRegionWithName:)
+  public func localRegion(named name: String) -> TKRegion? {
+    localRegion(code: name)
+  }
   
+  /// - Parameter code: A region code
+  /// - Returns: The local (non-international) region matching the provided code
+  public func localRegion(code: String) -> TKRegion? {
+    return regions.first { $0.code == code }
+  }
+  
+#if canImport(MapKit)
   /// - Returns: A matching local region or the shared instance of `TKInternationalRegion` if no local region contains this coordinate region.
   @objc(regionContainingCoordinateRegion:)
   public func region(containing region: MKCoordinateRegion) -> TKRegion {
     return self.region(containing: region.topLeft, region.bottomRight)
   }
-  
+
+  /// - Returns: Local regions that overlap with the provided coordinate region. Can be empty.
+  @objc(localRegionsOverlappingCoordinateRegion:)
+  public func localRegions(overlapping region: MKCoordinateRegion) -> [TKRegion] {
+    let mapRect = MKMapRect.forCoordinateRegion(region)
+    return regions.filter { $0.intersects(mapRect) }
+  }
+#endif
+
+#if canImport(CoreLocation)
   /// Determines the local (non-international) regions for the coordinate pair
   ///
   /// - Parameters:
@@ -314,15 +343,6 @@ extension TKRegionManager {
     }
     
   }
-  
-  
-  /// - Returns: Local regions that overlap with the provided coordinate region. Can be empty.
-  @objc(localRegionsOverlappingCoordinateRegion:)
-  public func localRegions(overlapping region: MKCoordinateRegion) -> [TKRegion] {
-    let mapRect = MKMapRect.forCoordinateRegion(region)
-    return regions.filter { $0.intersects(mapRect) }
-  }
-  
 
   /// - Parameter coordinate: A coordinate
   /// - Returns: The local (non-international) regions intersecting with the 
@@ -333,21 +353,6 @@ extension TKRegionManager {
     let containing = regions.filter { $0.contains(coordinate) }
     return Set(containing)
   }
-  
-  /// - Parameter name: A region code
-  /// - Returns: The local (non-international) region matching the provided code
-  @available(*, deprecated, renamed: "localRegion(code:)")
-  @objc(localRegionWithName:)
-  public func localRegion(named name: String) -> TKRegion? {
-    localRegion(code: name)
-  }
-  
-  /// - Parameter code: A region code
-  /// - Returns: The local (non-international) region matching the provided code
-  public func localRegion(code: String) -> TKRegion? {
-    return regions.first { $0.code == code }
-  }
-  
   
   /// Determines a region (local or international) for the coordinate pair
   ///
@@ -399,6 +404,6 @@ extension TKRegionManager {
     
     return best?.0
   }
-  
+#endif    
   
 }

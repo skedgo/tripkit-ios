@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 protocol RealTimeUpdatable {
   var hasRealTime: Bool { get }
@@ -108,8 +107,8 @@ extension TKAPI {
     
     public struct Entrance: Codable, Hashable {
       public let type: EntranceType
-      public let lat: CLLocationDegrees
-      public let lng: CLLocationDegrees
+      public let lat: Degrees
+      public let lng: Degrees
       public let address: String?
     }
     

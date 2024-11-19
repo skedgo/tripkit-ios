@@ -7,8 +7,11 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import CoreLocation
 import MapKit
+#endif
 
 enum TKRegionParserError : Error {
   case emptyPolygon
@@ -18,14 +21,14 @@ enum TKRegionParserError : Error {
 
 public class TKRegion : NSObject, Codable {
   
-  @objc public static let international = TKInternationalRegion()
+  public static let international = TKInternationalRegion()
 
-  @objc(TKRegionCity)
-  public class City : NSObject, Codable, MKAnnotation {
+  public class City : NSObject, Codable {
     public let title: String?
-    public let coordinate: CLLocationCoordinate2D
+    public let latitude: TKAPI.Degrees
+    public let longitude: TKAPI.Degrees
 
-    @objc public weak var region: TKRegion? = nil
+    public weak var region: TKRegion? = nil
     public var orderInRegion: Int? = nil
 
     // This shouldn't be necessary, but there were reports of crashes when
@@ -36,18 +39,10 @@ public class TKRegion : NSObject, Codable {
     //      class is not key value coding-compliant for the key subtitle.'
     public let subtitle: String? = nil
     
-    @objc public var centerBiasedMapRect: MKMapRect {
-      // centre it on the region's coordinate
-      let size = MKMapSize(width: 300_000, height: 400_00)
-      var center = MKMapPoint(coordinate)
-      center.x -= size.width / 2
-      center.y -= size.height / 2
-      return MKMapRect(origin: center, size: size)
-    }
-    
-    public init(title: String, coordinate: CLLocationCoordinate2D) {
+    public init(title: String, latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) {
       self.title = title
-      self.coordinate = coordinate
+      self.latitude = latitude
+      self.longitude = longitude
     }
     
     // MARK: Codable
@@ -61,36 +56,37 @@ public class TKRegion : NSObject, Codable {
     public required init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       title = try container.decode(String.self, forKey: .title)
-      let latitude = try container.decode(CLLocationDegrees.self, forKey: .lat)
-      let longitude = try container.decode(CLLocationDegrees.self, forKey: .lng)
-      coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+      latitude = try container.decode(TKAPI.Degrees.self, forKey: .lat)
+      longitude = try container.decode(TKAPI.Degrees.self, forKey: .lng)
     }
     
     public func encode(to encoder: Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(coordinate.latitude, forKey: .lat)
-      try container.encode(coordinate.longitude, forKey: .lng)
+      try container.encode(latitude, forKey: .lat)
+      try container.encode(longitude, forKey: .lng)
       try container.encode(title, forKey: .title)
     }
   }
   
-  @objc public let timeZone: TimeZone
-  @objc public let code: String
-  @objc public let cities: [City]
+  public let timeZone: TimeZone
+  public let code: String
+  public let cities: [City]
   
   @available(*, deprecated, renamed: "code")
-  @objc public var name: String { code }
+  public var name: String { code }
   
   /// A list of all the mode identifiers this region supports. This is sorted as defined by the server, as the server groups and sorts them in a sensible manner and we want to preserve this sorting.
-  @objc public let modeIdentifiers: [String]
+  public let modeIdentifiers: [String]
 
-  @objc public let urls: [URL]
-  @objc let encodedPolygon: String
+  public let urls: [URL]
+  let encodedPolygon: String
   
-  @objc public lazy var polygon: MKPolygon = {
+#if canImport(MapKit)
+  public lazy var polygon: MKPolygon = {
     simplePolygon?.polygon ?? MKPolygon()
   }()
-  
+#endif
+
   private let simplePolygon: Polygon?
   
   /// - warning: Only use this for testing purposes, do not pass
@@ -118,13 +114,13 @@ public class TKRegion : NSObject, Codable {
     self.modeIdentifiers  = modes
   }
   
+#if canImport(MapKit)
   @objc(containsCoordinate:)
   public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
     guard let polygon = simplePolygon else { return false }
     let point = Point(latitude: coordinate.latitude, longitude: coordinate.longitude)
     return polygon.contains(point, onLine: false)
   }
-  
   
   @objc(intersectsMapRect:)
   public func intersects(_ mapRect: MKMapRect) -> Bool {
@@ -148,6 +144,7 @@ public class TKRegion : NSObject, Codable {
         || needle.contains(simplePolygon)
         || simplePolygon.intersects(needle)
   }
+#endif
   
   // MARK: Codable
   
@@ -201,6 +198,31 @@ public class TKRegion : NSObject, Codable {
 
 }
 
+#if canImport(MapKit)
+extension TKRegion.City {
+  public init(title: String, coordinate: CLLocationCoordinate2D) {
+    self.title = title
+    self.latitude = coordinate.latitude
+    self.longitude = coordinate.longitude
+  }
+
+  @objc public var centerBiasedMapRect: MKMapRect {
+    // centre it on the region's coordinate
+    let size = MKMapSize(width: 300_000, height: 400_00)
+    var center = MKMapPoint(coordinate)
+    center.x -= size.width / 2
+    center.y -= size.height / 2
+    return MKMapRect(origin: center, size: size)
+  }
+}
+
+extension TKRegion.City: MKAnnotation {
+  public var coordinate: CLLocationCoordinate2D {
+    return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+  }
+}
+#endif
+
 
 public class TKInternationalRegion : TKRegion {
   
@@ -218,9 +240,11 @@ public class TKInternationalRegion : TKRegion {
     throw TKRegionParserError.cannotParseInternationalRegion
   }
   
+#if canImport(MapKit)
   override public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
     return coordinate.isValid
   }
+#endif
 }
 
 @available(*, unavailable, renamed: "TKRegion")

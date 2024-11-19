@@ -9,14 +9,11 @@
 import Foundation
 
 #if canImport(CoreData)
-
 import MapKit
 import CoreData
-
 #endif
 
 /// A TKRouter calculates trips for routing requests, it talks to TripGo's `routing.json` API.
-@objc
 public class TKRouter: NSObject {
   public enum RoutingError: Error, LocalizedError {
     case invalidRequest(String)

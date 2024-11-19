@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import MapKit
 
 open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
@@ -359,3 +361,5 @@ extension TKNamedCoordinate: TKGeocodable {
   }
   
 }
+
+#endif

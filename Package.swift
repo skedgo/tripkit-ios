@@ -70,3 +70,9 @@ let package = Package(
     ),
   ]
 )
+
+#if os(Linux)
+package.targets = package.targets.filter { $0.name == "TripKit" || $0.name == "TripKitTests" }
+package.products = package.products.filter { $0.name == "TripKit" }
+package.dependencies = package.dependencies.filter { $0.url?.contains("RxSwift") == true }
+#endif

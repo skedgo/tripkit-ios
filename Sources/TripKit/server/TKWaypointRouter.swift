@@ -6,6 +6,7 @@
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
 import Foundation
 
 import CoreData
@@ -807,7 +808,7 @@ extension TKWaypointRouter {
       ),
     ]
   }
-  
-
-    
+      
 }
+
+#endif

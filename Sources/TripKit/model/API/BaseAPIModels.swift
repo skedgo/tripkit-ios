@@ -7,11 +7,25 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import CoreLocation
-import CoreGraphics
 import MapKit
+#endif
 
 extension TKAPI {
+
+  #if canImport(CoreLocation)
+  public typealias Degrees = CLLocationDegrees
+  public typealias Direction = CLLocationDirection
+  public typealias Distance = CLLocationDistance
+  public typealias Speed = CLLocationSpeed
+#else
+  public typealias Degrees = Double
+  public typealias Direction = Double
+  public typealias Distance = Double
+  public typealias Speed = Double
+#endif
   
   public struct CompanyInfo: Codable, Hashable {
     public let name: String
@@ -57,11 +71,11 @@ extension TKAPI {
       self.disclaimer = disclaimer
     }
   }
-  
+
   public struct Location: Codable, Hashable {
-    let lat: CLLocationDegrees
-    let lng: CLLocationDegrees
-    let bearing: CLLocationDirection?
+    let lat: Degrees
+    let lng: Degrees
+    let bearing: Direction?
     let name: String?
     let address: String?
   }
@@ -138,6 +152,7 @@ extension TKAPI.CompanyInfo {
 
 extension TKAPI.Location {
   
+#if canImport(MapKit)
   public init?(annotation: MKAnnotation?) {
     guard let annotation = annotation else { return nil }
     self.lat = annotation.coordinate.latitude
@@ -146,6 +161,7 @@ extension TKAPI.Location {
     self.address = (annotation.subtitle ?? nil)
     self.bearing = nil
   }
+#endif
   
 }
 

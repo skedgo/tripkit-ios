@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(Contactts)
 import Contacts
 
 public class TKContactsManager: NSObject, TKPermissionManager {
@@ -139,3 +141,4 @@ extension CNContact {
 #endif
   }
 }
+#endif

@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(Contacts)
+
 import Foundation
 import Contacts
 
@@ -113,3 +115,5 @@ extension TKPeliasProperties {
   }
   
 }
+
+#endif
