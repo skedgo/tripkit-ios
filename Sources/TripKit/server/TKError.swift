@@ -23,16 +23,16 @@ enum TKErrorCode: Int {
   case internalError                 = 30052
 }
 
-class TKUserError: TKError {
+class TKUserError: TKError, @unchecked Sendable {
   override var isUserError: Bool {
     return true
   }
 }
 
-class TKServerError: TKError {
+class TKServerError: TKError, @unchecked Sendable {
 }
 
-public class TKError: NSError {
+public class TKError: NSError, @unchecked Sendable {
   @objc public var title: String?
   public var details: TKAPI.ServerError?
   

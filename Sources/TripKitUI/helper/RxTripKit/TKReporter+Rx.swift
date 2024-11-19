@@ -12,7 +12,7 @@ import RxSwift
 
 import TripKit
 
-extension TKReporter: ReactiveCompatible {}
+extension TKReporter: @retroactive ReactiveCompatible {}
 extension Reactive where Base == TKReporter {
   public static func reportPlannedTrip(_ trip: Trip, userInfo: [String: Any] = [:], includeUserID: Bool = false) -> Single<Bool> {
     return Single.create { observer in
