@@ -93,10 +93,12 @@ extension TKAPI {
     let green: Int
     let blue: Int
     
+#if !os(Linux)
     public var color: TKColor {
       return TKColor(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: 1)
     }
-    
+#endif
+
 #if canImport(UIKit)
       public init?(for color: TKColor?) {
         guard let color = color else { return nil }
@@ -150,9 +152,10 @@ extension TKAPI.CompanyInfo {
 
 // MARK - Helpers
 
+#if canImport(MapKit)
+
 extension TKAPI.Location {
   
-#if canImport(MapKit)
   public init?(annotation: MKAnnotation?) {
     guard let annotation = annotation else { return nil }
     self.lat = annotation.coordinate.latitude
@@ -161,7 +164,6 @@ extension TKAPI.Location {
     self.address = (annotation.subtitle ?? nil)
     self.bearing = nil
   }
-#endif
   
 }
 
@@ -170,3 +172,5 @@ extension TKNamedCoordinate {
     self.init(latitude: remote.lat, longitude: remote.lng, name: remote.name, address: remote.address)
   }
 }
+
+#endif

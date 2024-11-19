@@ -30,12 +30,14 @@ extension TKAPI {
     @available(*, deprecated, renamed: "routeName")
     public var name: String? { routeName }
     
+#if !os(Linux)
     public var routeColor: TKColor? { _routeColor?.color }
     
     /// This color applies to an individual service.
     public var color: TKColor? { return routeColor ?? modeInfo.color }
-    
-    @DefaultEmptyArray public var directions: [Direction]
+#endif
+
+    @DefaultEmptyArray public var directions: [RouteDirection]
     
     enum CodingKeys: String, CodingKey {
       case regionCode = "region"
@@ -51,7 +53,7 @@ extension TKAPI {
     }
   }
   
-  public struct Direction: Codable, Hashable {
+  public struct RouteDirection: Codable, Hashable {
     public let id: String
     
     public let name: String?

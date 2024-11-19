@@ -28,12 +28,15 @@ public class TKRouter: NSObject {
   }
   
   public struct RoutingQuery {
-    public let from: MKAnnotation
-    public let to: MKAnnotation
+    public let from: TKAPI.Location
+    public let to: TKAPI.Location
     public var at: TKShareHelper.QueryDetails.Time = .leaveASAP
     public let modes: Set<String>
     public var additional: Set<URLQueryItem> = []
+
+#if canImport(CoreData)
     public var context: NSManagedObjectContext?
+#endif
 
     public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: NSManagedObjectContext? = nil) {
       self.from = from
