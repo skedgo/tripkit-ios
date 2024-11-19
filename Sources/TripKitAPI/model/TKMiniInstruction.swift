@@ -19,16 +19,13 @@ public class TKMiniInstruction: NSObject, Codable, NSSecureCoding {
   
   // MARK: NSSecure coding
   
-  @objc
   public static var supportsSecureCoding: Bool { return true }
   
-  @objc(encodeWithCoder:)
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(instruction, forKey: "instruction")
     aCoder.encode(detail, forKey: "detail")
   }
   
-  @objc
   public required init?(coder aDecoder: NSCoder) {
     guard let instruction = aDecoder.decodeObject(of: NSString.self, forKey: "instruction") as String? else {
       assertionFailure()

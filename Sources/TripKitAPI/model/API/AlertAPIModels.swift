@@ -74,8 +74,10 @@ extension TKAPI {
     public let number: String?
     public let modeInfo: TKModeInfo
     
+#if !os(Linux)
     /// This color applies to an individual service.
     public var color: TKColor? { return modeInfo.color }
+#endif
   }
   
 }

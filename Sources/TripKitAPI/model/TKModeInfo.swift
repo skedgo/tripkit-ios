@@ -10,41 +10,43 @@ import Foundation
 
 /// Information to identify and display a transport mode. Kind of like the
 /// big sibling of a mode identifier string.
-public class TKModeInfo: NSObject, Codable, NSSecureCoding {
+public class TKModeInfo: NSObject, Codable {
   
   /// The mode identifier string. Can be `nil`, e.g., for parking as that can
   /// apply to multiple modes.
-  @objc public let identifier: String?
+  public let identifier: String?
 
   /// Text representation of the image
-  @objc public let alt: String
+  public let alt: String
 
   /// Image part name; use with `TKStyleManager.image(forModeImageName:)`
-  @objc public let localImageName: String?
+  public let localImageName: String?
   
   /// Image part name; use with `TKServer.imageURL(iconFileNamePart:)`
-  @objc public let remoteImageName: String?
+  public let remoteImageName: String?
 
   /// If true, then `remoteImageName` should be treated as a template image and
   /// have an appropriate colour applied to it.
-  @objc public var remoteImageIsTemplate: Bool {
+  public var remoteImageIsTemplate: Bool {
     return remoteIconIsTemplate ?? false
   }
   private let remoteIconIsTemplate: Bool?
 
   /// If true, `remoteImageIsBranding` points at a brand image and should be
   /// shown next to the local image; if `false` it shoud replace  it.
-  @objc public var remoteImageIsBranding: Bool {
+  public var remoteImageIsBranding: Bool {
     return remoteIconIsBranding ?? false
   }
   private let remoteIconIsBranding: Bool?
 
   /// Additional descriptor for image, e.g., "GoGet", "Shuttle"
-  @objc public let descriptor: String?
+  public let descriptor: String?
   
-  @objc public var color: TKColor? {
+#if !os(Linux)
+  public var color: TKColor? {
     return rgbColor?.color
   }
+#endif
   private let rgbColor: TKAPI.RGBColor?
     
   // MARK: Equatable
@@ -86,13 +88,16 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     case descriptor = "description"
     case rgbColor = "color"
   }
+}
+
+#if !os(Linux)
+
+extension TKModeInfo: NSSecureCoding {
   
   // MARK: NSSecure coding
   
-  @objc
   public static var supportsSecureCoding: Bool { return true }
 
-  @objc(encodeWithCoder:)
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(alt, forKey: "alt")
     aCoder.encode(identifier, forKey: "identifier")
@@ -104,7 +109,6 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     aCoder.encode(remoteIconIsBranding ?? false, forKey: "remoteIconIsBranding")
   }
   
-  @objc
   public required init?(coder aDecoder: NSCoder) {
     guard let alt = aDecoder.decodeObject(of: NSString.self, forKey: "alt") as String? else {
       assertionFailure()
@@ -131,3 +135,5 @@ public class TKModeInfo: NSObject, Codable, NSSecureCoding {
     }
   }
 }
+
+#endif

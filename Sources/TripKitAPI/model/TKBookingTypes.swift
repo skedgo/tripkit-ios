@@ -91,9 +91,11 @@ public enum TKBooking {
       case logoImageName = "remoteIcon"
     }
     
+#if !os(Linux)
     public var color: TKColor? {
       return rgbColor?.color
     }
+#endif
   }
   
   public struct Purchase: Codable, Hashable {
