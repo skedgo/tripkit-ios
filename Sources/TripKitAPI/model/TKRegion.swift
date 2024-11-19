@@ -16,6 +16,7 @@ public enum TKRegionParserError : Error {
   case emptyPolygon
   case badTimeZoneIdentifier(String)
   case cannotParseInternationalRegion
+  case fetchingRegionsFailed
 }
 
 open class TKRegion : NSObject, Codable {
@@ -61,6 +62,8 @@ open class TKRegion : NSObject, Codable {
 #endif
 
   public let simplePolygon: Polygon?
+
+  public var isInternational: Bool { simplePolygon == nil }
   
   /// - warning: Only use this for testing purposes, do not pass
   ///     instances created this way to methods that needs

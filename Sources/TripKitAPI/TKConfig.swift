@@ -13,12 +13,16 @@ public class TKConfig {
   public static let shared = TKConfig()
   
   private init() {
+#if os(Linux)
+    configuration = [:]
+#else
     // Yes, main!
-    if let path = Bundle.main.url(forResource: "Config", withExtension: "plist"), let config = try? NSDictionary(contentsOf: path, error: ()) as? [String: AnyHashable] {
+    if let path = Bundle.main.url(forResource: "Config", withExtension: "plist"), let config = try? NSDictionary(contentsOf: path) as? [String: AnyHashable] {
       configuration = config
     } else {
       configuration = [:]
     }
+#endif
   }
   
   public let configuration: [String: AnyHashable]
@@ -33,7 +37,6 @@ extension TKConfig {
     configuration["AppGroupName"] as? String
   }
   
-  @objc
   public var appURLScheme: String? {
     return configuration["URLScheme"] as? String
   }
@@ -62,7 +65,6 @@ extension TKConfig {
   /// - Note: If this is not set, then the default base URL,
   ///  "https://bigbang.buzzhives.com/satapp-beta/" is used.
   
-  @objc
   public var betaServerBaseURL: String {
     return configuration["BetaServerBaseURL"] as? String ?? "https://bigbang.buzzhives.com/satapp-beta/"
   }

@@ -66,7 +66,7 @@ public class TKError: NSError, @unchecked Sendable {
     }
     
     let userInfo: [String: Any] = [
-      NSLocalizedDescriptionKey: parsed.errorMessage ?? parsed.title ?? Loc.ServerError,
+      NSLocalizedDescriptionKey: parsed.errorMessage ?? parsed.title ?? "Server Error",
       "TKIsUserError": parsed.isUserError
     ]
     

@@ -96,8 +96,9 @@ extension TKRegionManager {
       if hasRegions {
         return
       } else {
-        let message = NSLocalizedString("Could not download supported regions from TripGo's server. Please try again later.", tableName: "Shared", bundle: .tripKit, comment: "Could not download supported regions warning.")
-        throw NSError(code: TKErrorCode.userError.rawValue, message: message)
+        // let message = NSLocalizedString("Could not download supported regions from TripGo's server. Please try again later.", tableName: "Shared", bundle: .tripKit, comment: "Could not download supported regions warning.")
+        // throw NSError(code: TKErrorCode.userError.rawValue, message: message)
+        throw TKRegionParserError.fetchingRegionsFailed
       }
       
     case .failure(TKServer.ServerError.noData) where !forced:

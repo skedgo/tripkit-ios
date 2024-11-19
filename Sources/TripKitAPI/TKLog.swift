@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 #if canImport(os.log)
 import os.log
 #endif
@@ -116,7 +120,6 @@ public class TKConsoleLogger: TKLogger {
 
 /// The main class to log something from TripKit. The actual logging is done by the `TKLogger` instances
 /// set on the `.logger` property.
-@objc
 public class TKLog : NSObject {
   
   private override init() {
@@ -151,7 +154,6 @@ public class TKLog : NSObject {
     #endif
   }()
   
-  @objc(info:block:)
   public class func info(_ identifier: String, text: @autoclosure () -> String) {
     log(identifier, level: .info, block: text)
   }
@@ -160,7 +162,6 @@ public class TKLog : NSObject {
     log(identifier ?? file.description, level: .info, block: message)
   }
   
-  @objc(debug:block:)
   public class func debug(_ identifier: String, text: @autoclosure () -> String) {
     log(identifier, level: .debug, block: text)
   }
@@ -169,7 +170,6 @@ public class TKLog : NSObject {
     log(identifier ?? file.description, level: .debug, block: message)
   }
 
-  @objc(verbose:block:)
   public class func verbose(_ identifier: String, text: @autoclosure () -> String) {
     log(identifier, level: .verbose, block: text)
   }
@@ -178,7 +178,6 @@ public class TKLog : NSObject {
     log(identifier ?? file.description, level: .verbose, block: message)
   }
   
-  @objc
   public class func error(_ identifier: String, text message: String) {
     log(identifier, level: .error) { message }
   }
@@ -187,7 +186,6 @@ public class TKLog : NSObject {
     log(identifier ?? file.description, level: .error, block: message)
   }
   
-  @objc(warn:text:)
   public class func warn(_ identifier: String, text message: String) {
     log(identifier, level: .warning) { message }
   }
@@ -196,17 +194,14 @@ public class TKLog : NSObject {
     log(identifier ?? file.description, level: .warning, block: message)
   }
   
-  @objc(info:text:)
   public class func _info(_ identifier: String, text message: String) {
     log(identifier, level: .info) { message }
   }
   
-  @objc(debug:text:)
   public class func _debug(_ identifier: String, text message: String) {
     log(identifier, level: .debug) { message }
   }
   
-  @objc(verbose:text:)
   public class func _verbose(_ identifier: String, text message: String) {
     log(identifier, level: .verbose) { message }
   }
@@ -285,7 +280,6 @@ extension TKLog {
   }
 
   /// :nodoc: - Public for building CocoaPods-style
-  @objc(log:request:UUID:)
   public class func log(_ identifier: String, request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }
@@ -296,7 +290,6 @@ extension TKLog {
   }
 
   /// :nodoc: - Public for building CocoaPods-style
-  @objc(log:response:data:orError:forRequest:UUID:)
   public class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: Error?, for request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }

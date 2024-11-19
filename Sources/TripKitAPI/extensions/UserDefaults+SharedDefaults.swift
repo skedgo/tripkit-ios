@@ -10,7 +10,6 @@ import Foundation
 
 extension UserDefaults {
 
-  @objc(sharedDefaults)
   public static let shared: UserDefaults = {
     if let shared = UserDefaults(suiteName: TKConfig.shared.appGroupName) {
       return shared

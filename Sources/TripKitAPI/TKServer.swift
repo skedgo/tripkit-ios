@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 public class TKServer {
   
   public static let shared = TKServer(isShared: true)
@@ -430,7 +434,7 @@ extension TKServer {
   private func hitSkedGo(method: HTTPMethod, path: String, parameters: [String: Any]?, headers: [String: String]?, region: TKRegion?, callbackOnMain: Bool = true, completion: @escaping (Response<Data?>) -> Void) {
     
     var adjustedHeaders: [String: String]? = headers
-    if let region = region, region != .international {
+    if let region, !region.isInternational {
       var headers = adjustedHeaders ?? [:]
       headers["X-TripGo-Region"] = region.code
       adjustedHeaders = headers
@@ -462,7 +466,7 @@ extension TKServer {
                    parameters: [String: Any]?,
                    headers: [String: String]? = nil,
                    completion: @escaping (Response<Data?>) -> Void) {
-#if DEBUG
+#if DEBUG && !os(Linux)
     if url.scheme == "file" {
       do {
         let filename = (url.lastPathComponent as NSString).deletingPathExtension
