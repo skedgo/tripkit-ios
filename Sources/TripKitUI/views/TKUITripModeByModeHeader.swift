@@ -26,7 +26,7 @@ class TKUITripModeByModeHeader: UIView {
   var actionHandler: () -> Void = {}
   
   static func newInstance() -> TKUITripModeByModeHeader {
-    let view = Bundle(for: self).loadNibNamed("TKUITripModeByModeHeader", owner: self, options: nil)?.first as! TKUITripModeByModeHeader
+    let view = Bundle.tripKitUI.loadNibNamed("TKUITripModeByModeHeader", owner: self, options: nil)?.first as! TKUITripModeByModeHeader
     return view
   }
   

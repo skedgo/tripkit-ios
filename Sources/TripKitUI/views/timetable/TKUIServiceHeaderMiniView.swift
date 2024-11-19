@@ -25,7 +25,7 @@ class TKUIServiceHeaderMiniView: UIView {
   private var disposeBag = DisposeBag()
   
   static func newInstance() -> TKUIServiceHeaderMiniView {
-    return Bundle(for: TKUIServiceHeaderMiniView.self).loadNibNamed("TKUIServiceHeaderMiniView", owner: self, options: nil)?.first as! TKUIServiceHeaderMiniView
+    return Bundle.tripKitUI.loadNibNamed("TKUIServiceHeaderMiniView", owner: self, options: nil)?.first as! TKUIServiceHeaderMiniView
   }
   
   override func awakeFromNib() {

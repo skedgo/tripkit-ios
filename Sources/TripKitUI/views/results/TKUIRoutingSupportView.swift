@@ -23,7 +23,7 @@ class TKUIRoutingSupportView: UIView {
   // MARK: - Factory
   
   static func makeView(with message: NSAttributedString, allowRoutingRequest: Bool) -> TKUIRoutingSupportView {
-    guard let supportView = Bundle(for: self).loadNibNamed(String(describing: self), owner: self, options: nil)?.first as? TKUIRoutingSupportView else {
+    guard let supportView = Bundle.tripKitUI.loadNibNamed(String(describing: self), owner: self, options: nil)?.first as? TKUIRoutingSupportView else {
       preconditionFailure("Unable to load view from nib")
     }
     

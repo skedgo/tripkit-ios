@@ -47,9 +47,8 @@ class TKUITimetableAccessoryView: UIView {
   private var sizingCell: TKUIServiceNumberCell!
   
   static func newInstance() -> TKUITimetableAccessoryView {
-    let bundle = Bundle(for: self)
     guard
-      let view = bundle.loadNibNamed("TKUITimetableAccessoryView", owner: nil, options: nil)!.first as? TKUITimetableAccessoryView
+      let view = Bundle.tripKitUI.loadNibNamed("TKUITimetableAccessoryView", owner: nil, options: nil)!.first as? TKUITimetableAccessoryView
       else { preconditionFailure() }
     return view
   }
