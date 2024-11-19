@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <accessibilityOverrides isEnabled="YES" dynamicTypePreference="5"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIRoutingQueryInputTitleView" customModule="TripKitUI" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIRoutingQueryInputTitleView" customModule="TripKitUI">
             <rect key="frame" x="0.0" y="0.0" width="355" height="248"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -135,8 +135,8 @@
                         <mask key="constraints">
                             <exclude reference="vSg-DZ-dEb"/>
                             <exclude reference="2IL-p6-Cjy"/>
-                            <exclude reference="4Qo-jb-06X"/>
                             <exclude reference="me7-4R-qf8"/>
+                            <exclude reference="4Qo-jb-06X"/>
                             <exclude reference="Fww-S8-vlF"/>
                         </mask>
                     </variation>

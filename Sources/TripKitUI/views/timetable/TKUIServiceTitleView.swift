@@ -27,7 +27,7 @@ class TKUIServiceTitleView: UIView {
   @IBOutlet weak var accessoryStack: UIStackView!
   
   static func newInstance() -> TKUIServiceTitleView {
-    return Bundle(for: TKUIServiceTitleView.self).loadNibNamed("TKUIServiceTitleView", owner: self, options: nil)?.first as! TKUIServiceTitleView
+    return Bundle.tripKitUI.loadNibNamed("TKUIServiceTitleView", owner: self, options: nil)?.first as! TKUIServiceTitleView
   }
   
   override func awakeFromNib() {

@@ -17,7 +17,7 @@ class TKUIAttributionCell: UITableViewCell {
 
   static let reuseIdentifier = "TKUIAttributionCell"
   
-  static let nib = UINib(nibName: "TKUIAttributionCell", bundle: Bundle(for: TKUIAttributionCell.self))
+  static let nib = UINib(nibName: "TKUIAttributionCell", bundle: .tripKitUI)
   
   var attribution: TKAPI.DataAttribution? {
     didSet { updateUI() }
