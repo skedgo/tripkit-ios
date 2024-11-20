@@ -180,7 +180,7 @@ extension TKRegionManager {
   
 }
 
-// MARK: - Testing coordinates
+// MARK: - Getting regions by coordinates, etc.
 
 extension TKRegionManager {
   
@@ -192,11 +192,23 @@ extension TKRegionManager {
     }
     return false
   }
-}
   
-// MARK: - Getting regions by coordinates, etc.
-
-extension TKRegionManager {
+  public func localRegions(containingLatitude latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) -> Set<TKRegion> {
+    let containing = regions.filter { $0.contains(latitude: latitude, longitude: longitude) }
+    return Set(containing)
+  }
+  
+  public func localRegions(start: (latitude: TKAPI.Degrees, longitude: TKAPI.Degrees), end: (latitude: TKAPI.Degrees, longitude: TKAPI.Degrees)) -> [TKRegion] {
+    let startRegions  = localRegions(containingLatitude: start.latitude, longitude: start.longitude)
+    let endRegions    = localRegions(containingLatitude: end.latitude, longitude: end.longitude)
+    
+    if let intersectingRegion = startRegions.intersection(endRegions).first {
+      return [intersectingRegion]
+    
+    } else {
+      return [startRegions, endRegions].compactMap { $0.first }
+    }
+  }
 
   /// - Parameter name: A region code
   /// - Returns: The local (non-international) region matching the provided code

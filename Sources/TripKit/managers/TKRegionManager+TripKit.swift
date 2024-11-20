@@ -61,17 +61,8 @@ extension TKRegionManager {
   ///     the same region, or C) two elements (a local region for the start and
   ///     one for the end coordinates).
   public func localRegions(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) -> [TKRegion] {
-    
-    let startRegions  = localRegions(containing: start)
-    let endRegions    = localRegions(containing: end)
-    
-    if let intersectingRegion = startRegions.intersection(endRegions).first {
-      return [intersectingRegion]
-    
-    } else {
-      return [startRegions, endRegions].compactMap { $0.first }
-    }
-    
+    guard start.isValid, end.isValid else { return [] }
+    return localRegions(start: (latitude: start.latitude, longitude: start.longitude), end: (latitude: end.latitude, longitude: end.longitude))
   }
   
   /// - Parameter coordinate: A coordinate
@@ -79,8 +70,7 @@ extension TKRegionManager {
   ///     provided coordinate
   public func localRegions(containing coordinate: CLLocationCoordinate2D) -> Set<TKRegion> {
     guard coordinate.isValid else { return [] }
-    let containing = regions.filter { $0.contains(coordinate) }
-    return Set(containing)
+    return localRegions(containingLatitude: coordinate.latitude, longitude: coordinate.longitude)
   }
 
   /// Determines a region (local or international) for the coordinate pair
