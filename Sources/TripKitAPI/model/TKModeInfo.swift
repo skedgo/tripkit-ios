@@ -15,30 +15,30 @@ public class TKModeInfo: NSObject, Codable {
   /// The mode identifier string. Can be `nil`, e.g., for parking as that can
   /// apply to multiple modes.
   public let identifier: String?
-
+  
   /// Text representation of the image
   public let alt: String
-
+  
   /// Image part name; use with `TKStyleManager.image(forModeImageName:)`
   public let localImageName: String?
   
   /// Image part name; use with `TKServer.imageURL(iconFileNamePart:)`
   public let remoteImageName: String?
-
+  
   /// If true, then `remoteImageName` should be treated as a template image and
   /// have an appropriate colour applied to it.
   public var remoteImageIsTemplate: Bool {
     return remoteIconIsTemplate ?? false
   }
   private let remoteIconIsTemplate: Bool?
-
+  
   /// If true, `remoteImageIsBranding` points at a brand image and should be
   /// shown next to the local image; if `false` it shoud replace  it.
   public var remoteImageIsBranding: Bool {
     return remoteIconIsBranding ?? false
   }
   private let remoteIconIsBranding: Bool?
-
+  
   /// Additional descriptor for image, e.g., "GoGet", "Shuttle"
   public let descriptor: String?
   
@@ -48,19 +48,19 @@ public class TKModeInfo: NSObject, Codable {
   }
 #endif
   private let rgbColor: TKAPI.RGBColor?
-    
+  
   // MARK: Equatable
   
   public override func isEqual(_ object: Any?) -> Bool {
     guard let other = object as? TKModeInfo else { return false }
     return identifier == other.identifier
-      && alt == other.alt
-      && localImageName == other.localImageName
-      && remoteImageName == other.remoteImageName
-      && remoteIconIsTemplate == other.remoteIconIsTemplate
-      && remoteIconIsBranding == other.remoteIconIsBranding
-      && descriptor == other.descriptor
-      && rgbColor == other.rgbColor
+    && alt == other.alt
+    && localImageName == other.localImageName
+    && remoteImageName == other.remoteImageName
+    && remoteIconIsTemplate == other.remoteIconIsTemplate
+    && remoteIconIsBranding == other.remoteIconIsBranding
+    && descriptor == other.descriptor
+    && rgbColor == other.rgbColor
   }
   
   public override var hash: Int {
@@ -88,14 +88,10 @@ public class TKModeInfo: NSObject, Codable {
     case descriptor = "description"
     case rgbColor = "color"
   }
-}
-
+  
+  // NSSecureCoding
+  
 #if !os(Linux)
-
-extension TKModeInfo: NSSecureCoding {
-  
-  // MARK: NSSecure coding
-  
   public static var supportsSecureCoding: Bool { return true }
 
   public func encode(with aCoder: NSCoder) {
@@ -134,6 +130,10 @@ extension TKModeInfo: NSSecureCoding {
       remoteIconIsBranding = nil
     }
   }
+#endif
 }
 
+
+#if !os(Linux)
+extension TKModeInfo: NSSecureCoding {}
 #endif

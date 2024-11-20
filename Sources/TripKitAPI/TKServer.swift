@@ -80,7 +80,7 @@ public class TKServer {
     }
   }
   
-  func baseURLs(for region: TKRegion?) -> [URL] {
+  public func baseURLs(for region: TKRegion?) -> [URL] {
     if let dev = Self.customBaseURL.flatMap(URL.init) {
       return [dev]
     } else if let urls = region?.urls, !urls.isEmpty {
@@ -91,6 +91,22 @@ public class TKServer {
   }
   
 }
+
+fileprivate extension String {
+  var nonEmpty: String? {
+    return isEmpty ? nil : self
+  }
+}
+
+fileprivate extension Optional {
+  func orThrow(_ error: Error) throws -> Wrapped {
+    switch self {
+    case .none: throw error
+    case .some(let wrapped): return wrapped
+    }
+  }
+}
+
 
 extension TKServer {
 
@@ -685,7 +701,7 @@ extension TKServer {
 
   }
   
-  static func xTripGoVersion() -> String? {
+  public static func xTripGoVersion() -> String? {
     Bundle.main.infoDictionary?["CFBundleShortVersionString"].map { "i\($0)" }
   }
   
@@ -712,7 +728,7 @@ extension TKServer {
     return headers
   }
   
-  func GETRequestWithSkedGoHTTPHeaders(for url: URL, paras: [String: Any]?) throws -> URLRequest {
+  public func GETRequestWithSkedGoHTTPHeaders(for url: URL, paras: [String: Any]?) throws -> URLRequest {
     try request(for: url, method: .GET, parameters: paras, headers: nil)
   }
   

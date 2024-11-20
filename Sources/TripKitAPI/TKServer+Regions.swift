@@ -109,23 +109,3 @@ extension TKRegionManager {
   }
   
 }
-
-// MARK: - Convenience methods
-
-#if canImport(MapKit)
-
-extension TKRegionManager {
-  @MainActor
-  public func requireRegion(for coordinate: CLLocationCoordinate2D) async throws -> TKRegion {
-    try await requireRegions()
-    return self.region(containing: coordinate, coordinate)
-  }
-
-  @MainActor
-  public func requireRegion(for coordinateRegion: MKCoordinateRegion) async throws -> TKRegion {
-    try await requireRegions()
-    return self.region(containing: coordinateRegion)
-  }
-}
-
-#endif

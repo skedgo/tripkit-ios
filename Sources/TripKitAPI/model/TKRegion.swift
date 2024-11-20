@@ -61,7 +61,7 @@ open class TKRegion : NSObject, Codable {
   }()
 #endif
 
-  public let simplePolygon: Polygon?
+  let simplePolygon: Polygon?
 
   public var isInternational: Bool { simplePolygon == nil }
   
@@ -140,4 +140,24 @@ open class TKRegion : NSObject, Codable {
     try container.encode(encodedPolygon, forKey: .encodedPolygon)
   }
 
+}
+
+extension TKRegion {
+  public func contains(latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) -> Bool {
+    guard let simplePolygon else { return false }
+    let point = Point(latitude: latitude, longitude: longitude)
+    return simplePolygon.contains(point, onLine: false)
+  }
+  
+  public func intersects(polygonPoints: [(latitude: TKAPI.Degrees, longitude: TKAPI.Degrees)]) -> Bool {
+    // Detailed check on actual polygon
+    guard let simplePolygon else { return true }
+    
+    let points = polygonPoints.map { Point(latitude: $0.latitude, longitude: $0.longitude) }
+    let needle = Polygon(points: points)
+    return simplePolygon.contains(needle)
+        || needle.contains(simplePolygon)
+        || simplePolygon.intersects(needle)
+
+  }
 }

@@ -10,12 +10,11 @@ import Foundation
 
 extension NSError {
 
-  @objc(errorWithCode:message:)
   public static func error(code: Int, message: String) -> NSError {
     return NSError(code: code, message: message)
   }
   
-  @objc public convenience init(code: Int, message: String) {
+  public convenience init(code: Int, message: String) {
     let dict = [
       NSLocalizedDescriptionKey: message
     ]

@@ -146,7 +146,7 @@ public struct Polygon {
   
   // MARK: Polygon to polygon intersections
   
-  public func intersects(_ polygon: Polygon) -> Bool {
+  func intersects(_ polygon: Polygon) -> Bool {
     return intersections(polygon).count > 0
   }
   
@@ -213,7 +213,7 @@ public struct Polygon {
   /// Checks if the polygon contains the provided polygon
   /// - Parameter polygon: The polygon to check for containment
   /// - Returns: Whether `self` contains `polygon`, ignoring interior polygons of either
-  public func contains(_ polygon: Polygon) -> Bool {
+  func contains(_ polygon: Polygon) -> Bool {
     for point in polygon.points {
       if !contains(point, onLine: false) {
         return false

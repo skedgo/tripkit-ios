@@ -15,9 +15,7 @@ extension TKRegion {
 
   @objc(containsCoordinate:)
   public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
-    guard let polygon = simplePolygon else { return false }
-    let point = Point(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    return polygon.contains(point, onLine: false)
+    return contains(latitude: coordinate.latitude, longitude: coordinate.longitude)
   }
   
   @objc(intersectsMapRect:)
@@ -25,22 +23,16 @@ extension TKRegion {
     // Fast check, based on bounding boxes
     guard polygon.intersects(mapRect) else { return false }
     
-    // Detailed check on actual polygon
-    guard let simplePolygon = simplePolygon else { return true }
-    
-    let needle = Polygon(
-      points: [
+    let points = [
         MKMapPoint(x: mapRect.minX, y: mapRect.minY),
         MKMapPoint(x: mapRect.minX, y: mapRect.maxY),
         MKMapPoint(x: mapRect.maxX, y: mapRect.maxY),
         MKMapPoint(x: mapRect.maxX, y: mapRect.minY),
       ]
       .map(\.coordinate)
-      .map { Point(latitude: $0.latitude, longitude: $0.longitude) }
-    )
-    return simplePolygon.contains(needle)
-        || needle.contains(simplePolygon)
-        || simplePolygon.intersects(needle)
+      .map { (latitude: $0.latitude, longitude: $0.longitude) }
+  
+    return intersects(polygonPoints: points)
   }
 
 }

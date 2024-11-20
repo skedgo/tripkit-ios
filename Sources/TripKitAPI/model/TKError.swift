@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TKErrorCode: Int {
+public enum TKErrorCode: Int {
   case unsupportedRegionCombination  = 1001
   case unsupportedOriginRegion       = 1002
   case unsupportedDestinationRegion  = 1003
@@ -23,13 +23,13 @@ enum TKErrorCode: Int {
   case internalError                 = 30052
 }
 
-class TKUserError: TKError, @unchecked Sendable {
-  override var isUserError: Bool {
+public class TKUserError: TKError, @unchecked Sendable {
+  public override var isUserError: Bool {
     return true
   }
 }
 
-class TKServerError: TKError, @unchecked Sendable {
+public class TKServerError: TKError, @unchecked Sendable {
 }
 
 public class TKError: NSError, @unchecked Sendable {
@@ -57,7 +57,7 @@ public class TKError: NSError, @unchecked Sendable {
     }
   }
   
-  class func error(from data: Data, domain: String) -> TKError? {
+  public class func error(from data: Data, domain: String) -> TKError? {
     guard let parsed = try? JSONDecoder().decode(TKAPI.ServerError.self, from: data) else { return nil }
     
     var code = Int(parsed.isUserError ? TKErrorCode.userError.rawValue : TKErrorCode.internalError.rawValue)
