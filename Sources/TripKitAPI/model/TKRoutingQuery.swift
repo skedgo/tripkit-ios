@@ -111,6 +111,9 @@ extension TKRoutingQuery where Context == Never {
       additional: []
     )
   }
+}
+
+extension TKRoutingQuery {
   
   public static func parseDate(_ object: Any?) -> Date? {
     if let string = object as? String {
@@ -125,6 +128,15 @@ extension TKRoutingQuery where Context == Never {
     } else {
       return nil
     }
+  }
+  
+  
+  static func requestString(for location: TKAPI.Location, includeAddress: Bool = true) -> String {
+    guard includeAddress, let address = location.address else {
+      return String(format: "(%f,%f)", location.latitude, location.longitude)
+    }
+    
+    return String(format: "(%f,%f)\"%@\"", location.latitude, location.longitude, address)
   }
 }
 

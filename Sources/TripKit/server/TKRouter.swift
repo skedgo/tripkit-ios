@@ -12,41 +12,19 @@ import Foundation
 import MapKit
 #endif
 
-/// A TKRouter calculates trips for routing requests, it talks to TripGo's `routing.json` API.
-public class TKRouter: NSObject {
-  public enum RoutingError: Error, LocalizedError {
-    case invalidRequest(String)
-    case noTripFound
-    
-    public var errorDescription: String? {
-      switch self {
-      case .invalidRequest(let text): return text
-      case .noTripFound: return Loc.NoRoutesFound
-      }
+extension TKRouter.RoutingError: LocalizedError {
+  public var errorDescription: String? {
+    switch self {
+    case .invalidRequest(let text): return text
+    case .noTripFound: return Loc.NoRoutesFound
+    case .startLocationNotDetermined: return "Start location could not be determined. Please try again or select manually" // code: TKErrorCode.userError.rawValue
+    case .endLocationNotDetermined: return "End location could not be determined. Please try again or select manually." // code: TKErrorCode.userError.rawValue
+    case .routingNotSupported: return Loc.RoutingBetweenTheseLocationsIsNotYetSupported // code: 1001 -- matches server
     }
   }
-  
-  /// Optional server to use instead of `TKServer.shared`.
-  public var server: TKServer?
-  
-  /// Optional configuration parameters to use instead of `TKSettings.Config.fromUserDefaults()`.
-  public var config: TKSettings.Config?
+}
 
-  /// Set to limit the modes. If not provided, modes according to `TKSettings` will be used.
-  public var modeIdentifiers: Set<String> = []
-  
-  /// A `TKRouter` might turn a routing request into multiple server requests. If some of these fail
-  /// but others return trips, the default behaviour is to return the trips that were found without returning
-  /// an error. Set this to `true` to always return an error if any of the requests fail, even if some trips were
-  /// found by other requests.
-  public var failOnAnyError: Bool = false
-
-  private var isActive: Bool = false
-
-  private var lastWorkerError: Error? = nil
-  private var workers: [Set<String>: TKRouter] = [:]
-  private var finishedWorkers: UInt = 0
-  private var workerQueue: DispatchQueue?
+extension TKRouter {
   
 #if canImport(CoreData)
 
@@ -114,21 +92,7 @@ public class TKRouter: NSObject {
   
 #endif
   
-  public func cancelRequests() {
-    if let queue = workerQueue {
-      queue.async(execute: cancelRequestsWorker)
-    } else {
-      cancelRequestsWorker()
-    }
-  }
-  
-  private func cancelRequestsWorker() {
-    workers.map(\.value).forEach { $0.cancelRequests() }
-    self.workers = [:]
-    self.finishedWorkers = 0
-    self.lastWorkerError = nil
-    self.isActive = false
-  }
+
 }
 
 #if canImport(MapKit)
@@ -233,12 +197,13 @@ extension TKRouter {
     
   private func multiFetchTripsWorker(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, on queue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) throws -> UInt {
     
-    let includesAllModes = try request.performAndWait { $0.additional.contains { $0.name == "allModes" } }
+    let additional = try request.performAndWait(\.additional)
+    let includesAllModes = additional.contains { $0.name == "allModes" }
     
     let enabledModes = try modes ?? request.performAndWait(\.modes)
     if includesAllModes {
       modeIdentifiers = enabledModes
-      fetchTrips(for: request, bestOnly: false, additional: nil, callbackQueue: queue, completion: completion)
+      fetchTrips(for: request, bestOnly: false, additional: additional, callbackQueue: queue, completion: completion)
       return 1
     }
     
@@ -254,8 +219,6 @@ extension TKRouter {
       return tripRequest
     }
     
-    let additional = try request.performAndWait(\.additional)
-    
     queue.async {
       self.cancelRequestsWorker()
       self.isActive = true
@@ -265,7 +228,7 @@ extension TKRouter {
           continue
         }
         
-        let worker = TKRouter()
+        let worker = TKRouter(config: .userSettings())
         self.workers[modeGroup] = worker
         worker.server = self.server
         worker.config = self.config
@@ -351,64 +314,7 @@ extension TripRequest {
 
 #endif
 
-extension TKTransportMode {
-  
-  /// Groups the mode identifiers
-  /// - Parameters:
-  ///   - modes: A set of all the identifiers to be grouped
-  ///   - includeGroupForAll: If an extra group which has all the identifiers should be added
-  /// - Returns: A set of a set of mode identifiers
-  static func groupModeIdentifiers(_ modes: Set<String>, includeGroupForAll: Bool) -> Set<Set<String>> {
-    var result: Set<Set<String>> = []
-    var processedModes: Set<String> = []
-    var schoolBuses: Set<String> = []
-    var includesWalkOnly = false
-    
-    for mode in modes {
-      if processedModes.contains(mode) {
-        continue // added already, e.g., via implied modes
-      } else if mode == TKTransportMode.flight.modeIdentifier, modes.count > 1 {
-        continue // don't add flights by themselves
-      } else if mode == TKTransportMode.walking.modeIdentifier || mode == TKTransportMode.wheelchair.modeIdentifier {
-        includesWalkOnly = true
-      } else if mode.hasPrefix(TKTransportMode.schoolBuses.modeIdentifier) {
-        schoolBuses.insert(mode)
-        processedModes.insert(mode)
-        continue
-      }
-      
-      var group: Set<String> = [mode]
-      group.formUnion(TKRegionManager.shared.impliedModes(byModeIdentifer: mode))
-      
-      // see if we can merge this into an existing group
-      let intersectionWithProcessed = processedModes.intersection(group)
-      if intersectionWithProcessed.isEmpty {
-        result.insert(group)
-      } else {
-        for existing in result {
-          let intersectionWithCurrent = existing.intersection(group)
-          if !intersectionWithCurrent.isEmpty {
-            result.remove(existing)
-            result.insert(existing.union(group))
-            break
-          }
-        }
-      }
-      
-      processedModes.formUnion(group)
-    }
-    
-    if !schoolBuses.isEmpty {
-      result.insert(schoolBuses)
-    }
-    
-    if includeGroupForAll, result.count > 1 + (includesWalkOnly ? 1 : 0) {
-      result.insert(modes)
-    }
-    
-    return result
-  }
-}
+
 
 // MARK: - Hitting API
 
@@ -428,6 +334,29 @@ public protocol TKRouterRequestable {
 }
 
 fileprivate extension TKRouterRequestable {
+#if canImport(CoreData)
+  func toQuery() -> TKRoutingQuery<NSManagedObjectContext> {
+    TKRoutingQuery(
+      from: from,
+      to: to,
+      at: at,
+      modes: modes,
+      additional: additional,
+      context: context
+    )
+  }
+#else
+  func toQuery() -> TKRoutingQuery<Never> {
+    TKRoutingQuery(
+      from: from,
+      to: to,
+      at: at,
+      modes: modes,
+      additional: additional
+    )
+  }
+#endif
+  
   func perform(_ block: @escaping (Self) -> Void) {
 #if os(Linux)
     block(self)
@@ -522,150 +451,59 @@ extension TripRequest: TKRouterRequestable {
 #endif
 
 extension TKRouter {
-
-  public static func urlRequest(for request: TKRouterRequestable, modes: Set<String>? = nil, includeAddress: Bool = false) throws -> URLRequest {
-    let paras = requestParameters(
-      for: request, modeIdentifiers: modes,
-      additional: nil, config: nil,
+  
+  public static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKAPIConfig?, bestOnly: Bool = false, includeAddress: Bool = true) -> [String: Any] {
+    return Self.requestParameters(
+      request: request.toQuery(),
+      modeIdentifiers: modeIdentifiers,
+      additional: additional,
+      config: config ?? .userSettings(),
+      bestOnly: bestOnly,
       includeAddress: includeAddress
     )
-    let baseURL = TKServer.fallbackBaseURL
-    let fullURL = baseURL.appendingPathComponent("routing.json")
-    return try TKServer.shared.GETRequestWithSkedGoHTTPHeaders(for: fullURL, paras: paras)
+  }
+
+  public static func urlRequest(for request: TKRouterRequestable, modes: Set<String>? = nil, includeAddress: Bool = false) throws -> URLRequest {
+    return try Self.urlRequest(
+      request: request.toQuery(),
+      modes: modes,
+      includeAddress: includeAddress,
+      config: .userSettings()
+    )
   }
   
   public static func routingRequestURL(for request: TKRouterRequestable, modes: Set<String>? = nil, includeAddress: Bool = true) -> String? {
     try? urlRequest(for: request, modes: modes, includeAddress: includeAddress).url?.absoluteString
   }
   
-  static func requestParameters(for request: TKRouterRequestable, modeIdentifiers: Set<String>?, additional: Set<URLQueryItem>?, config: TKSettings.Config?, bestOnly: Bool = false, includeAddress: Bool = true) -> [String: Any] {
-    var paras = (config ?? .userSettings()).paras
-    let modes = modeIdentifiers ?? request.modes
-    paras["modes"] = modes.sorted()
-    paras["from"] = TKParserHelper.requestString(for: request.from, includeAddress: includeAddress)
-    paras["to"] = TKParserHelper.requestString(for: request.to, includeAddress: includeAddress)
-    
-    switch request.at {
-    case .arriveBy(let arrival):
-      paras["arriveBefore"] = Int(arrival.timeIntervalSince1970)
-    case .leaveAfter(let departure):
-      paras["departAfter"] = Int(departure.timeIntervalSince1970)
-    case .leaveASAP:
-      paras["departAfter"] = Int(Date().timeIntervalSince1970)
-    }
-    
-    if bestOnly {
-      paras["bestOnly"] = true
-      paras["includeStops"] = true
-    }
-    
-    let additionalItems = additional ?? request.additional
-    let fromQueryItems = Dictionary(grouping: additionalItems, by: \.name)
-      .compactMapValues { list -> Any? in
-        if list.count == 1, let first = list.first {
-          return first.value
-        } else {
-          return list.compactMap(\.value)
-        }
-      }
-    paras.merge(fromQueryItems) { old, _ in old }
-    return paras
-  }
-  
 #if canImport(CoreData)
 
   private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
-    fetchTripsResponse(for: request, bestOnly: bestOnly, additional: additional, callbackQueue: callbackQueue) { [weak self] result in
-      request.perform { [weak self] _ in
-        guard let self = self else { return }
+    Task {
+      self.isActive = true
+      do {
+        let response = try await TKRouter.fetchTripsResponse(
+          for: request.toQuery(),
+          modeIdentifiers: request.modes,
+          bestOnly: bestOnly,
+          additional: additional,
+          config: self.config,
+          server: self.server
+        )
         
-        switch result {
-        case .success(let response):
-          let tripRequest = request.toTripRequest()
-          self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
-          
-        case .failure(let error):
-          // Do NOT `handleError` again, as that's already called by
-          // `fetchTripsResponse`, which marks this router as inactive,
-          // and calling it again will mean nothing happens.
-          completion(.failure(error))
-        }
+        try Task.checkCancellation()
+        
+        let tripRequest = request.toTripRequest()
+        self.parse(response, for: tripRequest, visibility: visibility, callbackQueue: callbackQueue, completion: completion)
+        
+      } catch {
+        self.handleError(error, callbackQueue: callbackQueue, completion: completion)
       }
+      self.isActive = false
     }
   }
   
 #endif
-  
-  /// Alternative method to get the API response for fetching trips, without parsing them into a `Trip`
-  func fetchTripsResponse(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, callbackQueue: DispatchQueue? = nil, completion: @escaping (Result<TKAPI.RoutingResponse, Error>) -> Void) {
-
-    // Mark as active early, to make sure we pass on errors
-    self.isActive = true
-    
-    // sanity checks
-    guard request.from.coordinate.isValid else {
-      return handleError(NSError(code: TKErrorCode.userError.rawValue, message: "Start location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
-    }
-    guard request.to.coordinate.isValid else {
-      return handleError(NSError(code: TKErrorCode.userError.rawValue, message: "End location could not be determined. Please try again or select manually."), callbackQueue: callbackQueue, completion: completion)
-    }
-    
-    TKRegionManager.shared.requireRegions { [weak self] regionsResult in
-      request.perform { [weak self] _ in
-        guard let self = self else { return }
-        
-        let region: TKRegion?
-        if self.server is TKRoutingServer {
-          // Fine to proceed without checking region as we're just hitting
-          // the base URL anyway and can rely on server errors instead.
-          // This allows hitting the server with different API keys without
-          // having to update `TKRegionManager`.
-          region = nil
-          
-        } else {
-          if case .failure(let error) = regionsResult {
-            return self.handleError(error, callbackQueue: callbackQueue, completion: completion)
-          }
-
-          // we are guaranteed to have regions
-          guard let localRegion = TKRegionManager.shared.localRegions(start: request.from.coordinate, end: request.to.coordinate).first else {
-            return self.handleError(
-              NSError(code: 1001, // matches server
-                      message: Loc.RoutingBetweenTheseLocationsIsNotYetSupported),
-              callbackQueue: callbackQueue,
-              completion: completion)
-          }
-          region = localRegion
-        }
-        
-        let paras = Self.requestParameters(
-          for: request,
-          modeIdentifiers: self.modeIdentifiers,
-          additional: additional,
-          config: self.config,
-          bestOnly: bestOnly
-        )
-        
-        let server = self.server ?? .shared
-        server.hit(TKAPI.RoutingResponse.self,
-                   path: "routing.json",
-                   parameters: paras,
-                   region: region,
-                   callbackOnMain: false
-        ) { [weak self] _, _, result in
-            switch result {
-            case .success(let success):
-              completion(.success(success))
-            case .failure(let error):
-              // For consistency, all errors from this method should go through
-              // `handleError`
-              self?.handleError(error, callbackQueue: callbackQueue, completion: completion)
-            }
-        }
-      }
-    }
-  }
-  
 }
 
 
@@ -678,7 +516,6 @@ extension TKAPI.Location {
 }
 
 extension TKRouter {
-
   private func handleError<S>(_ error: Error, callbackQueue: DispatchQueue?, completion: @escaping (Result<S, Error>) -> Void) {
     // Ignore outdated request errors
     guard isActive else { return }

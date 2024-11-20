@@ -353,7 +353,7 @@ extension TKWaypointRouter {
   public struct Input: Codable {
     var segments: [Segment]
     var vehicles: [TKAPI.PrivateVehicle]
-    var config: TKSettings.Config
+    var config: TKAPIConfig
     var leaveAt: Date?
   }
   

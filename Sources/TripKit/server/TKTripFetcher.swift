@@ -130,7 +130,7 @@ public enum TKTripFetcher {
 
     // fill in some default parameters that don't relate to trip properties
     // but rather how it's output -- at least, where the URL doesn't have them
-    let config = TKSettings.Config.userSettings()
+    let config = TKAPIConfig.userSettings()
     var queryItems = components.queryItems ?? []
     queryItems.addDefault(name: "v", value: String(config.version))
     queryItems.addDefault(name: "unit", value: config.distanceUnit.rawValue)
