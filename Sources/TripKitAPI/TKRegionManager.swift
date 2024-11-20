@@ -222,5 +222,9 @@ extension TKRegionManager {
   public func localRegion(code: String) -> TKRegion? {
     return regions.first { $0.code == code }
   }
+  
+  public func timeZone(containingLatitude latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) -> TimeZone? {
+    return localRegions(containingLatitude: latitude, longitude: longitude).first?.timeZone
+  }
     
 }

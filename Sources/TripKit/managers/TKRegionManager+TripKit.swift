@@ -94,7 +94,7 @@ extension TKRegionManager {
   /// - Returns: The time zone of a matching region for this coordinate. Will
   ///     return `nil` if the coordinate falls outside any supported region.
   public func timeZone(for coordinate: CLLocationCoordinate2D) -> TimeZone? {
-    return regions.first { $0.contains(coordinate) }?.timeZone
+    return timeZone(containingLatitude: coordinate.latitude, longitude: coordinate.longitude)
   }
   
   

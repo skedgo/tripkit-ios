@@ -87,11 +87,11 @@ extension TKAPI {
   public struct Location: Codable, Hashable {
     public let latitude: Degrees
     public let longitude: Degrees
-    public let bearing: Direction?
-    public let name: String?
-    public let address: String?
+    public var bearing: Direction? = nil
+    public var name: String? = nil
+    public var address: String? = nil
     
-    public init(latitude: Degrees, longitude: Degrees, bearing: Direction?, name: String?, address: String?) {
+    public init(latitude: Degrees, longitude: Degrees, bearing: Direction? = nil, name: String? = nil, address: String? = nil) {
       self.latitude = latitude
       self.longitude = longitude
       self.bearing = bearing

@@ -26,35 +26,6 @@ public class TKRouter: NSObject {
     }
   }
   
-  public struct RoutingQuery<Context> {
-    public let from: TKAPI.Location
-    public let to: TKAPI.Location
-    public var at: TKShareHelper.QueryDetails.Time = .leaveASAP
-    public let modes: Set<String>
-    public var additional: Set<URLQueryItem> = []
-    public var context: Context? = nil
-
-#if canImport(MapKit)
-    public init(from: MKAnnotation, to: MKAnnotation, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: Context? = nil) {
-      self.from = .init(annotation: from)
-      self.to = .init(annotation: to)
-      self.at = time
-      self.modes = modes
-      self.additional = additional
-      self.context = context
-    }
-#endif
-
-    public init(from: TKAPI.Location, to: TKAPI.Location, at time: TKShareHelper.QueryDetails.Time = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: Context? = nil) {
-      self.from = from
-      self.to = to
-      self.at = time
-      self.modes = modes
-      self.additional = additional
-      self.context = context
-    }
-  }
-  
   /// Optional server to use instead of `TKServer.shared`.
   public var server: TKServer?
   
@@ -110,7 +81,7 @@ public class TKRouter: NSObject {
   /// - Parameters:
   ///   - query: An instance of a `TripRequest` which specifies what kind of trips should get calculated.
   ///   - completion: Block called when done, on success or failure
-  public func fetchTrips(for query: RoutingQuery<NSManagedObjectContext>, completion: @escaping (Result<TripRequest, Error>) -> Void) {
+  public func fetchTrips(for query: TKRoutingQuery<NSManagedObjectContext>, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     return fetchTrips(for: query, bestOnly: false, additional: nil, completion: completion)
   }
 
@@ -160,6 +131,21 @@ public class TKRouter: NSObject {
   }
 }
 
+#if canImport(MapKit)
+extension TKRoutingQuery {
+  public init(from: MKAnnotation, to: MKAnnotation, at time: TKRoutingQueryTime = .leaveASAP, modes: Set<String>, additional: Set<URLQueryItem> = [], context: Context? = nil) {
+    self.init(
+      from: .init(annotation: from),
+      to: .init(annotation: to),
+      at: time,
+      modes: modes,
+      additional: additional,
+      context: context
+    )
+  }
+}
+#endif
+
 // MARK: - Multi-fetch
 
 #if canImport(CoreData)
@@ -178,7 +164,7 @@ extension TKRouter {
   ///   - request: The request specifying the query
   ///   - classifier: Optional classifier to assign `TripGroup`'s `classification`
   /// - returns: `TripRequest` with the resulting trip groups associated
-  public func multiFetchTrips(for query: RoutingQuery<NSManagedObjectContext>, classifier: TKTripClassifier? = nil) async throws -> TripRequest {
+  public func multiFetchTrips(for query: TKRoutingQuery<NSManagedObjectContext>, classifier: TKTripClassifier? = nil) async throws -> TripRequest {
     try await withCheckedThrowingContinuation { continuation in
       _ = multiFetchTrips(request: query, modes: query.modes, classifier: classifier) { result in
         continuation.resume(with: result)
@@ -203,7 +189,7 @@ extension TKRouter {
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
   /// - returns: The number of requests sent. This will match the number of times `progress` is called.
   @discardableResult
-  public func multiFetchTrips(for query: RoutingQuery<NSManagedObjectContext>, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
+  public func multiFetchTrips(for query: TKRoutingQuery<NSManagedObjectContext>, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
     return multiFetchTrips(request: query, modes: query.modes, classifier: classifier, progress: progress, completion: completion)
   }
   
@@ -429,7 +415,7 @@ extension TKTransportMode {
 public protocol TKRouterRequestable {
   var from: TKAPI.Location { get }
   var to: TKAPI.Location { get }
-  var at: TKShareHelper.QueryDetails.Time { get }
+  var at: TKRoutingQueryTime { get }
   var modes: Set<String> { get }
   var additional: Set<URLQueryItem> { get }
   
@@ -484,7 +470,7 @@ fileprivate extension TKRouterRequestable {
 
 #if canImport(CoreData)
 
-extension TKRouter.RoutingQuery: TKRouterRequestable where Context == NSManagedObjectContext {
+extension TKRoutingQuery: TKRouterRequestable where Context == NSManagedObjectContext {
   public func toTripRequest() -> TripRequest {
     guard let context = context else { preconditionFailure() }
     
@@ -518,7 +504,7 @@ extension TripRequest: TKRouterRequestable {
   
   public var modes: Set<String> { TKSettings.enabledModeIdentifiers(applicableModeIdentifiers) }
 
-  public var at: TKShareHelper.QueryDetails.Time {
+  public var at: TKRoutingQueryTime {
     switch (type, departureTime, arrivalTime) {
     case (.arriveBefore, _, .some(let time)): return .arriveBy(time)
     case (.leaveAfter, .some(let time), _): return .leaveAfter(time)
