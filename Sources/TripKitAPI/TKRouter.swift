@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if os(Linux)
+import FoundationNetworking
+#endif
 
 
 /// A TKRouter calculates trips for routing requests, it talks to TripGo's `routing.json` API.
