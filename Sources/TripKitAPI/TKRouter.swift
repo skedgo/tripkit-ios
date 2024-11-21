@@ -89,7 +89,7 @@ extension TKRouter {
 
       return try await withThrowingTaskGroup(of: TKAPI.RoutingResponse.self) { group in
         for modeGroup in groupedIdentifier {
-          group.addTaskUnlessCancelled {
+          _ = group.addTaskUnlessCancelled {
             try await Self.fetchTripsResponse(
               for: request,
               modeIdentifiers: modeGroup,
