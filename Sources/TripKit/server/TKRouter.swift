@@ -484,7 +484,7 @@ extension TKRouter {
       do {
         let response = try await TKRouter.fetchTripsResponse(
           for: request.toQuery(),
-          modeIdentifiers: request.modes,
+          modeIdentifiers: modeIdentifiers, // yes, not `request.modes`, as this might have been adjusted!
           bestOnly: bestOnly,
           additional: additional,
           config: self.config,
