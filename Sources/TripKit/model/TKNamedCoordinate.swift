@@ -13,6 +13,8 @@ import MapKit
 
 open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
   
+  public static var enableReverseGeocodingAddress: Bool = true
+  
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {
       _address = nil
@@ -44,7 +46,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   private var _placemark: CLPlacemark? = nil
   @objc public var placemark: CLPlacemark? {
     if let placemark = _placemark { return placemark }
-    guard coordinate.isValid else { return nil }
+    guard coordinate.isValid, TKNamedCoordinate.enableReverseGeocodingAddress else { return nil }
     
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     let geocoder = CLGeocoder()
