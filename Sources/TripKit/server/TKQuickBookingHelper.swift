@@ -17,6 +17,23 @@ public struct TKQuickBookingPrice: Hashable {
 }
 
 public struct TKQuickBooking: Codable, Hashable {
+  public enum BookingURLResponse: String, Codable {
+    /// A `TKQuickBooking` including `input`
+    case bookingDetails
+    
+    /// Internal `BookingOptionsResponse` with providers and/or fares
+    case bookingOptions
+    
+    /// Internal `PaymentOptionsResponse`
+    case paymentOptions
+    
+    /// Will confirm this option directly without further input needed
+    case confirmation
+    
+    /// An external link, e.g., a deep link
+    case external
+  }
+  
   /// Localised identifying this booking option
   public let title: String
 
@@ -33,16 +50,27 @@ public struct TKQuickBooking: Codable, Hashable {
   public var rider: TKBooking.Rider?
   
   /// `true` if billing/payments are supported, and `bookingURL` will return an appropriate response
-  @DefaultFalse public var billingEnabled: Bool
+  @DefaultFalse private var billingEnabled: Bool
   
-  /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
+  /// URL to book this option or request more details. See `bookingURLResponse` for what kind of `URL` this is.
   public let bookingURL: URL
 
   /// Localised string for doing booking
   public let bookingTitle: String
   
   /// Whether `bookingURL` is a deep-link into an external system
-  public let bookingURLIsDeepLink: Bool
+  private let bookingURLIsDeepLink: Bool
+  
+  public var bookingURLResponse: BookingURLResponse {
+    if bookingURLIsDeepLink {
+      return .external
+    } else if billingEnabled {
+      return .paymentOptions
+    } else {
+#warning("FIXME. Should be .confirmation")
+      return .bookingOptions // .confirmation
+    }
+  }
   
   /// URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
   public let secondaryBookingURL: URL?
@@ -96,6 +124,43 @@ public struct TKQuickBooking: Codable, Hashable {
     case surgeImageURL
     case fares
     case riders
+  }
+  
+}
+
+extension TKQuickBooking {
+  
+  /// Subset of a ``TKQuickBooking``, if it returned a subset of options to choose
+  public struct AvailableOption: Codable, Hashable {
+    
+    /// Localised identifying this booking option
+    public let title: String
+    
+    /// `true` if billing/payments are supported, and `bookingURL` will return an appropriate response
+    @DefaultFalse public var billingEnabled: Bool
+    
+    /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
+    public let bookingURL: URL
+
+    /// Localised string for doing booking
+    public let bookingTitle: String
+    
+    @DefaultEmptyArray public var fares: [TKBooking.Fare]
+    
+    /// `true` if only a single fare is allowed to be selected
+    @DefaultFalse public var singleFareOnly: Bool
+  }
+  
+  /// Alternative to ``AvailableOption`` but not available due to `warningMessage`.
+  public struct UnavailableOption: Codable, Hashable {
+    /// Localised identifying this booking option
+    public let title: String
+    
+    /// Localised string for doing booking
+    public let bookingTitle: String
+
+    /// Warning to show why `bookingTitle` is disabled.
+    public let warningMessage: String
   }
   
 }
