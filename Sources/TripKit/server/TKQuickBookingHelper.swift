@@ -137,7 +137,7 @@ extension TKQuickBooking {
     public let title: String
     
     /// `true` if billing/payments are supported, and `bookingURL` will return an appropriate response
-    @DefaultFalse public var billingEnabled: Bool
+    @DefaultFalse private var billingEnabled: Bool
     
     /// URL to book this option. If possible, this will book it without further confirmation. These URLs are meant to be used with an instance of `BPKBookingViewController`, unless `bookingURLIsDeepLink` returns `true`.
     public let bookingURL: URL
@@ -149,6 +149,14 @@ extension TKQuickBooking {
     
     /// `true` if only a single fare is allowed to be selected
     @DefaultFalse public var singleFareOnly: Bool
+    
+    public var bookingURLResponse: BookingURLResponse {
+      if billingEnabled {
+        return .paymentOptions
+      } else {
+        return .confirmation
+      }
+    }
   }
   
   /// Alternative to ``AvailableOption`` but not available due to `warningMessage`.
