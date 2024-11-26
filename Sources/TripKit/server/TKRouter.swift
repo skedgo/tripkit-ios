@@ -521,7 +521,7 @@ extension TripRequest: TKRouterRequestable {
   
   public var additional: Set<URLQueryItem> {
     let exclusionItems = (excludedStops ?? []).map { URLQueryItem(name: "avoidStops", value: $0) }
-    return Set(exclusionItems)
+    return Set(exclusionItems + [URLQueryItem(name: "groupDRT", value: "true")])
   }
   
   public func toTripRequest() -> TripRequest { self }
