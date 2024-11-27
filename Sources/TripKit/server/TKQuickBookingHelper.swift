@@ -59,7 +59,7 @@ public struct TKQuickBooking: Codable, Hashable {
   public let bookingTitle: String
   
   /// Whether `bookingURL` is a deep-link into an external system
-  private let bookingURLIsDeepLink: Bool
+  @DefaultFalse private var bookingURLIsDeepLink: Bool
   
   public var bookingURLResponse: BookingURLResponse {
     if bookingURLIsDeepLink {
