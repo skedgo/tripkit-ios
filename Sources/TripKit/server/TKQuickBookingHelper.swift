@@ -20,9 +20,6 @@ public struct TKQuickBooking: Codable, Hashable {
   public enum BookingResponseKind: String, Codable, DefaultCodableStrategy {
     public static var defaultValue: TKQuickBooking.BookingResponseKind { .paymentOptions }
     
-    /// A `TKQuickBooking` including `input`
-    case bookingDetails = "DETAILS"
-    
     /// Internal `BookingOptionsResponse` with providers and/or fares
     case bookingOptions = "OPTIONS"
     
