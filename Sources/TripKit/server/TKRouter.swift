@@ -48,6 +48,9 @@ public class TKRouter: NSObject {
     }
   }
   
+  /// Optional parameters to add to routing query that use a ``TripRequest``
+  public static var defaultParameters: [URLQueryItem]? = nil
+  
   /// Optional server to use instead of `TKServer.shared`.
   public var server: TKServer?
   
@@ -521,7 +524,11 @@ extension TripRequest: TKRouterRequestable {
   
   public var additional: Set<URLQueryItem> {
     let exclusionItems = (excludedStops ?? []).map { URLQueryItem(name: "avoidStops", value: $0) }
-    return Set(exclusionItems + [URLQueryItem(name: "groupDRT", value: "true")])
+    if let additionalDefaults = TKRouter.defaultParameters {
+      return Set(exclusionItems + additionalDefaults)
+    } else {
+      return Set(exclusionItems)
+    }
   }
   
   public func toTripRequest() -> TripRequest { self }
