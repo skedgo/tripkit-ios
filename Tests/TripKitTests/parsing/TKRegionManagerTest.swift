@@ -112,6 +112,9 @@ class TKRegionManagerTest: XCTestCase {
   }
   
   func testGroupingSchoolBusModes() {
+    TKRouter.modesToGroupInRequest = ["pt_ltd_SCHOOLBUS"]
+    defer { TKRouter.modesToGroupInRequest = nil }
+    
     let inputModes: Set<String> = [
       "pt_pub",
       "pt_ltd_SCHOOLBUS_1",
