@@ -351,7 +351,7 @@ extension TKBooking {
     
     public let id: ID
     public let name: String
-    public let details: String
+    public let details: String?
     
     /// Price in cents
     public let price: Int?
