@@ -54,7 +54,28 @@ public struct TKQuickBooking: Codable, Hashable {
   /// Localised string for doing booking
   public let bookingTitle: String
   
-  public var bookingResponseKind: BookingResponseKind
+  // - START: Temporary backwards compatibility 1/2
+  // When all backends are upgraded, this can be
+  // public var bookingResponseKind: BookingResponseKind
+  
+  public var bookingResponseKind: BookingResponseKind {
+    if let provided = _bookingResponseKind {
+      return provided
+    } else if billingEnabled == true {
+      return .paymentOptions
+    } else if bookingURLIsDeepLink == true {
+      return .external
+    } else {
+      return .confirmation
+    }
+  }
+  
+  private var _bookingResponseKind: BookingResponseKind?
+  private var billingEnabled: Bool?
+  private let bookingURLIsDeepLink: Bool?
+  
+  // - END: Temporary backwards compatibility 1/2
+  
   
   /// URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
   public let secondaryBookingURL: URL?
@@ -95,7 +116,14 @@ public struct TKQuickBooking: Codable, Hashable {
     case imageURL
     case bookingTitle
     case bookingURL
-    case bookingResponseKind = "bookingResponseType"
+    
+    // - START: Temporary backwards compatibility 2/2
+    // case bookingResponseKind = "bookingResponseType"
+    case _bookingResponseKind = "bookingResponseType"
+    case billingEnabled
+    case bookingURLIsDeepLink
+    // - END: Temporary backwards compatibility 2/2
+    
     case secondaryBookingTitle
     case secondaryBookingURL
     case tripUpdateURL
