@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_spm:
-    runs-on: macos-13
+    runs-on: macos-14
 
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
@@ -18,8 +18,8 @@ jobs:
       - name: Build
         run: swift build --target TripKit
 
-  build_spm_monterey:
-    runs-on: macos-12
+  build_spm_ventura:
+    runs-on: macos-13
 
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
@@ -40,9 +40,9 @@ jobs:
       - name: Build TripKit Mac
         run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit-macOS"
       - name: Build TripKitUI iOS
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14'
+        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
       - name: Build TripKitInterApp iOS
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14'
+        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
 
   test_xcode:
     runs-on: macos-14
@@ -56,7 +56,7 @@ jobs:
         env:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
         run: |
-          xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' -resultBundlePath TestResults
+          xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -resultBundlePath TestResults
       # - uses: kishikawakatsumi/xcresulttool@v1 # NOT YET COMPATIBLE WITH XCODE 16
       #   with:
       #     path: TestResults.xcresult
@@ -73,7 +73,7 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v4
       - name: Build TripKitUIExample
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14'
+        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
       - name: Build MiniMap
         run: |
           cd Examples/MiniMap
@@ -83,4 +83,4 @@ jobs:
         run: |
           cd Examples/CocoaPodsTest
           pod install
-          xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild build -workspace CocoaPodsTest.xcworkspace -scheme CocoaPodsTest -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
