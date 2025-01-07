@@ -137,6 +137,7 @@ public enum TKTripFetcher {
     if includeStops {
       queryItems.addDefault(name: "includeStops", value: "true")
     }
+    components.queryItems = queryItems
     
     guard let url = components.url else {
       completion(.failure(FetcherError.invalidURL))
