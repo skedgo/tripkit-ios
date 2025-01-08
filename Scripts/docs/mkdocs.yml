@@ -4,11 +4,12 @@ site_description: Documentation of TripKit iOS - the iOS SDK of the TripGo API.
 
 nav:
 - Getting Started: index.md
+- View Controllers: view-controllers.md
 - F.A.Q.: faq.md
 - SDK Reference:
-  - TripKit: TripKit/index.html
-  - TripKitUI: TripKitUI/index.html
-  - TripKitInterApp: TripKitInterApp/index.html
+  - TripKit: TripKit/TripKit.html
+  - TripKitUI: TripKit/TripKitUI.html
+  - TripKitInterApp: TripKit/TripKitInterApp.html
 - API: https://developer.tripgo.com
 
 repo_url: https://github.com/skedgo/tripkit-ios
