@@ -53,11 +53,11 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v3
       - name: Build TripKit Mac
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit-macOS"
+        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx
       - name: Build TripKitUI iOS
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
+        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
       - name: Build TripKitInterApp iOS
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
+        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
 
   test_xcode:
     runs-on: macos-15
@@ -71,7 +71,7 @@ jobs:
         env:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
         run: |
-          xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -resultBundlePath TestResults
+          xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -resultBundlePath TestResults
       # - uses: kishikawakatsumi/xcresulttool@v1 # NOT YET COMPATIBLE WITH XCODE 16
       #   with:
       #     path: TestResults.xcresult

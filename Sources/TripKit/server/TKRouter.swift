@@ -11,6 +11,9 @@ import Foundation
 #if canImport(MapKit)
 import MapKit
 #endif
+#if canImport(CoreData)
+import CoreData
+#endif
 
 extension TKRouter.RoutingError: LocalizedError {
   public var errorDescription: String? {

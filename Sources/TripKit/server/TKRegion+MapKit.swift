@@ -46,7 +46,7 @@ extension TKRegion.City {
     )
   }
 
-  @objc public var centerBiasedMapRect: MKMapRect {
+  public var centerBiasedMapRect: MKMapRect {
     // centre it on the region's coordinate
     let size = MKMapSize(width: 300_000, height: 400_00)
     var center = MKMapPoint(coordinate)
@@ -61,7 +61,7 @@ extension TKRegion.City: MKAnnotation {
     return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   }
   
-  @objc public var title: String? { name }
+  public var title: String? { name }
   
   // This shouldn't be necessary, but there were reports of crashes when
   // calling `[MKMapView removeAnnotations:]`:
@@ -69,7 +69,7 @@ extension TKRegion.City: MKAnnotation {
   //      Terminating app due to uncaught exception 'NSUnknownKeyException',
   //      reason: '[<TKRegionCity 0x7f957975d000> valueForUndefinedKey:]: this
   //      class is not key value coding-compliant for the key subtitle.'
-  @objc public var subtitle: String? { nil }
+  public var subtitle: String? { nil }
 }
 
 extension TKRegion {

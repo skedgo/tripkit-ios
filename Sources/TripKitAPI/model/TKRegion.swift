@@ -19,28 +19,29 @@ public enum TKRegionParserError : Error {
   case fetchingRegionsFailed
 }
 
-open class TKRegion : NSObject, Codable {
-  
-  public class City : NSObject, Codable {
-    public let name: String?
-    public let latitude: TKAPI.Degrees
-    public let longitude: TKAPI.Degrees
+public class TKRegionCity : NSObject, Codable {
+  public let name: String?
+  public let latitude: TKAPI.Degrees
+  public let longitude: TKAPI.Degrees
 
-    public weak var region: TKRegion? = nil
-    public var orderInRegion: Int? = nil
+  public weak var region: TKRegion? = nil
+  public var orderInRegion: Int? = nil
 
-    public init(title: String, latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) {
-      self.name = title
-      self.latitude = latitude
-      self.longitude = longitude
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-      case latitude = "lat"
-      case longitude = "lng"
-      case name = "title"
-    }
+  public init(title: String, latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) {
+    self.name = title
+    self.latitude = latitude
+    self.longitude = longitude
   }
+  
+  private enum CodingKeys: String, CodingKey {
+    case latitude = "lat"
+    case longitude = "lng"
+    case name = "title"
+  }
+}
+
+open class TKRegion : NSObject, Codable {
+  public typealias City = TKRegionCity
   
   public let timeZone: TimeZone
   public let code: String

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A6DF06F202C8C6E0084CB2C"
+               BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
                BuildableName = "TripKit.framework"
-               BlueprintName = "TripKit-macOS"
+               BlueprintName = "TripKit"
                ReferencedContainer = "container:TripKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,7 +27,26 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
+            BuildableName = "TripKit.framework"
+            BlueprintName = "TripKit"
+            ReferencedContainer = "container:TripKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3AB6C6291D1CD0060089F687"
+               BuildableName = "TripKitTests.xctest"
+               BlueprintName = "TripKitTests"
+               ReferencedContainer = "container:TripKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -43,12 +62,19 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A6DF06F202C8C6E0084CB2C"
+            BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
             BuildableName = "TripKit.framework"
-            BlueprintName = "TripKit-macOS"
+            BlueprintName = "TripKit"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "TRIPGO_API_KEY"
+            value = "$(TRIPGO_API_KEY)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -59,9 +85,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A6DF06F202C8C6E0084CB2C"
+            BlueprintIdentifier = "3AB6C61F1D1CD0060089F687"
             BuildableName = "TripKit.framework"
-            BlueprintName = "TripKit-macOS"
+            BlueprintName = "TripKit"
             ReferencedContainer = "container:TripKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
