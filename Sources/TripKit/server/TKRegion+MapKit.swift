@@ -73,7 +73,7 @@ extension TKRegion.City: MKAnnotation {
 }
 
 extension TKRegion {
-  static var international: TKInternationalRegion { .shared }
+  public static var international: TKInternationalRegion { .shared }
 }
 
 public class TKInternationalRegion : TKRegion {

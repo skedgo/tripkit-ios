@@ -65,7 +65,7 @@ extension TKTransportMode {
   }
   
   
-  static func color(for modeIdentifier: String) -> TKColor {
+  public static func color(for modeIdentifier: String) -> TKColor {
     
     switch modeIdentifier {
     case "in_air",

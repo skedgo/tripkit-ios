@@ -34,7 +34,7 @@ extension Reactive where Base == TKTripFetcher {
  
 extension Reactive where Base : TKRouter {
   public static func fetchBestTrip<C>(for request: TripRequest, modes: C) -> Single<Trip> where C: Collection, C.Element == String {
-    var router: TKRouter! = TKRouter()
+    var router: TKRouter! = TKRouter(config: .userSettings())
     if !modes.isEmpty {
       router.modeIdentifiers = Set(modes)
     }

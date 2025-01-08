@@ -10,6 +10,7 @@ import SwiftUI
 import Charts
 import MapKit
 
+import struct TripKitAPI.TKAPI
 import enum TripKit.TKPathFriendliness
 import class TripKit.Shape
 
@@ -87,11 +88,11 @@ struct TKUIPathChartView_Previews: PreviewProvider {
     .previewDisplayName("Friendliness")
 
     TKUIPathChartView(values: [
-      .init(value: Shape.RoadTag.cycleLane, distance: 1_000),
-      .init(value: Shape.RoadTag.cycleTrack, distance: 2_000),
-      .init(value: Shape.RoadTag.cycleNetwork, distance: 3_250),
-      .init(value: Shape.RoadTag.sideRoad, distance: 750),
-      .init(value: Shape.RoadTag.mainRoad, distance: 500),
+      .init(value: TKAPI.RoadTag.cycleLane, distance: 1_000),
+      .init(value: TKAPI.RoadTag.cycleTrack, distance: 2_000),
+      .init(value: TKAPI.RoadTag.cycleNetwork, distance: 3_250),
+      .init(value: TKAPI.RoadTag.sideRoad, distance: 750),
+      .init(value: TKAPI.RoadTag.mainRoad, distance: 500),
     ], totalDistance: 5_000)
     .previewLayout(.fixed(width: 260, height: 120))
     .previewDisplayName("Tags")
