@@ -54,85 +54,16 @@ public struct TKQuickBooking: Codable, Hashable {
   /// Localised string for doing booking
   public let bookingTitle: String
   
-  // - START: Temporary backwards compatibility 1/2
-  // When all backends are upgraded, this can be
-  // public var bookingResponseKind: BookingResponseKind
-  
-  public var bookingResponseKind: BookingResponseKind {
-    if let provided = _bookingResponseKind {
-      return provided
-    } else if billingEnabled == true {
-      return .paymentOptions
-    } else if bookingURLIsDeepLink == true {
-      return .external
-    } else {
-      return .confirmation
-    }
-  }
-  
-  private var _bookingResponseKind: BookingResponseKind?
-  private var billingEnabled: Bool?
-  private let bookingURLIsDeepLink: Bool?
-  
-  // - END: Temporary backwards compatibility 1/2
-  
-  
-  /// URL for secondary booking flow for booking this option. This will typically let you customise the booking or pick from more options, compared to the primary `bookingURL`.
-  public let secondaryBookingURL: URL?
-
-  /// Localised string for secondary booking action
-  public let secondaryBookingTitle: String?
-
-  /// URL to fetch updated trip that's using this booking options. Only present if there would be a change to the trip.
-  public let tripUpdateURL: URL?
-  
-  /// Optional URL for image identifying this booking option
-  public let imageURL: URL?
-  
-  /// Optional price for this option
-  private let localPrice: Float?
-  private let usdPrice: Float?
-  public var price: TKQuickBookingPrice? {
-    if let local = localPrice, let usd = usdPrice {
-      return TKQuickBookingPrice(localCost: local, USDCost: usd)
-    } else {
-      return nil
-    }
-  }
-
-  /// Localised human-friendly string, e.g., "$10"
-  public let priceString: String?
-  
-  public let surgeString: String?
-  public let surgeImageURL: URL?
-
-  /// Optional ETA for this option. This is the expected waiting time.
-  public let eta: TimeInterval?
+  public var bookingResponseKind: BookingResponseKind
   
   private enum CodingKeys: String, CodingKey {
     case title
     case subtitle
     case input
-    case imageURL
     case bookingTitle
     case bookingURL
+    case bookingResponseKind = "bookingResponseType"
     
-    // - START: Temporary backwards compatibility 2/2
-    // case bookingResponseKind = "bookingResponseType"
-    case _bookingResponseKind = "bookingResponseType"
-    case billingEnabled
-    case bookingURLIsDeepLink
-    // - END: Temporary backwards compatibility 2/2
-    
-    case secondaryBookingTitle
-    case secondaryBookingURL
-    case tripUpdateURL
-    case eta = "ETA"
-    case priceString
-    case localPrice = "price"
-    case usdPrice = "USDPrice"
-    case surgeString
-    case surgeImageURL
     case fares
     case riders
   }
