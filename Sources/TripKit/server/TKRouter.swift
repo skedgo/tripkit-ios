@@ -482,9 +482,8 @@ extension TKRouter {
   }
   
 #if canImport(CoreData)
-
   private func fetchTrips(for request: TKRouterRequestable, bestOnly: Bool, additional: Set<URLQueryItem>?, visibility: TripGroup.Visibility = .full, callbackQueue: DispatchQueue = .main, completion: @escaping (Result<TripRequest, Error>) -> Void) {
-    Task {
+    Task { @MainActor in
       self.isActive = true
       do {
         let response = try await TKRouter.fetchTripsResponse(
@@ -507,8 +506,8 @@ extension TKRouter {
       self.isActive = false
     }
   }
-  
 #endif
+  
 }
 
 
@@ -537,7 +536,6 @@ extension TKRouter {
   }
   
 #if canImport(CoreData)
-  
   private func parse(_ response: TKAPI.RoutingResponse, for request: TripRequest, visibility: TripGroup.Visibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
     
@@ -555,7 +553,6 @@ extension TKRouter {
       }
     }
   }
-  
 #endif
   
 }
