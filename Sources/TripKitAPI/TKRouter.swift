@@ -21,6 +21,13 @@ public class TKRouter: NSObject {
     case routingNotSupported
   }
   
+  /// Optional parameters to add to routing query that use a ``TripRequest``
+  public static var defaultParameters: [URLQueryItem]? = nil
+  
+  /// Optional setting to group certain modes always in a single `routing.json` when sending a
+  /// multi-fetch request.
+  public static var modesToGroupInRequest: [String]? = nil
+  
   /// Optional server to use instead of `TKServer.shared`.
   public var server: TKServer?
   
@@ -236,9 +243,10 @@ extension TKTransportMode {
   ///   - includeGroupForAll: If an extra group which has all the identifiers should be added
   /// - Returns: A set of a set of mode identifiers
   public static func groupModeIdentifiers(_ modes: Set<String>, includeGroupForAll: Bool) -> Set<Set<String>> {
+    let identifiersToAlwaysGroup: [String] = TKRouter.modesToGroupInRequest ?? []
     var result: Set<Set<String>> = []
     var processedModes: Set<String> = []
-    var schoolBuses: Set<String> = []
+    var specialGroups: [String: Set<String>] = [:]
     var includesWalkOnly = false
     
     for mode in modes {
@@ -248,8 +256,8 @@ extension TKTransportMode {
         continue // don't add flights by themselves
       } else if mode == TKTransportMode.walking.modeIdentifier || mode == TKTransportMode.wheelchair.modeIdentifier {
         includesWalkOnly = true
-      } else if mode.hasPrefix(TKTransportMode.schoolBuses.modeIdentifier) {
-        schoolBuses.insert(mode)
+      } else if let forceGroup = identifiersToAlwaysGroup.first(where: { mode.hasPrefix($0) }) {
+        specialGroups[forceGroup, default: []].insert(mode)
         processedModes.insert(mode)
         continue
       }
@@ -275,8 +283,8 @@ extension TKTransportMode {
       processedModes.formUnion(group)
     }
     
-    if !schoolBuses.isEmpty {
-      result.insert(schoolBuses)
+    for specials in specialGroups.values {
+      result.insert(specials)
     }
     
     if includeGroupForAll, result.count > 1 + (includesWalkOnly ? 1 : 0) {

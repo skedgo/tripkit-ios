@@ -314,8 +314,6 @@ extension TripRequest {
 
 #endif
 
-
-
 // MARK: - Hitting API
 
 public protocol TKRouterRequestable {
@@ -443,7 +441,11 @@ extension TripRequest: TKRouterRequestable {
   
   public var additional: Set<URLQueryItem> {
     let exclusionItems = (excludedStops ?? []).map { URLQueryItem(name: "avoidStops", value: $0) }
-    return Set(exclusionItems)
+    if let additionalDefaults = TKRouter.defaultParameters {
+      return Set(exclusionItems + additionalDefaults)
+    } else {
+      return Set(exclusionItems)
+    }
   }
   
   public func toTripRequest() -> TripRequest { self }

@@ -129,12 +129,16 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
       .padding(.vertical, 8)
     }
     .disabled(action.content.isInProgress)
-    .foregroundColor(action.content.style == .bold
-                     ? .white
-                     : (normalStyle == .fadedTint ? .accentColor : Color(.tkLabelPrimary)))
-    .background(action.content.style == .bold
-                ? Color.accentColor
-                : (normalStyle == .fadedTint ? Color.accentColor.opacity(0.15) : .clear))
+    .foregroundColor(
+      action.content.style == .bold
+        ? (UIColor.tkAppTintColor.isDark ? .white : .black)
+        : (normalStyle == .fadedTint ? .accentColor : Color(.tkLabelPrimary))
+    )
+    .background(
+      action.content.style == .bold
+        ? Color.accentColor
+        : (normalStyle == .fadedTint ? Color.accentColor.opacity(0.15) : .clear)
+    )
     .clipShape(Capsule())
     .background(
       Capsule().stroke(

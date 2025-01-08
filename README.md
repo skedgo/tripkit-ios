@@ -8,4 +8,4 @@
 
 ## License
 
-TripKit is copyright 2015-2024 by SkedGo Pty Ltd
+TripKit is copyright 2015-2025 by SkedGo Pty Ltd

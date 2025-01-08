@@ -324,7 +324,7 @@ public enum TKBooking {
 
 extension TKBooking {
   
-  public struct Fare: Codable, Hashable {
+  public struct Fare: Codable, Hashable, Identifiable {
     public enum Status: String, Codable {
       case inactive = "UNACTIVATED"
       case activated = "ACTIVE"
@@ -342,11 +342,11 @@ extension TKBooking {
       case multiple = "multiple_rides"
     }
     
-    public typealias Identifier = String
+    public typealias ID = String
     
-    public let id: Identifier
+    public let id: ID
     public let name: String
-    public let details: String
+    public let details: String?
     
     /// Price in cents
     public let price: Int?
@@ -383,16 +383,16 @@ extension TKBooking {
     }
     
     public enum InputValue: Hashable {
-      case selection(Fare.Identifier)
+      case selection(Fare.ID)
       case amount(Int)
     }
 
   }
   
-  public struct Rider: Codable, Hashable {
-    public typealias Identifier = String
+  public struct Rider: Codable, Hashable, Identifiable {
+    public typealias ID = String
     
-    public var id: Identifier
+    public var id: ID
     public var name: String
     public var description: String?
 
@@ -403,12 +403,12 @@ extension TKBooking {
     }
   }
   
-  public struct PurchasedTicket: Codable, Hashable {
+  public struct PurchasedTicket: Codable, Hashable, Identifiable {
     public typealias Status = Fare.Status
     
-    public typealias Identifier = String
+    public typealias ID = String
     
-    public let id: Identifier
+    public let id: ID
     
     public let status: Status?
 
