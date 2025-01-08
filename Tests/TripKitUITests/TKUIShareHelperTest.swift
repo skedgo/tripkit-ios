@@ -49,7 +49,7 @@ class TKUIShareHelperTest: XCTestCase {
     
     let result = try await TKShareHelper.queryDetails(for: url, using: geocoder)
     
-    XCTAssertNil(result.from)
+    XCTAssertFalse(result.from.isValid)
     XCTAssertTrue(result.to.isValid)
     XCTAssertNil(result.from.name)
     XCTAssertEqual(result.to.latitude,  -33.94501, accuracy: 0.001)
@@ -68,7 +68,7 @@ class TKUIShareHelperTest: XCTestCase {
     
     let result = try await TKShareHelper.meetingDetails(for: url, using: geocoder)
     
-    XCTAssertNil(result.from)
+    XCTAssertFalse(result.from.isValid)
     XCTAssertTrue(result.to.isValid)
     XCTAssertEqual(result.to.latitude,  -33.94501, accuracy: 0.001)
     XCTAssertEqual(result.to.longitude, 151.25807, accuracy: 0.001)
