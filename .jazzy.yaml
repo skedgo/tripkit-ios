@@ -1,20 +1,49 @@
 author: SkedGo
 author_url: https://skedgo.com
-title: SkedGo's TripKit iOS - TripKitUI iOS
+title: SkedGo's TripKit iOS
 theme: fullwidth
-output: source/TripKitUI
-hide_documentation_coverage: false
+output: Scripts/docs/source/TripKit
 
-module: TripKitUI
-podspec: ../../TripKitUI.podspec
+sdk: iphoneos
+
+modules:
+  - module: TripKit
+  - module: TripKitUI
+    build_tool_arguments:
+      - -scheme
+      - TripKitUI-iOS
+  - module: TripKitInterApp
+    build_tool_arguments:
+      - -scheme
+      - TripKitInterApp-iOS
+merge_modules: extensions
 
 exclude:
+  - /*/TripKit/Classes/core/Loc.swift
+  - /*/TripKit/Classes/core/Loc+*.swift
+  - /*/TripKit/Classes/categories/*
+  - /*/TripKit/vendor/*
   - /*/TripKitUI/helper/Categories/*
   - /*/TripKitUI/vendor/*
 
+abstract: api/*.md
+
 custom_categories:
+  - name: Setup & Configuration
+    children:
+      - TripKit
+      - TKConfig
+      - TKRegion
+      - TKRegionManager
+      - TKServer
+      - TKSettings
   - name: Trip Planning
     children:
+      - TKRouter
+      - TKRealTimeFetcher
+      - TKWaypointRouter
+      - TKTripClassifier
+      - TKMetricClassifier
       - TKUIRoutingResultsViewController
       - TKUIRoutingResultsViewControllerDelegate
       - TKUIRoutingResultsCard
@@ -36,6 +65,14 @@ custom_categories:
       - TKUIServiceCard
   - name: Search
     children:
+      - TKAppleGeocoder
+      - TKCalendarManager
+      - TKContactsManager
+      - TKPeliasGeocoder
+      - TKRegionAutocompleter
+      - TKRouteAutocompleter
+      - TKTripGoGeocoder
+      - TKAggregateGeocoder    
       - TKUIAutocompletionViewController
       - TKUIAutocompletionViewControllerDelegate
   - name: Home Screen
@@ -51,6 +88,8 @@ custom_categories:
       - TKUIHomeCardCustomizerItem
   - name: Notable Classes
     children:
+      - TKBuzzInfoProvider
+      - TKDeparturesProvider    
       - TKUICardAction
       - TKUICustomization
       - TKUIMapManager
