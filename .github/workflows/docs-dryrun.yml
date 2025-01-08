@@ -9,7 +9,7 @@ on:
 jobs:
   build_docs:
     name: Build docs
-    runs-on: macos-13
+    runs-on: macos-15
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
