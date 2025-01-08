@@ -1,16 +1,22 @@
 PODS:
-  - TripKit (4.6.0)
+  - TripKit (4.7.1):
+    - TripKitAPI (~> 4.7.1)
+  - TripKitAPI (4.7.1)
 
 DEPENDENCIES:
   - TripKit (from `../../`)
+  - TripKitAPI (from `../../`)
 
 EXTERNAL SOURCES:
   TripKit:
     :path: "../../"
+  TripKitAPI:
+    :path: "../../"
 
 SPEC CHECKSUMS:
-  TripKit: a23a1faba95b9db5aeee1c0f783415e9aa9f88c6
+  TripKit: 9d1002ec62731ef26b3a99da455f2f6793895b37
+  TripKitAPI: 5de1d5a2d3d4064139579730ce2ce2f5270f5217
 
-PODFILE CHECKSUM: 6ba7ae61d763b02edf07ffd87a7665960dd15572
+PODFILE CHECKSUM: 8c9d917f062ce6faa98ea0389448d72fbedb968a
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.16.2

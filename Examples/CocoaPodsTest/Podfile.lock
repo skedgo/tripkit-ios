@@ -8,7 +8,9 @@ PODS:
     - RxSwift (= 6.7.1)
   - RxSwift (6.7.1)
   - TGCardViewController (2.2.10)
-  - TripKit (4.7.1)
+  - TripKit (4.7.1):
+    - TripKitAPI (~> 4.7.1)
+  - TripKitAPI (4.7.1)
   - TripKitInterApp (4.7.1):
     - TripKit (>= 4.4)
   - TripKitUI (4.7.1):
@@ -21,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - TripKit (from `../../`)
+  - TripKitAPI (from `../../`)
   - TripKitInterApp (from `../../`)
   - TripKitUI (from `../../`)
 
@@ -36,6 +39,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   TripKit:
     :path: "../../"
+  TripKitAPI:
+    :path: "../../"
   TripKitInterApp:
     :path: "../../"
   TripKitUI:
@@ -48,10 +53,11 @@ SPEC CHECKSUMS:
   RxRelay: 4151ba01152436b08271e08410135e099880eae5
   RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
   TGCardViewController: 5be5341ce00cb2275f9e6bd3c0b6aecb0735b845
-  TripKit: 5155bb4b928184de47c53a106b7ed9372613f252
-  TripKitInterApp: 89f56e46cfec715d45b5aaf168b40cacd95db4b8
-  TripKitUI: f6d4fcb9ea3548e277b6a9afb590ff6f5add36fa
+  TripKit: 9d1002ec62731ef26b3a99da455f2f6793895b37
+  TripKitAPI: 5de1d5a2d3d4064139579730ce2ce2f5270f5217
+  TripKitInterApp: d060d73ba26d2c09d30c0e76f1a8c30c4ec3ebaa
+  TripKitUI: eb892cc791db347ee8f40af0f5b4c4997180c8d1
 
-PODFILE CHECKSUM: 7d2bcdf54d6d8bee1fa91d801b68974e5bef1083
+PODFILE CHECKSUM: 17c12c41f835974c0e23051b0fb1895d862f807a
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
