@@ -66,7 +66,11 @@ extension TKAPIConfig.Weights {
 @objc
 public class TKSettings: NSObject {
   
-  @available(*, deprecated, message: "Use TKSettings.Config.userSettings().paras directly instead")
+  public typealias Config = TKAPIConfig
+  public typealias Speed = TKAPIConfig.Speed
+  public static var parserJsonVersion: Int { TKAPIConfig.parserJsonVersion }
+  
+  @available(*, deprecated, message: "Use TKAPIConfig.userSettings().paras directly instead")
   public static var config: [String: Any] {
     return TKAPIConfig.userSettings().paras
   }

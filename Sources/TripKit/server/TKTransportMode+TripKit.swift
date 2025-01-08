@@ -102,7 +102,7 @@ extension TKTransportMode {
   }
   
   /// Image that stands for the specified transport mode identifier
-  static func title(for modeIdentifier: String) -> String? {
+  public static func title(for modeIdentifier: String) -> String? {
     if let known = TKRegionManager.shared.title(forModeIdentifier: modeIdentifier) {
       return known
     } else {
@@ -189,13 +189,13 @@ extension TKTransportMode {
     }
   }
   
-  static func image(for mode: TKTransportMode) -> TKImage? {
+  public static func image(for mode: TKTransportMode) -> TKImage? {
     guard let part = self.modeImageName(for: mode) else { return nil }
     return TKStyleManager.image(named: "icon-mode-\(part)")
   }
   
   
-  static func image(for modeIdentifier: String) -> TKImage? {
+  public static func image(for modeIdentifier: String) -> TKImage? {
     guard let part = self.modeImageName(forModeIdentifier: modeIdentifier) else { return nil }
     return TKStyleManager.image(named: "icon-mode-\(part)")
   }
