@@ -10,13 +10,13 @@ jobs:
   build_spm:
     strategy:
       matrix:
-        os: [macos-15, macos-14]
-        xcode: ['16.2', '15.4']
         include:
           - os: macos-15
             xcode: '16.2'
+          - os: macos-15
+            xcode: '15.4'
           - os: macos-14
-            xcode: '16.2'
+            xcode: '16.1' # sic, 16.2 not available on GitHub as of Jan 2025
           - os: macos-14
             xcode: '15.4'
 
