@@ -8,15 +8,16 @@ github_url: https://github.com/skedgo/tripkit-ios
 sdk: iphoneos
 
 modules:
+  - module: TripKitAPI
   - module: TripKit
   - module: TripKitUI
     build_tool_arguments:
       - -scheme
-      - TripKitUI-iOS
+      - TripKitUI
   - module: TripKitInterApp
     build_tool_arguments:
       - -scheme
-      - TripKitInterApp-iOS
+      - TripKitInterApp
 merge_modules: extensions
 
 exclude:
