@@ -32,7 +32,7 @@ class TKUIShareHelperTest: XCTestCase {
     
     let result = try await TKShareHelper.queryDetails(for: url, using: geocoder)
     
-    XCTAssertNil(result.from)
+    XCTAssertFalse(result.from.isValid)
     XCTAssertTrue(result.to.isValid)
     XCTAssertEqual(result.to.name, "dragon.letter.spoke")
     if case .leaveASAP = result.at {

@@ -87,7 +87,7 @@ extension TKRoutingQuery where Context == Never {
     
     // we need a to coordinate OR a name
     let to = coordinate(lat: tlat, lng: tlng, name: name)
-    guard to.isValid else {
+    guard to.isValid || to.name != nil else {
       return nil
     }
     

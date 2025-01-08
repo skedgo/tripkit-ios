@@ -56,6 +56,7 @@ extension TKShareHelper {
     }
     
     query.to = .init(annotation: valid)
+    query.to.name = named.address
     return query
   }
   
