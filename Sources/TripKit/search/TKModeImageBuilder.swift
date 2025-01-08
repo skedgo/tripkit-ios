@@ -8,10 +8,10 @@
 
 import Foundation
 
-@objc
+#if !os(Linux)
+
 public class TKModeImageFactory: NSObject {
   
-  @objc(sharedInstance)
   public static let shared = TKModeImageFactory()
   
   private let cache = NSCache<NSString, TKImage>()
@@ -20,7 +20,6 @@ public class TKModeImageFactory: NSObject {
     super.init()
   }
   
-  @objc(imageForModeInfo:)
   public func image(for modeInfo: TKModeInfo) -> TKImage? {
     guard let imageIdentifier = modeInfo.imageIdentifier else { return nil }
     
@@ -43,8 +42,8 @@ public class TKModeImageFactory: NSObject {
     return nil
 #endif
   }
-
 }
+#endif
 
 fileprivate extension TKModeInfo {
   

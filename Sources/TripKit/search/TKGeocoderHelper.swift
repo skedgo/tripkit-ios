@@ -6,6 +6,8 @@
 //  Copyright © 2015 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -271,3 +273,5 @@ extension Array where Element : TKNamedCoordinate {
     }
   }
 }
+
+#endif

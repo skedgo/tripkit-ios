@@ -6,6 +6,8 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 extension SegmentTemplate: DataAttachable {}
@@ -47,3 +49,5 @@ extension SegmentTemplate {
     set { encode(newValue, key: "operatorInfo") }
   }
 }
+
+#endif

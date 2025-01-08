@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import CoreLocation
 
@@ -236,3 +238,5 @@ public class TKStopCoordinate: TKModeCoordinate {
   }
 
 }
+
+#endif

@@ -6,6 +6,7 @@
 //
 //
 
+#if canImport(MapKit)
 import Foundation
 import CoreLocation
 
@@ -384,3 +385,5 @@ extension TKFreeFloatingVehicleLocation: TKDeepLinkable {
   public var deepLink: URL? { vehicle.deepLink ?? vehicle.operatorInfo.appInfo?.deepLink }
   public var downloadLink: URL? { vehicle.operatorInfo.appInfo?.downloadURL }
 }
+
+#endif

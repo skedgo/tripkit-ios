@@ -185,7 +185,7 @@ extension Shape: TKDisplayableRoute {
     // any tags on this segment to show other than just "Other". If so, we
     // default no tags to "Other" for the colour here.
     if segment?.distanceByRoadTags != nil {
-      return RoadTag.other.safety.color
+      return TKAPI.RoadTag.other.safety.color
     }
 #endif
     

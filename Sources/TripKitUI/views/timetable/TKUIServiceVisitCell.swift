@@ -31,7 +31,7 @@ class TKUIServiceVisitCell: UITableViewCell {
   @IBOutlet weak var outerDot: UIView!
   @IBOutlet weak var innerDot: UIView!
   
-  static let nib = UINib(nibName: "TKUIServiceVisitCell", bundle: Bundle(for: TKUIServiceVisitCell.self))
+  static let nib = UINib(nibName: "TKUIServiceVisitCell", bundle: .tripKitUI)
   
   static let reuseIdentifier = "TKUIServiceVisitCell"
   

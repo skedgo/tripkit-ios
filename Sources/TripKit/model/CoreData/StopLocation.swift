@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import MapKit
 
@@ -92,5 +94,7 @@ extension StopLocation: MKAnnotation {
       return output
     }
   }
+
+#endif
 
 #endif

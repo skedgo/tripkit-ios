@@ -15,7 +15,7 @@ public class TKUIProgressCell: UITableViewCell {
   @IBOutlet weak var spinner: UIActivityIndicatorView!
   @IBOutlet weak var titleLabel: UILabel!
   
-  public static let nib = UINib(nibName: "TKUIProgressCell", bundle: Bundle(for: TKUIProgressCell.self))
+  public static let nib = UINib(nibName: "TKUIProgressCell", bundle: .tripKitUI)
   
   public static let reuseIdentifier: String = "TKUIProgressCell"
 

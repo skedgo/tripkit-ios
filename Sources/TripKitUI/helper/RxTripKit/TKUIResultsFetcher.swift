@@ -145,7 +145,7 @@ fileprivate extension Reactive where Base : TKRouter {
   static func multiFetchRequest(for request: TripRequest, modes: Set<String>?, classifier: TKTripClassifier? = nil, baseURL: URL? = nil, apiKey: String? = nil) -> Observable<TKUIResultsFetcher.Progress> {
     
     return Observable.create { observer in
-      var router: TKRouter! = TKRouter()
+      var router: TKRouter! = TKRouter(config: .userSettings())
       if baseURL != nil || apiKey != nil {
         router.server = TKRoutingServer(baseURL: baseURL, apiKey: apiKey)
       }

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+import struct TripKitAPI.TKAPI
 import enum TripKit.TKPathFriendliness
 import class TripKit.TKSegment
 import class TripKit.Shape
@@ -35,11 +36,11 @@ extension TKSegment {
   }
   
   @MainActor
-  func buildRoadTags() -> TKUIPathChartView<TripKit.Shape.RoadTag>? {
+  func buildRoadTags() -> TKUIPathChartView<TKAPI.RoadTag>? {
     guard let total = distanceInMetres?.doubleValue, let distanceByRoadTags else {
       return nil
     }
-    return TKUIPathChartView<TripKit.Shape.RoadTag>(
+    return TKUIPathChartView<TKAPI.RoadTag>(
       values: distanceByRoadTags.map { .init(value: $0, distance: $1) },
       totalDistance: total
     )

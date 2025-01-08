@@ -38,7 +38,7 @@ public class TKUISectionedAlertViewController: UIViewController {
   // MARK: - Constructor
   
   public static func newInstance(region: TKRegion) -> TKUISectionedAlertViewController {
-    let controller = TKUISectionedAlertViewController(nibName: "TKUISectionedAlertViewController", bundle: Bundle(for: self))
+    let controller = TKUISectionedAlertViewController(nibName: "TKUISectionedAlertViewController", bundle: .tripKitUI)
     controller.region = region
     return controller
   }

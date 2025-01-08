@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -61,3 +63,5 @@ public class TKGeocodingResultScorer: NSObject {
   }
   
 }
+
+#endif

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import MapKit
 
 public extension MKMultiPoint {
@@ -48,3 +50,5 @@ public extension MKMultiPoint {
     return (closestPoint, distanceTo)
   }
 }
+
+#endif

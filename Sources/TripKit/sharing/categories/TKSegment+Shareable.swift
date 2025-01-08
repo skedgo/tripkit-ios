@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 extension TKSegment: TKURLShareable {
@@ -22,3 +24,5 @@ extension TKSegment: TKURLShareable {
   }
   
 }
+
+#endif

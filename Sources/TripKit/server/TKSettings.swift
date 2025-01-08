@@ -8,10 +8,72 @@
 
 import Foundation
 
-import CoreLocation
+extension TKAPIConfig {
+  
+  public static func userSettings() -> Self {
+    var basic = Self.defaultValues()
+    basic.distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
+    basic.weights.money = TKSettings[.money]
+    basic.weights.carbon = TKSettings[.carbon]
+    basic.weights.time = TKSettings[.time]
+    basic.weights.hassle = TKSettings[.hassle]
+    basic.weights.exercise = TKSettings[.exercise]
+    basic.avoidModes = Array(TKSettings.dislikedTransitModes)
+    basic.concession = TKSettings.useConcessionPricing
+    basic.wheelchair = TKSettings.showWheelchairInformation
+    basic.twoWayHireCostIncludesReturn = TKSettings.includeCostToReturnCarHireVehicle
+    
+    basic.cyclingSpeed = TKSettings.cyclingSpeed
+    basic.walkingSpeed = TKSettings.walkingSpeed
+
+    if let duration = TKSettings.maximumWalkingDuration {
+      basic.maximumWalkingMinutes = duration / 60
+    }
+
+    basic.minimumTransferMinutes = TKSettings.minimumTransferMinutes
+
+    basic.emissions = TKSettings.transportEmissions
+    
+#if DEBUG
+    if let setting = UserDefaults.shared.object(forKey: TKSettings.DefaultsKey.bookingsUseSandbox.rawValue) as? NSNumber {
+      basic.bookingSandbox = setting.boolValue
+    } else {
+      basic.bookingSandbox = true // Default to sandbox while developing
+    }
+#else
+    if UserDefaults.shared.bool(forKey: TKSettings.DefaultsKey.bookingsUseSandbox.rawValue) {
+      basic.bookingSandbox = true
+    }
+#endif
+    return basic
+  }
+  
+
+}
+
+extension TKAPIConfig.Weights {
+  public subscript(weight: TKSettings.Weight) -> Double {
+    switch weight {
+    case .money: return money
+    case .carbon: return carbon
+    case .time: return time
+    case .hassle: return hassle
+    case .exercise: return exercise
+    }
+  }
+}
 
 @objc
 public class TKSettings: NSObject {
+  
+  public typealias Config = TKAPIConfig
+  public typealias Speed = TKAPIConfig.Speed
+  public static var parserJsonVersion: Int { TKAPIConfig.parserJsonVersion }
+  
+  @available(*, deprecated, message: "Use TKAPIConfig.userSettings().paras directly instead")
+  public static var config: [String: Any] {
+    return TKAPIConfig.userSettings().paras
+  }
   
   private override init() {
     super.init()
@@ -144,18 +206,11 @@ public extension TKSettings.Weight {
 // MARK: - Speeds
 
 extension TKSettings {
-  public enum Speed: Equatable {
-    case impaired
-    case slow
-    case medium
-    case fast
-    case custom(CLLocationSpeed)
-  }
   
   /// The cycling speed. Slow is roughly 8km/h, average 12km/h, fast 25km/h.
-  public static var cyclingSpeed: Speed {
+  public static var cyclingSpeed: TKAPIConfig.Speed {
     get {
-      Speed(apiValue: UserDefaults.shared.object(forKey: DefaultsKey.cyclingSpeed.rawValue)) ?? .medium
+      TKAPIConfig.Speed(apiValue: UserDefaults.shared.object(forKey: DefaultsKey.cyclingSpeed.rawValue)) ?? .medium
     }
     set {
       UserDefaults.shared.set(newValue.apiValue, forKey: DefaultsKey.cyclingSpeed.rawValue)
@@ -163,9 +218,9 @@ extension TKSettings {
   }
   
   /// The walking speed. Slow is roughly 2km/h, average 4km/h, fast 6km/h.
-  public static var walkingSpeed: Speed {
+  public static var walkingSpeed: TKAPIConfig.Speed {
     get {
-      Speed(apiValue: UserDefaults.shared.object(forKey: DefaultsKey.walkingSpeed.rawValue)) ?? .medium
+      TKAPIConfig.Speed(apiValue: UserDefaults.shared.object(forKey: DefaultsKey.walkingSpeed.rawValue)) ?? .medium
     }
     set {
       UserDefaults.shared.set(newValue.apiValue, forKey: DefaultsKey.walkingSpeed.rawValue)
@@ -174,77 +229,7 @@ extension TKSettings {
 
 }
 
-extension TKSettings.Speed: Codable {
-  private enum CodingKeys: String, CodingKey {
-    case type
-    case speed
-  }
-  
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    let type: String = try container.decode(String.self, forKey: .type)
-    switch type {
-    case "impaired": self = .impaired
-    case "slow": self = .slow
-    case "medium": self = .medium
-    case "fast": self = .fast
-    case "custom": self = .custom(try container.decode(CLLocationSpeed.self, forKey: .speed))
-    default: throw TKSettings.DecodingError.unknownType(type)
-    }
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    switch self {
-    case .impaired:
-      try container.encode("impaired", forKey: .type)
-    case .slow:
-      try container.encode("slow", forKey: .type)
-    case .medium:
-      try container.encode("medium", forKey: .type)
-    case .fast:
-      try container.encode("fast", forKey: .type)
-    case .custom(let value):
-      try container.encode("custom", forKey: .type)
-      try container.encode(value, forKey: .speed)
-    }
-  }
-}
 
-extension TKSettings.Speed {
-  public var apiValue: Any {
-    switch self {
-    case .impaired:          return -1
-    case .slow:              return 0
-    case .medium:            return 1
-    case .fast:              return 2
-    case .custom(let speed):
-      let formatter = NumberFormatter()
-      formatter.locale = Locale(identifier: "en_US")
-      formatter.maximumFractionDigits = 2
-      return "\(formatter.string(from: .init(value: speed))!)mps"
-    }
-  }
-  
-  public init?(apiValue: Any?) {
-    if let int = apiValue as? Int {
-      switch int {
-      case -1: self = .impaired; return
-      case 0: self = .slow; return
-      case 1: self = .medium; return
-      case 2: self = .fast; return
-      default: return nil
-      }
-    }
-    
-    if let string = apiValue as? String,
-      let speed = CLLocationSpeed(string.replacingOccurrences(of: "mps", with: "")) {
-      self = .custom(speed)
-    } else {
-      return nil
-    }
-  }
-}
 
 // MARK: - Enabled transport modes
 
@@ -384,7 +369,7 @@ extension TKSettings {
     UserDefaults.shared.set(Array(modes), forKey: DefaultsKey.disabled.rawValue)
   }
   
-  class var disabledSharedVehicleModes: [Data] {
+  public class var disabledSharedVehicleModes: [Data] {
     if let disabled = UserDefaults.shared.object(forKey: DefaultsKey.disabled.rawValue) as? [Data] {
       return disabled
     } else {

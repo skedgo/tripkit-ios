@@ -239,7 +239,7 @@ class TKRouterTest: TKTestCase {
   func testURLWithAdditionalParameterArray() {
     let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     
-    let request = TKRouter.RoutingQuery(
+    let request = TKRoutingQuery(
       from: TKNamedCoordinate(coordinate: .init(latitude: -31.8875, longitude: 115.9443)),
       to: TKNamedCoordinate(coordinate: .init(latitude: -31.8408, longitude: 115.92)),
       modes: ["me_car"],

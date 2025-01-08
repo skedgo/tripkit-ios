@@ -5,6 +5,8 @@
 //  Created by Adrian Schoenig on 12.09.17.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -162,3 +164,5 @@ extension TKAutocompletionResult {
   }
 
 }
+
+#endif

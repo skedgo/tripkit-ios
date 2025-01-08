@@ -6,6 +6,7 @@
 //
 //
 
+#if canImport(MapKit)
 import Foundation
 import CoreLocation
 import MapKit
@@ -108,3 +109,5 @@ public class TKRoutePolyline : MKPolyline {
     return MKGeodesicPolyline(coordinates: coordinates, count: coordinates.count)
   }
 }
+
+#endif

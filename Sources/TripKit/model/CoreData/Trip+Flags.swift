@@ -6,6 +6,8 @@
 //  Copyright © 2021 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 extension Trip {
@@ -63,3 +65,5 @@ extension Trip {
   }
   
 }
+
+#endif

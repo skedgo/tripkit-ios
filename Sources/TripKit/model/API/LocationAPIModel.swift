@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 protocol RealTimeUpdatable {
   var hasRealTime: Bool { get }
@@ -108,8 +107,8 @@ extension TKAPI {
     
     public struct Entrance: Codable, Hashable {
       public let type: EntranceType
-      public let lat: CLLocationDegrees
-      public let lng: CLLocationDegrees
+      public let lat: Degrees
+      public let lng: Degrees
       public let address: String?
     }
     
@@ -168,97 +167,6 @@ extension TKAPI {
   @available(*, unavailable, renamed: "SharedVehicleInfo")
   public typealias FreeFloatingVehicleInfo = SharedVehicleInfo
 
-  public enum VehicleFormFactor: String, Codable {
-    case bicycle = "BICYCLE"
-    case car = "CAR"
-    case scooter = "SCOOTER"
-    case moped = "MOPED"
-    case other = "OTHER"
-  }
-
-  public enum VehiclePropulsionType: String, Codable {
-    case human = "HUMAN"
-    case electric = "ELECTRIC"
-    case electricAssist = "ELECTRIC_ASSIST"
-    case combustion = "COMBUSTION"
-  }
-
-  public struct VehicleTypeInfo: Codable, Hashable {
-    public let name: String?
-    public let formFactor: VehicleFormFactor
-    public let propulsionType: VehiclePropulsionType?
-    public let maxRangeMeters: Int?
-  }
-  
-  public struct SharedVehicleInfo: Codable, Hashable, RealTimeUpdatable {
-    public let identifier: String
-    public let name: String?
-    public let details: String?
-
-    public let operatorInfo: TKAPI.CompanyInfo
-    public let vehicleType: VehicleTypeInfo
-    public let source: TKAPI.DataAttribution?
-    public let deepLink: URL?
-    public let imageURL: URL?
-
-    public let licensePlate: String?
-    public let isDisabled: Bool
-    public let isReserved: Bool?
-    
-    public let batteryLevel: Int? // percentage, i.e., 0-100
-    public let currentRange: CLLocationDistance? // metres
-    public let lastReported: Date?
-    
-    private enum CodingKeys: String, CodingKey {
-      case identifier
-      case name
-      case batteryLevel
-      case operatorInfo = "operator"
-      case licensePlate
-      case vehicleType = "vehicleTypeInfo"
-      case isDisabled = "disabled"
-      case isReserved = "reserved"
-      case lastReported
-      case currentRange = "currentRangeMeters"
-
-      case imageURL // NOT DOCUMENTED
-      case details = "description"
-      case source
-      case deepLink = "deepLinks" // NOT DOCUMENTED
-    }
-    
-    public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-      identifier = try container.decode(String.self, forKey: .identifier)
-      operatorInfo = try container.decode(TKAPI.CompanyInfo.self, forKey: .operatorInfo)
-      vehicleType = try container.decode(VehicleTypeInfo.self, forKey: .vehicleType)
-      isDisabled = try container.decode(Bool.self, forKey: .isDisabled)
-
-      source = try? container.decode(TKAPI.DataAttribution.self, forKey: .source)
-      
-      if let deepLinkDict = try? container.decode([String: String].self, forKey: .deepLink),
-         let link = deepLinkDict["ios"],
-         let linkURL = URL(string: link) {
-        deepLink = linkURL
-      } else {
-        deepLink = nil
-      }
-      
-      name = try? container.decode(String.self, forKey: .name)
-      details = try? container.decode(String.self, forKey: .details)
-      imageURL = try? container.decode(URL.self, forKey: .imageURL)
-      licensePlate = try? container.decode(String.self, forKey: .licensePlate)
-      isReserved = try? container.decode(Bool.self, forKey: .isReserved)
-      batteryLevel = try? container.decode(Int.self, forKey: .batteryLevel)
-      currentRange = try? container.decode(CLLocationDistance.self, forKey: .currentRange)
-      lastReported = try? container.decode(Date.self, forKey: .lastReported)
-    }
-    
-    public var hasRealTime: Bool { true }
-    
-    public var isAvailable: Bool { !isDisabled && (isReserved != true) }
-  }
-  
   public struct OnStreetParkingInfo: Codable, Hashable, RealTimeUpdatable {
     public enum PaymentType: String, Codable {
       case meter = "METER"
@@ -401,4 +309,10 @@ extension TKAPI {
         
     }
   }
+}
+
+extension TKAPI.SharedVehicleInfo: RealTimeUpdatable {
+  
+  public var hasRealTime: Bool { true }
+  
 }

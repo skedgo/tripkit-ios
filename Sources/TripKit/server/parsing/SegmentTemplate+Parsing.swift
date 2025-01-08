@@ -64,8 +64,8 @@ extension SegmentTemplate {
     
     if template.isStationary {
       // stationary segments just have a single location
-      template.startLocation = model.location
-      template.endLocation = model.location
+      template.startLocation = model.location.map { TKNamedCoordinate($0) }
+      template.endLocation = model.location.map { TKNamedCoordinate($0) }
     
     } else {
       let shapes = insertNewShapes(
@@ -92,9 +92,9 @@ extension SegmentTemplate {
         }
       }
       
-      start = start ?? model.from
+      start = start ?? model.from.map { TKNamedCoordinate($0) }
       start?.address = model.from?.address
-      end = end ?? model.to
+      end = end ?? model.to.map { TKNamedCoordinate($0) }
       end?.address = model.to?.address
       template.startLocation = start
       template.endLocation = end

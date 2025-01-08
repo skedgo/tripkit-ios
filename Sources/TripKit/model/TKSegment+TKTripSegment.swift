@@ -6,6 +6,7 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
 import Foundation
 import MapKit
 
@@ -375,3 +376,5 @@ extension Alert {
     }
   }
 }
+
+#endif

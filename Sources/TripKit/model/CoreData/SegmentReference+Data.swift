@@ -6,36 +6,16 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 extension SegmentReference: DataAttachable {}
 
-struct BookingData: Codable, Hashable {
-  let title: String
-  
-  /// Optional overwrite for `accessibilityLabel`; fallback to `title` if `nil`
-  let accessibilityLabel: String?
-  
-  /// For in-app bookings using booking flow
-  let url: URL?
-  
-  /// For in-app quick bookings
-  let quickBookingsUrl: URL?
-
-  /// For in-app bookings follow-up
-  var confirmation: TKBooking.Confirmation?
-
-  /// For bookings using external apps
-  let externalActions: [String]?
-  
-  /// For virtual bookings, e.g., PT booking (GoCard) for ODIN
-  let virtualBookingUrl: URL?
-}
-
 extension SegmentReference {
 
-  var bookingData: BookingData? {
-    get { decode(BookingData.self, key: "booking") }
+  var bookingData: TKBookingData? {
+    get { decode(TKBookingData.self, key: "booking") }
     set { encode(newValue, key: "booking") }
   }
 
@@ -59,8 +39,8 @@ extension SegmentReference {
     set { encode(newValue, key: "sharedVehicle") }
   }
 
-  var ticket: TKSegment.Ticket? {
-    get { decode(TKSegment.Ticket.self, key: "ticket") }
+  var ticket: TKAPI.Ticket? {
+    get { decode(TKAPI.Ticket.self, key: "ticket") }
     set { encode(newValue, key: "ticket") }
   }
 
@@ -109,3 +89,5 @@ extension SegmentReference {
   }
 
 }
+
+#endif

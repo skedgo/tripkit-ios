@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(EventKit)
 import EventKit
 
 public class TKCalendarManager: NSObject {
@@ -124,3 +126,5 @@ extension TKCalendarManager: TKPermissionManager {
   }
   
 }
+
+#endif

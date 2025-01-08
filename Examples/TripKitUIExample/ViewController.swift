@@ -195,7 +195,7 @@ struct RouteView: View {
   
   let route: TKAPI.Route
   
-  @State var directions: [TKAPI.Direction]?
+  @State var directions: [TKAPI.RouteDirection]?
   
   var title: String {
     [route.shortName, route.routeName]

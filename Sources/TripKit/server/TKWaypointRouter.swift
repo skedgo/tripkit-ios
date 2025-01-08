@@ -6,6 +6,7 @@
 //  Copyright © 2016 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
 import Foundation
 
 import CoreData
@@ -352,7 +353,7 @@ extension TKWaypointRouter {
   public struct Input: Codable {
     var segments: [Segment]
     var vehicles: [TKAPI.PrivateVehicle]
-    var config: TKSettings.Config
+    var config: TKAPIConfig
     var leaveAt: Date?
   }
   
@@ -807,7 +808,7 @@ extension TKWaypointRouter {
       ),
     ]
   }
-  
-
-    
+      
 }
+
+#endif

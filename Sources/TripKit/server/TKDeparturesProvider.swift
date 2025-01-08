@@ -68,7 +68,7 @@ extension TKDeparturesProvider {
       "embarkationStops": stopCodes,
       "timeStamp": Int(fromDate.timeIntervalSince1970),
       "limit": limit,
-      "config": TKSettings.Config.userSettings().paras,
+      "config": TKAPIConfig.userSettings().paras,
     ]
     
     if !filters.isEmpty {
@@ -152,7 +152,7 @@ extension TKDeparturesProvider {
       "embarkationStops": [table.startStopCode],
       "disembarkationStops": [table.endStopCode],
       "limit": limit,
-      "config": TKSettings.Config.userSettings().paras
+      "config": TKAPIConfig.userSettings().paras
     ]
   }
   

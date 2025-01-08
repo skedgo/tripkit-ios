@@ -6,6 +6,8 @@
 //  Copyright © 2022 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -232,3 +234,5 @@ fileprivate extension String {
     return lowercased() == abbreviated.lowercased()
   }
 }
+
+#endif

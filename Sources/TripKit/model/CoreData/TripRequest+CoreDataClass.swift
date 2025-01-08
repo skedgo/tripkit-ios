@@ -153,7 +153,7 @@ extension TripRequest {
     let touched: Set<TKRegion> = {
       var regions = Set(TKRegionManager.shared.localRegions(start: fromLocation.coordinate, end: toLocation.coordinate))
       if regions.count > 1 {
-        regions.insert(.international)
+        regions.insert(TKInternationalRegion.shared)
       }
       return regions
     }()

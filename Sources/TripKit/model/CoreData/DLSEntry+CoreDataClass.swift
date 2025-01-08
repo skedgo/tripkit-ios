@@ -63,7 +63,7 @@ extension DLSEntry {
 }
 
 extension DLSEntry {
-  public override var wantsRealTimeUpdates: Bool {
+  @objc public override var wantsRealTimeUpdates: Bool {
     guard service.isRealTimeCapable,
       case .timetabled(let maybeArrival, let maybeDeparture) = timing,
       let departure = maybeDeparture,

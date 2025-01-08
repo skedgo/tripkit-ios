@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(Contacts)
 import CoreLocation
 import MapKit
 
@@ -98,16 +100,6 @@ extension TKContactsManager.ContactAddress {
   }
 }
 
-extension Optional {
-  
-  func orThrow(_ error: Error) throws -> Wrapped {
-    switch self {
-    case .none: throw error
-    case .some(let wrapped): return wrapped
-    }
-  }
-  
-}
 
 // MARK: - TKGeocoding
 
@@ -144,3 +136,5 @@ extension TKContactsManager: TKGeocoding {
   }
   
 }
+
+#endif

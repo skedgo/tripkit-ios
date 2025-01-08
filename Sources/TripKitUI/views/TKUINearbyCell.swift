@@ -31,7 +31,7 @@ public class TKUINearbyCell: UITableViewCell {
   }
   
   public static var nib: UINib {
-    return UINib(nibName: "TKUINearbyCell", bundle: Bundle(for: TKUINearbyCell.self))
+    return UINib(nibName: "TKUINearbyCell", bundle: .tripKitUI)
   }
   
   public override func awakeFromNib() {

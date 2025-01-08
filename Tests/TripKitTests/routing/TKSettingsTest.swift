@@ -8,13 +8,13 @@
 
 import XCTest
 
-@testable import TripKit
+@testable import TripKitAPI
 
 class TKSettingsTest: XCTestCase {
   
   func testDefaultValues() throws {
-    let config = TKSettings.Config.defaultValues()
-    XCTAssertEqual(config.version, TKSettings.parserJsonVersion)
+    let config = TKAPIConfig.defaultValues()
+    XCTAssertEqual(config.version, TKAPIConfig.parserJsonVersion)
     XCTAssertEqual(config.distanceUnit, .auto)
     XCTAssertEqual(config.weights, .init(money: 1.0, carbon: 1.0, time: 1.0, hassle: 1.0, exercise: 1.0))
     XCTAssertEqual(config.avoidModes, [])
@@ -30,14 +30,14 @@ class TKSettingsTest: XCTestCase {
   }
   
   func testRoundtripCoding() throws {
-    let config = TKSettings.Config.defaultValues()
+    let config = TKAPIConfig.defaultValues()
     let encoded = try JSONEncoder().encode(config)
-    let restored = try JSONDecoder().decode(TKSettings.Config.self, from: encoded)
+    let restored = try JSONDecoder().decode(TKAPIConfig.self, from: encoded)
     XCTAssertEqual(config, restored)
   }
   
   func testWeightsToJSON() throws {
-    let config = TKSettings.Config.defaultValues()
+    let config = TKAPIConfig.defaultValues()
     
     let encoded = try JSONEncoder().encode(config)
     let restored = try XCTUnwrap(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
@@ -51,17 +51,17 @@ class TKSettingsTest: XCTestCase {
   }
   
   func testSpeed() throws {
-    XCTAssertEqual(TKSettings.Speed(apiValue: -1), .impaired)
-    XCTAssertEqual(TKSettings.Speed(apiValue: 0), .slow)
-    XCTAssertEqual(TKSettings.Speed(apiValue: 1), .medium)
-    XCTAssertEqual(TKSettings.Speed(apiValue: 2), .fast)
+    XCTAssertEqual(TKAPIConfig.Speed(apiValue: -1), .impaired)
+    XCTAssertEqual(TKAPIConfig.Speed(apiValue: 0), .slow)
+    XCTAssertEqual(TKAPIConfig.Speed(apiValue: 1), .medium)
+    XCTAssertEqual(TKAPIConfig.Speed(apiValue: 2), .fast)
 
-    XCTAssertEqual(TKSettings.Speed(apiValue: "4mps"), .custom(4))
+    XCTAssertEqual(TKAPIConfig.Speed(apiValue: "4mps"), .custom(4))
   }
   
   func testReadPerformance() {
     self.measure {
-      _ = TKSettings.Config.userSettings()
+      _ = TKAPIConfig.userSettings()
     }
   }
     

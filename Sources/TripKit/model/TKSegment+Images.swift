@@ -6,6 +6,8 @@
 //  Copyright © 2020 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 
 // MARK: - Image helpers
@@ -41,5 +43,4 @@ extension TKSegment {
   }
 }
 
-
-
+#endif
