@@ -143,8 +143,8 @@ class TKUIRoutingResultsViewModel {
       .distinctUntilChanged()
       .asDriver(onErrorDriveWith: .empty())
     
-    originDestination = builderChanged
-      .flatMapLatest { $0.reverseGeocodeLocations() }
+    originDestination = originOrDestinationChanged
+      .map { (origin: $0.0.origin?.title, $0.0.destination?.title) }
       .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = builderChanged
