@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TKAPIConfig {
+public struct TKAPIConfig: Equatable {
   public static let parserJsonVersion: Int = 13
 
   public enum DistanceUnit: String, Codable {
