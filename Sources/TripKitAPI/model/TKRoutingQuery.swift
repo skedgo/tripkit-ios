@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TKRoutingQueryTime: Equatable {
+@frozen public enum TKRoutingQueryTime: Equatable {
   case leaveASAP
   case leaveAfter(Date)
   case arriveBy(Date)

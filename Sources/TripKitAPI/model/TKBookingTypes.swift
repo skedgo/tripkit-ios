@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   

@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 /// Information to identify and display a transport mode. Kind of like the
 /// big sibling of a mode identifier string.
 public class TKModeInfo: NSObject, Codable {

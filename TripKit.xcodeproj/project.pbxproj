@@ -4240,13 +4240,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = JFT62W5LA3;
 				INFOPLIST_FILE = "Tests/TripKitTests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skedgo.TripKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4265,13 +4263,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = JFT62W5LA3;
 				INFOPLIST_FILE = "Tests/TripKitTests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skedgo.TripKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
