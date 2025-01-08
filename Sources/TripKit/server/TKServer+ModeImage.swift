@@ -18,7 +18,12 @@ extension TKServer {
   
   public static func imageURL(iconFileNamePart: String?, iconType: TKStyleModeIconType? = nil) -> URL? {
     guard let iconFileNamePart = iconFileNamePart else { return nil }
-    let regionsURLString = TKServer.customBaseURL ?? "https://api.tripgo.com/v1"
+    let regionsURLString: String
+    if let custom = TKServer.customBaseURL {
+      regionsURLString = custom.appending("/modeicons/")
+    } else {
+      regionsURLString = "https://static.skedgo.com/icons/"
+    }
     
     let isPNG: Bool
     let fileNamePrefix: String
@@ -73,7 +78,6 @@ extension TKServer {
     }
     
     var urlString = regionsURLString
-    urlString.append("/modeicons/")
     urlString.append(fileNamePrefix)
     urlString.append(fileNamePart)
     urlString.append(".")

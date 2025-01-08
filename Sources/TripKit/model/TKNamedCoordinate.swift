@@ -50,16 +50,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     // no weak self as we're not retaining the geocoder
     geocoder.reverseGeocodeLocation(location) { placemarks, error in
       guard let placemark = placemarks?.first else { return }
-      
-      self._placemark = placemark
-      self._address = placemark.address()
-      
-      // KVO
-      if self.name != nil {
-        self.subtitle = ""
-      } else {
-        self.title = ""
-      }
+      self.assignPlacemark(placemark, includeName: false)
     }
     
     return _placemark
@@ -130,6 +121,28 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   convenience init(from: TKAPI.Location) {
     self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
+  }
+  
+  public func assignPlacemark(_ placemark: CLPlacemark, includeName: Bool) {
+    if includeName {
+      if let name = placemark.name {
+        self.name = name
+      } else if let poi = placemark.areasOfInterest?.first {
+        self.name = poi
+      } else {
+        self.name = nil
+      }
+    }
+    
+    _address = placemark.address()
+    _placemark = placemark
+    
+    // KVO
+    if self.name != nil {
+      self.subtitle = ""
+    } else {
+      self.title = ""
+    }
   }
 
   // MARK: - Codable
