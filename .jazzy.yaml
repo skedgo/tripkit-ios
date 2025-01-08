@@ -5,15 +5,17 @@ theme: fullwidth
 output: Scripts/docs/source/TripKit
 github_url: https://github.com/skedgo/tripkit-ios
 
-sdk: iphoneos
+sdk: iphonesimulator
 
 modules:
-  - module: TripKitAPI
   - module: TripKit
+  - module: TripKitAPI
   - module: TripKitUI
     build_tool_arguments:
       - -scheme
       - TripKitUI
+      - -destination
+      - platform=iOS Simulator,name=iPhone 16
   - module: TripKitInterApp
     build_tool_arguments:
       - -scheme
