@@ -24,7 +24,7 @@
 		<meta name="msapplication-TileColor" content="#154c7b">
 		<meta name="msapplication-TileImage" content="../img/favicon/ms-icon-144x144.png">
 		<meta name="theme-color" content="#154c7b">
-		<title>View Controllers of TripKitUI - TripKit SDK for iOS</title>
+		<title>View Controllers - TripKit SDK for iOS</title>
 			<link rel="stylesheet" href="../css/main.css">
 			<link rel="stylesheet" href="../css/superfences.css">
 			<link rel="stylesheet" href="../css/codehilite.css">
@@ -68,6 +68,12 @@
 						
 					
 						
+							<li class="current">
+								<a href="./">View Controllers</a>
+							</li>
+						
+					
+						
 							<li class="">
 								<a href="../faq/">F.A.Q.</a>
 							</li>
@@ -79,15 +85,15 @@
 								<ul class="submenu">
 									
 										<li class="">
-											<a href="../TripKit/">TripKit</a>
+											<a href="../TripKit/TripKit.html">TripKit</a>
 										</li>
 									
 										<li class="">
-											<a href="../TripKitUI/">TripKitUI</a>
+											<a href="../TripKit/TripKitUI.html">TripKitUI</a>
 										</li>
 									
 										<li class="">
-											<a href="../TripKitInterApp/">TripKitInterApp</a>
+											<a href="../TripKit/TripKitInterApp.html">TripKitInterApp</a>
 										</li>
 									
 								</ul>
@@ -123,7 +129,7 @@
 				<div class="col content" role="main">
 
 <h1 id="view-controllers-of-tripkitui">View Controllers of TripKitUI</h1>
-<p><a href="../TripKitUI/">TripKitUI</a> provides customisable view controllers for the following high-level features:</p>
+<p><a href="../TripKit/TripKitUI.html">TripKitUI</a> provides customisable view controllers for the following high-level features:</p>
 <ul>
 <li><strong>Trip planning</strong> for showing and comparing the different ways of getting from A-to-B, including details screens for each trip both as an overview of the whole trip or the steps of each trip on a mode-by-mode basis.</li>
 <li><strong>Public transport departures</strong> for a specific stop or station with real-time information, including a details screen for each service that shows the route on the map and in a list.</li>
@@ -142,7 +148,7 @@
 </ul>
 <h2 id="real-time-departures-and-service-details">Real-time departures and service details</h2>
 <p><img src="../assets/departures.png" style="height:500px; width: auto;" /></p>
-<p>The stand-alone view controller <a href="../TripKitUI/Classes/TKUITimetableViewController.html"><code>TKUITimetableViewController</code></a> let's you quickly and easily embed public transport departures. </p>
+<p>The stand-alone view controller <a href="../TripKit/TripKitUI/Classes/TKUITimetableViewController.html"><code>TKUITimetableViewController</code></a> let's you quickly and easily embed public transport departures. </p>
 <p>This view controller has the following features:</p>
 <ul>
 <li>Show departures for an individual stop or larger station<ul>
@@ -160,14 +166,14 @@
 </ul>
 <p>It has the following additional customisation points:</p>
 <ul>
-<li>Style of cards via <a href="../TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
-<li>Timetable screen via <a href="../TripKitUI/Classes/TKUITimetableCard/Configuration.html"><code>TKUITimetableCard.config</code></a>:</li>
+<li>Style of cards via <a href="../TripKit/TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
+<li>Timetable screen via <a href="../TripKit/TripKitUI/Classes/TKUITimetableCard/Configuration.html"><code>TKUITimetableCard.config</code></a>:</li>
 <li>Customisable list of action buttons</li>
 </ul>
-<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKitUI/Classes/TKUITimetableCard.html"><code>TKUITimetableCard</code></a> and <a href="../TripKitUI/Classes/TKUIServiceCard.html"><code>TKUIServiceCard</code></a>) and use them directly in a <code>TGCardViewController</code> container.</p>
+<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKit/TripKitUI/Classes/TKUITimetableCard.html"><code>TKUITimetableCard</code></a> and <a href="../TripKit/TripKitUI/Classes/TKUIServiceCard.html"><code>TKUIServiceCard</code></a>) and use them directly in a <code>TGCardViewController</code> container.</p>
 <h2 id="trip-planning-and-trip-details">Trip planning and trip details</h2>
 <p><img src="../assets/routing.png" style="height:500px; width: auto;" /></p>
-<p>The stand-alone view controller <a href="../TripKitUI/Classes/TKUIRoutingResultsViewController.html"><code>TKUIRoutingResultsViewController</code></a> let's you quickly and easily show routing results between two locations for various modes including combinations of those modes, i.e., this is fully multi-modal and inter-modal.</p>
+<p>The stand-alone view controller <a href="../TripKit/TripKitUI/Classes/TKUIRoutingResultsViewController.html"><code>TKUIRoutingResultsViewController</code></a> let's you quickly and easily show routing results between two locations for various modes including combinations of those modes, i.e., this is fully multi-modal and inter-modal.</p>
 <p>This view controller has the following features:</p>
 <ul>
 <li>Show routing results to a specified location from the user's current location, or between specified locations<ul>
@@ -181,12 +187,12 @@
 </ul>
 <p>It has the following additional customisation points:</p>
 <ul>
-<li>Style of cards via <a href="../TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
-<li>Results screen via <a href="../TripKitUI/Classes/TKUIRoutingResultsCard/Configuration.html"><code>TKUIRoutingResultsCard.config</code></a>:<ul>
+<li>Style of cards via <a href="../TripKit/TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
+<li>Results screen via <a href="../TripKit/TripKitUI/Classes/TKUIRoutingResultsCard/Configuration.html"><code>TKUIRoutingResultsCard.config</code></a>:<ul>
 <li>Option to provide a feedback action when user presses a "Contact support" button in case of an error or trying to route in an area that's not supported</li>
 </ul>
 </li>
-<li>Trip overview via <a href="../TripKitUI/Classes/TKUITripOverviewCard/Configuration.html"><code>TKUITripOverviewCard.config</code></a>:<ul>
+<li>Trip overview via <a href="../TripKit/TripKitUI/Classes/TKUITripOverviewCard/Configuration.html"><code>TKUITripOverviewCard.config</code></a>:<ul>
 <li>Presentation of attribution</li>
 <li>Custom callback for what to do when tapping a segment</li>
 <li>Customisable list of per-trip action buttons</li>
@@ -194,36 +200,36 @@
 </ul>
 </li>
 </ul>
-<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKitUI/Classes/TKUIRoutingResultsCard.html"><code>TKUIRoutingResultsCard</code></a> and <a href="../TripKitUI/Classes/TKUITripOverviewCard.html"><code>TKUITripOverviewCard</code></a>) and use them directly in a <code>TGCardViewController</code> container.</p>
+<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKit/TripKitUI/Classes/TKUIRoutingResultsCard.html"><code>TKUIRoutingResultsCard</code></a> and <a href="../TripKit/TripKitUI/Classes/TKUITripOverviewCard.html"><code>TKUITripOverviewCard</code></a>) and use them directly in a <code>TGCardViewController</code> container.</p>
 <h2 id="trip-mode-by-mode-overview">Trip mode-by-mode overview</h2>
 <p><img src="../assets/mode-by-mode.png" style="height:500px; width: auto;" /></p>
-<p>The stand-alone view controller <a href="../TripKitUI/Classes/TKUITripModeByModeViewController.html"><code>TKUITripModeByModeViewController</code></a> let's you display details of a trip on a mode-by-mode (or segment-by-segment) basis.</p>
+<p>The stand-alone view controller <a href="../TripKit/TripKitUI/Classes/TKUITripModeByModeViewController.html"><code>TKUITripModeByModeViewController</code></a> let's you display details of a trip on a mode-by-mode (or segment-by-segment) basis.</p>
 <p>This view controller has the following features:</p>
 <ul>
 <li>Show details for a trip on a mode-by-mode basis</li>
-<li>Highly customisable what cards to display for each mode, including custom cards or also the built-in cards like <a href="../TripKitUI/Classes/TKUITimetableCard.html"><code>TKUITimetableCard</code></a> or <a href="../TripKitUI/Classes/TKUIServiceCard.html"><code>TKUIServiceCard</code></a> from above</li>
+<li>Highly customisable what cards to display for each mode, including custom cards or also the built-in cards like <a href="../TripKit/TripKitUI/Classes/TKUITimetableCard.html"><code>TKUITimetableCard</code></a> or <a href="../TripKit/TripKitUI/Classes/TKUIServiceCard.html"><code>TKUIServiceCard</code></a> from above</li>
 </ul>
 <p>It has the following additional customisation points:</p>
 <ul>
-<li>Style of cards via <a href="../TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
-<li>Trip mode-by-mode cards view <a href="../TripKitUI/Classes/TKUITripModeByModeCard/Configuration.html"><code>TKUITripModeByModeCard.config</code></a>:</li>
+<li>Style of cards via <a href="../TripKit/TripKitUI/Classes/TKUICustomization.html"><code>TKUICustomization</code></a></li>
+<li>Trip mode-by-mode cards view <a href="../TripKit/TripKitUI/Classes/TKUITripModeByModeCard/Configuration.html"><code>TKUITripModeByModeCard.config</code></a>:</li>
 <li>What cards to display for each segment</li>
 </ul>
-<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKitUI/Classes/TKUITripModeByModeCard.html"><code>TKUITripModeByModeCard</code></a>, as well as the per-segment cards) and use them directly in a <code>TGCardViewController</code> container. This for example allows to show these mode-by-mode details when a user selects a segment on a trip card (see <a href="../TripKitUI/Classes/TKUITripOverviewCard.html"><code>TKUITripOverviewCard</code></a>). </p>
+<p>Note: As an alternative to using the stand-alone view controller, you can also take the individual card components (<a href="../TripKit/TripKitUI/Classes/TKUITripModeByModeCard.html"><code>TKUITripModeByModeCard</code></a>, as well as the per-segment cards) and use them directly in a <code>TGCardViewController</code> container. This for example allows to show these mode-by-mode details when a user selects a segment on a trip card (see <a href="../TripKit/TripKitUI/Classes/TKUITripOverviewCard.html"><code>TKUITripOverviewCard</code></a>). </p>
 <h2 id="location-search">Location search</h2>
 <p><img src="../assets/search.png" style="height:500px; width: auto;" /></p>
-<p>The <a href="../TripKitUI/Classes/TKUIAutocompletionViewController.html"><code>TKUIAutocompletionViewController</code></a> can be used with the standard <code>UISearchController</code> to provide autocompletion results for addresses, POIs and custom data sources.</p>
+<p>The <a href="../TripKit/TripKitUI/Classes/TKUIAutocompletionViewController.html"><code>TKUIAutocompletionViewController</code></a> can be used with the standard <code>UISearchController</code> to provide autocompletion results for addresses, POIs and custom data sources.</p>
 <p>The following data sources are included in TripKit:</p>
 <ul>
-<li><a href="../TripKit/Classes/TKTripGoGeocoder.html"><code>TKTripGoGeocoder</code></a> for public transport stops and stations</li>
-<li><a href="../TripKit/Classes/TKAppleGeocoder.html"><code>TKAppleGeocoder</code></a> for addresses and POIs provided by Apple Maps</li>
-<li><a href="../TripKit/Classes/TKPeliasGeocoder.html"><code>TKPeliasGeocoder</code></a> for use with any Pelias-powered geocoder</li>
-<li><a href="../TripKit/Classes/TKCalendarManager.html"><code>TKCalendarManager</code></a> for searching the user's calendar for events with locations</li>
-<li><a href="../TripKit/Classes/TKContactsManager.html"><code>TKContactsManager</code></a> for searching the  user's contacts for locations</li>
+<li><a href="../TripKit/TripKit/Classes/TKTripGoGeocoder.html"><code>TKTripGoGeocoder</code></a> for public transport stops and stations</li>
+<li><a href="../TripKit/TripKit/Classes/TKAppleGeocoder.html"><code>TKAppleGeocoder</code></a> for addresses and POIs provided by Apple Maps</li>
+<li><a href="../TripKit/TripKit/Classes/TKPeliasGeocoder.html"><code>TKPeliasGeocoder</code></a> for use with any Pelias-powered geocoder</li>
+<li><a href="../TripKit/TripKit/Classes/TKCalendarManager.html"><code>TKCalendarManager</code></a> for searching the user's calendar for events with locations</li>
+<li><a href="../TripKit/TripKit/Classes/TKContactsManager.html"><code>TKContactsManager</code></a> for searching the  user's contacts for locations</li>
 </ul>
 <h2 id="home-screen">Home screen</h2>
-<p>The <a href="../TripKitUI/Classes/TKUIHomeViewController.html"><code>TKUIHomeViewController</code></a> can be used as a start-screen for the trip planning, timetable and search components -- while being highly customisable to add arbitrary other features.</p>
-<p>The built-in functionality is a search bar at the top, which uses the same search functionality as the dedicated <a href="../TripKitUI/Classes/TKUIAutocompletionViewController.html"><code>TKUIAutocompletionViewController</code></a> but with the search integrated in the home screen UI, along with a directions button to bring up the <a href="../TripKitUI/Classes/TKUIRoutingQueryInputCard.html"><code>TKUIRoutingQueryInputCard</code></a>.</p>
+<p>The <a href="../TripKit/TripKitUI/Classes/TKUIHomeViewController.html"><code>TKUIHomeViewController</code></a> can be used as a start-screen for the trip planning, timetable and search components -- while being highly customisable to add arbitrary other features.</p>
+<p>The built-in functionality is a search bar at the top, which uses the same search functionality as the dedicated <a href="../TripKit/TripKitUI/Classes/TKUIAutocompletionViewController.html"><code>TKUIAutocompletionViewController</code></a> but with the search integrated in the home screen UI, along with a directions button to bring up the <a href="../TripKit/TripKitUI/Classes/TKUIRoutingQueryInputCard.html"><code>TKUIRoutingQueryInputCard</code></a>.</p>
 <p>The purpose of the home screen is then to add individual <em>components</em>, to give users quick access to different section. How to build these, is up to you, but they can be things like:</p>
 <ul>
 <li>The user's favourites</li>
@@ -236,6 +242,26 @@
 		</div>
 		<div class="navbar-bottom" role="navigation">
 	<div class="container -layout-6-6">
+			    <div class="col">
+			        <a rel="next"  href=".."  class="prev">
+			            <div class="label">
+			            	Previous
+			            </div>
+			            <div class="title">
+			            	Getting Started
+			            </div>
+			        </a>
+			    </div>
+			    <div class="col">
+			        <a rel="prev"  href="../faq/" class="next">
+			            <div class="label">
+			            	Next
+			            </div>
+			            <div class="title">
+			            	F.A.Q.
+			            </div>
+			        </a>
+			    </div>
 	</div>
 </div>
 		<footer class="footer">

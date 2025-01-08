@@ -1,0 +1,3225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TKAPI Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+    <script src="../../js/lunr.min.js" defer></script>
+    <script src="../../js/typeahead.jquery.js" defer></script>
+    <script src="../../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Struct/TKAPI" class="dashAnchor"></a>
+
+    <a title="TKAPI Structure Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../../index.html">
+          SkedGo&#39;s TripKit iOS
+        </a>
+         (22% documented)
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/skedgo/tripkit-ios">
+            <img class="header-icon" src="../../img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../../index.html">TripKit</a>
+      <img class="carat" src="../../img/carat.png" alt=""/>
+      <a class="breadcrumb" href="../../TripKit.html">TripKit</a>
+      <img class="carat" src="../../img/carat.png" alt=""/>
+      TKAPI Structure Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../Setup%20%26%20Configuration.html">Setup &amp; Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TripKit.html">TripKit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKConfig.html">TKConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRegion.html">TKRegion</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRegion/City.html">– City</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRegion/RoutingMode.html">– RoutingMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRegionManager.html">TKRegionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKServer.html">TKServer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKServer/HTTPMethod.html">– HTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKServer/RequestError.html">– RequestError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKServer/ServerError.html">– ServerError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKServer/RepeatHandler.html">– RepeatHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKServer/Response.html">– Response</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSettings.html">TKSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSettings/DefaultsKey.html">– DefaultsKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSettings/Config.html">– Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSettings/Weight.html">– Weight</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSettings/Speed.html">– Speed</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../Trip%20Planning.html">Trip Planning</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRouter.html">TKRouter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRouter/RoutingError.html">– RoutingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRouter/RoutingQuery.html">– RoutingQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRealTimeFetcher.html">TKRealTimeFetcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKWaypointRouter.html">TKWaypointRouter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKWaypointRouter/WaypointError.html">– WaypointError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKWaypointRouter.html#/s:7TripKit16TKWaypointRouterO5InputV">– Input</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKWaypointRouter/Segment.html">– Segment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKTripClassifier.html">TKTripClassifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKMetricClassifier.html">TKMetricClassifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKMetricClassifier/Classification.html">– Classification</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIRoutingResultsViewController.html">TKUIRoutingResultsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Trip%20Planning.html#/s:9TripKitUI40TKUIRoutingResultsViewControllerDelegateP">TKUIRoutingResultsViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIRoutingResultsCard.html">TKUIRoutingResultsCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIRoutingResultsCard/SupportType.html">– SupportType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIRoutingResultsCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIRoutingResultsCard/CustomItem.html">– CustomItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIRoutingResultsCardDelegate.html">TKUIRoutingResultsCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIRoutingQueryInputCard.html">TKUIRoutingQueryInputCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIRoutingQueryInputCardDelegate.html">TKUIRoutingQueryInputCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripOverviewViewController.html">TKUITripOverviewViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripOverviewCard.html">TKUITripOverviewCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripOverviewCard/DefaultActionPriority.html">– DefaultActionPriority</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripOverviewCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripModeByModeViewController.html">TKUITripModeByModeViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Trip%20Planning.html#/s:9TripKitUI014TKUITripModeByE22ViewControllerDelegateP">TKUITripModeByModeViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripModeByModeCard.html">TKUITripModeByModeCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripModeByModeCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITripModeByModePageBuilder.html">TKUITripModeByModePageBuilder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../Timetables.html">Timetables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimetableViewController.html">TKUITimetableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITimetableViewControllerDelegate.html">TKUITimetableViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimetableCard.html">TKUITimetableCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimetableCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITimetableCardDelegate.html">TKUITimetableCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIServiceCard.html">TKUIServiceCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIServiceCard/Configuration.html">– Configuration</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../Search.html">Search</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKAppleGeocoder.html">TKAppleGeocoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKCalendarManager.html">TKCalendarManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKContactsManager.html">TKContactsManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKContactsManager/AddressKind.html">– AddressKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKContactsManager/ContactAddress.html">– ContactAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKPeliasGeocoder.html">TKPeliasGeocoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRegionAutocompleter.html">TKRegionAutocompleter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRouteAutocompleter.html">TKRouteAutocompleter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKTripGoGeocoder.html">TKTripGoGeocoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKAggregateGeocoder.html">TKAggregateGeocoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAutocompletionViewController.html">TKUIAutocompletionViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIAutocompletionViewControllerDelegate.html">TKUIAutocompletionViewControllerDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../Home%20Screen.html">Home Screen</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIHomeViewController.html">TKUIHomeViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIHomeCard.html">TKUIHomeCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIHomeCard/SelectionMode.html">– SelectionMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIHomeCard/VoiceOverMode.html">– VoiceOverMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIHomeCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIHomeCard/ComponentAction.html">– ComponentAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIHomeCardSearchResultsDelegate.html">TKUIHomeCardSearchResultsDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIHomeComponentViewModel.html">TKUIHomeComponentViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIHomeComponentContent.html">TKUIHomeComponentContent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIHomeComponentInput.html">TKUIHomeComponentInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIHomeComponentItem.html">TKUIHomeComponentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIHomeHeaderConfiguration.html">TKUIHomeHeaderConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIHomeCardCustomizerItem.html">TKUIHomeCardCustomizerItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../Notable%20Classes.html">Notable Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBuzzInfoProvider.html">TKBuzzInfoProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBuzzInfoProvider/AlertsTransitResponse.html">– AlertsTransitResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKDeparturesProvider.html">TKDeparturesProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKDeparturesProvider/Filter.html">– Filter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKDeparturesProvider/InputError.html">– InputError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKDeparturesProvider/OutputError.html">– OutputError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUICardAction.html">TKUICardAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUICustomization.html">TKUICustomization</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIMapManager.html">TKUIMapManager</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../TripKit.html">TripKit</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Alert.html">Alert</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Alert.html#/s:7TripKit5AlertC20ActionTypeIdentifierO">– ActionTypeIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/AppKit">AppKit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Swift/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/CoreLocation/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/DLSEntry.html">DLSEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/Date/DateConversionError.html">– DateConversionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/JSONDecoder.html">JSONDecoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/JSONEncoder.html">JSONEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Loc.html">Loc</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/MapKit/MKAnnotation.html">MKAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/MapKit/MKGeodesicPolyline.html">MKGeodesicPolyline</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/MapKit/MKMapRect.html">MKMapRect</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/MapKit/MKMultiPoint.html">MKMultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/NSError.html">NSError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/CoreData/NSManagedObjectContext.html">NSManagedObjectContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/NSNotification.html">NSNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/NSNotification/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/Notification.html">Notification</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/Notification/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/ObjcTripKit.html">ObjcTripKit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Service.html">Service</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Shape.html">Shape</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Shape/Instruction.html">– Instruction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Shape/RoadSafety.html">– RoadSafety</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Shape/RoadTag.html">– RoadTag</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/StopLocation.html">StopLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/StopVisits.html">StopVisits</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/StopVisits/RealTime.html">– RealTime</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI.html">TKAPI</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/VehicleOccupancy.html">– VehicleOccupancy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/VehicleTypeInfo.html">– VehicleTypeInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SharedVehicleInfo.html">– SharedVehicleInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Alert.html">– Alert</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/AlertMapping.html">– AlertMapping</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/AlertRouteMapping.html">– AlertRouteMapping</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/CompanyInfo.html">– CompanyInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/DataAttribution.html">– DataAttribution</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Location.html">– Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/RealTimeStatus.html">– RealTimeStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/RGBColor.html">– RGBColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Departures.html">– Departures</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/EventsResponse.html">– EventsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/BikePodInfo.html">– BikePodInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/CarPodInfo.html">– CarPodInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/CarParkInfo.html">– CarParkInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/CarRentalInfo.html">– CarRentalInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/VehicleFormFactor.html">– VehicleFormFactor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/VehiclePropulsionType.html">– VehiclePropulsionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/OnStreetParkingInfo.html">– OnStreetParkingInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/LocationInfo.html">– LocationInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/LocationsResponse.html">– LocationsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/OpeningHours.html">– OpeningHours</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/PricingTable.html">– PricingTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/RegionInfo.html">– RegionInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Paratransit.html">– Paratransit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Integrations.html">– Integrations</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/GenericModeDetails.html">– GenericModeDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SpecificModeDetails.html">– SpecificModeDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Route.html">– Route</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Direction.html">– Direction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/DirectionStop.html">– DirectionStop</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/RoutingResponse.html">– RoutingResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Query.html">– Query</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/TripGroup.html">– TripGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Trip.html">– Trip</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/TripAvailability.html">– TripAvailability</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SegmentReference.html">– SegmentReference</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SegmentTemplate.html">– SegmentTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SegmentVisibility.html">– SegmentVisibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SegmentType.html">– SegmentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/TripNotification.html">– TripNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/SegmentShape.html">– SegmentShape</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/ShapeStop.html">– ShapeStop</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/ShapeInstruction.html">– ShapeInstruction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/ServiceResponse.html">– ServiceResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Departure.html">– Departure</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/BookingAvailability.html">– BookingAvailability</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/AppInfo.html">– AppInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/AvailabilityMode.html">– AvailabilityMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/CarAvailability.html">– CarAvailability</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Stop.html">– Stop</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Operator.html">– Operator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/User.html">– User</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Phone.html">– Phone</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Email.html">– Email</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/Vehicle.html">– Vehicle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/VehicleComponents.html">– VehicleComponents</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/PrivateVehicleType.html">– PrivateVehicleType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI.html#/s:7TripKit5TKAPIV14PrivateVehicleV">– PrivateVehicle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAPI/ServerError.html">– ServerError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKAddressFormatter.html">TKAddressFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKAlertSeverity.html">TKAlertSeverity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKAuthorizationStatus.html">TKAuthorizationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKAutocompleting.html">TKAutocompleting</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAutocompletionResult.html">TKAutocompletionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAutocompletionResult/Icon.html">– Icon</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAutocompletionResult/Score.html">– Score</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKAutocompletionResult/ScoreHighlights.html">– ScoreHighlights</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKAutocompletionSelection.html">TKAutocompletionSelection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBicycleAccessibility.html">TKBicycleAccessibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKBikePodLocation.html">TKBikePodLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking.html">TKBooking</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Detail.html">– Detail</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Action.html">– Action</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/ActionConfirmation.html">– ActionConfirmation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/TSPBranding.html">– TSPBranding</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Purchase.html">– Purchase</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Confirmation.html">– Confirmation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/BookingInput.html">– BookingInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/BookingNote.html">– BookingNote</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Location.html">– Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Fare.html">– Fare</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/Rider.html">– Rider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKBooking/PurchasedTicket.html">– PurchasedTicket</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKCarParkLocation.html">TKCarParkLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKCarPodLocation.html">TKCarPodLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKCarRentalLocation.html">TKCarRentalLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKCodableCache.html">TKCodableCache</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/TKColor">TKColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/TripKit/TKColor.html">TKColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/s:7TripKit7TKColora">TKColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKColoredRoute.html">TKColoredRoute</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKConsoleLogger.html">TKConsoleLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKDLSTable.html">TKDLSTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKDeepLinkable.html">TKDeepLinkable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKDisplayableRoute.html">TKDisplayableRoute</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKError.html">TKError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKFacilityLocation.html">TKFacilityLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKFileCache.html">TKFileCache</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKFileCacheDirectory.html">TKFileCacheDirectory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/TKFont">TKFont</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/s:7TripKit6TKFonta">TKFont</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKFreeFloatingVehicleLocation.html">TKFreeFloatingVehicleLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKGeoJSON.html">TKGeoJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKGeoJSON/Feature.html">– Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKGeoJSON/Position.html">– Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKGeoJSON/Polygon.html">– Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKGeoJSON/Geometry.html">– Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKGeocodable.html">TKGeocodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKGeocoderHelper.html">TKGeocoderHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKGeocoderHelper/GeocodingError.html">– GeocodingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKGeocoding.html">TKGeocoding</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKGeocodingResultScorer.html">TKGeocodingResultScorer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/TKImage">TKImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/s:7TripKit7TKImagea">TKImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/TripKit/TKImage.html">TKImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKInfoIcon.html">TKInfoIcon</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKInfoIconType.html">TKInfoIconType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKInfoIconUsage.html">TKInfoIconUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKInternationalRegion.html">TKInternationalRegion</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKJSONCache.html">TKJSONCache</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLocalCost.html">TKLocalCost</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKLocalCostAccuracy.html">TKLocalCostAccuracy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLocationManager.html">TKLocationManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLocationManager/LocalizationError.html">– LocalizationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKLocationProvider.html">TKLocationProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKLocationProvider/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLog.html">TKLog</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLog/LogLevel.html">– LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLog/ServerRequest.html">– ServerRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKLog/ServerResponse.html">– ServerResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKLogger.html">TKLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKMapTiles.html">TKMapTiles</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKModeCoordinate.html">TKModeCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKModeHelper.html">TKModeHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKModeImageFactory.html">TKModeImageFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKModeInfo.html">TKModeInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKNamedCoordinate.html">TKNamedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKNamedCoordinateValueTransformer.html">TKNamedCoordinateValueTransformer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKOnStreetParkingLocation.html">TKOnStreetParkingLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKOneOffLocationManager.html">TKOneOffLocationManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKOneOffLocationManager/LocationFetchError.html">– LocationFetchError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKPathFriendliness.html">TKPathFriendliness</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKPermissionManager.html">TKPermissionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKQuickBooking.html">TKQuickBooking</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKQuickBooking/BookingResponseKind.html">– BookingResponseKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKQuickBooking/AvailableOption.html">– AvailableOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKQuickBooking/UnavailableOption.html">– UnavailableOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKQuickBookingHelper.html">TKQuickBookingHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKQuickBookingPrice.html">TKQuickBookingPrice</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKRealTimeUpdateProgress.html">TKRealTimeUpdateProgress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKReporter.html">TKReporter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRoutePolyline.html">TKRoutePolyline</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKRouterRequestable.html">TKRouterRequestable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRoutingParser.html">TKRoutingParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKRoutingServer.html">TKRoutingServer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSegment.html">TKSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSegment/StationaryType.html">– StationaryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKSegment/Ticket.html">– Ticket</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKSegmentOrdering.html">TKSegmentOrdering</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit.html#/s:7TripKit16TKSegmentPatterna">TKSegmentPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKSegmentType.html">TKSegmentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKServiceTiming.html">TKServiceTiming</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareHelper.html">TKShareHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareHelper/ExtractionError.html">– ExtractionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareHelper/QueryDetails.html">– QueryDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareHelper/StopDetails.html">– StopDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareHelper/ServiceDetails.html">– ServiceDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareURLProvider.html">TKShareURLProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKShareURLProvider/ShareError.html">– ShareError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKSortableAnnotation.html">TKSortableAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKStopCoordinate.html">TKStopCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKStore.html">TKStore</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKStyleManager.html">TKStyleManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TKStyleManager/FontWeight.html">– FontWeight</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKStyleModeIconType.html">TKStyleModeIconType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTimeType.html">TKTimeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKTimetable.html">TKTimetable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Structs/TKTimetable/TimetableType.html">– TimetableType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTransportMode.html">TKTransportMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTripCostType.html">TKTripCostType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTripFetcher.html">TKTripFetcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTripPattern.html">TKTripPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTripSegmentVisibility.html">TKTripSegmentVisibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKTurnByTurnMode.html">TKTurnByTurnMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKURLSavable.html">TKURLSavable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKURLShareable.html">TKURLShareable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKVehicleType.html">TKVehicleType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Protocols/TKVehicular.html">TKVehicular</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Enums/TKWheelchairAccessibility.html">TKWheelchairAccessibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Trip.html">Trip</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TripGroup.html">TripGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TripGroup/Visibility.html">– Visibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/TripRequest.html">TripRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/UIKit/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Extensions/Foundation/UserDefaults.html">UserDefaults</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKit/Classes/Vehicle.html">Vehicle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../TripKitUI.html">TripKitUI</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/s:9TripKitUI2eeoiySbAA30TKUIRoutingResultsMapRouteItemV_ADtF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/Swift/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/CoreLocation/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/Foundation/Notification.html">Notification</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/Foundation/Notification/Name.html">– Name</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/RxSwift/ObservableType.html">ObservableType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/RxSwift/PrimitiveSequenceType.html">PrimitiveSequenceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/RxSwift/Reactive.html">Reactive</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/RxCocoa/SharedSequenceConvertibleType.html">SharedSequenceConvertibleType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/TGCardViewController/TGCardViewController.html">TGCardViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKLocationRealTime.html">TKLocationRealTime</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKRealTimeHelper.html">TKRealTimeHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAlertViewController.html">TKUIAlertViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAnnotationViewBuilder.html">TKUIAnnotationViewBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAttributionTableViewController.html">TKUIAttributionTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAttributionView.html">TKUIAttributionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAttributionView/Alignment.html">– Alignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAttributionView/Wording.html">– Wording</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIAttributionView/Style.html">– Style</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUIAutocompletionViewModel">TKUIAutocompletionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUICardActionContent.html">TKUICardActionContent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKUICardActionNormalStyle.html">TKUICardActionNormalStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKUICardActionStyle.html">TKUICardActionStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKUICardActionsViewFactory.html">TKUICardActionsViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUICircleAnnotationView.html">TKUICircleAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUICircleDisplayable.html">TKUICircleDisplayable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUICompatibleHomeMapManager.html">TKUICompatibleHomeMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIComposingMapManager.html">TKUIComposingMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIDateTimePickerView.html">TKUIDateTimePickerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIDateTimePickerViewController.html">TKUIDateTimePickerViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIDateTimePickerViewModel.html">TKUIDateTimePickerViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIDateTimePickerViewModel/ToggleItem.html">– ToggleItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIDateTimePickerViewModel/Selection.html">– Selection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIDefaultPageBuilder.html">TKUIDefaultPageBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIEventCallback.html">TKUIEventCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIEventCallback/Event.html">– Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIGlyphableAnnotation.html">TKUIGlyphableAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUIHomeCardCustomizationViewModel">TKUIHomeCardCustomizationViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUIHomeViewModel">TKUIHomeViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIIdentifiableAnnotation.html">TKUIIdentifiableAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIImageAnnotation.html">TKUIImageAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIImageAnnotationView.html">TKUIImageAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUILocationCard.html">TKUILocationCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUILocationCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKUILocationHandlerAction.html">TKUILocationHandlerAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUILocationInfo.html">TKUILocationInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUILocationInfo/RouteButton.html">– RouteButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUILocationMapManager.html">TKUILocationMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIMapTiles.html">TKUIMapTiles</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIModeAnnotation.html">TKUIModeAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIModeAnnotationView.html">TKUIModeAnnotationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIModePicker.html">TKUIModePicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIModePickerItem.html">TKUIModePickerItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyCell.html">TKUINearbyCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyMapManager.html">TKUINearbyMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyViewModel.html">TKUINearbyViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyViewModel/Next.html">– Next</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyViewModel/ListInput.html">– ListInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyViewModel/MapInput.html">– MapInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyViewModel/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINearbyViewModel/Section.html">– Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINotificationManager.html">TKUINotificationManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUINotificationManagerDelegate.html">TKUINotificationManagerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINotificationSubscription.html">TKUINotificationSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUINotificationSubscription/Context.html">– Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIPolylineRenderer.html">TKUIPolylineRenderer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIPolylineRenderer/SelectionMode.html">– SelectionMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIProgressCell.html">TKUIProgressCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIResultsFetcher.html">TKUIResultsFetcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIResultsFetcher/Progress.html">– Progress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIRoutingResultsCustomItemProvider.html">TKUIRoutingResultsCustomItemProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIRoutingResultsMapManagerType.html">TKUIRoutingResultsMapManagerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Structs/TKUIRoutingResultsMapRouteItem.html">TKUIRoutingResultsMapRouteItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUIRoutingResultsViewModel">TKUIRoutingResultsViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISectionedAlertViewController.html">TKUISectionedAlertViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUISectionedAlertViewModel">TKUISectionedAlertViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISegmentDirectionsCard.html">TKUISegmentDirectionsCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISegmentDirectionsCard/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUISegmentDirectionsViewModel">TKUISegmentDirectionsViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISegmentInstructionCard.html">TKUISegmentInstructionCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKUISegmentMode.html">TKUISegmentMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISegmentTitleView.html">TKUISegmentTitleView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUISelectableOnMap.html">TKUISelectableOnMap</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Enums/TKUISelectionCondition.html">TKUISelectionCondition</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUISemaphoreDisplayable.html">TKUISemaphoreDisplayable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISemaphoreView.html">TKUISemaphoreView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISemaphoreView/LabelSide.html">– LabelSide</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISemaphoreView/Mode.html">– Mode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUIServiceViewModel">TKUIServiceViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISheet.html">TKUISheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUISheetViewController.html">TKUISheetViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUIStopAnnotation.html">TKUIStopAnnotation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUIStyledLabel.html">TKUIStyledLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITableCard.html">TKUITableCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerSheet.html">TKUITimePickerSheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerSheet/SelectionStatus.html">– SelectionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerSheet/Style.html">– Style</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerSheet/ToolbarBuilder.html">– ToolbarBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerSheet/ToolbarElement.html">– ToolbarElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerSheet/Configuration.html">– Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITimePickerSheetDelegate.html">TKUITimePickerSheetDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITimePickerSheetSelectionStateDelegate.html">TKUITimePickerSheetSelectionStateDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerViewController.html">TKUITimePickerViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITimePickerViewController/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUITimetableViewModel">TKUITimetableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripBoyView.html">TKUITripBoyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripCell.html">TKUITripCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripMapManager.html">TKUITripMapManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/s:9TripKitUI22TKUITripMapManagerTypeP">TKUITripMapManagerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITripModeByModeCardDelegate.html">TKUITripModeByModeCardDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripMonitorManager.html">TKUITripMonitorManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripMonitorManager/GeofenceMatch.html">– GeofenceMatch</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITripOverviewViewControllerDelegate.html">TKUITripOverviewViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI.html#/TKUITripOverviewViewModel">TKUITripOverviewViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Protocols/TKUITripSegmentDisplayable.html">TKUITripSegmentDisplayable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Classes/TKUITripSegmentsView.html">TKUITripSegmentsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitUI/Extensions/UIKit/UIImage.html">UIImage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../../TripKitInterApp.html">TripKitInterApp</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Classes/TKInterAppCommunicator.html">TKInterAppCommunicator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Classes/TKInterAppCommunicator/ExternalActionType.html">– ExternalActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Classes/TKInterAppCommunicator/ExternalAction.html">– ExternalAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Protocols/TKInterAppExternalActionHandler.html">TKInterAppExternalActionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Enums/TKInterAppExternalActionPriority.html">TKInterAppExternalActionPriority</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp.html#/s:15TripKitInterApp07TKInterD10Identifiera">TKInterAppIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Classes/TKPhoneActionHandler.html">TKPhoneActionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Classes/TKSMSActionHandler.html">TKSMSActionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../TripKitInterApp/Classes/TKWebActionHandler.html">TKWebActionHandler</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>TKAPI</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TKAPI</span></code></pre>
+
+                </div>
+              </div>
+            <p>Top-Level Namespace for model structs that
+directly correspond to the TripGo API.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Real-time%20vehicles"></a>
+                <a name="//apple_ref/swift/Section/Real-time vehicles" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Real-time%20vehicles"></a>
+                  <h3 class="section-name"><span>Real-time vehicles</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV16VehicleOccupancyO"></a>
+                    <a name="//apple_ref/swift/Enum/VehicleOccupancy" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV16VehicleOccupancyO">VehicleOccupancy</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Representation of real-time occupancy information for public transport</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/VehicleOccupancy.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">VehicleOccupancy</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV15VehicleTypeInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/VehicleTypeInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV15VehicleTypeInfoV">VehicleTypeInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/VehicleTypeInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">VehicleTypeInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV17SharedVehicleInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/SharedVehicleInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV17SharedVehicleInfoV">SharedVehicleInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SharedVehicleInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SharedVehicleInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV5AlertV"></a>
+                    <a name="//apple_ref/swift/Struct/Alert" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV5AlertV">Alert</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Alert.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Alert</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV12AlertMappingV"></a>
+                    <a name="//apple_ref/swift/Struct/AlertMapping" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV12AlertMappingV">AlertMapping</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Replaces the previous <code>TKAlertWrapper</code></p>
+
+                        <a href="../../TripKit/Structs/TKAPI/AlertMapping.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AlertMapping</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV17AlertRouteMappingV"></a>
+                    <a name="//apple_ref/swift/Struct/AlertRouteMapping" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV17AlertRouteMappingV">AlertRouteMapping</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/AlertRouteMapping.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AlertRouteMapping</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV11CompanyInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/CompanyInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV11CompanyInfoV">CompanyInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/CompanyInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CompanyInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV15DataAttributionV"></a>
+                    <a name="//apple_ref/swift/Struct/DataAttribution" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV15DataAttributionV">DataAttribution</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/DataAttribution.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DataAttribution</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV8LocationV"></a>
+                    <a name="//apple_ref/swift/Struct/Location" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV8LocationV">Location</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Location.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Location</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV14RealTimeStatusO"></a>
+                    <a name="//apple_ref/swift/Enum/RealTimeStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV14RealTimeStatusO">RealTimeStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/RealTimeStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RealTimeStatus</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV8RGBColorV"></a>
+                    <a name="//apple_ref/swift/Struct/RGBColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV8RGBColorV">RGBColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/RGBColor.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RGBColor</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV10DeparturesV"></a>
+                    <a name="//apple_ref/swift/Struct/Departures" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV10DeparturesV">Departures</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Output data model for <code>departures.json</code></p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Departures.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Departures</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV14EventsResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/EventsResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV14EventsResponseV">EventsResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/EventsResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EventsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV11BikePodInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/BikePodInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV11BikePodInfoV">BikePodInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/BikePodInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BikePodInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV10CarPodInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/CarPodInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV10CarPodInfoV">CarPodInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/CarPodInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CarPodInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV11CarParkInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/CarParkInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV11CarParkInfoV">CarParkInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/CarParkInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CarParkInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV13CarRentalInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/CarRentalInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV13CarRentalInfoV">CarRentalInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/CarRentalInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CarRentalInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV17VehicleFormFactorO"></a>
+                    <a name="//apple_ref/swift/Enum/VehicleFormFactor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV17VehicleFormFactorO">VehicleFormFactor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/VehicleFormFactor.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">VehicleFormFactor</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV21VehiclePropulsionTypeO"></a>
+                    <a name="//apple_ref/swift/Enum/VehiclePropulsionType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV21VehiclePropulsionTypeO">VehiclePropulsionType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/VehiclePropulsionType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">VehiclePropulsionType</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV19OnStreetParkingInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/OnStreetParkingInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV19OnStreetParkingInfoV">OnStreetParkingInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/OnStreetParkingInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">OnStreetParkingInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV12LocationInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/LocationInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV12LocationInfoV">LocationInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/LocationInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LocationInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">RealTimeUpdatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV17LocationsResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/LocationsResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV17LocationsResponseV">LocationsResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/LocationsResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LocationsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV12OpeningHoursV"></a>
+                    <a name="//apple_ref/swift/Struct/OpeningHours" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV12OpeningHoursV">OpeningHours</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/OpeningHours.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">OpeningHours</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV12PricingTableV"></a>
+                    <a name="//apple_ref/swift/Struct/PricingTable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV12PricingTableV">PricingTable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Representation of a pricing table</p>
+
+<p>Matches PricingTable from the tripgo-api</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/PricingTable.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PricingTable</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV10RegionInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/RegionInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV10RegionInfoV">RegionInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/RegionInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RegionInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV11ParatransitV"></a>
+                    <a name="//apple_ref/swift/Struct/Paratransit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV11ParatransitV">Paratransit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Informational class for paratransit information (i.e., transport for people with disabilities).
+Contains name of service, URL with more information and phone number.</p>
+
+<p>Formerly known as <code>TKParatransitInfo</code></p>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <code><a href="../../TripKit/Enums/TKBuzzInfoProvider.html">TKBuzzInfoProvider</a></code>&lsquo;s <code>fetchParatransitInformation</code>
+
+</div>
+
+                        <a href="../../TripKit/Structs/TKAPI/Paratransit.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Paratransit</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV12IntegrationsO"></a>
+                    <a name="//apple_ref/swift/Enum/Integrations" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV12IntegrationsO">Integrations</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Integrations.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Integrations</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV18GenericModeDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/GenericModeDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV18GenericModeDetailsV">GenericModeDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Additional details about a group of modes,
+e.g., all bike or car share providers in a city</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/GenericModeDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericModeDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV19SpecificModeDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/SpecificModeDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV19SpecificModeDetailsV">SpecificModeDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Additional details about a specific mode, where the
+specific mode usually relates to a certain transport
+provider, such as a car-sharing provider, bike-sharing
+provider, limousine company, or TNC.</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SpecificModeDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SpecificModeDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV5RouteV"></a>
+                    <a name="//apple_ref/swift/Struct/Route" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV5RouteV">Route</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Route.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Route</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV9DirectionV"></a>
+                    <a name="//apple_ref/swift/Struct/Direction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV9DirectionV">Direction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Direction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Direction</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV13DirectionStopV"></a>
+                    <a name="//apple_ref/swift/Struct/DirectionStop" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV13DirectionStopV">DirectionStop</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/DirectionStop.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DirectionStop</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV15RoutingResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/RoutingResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV15RoutingResponseV">RoutingResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/RoutingResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RoutingResponse</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV5QueryV"></a>
+                    <a name="//apple_ref/swift/Struct/Query" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV5QueryV">Query</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Query.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Query</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV0A5GroupV"></a>
+                    <a name="//apple_ref/swift/Struct/TripGroup" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV0A5GroupV">TripGroup</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/TripGroup.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TripGroup</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV0A0V"></a>
+                    <a name="//apple_ref/swift/Struct/Trip" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV0A0V">Trip</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Trip.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Trip</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV0A12AvailabilityO"></a>
+                    <a name="//apple_ref/swift/Enum/TripAvailability" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV0A12AvailabilityO">TripAvailability</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/TripAvailability.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TripAvailability</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV16SegmentReferenceV"></a>
+                    <a name="//apple_ref/swift/Struct/SegmentReference" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV16SegmentReferenceV">SegmentReference</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SegmentReference.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SegmentReference</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV15SegmentTemplateV"></a>
+                    <a name="//apple_ref/swift/Struct/SegmentTemplate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV15SegmentTemplateV">SegmentTemplate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SegmentTemplate.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SegmentTemplate</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV17SegmentVisibilityO"></a>
+                    <a name="//apple_ref/swift/Enum/SegmentVisibility" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV17SegmentVisibilityO">SegmentVisibility</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SegmentVisibility.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SegmentVisibility</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV11SegmentTypeO"></a>
+                    <a name="//apple_ref/swift/Enum/SegmentType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV11SegmentTypeO">SegmentType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SegmentType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SegmentType</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV0A12NotificationV"></a>
+                    <a name="//apple_ref/swift/Struct/TripNotification" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV0A12NotificationV">TripNotification</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/TripNotification.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TripNotification</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="../../TripKit/Structs/TKAPI.html">TKAPI</a></span><span class="o">.</span><span class="kt">TripNotification</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV12SegmentShapeV"></a>
+                    <a name="//apple_ref/swift/Struct/SegmentShape" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV12SegmentShapeV">SegmentShape</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/SegmentShape.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SegmentShape</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV9ShapeStopV"></a>
+                    <a name="//apple_ref/swift/Struct/ShapeStop" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV9ShapeStopV">ShapeStop</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/ShapeStop.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ShapeStop</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV16ShapeInstructionO"></a>
+                    <a name="//apple_ref/swift/Enum/ShapeInstruction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV16ShapeInstructionO">ShapeInstruction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/ShapeInstruction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ShapeInstruction</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV15ServiceResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/ServiceResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV15ServiceResponseV">ServiceResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/ServiceResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ServiceResponse</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV9DepartureV"></a>
+                    <a name="//apple_ref/swift/Struct/Departure" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV9DepartureV">Departure</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Departure.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Departure</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV7VehicleV"></a>
+                    <a name="//apple_ref/swift/Struct/Vehicle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV7VehicleV">Vehicle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Vehicle.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Vehicle</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV17VehicleComponentsV"></a>
+                    <a name="//apple_ref/swift/Struct/VehicleComponents" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV17VehicleComponentsV">VehicleComponents</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Components of a vehicle, typically provided as a nested array, see <code><a href="../../TripKit/Structs/TKAPI/Vehicle.html#/s:7TripKit5TKAPIV7VehicleV10componentsSaySayAC0D10ComponentsVGGSgvp">Vehicle.components</a></code></p>
+
+                        <a href="../../TripKit/Structs/TKAPI/VehicleComponents.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">VehicleComponents</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Data%20Model"></a>
+                <a name="//apple_ref/swift/Section/Data Model" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Data%20Model"></a>
+                  <h3 class="section-name"><span>Data Model</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV19BookingAvailabilityV"></a>
+                    <a name="//apple_ref/swift/Struct/BookingAvailability" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV19BookingAvailabilityV">BookingAvailability</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/BookingAvailability.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BookingAvailability</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV7AppInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/AppInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV7AppInfoV">AppInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/AppInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AppInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV16AvailabilityModeO"></a>
+                    <a name="//apple_ref/swift/Enum/AvailabilityMode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV16AvailabilityModeO">AvailabilityMode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/AvailabilityMode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AvailabilityMode</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV15CarAvailabilityV"></a>
+                    <a name="//apple_ref/swift/Struct/CarAvailability" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV15CarAvailabilityV">CarAvailability</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/CarAvailability.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CarAvailability</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV4StopV"></a>
+                    <a name="//apple_ref/swift/Struct/Stop" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV4StopV">Stop</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Stop.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Stop</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV8OperatorV"></a>
+                    <a name="//apple_ref/swift/Struct/Operator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV8OperatorV">Operator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Operator.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Operator</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV4UserV"></a>
+                    <a name="//apple_ref/swift/Struct/User" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV4UserV">User</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/User.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">User</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV5PhoneV"></a>
+                    <a name="//apple_ref/swift/Struct/Phone" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV5PhoneV">Phone</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Phone.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Phone</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV5EmailV"></a>
+                    <a name="//apple_ref/swift/Struct/Email" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV5EmailV">Email</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/Email.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Email</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Private%20vehicles"></a>
+                <a name="//apple_ref/swift/Section/Private vehicles" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Private%20vehicles"></a>
+                  <h3 class="section-name"><span>Private vehicles</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV18PrivateVehicleTypeO"></a>
+                    <a name="//apple_ref/swift/Enum/PrivateVehicleType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV18PrivateVehicleTypeO">PrivateVehicleType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/PrivateVehicleType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PrivateVehicleType</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV14PrivateVehicleV"></a>
+                    <a name="//apple_ref/swift/Struct/PrivateVehicle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV14PrivateVehicleV">PrivateVehicle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The TripGo API-compliant dictionary representation of a vehicle</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PrivateVehicle</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7TripKit5TKAPIV11ServerErrorV"></a>
+                    <a name="//apple_ref/swift/Struct/ServerError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7TripKit5TKAPIV11ServerErrorV">ServerError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../../TripKit/Structs/TKAPI/ServerError.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ServerError</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2025 <a class="link" href="https://skedgo.com" target="_blank" rel="external noopener">SkedGo</a>. All rights reserved. (Last updated: 2025-01-08)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>
