@@ -438,7 +438,7 @@ extension TKUIRoutingResultsCard {
       progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
       return progressCell
       
-    case .trip(let trip):
+    case .trip(let trip, _):
       let tripCell = tableView.dequeueReusableCell(withIdentifier: TKUITripCell.reuseIdentifier, for: indexPath) as! TKUITripCell
       tripCell.configure(trip, preferredContentSizeCategory: preferredContentSizeCategory)
       tripCell.separatorView.isHidden = !(dataSource.sectionModels[indexPath.section].items.count > 1)

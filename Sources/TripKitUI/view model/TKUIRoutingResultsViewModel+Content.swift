@@ -14,18 +14,11 @@ import RxCocoa
 
 import TripKit
 
-// MARK: - List content
-
-extension TKUIRoutingResultsViewModel {
-  
-}
-
 // MARK: - Map Content
 
 extension TKUIRoutingResultsViewModel {
 
   typealias MapContent = (all: [TKUIRoutingResultsMapRouteItem], selection: TKUIRoutingResultsMapRouteItem?)
-
   
 }
 
@@ -219,7 +212,8 @@ extension TKUIRoutingResultsViewModel {
   enum Item {
     
     /// A regular/expanded trip
-    case trip(Trip)
+    /// Also include update URL to allow checking when a trip changed and then update the cell.
+    case trip(Trip, lastUpdateURL: String?)
     
     case progress
     
@@ -227,7 +221,7 @@ extension TKUIRoutingResultsViewModel {
     
     var trip: Trip? {
       switch self {
-      case .trip(let trip): return trip
+      case .trip(let trip, _): return trip
       case .progress, .customItem: return nil
       }
     }
@@ -303,11 +297,11 @@ extension TKMetricClassifier.Classification {
 extension TKUIRoutingResultsViewModel.Item {
   
   fileprivate init?(trip: Trip, in group: TripGroup, filter: Bool) {
-    guard filter else { self = .trip(trip); return }
+    guard filter else { self = .trip(trip, lastUpdateURL: trip.updateURLString); return }
     
     switch group.visibility {
     case .hidden: return nil
-    case .full:   self = .trip(trip)
+    case .full:   self = .trip(trip, lastUpdateURL: trip.logURLString)
     }
   }
   
@@ -349,7 +343,9 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
 
 func ==(lhs: TKUIRoutingResultsViewModel.Item, rhs: TKUIRoutingResultsViewModel.Item) -> Bool {
   switch (lhs, rhs) {
-  case (.trip(let left), .trip(let right)): return left.objectID == right.objectID
+  case (.trip(let left, let leftURL), .trip(let right, let rightURL)):
+    return left.objectID == right.objectID
+        && leftURL == rightURL
   case (.progress, .progress): return true
   case (.customItem(let left), .customItem(let right)): return left == right
   default: return false
@@ -361,7 +357,7 @@ extension TKUIRoutingResultsViewModel.Item: IdentifiableType {
   typealias Identity = String
   var identity: Identity {
     switch self {
-    case .trip(let trip): return trip.objectID.uriRepresentation().absoluteString
+    case .trip(let trip, _): return trip.objectID.uriRepresentation().absoluteString
     case .progress: return "progress_indicator"
     case .customItem: return "customItem" // should only ever have one
     }
