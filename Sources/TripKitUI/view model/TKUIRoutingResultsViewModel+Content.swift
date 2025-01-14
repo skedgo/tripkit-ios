@@ -375,6 +375,11 @@ extension TKUIRoutingResultsViewModel.Section: AnimatableSectionModelType {
   
   var identity: Identity {
     let itemIdentity = items.first?.identity ?? "Empty"
-    return itemIdentity + (action?.title ?? "")
+    
+    // `AnimatableSectionModelType` seems to only pick up changes to items
+    // not to the section otherwise itself. But badge + cost are somewhat
+    // dynamic when new trips pop in, or a real-time or booking update changes
+    // a trip's metrics. So we smush them into the identity to force an update.
+    return itemIdentity + (action?.title ?? "") + (badge?.rawValue ?? "") + "\(costs.hashValue)"
   }
 }
