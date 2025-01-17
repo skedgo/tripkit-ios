@@ -155,6 +155,9 @@ extension TKQuickBooking {
     /// Localised string for doing booking
     public let bookingTitle: String
     
+    /// Warning to show why `bookingTitle` is disabled.
+    public let warningMessage: String?
+    
     @DefaultEmptyArray public var fares: [TKBooking.Fare]
     
     /// `true` if only a single fare is allowed to be selected
@@ -165,6 +168,7 @@ extension TKQuickBooking {
       case bookingTitle
       case bookingURL
       case bookingResponseKind = "bookingResponseType"
+      case warningMessage
       case fares
       case singleFareOnly
     }
