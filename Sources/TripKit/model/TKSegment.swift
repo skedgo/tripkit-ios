@@ -171,7 +171,7 @@ public class TKSegment: NSObject {
         }
       }
     }
-    guard distancesByTag.count > 1 || distancesByTag.keys.first != .other else {
+    guard !distancesByTag.isEmpty, distancesByTag.count > 1 || distancesByTag.keys.first != .other else {
       _distanceByRoadTags = nil
       return nil
     }
