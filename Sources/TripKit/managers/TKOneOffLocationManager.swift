@@ -8,10 +8,10 @@
 
 import Foundation
 
-import CoreLocation
+@preconcurrency import CoreLocation
 
 @available(iOS 14.0, macOS 11.0,  *)
-public class TKOneOffLocationManager: NSObject {
+public final class TKOneOffLocationManager: NSObject {
   
   public override init() {
     locationManager = .init()
