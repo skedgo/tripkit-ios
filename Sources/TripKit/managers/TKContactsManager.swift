@@ -100,6 +100,7 @@ public class TKContactsManager: NSObject, TKPermissionManager {
   public var authorizationStatus: TKAuthorizationStatus {
     switch CNContactStore.authorizationStatus(for: .contacts) {
     case .authorized: return .authorized
+    case .limited: return .authorized
     case .denied: return .denied
     case .notDetermined: return .notDetermined
     case .restricted: return .restricted
