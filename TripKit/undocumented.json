@@ -2278,244 +2278,209 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
       "line": 21,
-      "symbol": "TKImage.iconModeAutoRickshaw",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 22,
       "symbol": "TKImage.iconModeBicycle",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 23,
+      "line": 22,
       "symbol": "TKImage.iconModeBicycleElectric",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 24,
+      "line": 23,
       "symbol": "TKImage.iconModeBicycleFolding",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 25,
+      "line": 24,
       "symbol": "TKImage.iconModeBus",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 26,
-      "symbol": "TKImage.iconModeCablecar",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 27,
+      "line": 25,
       "symbol": "TKImage.iconModeCar",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 28,
+      "line": 26,
       "symbol": "TKImage.iconModeCarPool",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 29,
+      "line": 27,
       "symbol": "TKImage.iconModeCarRideShare",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 30,
+      "line": 28,
       "symbol": "TKImage.iconModeCarShare",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 31,
+      "line": 29,
       "symbol": "TKImage.iconModeCoach",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 32,
+      "line": 30,
       "symbol": "TKImage.iconModeFerry",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 33,
-      "symbol": "TKImage.iconModeFunicular",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 34,
-      "symbol": "TKImage.iconModeGondola",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 35,
+      "line": 31,
       "symbol": "TKImage.iconModeHoverboard",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 36,
+      "line": 32,
       "symbol": "TKImage.iconModeKickscooter",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 37,
-      "symbol": "TKImage.iconModeMonorail",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 38,
+      "line": 33,
       "symbol": "TKImage.iconModeMotorbike",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 39,
+      "line": 34,
       "symbol": "TKImage.iconModeMotoscooter",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 40,
+      "line": 35,
       "symbol": "TKImage.iconModeParking",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 41,
+      "line": 36,
       "symbol": "TKImage.iconModePublicTransport",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 42,
+      "line": 37,
       "symbol": "TKImage.iconModeSegway",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 43,
+      "line": 38,
       "symbol": "TKImage.iconModeTaxi",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 44,
+      "line": 39,
       "symbol": "TKImage.iconModeTrain",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 45,
+      "line": 40,
       "symbol": "TKImage.iconModeTrainIntercity",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 46,
+      "line": 41,
       "symbol": "TKImage.iconModeTram",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 47,
+      "line": 42,
       "symbol": "TKImage.iconModeUnicycle",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 48,
+      "line": 43,
       "symbol": "TKImage.iconModeWalk",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 49,
+      "line": 44,
       "symbol": "TKImage.iconModeWheelchair",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 53,
+      "line": 48,
       "symbol": "TKImage.iconBattery0",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 54,
+      "line": 49,
       "symbol": "TKImage.iconBattery25",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 55,
+      "line": 50,
       "symbol": "TKImage.iconBattery50",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 56,
+      "line": 51,
       "symbol": "TKImage.iconBattery75",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 57,
+      "line": 52,
       "symbol": "TKImage.iconBattery100",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/core/TKImage+TripKit.swift",
-      "line": 58,
+      "line": 53,
       "symbol": "TKImage.iconBattery",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
@@ -14822,160 +14787,153 @@
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
       "line": 24,
-      "symbol": "TKTransportMode.autoRickshaw",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 25,
       "symbol": "TKTransportMode.car",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 26,
+      "line": 25,
       "symbol": "TKTransportMode.carShare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 27,
+      "line": 26,
       "symbol": "TKTransportMode.carRental",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 28,
+      "line": 27,
       "symbol": "TKTransportMode.carPool",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 29,
+      "line": 28,
       "symbol": "TKTransportMode.motorbike",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 30,
+      "line": 29,
       "symbol": "TKTransportMode.micromobility",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 31,
+      "line": 30,
       "symbol": "TKTransportMode.bicycle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 32,
+      "line": 31,
       "symbol": "TKTransportMode.micromobilityShared",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 33,
+      "line": 32,
       "symbol": "TKTransportMode.bicycleShared",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 34,
+      "line": 33,
       "symbol": "TKTransportMode.walking",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 35,
+      "line": 34,
       "symbol": "TKTransportMode.wheelchair",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 37,
+      "line": 36,
       "symbol": "TKTransportMode.bicycleDeprecated",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 38,
+      "line": 37,
       "symbol": "TKTransportMode.bikeShareDeprecated",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 40,
+      "line": 39,
       "symbol": "TKTransportMode.modeIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 112,
+      "line": 109,
       "symbol": "TKTransportMode.modeIdentifierIsPublicTransport(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 116,
+      "line": 113,
       "symbol": "TKTransportMode.modeIdentifierIsWalking(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 120,
+      "line": 117,
       "symbol": "TKTransportMode.modeIdentifierIsWheelchair(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 124,
+      "line": 121,
       "symbol": "TKTransportMode.modeIdentifierIsCycling(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 182,
+      "line": 179,
       "symbol": "TKTransportMode",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 183,
+      "line": 180,
       "symbol": "TKTransportMode.color(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 248,
+      "line": 239,
       "symbol": "TKTransportMode.image(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKTransportMode.swift",
-      "line": 254,
+      "line": 245,
       "symbol": "TKTransportMode.image(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
