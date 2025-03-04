@@ -155,7 +155,7 @@ extension TKSegment: TKUISemaphoreDisplayable {
   
   public var canFlipImage: Bool {
     // only those pointing left or right
-    return isSelfNavigating || self.modeIdentifier == TKTransportMode.autoRickshaw.modeIdentifier
+    return isSelfNavigating
   }
   
   public var isTerminal: Bool {
