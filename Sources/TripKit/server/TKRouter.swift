@@ -402,7 +402,7 @@ fileprivate extension TKRouterRequestable {
 
 extension TKRoutingQuery: TKRouterRequestable where Context == NSManagedObjectContext {
   public func toTripRequest() -> TripRequest {
-    guard let context = context else { preconditionFailure() }
+    guard let context else { preconditionFailure() }
     
     let timeType: TKTimeType
     let date: Date?

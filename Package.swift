@@ -22,7 +22,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.1.0")),
     .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.0.0")),
-    .package(url: "https://github.com/skedgo/GeoMonitor.git", .upToNextMinor(from: "0.1.2")),
+    .package(url: "https://github.com/skedgo/GeoMonitor.git", .upToNextMinor(from: "0.2.0")),
     .package(url: "https://github.com/skedgo/TGCardViewController.git", .upToNextMajor(from: "2.2.10")),
   ],
   targets: [
@@ -32,8 +32,7 @@ let package = Package(
     ),
     .target(
       name: "TripKit",
-      dependencies: ["TripKitAPI"],
-      exclude: ["Supporting Files/Info.plist"]
+      dependencies: ["TripKitAPI"]
     ),
     .target(
       name: "TripKitUI",
@@ -44,14 +43,13 @@ let package = Package(
         "TGCardViewController",
         "GeoMonitor",
       ],
-      exclude: ["Supporting Files/Info.plist", "vendor/RxCombine/LICENSE"]
+      exclude: ["vendor/RxCombine/LICENSE"]
     ),
     .target(
       name: "TripKitInterApp",
       dependencies: [
         "TripKit",
-      ],
-      exclude: ["Supporting Files/Info.plist"]
+      ]
     ),
     .testTarget(
       name: "TripKitTests",
