@@ -3334,16 +3334,16 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKContactsManager.swift",
-      "line": 112,
-      "symbol": "TKContactsManager.authorizationAlertText",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "line": 114,
+      "symbol": "TKContactsManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKContactsManager.swift",
-      "line": 114,
-      "symbol": "TKContactsManager",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 115,
+      "symbol": "TKContactsManager.authorizationAlertText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -19812,28 +19812,28 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 275,
+      "line": 295,
       "symbol": "TKUIServiceCard.tableView(_:viewForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 279,
+      "line": 299,
       "symbol": "TKUIServiceCard.tableView(_:heightForHeaderInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 284,
+      "line": 304,
       "symbol": "TKUIServiceCard.scrollViewShouldScrollToTop(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitUI/cards/TKUIServiceCard.swift",
-      "line": 293,
+      "line": 313,
       "symbol": "TKUIServiceCard.tableView(_:didSelectRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
