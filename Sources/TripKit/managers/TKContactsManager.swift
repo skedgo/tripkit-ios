@@ -100,6 +100,9 @@ public class TKContactsManager: NSObject, TKPermissionManager {
   public var authorizationStatus: TKAuthorizationStatus {
     switch CNContactStore.authorizationStatus(for: .contacts) {
     case .authorized: return .authorized
+#if compiler(>=6.0) // Only Xcode 16.0+ is aware of this
+    case .limited: return .authorized
+#endif
     case .denied: return .denied
     case .notDetermined: return .notDetermined
     case .restricted: return .restricted
