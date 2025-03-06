@@ -21,7 +21,6 @@ public enum TKTransportMode: String, CaseIterable {
   case drt = "ps_drt"
   case taxi = "ps_tax"
   case tnc = "ps_tnc"
-  case autoRickshaw = "ps_ars"
   case car = "me_car"
   case carShare = "me_car-s"
   case carRental = "me_car-r"

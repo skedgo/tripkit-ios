@@ -172,8 +172,6 @@ extension TKTransportMode {
       return "taxi"
     case .tnc:
       return "car-ride-share"
-    case .autoRickshaw:
-      return "auto-rickshaw"
     case .motorbike:
       return "motorbike"
     case .walking:
