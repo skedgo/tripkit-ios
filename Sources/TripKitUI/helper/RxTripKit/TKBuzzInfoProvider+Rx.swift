@@ -12,7 +12,7 @@ import RxSwift
 
 import TripKit
 
-extension TKBuzzInfoProvider: @retroactive ReactiveCompatible {}
+extension TKBuzzInfoProvider: ReactiveCompatible {}
 
 extension Reactive where Base == TKBuzzInfoProvider {
   
