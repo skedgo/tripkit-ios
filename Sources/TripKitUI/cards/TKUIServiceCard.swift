@@ -192,7 +192,27 @@ public class TKUIServiceCard: TKUITableCard {
             isInitial,
             let embarkation = TKUIServiceViewModel.embarkationIndexPath(in: sections)
           else { return }
-          tableView.scrollToRow(at: embarkation, at: .top, animated: false)
+          
+          // This sometimes crashes when called too quickly, so we add this
+          // delay. Crash is insuide UIKit and look like:
+          /*
+           #0  (null) in __exceptionPreprocess ()
+           #1  (null) in objc_exception_throw ()
+           #2  (null) in -[NSAssertionHandler handleFailureInMethod:object:file:lineNumber:description:] ()
+           #3  (null) in -[UITableView _createPreparedCellForGlobalRow:withIndexPath:willDisplay:] ()
+           #4  (null) in -[UITableView _createPreparedCellForRowAtIndexPath:willDisplay:] ()
+           #5  (null) in -[UITableView _heightForRowAtIndexPath:] ()
+           #6  (null) in -[UISectionRowData heightForRow:inSection:canGuess:] ()
+           #7  (null) in -[UITableViewRowData heightForRow:inSection:canGuess:adjustForReorderedRow:] ()
+           #8  (null) in -[UITableViewRowData ensureHeightsFaultedInForScrollToIndexPath:boundsHeight:] ()
+           #9  (null) in -[UITableView _contentOffsetForScrollingToRowAtIndexPath:atScrollPosition:usingPresentationValues:] ()
+           #10  (null) in -[UITableView _scrollToRowAtIndexPath:atScrollPosition:animated:usingPresentationValues:] ()
+           #11  (null) in -[UITableView scrollToRowAtIndexPath:atScrollPosition:animated:] ()
+           #12  0x1049081b0 in closure #1 in closure #7 in TKUIServiceCard.didBuild(tableView:) at TKUIServiceCard.swift:195
+           */
+          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+            tableView.scrollToRow(at: embarkation, at: .top, animated: false)
+          }
         }
       }
       .disposed(by: disposeBag)

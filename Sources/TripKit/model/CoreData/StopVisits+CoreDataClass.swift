@@ -210,11 +210,11 @@ extension StopVisits {
       // do they display differently
       let realTime = Int(time.timeIntervalSince1970) - (Int(time.timeIntervalSince1970) % 60)
       let timeTable = Int(original.timeIntervalSince1970) - (Int(original.timeIntervalSince1970) % 60)
-      let minutes = abs(realTime - timeTable) / 60
+      let minutes = (realTime - timeTable) / 60
       if minutes > 1 {
         return .late(minutes: minutes, after: original)
       } else if minutes < -1 {
-        return .early(minutes: minutes, before: original)
+        return .early(minutes: abs(minutes), before: original)
       } else {
         return .onTime
       }

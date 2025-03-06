@@ -118,7 +118,8 @@ extension Service {
             return best.index
           }
           currentVisit = visits[visitsIndex]
-          coordinate = currentVisit.stop.location?.coordinate ?? .invalid
+          guard let stop = currentVisit.stop else { return -1 }
+          coordinate = stop.location?.coordinate ?? .invalid
           let lastBest = best.index
           best = (.infinity, -1)
           index = max(lastBest, 0) // reset to the previous index

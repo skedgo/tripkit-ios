@@ -28,7 +28,7 @@ extension TKAPI {
 import UIKit
 import CoreData
 
-public class TKShareURLProvider: UIActivityItemProvider {
+public class TKShareURLProvider: UIActivityItemProvider, @unchecked Sendable {
   
   public enum ShareError: Error {
     case missingSaveURL

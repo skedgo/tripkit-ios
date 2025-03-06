@@ -76,9 +76,6 @@ extension TKTransportMode {
     case "pt_pub_subway":     return #colorLiteral(red: 0.6026608944, green: 0.3418461382, blue: 0.614194572, alpha: 1)
     case "pt_pub_tram":       return #colorLiteral(red: 0.9155990481, green: 0.6139323115, blue: 0.2793464363, alpha: 1)
     case "pt_pub_ferry":      return #colorLiteral(red: 0.3049013913, green: 0.617303133, blue: 0.8455126882, alpha: 1)
-    case "pt_pub_cablecar":   return #colorLiteral(red: 0.8532444835, green: 0.3551393449, blue: 0.2957291603, alpha: 1)
-    case "pt_pub_funicular":  return #colorLiteral(red: 0.4494780302, green: 0.664527297, blue: 0.954687655, alpha: 1)
-    case "pt_pub_monorail":   return #colorLiteral(red: 0.8918713927, green: 0.7548664212, blue: 0.08011957258, alpha: 1)
     case "ps_tax":            return #colorLiteral(red: 0.892275691, green: 0.8211820722, blue: 0.07182558626, alpha: 1)
     case "me_car":            return #colorLiteral(red: 0.2567383349, green: 0.5468673706, blue: 0.9439687133, alpha: 1)
     case "me_car-s":          return #colorLiteral(red: 0.4492250085, green: 0.6646941304, blue: 0.9505276084, alpha: 1)
@@ -115,9 +112,6 @@ extension TKTransportMode {
       case "pt_pub_subway":     return "Subway"
       case "pt_pub_tram":       return "Tram"
       case "pt_pub_ferry":      return "Ferry"
-      case "pt_pub_cablecar":   return "Cable car"
-      case "pt_pub_funicular":  return "Funicular"
-      case "pt_pub_monorail":   return "Monorail"
       case "ps_tax":            return "Taxi"
       case "me_car":            return Loc.VehicleTypeCar
       case "me_car-s":          return "Car-share"

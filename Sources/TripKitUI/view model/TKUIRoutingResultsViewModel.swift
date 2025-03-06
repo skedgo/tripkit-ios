@@ -96,9 +96,20 @@ class TKUIRoutingResultsViewModel {
     let requestToShow = requestChanged.map(\.0)
     let updateableRequest = requestChanged.compactMap { $0.1 == true ? $0.0 : nil }
 
-    let tripGroupsChanged = TKUIRoutingResultsViewModel.fetchTripGroups(requestChanged)
+    // This picks up CoreData changes of the trip group itself, but ...
+    let tripGroupsUpdated = TKUIRoutingResultsViewModel.fetchTripGroups(requestChanged)
       .share(replay: 1, scope: .forever)
       .distinctUntilChanged { $0.0 == $1.0 }
+    
+    // ... what we show is the trip, so we'll also need to pick up real-time
+    // updates of those...
+    let tripGroupsRefreshed = NotificationCenter.default.rx.notification(.TKUIUpdatedRealTimeData)
+      .withLatestFrom(tripGroupsUpdated)
+    
+    // ... and what we then use is the combination of the two. Important to
+    // *not* call `.distinctUntilChanged` here, as the TripGroup would not
+    // always have changed, but instead the nested Trip.
+    let tripGroupsChanged = Observable.merge([tripGroupsUpdated, tripGroupsRefreshed])
     
     let builderChanged = builderChangedWithID.map(\.0)
 
@@ -319,7 +330,7 @@ extension TKUIRoutingResultsViewModel {
     init?(selection: Item) {
       switch selection {
       case .customItem(let customItem): self = .showCustomItem(customItem)
-      case .trip(let trip): self = .showTrip(trip)
+      case .trip(let trip, _): self = .showTrip(trip)
       default: return nil
       }
     }
