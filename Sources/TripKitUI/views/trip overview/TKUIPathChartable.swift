@@ -31,11 +31,11 @@ extension TKPathFriendliness: TKUIPathChartable {
   }
 }
 
-extension Shape.RoadTag: TKUIPathChartable {
+extension TKAPI.RoadTag: TKUIPathChartable {
   var chartTitle: String { localized }
   var chartColor: TKColor { safety.color }
   
-  func chartOrderCompared(to other: Shape.RoadTag) -> ComparisonResult {
+  func chartOrderCompared(to other: TKAPI.RoadTag) -> ComparisonResult {
     if safety == other.safety {
       return .orderedSame
     } else if safety < other.safety {

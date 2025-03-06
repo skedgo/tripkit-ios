@@ -7,8 +7,11 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import CoreLocation
 import MapKit
+#endif
 
 // MARK: - Fetcher methods
 
@@ -125,6 +128,7 @@ public enum TKBuzzInfoProvider {
     await fetchPublicTransportModes(for: region)
   }
 
+#if canImport(MapKit)
   /**
    Asynchronously fetches additional location information for a specified coordinate.
    */
@@ -143,6 +147,7 @@ public enum TKBuzzInfoProvider {
       region: region
     ).result.get()
   }
+#endif
   
   /**
    Asynchronously fetches additional location information for a location of specified ID
@@ -160,6 +165,7 @@ public enum TKBuzzInfoProvider {
     ).result.get()
   }
   
+#if canImport(MapKit)
   /**
    Asynchronously fetches additional location information for a specified coordinate.
    */
@@ -168,6 +174,7 @@ public enum TKBuzzInfoProvider {
     annotation.coordinate = coordinate
     return try await fetchLocationInformation(annotation, for: region)
   }
+#endif
   
   // MARK: - Transit alerts
   
@@ -177,7 +184,7 @@ public enum TKBuzzInfoProvider {
   public static func fetchTransitAlerts(for region: TKRegion) async throws -> [TKAPI.AlertMapping] {
     let paras: [String: Any] = [
       "region": region.code,
-      "v": TKSettings.parserJsonVersion
+      "v": TKAPIConfig.parserJsonVersion
     ]
 
     return try await TKServer.shared.hit(

@@ -6,6 +6,8 @@
 //
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreLocation
 
@@ -164,3 +166,5 @@ extension TKSegment {
   }
   
 }
+
+#endif

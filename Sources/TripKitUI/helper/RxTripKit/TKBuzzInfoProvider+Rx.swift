@@ -12,7 +12,7 @@ import RxSwift
 
 import TripKit
 
-extension TKBuzzInfoProvider: @retroactive ReactiveCompatible {}
+extension TKBuzzInfoProvider: ReactiveCompatible {}
 
 extension Reactive where Base == TKBuzzInfoProvider {
   
@@ -40,7 +40,7 @@ extension Reactive where Base == TKBuzzInfoProvider {
   public static func fetchTransitAlertMappings(forRegion region: TKRegion) -> Single<[TKAPI.AlertMapping]> {
     let paras: [String: Any] = [
       "region": region.code,
-      "v": TKSettings.parserJsonVersion
+      "v": TKAPIConfig.parserJsonVersion
     ]
     
     return TKServer.shared.rx

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import CoreLocation
-
 /// Top-level struct representing a GeoJSON, which
 /// is either a (geometrical) feature or a collection
 /// there-of.
@@ -31,9 +29,9 @@ public enum TKGeoJSON {
   }
   
   public struct Position: Hashable {
-    public let latitude: CLLocationDegrees
-    public let longitude: CLLocationDegrees
-    public let altitude: CLLocationDistance?
+    public let latitude: TKAPI.Degrees
+    public let longitude: TKAPI.Degrees
+    public let altitude: TKAPI.Distance?
   }
   
   public struct Polygon: Hashable {
@@ -57,7 +55,7 @@ struct TKPeliasProperties: Decodable {
   
   let name: String
   let label: String
-  let distance: CLLocationDistance
+  let distance: TKAPI.Distance
   let layer: String? // e.g., address or venue or locality
   
   let country: String?        //  United States -     Australia -        Germany

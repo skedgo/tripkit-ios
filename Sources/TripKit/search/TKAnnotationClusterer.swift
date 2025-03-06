@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -72,3 +74,5 @@ extension TKClusterAnnotation: TKClusterable {
     return memberAnnotations.first?.subtitle ?? nil
   }
 }
+
+#endif

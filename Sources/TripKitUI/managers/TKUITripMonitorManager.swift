@@ -219,7 +219,7 @@ extension TKAPI.TripNotification {
   var region: CLCircularRegion? {
     switch kind {
     case let .circle(center, radius, _):
-      return CLCircularRegion(center: center, radius: radius, identifier: id)
+      return CLCircularRegion(center: .init(latitude: center.latitude, longitude: center.longitude), radius: radius, identifier: id)
     case .time, .pushNotification:
       return nil
     }

@@ -7,7 +7,10 @@
 //
 
 import Foundation
+
+#if canImport(CoreLocation)
 import CoreLocation
+#endif
 
 
 /// Simple dictionary representing a segment that can be
@@ -22,6 +25,7 @@ public enum TKTripPattern {
     return trip.segments.compactMap(\.pattern)
   }
 
+#if canImport(CoreLocation)
   public static func od(for pattern: [TKSegmentPattern]) -> (o: CLLocationCoordinate2D, d: CLLocationCoordinate2D)? {
     if case .coordinate(let start) = pattern.first?.start,
        case .coordinate(let end) = pattern.last?.end {
@@ -30,7 +34,9 @@ public enum TKTripPattern {
       return nil
     }
   }
+#endif
   
+#if canImport(CoreData)
   public static func modeLabels(for trip: Trip) -> [String] {
     return trip.segments.compactMap { segment in
       guard !segment.isStationary else { return nil }
@@ -43,6 +49,7 @@ public enum TKTripPattern {
       }
     }
   }
+#endif
   
   public static func modeLabels(for pattern: [TKSegmentPattern]) -> [String] {
     return pattern.compactMap { pattern in
@@ -57,6 +64,7 @@ public enum TKTripPattern {
 }
 
 
+#if canImport(CoreData)
 
 extension TKSegment {
   
@@ -82,3 +90,5 @@ extension TKSegment {
   }
   
 }
+
+#endif

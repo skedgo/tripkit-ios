@@ -18,7 +18,7 @@ class ViewController: NSViewController {
   var from: MKAnnotation? = nil
   var to: MKAnnotation? = nil
   
-  let router = TKRouter()
+  let router = TKRouter(config: .userSettings())
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -71,7 +71,7 @@ class ViewController: NSViewController {
       TKTransportMode.publicTransport.modeIdentifier
     ]
     
-    let query = TKRouter.RoutingQuery(
+    let query = TKRoutingQuery(
       from: from, to: to, at: .leaveASAP, modes: [
       "pt_pub"], context: TripKit.shared.tripKitContext
     )

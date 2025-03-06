@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import MapKit
 
 public class TKColoredRoute: NSObject {
@@ -52,3 +54,4 @@ extension TKColoredRoute: TKDisplayableRoute {
   
 }
 
+#endif

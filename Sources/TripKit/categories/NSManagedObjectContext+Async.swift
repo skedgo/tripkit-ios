@@ -6,6 +6,8 @@
 //  Copyright © 2023 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import CoreData
 
 extension NSManagedObjectContext {
@@ -45,3 +47,5 @@ extension NSManagedObjectContext {
   }
   
 }
+
+#endif

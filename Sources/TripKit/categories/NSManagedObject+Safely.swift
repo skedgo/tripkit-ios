@@ -6,6 +6,8 @@
 //  Copyright © 2022 SkedGo Pty Ltd. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import CoreData
 
 func tk_safeRead<S, V>(_ keyPath: KeyPath<S, V>, from target: S) -> V {
@@ -29,3 +31,5 @@ func tk_safeWrite<S, V>(_ keyPath: WritableKeyPath<S, V>, value: V, to target: i
     target[keyPath: keyPath] = value
   }
 }
+
+#endif

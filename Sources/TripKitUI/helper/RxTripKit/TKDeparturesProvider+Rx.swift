@@ -37,7 +37,7 @@ extension TKDeparturesProvider {
       "region": region.code,
       "embarkationStops": stopCodes,
       "limit": limit,
-      "config": TKSettings.Config.userSettings().paras
+      "config": TKAPIConfig.userSettings().paras
     ]
     
     return TKServer.shared.rx

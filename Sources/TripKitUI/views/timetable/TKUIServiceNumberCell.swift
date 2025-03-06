@@ -12,10 +12,10 @@ class TKUIServiceNumberCell: UICollectionViewCell {
 
   static let reuseIdentifier: String = "TKUIServiceNumberCell"
   
-  static let nib = UINib(nibName: "TKUIServiceNumberCell", bundle: Bundle(for: TKUIServiceNumberCell.self))
+  static let nib = UINib(nibName: "TKUIServiceNumberCell", bundle: .tripKitUI)
   
   static func newInstance() -> TKUIServiceNumberCell {
-    return Bundle(for: self).loadNibNamed("TKUIServiceNumberCell", owner: self, options: nil)?.first as! TKUIServiceNumberCell
+    return Bundle.tripKitUI.loadNibNamed("TKUIServiceNumberCell", owner: self, options: nil)?.first as! TKUIServiceNumberCell
   }
 
   @IBOutlet weak var wrapperView: UIView!

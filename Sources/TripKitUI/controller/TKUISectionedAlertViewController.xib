@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TKUISectionedAlertViewController" customModule="TripKitUI" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TKUISectionedAlertViewController" customModule="TripKitUI">
             <connections>
                 <outlet property="searchBar" destination="QcU-yO-3Wu" id="wCd-hn-t5M"/>
                 <outlet property="tableView" destination="M79-lI-HaZ" id="00q-mE-2fP"/>

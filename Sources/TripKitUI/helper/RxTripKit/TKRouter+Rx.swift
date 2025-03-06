@@ -13,7 +13,7 @@ import RxSwift
 
 import TripKit
 
-extension TKTripFetcher: @retroactive ReactiveCompatible {}
+extension TKTripFetcher: ReactiveCompatible {}
 extension Reactive where Base == TKTripFetcher {
   public static func downloadTrip(_ url: URL, identifier: String? = nil, into context: NSManagedObjectContext) -> Single<Trip> {
     return Single.create { observer in
@@ -34,7 +34,7 @@ extension Reactive where Base == TKTripFetcher {
  
 extension Reactive where Base : TKRouter {
   public static func fetchBestTrip<C>(for request: TripRequest, modes: C) -> Single<Trip> where C: Collection, C.Element == String {
-    var router: TKRouter! = TKRouter()
+    var router: TKRouter! = TKRouter(config: .userSettings())
     if !modes.isEmpty {
       router.modeIdentifiers = Set(modes)
     }

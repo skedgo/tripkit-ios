@@ -6,6 +6,8 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
+#if canImport(CoreData)
+
 import Foundation
 import CoreLocation
 import MapKit
@@ -35,113 +37,30 @@ public class TKShareHelper: NSObject {
 
 extension TKShareHelper {
   
-  public static func queryDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) async throws -> QueryDetails {
-    
-    guard
-      let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
-      let items = components.queryItems
-      else { throw ExtractionError.invalidURL }
-    
-    // get the input from the query
-    var tlat, tlng: Double?
-    var name: String?
-    var flat, flng: Double?
-    var type: Int?
-    var time: Date?
-    var modes: [String] = .init()
-    for item in items {
-      guard let value = item.value, !value.isEmpty else { continue }
-      switch item.name {
-      case "tlat":  tlat = Double(value)
-      case "tlng":  tlng = Double(value)
-      case "tname": name = value
-      case "flat":  flat = Double(value)
-      case "flng":  flng = Double(value)
-      case "type":  type = Int(value)
-      case "time":
-        guard let date = TKParserHelper.parseDate(value) else { continue }
-        time = date
-      case "modes", "mode":
-        modes.append(value)
-      default:
-        TKLog.verbose("Ignoring \(item.name)=\(value)")
-        continue
-      }
+  /// Extracts the query details from a TripGo API-compatible deep link
+  /// - parameter url: TripGo API-compatible deep link
+  /// - parameter geocoder: Geocoder used for filling in missing information
+  public static func queryDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) async throws -> TKRoutingQuery<Never> {
+    var query = try TKRoutingQuery(url: url).orThrow(ExtractionError.invalidURL)
+    if query.to.isValid {
+      return query
     }
     
-    func coordinate(lat: Double?, lng: Double?) -> CLLocationCoordinate2D {
-      if let lat = lat, let lng = lng {
-        return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-      } else {
-        return kCLLocationCoordinate2DInvalid
-      }
-    }
-    
-    // we need a to coordinate OR a name
-    let to = coordinate(lat: tlat, lng: tlng)
-    guard to.isValid || name != nil else {
-      throw ExtractionError.missingNecessaryInformation
-    }
-    
-    // we're good to go, construct the time and from info
-    let timeType: QueryDetails.Time
-    if let type = type {
-      switch (type, time != nil) {
-      case (1, true): timeType = .leaveAfter(time!)
-      case (2, true): timeType = .arriveBy(time!)
-      default:        timeType = .leaveASAP
-      }
-    } else {
-      timeType = .leaveASAP
-    }
-    let from = coordinate(lat: flat, lng: flng)
-    
-    // make sure we got a destination
-    let named = TKNamedCoordinate(coordinate: to)
-    named.address = name
+    // Destination is missing coordinates, geocode it.
+    let named = TKNamedCoordinate(query.to)
+    named.address = query.to.name
     
     let valid = try await named.tk_valid(geocoder: geocoder)
     guard valid.coordinate.isValid else {
-      throw ExtractionError.missingNecessaryInformation
+      throw ExtractionError.invalidURL
     }
-    return QueryDetails(
-      start: from.isValid ? from : nil,
-      end: valid.coordinate,
-      title: name,
-      timeType: timeType,
-      modes: modes
-    )
+    
+    query.to = .init(annotation: valid)
+    query.to.name = named.address
+    return query
   }
   
 }
-
-//+ (void)geocodeString:(NSString *)string
-//usingGeocoder:(id<SGGeocoder>)geocoder
-//completion:(void(^)( TKNamedCoordinate * _Nullable coordinate))completion
-//{
-//  [geocoder geocodeString:string
-//    nearRegion:MKMapRectWorld
-//    success:
-//    ^(NSString * _Nonnull query, NSArray<TKNamedCoordinate *> * _Nonnull results) {
-//    #pragma unused(query)
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//    id<MKAnnotation> annotation = [TKGeocoderHelper pickBestFromResults:results];
-//    if (annotation) {
-//    TKNamedCoordinate *coordinate = [TKNamedCoordinate namedCoordinateForAnnotation:annotation];
-//    coordinate.name = string;
-//    completion(coordinate);
-//    } else {
-//    completion(nil);
-//    }
-//    });
-//    } failure:
-//    ^(NSString * _Nonnull query, NSError * _Nullable error) {
-//    #pragma unused(query, error)
-//    completion(nil);
-//    }];
-//  
-//}
-
 
 extension TKShareHelper {
   
@@ -181,7 +100,7 @@ extension TKShareHelper {
     return URL(string: baseURL + path)
   }
   
-  public static func meetingDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) async throws -> QueryDetails {
+  public static func meetingDetails(for url: URL, using geocoder: TKGeocoding = TKAppleGeocoder()) async throws -> TKRoutingQuery<Never> {
     guard
       let components = NSURLComponents(url: url, resolvingAgainstBaseURL: false),
       let items = components.queryItems
@@ -233,7 +152,7 @@ extension TKShareHelper {
   public static func stopDetails(for url: URL) throws -> StopDetails {
     let pathComponents = url.path.components(separatedBy: "/")
     guard pathComponents.count >= 4 else {
-      throw ExtractionError.missingNecessaryInformation
+      throw ExtractionError.invalidURL
     }
     
     let region = pathComponents[2]
@@ -285,7 +204,7 @@ extension TKShareHelper {
       return ServiceDetails(region: region, stopCode: stop, serviceID: service)
       
     } else {
-      throw ExtractionError.missingNecessaryInformation
+      throw ExtractionError.invalidURL
     }
   }
 
@@ -330,3 +249,5 @@ extension MKAnnotation {
   }
   
 }
+
+#endif

@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIServiceHeaderView" customModule="TripKitUI" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TKUIServiceHeaderView" customModule="TripKitUI">
             <rect key="frame" x="0.0" y="0.0" width="414" height="324"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -103,7 +103,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Suk-0j-f3c">
                                     <rect key="frame" x="28" y="26" width="354" height="122"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vB3-gf-L3C" customClass="TKUITrainOccupancyView" customModule="TripKitUI" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vB3-gf-L3C" customClass="TKUITrainOccupancyView" customModule="TripKitUI">
                                             <rect key="frame" x="0.0" y="0.0" width="354" height="10"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="10" id="IBF-ox-DIl"/>

@@ -1,7 +1,8 @@
-platform :ios, '15.0'
+platform :ios, '15'
 use_frameworks!
 
 target 'CocoaPodsTest' do
+  pod 'TripKitAPI', :path => '../../'
   pod 'TripKit', :path => '../../'
   pod 'TripKitUI', :path => '../../'
   pod 'TripKitInterApp', :path => '../../'

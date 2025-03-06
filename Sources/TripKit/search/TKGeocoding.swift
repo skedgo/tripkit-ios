@@ -6,6 +6,8 @@
 //  Copyright © 2018 SkedGo. All rights reserved.
 //
 
+#if canImport(MapKit)
+
 import Foundation
 import MapKit
 
@@ -95,3 +97,5 @@ extension TKAutocompleting {
 #endif
   
 }
+
+#endif

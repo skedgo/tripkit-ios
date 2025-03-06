@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+#if canImport(EventKit)
 import EventKit
 import MapKit
 
@@ -154,3 +156,4 @@ extension TKNamedCoordinate {
   
 }
 
+#endif

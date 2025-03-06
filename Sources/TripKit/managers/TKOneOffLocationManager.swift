@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if canImport(CoreLocation)
+
 @preconcurrency import CoreLocation
 
 @available(iOS 14.0, macOS 11.0,  *)
@@ -194,3 +196,5 @@ extension TKOneOffLocationManager: CLLocationManagerDelegate {
   }
   
 }
+
+#endif

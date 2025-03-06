@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import TripKitAPI
 @testable import TripKit
 
 class TKRegionManagerTest: XCTestCase {

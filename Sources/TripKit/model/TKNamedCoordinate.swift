@@ -7,9 +7,13 @@
 //
 
 import Foundation
+
+#if canImport(MapKit)
 import MapKit
 
 open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
+  
+  public static var enableReverseGeocodingAddress: Bool = true
   
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {
@@ -42,7 +46,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   private var _placemark: CLPlacemark? = nil
   @objc public var placemark: CLPlacemark? {
     if let placemark = _placemark { return placemark }
-    guard coordinate.isValid else { return nil }
+    guard coordinate.isValid, TKNamedCoordinate.enableReverseGeocodingAddress else { return nil }
     
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     let geocoder = CLGeocoder()
@@ -120,7 +124,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   }
   
   convenience init(from: TKAPI.Location) {
-    self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
+    self.init(latitude: from.latitude, longitude: from.longitude, name: from.name, address: from.address)
   }
   
   public func assignPlacemark(_ placemark: CLPlacemark, includeName: Bool) {
@@ -372,3 +376,5 @@ extension TKNamedCoordinate: TKGeocodable {
   }
   
 }
+
+#endif

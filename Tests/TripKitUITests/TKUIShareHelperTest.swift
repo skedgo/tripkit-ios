@@ -32,10 +32,10 @@ class TKUIShareHelperTest: XCTestCase {
     
     let result = try await TKShareHelper.queryDetails(for: url, using: geocoder)
     
-    XCTAssertNil(result.start)
-    XCTAssertTrue(result.end.isValid)
-    XCTAssertEqual(result.title, "dragon.letter.spoke")
-    if case .leaveASAP = result.timeType {
+    XCTAssertFalse(result.from.isValid)
+    XCTAssertTrue(result.to.isValid)
+    XCTAssertEqual(result.to.name, "dragon.letter.spoke")
+    if case .leaveASAP = result.at {
       XCTAssertTrue(true)
     } else {
       XCTFail()
@@ -49,12 +49,12 @@ class TKUIShareHelperTest: XCTestCase {
     
     let result = try await TKShareHelper.queryDetails(for: url, using: geocoder)
     
-    XCTAssertNil(result.start)
-    XCTAssertTrue(result.end.isValid)
-    XCTAssertNil(result.title)
-    XCTAssertEqual(result.end.latitude,  -33.94501, accuracy: 0.001)
-    XCTAssertEqual(result.end.longitude, 151.25807, accuracy: 0.001)
-    if case .leaveAfter(let time) = result.timeType {
+    XCTAssertFalse(result.from.isValid)
+    XCTAssertTrue(result.to.isValid)
+    XCTAssertNil(result.from.name)
+    XCTAssertEqual(result.to.latitude,  -33.94501, accuracy: 0.001)
+    XCTAssertEqual(result.to.longitude, 151.25807, accuracy: 0.001)
+    if case .leaveAfter(let time) = result.at {
       XCTAssertEqual(time.timeIntervalSince1970, 1385535734, accuracy: 1)
     } else {
       XCTFail()
@@ -68,12 +68,12 @@ class TKUIShareHelperTest: XCTestCase {
     
     let result = try await TKShareHelper.meetingDetails(for: url, using: geocoder)
     
-    XCTAssertNil(result.start)
-    XCTAssertTrue(result.end.isValid)
-    XCTAssertEqual(result.end.latitude,  -33.94501, accuracy: 0.001)
-    XCTAssertEqual(result.end.longitude, 151.25807, accuracy: 0.001)
+    XCTAssertFalse(result.from.isValid)
+    XCTAssertTrue(result.to.isValid)
+    XCTAssertEqual(result.to.latitude,  -33.94501, accuracy: 0.001)
+    XCTAssertEqual(result.to.longitude, 151.25807, accuracy: 0.001)
     
-    if case .arriveBy(let time) = result.timeType {
+    if case .arriveBy(let time) = result.at {
       XCTAssertEqual(time.timeIntervalSince1970, 1385535734, accuracy: 1)
     } else {
       XCTFail()

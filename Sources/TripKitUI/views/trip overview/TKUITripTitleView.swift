@@ -22,7 +22,7 @@ class TKUITripTitleView: UIView {
   @IBOutlet weak var dismissButton: UIButton!
   
   static func newInstance() -> TKUITripTitleView {
-    return Bundle(for: TKUITripTitleView.self).loadNibNamed("TKUITripTitleView", owner: self, options: nil)?.first as! TKUITripTitleView
+    return Bundle.tripKitUI.loadNibNamed("TKUITripTitleView", owner: self, options: nil)?.first as! TKUITripTitleView
   }
 
   override func awakeFromNib() {

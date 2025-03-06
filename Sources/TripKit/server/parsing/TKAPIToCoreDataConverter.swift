@@ -478,8 +478,8 @@ extension Vehicle {
       lastUpdate = Date()
     }
     
-    latitude = model.location.lat
-    longitude = model.location.lng
+    latitude = model.location.latitude
+    longitude = model.location.longitude
     if let bearing = model.location.bearing {
       self.bearing = NSNumber(value: bearing)
     }
@@ -505,7 +505,7 @@ extension TKVehicular {
       type: privateVehicleType,
       UUID: vehicleID?.uuidString,
       name: name,
-      garage: TKAPI.Location(annotation: garage)
+      garage: garage.map { TKAPI.Location(annotation: $0) }
     )
   }
 }
