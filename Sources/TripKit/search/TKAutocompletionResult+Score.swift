@@ -81,8 +81,16 @@ extension TKAutocompletionResult {
       return 100 // having typed yet means a perfect match of everything you've typed so far
     }
     
+    
+    func nsRange(of string: String) -> NSRange? {
+      let haystack = fullCandidate.lowercased()
+      let needle = string.lowercased()
+      let range = (haystack as NSString).range(of: needle)
+      return  range.location == NSNotFound ? nil : range
+    }
+    
     if target == candidate {
-      return .init(score: 100, ranges: [.init(location: 0, length: candidate.utf8.count)])
+      return .init(score: 100, ranges: [nsRange(of: candidate)].compactMap { $0 })
     }
     
     if target.isAbbreviation(for: candidate) || target.isAbbreviation(for: stringForScoring(fullCandidate, removeBrackets: true)) {
@@ -92,13 +100,7 @@ extension TKAutocompletionResult {
     if candidate.isAbbreviation(for: target) || candidate.isAbbreviation(for: stringForScoring(fullTarget, removeBrackets: true)) {
       return 90
     }
-    
-    func nsRange(of string: String) -> NSRange? {
-      let haystack = fullCandidate.lowercased()
-      let needle = string.lowercased()
-      let range = (haystack as NSString).range(of: needle)
-      return  range.location == NSNotFound ? nil : range
-    }
+
     
     // exact phrase matches
     let excess = candidate.utf8.count - target.utf8.count

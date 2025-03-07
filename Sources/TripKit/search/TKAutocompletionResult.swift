@@ -28,11 +28,19 @@ public struct TKAutocompletionResult {
   
   public let title: String
   
-  public var titleHighlightRanges: [NSRange] = []
+  public var titleHighlightRanges: [NSRange] = [] {
+    didSet {
+      assert(titleHighlightRanges.allSatisfy({ title.count >= $0.upperBound }))
+    }
+  }
   
   public var subtitle: String? = nil
   
-  public var subtitleHighlightRanges: [NSRange] = []
+  public var subtitleHighlightRanges: [NSRange] = [] {
+    didSet {
+      assert(titleHighlightRanges.allSatisfy({ (subtitle ?? "").count >= $0.upperBound }))
+    }
+  }
   
   public let image: TKImage
   
