@@ -11,12 +11,9 @@
 import Foundation
 import MapKit
 
-public class TKGeocodingResultScorer: NSObject {
+enum TKGeocodingResultScorer {
 
-  private override init() {
-  }
-  
-  public static func calculateScore(for annotation: MKAnnotation, searchTerm: String, near region: MKCoordinateRegion, allowLongDistance: Bool, minimum: Int, maximum: Int) -> TKAutocompletionResult.ScoreHighlights {
+  static func calculateScore(for annotation: MKAnnotation, searchTerm: String, near region: MKCoordinateRegion, allowLongDistance: Bool, minimum: Int, maximum: Int) -> TKAutocompletionResult.ScoreHighlights {
     
     guard let title = (annotation.title ?? nil) else {
       return .init(score: 0)
@@ -42,7 +39,7 @@ public class TKGeocodingResultScorer: NSObject {
     )
   }
   
-  public static func calculateScore(title: String, subtitle: String?, searchTerm: String, minimum: Int, maximum: Int) -> TKAutocompletionResult.ScoreHighlights {
+  static func calculateScore(title: String, subtitle: String?, searchTerm: String, minimum: Int, maximum: Int) -> TKAutocompletionResult.ScoreHighlights {
     assert(maximum > minimum, "Order must be preserved.")
     
     let titleScore = TKAutocompletionResult.nameScore(searchTerm: searchTerm, candidate: title)

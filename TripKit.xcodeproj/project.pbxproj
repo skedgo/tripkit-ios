@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A0F254C27F5397100DEB6A0 /* NSManagedObject+Safely.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */; };
+		3A10C71A2D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C7192D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift */; };
 		3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; };
@@ -767,6 +768,7 @@
 
 /* Begin PBXFileReference section */
 		3A0F254B27F5397100DEB6A0 /* NSManagedObject+Safely.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Safely.swift"; sourceTree = "<group>"; };
+		3A10C7192D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionHighlightTest.swift; sourceTree = "<group>"; };
 		3A19BE2427ABA44500B4AA8C /* TKUITripTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUITripTitleView.swift; sourceTree = "<group>"; };
 		3A19BE2627ABA44D00B4AA8C /* TKUITripTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TKUITripTitleView.xib; sourceTree = "<group>"; };
 		3A1AABAA26CB6F8000FDDB06 /* TKAutocompletionResult+Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TKAutocompletionResult+Icon.swift"; sourceTree = "<group>"; };
@@ -2683,6 +2685,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */,
+				3A10C7192D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift */,
 				3AD653EF28FF544F00A846C5 /* TKAutocompletionResultTest.swift */,
 				3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */,
 				3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */,
@@ -3630,6 +3633,7 @@
 				3ACD91E826CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift in Sources */,
 				3ACD920026CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift in Sources */,
 				3ACD91FF26CCC47B0075CCF3 /* BlockingObservable.swift in Sources */,
+				3A10C71A2D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift in Sources */,
 				3ACD91EF26CCC47B0075CCF3 /* Event+Equatable.swift in Sources */,
 				3ACD91ED26CCC47B0075CCF3 /* Any+Equatable.swift in Sources */,
 				3AFF2AA426C69A96007809CD /* TKBuzzInfoProviderTest.swift in Sources */,
