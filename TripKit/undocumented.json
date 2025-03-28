@@ -1,216 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/TKStyleManager+UIKit.swift",
-      "line": 18,
-      "symbol": "TKStyleManager.addDefaultShadow(to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/TKStyleManager+UIKit.swift",
-      "line": 25,
-      "symbol": "TKStyleManager.addDefaultOutline(to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/TKStyleManager+UIKit.swift",
-      "line": 31,
-      "symbol": "TKStyleManager.style(_:includingBackground:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/TKStyleManager+UIKit.swift",
-      "line": 35,
-      "symbol": "TKStyleManager.style(_:includingBackground:styler:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 18,
-      "symbol": "UIColor.tkAppTintColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 20,
-      "symbol": "UIColor.tkBarBackgroundColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 22,
-      "symbol": "UIColor.tkBarForegroundColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 26,
-      "symbol": "UIColor.tkLabelPrimary",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 27,
-      "symbol": "UIColor.tkLabelSecondary",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 28,
-      "symbol": "UIColor.tkLabelTertiary",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 29,
-      "symbol": "UIColor.tkLabelQuarternary",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 31,
-      "symbol": "UIColor.tkLabelOnDark",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 32,
-      "symbol": "UIColor.tkLabelOnLight",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 36,
-      "symbol": "UIColor.tkFilledButtonBackgroundColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 37,
-      "symbol": "UIColor.tkFilledButtonTextColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 38,
-      "symbol": "UIColor.tkEmptyButtonBackgroundColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 39,
-      "symbol": "UIColor.tkEmptyButtonTextColor",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 43,
-      "symbol": "UIColor.tkStateError",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 44,
-      "symbol": "UIColor.tkStateWarning",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 45,
-      "symbol": "UIColor.tkStateSuccess",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 73,
-      "symbol": "UIColor.tkSeparator",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 79,
-      "symbol": "UIColor.tkMapOverlay",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 80,
-      "symbol": "UIColor.tkSheetOverlay",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 81,
-      "symbol": "UIColor.tkStatusBarOverlay",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 85,
-      "symbol": "UIColor.tkNeutral",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 86,
-      "symbol": "UIColor.tkNeutral1",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 87,
-      "symbol": "UIColor.tkNeutral2",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 88,
-      "symbol": "UIColor.tkNeutral3",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 89,
-      "symbol": "UIColor.tkNeutral4",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/UIKit/UIColor+TripKit.swift",
-      "line": 90,
-      "symbol": "UIColor.tkNeutral5",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/categories/MKMultiPoint+ClosestPoint.swift",
       "line": 22,
       "symbol": "MKMultiPoint.closestPoint(to:)",
@@ -2732,13 +2522,6 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKCalendarManager+Autocompleting.swift",
-      "line": 72,
-      "symbol": "TKCalendarManager.triggerAdditional(presenter:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKCalendarManager+Autocompleting.swift",
       "line": 147,
       "symbol": "TKNamedCoordinate.eventStartTime",
       "symbol_kind": "source.lang.swift.decl.var.instance",
@@ -2833,13 +2616,6 @@
       "line": 31,
       "symbol": "TKContactsManager.allowLocationInfoButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKContactsManager+TKAutocompleting.swift",
-      "line": 65,
-      "symbol": "TKContactsManager.triggerAdditional(presenter:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -3228,20 +3004,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKPermissionManager+AuthorizationAlert.swift",
-      "line": 16,
-      "symbol": "TKPermissionManager.tryAuthorization(sender:in:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKPermissionManager+AuthorizationAlert.swift",
-      "line": 43,
-      "symbol": "TKPermissionManager.showAuthorizationAlert(sender:in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKPermissionManager.swift",
       "line": 11,
       "symbol": "TKAuthorizationStatus",
@@ -3267,13 +3029,6 @@
       "line": 14,
       "symbol": "TKAuthorizationStatus.denied",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKPermissionManager.swift",
-      "line": 14,
-      "symbol": "TKPermissionManager",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -3407,13 +3162,6 @@
       "line": 161,
       "symbol": "TKRegionManager.sortedModes(in:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 15,
-      "symbol": "TKStyleManager",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -3567,34 +3315,6 @@
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
       "line": 224,
       "symbol": "TKStyleManager.mediumSystemFont(size:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 230,
-      "symbol": "TKStyleManager.customFont(forTextStyle:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 235,
-      "symbol": "TKStyleManager.boldCustomFont(forTextStyle:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 240,
-      "symbol": "TKStyleManager.semiboldCustomFont(forTextStyle:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/managers/TKStyleManager.swift",
-      "line": 245,
-      "symbol": "TKStyleManager.mediumCustomFont(forTextStyle:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
@@ -5545,13 +5265,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Shape+Data.swift",
-      "line": 71,
-      "symbol": "TKAPI.RoadSafety.color",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopLocation+CoreDataProperties.swift",
       "line": 18,
       "symbol": "StopLocation.fetchRequest()",
@@ -5688,27 +5401,6 @@
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopLocation.swift",
       "line": 45,
       "symbol": "StopLocation.coordinate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopLocation.swift",
-      "line": 56,
-      "symbol": "StopLocation.activityViewControllerPlaceholderItem(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopLocation.swift",
-      "line": 61,
-      "symbol": "StopLocation.activityViewController(_:itemForActivityType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopLocation.swift",
-      "line": 80,
-      "symbol": "Array.localizedShareString",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -5899,34 +5591,6 @@
       "line": 271,
       "symbol": "StopVisits.coordinate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopVisits+CoreDataClass.swift",
-      "line": 291,
-      "symbol": "StopVisits",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopVisits+CoreDataClass.swift",
-      "line": 293,
-      "symbol": "StopVisits.activityViewController(_:subjectForActivityType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopVisits+CoreDataClass.swift",
-      "line": 297,
-      "symbol": "StopVisits.activityViewControllerPlaceholderItem(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/StopVisits+CoreDataClass.swift",
-      "line": 301,
-      "symbol": "StopVisits.activityViewController(_:itemForActivityType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -6245,48 +5909,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataClass.swift",
-      "line": 480,
-      "symbol": "Trip",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataClass.swift",
-      "line": 481,
-      "symbol": "Trip.accessibilityLabel",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataClass.swift",
-      "line": 547,
-      "symbol": "Trip",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataClass.swift",
-      "line": 549,
-      "symbol": "Trip.activityViewControllerPlaceholderItem(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataClass.swift",
-      "line": 553,
-      "symbol": "Trip.activityViewController(_:itemForActivityType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataClass.swift",
-      "line": 565,
-      "symbol": "Trip.activityViewController(_:subjectForActivityType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/Trip+CoreDataProperties.swift",
       "line": 18,
       "symbol": "Trip.fetchRequest()",
@@ -6528,20 +6150,6 @@
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/TripGroup+CoreDataClass.swift",
       "line": 38,
       "symbol": "TripGroup.sources",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/TripGroup+CoreDataClass.swift",
-      "line": 104,
-      "symbol": "TripGroup",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/CoreData/TripGroup+CoreDataClass.swift",
-      "line": 105,
-      "symbol": "TripGroup.accessibilityLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -9395,27 +9003,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKSegment.swift",
-      "line": 668,
-      "symbol": "TKSegment",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKSegment.swift",
-      "line": 670,
-      "symbol": "TKSegment.activityViewControllerPlaceholderItem(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKSegment.swift",
-      "line": 674,
-      "symbol": "TKSegment.activityViewController(_:itemForActivityType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/model/TKSortableAnnotation.swift",
       "line": 15,
       "symbol": "TKSortableAnnotation",
@@ -10306,13 +9893,6 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKGeocoding.swift",
-      "line": 69,
-      "symbol": "TKAutocompleting.triggerAdditional(presenter:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKGeocoding.swift",
       "line": 73,
       "symbol": "TKAutocompleting.allowLocationInfoButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
@@ -10351,13 +9931,6 @@
       "line": 84,
       "symbol": "TKAutocompleting.allowLocationInfoButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/search/TKGeocoding.swift",
-      "line": 93,
-      "symbol": "TKAutocompleting.triggerAdditional(presenter:completion:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -12069,48 +11642,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/TKShareURLProvider.swift",
-      "line": 31,
-      "symbol": "TKShareURLProvider",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/TKShareURLProvider.swift",
-      "line": 33,
-      "symbol": "TKShareURLProvider.ShareError",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/TKShareURLProvider.swift",
-      "line": 34,
-      "symbol": "TKShareURLProvider.ShareError.missingSaveURL",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/TKShareURLProvider.swift",
-      "line": 37,
-      "symbol": "TKShareURLProvider.getShareURL(for:allowLongURL:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/TKShareURLProvider.swift",
-      "line": 108,
-      "symbol": "TKShareURLProvider.item",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/TKShareURLProvider.swift",
-      "line": 120,
-      "symbol": "TKShareURLProvider.activityViewControllerPlaceholderItem(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/sharing/categories/StopLocation+Shareable.swift",
       "line": 15,
       "symbol": "StopLocation.shareURL",
@@ -12476,20 +12007,6 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/TKCrossPlatform.swift",
-      "line": 13,
-      "symbol": "TKColor",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/TKCrossPlatform.swift",
-      "line": 14,
-      "symbol": "TKImage",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/TKCrossPlatform.swift",
       "line": 15,
       "symbol": "TKColor",
       "symbol_kind": "source.lang.swift.decl.extension",
@@ -12497,7 +12014,21 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/TKCrossPlatform.swift",
-      "line": 15,
+      "line": 18,
+      "symbol": "TKColor",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/TKCrossPlatform.swift",
+      "line": 19,
+      "symbol": "TKImage",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/TKCrossPlatform.swift",
+      "line": 20,
       "symbol": "TKFont",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
@@ -13946,16 +13477,16 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/model/API/BaseAPIModels.swift",
-      "line": 131,
-      "symbol": "TKAPI.RGBColor.init(for:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "line": 143,
+      "symbol": "TKAPI.Location",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/model/API/BaseAPIModels.swift",
-      "line": 143,
-      "symbol": "TKAPI.Location",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 145,
+      "symbol": "TKAPI.RGBColor.init(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -19570,6 +19101,13 @@
       "line": 60,
       "symbol": "Polygon.init(points:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKitAPI/vendor/ASPolygonKit/Polygon.swift",
+      "line": 86,
+      "symbol": "Polygon",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
