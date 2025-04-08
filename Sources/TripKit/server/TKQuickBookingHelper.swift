@@ -163,6 +163,8 @@ extension TKQuickBooking {
     /// `true` if only a single fare is allowed to be selected
     @DefaultFalse public var singleFareOnly: Bool
     
+    @DefaultEmptyArray public var fareGroups: [TKBooking.FareGroup]
+    
     private enum CodingKeys: String, CodingKey {
       case title
       case bookingTitle
@@ -171,6 +173,7 @@ extension TKQuickBooking {
       case warningMessage
       case fares
       case singleFareOnly
+      case fareGroups
     }
   }
   
