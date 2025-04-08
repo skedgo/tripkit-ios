@@ -330,6 +330,11 @@ public enum TKBooking {
 
 extension TKBooking {
   
+  public struct FareGroup: Codable, Hashable, Identifiable {
+    public let id: String
+    public let name: String
+  }
+  
   public struct Fare: Codable, Hashable, Identifiable {
     public enum Status: String, Codable {
       case inactive = "UNACTIVATED"
@@ -373,7 +378,10 @@ extension TKBooking {
     
     public let status: Status?
     
-    public let type: RideType?
+    // Not used, just passed back out of the API
+    private let type: RideType?
+    
+    @DefaultEmptyArray public var groupIDs: [FareGroup.ID]
 
     public enum CodingKeys: String, CodingKey {
       case id
@@ -386,6 +394,7 @@ extension TKBooking {
       case riders
       case status
       case type
+      case groupIDs
     }
     
     public enum InputValue: Hashable {
