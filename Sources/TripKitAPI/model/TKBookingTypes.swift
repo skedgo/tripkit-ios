@@ -333,6 +333,7 @@ extension TKBooking {
   public struct FareGroup: Codable, Hashable, Identifiable {
     public let id: String
     public let name: String
+    @DefaultFalse public var selected: Bool
   }
   
   public struct Fare: Codable, Hashable, Identifiable {
