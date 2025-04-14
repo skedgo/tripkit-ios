@@ -3,7 +3,19 @@ name: Swift
 on:
   push:
     branches: [main]
+    paths:
+      - 'Sources/**'
+      - 'Tests/**'
+      - 'Package.swift'
+      - 'TripKit.xcodeproj/**'
+      - 'Examples/**'
   pull_request:
+    paths:
+      - 'Sources/**'
+      - 'Tests/**'
+      - 'Package.swift'
+      - 'TripKit.xcodeproj/**'
+      - 'Examples/**'
   workflow_dispatch:
 
 jobs:
