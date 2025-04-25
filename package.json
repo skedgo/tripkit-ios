@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "prettier-plugin-jinja-template": "^2.1.0"
+  }
+}

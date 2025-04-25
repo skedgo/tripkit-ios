@@ -197,24 +197,14 @@ hr {
 pre {
   display: block;
   margin-bottom: 1rem;
-  padding: 8px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 code {
-  font-size: 0.875rem;
-  padding: 4px 6px;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-size: 0.85em;
   white-space: pre-wrap;
   word-wrap: break-word;
-  color: #25323E;
-}
-
-pre, code {
-  word-wrap: normal;
-  border-radius: 4px;
-  background-color: #F2F3F4;
-}
-pre > .hljs, code > .hljs {
-  background-color: #F2F3F4;
 }
 
 img {

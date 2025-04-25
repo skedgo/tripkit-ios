@@ -1,116 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		
-		<meta name="description" content="Documentation of TripKit iOS - the iOS SDK of the TripGo API." />
-		 
-		<meta name="author" content="SkedGo Pty Ltd" />
-		 
-		<link
-			rel="apple-touch-icon"
-			sizes="57x57"
-			href="img/favicon/apple-icon-57x57.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="60x60"
-			href="img/favicon/apple-icon-60x60.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="72x72"
-			href="img/favicon/apple-icon-72x72.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="76x76"
-			href="img/favicon/apple-icon-76x76.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="114x114"
-			href="img/favicon/apple-icon-114x114.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="120x120"
-			href="img/favicon/apple-icon-120x120.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="144x144"
-			href="img/favicon/apple-icon-144x144.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="152x152"
-			href="img/favicon/apple-icon-152x152.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="img/favicon/apple-icon-180x180.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="192x192"
-			href="img/favicon/android-icon-192x192.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="img/favicon/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="96x96"
-			href="img/favicon/favicon-96x96.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="img/favicon/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="img/favicon/manifest.json" />
-		<meta name="msapplication-TileColor" content="#154c7b" />
-		<meta
-			name="msapplication-TileImage"
-			content="img/favicon/ms-icon-144x144.png"
-		/>
-		<meta name="theme-color" content="#154c7b" />
-		<title>
-			TripKit SDK for iOS
-		</title>
+  <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" href="css/main-above.css" />
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-		<![endif]-->
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-C12N56MG8C"
-		></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag("js", new Date());
+      
+        <meta name="description" content="Documentation of TripKit iOS - the iOS SDK of the TripGo API." />
+      
 
-			gtag("config", "G-C12N56MG8C");
-		</script> 
-	</head>
-	<body  class="homepage" >
-		<header class="navbar">
+      
+        <meta name="author" content="SkedGo Pty Ltd" />
+      
+
+      
+      <link
+        rel="apple-touch-icon"
+        sizes="57x57"
+        href="img/favicon/apple-icon-57x57.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="60x60"
+        href="img/favicon/apple-icon-60x60.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="72x72"
+        href="img/favicon/apple-icon-72x72.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="76x76"
+        href="img/favicon/apple-icon-76x76.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="114x114"
+        href="img/favicon/apple-icon-114x114.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="120x120"
+        href="img/favicon/apple-icon-120x120.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="144x144"
+        href="img/favicon/apple-icon-144x144.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="152x152"
+        href="img/favicon/apple-icon-152x152.png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="img/favicon/apple-icon-180x180.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="img/favicon/android-icon-192x192.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="img/favicon/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="96x96"
+        href="img/favicon/favicon-96x96.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="img/favicon/favicon-16x16.png"
+      />
+      <link rel="manifest" href="img/favicon/manifest.json" />
+      <meta name="msapplication-TileColor" content="#154c7b" />
+      <meta
+        name="msapplication-TileImage"
+        content="img/favicon/ms-icon-144x144.png"
+      />
+      <meta name="theme-color" content="#154c7b" />
+      <title>
+        TripKit SDK for iOS
+      </title>
+      <link rel="stylesheet" href="css/main.css" />
+
+      <link rel="stylesheet" href="css/main-above.css" />
+      <link
+        rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css"
+      />
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+      <script>
+        var base_url = ".";
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="js/app.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script>
+          hljs.highlightAll();
+        </script>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-C12N56MG8C"
+      ></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-C12N56MG8C");
+      </script>
+    
+  </head>
+
+  <body class="homepage">
+    <header class="navbar">
 	
 	<div class="container-fluid flex">
 		<a class="logo" href=".">
@@ -229,8 +250,8 @@
 	</div>
 </header>
 
-		<div class="container -layout-3-9">
-			<div class="col" role="complementary"><div class="sidebar hidden-print affix" role="complementary" id="sidebar">
+    <div class="container -layout-3-9">
+        <div class="col" role="complementary"><div class="sidebar hidden-print affix" role="complementary" id="sidebar">
 	<div class="indicator"></div>
     <ul class="nav sidenav">
         <li class="main "><a href="#tripkit-sdk-for-ios" class="active">TripKit SDK for iOS</a></li>
@@ -238,8 +259,7 @@
             <li><a href="#set-up" class="">Set-up</a></li>
     </ul>
 </div></div>
-			<div class="col content" role="main">
-				
+        <div class="col content" role="main">
 
 <h1 id="tripkit-sdk-for-ios">TripKit SDK for iOS</h1>
 <p>This is the documentation of TripKit iOS, the iOS SDK for the <a href="https://developer.tripgo.com">TripGo API</a>.</p>
@@ -288,10 +308,10 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 let controller = TKUIHomeViewController()
 present(controller, animated: true)</code></pre>
-<p>Have a look at the <a href="https://github.com/skedgo/tripkit-ios/tree/main/Examples/TripKitUIExample"><code>TripKitUIExample</code></a> in the GitHub repository, as well as the SDK Reference at the top of this page.</p>
-			</div>
-		</div>
-		<div class="navbar-bottom" role="navigation">
+<p>Have a look at the <a href="https://github.com/skedgo/tripkit-ios/tree/main/Examples/TripKitUIExample"><code>TripKitUIExample</code></a> in the GitHub repository, as well as the SDK Reference at the top of this page.</p></div>
+    </div>
+
+    <div class="navbar-bottom" role="navigation">
 	<div class="container -layout-6-6">
 			    <div class="disabled col">
 			        <a rel="next"  class="prev">
@@ -314,7 +334,8 @@ present(controller, animated: true)</code></pre>
 			        </a>
 			    </div>
 	</div>
-</div> <footer class="footer">
+</div>
+    <footer class="footer">
 	<div class="logo">
 		<img src="./img/tripgo-api-logo-mono.svg" alt="TripGo Logo" width="134" height="34">
 	</div>
@@ -336,19 +357,5 @@ present(controller, animated: true)</code></pre>
 		</li>
 	</ul>
 </footer>
-		<link rel="stylesheet" href="css/main.css" />
-		<link
-			rel="stylesheet"
-			href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"
-		/>
-		<script>
-			var base_url = ".";
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-		<script src="js/app.min.js"></script>
-		<script>
-			hljs.initHighlightingOnLoad();
-		</script>
-	</body>
+  </body>
 </html>
