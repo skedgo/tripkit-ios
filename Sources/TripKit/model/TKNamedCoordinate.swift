@@ -11,6 +11,7 @@ import Foundation
 #if canImport(MapKit)
 import MapKit
 
+@objc(TKNamedCoordinate)
 open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
   
   public static var enableReverseGeocodingAddress: Bool = true
