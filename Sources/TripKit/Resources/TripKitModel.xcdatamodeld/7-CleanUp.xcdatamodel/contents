@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="TripKit">
     <entity name="Alert" representedClassName="Alert" syncable="YES">
         <attribute name="action" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSDictionary"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="YES"/>
         <attribute name="idService" optional="YES" attributeType="String"/>
         <attribute name="idStopCode" optional="YES" attributeType="String"/>
-        <attribute name="location" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer" customClassName="TKNamedCoordinate"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer"/>
         <attribute name="remoteIcon" optional="YES" attributeType="String"/>
         <attribute name="severity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -52,7 +52,7 @@
         <attribute name="bearing" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
         <attribute name="data" optional="YES" attributeType="Binary"/>
         <attribute name="durationWithoutTraffic" optional="YES" attributeType="Integer 32" usesScalarValueType="NO"/>
-        <attribute name="endLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer" customClassName="TKNamedCoordinate"/>
+        <attribute name="endLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="hashCode" attributeType="Integer 32" usesScalarValueType="NO"/>
         <attribute name="metres" optional="YES" attributeType="Integer 32" usesScalarValueType="NO"/>
@@ -66,7 +66,7 @@
         <attribute name="segmentType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="smsMessage" optional="YES" attributeType="String"/>
         <attribute name="smsNumber" optional="YES" attributeType="String"/>
-        <attribute name="startLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer" customClassName="TKNamedCoordinate"/>
+        <attribute name="startLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer"/>
         <attribute name="visibility" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="NO"/>
         <relationship name="references" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SegmentReference" inverseName="segmentTemplate" inverseEntity="SegmentReference"/>
         <relationship name="shapes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Shape" inverseName="template" inverseEntity="Shape"/>
@@ -77,10 +77,10 @@
     <entity name="Service" representedClassName="Service" syncable="YES">
         <attribute name="alertHashCodes" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
         <attribute name="code" attributeType="String" defaultValueString="NO_CODE"/>
-        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="TKColorValueTransformer" customClassName="TKColor"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="TKColorValueTransformer"/>
         <attribute name="flags" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="frequency" optional="YES" attributeType="Integer 16" usesScalarValueType="NO"/>
-        <attribute name="modeInfo" optional="YES" attributeType="Transformable" valueTransformerName="TKModeInfoValueTransformer" customClassName="TKModeInfo"/>
+        <attribute name="modeInfo" optional="YES" attributeType="Transformable" valueTransformerName="TKModeInfoValueTransformer"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="String"/>
         <attribute name="operatorID" optional="YES" attributeType="String"/>
@@ -121,13 +121,13 @@
     <entity name="StopLocation" representedClassName="StopLocation" syncable="YES">
         <attribute name="alertHashCodes" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
         <attribute name="filter" optional="YES" attributeType="String"/>
-        <attribute name="location" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer" customClassName="TKNamedCoordinate"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="regionName" optional="YES" attributeType="String"/>
         <attribute name="shortName" optional="YES" attributeType="String"/>
         <attribute name="sortScore" optional="YES" attributeType="Integer 32" usesScalarValueType="NO"/>
         <attribute name="stopCode" attributeType="String"/>
-        <attribute name="stopModeInfo" optional="YES" attributeType="Transformable" valueTransformerName="TKModeInfoValueTransformer" customClassName="TKModeInfo"/>
+        <attribute name="stopModeInfo" optional="YES" attributeType="Transformable" valueTransformerName="TKModeInfoValueTransformer"/>
         <attribute name="wheelchairAccessible" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
         <attribute name="zoneID" optional="YES" attributeType="String"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopLocation" inverseName="parent" inverseEntity="StopLocation"/>
@@ -224,11 +224,11 @@
         <attribute name="departureTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="excludedStops" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
         <attribute name="expandForFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="fromLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer" customClassName="TKNamedCoordinate"/>
+        <attribute name="fromLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer"/>
         <attribute name="purpose" optional="YES" attributeType="String"/>
         <attribute name="timeCreated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timeType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="toLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer" customClassName="TKNamedCoordinate"/>
+        <attribute name="toLocation" optional="YES" attributeType="Transformable" valueTransformerName="TKNamedCoordinateValueTransformer"/>
         <relationship name="preferredGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripGroup" inverseName="preferredFor" inverseEntity="TripGroup"/>
         <relationship name="tripGroups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripGroup" inverseName="request" inverseEntity="TripGroup"/>
         <fetchIndex name="byTripGroupsIndex">
@@ -252,18 +252,4 @@
             <fetchIndexElement property="identifier" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <elements>
-        <element name="Alert" positionX="952" positionY="324" width="128" height="209"/>
-        <element name="DLSEntry" positionX="124" positionY="539" width="128" height="89"/>
-        <element name="SegmentReference" positionX="511" positionY="-117" width="128" height="224"/>
-        <element name="SegmentTemplate" positionX="952" positionY="-234" width="128" height="28"/>
-        <element name="Service" positionX="317.046875" positionY="215.6796875" width="128" height="28"/>
-        <element name="Shape" positionX="637" positionY="531" width="128" height="194"/>
-        <element name="StopLocation" positionX="-117.2578125" positionY="330.36328125" width="128" height="28"/>
-        <element name="StopVisits" positionX="124" positionY="243" width="128" height="239"/>
-        <element name="Trip" positionX="315" positionY="-252" width="128" height="418"/>
-        <element name="TripGroup" positionX="99" positionY="-186" width="128" height="164"/>
-        <element name="TripRequest" positionX="-153" positionY="-234" width="128" height="194"/>
-        <element name="Vehicle" positionX="700" positionY="165" width="128" height="209"/>
-    </elements>
 </model>
