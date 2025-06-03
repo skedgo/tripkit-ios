@@ -43,18 +43,17 @@ public class TKReporter {
       
       UserDefaults.standard.removeObject(forKey: key)
       
-      TKServer.shared.hit(.POST, url: url, parameters: paras) { _, _, result in
-        switch result {
-        case .success:
+      TKServer.shared.hit(.POST, url: url, parameters: paras) { status, _, result in
+        switch (status, result) {
+        case (204, _), (_, .success):
           TKLog.debug("Planned trip reported successfully")
           completion?(true)
-        case .failure(let error):
+        case (_, .failure(let error)):
           TKLog.debug("Planned trip encountered error: \(error)")
           completion?(false)
         }
       }
     }
-    
   }
   
   public static func reportProgress(for trip: Trip, locations: [CLLocation]) {
