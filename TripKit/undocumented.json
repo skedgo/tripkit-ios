@@ -10551,7 +10551,7 @@
     },
     {
       "file": "/Users/runner/work/tripkit-ios/tripkit-ios/Sources/TripKit/server/TKReporter.swift",
-      "line": 60,
+      "line": 59,
       "symbol": "TKReporter.reportProgress(for:locations:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
