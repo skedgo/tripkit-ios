@@ -113,6 +113,7 @@ extension TKUIRoutingResultsViewModel {
     
     // When changing modes, force refresh
     let refresh: Observable<BuilderInput> = inputs.changedModes.asObservable()
+      .debounce(.seconds(1), scheduler: MainScheduler.instance)
       .map { _ in (date: nil, search: nil, pin: nil, forceRefresh: true) }
     
     // When changing date, switch to that date

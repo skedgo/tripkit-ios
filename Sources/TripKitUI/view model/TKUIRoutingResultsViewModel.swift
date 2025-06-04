@@ -81,9 +81,9 @@ class TKUIRoutingResultsViewModel {
       requestChanged = Observable.merge(
         originOrDestinationChanged,
         builderChangedWithID
-          .debounce(.seconds(1), scheduler: MainScheduler.instance)
       )
         .distinctUntilChanged { $0.1 == $1.1 } // only generate a new request object if necessary
+        .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
         .map { ($0.0.generateRequest(), $0.1) }
         .startWith( (initialRequest, initialRequest.map { Self.buildId(for: $0.builder) } ) )
         .distinctUntilChanged { $0.1 == $1.1 } // ignore duplicated request objects (happens when initialRequest != nil)
