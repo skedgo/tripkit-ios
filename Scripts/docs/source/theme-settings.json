@@ -1,0 +1,44 @@
+{
+  "theme": {
+    "colors": {
+      "fill": {
+        "tertiary": {
+          "light": "#f2f2f7",
+          "dark": "#2c2c2e"
+        }
+      },
+      "text": {
+        "primary": {
+          "light": "#000000",
+          "dark": "#ffffff"
+        },
+        "secondary": {
+          "light": "#6c6c6c",
+          "dark": "#a0a0a0"
+        },
+        "tertiary": {
+          "light": "#6c6c6c",
+          "dark": "#a0a0a0"
+        }
+      },
+      "code": {
+        "background": {
+          "light": "#f2f2f7",
+          "dark": "#2c2c2e"
+        }
+      },
+      "brand": {
+        "primary": {
+          "light": "#007aff",
+          "dark": "#0a84ff"
+        }
+      },
+      "figure": {
+        "stroke": {
+          "light": "#d1d1d6",
+          "dark": "#424245"
+        }
+      }
+    }
+  }
+}
