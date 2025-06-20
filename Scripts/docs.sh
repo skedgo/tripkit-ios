@@ -254,6 +254,15 @@ else
   ls -la "$MKDOCS_SOURCE_DIR" || echo "Failed to list MkDocs source directory"
 fi
 
+# Copy theme settings file to the SDK directory
+echo "🔧 Copying theme-settings.json to SDK directory..."
+if [ -f "$MKDOCS_SOURCE_DIR/theme-settings.json" ]; then
+  cp "$MKDOCS_SOURCE_DIR/theme-settings.json" "$MKDOCS_SOURCE_DIR/$MKDOCS_DOCS_SUBDIR/"
+  echo "✅ Successfully copied theme-settings.json"
+else
+  echo "⚠️ Warning: theme-settings.json not found in $MKDOCS_SOURCE_DIR"
+fi
+
 # Copy everything to the public directory at the project root
 echo "📂 Copying final site content to project root directory: $PUBLIC_DIR..."
 cp -R "$MKDOCS_SITE_DIR"/* "$PUBLIC_DIR/"
