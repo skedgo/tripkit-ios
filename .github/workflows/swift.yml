@@ -23,8 +23,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-26
-            xcode: "26.0"
+          # - os: macos-26
+          #   xcode: "26.0"
           - os: macos-15
             xcode: "16.4"
           - os: macos-14
