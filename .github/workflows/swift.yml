@@ -4,18 +4,18 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Sources/**'
-      - 'Tests/**'
-      - 'Package.swift'
-      - 'TripKit.xcodeproj/**'
-      - 'Examples/**'
+      - "Sources/**"
+      - "Tests/**"
+      - "Package.swift"
+      - "TripKit.xcodeproj/**"
+      - "Examples/**"
   pull_request:
     paths:
-      - 'Sources/**'
-      - 'Tests/**'
-      - 'Package.swift'
-      - 'TripKit.xcodeproj/**'
-      - 'Examples/**'
+      - "Sources/**"
+      - "Tests/**"
+      - "Package.swift"
+      - "TripKit.xcodeproj/**"
+      - "Examples/**"
   workflow_dispatch:
 
 jobs:
@@ -23,14 +23,12 @@ jobs:
     strategy:
       matrix:
         include:
+          - os: macos-26
+            xcode: "26.0"
           - os: macos-15
-            xcode: '16.2'
-          - os: macos-15
-            xcode: '15.4'
+            xcode: "16.4"
           - os: macos-14
-            xcode: '16.1' # sic, 16.2 not available on GitHub as of Jan 2025
-          - os: macos-14
-            xcode: '15.4'
+            xcode: "16.1" # sic, 16.2 not available on GitHub as of Jan 2025
 
     runs-on: ${{ matrix.os }}
 
@@ -49,13 +47,13 @@ jobs:
       matrix:
         swift: ["6.0", "5.10"]
     container:
-      image: swift:${{ matrix.swift }}  
+      image: swift:${{ matrix.swift }}
 
     steps:
       - uses: actions/checkout@v4
       - name: Build
-        run: swift build --target TripKitAPI      
-      
+        run: swift build --target TripKitAPI
+
   build_xcode:
     runs-on: macos-15
 
