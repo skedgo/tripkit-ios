@@ -188,8 +188,27 @@ echo "✅ Successfully processed DocC documentation for static hosting"
 # Step 6: Build the MkDocs site (if available)
 # MkDocs provides the overall site structure, with DocC integrated as a subdirectory
 # MkDocs will process the source directory, verify links, and generate the site
-if [ -f "$MKDOCS_DIR/mkdocs-dev.sh" ]; then
-  echo "🏗️ Building the MkDocs site with source from: $MKDOCS_SOURCE_DIR"
+
+# Check if we're running in CI (GitHub Actions or other CI environments)
+if [ "$CI" = "true" ] || [ "$GITHUB_ACTIONS" = "true" ] || [ -n "$CI" ]; then
+  echo "🏗️ Building MkDocs site in CI environment with source from: $MKDOCS_SOURCE_DIR"
+  cd "$MKDOCS_DIR"
+
+  # In CI, use mkdocs directly since dependencies are already installed globally
+  if [ "$VERBOSE" = true ]; then
+    mkdocs build --no-strict
+  else
+    mkdocs build --no-strict > /dev/null 2>&1
+  fi
+
+  if [ $? -ne 0 ]; then
+    echo "❌ MkDocs BUILD FAILED. Check the logs and fix the documentation!"
+    echo "   Verify that all references to DocC pages use the correct path: /$MKDOCS_DOCS_SUBDIR/..."
+    exit 1
+  fi
+
+elif [ -f "$MKDOCS_DIR/mkdocs-dev.sh" ]; then
+  echo "🏗️ Building the MkDocs site using mkdocs-dev.sh with source from: $MKDOCS_SOURCE_DIR"
   chmod +x "$MKDOCS_DIR/mkdocs-dev.sh"
 
   cd "$MKDOCS_DIR"
@@ -201,19 +220,20 @@ if [ -f "$MKDOCS_DIR/mkdocs-dev.sh" ]; then
     exit 1
   fi
 
-  # Verify that MkDocs processed the DocC content
-  if [ -d "$MKDOCS_SITE_DIR/$MKDOCS_DOCS_SUBDIR" ] && [ -f "$MKDOCS_SITE_DIR/$MKDOCS_DOCS_SUBDIR/index.html" ]; then
-    echo "✅ MkDocs site built successfully with DocC content included"
-  else
-    echo "⚠️ MkDocs build completed but DocC content may be missing - check $MKDOCS_SITE_DIR"
-  fi
 else
-  echo "⚠️ mkdocs-dev.sh not found. Skipping MkDocs build."
+  echo "⚠️ mkdocs-dev.sh not found and not in CI environment. Skipping MkDocs build."
   # Copy DocC content directly to the site directory
   mkdir -p "$MKDOCS_SITE_DIR"
   echo "📂 Copying DocC content directly to site directory..."
   mkdir -p "$MKDOCS_SITE_DIR/$MKDOCS_DOCS_SUBDIR"
   cp -R "$MKDOCS_SOURCE_DIR/$MKDOCS_DOCS_SUBDIR"/* "$MKDOCS_SITE_DIR/$MKDOCS_DOCS_SUBDIR/"
+fi
+
+# Verify that MkDocs processed the DocC content (for both CI and local builds)
+if [ -d "$MKDOCS_SITE_DIR/$MKDOCS_DOCS_SUBDIR" ] && [ -f "$MKDOCS_SITE_DIR/$MKDOCS_DOCS_SUBDIR/index.html" ]; then
+  echo "✅ MkDocs site built successfully with DocC content included"
+else
+  echo "⚠️ MkDocs build completed but DocC content may be missing - check $MKDOCS_SITE_DIR"
 fi
 
 # Step 7: Prepare final output site for deployment
