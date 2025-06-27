@@ -247,8 +247,8 @@ If generated documentation doesn't appear:
 - [ ] Migrate custom categories and styling (if needed)
 - [ ] Add comprehensive symbol documentation
 - [ ] Create tutorial content
-- [ ] Set up CI/CD for documentation builds
-- [ ] Remove Jazzy dependencies (.jazzy.yaml, Gemfile, etc.)
+- [x] Set up CI/CD for documentation builds
+- [x] Remove Jazzy dependencies (.jazzy.yaml, Gemfile, etc.)
 
 ## Next Steps
 

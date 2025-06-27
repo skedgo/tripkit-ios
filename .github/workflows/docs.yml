@@ -2,7 +2,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -21,14 +21,12 @@ jobs:
           python-version: 3.x
       - name: Prepare dependencies
         run: |
-          brew install sourcekitten
           python --version
           pip install --upgrade pip
           pip install mkdocs
-          pip install pymdown-extensions    
+          pip install pymdown-extensions
           pip install git+https://github.com/skedgo/skedgo-mkdocs-theme
-          mkdocs --version 
-          bundle install
+          mkdocs --version
 
       - name: Build docs
         run: |
