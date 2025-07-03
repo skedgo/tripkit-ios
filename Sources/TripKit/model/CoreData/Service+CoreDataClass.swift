@@ -86,7 +86,6 @@ extension Service {
 
 // MARK: - TKRealTimeUpdatable
 
-/// :nodoc:
 extension Service: TKRealTimeUpdatable {
   public var wantsRealTimeUpdates: Bool {
     guard self.isRealTimeCapable else { return false }

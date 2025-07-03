@@ -16,14 +16,14 @@ import FoundationNetworking
 import os.log
 #endif
 
-/// A `TKLogger` is used by `TKLog` to perform the outputting and processing of log statements.
+/// A `TKLogger` is used by ``TKLog`` to perform the outputting and processing of log statements.
 ///
-/// A default `TKConsoleLogger` is provided.
+/// A default ``TKConsoleLogger`` is provided.
 public protocol TKLogger {
-  /// The log level of the logger. Used by `TKLog` to decide whether to sent events to this logger.
+  /// The log level of the logger. Used by ``TKLog`` to decide whether to sent events to this logger.
   var level: TKLog.LogLevel { get }
   
-  /// Called by `TKLog` when an event should be logged.
+  /// Called by ``TKLog`` when an event should be logged.
   ///
   /// - Parameters:
   ///   - level: The log level of the event.
@@ -31,7 +31,7 @@ public protocol TKLogger {
   ///   - message: The log message
   func output(_ level: TKLog.LogLevel, identifier: String, message: String)
   
-  /// Called by `TKLog` with requests, typically maded by `TKServer`
+  /// Called by ``TKLog`` with requests, typically maded by ``TKServer``
   ///
   /// This is optional. By default `output` will be called if `level` is less or equal `.info`
   ///
@@ -40,7 +40,7 @@ public protocol TKLogger {
   ///   - request: The request that was made
   func log(identifier: String, request: TKLog.ServerRequest)
   
-  /// Called by `TKLog` when server response was received, typically initiated by `TKServer`
+  /// Called by ``TKLog`` when server response was received, typically initiated by ``TKServer``
   ///
   /// This is optional. By default `output` will be called if `level` is less or equal `.info`
   ///
@@ -118,8 +118,8 @@ public class TKConsoleLogger: TKLogger {
   }
 }
 
-/// The main class to log something from TripKit. The actual logging is done by the `TKLogger` instances
-/// set on the `.logger` property.
+/// The main class to log something from TripKit. The actual logging is done by the ``TKLogger`` instances
+/// set on the ``TKLog/loggers`` property.
 public class TKLog : NSObject {
   
   private override init() {
@@ -144,8 +144,10 @@ public class TKLog : NSObject {
     }
   }
   
-  /// The loggers which do the actual logging work. By default this is empty, unless TripKit is compiled with
-  /// a `BETA` or `DEBUG` Swift flag, then it's a `TKConsoleLogger` with a log level of "warning".
+  /// The loggers which do the actual logging work.
+  ///
+  /// By default this is empty, unless TripKit is compiled with
+  /// a `BETA` or `DEBUG` Swift flag, then it's a ``TKConsoleLogger`` with a log level of "``LogLevel/warning``".
   public static var loggers: [TKLogger] = {
     #if BETA || DEBUG
     return [TKConsoleLogger(level: .warning)]
@@ -250,7 +252,7 @@ extension TKLog {
     }
   }
   
-  /// A response to a `ServerRequest`
+  /// A response to a ``ServerRequest``
   public struct ServerResponse: Hashable {
     public let request: ServerRequest
     public let result: ServerResult
@@ -279,7 +281,9 @@ extension TKLog {
     }
   }
 
-  /// :nodoc: - Public for building CocoaPods-style
+  /// Log the start of a server request.
+  ///
+  /// When request request is completed make sure to call ``log(_:response:data:orError:for:uuid:)`` afterwards.
   public class func log(_ identifier: String, request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }
@@ -289,7 +293,9 @@ extension TKLog {
     #endif
   }
 
-  /// :nodoc: - Public for building CocoaPods-style
+  /// Log the response of a server request.
+  ///
+  /// Should always follow a call to ``log(_:request:uuid:)`` with a matching UUID.
   public class func log(_ identifier: String, response: URLResponse?, data: Data?, orError error: Error?, for request: URLRequest, uuid: UUID) {
     #if BETA || DEBUG || targetEnvironment(macCatalyst)
     guard !loggers.isEmpty else { return }

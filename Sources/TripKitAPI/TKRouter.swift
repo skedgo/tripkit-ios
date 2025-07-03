@@ -21,20 +21,20 @@ public class TKRouter: NSObject {
     case routingNotSupported
   }
   
-  /// Optional parameters to add to routing query that use a ``TripRequest``
+  /// Optional parameters to add to routing query. Only used by TripKit.
   public static var defaultParameters: [URLQueryItem]? = nil
   
   /// Optional setting to group certain modes always in a single `routing.json` when sending a
   /// multi-fetch request.
   public static var modesToGroupInRequest: [String]? = nil
   
-  /// Optional server to use instead of `TKServer.shared`.
+  /// Optional server to use instead of ``TKServer/shared``.
   public var server: TKServer?
   
   /// Optional configuration parameters to use
   public var config: TKAPIConfig
   
-  /// Set to limit the modes. If not provided, modes according to `TKSettings` will be used.
+  /// Set to limit the modes.  Only used by TripKit to override default modes.
   public var modeIdentifiers: Set<String> = []
   
   /// A `TKRouter` might turn a routing request into multiple server requests. If some of these fail
@@ -43,12 +43,12 @@ public class TKRouter: NSObject {
   /// found by other requests.
   public var failOnAnyError: Bool = false
   
-  public /*private(set)*/ var isActive: Bool = false
+  public var isActive: Bool = false
   
-  public /*private*/ var lastWorkerError: Error? = nil
-  public /*private*/ var workers: [Set<String>: TKRouter] = [:]
-  public /*private*/ var finishedWorkers: UInt = 0
-  public /*private*/ var workerQueue: DispatchQueue?
+  public var lastWorkerError: Error? = nil
+  public var workers: [Set<String>: TKRouter] = [:]
+  public var finishedWorkers: UInt = 0
+  public var workerQueue: DispatchQueue?
   
   public init(config: TKAPIConfig) {
     self.config = config
