@@ -185,19 +185,25 @@
 					<ul class="submenu">
 						
 						<li class="">
-							<a href="../TripKit/TripKit.html"
+							<a href="../sdk/documentation/tripkitapi/"
+								>TripKitAPI</a
+							>
+						</li>
+						
+						<li class="">
+							<a href="../sdk/documentation/tripkit/"
 								>TripKit</a
 							>
 						</li>
 						
 						<li class="">
-							<a href="../TripKit/TripKitUI.html"
+							<a href="../sdk/documentation/tripkitui/"
 								>TripKitUI</a
 							>
 						</li>
 						
 						<li class="">
-							<a href="../TripKit/TripKitInterApp.html"
+							<a href="../sdk/documentation/tripkitinterapp/"
 								>TripKitInterApp</a
 							>
 						</li>
@@ -272,7 +278,7 @@
         <div class="col content" role="main">
 
 <h1 id="faq">F.A.Q.</h1>
-<p>This is the F.A.Q. specific to the TripKit iOS SDK. For more general information on the TripGo API, please also check the TripGo API developer site - that general information will be especially relevant to you, if you're using the <a href="../TripKit/TripKit.html">TripKit framework</a> directly rather than the <a href="../TripKit/TripKitUI.html">TripKitUI framework</a> with its user interface components.</p>
+<p>This is the F.A.Q. specific to the TripKit iOS SDK. For more general information on the TripGo API, please also check the TripGo API developer site - that general information will be especially relevant to you, if you're using the <a href="../sdk/documentation/tripkit/">TripKit framework</a> directly rather than the <a href="../sdk/documentation/tripkitui/">TripKitUI framework</a> with its user interface components.</p>
 <h2 id="user-data-storage">User data storage</h2>
 <h3 id="does-the-sdk-support-storing-favourite-locations-or-routes">Does the SDK support storing favourite locations or routes?</h3>
 <p>No, the SDK does not include storage for the user's favourites. That's assumed to be taken care of by the hosting app that uses the SDK. The SDK does let you inject custom buttons (with custom label and icon) on both the timetable and trip overview screens though. Your developers can use this to add an "add to favourites" button."</p>
@@ -295,7 +301,7 @@
 <p>For long-term sharing, you need to use the trip's <code>shareURL</code>. If it doesn't yet have one, hit the <code>saveURL</code> which will return a <code>shareURL</code> that is the valid for a long time (until the trip is in the past).</p>
 <h3 id="i-want-to-save-a-trip-as-a-favourite-so-that-i-can-get-the-latest-version-of-this-trip-at-a-later-time-ie-replacing-public-transport-services-with-those-leaving-now-rather-than-when-i-saved-the-trip">I want to save a trip as a favourite, so that I can get the latest version of this trip at a later time, i.e., replacing public transport services with those leaving now rather than when I saved the trip.</h3>
 <p>In this case, don't use <code>trip.shareURL</code> or <code>trip.saveURL</code>. That URLs point to that exact trip <em>at its specific time</em> that you've planned it for. The use case of this is for sharing a trip or saving it to your calendar to refer back to it later.</p>
-<p>As a favourite, it would make more sense to store either the components of a <a href="../TripKit/TripKit/Classes/TripRequest.html"><code>TripRequest</code></a>, i.e., from location + start location + modes (if you then want to display the results screen later), or have a look at <a href="../TripKit/TripKit/Enums/TKTripPattern.html"><code>TKTripPattern</code></a> and <a href="../TripKit/TripKit/Enums/TKWaypointRouter.html"><code>TKWaypointRouter</code></a> if you later want to get back a trip with the same combination of modes to the one that you want to save.</p></div>
+<p>As a favourite, it would make more sense to store either the components of a <a href="../sdk/documentation/tripkit/triprequest/"><code>TripRequest</code></a>, i.e., from location + start location + modes (if you then want to display the results screen later), or have a look at <a href="../sdk/documentation/tripkit/tktrippattern/"><code>TKTripPattern</code></a> and <a href="../sdk/documentation/tripkit/tkwaypointrouter/"><code>TKWaypointRouter</code></a> if you later want to get back a trip with the same combination of modes to the one that you want to save.</p></div>
     </div>
 
     <div class="navbar-bottom" role="navigation">
@@ -311,12 +317,12 @@
 			        </a>
 			    </div>
 			    <div class="col">
-			        <a rel="prev" href="/TripKit/TripKit.html" class="next">
+			        <a rel="prev" href="/sdk/documentation/tripkitapi/" class="next">
 			            <div class="label">
 			            	Next
 			            </div>
 			            <div class="title">
-			            	TripKit
+			            	TripKitAPI
 			            </div>
 			        </a>
 			    </div>
