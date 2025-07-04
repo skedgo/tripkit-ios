@@ -78,6 +78,13 @@ public class TKRouter: NSObject {
 
 extension TKRouter {
   
+  /// Send multiple requests in parallel to `routing.json` to fetch all trip options.
+  ///
+  /// - Parameters:
+  ///   - request: The request specifying all the modes.
+  ///   - config: User's preferences.
+  ///   - server: Server to use, or ``TKServer/shared`` if none provided.
+  /// - Returns: All routing responses, in no particular order.
   public static func multiFetchTripResponses<C>(request: TKRoutingQuery<C>, config: TKAPIConfig, server: TKServer? = nil) async throws -> [TKAPI.RoutingResponse] {
     let includesAllModes = request.additional.contains { $0.name == "allModes" }
     if includesAllModes {
@@ -177,8 +184,17 @@ extension TKRouter {
     return paras
   }
   
-  /// Alternative method to get the API response for fetching trips, without parsing them into a `Trip`
-  public static func fetchTripsResponse<C>(for request: TKRoutingQuery<C>, modeIdentifiers: Set<String>, bestOnly: Bool, additional: Set<URLQueryItem>?, config: TKAPIConfig, server: TKServer? = nil) async throws -> TKAPI.RoutingResponse {
+  /// Sends a single request to `routing.json`.
+  ///
+  /// - Parameters:
+  ///   - request: The request with all modes
+  ///   - modeIdentifiers: Optional subset of modes to use instead of modes from the request; e.g., used by ``multiFetchTripResponses(request:config:server:)`` to fetch single-modal results in parallel to multi-modal results.
+  ///   - bestOnly: Whether only a the single best result should be calculated and returned.
+  ///   - additional: Additional query parameters to add to the request.
+  ///   - config: User's preferences.
+  ///   - server: Server to use, or ``TKServer/shared`` if none provided.
+  /// - Returns: The routing response.
+  public static func fetchTripsResponse<C>(for request: TKRoutingQuery<C>, modeIdentifiers: Set<String>? = nil, bestOnly: Bool = false, additional: Set<URLQueryItem>? = nil, config: TKAPIConfig, server: TKServer? = nil) async throws -> TKAPI.RoutingResponse {
 
     // sanity checks
     guard request.from.isValid else {

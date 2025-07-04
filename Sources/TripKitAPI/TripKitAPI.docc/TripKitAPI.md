@@ -26,5 +26,14 @@ TripKit's trip planning capabilities provide wrappers around SkedGo's routing AP
 For A-to-B multi-modal routing, use ``TKRouter``:
 
 ```swift
-```
+let query = TKRoutingQuery(
+  from: .init(latitude: 52.520008, longitude: 13.404954),
+  to: .init(latitude: 52.520008, longitude: 13.404954),
+  modes: ["pt_pub", "me_car", "cy_bic"]
+)
 
+let response = try await TKRouter.fetchTripsResponse(
+  for: query,
+  config: .defaultValues()
+)
+```
