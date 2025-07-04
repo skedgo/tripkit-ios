@@ -1,6 +1,6 @@
 # F.A.Q.
 
-This is the F.A.Q. specific to the TripKit iOS SDK. For more general information on the TripGo API, please also check the TripGo API developer site - that general information will be especially relevant to you, if you're using the [TripKit framework](TripKit/TripKit.html) directly rather than the [TripKitUI framework](TripKit/TripKitUI.html) with its user interface components.
+This is the F.A.Q. specific to the TripKit iOS SDK. For more general information on the TripGo API, please also check the TripGo API developer site - that general information will be especially relevant to you, if you're using the [TripKit framework](sdk/documentation/tripkit/index.html) directly rather than the [TripKitUI framework](sdk/documentation/tripkitui/index.html) with its user interface components.
 
 ## User data storage
 
@@ -35,4 +35,4 @@ For long-term sharing, you need to use the trip's `shareURL`. If it doesn't yet 
 
 In this case, don't use `trip.shareURL` or `trip.saveURL`. That URLs point to that exact trip *at its specific time* that you've planned it for. The use case of this is for sharing a trip or saving it to your calendar to refer back to it later.
 
-As a favourite, it would make more sense to store either the components of a [`TripRequest`](TripKit/TripKit/Classes/TripRequest.html), i.e., from location + start location + modes (if you then want to display the results screen later), or have a look at [`TKTripPattern`](TripKit/TripKit/Enums/TKTripPattern.html) and [`TKWaypointRouter`](TripKit/TripKit/Enums/TKWaypointRouter.html) if you later want to get back a trip with the same combination of modes to the one that you want to save.
+As a favourite, it would make more sense to store either the components of a [`TripRequest`](sdk/documentation/tripkit/triprequest/index.html), i.e., from location + start location + modes (if you then want to display the results screen later), or have a look at [`TKTripPattern`](sdk/documentation/tripkit/tktrippattern/index.html) and [`TKWaypointRouter`](sdk/documentation/tripkit/tkwaypointrouter/index.html) if you later want to get back a trip with the same combination of modes to the one that you want to save.

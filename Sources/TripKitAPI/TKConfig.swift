@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A helper to access `Config.plist` in the main bundle.
 public class TKConfig {
   
   public static let shared = TKConfig()
@@ -30,6 +31,7 @@ public class TKConfig {
 }
 
 extension TKConfig {
+  /// Value of `AppGroupName` in the main bundle's `Config.plist`.
   public var appGroupName: String? {
     configuration["AppGroupName"] as? String
   }

@@ -47,7 +47,7 @@ extension TKAPI {
     case notAcceptingPassengers = "NOT_ACCEPTING_PASSENGERS"
   }
   
-  /// Components of a vehicle, typically provided as a nested array, see `Vehicle.components`
+  /// Components of a vehicle, typically provided as a nested array, see ``TripKitAPI/TKAPI/Vehicle/components``
   public struct VehicleComponents: Codable, Hashable {
     public let airConditioned: Bool?
     public let model: String?

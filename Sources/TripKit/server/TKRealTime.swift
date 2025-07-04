@@ -14,7 +14,6 @@ public enum TKRealTimeUpdateProgress<E> {
   case updated(E)
 }
 
-/// :nodoc:
 public protocol TKRealTimeUpdatable {
   
   /// Whether the particular objects should be updated at all

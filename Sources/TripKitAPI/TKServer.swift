@@ -32,7 +32,7 @@ public class TKServer {
 
   /// Custom base URL to use, instead of hitting SkedGo's default servers directly.
   ///
-  /// - Note: This is persistently saved to `UserDefaults`
+  /// - Note: This is persistently saved to ``Foundation/UserDefaults/shared``
   public static var customBaseURL: String? {
     get {
       UserDefaults.shared.string(forKey: "developmentServer")
@@ -55,8 +55,8 @@ public class TKServer {
     }
   }
   
-  /// Base URL to use for server calls when `customBaseURL` is not set and the server calls
-  /// do not specify a ```TKRegion```.
+  /// Base URL to use for server calls when ``customBaseURL`` is not set and the server calls
+  /// do not specify a ``TKRegion``.
   public static var fallbackBaseURL: URL {
     customBaseURL.flatMap(URL.init) ?? URL(string: "https://api.tripgo.com/v1/")!
   }
@@ -66,7 +66,7 @@ public class TKServer {
   /// Your TripGo API key
   public var apiKey: String = ""
   
-  /// Custom headers to use, passed allong with calls
+  /// Custom headers to use, passed allong with all calls.
   public var customHeaders: [String: String]?
   
   public var userToken: String? {

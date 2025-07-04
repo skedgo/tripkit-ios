@@ -4,9 +4,9 @@ This is the documentation of TripKit iOS, the iOS SDK for the [TripGo API](https
 
 The SDK consists of the following three frameworks:
 
-- [**TripKit**](TripKit/TripKit.html) (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
-- [**TripKitUI**](TripKit/TripKitUI.html) (iOS, iOS extensions): [View controllers](view-controllers.md), as well as individual UI helpers and components.
-- [**TripKitInterApp** ](TripKit/TripKitInterApp.html) (iOS): Helpers for deep linking into other apps, such as GoCatch, Ingogo, Lyft, Ola and Uber.
+- [**TripKit**](sdk/documentation/tripkit/index.html) (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
+- [**TripKitUI**](sdk/documentation/tripkitui/index.html) (iOS, iOS extensions): [View controllers](view-controllers.md), as well as individual UI helpers and components.
+- [**TripKitInterApp** ](sdk/documentation/tripkitinterapp/index.html) (iOS): Helpers for deep linking into other apps, such as GoCatch, Ingogo, Lyft, Ola and Uber.
 
 TripKit contains the core logic, and the other two depend on it..
 
@@ -57,7 +57,7 @@ In your app delegate, provide your API key and start a new session:
 import TripKit
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-  
+
   TripKit.apiKey = "MY_API_KEY"
   TripKit.prepareForNewSession()
 

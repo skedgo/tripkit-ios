@@ -3,31 +3,32 @@ site_author: SkedGo Pty Ltd
 site_description: Documentation of TripKit iOS - the iOS SDK of the TripGo API.
 
 nav:
-    - Getting Started: index.md
-    - View Controllers: view-controllers.md
-    - F.A.Q.: faq.md
-    - SDK Reference:
-          - TripKit: TripKit/TripKit.html
-          - TripKitUI: TripKit/TripKitUI.html
-          - TripKitInterApp: TripKit/TripKitInterApp.html
-    - Developer:
-          - Docs: https://developer.tripgo.com/
-          - API: https://developer.tripgo.com/specs
-          - Android: https://android.developer.tripgo.com
-          - iOS: https://ios.developer.tripgo.com
-          - React: https://react.developer.tripgo.com
-    - SkedGo: https://www.skedgo.com
+  - Getting Started: index.md
+  - View Controllers: view-controllers.md
+  - F.A.Q.: faq.md
+  - SDK Reference:
+      - TripKitAPI: sdk/documentation/tripkitapi/index.html
+      - TripKit: sdk/documentation/tripkit/index.html
+      - TripKitUI: sdk/documentation/tripkitui/index.html
+      - TripKitInterApp: sdk/documentation/tripkitinterapp/index.html
+  - Developer:
+      - Docs: https://developer.tripgo.com/
+      - API: https://developer.tripgo.com/specs
+      - Android: https://android.developer.tripgo.com
+      - iOS: https://ios.developer.tripgo.com
+      - React: https://react.developer.tripgo.com
+  - SkedGo: https://www.skedgo.com
 
 repo_url: https://github.com/skedgo/tripkit-ios
 docs_dir: source
 strict: true
 theme:
-    name: skedgo
-    highlightjs: True
+  name: skedgo
+  highlightjs: True
 
 # Disable search, as you might expect it to search the reference, too
 plugins: []
 
 markdown_extensions:
-    - pymdownx.highlight
-    - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.superfences
