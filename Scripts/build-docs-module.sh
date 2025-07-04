@@ -76,13 +76,21 @@ if [ "$VERBOSE" = true ]; then
     xcodebuild docbuild -scheme "$MODULE_NAME" \
         -destination 'platform=iOS Simulator,name=iPhone 16' \
         -derivedDataPath ./build \
-        DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH"
+        DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH" \
+        DOCC_CATALOG_INCLUDE_EXTENSION_SYMBOL_GRAPHS=YES \
+        DOCC_EXTRACT_EXTENSION_SYMBOLS=YES \
+        DOCC_CATALOG_IDENTIFIER="$MODULE_NAME" \
+        DOCC_INCLUDE_DOCUMENTATION_CATALOGS=YES
     BUILD_RESULT=$?
 else
     xcodebuild docbuild -scheme "$MODULE_NAME" \
         -destination 'platform=iOS Simulator,name=iPhone 16' \
         -derivedDataPath ./build \
-        DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH" > /dev/null 2>&1
+        DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH" \
+        DOCC_CATALOG_INCLUDE_EXTENSION_SYMBOL_GRAPHS=YES \
+        DOCC_EXTRACT_EXTENSION_SYMBOLS=YES \
+        DOCC_CATALOG_IDENTIFIER="$MODULE_NAME" \
+        DOCC_INCLUDE_DOCUMENTATION_CATALOGS=YES > /dev/null 2>&1
     BUILD_RESULT=$?
 fi
 

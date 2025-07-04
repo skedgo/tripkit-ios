@@ -402,42 +402,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3A8DD3A62E164D9F00FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TripKit.docc,
-			);
-			target = 3AB6C61F1D1CD0060089F687 /* TripKit */;
-		};
-		3A8DD4232E164DB200FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TripKitAPI.docc,
-			);
-			target = 3AEC06412D2E3E7D003C9A0B /* TripKitAPI */;
-		};
 		3A8DD6792E164DE000FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				TripKitUI.docc,
 				vendor/RxCombine/LICENSE,
 			);
 			target = 3A6DF083202C8DA30084CB2C /* TripKitUI */;
 		};
-		3A8DD68F2E164DED00FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TripKitInterApp.docc,
-			);
-			target = 3A6DF166202C97F60084CB2C /* TripKitInterApp */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3A8DD2F92E164D9F00FBE268 /* TripKit */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A8DD3A62E164D9F00FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKit; sourceTree = "<group>"; };
-		3A8DD3E82E164DB200FBE268 /* TripKitAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A8DD4232E164DB200FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitAPI; sourceTree = "<group>"; };
+		3A8DD2F92E164D9F00FBE268 /* TripKit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TripKit; sourceTree = "<group>"; };
+		3A8DD3E82E164DB200FBE268 /* TripKitAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TripKitAPI; sourceTree = "<group>"; };
 		3A8DD55A2E164DE000FBE268 /* TripKitUI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A8DD6792E164DE000FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitUI; sourceTree = "<group>"; };
-		3A8DD6852E164DED00FBE268 /* TripKitInterApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A8DD68F2E164DED00FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitInterApp; sourceTree = "<group>"; };
+		3A8DD6852E164DED00FBE268 /* TripKitInterApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TripKitInterApp; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
