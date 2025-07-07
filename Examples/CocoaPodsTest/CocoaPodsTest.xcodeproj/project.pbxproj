@@ -31,6 +31,7 @@
 		3A5071A4290CA8BB00C5590F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../../TripKitUIExample/AppDelegate.swift; sourceTree = "<group>"; };
 		3A5071A5290CA8BB00C5590F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../TripKitUIExample/ViewController.swift; sourceTree = "<group>"; };
 		3A5071AA290CA8C100C5590F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../TripKitUIExample/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3A5783432E1B9CFD00291841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../TripKitUIExample/Info.plist; sourceTree = SOURCE_ROOT; };
 		3A6BBD6E232A305100D87E99 /* CocoaPodsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaPodsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6BBD77232A305100D87E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A6BBD7D232A305100D87E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 				3A5071A9290CA8C100C5590F /* Main.storyboard */,
 				3A6BBD77232A305100D87E99 /* Assets.xcassets */,
 				3A6BBD7C232A305100D87E99 /* LaunchScreen.storyboard */,
+				3A5783432E1B9CFD00291841 /* Info.plist */,
 			);
 			path = CocoaPodsTest;
 			sourceTree = "<group>";
@@ -388,7 +390,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ../TripKitUIExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,7 +411,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ../TripKitUIExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
