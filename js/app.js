@@ -1,123 +1,123 @@
-$(function(){
-	$('a[href*="#"]')
-	  // Remove links that don't actually link to anything
-	  .not('[href="#"]')
-	  .not('[href="#0"]')
-	  .click(function(event) {
-	    // On-page links
-	    if (
-	      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-	      && 
-	      location.hostname == this.hostname
-	    ) {
-	      // Figure out element to scroll to
-	      var target = $(this.hash);
-	      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-	      // Does a scroll target exist?
-	      if (target.length) {
-	        // Only prevent default if animation is actually gonna happen
-	        event.preventDefault();
-	        $('html, body').animate({
-	          scrollTop: target.offset().top
-	        }, 500, function() {
-	          // Callback after animation
-	          // Must change focus!
-	          var $target = $(target);
-	          $target.focus();
-	          if ($target.is(":focus")) { // Checking if the target was focused
-	            return false;
-	          } else {
-	            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-	            $target.focus(); // Set focus again
-	          };
-	        });
-	      }
-	    }
-	  });
-	// Keyboard navigation
-    document.addEventListener("keydown", function(e) {
-        if ($(e.target).is(':input')) return true;
-        var key = e.which || e.keyCode || window.event && window.event.keyCode;
-        var page;
-        switch (key) {
-            case 39:   // right arrow
-                page = $('[role="navigation"] a:contains(Next):first').prop('href');
-                break;
-            case 37:   // left arrow
-                page = $('[role="navigation"] a:contains(Previous):first').prop('href');
-                break;
-            // case 83:   // s
-            //     e.preventDefault();
-            //     $keyboard_modal.modal('hide');
-            //     $search_modal.modal('show');
-            //     $search_modal.find('#mkdocs-search-query').focus();
-            //     break;
-            // case 191:  // ?
-            //     $keyboard_modal.modal('show');
-            //     break;
-            default: break;
-        }
-        if (page) {
-            // $keyboard_modal.modal('hide');
-            window.location.href = page;
-        }
-    });
+// Keyboard navigation
+document.addEventListener("keydown", function (e) {
+  // Skip if user is typing in an input/textarea
+  const tag = e.target.tagName.toLowerCase();
+  if (tag === "input" || tag === "textarea") return;
 
-    reloadSideNav();
+  let page = null;
 
-	$('a.menu-toggle').click(function() {
-		$('a.search').toggleClass('hide');
-		if (!($(this).hasClass('-toggle'))) {
-			$(this).addClass('-toggle');
-			$('.menu').addClass('-show').attr('aria-hidden', 'true');
-			$('.navbar').addClass('-expanded');
+  switch (e.key) {
+    case "ArrowRight":
+      page = findNavLink("next");
+      break;
+    case "ArrowLeft":
+      page = findNavLink("prev");
+      break;
+  }
 
-		} else {
-			$(this).removeClass('-toggle');
-			$('.menu').removeClass('-show').attr('aria-hidden', 'false');
-			$('.navbar').removeClass('-expanded');
-		}
-	});
-
-	$('a.search').click(function(){
-		$(this).toggleClass('cross');
-		if (!($('.search-form').hasClass('show')))	{
-			$('.search-form').addClass('show');
-			$('body').addClass('lock');
-			$('#mkdocs-search-query').focus();
-		} else {
-			$('.search-form').removeClass('show');
-			$('body').removeClass('lock');
-		}
-	});
-})
-
-$(window).scroll(function(){
-	reloadSideNav();
+  if (page) {
+    window.location.href = page;
+  }
 });
 
-function reloadSideNav() {
-	var valueMin = 999999999;
-	var currentHeight = 0;
-	var currentsideitem = '';
-	var currentsidebarpos = 0;
-	$('.content h1[id]').each(function(){
-		var value = Math.abs($(this).offset().top - $(window).scrollTop());
-		if ( value < valueMin) {
-			valueMin = value;
-			var sideitem = 'a[href="#';	
-			currentsideitem = sideitem.concat($(this).attr('id').toLowerCase(), '"]');
-		}
-	});
-	$('.content h2[id]').each(function(){
-		var value = Math.abs($(this).offset().top - $(window).scrollTop());
-		if ( value < valueMin) {
-			valueMin = value;
-			var sideitem = 'a[href="#';	
-			currentsideitem = sideitem.concat($(this).attr('id').toLowerCase(), '"]');
-		}
-	});
-	currentsidebarpos =  Math.abs($(currentsideitem).offset().top - $('.sidebar').offset().top);
-	currentHeight = $(currentsideitem).outerHeight();
-	$('.sidebar > .indicator').css({'top': currentsidebarpos, 'height': currentHeight});
+// Helper to find navigation link by text
+function findNavLink(rel) {
+  const link = document.querySelector(`a[rel="${rel}"]`);
+  return link ? link.getAttribute("href") : null;
 }
+
+let isSearchVisible = false;
+let isMenuVisible = false;
+
+function toggleSearch() {
+  const el = document.getElementById("mkdocs_search_modal");
+  el.classList.toggle("opacity-0");
+  el.classList.toggle("pointer-events-none");
+  el.classList.toggle("backdrop-blur-xs");
+  document.body.classList.toggle("overflow-hidden");
+
+  if (!isSearchVisible) {
+    const input = document.getElementById("mkdocs-search-query");
+    input.focus();
+  }
+  isSearchVisible = !isSearchVisible;
+}
+
+document.addEventListener("keydown", (event) => {
+  const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+  const isCmdK = isMac
+    ? event.metaKey && event.key === "k"
+    : event.ctrlKey && event.key === "k";
+
+  if (isCmdK) {
+    event.preventDefault(); // prevent browser default (like "search in page")
+    toggleSearch();
+  }
+
+  if (event.key === "Escape" && isSearchVisible) {
+    toggleSearch(); // hide on Esc
+  }
+});
+
+function toggleMenu() {
+  const menu = document.getElementById("menu-mobile");
+  const header = document.getElementById("site-header");
+  const viewportHeight = window.innerHeight;
+  const headerHeight = header.offsetHeight;
+  const startHeight = menu.offsetHeight;
+  const menuHeight = menu.scrollHeight;
+  const endHeight = Math.min(menuHeight, viewportHeight - headerHeight);
+  menu.classList.toggle("max-h-0");
+  menu.classList.toggle("opacity-0");
+  menu.classList.toggle("-translate-y-4");
+  menu.classList.toggle("opacity-100");
+
+  menu.animate(
+    [
+      { maxHeight: `${startHeight}px` },
+      { maxHeight: isMenuVisible ? "0px" : `${endHeight}px` },
+    ],
+    {
+      duration: 300,
+      easing: "ease",
+      fill: "forwards",
+    },
+  );
+
+  isMenuVisible = !isMenuVisible;
+}
+
+function initSidebar() {
+  const headings = document.querySelectorAll("h2"); // or whatever heading levels you want
+  const tocLinks = document.querySelectorAll("#toc a"); // your TOC links
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return; // only care about *entering* headings
+        const top = entry.boundingClientRect.top;
+
+        // Only trigger when the heading enters near the top
+        if (top >= 0 && top <= window.innerHeight * 0.3) {
+          const id = entry.target.id;
+
+          // Remove all active states
+          tocLinks.forEach((link) => link.classList.remove("active"));
+
+          // Add active to the current heading's TOC link
+          const current = document.querySelector(`#toc a[href="#${id}"]`);
+          if (current) current.classList.add("active");
+        }
+      });
+    },
+    {
+      rootMargin: "-56px 0px -70% 0px",
+      threshold: 0,
+    },
+  );
+
+  // Observe all headings
+  headings.forEach((h) => observer.observe(h));
+}
+
+document.addEventListener("DOMContentLoaded", initSidebar);

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -93,13 +93,14 @@
       <title>
         TripKit SDK for iOS
       </title>
-      <link rel="stylesheet" href="css/main.css" />
-
-      <link rel="stylesheet" href="css/main-above.css" />
       <link
         rel="stylesheet"
-        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css"
+        href="css/main.css?v=0.3.3"
       />
+        <link
+          rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css"
+        />
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -109,7 +110,7 @@
         var base_url = ".";
       </script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="js/app.min.js"></script>
+      <script src="js/app.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script>
           hljs.highlightAll();
@@ -129,154 +130,572 @@
       </script>
 
       <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P5QG5P4T');</script>
+      <script>
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-P5QG5P4T");
+      </script>
       <!-- End Google Tag Manager -->
 
-      <!-- Fathom - beautiful, simple website analytics --> <script src="https://cdn.usefathom.com/script.js" data-site="PRBVBCCQ" defer></script> <!-- / Fathom -->
+      <!-- Fathom - beautiful, simple website analytics -->
+      <script
+        src="https://cdn.usefathom.com/script.js"
+        data-site="PRBVBCCQ"
+        defer
+      ></script>
+      <!-- / Fathom -->
   </head>
 
-  <body class="homepage">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5QG5P4T" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
-    <header class="navbar">
-	
-	<div class="container-fluid flex">
-		<a class="logo" href=".">
-			<img
-				src="./img/tripgo-api-logo-white.svg"
-				alt="TripGo API Logo White"
-				height="32"
-				width="140"
-			/>
-		</a>
+  <body
+    class="homepage ring-sg-green relative font-sans text-gray-800 antialiased"
+  >
+      <!-- Google Tag Manager (noscript) -->
+      <noscript
+        ><iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-P5QG5P4T"
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+        ></iframe
+      ></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+    <header
+  id="site-header"
+  class="bg-sg-blue fixed top-0 z-10 flex w-full flex-col"
+>
+  <div class="flex h-14 w-full items-center px-1">
+    <button
+      onclick="toggleMenu()"
+      class="flex shrink-0 p-2 text-white lg:hidden"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-menu-icon lucide-menu"
+      >
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+        <path d="M4 6h16" />
+      </svg>
+    </button>
+      <a
+        class="flex grow flex-wrap items-center gap-3 p-3 hover:opacity-80 lg:flex-initial"
+        href="."
+      >
+        <img
+          src="./img/skedgo-logo-white-green.svg"
+          alt="SkedGo Logo"
+          height="20"
+          width="112"
+          class="h-[20px]! w-[112px]!"
+        />
+        <span class="text-lg font-semibold text-white"
+          >TripKit SDK for iOS</span
+        >
+      </a>
 
-		<div class="divider"></div>
-		<a class="menu-toggle" type="button" href="#" aria-hidden="true">
-			<div class="bar-container">
-				<span class="bar-1"></span>
-				<span class="bar-2"></span>
-				<span class="bar-3"></span>
-			</div>
-		</a>
-		<div
-			class="menu -no-search"
-			aria-hidden="false"
-		>
-			
-			<ul>
-				 
-				<li class="current">
-					<a href=".">Getting Started</a>
-				</li>
-				  
-				<li class="">
-					<a href="view-controllers/">View Controllers</a>
-				</li>
-				  
-				<li class="">
-					<a href="faq/">F.A.Q.</a>
-				</li>
-				  
-				<li>
-					<a href="#" class="dropdown">SDK Reference</a>
-					<ul class="submenu">
-						
-						<li class="">
-							<a href="sdk/documentation/tripkitapi/"
-								>TripKitAPI</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="sdk/documentation/tripkit/"
-								>TripKit</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="sdk/documentation/tripkitui/"
-								>TripKitUI</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="sdk/documentation/tripkitinterapp/"
-								>TripKitInterApp</a
-							>
-						</li>
-						
-					</ul>
-				</li>
-				  
-				<li>
-					<a href="#" class="dropdown">Developer</a>
-					<ul class="submenu">
-						
-						<li class="">
-							<a href="https://developer.tripgo.com/"
-								>Docs</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="https://developer.tripgo.com/specs"
-								>API</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="https://android.developer.tripgo.com"
-								>Android</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="https://ios.developer.tripgo.com"
-								>iOS</a
-							>
-						</li>
-						
-						<li class="">
-							<a href="https://react.developer.tripgo.com"
-								>React</a
-							>
-						</li>
-						
-					</ul>
-				</li>
-				  
-				<li class="">
-					<a href="https://www.skedgo.com">SkedGo</a>
-				</li>
-				 
-			</ul>
-			
-			<ul>
-				<li>
-					<a href="https://tripgo.3scale.net/login">Log in</a>
-				</li>
-				<li>
-					<a href="https://tripgo.3scale.net/#plans">Sign up</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+    <div class="hidden items-center gap-3 p-2 lg:flex">
+      <div class="h-5 w-[2px] rounded bg-white/20"></div>
+    </div>
+
+    <div
+      id="menu"
+      class="space-between hidden flex-auto items-center p-2 text-sm lg:flex"
+    >
+      
+        <ul
+          class="flex flex-col flex-wrap gap-2 md:flex-1 md:flex-row lg:items-center"
+        >
+          
+            <li>
+              <a
+                class="
+                  text-white hover:text-white/70
+                 block p-2 font-semibold"
+                href="."
+                >Getting Started</a
+              >
+            </li>
+          
+            <li>
+              <a
+                class="
+                  text-white/50 hover:text-white
+                 block p-2 font-semibold"
+                href="view-controllers/"
+                >View Controllers</a
+              >
+            </li>
+          
+            <li>
+              <a
+                class="
+                  text-white/50 hover:text-white
+                 block p-2 font-semibold"
+                href="faq/"
+                >F.A.Q.</a
+              >
+            </li>
+          
+            <li class="group relative">
+              <a
+                href="#"
+                class="flex items-center gap-2 p-2 font-semibold text-white/50"
+                >SDK Reference
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  class="hidden md:block"
+                >
+                  <polyline
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    points="98 26 102 30 106 26"
+                    transform="translate(-97 -25)"
+                  />
+                </svg>
+              </a>
+              <ul
+                class="pointer-events-none absolute w-[200px] origin-top scale-95 flex-col overflow-hidden rounded-2xl bg-white p-2 opacity-0 shadow-lg transition-all duration-200 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
+              >
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="sdk/documentation/tripkitapi/"
+                      >TripKitAPI</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="sdk/documentation/tripkit/"
+                      >TripKit</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="sdk/documentation/tripkitui/"
+                      >TripKitUI</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="sdk/documentation/tripkitinterapp/"
+                      >TripKitInterApp</a
+                    >
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li class="group relative">
+              <a
+                href="#"
+                class="flex items-center gap-2 p-2 font-semibold text-white/50"
+                >Developer
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  class="hidden md:block"
+                >
+                  <polyline
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    points="98 26 102 30 106 26"
+                    transform="translate(-97 -25)"
+                  />
+                </svg>
+              </a>
+              <ul
+                class="pointer-events-none absolute w-[200px] origin-top scale-95 flex-col overflow-hidden rounded-2xl bg-white p-2 opacity-0 shadow-lg transition-all duration-200 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
+              >
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="https://developer.tripgo.com/"
+                      >Docs</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="https://developer.tripgo.com/specs"
+                      >API</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="https://android.developer.tripgo.com"
+                      >Android</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="https://ios.developer.tripgo.com"
+                      >iOS</a
+                    >
+                  </li>
+                
+                  <li
+                    class=" flex rounded-lg"
+                  >
+                    <a
+                      class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 lg:text-gray-700 lg:hover:text-gray-600"
+                      href="https://react.developer.tripgo.com"
+                      >React</a
+                    >
+                  </li>
+                
+              </ul>
+            </li>
+          
+            <li>
+              <a
+                class="
+                  text-white/50 hover:text-white
+                 block p-2 font-semibold"
+                href="https://www.skedgo.com"
+                >SkedGo</a
+              >
+            </li>
+          
+        </ul>
+      
+      <ul class="flex shrink-0 flex-col gap-2 md:flex-row md:items-center">
+        <li>
+          <a
+            href="https://tripgo.3scale.net/login"
+            target="_blank"
+            class="block p-2 font-semibold text-white/50 hover:text-white"
+            >Log in</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://tripgo.3scale.net/#plans"
+            target="_blank"
+            class="block p-2 font-semibold text-white/50 hover:text-white"
+            >Sign up</a
+          >
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+  <div
+    id="menu-mobile"
+    class="max-h-0 -translate-y-4 overflow-scroll px-1 opacity-0 transition-all duration-300 lg:hidden"
+  >
+    
+      <ul class="py-3">
+        
+          <li>
+            <a
+              class="
+                text-white hover:text-white/70
+               block p-2 font-semibold"
+              href="."
+              >Getting Started</a
+            >
+          </li>
+        
+          <li>
+            <a
+              class="
+                text-white/50 hover:text-white
+               block p-2 font-semibold"
+              href="view-controllers/"
+              >View Controllers</a
+            >
+          </li>
+        
+          <li>
+            <a
+              class="
+                text-white/50 hover:text-white
+               block p-2 font-semibold"
+              href="faq/"
+              >F.A.Q.</a
+            >
+          </li>
+        
+          <li class="group relative">
+            <a
+              href="#"
+              class="flex items-center gap-2 p-2 font-semibold text-white/50"
+              >SDK Reference
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                class="hidden md:block"
+              >
+                <polyline
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  points="98 26 102 30 106 26"
+                  transform="translate(-97 -25)"
+                />
+              </svg>
+            </a>
+            <ul
+              class="w-[200px] flex-col overflow-hidden p-2 md:absolute md:hidden md:rounded-2xl md:bg-white md:shadow-lg md:group-hover:flex"
+            >
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="sdk/documentation/tripkitapi/"
+                    >TripKitAPI</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="sdk/documentation/tripkit/"
+                    >TripKit</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="sdk/documentation/tripkitui/"
+                    >TripKitUI</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="sdk/documentation/tripkitinterapp/"
+                    >TripKitInterApp</a
+                  >
+                </li>
+              
+            </ul>
+          </li>
+        
+          <li class="group relative">
+            <a
+              href="#"
+              class="flex items-center gap-2 p-2 font-semibold text-white/50"
+              >Developer
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                class="hidden md:block"
+              >
+                <polyline
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  points="98 26 102 30 106 26"
+                  transform="translate(-97 -25)"
+                />
+              </svg>
+            </a>
+            <ul
+              class="w-[200px] flex-col overflow-hidden p-2 md:absolute md:hidden md:rounded-2xl md:bg-white md:shadow-lg md:group-hover:flex"
+            >
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="https://developer.tripgo.com/"
+                    >Docs</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="https://developer.tripgo.com/specs"
+                    >API</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="https://android.developer.tripgo.com"
+                    >Android</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="https://ios.developer.tripgo.com"
+                    >iOS</a
+                  >
+                </li>
+              
+                <li
+                  class=" flex rounded-lg"
+                >
+                  <a
+                    class="block px-3 py-2 text-sm font-semibold text-white/50 hover:text-white/70 md:text-gray-700 md:hover:text-gray-600"
+                    href="https://react.developer.tripgo.com"
+                    >React</a
+                  >
+                </li>
+              
+            </ul>
+          </li>
+        
+          <li>
+            <a
+              class="
+                text-white/50 hover:text-white
+               block p-2 font-semibold"
+              href="https://www.skedgo.com"
+              >SkedGo</a
+            >
+          </li>
+        
+      </ul>
+    
+    <div class="px-2">
+      <div class="h-[2px] w-full rounded bg-white/10"></div>
+    </div>
+    <ul class="flex shrink-0 flex-col gap-2 py-3 md:flex-row md:items-center">
+      <li>
+        <a
+          href="https://tripgo.3scale.net/login"
+          target="_blank"
+          class="block p-2 font-semibold text-white/50 hover:text-white"
+          >Log in</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://tripgo.3scale.net/#plans"
+          target="_blank"
+          class="block p-2 font-semibold text-white/50 hover:text-white"
+          >Sign up</a
+        >
+      </li>
+    </ul>
+  </div>
 </header>
 
-    <div class="container -layout-3-9">
-        <div class="col" role="complementary"><div class="sidebar hidden-print affix" role="complementary" id="sidebar">
-	<div class="indicator"></div>
-    <ul class="nav sidenav">
-        <li class="main "><a href="#tripkit-sdk-for-ios" class="active">TripKit SDK for iOS</a></li>
-            <li><a href="#installation" class="">Installation</a></li>
-            <li><a href="#set-up" class="">Set-up</a></li>
+    <div
+      id="main-content"
+      class="relative mx-auto flex max-w-[1200px] gap-16 px-4 py-14"
+    >
+        <div class="relative hidden w-[280px] shrink-0 lg:block" role="complementary">
+  <div
+    class="sticky top-32 rounded-2xl border-1 border-gray-200 py-3"
+    role="complementary"
+    id="sidebar"
+  >
+    <ul id="toc" class="flex flex-col gap-2">
+        
+        <li class="mb-1 px-4 text-lg leading-5 font-semibold">
+          <a
+            href="#tripkit-sdk-for-ios"
+            class="active"
+            >TripKit SDK for iOS</a
+          >
+        </li>
+          <li>
+            <a
+              href="#installation"
+              class=" transition-color -ml-px block border-l border-transparent pl-4 text-sm text-gray-500 hover:border-gray-400 hover:text-gray-900"
+              >Installation</a
+            >
+          </li>
+          <li>
+            <a
+              href="#set-up"
+              class=" transition-color -ml-px block border-l border-transparent pl-4 text-sm text-gray-500 hover:border-gray-400 hover:text-gray-900"
+              >Set-up</a
+            >
+          </li>
     </ul>
-</div></div>
-        <div class="col content" role="main">
-
-<h1 id="tripkit-sdk-for-ios">TripKit SDK for iOS</h1>
+  </div>
+</div>
+        <div class="max-w-full py-6 lg:py-10" role="main">
+  
+  <div class="content mb-20"><h1 id="tripkit-sdk-for-ios">TripKit SDK for iOS</h1>
 <p>This is the documentation of TripKit iOS, the iOS SDK for the <a href="https://developer.tripgo.com">TripGo API</a>.</p>
 <p>The SDK consists of the following three frameworks:</p>
 <ul>
@@ -324,53 +743,164 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 let controller = TKUIHomeViewController()
 present(controller, animated: true)</code></pre>
 <p>Have a look at the <a href="https://github.com/skedgo/tripkit-ios/tree/main/Examples/TripKitUIExample"><code>TripKitUIExample</code></a> in the GitHub repository, as well as the SDK Reference at the top of this page.</p></div>
-    </div>
+  <div
+  class="grid grid-cols-2 rounded-xl border border-gray-200 p-2"
+  role="navigation"
+>
+      <div class="hidden">
+        <a
+          rel="prev"
+          
+          class="flex rounded-lg p-2 text-gray-900 transition-all hover:bg-gray-100 hover:text-gray-700"
+        >
+          <div class="text-gray-400">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-left-icon lucide-chevron-left"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </div>
+          <div class="font-semibold"></div>
+        </a>
+      </div>
 
-    <div class="navbar-bottom" role="navigation">
-	<div class="container -layout-6-6">
-			    <div class="disabled col">
-			        <a rel="next"  class="prev">
-			            <div class="label">
-			            	Previous
-			            </div>
-			            <div class="title">
-			            	
-			            </div>
-			        </a>
-			    </div>
-			    <div class="col">
-			        <a rel="prev" href="/view-controllers/" class="next">
-			            <div class="label">
-			            	Next
-			            </div>
-			            <div class="title">
-			            	View Controllers
-			            </div>
-			        </a>
-			    </div>
-	</div>
+      <div class=" col-start-2">
+        <a
+          rel="next"
+          href="/view-controllers/"
+          class="flex justify-end rounded-lg p-2 text-gray-900 transition-all hover:bg-gray-100 hover:text-gray-700"
+        >
+          <div class="font-semibold">View Controllers</div>
+          <div class="text-gray-400">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevron-right-icon lucide-chevron-right"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </div>
+        </a>
+      </div>
 </div>
-    <footer class="footer">
-	<div class="logo">
-		<img src="./img/tripgo-api-logo-mono.svg" alt="TripGo Logo" width="134" height="34">
-	</div>
-	<ul class="menu">
-		<li>
-			<a href="https://www.skedgo.com">SkedGo website</a>
-		</li>
-		<li>
-			<a href="https://skedgo.com/en/tripgo-api/pricing/">Pricing</a>
-		</li>
-		<li>
-			<a href="https://github.com/skedgo/tripgo-api/issues">Report issue</a>
-		</li>
-		<li>
-			<a href="mailto:api@tripgo.com">Email support</a>
-		</li>
-		<li>
-			<a href="http://slack.tripgo.com/">Slack community</a>
-		</li>
-	</ul>
+</div>
+    </div><div
+  class="pointer-events-none fixed top-0 left-0 z-20 flex h-screen w-full items-start justify-center p-4 opacity-0 transition-all duration-300 md:p-8"
+  id="mkdocs_search_modal"
+  tabindex="-1"
+  raria-labelledby="Search Modal"
+  aria-hidden="true"
+>
+  <button onclick="toggleSearch()">
+    <div class="absolute top-0 left-0 h-full w-full bg-gray-900/30"></div>
+  </button>
+  <div
+    class="z-20 flex w-full max-w-[600px] flex-col gap-0 rounded-2xl bg-white p-2 shadow-2xl"
+  >
+    <form role="form" class="flex items-center px-1">
+      <div class="text-gray-400">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-search-icon lucide-search"
+        >
+          <path d="m21 21-4.34-4.34" />
+          <circle cx="11" cy="11" r="8" />
+        </svg>
+      </div>
+      <input
+        type="text"
+        class="grow rounded-lg p-2 focus-visible:outline-none"
+        placeholder="Type keyword..."
+        id="mkdocs-search-query"
+      />
+      <button
+        type="reset"
+        onclick="toggleSearch()"
+        class="rounded border border-gray-200 px-1.5 py-1 text-xs leading-3 text-gray-500"
+      >
+        esc
+      </button>
+    </form>
+    <div id="mkdocs-search-results" class="overflow-auto"></div>
+  </div>
+</div>
+    <footer class="mx-auto max-w-[1200px] px-4">
+  <div
+    class="mb-4 flex flex-col items-center justify-center gap-10 border-t border-gray-100 py-10 md:flex-row md:justify-between md:gap-4"
+  >
+    <div class="flex flex-col items-center gap-4 md:flex-row">
+        <a href="https://www.skedgo.com" target="_blank">
+          <img
+            src="./img/skedgo-logo-blue-green.svg"
+            width="112"
+            height="20"
+          />
+        </a>
+      <a
+        class="flex flex-wrap items-center text-lg font-semibold text-gray-500 hover:text-gray-900"
+        href="."
+      >
+        TripKit SDK for iOS
+      </a>
+    </div>
+    <ul class="flex gap-6 text-sm">
+      <li>
+        <a
+          class="font-medium text-gray-500 transition-all hover:text-gray-900"
+          target="_blank"
+          href="https://skedgo.com/tripgo-api/pricing/"
+          >Pricing</a
+        >
+      </li>
+      <li>
+        <a
+          class="font-medium text-gray-500 transition-all hover:text-gray-900"
+          target="_blank"
+          href="https://github.com/skedgo/tripgo-api/issues"
+          >Report issue</a
+        >
+      </li>
+      <li>
+        <a
+          class="font-medium text-gray-500 transition-all hover:text-gray-900"
+          href="mailto:api@tripgo.com"
+          >Email support</a
+        >
+      </li>
+      <li>
+        <a
+          class="font-medium text-gray-500 transition-all hover:text-gray-900"
+          target="_blank"
+          href="http://slack.tripgo.com/"
+          >Slack community</a
+        >
+      </li>
+    </ul>
+  </div>
 </footer>
   </body>
 </html>

@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_0_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_0_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_0_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_0_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_1_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_1_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_1_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_1_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_2_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_2_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_2_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_2_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_3_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_3_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_3_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_3_0.ttf") format("truetype");
+}
+
+.content h1 {
+  @apply mt-8 mb-2 text-4xl font-bold tracking-tight text-gray-900;
+}
+
+.content h2 {
+  @apply mt-8 mb-2 text-3xl font-semibold tracking-tight text-gray-900;
+}
+
+.content h3 {
+  @apply mt-8 mb-2 text-2xl font-semibold tracking-tight text-gray-900;
+}
+
+.content h4 {
+  @apply mt-8 mb-2 text-lg font-semibold text-gray-900;
+}
+
+.content h5 {
+  @apply mt-8 mb-2 font-semibold text-gray-900;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  @apply scroll-mt-22;
+}
+
+.content p {
+  @apply text-base leading-relaxed text-gray-700;
+}
+
+.content a {
+  @apply hover:decoration-sg-green font-semibold underline decoration-gray-200 decoration-2 underline-offset-4;
+}
+
+.content code {
+  @apply font-mono text-[0.85em];
+}
+
+.content pre code {
+  @apply text-xs leading-5 whitespace-pre-wrap;
+}
+
+.content pre {
+  @apply overflow-hidden rounded-lg inset-ring-1 inset-ring-gray-900/20;
+}
+
+.content * + * {
+  @apply mt-4;
+}
+
+.content ul {
+  @apply list-disc pl-6;
+}
+
+.content ol {
+  @apply list-decimal pl-6;
+}
+
+.content blockquote {
+  @apply border-l-4 border-gray-200 pl-4;
+}
+
+.content .headerlink {
+  @apply hover:text-sg-green ml-2 text-gray-400 no-underline opacity-0 transition-opacity duration-150;
+}
+
+.content hr {
+  @apply mt-10 block border-gray-300;
+}
+
+.content li code,
+.content p code {
+  @apply rounded bg-blue-50 px-1 py-0.5 text-blue-600;
+}
+
+.content h1:hover > .headerlink,
+.content h2:hover > .headerlink,
+.content h3:hover > .headerlink,
+.content h4:hover > .headerlink,
+.content h5:hover > .headerlink,
+.content h6:hover > .headerlink {
+  @apply opacity-100;
+}
+
+.content img {
+  @apply rounded-lg;
+}
+
+#mkdocs-search-results > p {
+  @apply p-2;
+}
+
+#mkdocs-search-results article {
+  @apply p-2;
+}
+
+#mkdocs-search-results article h3 {
+  @apply hover:decoration-sg-green text-lg font-semibold text-gray-900 underline decoration-gray-200 decoration-2 underline-offset-3;
+}
+
+#mkdocs-search-results article p {
+  @apply text-gray-700;
+}
+
+#toc a.active {
+  @apply border-gray-900 font-semibold text-gray-900;
+}
+
+@theme {
+  --font-sans:
+    "ProximaNovaSoft", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --color-sg-blue: #154c7b;
+  --color-sg-green: #23b15e;
+}
