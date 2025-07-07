@@ -7,133 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A10C71A2D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C7192D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift */; };
 		3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; };
 		3A1777B0232C17570093D495 /* TripKitInterApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A1777B2232C17590093D495 /* TripKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB126CB78DE00FDDB06 /* pelias-au.json */; };
-		3A1AABB526CB78DE00FDDB06 /* pelias-us.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB226CB78DE00FDDB06 /* pelias-us.json */; };
-		3A1AABB626CB78DE00FDDB06 /* pelias-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A1AABB326CB78DE00FDDB06 /* pelias-de.json */; };
 		3A1F72D325C7E54800C72CEE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1F72D225C7E54800C72CEE /* RxCocoa */; };
 		3A1F744925C8F5AA00C72CEE /* TripKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6DF084202C8DA30084CB2C /* TripKitUI.framework */; };
 		3A55D16626FC5C5800A3D6EB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3A55D16526FC5C5800A3D6EB /* Kingfisher */; };
-		3A96B93B293F102800556A44 /* routes-sf.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A96B93A293F102800556A44 /* routes-sf.json */; };
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
-		3A9C6A8629B58AC4000D43B2 /* TKAPIParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
-		3AC6946E27E3043C00DBD287 /* InMemoryHistoryManager+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */; };
-		3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */; };
-		3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */; };
-		3ACD91DA26CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */; };
-		3ACD91DB26CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A526CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift */; };
-		3ACD91DC26CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A626CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift */; };
-		3ACD91DD26CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A726CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift */; };
-		3ACD91DE26CCC47B0075CCF3 /* TKUIGeocoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91A826CCC47B0075CCF3 /* TKUIGeocoderTest.swift */; };
-		3ACD91E826CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B326CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift */; };
-		3ACD91E926CCC47B0075CCF3 /* TKUIModePickerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B426CCC47B0075CCF3 /* TKUIModePickerTest.swift */; };
-		3ACD91EA26CCC47B0075CCF3 /* HotObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B726CCC47B0075CCF3 /* HotObservable.swift */; };
-		3ACD91EB26CCC47B0075CCF3 /* TestableObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B826CCC47B0075CCF3 /* TestableObservable.swift */; };
-		3ACD91EC26CCC47B0075CCF3 /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91B926CCC47B0075CCF3 /* Recorded+Event.swift */; };
-		3ACD91ED26CCC47B0075CCF3 /* Any+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BA26CCC47B0075CCF3 /* Any+Equatable.swift */; };
-		3ACD91EE26CCC47B0075CCF3 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BD26CCC47B0075CCF3 /* Bag.swift */; };
-		3ACD91EF26CCC47B0075CCF3 /* Event+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BE26CCC47B0075CCF3 /* Event+Equatable.swift */; };
-		3ACD91F026CCC47B0075CCF3 /* TestableObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91BF26CCC47B0075CCF3 /* TestableObserver.swift */; };
-		3ACD91F126CCC47B0075CCF3 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C026CCC47B0075CCF3 /* Subscription.swift */; };
-		3ACD91F226CCC47B0075CCF3 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C126CCC47B0075CCF3 /* Deprecated.swift */; };
-		3ACD91F326CCC47B0075CCF3 /* Recorded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C226CCC47B0075CCF3 /* Recorded.swift */; };
-		3ACD91F426CCC47B0075CCF3 /* XCTest+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C326CCC47B0075CCF3 /* XCTest+Rx.swift */; };
-		3ACD91F526CCC47B0075CCF3 /* ColdObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C426CCC47B0075CCF3 /* ColdObservable.swift */; };
-		3ACD91F726CCC47B0075CCF3 /* RxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C626CCC47B0075CCF3 /* RxTest.swift */; };
-		3ACD91F826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift */; };
-		3ACD91F926CCC47B0075CCF3 /* TestScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91C926CCC47B0075CCF3 /* TestScheduler.swift */; };
-		3ACD91FA26CCC47B0075CCF3 /* Platform.Darwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CC26CCC47B0075CCF3 /* Platform.Darwin.swift */; };
-		3ACD91FB26CCC47B0075CCF3 /* AtomicInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CD26CCC47B0075CCF3 /* AtomicInt.swift */; };
-		3ACD91FC26CCC47B0075CCF3 /* Platform.Linux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CE26CCC47B0075CCF3 /* Platform.Linux.swift */; };
-		3ACD91FD26CCC47B0075CCF3 /* RecursiveLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91CF26CCC47B0075CCF3 /* RecursiveLock.swift */; };
-		3ACD91FF26CCC47B0075CCF3 /* BlockingObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D126CCC47B0075CCF3 /* BlockingObservable.swift */; };
-		3ACD920026CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D226CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift */; };
-		3ACD920126CCC47B0075CCF3 /* RunLoopLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D326CCC47B0075CCF3 /* RunLoopLock.swift */; };
-		3ACD920226CCC47B0075CCF3 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D426CCC47B0075CCF3 /* Resources.swift */; };
-		3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */; };
-		3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */; };
-		3ACD920726CCC8060075CCF3 /* TKBetterDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */; };
-		3ACD92B226CDDC460075CCF3 /* routing-scooter-vehicle.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ACD92B026CDDC460075CCF3 /* routing-scooter-vehicle.json */; };
-		3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A3229EEDFE0096860D /* AppDelegate.swift */; };
-		3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF47A5229EEDFE0096860D /* ViewController.swift */; };
-		3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47A7229EEDFE0096860D /* Main.storyboard */; };
-		3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AA229EEDFF0096860D /* Assets.xcassets */; };
-		3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */; };
 		3AD3BA9327422A4C00E33015 /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3AD3BA9227422A4C00E33015 /* TGCardViewController */; };
-		3AD653F028FF544F00A846C5 /* TKAutocompletionResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD653EF28FF544F00A846C5 /* TKAutocompletionResultTest.swift */; };
-		3ADEBC482B7ED5CD00ABF557 /* TKUIRoutingResultsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADEBC472B7ED5CD00ABF557 /* TKUIRoutingResultsViewModelTest.swift */; };
 		3AEC06912D2E3F45003C9A0B /* TripKitAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */; };
 		3AEC06962D2E3F7A003C9A0B /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3AEC069B2D2E3F7F003C9A0B /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3AEC06BD2D2E5CAF003C9A0B /* TripKitAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */; };
 		3AEC06C22D2E5CB7003C9A0B /* TripKitAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */; };
-		3AFF2A8A26C69A96007809CD /* TKLocationRestorationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */; };
-		3AFF2A8C26C69A96007809CD /* TKPeliasTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */; };
-		3AFF2A8D26C69A96007809CD /* TKGeoJSONTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */; };
-		3AFF2A8E26C69A96007809CD /* TKAnnotationClusterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */; };
-		3AFF2A9326C69A96007809CD /* TKTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2226C69A96007809CD /* TKTestCase.swift */; };
-		3AFF2A9A26C69A96007809CD /* TKRouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2D26C69A96007809CD /* TKRouterTest.swift */; };
-		3AFF2A9B26C69A96007809CD /* TKWaypointRouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2E26C69A96007809CD /* TKWaypointRouterTest.swift */; };
-		3AFF2A9C26C69A96007809CD /* TKSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A2F26C69A96007809CD /* TKSettingsTest.swift */; };
-		3AFF2A9D26C69A96007809CD /* TKAlertModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3126C69A96007809CD /* TKAlertModelTest.swift */; };
-		3AFF2A9E26C69A96007809CD /* TKBookingDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3226C69A96007809CD /* TKBookingDecodingTest.swift */; };
-		3AFF2A9F26C69A96007809CD /* TKJSONSanitizerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3326C69A96007809CD /* TKJSONSanitizerTest.swift */; };
-		3AFF2AA026C69A96007809CD /* TKBookingAvailabilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3426C69A96007809CD /* TKBookingAvailabilityTest.swift */; };
-		3AFF2AA126C69A96007809CD /* TKModeHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3526C69A96007809CD /* TKModeHelperTest.swift */; };
-		3AFF2AA226C69A96007809CD /* TKLocationInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3626C69A96007809CD /* TKLocationInfoTest.swift */; };
-		3AFF2AA326C69A96007809CD /* TKRegionManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3726C69A96007809CD /* TKRegionManagerTest.swift */; };
-		3AFF2AA426C69A96007809CD /* TKBuzzInfoProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3826C69A96007809CD /* TKBuzzInfoProviderTest.swift */; };
-		3AFF2AA526C69A96007809CD /* RoutingAPIParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3926C69A96007809CD /* RoutingAPIParserTest.swift */; };
-		3AFF2AA626C69A96007809CD /* TKDeparturesModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3A26C69A96007809CD /* TKDeparturesModelTest.swift */; };
-		3AFF2AA726C69A96007809CD /* TKPolylineDecoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3B26C69A96007809CD /* TKPolylineDecoderTest.swift */; };
-		3AFF2AA826C69A96007809CD /* hornsbyToSkedGoService.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3D26C69A96007809CD /* hornsbyToSkedGoService.json */; };
-		3AFF2AA926C69A96007809CD /* routing-with-stops.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3E26C69A96007809CD /* routing-with-stops.json */; };
-		3AFF2AAA26C69A96007809CD /* routing-bus+scooter.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A3F26C69A96007809CD /* routing-bus+scooter.json */; };
-		3AFF2AAB26C69A96007809CD /* locationInfo-carRental.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4026C69A96007809CD /* locationInfo-carRental.json */; };
-		3AFF2AAC26C69A96007809CD /* regionInfo-Sydney.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4126C69A96007809CD /* regionInfo-Sydney.json */; };
-		3AFF2AAD26C69A96007809CD /* location-carPods.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4226C69A96007809CD /* location-carPods.json */; };
-		3AFF2AAF26C69A96007809CD /* routing-motorbike.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4426C69A96007809CD /* routing-motorbike.json */; };
-		3AFF2AB026C69A96007809CD /* routing-pt-realtime.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4526C69A96007809CD /* routing-pt-realtime.json */; };
-		3AFF2AB126C69A96007809CD /* hornsbyToSkedGo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4626C69A96007809CD /* hornsbyToSkedGo.json */; };
-		3AFF2AB226C69A96007809CD /* regionInfo-Nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4726C69A96007809CD /* regionInfo-Nuremberg.json */; };
-		3AFF2AB326C69A96007809CD /* routing-drive-park-walk-train.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4826C69A96007809CD /* routing-drive-park-walk-train.json */; };
-		3AFF2AB426C69A96007809CD /* routing-scooters.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4926C69A96007809CD /* routing-scooters.json */; };
-		3AFF2AB526C69A96007809CD /* routing-pt-continuation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4A26C69A96007809CD /* routing-pt-continuation.json */; };
-		3AFF2AB626C69A96007809CD /* regionInfo-Vancouver.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4B26C69A96007809CD /* regionInfo-Vancouver.json */; };
-		3AFF2AB726C69A96007809CD /* berowraToHornsbyService.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4C26C69A96007809CD /* berowraToHornsbyService.json */; };
-		3AFF2AB826C69A96007809CD /* locationInfo-onStreetParking.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4D26C69A96007809CD /* locationInfo-onStreetParking.json */; };
-		3AFF2AB926C69A96007809CD /* routing-pt-platforms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4E26C69A96007809CD /* routing-pt-platforms.json */; };
-		3AFF2ABA26C69A96007809CD /* geojson-nuremberg.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A4F26C69A96007809CD /* geojson-nuremberg.json */; };
-		3AFF2ABB26C69A96007809CD /* routing-goget.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5026C69A96007809CD /* routing-goget.json */; };
-		3AFF2ABC26C69A96007809CD /* regions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5126C69A96007809CD /* regions.json */; };
-		3AFF2ABD26C69A96007809CD /* routing-pt-impossible.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5226C69A96007809CD /* routing-pt-impossible.json */; };
-		3AFF2ABE26C69A96007809CD /* berowraToHornsby.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5326C69A96007809CD /* berowraToHornsby.json */; };
-		3AFF2ABF26C69A96007809CD /* service-for-park-ride.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5426C69A96007809CD /* service-for-park-ride.json */; };
-		3AFF2AC026C69A96007809CD /* locationInfo-bikePod.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5526C69A96007809CD /* locationInfo-bikePod.json */; };
-		3AFF2AC126C69A96007809CD /* locationInfo-carRental-days.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5626C69A96007809CD /* locationInfo-carRental-days.json */; };
-		3AFF2AC226C69A96007809CD /* location-carParks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5726C69A96007809CD /* location-carParks.json */; };
-		3AFF2AC326C69A96007809CD /* routing-pt-oldish.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5826C69A96007809CD /* routing-pt-oldish.json */; };
-		3AFF2AC426C69A96007809CD /* routing-pt-cancelled.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5926C69A96007809CD /* routing-pt-cancelled.json */; };
-		3AFF2AC526C69A96007809CD /* departures-parentStop.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5A26C69A96007809CD /* departures-parentStop.json */; };
-		3AFF2AC626C69A96007809CD /* routing-goget-park.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5B26C69A96007809CD /* routing-goget-park.json */; };
-		3AFF2AC726C69A96007809CD /* alertsTransit.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5C26C69A96007809CD /* alertsTransit.json */; };
-		3AFF2AC826C69A96007809CD /* routing-walk.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5D26C69A96007809CD /* routing-walk.json */; };
-		3AFF2AC926C69A96007809CD /* regionInfo-multi.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5E26C69A96007809CD /* regionInfo-multi.json */; };
-		3AFF2ACA26C69A96007809CD /* routing-pt-wheelchair-reroute.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A5F26C69A96007809CD /* routing-pt-wheelchair-reroute.json */; };
-		3AFF2ACB26C69A96007809CD /* routing-cycle-train-cycle.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFF2A6026C69A96007809CD /* routing-cycle-train-cycle.json */; };
-		D31410992395DFE7009498C5 /* ExampleCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31410982395DFE7009498C5 /* ExampleCustomizer.swift */; };
-		D314109D2395E79E009498C5 /* InMemoryFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */; };
-		D314109F2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */; };
-		D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */; };
-		D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */; };
-		D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,154 +144,57 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A10C7192D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionHighlightTest.swift; sourceTree = "<group>"; };
-		3A1AABB126CB78DE00FDDB06 /* pelias-au.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-au.json"; sourceTree = "<group>"; };
-		3A1AABB226CB78DE00FDDB06 /* pelias-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-us.json"; sourceTree = "<group>"; };
-		3A1AABB326CB78DE00FDDB06 /* pelias-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pelias-de.json"; sourceTree = "<group>"; };
+		3A576B0D2E1B8F4F00291841 /* TripKitAPI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = TripKitAPI.podspec; sourceTree = "<group>"; };
 		3A6DF068202C8C340084CB2C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6DF069202C8C340084CB2C /* TripKitUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitUI.podspec; sourceTree = "<group>"; };
 		3A6DF06A202C8C340084CB2C /* TripKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKit.podspec; sourceTree = "<group>"; };
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A96B93A293F102800556A44 /* routes-sf.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "routes-sf.json"; sourceTree = "<group>"; };
-		3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAPIParsingTest.swift; sourceTree = "<group>"; };
 		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
-		3AACB4942643771300DE5665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TripKitUIExample.entitlements; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Home.swift"; sourceTree = "<group>"; };
-		3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIShareHelperTest.swift; sourceTree = "<group>"; };
-		3ACD91A226CCC47B0075CCF3 /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
-		3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIRoutingQueryInputViewModelTest.swift; sourceTree = "<group>"; };
-		3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIMapManagerHelperTest.swift; sourceTree = "<group>"; };
-		3ACD91A526CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUISectionedAlertsTest.swift; sourceTree = "<group>"; };
-		3ACD91A626CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIAutocompletionRaceTest.swift; sourceTree = "<group>"; };
-		3ACD91A726CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUITripOverviewViewModelTest.swift; sourceTree = "<group>"; };
-		3ACD91A826CCC47B0075CCF3 /* TKUIGeocoderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIGeocoderTest.swift; sourceTree = "<group>"; };
-		3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alertsTransit-melbourne.json"; sourceTree = "<group>"; };
-		3ACD91AB26CCC47B0075CCF3 /* routing-motorbike.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-motorbike.json"; sourceTree = "<group>"; };
-		3ACD91AC26CCC47B0075CCF3 /* routing-pt-realtime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-realtime.json"; sourceTree = "<group>"; };
-		3ACD91AD26CCC47B0075CCF3 /* routing-pt-continuation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-continuation.json"; sourceTree = "<group>"; };
-		3ACD91AE26CCC47B0075CCF3 /* routing-pt-platforms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-platforms.json"; sourceTree = "<group>"; };
-		3ACD91AF26CCC47B0075CCF3 /* routing-pt-impossible.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-impossible.json"; sourceTree = "<group>"; };
-		3ACD91B026CCC47B0075CCF3 /* routing-pt-cancelled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-cancelled.json"; sourceTree = "<group>"; };
-		3ACD91B126CCC47B0075CCF3 /* alertsTransit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alertsTransit.json; sourceTree = "<group>"; };
-		3ACD91B226CCC47B0075CCF3 /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
-		3ACD91B326CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIPolylineRendererStabilityTest.swift; sourceTree = "<group>"; };
-		3ACD91B426CCC47B0075CCF3 /* TKUIModePickerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKUIModePickerTest.swift; sourceTree = "<group>"; };
-		3ACD91B726CCC47B0075CCF3 /* HotObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotObservable.swift; sourceTree = "<group>"; };
-		3ACD91B826CCC47B0075CCF3 /* TestableObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObservable.swift; sourceTree = "<group>"; };
-		3ACD91B926CCC47B0075CCF3 /* Recorded+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recorded+Event.swift"; sourceTree = "<group>"; };
-		3ACD91BA26CCC47B0075CCF3 /* Any+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Any+Equatable.swift"; sourceTree = "<group>"; };
-		3ACD91BD26CCC47B0075CCF3 /* Bag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
-		3ACD91BE26CCC47B0075CCF3 /* Event+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+Equatable.swift"; sourceTree = "<group>"; };
-		3ACD91BF26CCC47B0075CCF3 /* TestableObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestableObserver.swift; sourceTree = "<group>"; };
-		3ACD91C026CCC47B0075CCF3 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
-		3ACD91C126CCC47B0075CCF3 /* Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
-		3ACD91C226CCC47B0075CCF3 /* Recorded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorded.swift; sourceTree = "<group>"; };
-		3ACD91C326CCC47B0075CCF3 /* XCTest+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Rx.swift"; sourceTree = "<group>"; };
-		3ACD91C426CCC47B0075CCF3 /* ColdObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColdObservable.swift; sourceTree = "<group>"; };
-		3ACD91C526CCC47B0075CCF3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACD91C626CCC47B0075CCF3 /* RxTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTest.swift; sourceTree = "<group>"; };
-		3ACD91C826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSchedulerVirtualTimeConverter.swift; sourceTree = "<group>"; };
-		3ACD91C926CCC47B0075CCF3 /* TestScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScheduler.swift; sourceTree = "<group>"; };
-		3ACD91CC26CCC47B0075CCF3 /* Platform.Darwin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Darwin.swift; sourceTree = "<group>"; };
-		3ACD91CD26CCC47B0075CCF3 /* AtomicInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicInt.swift; sourceTree = "<group>"; };
-		3ACD91CE26CCC47B0075CCF3 /* Platform.Linux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.Linux.swift; sourceTree = "<group>"; };
-		3ACD91CF26CCC47B0075CCF3 /* RecursiveLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveLock.swift; sourceTree = "<group>"; };
-		3ACD91D026CCC47B0075CCF3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3ACD91D126CCC47B0075CCF3 /* BlockingObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingObservable.swift; sourceTree = "<group>"; };
-		3ACD91D226CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+Blocking.swift"; sourceTree = "<group>"; };
-		3ACD91D326CCC47B0075CCF3 /* RunLoopLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopLock.swift; sourceTree = "<group>"; };
-		3ACD91D426CCC47B0075CCF3 /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		3ACD91D526CCC47B0075CCF3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
-		3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBetterDecodingTest.swift; sourceTree = "<group>"; };
-		3ACD92B026CDDC460075CCF3 /* routing-scooter-vehicle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-scooter-vehicle.json"; sourceTree = "<group>"; };
 		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
 		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
-		3ACF47082297EC820096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3ACF47092297EC820096860D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3ACF470C2297EC820096860D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3ACF470D2297EC820096860D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACF470E2297EC820096860D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		3ACF47142297ED920096860D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3ACF47A1229EEDFE0096860D /* TripKitUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripKitUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ACF47A3229EEDFE0096860D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3ACF47A5229EEDFE0096860D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3ACF47A8229EEDFE0096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3ACF47AA229EEDFF0096860D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3ACF47AD229EEDFF0096860D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3ACF47AF229EEDFF0096860D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AD653EF28FF544F00A846C5 /* TKAutocompletionResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAutocompletionResultTest.swift; sourceTree = "<group>"; };
 		3ADCB5F626CDFCC400E4C13A /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		3ADEBC472B7ED5CD00ABF557 /* TKUIRoutingResultsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKUIRoutingResultsViewModelTest.swift; sourceTree = "<group>"; };
 		3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationRestorationTest.swift; sourceTree = "<group>"; };
-		3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPeliasTitleTest.swift; sourceTree = "<group>"; };
-		3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKGeoJSONTest.swift; sourceTree = "<group>"; };
-		3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAnnotationClusterer.swift; sourceTree = "<group>"; };
-		3AFF2A2226C69A96007809CD /* TKTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKTestCase.swift; sourceTree = "<group>"; };
-		3AFF2A2B26C69A96007809CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AFF2A2D26C69A96007809CD /* TKRouterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRouterTest.swift; sourceTree = "<group>"; };
-		3AFF2A2E26C69A96007809CD /* TKWaypointRouterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKWaypointRouterTest.swift; sourceTree = "<group>"; };
-		3AFF2A2F26C69A96007809CD /* TKSettingsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKSettingsTest.swift; sourceTree = "<group>"; };
-		3AFF2A3126C69A96007809CD /* TKAlertModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKAlertModelTest.swift; sourceTree = "<group>"; };
-		3AFF2A3226C69A96007809CD /* TKBookingDecodingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingDecodingTest.swift; sourceTree = "<group>"; };
-		3AFF2A3326C69A96007809CD /* TKJSONSanitizerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKJSONSanitizerTest.swift; sourceTree = "<group>"; };
-		3AFF2A3426C69A96007809CD /* TKBookingAvailabilityTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBookingAvailabilityTest.swift; sourceTree = "<group>"; };
-		3AFF2A3526C69A96007809CD /* TKModeHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKModeHelperTest.swift; sourceTree = "<group>"; };
-		3AFF2A3626C69A96007809CD /* TKLocationInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKLocationInfoTest.swift; sourceTree = "<group>"; };
-		3AFF2A3726C69A96007809CD /* TKRegionManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKRegionManagerTest.swift; sourceTree = "<group>"; };
-		3AFF2A3826C69A96007809CD /* TKBuzzInfoProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKBuzzInfoProviderTest.swift; sourceTree = "<group>"; };
-		3AFF2A3926C69A96007809CD /* RoutingAPIParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingAPIParserTest.swift; sourceTree = "<group>"; };
-		3AFF2A3A26C69A96007809CD /* TKDeparturesModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKDeparturesModelTest.swift; sourceTree = "<group>"; };
-		3AFF2A3B26C69A96007809CD /* TKPolylineDecoderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPolylineDecoderTest.swift; sourceTree = "<group>"; };
-		3AFF2A3D26C69A96007809CD /* hornsbyToSkedGoService.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hornsbyToSkedGoService.json; sourceTree = "<group>"; };
-		3AFF2A3E26C69A96007809CD /* routing-with-stops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-with-stops.json"; sourceTree = "<group>"; };
-		3AFF2A3F26C69A96007809CD /* routing-bus+scooter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-bus+scooter.json"; sourceTree = "<group>"; };
-		3AFF2A4026C69A96007809CD /* locationInfo-carRental.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental.json"; sourceTree = "<group>"; };
-		3AFF2A4126C69A96007809CD /* regionInfo-Sydney.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Sydney.json"; sourceTree = "<group>"; };
-		3AFF2A4226C69A96007809CD /* location-carPods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "location-carPods.json"; sourceTree = "<group>"; };
-		3AFF2A4426C69A96007809CD /* routing-motorbike.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-motorbike.json"; sourceTree = "<group>"; };
-		3AFF2A4526C69A96007809CD /* routing-pt-realtime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-realtime.json"; sourceTree = "<group>"; };
-		3AFF2A4626C69A96007809CD /* hornsbyToSkedGo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hornsbyToSkedGo.json; sourceTree = "<group>"; };
-		3AFF2A4726C69A96007809CD /* regionInfo-Nuremberg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Nuremberg.json"; sourceTree = "<group>"; };
-		3AFF2A4826C69A96007809CD /* routing-drive-park-walk-train.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-drive-park-walk-train.json"; sourceTree = "<group>"; };
-		3AFF2A4926C69A96007809CD /* routing-scooters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-scooters.json"; sourceTree = "<group>"; };
-		3AFF2A4A26C69A96007809CD /* routing-pt-continuation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-continuation.json"; sourceTree = "<group>"; };
-		3AFF2A4B26C69A96007809CD /* regionInfo-Vancouver.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-Vancouver.json"; sourceTree = "<group>"; };
-		3AFF2A4C26C69A96007809CD /* berowraToHornsbyService.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = berowraToHornsbyService.json; sourceTree = "<group>"; };
-		3AFF2A4D26C69A96007809CD /* locationInfo-onStreetParking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-onStreetParking.json"; sourceTree = "<group>"; };
-		3AFF2A4E26C69A96007809CD /* routing-pt-platforms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-platforms.json"; sourceTree = "<group>"; };
-		3AFF2A4F26C69A96007809CD /* geojson-nuremberg.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "geojson-nuremberg.json"; sourceTree = "<group>"; };
-		3AFF2A5026C69A96007809CD /* routing-goget.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-goget.json"; sourceTree = "<group>"; };
-		3AFF2A5126C69A96007809CD /* regions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = regions.json; sourceTree = "<group>"; };
-		3AFF2A5226C69A96007809CD /* routing-pt-impossible.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-impossible.json"; sourceTree = "<group>"; };
-		3AFF2A5326C69A96007809CD /* berowraToHornsby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = berowraToHornsby.json; sourceTree = "<group>"; };
-		3AFF2A5426C69A96007809CD /* service-for-park-ride.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "service-for-park-ride.json"; sourceTree = "<group>"; };
-		3AFF2A5526C69A96007809CD /* locationInfo-bikePod.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-bikePod.json"; sourceTree = "<group>"; };
-		3AFF2A5626C69A96007809CD /* locationInfo-carRental-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "locationInfo-carRental-days.json"; sourceTree = "<group>"; };
-		3AFF2A5726C69A96007809CD /* location-carParks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "location-carParks.json"; sourceTree = "<group>"; };
-		3AFF2A5826C69A96007809CD /* routing-pt-oldish.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-oldish.json"; sourceTree = "<group>"; };
-		3AFF2A5926C69A96007809CD /* routing-pt-cancelled.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-cancelled.json"; sourceTree = "<group>"; };
-		3AFF2A5A26C69A96007809CD /* departures-parentStop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "departures-parentStop.json"; sourceTree = "<group>"; };
-		3AFF2A5B26C69A96007809CD /* routing-goget-park.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-goget-park.json"; sourceTree = "<group>"; };
-		3AFF2A5C26C69A96007809CD /* alertsTransit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alertsTransit.json; sourceTree = "<group>"; };
-		3AFF2A5D26C69A96007809CD /* routing-walk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-walk.json"; sourceTree = "<group>"; };
-		3AFF2A5E26C69A96007809CD /* regionInfo-multi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "regionInfo-multi.json"; sourceTree = "<group>"; };
-		3AFF2A5F26C69A96007809CD /* routing-pt-wheelchair-reroute.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-pt-wheelchair-reroute.json"; sourceTree = "<group>"; };
-		3AFF2A6026C69A96007809CD /* routing-cycle-train-cycle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "routing-cycle-train-cycle.json"; sourceTree = "<group>"; };
-		D31410982395DFE7009498C5 /* ExampleCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCustomizer.swift; sourceTree = "<group>"; };
-		D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteManager.swift; sourceTree = "<group>"; };
-		D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryFavoriteManager+Autocompleting.swift"; sourceTree = "<group>"; };
-		D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InMemoryHistoryManager+Autocompleting.swift"; sourceTree = "<group>"; };
-		D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryHistoryManager.swift; sourceTree = "<group>"; };
-		D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKTripSegmentModeTitleTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3A577CCA2E1B9B5B00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3ACF47A0229EEDFE0096860D /* TripKitUIExample */;
+		};
+		3A577D5B2E1B9B6A00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Supporting Files/Info.plist",
+			);
+			target = 3AB6C6291D1CD0060089F687 /* TripKitTests */;
+		};
+		3A577DC32E1B9B6F00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Data/alertsTransit.json,
+				"Data/routing-cycle-train-cycle.json",
+				"Data/routing-motorbike.json",
+				"Data/routing-pt-cancelled.json",
+				"Data/routing-pt-continuation.json",
+				"Data/routing-pt-impossible.json",
+				"Data/routing-pt-platforms.json",
+				"Data/routing-pt-realtime.json",
+				TKTestCase.swift,
+				vendor/RxBlocking/Info.plist,
+				vendor/RxBlocking/README.md,
+				vendor/RxTest/Info.plist,
+			);
+			target = 3AB6C6291D1CD0060089F687 /* TripKitTests */;
+		};
 		3A8DD6792E164DE000FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -412,6 +205,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		3A577CBD2E1B9B5B00291841 /* TripKitUIExample */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A577CCA2E1B9B5B00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitUIExample; sourceTree = "<group>"; };
+		3A577CD12E1B9B6000291841 /* MiniMap */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MiniMap; sourceTree = "<group>"; };
+		3A577D192E1B9B6A00291841 /* TripKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A577D5B2E1B9B6A00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitTests; sourceTree = "<group>"; };
+		3A577D932E1B9B6E00291841 /* TripKitUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A577DC32E1B9B6F00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitUITests; sourceTree = "<group>"; };
 		3A8DD2F92E164D9F00FBE268 /* TripKit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TripKit; sourceTree = "<group>"; };
 		3A8DD3E82E164DB200FBE268 /* TripKitAPI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TripKitAPI; sourceTree = "<group>"; };
 		3A8DD55A2E164DE000FBE268 /* TripKitUI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A8DD6792E164DE000FBE268 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitUI; sourceTree = "<group>"; };
@@ -490,6 +287,7 @@
 			children = (
 				3A6DF068202C8C340084CB2C /* README.md */,
 				3ADCB5F626CDFCC400E4C13A /* Package.swift */,
+				3A576B0D2E1B8F4F00291841 /* TripKitAPI.podspec */,
 				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
 				3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */,
 				3A6DF069202C8C340084CB2C /* TripKitUI.podspec */,
@@ -522,129 +320,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3ACD91A026CCC47B0075CCF3 /* TripKitUITests */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91A926CCC47B0075CCF3 /* Data */,
-				3ACD91A226CCC47B0075CCF3 /* TKTestCase.swift */,
-				3ACD91A626CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift */,
-				3ACD91A826CCC47B0075CCF3 /* TKUIGeocoderTest.swift */,
-				3ACD91A426CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift */,
-				3ACD91B426CCC47B0075CCF3 /* TKUIModePickerTest.swift */,
-				3ACD91B326CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift */,
-				3ACD91A326CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift */,
-				3ADEBC472B7ED5CD00ABF557 /* TKUIRoutingResultsViewModelTest.swift */,
-				3ACD91A526CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift */,
-				3ACD91A126CCC47B0075CCF3 /* TKUIShareHelperTest.swift */,
-				3ACD91A726CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift */,
-				3ACD91B526CCC47B0075CCF3 /* vendor */,
-			);
-			path = TripKitUITests;
-			sourceTree = "<group>";
-		};
-		3ACD91A926CCC47B0075CCF3 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91AA26CCC47B0075CCF3 /* alertsTransit-melbourne.json */,
-				3ACD91AB26CCC47B0075CCF3 /* routing-motorbike.json */,
-				3ACD91AC26CCC47B0075CCF3 /* routing-pt-realtime.json */,
-				3ACD91AD26CCC47B0075CCF3 /* routing-pt-continuation.json */,
-				3ACD91AE26CCC47B0075CCF3 /* routing-pt-platforms.json */,
-				3ACD91AF26CCC47B0075CCF3 /* routing-pt-impossible.json */,
-				3ACD91B026CCC47B0075CCF3 /* routing-pt-cancelled.json */,
-				3ACD91B126CCC47B0075CCF3 /* alertsTransit.json */,
-				3ACD91B226CCC47B0075CCF3 /* routing-cycle-train-cycle.json */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		3ACD91B526CCC47B0075CCF3 /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91B626CCC47B0075CCF3 /* RxTest */,
-				3ACD91CA26CCC47B0075CCF3 /* RxBlocking */,
-			);
-			path = vendor;
-			sourceTree = "<group>";
-		};
-		3ACD91B626CCC47B0075CCF3 /* RxTest */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91BB26CCC47B0075CCF3 /* Platform */,
-				3ACD91C726CCC47B0075CCF3 /* Schedulers */,
-				3ACD91BA26CCC47B0075CCF3 /* Any+Equatable.swift */,
-				3ACD91C426CCC47B0075CCF3 /* ColdObservable.swift */,
-				3ACD91C126CCC47B0075CCF3 /* Deprecated.swift */,
-				3ACD91BE26CCC47B0075CCF3 /* Event+Equatable.swift */,
-				3ACD91B726CCC47B0075CCF3 /* HotObservable.swift */,
-				3ACD91C526CCC47B0075CCF3 /* Info.plist */,
-				3ACD91C226CCC47B0075CCF3 /* Recorded.swift */,
-				3ACD91B926CCC47B0075CCF3 /* Recorded+Event.swift */,
-				3ACD91C626CCC47B0075CCF3 /* RxTest.swift */,
-				3ACD91C026CCC47B0075CCF3 /* Subscription.swift */,
-				3ACD91B826CCC47B0075CCF3 /* TestableObservable.swift */,
-				3ACD91BF26CCC47B0075CCF3 /* TestableObserver.swift */,
-				3ACD91C326CCC47B0075CCF3 /* XCTest+Rx.swift */,
-			);
-			path = RxTest;
-			sourceTree = "<group>";
-		};
-		3ACD91BB26CCC47B0075CCF3 /* Platform */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91BC26CCC47B0075CCF3 /* DataStructures */,
-			);
-			path = Platform;
-			sourceTree = "<group>";
-		};
-		3ACD91BC26CCC47B0075CCF3 /* DataStructures */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91BD26CCC47B0075CCF3 /* Bag.swift */,
-			);
-			path = DataStructures;
-			sourceTree = "<group>";
-		};
-		3ACD91C726CCC47B0075CCF3 /* Schedulers */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91C826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift */,
-				3ACD91C926CCC47B0075CCF3 /* TestScheduler.swift */,
-			);
-			path = Schedulers;
-			sourceTree = "<group>";
-		};
-		3ACD91CA26CCC47B0075CCF3 /* RxBlocking */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91CB26CCC47B0075CCF3 /* Platform */,
-				3ACD91D126CCC47B0075CCF3 /* BlockingObservable.swift */,
-				3ACD91D626CCC47B0075CCF3 /* BlockingObservable+Operators.swift */,
-				3ACD91D526CCC47B0075CCF3 /* Info.plist */,
-				3ACD91D226CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift */,
-				3ACD91D026CCC47B0075CCF3 /* README.md */,
-				3ACD91D426CCC47B0075CCF3 /* Resources.swift */,
-				3ACD91D326CCC47B0075CCF3 /* RunLoopLock.swift */,
-			);
-			path = RxBlocking;
-			sourceTree = "<group>";
-		};
-		3ACD91CB26CCC47B0075CCF3 /* Platform */ = {
-			isa = PBXGroup;
-			children = (
-				3ACD91CC26CCC47B0075CCF3 /* Platform.Darwin.swift */,
-				3ACD91CD26CCC47B0075CCF3 /* AtomicInt.swift */,
-				3ACD91CE26CCC47B0075CCF3 /* Platform.Linux.swift */,
-				3ACD91CF26CCC47B0075CCF3 /* RecursiveLock.swift */,
-			);
-			path = Platform;
-			sourceTree = "<group>";
-		};
 		3ACF46FE2297EC820096860D /* Examples */ = {
 			isa = PBXGroup;
 			children = (
 				3ACF47022297EC820096860D /* MiniMap */,
-				3ACF47A2229EEDFE0096860D /* TripKitUIExample */,
+				3A577CBD2E1B9B5B00291841 /* TripKitUIExample */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -654,7 +334,7 @@
 			children = (
 				3ACF47032297EC820096860D /* MiniMap.xcodeproj */,
 				3ACF47062297EC820096860D /* MiniMap.xcworkspace */,
-				3ACF47072297EC820096860D /* MiniMap */,
+				3A577CD12E1B9B6000291841 /* MiniMap */,
 				3ACF470E2297EC820096860D /* Podfile */,
 				3ACF47142297ED920096860D /* README.md */,
 			);
@@ -667,34 +347,6 @@
 				3ACF47112297EC820096860D /* MiniMap.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3ACF47072297EC820096860D /* MiniMap */ = {
-			isa = PBXGroup;
-			children = (
-				3ACF47082297EC820096860D /* ViewController.swift */,
-				3ACF47092297EC820096860D /* Assets.xcassets */,
-				3ACF470A2297EC820096860D /* Main.storyboard */,
-				3ACF470C2297EC820096860D /* AppDelegate.swift */,
-				3ACF470D2297EC820096860D /* Info.plist */,
-			);
-			path = MiniMap;
-			sourceTree = "<group>";
-		};
-		3ACF47A2229EEDFE0096860D /* TripKitUIExample */ = {
-			isa = PBXGroup;
-			children = (
-				D314109B2395E779009498C5 /* Autocompleter */,
-				3ACF47A3229EEDFE0096860D /* AppDelegate.swift */,
-				D31410982395DFE7009498C5 /* ExampleCustomizer.swift */,
-				3ACF47A5229EEDFE0096860D /* ViewController.swift */,
-				3ACF47A7229EEDFE0096860D /* Main.storyboard */,
-				3ACF47AA229EEDFF0096860D /* Assets.xcassets */,
-				3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */,
-				3ACF47AF229EEDFF0096860D /* Info.plist */,
-				3AB4A2DD235DEE2500C0E195 /* TripKitUIExample.entitlements */,
-			);
-			path = TripKitUIExample;
 			sourceTree = "<group>";
 		};
 		3AFF25E926C6975F007809CD /* Sources */ = {
@@ -711,142 +363,10 @@
 		3AFF2A0B26C69A96007809CD /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3AFF2A0E26C69A96007809CD /* TripKitTests */,
-				3ACD91A026CCC47B0075CCF3 /* TripKitUITests */,
+				3A577D192E1B9B6A00291841 /* TripKitTests */,
+				3A577D932E1B9B6E00291841 /* TripKitUITests */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		3AFF2A0E26C69A96007809CD /* TripKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A3C26C69A96007809CD /* Data */,
-				3AFF2A3026C69A96007809CD /* parsing */,
-				3AFF2A1726C69A96007809CD /* restoration */,
-				3AFF2A2C26C69A96007809CD /* routing */,
-				3AFF2A1926C69A96007809CD /* searching */,
-				3AFF2A2A26C69A96007809CD /* Supporting Files */,
-				3AFF2A2226C69A96007809CD /* TKTestCase.swift */,
-			);
-			path = TripKitTests;
-			sourceTree = "<group>";
-		};
-		3AFF2A1726C69A96007809CD /* restoration */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A1826C69A96007809CD /* TKLocationRestorationTest.swift */,
-			);
-			path = restoration;
-			sourceTree = "<group>";
-		};
-		3AFF2A1926C69A96007809CD /* searching */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A1D26C69A96007809CD /* TKAnnotationClusterer.swift */,
-				3A10C7192D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift */,
-				3AD653EF28FF544F00A846C5 /* TKAutocompletionResultTest.swift */,
-				3AFF2A1C26C69A96007809CD /* TKGeoJSONTest.swift */,
-				3AFF2A1B26C69A96007809CD /* TKPeliasTitleTest.swift */,
-			);
-			path = searching;
-			sourceTree = "<group>";
-		};
-		3AFF2A2A26C69A96007809CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A2B26C69A96007809CD /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3AFF2A2C26C69A96007809CD /* routing */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A2D26C69A96007809CD /* TKRouterTest.swift */,
-				3AFF2A2F26C69A96007809CD /* TKSettingsTest.swift */,
-				3AFF2A2E26C69A96007809CD /* TKWaypointRouterTest.swift */,
-			);
-			path = routing;
-			sourceTree = "<group>";
-		};
-		3AFF2A3026C69A96007809CD /* parsing */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A3926C69A96007809CD /* RoutingAPIParserTest.swift */,
-				3AFF2A3126C69A96007809CD /* TKAlertModelTest.swift */,
-				3ACD920626CCC8060075CCF3 /* TKBetterDecodingTest.swift */,
-				3AFF2A3426C69A96007809CD /* TKBookingAvailabilityTest.swift */,
-				3AFF2A3226C69A96007809CD /* TKBookingDecodingTest.swift */,
-				3AFF2A3826C69A96007809CD /* TKBuzzInfoProviderTest.swift */,
-				3AFF2A3A26C69A96007809CD /* TKDeparturesModelTest.swift */,
-				3AFF2A3326C69A96007809CD /* TKJSONSanitizerTest.swift */,
-				3AFF2A3626C69A96007809CD /* TKLocationInfoTest.swift */,
-				3AFF2A3526C69A96007809CD /* TKModeHelperTest.swift */,
-				3AFF2A3B26C69A96007809CD /* TKPolylineDecoderTest.swift */,
-				3AFF2A3726C69A96007809CD /* TKRegionManagerTest.swift */,
-				D3D5112C26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift */,
-				3A9C6A8529B58AC4000D43B2 /* TKAPIParsingTest.swift */,
-			);
-			path = parsing;
-			sourceTree = "<group>";
-		};
-		3AFF2A3C26C69A96007809CD /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				3AFF2A5C26C69A96007809CD /* alertsTransit.json */,
-				3AFF2A5326C69A96007809CD /* berowraToHornsby.json */,
-				3AFF2A4C26C69A96007809CD /* berowraToHornsbyService.json */,
-				3AFF2A5A26C69A96007809CD /* departures-parentStop.json */,
-				3AFF2A4F26C69A96007809CD /* geojson-nuremberg.json */,
-				3AFF2A4626C69A96007809CD /* hornsbyToSkedGo.json */,
-				3AFF2A3D26C69A96007809CD /* hornsbyToSkedGoService.json */,
-				3AFF2A5726C69A96007809CD /* location-carParks.json */,
-				3AFF2A4226C69A96007809CD /* location-carPods.json */,
-				3AFF2A5526C69A96007809CD /* locationInfo-bikePod.json */,
-				3AFF2A5626C69A96007809CD /* locationInfo-carRental-days.json */,
-				3AFF2A4026C69A96007809CD /* locationInfo-carRental.json */,
-				3AFF2A4D26C69A96007809CD /* locationInfo-onStreetParking.json */,
-				3A1AABB126CB78DE00FDDB06 /* pelias-au.json */,
-				3A1AABB326CB78DE00FDDB06 /* pelias-de.json */,
-				3A1AABB226CB78DE00FDDB06 /* pelias-us.json */,
-				3AFF2A5E26C69A96007809CD /* regionInfo-multi.json */,
-				3AFF2A4726C69A96007809CD /* regionInfo-Nuremberg.json */,
-				3AFF2A4126C69A96007809CD /* regionInfo-Sydney.json */,
-				3AFF2A4B26C69A96007809CD /* regionInfo-Vancouver.json */,
-				3AFF2A5126C69A96007809CD /* regions.json */,
-				3A96B93A293F102800556A44 /* routes-sf.json */,
-				3AFF2A3F26C69A96007809CD /* routing-bus+scooter.json */,
-				3AFF2A6026C69A96007809CD /* routing-cycle-train-cycle.json */,
-				3AFF2A4826C69A96007809CD /* routing-drive-park-walk-train.json */,
-				3AFF2A5B26C69A96007809CD /* routing-goget-park.json */,
-				3AFF2A5026C69A96007809CD /* routing-goget.json */,
-				3AFF2A4426C69A96007809CD /* routing-motorbike.json */,
-				3AFF2A5926C69A96007809CD /* routing-pt-cancelled.json */,
-				3AFF2A4A26C69A96007809CD /* routing-pt-continuation.json */,
-				3AFF2A5226C69A96007809CD /* routing-pt-impossible.json */,
-				3AFF2A5826C69A96007809CD /* routing-pt-oldish.json */,
-				3AFF2A4E26C69A96007809CD /* routing-pt-platforms.json */,
-				3AFF2A4526C69A96007809CD /* routing-pt-realtime.json */,
-				3AFF2A5F26C69A96007809CD /* routing-pt-wheelchair-reroute.json */,
-				3ACD92B026CDDC460075CCF3 /* routing-scooter-vehicle.json */,
-				3AFF2A4926C69A96007809CD /* routing-scooters.json */,
-				3AFF2A5D26C69A96007809CD /* routing-walk.json */,
-				3AFF2A3E26C69A96007809CD /* routing-with-stops.json */,
-				3AFF2A5426C69A96007809CD /* service-for-park-ride.json */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		D314109B2395E779009498C5 /* Autocompleter */ = {
-			isa = PBXGroup;
-			children = (
-				D314109C2395E79E009498C5 /* InMemoryFavoriteManager.swift */,
-				D314109E2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift */,
-				D3C015D32390BB0C00BF7110 /* InMemoryHistoryManager.swift */,
-				D33C052323949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift */,
-				3AC6946D27E3043B00DBD287 /* InMemoryHistoryManager+Home.swift */,
-			);
-			path = Autocompleter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -976,6 +496,10 @@
 				3AA4A2C8217F71A300A3A6A8 /* PBXTargetDependency */,
 				3AB6C62D1D1CD0060089F687 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				3A577D192E1B9B6A00291841 /* TripKitTests */,
+				3A577D932E1B9B6E00291841 /* TripKitUITests */,
+			);
 			name = TripKitTests;
 			packageProductDependencies = (
 			);
@@ -998,6 +522,9 @@
 				3A1777A7232BF3090093D495 /* PBXTargetDependency */,
 				3ACF47B5229EF0000096860D /* PBXTargetDependency */,
 				3ACF47B7229EF0000096860D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3A577CBD2E1B9B5B00291841 /* TripKitUIExample */,
 			);
 			name = TripKitUIExample;
 			productName = TripKitUIExample;
@@ -1155,47 +682,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AFF2ABD26C69A96007809CD /* routing-pt-impossible.json in Resources */,
-				3AFF2AC426C69A96007809CD /* routing-pt-cancelled.json in Resources */,
-				3AFF2AB626C69A96007809CD /* regionInfo-Vancouver.json in Resources */,
-				3AFF2AB126C69A96007809CD /* hornsbyToSkedGo.json in Resources */,
-				3AFF2AB926C69A96007809CD /* routing-pt-platforms.json in Resources */,
-				3AFF2AB726C69A96007809CD /* berowraToHornsbyService.json in Resources */,
-				3AFF2ACB26C69A96007809CD /* routing-cycle-train-cycle.json in Resources */,
-				3AFF2ABE26C69A96007809CD /* berowraToHornsby.json in Resources */,
-				3AFF2ABA26C69A96007809CD /* geojson-nuremberg.json in Resources */,
-				3AFF2AB226C69A96007809CD /* regionInfo-Nuremberg.json in Resources */,
-				3AFF2AB826C69A96007809CD /* locationInfo-onStreetParking.json in Resources */,
-				3AFF2AC926C69A96007809CD /* regionInfo-multi.json in Resources */,
-				3AFF2AC626C69A96007809CD /* routing-goget-park.json in Resources */,
-				3A96B93B293F102800556A44 /* routes-sf.json in Resources */,
-				3AFF2AC326C69A96007809CD /* routing-pt-oldish.json in Resources */,
-				3AFF2ABB26C69A96007809CD /* routing-goget.json in Resources */,
-				3AFF2AAB26C69A96007809CD /* locationInfo-carRental.json in Resources */,
-				3AFF2AC026C69A96007809CD /* locationInfo-bikePod.json in Resources */,
-				3AFF2AA926C69A96007809CD /* routing-with-stops.json in Resources */,
-				3AFF2AC526C69A96007809CD /* departures-parentStop.json in Resources */,
-				3AFF2AC226C69A96007809CD /* location-carParks.json in Resources */,
-				3AFF2ABF26C69A96007809CD /* service-for-park-ride.json in Resources */,
-				3AFF2AB526C69A96007809CD /* routing-pt-continuation.json in Resources */,
-				3A1AABB626CB78DE00FDDB06 /* pelias-de.json in Resources */,
-				3AFF2AC126C69A96007809CD /* locationInfo-carRental-days.json in Resources */,
-				3AFF2AB026C69A96007809CD /* routing-pt-realtime.json in Resources */,
-				3ACD920526CCC4AB0075CCF3 /* alertsTransit-melbourne.json in Resources */,
-				3A1AABB426CB78DE00FDDB06 /* pelias-au.json in Resources */,
-				3AFF2AC826C69A96007809CD /* routing-walk.json in Resources */,
-				3AFF2ACA26C69A96007809CD /* routing-pt-wheelchair-reroute.json in Resources */,
-				3AFF2ABC26C69A96007809CD /* regions.json in Resources */,
-				3ACD92B226CDDC460075CCF3 /* routing-scooter-vehicle.json in Resources */,
-				3AFF2AAC26C69A96007809CD /* regionInfo-Sydney.json in Resources */,
-				3AFF2AB426C69A96007809CD /* routing-scooters.json in Resources */,
-				3A1AABB526CB78DE00FDDB06 /* pelias-us.json in Resources */,
-				3AFF2AC726C69A96007809CD /* alertsTransit.json in Resources */,
-				3AFF2AB326C69A96007809CD /* routing-drive-park-walk-train.json in Resources */,
-				3AFF2AAA26C69A96007809CD /* routing-bus+scooter.json in Resources */,
-				3AFF2AA826C69A96007809CD /* hornsbyToSkedGoService.json in Resources */,
-				3AFF2AAD26C69A96007809CD /* location-carPods.json in Resources */,
-				3AFF2AAF26C69A96007809CD /* routing-motorbike.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1203,9 +689,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACF47AE229EEDFF0096860D /* LaunchScreen.storyboard in Resources */,
-				3ACF47AB229EEDFF0096860D /* Assets.xcassets in Resources */,
-				3ACF47A9229EEDFE0096860D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,64 +727,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACD91E826CCC47B0075CCF3 /* TKUIPolylineRendererStabilityTest.swift in Sources */,
-				3ACD920026CCC47B0075CCF3 /* ObservableConvertibleType+Blocking.swift in Sources */,
-				3ACD91FF26CCC47B0075CCF3 /* BlockingObservable.swift in Sources */,
-				3A10C71A2D7AA1A10079C015 /* TKAutocompletionHighlightTest.swift in Sources */,
-				3ACD91EF26CCC47B0075CCF3 /* Event+Equatable.swift in Sources */,
-				3ACD91ED26CCC47B0075CCF3 /* Any+Equatable.swift in Sources */,
-				3AFF2AA426C69A96007809CD /* TKBuzzInfoProviderTest.swift in Sources */,
-				3AFF2A9326C69A96007809CD /* TKTestCase.swift in Sources */,
-				3ACD91F326CCC47B0075CCF3 /* Recorded.swift in Sources */,
-				3AFF2A8A26C69A96007809CD /* TKLocationRestorationTest.swift in Sources */,
-				3AFF2AA726C69A96007809CD /* TKPolylineDecoderTest.swift in Sources */,
-				3AFF2AA326C69A96007809CD /* TKRegionManagerTest.swift in Sources */,
-				3AFF2A9F26C69A96007809CD /* TKJSONSanitizerTest.swift in Sources */,
-				3ACD91F526CCC47B0075CCF3 /* ColdObservable.swift in Sources */,
-				3AFF2AA226C69A96007809CD /* TKLocationInfoTest.swift in Sources */,
-				3ACD91D726CCC47B0075CCF3 /* TKUIShareHelperTest.swift in Sources */,
-				3AFF2AA126C69A96007809CD /* TKModeHelperTest.swift in Sources */,
-				3AFF2AA026C69A96007809CD /* TKBookingAvailabilityTest.swift in Sources */,
-				3AFF2A9B26C69A96007809CD /* TKWaypointRouterTest.swift in Sources */,
-				3ACD91EB26CCC47B0075CCF3 /* TestableObservable.swift in Sources */,
-				3ACD91DA26CCC47B0075CCF3 /* TKUIMapManagerHelperTest.swift in Sources */,
-				3ACD920126CCC47B0075CCF3 /* RunLoopLock.swift in Sources */,
-				3ACD91DC26CCC47B0075CCF3 /* TKUIAutocompletionRaceTest.swift in Sources */,
-				3AFF2A8D26C69A96007809CD /* TKGeoJSONTest.swift in Sources */,
-				3ACD91F126CCC47B0075CCF3 /* Subscription.swift in Sources */,
-				3ACD920726CCC8060075CCF3 /* TKBetterDecodingTest.swift in Sources */,
-				3ACD91E926CCC47B0075CCF3 /* TKUIModePickerTest.swift in Sources */,
-				3AFF2A8E26C69A96007809CD /* TKAnnotationClusterer.swift in Sources */,
-				3ACD91FD26CCC47B0075CCF3 /* RecursiveLock.swift in Sources */,
-				3ACD91D926CCC47B0075CCF3 /* TKUIRoutingQueryInputViewModelTest.swift in Sources */,
-				3AFF2AA526C69A96007809CD /* RoutingAPIParserTest.swift in Sources */,
-				3ACD91F726CCC47B0075CCF3 /* RxTest.swift in Sources */,
-				3ACD91FB26CCC47B0075CCF3 /* AtomicInt.swift in Sources */,
-				3A9C6A8629B58AC4000D43B2 /* TKAPIParsingTest.swift in Sources */,
-				3AFF2A9E26C69A96007809CD /* TKBookingDecodingTest.swift in Sources */,
-				3AFF2A9D26C69A96007809CD /* TKAlertModelTest.swift in Sources */,
-				3ACD91F826CCC47B0075CCF3 /* TestSchedulerVirtualTimeConverter.swift in Sources */,
-				3ADEBC482B7ED5CD00ABF557 /* TKUIRoutingResultsViewModelTest.swift in Sources */,
-				3ACD91DE26CCC47B0075CCF3 /* TKUIGeocoderTest.swift in Sources */,
-				3ACD91FC26CCC47B0075CCF3 /* Platform.Linux.swift in Sources */,
-				D3D5112D26D858F600E49D12 /* TKTripSegmentModeTitleTest.swift in Sources */,
-				3ACD920426CCC47B0075CCF3 /* BlockingObservable+Operators.swift in Sources */,
-				3ACD91EC26CCC47B0075CCF3 /* Recorded+Event.swift in Sources */,
-				3ACD920226CCC47B0075CCF3 /* Resources.swift in Sources */,
-				3ACD91EA26CCC47B0075CCF3 /* HotObservable.swift in Sources */,
-				3ACD91DD26CCC47B0075CCF3 /* TKUITripOverviewViewModelTest.swift in Sources */,
-				3AFF2A9A26C69A96007809CD /* TKRouterTest.swift in Sources */,
-				3ACD91F926CCC47B0075CCF3 /* TestScheduler.swift in Sources */,
-				3ACD91EE26CCC47B0075CCF3 /* Bag.swift in Sources */,
-				3ACD91F426CCC47B0075CCF3 /* XCTest+Rx.swift in Sources */,
-				3AD653F028FF544F00A846C5 /* TKAutocompletionResultTest.swift in Sources */,
-				3ACD91DB26CCC47B0075CCF3 /* TKUISectionedAlertsTest.swift in Sources */,
-				3ACD91FA26CCC47B0075CCF3 /* Platform.Darwin.swift in Sources */,
-				3AFF2AA626C69A96007809CD /* TKDeparturesModelTest.swift in Sources */,
-				3AFF2A8C26C69A96007809CD /* TKPeliasTitleTest.swift in Sources */,
-				3ACD91F226CCC47B0075CCF3 /* Deprecated.swift in Sources */,
-				3AFF2A9C26C69A96007809CD /* TKSettingsTest.swift in Sources */,
-				3ACD91F026CCC47B0075CCF3 /* TestableObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,14 +734,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACF47A6229EEDFE0096860D /* ViewController.swift in Sources */,
-				D314109D2395E79E009498C5 /* InMemoryFavoriteManager.swift in Sources */,
-				D33C052423949637000D9B5C /* InMemoryHistoryManager+Autocompleting.swift in Sources */,
-				D314109F2396003A009498C5 /* InMemoryFavoriteManager+Autocompleting.swift in Sources */,
-				3AC6946E27E3043C00DBD287 /* InMemoryHistoryManager+Home.swift in Sources */,
-				3ACF47A4229EEDFE0096860D /* AppDelegate.swift in Sources */,
-				D31410992395DFE7009498C5 /* ExampleCustomizer.swift in Sources */,
-				D3C015D42390BB0C00BF7110 /* InMemoryHistoryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,33 +813,6 @@
 			targetProxy = 3AEC06C42D2E5CB7003C9A0B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		3ACF470A2297EC820096860D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3AACB4942643771300DE5665 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3ACF47A7229EEDFE0096860D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3ACF47A8229EEDFE0096860D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3ACF47AC229EEDFF0096860D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3ACF47AD229EEDFF0096860D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3A6DF08A202C8DA30084CB2C /* Debug */ = {
