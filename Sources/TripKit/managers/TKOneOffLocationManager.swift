@@ -139,7 +139,7 @@ public final class TKOneOffLocationManager: NSObject {
     
     timeoutTask = Task { [weak self] in
       do {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, macOS 13.0, *) {
           try await Task.sleep(for: .seconds(10))
         } else {
           try await Task.sleep(nanoseconds: 10_000_000_000)
