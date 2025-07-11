@@ -90,14 +90,10 @@
 }
 
 .content pre code {
-  @apply text-xs leading-5 whitespace-pre-wrap;
+  @apply block rounded-lg border border-gray-900/10 text-xs leading-5 whitespace-pre-wrap;
 }
 
-.content pre {
-  @apply overflow-hidden rounded-lg inset-ring-1 inset-ring-gray-900/20;
-}
-
-.content * + * {
+.content > * + * {
   @apply mt-4;
 }
 
@@ -107,6 +103,10 @@
 
 .content ol {
   @apply list-decimal pl-6;
+}
+
+.content li {
+  @apply mb-2;
 }
 
 .content blockquote {
@@ -121,10 +121,10 @@
   @apply mt-10 block border-gray-300;
 }
 
-.content li code,
+/* .content li code,
 .content p code {
   @apply rounded bg-blue-50 px-1 py-0.5 text-blue-600;
-}
+} */
 
 .content h1:hover > .headerlink,
 .content h2:hover > .headerlink,
@@ -137,6 +137,19 @@
 
 .content img {
   @apply rounded-lg;
+}
+
+.content pre {
+  @apply relative;
+}
+
+.content pre .copy-button {
+  @apply absolute top-0 right-0 bg-white px-1 text-xs;
+}
+
+.content p > code,
+.content li > code {
+  @apply rounded bg-gray-100 px-1 py-0.5 text-blue-600;
 }
 
 #mkdocs-search-results > p {
