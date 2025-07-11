@@ -22,7 +22,7 @@ import TripKit
 /// var body: some View {
 ///   ZStack {
 ///     Map()
-///     if isSearching
+///     if isSearching {
 ///       TKUIAutocompletionView(
 ///         providers: GeocoderManager.autocompletionProviders,
 ///         searchText: searchText
@@ -52,9 +52,6 @@ public struct TKUIAutocompletionView: UIViewControllerRepresentable {
     let controller = TKUIAutocompletionViewController(providers: providers)
     controller.showAccessoryButtons = false
     controller.delegate = context.coordinator
-    if let biasMapRect = biasMapRect {
-      controller.biasMapRect = biasMapRect
-    }
     return controller
   }
 
@@ -62,7 +59,11 @@ public struct TKUIAutocompletionView: UIViewControllerRepresentable {
     _ uiViewController: TKUIAutocompletionViewController, context: Context
   ) {
     // Update search text by calling updateSearchResults
-    let searchController = UISearchController()
+    if let biasMapRect {
+      uiViewController.biasMapRect = biasMapRect
+    }
+
+    let searchController = context.coordinator.searchController
     searchController.searchBar.text = searchText
     uiViewController.updateSearchResults(for: searchController)
   }
@@ -73,6 +74,7 @@ public struct TKUIAutocompletionView: UIViewControllerRepresentable {
 
   public class Coordinator: NSObject, TKUIAutocompletionViewControllerDelegate {
     let parent: TKUIAutocompletionView
+    let searchController = UISearchController()
 
     init(parent: TKUIAutocompletionView) {
       self.parent = parent
