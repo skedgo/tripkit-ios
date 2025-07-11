@@ -16,8 +16,18 @@ import Foundation
 public final class TKOneOffLocationManager: NSObject {
   
   public override init() {
-    locationManager = .init()
-    hasAccess = false
+    let coreLocationManager = CLLocationManager()
+    locationManager = coreLocationManager
+    
+    currentLocation = coreLocationManager.location
+    hasAccess = switch coreLocationManager.authorizationStatus {
+    case .authorizedAlways, .authorizedWhenInUse:
+      true
+    case .notDetermined, .denied, .restricted:
+      false
+    @unknown default:
+      false
+    }
     
     super.init()
     
@@ -108,7 +118,7 @@ public final class TKOneOffLocationManager: NSObject {
 
   private var withNextLocation: [(Result<CLLocation, Error>) -> Void] = []
   
-  private var fetchTimer: Timer?
+  private var timeoutTask: Task<Void, Never>?
   
   public func fetchCurrentLocation() async throws -> CLLocation {
     guard hasAccess else {
@@ -116,7 +126,7 @@ public final class TKOneOffLocationManager: NSObject {
     }
     
     let desiredAccuracy = kCLLocationAccuracyHundredMeters
-    if let currentLocation = currentLocation,
+    if let currentLocation,
         currentLocation.timestamp.timeIntervalSinceNow > -10,
         currentLocation.horizontalAccuracy <= desiredAccuracy {
       // We have a current location and it's less than 10 seconds old. Just use it
@@ -127,8 +137,19 @@ public final class TKOneOffLocationManager: NSObject {
     locationManager.desiredAccuracy = desiredAccuracy
     locationManager.requestLocation()
     
-    fetchTimer = .scheduledTimer(withTimeInterval: 10, repeats: false) { [unowned self] _ in
-      self.notify(.failure(LocationFetchError.noLocationFetchedInTime))
+    timeoutTask = Task { [weak self] in
+      do {
+        if #available(iOS 16.0, *) {
+          try await Task.sleep(for: .seconds(10))
+        } else {
+          try await Task.sleep(nanoseconds: 10_000_000_000)
+        }
+        if let self, !Task.isCancelled {
+          self.notify(.failure(LocationFetchError.noLocationFetchedInTime))
+        }
+      } catch {
+        return // Fine to get cancelled
+      }
     }
     
     return try await withCheckedThrowingContinuation { continuation in
@@ -140,8 +161,8 @@ public final class TKOneOffLocationManager: NSObject {
   }
   
   private func notify(_ result: Result<CLLocation, Error>) {
-    fetchTimer?.invalidate()
-    fetchTimer = nil
+    timeoutTask?.cancel()
+    timeoutTask = nil
     
     withNextLocation.forEach {
       $0(result)
