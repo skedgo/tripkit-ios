@@ -62,6 +62,7 @@ document.addEventListener("keydown", (event) => {
 function toggleMenu() {
   const menu = document.getElementById("menu-mobile");
   const header = document.getElementById("site-header");
+  const overlay = document.getElementById("menu-overlay");
   const viewportHeight = window.innerHeight;
   const headerHeight = header.offsetHeight;
   const startHeight = menu.offsetHeight;
@@ -71,6 +72,11 @@ function toggleMenu() {
   menu.classList.toggle("opacity-0");
   menu.classList.toggle("-translate-y-4");
   menu.classList.toggle("opacity-100");
+
+  // Animate overlay opacity
+  overlay.classList.toggle("opacity-0");
+  overlay.classList.toggle("opacity-100");
+  overlay.classList.toggle("pointer-events-none");
 
   menu.animate(
     [

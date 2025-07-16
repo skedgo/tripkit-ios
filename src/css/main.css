@@ -82,7 +82,7 @@
 }
 
 .content a {
-  @apply hover:decoration-sg-green font-semibold underline decoration-gray-200 decoration-2 underline-offset-4;
+  @apply hover:decoration-sg-green/60 font-semibold underline decoration-gray-200 decoration-2 underline-offset-4;
 }
 
 .content code {
@@ -150,6 +150,34 @@
 .content p > code,
 .content li > code {
   @apply rounded bg-gray-100 px-1 py-0.5 text-blue-600;
+}
+
+.content table {
+  @apply w-full;
+}
+
+.content table tr {
+  @apply border-b border-gray-200;
+}
+
+.content table tr:first-child {
+  @apply border-t border-gray-200;
+}
+
+.content table th {
+  @apply border-r border-gray-200 bg-gray-50 px-3 py-2 text-left align-top font-semibold;
+}
+
+.content table th:first-child {
+  @apply border-l;
+}
+
+.content table td {
+  @apply border-r border-gray-200 px-3 py-2 align-top text-sm;
+}
+
+.content table td:first-child {
+  @apply border-l;
 }
 
 #mkdocs-search-results > p {
