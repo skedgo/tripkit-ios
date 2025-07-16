@@ -3,26 +3,24 @@ site_author: SkedGo Pty Ltd
 site_description: Documentation of TripKit iOS - the iOS SDK of the TripGo API.
 copyright: © 2025 SkedGo. All rights reserved.
 nav:
-    - Getting Started: index.md
-    - View Controllers: view-controllers.md
-    - F.A.Q.: faq.md
-    - SDK Reference:
-          - TripKitAPI: sdk/documentation/tripkitapi/index.html
-          - TripKit: sdk/documentation/tripkit/index.html
-          - TripKitUI: sdk/documentation/tripkitui/index.html
-          - TripKitInterApp: sdk/documentation/tripkitinterapp/index.html
+  - Getting Started: index.md
+  - View Controllers: view-controllers.md
+  - F.A.Q.: faq.md
+  - SDK Reference:
+      - TripKitAPI: sdk/documentation/tripkitapi/index.html
+      - TripKit: sdk/documentation/tripkit/index.html
+      - TripKitUI: sdk/documentation/tripkitui/index.html
+      - TripKitInterApp: sdk/documentation/tripkitinterapp/index.html
 
 repo_url: https://github.com/skedgo/tripkit-ios
 docs_dir: source
 strict: true
 theme:
-    name: skedgo
-    highlightjs: True
-    hljs_style: atom-one-light
+  name: skedgo
 
 # Disable search, as you might expect it to search the reference, too
 plugins: []
 
 markdown_extensions:
-    - pymdownx.highlight
-    - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.superfences
