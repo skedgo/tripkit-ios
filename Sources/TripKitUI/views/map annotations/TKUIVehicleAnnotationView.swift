@@ -13,6 +13,24 @@ import MapKit
 
 import TripKit
 
+protocol TKUIVehicleAnnotation: MKAnnotation {
+  var serviceColor: TKColor? { get }
+  var icon: String? { get }
+  var serviceNumber: String? { get }
+  var bearing: NSNumber? { get }
+  var componentsData: Data? { get }
+}
+
+extension TKUIVehicleAnnotation {
+  var serviceColor: TKColor? { nil }
+  var icon: String? { nil }
+  var serviceNumber: String? { nil }
+  var bearing: NSNumber? { nil }
+  var componentsData: Data? { nil }
+}
+
+extension Vehicle: TKUIVehicleAnnotation {}
+
 class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   
   private weak var vehicleShape: TKUIVehicleView?
@@ -20,8 +38,8 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
   private weak var label: UILabel!
   private weak var wrapper: UIView!
   
-  private let vehicleWidth = CGFloat(30)
-  private let vehicleHeight = CGFloat(15)
+  private let vehicleWidth = CGFloat(38)
+  private let vehicleHeight = CGFloat(21)
   
   private let disposeBag = DisposeBag()
   
@@ -66,7 +84,7 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     }
     
     guard
-      let vehicle = annotation as? Vehicle else {
+      let vehicle = annotation as? TKUIVehicleAnnotation else {
       return // happens on getting removed.
     }
     
@@ -95,6 +113,11 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
       self.vehicleImageView = vehicleImageView
     } else {
       let vehicleShape = TKUIVehicleView(frame: vehicleRect, color: serviceColor)
+      vehicleShape.layer.shadowColor = UIColor.black.cgColor
+      vehicleShape.layer.shadowOpacity = 0.3
+      vehicleShape.layer.shadowRadius = 3
+      vehicleShape.layer.shadowOffset = CGSize(width: 0, height: 1)
+      vehicleShape.layer.masksToBounds = false
       vehicleView = vehicleShape
       self.vehicleShape = vehicleShape
     }
@@ -129,12 +152,13 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     observe(vehicle)
   }
   
-  private func observe(_ vehicle: Vehicle) {
+  private func observe(_ vehicle: TKUIVehicleAnnotation) {
+    guard let tkVehicle = vehicle as? Vehicle else { return }
     
     // Vehicle color needs to change following real-time update.
-    vehicle.rx.observeWeakly(Data.self, "componentsData")
+    tkVehicle.rx.observeWeakly(Data.self, "componentsData")
       .compactMap { data in
-        guard let data = data else { return nil }
+        guard let data else { return nil }
         let components = Vehicle.components(from: data)
         return TKAPI.VehicleOccupancy.average(in: components)?.0.color
       }
@@ -182,3 +206,23 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     return textColor
   }
 }
+
+#if DEBUG
+class PreviewVehicle: NSObject, TKUIVehicleAnnotation {
+  var coordinate: CLLocationCoordinate2D = .invalid
+  var serviceNumber: String?
+  
+  init(serviceNumber: String? = nil) {
+    self.serviceNumber = serviceNumber
+  }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+  let wrapper = UIView(frame: .init(x: 0, y: 0, width: 300, height: 600))
+  let vehicleView = TKUIVehicleAnnotationView(with: PreviewVehicle(serviceNumber: "311"), reuseIdentifier: "")
+  vehicleView.frame = .init(x: 50, y: 100, width: 50, height: 50)
+  wrapper.addSubview(vehicleView)
+  return wrapper
+}
+#endif
