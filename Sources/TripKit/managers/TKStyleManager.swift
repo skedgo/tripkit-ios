@@ -45,12 +45,20 @@ public class TKStyleManager {
   
   @available(*, deprecated, message: "Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI")
   public static var globalBarTintColor: TKColor = {
-    color(for: TKConfig.shared.globalBarTintColor) ?? #colorLiteral(red: 0.1647058824, green: 0.2274509804, blue: 0.3019607843, alpha: 1)
+    if #available(iOS 26.0, *) {
+      .clear
+    } else {
+      color(for: TKConfig.shared.globalBarTintColor) ?? #colorLiteral(red: 0.1647058824, green: 0.2274509804, blue: 0.3019607843, alpha: 1)
+    }
   }()
   
   @available(*, deprecated, message: "Use dynamic colors that are compatible with Dark Mode, e.g., from TripKitUI")
   public static var globalSecondaryBarTintColor: TKColor = {
-    color(for: TKConfig.shared.globalSecondaryBarTintColor) ?? #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
+    if #available(iOS 26.0, *) {
+      .clear
+    } else {
+      color(for: TKConfig.shared.globalSecondaryBarTintColor) ?? #colorLiteral(red: 0.1176470588, green: 0.1647058824, blue: 0.2117647059, alpha: 1)
+    }
   }()
   
   public static var globalAccentColor: TKColor = {
