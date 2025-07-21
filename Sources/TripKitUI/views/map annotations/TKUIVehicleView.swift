@@ -36,7 +36,7 @@ class TKUIVehicleView: UIView {
 
     context.setLineJoin(.round)
     context.setLineCap(.round)
-//    context.setShadow(offset: CGSize(width: 0, height: 1), blur: 3, color: UIColor.black.withAlphaComponent(0.3).cgColor)
+    context.setShadow(offset: CGSize(width: 0, height: 2), blur: 4, color: UIColor.black.withAlphaComponent(0.25).cgColor)
 
     let rect = rect.insetBy(dx: 2, dy: 2)
     let radius = sqrt(CGFloat(4))
