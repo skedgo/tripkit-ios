@@ -88,7 +88,7 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
       return // happens on getting removed.
     }
     
-    calloutOffset = CGPoint(x: 0, y: 10)
+    calloutOffset = CGPoint(x: 0, y: vehicleHeight / 2)
     frame = CGRect(x: 0, y: 0, width: 44, height: 44)
     backgroundColor = UIColor.clear
     isOpaque = false
@@ -114,9 +114,9 @@ class TKUIVehicleAnnotationView: TKUIPulsingAnnotationView {
     } else {
       let vehicleShape = TKUIVehicleView(frame: vehicleRect, color: serviceColor)
       vehicleShape.layer.shadowColor = UIColor.black.cgColor
-      vehicleShape.layer.shadowOpacity = 0.3
-      vehicleShape.layer.shadowRadius = 3
-      vehicleShape.layer.shadowOffset = CGSize(width: 0, height: 1)
+      vehicleShape.layer.shadowOpacity = 0.25
+      vehicleShape.layer.shadowRadius = 4
+      vehicleShape.layer.shadowOffset = CGSize(width: 0, height: 2)
       vehicleShape.layer.masksToBounds = false
       vehicleView = vehicleShape
       self.vehicleShape = vehicleShape
