@@ -47,6 +47,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   private let origin: MKAnnotation?
   private var request: TripRequest? // Updated for debugging purposes
   private let editable: Bool
+  private let initialModes: Set<String>?
 
   private var viewModel: TKUIRoutingResultsViewModel!
   let disposeBag = DisposeBag()
@@ -85,6 +86,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     self.origin = origin
     self.request = nil
     self.editable = true
+    self.initialModes = nil
     
     let mapManager = Self.config.mapManagerFactory(destination, zoomToDestination)
     
@@ -109,11 +111,18 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     didInit()
   }
   
-  public init(request: TripRequest, editable: Bool = true) {
+  /// Initializes and returns a newly allocated card showing results for a specific routing request.
+  ///
+  /// - Parameters:
+  ///   - request: The routing request to display results for.
+  ///   - editable: Whether the user can modify the routing parameters. (Defaults to `true` if not provided.)
+  ///   - modes: Optional set of transport mode identifiers to set as the initial mode selection. If provided and non-empty, these modes will be enabled initially and all others will be disabled. Users can then interact with the mode picker to change the selection. Walking modes (`wa_wal`, `wa_whe`) are handled specially: if no walking modes are specified in this set, their current enabled/disabled state is preserved. If `nil` or empty, the user's current mode preferences are used unchanged.
+  public init(request: TripRequest, editable: Bool = true, modes: Set<String>? = nil) {
     self.destination = nil
     self.origin = nil
     self.request = request
     self.editable = editable
+    self.initialModes = modes
     
     let mapManager = Self.config.mapManagerFactory(request.toLocation, true)
     
@@ -205,6 +214,24 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       droppedPin: mapManager.droppedPin,
       tappedPin: (mapManager as? TKUIRoutingResultsMapManager)?.tappedPin ?? .empty()
     )
+    
+    // Set initial mode selection from URL if provided (must be done before view model creation)
+    if let initialModes = self.initialModes, !initialModes.isEmpty, let request = self.request {
+      // Use same logic as mode picker: start, end, and spanning regions
+      let regions = [request.startRegion, request.endRegion, request.spanningRegion].compactMap { $0 }
+      let availableModes = Set(TKRegionManager.sortedModes(in: regions).map(\.identifier))
+      let walkingModesInURL = initialModes.filter(TKTransportMode.modeIdentifierIsWalking)
+      let modesToHide = availableModes.subtracting(initialModes)
+      
+      // Update hidden modes to show only the URL-specified modes
+      for modeIdentifier in availableModes {
+        // Skip walking modes if none were specified in the URL to preserve current state
+        if TKTransportMode.modeIdentifierIsWalking(modeIdentifier) && walkingModesInURL.isEmpty {
+          continue
+        }
+        TKSettings.setModeIdentifier(modeIdentifier, toHidden: modesToHide.contains(modeIdentifier))
+      }
+    }
     
     let viewModel: TKUIRoutingResultsViewModel
     if let destination = self.destination {
