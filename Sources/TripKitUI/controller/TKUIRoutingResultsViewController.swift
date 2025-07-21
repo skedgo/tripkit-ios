@@ -52,12 +52,14 @@ public class TKUIRoutingResultsViewController: TGCardViewController {
   /// other than the user's current location, or when you want to set the
   /// departure or arrival time.
   ///
-  /// - Parameter request: The trip request object, which should be instatiated
-  ///     using `TripRequest.insert(from:to:for:timeType:info:)`
-  public init(request: TripRequest) {
+  /// - Parameters:
+  ///   - request: The trip request object, which should be instatiated
+  ///       using `TripRequest.insert(from:to:for:timeType:info:)`
+  ///   - modes: Optional set of transport mode identifiers to set as the initial mode selection. If provided and non-empty, these modes will be enabled initially and all others will be disabled. Users can then interact with the mode picker to change the selection. Walking modes (`wa_wal`, `wa_whe`) are handled specially: if no walking modes are specified in this set, their current enabled/disabled state is preserved. If `nil` or empty, the user's current mode preferences are used unchanged.
+  public init(request: TripRequest, modes: Set<String>? = nil) {
     super.init(nibName: "TGCardViewController", bundle: TGCardViewController.bundle)
 
-    let resultsCard = TKUIRoutingResultsCard(request: request)
+    let resultsCard = TKUIRoutingResultsCard(request: request, modes: modes)
     resultsCard.style = TKUICustomization.shared.cardStyle
     rootCard = resultsCard
   }
