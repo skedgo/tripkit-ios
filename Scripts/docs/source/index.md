@@ -2,27 +2,26 @@
 
 This is the documentation of TripKit iOS, the iOS SDK for the [TripGo API](https://developer.tripgo.com).
 
-The SDK consists of the following three frameworks:
+The SDK consists of the following frameworks:
 
+- [**TripKitAPI**](sdk/documentation/tripkitapi/index.html) (Linux, iOS, iOS extensions, macOS): Data models and core server and routing logic. Generally you'll not use this directly, except for low-level or Linux needs.
 - [**TripKit**](sdk/documentation/tripkit/index.html) (iOS, iOS extensions, macOS): Core functionality for A-to-B routing, waypoint routing, real-time updates, transport data, and more.
 - [**TripKitUI**](sdk/documentation/tripkitui/index.html) (iOS, iOS extensions): [View controllers](view-controllers.md), as well as individual UI helpers and components.
-- [**TripKitInterApp** ](sdk/documentation/tripkitinterapp/index.html) (iOS): Helpers for deep linking into other apps, such as GoCatch, Ingogo, Lyft, Ola and Uber.
+- [**TripKitInterApp** ](sdk/documentation/tripkitinterapp/index.html) (iOS): Helpers for deep linking into other apps, such as Apple Maps, Google Maps, Waze, and more.
 
-TripKit contains the core logic, and the other two depend on it..
+TripKit contains the core logic and it builds on the data models from TripKitAPI, and TripKitUI and TripKitInterApp depends on TripKit.
 
 ## Installation
 
 ### Swift Package Manager
 
-Full support for SPM is incoming in the upcoming version 5.0. For now, you can use the `main` branch.
-
 Add it to your dependencies:
 
 ```swift
-.package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", branch: "main")
+.package(name: "TripKit", url: "https://github.com/skedgo/tripkit-ios", from: "5.0.0")
 ```
 
-And then add the TripKit, TripKitUI, and/or TripKitInterApp dependencies to your target, as appropriate.
+And then add the TripKit, TripKitUI, and/or TripKitInterApp dependencies to your target, as appropriate. You can also only use TripKitAPI for low-level needs.
 
 ### Cocoapods
 
