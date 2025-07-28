@@ -1,52 +1,7 @@
 @import "tailwindcss";
-
-@font-face {
-  font-family: "ProximaNovaSoft";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("../../font/webfonts/234DF5_0_0.eot");
-  src:
-    url("../../font/webfonts/234DF5_0_0.eot?#iefix") format("embedded-opentype"),
-    url("../../font/webfonts/234DF5_0_0.woff") format("woff"),
-    url("../../font/webfonts/234DF5_0_0.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "ProximaNovaSoft";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("../../font/webfonts/234DF5_1_0.eot");
-  src:
-    url("../../font/webfonts/234DF5_1_0.eot?#iefix") format("embedded-opentype"),
-    url("../../font/webfonts/234DF5_1_0.woff") format("woff"),
-    url("../../font/webfonts/234DF5_1_0.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "ProximaNovaSoft";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../../font/webfonts/234DF5_2_0.eot");
-  src:
-    url("../../font/webfonts/234DF5_2_0.eot?#iefix") format("embedded-opentype"),
-    url("../../font/webfonts/234DF5_2_0.woff") format("woff"),
-    url("../../font/webfonts/234DF5_2_0.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "ProximaNovaSoft";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../../font/webfonts/234DF5_3_0.eot");
-  src:
-    url("../../font/webfonts/234DF5_3_0.eot?#iefix") format("embedded-opentype"),
-    url("../../font/webfonts/234DF5_3_0.woff") format("woff"),
-    url("../../font/webfonts/234DF5_3_0.ttf") format("truetype");
-}
+@import url("./typo.css");
+@import url("./search.css");
+@import url("./tabbed.css");
 
 .content h1 {
   @apply mt-8 mb-2 text-4xl font-bold tracking-tight text-gray-900;
@@ -77,12 +32,16 @@
   @apply scroll-mt-22;
 }
 
-.content p {
+.content {
   @apply text-base leading-relaxed text-gray-700;
 }
 
+.content strong {
+  @apply text-gray-900;
+}
+
 .content a {
-  @apply hover:decoration-sg-green/60 font-semibold underline decoration-gray-200 decoration-2 underline-offset-4;
+  @apply hover:decoration-sg-green/60 font-semibold text-gray-900 underline decoration-gray-200 decoration-2 underline-offset-4;
 }
 
 .content code {
@@ -94,7 +53,7 @@
 }
 
 .content > * + * {
-  @apply mt-4;
+  @apply my-[1em];
 }
 
 .content ul {
@@ -121,11 +80,6 @@
   @apply mt-10 block border-gray-300;
 }
 
-/* .content li code,
-.content p code {
-  @apply rounded bg-blue-50 px-1 py-0.5 text-blue-600;
-} */
-
 .content h1:hover > .headerlink,
 .content h2:hover > .headerlink,
 .content h3:hover > .headerlink,
@@ -143,13 +97,8 @@
   @apply relative;
 }
 
-.content pre .copy-button {
-  @apply absolute top-0 right-0 bg-white px-1 text-xs;
-}
-
-.content p > code,
-.content li > code {
-  @apply rounded bg-gray-100 px-1 py-0.5 text-blue-600;
+code.highlight {
+  @apply rounded bg-gray-100 px-1 py-0.5;
 }
 
 .content table {
@@ -180,25 +129,13 @@
   @apply border-l;
 }
 
-#mkdocs-search-results > p {
-  @apply p-2;
-}
-
-#mkdocs-search-results article {
-  @apply p-2;
-}
-
-#mkdocs-search-results article h3 {
-  @apply hover:decoration-sg-green text-lg font-semibold text-gray-900 underline decoration-gray-200 decoration-2 underline-offset-3;
-}
-
-#mkdocs-search-results article p {
-  @apply text-gray-700;
-}
+/* Toc */
 
 #toc a.active {
   @apply border-gray-900 font-semibold text-gray-900;
 }
+
+/* Tab style */
 
 @theme {
   --font-sans:
