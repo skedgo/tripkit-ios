@@ -71,7 +71,7 @@ extension TKUIServiceTitleView {
       serviceShortNameLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       serviceColorView.backgroundColor = serviceColor
     } else {
-      serviceShortNameLabel.textColor = .tkBackground
+      serviceShortNameLabel.textColor = .tkBackgroundNotClear
       serviceColorView.backgroundColor = .tkLabelPrimary
     }
     

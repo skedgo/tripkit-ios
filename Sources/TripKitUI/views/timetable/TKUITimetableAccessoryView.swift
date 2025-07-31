@@ -145,7 +145,7 @@ extension TKUIServiceNumberCell {
       numberLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       wrapperView.backgroundColor = serviceColor
     } else {
-      numberLabel.textColor = .tkBackground
+      numberLabel.textColor = .tkBackgroundNotClear
       wrapperView.backgroundColor = .tkLabelPrimary
     }
   }

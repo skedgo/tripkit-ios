@@ -171,7 +171,7 @@ class TKUIMapManagerHelper: NSObject {
         // Plus a circle, but only if something else is selected
         TKUICircleAnnotation(
           coordinate: segment.coordinate,
-          circleColor: .tkBackground.withAlphaComponent(0.3),
+          circleColor: .tkBackgroundNotClear.withAlphaComponent(0.3),
           isTravelled: true,
           asLarge: true,
           selectionIdentifier: segment.selectionIdentifier,
