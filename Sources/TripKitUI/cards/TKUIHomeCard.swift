@@ -57,7 +57,19 @@ open class TKUIHomeCard: TKUITableCard {
     
     self.headerView = TKUIHomeHeaderView(hasGrabHandle: hasGrabHandle)
 
-    super.init(title: .custom(headerView, dismissButton: nil), mapManager: theMapManager, initialPosition: initialPosition)
+    let tableStyle: UITableView.Style
+    if #available(iOS 26, *) {
+      tableStyle = .insetGrouped
+    } else {
+      tableStyle = .plain
+    }
+    
+    super.init(
+      title: .custom(headerView, dismissButton: nil),
+      style: tableStyle,
+      mapManager: theMapManager,
+      initialPosition: initialPosition
+    )
     
     headerView.searchBar.placeholder = Loc.SearchForDestination
     headerView.searchBar.delegate = self
@@ -128,6 +140,10 @@ open class TKUIHomeCard: TKUITableCard {
             assertionFailure("No component returned a cell for \(componentItem) at \(ip)."); return fallback
           }
           cell.accessibilityTraits = componentItem.isAction ? .button : .none
+          if #available(iOS 26, *) {
+            // Contrast from clear background in inset-grouped style
+            cell.backgroundColor = .tkBackgroundNotClear
+          }
           return cell
         }
         
