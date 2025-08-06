@@ -48,7 +48,7 @@ class TKUISegmentStationaryCell: UITableViewCell {
     super.awakeFromNib()
     
     backgroundColor = .clear
-    lineDot.backgroundColor = .tkBackground
+    lineDot.backgroundColor = .tkBackgroundNotClear
     
     titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary

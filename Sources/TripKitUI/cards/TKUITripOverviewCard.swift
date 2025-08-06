@@ -493,6 +493,7 @@ extension TKUITripOverviewCard {
       actions: mutable,
       card: self, model: trip, container: tableView!
     )
+    actionsView.backgroundColor = .tkBackground
     actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     return actionsView
   }

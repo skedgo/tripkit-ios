@@ -93,7 +93,7 @@ extension TKUISegmentMovingCell {
       // If we have a remote image, that's not a template, put it as is on
       // the background
       modeImage.tintColor = .tkLabelOnDark
-      modeWrapper.backgroundColor = .tkBackground
+      modeWrapper.backgroundColor = .tkBackgroundNotClear
       
     } else {
       // ... otherwise, put the image on a background
@@ -131,12 +131,14 @@ extension TKUISegmentMovingCell {
       } else {
         let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
         pathFriendlinessView.segment = segment
+        pathFriendlinessView.backgroundColor = .tkBackground
         return pathFriendlinessView
       }
 
     case .roadTags(let segment):
       if #available(iOS 16.0, *), let chart = segment.buildRoadTags() {
         let host = UIHostingController(rootView: chart.frame(minWidth: 300))
+        host.view.backgroundColor = .tkBackground
         return host.view
       } else {
         return nil

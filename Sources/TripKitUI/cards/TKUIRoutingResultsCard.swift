@@ -145,9 +145,16 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .grouped
+    }
+
     super.init(
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
-      style: .grouped,
+      style: style,
       mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
