@@ -38,14 +38,27 @@ class TKUIHomeHeaderView: UIView {
     // The hierarchy
     let searchBar = UISearchBar()
     searchBar.translatesAutoresizingMaskIntoConstraints = false
-    searchBar.searchBarStyle = .minimal
+    searchBar.tintColor = .tkAppTintColor
+    searchBar.searchBarStyle = .minimal // No background *around* the search bar
+    if #available(iOS 26.0, *) {
+      searchBar.searchTextField.cornerConfiguration = .corners(radius: .containerConcentric(minimum: 22))
+      searchBar.searchTextField.backgroundColor = .tkBackgroundNotClear
+    } else {
+      searchBar.barTintColor = .tkBackground
+    }
     
+    let directionButtonSize: CGFloat
+    if #available(iOS 26.0, *) {
+      directionButtonSize = 44
+    } else {
+      directionButtonSize = 32
+    }
     let directionsButton = UIButton(type: .custom)
     directionsButton.translatesAutoresizingMaskIntoConstraints = false
     directionsButton.setImage(UIImage(systemName: "arrow.triangle.turn.up.right.diamond.fill"), for: .normal)
     directionsButton.tintColor = .white
     directionsButton.backgroundColor = .tkAppTintColor
-    directionsButton.layer.cornerRadius = 16
+    directionsButton.layer.cornerRadius = directionButtonSize / 2
     
     let directionsWrapper = UIView()
     directionsWrapper.backgroundColor = .clear
@@ -55,7 +68,7 @@ class TKUIHomeHeaderView: UIView {
     directionsWrapper.addSubview(directionsButton)
     NSLayoutConstraint.activate([
       directionsWrapper.widthAnchor.constraint(equalToConstant: 44),
-      directionsButton.widthAnchor.constraint(equalToConstant: 32),
+      directionsButton.widthAnchor.constraint(equalToConstant: directionButtonSize),
       directionsButton.heightAnchor.constraint(equalTo: directionsButton.widthAnchor),
       directionsWrapper.centerYAnchor.constraint(equalTo: directionsButton.centerYAnchor),
       directionsWrapper.centerXAnchor.constraint(equalTo: directionsButton.centerXAnchor),
@@ -69,21 +82,24 @@ class TKUIHomeHeaderView: UIView {
     stackView.spacing = 0
     
     addSubview(stackView)
+
+    let padding: UIEdgeInsets  // negative spacer on top to minimise gap to grab handle
+    if #available(iOS 26.0, *) {
+      padding = UIEdgeInsets(top: hasGrabHandle ? -6 : 8, left: 14, bottom: 0, right: 20)
+    } else {
+      padding = UIEdgeInsets(top: hasGrabHandle ? -10 : 0, left: 6, bottom: 0, right: 10)
+    }
     
     NSLayoutConstraint.activate([
-      stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
-      stackView.topAnchor.constraint(equalTo: topAnchor, constant: hasGrabHandle ? -10 : 0), // negative spacer to minimise gap to grab handle
-      trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-      bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+      stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left),
+      stackView.topAnchor.constraint(equalTo: topAnchor, constant: padding.top),
+      trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: padding.right),
+      bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: padding.bottom),
     ])
     
     self.stackView = stackView
     self.searchBar = searchBar
     self.directionsButton = directionsButton
-    
-    // Styling
-    searchBar.tintColor = .tkAppTintColor
-    searchBar.barTintColor = .tkBackground
   }
   
 }

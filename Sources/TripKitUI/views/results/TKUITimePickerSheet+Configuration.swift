@@ -43,7 +43,7 @@ public extension TKUITimePickerSheet {
     /// Allows customizig the "Arrive by" time type label
     public var arriveByLabel: String = Loc.ArriveBy
     
-    /// This controls wether minimum and maximum date is set to 1 month if set to nil
+    /// This controls whether minimum and maximum date is set to 1 month if set to nil
     public var removeDateLimits: Bool = false
     
     /// Allows selection of dates that are below or beyond minimum and maximum date respectively.

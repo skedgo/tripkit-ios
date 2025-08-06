@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import SwiftUI
 
 import TGCardViewController
 import RxSwift
@@ -101,9 +102,16 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .grouped
+    }
+    
     super.init(
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
-      style: .grouped,
+      style: style,
       mapManager: mapManager,
       initialPosition: initialPosition ?? Self.config.initialCardPosition
     )
@@ -462,7 +470,11 @@ extension TKUIRoutingResultsCard {
     switch item {
     case .progress:
       let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell
-      progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
+      if #available(iOS 26.0, *) {
+        progressCell.contentView.backgroundColor = .tkBackgroundNotClear
+      } else {
+        progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
+      }
       return progressCell
       
     case .trip(let trip, _):
@@ -484,6 +496,9 @@ extension TKUIRoutingResultsCard {
         })
         .disposed(by: tripCell.disposeBag)
       
+      if #available(iOS 26.0, *) {
+        tripCell.backgroundColor = .tkBackgroundNotClear
+      }
       return tripCell
     
     case .customItem(let item):
@@ -790,29 +805,51 @@ private extension TKUIRoutingResultsCard {
   }
   
   func showTimePicker(time: TKUIRoutingResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
-    guard let controller = controller else {
+    guard let controller else {
       preconditionFailure("Shouldn't be able to show time picker!")
     }
     
     let sender: UIButton = accessoryView.timeButton
     
-    let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone, config: Self.config.timePickerConfig)
-    picker.selectAction = { [weak self] timeType, date in
-      self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
-    }
-    
-    if controller.traitCollection.horizontalSizeClass == .regular {
-      picker.delegate = self
-      
-      let pickerController = TKUISheetViewController(sheet: picker)
-      pickerController.modalPresentationStyle = .popover
-      let presenter = pickerController.popoverPresentationController
-      presenter?.sourceView = controller.view
-      presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
-      controller.present(pickerController, animated: true)
+    if #available(iOS 26.0, *) {
+      let picker = UIHostingController(
+        rootView:
+          NavigationStack() {
+            TKUITimePicker { [weak self] timeType, date in
+              self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
+            }
+          }
+      )
+
+      if let sheet = picker.sheetPresentationController {
+        sheet.detents = [.medium()]
+        sheet.largestUndimmedDetentIdentifier = nil // Always dim
+        sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        sheet.prefersEdgeAttachedInCompactHeight = true
+        sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+      }
+      controller.present(picker, animated: true)
       
     } else {
-      picker.showWithOverlay(in: controller.view)
+      
+      let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone, config: Self.config.timePickerConfig)
+      picker.selectAction = { [weak self] timeType, date in
+        self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
+      }
+      
+      if controller.traitCollection.horizontalSizeClass == .regular {
+        picker.delegate = self
+        
+        let pickerController = TKUISheetViewController(sheet: picker)
+        pickerController.modalPresentationStyle = .popover
+        let presenter = pickerController.popoverPresentationController
+        presenter?.sourceView = controller.view
+        presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
+        controller.present(pickerController, animated: true)
+        
+      } else {
+        picker.showWithOverlay(in: controller.view)
+      }
     }
   }
   
