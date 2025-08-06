@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24118.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24059"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,8 +82,11 @@
                 <outlet property="accessoryViewContainer" destination="wVw-MU-IHq" id="IbM-WR-LGz"/>
                 <outlet property="destinationLabel" destination="Kdn-Jf-NxY" id="GJR-GX-frB"/>
                 <outlet property="dismissButton" destination="88I-7o-sPz" id="rff-vn-tPJ"/>
+                <outlet property="dismissButtonTopConstraint" destination="h0I-1P-J2z" id="s3l-9z-lHQ"/>
+                <outlet property="dismissButtonTrailingConstraint" destination="SpC-YT-Jwo" id="BDL-JY-b8P"/>
                 <outlet property="fromToStack" destination="NF7-bE-gIz" id="mJe-C2-Phn"/>
                 <outlet property="originLabel" destination="vmK-Ou-na6" id="t3Y-Gg-AY3"/>
+                <outlet property="topLevelLeadingConstraint" destination="2eC-Sz-esY" id="JXS-4A-BPD"/>
                 <outlet property="topLevelStack" destination="zUI-JE-7Nv" id="7zd-zR-WFO"/>
                 <outlet property="topLevelStackBottomSpacing" destination="jM5-Kn-XF3" id="GRX-7r-2I4"/>
             </connections>

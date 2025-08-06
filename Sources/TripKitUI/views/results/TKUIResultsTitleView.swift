@@ -27,6 +27,10 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
   
+  @IBOutlet weak var topLevelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTopConstraint: NSLayoutConstraint!
+  
   var enableTappingLocation: Bool = true
   
   private let locationSearchPublisher = PublishSubject<Void>()
@@ -74,7 +78,17 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+
+    if #available(iOS 26.0, *) {
+      topLevelLeadingConstraint.constant = 4
+      dismissButtonTrailingConstraint.constant = 18
+      dismissButtonTopConstraint.constant = 2
+    } else {
+      topLevelLeadingConstraint.constant = 0
+      dismissButtonTrailingConstraint.constant = 4
+      dismissButtonTopConstraint.constant = -11
+    }
+
     backgroundColor = .tkBackground
     
     originLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
