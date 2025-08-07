@@ -12,6 +12,7 @@ import TripKit
 // TODO:
 // - [ ] Pass in selected type and time
 // - [ ] Immediately dismiss on selecting "Now", if something else was selcted previously
+// - [ ] When selecting different time, switch to "leave after" if "now" was selected
 // - [ ] Fix crash in landscape
 // - [ ] Deprecate old picker
 struct TKUITimePicker: View {

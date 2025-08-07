@@ -84,7 +84,11 @@ public class TKUITripModeByModeCard: TGPageCard {
   private let segmentCards: [SegmentCardsInfo]
   
   private var headerView: TKUITripModeByModeHeader? {
-    headerAccessoryView as? TKUITripModeByModeHeader
+    if let visualEffect = headerAccessoryView as? UIVisualEffectView {
+      return visualEffect.contentView.subviews.compactMap { $0 as? TKUITripModeByModeHeader }.first
+    } else {
+      return headerAccessoryView as? TKUITripModeByModeHeader
+    }
   }
 
   private let tripMapManager: TKUITripMapManager
@@ -138,7 +142,28 @@ public class TKUITripModeByModeCard: TGPageCard {
     headerView.configure(trip: trip, selecting: segment.index)
     headerView.tapHandler = { [weak self] in self?.selectSegment(index: $0) }
     headerView.actionHandler = { [weak self] in self?.triggerPrimaryAction() }
-    self.headerAccessoryView = headerView
+    if #available(iOS 26.0, *) {
+      let visualEffectView = UIVisualEffectView(effect: UIGlassEffect(style: .regular))
+      visualEffectView.cornerConfiguration = .corners(
+        topLeftRadius: .containerConcentric(minimum: 22),
+        topRightRadius: .containerConcentric(minimum: 22),
+        bottomLeftRadius: 22,
+        bottomRightRadius: 22
+      )
+      visualEffectView.contentView.addSubview(headerView)
+      headerView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        headerView.topAnchor.constraint(equalTo: visualEffectView.topAnchor),
+        headerView.bottomAnchor.constraint(equalTo: visualEffectView.bottomAnchor),
+        headerView.leadingAnchor.constraint(equalTo: visualEffectView.leadingAnchor),
+        headerView.trailingAnchor.constraint(equalTo: visualEffectView.trailingAnchor)
+      ])
+
+      self.headerAccessoryView = visualEffectView
+      
+    } else {
+      self.headerAccessoryView = headerView
+    }
     
     // Little hack for starting with selecting the first page on the map, too
     didMoveToPage(index: actualInitialPage)
@@ -164,7 +189,16 @@ public class TKUITripModeByModeCard: TGPageCard {
     
     if let pageHeader = headerView, let modeByModeHeader = self.headerView {
       pageHeader.cornerRadius = 0
-      let widthConstraint = modeByModeHeader.widthAnchor.constraint(equalTo: pageHeader.widthAnchor, constant: -16)
+      
+      // Adjust for TGPageHeaderView's leading/trailing
+      let widthConstant: CGFloat
+      if #available(iOS 26.0, *) {
+        widthConstant = 0
+      } else {
+        widthConstant = -16
+      }
+      
+      let widthConstraint = modeByModeHeader.widthAnchor.constraint(equalTo: pageHeader.widthAnchor, constant: widthConstant)
       widthConstraint.priority = .required
       widthConstraint.isActive = true
     }
