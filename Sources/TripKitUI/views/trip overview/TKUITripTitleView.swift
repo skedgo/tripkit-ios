@@ -20,7 +20,11 @@ class TKUITripTitleView: UIView {
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
 
   @IBOutlet weak var dismissButton: UIButton!
-  
+
+  @IBOutlet weak var topLevelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTopConstraint: NSLayoutConstraint!
+
   static func newInstance() -> TKUITripTitleView {
     return Bundle.tripKitUI.loadNibNamed("TKUITripTitleView", owner: self, options: nil)?.first as! TKUITripTitleView
   }
@@ -28,6 +32,16 @@ class TKUITripTitleView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    if #available(iOS 26.0, *) {
+      topLevelLeadingConstraint.constant = 22
+      dismissButtonTrailingConstraint.constant = 18
+      dismissButtonTopConstraint.constant = 2
+    } else {
+      topLevelLeadingConstraint.constant = 16
+      dismissButtonTrailingConstraint.constant = 4
+      dismissButtonTopConstraint.constant = -11
+    }
+
     backgroundColor = .tkBackground
 
     timeTitleLabel.text = nil

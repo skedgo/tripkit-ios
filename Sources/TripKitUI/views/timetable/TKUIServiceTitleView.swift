@@ -24,6 +24,10 @@ class TKUIServiceTitleView: UIView {
   
   @IBOutlet weak var dismissButton: UIButton!
   
+  @IBOutlet weak var topLevelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTopConstraint: NSLayoutConstraint!
+  
   @IBOutlet weak var accessoryStack: UIStackView!
   
   static func newInstance() -> TKUIServiceTitleView {
@@ -34,6 +38,16 @@ class TKUIServiceTitleView: UIView {
     super.awakeFromNib()
     
     backgroundColor = .tkBackground
+    
+    if #available(iOS 26.0, *) {
+      topLevelLeadingConstraint.constant = 22
+      dismissButtonTrailingConstraint.constant = 18
+      dismissButtonTopConstraint.constant = 2
+    } else {
+      topLevelLeadingConstraint.constant = 16
+      dismissButtonTrailingConstraint.constant = 4
+      dismissButtonTopConstraint.constant = -11
+    }
 
     serviceTitleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     serviceTitleLabel.textColor = .tkLabelPrimary
