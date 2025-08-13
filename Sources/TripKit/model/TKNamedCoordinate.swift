@@ -46,19 +46,20 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   private var _placemark: CLPlacemark? = nil
   @objc public var placemark: CLPlacemark? {
     if let placemark = _placemark { return placemark }
-    guard coordinate.isValid, TKNamedCoordinate.enableReverseGeocodingAddress else { return nil }
+    guard coordinate.isValid, TKNamedCoordinate.enableReverseGeocodingAddress, reverseGeocodingTask == nil else { return nil }
     
-    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    let geocoder = CLGeocoder()
-    
-    // no weak self as we're not retaining the geocoder
-    geocoder.reverseGeocodeLocation(location) { placemarks, error in
-      guard let placemark = placemarks?.first else { return }
-      self.assignPlacemark(placemark, includeName: false)
+    let coordinate = self.coordinate
+    reverseGeocodingTask = Task { [weak self] in
+      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+      let geocoder = CLGeocoder()
+      if let best = try? await geocoder.reverseGeocodeLocation(location).first {
+        self?.assignPlacemark(best, includeName: false)
+      }
     }
-    
-    return _placemark
+    return nil
   }
+  
+  private var reverseGeocodingTask: Task<Void, Never>?
   
   @objc public var locationID: String? = nil
   @objc public var timeZoneID: String? = nil
