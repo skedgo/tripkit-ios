@@ -17,6 +17,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {
+      name = nil // Often closely tied to the location
       _address = nil
       _placemark = nil
     }
