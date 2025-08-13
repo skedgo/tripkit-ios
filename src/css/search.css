@@ -1,0 +1,17 @@
+/* Search */
+
+#mkdocs-search-results > p {
+  @apply p-2;
+}
+
+#mkdocs-search-results article {
+  @apply p-2;
+}
+
+#mkdocs-search-results article h3 {
+  @apply hover:decoration-sg-green text-lg font-semibold text-gray-900 underline decoration-gray-200 decoration-2 underline-offset-3;
+}
+
+#mkdocs-search-results article p {
+  @apply text-gray-700;
+}

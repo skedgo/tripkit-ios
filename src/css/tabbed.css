@@ -1,0 +1,39 @@
+.tabbed-set {
+  @apply relative mx-2 flex flex-wrap overflow-clip rounded-xl border border-gray-200;
+}
+
+.tabbed-set > input {
+  @apply hidden;
+}
+
+.tabbed-set label {
+  @apply w-auto cursor-pointer border-b-2 border-transparent border-b-transparent px-5 py-3 font-semibold whitespace-nowrap text-gray-500 hover:text-gray-600;
+}
+
+.tabbed-set .tabbed-content {
+  @apply hidden w-full border-t border-gray-200 bg-gray-50 p-4;
+}
+
+.tabbed-set input {
+  @apply absolute opacity-0;
+}
+
+.tabbed-set input:checked:nth-child(n + 1) + label {
+  @apply border-sg-green text-gray-700;
+}
+
+@media screen {
+  .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
+    @apply order-99 block;
+  }
+
+  .tabbed-content > *:not(:last-child) {
+    @apply mb-[1em];
+  }
+}
+
+@media print {
+  .tabbed-content {
+    @apply contents;
+  }
+}

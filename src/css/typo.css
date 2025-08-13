@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_0_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_0_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_0_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_0_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_1_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_1_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_1_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_1_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_2_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_2_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_2_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_2_0.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ProximaNovaSoft";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../font/webfonts/234DF5_3_0.eot");
+  src:
+    url("../../font/webfonts/234DF5_3_0.eot?#iefix") format("embedded-opentype"),
+    url("../../font/webfonts/234DF5_3_0.woff") format("woff"),
+    url("../../font/webfonts/234DF5_3_0.ttf") format("truetype");
+}
