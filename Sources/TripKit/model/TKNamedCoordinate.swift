@@ -11,6 +11,8 @@ import MapKit
 
 open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable {
   
+  public static var enableReverseGeocodingAddress: Bool = true
+  
   public fileprivate(set) var coordinate: CLLocationCoordinate2D {
     didSet {
       _address = nil
@@ -42,28 +44,20 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   private var _placemark: CLPlacemark? = nil
   @objc public var placemark: CLPlacemark? {
     if let placemark = _placemark { return placemark }
-    guard coordinate.isValid else { return nil }
+    guard coordinate.isValid, TKNamedCoordinate.enableReverseGeocodingAddress, reverseGeocodingTask == nil else { return nil }
     
-    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    let geocoder = CLGeocoder()
-    
-    // no weak self as we're not retaining the geocoder
-    geocoder.reverseGeocodeLocation(location) { placemarks, error in
-      guard let placemark = placemarks?.first else { return }
-      
-      self._placemark = placemark
-      self._address = placemark.address()
-      
-      // KVO
-      if self.name != nil {
-        self.subtitle = ""
-      } else {
-        self.title = ""
+    let coordinate = self.coordinate
+    reverseGeocodingTask = Task { [weak self] in
+      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+      let geocoder = CLGeocoder()
+      if let best = try? await geocoder.reverseGeocodeLocation(location).first {
+        self?.assignPlacemark(best, includeName: false)
       }
     }
-    
-    return _placemark
+    return nil
   }
+  
+  private var reverseGeocodingTask: Task<Void, Never>?
   
   @objc public var locationID: String? = nil
   @objc public var timeZoneID: String? = nil
@@ -117,6 +111,28 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   
   convenience init(from: TKAPI.Location) {
     self.init(latitude: from.lat, longitude: from.lng, name: from.name, address: from.address)
+  }
+  
+  public func assignPlacemark(_ placemark: CLPlacemark, includeName: Bool) {
+    if includeName {
+      if let name = placemark.name {
+        self.name = name
+      } else if let poi = placemark.areasOfInterest?.first {
+        self.name = poi
+      } else {
+        self.name = nil
+      }
+    }
+    
+    _address = placemark.address()
+    _placemark = placemark
+    
+    // KVO
+    if self.name != nil {
+      self.subtitle = ""
+    } else {
+      self.title = ""
+    }
   }
 
   // MARK: - Codable
