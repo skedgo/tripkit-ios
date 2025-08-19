@@ -36,10 +36,13 @@ public struct TKUITimePickerConfiguration {
   /// Defaults to `nil`, i.e., no limit.
   public var maximumDate: Date? = nil
   
-  /// Allows customizing the "Leave at" time type label.
+  /// Allows customising the "Date & Time" title of the sheet
+  public var title: String = Loc.DateAndTime
+  
+  /// Allows customising the "Leave at" time type label.
   public var leaveAtLabel: String = Loc.LeaveAt
   
-  /// Allows customizig the "Arrive by" time type label
+  /// Allows customising the "Arrive by" time type label
   public var arriveByLabel: String = Loc.ArriveBy
   
   /// This controls whether minimum and maximum date is set to 1 month if set to nil
@@ -49,7 +52,7 @@ public struct TKUITimePickerConfiguration {
   /// This makes the selector button be disabled wether current date selected is out of range.
   public var allowsOutOfRangeSelection: Bool = false
   
-  /// Customizes the time picker use for either sheet or embed (for other view / view controller use)
+  /// Customises the time picker use for either sheet or embed (for other view / view controller use)
   ///
   ///  Defaults to .sheet
   ///

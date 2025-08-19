@@ -113,7 +113,7 @@ public struct TKUITimePicker: View {
         dismiss()
       }
     }
-    .navigationTitle("Date & Time")
+    .navigationTitle(Text(verbatim: configuration.title))
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       if !showTimeTypePicker, configuration.allowsASAP {
