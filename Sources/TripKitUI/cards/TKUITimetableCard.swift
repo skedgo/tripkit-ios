@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 import TGCardViewController
 import RxSwift
@@ -395,27 +396,48 @@ private extension TKUITimetableCard {
   
   func showTimePicker(date: Date, sender: UIView) {
     
-    guard let controller = controller else {
+    guard let controller else {
       preconditionFailure("Shouldn't be able to show time picker!")
     }
     
-    let picker = TKUITimePickerSheet(time: date, timeZone: viewModel.timeZone)
-    picker.selectAction = { [unowned self] timeType, date in
-      self.datePublisher.onNext(date)
-    }
-    
-    if controller.traitCollection.horizontalSizeClass == .regular {
-      picker.delegate = self
-      
-      let pickerController = TKUISheetViewController(sheet: picker)
-      pickerController.modalPresentationStyle = .popover
-      let presenter = pickerController.popoverPresentationController
-      presenter?.sourceView = controller.view
-      presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
-      controller.present(pickerController, animated: true)
+    if #available(iOS 26.0, *) {
+      let picker = UIHostingController(
+        rootView:
+          NavigationStack() {
+            TKUITimePicker(time: date, timeZone: viewModel.timeZone) { [unowned self] date in
+              self.datePublisher.onNext(date)
+            }
+          }
+      )
+
+      if let sheet = picker.sheetPresentationController {
+        sheet.detents = controller.traitCollection.verticalSizeClass == .compact ? [.large()] : [.medium()]
+        sheet.largestUndimmedDetentIdentifier = nil // Always dim
+        sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        sheet.prefersEdgeAttachedInCompactHeight = true
+        sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+      }
+      controller.present(picker, animated: true)
       
     } else {
-      picker.showWithOverlay(in: controller.view)
+      let picker = TKUITimePickerSheet(time: date, timeZone: viewModel.timeZone)
+      picker.selectAction = { [unowned self] timeType, date in
+        self.datePublisher.onNext(date)
+      }
+      
+      if controller.traitCollection.horizontalSizeClass == .regular {
+        picker.delegate = self
+        
+        let pickerController = TKUISheetViewController(sheet: picker)
+        pickerController.modalPresentationStyle = .popover
+        let presenter = pickerController.popoverPresentationController
+        presenter?.sourceView = controller.view
+        presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
+        controller.present(pickerController, animated: true)
+        
+      } else {
+        picker.showWithOverlay(in: controller.view)
+      }
     }
   }
   

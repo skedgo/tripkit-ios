@@ -25,6 +25,7 @@ public protocol TKUITimePickerSheetSelectionStateDelegate: AnyObject {
   
 }
 
+@available(iOS, deprecated: 26.0, message: "Use `TKUITimePicker` and sheet presentations.")
 public class TKUITimePickerSheet: TKUISheet {
   
   public enum SelectionStatus {

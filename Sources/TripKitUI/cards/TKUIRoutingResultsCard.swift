@@ -804,7 +804,7 @@ private extension TKUIRoutingResultsCard {
   func findOverlay() -> UIView? {
     if let presentee = controller?.presentedViewController {
       return presentee.view
-    } else if let sheet = controller?.view.subviews.first(where: { $0 is TKUISheet }) {
+    } else if #unavailable(iOS 26.0), let sheet = controller?.view.subviews.first(where: { $0 is TKUISheet }) {
       return sheet
     } else {
       return nil
@@ -816,20 +816,23 @@ private extension TKUIRoutingResultsCard {
       preconditionFailure("Shouldn't be able to show time picker!")
     }
     
-    let sender: UIButton = accessoryView.timeButton
-    
     if #available(iOS 26.0, *) {
       let picker = UIHostingController(
         rootView:
           NavigationStack() {
-            TKUITimePicker { [weak self] timeType, date in
-              self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
+            TKUITimePicker(
+              time: time.date,
+              timeType: time.timeType,
+              timeZone: timeZone,
+              configuration: Self.config.timePickerConfig
+            ) { [unowned self] timeType, date in
+              self.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
             }
           }
       )
 
       if let sheet = picker.sheetPresentationController {
-        sheet.detents = [.medium()]
+        sheet.detents = controller.traitCollection.verticalSizeClass == .compact ? [.large()] : [.medium()]
         sheet.largestUndimmedDetentIdentifier = nil // Always dim
         sheet.prefersScrollingExpandsWhenScrolledToEdge = false
         sheet.prefersEdgeAttachedInCompactHeight = true
@@ -838,7 +841,6 @@ private extension TKUIRoutingResultsCard {
       controller.present(picker, animated: true)
       
     } else {
-      
       let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone, config: Self.config.timePickerConfig)
       picker.selectAction = { [weak self] timeType, date in
         self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
@@ -846,6 +848,8 @@ private extension TKUIRoutingResultsCard {
       
       if controller.traitCollection.horizontalSizeClass == .regular {
         picker.delegate = self
+        
+        let sender: UIButton = accessoryView.timeButton
         
         let pickerController = TKUISheetViewController(sheet: picker)
         pickerController.modalPresentationStyle = .popover

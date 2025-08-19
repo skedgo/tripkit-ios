@@ -78,7 +78,7 @@ public extension TKUIRoutingResultsCard {
     /// Optional configuration of the time picker used on the routing results card.
     ///
     /// Note: this will also be re-used in the mode-by-mode card.
-    public var timePickerConfig: TKUITimePickerSheet.Configuration = .default
+    public var timePickerConfig: TKUITimePickerConfiguration = .default
     
     /// Set this to select which trip metrics to show for each trip group in the routing
     /// results card.
