@@ -19,14 +19,6 @@ import TripKit
 @available(*, unavailable, renamed: "TKUIRoutingResultsCard")
 public typealias TKUIResultsCard = TKUIRoutingResultsCard
 
-@available(*, unavailable, renamed: "TKUIRoutingResultsCardDelegate")
-public typealias TKUIResultsCardDelegate = TKUIRoutingResultsCardDelegate
-
-
-public protocol TKUIRoutingResultsCardDelegate: AnyObject {
-  func resultsCard(_ card: TKUIRoutingResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
-}
-
 /// An interactive card for displaying routing results, including updating from/to location, time and selected modes.
 ///
 /// Can be used standalone or via ``TKUIRoutingResultsViewController``.
@@ -35,8 +27,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>
   
   public static var config = Configuration.empty
-
-  public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
   /// Set this callback to provide a custom handler for what should happen when a user selects a trip.
   ///
@@ -217,7 +207,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       tappedSearch: searchTriggers.asAssertingSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
-      tappedShowModeOptions: .empty(),
       changedDate: changedTime.asAssertingSignal(),
       changedModes: changedModes.asAssertingSignal(),
       changedSortOrder: .empty(),
@@ -316,6 +305,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     viewModel.availableModes
       .drive(onNext: { [weak self] in
         self?.updateModePicker($0, in: tableView)
+        
         // When available modes change, e.g., from toggling the Transport button on and off,
         // an error view may be sitting above the table view, covering the mode picker. This
         // repositions it so the mode picker is always visible. See this ticket for details
@@ -748,8 +738,8 @@ private extension TKUIRoutingResultsCard {
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       
-    case .presentModeConfigurator(let modes, let region):      
-      showTransportOptions(modes: modes, for: region)
+    case .presentModeConfigurator(let modes, let region):
+      TKUIRoutingResultsCard.config.transportButtonHandler?(self, region)
       
     case .presentDatePicker(let time, let timeZone):
       showTimePicker(time: time, timeZone: timeZone)
@@ -891,10 +881,6 @@ extension TKUIRoutingResultsCard: TKUITimePickerSheetDelegate {
 // MARK: - Picking transport modes
 
 extension TKUIRoutingResultsCard {
-  
-  private func showTransportOptions(modes: [String], for region: TKRegion) {
-    resultsDelegate?.resultsCard(self, requestsModePickerWithModes: modes, for: region, sender: accessoryView.transportButton)
-  }
   
   public func refreshForUpdatedModes() {
     changedModes.onNext(nil)
