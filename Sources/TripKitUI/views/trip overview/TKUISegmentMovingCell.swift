@@ -36,10 +36,10 @@ class TKUISegmentMovingCell: UITableViewCell {
     
     backgroundColor = .clear
 
-    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    titleLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
     titleLabel.textColor = .tkLabelPrimary
     
-    subtitleLabel.textColor = .tkLabelSecondary
+    subtitleLabel.textColor = .tkLabelPrimary
   }
   
   override func prepareForReuse() {
@@ -76,7 +76,7 @@ extension TKUISegmentMovingCell {
     switch item.connection?.color?.isDark {
     case .some(true): modeImageColor = .tkLabelOnDark
     case .some(false): modeImageColor = .tkLabelOnLight
-    case nil: modeImageColor = .tkLabelPrimary
+    case nil: modeImageColor = .tkLabelSecondary
     }
     
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
@@ -111,7 +111,7 @@ extension TKUISegmentMovingCell {
     let accessories = item.accessories.compactMap(TKUISegmentMovingCell.buildView)
     accessoryViewStack.resetViews(accessories)
     
-    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, disposeBag: disposeBag) }
     buttonStackView.resetViews(buttons)
   }
   

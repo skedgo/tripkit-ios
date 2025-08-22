@@ -10,16 +10,18 @@ import Foundation
 import UIKit
 
 import RxSwift
+import TGCardViewController
 
 import TripKit
 
 enum TKUISegmentCellHelper {
   
   @MainActor
-  static func buildView(for action: TKUICardAction<TKUITripOverviewCard, TKSegment>, model: TKSegment, for card: TKUITripOverviewCard, tintColor: UIColor, disposeBag: DisposeBag) -> UIView {
-    let button = UIButton(type: .custom)
+  static func buildView<Card: TGCard, Model>(for action: TKUICardAction<Card, Model>, model: Model, for card: Card, tintColor: UIColor = .tkLabelPrimary, disposeBag: DisposeBag) -> UIView {
+    let button = UIButton(configuration: .bordered())
     button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     button.setTitleColor(tintColor, for: .normal)
+    button.tintColor = tintColor
 
     // We could add an icon here, too, but that's not yet in the style guide
     // button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
@@ -50,4 +52,19 @@ extension UIStackView {
     views.forEach(addArrangedSubview)
     isHidden = views.isEmpty
   }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+  TKUISegmentCellHelper.buildView(
+    for: TKUICardAction(
+      title: "Open in",
+      icon: UIImage(systemName: "app")!,
+      handler: { _, _, _, _ in false }
+    ),
+    model: String(),
+    for: TGCard(title: .none),
+    tintColor: .tkLabelPrimary,
+    disposeBag: .init()
+  )
 }

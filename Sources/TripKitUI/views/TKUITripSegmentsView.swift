@@ -35,8 +35,8 @@ public class TKUITripSegmentsView : UIView {
   
   /// This color is used on lighter texts. In addition, this is also the color which
   /// will be used to tint non-PT modes if `colorCodingTransitIcon` is set to `YES`.
-  /// - default: `UIColor.tkLabelSecondary`
-  public var lightTextColor: UIColor = .tkLabelSecondary
+  /// - default: `UIColor.tkLabelPrimary`
+  public var lightTextColor: UIColor = .tkLabelPrimary
   
   public override init(frame: CGRect) {
     super.init(frame: frame)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24123.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24062"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,7 +37,7 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-Ry-4oR">
-                        <rect key="frame" x="64" y="24.5" width="240" height="48.5"/>
+                        <rect key="frame" x="57" y="24.5" width="247" height="48.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-Mg-fai">
                                 <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
@@ -46,7 +46,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="256" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WG8-Aa-TaE">
-                                <rect key="frame" x="0.0" y="24.5" width="240" height="0.0"/>
+                                <rect key="frame" x="0.0" y="24.5" width="247" height="0.0"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rk-Bj-uEq">
                                 <rect key="frame" x="0.0" y="28.5" width="33" height="16"/>
@@ -88,9 +88,9 @@
                     <constraint firstAttribute="bottom" secondItem="zM4-hW-aEs" secondAttribute="bottom" id="08B-Ya-TQp"/>
                     <constraint firstItem="zM4-hW-aEs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5jN-21-YSd"/>
                     <constraint firstItem="ljx-Ux-sWP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FpP-TH-gkv"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PYC-Ry-4oR" secondAttribute="bottom" constant="8" id="J2K-7R-36U"/>
-                    <constraint firstItem="PYC-Ry-4oR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VWD-1e-MWf"/>
-                    <constraint firstItem="PYC-Ry-4oR" firstAttribute="leading" secondItem="zM4-hW-aEs" secondAttribute="trailing" constant="23" id="VZe-rh-XAG"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PYC-Ry-4oR" secondAttribute="bottom" constant="14" id="J2K-7R-36U"/>
+                    <constraint firstItem="PYC-Ry-4oR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="VWD-1e-MWf"/>
+                    <constraint firstItem="PYC-Ry-4oR" firstAttribute="leading" secondItem="zM4-hW-aEs" secondAttribute="trailing" constant="16" id="VZe-rh-XAG"/>
                     <constraint firstAttribute="trailing" secondItem="PYC-Ry-4oR" secondAttribute="trailing" constant="16" id="goc-yB-tOS"/>
                     <constraint firstItem="PYC-Ry-4oR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iOu-te-RdT"/>
                     <constraint firstItem="zM4-hW-aEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="tHO-8q-zez"/>

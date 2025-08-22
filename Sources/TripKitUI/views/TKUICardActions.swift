@@ -12,8 +12,8 @@ import Combine
 import TGCardViewController
 
 public enum TKUICardActionNormalStyle {
-  /// Uses the `.tkAppTintColor` as the foreground colour, and also as the background colour with a opacity of 0.15
-  case fadedTint
+  /// Uses the `tkLabelPrimary` as the foreground colour, and `.tertiarySystemFill` as the background colour
+  case monochrome
   
   /// Uses `.tkLabelPrimary` as the foreground colour, `.clear` as the background colour and adds
   /// an outline around the button of `.tkLabelPrimary` with 0.1 opacity
@@ -133,12 +133,12 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
     .foregroundColor(
       action.content.style == .bold
         ? (UIColor.tkAppTintColor.isDark ? .white : .black)
-        : (normalStyle == .fadedTint ? .accentColor : Color(.tkLabelPrimary))
+        : Color(uiColor: .tkLabelPrimary)
     )
     .background(
       action.content.style == .bold
         ? Color.accentColor
-        : (normalStyle == .fadedTint ? Color.accentColor.opacity(0.15) : .clear)
+        : (normalStyle == .monochrome ? Color(uiColor: .tertiarySystemFill) : .clear)
     )
     .clipShape(Capsule())
     .background(
@@ -207,7 +207,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             icon: UIImage(systemName: "arrow.triangle.branch")!.withRenderingMode(.alwaysTemplate),
             handler: { _, _, _, _ in false }
           ),
-        ], info: PreviewData.shared.context, normalStyle: .fadedTint)
+        ], info: PreviewData.shared.context, normalStyle: .monochrome)
         
         TKUIAdaptiveCardActions<TGNoCard, String>(actions: [
           .init(
@@ -232,7 +232,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             icon: .iconShare,
             handler: { _, _, _, _ in false }
           ),
-        ], info: PreviewData.shared.context, normalStyle: .fadedTint)
+        ], info: PreviewData.shared.context, normalStyle: .monochrome)
       }
       
       TKUIScrollingCardActions<TGNoCard, String>(actions: [
@@ -263,12 +263,13 @@ struct TKUICardActions_Previews: PreviewProvider {
           icon: UIImage(systemName: "arrow.triangle.branch")!.withRenderingMode(.alwaysTemplate),
           handler: { _, _, _, _ in false }
         ),
-      ], info: PreviewData.shared.context, normalStyle: .fadedTint)
+      ], info: PreviewData.shared.context, normalStyle: .monochrome)
       
       
     }
     .accentColor(Color(.tkAppTintColor))
     .previewLayout(.fixed(width: 420, height: 200))
+    .preferredColorScheme(.dark)
   }
 }
 #endif

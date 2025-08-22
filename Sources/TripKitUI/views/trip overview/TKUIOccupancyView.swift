@@ -107,7 +107,7 @@ extension TKUIOccupancyView {
       accessibilityLabel = title
       label.text = title
       label.font = TKStyleManager.customFont(forTextStyle: .footnote)
-      label.textColor = .tkLabelSecondary
+      label.textColor = .tkLabelPrimary
       
       heightConstraint.constant = 24
       icon.image = occupancy.standingPeople(occupiedColor: .tkLabelPrimary) // dark as it'll get an alpha anyway
@@ -115,7 +115,7 @@ extension TKUIOccupancyView {
     case .occupancy(let occupancy, let title, simple: false):
       accessibilityLabel = title
       label.text = title
-      label.textColor = .tkLabelSecondary
+      label.textColor = .tkLabelPrimary
 
       icon.image = occupancy.icon
       icon.backgroundColor = occupancy.color
@@ -149,7 +149,6 @@ extension TKUIOccupancyView {
       
       icon.image = accessibility.icon
       icon.layer.cornerRadius = 0
-
     }
   }
   
