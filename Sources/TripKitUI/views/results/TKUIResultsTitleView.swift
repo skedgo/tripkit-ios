@@ -91,10 +91,16 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
 
     backgroundColor = .tkBackground
     
-    originLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    originLabel.textColor = .tkLabelSecondary
+    originLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .callout)
+    originLabel.textColor = UIColor { traits in
+      if traits.accessibilityContrast == .high {
+        return UIColor.tkLabelSecondary
+      } else {
+        return UIColor.tkAppTintColor
+      }
+    }
     
-    destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title3)
+    destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     destinationLabel.textColor = .tkLabelPrimary
     
     let fromToTapper = UITapGestureRecognizer(target: self, action: #selector(fromToTapped))
@@ -118,24 +124,7 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
 
     let originName = origin ?? "…"
     let originText = Loc.From(location: originName)
-    let attributedOrigin = NSMutableAttributedString(string: originText)
-    attributedOrigin.addAttribute(
-      .foregroundColor, value: UIColor.tkLabelSecondary,
-      range: NSRange(location: 0, length: (originText as NSString).length)
-    )
-    let nameColor = UIColor { traits in
-      if traits.accessibilityContrast == .high {
-        return UIColor.tkLabelSecondary
-      } else {
-        return UIColor.tkAppTintColor
-      }
-    }
-    attributedOrigin.addAttribute(
-      .foregroundColor, value: nameColor,
-      range: (originText as NSString).range(of: originName)
-    )
-    
-    originLabel.attributedText = attributedOrigin
+    originLabel.text = originText
     
     originLabel.isAccessibilityElement = false
     destinationLabel.isAccessibilityElement = false

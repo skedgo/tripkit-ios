@@ -41,8 +41,10 @@ class TKUIHomeHeaderView: UIView {
     searchBar.tintColor = .tkAppTintColor
     searchBar.searchBarStyle = .minimal // No background *around* the search bar
     if #available(iOS 26.0, *) {
+#if compiler(>=6.2) // Xcode 26 proxy
       searchBar.searchTextField.cornerConfiguration = .corners(radius: .containerConcentric(minimum: 22))
       searchBar.searchTextField.backgroundColor = .tkBackgroundNotClear
+#endif
     } else {
       searchBar.barTintColor = .tkBackground
     }

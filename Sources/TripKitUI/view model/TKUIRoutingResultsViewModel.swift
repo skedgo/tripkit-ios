@@ -193,13 +193,11 @@ class TKUIRoutingResultsViewModel {
     if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
       availableModes = .just(.none)
       
-      let modeInput = Observable.combineLatest(requestToShow, builderChanged)
       presentModes = inputs.tappedShowModes
         .asObservable()
-        .withLatestFrom(modeInput) { (_, tuple) -> Next in
-          let modes = tuple.0.applicableModeIdentifiers
-          let region = Self.regionForModes(for: tuple.1)
-          return Next.presentModeConfigurator(modes: modes, region: region)
+        .withLatestFrom(builderChanged) { (_, builder) -> Next in
+          let region = Self.regionForModes(for: builder)
+          return Next.presentModeConfigurator(region: region)
         }
         .asAssertingSignal()
       
@@ -329,7 +327,7 @@ extension TKUIRoutingResultsViewModel {
     case showCustomItem(TKUIRoutingResultsCard.CustomItem)
     case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
     case showLocation(MKAnnotation, mode: SearchMode?)
-    case presentModeConfigurator(modes: [String], region: TKRegion)
+    case presentModeConfigurator(region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
     

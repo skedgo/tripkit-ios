@@ -143,6 +143,7 @@ public class TKUITripModeByModeCard: TGPageCard {
     headerView.tapHandler = { [weak self] in self?.selectSegment(index: $0) }
     headerView.actionHandler = { [weak self] in self?.triggerPrimaryAction() }
     if #available(iOS 26.0, *) {
+#if compiler(>=6.2) // Xcode 26 proxy
       let visualEffectView = UIVisualEffectView(effect: UIGlassEffect(style: .regular))
       visualEffectView.cornerConfiguration = .corners(
         topLeftRadius: .containerConcentric(minimum: 22),
@@ -160,7 +161,8 @@ public class TKUITripModeByModeCard: TGPageCard {
       ])
 
       self.headerAccessoryView = visualEffectView
-      
+#endif
+
     } else {
       self.headerAccessoryView = headerView
     }

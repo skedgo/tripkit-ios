@@ -62,12 +62,18 @@ class TKUITripTitleView: UIView {
 
 extension TKUITripTitleView {
   func configure(with model: TKUITripCell.Model) {
+    if #available(iOS 26.0, *) {
+      timeTitleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
+      timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .title2)
+    } else {
+      timeTitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+      timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    }
+    
     timeTitleLabel.text = model.primaryTimeString
-    timeTitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     timeTitleLabel.textColor = .tkLabelPrimary
 
     timeSubtitleLabel.text = model.secondaryTimeString
-    timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     timeSubtitleLabel.textColor = .tkLabelSecondary
 
     segmentView.isCanceled = model.isCancelled

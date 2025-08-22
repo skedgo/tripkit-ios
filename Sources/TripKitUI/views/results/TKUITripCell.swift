@@ -83,11 +83,11 @@ public class TKUITripCell: UITableViewCell {
     update(preferredContentSizeCategory: preferredContentSizeCategory)
     
     titleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
-    titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    titleLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .headline)
     titleLabel.textColor = .tkLabelPrimary
     
     subtitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
-    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     subtitleLabel.textColor = .tkLabelSecondary
     
     segmentView.isCanceled = model.isCancelled

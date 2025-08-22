@@ -248,6 +248,10 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     self.viewModel = viewModel
     (mapManager as? TKUIRoutingResultsMapManager)?.viewModel = viewModel
     
+    if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
+      accessoryView.setTransport() // Apply fixed default style
+    }
+    
     // Table view configuration
     
     tableView.register(TKUITripCell.nib, forCellReuseIdentifier: TKUITripCell.reuseIdentifier)
@@ -646,6 +650,8 @@ extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
+    guard TKUIRoutingResultsCard.config.transportButtonHandler == nil else { return }
+
     accessoryView.setTransport(isOpen: !modes.available.isEmpty)
     
     guard !modes.available.isEmpty else {
@@ -738,7 +744,7 @@ private extension TKUIRoutingResultsCard {
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       
-    case .presentModeConfigurator(let modes, let region):
+    case .presentModeConfigurator(let region):
       TKUIRoutingResultsCard.config.transportButtonHandler?(self, region)
       
     case .presentDatePicker(let time, let timeZone):

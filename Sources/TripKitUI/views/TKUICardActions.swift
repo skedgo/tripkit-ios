@@ -89,16 +89,16 @@ struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
 
 @MainActor
 struct TKUICardActionButton<C, M>: View where C: TGCard {
-  init(action: TKUICardAction<C, M>, info: TKUICardActionHandlerInfo<C, M>, big: Bool = true, normalStyle: TKUICardActionNormalStyle) {
+  init(action: TKUICardAction<C, M>, info: TKUICardActionHandlerInfo<C, M>, includeText: Bool = true, normalStyle: TKUICardActionNormalStyle) {
     self.action = action
     self.info = info
-    self.big = big
+    self.includeText = includeText
     self.normalStyle = normalStyle
   }
   
   @ObservedObject var action: TKUICardAction<C, M>
   let info: TKUICardActionHandlerInfo<C, M>
-  var big: Bool = true
+  var includeText: Bool = true
   let normalStyle: TKUICardActionNormalStyle
   
   var body: some View {
@@ -111,22 +111,23 @@ struct TKUICardActionButton<C, M>: View where C: TGCard {
       HStack(spacing: 4) {
         if action.content.isInProgress {
           ProgressView()
-            .frame(width: 18, height: 18)
+            .frame(width: 20, height: 20)
         } else {
           Image(uiImage: action.content.icon)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 18, height: 18)
+            .frame(width: 20, height: 20)
         }
         
-        if big {
+        if includeText {
           Text(action.content.title)
             .font(.subheadline.weight(.semibold))
         }
       }
       .accessibility(label: Text(action.content.accessibilityLabel ?? action.content.title))
-      .padding(.horizontal, big ? 12 : 8)
-      .padding(.vertical, 8)
+      .padding(.horizontal, includeText ? 14 : 7)
+      .padding(.vertical, 7)
+      .frame(minHeight: 40)
     }
     .disabled(action.content.isInProgress)
     .foregroundColor(
