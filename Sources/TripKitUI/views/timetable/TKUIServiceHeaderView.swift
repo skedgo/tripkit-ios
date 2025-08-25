@@ -84,7 +84,11 @@ class TKUIServiceHeaderView: UIView {
     expandyButton.setTitle(nil, for: .normal)
     expandyButton.accessibilityLabel = Loc.Collapse
 
-    separator.backgroundColor = .tkLabelTertiary
+    if #available(iOS 26.0, *) {
+      separator.isHidden = true
+    } else {
+      separator.backgroundColor = .tkLabelTertiary
+    }
   }
   
   override func tintColorDidChange() {
