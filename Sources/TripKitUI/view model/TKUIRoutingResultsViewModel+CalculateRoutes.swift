@@ -417,7 +417,9 @@ extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
     formatter.doesRelativeDateFormatting = true
     formatter.timeZone = timeZone
     
-    if let time = time {
+    if let time {
+      formatter.dateStyle = Calendar.current.isDateInToday(time) ? .none : .short
+      
       var timeString = formatter.string(from: time)
       timeString = timeString.replacingOccurrences(of: " pm", with: "pm")
       timeString = timeString.replacingOccurrences(of: " am", with: "am")
