@@ -73,6 +73,13 @@ public class TKUIServiceCard: TKUITableCard {
       self.titleView = header
     }
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .plain
+    }
+    
     self.serviceMapManager = TKUIServiceMapManager()
     let mapManager: TGMapManager
     if let trip = reusing {
@@ -83,7 +90,7 @@ public class TKUIServiceCard: TKUITableCard {
     
     super.init(
       title: title,
-      style: .plain,
+      style: style,
       mapManager: mapManager,
       initialPosition: .peaking
     )
@@ -120,6 +127,9 @@ public class TKUIServiceCard: TKUITableCard {
     let dataSource = DataSource(tableView: tableView) { tv, ip, item in
       let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
       cell.configure(with: item)
+      if #available(iOS 26.0, *) {
+        cell.backgroundColor = .tkBackgroundNotClear
+      }
       return cell
     }
     self.dataSource = dataSource
@@ -140,6 +150,7 @@ public class TKUIServiceCard: TKUITableCard {
       let actions = factory(pair)
 
       let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: self, model: pair, container: tableView)
+      actionsView.backgroundColor = .clear
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }
 

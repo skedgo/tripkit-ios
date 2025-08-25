@@ -88,6 +88,13 @@ public class TKUITimetableCard : TKUITableCard {
       title = .default(Loc.Timetable, nil, self.accessoryView)
     }
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .plain
+    }
+    
     let mapman: TGCompatibleMapManager
     if let existing = mapManager {
       mapman = existing
@@ -98,7 +105,12 @@ public class TKUITimetableCard : TKUITableCard {
       mapman = simpleManager
     }
     
-    super.init(title: title, mapManager: mapman, initialPosition: initialPosition ?? .extended)
+    super.init(
+      title: title,
+      style: style,
+      mapManager: mapman,
+      initialPosition: initialPosition ?? .extended
+    )
     didInit()
   }
 
@@ -121,7 +133,19 @@ public class TKUITimetableCard : TKUITableCard {
       title = .default(Loc.Timetable, nil, self.accessoryView)
     }
     
-    super.init(title: title, mapManager: mapManager, initialPosition: .extended)
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .plain
+    }
+    
+    super.init(
+      title: title,
+      style: style,
+      mapManager: mapManager,
+      initialPosition: .extended
+    )
     didInit()
   }
 
@@ -169,6 +193,9 @@ public class TKUITimetableCard : TKUITableCard {
         
         cell.dataSource = item.contentModel
         cell.accessibilityTraits = .button // Will trigger showing details
+        if #available(iOS 26.0, *) {
+          cell.backgroundColor = .tkBackgroundNotClear
+        }
         return cell
         
       }, titleForHeaderInSection: { ds, index in
