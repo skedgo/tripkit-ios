@@ -11,7 +11,6 @@
 import Foundation
 import CoreData
 
-/// :nodoc:
 @objc
 public class TKAPIToCoreDataConverter: NSObject {
   override private init() {
@@ -21,7 +20,6 @@ public class TKAPIToCoreDataConverter: NSObject {
 
 // MARK: - Stops
 
-/// :nodoc:
 extension StopLocation {
 
   func update(from model: TKAPI.Stop) -> Bool {
@@ -63,12 +61,18 @@ extension StopLocation {
   
 }
 
-/// :nodoc:
 extension TKAPIToCoreDataConverter {
   
-  static func insertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
+  fileprivate static func insertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
     let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
     let newStop = StopLocation.insertStop(stopCode: model.code, modeInfo: model.modeInfo, at: coordinate, in: context)
+    _ = newStop.update(from: model)
+    return newStop
+  }
+
+  static func fetchOrInsertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
+    let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    let newStop = StopLocation.fetchOrInsertStop(stopCode: model.code, modeInfo: model.modeInfo, at: coordinate, in: context)
     _ = newStop.update(from: model)
     return newStop
   }
@@ -77,7 +81,6 @@ extension TKAPIToCoreDataConverter {
 
 // MARK: - Services
 
-/// :nodoc:
 extension Service {
   convenience init(from model: TKAPI.Departure, into context: NSManagedObjectContext) {
     self.init(context: context)
@@ -190,7 +193,6 @@ extension Service {
   }
 }
 
-/// :nodoc:
 extension TKAPIToCoreDataConverter {
   @objc(updateVehiclesForService:primaryVehicle:alternativeVehicles:)
   public static func updateVehicles(for service: Service, primaryVehicle: [String: Any]?, alternativeVehicles: [[String: Any]]?) {
@@ -313,10 +315,8 @@ extension Shape {
           shape.addToVisits(visit)
           
           if !existingVisitsByCode.keys.contains(apiStop.code) {
-            // We added a new visit; we used to use `fetchOrInsert` but the
-            // duplicate checking is remarkably slow :-(
             let coordinate = TKNamedCoordinate(latitude: apiStop.lat, longitude: apiStop.lng, name: apiStop.name, address: nil)
-            let stop = StopLocation.insertStop(stopCode: apiStop.code, modeInfo: modeInfo, at: coordinate, in: context)
+            let stop = StopLocation.fetchOrInsertStop(stopCode: apiStop.code, modeInfo: modeInfo, at: coordinate, in: context)
             stop.shortName = apiStop.shortName
             stop.wheelchairAccessible = apiStop.wheelchairAccessible.map(NSNumber.init)
             assert((visit.stop as StopLocation?) == nil || visit.stop == stop, "We shouldn't have a stop already!")
@@ -399,7 +399,6 @@ extension StopVisits {
 
 // MARK: - Alerts
 
-/// :nodoc:
 extension Alert {
   
   convenience init(from model: TKAPI.Alert, into context: NSManagedObjectContext) {
@@ -458,7 +457,6 @@ extension TKAPIToCoreDataConverter {
 
 // MARK: - Vehicles
 
-/// :nodoc:
 extension Vehicle {
   
   public convenience init(from model: TKAPI.Vehicle, into context: NSManagedObjectContext) {
