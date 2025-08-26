@@ -13,6 +13,7 @@ import TGCardViewController
 
 import TripKit
 
+@available(iOS, deprecated: 16.0, message: "Use TKUIServiceInfoView")
 class TKUIServiceHeaderMiniView: UIView {
   @IBOutlet weak var wheelchairAccessibilityImageView: UIImageView!
   @IBOutlet weak var bicycleAccessibilityImageView: UIImageView!
@@ -81,6 +82,7 @@ class TKUIServiceHeaderMiniView: UIView {
 
 // MARK: - TKUIDepartureCellContent compatibility
 
+@available(iOS, deprecated: 16.0, message: "Use TKUIServiceInfoView")
 extension TKUIServiceHeaderMiniView {
   func configure(with model: TKUIDepartureCellContent) {
     disposeBag = DisposeBag()

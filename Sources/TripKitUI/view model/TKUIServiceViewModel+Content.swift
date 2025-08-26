@@ -7,21 +7,33 @@
 //
 
 import Foundation
+import CoreData
 import UIKit
 
 import TripKit
 
 extension TKUIServiceViewModel {
+
+  enum SectionGroup: Hashable {
+    case incoming
+    case info
+    case main
+  }
   
-  /// Section in a table view
-  enum Section: Hashable {
-    case single
+  struct Section: Hashable {
+    let group: SectionGroup
+    let items: [Item]
+  }
+  
+  enum Item: Hashable {
+    case timing(TimingItem)
+    case info(TKUIServiceInfoView.Content)
   }
   
   /// For individual cells in a table view, representing a stop along the
   /// route
-  struct Item: Hashable {
-    let dataModel: StopVisits
+  struct TimingItem: Hashable {
+    let modelID: NSManagedObjectID
     
     /// Title of the stop
     let title: String
@@ -44,6 +56,11 @@ extension TKUIServiceViewModel {
     
     /// Colour of line to draw from the stop to the end of the cell
     let bottomConnection: UIColor?
+    
+    /// This is the accessibility of the stop-only, as the
+    /// service accessibility is assumed covered by the title
+    /// of the screen.
+    let stopAccessibility: TKWheelchairAccessibility
   }
   
 }
@@ -52,13 +69,56 @@ extension TKUIServiceViewModel {
 
 extension TKUIServiceViewModel {
   
-  static func buildSections(for embarkation: StopVisits, disembarkation: StopVisits?) -> [(Section, [Item])] {
+  static func buildSections(for embarkation: StopVisits, disembarkation: StopVisits?) -> [Section] {
+    let allVisits = embarkation.service.visitsIncludingContinuation()
     
-    let items = embarkation.service
-      .visitsIncludingContinuation()
-      .compactMap { Item($0, embarkation: embarkation, disembarkation: disembarkation) }
-    
-    return [(.single, items)]
+    var sections: [Section] = []
+    if let split = allVisits.firstIndex(of: embarkation) {
+      let incoming = allVisits[..<split]
+      if !incoming.isEmpty {
+        sections.append(Section(
+          group: .incoming,
+          items: incoming.compactMap { TimingItem($0, embarkation: embarkation, disembarkation: disembarkation) }.map { .timing($0) }
+        ))
+      }
+      
+      if #available(iOS 16.0, *), let service = embarkation.service {
+        // Note, for DLS entries `disembarkation` will be nil, but the accessibility
+        // is already handled then under `disembarkation`.
+        var wheelchairAccessibility = embarkation.wheelchairAccessibility
+        if let atEnd = disembarkation?.wheelchairAccessibility {
+          wheelchairAccessibility = wheelchairAccessibility.combine(with: atEnd)
+        }
+        let infoItems = [
+          TKUIServiceInfoView.Content(
+            wheelchairAccessibility: wheelchairAccessibility,
+            bicycleAccessibility: service.bicycleAccessibility,
+            vehicleComponents: service.vehicle?.components ?? [[]],
+            timestamp: service.vehicle?.lastUpdate
+          ),
+          TKUIServiceInfoView.Content(
+            alerts: service.allAlerts()
+              .compactMap { alert in alert.title.map { .init(isCritical: alert.isCritical(), title: $0, body: alert.text) }}
+          )
+        ].filter { !$0.isEmpty }
+        if !infoItems.isEmpty {
+          sections.append(Section(group: .info, items: infoItems.map { .info($0) }))
+        }
+        
+      }
+      
+      let outgoing = allVisits[split...]
+      if !outgoing.isEmpty {
+        sections.append(Section(
+          group: .main,
+          items: outgoing.compactMap { TimingItem($0, embarkation: embarkation, disembarkation: disembarkation) }.map { .timing($0) }
+        ))
+      }
+      
+    } else {
+      assertionFailure()
+    }
+    return sections
   }
   
 }
@@ -75,11 +135,11 @@ extension Service {
   }
   
   func visitsIncludingContinuation() -> [StopVisits] {
-    return includingContinuations.flatMap { $0.sortedVisits }
+    return includingContinuations.flatMap(\.sortedVisits)
   }
 }
 
-extension TKUIServiceViewModel.Item {
+extension TKUIServiceViewModel.TimingItem {
   fileprivate init?(_ visit: StopVisits, embarkation: StopVisits, disembarkation: StopVisits?) {
     guard
       let service = visit.service,
@@ -113,14 +173,15 @@ extension TKUIServiceViewModel.Item {
     }
     
     self.init(
-      dataModel: visit,
+      modelID: visit.objectID,
       title: stop.title ?? stop.stopCode,
       timing: visit.timing,
       timeZone: visit.timeZone,
       realTimeStatus: visit.realTimeStatus,
       isVisited: isVisited,
       topConnection: topConnectionColor,
-      bottomConnection: bottomConnectionColor
+      bottomConnection: bottomConnectionColor,
+      stopAccessibility: stop.wheelchairAccessibility
     )
   }
 }

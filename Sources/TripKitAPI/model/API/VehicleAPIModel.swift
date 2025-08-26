@@ -49,6 +49,16 @@ extension TKAPI {
   
   /// Components of a vehicle, typically provided as a nested array, see ``TripKitAPI/TKAPI/Vehicle/components``
   public struct VehicleComponents: Codable, Hashable {
+    public init(airConditioned: Bool? = nil, model: String? = nil, occupancy: VehicleOccupancy? = nil, occupancyText: String? = nil, wheelchairAccessible: Bool? = nil, wheelchairSeats: Int? = nil, wifi: Bool? = nil) {
+      self.airConditioned = airConditioned
+      self.model = model
+      self.occupancy = occupancy
+      self.occupancyText = occupancyText
+      self.wheelchairAccessible = wheelchairAccessible
+      self.wheelchairSeats = wheelchairSeats
+      self.wifi = wifi
+    }
+    
     public let airConditioned: Bool?
     public let model: String?
     public let occupancy: VehicleOccupancy?
