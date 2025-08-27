@@ -217,7 +217,7 @@ extension TKDeparturesProvider {
     
     // First, we make sure we have all the stops
     let stops = (departures.stops ?? [])
-      .map { TKAPIToCoreDataConverter.insertNewStopLocation(from: $0, into: context) }
+      .map { TKAPIToCoreDataConverter.fetchOrInsertNewStopLocation(from: $0, into: context) }
     
     // Next, we collect the existing stops to add content to
     let flattened = stops.flatMap {

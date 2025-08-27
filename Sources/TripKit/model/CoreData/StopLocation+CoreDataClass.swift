@@ -19,8 +19,6 @@ public class StopLocation: NSManagedObject {
   
   // MARK: - Fetcher
   
-  /// :nodoc:
-  @objc(fetchStopForStopCode:inRegionNamed:requireCoordinate:inTripKitContext:)
   public static func fetchStop(stopCode: String, inRegion regionName: String?, requireCoordinate: Bool, in context: NSManagedObjectContext) -> StopLocation? {
     guard let regionName = regionName else { return nil }
     
@@ -35,15 +33,12 @@ public class StopLocation: NSManagedObject {
     return context.fetchUniqueObject(StopLocation.self, predicate: NSPredicate(format: "stopCode = %@", stopCode))
   }
 
-  @objc(fetchOrInsertStopForStopCode:inRegionNamed:intoTripKitContext:)
   static func fetchOrInsertStop(stopCode: String, inRegion regionName: String, in context: NSManagedObjectContext) -> StopLocation {
     let stop = fetchOrInsertStop(stopCode: stopCode, modeInfo: nil, at: nil, in: context)
     stop.regionName = regionName
     return stop
   }
 
-  /// :nodoc:
-  @objc(fetchOrInsertStopForStopCode:modeInfo:atLocation:intoTripKitContext:)
   public static func fetchOrInsertStop(stopCode: String, modeInfo: TKModeInfo? = nil, at location: TKNamedCoordinate? = nil, in context: NSManagedObjectContext) -> StopLocation {
     var stop: StopLocation?
     var region: TKRegion?
@@ -66,9 +61,9 @@ public class StopLocation: NSManagedObject {
     }
   }
   
-  /// :nodoc:
-  @objc(insertStopForStopCode:modeInfo:atLocation:intoTripKitContext:)
-  public static func insertStop(stopCode: String, modeInfo: TKModeInfo? = nil, at location: TKNamedCoordinate? = nil, in context: NSManagedObjectContext) -> StopLocation {
+  /// Should only be called after checking that the stop of that stop code in the region doesn't yet
+  /// exist as otherwise there'll be duplicates, which `fetchStop(...)` above doesn't handle.
+  static func insertStop(stopCode: String, modeInfo: TKModeInfo? = nil, at location: TKNamedCoordinate? = nil, in context: NSManagedObjectContext) -> StopLocation {
     let stop = StopLocation(context: context)
     stop.name = location?.title
     stop.location = location
@@ -104,8 +99,6 @@ public class StopLocation: NSManagedObject {
     children?
       .forEach { $0.clearVisits() }
   }
-
-  
   
 }
 
