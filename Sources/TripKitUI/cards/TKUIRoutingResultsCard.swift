@@ -250,6 +250,14 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
       accessoryView.setTransport() // Apply fixed default style
+      
+      NotificationCenter.default.rx.notification(UserDefaults.didChangeNotification)
+        .map { _ in TKSettings.hiddenModeIdentifiers }
+        .distinctUntilChanged()
+        .subscribe(onNext: { [weak self] _ in
+          self?.changedModes.onNext(nil)
+        })
+        .disposed(by: disposeBag)
     }
     
     // Table view configuration
