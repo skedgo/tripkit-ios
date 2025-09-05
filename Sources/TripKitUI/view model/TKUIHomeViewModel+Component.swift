@@ -12,16 +12,44 @@ import MapKit
 import RxSwift
 import RxCocoa
 
+import TGCardViewController
+
 public struct TKUIHomeHeaderConfiguration {
-  public let title: String
-  public var action: (title: String, handler: (TKUIHomeCard) -> TKUIHomeCard.ComponentAction)?
+  struct Action {
+    var title: String = ""
+    let handler: (TKUIHomeCard) -> TKUIHomeCard.ComponentAction
+  }
   
-  public init(title: String, action: (String, (TKUIHomeCard) -> TKUIHomeCard.ComponentAction)? = nil) {
+  public enum NavigationAction {
+    case push(TGCard, selection: MKAnnotation? = nil)
+    case present(UIViewController, inNavigationController: Bool = false)
+  }
+  
+  public let title: String
+  let action: Action?
+  
+  public init(title: String, navigationAction: ((TKUIHomeCard) -> NavigationAction)? = nil) {
     self.title = title
-    self.action = action
+    if let navigationAction {
+      self.action = Action { card in
+        switch navigationAction(card) {
+        case let .push(card, selection):
+          return .push(card, selection: selection)
+        case let .present(controller, inNavigationController):
+          return .present(controller, inNavigationController: inNavigationController)
+        }
+      }
+    } else {
+      self.action = nil
+    }
+  }
+
+  @available(*, deprecated, renamed: "init(title:navigationAction:)", message: "Use the initialiser that takes a NavigationAction instead.")
+  public init(title: String, action: (String, (TKUIHomeCard) -> TKUIHomeCard.ComponentAction)?) {
+    self.title = title
+    self.action = action.map { Action(title: $0, handler: $1) }
   }
 }
-
 
 public struct TKUIHomeComponentInput {
   /// Fires whenever the home card will appear *or disappear*, providing `true` on appearance
