@@ -212,7 +212,6 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     try container.encode(coordinate.latitude, forKey: .latitude)
     try container.encode(coordinate.longitude, forKey: .longitude)
     try container.encode(name, forKey: .name)
-    try container.encode(address, forKey: .address)
     try container.encode(locationID, forKey: .locationID)
     try container.encode(timeZoneID, forKey: .timeZoneID)
     try container.encode(clusterIdentifier, forKey: .clusterIdentifier)
@@ -220,6 +219,9 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     try container.encode(klass, forKey: .klass)
     try container.encode(isDraggable, forKey: .isDraggable)
     try container.encode(isSuburb, forKey: .isSuburb)
+
+    // Important to encode the underlying value to not trigger reverse-geocoding.
+    try container.encode(_address, forKey: .address)
 
     if let sanitized = TKJSONSanitizer.sanitize(data) {
       let encodedData = try JSONSerialization.data(withJSONObject: sanitized, options: [])
@@ -262,13 +264,16 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
       }
       coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
       name = aDecoder.decodeObject(of: NSString.self, forKey: "name") as String?
-      _address = aDecoder.decodeObject(of: NSString.self, forKey: "address") as String?
       locationID = aDecoder.decodeObject(of: NSString.self, forKey: "locationID") as String?
       timeZoneID = aDecoder.decodeObject(of: NSString.self, forKey: "timeZone") as String?
       clusterIdentifier = aDecoder.decodeObject(of: NSString.self, forKey: "clusterIdentifier") as String?
       modeIdentifiers = aDecoder.decodeObject(of: [NSString.self, NSArray.self], forKey: "modeIdentifiers") as? [String]
       klass = aDecoder.decodeObject(of: NSString.self, forKey: "klass") as String?
+
+      // Important to encode the underlying value to not trigger reverse-geocoding.
+      _address = aDecoder.decodeObject(of: NSString.self, forKey: "address") as String?
       _placemark = aDecoder.decodeObject(of: CLPlacemark.self, forKey: "placemark")
+
       isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
       isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
       data = aDecoder.decodeObject(of: [
@@ -285,16 +290,18 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     aCoder.encode(coordinate.latitude, forKey: "latitude")
     aCoder.encode(coordinate.longitude, forKey: "longitude")
     aCoder.encode(name, forKey: "name")
-    aCoder.encode(address, forKey: "address")
     aCoder.encode(locationID, forKey: "locationID")
     aCoder.encode(timeZoneID, forKey: "timeZone")
     aCoder.encode(clusterIdentifier, forKey: "clusterIdentifier")
     aCoder.encode(modeIdentifiers, forKey: "modeIdentifiers")
     aCoder.encode(klass, forKey: "klass")
-    aCoder.encode(_placemark, forKey: "placemark")
     aCoder.encode(isDraggable, forKey: "isDraggable")
     aCoder.encode(isSuburb, forKey: "isSuburb")
     aCoder.encode(data, forKey: "data")
+    
+    // Important to encode the underlying value to not trigger reverse-geocoding.
+    aCoder.encode(_address, forKey: "address")
+    aCoder.encode(_placemark, forKey: "placemark")
   }
 
 }
