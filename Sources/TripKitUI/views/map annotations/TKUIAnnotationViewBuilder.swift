@@ -267,10 +267,11 @@ fileprivate extension TKUIAnnotationViewBuilder {
     }
     
     circleView.isFaded = !annotation.isTravelled
+    circleView.circleColor = annotation.circleColor
     if annotation.isTravelled  {
-      circleView.circleColor = annotation.circleColor
+      circleView.borderColor = annotation.borderColor
     } else {
-      circleView.circleColor = .routeDashColorNonTravelled
+      circleView.borderColor = .routeDashColorNonTravelled
     }
     circleView.setNeedsDisplay()
 
