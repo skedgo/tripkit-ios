@@ -81,7 +81,8 @@ class TKUIMapManagerHelper: NSObject {
             coordinate: visit.coordinate,
             title: visit.title,
             subtitle: visit.subtitle,
-            circleColor: service.color ?? .tkAppTintColor,
+            circleColor: .white,
+            borderColor: service.color ?? .tkAppTintColor,
             isTravelled: segment.uses(visit),
             asLarge: true,
             selectionIdentifier: segment.selectionIdentifier,
@@ -171,7 +172,8 @@ class TKUIMapManagerHelper: NSObject {
         // Plus a circle, but only if something else is selected
         TKUICircleAnnotation(
           coordinate: segment.coordinate,
-          circleColor: .tkBackground.withAlphaComponent(0.3),
+          circleColor: .white,
+          borderColor: .tkBackground.withAlphaComponent(0.3),
           isTravelled: true,
           asLarge: true,
           selectionIdentifier: segment.selectionIdentifier,
@@ -188,11 +190,12 @@ class TKUIMapManagerHelper: NSObject {
 }
 
 fileprivate class TKUICircleAnnotation: NSObject, TKUICircleDisplayable, TKUISelectableOnMap {
-  internal init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, circleColor: UIColor, isTravelled: Bool, asLarge: Bool, selectionIdentifier: String?, selectionCondition: TKUISelectionCondition) {
+  internal init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, circleColor: UIColor, borderColor: UIColor?, isTravelled: Bool, asLarge: Bool, selectionIdentifier: String?, selectionCondition: TKUISelectionCondition) {
     self.coordinate = coordinate
     self.title = title
     self.subtitle = subtitle
     self.circleColor = circleColor
+    self.borderColor = borderColor
     self.isTravelled = isTravelled
     self.asLarge = asLarge
     self.selectionIdentifier = selectionIdentifier
@@ -211,6 +214,7 @@ fileprivate class TKUICircleAnnotation: NSObject, TKUICircleDisplayable, TKUISel
   // MARK: TKUICircleDisplayable
   
   var circleColor: UIColor
+  var borderColor: UIColor?
   var isTravelled: Bool
   var asLarge: Bool
   
