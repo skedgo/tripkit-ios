@@ -49,7 +49,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   public init(
     content: AnyPublisher<TKUICardActionContent, Never>,
     priority: Int = 0,
-    handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Void
+    handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, Any?) -> Void
   ) {
     self.handler = { action, card, model, view in
       handler(action, card, model, view)
@@ -77,7 +77,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     style: TKUICardActionStyle = .normal,
     priority: Int = 0,
     isEnabled: Bool = true,
-    handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
+    handler: @escaping @MainActor (TKUICardAction<Card, Model>, Card, Model, Any?) -> Bool
   ) {
     self.content = .init(
       title: title,
@@ -109,7 +109,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
     style: (() -> TKUICardActionStyle)?  = nil,
     priority: Int = 0,
     isEnabled: Bool = true,
-    handler: @escaping @MainActor (Card, Model, UIView) -> Void
+    handler: @escaping @MainActor (Card, Model, Any?) -> Void
   ) {
     self.init(
       title: title(),
@@ -118,8 +118,8 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
       style: style?() ?? .normal,
       priority: priority,
       isEnabled: isEnabled
-    ) { action, card, model, view in
-      handler(card, model, view)
+    ) { action, card, model, sender in
+      handler(card, model, sender)
       action.content = .init(
         title: title(),
         accessibilityLabel: accessibilityLabel?() ?? title(),
@@ -179,7 +179,7 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   /// toggle actions such as adding or removing a reminder or favourite).
   ///
   /// Parameters are the action itself, the owning card, the model instance, and the sender.
-  public let handler: @MainActor (TKUICardAction<Card, Model>, Card, Model, UIView) -> Bool
+  public let handler: @MainActor (TKUICardAction<Card, Model>, Card, Model, Any?) -> Bool
 }
 
 public struct TKUICardActionContent {

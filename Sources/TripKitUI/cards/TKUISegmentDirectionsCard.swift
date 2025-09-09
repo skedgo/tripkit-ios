@@ -18,7 +18,7 @@ import RxCocoa
 
 import TripKit
 
-public class TKUISegmentDirectionsCard: TGTableCard {
+public class TKUISegmentDirectionsCard: TGHostingCard<TKUISegmentDirectionsContent> {
   
   public static func canShowInstructions(for segment: TKSegment) -> Bool {
     return TKUISegmentDirectionsViewModel.canShowInstructions(for: segment)
@@ -45,36 +45,25 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     titleView = TKUISegmentTitleView.newInstance()
     titleView.configure(for: segment)
     
-    super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), mapManager: mapManager)
+    let wrapper = CardHolder()
+    
+    super.init(
+      title: .custom(titleView, dismissButton: titleView.dismissButton),
+      rootView: TKUISegmentDirectionsContent(model: .init(segment: segment), wrapper: wrapper),
+      mapManager: mapManager
+    )
+    
+    wrapper.card = self
     
     titleView.applyStyleToCloseButton(style)
   }
   
-  override public func didBuild(tableView: UITableView) {
-    super.didBuild(tableView: tableView)
-
-    viewModel = TKUISegmentDirectionsViewModel(segment: segment)
+  public override func didBuild(scrollView: UIScrollView) {
+    super.didBuild(scrollView: scrollView)
     
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
-    
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)
-    
-    viewModel.sections
-      .drive(tableView.rx.items(dataSource: dataSource))
-      .disposed(by: disposeBag)
-    
-    if let factory = Self.config.actionFactory {
-      let actions = factory(segment)
-      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: self, model: segment, container: tableView)
-      actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-      tableView.tableHeaderView = actionsView
-    } else {
-      tableView.tableHeaderView = nil
+    if #unavailable(iOS 26.0) {
+      scrollView.backgroundColor = .tkBackgroundGrouped
     }
-  }
-  
-  private func setup(_ tableView: UITableView) {
-    tableView.tableFooterView = UIView()
   }
   
   public override func didAppear(animated: Bool) {
@@ -85,23 +74,49 @@ public class TKUISegmentDirectionsCard: TGTableCard {
   
 }
 
-// MARK: Configuring cells
-
-extension TKUISegmentDirectionsCard {
-  
-  static func configureCell(dataSource: TableViewSectionedDataSource<TKUISegmentDirectionsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUISegmentDirectionsViewModel.Item) -> UITableViewCell {
-
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
-    cell.contentConfiguration = UIHostingConfiguration {
-      TKUISegmentDirectionView(item: item)
-    }
-    cell.backgroundColor = .tkBackground
-    return cell
-  }
-  
+fileprivate class CardHolder {
+  weak var card: TKUISegmentDirectionsCard?
 }
 
-@MainActor
+public struct TKUISegmentDirectionsContent: View {
+  @ObservedObject var model: TKUISegmentDirectionsViewModel
+  fileprivate let wrapper: CardHolder
+  
+  public var body: some View {
+    VStack(alignment: .leading) {
+      if let factory = TKUISegmentDirectionsCard.config.actionFactory {
+        TKUICardActionsViewFactory.build(actions: factory(model.segment)) { action in
+          guard let card = wrapper.card else { return }
+          _ = action.handler(action, card, model.segment, nil)
+        }
+        .background(.clear)
+      }
+      
+      LazyVStack(alignment: .leading) {
+        ForEach(model.items) { item in
+          if item.index != 0 {
+            Divider()
+          }
+          TKUISegmentDirectionView(item: item)
+        }
+      }
+      .padding()
+      .background(Color(.tkBackgroundNotClear))
+      .cornerRadius(22)
+    }
+    .padding()
+    .modify { view in
+      if #available(iOS 26.0, *) {
+        view
+          .background(.clear)
+      } else {
+        view
+          .background(Color(.tkBackgroundGrouped))
+      }
+    }
+  }
+}
+
 struct TKUISegmentDirectionView: View {
   let item: TKUISegmentDirectionsViewModel.Item
   
@@ -146,7 +161,13 @@ struct TKUISegmentDirectionView: View {
           }
         }
       }
-    }.background(Color(.tkBackground))
+    }
+  }
+}
+
+extension View {
+  func modify<T: View>(@ViewBuilder _ modifier: (Self) -> T) -> some View {
+    return modifier(self)
   }
 }
 

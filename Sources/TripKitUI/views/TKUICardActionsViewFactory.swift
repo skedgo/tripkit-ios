@@ -33,14 +33,25 @@ public enum TKUICardActionsViewFactory {
     let actionsView: UIView = UIHostingController(
       rootView: TKUIAdaptiveCardActions(
         actions: sorted,
-        info: .init(card: card, model: model, container: container),
         normalStyle: TKUICustomization.shared.cardActionNormalStyle
-      )
+      ) { [weak card, model, weak container] action in
+        guard let card, let container else { return }
+        _ = action.handler(action, card, model, container)
+      }
       .padding(padding)
     ).view
     
     actionsView.tintColor = TKColor.tkAppTintColor
     return actionsView
+  }
+  
+  @MainActor
+  public static func build<C, M>(actions: [TKUICardAction<C, M>], handler: @escaping (TKUICardAction<C, M>) -> Void) -> some View {
+    TKUIAdaptiveCardActions(
+      actions: sort(actions: actions),
+      normalStyle: TKUICustomization.shared.cardActionNormalStyle,
+      handler: handler
+    )
   }
 
   @MainActor
