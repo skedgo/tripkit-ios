@@ -57,7 +57,19 @@ open class TKUIHomeCard: TKUITableCard {
     
     self.headerView = TKUIHomeHeaderView(hasGrabHandle: hasGrabHandle)
 
-    super.init(title: .custom(headerView, dismissButton: nil), mapManager: theMapManager, initialPosition: initialPosition)
+    let tableStyle: UITableView.Style
+    if #available(iOS 26, *) {
+      tableStyle = .insetGrouped
+    } else {
+      tableStyle = .plain
+    }
+    
+    super.init(
+      title: .custom(headerView, dismissButton: nil),
+      style: tableStyle,
+      mapManager: theMapManager,
+      initialPosition: initialPosition
+    )
     
     headerView.searchBar.placeholder = Loc.SearchForDestination
     headerView.searchBar.delegate = self
@@ -78,12 +90,7 @@ open class TKUIHomeCard: TKUITableCard {
     tableView.keyboardDismissMode = .onDrag
 
     tableView.register(TKUIHomeCardSectionHeader.self, forHeaderFooterViewReuseIdentifier: "TKUIHomeCardSectionHeader")
-    
-    if #available(iOS 16, *) {
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
-    } else {
-      tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
-    }
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
     
     tableView.dataSource = nil
     tableView.tableFooterView = UIView() // no trailing separators
@@ -101,33 +108,23 @@ open class TKUIHomeCard: TKUITableCard {
         
         switch item {
         case .search(let searchItem):
-          if #available(iOS 16, *) {
-            let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
-            cell.contentConfiguration = UIHostingConfiguration {
-              TKUIAutocompletionResultView(item: searchItem) { [weak self] in
-                self?.cellAccessoryTapped.onNext(.search($0))
-              }
+          let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
+          cell.contentConfiguration = UIHostingConfiguration {
+            TKUIAutocompletionResultView(item: searchItem) { [weak self] in
+              self?.cellAccessoryTapped.onNext(.search($0))
             }
-            return cell
-            
-          } else {
-            guard
-              let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell
-            else { assertionFailure("Unable to load an instance of TKUIAutocompletionResultCell"); return fallback }
-            
-            cell.configure(
-              with: searchItem,
-              onAccessoryTapped: { [weak self] in self?.cellAccessoryTapped.onNext(.search($0)) }
-            )
-            cell.accessibilityTraits = .button
-            return cell
           }
+          return cell
           
         case .component(let componentItem):
           guard let cell = self.viewModel.componentViewModels.compactMap({ $0.cell(for: componentItem, at: ip, in: tv) }).first else {
             assertionFailure("No component returned a cell for \(componentItem) at \(ip)."); return fallback
           }
           cell.accessibilityTraits = componentItem.isAction ? .button : .none
+          if #available(iOS 26, *) {
+            // Contrast from clear background in inset-grouped style
+            cell.backgroundColor = .tkBackgroundNotClear
+          }
           return cell
         }
         

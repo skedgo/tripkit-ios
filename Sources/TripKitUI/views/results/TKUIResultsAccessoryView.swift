@@ -57,7 +57,7 @@ class TKUIResultsAccessoryView: UIView {
     
     var config = highlight ? UIButton.Configuration.borderedTinted() : UIButton.Configuration.plain()
     config.buttonSize = .mini
-    config.imagePadding = 4
+    config.imagePadding = 8
     config.cornerStyle = .capsule
     config.imagePlacement = imagePlacement
     config.titleTextAttributesTransformer = .init { container in
@@ -96,13 +96,18 @@ class TKUIResultsAccessoryView: UIView {
     style(timeButton, title: text, systemImageName: "clock", imagePlacement: .leading, highlight: highlight)
   }
   
-  func setTransport(isOpen: Bool) {
-    style(transportButton, title: Loc.Transport, systemImageName: isOpen ? "chevron.up" : "chevron.down", imagePlacement: .trailing)
-    
-    if isOpen {
-      transportButton.accessibilityTraits.insert(.selected)
+  func setTransport(isOpen: Bool? = nil) {
+    if let isOpen {
+      style(transportButton, title: Loc.Transport, systemImageName: isOpen ? "chevron.up" : "chevron.down", imagePlacement: .trailing)
+      
+      if isOpen {
+        transportButton.accessibilityTraits.insert(.selected)
+      } else {
+        transportButton.accessibilityTraits.remove(.selected)
+      }
+      
     } else {
-      transportButton.accessibilityTraits.remove(.selected)
+      style(transportButton, title: Loc.Transport, systemImageName: "slider.horizontal.3", imagePlacement: .leading)
     }
   }
   

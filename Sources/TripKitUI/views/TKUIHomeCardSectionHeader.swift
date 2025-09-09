@@ -22,18 +22,18 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     static let buttonHeight: CGFloat = 44.0
   }
   
-  @IBOutlet private weak var label: UILabel!
+  @IBOutlet private weak var label: UILabel?
   @IBOutlet private weak var button: UIButton!
   
-  private var labelTopSpaceConstraint: NSLayoutConstraint!
-  private var labelBottomSpaceConstraint: NSLayoutConstraint!
+  private var labelTopSpaceConstraint: NSLayoutConstraint?
+  private var labelBottomSpaceConstraint: NSLayoutConstraint?
   
   var disposeBag = DisposeBag()
   
   private var minimize: Bool = false {
     didSet {
-      labelTopSpaceConstraint.constant = minimize ? 0 : Constraint.top
-      labelBottomSpaceConstraint.constant =  minimize ? 0 : Constraint.bottom
+      labelTopSpaceConstraint?.constant = minimize ? 0 : Constraint.top
+      labelBottomSpaceConstraint?.constant =  minimize ? 0 : Constraint.bottom
     }
   }
   
@@ -48,30 +48,47 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    label.text = nil
+    label?.text = nil
     button.setTitle(nil, for: .normal)
     disposeBag = DisposeBag()
   }
   
   func configure(with configuration: TKUIHomeHeaderConfiguration?, homeCard: TKUIHomeCard, onTap: @escaping (TKUIHomeCard.ComponentAction) -> Void) {
-    if let configuration = configuration {
-      label.text = configuration.title
-      if let action = configuration.action {
+    if let configuration {
+      if #available(iOS 26.0, *) {
         button.isHidden = false
-        button.setTitle(action.title, for: .normal)
-        button.rx.tap
-          .subscribe(onNext: { _ in onTap(action.handler(homeCard)) })
-          .disposed(by: disposeBag)
+        button.setTitle(configuration.title, for: .normal)
+        if let action = configuration.action {
+          button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+          button.rx.tap
+            .subscribe(onNext: { _ in onTap(action.handler(homeCard)) })
+            .disposed(by: disposeBag)
+          button.isUserInteractionEnabled = true
+        } else {
+          button.setImage(nil, for: .normal)
+          button.isUserInteractionEnabled = false
+        }
+
       } else {
-        button.isHidden = true
-        button.setTitle(nil, for: .normal)
+        label?.text = configuration.title
+        if let action = configuration.action {
+          button.isHidden = false
+          button.setTitle(action.title, for: .normal)
+          button.rx.tap
+            .subscribe(onNext: { _ in onTap(action.handler(homeCard)) })
+            .disposed(by: disposeBag)
+        } else {
+          button.isHidden = true
+          button.setTitle(nil, for: .normal)
+        }
       }
       minimize = false
         
     } else {
       button.isHidden = true
-      label.text = nil
+      label?.text = nil
       button.setTitle(nil, for: .normal)
+      button.setImage(nil, for: .normal)
       minimize = true
     }
     
@@ -82,68 +99,112 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
     if minimize {
       accessibilityElements = []
     } else if button.isHidden {
-      accessibilityElements = [label!]
+      accessibilityElements = [label].compactMap { $0 }
     } else {
       // Override default order that'd start with the button
-      accessibilityElements = [label!, button!]
+      accessibilityElements = [label, button].compactMap { $0 }
     }
   }
   
   private func didInit() {
     let wrapper = UIView()
-    #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
     wrapper.backgroundColor = .clear
-    #else
+#else
     wrapper.backgroundColor = .tkBackground
-    #endif
+#endif
     wrapper.translatesAutoresizingMaskIntoConstraints = false
     
-    let label = UILabel()
-    label.textAlignment = .left
-    label.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
-    label.textColor = .tkLabelSecondary
-    label.translatesAutoresizingMaskIntoConstraints = false
-    self.label = label
-    wrapper.addSubview(label)
-    
-    let button = UIButton(type: .system)
-    button.tintColor = .tkAppTintColor
-    button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
-    button.titleLabel?.textAlignment = .right
-    button.translatesAutoresizingMaskIntoConstraints = false
-    self.button = button
-    wrapper.addSubview(button)
+    if #available(iOS 26.0, *) {
+      var config = UIButton.Configuration.plain()
+      config.baseForegroundColor = .tkLabelSecondary
+      config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+        var attrs = incoming
+        attrs.font = TKStyleManager.semiboldCustomFont(forTextStyle: .title3)
+        attrs.foregroundColor = .tkLabelPrimary
+        return attrs
+      }
+      config.imagePlacement = .trailing
+      config.imagePadding = 4
+      
+      let button = UIButton(configuration: config)
+      button.contentHorizontalAlignment = .right
+      button.translatesAutoresizingMaskIntoConstraints = false
+      self.button = button
+      wrapper.addSubview(button)
 
-    updateAccessibilityElements()
-    
-    // Wrapper to content view
-    #if targetEnvironment(macCatalyst)
-    contentView.backgroundColor = .clear
-    #else
-    contentView.backgroundColor = .tkBackgroundGrouped
-    #endif
+      updateAccessibilityElements()
+      
+      // Wrapper to content view
+#if targetEnvironment(macCatalyst)
+      contentView.backgroundColor = .clear
+#else
+      contentView.backgroundColor = .tkBackgroundGrouped
+#endif
 
-    contentView.addSubview(wrapper)
-    NSLayoutConstraint.activate([
-      wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-      wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-      wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-    ])
-    
-    // Label and button to wrapper
-    label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: Constraint.leading).isActive = true
-    let labelTopSpaceConstraint = label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: Constraint.top)
-    labelTopSpaceConstraint.isActive = true
-    self.labelTopSpaceConstraint = labelTopSpaceConstraint
-    let labelBottomSpaceConstraint = wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: Constraint.bottom)
-    labelBottomSpaceConstraint.isActive = true
-    self.labelBottomSpaceConstraint = labelBottomSpaceConstraint
-    
-    button.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: Constraint.trailing).isActive = true
-    wrapper.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: Constraint.trailing).isActive = true
-    button.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
-    button.heightAnchor.constraint(equalToConstant: Constraint.buttonHeight).isActive = true
+      contentView.addSubview(wrapper)
+      NSLayoutConstraint.activate([
+        wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+        wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+        wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+      ])
+      
+      // Label and button to wrapper
+      button.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor).isActive = true
+      button.topAnchor.constraint(equalTo: wrapper.topAnchor).isActive = true
+      wrapper.bottomAnchor.constraint(equalTo: button.bottomAnchor).isActive = true
+      wrapper.trailingAnchor.constraint(greaterThanOrEqualTo: button.trailingAnchor).isActive = true
+      
+      
+    } else {
+      let label = UILabel()
+      label.textAlignment = .left
+      label.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
+      label.textColor = .tkLabelSecondary
+      label.translatesAutoresizingMaskIntoConstraints = false
+      self.label = label
+      wrapper.addSubview(label)
+      
+      let button = UIButton(type: .system)
+      button.tintColor = .tkAppTintColor
+      button.titleLabel?.font = TKStyleManager.customFont(forTextStyle: .subheadline)
+      button.titleLabel?.textAlignment = .right
+      button.translatesAutoresizingMaskIntoConstraints = false
+      self.button = button
+      wrapper.addSubview(button)
+
+      updateAccessibilityElements()
+      
+      // Wrapper to content view
+      #if targetEnvironment(macCatalyst)
+      contentView.backgroundColor = .clear
+      #else
+      contentView.backgroundColor = .tkBackgroundGrouped
+      #endif
+
+      contentView.addSubview(wrapper)
+      NSLayoutConstraint.activate([
+        wrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+        wrapper.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+        wrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        wrapper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+      ])
+      
+      // Label and button to wrapper
+      label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: Constraint.leading).isActive = true
+      let labelTopSpaceConstraint = label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: Constraint.top)
+      labelTopSpaceConstraint.isActive = true
+      self.labelTopSpaceConstraint = labelTopSpaceConstraint
+      let labelBottomSpaceConstraint = wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: Constraint.bottom)
+      labelBottomSpaceConstraint.isActive = true
+      self.labelBottomSpaceConstraint = labelBottomSpaceConstraint
+      
+      button.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: Constraint.trailing).isActive = true
+      wrapper.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: Constraint.trailing).isActive = true
+      button.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+      button.heightAnchor.constraint(equalToConstant: Constraint.buttonHeight).isActive = true
+    }
   }
   
 }

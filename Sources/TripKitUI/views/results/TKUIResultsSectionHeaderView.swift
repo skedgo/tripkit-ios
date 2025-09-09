@@ -54,7 +54,6 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
       badgeIcon.image = newValue?.icon
       badgeIcon.tintColor = newValue?.color
       badgeLabel.text = newValue?.text
-      badgeLabel.textColor = newValue?.color
     }
   }
   
@@ -85,8 +84,8 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     let badgeLabel = UILabel()
     badgeLabel.numberOfLines = 1
     badgeLabel.text = nil
-    badgeLabel.textColor = .tkFilledButtonTextColor
-    badgeLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .subheadline)
+    badgeLabel.textColor = .tkLabelPrimary
+    badgeLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .footnote)
     badgeLabel.translatesAutoresizingMaskIntoConstraints = false
     self.badgeLabel = badgeLabel
     wrapper.addSubview(badgeLabel)
@@ -99,7 +98,7 @@ class TKUIResultsSectionHeaderView: UITableViewHeaderFooterView {
     
     NSLayoutConstraint.activate([
       badgeIcon.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
-      badgeLabel.leadingAnchor.constraint(equalTo: badgeIcon.trailingAnchor, constant: 8),
+      badgeLabel.leadingAnchor.constraint(equalTo: badgeIcon.trailingAnchor, constant: 4),
       wrapper.trailingAnchor.constraint(equalTo: badgeLabel.trailingAnchor, constant: 16),
       
       badgeTopMarginConstraint,

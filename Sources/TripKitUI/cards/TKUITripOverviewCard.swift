@@ -90,8 +90,19 @@ public class TKUITripOverviewCard: TKUITableCard {
     tripTitle.configure(with: .init(trip, allowFading: false))
     self.titleView = tripTitle
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .plain
+    }
+    
     let mapManager = TKUITripOverviewCard.config.mapManagerFactory(trip)
-    super.init(title: .custom(tripTitle, dismissButton: tripTitle.dismissButton), mapManager: mapManager)
+    super.init(
+      title: .custom(tripTitle, dismissButton: tripTitle.dismissButton),
+      style: style,
+      mapManager: mapManager
+    )
 
     if let knownMapManager = mapManager as? TKUIMapManager {
       knownMapManager.attributionDisplayer = { [weak self] sources, sender in
@@ -263,6 +274,9 @@ extension TKUITripOverviewCard {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
     cell.configure(with: terminal, for: self)
     cell.accessibilityTraits = .none // No action on terminals
+    if #available(iOS 26.0, *) {
+      cell.backgroundColor = .tkBackgroundNotClear
+    }
     return cell
   }
 
@@ -270,6 +284,9 @@ extension TKUITripOverviewCard {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryCell else { preconditionFailure() }
     cell.configure(with: stationary, for: self)
     cell.accessibilityTraits = TKUITripOverviewCard.config.presentSegmentHandler != nil ? .button : .none
+    if #available(iOS 26.0, *) {
+      cell.backgroundColor = .tkBackgroundNotClear
+    }
     return cell
   }
 
@@ -277,6 +294,9 @@ extension TKUITripOverviewCard {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentStationaryDoubleCell.reuseIdentifier, for: indexPath) as? TKUISegmentStationaryDoubleCell else { preconditionFailure() }
     cell.configure(with: stationary)
     cell.accessibilityTraits = TKUITripOverviewCard.config.presentSegmentHandler != nil ? .button : .none
+    if #available(iOS 26.0, *) {
+      cell.backgroundColor = .tkBackgroundNotClear
+    }
     return cell
   }
 
@@ -284,6 +304,9 @@ extension TKUITripOverviewCard {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentAlertCell.reuseIdentifier, for: indexPath) as? TKUISegmentAlertCell else { preconditionFailure() }
     cell.configure(with: alertItem)    
     cell.accessibilityTraits = .button // Will show alerts
+    if #available(iOS 26.0, *) {
+      cell.backgroundColor = .tkBackgroundNotClear
+    }
     return cell
   }
 
@@ -291,6 +314,9 @@ extension TKUITripOverviewCard {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentMovingCell.reuseIdentifier, for: indexPath) as? TKUISegmentMovingCell else { preconditionFailure() }
     cell.configure(with: moving, for: self)
     cell.accessibilityTraits = TKUITripOverviewCard.config.presentSegmentHandler != nil ? .button : .none
+    if #available(iOS 26.0, *) {
+      cell.backgroundColor = .tkBackgroundNotClear
+    }
     return cell
   }
 
@@ -303,6 +329,9 @@ extension TKUITripOverviewCard {
       .subscribe(onNext: { [unowned self] _ in self.alternativesTapped.onNext(indexPath) })
       .disposed(by: cell.disposeBag)
     
+    if #available(iOS 26.0, *) {
+      cell.backgroundColor = .tkBackgroundNotClear
+    }
     return cell
   }
   
@@ -491,8 +520,10 @@ extension TKUITripOverviewCard {
     
     let actionsView = TKUICardActionsViewFactory.build(
       actions: mutable,
-      card: self, model: trip, container: tableView!
+      card: self, model: trip, container: tableView!,
+      padding: .bottom
     )
+    actionsView.backgroundColor = .tkBackground
     actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     return actionsView
   }

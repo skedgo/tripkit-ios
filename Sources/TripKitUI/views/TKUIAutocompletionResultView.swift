@@ -10,7 +10,6 @@ import SwiftUI
 
 import TripKit
 
-@available(iOS 16.0, *)
 struct TKUIAutocompletionResultView: View {
   typealias Item = TKUIAutocompletionViewModel.Item
   
@@ -92,7 +91,6 @@ struct TKUIAutocompletionResultView: View {
   }
 }
 
-@available(iOS 16.0, *)
 extension Text {
   @ViewBuilder
   static func build(_ text: String, highlightRanges: [NSRange], textColor: UIColor) -> some View {
@@ -116,7 +114,6 @@ extension Text {
   }
 }
 
-@available(iOS 16.0, *)
 #Preview {
   TKUIAutocompletionResultView(
     item: .autocompletion(.init(

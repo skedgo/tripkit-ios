@@ -181,9 +181,9 @@ extension TKUISectionedAlertViewController: UITableViewDelegate {
     guard let source = dataSource else { return nil }
     let header = TKUISectionedAlertTableHeader.newInstance()
     let section = source[section]
-    header.backgroundColor = section.color ?? .tkBackground
+    header.backgroundColor = section.color ?? .tkBackgroundNotClear
     header.titleLabel.text = section.header
-    header.titleLabel.textColor = section.color != nil ? .tkBackground : .tkLabelPrimary
+    header.titleLabel.textColor = section.color != nil ? .tkBackgroundNotClear : .tkLabelPrimary
     return header
   }
   

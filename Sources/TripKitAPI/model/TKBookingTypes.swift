@@ -173,11 +173,9 @@ public enum TKBooking {
     @DefaultEmptyArray public var purchasedTickets: [PurchasedTicket]
   }
   
-  public struct BookingInput: Codable, Hashable {
-    public typealias InputOptionId = String
-    
-    public struct InputOption: Codable, Hashable {
-      public let id: InputOptionId
+  public struct BookingInput: Codable, Hashable, Identifiable {
+    public struct InputOption: Codable, Hashable, Identifiable {
+      public let id: String
       public let title: String
     }
     
@@ -197,8 +195,8 @@ public enum TKBooking {
     }
     
     public enum InputValue: Hashable {
-      case singleSelection(InputOptionId)
-      case multipleSelections([InputOptionId])
+      case singleSelection(InputOption.ID)
+      case multipleSelections([InputOption.ID])
       case longText(String)
       case returnTripDate(ReturnTripDateValue)
       case number(Int, min: Int?, max: Int?)

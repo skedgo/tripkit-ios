@@ -30,7 +30,7 @@ extension TKBooking.BookingInput {
     }
   }
   
-  public func displayTitle(for optionId: InputOptionId) -> String? {
+  public func displayTitle(for optionId: InputOption.ID) -> String? {
     return options?.first(where: { $0.id == optionId })?.title
   }
   

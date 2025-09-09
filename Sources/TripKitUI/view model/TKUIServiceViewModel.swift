@@ -24,6 +24,10 @@ class TKUIServiceViewModel {
     case segment(TKSegment)
   }
   
+  enum Next {
+    case showAlerts([Alert])
+  }
+  
   /// - Parameters:
   ///   - dataInput: What to show
   ///   - itemSelected: UI input of selected item
@@ -50,9 +54,10 @@ class TKUIServiceViewModel {
       .compactMap(TKUIDepartureCellContent.build)
       .asDriver(onErrorDriveWith: .empty())
 
-    sections = Observable.combineLatest(withNewRealTime, withEmbarkation) { $1 }
+    let sections = Observable.combineLatest(withNewRealTime, withEmbarkation) { $1 }
       .map(TKUIServiceViewModel.buildSections)
       .asDriver(onErrorJustReturn: [])
+    self.sections = sections
     
     // Map content doesn't change with real-time
     let mapContent = withEmbarkation.map(TKUIServiceViewModel.buildMapContent)
@@ -64,6 +69,19 @@ class TKUIServiceViewModel {
       .compactMap { $1?.findStop($0) }
       .asDriver(onErrorDriveWith: .empty())
     
+    next = itemSelected
+      .asObservable()
+      .withLatestFrom(withEmbarkation) { (item: $0, embarkation: $1.0) }
+      .compactMap { (item, embarkation) in
+        switch item {
+        case .info(let content) where !content.alerts.isEmpty:
+          return .showAlerts(embarkation.service.allAlerts())
+        default:
+          return nil
+        }
+      }
+      .asAssertingSignal()
+    
     error = errorPublisher.asDriver(onErrorRecover: { Driver.just($0) })
   }
   
@@ -73,7 +91,7 @@ class TKUIServiceViewModel {
   
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.
-  let sections: Driver<[(Section, [Item])]>
+  let sections: Driver<[Section]>
   
   /// Stops and route of the service, for display on a map.
   /// Can change with real-time data.
@@ -90,6 +108,8 @@ class TKUIServiceViewModel {
   
   /// User-relevant errors, e.g., if service content couldn't get downloaded
   let error: Driver<Error>
+  
+  let next: Signal<Next>
   
 }
 
@@ -134,12 +154,25 @@ extension TKUIServiceViewModel {
 
 extension TKUIServiceViewModel {
   
-  static func embarkationIndexPath(in sections: [(Section, [Item])]) -> IndexPath? {
+  static func embarkationIndexPath(in sections: [Section]) -> IndexPath? {
     for (s, section) in sections.enumerated() {
-      for (i, item) in section.1.enumerated() {
-        if item.isVisited {
-          return IndexPath(item: i, section: s)
-        }
+      switch section.group {
+      case .main, .info:
+        return IndexPath(item: 0, section: s)
+      case .incoming:
+        continue
+      }
+    }
+    return nil
+  }
+  
+  static func beforeEmbarkationIndexPath(in sections: [Section]) -> IndexPath? {
+    for (s, section) in sections.enumerated() {
+      switch section.group {
+      case .main, .info:
+        continue
+      case .incoming:
+        return IndexPath(item: section.items.count - 1, section: s)
       }
     }
     return nil
