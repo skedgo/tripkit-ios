@@ -11,6 +11,7 @@ import MapKit
 
 public protocol TKUICircleDisplayable: MKAnnotation {
   var circleColor: UIColor { get }
+  var borderColor: UIColor? { get }
   var isTravelled: Bool { get }
   var asLarge: Bool { get }
 }

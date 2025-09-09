@@ -100,7 +100,8 @@ extension TKUIServiceViewModel {
 }
 
 extension TKUIServiceViewModel.ServiceVisit: TKUICircleDisplayable {
-  var circleColor: UIColor { color }
+  var circleColor: UIColor { .white }
+  var borderColor: UIColor? { color }
   var isTravelled: Bool { isVisited }
   var asLarge: Bool { false }
 }
