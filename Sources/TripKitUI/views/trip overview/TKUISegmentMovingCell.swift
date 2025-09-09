@@ -126,17 +126,10 @@ extension TKUISegmentMovingCell {
       return trainView
 
     case .pathFriendliness(let segment):
-      if #available(iOS 16.0, *) {
-        return nil // will show road tags instead
-      } else {
-        let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
-        pathFriendlinessView.segment = segment
-        pathFriendlinessView.backgroundColor = .tkBackground
-        return pathFriendlinessView
-      }
+      return nil // will show road tags instead
 
     case .roadTags(let segment):
-      if #available(iOS 16.0, *), let chart = segment.buildRoadTags() {
+      if let chart = segment.buildRoadTags() {
         let host = UIHostingController(rootView: chart.frame(minWidth: 300))
         host.view.backgroundColor = .tkBackground
         return host.view

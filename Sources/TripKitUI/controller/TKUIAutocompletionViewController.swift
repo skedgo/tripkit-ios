@@ -62,26 +62,14 @@ public class TKUIAutocompletionViewController: UITableViewController {
           return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
         
-        if #available(iOS 16, *) {
-          let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
-          cell.contentConfiguration = UIHostingConfiguration {
-            TKUIAutocompletionResultView(
-              item: item,
-              onAccessoryTapped: self.showAccessoryButtons ? { self.accessoryTapped.onNext($0) } : nil
-            )
-          }
-          return cell
-          
-        } else {
-          guard let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell else {
-            preconditionFailure("Couldn't dequeue TKUIAutocompletionResultCell")
-          }
-          cell.configure(
-            with: item,
+        let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
+        cell.contentConfiguration = UIHostingConfiguration {
+          TKUIAutocompletionResultView(
+            item: item,
             onAccessoryTapped: self.showAccessoryButtons ? { self.accessoryTapped.onNext($0) } : nil
           )
-          return cell
         }
+        return cell
       },
       titleForHeaderInSection: { ds, index in
         return ds.sectionModels[index].title
@@ -92,11 +80,7 @@ public class TKUIAutocompletionViewController: UITableViewController {
     tableView.delegate = nil
     tableView.dataSource = nil
     
-    if #available(iOS 16, *) {
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
-    } else {
-      tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
-    }
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
     
     viewModel = TKUIAutocompletionViewModel(
       providers: providers,

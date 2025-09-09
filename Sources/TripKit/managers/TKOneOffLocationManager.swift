@@ -12,7 +12,6 @@ import Foundation
 
 @preconcurrency import CoreLocation
 
-@available(iOS 14.0, macOS 11.0,  *)
 public final class TKOneOffLocationManager: NSObject {
   
   public override init() {
@@ -139,11 +138,7 @@ public final class TKOneOffLocationManager: NSObject {
     
     timeoutTask = Task { [weak self] in
       do {
-        if #available(iOS 16.0, macOS 13.0, *) {
-          try await Task.sleep(for: .seconds(10))
-        } else {
-          try await Task.sleep(nanoseconds: 10_000_000_000)
-        }
+        try await Task.sleep(for: .seconds(10))
         if let self, !Task.isCancelled {
           self.notify(.failure(LocationFetchError.noLocationFetchedInTime))
         }
@@ -174,7 +169,6 @@ public final class TKOneOffLocationManager: NSObject {
 
 // MARK: - CLLocationManagerDelegate
 
-@available(iOS 14.0, macOS 11.0, *)
 extension TKOneOffLocationManager: CLLocationManagerDelegate {
   
   public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

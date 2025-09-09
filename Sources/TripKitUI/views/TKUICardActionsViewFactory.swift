@@ -29,29 +29,15 @@ public enum TKUICardActionsViewFactory {
   @MainActor
   public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, padding: Edge.Set = []) -> UIView {
     
-    let actionsView: UIView
     let sorted = sort(actions: actions)
-    
-    if #available(iOS 16.0, *) {
-      actionsView = UIHostingController(
-        rootView: TKUIAdaptiveCardActions(
-          actions: sorted,
-          info: .init(card: card, model: model, container: container),
-          normalStyle: TKUICustomization.shared.cardActionNormalStyle
-        )
-        .padding(padding)
-      ).view
-      
-    } else {
-      actionsView = UIHostingController(
-        rootView: TKUIScrollingCardActions(
-          actions: sorted,
-          info: .init(card: card, model: model, container: container),
-          normalStyle: TKUICustomization.shared.cardActionNormalStyle
-        )
-        .padding(padding)
-      ).view
-    }
+    let actionsView: UIView = UIHostingController(
+      rootView: TKUIAdaptiveCardActions(
+        actions: sorted,
+        info: .init(card: card, model: model, container: container),
+        normalStyle: TKUICustomization.shared.cardActionNormalStyle
+      )
+      .padding(padding)
+    ).view
     
     actionsView.tintColor = TKColor.tkAppTintColor
     return actionsView

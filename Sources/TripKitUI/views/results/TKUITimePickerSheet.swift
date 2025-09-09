@@ -155,10 +155,8 @@ public class TKUITimePickerSheet: TKUISheet {
     timePicker.timeZone = timeZone
     timePicker.minuteInterval = config.incrementInterval
     
-    if #available(iOS 13.4, *) {
-      timePicker.preferredDatePickerStyle = .wheels
-      timePicker.sizeToFit()
-    }
+    timePicker.preferredDatePickerStyle = .wheels
+    timePicker.sizeToFit()
     
     if let earliest = config.minimumDate, !config.allowsOutOfRangeSelection {
       timePicker.minimumDate = earliest

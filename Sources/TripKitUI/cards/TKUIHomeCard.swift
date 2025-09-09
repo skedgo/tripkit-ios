@@ -90,12 +90,7 @@ open class TKUIHomeCard: TKUITableCard {
     tableView.keyboardDismissMode = .onDrag
 
     tableView.register(TKUIHomeCardSectionHeader.self, forHeaderFooterViewReuseIdentifier: "TKUIHomeCardSectionHeader")
-    
-    if #available(iOS 16, *) {
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
-    } else {
-      tableView.register(TKUIAutocompletionResultCell.self, forCellReuseIdentifier: TKUIAutocompletionResultCell.reuseIdentifier)
-    }
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "plain")
     
     tableView.dataSource = nil
     tableView.tableFooterView = UIView() // no trailing separators
@@ -113,27 +108,13 @@ open class TKUIHomeCard: TKUITableCard {
         
         switch item {
         case .search(let searchItem):
-          if #available(iOS 16, *) {
-            let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
-            cell.contentConfiguration = UIHostingConfiguration {
-              TKUIAutocompletionResultView(item: searchItem) { [weak self] in
-                self?.cellAccessoryTapped.onNext(.search($0))
-              }
+          let cell = tv.dequeueReusableCell(withIdentifier: "plain", for: ip)
+          cell.contentConfiguration = UIHostingConfiguration {
+            TKUIAutocompletionResultView(item: searchItem) { [weak self] in
+              self?.cellAccessoryTapped.onNext(.search($0))
             }
-            return cell
-            
-          } else {
-            guard
-              let cell = tv.dequeueReusableCell(withIdentifier: TKUIAutocompletionResultCell.reuseIdentifier, for: ip) as? TKUIAutocompletionResultCell
-            else { assertionFailure("Unable to load an instance of TKUIAutocompletionResultCell"); return fallback }
-            
-            cell.configure(
-              with: searchItem,
-              onAccessoryTapped: { [weak self] in self?.cellAccessoryTapped.onNext(.search($0)) }
-            )
-            cell.accessibilityTraits = .button
-            return cell
           }
+          return cell
           
         case .component(let componentItem):
           guard let cell = self.viewModel.componentViewModels.compactMap({ $0.cell(for: componentItem, at: ip, in: tv) }).first else {

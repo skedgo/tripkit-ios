@@ -82,7 +82,7 @@ extension TKUIServiceViewModel {
         ))
       }
       
-      if #available(iOS 16.0, *), let service = embarkation.service {
+      if let service = embarkation.service {
         // Note, for DLS entries `disembarkation` will be nil, but the accessibility
         // is already handled then under `disembarkation`.
         var wheelchairAccessibility = embarkation.wheelchairAccessibility

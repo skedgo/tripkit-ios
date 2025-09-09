@@ -55,12 +55,7 @@ public class TKUISegmentDirectionsCard: TGTableCard {
 
     viewModel = TKUISegmentDirectionsViewModel(segment: segment)
     
-    if #available(iOS 16.0, *) {
-      // default cells
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
-    } else {
-      tableView.register(TKUISegmentDirectionCell.nib, forCellReuseIdentifier: TKUISegmentDirectionCell.reuseIdentifier)
-    }
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)
     
@@ -96,37 +91,16 @@ extension TKUISegmentDirectionsCard {
   
   static func configureCell(dataSource: TableViewSectionedDataSource<TKUISegmentDirectionsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUISegmentDirectionsViewModel.Item) -> UITableViewCell {
 
-    if #available(iOS 16.0, *) {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
-      cell.contentConfiguration = UIHostingConfiguration {
-        TKUISegmentDirectionView(item: item)
-      }
-      cell.backgroundColor = .tkBackground
-      return cell
-      
-    } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentDirectionCell.reuseIdentifier, for: indexPath) as! TKUISegmentDirectionCell
-      cell.iconView?.image = item.image
-      cell.durationLabel?.textColor = .tkLabelPrimary
-
-      if let distance = item.distance {
-        let distanceFormatter = MKDistanceFormatter()
-        distanceFormatter.unitStyle = .abbreviated
-        cell.durationLabel?.text = distanceFormatter.string(fromDistance: distance)
-      }
-      
-      cell.nameLabel?.textColor = .tkLabelSecondary
-      cell.nameLabel?.text = item.streetInstruction
-      
-      cell.setBubbles(item.bubbles)
-      
-      return cell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
+    cell.contentConfiguration = UIHostingConfiguration {
+      TKUISegmentDirectionView(item: item)
     }
+    cell.backgroundColor = .tkBackground
+    return cell
   }
   
 }
 
-@available(iOS 16.0, *)
 @MainActor
 struct TKUISegmentDirectionView: View {
   let item: TKUISegmentDirectionsViewModel.Item
@@ -176,7 +150,6 @@ struct TKUISegmentDirectionView: View {
   }
 }
 
-@available(iOS 16.0, *)
 struct TKUISegmentDirectionView_Previews: PreviewProvider {
   static var previews: some View {
     List {

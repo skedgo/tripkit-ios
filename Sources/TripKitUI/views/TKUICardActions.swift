@@ -63,7 +63,6 @@ struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
   }
 }
 
-@available(iOS 16.0, *)
 @MainActor
 struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
   let actions: [TKUICardAction<C, M>]
@@ -181,7 +180,6 @@ class PreviewData: ObservableObject {
   }
 }
 
-@available(iOS 16.0, *)
 struct TKUICardActions_Previews: PreviewProvider {
   
   static var previews: some View {
