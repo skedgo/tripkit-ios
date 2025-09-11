@@ -17,7 +17,7 @@ import MapKit
 
 public enum TKBuzzInfoProvider {
   
-  @discardableResult
+  @discardableResult @MainActor
   public static func downloadContent(of service: Service, embarkationDate: Date, region: TKRegion?) async throws -> Bool {
     assert(service.managedObjectContext?.parent != nil || Thread.isMainThread)
     guard !service.isRequestingServiceData else { return false }

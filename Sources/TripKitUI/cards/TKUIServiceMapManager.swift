@@ -35,9 +35,9 @@ class TKUIServiceMapManager: TKUIMapManager {
     
     guard let viewModel = viewModel else { assertionFailure(); return }
     
-    viewModel.mapContent
-      .drive(onNext: { [weak self] in self?.reloadContent($0) })
-      .disposed(by: disposeBag)
+//    viewModel.mapContent
+//      .drive(onNext: { [weak self] in self?.reloadContent($0) })
+//      .disposed(by: disposeBag)
     
     viewModel.selectAnnotation
       .drive(onNext: { [weak self] in self?.select($0) })

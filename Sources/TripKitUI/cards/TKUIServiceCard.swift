@@ -20,17 +20,13 @@ import TripKit
 /// A card that lists the route of an individual public transport
 /// service. Starts at the provided embarkation and optionally
 /// highlights where to get off.
-public class TKUIServiceCard: TKUITableCard {
-  
-  typealias DataSource = UITableViewDiffableDataSource<TKUIServiceViewModel.SectionGroup, TKUIServiceViewModel.Item>
+public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
   
   public static var config = Configuration.empty
   
   private var dataInput: TKUIServiceViewModel.DataInput
-  private var viewModel: TKUIServiceViewModel!
-  private var dataSource: DataSource!
+  private let viewModel: TKUIServiceViewModel
   private let serviceMapManager: TKUIServiceMapManager
-  private let disposeBag = DisposeBag()
   private var cancellables = Set<AnyCancellable>()
   
   private let itemSelected = PublishSubject<TKUIServiceViewModel.Item>()
@@ -67,18 +63,21 @@ public class TKUIServiceCard: TKUITableCard {
     if let view = titleView {
       title = .custom(view.0, dismissButton: view.1)
       self.titleView = nil
-    } else {
+    } else if false {
       let header = TKUIServiceTitleView.newInstance()
       title = .custom(header, dismissButton: header.dismissButton)
       self.titleView = header
+    } else {
+      title = .default("Departure")
+      self.titleView = nil
     }
     
-    let style: UITableView.Style
-    if #available(iOS 26.0, *) {
-      style = .insetGrouped
-    } else {
-      style = .plain
-    }
+//    let style: UITableView.Style
+//    if #available(iOS 26.0, *) {
+//      style = .insetGrouped
+//    } else {
+//      style = .plain
+//    }
     
     self.serviceMapManager = TKUIServiceMapManager()
     let mapManager: TGMapManager
@@ -88,20 +87,26 @@ public class TKUIServiceCard: TKUITableCard {
       mapManager = serviceMapManager
     }
     
+    // Build the view model
+    
+    viewModel = TKUIServiceViewModel(
+      dataInput: dataInput,
+      itemSelected: itemSelected.asAssertingSignal()
+    )
+    
+    serviceMapManager.viewModel = viewModel
+
+    
     super.init(
       title: title,
-      style: style,
+      rootView: TKUIServiceContent(model: viewModel),
       mapManager: mapManager,
       initialPosition: .peaking
     )
     
-    didInit()
-  }
-  
-  private func didInit() {
     switch self.title {
     case .custom(_, let dismissButton):
-      let styledButtonImage = TGCard.closeButtonImage(style: style)
+      let styledButtonImage = TGCard.closeButtonImage(style: self.style)
       dismissButton?.setImage(styledButtonImage, for: .normal)
       dismissButton?.setTitle(nil, for: .normal)
     default:
@@ -118,8 +123,23 @@ public class TKUIServiceCard: TKUITableCard {
   
   // MARK: - Card life cycle
 
-  override public func didBuild(tableView: UITableView) {
-    super.didBuild(tableView: tableView)
+  public override func didBuild(scrollView: UIScrollView) {
+    super.didBuild(scrollView: scrollView)
+    
+    if #unavailable(iOS 26.0) {
+      scrollView.backgroundColor = .tkBackgroundGrouped
+    }
+    
+    if let title = titleView {
+      viewModel.headerPublisher
+        .compactMap { $0 }
+        .sink { title.configure(with: $0) }
+        .store(in: &cancellables)
+    }
+
+  }
+
+  private func didBuild(tableView: UITableView) {
 
     self.tableView = tableView
     
@@ -127,34 +147,25 @@ public class TKUIServiceCard: TKUITableCard {
     
     tableView.register(TKUIServiceVisitCell.nib, forCellReuseIdentifier: TKUIServiceVisitCell.reuseIdentifier)
     
-    let dataSource = DataSource(tableView: tableView) { tv, ip, item in
-      switch item {
-      case .timing(let timing):
-        let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
-        cell.configure(with: timing)
-        if #available(iOS 26.0, *) {
-          cell.backgroundColor = .tkBackgroundNotClear
-        }
-        return cell
-        
-      case .info(let content):
-        let cell = UITableViewCell()
-        cell.contentConfiguration = UIHostingConfiguration {
-          TKUIServiceInfoView(content: content)
-        }
-        return cell
-      }
-    }
-    self.dataSource = dataSource
+//    let dataSource = DataSource(tableView: tableView) { tv, ip, item in
+//      switch item {
+//      case .timing(let timing):
+//        let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
+//        cell.configure(with: timing)
+//        if #available(iOS 26.0, *) {
+//          cell.backgroundColor = .tkBackgroundNotClear
+//        }
+//        return cell
+//        
+//      case .info(let content):
+//        let cell = UITableViewCell()
+//        cell.contentConfiguration = UIHostingConfiguration {
+//          TKUIServiceInfoView(content: content)
+//        }
+//        return cell
+//      }
+//    }
     
-    // Build the view model
-    
-    viewModel = TKUIServiceViewModel(
-      dataInput: dataInput,
-      itemSelected: itemSelected.asAssertingSignal()
-    )
-    
-    serviceMapManager.viewModel = viewModel
     
     // Setting up actions view
     
@@ -176,40 +187,40 @@ public class TKUIServiceCard: TKUITableCard {
         .store(in: &cancellables)
     }
 
-    viewModel.sectionsPublisher
-      .sink { [weak self, weak tableView] sections in
-        guard let self, let tableView else { return }
-        self.applySnapshot(for: sections) { [weak tableView] isInitial in
-          // When initially populating, scroll to the first embarkation
-          guard let tableView, isInitial else { return }
-          
-          // This sometimes crashes when called too quickly, so we add this
-          // delay. Crash is insuide UIKit and look like:
-          /*
-           #0  (null) in __exceptionPreprocess ()
-           #1  (null) in objc_exception_throw ()
-           #2  (null) in -[NSAssertionHandler handleFailureInMethod:object:file:lineNumber:description:] ()
-           #3  (null) in -[UITableView _createPreparedCellForGlobalRow:withIndexPath:willDisplay:] ()
-           #4  (null) in -[UITableView _createPreparedCellForRowAtIndexPath:willDisplay:] ()
-           #5  (null) in -[UITableView _heightForRowAtIndexPath:] ()
-           #6  (null) in -[UISectionRowData heightForRow:inSection:canGuess:] ()
-           #7  (null) in -[UITableViewRowData heightForRow:inSection:canGuess:adjustForReorderedRow:] ()
-           #8  (null) in -[UITableViewRowData ensureHeightsFaultedInForScrollToIndexPath:boundsHeight:] ()
-           #9  (null) in -[UITableView _contentOffsetForScrollingToRowAtIndexPath:atScrollPosition:usingPresentationValues:] ()
-           #10  (null) in -[UITableView _scrollToRowAtIndexPath:atScrollPosition:animated:usingPresentationValues:] ()
-           #11  (null) in -[UITableView scrollToRowAtIndexPath:atScrollPosition:animated:] ()
-           #12  0x1049081b0 in closure #1 in closure #7 in TKUIServiceCard.didBuild(tableView:) at TKUIServiceCard.swift:195
-           */
-          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-            if let before = TKUIServiceViewModel.beforeEmbarkationIndexPath(in: sections) {
-              tableView.scrollToRow(at: before, at: .top, animated: false)
-            } else if let embarkation = TKUIServiceViewModel.embarkationIndexPath(in: sections) {
-              tableView.scrollToRow(at: embarkation, at: .top, animated: false)
-            }
-          }
-        }
-      }
-      .store(in: &cancellables)
+//    viewModel.sectionsPublisher
+//      .sink { [weak self, weak tableView] sections in
+//        guard let self, let tableView else { return }
+//        self.applySnapshot(for: sections) { [weak tableView] isInitial in
+//          // When initially populating, scroll to the first embarkation
+//          guard let tableView, isInitial else { return }
+//          
+//          // This sometimes crashes when called too quickly, so we add this
+//          // delay. Crash is insuide UIKit and look like:
+//          /*
+//           #0  (null) in __exceptionPreprocess ()
+//           #1  (null) in objc_exception_throw ()
+//           #2  (null) in -[NSAssertionHandler handleFailureInMethod:object:file:lineNumber:description:] ()
+//           #3  (null) in -[UITableView _createPreparedCellForGlobalRow:withIndexPath:willDisplay:] ()
+//           #4  (null) in -[UITableView _createPreparedCellForRowAtIndexPath:willDisplay:] ()
+//           #5  (null) in -[UITableView _heightForRowAtIndexPath:] ()
+//           #6  (null) in -[UISectionRowData heightForRow:inSection:canGuess:] ()
+//           #7  (null) in -[UITableViewRowData heightForRow:inSection:canGuess:adjustForReorderedRow:] ()
+//           #8  (null) in -[UITableViewRowData ensureHeightsFaultedInForScrollToIndexPath:boundsHeight:] ()
+//           #9  (null) in -[UITableView _contentOffsetForScrollingToRowAtIndexPath:atScrollPosition:usingPresentationValues:] ()
+//           #10  (null) in -[UITableView _scrollToRowAtIndexPath:atScrollPosition:animated:usingPresentationValues:] ()
+//           #11  (null) in -[UITableView scrollToRowAtIndexPath:atScrollPosition:animated:] ()
+//           #12  0x1049081b0 in closure #1 in closure #7 in TKUIServiceCard.didBuild(tableView:) at TKUIServiceCard.swift:195
+//           */
+//          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+//            if let before = TKUIServiceViewModel.beforeEmbarkationIndexPath(in: sections) {
+//              tableView.scrollToRow(at: before, at: .top, animated: false)
+//            } else if let embarkation = TKUIServiceViewModel.embarkationIndexPath(in: sections) {
+//              tableView.scrollToRow(at: embarkation, at: .top, animated: false)
+//            }
+//          }
+//        }
+//      }
+//      .store(in: &cancellables)
 
     viewModel.next
       .sink(
@@ -220,8 +231,8 @@ public class TKUIServiceCard: TKUITableCard {
 
     // Additional customisations
     
-    tableView.rx.setDelegate(self)
-      .disposed(by: disposeBag)
+//    tableView.rx.setDelegate(self)
+//      .disposed(by: disposeBag)
   }
   
   public override func didAppear(animated: Bool) {
@@ -230,19 +241,19 @@ public class TKUIServiceCard: TKUITableCard {
     TKUIEventCallback.handler(.cardAppeared(self))
   }
   
-  private func applySnapshot(for sections: [TKUIServiceViewModel.Section], completion: @escaping (Bool) -> Void) {
-    let isInitial = dataSource.snapshot().numberOfItems == 0
-    
-    var snapshot = NSDiffableDataSourceSnapshot<TKUIServiceViewModel.SectionGroup, TKUIServiceViewModel.Item>()
-    snapshot.appendSections(sections.map(\.group))
-    for section in sections {
-      snapshot.appendItems(section.items, toSection: section.group)
-    }
-    
-    dataSource.apply(snapshot, animatingDifferences: isInitial) {
-      completion(isInitial)
-    }
-  }
+//  private func applySnapshot(for sections: [TKUIServiceViewModel.Section], completion: @escaping (Bool) -> Void) {
+//    let isInitial = dataSource.snapshot().numberOfItems == 0
+//    
+//    var snapshot = NSDiffableDataSourceSnapshot<TKUIServiceViewModel.SectionGroup, TKUIServiceViewModel.Item>()
+//    snapshot.appendSections(sections.map(\.group))
+//    for section in sections {
+//      snapshot.appendItems(section.items, toSection: section.group)
+//    }
+//    
+//    dataSource.apply(snapshot, animatingDifferences: isInitial) {
+//      completion(isInitial)
+//    }
+//  }
   
   private func handle(_ next: TKUIServiceViewModel.Next) {
     switch next {
@@ -273,12 +284,56 @@ extension TKUIServiceCard: UITableViewDelegate {
     return false
   }
   
-  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-    itemSelected.onNext(item)
-    
-    tableView.deselectRow(at: indexPath, animated: true)
-  }
+//  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+//    itemSelected.onNext(item)
+//    
+//    tableView.deselectRow(at: indexPath, animated: true)
+//  }
   
 }
 
+// MARK: - Content
+
+public struct TKUIServiceContent: View {
+  @ObservedObject var model: TKUIServiceViewModel
+  
+  public var body: some View {
+    VStack(alignment: .leading) {
+      if model.header == nil {
+        Text("Loading...")
+      } else {
+        ForEach(model.sections) { section in
+          VStack(alignment: .leading) {
+            ForEach(section.items) { item in
+              switch item {
+              case .info(let content):
+                TKUIServiceInfoView(content: content)
+                
+              case .timing(let content):
+                Text("Departure \(content)")
+              }
+              
+            }
+          }
+          .padding()
+          .background(Color(.tkBackgroundNotClear))
+          .cornerRadius(22)
+        }
+      }
+    }
+    .padding()
+    .modify { view in
+      if #available(iOS 26.0, *) {
+        view
+          .background(.clear)
+      } else {
+        view
+          .background(Color(.tkBackgroundGrouped))
+      }
+    }
+    .task {
+      try? await model.populate()
+    }
+  }
+}

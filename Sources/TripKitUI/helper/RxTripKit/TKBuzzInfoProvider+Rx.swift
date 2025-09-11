@@ -17,7 +17,7 @@ extension TKBuzzInfoProvider: ReactiveCompatible {}
 extension Reactive where Base == TKBuzzInfoProvider {
   
   public static func downloadContent(of service: Service, forEmbarkationDate date: Date, in region: TKRegion) -> Single<Void> {
-    return Single.create {
+    return Single.create(onMain: true) { @MainActor in
       let success = try await TKBuzzInfoProvider.downloadContent(of: service, embarkationDate: date, region: region)
       if !success {
         throw TKError(code: 87612, message: "Could not download service data.")
