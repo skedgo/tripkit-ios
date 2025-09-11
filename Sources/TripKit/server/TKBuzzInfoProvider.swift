@@ -17,44 +17,31 @@ import MapKit
 
 public enum TKBuzzInfoProvider {
   
-  public static func downloadContent(of service: Service, embarkationDate: Date, region: TKRegion?, completion: @escaping (Service, Bool) -> Void) {
+  @discardableResult
+  public static func downloadContent(of service: Service, embarkationDate: Date, region: TKRegion?) async throws -> Bool {
     assert(service.managedObjectContext?.parent != nil || Thread.isMainThread)
-    guard !service.isRequestingServiceData else { return }
+    guard !service.isRequestingServiceData else { return false }
     
     service.isRequestingServiceData = true
-    TKRegionManager.shared.requireRegions { result in
-      if case .failure = result {
-        service.isRequestingServiceData = false
-        completion(service, false)
-        return
-      }
+    defer { service.isRequestingServiceData = false }
+    
+    try await TKRegionManager.shared.requireRegions()
       
-      guard let region = region ?? service.region else {
-        service.isRequestingServiceData = false
-        completion(service, false)
-        return
-      }
-      
-      let paras: [String: Any] = [
-        "region": region.code,
-        "serviceTripID": service.code,
-        "operator": service.operatorName ?? "",
-        "embarkationDate": Int(embarkationDate.timeIntervalSince1970),
-        "encode": true
-      ]
-      
-      TKServer.shared.hit(
-        TKAPI.ServiceResponse.self,
-        path: "service.json",
-        parameters: paras,
-        region: region
-      ) { _, _, result in
-        service.isRequestingServiceData = false
-        let response = try? result.get()
-        let success = response.map { Self.addContent(from: $0, to: service) }
-        completion(service, success ?? false)
-      }
+    guard let region = region ?? service.region else {
+      return false
     }
+      
+    let paras: [String: Any] = [
+      "region": region.code,
+      "serviceTripID": service.code,
+      "operator": service.operatorName ?? "",
+      "embarkationDate": Int(embarkationDate.timeIntervalSince1970),
+      "encode": true
+    ]
+
+    let response = await TKServer.shared.hit(TKAPI.ServiceResponse.self, path: "service.json", parameters: paras, region: region)
+    let serviceData = try response.result.get()
+    return addContent(from: serviceData, to: service)
   }
   
   @discardableResult

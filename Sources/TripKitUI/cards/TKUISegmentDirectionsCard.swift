@@ -171,20 +171,18 @@ extension View {
   }
 }
 
-struct TKUISegmentDirectionView_Previews: PreviewProvider {
-  static var previews: some View {
-    List {
-      TKUISegmentDirectionView(item: .init(
-        index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.turnSlightyLeft.image, distance: 1_000, bubbles: [
-          ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue), ("Main Road", .systemOrange)
-        ]
-      ))
+#Preview {
+  List {
+    TKUISegmentDirectionView(item: .init(
+      index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.turnSlightyLeft.image, distance: 1_000, bubbles: [
+        ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue), ("Main Road", .systemOrange)
+      ]
+    ))
 
-      TKUISegmentDirectionView(item: .init(
-        index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.headTowards.image, distance: 600, bubbles: [
-          ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue)
-        ]
-      ))
-    }.listStyle(.plain)
+    TKUISegmentDirectionView(item: .init(
+      index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.headTowards.image, distance: 600, bubbles: [
+        ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue)
+      ]
+    ))
   }
 }

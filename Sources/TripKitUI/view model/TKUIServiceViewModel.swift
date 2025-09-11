@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import Combine
 
 import RxSwift
 import RxCocoa
@@ -17,7 +18,7 @@ import TripKit
 /// View model for displaying and interacting with an individual
 /// transport service.
 @MainActor
-class TKUIServiceViewModel {
+class TKUIServiceViewModel: ObservableObject {
   
   enum DataInput {
     case visits(embarkation: StopVisits, disembarkation: StopVisits? = nil)
@@ -48,17 +49,6 @@ class TKUIServiceViewModel {
       .startWith(.updated(()))
       .map { _ in }
     
-    header = withNewRealTime
-      .asObservable()
-      .withLatestFrom(withEmbarkation)
-      .compactMap(TKUIDepartureCellContent.build)
-      .asDriver(onErrorDriveWith: .empty())
-
-    let sections = Observable.combineLatest(withNewRealTime, withEmbarkation) { $1 }
-      .map(TKUIServiceViewModel.buildSections)
-      .asDriver(onErrorJustReturn: [])
-    self.sections = sections
-    
     // Map content doesn't change with real-time
     let mapContent = withEmbarkation.map(TKUIServiceViewModel.buildMapContent)
     self.mapContent = mapContent.asDriver(onErrorJustReturn: nil)
@@ -72,7 +62,7 @@ class TKUIServiceViewModel {
     next = itemSelected
       .asObservable()
       .withLatestFrom(withEmbarkation) { (item: $0, embarkation: $1.0) }
-      .compactMap { (item, embarkation) in
+      .compactMap { (item, embarkation) -> Next? in
         switch item {
         case .info(let content) where !content.alerts.isEmpty:
           return .showAlerts(embarkation.service.allAlerts())
@@ -80,18 +70,38 @@ class TKUIServiceViewModel {
           return nil
         }
       }
-      .asAssertingSignal()
+      .asPublisher()
     
-    error = errorPublisher.asDriver(onErrorRecover: { Driver.just($0) })
+    withNewRealTime
+      .asObservable()
+      .withLatestFrom(withEmbarkation)
+      .compactMap(TKUIDepartureCellContent.build)
+      .subscribe { [weak self] in self?.header = $0 }
+      .disposed(by: disposeBag)
+    
+    Observable.combineLatest(withNewRealTime, withEmbarkation) { $1 }
+      .map(TKUIServiceViewModel.buildSections)
+      .subscribe { [weak self] in self?.sections = $0 }
+      .disposed(by: disposeBag)
+    
+    errorPublisher
+      .subscribe { [weak self] in self?.errorToShow = $0 }
+      .disposed(by: disposeBag)
   }
+  
+  private let disposeBag = DisposeBag()
   
   /// Title view with details about the embarkation.
   /// Can change with real-time data.
-  let header: Driver<TKUIDepartureCellContent>
+  @Published var header: TKUIDepartureCellContent?
+  
+  var headerPublisher: some Publisher<TKUIDepartureCellContent?, Never> { _header.projectedValue }
   
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.
-  let sections: Driver<[Section]>
+  @Published var sections: [Section] = []
+  
+  var sectionsPublisher: some Publisher<[Section], Never> { _sections.projectedValue }
   
   /// Stops and route of the service, for display on a map.
   /// Can change with real-time data.
@@ -107,9 +117,9 @@ class TKUIServiceViewModel {
   let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
   
   /// User-relevant errors, e.g., if service content couldn't get downloaded
-  let error: Driver<Error>
+  @Published var errorToShow: Error?
   
-  let next: Signal<Next>
+  let next: AnyPublisher<Next, Error>
   
 }
 

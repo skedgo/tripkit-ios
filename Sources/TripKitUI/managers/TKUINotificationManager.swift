@@ -12,8 +12,6 @@ import UserNotifications
 
 import TripKit
 
-typealias Publisher = ([UNNotificationRequest]) -> Void
-
 public class TKUINotificationManager: NSObject {
   
   public weak var delegate: TKUINotificationManagerDelegate?
@@ -133,7 +131,7 @@ public class TKUINotificationSubscription {
   
   var context: Context
   var requests: [UNNotificationRequest] = []
-  var publisher: Publisher?
+  var publisher: (([UNNotificationRequest]) -> Void)?
   
   init(context: Context) {
     self.context = context

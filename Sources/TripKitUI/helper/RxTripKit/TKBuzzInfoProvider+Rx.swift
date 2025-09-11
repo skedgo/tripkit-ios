@@ -17,15 +17,11 @@ extension TKBuzzInfoProvider: ReactiveCompatible {}
 extension Reactive where Base == TKBuzzInfoProvider {
   
   public static func downloadContent(of service: Service, forEmbarkationDate date: Date, in region: TKRegion) -> Single<Void> {
-    return Single.create { subscriber in
-      TKBuzzInfoProvider.downloadContent(of: service, embarkationDate: date, region: region) { service, success in
-        if success {
-          subscriber(.success(()))
-        } else {
-          subscriber(.failure(TKError(code: 87612, message: "Could not download service data.")))
-        }
+    return Single.create {
+      let success = try await TKBuzzInfoProvider.downloadContent(of: service, embarkationDate: date, region: region)
+      if !success {
+        throw TKError(code: 87612, message: "Could not download service data.")
       }
-      return Disposables.create()
     }
   }
   

@@ -12,33 +12,6 @@ import RxSwift
 
 import TripKit
 
-// MARK: - Fetching service content
-
-extension TKUIServiceViewModel {
-  
-  enum FetchError: Error {
-    case couldNotFetchServiceContent
-  }
-  
-  static func fetchServiceContent(embarkation: StopVisits) -> Single<Void> {
-    guard let service = embarkation.service, !service.hasServiceData else {
-      return .just((), scheduler: MainScheduler.instance)
-    }
-    
-    return Single.create { subscriber in
-      TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.timeForServerRequests, region: embarkation.stop.region) { service, success in
-        if success {
-          subscriber(.success(()))
-        } else {
-          subscriber(.failure(FetchError.couldNotFetchServiceContent))
-        }
-      }
-      return Disposables.create()
-    }.observe(on: MainScheduler.instance)
-  }
-  
-}
-
 // MARK: - Fetching real-time updates
 
 extension TKUIServiceViewModel {

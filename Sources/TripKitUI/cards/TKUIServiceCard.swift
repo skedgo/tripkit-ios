@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import Combine
 
 import RxSwift
 import RxCocoa
@@ -30,13 +31,12 @@ public class TKUIServiceCard: TKUITableCard {
   private var dataSource: DataSource!
   private let serviceMapManager: TKUIServiceMapManager
   private let disposeBag = DisposeBag()
+  private var cancellables = Set<AnyCancellable>()
   
   private let itemSelected = PublishSubject<TKUIServiceViewModel.Item>()
-  private let scrollToTopPublisher = PublishSubject<Void>()
-  private let toggleHeaderPublisher = PublishSubject<Bool>()
-  private let showAlertsPublisher = PublishSubject<Void>()
 
   private let titleView: TKUIServiceTitleView?
+  private weak var tableView: UITableView?
   
   /// Configures a new instance that will fetch the service details
   /// and the show them in the list and on the map.
@@ -121,6 +121,8 @@ public class TKUIServiceCard: TKUITableCard {
   override public func didBuild(tableView: UITableView) {
     super.didBuild(tableView: tableView)
 
+    self.tableView = tableView
+    
     // Table view configuration
     
     tableView.register(TKUIServiceVisitCell.nib, forCellReuseIdentifier: TKUIServiceVisitCell.reuseIdentifier)
@@ -168,13 +170,14 @@ public class TKUIServiceCard: TKUITableCard {
     // Bind outputs
     
     if let title = titleView {
-      viewModel.header
-        .drive(title.rx.model)
-        .disposed(by: disposeBag)
+      viewModel.headerPublisher
+        .compactMap { $0 }
+        .sink { title.configure(with: $0) }
+        .store(in: &cancellables)
     }
 
-    viewModel.sections
-      .drive { [weak self, weak tableView] sections in
+    viewModel.sectionsPublisher
+      .sink { [weak self, weak tableView] sections in
         guard let self, let tableView else { return }
         self.applySnapshot(for: sections) { [weak tableView] isInitial in
           // When initially populating, scroll to the first embarkation
@@ -206,23 +209,16 @@ public class TKUIServiceCard: TKUITableCard {
           }
         }
       }
-      .disposed(by: disposeBag)
-    
+      .store(in: &cancellables)
+
     viewModel.next
-      .emit(onNext: { [weak self] next in self?.handle(next) })
-      .disposed(by: disposeBag)
+      .sink(
+        receiveCompletion: { _ in assertionFailure() },
+        receiveValue: { [weak self] in self?.handle($0) }
+      )
+      .store(in: &cancellables)
 
     // Additional customisations
-    
-    scrollToTopPublisher
-      .withLatestFrom(viewModel.sections)
-      .map(TKUIServiceViewModel.embarkationIndexPath)
-      .subscribe(onNext: {
-        if let indexPath = $0 {
-          tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        }
-      })
-      .disposed(by: disposeBag)
     
     tableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
@@ -257,6 +253,11 @@ public class TKUIServiceCard: TKUITableCard {
     }
   }
   
+  private func scrollToEmbarkation() {
+    guard let tableView, let indexPath = TKUIServiceViewModel.embarkationIndexPath(in: viewModel.sections) else { return }
+    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+  }
+  
 }
 
 // MARK: - UITableViewDelegate + Headers
@@ -268,7 +269,7 @@ extension TKUIServiceCard: UITableViewDelegate {
       return true
     }
     
-    scrollToTopPublisher.onNext(())
+    scrollToEmbarkation()
     return false
   }
   
@@ -280,3 +281,4 @@ extension TKUIServiceCard: UITableViewDelegate {
   }
   
 }
+
