@@ -14,8 +14,6 @@ import struct TripKitAPI.TKAPI
 import enum TripKit.TKPathFriendliness
 import class TripKit.Shape
 
-@available(iOS 16.0, *)
-@MainActor
 struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
   init?(values: [TKUIPathChartView.ChartValue], totalDistance: CLLocationDistance? = nil) {
     let longEnough = values.filter { $0.distance > 25 }
@@ -76,7 +74,6 @@ struct TKUIPathChartView<V>: View where V: TKUIPathChartable & Hashable {
   }
 }
 
-@available(iOS 16.0, *)
 struct TKUIPathChartView_Previews: PreviewProvider {
   static var previews: some View {
     TKUIPathChartView(values: [

@@ -31,7 +31,7 @@ extension UIImageView {
   }
   
   private static func realTimeAccessoryImage(_ animated: Bool, tintColor: UIColor?) -> [UIImage] {
-    if #available(iOS 16.0, *), animated {
+    if animated {
      let name = "dot.radiowaves.forward"
      let image1 = UIImage(systemName: name, variableValue: 0.3)
      let image2 = UIImage(systemName: name, variableValue: 0.7)

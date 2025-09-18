@@ -101,7 +101,7 @@ extension TKDeparturesProvider {
       throw OutputError.stopSinceDeleted
     }
     
-    let (region, stopCodes) = try await context.tk_performThrowing {
+    let (region, stopCodes) = try await context.perform {
       guard let region = stops.first?.region else {
         throw OutputError.couldNotFetchRegions
       }
@@ -110,7 +110,7 @@ extension TKDeparturesProvider {
     
     let departures = try await Self.fetchDepartures(stopCodes: stopCodes, fromDate: fromDate, filters: filters, limit: limit, in: region)
     
-    return await context.tk_perform {
+    return await context.perform {
       TKDeparturesProvider.addDepartures(departures, to: stops)
     }
   }
@@ -139,7 +139,7 @@ extension TKDeparturesProvider {
     
     let departures = try await fetchDepartures(for: table, fromDate: fromDate, limit: limit)
     let context = table.tripKitContext
-    return await context.tk_perform {
+    return await context.perform {
       TKDeparturesProvider.addDepartures(departures, into: context)
     }
   }

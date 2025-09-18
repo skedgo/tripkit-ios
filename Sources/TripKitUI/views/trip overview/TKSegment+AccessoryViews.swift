@@ -49,15 +49,9 @@ extension TKSegment {
       accessoryViews.append(wheelchairView)
     }
     
-    if canShowPathFriendliness {
-      if #available(iOS 16.0, *), let chart = self.buildFriendliness() {
-        let host = UIHostingController(rootView: chart)
-        accessoryViews.append(host.view)
-      } else {
-        let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
-        pathFriendlinessView.segment = self
-        accessoryViews.append(pathFriendlinessView)
-      }
+    if canShowPathFriendliness, let chart = self.buildFriendliness() {
+      let host = UIHostingController(rootView: chart)
+      accessoryViews.append(host.view)
     }
     
     return accessoryViews

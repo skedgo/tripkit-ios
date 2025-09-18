@@ -77,6 +77,10 @@ public class Loc : NSObject {
     return NSLocalizedString("Location", tableName: "Shared", bundle: .tripKit, comment: "Title for unnamed location")
   }
   
+  public static var SeeAll: String {
+    return NSLocalizedString("See all", tableName: "TripGo", bundle: .tripKit, comment: "Title for an action that shows users all options/results")
+  }
+  
   @objc
   public static var Name: String {
     return NSLocalizedString("Name", tableName: "Shared", bundle: .tripKit, comment: "Title for name of something (or someone)")

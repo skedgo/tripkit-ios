@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24123.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <accessibilityOverrides isEnabled="YES" dynamicTypePreference="5"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24062"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,7 +44,7 @@
                     <rect key="frame" x="0.0" y="64" width="355" height="150"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Y6-YD-smf">
-                            <rect key="frame" x="308" y="49.5" width="44" height="44"/>
+                            <rect key="frame" x="308" y="53.5" width="44" height="44"/>
                             <accessibility key="accessibilityConfiguration" label="Swap from and to"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="Q38-Hl-UKZ"/>
@@ -60,7 +60,7 @@
                             </state>
                         </button>
                         <searchBar contentMode="redraw" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" placeholder="From" translatesAutoresizingMaskIntoConstraints="NO" id="wgQ-BO-Jvl">
-                            <rect key="frame" x="36" y="8" width="280" height="63.5"/>
+                            <rect key="frame" x="36" y="8" width="280" height="72"/>
                             <constraints>
                                 <constraint firstAttribute="height" priority="999" constant="44" id="LH6-0O-jvm"/>
                             </constraints>
@@ -68,7 +68,7 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="route" textContentType="street-address"/>
                         </searchBar>
                         <searchBar contentMode="redraw" placeholder="To" translatesAutoresizingMaskIntoConstraints="NO" id="xeq-Fa-HHu">
-                            <rect key="frame" x="36" y="71.5" width="280" height="62.5"/>
+                            <rect key="frame" x="36" y="80" width="280" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="height" priority="999" constant="44" id="xdM-r2-qB1"/>
                             </constraints>
@@ -76,7 +76,7 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="route" textContentType="street-address"/>
                         </searchBar>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NhZ-YN-85N">
-                            <rect key="frame" x="6" y="18" width="44" height="44"/>
+                            <rect key="frame" x="6" y="22" width="44" height="44"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <accessibility key="accessibilityConfiguration" label="From Location"/>
                             <constraints>
@@ -88,7 +88,7 @@
                             <state key="highlighted" image="trip-point-active"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ip-Px-sit">
-                            <rect key="frame" x="6" y="81" width="44" height="44"/>
+                            <rect key="frame" x="6" y="85" width="44" height="44"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <accessibility key="accessibilityConfiguration" label="To Location"/>
                             <constraints>
@@ -100,7 +100,7 @@
                             <state key="highlighted" image="trip-point-active"/>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrd-x7-0WT">
-                            <rect key="frame" x="27" y="51" width="2" height="41"/>
+                            <rect key="frame" x="27" y="55" width="2" height="41"/>
                             <color key="backgroundColor" systemColor="systemGreenColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="2" id="6lV-Uw-BOu"/>
@@ -163,6 +163,7 @@
                 <outlet property="fromButton" destination="NhZ-YN-85N" id="ODa-1e-vLV"/>
                 <outlet property="fromSearchBar" destination="wgQ-BO-Jvl" id="WFB-Hm-thF"/>
                 <outlet property="routeButton" destination="5jL-GH-X0k" id="vN1-uO-uJF"/>
+                <outlet property="searchBarPaddingConstraint" destination="uG8-y0-aPy" id="8r0-9D-ivw"/>
                 <outlet property="swapButton" destination="6Y6-YD-smf" id="5w8-zX-4Dn"/>
                 <outlet property="titleLabel" destination="toE-WF-qqw" id="ESq-9R-Aat"/>
                 <outlet property="toButton" destination="8ip-Px-sit" id="PwF-CO-Ilp"/>
@@ -177,7 +178,7 @@
         <image name="trip-point-active" width="10" height="10"/>
         <image name="trip-point-highlighted" width="10" height="10"/>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableCellGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

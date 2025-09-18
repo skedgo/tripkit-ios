@@ -13,7 +13,6 @@ import enum TripKit.TKPathFriendliness
 import class TripKit.TKSegment
 import class TripKit.Shape
 
-@available(iOS 16.0, *)
 extension TKSegment {
   
   @MainActor

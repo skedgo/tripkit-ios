@@ -52,7 +52,7 @@ public class TKUIModeAnnotationView: MKAnnotationView {
       let circle = UIView(frame: circleFrame)
       circle.layer.cornerRadius = circleFrame.width / 2
       circle.layer.borderWidth = 1
-      circle.layer.borderColor = UIColor.tkBackground.cgColor
+      circle.layer.borderColor = UIColor.tkBackgroundNotClear.cgColor
       insertSubview(circle, at: 0)
       backgroundCircle = circle
     }
@@ -75,7 +75,7 @@ public class TKUIModeAnnotationView: MKAnnotationView {
       
       let imageView = UIImageView(image: image)
       imageView.frame = backgroundCircle.frame.insetBy(dx: 3, dy: 3)
-      imageView.tintColor = .tkBackground
+      imageView.tintColor = .tkBackgroundNotClear
       
       addSubview(imageView)
       self.imageView = imageView

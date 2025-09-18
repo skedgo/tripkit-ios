@@ -41,7 +41,7 @@ extension TKAPI.Alert.Severity {
   public var textColor: UIColor {
     switch self {
     case .alert: return .tkLabelOnDark
-    case .info: return .tkBackground
+    case .info: return .tkBackgroundNotClear
     case .warning: return .tkLabelOnLight
     }
   }

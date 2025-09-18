@@ -97,7 +97,11 @@ extension Loc {
   public static var TapToChangeStartAndEndLocations: String {
     return NSLocalizedString("Tap to change start and end locations", tableName: "Shared", bundle: .tripKit, comment: "Accessibility hint for routing results screen.")
   }
-  
+
+  public static var DateAndTime: String {
+    return NSLocalizedString("Date & Time", tableName: "TripKit", bundle: .tripKit, comment: "Title of sheet to set departure/arrival time")
+  }
+
   public static var SetTime: String {
     return NSLocalizedString("Set time", tableName: "TripKit", bundle: .tripKit, comment: "Button label to set departure time")
   }
