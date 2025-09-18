@@ -54,10 +54,10 @@ public class Service: NSManagedObject {
     [number, lineName].compactMap { $0 }.joined(separator: " ")
   }
   
+  @available(*, deprecated, message: "Use `.numer` or `.lineName` as appropriate instead.")
   public var shortIdentifier: String? {
     number ?? lineName
   }
-  
   
 }
 

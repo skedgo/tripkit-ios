@@ -75,11 +75,7 @@ extension StopVisits {
 
   /// :nodoc:
   public var smsString: String? {
-    guard let serviceId = service.shortIdentifier else {
-      return nil
-    }
-    
-    var output = serviceId
+    var output = service.title
     
     switch timing {
     case .timetabled(let arrival, let departure):
@@ -304,7 +300,7 @@ extension StopVisits: TKRealTimeUpdatable {
         let departureTime = TKStyleManager.timeString(departure, for: timeZone)
         let format = NSLocalizedString("I'll take a %@ at %@ from %@.", tableName: "TripKit", bundle: .tripKit, comment: "Indication of an activity. (old key: ActivityIndication)")
         return String(format: format,
-                      service.shortIdentifier ?? "",
+                      service.title,
                       departureTime,
                       stop.name ?? stop.stopCode
         )
@@ -312,7 +308,7 @@ extension StopVisits: TKRealTimeUpdatable {
       } else {
         let format = NSLocalizedString("I'll take a %@ from %@.", tableName: "TripKit", bundle: .tripKit, comment: "Indication of an activity.")
         return String(format: format,
-                      service.shortIdentifier ?? "",
+                      service.title,
                       stop.name ?? stop.stopCode
         )
       }
