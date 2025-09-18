@@ -33,7 +33,7 @@ extension TKUIDepartureCellContent {
       imageIsTemplate: service.modeImageIsTemplate,
       imageTintColor: TKUICustomization.shared.colorCodeTransitIcons ? serviceColor : nil,
       modeName: service.modeTitle ?? "",
-      serviceShortName: service.shortIdentifier,
+      serviceShortName: service.number,
       serviceColor: serviceColor,
       serviceIsCanceled: service.isCanceled,
       serviceOperatorName: TKUITimetableCard.config.showOperatorNames ? service.operatorName : nil,
