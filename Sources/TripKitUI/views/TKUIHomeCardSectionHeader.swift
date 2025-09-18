@@ -73,7 +73,7 @@ class TKUIHomeCardSectionHeader: UITableViewHeaderFooterView {
         label?.text = configuration.title
         if let action = configuration.action {
           button.isHidden = false
-          button.setTitle(action.title, for: .normal)
+          button.setTitle(action.title.isEmpty ? Loc.SeeAll : action.title, for: .normal)
           button.rx.tap
             .subscribe(onNext: { _ in onTap(action.handler(homeCard)) })
             .disposed(by: disposeBag)
