@@ -32,11 +32,13 @@ class TKUIServiceViewModel: ObservableObject {
   /// - Parameters:
   ///   - dataInput: What to show
   ///   - itemSelected: UI input of selected item
-  init(dataInput: DataInput, itemSelected: Signal<Item>) {
+  init(dataInput: DataInput) {
     self.dataInput = dataInput
     self.next = Empty().eraseToAnyPublisher()
     self.selectAnnotation = .never()
-    self.realTimeUpdate = .never()
+    self.realTimeUpdate = .idle
+    
+#warning("TODO: Set `selectAnnotation` and `next` properly")
   }
   
   private let dataInput: DataInput
@@ -45,28 +47,21 @@ class TKUIServiceViewModel: ObservableObject {
   /// Can change with real-time data.
   @Published var header: TKUIDepartureCellContent?
   
-  var headerPublisher: some Publisher<TKUIDepartureCellContent?, Never> { _header.projectedValue }
-  
   /// Sections with stops of the service, for display in a table view.
   /// Can change with real-time data.
   @Published var sections: [Section] = []
-  
-  var sectionsPublisher: some Publisher<[Section], Never> { _sections.projectedValue }
   
   /// Stops and route of the service, for display on a map.
   /// Can change with real-time data.
   @Published var mapContent: MapContent?
 
-  var mapContentPublisher: some Publisher<MapContent?, Never> { _mapContent.projectedValue }
-
   /// Annotation matching the user's selection in the list.
   let selectAnnotation: Driver<TKUIIdentifiableAnnotation>
   
   /// Status of real-time update
-  ///
-  /// - note: Real-updates are only enabled while you're connected
-  ///         to this driver.
-  let realTimeUpdate: Driver<TKRealTimeUpdateProgress<Void>>
+  @Published var realTimeUpdate: TKRealTimeUpdateProgress<Void>
+  
+  private var realTimeUpdateTask: Task<Void, Never>?
   
   /// User-relevant errors, e.g., if service content couldn't get downloaded
   @Published var errorToShow: Error?
@@ -79,30 +74,26 @@ class TKUIServiceViewModel: ObservableObject {
     // Map content doesn't change with real-time
     self.mapContent = Self.buildMapContent(for: embarkation, disembarkation: disembarkation)
     
-//    let realTimeUpdate = withEmbarkation
-//      .flatMapLatest { TKUIServiceViewModel.fetchRealTimeUpdates(embarkation: $0.0) }
-//    self.realTimeUpdate = realTimeUpdate.asDriver(onErrorJustReturn: .idle)
-//    
-//    let withNewRealTime = realTimeUpdate
-//      .filter { if case .updated = $0 { return true } else { return false } }
-//      .startWith(.updated(()))
-//      .map { _ in }
+    self.rebuild(embarkation: embarkation, disembarkation: disembarkation)
     
-//    withNewRealTime
-//      .asObservable()
-//      .withLatestFrom(withEmbarkation)
-//      .compactMap(TKUIDepartureCellContent.build)
-//      .subscribe { [weak self] in self?.header = $0 }
-//      .disposed(by: disposeBag)
+    self.realTimeUpdateTask?.cancel()
+    self.realTimeUpdateTask = Task { @MainActor [weak self, weak embarkation, weak disembarkation] in
+      while !Task.isCancelled {
+        guard let self, let embarkation, let region = embarkation.stop?.region else { return }
+        self.realTimeUpdate = .updating
+        let _ = try? await TKRealTimeFetcher.update([embarkation.service], in: region)
+        
+        self.rebuild(embarkation: embarkation, disembarkation: disembarkation)
+        
+        self.realTimeUpdate = .idle
+        try? await Task.sleep(for: .seconds(10))
+      }
+    }
+  }
+  
+  private func rebuild(embarkation: StopVisits, disembarkation: StopVisits?) {
     header = TKUIDepartureCellContent.build(embarkation: embarkation, disembarkation: disembarkation)
-    
-//    Observable.combineLatest(withNewRealTime, withEmbarkation) { $1 }
-//      .map(TKUIServiceViewModel.buildSections)
-//      .subscribe { [weak self] in self?.sections = $0 }
-//      .disposed(by: disposeBag)
     sections = Self.buildSections(for: embarkation, disembarkation: disembarkation)
-    
-
   }
   
   func selected(_ item: Item) -> Next? {

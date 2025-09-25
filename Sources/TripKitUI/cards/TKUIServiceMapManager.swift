@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import Combine
 
 import RxSwift
 import RxCocoa
@@ -19,6 +20,7 @@ class TKUIServiceMapManager: TKUIMapManager {
   weak var viewModel: TKUIServiceViewModel?
   
   private let disposeBag = DisposeBag()
+  private var cancellables: Set<AnyCancellable> = []
   
   override init() {
     super.init()
@@ -35,22 +37,22 @@ class TKUIServiceMapManager: TKUIMapManager {
     
     guard let viewModel = viewModel else { assertionFailure(); return }
     
-//    viewModel.mapContent
-//      .drive(onNext: { [weak self] in self?.reloadContent($0) })
-//      .disposed(by: disposeBag)
+    viewModel.$mapContent
+      .sink { [weak self] in self?.reloadContent($0) }
+      .store(in: &cancellables)
     
     viewModel.selectAnnotation
       .drive(onNext: { [weak self] in self?.select($0) })
       .disposed(by: disposeBag)
 
-    viewModel.realTimeUpdate
-      .drive(onNext: { [weak self] update in
+    viewModel.$realTimeUpdate
+      .sink { [weak self] update in
         switch update {
         case .updated: self?.updateDynamicAnnotations(animated: true)
         case .idle, .updating: break // nothing to do
         }
-      })
-      .disposed(by: disposeBag)
+      }
+      .store(in: &cancellables)
   }
   
   override func cleanUp(_ mapView: MKMapView, animated: Bool) {

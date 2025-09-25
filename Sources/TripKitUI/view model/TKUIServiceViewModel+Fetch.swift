@@ -41,13 +41,9 @@ extension Reactive where Base: TKRealTimeFetcher {
       return .never()
     }
     
-    return Single.create { subscriber in
-      TKRealTimeFetcher.update([embarkation.service], in: region) { result in
-        subscriber(result.map { _ in } )
-      }
-      return Disposables.create()
+    return Single.create {
+      _ = try await TKRealTimeFetcher.update([embarkation.service], in: region)
     }
-    
   }
   
 }
