@@ -9,7 +9,7 @@ import Foundation
 
 extension TKAPI {
 
-  public struct ServiceResponse: Codable {
+  public struct ServiceResponse: Codable, @unchecked Sendable {
     public let error: String?
     public let shapes: [SegmentShape]?
     public let modeInfo: TKModeInfo?
@@ -31,7 +31,7 @@ extension TKAPI {
     }
   }
   
-  public struct Departure: Codable, Hashable {
+  public struct Departure: Codable, Hashable, @unchecked Sendable {
     
     // information about the service
     public let serviceTripID: String

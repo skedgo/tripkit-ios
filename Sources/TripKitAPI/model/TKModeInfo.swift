@@ -16,7 +16,7 @@ import AppKit
 
 /// Information to identify and display a transport mode. Kind of like the
 /// big sibling of a mode identifier string.
-public class TKModeInfo: NSObject, Codable {
+public class TKModeInfo: NSObject, Codable, @unchecked Sendable {
   
   /// The mode identifier string. Can be `nil`, e.g., for parking as that can
   /// apply to multiple modes.

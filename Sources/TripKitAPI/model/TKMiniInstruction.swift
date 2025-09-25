@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TKMiniInstruction: NSObject, Codable, NSSecureCoding {
+public final class TKMiniInstruction: NSObject, Codable, NSSecureCoding, Sendable {
   public let instruction: String
   public let detail: String?
   

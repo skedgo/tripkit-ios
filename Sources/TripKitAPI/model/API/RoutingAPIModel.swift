@@ -10,7 +10,7 @@ import Foundation
 
 extension TKAPI {
 
-  public struct RoutingResponse: Codable {
+  public struct RoutingResponse: Codable, @unchecked Sendable {
     public let error: String?
     public var segmentTemplates: [SegmentTemplate]?
     @DefaultEmptyArray public var alerts: [Alert]
@@ -18,20 +18,20 @@ extension TKAPI {
     public let query: Query?
   }
   
-  public struct Query: Codable, Hashable {
+  public struct Query: Codable, Hashable, @unchecked Sendable {
     public let from: Location
     public let to: Location
     @OptionalISO8601OrSecondsSince1970 public var depart: Date?
     @OptionalISO8601OrSecondsSince1970 public var arrive: Date?
   }
   
-  public struct TripGroup: Codable, Hashable {
+  public struct TripGroup: Codable, Hashable, @unchecked Sendable {
     public var trips: [Trip]
     public var frequency: Int?
     @DefaultEmptyArray public var sources: [DataAttribution]
   }
   
-  public struct Trip: Codable, Hashable {
+  public struct Trip: Codable, Hashable, @unchecked Sendable {
     public var id: String?
     @ISO8601OrSecondsSince1970 public var depart: Date
     @ISO8601OrSecondsSince1970 public var arrive: Date
@@ -65,12 +65,12 @@ extension TKAPI {
     public var availabilityInfo: String?
   }
   
-  public enum TripAvailability: String, Codable, Hashable {
+  public enum TripAvailability: String, Codable, Hashable, Sendable {
     case missedPrebookingWindow = "MISSED_PREBOOKING_WINDOW"
     case canceled               = "CANCELLED"
   }
   
-  public enum RoadSafety: Comparable {
+  public enum RoadSafety: Comparable, Hashable, Sendable {
     /// Just for this mode
     case safe
     
@@ -86,7 +86,7 @@ extension TKAPI {
     case unknown
   }
   
-  public enum RoadTag: String, Codable {
+  public enum RoadTag: String, Codable, Sendable {
     case cycleLane = "CYCLE-LANE"
     case cycleTrack = "CYCLE-TRACK"
     case cycleNetwork = "CYCLE-NETWORK"
@@ -127,7 +127,7 @@ extension TKAPI {
   }
   
   /// Ticket information, for public transport segments
-  public struct Ticket: Codable, Hashable {
+  public struct Ticket: Codable, Hashable, Sendable {
     /// User-friendly name of the ticket
     public let name: String
     
@@ -139,7 +139,7 @@ extension TKAPI {
     public let cost: Decimal?
   }
 
-  public struct SegmentReference: Codable, Hashable {
+  public struct SegmentReference: Codable, Hashable, @unchecked Sendable {
     public let segmentTemplateHashCode: Int
     @ISO8601OrSecondsSince1970 public var startTime: Date
     @ISO8601OrSecondsSince1970 public var endTime: Date
@@ -203,7 +203,7 @@ extension TKAPI {
     }
   }
   
-  public struct SegmentTemplate: Codable, Hashable {
+  public struct SegmentTemplate: Codable, Hashable, @unchecked Sendable {
     public let hashCode: Int
     public let type: SegmentType
     public let visibility: SegmentVisibility
@@ -280,21 +280,21 @@ extension TKAPI {
     }
   }
   
-  public enum SegmentVisibility: String, Codable, Hashable {
+  public enum SegmentVisibility: String, Codable, Hashable, Sendable {
     case inSummary = "in summary"
     case onMap = "on map"
     case inDetails = "in details"
     case hidden
   }
   
-  public enum SegmentType: String, Codable, Hashable {
+  public enum SegmentType: String, Codable, Hashable, Sendable {
     case scheduled
     case unscheduled
     case stationary
   }
   
-  public struct TripNotification: Hashable {
-    public enum Kind: Hashable {
+  public struct TripNotification: Hashable, Sendable {
+    public enum Kind: Hashable, Sendable {
       case circle(center: Coordinate, radius: Distance, trigger: Trigger)
       case time(Date)
       case pushNotification
@@ -329,7 +329,7 @@ extension TKAPI {
       
     }
     
-    public struct Coordinate: Codable, Hashable {
+    public struct Coordinate: Codable, Hashable, Sendable {
       public let latitude: Degrees
       public let longitude: Degrees
       
@@ -339,12 +339,12 @@ extension TKAPI {
       }
     }
     
-    public enum Trigger: String, Codable, Hashable {
+    public enum Trigger: String, Codable, Hashable, Sendable {
       case onEnter = "ENTER"
       case onExit = "EXIT"
     }
     
-    public enum MessageKind: String, Codable, Hashable, CaseIterable {
+    public enum MessageKind: String, Codable, Hashable, CaseIterable, Sendable {
       case tripStart          = "TRIP_START"
       case vehicleIsApproaching = "VEHICLE_IS_APPROACHING"
       case arrivingAtYourStop = "ARRIVING_AT_YOUR_STOP"
@@ -367,7 +367,7 @@ extension TKAPI {
     public var messageBody: String
   }
   
-  public struct SegmentShape: Codable, Hashable {
+  public struct SegmentShape: Codable, Hashable, @unchecked Sendable {
     public let encodedWaypoints: String
 
     public var modeInfo: TKModeInfo?
@@ -424,7 +424,7 @@ extension TKAPI {
     }
   }
   
-  public struct ShapeStop: Codable, Hashable {
+  public struct ShapeStop: Codable, Hashable, @unchecked Sendable {
     public let lat: Degrees
     public let lng: Degrees
     public let code: String
@@ -439,7 +439,7 @@ extension TKAPI {
     public let wheelchairAccessible: Bool?
   }
   
-  public enum ShapeInstruction: String, Codable {
+  public enum ShapeInstruction: String, Codable, Sendable {
     case headTowards        = "HEAD_TOWARDS"
     case continueStraight   = "CONTINUE_STRAIGHT"
     case turnSlightyLeft    = "TURN_SLIGHTLY_LEFT"
