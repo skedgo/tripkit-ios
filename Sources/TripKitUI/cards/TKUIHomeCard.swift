@@ -55,7 +55,10 @@ open class TKUIHomeCard: TKUITableCard {
     hasGrabHandle = true
     #endif
     
-    self.headerView = TKUIHomeHeaderView(hasGrabHandle: hasGrabHandle)
+    self.headerView = TKUIHomeHeaderView(
+      hasGrabHandle: hasGrabHandle,
+      prompt: TKUIHomeCard.config.prompt
+    )
 
     super.init(title: .custom(headerView, dismissButton: nil), mapManager: theMapManager, initialPosition: initialPosition)
     

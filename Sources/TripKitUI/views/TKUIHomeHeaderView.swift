@@ -8,24 +8,28 @@
 
 import UIKit
 
+import TripKit
+
 class TKUIHomeHeaderView: UIView {
   
   var searchBar: UISearchBar!
   var directionsButton: UIButton?
   
-  private var stackView: UIStackView!
   private var directionsWrapper: UIView?
   
   private let hasGrabHandle: Bool
+  private let prompt: String?
 
-  init(hasGrabHandle: Bool) {
+  init(hasGrabHandle: Bool, prompt: String? = nil) {
     self.hasGrabHandle = hasGrabHandle
+    self.prompt = prompt
     super.init(frame: .zero)
     didInit()
   }
   
   required init?(coder: NSCoder) {
     self.hasGrabHandle = true
+    self.prompt = nil
     super.init(coder: coder)
     didInit()
   }
@@ -61,27 +65,43 @@ class TKUIHomeHeaderView: UIView {
       directionsWrapper.centerXAnchor.constraint(equalTo: directionsButton.centerXAnchor),
     ])
     
-    let stackedViews: [UIView] = [searchBar, directionsWrapper]
+    let hStack = UIStackView(arrangedSubviews: [searchBar, directionsWrapper])
+    hStack.translatesAutoresizingMaskIntoConstraints = false
+    hStack.axis = .horizontal
+    hStack.spacing = 0
+
+    addSubview(hStack)
     
-    let stackView = UIStackView(arrangedSubviews: stackedViews)
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .horizontal
-    stackView.spacing = 0
+    if let prompt {
+      let label = UILabel()
+      label.translatesAutoresizingMaskIntoConstraints = false
+      label.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
+      label.text = prompt
+      addSubview(label)
+
+      NSLayoutConstraint.activate([
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+        hStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
+        trailingAnchor.constraint(equalTo: hStack.trailingAnchor, constant: 10),
+
+        label.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+        hStack.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 0),
+        bottomAnchor.constraint(equalTo: hStack.bottomAnchor),
+      ])
+
+    } else {
+      NSLayoutConstraint.activate([
+        hStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
+        hStack.topAnchor.constraint(equalTo: topAnchor, constant: hasGrabHandle ? -10 : 0), // negative spacer to minimise gap to grab handle
+        trailingAnchor.constraint(equalTo: hStack.trailingAnchor, constant: 10),
+        bottomAnchor.constraint(equalTo: hStack.bottomAnchor),
+      ])
+    }
     
-    addSubview(stackView)
-    
-    NSLayoutConstraint.activate([
-      stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6),
-      stackView.topAnchor.constraint(equalTo: topAnchor, constant: hasGrabHandle ? -10 : 0), // negative spacer to minimise gap to grab handle
-      trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-      bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-    ])
-    
-    self.stackView = stackView
     self.searchBar = searchBar
     self.directionsButton = directionsButton
     
-    // Styling
     searchBar.tintColor = .tkAppTintColor
     searchBar.barTintColor = .tkBackground
   }
