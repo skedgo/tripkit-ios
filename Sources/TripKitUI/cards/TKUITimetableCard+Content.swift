@@ -103,6 +103,9 @@ extension StopVisits {
       } else if !departureString.isEmpty {
         text += departureString
       }
+      
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
     }
     
     let color = realTimeStatus.color

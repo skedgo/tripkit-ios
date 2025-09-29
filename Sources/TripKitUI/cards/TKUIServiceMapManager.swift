@@ -47,6 +47,7 @@ class TKUIServiceMapManager: TKUIMapManager {
         switch update {
         case .updated: self?.updateDynamicAnnotations(animated: true)
         case .idle, .updating: break // nothing to do
+        @unknown default: assertionFailure("Please update TripKit dependency.")
         }
       }
       .store(in: &cancellables)

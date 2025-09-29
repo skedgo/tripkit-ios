@@ -312,6 +312,8 @@ extension TKUIHomeCard {
           homeMapManager.select(annotation)
         case .result:
           assertionFailure("You are using a `TKAutocompleting` provider that does not return annotations for some of its results. In this case, make sure to use the callback selection mode.")
+        @unknown default:
+          assertionFailure("Please update TripKit dependency.")
         }
         
       case let .callback(handler):
@@ -330,6 +332,8 @@ extension TKUIHomeCard {
           cardController.push(TKUIRoutingResultsCard(destination: annotation))
         case .result:
           assertionFailure("You are using a `TKAutocompleting` provider that does not return annotations for some of its results. In this case, make sure to use the callback selection mode.")
+        @unknown default:
+          assertionFailure("Please update TripKit dependency.")
         }
       }
       

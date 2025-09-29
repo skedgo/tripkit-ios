@@ -59,24 +59,28 @@ class TKUINotificationView: UIView {
   
   func updateAvailableKinds(_ notificationKinds: Set<TKAPI.TripNotification.MessageKind>, includeTimeToLeaveNotification: Bool = true) {
     
-    func views(for kind: TKAPI.TripNotification.MessageKind) -> (UIView, UILabel) {
+    func views(for kind: TKAPI.TripNotification.MessageKind) -> (UIView, UILabel)? {
       switch kind {
       case .arrivingAtYourStop: return (detailView2, detailItem2)
       case .nextStopIsYours: return (detailView3, detailItem3)
       case .tripEnd: return (detailView4, detailItem4)
       case .tripStart: return (detailView1, detailItem1)
       case .vehicleIsApproaching: return (detailView5, detailItem5)
+      @unknown default:
+        assertionFailure("Please update TripKit dependency.")
+        return nil
       }
     }
     
     for kind in TKAPI.TripNotification.MessageKind.allCases {
-      let (view, label) = views(for: kind)
-      view.alpha = notificationKinds.contains(kind) ? 1 : 0.3
-      label.text = kind.label
+      if let (view, label) = views(for: kind) {
+        view.alpha = notificationKinds.contains(kind) ? 1 : 0.3
+        label.text = kind.label
+      }
     }
     
-    views(for: .tripStart).0.isHidden = !includeTimeToLeaveNotification
-    views(for: .vehicleIsApproaching).0.isHidden = !TKUINotificationManager.shared.isSubscribed(to: .pushNotifications)
+    views(for: .tripStart)?.0.isHidden = !includeTimeToLeaveNotification
+    views(for: .vehicleIsApproaching)?.0.isHidden = !TKUINotificationManager.shared.isSubscribed(to: .pushNotifications)
     
     notificationSwitch.isEnabled = !notificationKinds.isEmpty
   }
@@ -106,6 +110,9 @@ extension TKAPI.TripNotification.MessageKind {
       return Loc.TripNotificationsNextStop
     case .tripEnd:
       return Loc.TripNotificationsTripEnd
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return ""
     }
   }
 }

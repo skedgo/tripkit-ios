@@ -27,6 +27,9 @@ extension TKAPI.VehicleOccupancy {
       case .standingRoomOnly: return 3
       case .crushedStandingRoomOnly: return 3
       case .full, .notAcceptingPassengers: return 4
+      @unknown default:
+        assertionFailure("Please update TripKit dependency.")
+        return nil
       }
     }
     
@@ -43,6 +46,10 @@ extension TKAPI.Alert.Severity {
     case .alert: return .tkLabelOnDark
     case .info: return .tkBackgroundNotClear
     case .warning: return .tkLabelOnLight
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return .tkBackgroundNotClear
+
     }
   }
   
@@ -51,6 +58,10 @@ extension TKAPI.Alert.Severity {
     case .alert: return .tkStateError
     case .warning: return .tkStateWarning
     case .info: return .tkLabelSecondary
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return .tkLabelSecondary
+
     }
   }
 
@@ -61,6 +72,9 @@ extension TKAPI.Alert.Severity {
       fileName = "icon-alert-yellow-high-res"
     case .alert:
       fileName = "icon-alert-red-high-res"
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      fileName = "icon-alert-yellow-high-res"
     }
     return TripKitUIBundle.imageNamed(fileName)
   }

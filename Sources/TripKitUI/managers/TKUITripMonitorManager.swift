@@ -222,6 +222,9 @@ extension TKAPI.TripNotification {
       return CLCircularRegion(center: .init(latitude: center.latitude, longitude: center.longitude), radius: radius, identifier: id)
     case .time, .pushNotification:
       return nil
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
 }

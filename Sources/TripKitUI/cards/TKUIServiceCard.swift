@@ -290,9 +290,14 @@ private struct TKUIServiceItemView: View {
           .accessibilityLabel(Text(verbatim: Loc.Departs(atTime: departureText)))
           .foregroundStyle(Color(textColor))
       }
+
     case .frequencyBased:
       // LATER: Could show the travel time here, but that should show not at
       //        the stop but in between stops.
+      EmptyView()
+      
+    @unknown default:
+      let _ = assertionFailure("Please update TripKit dependency.")
       EmptyView()
     }
   }

@@ -18,6 +18,9 @@ extension StopVisits.RealTime {
       case .early, .late: return .tkStateWarning
       case .onTime: return .tkStateSuccess
       case .notApplicable, .notAvailable: return .tkLabelSecondary
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return .tkLabelSecondary
     }
   }
 }

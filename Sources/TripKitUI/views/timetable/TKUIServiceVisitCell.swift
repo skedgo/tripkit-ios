@@ -111,6 +111,9 @@ extension TKUIServiceVisitCell {
       // TODO: Would be good to show travel time here
       arrivalText = nil
       departureText = nil
+      
+    @unknown default:
+      return assertionFailure("Please update TripKit dependency.")
     }
     
     if arrivalText == departureText {
