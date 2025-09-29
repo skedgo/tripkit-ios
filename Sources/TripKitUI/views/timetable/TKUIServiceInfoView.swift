@@ -16,7 +16,9 @@ struct TKUIServiceInfoView: View {
     var body: String? = nil
   }
   
-  struct Content: Hashable {
+  struct Content: Hashable, Identifiable {
+    var id: String = "content"
+    
     var wheelchairAccessibility: TKWheelchairAccessibility = .unknown
     var bicycleAccessibility: TKBicycleAccessibility = .unknown
     var alerts: [Alert] = []

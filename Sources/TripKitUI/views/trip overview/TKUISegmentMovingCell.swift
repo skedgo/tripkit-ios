@@ -125,7 +125,7 @@ extension TKUISegmentMovingCell {
       trainView.occupancies = occupancies
       return trainView
 
-    case .pathFriendliness(let segment):
+    case .pathFriendliness:
       return nil // will show road tags instead
 
     case .roadTags(let segment):

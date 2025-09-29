@@ -10,12 +10,12 @@ import Foundation
 
 extension TKAPI {
   
-  public struct EventsResponse: Codable, Hashable {
+  public struct EventsResponse: Codable, Hashable, Sendable {
     public static let empty: EventsResponse = EventsResponse(events: [])
     
     public let events: [Event]
     
-    public struct Event: Codable, Hashable {
+    public struct Event: Codable, Hashable, Sendable {
       public let description: String
       public let displayImage: String?
       public let endTime: Date?
@@ -27,12 +27,12 @@ extension TKAPI {
       public let icon: Icon?
     }
     
-    public struct Location: Codable, Hashable {
+    public struct Location: Codable, Hashable, Sendable {
       public let lat: Double
       public let lng: Double
     }
     
-    public struct Icon: Codable, Hashable {
+    public struct Icon: Codable, Hashable, Sendable {
       public let remoteIcon: String
       public let remoteIconIsTemplate: Bool?
     }

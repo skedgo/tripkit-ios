@@ -10,7 +10,7 @@ import Foundation
 
 extension TKAPI {
   
-  public struct RegionInfo: Codable, Hashable {
+  public struct RegionInfo: Codable, Hashable, Sendable {
     public let streetBicyclePaths: Bool
     public let streetWheelchairAccessibility: Bool
     public let transitModes: [TKModeInfo]
@@ -32,7 +32,7 @@ extension TKAPI {
   ///
   /// Formerly known as `TKParatransitInfo`
   /// - SeeAlso: `TKBuzzInfoProvider`'s `fetchParatransitInformation`
-  public struct Paratransit: Codable, Hashable {
+  public struct Paratransit: Codable, Hashable, Sendable {
     public let name: String
     public let url: URL
     public let number: String
@@ -44,7 +44,7 @@ extension TKAPI {
     }
   }
   
-  public enum Integrations: String, Codable {
+  public enum Integrations: String, Codable, Sendable {
     case routing
     case realTime = "real_time"
     case bookings
@@ -53,7 +53,7 @@ extension TKAPI {
   
   /// Additional details about a group of modes,
   /// e.g., all bike or car share providers in a city
-  public struct GenericModeDetails: Codable, Hashable {
+  public struct GenericModeDetails: Codable, Hashable, @unchecked Sendable {
     /// Name of the group
     public let title: String
     
@@ -78,7 +78,7 @@ extension TKAPI {
   /// specific mode usually relates to a certain transport
   /// provider, such as a car-sharing provider, bike-sharing
   /// provider, limousine company, or TNC.
-  public struct SpecificModeDetails: Codable, Hashable {
+  public struct SpecificModeDetails: Codable, Hashable, @unchecked Sendable {
     /// Name of thise mode
     public let title: String?
     

@@ -20,14 +20,23 @@ extension TKUIServiceViewModel {
     case main
   }
   
-  struct Section: Hashable {
+  struct Section: Hashable, Identifiable {
+    var id: SectionGroup { group }
+    
     let group: SectionGroup
     let items: [Item]
   }
   
-  enum Item: Hashable {
+  enum Item: Hashable, Identifiable {
     case timing(TimingItem)
     case info(TKUIServiceInfoView.Content)
+    
+    var id: String {
+      switch self {
+      case .timing(let timing): return timing.modelID.uriRepresentation().absoluteString
+      case .info(let content): return content.id
+      }
+    }
   }
   
   /// For individual cells in a table view, representing a stop along the
@@ -91,12 +100,14 @@ extension TKUIServiceViewModel {
         }
         let infoItems = [
           TKUIServiceInfoView.Content(
+            id: "accessibility",
             wheelchairAccessibility: wheelchairAccessibility,
             bicycleAccessibility: service.bicycleAccessibility,
             vehicleComponents: service.vehicle?.components ?? [[]],
             timestamp: service.vehicle?.lastUpdate
           ),
           TKUIServiceInfoView.Content(
+            id: "alerts",
             alerts: service.allAlerts()
               .compactMap { alert in alert.title.map { .init(isCritical: alert.isCritical(), title: $0, body: alert.text) }}
           )

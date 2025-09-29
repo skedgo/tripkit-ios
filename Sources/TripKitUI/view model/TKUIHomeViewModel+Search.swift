@@ -35,7 +35,7 @@ extension TKUIHomeViewModel {
     }
     
     let nextFromSelection = searchViewModel.selection
-      .map { selection -> NextAction in
+      .compactMap { selection -> NextAction? in
         switch selection {
         case .annotation(let city) where city is TKRegion.City:
           return .handleSelection(selection, component: nil)
@@ -43,6 +43,9 @@ extension TKUIHomeViewModel {
           return .push(TKUIRoutingResultsCard(destination: annotation), selection: annotation)
         case .result:
           return .handleSelection(selection, component: nil)
+        @unknown default:
+          assertionFailure("Please update TripKit dependency.")
+          return nil
         }
       }
     
@@ -59,6 +62,10 @@ extension TKUIHomeViewModel {
           
         case (.annotation, _), (.result, _):
           assertionFailure("Unexpected annotation: \(selection)")
+          return nil
+          
+        @unknown default:
+          assertionFailure("Please update TripKit dependency.")
           return nil
         }
       }

@@ -11,7 +11,7 @@ import Foundation
 
 extension TKAPI {
   
-  public struct Vehicle: Codable, Hashable {
+  public struct Vehicle: Codable, Hashable, Sendable {
     
     @available(*, unavailable, renamed: "API.VehicleOccupancy")
     public typealias Occupancy = VehicleOccupancy
@@ -36,7 +36,7 @@ extension TKAPI {
   }
   
   /// Representation of real-time occupancy information for public transport
-  public enum VehicleOccupancy: String, Codable, Hashable {
+  public enum VehicleOccupancy: String, Codable, Hashable, Sendable {
     case unknown = "UNKNOWN"
     case empty = "EMPTY"
     case manySeatsAvailable = "MANY_SEATS_AVAILABLE"
@@ -48,7 +48,7 @@ extension TKAPI {
   }
   
   /// Components of a vehicle, typically provided as a nested array, see ``TripKitAPI/TKAPI/Vehicle/components``
-  public struct VehicleComponents: Codable, Hashable {
+  public struct VehicleComponents: Codable, Hashable, Sendable {
     public init(airConditioned: Bool? = nil, model: String? = nil, occupancy: VehicleOccupancy? = nil, occupancyText: String? = nil, wheelchairAccessible: Bool? = nil, wheelchairSeats: Int? = nil, wifi: Bool? = nil) {
       self.airConditioned = airConditioned
       self.model = model
@@ -130,7 +130,7 @@ extension TKAPI {
 
 extension TKAPI {
   
-  public enum VehicleFormFactor: String, Codable {
+  public enum VehicleFormFactor: String, Codable, Sendable {
     case bicycle = "BICYCLE"
     case car = "CAR"
     case scooter = "SCOOTER"
@@ -138,14 +138,14 @@ extension TKAPI {
     case other = "OTHER"
   }
 
-  public enum VehiclePropulsionType: String, Codable {
+  public enum VehiclePropulsionType: String, Codable, Sendable {
     case human = "HUMAN"
     case electric = "ELECTRIC"
     case electricAssist = "ELECTRIC_ASSIST"
     case combustion = "COMBUSTION"
   }
 
-  public struct VehicleTypeInfo: Codable, Hashable {
+  public struct VehicleTypeInfo: Codable, Hashable, Sendable {
     public let name: String?
     public let formFactor: VehicleFormFactor
     public let propulsionType: VehiclePropulsionType?
@@ -153,7 +153,7 @@ extension TKAPI {
   }
   
   
-  public struct SharedVehicleInfo: Codable, Hashable {
+  public struct SharedVehicleInfo: Codable, Hashable, Sendable {
     public let identifier: String
     public let name: String?
     public let details: String?

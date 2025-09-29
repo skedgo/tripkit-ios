@@ -17,13 +17,13 @@ import AppKit
 /// Case-less enum just to create a namespace
 public enum TKBooking {
   
-  public struct Detail: Codable, Hashable {
+  public struct Detail: Codable, Hashable, Sendable {
     public let title: String
     public let subtitle: String?
     public let imageURL: URL?
   }
   
-  public struct Action: Codable, Hashable {
+  public struct Action: Codable, Hashable, Sendable {
     public let title: String
     public let isDestructive: Bool
     public let internalURL: URL?
@@ -34,7 +34,7 @@ public enum TKBooking {
     public let confirmation: ActionConfirmation?
     public var input: [ActionInput]?
     
-    public enum ActionType: String, Codable, CaseIterable {
+    public enum ActionType: String, Codable, CaseIterable, Sendable {
       public init(from decoder: Decoder) throws {
         let single = try decoder.singleValueContainer()
         let string = try single.decode(String.self)
@@ -60,7 +60,7 @@ public enum TKBooking {
       case unknown
     }
     
-    public struct ActionInput: Codable, Hashable {
+    public struct ActionInput: Codable, Hashable, Sendable {
       public let field: String
       public var value: String?
       
@@ -82,13 +82,13 @@ public enum TKBooking {
     }
   }
     
-  public struct ActionConfirmation: Codable, Hashable {
+  public struct ActionConfirmation: Codable, Hashable, Sendable {
     public let message: String
     public let abortActionTitle: String
     public let confirmActionTitle: String
   }
   
-  public struct TSPBranding: Codable, Hashable {
+  public struct TSPBranding: Codable, Hashable, Sendable {
     private let rgbColor: TKAPI.RGBColor?
     public let logoImageName: String?
     
@@ -104,7 +104,7 @@ public enum TKBooking {
 #endif
   }
   
-  public struct Purchase: Codable, Hashable {
+  public struct Purchase: Codable, Hashable, @unchecked Sendable {
     public let id: String
     private let rawPrice: Double?
     public let currency: String?
@@ -160,7 +160,7 @@ public enum TKBooking {
     
   }
   
-  public struct Confirmation: Codable, Hashable {
+  public struct Confirmation: Codable, Hashable, @unchecked Sendable {
     public let status: Detail
     public let provider: Detail?
     public let vehicle: Detail?
@@ -173,8 +173,8 @@ public enum TKBooking {
     @DefaultEmptyArray public var purchasedTickets: [PurchasedTicket]
   }
   
-  public struct BookingInput: Codable, Hashable, Identifiable {
-    public struct InputOption: Codable, Hashable, Identifiable {
+  public struct BookingInput: Codable, Hashable, Identifiable, Sendable {
+    public struct InputOption: Codable, Hashable, Identifiable, Sendable {
       public let id: String
       public let title: String
     }
@@ -188,13 +188,13 @@ public enum TKBooking {
       case terms = "TERMS"
     }
     
-    public enum ReturnTripDateValue: Hashable {
+    public enum ReturnTripDateValue: Hashable, Sendable {
       case unspecified
       case date(Date)
       case oneWayTrip
     }
     
-    public enum InputValue: Hashable {
+    public enum InputValue: Hashable, Sendable {
       case singleSelection(InputOption.ID)
       case multipleSelections([InputOption.ID])
       case longText(String)
@@ -302,13 +302,13 @@ public enum TKBooking {
     }
   }
   
-  public struct BookingNote: Codable, Hashable {
+  public struct BookingNote: Codable, Hashable, @unchecked Sendable {
     public let provider: String
     public let text: String
     @ISO8601OrSecondsSince1970 public var timestamp: Date
   }
   
-  public struct Location: Codable, Hashable {
+  public struct Location: Codable, Hashable, Sendable {
     public let latitude: TKAPI.Degrees
     public let longitude: TKAPI.Degrees
     
@@ -328,14 +328,14 @@ public enum TKBooking {
 
 extension TKBooking {
   
-  public struct FareGroup: Codable, Hashable, Identifiable {
+  public struct FareGroup: Codable, Hashable, Identifiable, @unchecked Sendable {
     public let id: String
     public let name: String
     @DefaultFalse public var selected: Bool
   }
   
-  public struct Fare: Codable, Hashable, Identifiable {
-    public enum Status: String, Codable {
+  public struct Fare: Codable, Hashable, Identifiable, @unchecked Sendable {
+    public enum Status: String, Codable, Sendable {
       case inactive = "UNACTIVATED"
       case activated = "ACTIVE"
       case stale = "STALE_TICKET"
@@ -347,7 +347,7 @@ extension TKBooking {
       case fareCapped = "FARE_CAPPED"
     }
     
-    public enum RideType: String, Codable {
+    public enum RideType: String, Codable, Sendable {
       case single = "single_ride"
       case multiple = "multiple_rides"
     }
@@ -403,7 +403,7 @@ extension TKBooking {
 
   }
   
-  public struct Rider: Codable, Hashable, Identifiable {
+  public struct Rider: Codable, Hashable, Identifiable, Sendable {
     public typealias ID = String
     
     public var id: ID
@@ -417,7 +417,7 @@ extension TKBooking {
     }
   }
   
-  public struct PurchasedTicket: Codable, Hashable, Identifiable {
+  public struct PurchasedTicket: Codable, Hashable, Identifiable, @unchecked Sendable {
     public typealias Status = Fare.Status
     
     public typealias ID = String

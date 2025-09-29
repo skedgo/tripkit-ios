@@ -108,8 +108,7 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
     fromToStack.isUserInteractionEnabled = true
     fromToStack.addGestureRecognizer(fromToTapper)
     
-    dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton)
     dismissButton.accessibilityLabel = Loc.Close
   }
   

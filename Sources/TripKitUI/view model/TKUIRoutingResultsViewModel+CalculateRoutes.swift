@@ -273,6 +273,9 @@ extension TripRequest {
       time = .leaveAfter(self.time!)
     case .arriveBefore:
       time = .arriveBefore(self.time!)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      time = .leaveASAP
     }
     
     return TKUIRoutingResultsViewModel.RouteBuilder(
@@ -296,6 +299,9 @@ extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
       self = .leaveAfter(date)
     case .arriveBefore:
       self = .arriveBefore(date)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      self = .leaveASAP
     }
   }
   

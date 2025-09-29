@@ -10,7 +10,7 @@ import Foundation
 
 extension TKAPI {
 
-  public struct Stop: Codable, Hashable {
+  public struct Stop: Codable, Hashable, @unchecked Sendable {
     private enum CodingKeys: String, CodingKey {
       case code
       case lat
@@ -58,7 +58,7 @@ extension TKAPI {
     
   }
   
-  public struct Operator: Codable, Hashable {
+  public struct Operator: Codable, Hashable, Sendable {
     public let id: String?
     public let name: String?
   }

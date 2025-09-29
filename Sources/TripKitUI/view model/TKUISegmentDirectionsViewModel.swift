@@ -115,6 +115,9 @@ extension Shape.Instruction {
     case .turnSlightlyRight:  part = "light-right"
     case .turnSharplyLeft:    flip = true; fallthrough
     case .turnSharplyRight:   part = "heavy-right"
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
     
     let image = TripKitUIBundle.imageNamed("maneuver-\(part)")

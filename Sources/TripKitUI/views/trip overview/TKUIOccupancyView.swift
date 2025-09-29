@@ -22,6 +22,9 @@ extension TKAPI.VehicleOccupancy {
       return .iconCrossMini
     case .unknown:
       return nil
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
   

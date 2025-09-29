@@ -9,7 +9,7 @@
 import Foundation
 
 /// This class encapsulates information about the map tiles of a trip segment.
-public class TKMapTiles: NSObject, Codable {
+public final class TKMapTiles: NSObject, Codable, Sendable {
   
   /// A human-friendly name for these tiles
   public let name: String

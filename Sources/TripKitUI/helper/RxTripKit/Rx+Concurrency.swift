@@ -105,13 +105,24 @@ extension PrimitiveSequenceType where Trait == SingleTrait {
     }
   }
   
-  public static func create(_ handler: @escaping () async throws -> Element) -> Single<Element> {
+  public static func create(onMain: Bool = false, _ handler: @escaping () async throws -> Element) -> Single<Element> {
     create { subscriber in
-      Task {
-        do {
-          subscriber(.success(try await handler()))
-        } catch {
-          subscriber(.failure(error))
+      if onMain {
+        Task { @MainActor in
+          do {
+            subscriber(.success(try await handler()))
+          } catch {
+            subscriber(.failure(error))
+          }
+        }
+
+      } else {
+        Task {
+          do {
+            subscriber(.success(try await handler()))
+          } catch {
+            subscriber(.failure(error))
+          }
         }
       }
       return Disposables.create()

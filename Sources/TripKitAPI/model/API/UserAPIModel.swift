@@ -10,7 +10,7 @@ import Foundation
 
 extension TKAPI {
   
-  public struct User: Codable {
+  public struct User: Codable, @unchecked Sendable {
     public let name: String?
     public let givenName: String?
     public let familyName: String?
@@ -61,7 +61,7 @@ extension TKAPI {
     }
   }
   
-  public struct Phone: Codable, Hashable {
+  public struct Phone: Codable, Hashable, Sendable {
     public let countryCode: String?
     public let number: String
     let validated: Bool?
@@ -87,7 +87,7 @@ extension TKAPI {
     }
   }
   
-  public struct Email: Codable, Hashable {
+  public struct Email: Codable, Hashable, Sendable {
     public let address: String
     public let verified: Bool
     public let primary: Bool

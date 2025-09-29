@@ -23,7 +23,8 @@ let package = Package(
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.1.0")),
     .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.0.0")),
     .package(url: "https://github.com/skedgo/GeoMonitor.git", .upToNextMinor(from: "0.2.0")),
-    .package(url: "https://github.com/skedgo/TGCardViewController.git", .upToNextMajor(from: "2.2.10")),
+    .package(url: "https://github.com/skedgo/TGCardViewController.git", branch: "ios26"),
+//    .package(url: "https://github.com/skedgo/TGCardViewController.git", .upToNextMajor(from: "2.2.10")),
   ],
   targets: [
     .target(
