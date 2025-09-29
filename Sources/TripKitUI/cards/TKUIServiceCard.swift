@@ -128,13 +128,18 @@ public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }
     
-    if let title = titleView {
+    if let titleView {
       viewModel.$header
         .compactMap { $0 }
-        .sink { title.configure(with: $0) }
+        .sink { [weak titleView] in titleView?.configure(with: $0) }
         .store(in: &cancellables)
     }
     
+    viewModel.$next
+      .compactMap(\.self)
+      .sink { [weak self] in self?.handle($0) }
+      .store(in: &cancellables)
+
     if rectStorage.infoFrame != nil {
       scrollToEmbarkation(animated: false)
     } else {
@@ -144,15 +149,6 @@ public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
     }
     
     scrollView.delegate = self
-  }
-
-  private func didBuild(tableView: UITableView) {
-    viewModel.next
-      .sink(
-        receiveCompletion: { _ in assertionFailure() },
-        receiveValue: { [weak self] in self?.handle($0) }
-      )
-      .store(in: &cancellables)
   }
   
   public override func didAppear(animated: Bool) {
@@ -189,7 +185,7 @@ private class RectStorage {
   var didSetInitialFrame: () -> Void = { }
 }
 
-// MARK: - UITableViewDelegate + Headers
+// MARK: - UIScrollViewDelegate
 
 extension TKUIServiceCard: UIScrollViewDelegate {
 
@@ -212,20 +208,17 @@ public struct TKUIServiceContent: View {
   
   public var body: some View {
     VStack(alignment: .leading) {
-      if model.header == nil {
-        HStack {
-          ProgressView()
-          Text(verbatim: Loc.LoadingDotDotDot)
-          Spacer()
-        }
-      } else {
-        ForEach(model.sections) { section in
+      if let sections = model.sections {
+        ForEach(sections) { section in
           VStack(alignment: .leading, spacing: 0) {
             ForEach(section.items) { item in
               switch item {
               case .info(let content):
                 TKUIServiceInfoView(content: content)
                   .padding()
+                  .onTapGesture {
+                    try? model.selected(item)
+                  }
                   .background(GeometryReader { proxy in
                     Color.clear.preference(
                       key: RectPreferenceKey.self,
@@ -235,12 +228,21 @@ public struct TKUIServiceContent: View {
 
               case .timing(let content):
                 TKUIServiceItemView(item: content)
+                  .onTapGesture {
+                    try? model.selected(item)
+                  }
               }
               
             }
           }
           .background(Color(.tkBackgroundNotClear))
           .cornerRadius(22)
+        }
+      } else {
+        HStack {
+          ProgressView()
+          Text(verbatim: Loc.LoadingDotDotDot)
+          Spacer()
         }
       }
     }

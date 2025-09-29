@@ -10,16 +10,12 @@ import Foundation
 import MapKit
 import Combine
 
-import RxSwift
-import RxCocoa
-
 import TripKit
 
 class TKUIServiceMapManager: TKUIMapManager {
   
   weak var viewModel: TKUIServiceViewModel?
   
-  private let disposeBag = DisposeBag()
   private var cancellables: Set<AnyCancellable> = []
   
   override init() {
@@ -41,9 +37,10 @@ class TKUIServiceMapManager: TKUIMapManager {
       .sink { [weak self] in self?.reloadContent($0) }
       .store(in: &cancellables)
     
-    viewModel.selectAnnotation
-      .drive(onNext: { [weak self] in self?.select($0) })
-      .disposed(by: disposeBag)
+    viewModel.$selectAnnotation
+      .compactMap(\.self)
+      .sink { [weak self] in self?.select($0) }
+      .store(in: &cancellables)
 
     viewModel.$realTimeUpdate
       .sink { [weak self] update in
