@@ -89,13 +89,8 @@ public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
       initialPosition: .peaking
     )
     
-    switch self.title {
-    case .custom(_, let dismissButton):
-      let styledButtonImage = TGCard.closeButtonImage(style: self.style)
-      dismissButton?.setImage(styledButtonImage, for: .normal)
-      dismissButton?.setTitle(nil, for: .normal)
-    default:
-      return
+    if case .custom(_, .some(let dismissButton)) = title {
+      TGCard.configureCloseButton(dismissButton, style: style)
     }
 
     if let knownMapManager = mapManager as? TKUIMapManager {

@@ -71,8 +71,7 @@ public class TKUISegmentTitleView: UIView, TGPreferrableView {
 
     subsubtitleLabel.text = nil
     
-    dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton)
     dismissButton.accessibilityLabel = Loc.Close
 
     modeIcon.tintColor = primaryColor
@@ -111,9 +110,7 @@ public class TKUISegmentTitleView: UIView, TGPreferrableView {
   public func applyStyleToCloseButton(_ style: TGCardStyle) {
     guard dismissButton != nil else { return }
     
-    let styledImage = TGCard.closeButtonImage(style: style)
-    dismissButton.setImage(styledImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton, style: style)
   }
   
   private func showActionsWrapper(_ show: Bool) {

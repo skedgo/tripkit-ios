@@ -47,8 +47,7 @@ class TKUITripTitleView: UIView {
     timeTitleLabel.text = nil
     timeSubtitleLabel.text = nil
 
-    dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton)
     dismissButton.accessibilityLabel = Loc.Close
   }
   
