@@ -383,7 +383,7 @@ extension MainViewController {
       style: .bold
     ) { _, card, segment, sender in
       guard let controller = card.controller else { return false }
-      TKInterAppCommunicator.openSegmentInMapsApp(segment, forViewController: controller, initiatedBy: sender, currentLocationHandler: nil)
+      TKInterAppCommunicator.openSegmentInMapsApp(segment, forViewController: controller, currentLocationHandler: nil)
       return false
     }
   }
