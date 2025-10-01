@@ -41,6 +41,9 @@ public extension TKUIHomeCard {
     
     static let empty = Configuration()
     
+    /// Prompt to show above the search bar
+    public var prompt: String? = nil
+    
     /// Set this to indicate if permission to access location services should be
     /// requested when the card is loaded. When setting to `true`, the map
     /// is zoomed to a user's current location and begins displaying nearby

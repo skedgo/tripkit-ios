@@ -55,7 +55,10 @@ open class TKUIHomeCard: TKUITableCard {
     hasGrabHandle = true
     #endif
     
-    self.headerView = TKUIHomeHeaderView(hasGrabHandle: hasGrabHandle)
+    self.headerView = TKUIHomeHeaderView(
+      hasGrabHandle: hasGrabHandle,
+      prompt: TKUIHomeCard.config.prompt
+    )
 
     let tableStyle: UITableView.Style
     if #available(iOS 26, *) {
