@@ -206,7 +206,7 @@ public struct TKUIServiceContent: View {
       if let sections = model.sections {
         ForEach(sections) { section in
           VStack(alignment: .leading, spacing: 0) {
-            ForEach(section.items) { item in
+            ForEach(Array(section.items.enumerated()), id: \.element) { index, item in
               switch item {
               case .info(let content):
                 TKUIServiceInfoView(content: content)
@@ -226,6 +226,10 @@ public struct TKUIServiceContent: View {
                   .onTapGesture {
                     try? model.selected(item)
                   }
+                
+                if index < section.items.count - 1 {
+                  Divider()
+                }
               }
               
             }
@@ -364,6 +368,7 @@ private struct TKUIServiceItemView: View {
           }
         }
       }
+      .padding(.vertical, 12)
       
       Spacer(minLength: 0)
     }
