@@ -234,6 +234,7 @@ public struct TKUIServiceContent: View {
               
             }
           }
+          .fixedSize(horizontal: false, vertical: true) // each row should be as compact as possible
           .background(Color(.tkBackgroundNotClear))
           .cornerRadius(22)
         }
