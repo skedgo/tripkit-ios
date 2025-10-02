@@ -195,9 +195,8 @@ class TKUIRoutingResultsViewModel {
       
       presentModes = inputs.tappedShowModes
         .asObservable()
-        .withLatestFrom(builderChanged) { (_, builder) -> Next in
-          let region = Self.regionForModes(for: builder)
-          return Next.presentModeConfigurator(region: region)
+        .withLatestFrom(requestChanged) { (_, request) -> Next in
+          .presentModeConfigurator(region: request.0.spanningRegion)
         }
         .asAssertingSignal()
       
