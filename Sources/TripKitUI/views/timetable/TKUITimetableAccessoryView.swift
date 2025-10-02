@@ -66,11 +66,25 @@ class TKUITimetableAccessoryView: UIView {
     serviceCollectionToCustomActionViewConstraint.isActive = false
     serviceCollectionToBottomBarConstraint.isActive = true
 
-    bottomBar.backgroundColor = .tkBackgroundSecondary
     
-    // Apply default style, removing the search bar's background
-    TKStyleManager.style(searchBar, includingBackground: false) { textField in
-      textField.backgroundColor = .tkBackground
+    if #available(iOS 26.0, *) {
+      searchBar.searchBarStyle = .minimal // No background *around* the search bar
+      searchBar.searchTextField.backgroundColor = .tkBackgroundNotClear
+#if compiler(>=6.2) // Xcode 26 proxy
+      searchBar.searchTextField.cornerConfiguration = .corners(radius: .containerConcentric(minimum: 22))
+#endif
+      
+      // Clear preferred for these
+      bottomBar.backgroundColor = .tkBackground
+      customActionView.backgroundColor = .tkBackground
+      
+    } else {
+      // Apply default style, removing the search bar's background
+      TKStyleManager.style(searchBar, includingBackground: false) { textField in
+        textField.backgroundColor = .tkBackground
+      }
+      
+      bottomBar.backgroundColor = .tkBackgroundSecondary
     }
     searchBar.placeholder = Loc.Search
 
@@ -97,6 +111,7 @@ class TKUITimetableAccessoryView: UIView {
       customActionViewToBottomBarConstraint.isActive = true
       
       let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: card, model: model, container: customActionView)
+      actionsView.backgroundColor = .tkBackground
       customActionView.addSubview(actionsView)
       
       actionsView.translatesAutoresizingMaskIntoConstraints = false
@@ -145,7 +160,7 @@ extension TKUIServiceNumberCell {
       numberLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       wrapperView.backgroundColor = serviceColor
     } else {
-      numberLabel.textColor = .tkBackground
+      numberLabel.textColor = .tkBackgroundNotClear
       wrapperView.backgroundColor = .tkLabelPrimary
     }
   }

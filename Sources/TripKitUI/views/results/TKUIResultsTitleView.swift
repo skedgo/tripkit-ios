@@ -27,6 +27,10 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
   
   @IBOutlet private weak var topLevelStackBottomSpacing: NSLayoutConstraint!
   
+  @IBOutlet weak var topLevelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTopConstraint: NSLayoutConstraint!
+  
   var enableTappingLocation: Bool = true
   
   private let locationSearchPublisher = PublishSubject<Void>()
@@ -74,13 +78,29 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+
+    if #available(iOS 26.0, *) {
+      topLevelLeadingConstraint.constant = 4
+      dismissButtonTrailingConstraint.constant = 18
+      dismissButtonTopConstraint.constant = 2
+    } else {
+      topLevelLeadingConstraint.constant = 0
+      dismissButtonTrailingConstraint.constant = 4
+      dismissButtonTopConstraint.constant = -11
+    }
+
     backgroundColor = .tkBackground
     
-    originLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
-    originLabel.textColor = .tkLabelSecondary
+    originLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .callout)
+    originLabel.textColor = UIColor { traits in
+      if traits.accessibilityContrast == .high {
+        return UIColor.tkLabelSecondary
+      } else {
+        return UIColor.tkAppTintColor
+      }
+    }
     
-    destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title3)
+    destinationLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     destinationLabel.textColor = .tkLabelPrimary
     
     let fromToTapper = UITapGestureRecognizer(target: self, action: #selector(fromToTapped))
@@ -88,8 +108,7 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
     fromToStack.isUserInteractionEnabled = true
     fromToStack.addGestureRecognizer(fromToTapper)
     
-    dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton)
     dismissButton.accessibilityLabel = Loc.Close
   }
   
@@ -104,24 +123,7 @@ class TKUIResultsTitleView: UIView, TGPreferrableView {
 
     let originName = origin ?? "…"
     let originText = Loc.From(location: originName)
-    let attributedOrigin = NSMutableAttributedString(string: originText)
-    attributedOrigin.addAttribute(
-      .foregroundColor, value: UIColor.tkLabelSecondary,
-      range: NSRange(location: 0, length: (originText as NSString).length)
-    )
-    let nameColor = UIColor { traits in
-      if traits.accessibilityContrast == .high {
-        return UIColor.tkLabelSecondary
-      } else {
-        return UIColor.tkAppTintColor
-      }
-    }
-    attributedOrigin.addAttribute(
-      .foregroundColor, value: nameColor,
-      range: (originText as NSString).range(of: originName)
-    )
-    
-    originLabel.attributedText = attributedOrigin
+    originLabel.text = originText
     
     originLabel.isAccessibilityElement = false
     destinationLabel.isAccessibilityElement = false

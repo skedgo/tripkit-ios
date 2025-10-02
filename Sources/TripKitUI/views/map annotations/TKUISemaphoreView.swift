@@ -37,7 +37,7 @@ public class TKUISemaphoreView: MKAnnotationView {
     case onRight
     
     public static var defaultDirection: LabelSide {
-      switch Locale.current.languageCode.map({ Locale.lineDirection(forLanguage: $0) }) {
+      switch Locale.current.language.lineLayoutDirection {
       case .rightToLeft: return .onLeft
       default: return .onRight
       }

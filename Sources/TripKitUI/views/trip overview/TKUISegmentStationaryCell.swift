@@ -48,11 +48,11 @@ class TKUISegmentStationaryCell: UITableViewCell {
     super.awakeFromNib()
     
     backgroundColor = .clear
-    lineDot.backgroundColor = .tkBackground
+    lineDot.backgroundColor = .tkBackgroundNotClear
     
-    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    titleLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
     titleLabel.textColor = .tkLabelPrimary
-    subtitleLabel.textColor = .tkLabelSecondary
+    subtitleLabel.textColor = .tkLabelPrimary
     
     timeLabel.textColor = .tkLabelPrimary
     timeLabel.numberOfLines = 0
@@ -247,7 +247,7 @@ extension TKUISegmentStationaryCell {
     lineDot.layer.borderColor = (item.bottomConnection?.color ?? item.topConnection?.color ?? .tkLabelPrimary).cgColor
     lineDot.layer.borderWidth = 3
 
-    let width: CGFloat = item.isContinuation ? 12 : 18
+    let width: CGFloat = item.isContinuation ? 12 : 15
     lineDotWidthConstraint.constant = width
     lineDot.layer.cornerRadius = width / 2
 
@@ -256,7 +256,7 @@ extension TKUISegmentStationaryCell {
     bottomLine.backgroundColor = item.bottomConnection?.color
     bottomLine.isHidden = item.bottomConnection?.color == nil
 
-    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, disposeBag: disposeBag) }
     buttonStackView.resetViews(buttons)
   }
   
@@ -293,7 +293,7 @@ extension TKUISegmentStationaryCell {
 
     } else {
       linePinImageView.isHidden = false
-      linePinImageView.tintColor = item.connection?.color ?? .tkLabelPrimary
+      linePinImageView.tintColor = item.connection?.color ?? .tkLabelSecondary
       linePinImageView.backgroundColor = .clear
       lineDot.isHidden = true
     }
@@ -304,7 +304,7 @@ extension TKUISegmentStationaryCell {
     bottomLine.backgroundColor = item.connection?.color
     bottomLine.isHidden = !item.isStart || item.connection?.color == nil
     
-    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, disposeBag: disposeBag) }
     buttonStackView.resetViews(buttons)
   }
   

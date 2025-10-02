@@ -20,7 +20,11 @@ class TKUITripTitleView: UIView {
   @IBOutlet weak var segmentView: TKUITripSegmentsView!
 
   @IBOutlet weak var dismissButton: UIButton!
-  
+
+  @IBOutlet weak var topLevelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTopConstraint: NSLayoutConstraint!
+
   static func newInstance() -> TKUITripTitleView {
     return Bundle.tripKitUI.loadNibNamed("TKUITripTitleView", owner: self, options: nil)?.first as! TKUITripTitleView
   }
@@ -28,13 +32,22 @@ class TKUITripTitleView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    if #available(iOS 26.0, *) {
+      topLevelLeadingConstraint.constant = 22
+      dismissButtonTrailingConstraint.constant = 18
+      dismissButtonTopConstraint.constant = 2
+    } else {
+      topLevelLeadingConstraint.constant = 16
+      dismissButtonTrailingConstraint.constant = 4
+      dismissButtonTopConstraint.constant = -11
+    }
+
     backgroundColor = .tkBackground
 
     timeTitleLabel.text = nil
     timeSubtitleLabel.text = nil
 
-    dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton)
     dismissButton.accessibilityLabel = Loc.Close
   }
   
@@ -48,12 +61,18 @@ class TKUITripTitleView: UIView {
 
 extension TKUITripTitleView {
   func configure(with model: TKUITripCell.Model) {
+    if #available(iOS 26.0, *) {
+      timeTitleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
+      timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .title2)
+    } else {
+      timeTitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+      timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
+    }
+    
     timeTitleLabel.text = model.primaryTimeString
-    timeTitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     timeTitleLabel.textColor = .tkLabelPrimary
 
     timeSubtitleLabel.text = model.secondaryTimeString
-    timeSubtitleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     timeSubtitleLabel.textColor = .tkLabelSecondary
 
     segmentView.isCanceled = model.isCancelled

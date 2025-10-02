@@ -27,7 +27,7 @@ extension TKAPI {
   public typealias Speed = Double
 #endif
   
-  public struct AppInfo: Codable, Hashable {
+  public struct AppInfo: Codable, Hashable, Sendable {
     public let name: String?
     public let downloadURL: URL?
     public let deepLink: URL?
@@ -39,7 +39,7 @@ extension TKAPI {
     }
   }  
 
-  public struct CompanyInfo: Codable, Hashable {
+  public struct CompanyInfo: Codable, Hashable, Sendable {
     public let name: String
     public let website: URL?
     public let phone: String?
@@ -74,7 +74,7 @@ extension TKAPI {
     
   }
   
-  public struct DataAttribution: Codable, Hashable {
+  public struct DataAttribution: Codable, Hashable, Sendable {
     public let provider: CompanyInfo
     public let disclaimer: String?
     
@@ -84,7 +84,7 @@ extension TKAPI {
     }
   }
 
-  public struct Location: Codable, Hashable {
+  public struct Location: Codable, Hashable, Sendable {
     public let latitude: Degrees
     public let longitude: Degrees
     public var bearing: Direction? = nil
@@ -108,7 +108,7 @@ extension TKAPI {
     }
   }
   
-  public enum RealTimeStatus: String, Codable, Equatable {
+  public enum RealTimeStatus: String, Codable, Equatable, Sendable {
     case capable    = "CAPABLE"
     case incapable  = "INCAPABLE"
     
@@ -116,7 +116,7 @@ extension TKAPI {
     case canceled   = "CANCELLED"
   }
 
-  public struct RGBColor: Codable, Hashable {
+  public struct RGBColor: Codable, Hashable, Sendable {
     let red: Int
     let green: Int
     let blue: Int

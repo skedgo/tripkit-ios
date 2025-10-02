@@ -16,15 +16,15 @@ import AppKit
 
 extension TKAPI {
   
-  public struct Alert: Codable, Hashable {
-    public enum Severity: String, Codable {
+  public struct Alert: Codable, Hashable, Sendable {
+    public enum Severity: String, Codable, Sendable {
       case info = "info"
       case warning = "warning"
       case alert = "alert"
     }
     
-    public struct Action: Hashable {
-      public enum ActionType: Hashable {
+    public struct Action: Hashable, Sendable {
+      public enum ActionType: Hashable, Sendable {
         case reroute([String])
       }
       
@@ -65,7 +65,7 @@ extension TKAPI {
   }
   
   /// Replaces the previous `TKAlertWrapper`
-  public struct AlertMapping: Codable, Hashable {
+  public struct AlertMapping: Codable, Hashable, Sendable {
     public let alert: TKAPI.Alert
     public let operators: [String]?
     public let serviceTripIDs: [String]?
@@ -74,7 +74,7 @@ extension TKAPI {
     public let modeInfo: TKModeInfo?
   }
   
-  public struct AlertRouteMapping: Codable, Hashable {
+  public struct AlertRouteMapping: Codable, Hashable, Sendable {
     public let id: String
     public let name: String?
     public let number: String?

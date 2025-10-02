@@ -13,7 +13,6 @@ import MapKit
 
 extension TKInterAppCommunicator {
   
-  @objc(canOpenInMapsApp:)
   public static func canOpenInMapsApp(_ segment: TKSegment) -> Bool {
     return segment.turnByTurnMode != nil
   }
@@ -53,15 +52,12 @@ extension TKInterAppCommunicator {
   ///
   /// - Parameter segment: A segment for which `canOpenInMapsApp` returns `true`
   /// - Parameter controller: A controller to present the optional action sheet on
-  /// - Parameter sender: A controller to present the optional action sheet on
   /// - Parameter currentLocationHandler: Will be called to check if turn-by-turn navigation
   ///               should start at the current location or at the segment's start location. If `nil` it will
   ///               start at the current location.
-  @objc(openSegmentInMapsApp:forViewController:initiatedBy:currentLocationHandler:)
   public static func openSegmentInMapsApp(
       _ segment: TKSegment,
       forViewController controller: UIViewController,
-      initiatedBy sender: Any,
       currentLocationHandler: ((TKSegment) -> Bool)?
     ) {
     

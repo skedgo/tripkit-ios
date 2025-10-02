@@ -13,14 +13,14 @@ extension TKAPI {
   /// Representation of a pricing table
   ///
   /// Matches PricingTable from the tripgo-api
-  public struct PricingTable : Codable, Hashable {
+  public struct PricingTable : Codable, Hashable, Sendable {
     public let title: String
     public let subtitle: String?
     public let currency: String
     public let entries: [Entry]
     
     /// A single entry in a pricing table
-    public struct Entry: Codable, Hashable {
+    public struct Entry: Codable, Hashable, Sendable {
       public let label: String?
       public let price: Float
       public let maxDurationInMinutes: Int?

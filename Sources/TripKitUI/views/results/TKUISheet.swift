@@ -10,6 +10,7 @@ import UIKit
 
 import TripKit
 
+@available(iOS, deprecated: 26.0, message: "Use sheet presentations.")
 open class TKUISheet: UIView {
 
   public var overlayColor: UIColor = .tkNeutral4

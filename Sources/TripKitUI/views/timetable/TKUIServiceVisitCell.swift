@@ -111,6 +111,9 @@ extension TKUIServiceVisitCell {
       // TODO: Would be good to show travel time here
       arrivalText = nil
       departureText = nil
+      
+    @unknown default:
+      return assertionFailure("Please update TripKit dependency.")
     }
     
     if arrivalText == departureText {
@@ -134,7 +137,6 @@ extension TKUIServiceVisitCell {
   }
   
   func setTitle(_ title: String?, subtitle: String? = nil,  isVisited: Bool) {
-    
     titleLabel.text = title
     titleLabel.font = TKStyleManager.customFont(forTextStyle: .body)
     titleLabel.textColor = isVisited ? .tkLabelPrimary : .tkLabelTertiary
@@ -142,6 +144,7 @@ extension TKUIServiceVisitCell {
     subtitleLabel.text = subtitle
     subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
     subtitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
+    subtitleLabel.isHidden = subtitle == nil
     
     accessibilityTitleLabel.textColor = isVisited ? .tkLabelSecondary : .tkLabelTertiary
     accessibilityImageView.alpha = isVisited ? 1 : 0.3
@@ -174,15 +177,12 @@ extension TKUIServiceVisitCell {
 
 extension TKUIServiceVisitCell {
   
-  func configure(with item: TKUIServiceViewModel.Item) {
+  func configure(with item: TKUIServiceViewModel.TimingItem) {
     setTiming(item.timing, timeZone: item.timeZone, isVisited: item.isVisited, realTime: item.realTimeStatus)
 
     setTitle(item.title, isVisited: item.isVisited)
     
-    // NOTE: This is the accessibility of the stop-only, as the
-    // service accessibility is assumed covered by the title
-    // of the screen.
-    setStopAccessibility(item.dataModel.stop.wheelchairAccessibility)
+    setStopAccessibility(item.stopAccessibility)
     
     topLine.backgroundColor = item.topConnection
     topLine.isHidden = item.topConnection == nil

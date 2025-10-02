@@ -129,6 +129,10 @@ public extension Reactive where Base : TKLocationManager {
         }
         return Disposables.create()
       }
+      
+    @unknown default:
+      assertionFailure()
+      return .just(false)
     }
     
   }

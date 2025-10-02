@@ -9,7 +9,7 @@
 import Foundation
 
 @objc
-public enum TKTimeType: Int {
+public enum TKTimeType: Int, Hashable {
   case leaveASAP = 0
   case leaveAfter
   case arriveBefore

@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/skedgo/TGCardViewController.git",
       "state" : {
-        "revision" : "ea4938501d071d99cc9cc6c74f5ea5a79aef919b",
-        "version" : "2.3.3"
+        "branch" : "ios26",
+        "revision" : "af683e660df7784df7e92081f12a6cebc2123446"
       }
     }
   ],

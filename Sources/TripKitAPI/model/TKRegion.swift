@@ -19,13 +19,10 @@ public enum TKRegionParserError : Error {
   case fetchingRegionsFailed
 }
 
-public class TKRegionCity : NSObject, Codable {
+public final class TKRegionCity : NSObject, Codable, @unchecked Sendable {
   public let name: String?
   public let latitude: TKAPI.Degrees
   public let longitude: TKAPI.Degrees
-
-  public weak var region: TKRegion? = nil
-  public var orderInRegion: Int? = nil
 
   public init(title: String, latitude: TKAPI.Degrees, longitude: TKAPI.Degrees) {
     self.name = title
@@ -40,7 +37,7 @@ public class TKRegionCity : NSObject, Codable {
   }
 }
 
-open class TKRegion : NSObject, Codable {
+open class TKRegion : NSObject, Codable, @unchecked Sendable {
   public typealias City = TKRegionCity
   
   public let timeZone: TimeZone
@@ -124,11 +121,6 @@ open class TKRegion : NSObject, Codable {
     simplePolygon = Polygon(points: Point.decodePolyline(encodedPolygon))
     
     super.init()
-    
-    for (index, city) in cities.enumerated() {
-      city.region = self
-      city.orderInRegion = index
-    }
   }
   
   public func encode(to encoder: Encoder) throws {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TKBookingData: Codable, Hashable {
+public struct TKBookingData: Codable, Hashable, Sendable {
   public let title: String
   
   /// Optional overwrite for `accessibilityLabel`; fallback to `title` if `nil`

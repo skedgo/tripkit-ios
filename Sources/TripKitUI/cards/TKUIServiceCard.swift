@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
+import SwiftUI
+import Combine
 
-import RxSwift
-import RxCocoa
 import TGCardViewController
 
 import TripKit
@@ -18,25 +18,18 @@ import TripKit
 /// A card that lists the route of an individual public transport
 /// service. Starts at the provided embarkation and optionally
 /// highlights where to get off.
-public class TKUIServiceCard: TKUITableCard {
-  
-  typealias DataSource = UITableViewDiffableDataSource<TKUIServiceViewModel.Section, TKUIServiceViewModel.Item>
+public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
   
   public static var config = Configuration.empty
   
   private var dataInput: TKUIServiceViewModel.DataInput
-  private var viewModel: TKUIServiceViewModel!
-  private var dataSource: DataSource!
+  private let viewModel: TKUIServiceViewModel
   private let serviceMapManager: TKUIServiceMapManager
-  private let disposeBag = DisposeBag()
-  
-  private let itemSelected = PublishSubject<TKUIServiceViewModel.Item>()
-  private let scrollToTopPublisher = PublishSubject<Void>()
-  private let toggleHeaderPublisher = PublishSubject<Bool>()
-  private let showAlertsPublisher = PublishSubject<Void>()
+  private var cancellables = Set<AnyCancellable>()
 
   private let titleView: TKUIServiceTitleView?
-  private var headerView: UIView?
+  private weak var scrollView: UIScrollView?
+  private let rectStorage: RectStorage
   
   /// Configures a new instance that will fetch the service details
   /// and the show them in the list and on the map.
@@ -73,31 +66,31 @@ public class TKUIServiceCard: TKUITableCard {
       self.titleView = header
     }
     
-    self.serviceMapManager = TKUIServiceMapManager()
+    let serviceMapManager = TKUIServiceMapManager()
     let mapManager: TGMapManager
     if let trip = reusing {
       mapManager = TKUIComposingMapManager(composing: serviceMapManager, onTopOf: trip)
     } else {
       mapManager = serviceMapManager
     }
+    self.serviceMapManager = serviceMapManager
+    
+    let viewModel = TKUIServiceViewModel(dataInput: dataInput)
+    serviceMapManager.viewModel = viewModel
+    self.viewModel = viewModel
+    
+    let wrapper = RectStorage()
+    self.rectStorage = wrapper
     
     super.init(
       title: title,
-      style: .plain,
+      rootView: TKUIServiceContent(model: viewModel, rectWrapper: wrapper),
       mapManager: mapManager,
       initialPosition: .peaking
     )
     
-    didInit()
-  }
-  
-  private func didInit() {
-    switch self.title {
-    case .custom(_, let dismissButton):
-      let styledButtonImage = TGCard.closeButtonImage(style: style)
-      dismissButton?.setImage(styledButtonImage, for: .normal)
-      dismissButton?.setTitle(nil, for: .normal)
-    default: return
+    if case .custom(_, .some(let dismissButton)) = title {
+      TGCard.configureCloseButton(dismissButton, style: style)
     }
 
     if let knownMapManager = mapManager as? TKUIMapManager {
@@ -110,127 +103,47 @@ public class TKUIServiceCard: TKUITableCard {
   
   // MARK: - Card life cycle
 
-  override public func didBuild(tableView: UITableView) {
-    super.didBuild(tableView: tableView)
-
-    // Table view configuration
+  public override func didBuild(scrollView: UIScrollView) {
+    super.didBuild(scrollView: scrollView)
     
-    tableView.register(TKUIServiceVisitCell.nib, forCellReuseIdentifier: TKUIServiceVisitCell.reuseIdentifier)
+    self.scrollView = scrollView
     
-    let dataSource = DataSource(tableView: tableView) { tv, ip, item in
-      let cell = tv.dequeueReusableCell(withIdentifier: TKUIServiceVisitCell.reuseIdentifier, for: ip) as! TKUIServiceVisitCell
-      cell.configure(with: item)
-      return cell
+    if #unavailable(iOS 26.0) {
+      scrollView.backgroundColor = .tkBackgroundGrouped
     }
-    self.dataSource = dataSource
-    
-    // Build the view model
-    
-    viewModel = TKUIServiceViewModel(
-      dataInput: dataInput,
-      itemSelected: itemSelected.asAssertingSignal()
-    )
-    
-    serviceMapManager.viewModel = viewModel
-    
-    // Setting up actions view
     
     if let titleView = self.titleView, let factory = Self.config.serviceActionsFactory, case let .visits(embarkation, disembarkation) = dataInput {
       let pair: TKUIServiceCard.EmbarkationPair = (embarkation, disembarkation)
       let actions = factory(pair)
 
-      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: self, model: pair, container: tableView)
+      let actionsView = TKUICardActionsViewFactory.build(
+        actions: actions, card: self, model: pair, container: scrollView
+      )
+      actionsView.backgroundColor = .clear
       titleView.accessoryStack.addArrangedSubview(actionsView)
     }
-
-    // Bind outputs
     
-    if let title = titleView {
-      viewModel.header
-        .drive(title.rx.model)
-        .disposed(by: disposeBag)
+    if let titleView {
+      viewModel.$header
+        .compactMap { $0 }
+        .sink { [weak titleView] in titleView?.configure(with: $0) }
+        .store(in: &cancellables)
     }
     
-    viewModel.header
-      .drive(onNext: { [weak self] content in
-        guard let self = self else { return }
-        if self.headerView == nil {
-          self.buildHeader(expanded: !content.alerts.isEmpty, content: content, for: tableView)
-        } else if let mini = self.headerView as? TKUIServiceHeaderMiniView {
-          mini.configure(with: content)
-        } else if let maxi = self.headerView as? TKUIServiceHeaderView {
-          maxi.configure(with: content)
-        }
+    viewModel.$next
+      .compactMap(\.self)
+      .sink { [weak self] in self?.handle($0) }
+      .store(in: &cancellables)
 
-      })
-      .disposed(by: disposeBag)
-    
-    toggleHeaderPublisher.withLatestFrom(viewModel.header.asObservable()) { ($0, $1)}
-      .subscribe(onNext: { [weak self] expand, content in
-        self?.buildHeader(expanded: expand, content: content, for: tableView)
-      })
-      .disposed(by: disposeBag)
-    
-    showAlertsPublisher.withLatestFrom(viewModel.header.asObservable()) { ($1) }
-      .subscribe(onNext: { [weak self] content in
-        let alerts = content.alerts
-        guard let self, !alerts.isEmpty else { return }
-
-        let alertController = TKUIAlertViewController(style: .plain)
-        alertController.alerts = alerts
-        self.controller?.present(alertController, inNavigator: true)
-      })
-      .disposed(by: disposeBag)
-
-    viewModel.sections
-      .drive { [weak self, weak tableView] sections in
-        guard let self, let tableView else { return }
-        self.applySnapshot(for: sections) { [weak tableView] isInitial in
-          // When initially populating, scroll to the first embarkation
-          guard
-            let tableView,
-            isInitial,
-            let embarkation = TKUIServiceViewModel.embarkationIndexPath(in: sections)
-          else { return }
-          
-          // This sometimes crashes when called too quickly, so we add this
-          // delay. Crash is insuide UIKit and look like:
-          /*
-           #0  (null) in __exceptionPreprocess ()
-           #1  (null) in objc_exception_throw ()
-           #2  (null) in -[NSAssertionHandler handleFailureInMethod:object:file:lineNumber:description:] ()
-           #3  (null) in -[UITableView _createPreparedCellForGlobalRow:withIndexPath:willDisplay:] ()
-           #4  (null) in -[UITableView _createPreparedCellForRowAtIndexPath:willDisplay:] ()
-           #5  (null) in -[UITableView _heightForRowAtIndexPath:] ()
-           #6  (null) in -[UISectionRowData heightForRow:inSection:canGuess:] ()
-           #7  (null) in -[UITableViewRowData heightForRow:inSection:canGuess:adjustForReorderedRow:] ()
-           #8  (null) in -[UITableViewRowData ensureHeightsFaultedInForScrollToIndexPath:boundsHeight:] ()
-           #9  (null) in -[UITableView _contentOffsetForScrollingToRowAtIndexPath:atScrollPosition:usingPresentationValues:] ()
-           #10  (null) in -[UITableView _scrollToRowAtIndexPath:atScrollPosition:animated:usingPresentationValues:] ()
-           #11  (null) in -[UITableView scrollToRowAtIndexPath:atScrollPosition:animated:] ()
-           #12  0x1049081b0 in closure #1 in closure #7 in TKUIServiceCard.didBuild(tableView:) at TKUIServiceCard.swift:195
-           */
-          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-            tableView.scrollToRow(at: embarkation, at: .top, animated: false)
-          }
-        }
+    if rectStorage.infoFrame != nil {
+      scrollToEmbarkation(animated: false)
+    } else {
+      rectStorage.didSetInitialFrame = { [weak self] in
+        self?.scrollToEmbarkation(animated: false)
       }
-      .disposed(by: disposeBag)
+    }
     
-    // Additional customisations
-    
-    scrollToTopPublisher
-      .withLatestFrom(viewModel.sections)
-      .map(TKUIServiceViewModel.embarkationIndexPath)
-      .subscribe(onNext: {
-        if let indexPath = $0 {
-          tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        }
-      })
-      .disposed(by: disposeBag)
-    
-    tableView.rx.setDelegate(self)
-      .disposed(by: disposeBag)
+    scrollView.delegate = self
   }
   
   public override func didAppear(animated: Bool) {
@@ -239,80 +152,258 @@ public class TKUIServiceCard: TKUITableCard {
     TKUIEventCallback.handler(.cardAppeared(self))
   }
   
-  private func applySnapshot(for sections: [(TKUIServiceViewModel.Section, [TKUIServiceViewModel.Item])], completion: @escaping (Bool) -> Void) {
-    let isInitial = dataSource.snapshot().numberOfItems == 0
-    
-    var snapshot = NSDiffableDataSourceSnapshot<TKUIServiceViewModel.Section, TKUIServiceViewModel.Item>()
-    snapshot.appendSections(sections.map(\.0))
-    for section in sections {
-      snapshot.appendItems(section.1, toSection: section.0)
+  private func handle(_ next: TKUIServiceViewModel.Next) {
+    switch next {
+    case .showAlerts(let alerts):
+      let alertController = TKUIAlertViewController(style: .plain)
+      alertController.alerts = alerts
+      self.controller?.present(alertController, inNavigator: true)
     }
-    
-    dataSource.apply(snapshot, animatingDifferences: isInitial) {
-      completion(isInitial)
-    }
+  }
+  
+  private func scrollToEmbarkation(animated: Bool) {
+    guard let scrollView, let rect = rectStorage.infoFrame else { return }
+    scrollView.setContentOffset(rect.origin, animated: animated)
   }
   
 }
 
-// MARK: - UITableViewDelegate + Headers
-
-extension TKUIServiceCard: UITableViewDelegate {
-
-  private func buildHeader(expanded: Bool, content: TKUIDepartureCellContent, for tableView: UITableView) {
-    if expanded {
-      let header = TKUIServiceHeaderView.newInstance()
-      header.configure(with: content)
-
-      header.expandyButton.rx.tap
-        .subscribe(onNext: { [weak self] in
-          self?.toggleHeaderPublisher.onNext(false)
-        })
-        .disposed(by: disposeBag)
-      
-      header.alertTapped
-        .subscribe(onNext: { [weak self] in
-          self?.showAlertsPublisher.onNext(())
-        })
-        .disposed(by: disposeBag)
-
-      headerView = header
-    } else {
-      let header = TKUIServiceHeaderMiniView.newInstance()
-      header.configure(with: content)
-
-      header.expandyButton.rx.tap
-        .subscribe(onNext: { [weak self] in
-          self?.toggleHeaderPublisher.onNext(true)
-        })
-        .disposed(by: disposeBag)
-      headerView = header
+private class RectStorage {
+  var infoFrame: CGRect? {
+    didSet {
+      if oldValue == nil, infoFrame != nil {
+        didSetInitialFrame()
+      }
     }
-    
-    tableView.reloadData()
   }
   
-  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    return headerView
-  }
-  
-  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    let size = headerView?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-    return size?.height ?? 0
-  }
-  
+  var didSetInitialFrame: () -> Void = { }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension TKUIServiceCard: UIScrollViewDelegate {
+
   public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-    guard scrollView is UITableView else {
+    guard scrollView == self.scrollView else {
       return true
     }
     
-    scrollToTopPublisher.onNext(())
+    scrollToEmbarkation(animated: true)
     return false
   }
   
-  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-    itemSelected.onNext(item)
+}
+
+// MARK: - Content
+
+public struct TKUIServiceContent: View {
+  @ObservedObject var model: TKUIServiceViewModel
+  fileprivate weak var rectWrapper: RectStorage?
+  
+  public var body: some View {
+    VStack(alignment: .leading) {
+      if let sections = model.sections {
+        ForEach(sections) { section in
+          VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(section.items.enumerated()), id: \.element) { index, item in
+              switch item {
+              case .info(let content):
+                TKUIServiceInfoView(content: content)
+                  .padding()
+                  .onTapGesture {
+                    try? model.selected(item)
+                  }
+                  .background(GeometryReader { proxy in
+                    Color.clear.preference(
+                      key: RectPreferenceKey.self,
+                      value: proxy.frame(in: .named("content-stack"))
+                    )
+                  })
+
+              case .timing(let content):
+                TKUIServiceItemView(item: content)
+                  .onTapGesture {
+                    try? model.selected(item)
+                  }
+                
+                if index < section.items.count - 1 {
+                  Divider()
+                }
+              }
+              
+            }
+          }
+          .fixedSize(horizontal: false, vertical: true) // each row should be as compact as possible
+          .background(Color(.tkBackgroundNotClear))
+          .cornerRadius(22)
+        }
+      } else {
+        HStack {
+          ProgressView()
+          Text(verbatim: Loc.LoadingDotDotDot)
+          Spacer()
+        }
+      }
+    }
+    .padding()
+    .coordinateSpace(name: "content-stack")
+    .onPreferenceChange(RectPreferenceKey.self) { rect in
+      rectWrapper?.infoFrame = rect
+    }
+    .modify { view in
+      if #available(iOS 26.0, *) {
+        view
+          .background(.clear)
+      } else {
+        view
+          .background(Color(.tkBackgroundGrouped))
+      }
+    }
+    .task {
+      try? await model.populate()
+    }
+  }
+}
+
+struct RectPreferenceKey: PreferenceKey {
+  static var defaultValue: CGRect? = nil
+  static func reduce(value: inout CGRect?, nextValue: () -> CGRect?) {
+    value = nextValue() ?? value
+  }
+}
+
+private struct TKUIServiceItemView: View {
+  let item: TKUIServiceViewModel.TimingItem
+  
+  @ViewBuilder
+  var timingContent: some View {
+    let textColor = item.isVisited ? item.realTimeStatus.color : .tkLabelTertiary
+    
+    switch item.timing {
+    case .timetabled(let arrival, let departure):
+      let arrivalText = arrival.map { TKStyleManager.timeString($0, for: item.timeZone) }
+      let departureText = departure.map { TKStyleManager.timeString($0, for: item.timeZone) }
+      if let arrivalText, arrivalText != departureText {
+        Text(verbatim: arrivalText)
+          .accessibilityLabel(Text(verbatim: Loc.Arrives(atTime: arrivalText)))
+          .foregroundStyle(Color(textColor))
+      }
+      
+      if let departureText {
+        Text(verbatim: departureText)
+          .accessibilityLabel(Text(verbatim: Loc.Departs(atTime: departureText)))
+          .foregroundStyle(Color(textColor))
+      }
+
+    case .frequencyBased:
+      // LATER: Could show the travel time here, but that should show not at
+      //        the stop but in between stops.
+      EmptyView()
+      
+    @unknown default:
+      let _ = assertionFailure("Please update TripKit dependency.")
+      EmptyView()
+    }
   }
   
+  var body: some View {
+    HStack(spacing: 12) {
+      VStack {
+        timingContent
+      }
+      .font(.footnote.weight(.semibold))
+      .frame(width: 68, alignment: .center)
+
+      VStack(spacing: 0) {
+        Rectangle()
+          .fill(Color(item.topConnection ?? .clear))
+          .frame(width: 16)
+          .padding(.bottom, -8)
+
+        Circle()
+          .fill(Color(item.bottomConnection ?? item.topConnection ?? .clear))
+          .frame(width: 16, height: 16)
+          .modify { view in
+            // Only draw appropriate part of the circle to not draw some
+            // alpha over another which isn't pretty.
+            if item.bottomConnection == item.topConnection {
+              view
+                .opacity(0)
+            } else if item.topConnection == nil {
+              view
+                .mask(alignment: .top) { Rectangle().frame(width: 16, height: 8) }
+            } else if item.bottomConnection == nil {
+              view
+                .mask(alignment: .bottom) { Rectangle().frame(width: 16, height: 8) }
+            } else {
+              view
+            }
+          }
+          .overlay {
+            Circle()
+              .fill(.white)
+              .padding(4)
+          }
+          .zIndex(2)
+
+        Rectangle()
+          .fill(Color(item.bottomConnection ?? .clear))
+          .frame(width: 16)
+          .padding(.top, -8)
+      }
+      
+      VStack(alignment: .leading, spacing: 4) {
+        Text(verbatim: item.title)
+          .foregroundStyle(item.isVisited ? .primary : .tertiary)
+        
+        if item.stopAccessibility.showInUI(), item.stopAccessibility == .notAccessible {
+          HStack(spacing: 8) {
+            Image(uiImage: item.stopAccessibility.icon)
+              .frame(width: 16, height: 16)
+              .opacity(item.isVisited ? 1 : 0.3)
+            Text(verbatim: item.stopAccessibility.title)
+              .font(.footnote)
+              .foregroundStyle(item.isVisited ? .secondary : .tertiary)
+              
+          }
+        }
+      }
+      .padding(.vertical, 12)
+      
+      Spacer(minLength: 0)
+    }
+    .frame(minHeight: 52)
+  }
 }
+
+#if DEBUG
+@available(iOS 18.0, *)
+#Preview {
+  @Previewable @State var visit: StopVisits?
+  
+  ZStack {
+    if let visit {
+      ScrollView {
+        TKUIServiceContent(model: .init(dataInput: .visits(embarkation: visit, disembarkation: nil)))
+      }
+      .background(Color.gray.opacity(0.05))
+
+    } else {
+      ProgressView()
+        .task {
+          let rawService = """
+            {"shapes":[{"travelled":true,"encodedWaypoints":"x~xmEuq{y[gCwC]S]K_A]_@Ke@Gw@SaASm@Ie@Oc@KmCe@eASsAO_@EuD[aANkA^eEnCm@l@{BzCw@l@g@N{AD{AQqA]gCMqDSyLdC_BRyMv@qA@qBQkDVmCRaB^kHf@cCOgAc@cA{@yAgC[mAO_B?aBd@uLl@mNPmBNeAN{@Xq@Tc@Z]^[b@Ud@Qt@Ev@Dd@Fd@N~ChCbClCzAlB|@f@n@Tz@L`VtBpBRjJ`AnGdAhEvAvAl@tCvAXNdClAf@Jj@HdBFjAPt@Pv@Vn@L`CV`@DrARfARdGbApB\\\\^HrAb@|Af@r@v@hFtDUM|I|JxMbQtEtDxHjInH`MvDbLvKtb@~AdD`GlHhInEjEtAbWbFdDdBpBdBtDnFxKpi@bDrHf\\\\bh@","stops":[{"lat":-33.88412,"lng":151.20683,"code":"2000337","name":"Central Station","bearing":0,"wheelchairAccessible":true,"pickUpOnly":true,"dropOffOnly":false,"departure":1758774751},{"lat":-33.87368,"lng":151.20679,"code":"2000396","name":"Town Hall Station","bearing":354,"wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758774918,"departure":1758774978},{"lat":-33.86591,"lng":151.20584,"code":"2000406","name":"Wynyard Station","bearing":44,"wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758775080,"departure":1758775140},{"lat":-33.86126,"lng":151.21029,"code":"2000352","name":"Circular Quay Station","bearing":170,"wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758775260,"departure":1758775290},{"lat":-33.87072,"lng":151.21193,"code":"2000382","name":"St James Station","bearing":199,"wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758775458,"departure":1758775488},{"lat":-33.87619,"lng":151.20998,"code":"2000372","name":"Museum Station","bearing":198,"wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758775572,"departure":1758775602},{"lat":-33.88434,"lng":151.20723,"code":"2000342","name":"Central Station","bearing":227,"wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758775740,"departure":1758775980},{"lat":-33.89207,"lng":151.19889,"code":"2015138","name":"Redfern Station","bearing":238,"wheelchairAccessible":false,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758776130,"departure":1758776190},{"lat":-33.90032,"lng":151.18543,"code":"204332","name":"Erskineville Station","bearing":215,"wheelchairAccessible":false,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758776340,"departure":1758776400},{"lat":-33.9073,"lng":151.1805,"code":"204462","name":"St Peters Station","bearing":242,"wheelchairAccessible":false,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758776490,"departure":1758776550},{"lat":-33.91423,"lng":151.16702,"code":"204474","name":"Sydenham Station","wheelchairAccessible":true,"pickUpOnly":false,"dropOffOnly":false,"arrival":1758776700}],"operator":"Sydney Trains","operatorID":"au-nsw-sydney-trains-SydneyTrains","serviceTripID":"18-P.817.150.116.B.8.86595248_XxX_INTERCHANGE_XxX_1_pos_2_3","serviceName":"T8 Airport & South Line","serviceNumber":"T8","serviceShortName":"","serviceDirection":"Sydenham","routeID":"APS_1e","serviceColor":{"red":0,"green":149,"blue":76},"bicycleAccessible":true,"wheelchairAccessible":true}],"type":"train","modeInfo":{"identifier":"pt_pub_train","alt":"train","localIcon":"train","color":{"red":222,"green":118,"blue":0}},"realtimeVehicle":{"lastUpdate":1758775157,"id":"18-P.817.116","label":"14:32 Central Station to Sydenham Station ","location":{"lat":-33.86379,"lng":151.20547,"bearing":351},"occupancy":"MANY_SEATS_AVAILABLE","components":[[{"occupancy":"MANY_SEATS_AVAILABLE","occupancyText":"Space available"}]]}}
+            """
+          
+          let response = try! JSONDecoder().decode(TKAPI.ServiceResponse.self, from: Data(rawService.utf8))
+          
+          let context = TripKit.shared.tripKitContext
+          let service = Service.fetchOrInsert(code: response.shapes!.first!.serviceTripID!, in: context)
+          TKBuzzInfoProvider.addContent(from: response, to: service)
+          visit = service.sortedVisits[3]
+        }
+    }
+  }
+}
+#endif

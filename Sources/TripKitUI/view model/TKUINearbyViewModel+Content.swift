@@ -273,7 +273,7 @@ extension TKModeInfo {
   
 }
 
-extension TKOnStreetParkingLocation: TKDisplayableRoute {
+extension TKOnStreetParkingLocation: @retroactive TKDisplayableRoute {
   
   public var routePath: [Any] {
     guard let polyline = parking.encodedPolyline else { return [] }
@@ -295,6 +295,9 @@ extension TKOnStreetParkingLocation: TKDisplayableRoute {
     case .full: return UIColor.tkStateError
     case .limited: return UIColor.tkStateWarning
     case .plenty: return UIColor.tkStateSuccess
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
   

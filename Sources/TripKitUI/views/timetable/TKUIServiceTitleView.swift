@@ -24,6 +24,10 @@ class TKUIServiceTitleView: UIView {
   
   @IBOutlet weak var dismissButton: UIButton!
   
+  @IBOutlet weak var topLevelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var dismissButtonTopConstraint: NSLayoutConstraint!
+  
   @IBOutlet weak var accessoryStack: UIStackView!
   
   static func newInstance() -> TKUIServiceTitleView {
@@ -34,6 +38,16 @@ class TKUIServiceTitleView: UIView {
     super.awakeFromNib()
     
     backgroundColor = .tkBackground
+    
+    if #available(iOS 26.0, *) {
+      topLevelLeadingConstraint.constant = 22
+      dismissButtonTrailingConstraint.constant = 18
+      dismissButtonTopConstraint.constant = 2
+    } else {
+      topLevelLeadingConstraint.constant = 16
+      dismissButtonTrailingConstraint.constant = 4
+      dismissButtonTopConstraint.constant = -11
+    }
 
     serviceTitleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .title2)
     serviceTitleLabel.textColor = .tkLabelPrimary
@@ -45,8 +59,7 @@ class TKUIServiceTitleView: UIView {
     serviceTimeLabel.textColor = .tkLabelSecondary
     serviceTimeLabel.text = nil
     
-    dismissButton.setImage(TGCard.closeButtonImage, for: .normal)
-    dismissButton.setTitle(nil, for: .normal)
+    TGCard.configureCloseButton(dismissButton)
     dismissButton.accessibilityLabel = Loc.Close
   }
 
@@ -71,7 +84,7 @@ extension TKUIServiceTitleView {
       serviceShortNameLabel.textColor = serviceColor.isDark ? .tkLabelOnDark : .tkLabelOnLight
       serviceColorView.backgroundColor = serviceColor
     } else {
-      serviceShortNameLabel.textColor = .tkBackground
+      serviceShortNameLabel.textColor = .tkBackgroundNotClear
       serviceColorView.backgroundColor = .tkLabelPrimary
     }
     

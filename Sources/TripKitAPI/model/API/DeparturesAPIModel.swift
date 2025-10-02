@@ -10,9 +10,9 @@ import Foundation
 extension TKAPI {
 
   /// Output data model for `departures.json`
-  public struct Departures: Codable, Hashable {
+  public struct Departures: Codable, Hashable, Sendable {
     
-    public struct Embarkations: Codable, Hashable {
+    public struct Embarkations: Codable, Hashable, Sendable {
       public let services: [Departure]
       public let stopCode: String
     }

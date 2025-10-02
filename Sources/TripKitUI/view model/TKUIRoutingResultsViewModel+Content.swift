@@ -268,6 +268,9 @@ extension TKMetricClassifier.Classification {
     case .greenest: return .badgeLeaf
     case .healthiest: return .badgeHeart
     case .recommended: return .badgeCheck
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
   
@@ -279,6 +282,9 @@ extension TKMetricClassifier.Classification {
     case .greenest: return Loc.BadgeGreenest
     case .healthiest: return Loc.BadgeHealthiest
     case .recommended: return Loc.BadgeRecommended
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return ""
     }
   }
   
@@ -290,6 +296,9 @@ extension TKMetricClassifier.Classification {
     case .greenest: return #colorLiteral(red: 0, green: 0.6588235294, blue: 0.5607843137, alpha: 1)
     case .healthiest: return #colorLiteral(red: 0.8823529412, green: 0.3568627451, blue: 0.4470588235, alpha: 1)
     case .recommended: return #colorLiteral(red: 0.09411764706, green: 0.5019607843, blue: 0.9058823529, alpha: 1)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return .clear
     }
   }
 }
@@ -302,6 +311,9 @@ extension TKUIRoutingResultsViewModel.Item {
     switch group.visibility {
     case .hidden: return nil
     case .full:   self = .trip(trip, lastUpdateURL: trip.logURLString)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
   

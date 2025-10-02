@@ -38,7 +38,7 @@ extension Reactive where Base: TKRegionManager {
   }
 }
 
-extension TKServer: ReactiveCompatible {}
+extension TKServer: @retroactive ReactiveCompatible {}
 
 extension Reactive where Base: TKServer {
   
@@ -281,6 +281,8 @@ extension Reactive where Base: TKServer {
         case .repeatWithNewParameters(let seconds, let paras):
           retryIn = seconds
           newParameters = paras
+        @unknown default:
+          return assertionFailure("Please update TripKit dependency.")
         }
         
         if retryIn > 0 {

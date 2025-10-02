@@ -32,6 +32,7 @@ class TKUIRoutingQueryInputTitleView: UIView {
   @IBOutlet weak var swapButton: UIButton!
 
   @IBOutlet weak var buttonLine: UIView!
+  @IBOutlet weak var searchBarPaddingConstraint: NSLayoutConstraint!
   
   // This is a hack to only start switching first responder when the view
   // did appear.
@@ -65,6 +66,11 @@ class TKUIRoutingQueryInputTitleView: UIView {
       textField.leftView = UIImageView()
       textField.tintColor = .tkLabelPrimary
       textField.textColor = .tkLabelPrimary
+    }
+    
+    if #available(iOS 26.0, *) {
+      // More padding as the search bar's background goes outside its bounds?!
+      searchBarPaddingConstraint.constant = 16
     }
     
     style(fromSearchBar, label: Loc.StartLocation)

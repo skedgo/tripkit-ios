@@ -214,6 +214,10 @@ extension TKUITripOverviewViewModel {
 
         return items
       }
+
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return []
     }
   }
   

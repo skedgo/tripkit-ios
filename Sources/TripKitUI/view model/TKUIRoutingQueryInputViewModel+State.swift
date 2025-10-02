@@ -46,6 +46,9 @@ extension TKUIRoutingQueryInputViewModel {
           switch $0 {
           case .annotation(let annotation): return .selectResult(annotation)
           case .result: return nil
+          @unknown default:
+            assertionFailure("Please update TripKit dependency.")
+            return nil
           }
         },
         inputs.tappedSwap.asObservable().map { .swap },

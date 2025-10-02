@@ -10,13 +10,13 @@ import Foundation
 
 extension TKAPI {
   
-  public struct RegionsResponse: Codable {
+  public struct RegionsResponse: Codable, Sendable {
     public let modes: [String: ModeDetails]?
     public let regions: [TKRegion]?
     public let hashCode: Int
   }
 
-  public struct ModeDetails: Codable {
+  public struct ModeDetails: Codable, Sendable {
     private enum CodingKeys: String, CodingKey {
       case title
       case subtitle

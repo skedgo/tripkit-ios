@@ -299,19 +299,15 @@ extension Reactive where Base: TKRealTimeFetcher {
     
     let dlsEntries = departures.compactMap({ $0 as? DLSEntry })
     if !dlsEntries.isEmpty {
-      return Single.create { subscriber in
-        TKRealTimeFetcher.update(Set(dlsEntries), in: region) { result in
-          subscriber(result.map { $0.map { $0 as StopVisits }})
-        }
-        return Disposables.create()
+      return Single.create {
+        let result = try await TKRealTimeFetcher.update(Set(dlsEntries), in: region)
+        return result.map { $0 as StopVisits }
       }
       
     } else {
-      return Single.create { subscriber in
-        TKRealTimeFetcher.update(Set(departures), in: region) { result in
-          subscriber(result.map { Array($0)} )
-        }
-        return Disposables.create()
+      return Single.create {
+        let result = try await TKRealTimeFetcher.update(Set(departures), in: region)
+        return Array(result)
       }
     }
     

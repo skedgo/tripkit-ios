@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TKTurnByTurnMode: String, Codable {
+public enum TKTurnByTurnMode: String, Codable, Sendable {
   case cycling = "CYCLING"
   case driving = "DRIVING"
   case walking = "WALKING"

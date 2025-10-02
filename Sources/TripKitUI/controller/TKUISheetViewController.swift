@@ -8,10 +8,9 @@
 
 import UIKit
 
-@objc
+@available(iOS, deprecated: 26.0, message: "Use sheet presentations.")
 public class TKUISheetViewController: UIViewController {
   
-  @objc
   public init(sheet: TKUISheet) {
     super.init(nibName: nil, bundle: nil)
     sheet.overlayColor = .tkSheetOverlay

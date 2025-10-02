@@ -16,7 +16,7 @@ import AppKit
 
 extension TKAPI {
   
-  public struct Route: Codable, Hashable {
+  public struct Route: Codable, Hashable, @unchecked Sendable {
     public let regionCode: String
     public let id: String
     
@@ -59,7 +59,7 @@ extension TKAPI {
     }
   }
   
-  public struct RouteDirection: Codable, Hashable {
+  public struct RouteDirection: Codable, Hashable, Sendable {
     public let id: String
     
     public let name: String?
@@ -68,7 +68,7 @@ extension TKAPI {
     public let stops: [DirectionStop]
   }
   
-  public struct DirectionStop: Codable, Hashable {
+  public struct DirectionStop: Codable, Hashable, Sendable {
     public let stopCode: String
     public let name: String
     public let latitude: Double

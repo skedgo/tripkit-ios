@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import MapKit
 
 import TripKit
@@ -65,7 +66,12 @@ extension TKUIServiceViewModel.MapContent {
   func findStop(_ item: TKUIServiceViewModel.Item) -> TKUIIdentifiableAnnotation? {
     return stops
       .compactMap { $0 as? TKUIServiceViewModel.ServiceVisit }
-      .first { $0.visit == item.dataModel }
+      .first { candidate in
+        switch item {
+        case .timing(let timing): return candidate.visit.objectID == timing.modelID
+        case .info: return false
+        }
+      }
   }
 }
 

@@ -25,8 +25,7 @@ open class TKUITableCard: TGTableCard {
     self.handleMacSelection = highlighted.onNext
     #else
 
-    // LATER: Also apply this on Catalyst, once that supports iOS 15
-    if #available(iOS 15, *), tableView.style == .plain {
+    if tableView.style == .plain {
       tableView.sectionHeaderTopPadding = 0.0
     }
     #endif

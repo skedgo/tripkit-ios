@@ -36,10 +36,10 @@ class TKUISegmentMovingCell: UITableViewCell {
     
     backgroundColor = .clear
 
-    titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
+    titleLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .subheadline)
     titleLabel.textColor = .tkLabelPrimary
     
-    subtitleLabel.textColor = .tkLabelSecondary
+    subtitleLabel.textColor = .tkLabelPrimary
   }
   
   override func prepareForReuse() {
@@ -76,7 +76,7 @@ extension TKUISegmentMovingCell {
     switch item.connection?.color?.isDark {
     case .some(true): modeImageColor = .tkLabelOnDark
     case .some(false): modeImageColor = .tkLabelOnLight
-    case nil: modeImageColor = .tkLabelPrimary
+    case nil: modeImageColor = .tkLabelSecondary
     }
     
     modeImage.setImage(with: item.iconURL, asTemplate: item.iconIsTemplate, placeholder: item.icon)
@@ -93,7 +93,7 @@ extension TKUISegmentMovingCell {
       // If we have a remote image, that's not a template, put it as is on
       // the background
       modeImage.tintColor = .tkLabelOnDark
-      modeWrapper.backgroundColor = .tkBackground
+      modeWrapper.backgroundColor = .tkBackgroundNotClear
       
     } else {
       // ... otherwise, put the image on a background
@@ -111,7 +111,7 @@ extension TKUISegmentMovingCell {
     let accessories = item.accessories.compactMap(TKUISegmentMovingCell.buildView)
     accessoryViewStack.resetViews(accessories)
     
-    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, tintColor: tintColor, disposeBag: disposeBag) }
+    let buttons = item.actions.map { TKUISegmentCellHelper.buildView(for: $0, model: item.segment, for: card, disposeBag: disposeBag) }
     buttonStackView.resetViews(buttons)
   }
   
@@ -125,18 +125,13 @@ extension TKUISegmentMovingCell {
       trainView.occupancies = occupancies
       return trainView
 
-    case .pathFriendliness(let segment):
-      if #available(iOS 16.0, *) {
-        return nil // will show road tags instead
-      } else {
-        let pathFriendlinessView = TKUIPathFriendlinessView.newInstance()
-        pathFriendlinessView.segment = segment
-        return pathFriendlinessView
-      }
+    case .pathFriendliness:
+      return nil // will show road tags instead
 
     case .roadTags(let segment):
-      if #available(iOS 16.0, *), let chart = segment.buildRoadTags() {
+      if let chart = segment.buildRoadTags() {
         let host = UIHostingController(rootView: chart.frame(minWidth: 300))
+        host.view.backgroundColor = .tkBackground
         return host.view
       } else {
         return nil
