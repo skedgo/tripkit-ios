@@ -46,8 +46,17 @@ extension UIColor {
   
   // MARK: - Background
   
+  /// Primary background colour; clear on iOS 26+
+  @objc public static var tkBackground: UIColor = {
+    if #available(iOS 26.0, *) {
+      .clear
+    } else {
+      .tkBackgroundNotClear
+    }
+  }()
+  
   /// Primary background colour
-  @objc public static var tkBackground: UIColor = .tripgoBackground
+  @objc public static var tkBackgroundNotClear: UIColor = .tripgoBackground
   
   /// Background colour for elements that should be offset, e.g., grouped cells
   @objc public static var tkBackgroundSecondary: UIColor = .tripgoBackgroundSecondary
@@ -59,11 +68,23 @@ extension UIColor {
   @objc public static var tkBackgroundTile: UIColor = .tripgoBackgroundTile
 
   /// The background colour for what's *behind* tiles
-  @objc public static var tkBackgroundBelowTile: UIColor = .tripgoBackgroundBelowTile
+  @objc public static var tkBackgroundBelowTile: UIColor = {
+    if #available(iOS 26.0, *) {
+      .clear
+    } else {
+      .tripgoBackgroundBelowTile
+    }
+  }()
 
   /// The background colour for grouped table views, where each cell would use `.tkBackground`
   /// as its background colour.
-  @objc public static var tkBackgroundGrouped: UIColor = .tripgoBackgroundGrouped
+  @objc public static var tkBackgroundGrouped: UIColor = {
+    if #available(iOS 26.0, *) {
+      .clear
+    } else {
+      .tripgoBackgroundGrouped
+    }
+  }()
   
   /// The background colour for separators
   @objc public static var tkBarSecondary: UIColor = .tripgoBarSecondary

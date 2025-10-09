@@ -41,7 +41,9 @@ class TKUITripOverviewViewModel {
     let servicesFetched = presentedTrip
       .asObservable()
       .flatMapLatest { trip in
-        Self.fetchContentOfServices(in: trip).map { trip }
+        Self.fetchContentOfServices(in: trip)
+          .catchAndReturn(()) // Swallow fetch errors
+          .map { trip }
       }
 
     refreshMap = Observable.merge(tripChanged, servicesFetched)

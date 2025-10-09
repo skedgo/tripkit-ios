@@ -25,10 +25,6 @@ xcbaselines
 # Xcode left-overs
 TripKit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
-# Examples
-/Examples/MiniMap/Pods
-/Examples/CocoaPodsTest/Pods
-
 # Documentation
 /Scripts/docs/jazzy-temp.*
 /Scripts/docs/source/TripKit

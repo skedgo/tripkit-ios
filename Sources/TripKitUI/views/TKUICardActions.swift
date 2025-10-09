@@ -12,8 +12,8 @@ import Combine
 import TGCardViewController
 
 public enum TKUICardActionNormalStyle {
-  /// Uses the `.tkAppTintColor` as the foreground colour, and also as the background colour with a opacity of 0.15
-  case fadedTint
+  /// Uses the `tkLabelPrimary` as the foreground colour, and `.tertiarySystemFill` as the background colour
+  case monochrome
   
   /// Uses `.tkLabelPrimary` as the foreground colour, `.clear` as the background colour and adds
   /// an outline around the button of `.tkLabelPrimary` with 0.1 opacity
@@ -32,18 +32,17 @@ class TKUICardActionHandlerInfo<C, M> where C: TGCard {
   weak var container: UIView!
 }
 
-@MainActor
 struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
   let actions: [TKUICardAction<C, M>]
-  let info: TKUICardActionHandlerInfo<C, M>
   let normalStyle: TKUICardActionNormalStyle
+  let handler: (TKUICardAction<C, M>) -> Void
 
   var body: some View {
     ZStack {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack {
           ForEach(actions, id: \.title) { action in
-            TKUICardActionButton(action: action, info: info, normalStyle: normalStyle)
+            TKUICardActionButton(action: action, normalStyle: normalStyle, handler: handler)
           }
 
           Spacer()
@@ -51,7 +50,6 @@ struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
         .padding(.horizontal)
       }
       .layoutPriority(1)
-      .background(Color(.tkBackground))
 
       HStack {
         Spacer()
@@ -63,81 +61,78 @@ struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
   }
 }
 
-@available(iOS 16.0, *)
-@MainActor
 struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
   let actions: [TKUICardAction<C, M>]
-  let info: TKUICardActionHandlerInfo<C, M>
   let normalStyle: TKUICardActionNormalStyle
+  let handler: (TKUICardAction<C, M>) -> Void
   
   var body: some View {
     ViewThatFits {
       HStack {
         ForEach(actions, id: \.title) { action in
-          TKUICardActionButton(action: action, info: info, normalStyle: normalStyle)
+          TKUICardActionButton(action: action, normalStyle: normalStyle, handler: handler)
         }
         
         Spacer()
       }
       .padding(.horizontal)
-      .background(Color(.tkBackground))
       
-      TKUIScrollingCardActions(actions: actions, info: info, normalStyle: normalStyle)
+      TKUIScrollingCardActions(actions: actions, normalStyle: normalStyle, handler: handler)
     }
   }
 }
 
-@MainActor
 struct TKUICardActionButton<C, M>: View where C: TGCard {
-  init(action: TKUICardAction<C, M>, info: TKUICardActionHandlerInfo<C, M>, big: Bool = true, normalStyle: TKUICardActionNormalStyle) {
+  init(action: TKUICardAction<C, M>, includeText: Bool = true, normalStyle: TKUICardActionNormalStyle, handler: @escaping (TKUICardAction<C, M>) -> Void) {
     self.action = action
-    self.info = info
-    self.big = big
+    self.includeText = includeText
     self.normalStyle = normalStyle
+    self.handler = handler
   }
   
   @ObservedObject var action: TKUICardAction<C, M>
-  let info: TKUICardActionHandlerInfo<C, M>
-  var big: Bool = true
+  
+  var includeText: Bool = true
   let normalStyle: TKUICardActionNormalStyle
+  let handler: (TKUICardAction<C, M>) -> Void
   
   var body: some View {
     Button {
-      guard let card = info.card, let container = info.container else { return }
       withAnimation {
-        let _ = action.handler(action, card, info.model, container)
+        handler(action)
       }
     } label: {
       HStack(spacing: 4) {
         if action.content.isInProgress {
           ProgressView()
-            .frame(width: 18, height: 18)
+            .frame(width: 20, height: 20)
         } else {
           Image(uiImage: action.content.icon)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 18, height: 18)
+            .frame(width: 20, height: 20)
         }
         
-        if big {
+        if includeText {
           Text(action.content.title)
             .font(.subheadline.weight(.semibold))
         }
       }
       .accessibility(label: Text(action.content.accessibilityLabel ?? action.content.title))
-      .padding(.horizontal, big ? 12 : 8)
-      .padding(.vertical, 8)
+      .padding(.horizontal, includeText ? 14 : 7)
+      .padding(.vertical, 7)
+      .frame(minHeight: 40)
     }
     .disabled(action.content.isInProgress)
     .foregroundColor(
       action.content.style == .bold
         ? (UIColor.tkAppTintColor.isDark ? .white : .black)
-        : (normalStyle == .fadedTint ? .accentColor : Color(.tkLabelPrimary))
+        : Color(uiColor: .tkLabelPrimary)
     )
     .background(
       action.content.style == .bold
         ? Color.accentColor
-        : (normalStyle == .fadedTint ? Color.accentColor.opacity(0.15) : .clear)
+        : (normalStyle == .monochrome ? Color(uiColor: .tertiarySystemFill) : .clear)
     )
     .clipShape(Capsule())
     .background(
@@ -180,7 +175,6 @@ class PreviewData: ObservableObject {
   }
 }
 
-@available(iOS 16.0, *)
 struct TKUICardActions_Previews: PreviewProvider {
   
   static var previews: some View {
@@ -206,7 +200,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             icon: UIImage(systemName: "arrow.triangle.branch")!.withRenderingMode(.alwaysTemplate),
             handler: { _, _, _, _ in false }
           ),
-        ], info: PreviewData.shared.context, normalStyle: .fadedTint)
+        ], normalStyle: .monochrome) { _ in }
         
         TKUIAdaptiveCardActions<TGNoCard, String>(actions: [
           .init(
@@ -223,7 +217,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             icon: .iconShare,
             handler: { _, _, _, _ in false }
           ),
-        ], info: PreviewData.shared.context, normalStyle: .outline)
+        ], normalStyle: .outline) { _ in }
         
         TKUIAdaptiveCardActions<TGNoCard, String>(actions: [
           .init(
@@ -231,7 +225,7 @@ struct TKUICardActions_Previews: PreviewProvider {
             icon: .iconShare,
             handler: { _, _, _, _ in false }
           ),
-        ], info: PreviewData.shared.context, normalStyle: .fadedTint)
+        ], normalStyle: .monochrome) { _ in }
       }
       
       TKUIScrollingCardActions<TGNoCard, String>(actions: [
@@ -240,7 +234,7 @@ struct TKUICardActions_Previews: PreviewProvider {
           icon: .iconShare,
           handler: { _, _, _, _ in false }
         ),
-      ], info: PreviewData.shared.context, normalStyle: .outline)
+      ], normalStyle: .outline) { _ in }
 
       TKUIScrollingCardActions<TGNoCard, String>(actions: [
         .init(
@@ -262,12 +256,13 @@ struct TKUICardActions_Previews: PreviewProvider {
           icon: UIImage(systemName: "arrow.triangle.branch")!.withRenderingMode(.alwaysTemplate),
           handler: { _, _, _, _ in false }
         ),
-      ], info: PreviewData.shared.context, normalStyle: .fadedTint)
+      ], normalStyle: .monochrome) { _ in }
       
       
     }
     .accentColor(Color(.tkAppTintColor))
     .previewLayout(.fixed(width: 420, height: 200))
+    .preferredColorScheme(.dark)
   }
 }
 #endif

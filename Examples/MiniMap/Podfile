@@ -1,8 +1,0 @@
-use_frameworks!
-
-platform :osx, '11'
-
-target 'MiniMap' do
-  pod 'TripKitAPI', :path => '../../'
-  pod 'TripKit', :path => '../../'
-end

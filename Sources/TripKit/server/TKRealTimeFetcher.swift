@@ -12,10 +12,10 @@ import Foundation
 import CoreData
 
 public class TKRealTimeFetcher {
-  
   private init() {}
   
-  public static func update(_ entries: Set<DLSEntry>, in region: TKRegion, completion: @escaping (Result<Set<DLSEntry>, Error>) -> Void) {
+  @MainActor
+  public static func update(_ entries: Set<DLSEntry>, in region: TKRegion) async throws -> Set<DLSEntry> {
     var serviceParas: [[String: Any]] = []
     var keysToUpdateables: [String: Updateable] = [:]
     var context: NSManagedObjectContext? = nil
@@ -35,12 +35,12 @@ public class TKRealTimeFetcher {
       keysToUpdateables[service.code] = .service(service)
     }
     
-    fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context) { result in
-      completion(result.map { _ in entries })
-    }
+    try await fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context)
+    return entries
   }
   
-  public static func update(_ visits: Set<StopVisits>, in region: TKRegion, completion: @escaping (Result<Set<StopVisits>, Error>) -> Void) {
+  @MainActor
+  public static func update(_ visits: Set<StopVisits>, in region: TKRegion) async throws -> Set<StopVisits> {
     var serviceParas: [[String: Any]] = []
     var keysToUpdateables: [String: Updateable] = [:]
     var context: NSManagedObjectContext? = nil
@@ -59,12 +59,12 @@ public class TKRealTimeFetcher {
       keysToUpdateables[service.code] = .service(service)
     }
     
-    fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context) { result in
-      completion(result.map { _ in visits })
-    }
+    try await fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context)
+    return visits
   }
   
-  public static func update(_ services: Set<Service>, in region: TKRegion, completion: @escaping (Result<Set<Service>, Error>) -> Void) {
+  @MainActor
+  public static func update(_ services: Set<Service>, in region: TKRegion) async throws -> Set<Service> {
     var serviceParas: [[String: Any]] = []
     var keysToUpdateables: [String: Updateable] = [:]
     var context: NSManagedObjectContext? = nil
@@ -81,20 +81,19 @@ public class TKRealTimeFetcher {
       keysToUpdateables[service.code] = .service(service)
     }
     
-    fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context) { result in
-      completion(result.map { _ in services })
-    }
+    try await fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context)
+    return services
   }
 
+  @MainActor
   private static func fetchAndUpdate(
     serviceParas: [[String: Any]],
     keysToUpdateables: [String: Updateable],
     region: TKRegion,
-    context: NSManagedObjectContext?,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    guard !serviceParas.isEmpty, let context = context else {
-      return completion(.success(()))
+    context: NSManagedObjectContext?
+  ) async throws {
+    guard !serviceParas.isEmpty, let context else {
+      return
     }
     
     let paras: [String: Any] = [
@@ -103,16 +102,10 @@ public class TKRealTimeFetcher {
       "services": serviceParas
     ]
     
-    TKServer.shared.hit(TKAPI.LatestResponse.self, .POST, path: "latest.json", parameters: paras, region: region, callbackOnMain: false) { _, _, result in
-      switch result {
-      case .success(let response):
-        context.perform {
-          update(keysToUpdateables: keysToUpdateables, from: response)
-          completion(.success(()))
-        }
-      case .failure(let error):
-        completion(.failure(error))
-      }
+    let response = await TKServer.shared.hit(TKAPI.LatestResponse.self, .POST, path: "latest.json", parameters: paras, region: region)
+    let content = try response.result.get()
+    await context.perform {
+      update(keysToUpdateables: keysToUpdateables, from: content)
     }
   }
   
@@ -121,8 +114,8 @@ public class TKRealTimeFetcher {
     case service(Service)
   }
   
+  @MainActor
   private static func update(keysToUpdateables: [String: Updateable], from response: TKAPI.LatestResponse) {
-    
     for apiService in response.services {
       guard let updatable = keysToUpdateables[apiService.code] else {
         continue

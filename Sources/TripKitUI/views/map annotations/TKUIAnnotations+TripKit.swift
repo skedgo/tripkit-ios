@@ -117,6 +117,9 @@ extension TKSegment: TKUIModeAnnotation {
     case .start: return nil
     case .end: return .iconPin
     case .regular: return tripSegmentModeImage
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
 }
@@ -130,6 +133,9 @@ extension TKSegment: TKUISemaphoreDisplayable {
     case .start: return "start"
     case .regular: return String(originalSegmentIncludingContinuation().templateHashCode)
     case .end: return "end"
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
   

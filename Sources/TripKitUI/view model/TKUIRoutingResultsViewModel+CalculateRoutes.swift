@@ -243,23 +243,6 @@ extension TKUIRoutingResultsViewModel {
 
 // MARK: - Routing
 
-extension TKUIRoutingResultsViewModel {
-  
-  static func regionForModes(for builder: RouteBuilder) -> TKRegion {
-    let start = builder.origin?.coordinate
-    let end = builder.destination?.coordinate
-    
-    if let start = start, let end = end {
-      return TKRegionManager.shared.region(containing: start, end)
-    } else if let start = start, let local = TKRegionManager.shared.localRegions(containing: start).first {
-      return local
-    } else {
-      return .international
-    }
-  }
-  
-}
-
 extension TripRequest {
   
   @MainActor
@@ -273,6 +256,9 @@ extension TripRequest {
       time = .leaveAfter(self.time!)
     case .arriveBefore:
       time = .arriveBefore(self.time!)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      time = .leaveASAP
     }
     
     return TKUIRoutingResultsViewModel.RouteBuilder(
@@ -296,6 +282,9 @@ extension TKUIRoutingResultsViewModel.RouteBuilder.Time {
       self = .leaveAfter(date)
     case .arriveBefore:
       self = .arriveBefore(date)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      self = .leaveASAP
     }
   }
   

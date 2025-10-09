@@ -92,24 +92,14 @@ private struct DatePickerView: View {
   
   var content: some View {
     VStack(alignment: .leading) {
-      if #available(iOS 14.0, *) {
-        DatePicker(viewModel.dateTitle(), 
-                   selection: $viewModel.selectedDateTime,
-                   in: viewModel.allowedDateRange(),
-                   displayedComponents: [.date])
-          .environment(\.timeZone, viewModel.timeZone)
-          .datePickerStyle(GraphicalDatePickerStyle())
-          .accentColor(Color(.tkAppTintColor))
-          .padding(.horizontal, 16)
-      } else {
-        DatePicker(viewModel.dateTitle(), 
-                   selection: $viewModel.selectedDateTime, 
-                   in: viewModel.allowedDateRange(),
-                   displayedComponents: [.date])
-          .environment(\.timeZone, viewModel.timeZone)
-          .accentColor(Color(.tkAppTintColor))
-          .padding(.horizontal, 16)
-      }
+      DatePicker(viewModel.dateTitle(),
+                 selection: $viewModel.selectedDateTime,
+                 in: viewModel.allowedDateRange(),
+                 displayedComponents: [.date])
+        .environment(\.timeZone, viewModel.timeZone)
+        .datePickerStyle(GraphicalDatePickerStyle())
+        .accentColor(Color(.tkAppTintColor))
+        .padding(.horizontal, 16)
       
       Divider()
         .padding(.leading, 16)

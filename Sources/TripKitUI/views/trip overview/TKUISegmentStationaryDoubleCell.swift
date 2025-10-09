@@ -46,13 +46,13 @@ class TKUISegmentStationaryDoubleCell: UITableViewCell {
     super.awakeFromNib()
     
     backgroundColor = .clear
-    topLineDot.backgroundColor = .tkBackground
-    bottomLineDot.backgroundColor = .tkBackground
+    topLineDot.backgroundColor = .tkBackgroundNotClear
+    bottomLineDot.backgroundColor = .tkBackgroundNotClear
     
     titleLabel.font = TKStyleManager.boldCustomFont(forTextStyle: .body)
     titleLabel.textColor = .tkLabelPrimary
-    subtitleLabel.textColor = .tkLabelSecondary
-    endSubtitleLabel.textColor = .tkLabelSecondary
+    subtitleLabel.textColor = .tkLabelPrimary
+    endSubtitleLabel.textColor = .tkLabelPrimary
     
     timeLabel.textColor = .tkLabelPrimary
     timeLabel.numberOfLines = 0
@@ -89,7 +89,7 @@ extension TKUISegmentStationaryDoubleCell {
       timeLabel.text = nil
       timeEndLabel.text = nil
 
-    } else if let start = startText, let end = endText, start.1 != end.1 {
+    } else if let start = startText, let end = endText {
       timeLabel.attributedText = start.0
       timeLabel.accessibilityLabel = Loc.Arrives(atTime: start.1)
       timeEndLabel.attributedText = end.0
@@ -116,7 +116,7 @@ extension TKUISegmentStationaryDoubleCell {
     bottomLineDot.layer.borderColor = (item.bottomConnection?.color ?? .tkLabelPrimary).cgColor
     bottomLineDot.layer.borderWidth = 3
 
-    let width: CGFloat = item.isContinuation ? 12 : 18
+    let width: CGFloat = 15
     lineDotWidthConstraint.constant = width
     topLineDot.layer.cornerRadius = width / 2
     bottomLineDot.layer.cornerRadius = width / 2

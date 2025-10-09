@@ -27,6 +27,9 @@ extension TKBicycleAccessibility {
       return TKUIServiceCard.config.bicycleAccessibilityImage
     case .unknown:
       return nil // Just omit it
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
   
@@ -40,6 +43,10 @@ extension TKBicycleAccessibility {
     
     case .unknown:
       return nil // Can be added at a later stage, when needed
+      
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
 
@@ -48,6 +55,10 @@ extension TKBicycleAccessibility {
     switch self {
     case .accessible:     return #colorLiteral(red: 0.137254902, green: 0.6941176471, blue: 0.368627451, alpha: 1)
     case .unknown:  return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
+
     }
   }
 }

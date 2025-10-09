@@ -18,7 +18,7 @@ extension TKAPI {
     case notValidTimeZoneIdentifier(String)
   }
   
-  public struct OpeningHours: Codable, Hashable {
+  public struct OpeningHours: Codable, Hashable, Sendable {
     
     /// Time zone in which the opening hours are defined
     public let timeZone: TimeZone
@@ -54,7 +54,7 @@ extension TKAPI {
     
     /// Opening hours on a particular day of the week (with
     /// a special case for public holidays).
-    public struct Day: Codable, Hashable {
+    public struct Day: Codable, Hashable, Sendable {
       
       public let day: DayOfWeek
       public let times: [Time]
@@ -69,7 +69,7 @@ extension TKAPI {
         case times
       }
       
-      public struct Time: Codable, Hashable {
+      public struct Time: Codable, Hashable, Sendable {
         
         public let opens: TimeInterval
         public let closes: TimeInterval
@@ -117,7 +117,7 @@ extension TKAPI {
       }
       
       
-      public enum DayOfWeek: String, Codable {
+      public enum DayOfWeek: String, Codable, Sendable {
         case monday         = "MONDAY"
         case tuesday        = "TUESDAY"
         case wednesday      = "WEDNESDAY"

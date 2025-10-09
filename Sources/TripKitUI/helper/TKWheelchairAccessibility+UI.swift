@@ -28,6 +28,9 @@ extension TKWheelchairAccessibility {
       return TripKitUIBundle.imageNamed("icon-wheelchair-not-accessible")
     case .unknown:
       return TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return TripKitUIBundle.imageNamed("icon-wheelchair-unknown")
     }
   }
   
@@ -44,6 +47,10 @@ extension TKWheelchairAccessibility {
     
     case .unknown:
       return nil
+      
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return nil
     }
   }
 
@@ -53,6 +60,9 @@ extension TKWheelchairAccessibility {
     case .accessible:     return #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8745098039, alpha: 1)
     case .notAccessible:  return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
     case .unknown:        return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
+    @unknown default:
+      assertionFailure("Please update TripKit dependency.")
+      return #colorLiteral(red: 0.5794443488, green: 0.5845708847, blue: 0.5800062418, alpha: 1)
     }
   }
 }

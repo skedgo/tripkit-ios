@@ -173,7 +173,7 @@ class TKUIMapManagerHelper: NSObject {
         TKUICircleAnnotation(
           coordinate: segment.coordinate,
           circleColor: .white,
-          borderColor: .tkBackground.withAlphaComponent(0.3),
+          borderColor: .tkBackgroundNotClear.withAlphaComponent(0.3),
           isTravelled: true,
           asLarge: true,
           selectionIdentifier: segment.selectionIdentifier,

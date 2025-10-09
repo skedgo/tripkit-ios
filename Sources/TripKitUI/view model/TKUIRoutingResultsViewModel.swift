@@ -33,7 +33,6 @@ class TKUIRoutingResultsViewModel {
     tappedSearch: Signal<Void>,                 // => trigger query input
     tappedDate: Signal<Void>,                   // => return which date to show
     tappedShowModes: Signal<Void>,              // => return which modes to show
-    tappedShowModeOptions: Signal<Void>,        // => trigger mode configurator
     changedDate: Signal<RouteBuilder.Time>,     // => update request + title
     changedModes: Signal<[String]?>,            // => update request
     changedSortOrder: Signal<TKTripCostType>,   // => update sorting
@@ -162,28 +161,6 @@ class TKUIRoutingResultsViewModel {
       .map(\.timeString)
       .asDriver(onErrorDriveWith: .empty())
     
-    let availableFromRequest: Observable<AvailableModes> = requestChanged
-      .compactMap(Self.buildAvailableModes)
-      .distinctUntilChanged { $0.available == $1.available } // ignore any `enabled` changes in the mean-time
-    
-    let availableFromChange = inputs.changedModes.asObservable()
-      .withLatestFrom(requestToShow) { ($0, $1) }
-      .compactMap(Self.updateAvailableModes)
-    
-    let available = Observable.merge(availableFromRequest, availableFromChange)
-      .distinctUntilChanged()
-    
-    let showModes = inputs.tappedShowModes.scan(false) { acc, _ in !acc }.asObservable()
-
-    availableModes = Observable.combineLatest(available, showModes) { available, show in
-        if show {
-          return available
-        } else {
-          return .none
-        }
-      }
-      .asDriver(onErrorDriveWith: .empty())
-
     originAnnotation = builderChanged
       .map { ($0.origin, $0.select == .origin) }
       .distinctUntilChanged { $0.0 === $1.0 }
@@ -201,6 +178,42 @@ class TKUIRoutingResultsViewModel {
       .map(Self.buildMapContent)
       .asDriver(onErrorDriveWith: .empty())
 
+    let availableFromRequest: Observable<AvailableModes> = requestChanged
+      .compactMap(Self.buildAvailableModes)
+      .distinctUntilChanged { $0.available == $1.available } // ignore any `enabled` changes in the mean-time
+    
+    let availableFromChange = inputs.changedModes.asObservable()
+      .withLatestFrom(requestToShow) { ($0, $1) }
+      .compactMap(Self.updateAvailableModes)
+    
+    let available = Observable.merge(availableFromRequest, availableFromChange)
+      .distinctUntilChanged()
+    
+    let presentModes: Signal<TKUIRoutingResultsViewModel.Next>
+    if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
+      availableModes = .just(.none)
+      
+      presentModes = inputs.tappedShowModes
+        .asObservable()
+        .withLatestFrom(requestChanged) { (_, request) -> Next in
+          .presentModeConfigurator(region: request.0.spanningRegion)
+        }
+        .asAssertingSignal()
+      
+    } else {
+      presentModes = .never()
+
+      let showModes = inputs.tappedShowModes.scan(false) { acc, _ in !acc }.asObservable()
+      availableModes = Observable.combineLatest(available, showModes) { available, show in
+          if show {
+            return available
+          } else {
+            return .none
+          }
+        }
+        .asDriver(onErrorDriveWith: .empty())
+    }
+    
     // Navigation
     
     let triggerAction = inputs.tappedSectionButton
@@ -213,16 +226,6 @@ class TKUIRoutingResultsViewModel {
     
     let showSelection = inputs.selected
       .compactMap(Next.init)
-
-    let modeInput = Observable.combineLatest(requestToShow, builderChanged)
-    
-    let presentModes = inputs.tappedShowModeOptions.asObservable()
-      .withLatestFrom(modeInput) { (_, tuple) -> Next in
-        let modes = tuple.0.applicableModeIdentifiers
-        let region = Self.regionForModes(for: tuple.1)
-        return Next.presentModeConfigurator(modes: modes, region: region)
-      }
-      .asAssertingSignal()
     
     let presentTime = inputs.tappedDate.asObservable()
       .withLatestFrom(builderChanged)
@@ -323,7 +326,7 @@ extension TKUIRoutingResultsViewModel {
     case showCustomItem(TKUIRoutingResultsCard.CustomItem)
     case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
     case showLocation(MKAnnotation, mode: SearchMode?)
-    case presentModeConfigurator(modes: [String], region: TKRegion)
+    case presentModeConfigurator(region: TKRegion)
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
     

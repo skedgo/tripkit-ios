@@ -18,7 +18,7 @@ import RxCocoa
 
 import TripKit
 
-public class TKUISegmentDirectionsCard: TGTableCard {
+public class TKUISegmentDirectionsCard: TGHostingCard<TKUISegmentDirectionsContent> {
   
   public static func canShowInstructions(for segment: TKSegment) -> Bool {
     return TKUISegmentDirectionsViewModel.canShowInstructions(for: segment)
@@ -45,41 +45,25 @@ public class TKUISegmentDirectionsCard: TGTableCard {
     titleView = TKUISegmentTitleView.newInstance()
     titleView.configure(for: segment)
     
-    super.init(title: .custom(titleView, dismissButton: titleView.dismissButton), mapManager: mapManager)
+    let wrapper = CardHolder()
+    
+    super.init(
+      title: .custom(titleView, dismissButton: titleView.dismissButton),
+      rootView: TKUISegmentDirectionsContent(model: .init(segment: segment), wrapper: wrapper),
+      mapManager: mapManager
+    )
+    
+    wrapper.card = self
     
     titleView.applyStyleToCloseButton(style)
   }
   
-  override public func didBuild(tableView: UITableView) {
-    super.didBuild(tableView: tableView)
-
-    viewModel = TKUISegmentDirectionsViewModel(segment: segment)
+  public override func didBuild(scrollView: UIScrollView) {
+    super.didBuild(scrollView: scrollView)
     
-    if #available(iOS 16.0, *) {
-      // default cells
-      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
-    } else {
-      tableView.register(TKUISegmentDirectionCell.nib, forCellReuseIdentifier: TKUISegmentDirectionCell.reuseIdentifier)
+    if #unavailable(iOS 26.0) {
+      scrollView.backgroundColor = .tkBackgroundGrouped
     }
-    
-    let dataSource = RxTableViewSectionedAnimatedDataSource<TKUISegmentDirectionsViewModel.Section>(configureCell: TKUISegmentDirectionsCard.configureCell)
-    
-    viewModel.sections
-      .drive(tableView.rx.items(dataSource: dataSource))
-      .disposed(by: disposeBag)
-    
-    if let factory = Self.config.actionFactory {
-      let actions = factory(segment)
-      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: self, model: segment, container: tableView)
-      actionsView.frame.size.height = actionsView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-      tableView.tableHeaderView = actionsView
-    } else {
-      tableView.tableHeaderView = nil
-    }
-  }
-  
-  private func setup(_ tableView: UITableView) {
-    tableView.tableFooterView = UIView()
   }
   
   public override func didAppear(animated: Bool) {
@@ -90,44 +74,49 @@ public class TKUISegmentDirectionsCard: TGTableCard {
   
 }
 
-// MARK: Configuring cells
-
-extension TKUISegmentDirectionsCard {
-  
-  static func configureCell(dataSource: TableViewSectionedDataSource<TKUISegmentDirectionsViewModel.Section>, tableView: UITableView, indexPath: IndexPath, item: TKUISegmentDirectionsViewModel.Item) -> UITableViewCell {
-
-    if #available(iOS 16.0, *) {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
-      cell.contentConfiguration = UIHostingConfiguration {
-        TKUISegmentDirectionView(item: item)
-      }
-      cell.backgroundColor = .tkBackground
-      return cell
-      
-    } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TKUISegmentDirectionCell.reuseIdentifier, for: indexPath) as! TKUISegmentDirectionCell
-      cell.iconView?.image = item.image
-      cell.durationLabel?.textColor = .tkLabelPrimary
-
-      if let distance = item.distance {
-        let distanceFormatter = MKDistanceFormatter()
-        distanceFormatter.unitStyle = .abbreviated
-        cell.durationLabel?.text = distanceFormatter.string(fromDistance: distance)
-      }
-      
-      cell.nameLabel?.textColor = .tkLabelSecondary
-      cell.nameLabel?.text = item.streetInstruction
-      
-      cell.setBubbles(item.bubbles)
-      
-      return cell
-    }
-  }
-  
+fileprivate class CardHolder {
+  weak var card: TKUISegmentDirectionsCard?
 }
 
-@available(iOS 16.0, *)
-@MainActor
+public struct TKUISegmentDirectionsContent: View {
+  @ObservedObject var model: TKUISegmentDirectionsViewModel
+  fileprivate let wrapper: CardHolder
+  
+  public var body: some View {
+    VStack(alignment: .leading) {
+      if let factory = TKUISegmentDirectionsCard.config.actionFactory {
+        TKUICardActionsViewFactory.build(actions: factory(model.segment)) { action in
+          guard let card = wrapper.card else { return }
+          _ = action.handler(action, card, model.segment, nil)
+        }
+        .background(.clear)
+      }
+      
+      LazyVStack(alignment: .leading) {
+        ForEach(model.items) { item in
+          if item.index != 0 {
+            Divider()
+          }
+          TKUISegmentDirectionView(item: item)
+        }
+      }
+      .padding()
+      .background(Color(.tkBackgroundNotClear))
+      .cornerRadius(22)
+    }
+    .padding()
+    .modify { view in
+      if #available(iOS 26.0, *) {
+        view
+          .background(.clear)
+      } else {
+        view
+          .background(Color(.tkBackgroundGrouped))
+      }
+    }
+  }
+}
+
 struct TKUISegmentDirectionView: View {
   let item: TKUISegmentDirectionsViewModel.Item
   
@@ -172,25 +161,28 @@ struct TKUISegmentDirectionView: View {
           }
         }
       }
-    }.background(Color(.tkBackground))
+    }
   }
 }
 
-@available(iOS 16.0, *)
-struct TKUISegmentDirectionView_Previews: PreviewProvider {
-  static var previews: some View {
-    List {
-      TKUISegmentDirectionView(item: .init(
-        index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.turnSlightyLeft.image, distance: 1_000, bubbles: [
-          ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue), ("Main Road", .systemOrange)
-        ]
-      ))
+extension View {
+  func modify<T: View>(@ViewBuilder _ modifier: (Self) -> T) -> some View {
+    return modifier(self)
+  }
+}
 
-      TKUISegmentDirectionView(item: .init(
-        index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.headTowards.image, distance: 600, bubbles: [
-          ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue)
-        ]
-      ))
-    }.listStyle(.plain)
+#Preview {
+  List {
+    TKUISegmentDirectionView(item: .init(
+      index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.turnSlightyLeft.image, distance: 1_000, bubbles: [
+        ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue), ("Main Road", .systemOrange)
+      ]
+    ))
+
+    TKUISegmentDirectionView(item: .init(
+      index: 0, streetName: "Along Southwest 5th Avenue", image: Shape.Instruction.headTowards.image, distance: 600, bubbles: [
+        ("Cycle Lane", .systemBlue), ("Designated for Cyclists", .systemBlue)
+      ]
+    ))
   }
 }

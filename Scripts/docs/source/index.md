@@ -23,22 +23,6 @@ Add it to your dependencies:
 
 And then add the TripKit, TripKitUI, and/or TripKitInterApp dependencies to your target, as appropriate. You can also only use TripKitAPI for low-level needs.
 
-### Cocoapods
-
-Add desired pods to your `Podfile`:
-
-```ruby
-use_frameworks!
-
-pod 'TripKit'
-pod 'TripKitUI'
-pod 'TripKitInterApp'
-```
-
-Then run `pod update` and you're set.
-
-If you get a "Sandbox" error, make sure that your `ENABLE_USER_SCRIPT_SANDBOXING` is set to 'No', see [Stack Overflow](https://stackoverflow.com/questions/76590131/error-while-build-ios-app-in-xcode-sandbox-rsync-samba-13105-deny1-file-w).
-
 ### Manually
 
 - Drag the files into your project.

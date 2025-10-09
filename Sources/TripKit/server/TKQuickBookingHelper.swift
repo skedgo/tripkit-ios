@@ -16,8 +16,8 @@ public struct TKQuickBookingPrice: Hashable {
   public let USDCost: Float
 }
 
-public struct TKQuickBooking: Codable, Hashable {
-  public enum BookingResponseKind: String, Codable, DefaultCodableStrategy {
+public struct TKQuickBooking: Codable, Hashable, @unchecked Sendable {
+  public enum BookingResponseKind: String, Codable, DefaultCodableStrategy, Sendable {
     public static var defaultValue: TKQuickBooking.BookingResponseKind { .paymentOptions }
     
     /// Internal `BookingOptionsResponse` with providers and/or fares

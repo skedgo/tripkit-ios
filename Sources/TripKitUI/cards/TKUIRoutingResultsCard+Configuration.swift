@@ -60,6 +60,9 @@ public extension TKUIRoutingResultsCard {
     /// Called when the user taps the button.
     public var contactCustomerSupport: ((TKUIRoutingResultsCard, SupportType) -> Void)?
     
+    /// Set this to intercept taps on the transport button. Will then disable the mini transport picker buttons.
+    public var transportButtonHandler: ((TKUIRoutingResultsCard, TKRegion) -> Void)?
+    
     /// Set this to use your own map manager. You can use this in combination
     /// with `TGCardViewController.builder` to use a map other than Apple's
     /// MapKit.
@@ -78,7 +81,7 @@ public extension TKUIRoutingResultsCard {
     /// Optional configuration of the time picker used on the routing results card.
     ///
     /// Note: this will also be re-used in the mode-by-mode card.
-    public var timePickerConfig: TKUITimePickerSheet.Configuration = .default
+    public var timePickerConfig: TKUITimePickerConfiguration = .default
     
     /// Set this to select which trip metrics to show for each trip group in the routing
     /// results card.

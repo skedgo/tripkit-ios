@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import SwiftUI
 
 import TGCardViewController
 import RxSwift
@@ -18,14 +19,6 @@ import TripKit
 @available(*, unavailable, renamed: "TKUIRoutingResultsCard")
 public typealias TKUIResultsCard = TKUIRoutingResultsCard
 
-@available(*, unavailable, renamed: "TKUIRoutingResultsCardDelegate")
-public typealias TKUIResultsCardDelegate = TKUIRoutingResultsCardDelegate
-
-
-public protocol TKUIRoutingResultsCardDelegate: AnyObject {
-  func resultsCard(_ card: TKUIRoutingResultsCard, requestsModePickerWithModes modes: [String], for region: TKRegion, sender: Any?)
-}
-
 /// An interactive card for displaying routing results, including updating from/to location, time and selected modes.
 ///
 /// Can be used standalone or via ``TKUIRoutingResultsViewController``.
@@ -34,8 +27,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
   typealias RoutingModePicker = TKUIModePicker<TKRegion.RoutingMode>
   
   public static var config = Configuration.empty
-
-  public weak var resultsDelegate: TKUIRoutingResultsCardDelegate?
   
   /// Set this callback to provide a custom handler for what should happen when a user selects a trip.
   ///
@@ -101,9 +92,16 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .grouped
+    }
+    
     super.init(
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
-      style: .grouped,
+      style: style,
       mapManager: mapManager,
       initialPosition: initialPosition ?? Self.config.initialCardPosition
     )
@@ -137,9 +135,16 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     resultsTitle.accessoryView = accessoryView
     self.titleView = resultsTitle
     
+    let style: UITableView.Style
+    if #available(iOS 26.0, *) {
+      style = .insetGrouped
+    } else {
+      style = .grouped
+    }
+
     super.init(
       title: .custom(resultsTitle, dismissButton: resultsTitle.dismissButton),
-      style: .grouped,
+      style: style,
       mapManager: mapManager,
       initialPosition: .extended // show fully as we'll have routes shortly
     )
@@ -152,12 +157,8 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     // the best trip (as it's also highlighted on the map still).
     self.deselectOnAppear = false
     
-    switch self.title {
-    case .custom(_, let dismissButton):
-      let styledCloseImage = TGCard.closeButtonImage(style: style)
-      dismissButton?.setImage(styledCloseImage, for: .normal)
-      dismissButton?.setTitle(nil, for: .normal)
-    default: return
+    if case .custom(_, .some(let dismissButton)) = title {
+      TGCard.configureCloseButton(dismissButton, style: style)
     }
     
     if let knownMapManager = mapManager as? TKUIMapManager {
@@ -202,7 +203,6 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       tappedSearch: searchTriggers.asAssertingSignal(),
       tappedDate: accessoryView.timeButton.rx.tap.asSignal(),
       tappedShowModes: accessoryView.transportButton.rx.tap.asSignal(),
-      tappedShowModeOptions: .empty(),
       changedDate: changedTime.asAssertingSignal(),
       changedModes: changedModes.asAssertingSignal(),
       changedSortOrder: .empty(),
@@ -243,6 +243,18 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     }
     self.viewModel = viewModel
     (mapManager as? TKUIRoutingResultsMapManager)?.viewModel = viewModel
+    
+    if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
+      accessoryView.setTransport() // Apply fixed default style
+      
+      NotificationCenter.default.rx.notification(UserDefaults.didChangeNotification)
+        .map { _ in TKSettings.hiddenModeIdentifiers }
+        .distinctUntilChanged()
+        .subscribe(onNext: { [weak self] _ in
+          self?.changedModes.onNext(nil)
+        })
+        .disposed(by: disposeBag)
+    }
     
     // Table view configuration
     
@@ -301,6 +313,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     viewModel.availableModes
       .drive(onNext: { [weak self] in
         self?.updateModePicker($0, in: tableView)
+        
         // When available modes change, e.g., from toggling the Transport button on and off,
         // an error view may be sitting above the table view, covering the mode picker. This
         // repositions it so the mode picker is always visible. See this ticket for details
@@ -462,7 +475,11 @@ extension TKUIRoutingResultsCard {
     switch item {
     case .progress:
       let progressCell = tableView.dequeueReusableCell(withIdentifier: TKUIProgressCell.reuseIdentifier, for: indexPath) as! TKUIProgressCell
-      progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
+      if #available(iOS 26.0, *) {
+        progressCell.contentView.backgroundColor = .tkBackgroundNotClear
+      } else {
+        progressCell.contentView.backgroundColor = .tkBackgroundSecondary // this blends in the background beneath tiles
+      }
       return progressCell
       
     case .trip(let trip, _):
@@ -484,6 +501,9 @@ extension TKUIRoutingResultsCard {
         })
         .disposed(by: tripCell.disposeBag)
       
+      if #available(iOS 26.0, *) {
+        tripCell.backgroundColor = .tkBackgroundNotClear
+      }
       return tripCell
     
     case .customItem(let item):
@@ -634,6 +654,8 @@ extension TKUIRoutingResultsCard {
 private extension TKUIRoutingResultsCard {
   
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
+    guard TKUIRoutingResultsCard.config.transportButtonHandler == nil else { return }
+
     accessoryView.setTransport(isOpen: !modes.available.isEmpty)
     
     guard !modes.available.isEmpty else {
@@ -726,8 +748,8 @@ private extension TKUIRoutingResultsCard {
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       
-    case .presentModeConfigurator(let modes, let region):      
-      showTransportOptions(modes: modes, for: region)
+    case .presentModeConfigurator(let region):
+      TKUIRoutingResultsCard.config.transportButtonHandler?(self, region)
       
     case .presentDatePicker(let time, let timeZone):
       showTimePicker(time: time, timeZone: timeZone)
@@ -782,7 +804,7 @@ private extension TKUIRoutingResultsCard {
   func findOverlay() -> UIView? {
     if let presentee = controller?.presentedViewController {
       return presentee.view
-    } else if let sheet = controller?.view.subviews.first(where: { $0 is TKUISheet }) {
+    } else if #unavailable(iOS 26.0), let sheet = controller?.view.subviews.first(where: { $0 is TKUISheet }) {
       return sheet
     } else {
       return nil
@@ -790,29 +812,55 @@ private extension TKUIRoutingResultsCard {
   }
   
   func showTimePicker(time: TKUIRoutingResultsViewModel.RouteBuilder.Time, timeZone: TimeZone) {
-    guard let controller = controller else {
+    guard let controller else {
       preconditionFailure("Shouldn't be able to show time picker!")
     }
     
-    let sender: UIButton = accessoryView.timeButton
-    
-    let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone, config: Self.config.timePickerConfig)
-    picker.selectAction = { [weak self] timeType, date in
-      self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
-    }
-    
-    if controller.traitCollection.horizontalSizeClass == .regular {
-      picker.delegate = self
-      
-      let pickerController = TKUISheetViewController(sheet: picker)
-      pickerController.modalPresentationStyle = .popover
-      let presenter = pickerController.popoverPresentationController
-      presenter?.sourceView = controller.view
-      presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
-      controller.present(pickerController, animated: true)
+    if #available(iOS 26.0, *) {
+      let picker = UIHostingController(
+        rootView:
+          NavigationStack() {
+            TKUITimePicker(
+              time: time.date,
+              timeType: time.timeType,
+              timeZone: timeZone,
+              configuration: Self.config.timePickerConfig
+            ) { [unowned self] timeType, date in
+              self.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
+            }
+          }
+      )
+
+      if let sheet = picker.sheetPresentationController {
+        sheet.detents = controller.traitCollection.verticalSizeClass == .compact ? [.large()] : [.medium()]
+        sheet.largestUndimmedDetentIdentifier = nil // Always dim
+        sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        sheet.prefersEdgeAttachedInCompactHeight = true
+        sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+      }
+      controller.present(picker, animated: true)
       
     } else {
-      picker.showWithOverlay(in: controller.view)
+      let picker = TKUITimePickerSheet(time: time.date, timeType: time.timeType, timeZone: timeZone, config: Self.config.timePickerConfig)
+      picker.selectAction = { [weak self] timeType, date in
+        self?.changedTime.onNext(TKUIRoutingResultsViewModel.RouteBuilder.Time(timeType: timeType, date: date))
+      }
+      
+      if controller.traitCollection.horizontalSizeClass == .regular {
+        picker.delegate = self
+        
+        let sender: UIButton = accessoryView.timeButton
+        
+        let pickerController = TKUISheetViewController(sheet: picker)
+        pickerController.modalPresentationStyle = .popover
+        let presenter = pickerController.popoverPresentationController
+        presenter?.sourceView = controller.view
+        presenter?.sourceRect = controller.view.convert(sender.bounds, from: sender)
+        controller.present(pickerController, animated: true)
+        
+      } else {
+        picker.showWithOverlay(in: controller.view)
+      }
     }
   }
   
@@ -843,10 +891,6 @@ extension TKUIRoutingResultsCard: TKUITimePickerSheetDelegate {
 // MARK: - Picking transport modes
 
 extension TKUIRoutingResultsCard {
-  
-  private func showTransportOptions(modes: [String], for region: TKRegion) {
-    resultsDelegate?.resultsCard(self, requestsModePickerWithModes: modes, for: region, sender: accessoryView.transportButton)
-  }
   
   public func refreshForUpdatedModes() {
     changedModes.onNext(nil)

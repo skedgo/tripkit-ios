@@ -10,11 +10,11 @@ import Foundation
 
 extension TKAPI {
   
-  public struct LatestResponse: Codable {
+  public struct LatestResponse: Codable, Sendable {
     public let services: [LatestService]
   }
   
-  public struct LatestService: Codable {
+  public struct LatestService: Codable, @unchecked Sendable {
     public let code: String
     
     @OptionalISO8601OrSecondsSince1970 public var startTime: Date?
@@ -37,7 +37,7 @@ extension TKAPI {
     }
   }
   
-  public struct LatestStop: Codable {
+  public struct LatestStop: Codable, @unchecked Sendable {
     public let stopCode: String
     @OptionalISO8601OrSecondsSince1970 public var arrival: Date?
     @OptionalISO8601OrSecondsSince1970 public var departure: Date?
