@@ -23,8 +23,10 @@ jobs:
     strategy:
       matrix:
         include:
-          # - os: macos-26
-          #   xcode: "26.0"
+          - os: macos-26
+            xcode: "26.0"
+          - os: macos-15
+            xcode: "26.4"
           - os: macos-15
             xcode: "16.4"
           - os: macos-14
@@ -45,7 +47,7 @@ jobs:
 
     strategy:
       matrix:
-        swift: ["6.0", "5.10"]
+        swift: ["6.1", "6.0", "5.10"]
     container:
       image: swift:${{ matrix.swift }}
 
