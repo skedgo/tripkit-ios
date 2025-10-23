@@ -79,7 +79,11 @@ extension TKUIServiceViewModel {
 extension TKUIServiceViewModel {
   
   static func buildSections(for embarkation: StopVisits, disembarkation: StopVisits?) -> [Section] {
-    let allVisits = embarkation.service.visitsIncludingContinuation()
+    guard let service = embarkation.service else {
+      return [] // No longer available
+    }
+    
+    let allVisits = service.visitsIncludingContinuation()
     
     var sections: [Section] = []
     if let split = allVisits.firstIndex(of: embarkation) {
@@ -91,31 +95,28 @@ extension TKUIServiceViewModel {
         ))
       }
       
-      if let service = embarkation.service {
-        // Note, for DLS entries `disembarkation` will be nil, but the accessibility
-        // is already handled then under `disembarkation`.
-        var wheelchairAccessibility = embarkation.wheelchairAccessibility
-        if let atEnd = disembarkation?.wheelchairAccessibility {
-          wheelchairAccessibility = wheelchairAccessibility.combine(with: atEnd)
-        }
-        let infoItems = [
-          TKUIServiceInfoView.Content(
-            id: "accessibility",
-            wheelchairAccessibility: wheelchairAccessibility,
-            bicycleAccessibility: service.bicycleAccessibility,
-            vehicleComponents: service.vehicle?.components ?? [[]],
-            timestamp: service.vehicle?.lastUpdate
-          ),
-          TKUIServiceInfoView.Content(
-            id: "alerts",
-            alerts: service.allAlerts()
-              .compactMap { alert in alert.title.map { .init(isCritical: alert.isCritical(), title: $0, body: alert.text) }}
-          )
-        ].filter { !$0.isEmpty }
-        if !infoItems.isEmpty {
-          sections.append(Section(group: .info, items: infoItems.map { .info($0) }))
-        }
-        
+      // Note, for DLS entries `disembarkation` will be nil, but the accessibility
+      // is already handled then under `disembarkation`.
+      var wheelchairAccessibility = embarkation.wheelchairAccessibility
+      if let atEnd = disembarkation?.wheelchairAccessibility {
+        wheelchairAccessibility = wheelchairAccessibility.combine(with: atEnd)
+      }
+      let infoItems = [
+        TKUIServiceInfoView.Content(
+          id: "accessibility",
+          wheelchairAccessibility: wheelchairAccessibility,
+          bicycleAccessibility: service.bicycleAccessibility,
+          vehicleComponents: service.vehicle?.components ?? [[]],
+          timestamp: service.vehicle?.lastUpdate
+        ),
+        TKUIServiceInfoView.Content(
+          id: "alerts",
+          alerts: service.allAlerts()
+            .compactMap { alert in alert.title.map { .init(isCritical: alert.isCritical(), title: $0, body: alert.text) }}
+        )
+      ].filter { !$0.isEmpty }
+      if !infoItems.isEmpty {
+        sections.append(Section(group: .info, items: infoItems.map { .info($0) }))
       }
       
       let outgoing = allVisits[split...]
