@@ -44,6 +44,8 @@ public enum TKBooking {
       case lock = "LOCK"
       case unlock = "UNLOCK"
       case cancel = "CANCEL"
+      case confirm = "CONFIRM"
+      case review = "REVIEW"
 
       /// Tells the app to show another trip when tapped; comes with an internal URL
       case showTrip = "SHOW_RELATED_TRIP"
