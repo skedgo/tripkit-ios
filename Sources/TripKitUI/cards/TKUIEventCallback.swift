@@ -41,8 +41,10 @@ public struct TKUIEventCallback {
     /// is no longer selected.
     case tripSelected(Trip, controller: TGCardViewController, DisposeBag)
 
-    /// Fires whenever the routing results were requested and finished loading
-    case routesLoaded(TripRequest, controller: TGCardViewController)
+    /// Fires whenever the routing results were requested and finished loading.
+    ///
+    /// The second parameter indicates if the results are visible at the time this is reported.
+    case routesLoaded(TripRequest, isVisible: Bool, controller: TGCardViewController)
     
     /// Fires when a timetable is viewed
     case timetableSelected(TKTimetable, controller: TGCardViewController)
