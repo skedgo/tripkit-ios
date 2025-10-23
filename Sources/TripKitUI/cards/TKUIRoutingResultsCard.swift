@@ -327,7 +327,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     // Monitor progress (note: without this, we won't fetch!)
     viewModel.fetchProgress
       .drive(onNext: { [weak self] progress in
-        guard let self = self, let controller = self.controller else { return }
+        guard let self, let controller = self.controller else { return }
         switch progress {
         case .started:
           if let errorView = self.errorView {
@@ -337,7 +337,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
 
         case .finished:
           if let request = self.request {
-            TKUIEventCallback.handler(.routesLoaded(request, controller: controller))
+            TKUIEventCallback.handler(.routesLoaded(request, isVisible: self.viewIsVisible, controller: controller))
           }
           self.showTripGoAttribution(in: tableView)
           
