@@ -539,10 +539,8 @@ extension TKRouter {
   private func parse(_ response: TKAPI.RoutingResponse, for request: TripRequest, visibility: TripGroup.Visibility, callbackQueue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) {
     guard isActive, let context = request.managedObjectContext else { return }
     
-    TKLog.verbose("Parsing \(request)")
     TKRoutingParser.add(response, to: request, merge: true, visibility: visibility) { _ in
       do {
-        TKLog.verbose("Saving parsed result for \(request)")
         try context.save()
         callbackQueue.async {
           completion(.success(request))
