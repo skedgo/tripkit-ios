@@ -12,6 +12,7 @@ import Foundation
 
 @preconcurrency import CoreLocation
 
+@MainActor
 public final class TKOneOffLocationManager: NSObject {
   
   public override init() {
@@ -158,11 +159,13 @@ public final class TKOneOffLocationManager: NSObject {
   private func notify(_ result: Result<CLLocation, Error>) {
     timeoutTask?.cancel()
     timeoutTask = nil
-    
-    withNextLocation.forEach {
+
+    let handlers = withNextLocation
+    withNextLocation = []
+
+    handlers.forEach {
       $0(result)
     }
-    withNextLocation = []
   }
   
 }
@@ -171,42 +174,50 @@ public final class TKOneOffLocationManager: NSObject {
 
 extension TKOneOffLocationManager: CLLocationManagerDelegate {
   
-  public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+  public nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let latest = locations.last else { return assertionFailure() }
     
     guard let latestAccurate = locations
       .filter({ $0.horizontalAccuracy <= manager.desiredAccuracy })
       .last
     else {
-      notify(.failure(LocationFetchError.locationInaccurate(latest)))
+      Task { @MainActor in
+        notify(.failure(LocationFetchError.locationInaccurate(latest)))
+      }
       return
     }
 
-    self.currentLocation = latestAccurate
-    
-    notify(.success(latestAccurate))
+    Task { @MainActor in
+      self.currentLocation = latestAccurate
+      
+      notify(.success(latestAccurate))
+    }
   }
   
-  public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    notify(.failure(error))
+  public nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    Task { @MainActor in
+      notify(.failure(error))
+    }
   }
   
-  public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+  public  nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     if case .notDetermined = manager.authorizationStatus {
       return // happens immediately when asking for access
     }
     
-    updateAccess()
-    askHandler(hasAccess)
-    askHandler = { _ in }
-    
-    switch manager.authorizationStatus {
-    case .authorizedAlways, .authorizedWhenInUse:
-      manager.requestLocation()
-    case .denied, .notDetermined, .restricted:
-      return
-    @unknown default:
-      return
+    Task { @MainActor in
+      updateAccess()
+      askHandler(hasAccess)
+      askHandler = { _ in }
+      
+      switch manager.authorizationStatus {
+      case .authorizedAlways, .authorizedWhenInUse:
+        manager.requestLocation()
+      case .denied, .notDetermined, .restricted:
+        return
+      @unknown default:
+        return
+      }
     }
   }
   
