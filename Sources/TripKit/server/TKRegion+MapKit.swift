@@ -76,7 +76,7 @@ extension TKRegion {
   public static var international: TKInternationalRegion { .shared }
 }
 
-public class TKInternationalRegion : TKRegion {
+public class TKInternationalRegion : TKRegion, @unchecked Sendable {
   
   public static let shared = TKInternationalRegion()
   

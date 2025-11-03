@@ -273,7 +273,7 @@ extension TKModeInfo {
   
 }
 
-extension TKOnStreetParkingLocation: @retroactive TKDisplayableRoute {
+extension TKOnStreetParkingLocation: TKDisplayableRoute {
   
   public var routePath: [Any] {
     guard let polyline = parking.encodedPolyline else { return [] }

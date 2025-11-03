@@ -12,7 +12,7 @@ extension TKAPIConfig {
   
   public static func userSettings() -> Self {
     var basic = Self.defaultValues()
-    basic.distanceUnit = Locale.current.usesMetricSystem ? .metric : .imperial
+    basic.distanceUnit = Locale.current.measurementSystem == .metric ? .metric : .imperial
     basic.weights.money = TKSettings[.money]
     basic.weights.carbon = TKSettings[.carbon]
     basic.weights.time = TKSettings[.time]

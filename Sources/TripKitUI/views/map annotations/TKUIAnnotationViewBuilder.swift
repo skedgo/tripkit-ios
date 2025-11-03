@@ -22,10 +22,9 @@ open class TKUIAnnotationViewBuilder: NSObject {
   fileprivate var preferMarker: Bool = false
   fileprivate var enableClustering: Bool = false
 
-  @objc public let annotation: MKAnnotation
-  @objc public let mapView: MKMapView
+  public let annotation: MKAnnotation
+  public let mapView: MKMapView
   
-  @objc(initForAnnotation:inMapView:)
   public init(for annotation: MKAnnotation, in mapView: MKMapView) {
     self.annotation = annotation
     self.mapView = mapView
@@ -36,28 +35,26 @@ open class TKUIAnnotationViewBuilder: NSObject {
     super.init()
   }
   
-  @objc @discardableResult
+  @discardableResult
   public func withHeading(_ heading: CLLocationDirection) -> TKUIAnnotationViewBuilder {
     self.heading = heading
     return self
   }
   
-  @objc @discardableResult
+  @discardableResult
   public func enableClustering(_ cluster: Bool) -> TKUIAnnotationViewBuilder {
     self.enableClustering = cluster
     return self
   }
 
-  @objc @discardableResult
+  @discardableResult
   public func preferMarker(_ prefer: Bool) -> TKUIAnnotationViewBuilder {
     self.preferMarker = prefer
     return self
   }
 
   
-  @objc
-  open func build() -> MKAnnotationView? {
-
+  @MainActor open func build() -> MKAnnotationView? {
     if preferMarker, let glyphable = annotation as? TKUIGlyphableAnnotation {
       return build(for: glyphable, enableClustering: enableClustering)
     } else if let vehicle = annotation as? Vehicle {
@@ -88,6 +85,7 @@ open class TKUIAnnotationViewBuilder: NSObject {
 
 private extension TKUIAnnotationViewBuilder {
   
+  @MainActor
   private func build(for glyphable: TKUIGlyphableAnnotation, enableClustering: Bool) -> MKAnnotationView {
     let identifier = glyphable is MKClusterAnnotation ? "ClusterMarker" : "ImageMarker"
     
@@ -106,19 +104,17 @@ private extension TKUIAnnotationViewBuilder {
     
     // We may have remote icons
     if let url = glyphable.glyphImageURL {
-      ImageDownloader.default.downloadImage(
-        with: url,
-        options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))],
-        completionHandler:
-          { result in
-            guard
-              let imageResult = try? result.get(),
-              let latest = view.annotation as? TKUIGlyphableAnnotation,
-              latest.glyphImageURL == imageResult.url
-            else { return }
-            view.glyphImage = imageResult.image
-          }
-      )
+      Task { @MainActor in
+        let imageResult = try await ImageDownloader.default.downloadImage(
+          with: url,
+          options: [.imageModifier(RenderingModeImageModifier(renderingMode: .alwaysTemplate))]
+        )
+        guard
+          let latest = view.annotation as? TKUIGlyphableAnnotation,
+          latest.glyphImageURL == imageResult.url
+        else { return }
+        view.glyphImage = imageResult.image
+      }
     }
     
     if let modeAnnotation = glyphable as? TKUIModeAnnotation {

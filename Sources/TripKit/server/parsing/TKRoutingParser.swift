@@ -44,26 +44,6 @@ public final class TKRoutingParser {
     }
   }
   
-  static func addBlocking(_ response: TKAPI.RoutingResponse, into context: NSManagedObjectContext) throws -> TripRequest {
-    var result: Result<TripRequest, Error>? = nil
-    context.performAndWait {
-      let request = TripRequest(context: context)
-      request.timeCreated = .init()
-      result = Result {
-        try add(response,
-                mode: .addTo(request),
-                context: context,
-                allowDuplicates: true,
-                visibility: .full
-        )
-        
-        Self.populate(request, using: response.query)
-        return request
-      }
-    }
-    return try result.orThrow(ParserError.didNotFinish).get()
-  }
-  
   static func add(_ response: TKAPI.RoutingResponse, to request: TripRequest, merge: Bool, visibility: TripGroup.Visibility = .full, completion: @escaping (Result<[Trip], Error>) -> Void) {
     guard let context = request.managedObjectContext else {
       assertionFailure("Request's context went missing.")
