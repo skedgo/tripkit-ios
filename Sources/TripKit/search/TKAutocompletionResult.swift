@@ -38,7 +38,7 @@ public struct TKAutocompletionResult {
   
   public var subtitleHighlightRanges: [NSRange] = [] {
     didSet {
-      assert(titleHighlightRanges.allSatisfy({ (subtitle ?? "").count >= $0.upperBound }))
+      assert(subtitleHighlightRanges.allSatisfy({ (subtitle ?? "").count >= $0.upperBound }))
     }
   }
   
