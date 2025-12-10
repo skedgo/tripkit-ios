@@ -16,7 +16,7 @@ extension TKModeInfo: TKUIModePickerItem {
   public var imageURLIsBranding: Bool { remoteImageIsBranding }
 }
 
-extension TKModeInfo: @retroactive Comparable {
+extension TKModeInfo: Comparable {
   public static func < (lhs: TKModeInfo, rhs: TKModeInfo) -> Bool {
     if let leftId = lhs.identifier, let rightId = rhs.identifier {
       return leftId < rightId

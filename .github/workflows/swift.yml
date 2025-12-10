@@ -24,9 +24,9 @@ jobs:
       matrix:
         include:
           - os: macos-26
-            xcode: "26.0"
+            xcode: "26.1.1"
           - os: macos-15
-            xcode: "26.0"
+            xcode: "26.1.1"
           - os: macos-15
             xcode: "16.4"
           - os: macos-14
@@ -65,11 +65,11 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v3
       - name: Build TripKit Mac
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx
+        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx | xcbeautify
       - name: Build TripKitUI iOS
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
+        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
       - name: Build TripKitInterApp iOS
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
+        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
 
   test_xcode:
     runs-on: macos-15
@@ -83,13 +83,7 @@ jobs:
         env:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
         run: |
-          xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -resultBundlePath TestResults
-      # - uses: kishikawakatsumi/xcresulttool@v1 # NOT YET COMPATIBLE WITH XCODE 16
-      #   with:
-      #     path: TestResults.xcresult
-      #   if: success() || failure()
-      #   # ^ This is important because the action will be run
-      #   # even if the test fails in the previous step.
+          set -o pipefail && xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
 
   example_spm:
     runs-on: macos-15
@@ -100,4 +94,4 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v4
       - name: Build TripKitUIExample
-        run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
+        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify

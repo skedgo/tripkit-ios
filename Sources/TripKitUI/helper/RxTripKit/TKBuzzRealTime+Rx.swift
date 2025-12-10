@@ -12,7 +12,7 @@ import RxSwift
 
 import TripKit
 
-extension TKRealTimeFetcher: @retroactive ReactiveCompatible {}
+extension TKRealTimeFetcher: ReactiveCompatible {}
 extension Reactive where Base: TKRealTimeFetcher {
   
   /// Stream real-time updates for the trip

@@ -206,7 +206,7 @@ public enum TKQuickBookingHelper {
     
     let response = await TKServer.shared.hit([TKQuickBooking].self, url: bookingsURL)
     let bookings = try response.result.get()
-    segment.trip.managedObjectContext?.performAndWait {
+    await segment.trip.managedObjectContext?.perform {
       segment.storeQuickBookings(bookings)
     }
     return bookings

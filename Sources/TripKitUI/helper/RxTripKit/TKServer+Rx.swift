@@ -38,7 +38,7 @@ extension Reactive where Base: TKRegionManager {
   }
 }
 
-extension TKServer: @retroactive ReactiveCompatible {}
+extension TKServer: ReactiveCompatible {}
 
 extension Reactive where Base: TKServer {
   

@@ -44,6 +44,7 @@ public final class TKRoutingParser {
     }
   }
   
+  @available(*, deprecated, message: "Should only be used in tests")
   static func addBlocking(_ response: TKAPI.RoutingResponse, into context: NSManagedObjectContext) throws -> TripRequest {
     var result: Result<TripRequest, Error>? = nil
     context.performAndWait {
