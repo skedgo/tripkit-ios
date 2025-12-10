@@ -65,11 +65,11 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v3
       - name: Build TripKit Mac
-        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx | xcbeautify
       - name: Build TripKitUI iOS
-        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
       - name: Build TripKitInterApp iOS
-        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
 
   test_xcode:
     runs-on: macos-15
@@ -83,7 +83,7 @@ jobs:
         env:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
         run: |
-          set -o pipefail && xcodebuild test -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+          set -o pipefail && xcodebuild test -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
 
   example_spm:
     runs-on: macos-15
@@ -94,4 +94,4 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v4
       - name: Build TripKitUIExample
-        run: set -o pipefail && xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
