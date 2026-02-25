@@ -94,6 +94,8 @@ public class TKStopCoordinate: TKModeCoordinate {
 
   public init(_ stop: TKAPI.Stop) {
     super.init(modeInfo: stop.modeInfo, coordinate: .init(latitude: stop.lat, longitude: stop.lng))
+    self.name = stop.name
+    self.address = stop.address
     isDraggable = false
     stopCode = stop.code
     services = stop.services
