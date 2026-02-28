@@ -220,7 +220,7 @@ extension StopVisits {
   public func realTimeInformation(withOriginalTime: Bool) -> String {
     switch realTimeStatus {
     case .notApplicable: return Loc.Scheduled
-    case .notAvailable: return Loc.NoRealTimeAvailable
+    case .notAvailable: return Loc.Scheduled
     case .canceled: return Loc.Cancelled
     case .onTime: return Loc.OnTime
     

@@ -273,6 +273,7 @@ extension TKUITimetableViewModel {
     
     return Observable<Int>
       .interval(Constants.realTimeRefreshInterval, scheduler: MainScheduler.instance)
+      .startWith(0) // update immediately while visible
       .withLatestFrom(departures)
       .flatMapLatest { departures -> Observable<TKRealTimeUpdateProgress<Void>> in
         guard let region = departures.first?.stop.region else { return .empty() }

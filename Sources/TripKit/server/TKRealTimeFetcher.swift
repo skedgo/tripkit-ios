@@ -13,6 +13,35 @@ import CoreData
 
 public class TKRealTimeFetcher {
   private init() {}
+
+  static func latestParameters(for visit: StopVisits) -> (service: Service, parameters: [String: Any])? {
+    guard let service = visit.service, service.isRealTimeCapable, let startTime = visit.originalTime else { return nil }
+    return (
+      service,
+      [
+        "serviceTripID": service.code,
+        "operatorID": service.operatorID ?? "",
+        "operator": service.operatorName ?? "",
+        "startStopCode": visit.stop.stopCode,
+        "startTime": startTime.timeIntervalSince1970,
+      ]
+    )
+  }
+  
+  static func latestParameters(for entry: DLSEntry) -> (service: Service, parameters: [String: Any])? {
+    guard let service = entry.service, service.isRealTimeCapable, let startTime = entry.originalTime else { return nil }
+    return (
+      service,
+      [
+        "serviceTripID": service.code,
+        "operatorID": service.operatorID ?? "",
+        "operator": service.operatorName ?? "",
+        "startStopCode": entry.stop.stopCode,
+        "startTime": startTime.timeIntervalSince1970,
+        "endStopCode": entry.endStop.stopCode,
+      ]
+    )
+  }
   
   @MainActor
   public static func update(_ entries: Set<DLSEntry>, in region: TKRegion) async throws -> Set<DLSEntry> {
@@ -20,18 +49,11 @@ public class TKRealTimeFetcher {
     var keysToUpdateables: [String: Updateable] = [:]
     var context: NSManagedObjectContext? = nil
     for entry in entries {
-      guard let service = entry.service, !service.wantsRealTimeUpdates, let startTime = entry.originalTime else { continue }
+      guard let latest = latestParameters(for: entry) else { continue }
+      let service = latest.service
       context = context ?? service.managedObjectContext
       assert(context == service.managedObjectContext)
-
-      serviceParas.append([
-        "serviceTripID": service.code,
-        "operatorID": service.operatorID ?? "",
-        "operator": service.operatorName ?? "",
-        "startStopCode": entry.stop.stopCode,
-        "startTime": startTime.timeIntervalSince1970,
-        "endStopCode": entry.endStop.stopCode,
-      ])
+      serviceParas.append(latest.parameters)
       keysToUpdateables[service.code] = .service(service)
     }
     
@@ -45,17 +67,11 @@ public class TKRealTimeFetcher {
     var keysToUpdateables: [String: Updateable] = [:]
     var context: NSManagedObjectContext? = nil
     for visit in visits {
-      guard let service = visit.service, !service.wantsRealTimeUpdates, let startTime = visit.originalTime else { continue }
+      guard let latest = latestParameters(for: visit) else { continue }
+      let service = latest.service
       context = context ?? service.managedObjectContext
       assert(context == service.managedObjectContext)
-
-      serviceParas.append([
-        "serviceTripID": service.code,
-        "operatorID": service.operatorID ?? "",
-        "operator": service.operatorName ?? "",
-        "startStopCode": visit.stop.stopCode,
-        "startTime": startTime.timeIntervalSince1970,
-      ])
+      serviceParas.append(latest.parameters)
       keysToUpdateables[service.code] = .service(service)
     }
     
