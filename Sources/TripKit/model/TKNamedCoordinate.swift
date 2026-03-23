@@ -48,19 +48,24 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
   @objc public var placemark: CLPlacemark? {
     if let placemark = _placemark { return placemark }
     guard coordinate.isValid, TKNamedCoordinate.enableReverseGeocodingAddress, reverseGeocodingTask == nil else { return nil }
-    
-    let coordinate = self.coordinate
-    reverseGeocodingTask = Task { [weak self] in
-      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-      let geocoder = CLGeocoder()
-      if let best = try? await geocoder.reverseGeocodeLocation(location).first {
-        self?.assignPlacemark(best, includeName: false)
-      }
+
+    reverseGeocodingTask = Task { @MainActor [weak self] in
+      try? await self?.needsAddress(includeName: false)
     }
     return nil
   }
-  
+
   private var reverseGeocodingTask: Task<Void, Never>?
+
+  @MainActor
+  public func needsAddress(includeName: Bool) async throws {
+    guard _address == nil else { return }
+    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    let geocoder = CLGeocoder()
+    if let best = try await geocoder.reverseGeocodeLocation(location).first {
+      assignPlacemark(best, includeName: includeName)
+    }
+  }
   
   @objc public var locationID: String? = nil
   @objc public var timeZoneID: String? = nil
@@ -129,7 +134,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     self.init(latitude: from.latitude, longitude: from.longitude, name: from.name, address: from.address)
   }
   
-  public func assignPlacemark(_ placemark: CLPlacemark, includeName: Bool) {
+  func assignPlacemark(_ placemark: CLPlacemark, includeName: Bool) {
     if includeName {
       if let name = placemark.name {
         self.name = name
