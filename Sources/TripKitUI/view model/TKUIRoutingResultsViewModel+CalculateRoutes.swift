@@ -174,14 +174,14 @@ extension TKUIRoutingResultsViewModel {
       origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
         .compactMap { [weak asObject] _ in asObject?.coordinate }
         .distinctUntilChanged(isCloseEnough)
-        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject, retryLimit: 3, delay: 1) }
+        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject) }
         .map { _ in (builder, Self.buildId(for: builder)) }
     }
     if let asObject = builder.destination {
       destination = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
         .compactMap { [weak asObject] _ in asObject?.coordinate }
         .distinctUntilChanged(isCloseEnough)
-        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject, retryLimit: 3, delay: 1) }
+        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject) }
         .map { _ in (builder, Self.buildId(for: builder)) }
     }
     return Observable.merge(origin, destination)
@@ -349,7 +349,7 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
     if let from = location?.title, from != Loc.Location {
       return .just(from)
     } else if let location {
-      return Single.create(onMain: true) {
+      return Single.create {
         try await location.needsAddress(includeName: true)
         return location.title
       }
