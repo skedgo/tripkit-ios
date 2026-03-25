@@ -36,7 +36,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: ${{ matrix.xcode }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build
         run: swift build --target TripKit
 
@@ -50,7 +50,7 @@ jobs:
       image: swift:${{ matrix.swift }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build
         run: swift build --target TripKitAPI
 
@@ -61,7 +61,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Build TripKit Mac
         run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx
       - name: Build TripKitUI iOS
@@ -76,7 +76,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run tests
         env:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
@@ -96,7 +96,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build TripKitUIExample
         run: xcodebuild build -quiet -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16'
 
@@ -124,7 +124,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build ${{ matrix.name }}
         run: |
           cd ${{ matrix.directory }}
