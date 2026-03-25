@@ -212,21 +212,26 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetch(for request: Observable<TripRequest>, skipInitial: Bool, limitTo modes: Set<String>? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
-    return request
-      .filter { $0.managedObjectContext != nil }
-      .flatMapLatest { request -> Observable<TKUIResultsFetcher.Progress> in
+  static func fetch(for request: Observable<TripRequest>, selectedModes: Observable<Set<String>>, skipInitial: Bool, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
+    return Observable
+      .combineLatest(request, selectedModes)
+      .filter { $0.0.managedObjectContext != nil }
+      .flatMapLatest { request, selectedModes -> Observable<TKUIResultsFetcher.Progress> in
         if skipInitial, request.hasTrips, !request.expandForFavorite {
           return .just(.finished)
         }
-        
-        if let restricted = modes, !Set(restricted).isSubset(of: Set(request.spanningRegion.modeIdentifiers)) {
-          assertionFailure("Try to limit search results to modes that are not supported in the region.")
-        }
+
+        let routingModes = TKUIRoutingResultsCard.config.routingModeIdentifiers(for: selectedModes)
+        let routingModeRequestGroups = TKUIRoutingResultsCard.config.routingModeRequestGroups(for: selectedModes)
         
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKUIResultsFetcher
-          .streamTrips(for: request, modes: modes, classifier: TKMetricClassifier())
+          .streamTrips(
+            for: request,
+            modes: routingModes,
+            groupedModeIdentifiers: routingModeRequestGroups,
+            classifier: TKMetricClassifier()
+          )
           .do(onNext: { progress in
             if progress == .finished {
               try? request.managedObjectContext?.save()
@@ -438,5 +443,3 @@ extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable {
       && lhs.mode == rhs.mode
   }
 }
-
-

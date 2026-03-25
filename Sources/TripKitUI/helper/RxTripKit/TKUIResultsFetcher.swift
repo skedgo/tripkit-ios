@@ -57,7 +57,7 @@ public class TKUIResultsFetcher {
   ///   - classifier: Optional classifier, see `TKTripClassifier` for more
   /// - Returns: Stream of fetching the results, multiple call backs as different
   ///     modes are fetched.
-  public static func streamTrips(for request: TripRequest, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, baseURL: URL? = nil) -> Observable<Progress> {
+  public static func streamTrips(for request: TripRequest, modes: Set<String>? = nil, groupedModeIdentifiers: Set<Set<String>>? = nil, classifier: TKTripClassifier? = nil, baseURL: URL? = nil) -> Observable<Progress> {
     
     // first we'll lock in this trips time if necessary
     if request.type == .leaveASAP {
@@ -65,34 +65,36 @@ public class TKUIResultsFetcher {
     }
     
     // 1. Fetch current location if necessary
-    var prepared: Single<(TripRequest, Set<String>?)>
+    var prepared: Single<(TripRequest, Set<String>?, Set<Set<String>>?)>
     if request.usesCurrentLocation {
       prepared = TKLocationManager.shared.rx
         .fetchCurrentLocation(within: Constants.secondsToRefine)
         .map { location in
           request.override(currentLocation: location)
-          return (request, nil)
+          return (request, modes, groupedModeIdentifiers)
         }
       
     } else {
-      prepared = .just((request, nil))
+      prepared = .just((request, modes, groupedModeIdentifiers))
     }
     
     if let modeAdjuster = Self.modeReplacementHandler {
-      prepared = prepared.flatMap { (request: TripRequest, _) in
+      prepared = prepared.flatMap { (request: TripRequest, _, groupedModeIdentifiers: Set<Set<String>>?) in
         let modesToAdjust: Set<String> = modes ?? request.modes
         let region = request.startRegion ?? request.spanningRegion
         return modeAdjuster(region, modesToAdjust, request)
-          .map { (request, $0) }
+          .map { (request, $0, groupedModeIdentifiers) }
       }
     }
     
     // 2. Then we can kick off the requests
     return prepared
       .asObservable()
-      .flatMapLatest { (request, modes) -> Observable<Progress> in
+      .flatMapLatest { (request, modes, groupedModeIdentifiers) -> Observable<Progress> in
         return TKRouter.rx.multiFetchRequest(
-          for: request, modes: modes,
+          for: request,
+          modes: modes,
+          groupedModeIdentifiers: groupedModeIdentifiers,
           classifier: classifier,
           baseURL: baseURL
         )
@@ -142,7 +144,7 @@ fileprivate class CountHolder {
 
 fileprivate extension Reactive where Base : TKRouter {
   
-  static func multiFetchRequest(for request: TripRequest, modes: Set<String>?, classifier: TKTripClassifier? = nil, baseURL: URL? = nil, apiKey: String? = nil) -> Observable<TKUIResultsFetcher.Progress> {
+  static func multiFetchRequest(for request: TripRequest, modes: Set<String>?, groupedModeIdentifiers: Set<Set<String>>?, classifier: TKTripClassifier? = nil, baseURL: URL? = nil, apiKey: String? = nil) -> Observable<TKUIResultsFetcher.Progress> {
     
     return Observable.create { observer in
       var router: TKRouter! = TKRouter(config: .userSettings())
@@ -153,6 +155,7 @@ fileprivate extension Reactive where Base : TKRouter {
       let count = router.multiFetchTrips(
         for: request,
         modes: modes,
+        groupedModeIdentifiers: groupedModeIdentifiers,
         classifier: classifier,
         progress: { [weak holder] progress in
           guard let holder = holder else { return }
@@ -179,4 +182,3 @@ fileprivate extension Reactive where Base : TKRouter {
   }
   
 }
-

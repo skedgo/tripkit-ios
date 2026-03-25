@@ -29,6 +29,29 @@ extension TKRouter.RoutingError: LocalizedError {
 
 extension TKRouter {
   
+  static func effectiveModeIdentifiers(
+    modes: Set<String>?,
+    groupedModeIdentifiers: Set<Set<String>>?,
+    fallbackModes: Set<String>
+  ) -> Set<String> {
+    if let modes, !modes.isEmpty {
+      return modes
+    } else if let groupedModeIdentifiers, !groupedModeIdentifiers.isEmpty {
+      return groupedModeIdentifiers.reduce(into: Set<String>()) { result, group in
+        result.formUnion(group)
+      }
+    } else {
+      return fallbackModes
+    }
+  }
+  
+  static func usesExplicitModeSelection(
+    modes: Set<String>?,
+    groupedModeIdentifiers: Set<Set<String>>?
+  ) -> Bool {
+    modes != nil || groupedModeIdentifiers != nil
+  }
+  
 #if canImport(CoreData)
 
   /// The main method to call to have the router calculate trips.
@@ -178,19 +201,19 @@ extension TKRouter {
   ///   - completion: Callback executed when all requests have finished with the original request and, optionally, an error if all failed.
   /// - returns: The number of requests sent. This will match the number of times `progress` is called.
   @discardableResult
-  public func multiFetchTrips(for request: TripRequest, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<Void, Error>) -> Void) -> UInt {
-    return multiFetchTrips(request: request, modes: modes, classifier: classifier, progress: progress) { result in
+  public func multiFetchTrips(for request: TripRequest, modes: Set<String>? = nil, groupedModeIdentifiers: Set<Set<String>>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<Void, Error>) -> Void) -> UInt {
+    return multiFetchTrips(request: request, modes: modes, groupedModeIdentifiers: groupedModeIdentifiers, classifier: classifier, progress: progress) { result in
       completion(result.map { _ in })
     }
   }
   
-  private func multiFetchTrips(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
+  private func multiFetchTrips(request: TKRouterRequestable, modes: Set<String>? = nil, groupedModeIdentifiers: Set<Set<String>>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, completion: @escaping (Result<TripRequest, Error>) -> Void) -> UInt {
     let queue = DispatchQueue(label: "com.skedgo.TripKit.multi-fetch-worker")
     self.workerQueue = queue
     var count: UInt = 0
     queue.sync {
       do {
-        count = try self.multiFetchTripsWorker(request: request, modes: modes, classifier: classifier, progress: progress, on: queue, completion: completion)
+        count = try self.multiFetchTripsWorker(request: request, modes: modes, groupedModeIdentifiers: groupedModeIdentifiers, classifier: classifier, progress: progress, on: queue, completion: completion)
       } catch {
         self.handleError(error, callbackQueue: queue, completion: completion)
       }
@@ -198,12 +221,17 @@ extension TKRouter {
     return count
   }
     
-  private func multiFetchTripsWorker(request: TKRouterRequestable, modes: Set<String>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, on queue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) throws -> UInt {
+  private func multiFetchTripsWorker(request: TKRouterRequestable, modes: Set<String>? = nil, groupedModeIdentifiers: Set<Set<String>>? = nil, classifier: TKTripClassifier? = nil, progress: ((UInt) -> Void)? = nil, on queue: DispatchQueue, completion: @escaping (Result<TripRequest, Error>) -> Void) throws -> UInt {
     
     let additional = try request.performAndWait(\.additional)
     let includesAllModes = additional.contains { $0.name == "allModes" }
     
-    let enabledModes = try modes ?? request.performAndWait(\.modes)
+    let enabledModes = try Self.effectiveModeIdentifiers(
+      modes: modes,
+      groupedModeIdentifiers: groupedModeIdentifiers,
+      fallbackModes: request.performAndWait(\.modes)
+    )
+
     if includesAllModes {
       modeIdentifiers = enabledModes
       fetchTrips(for: request, bestOnly: false, additional: additional, callbackQueue: queue, completion: completion)
@@ -214,7 +242,7 @@ extension TKRouter {
       throw RoutingError.invalidRequest("No modes enabled")
     }
     
-    let groupedIdentifier = TKTransportMode.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
+    let groupedIdentifier = groupedModeIdentifiers ?? TKTransportMode.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
     
     let tripRequest: TripRequest = try request.performAndWait {
       let tripRequest = $0.toTripRequest()
@@ -253,7 +281,7 @@ extension TKRouter {
             // Classifiers will likely heavily read from the trips, so
             // we need to switch
             request.perform { _ in
-              if modes == nil {
+              if Self.usesExplicitModeSelection(modes: modes, groupedModeIdentifiers: groupedModeIdentifiers) == false {
                 // We get hidden modes here in the completion block
                 // since they might have changed while waiting for results
                 let hidden = TKSettings.hiddenModeIdentifiers

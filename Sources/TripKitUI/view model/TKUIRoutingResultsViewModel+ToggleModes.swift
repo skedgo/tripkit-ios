@@ -16,7 +16,7 @@ extension TKUIRoutingResultsViewModel {
     static let none = AvailableModes(available: [], enabled: [])
     
     let available: [TKRegion.RoutingMode]
-    fileprivate let enabled: Set<String>
+    let enabled: Set<String>
     
     func isEnabled(_ mode: TKRegion.RoutingMode) -> Bool {
       return enabled.contains(mode.identifier)
@@ -25,7 +25,7 @@ extension TKUIRoutingResultsViewModel {
   
   private static func modes(for request: TripRequest) -> [TKRegion.RoutingMode] {
     let regions = [request.startRegion, request.endRegion, request.spanningRegion].compactMap { $0 }
-    return TKRegionManager.sortedModes(in: regions)
+    return TKUIRoutingResultsCard.config.routingModes(in: regions)
 
   }
   

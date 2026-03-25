@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import MapKit
 
 @testable import TripKit
 @testable import TripKitUI
@@ -16,8 +17,14 @@ final class TKUIRoutingResultsViewModelTest: XCTestCase {
   override func setUp() async throws {
     try await super.setUp()
 
+    TKUIRoutingResultsCard.config = .empty
     TKSettings.hiddenModeIdentifiers = []
     TKSettings.showWheelchairInformation = false
+  }
+  
+  override func tearDown() {
+    TKUIRoutingResultsCard.config = .empty
+    super.tearDown()
   }
   
   func testDefaultModes() {
@@ -102,6 +109,94 @@ final class TKUIRoutingResultsViewModelTest: XCTestCase {
     XCTAssertTrue(adjusted.contains(TKTransportMode.wheelchair.modeIdentifier))
     
     XCTAssertTrue(TKSettings.showWheelchairInformation)
+  }
+  
+  func testCustomModesAreInjectedIntoAvailableModes() {
+    TKUIRoutingResultsCard.config.customModes = [
+      .init(identifier: "custom_park_ride", title: "Park & Ride", subtitle: "Drive + public transport", icon: .badgeHeart)
+    ]
+    
+    let region = TKRegion(
+      forTestingWithCode: "test",
+      modes: [
+        TKTransportMode.publicTransport.modeIdentifier,
+        TKTransportMode.car.modeIdentifier
+      ],
+      cities: []
+    )
+    
+    let available = TKUIRoutingResultsCard.config.routingModes(in: [region])
+    
+    XCTAssertEqual(
+      available.map(\.identifier),
+      [
+        TKTransportMode.publicTransport.modeIdentifier,
+        TKTransportMode.car.modeIdentifier,
+        "custom_park_ride"
+      ]
+    )
+  }
+  
+  func testRoutingModeRequestGroupAdjusterCanInjectMixedModeRequests() {
+    TKUIRoutingResultsCard.config.customModes = [
+      .init(identifier: "custom_park_ride", title: "Park & Ride", icon: .badgeHeart)
+    ]
+    TKUIRoutingResultsCard.config.routingModeRequestGroupAdjuster = { selected, defaultGroups in
+      var adjustedGroups = defaultGroups
+      guard selected.contains("custom_park_ride") else { return adjustedGroups }
+      adjustedGroups.insert([
+        TKTransportMode.publicTransport.modeIdentifier,
+        TKTransportMode.car.modeIdentifier
+      ])
+      return adjustedGroups
+    }
+    
+    let adjusted = TKUIRoutingResultsCard.config.routingModeRequestGroups(
+      for: [
+        "custom_park_ride",
+        TKTransportMode.walking.modeIdentifier
+      ]
+    )
+    
+    XCTAssertEqual(
+      adjusted,
+      [
+        [TKTransportMode.walking.modeIdentifier],
+        [
+          TKTransportMode.publicTransport.modeIdentifier,
+          TKTransportMode.car.modeIdentifier
+        ]
+      ]
+    )
+  }
+  
+  func testCustomModeGroupingDoesNotFlattenIntoBackendModes() {
+    TKUIRoutingResultsCard.config.customModes = [
+      .init(identifier: "custom_park_ride", title: "Park & Ride", icon: .badgeHeart)
+    ]
+    TKUIRoutingResultsCard.config.routingModeRequestGroupAdjuster = { selected, defaultGroups in
+      var adjustedGroups = defaultGroups
+      guard selected.contains("custom_park_ride") else { return adjustedGroups }
+      adjustedGroups.insert([
+        TKTransportMode.publicTransport.modeIdentifier,
+        TKTransportMode.car.modeIdentifier
+      ])
+      return adjustedGroups
+    }
+    
+    let selected: Set<String> = ["custom_park_ride"]
+    
+    XCTAssertEqual(
+      TKUIRoutingResultsCard.config.routingModeIdentifiers(for: selected),
+      []
+    )
+    XCTAssertEqual(
+      TKUIRoutingResultsCard.config.routingModeRequestGroups(for: selected),
+      [[
+        TKTransportMode.publicTransport.modeIdentifier,
+        TKTransportMode.car.modeIdentifier
+      ]]
+    )
   }
   
 

@@ -35,6 +35,25 @@ public extension TKUIRoutingResultsCard {
     
     static let empty = Configuration()
     
+    /// Runtime-injected mode shown alongside the region's routing modes.
+    public struct CustomMode {
+      public let identifier: String
+      public let title: String
+      public let subtitle: String?
+      public let icon: TKImage
+      
+      public init(identifier: String, title: String, subtitle: String? = nil, icon: TKImage) {
+        self.identifier = identifier
+        self.title = title
+        self.subtitle = subtitle
+        self.icon = icon
+      }
+      
+      fileprivate var routingMode: TKRegion.RoutingMode {
+        TKRegion.RoutingMode(identifier: identifier, title: title, subtitle: subtitle, icon: icon)
+      }
+    }
+    
     /// Set this to specify where the card should be placed when it's loaded.
     ///
     /// Defaults to `.peaking` position
@@ -48,6 +67,16 @@ public extension TKUIRoutingResultsCard {
     ///
     /// Defaults to nil, which means the SDK will read from `TKSettings`
     public var limitToModes: Set<String>? = nil
+    
+    /// Additional routing modes to inject into the runtime mode picker.
+    public var customModes: [CustomMode] = []
+    
+    /// Adjust grouped routing requests after the selected identifiers have been
+    /// translated into backend-recognised modes.
+    ///
+    /// This can be used to inject extra modes into a mixed-modal request
+    /// without creating additional single-mode requests.
+    public var routingModeRequestGroupAdjuster: ((Set<String>, Set<Set<String>>) -> Set<Set<String>>)? = nil
     
     /// Set this to add a button for a trip group.
     ///
@@ -113,4 +142,33 @@ public extension TKUIRoutingResultsCard {
     
   }
 
+}
+
+extension TKUIRoutingResultsCard.Configuration {
+  fileprivate var customModeIdentifiers: Set<String> {
+    Set(customModes.map(\.identifier))
+  }
+  
+  func routingModes(in regions: [TKRegion]) -> [TKRegion.RoutingMode] {
+    let regionModes = TKRegionManager.sortedModes(in: regions)
+    guard !customModes.isEmpty else { return regionModes }
+    
+    var seen = Set(regionModes.map(\.identifier))
+    let injected = customModes
+      .map(\.routingMode)
+      .filter { seen.insert($0.identifier).inserted }
+    return regionModes + injected
+  }
+  
+  func routingModeIdentifiers(for selectedModeIdentifiers: Set<String>) -> Set<String> {
+    var adjusted = selectedModeIdentifiers
+    adjusted.subtract(customModeIdentifiers)
+    return adjusted
+  }
+  
+  func routingModeRequestGroups(for selectedModeIdentifiers: Set<String>) -> Set<Set<String>> {
+    let routingModeIdentifiers = routingModeIdentifiers(for: selectedModeIdentifiers)
+    let defaultGroups = TKTransportMode.groupModeIdentifiers(routingModeIdentifiers, includeGroupForAll: true)
+    return routingModeRequestGroupAdjuster?(selectedModeIdentifiers, defaultGroups) ?? defaultGroups
+  }
 }
