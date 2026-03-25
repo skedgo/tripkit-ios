@@ -200,7 +200,7 @@ extension TKUIRoutingResultsCard.Configuration {
     Set(customModes.map(\.identifier))
   }
   
-  func routingModes(in regions: [TKRegion]) -> [TKRegion.RoutingMode] {
+  public func routingModes(in regions: [TKRegion]) -> [TKRegion.RoutingMode] {
     mergeCustomModes(into: TKRegionManager.sortedModes(in: regions))
   }
   
