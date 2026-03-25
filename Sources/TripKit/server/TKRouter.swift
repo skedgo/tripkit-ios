@@ -244,8 +244,7 @@ extension TKRouter {
     
     let groupedIdentifier = groupedModeIdentifiers ?? TKTransportMode.groupModeIdentifiers(
       enabledModes,
-      includeGroupForAll: true,
-      alwaysGroupedModeIdentifierPrefixes: TKRouter.modesToGroupInRequest ?? []
+      includeGroupForAll: true
     )
     
     let tripRequest: TripRequest = try request.performAndWait {
