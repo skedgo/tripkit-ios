@@ -116,23 +116,46 @@ final class TKUIRoutingResultsViewModelTest: XCTestCase {
       .init(identifier: "custom_park_ride", title: "Park & Ride", subtitle: "Drive + public transport", icon: .badgeHeart)
     ]
     
-    let region = TKRegion(
-      forTestingWithCode: "test",
-      modes: [
-        TKTransportMode.publicTransport.modeIdentifier,
-        TKTransportMode.car.modeIdentifier
-      ],
-      cities: []
+    let available = TKUIRoutingResultsCard.config.mergeCustomModes(
+      into: [
+        .buildForTesting(TKTransportMode.publicTransport.modeIdentifier),
+        .buildForTesting(TKTransportMode.car.modeIdentifier)
+      ]
     )
     
-    let available = TKUIRoutingResultsCard.config.routingModes(in: [region])
+    XCTAssertEqual(
+      available.map(\.identifier),
+      [
+        "custom_park_ride",
+        TKTransportMode.publicTransport.modeIdentifier,
+        TKTransportMode.car.modeIdentifier
+      ]
+    )
+  }
+  
+  func testCustomModeCanBeInsertedAfterExistingMode() {
+    TKUIRoutingResultsCard.config.customModes = [
+      .init(
+        identifier: "custom_park_ride",
+        title: "Park & Ride",
+        icon: .badgeHeart,
+        after: TKTransportMode.publicTransport.modeIdentifier
+      )
+    ]
+    
+    let available = TKUIRoutingResultsCard.config.mergeCustomModes(
+      into: [
+        .buildForTesting(TKTransportMode.publicTransport.modeIdentifier),
+        .buildForTesting(TKTransportMode.car.modeIdentifier)
+      ]
+    )
     
     XCTAssertEqual(
       available.map(\.identifier),
       [
         TKTransportMode.publicTransport.modeIdentifier,
-        TKTransportMode.car.modeIdentifier,
-        "custom_park_ride"
+        "custom_park_ride",
+        TKTransportMode.car.modeIdentifier
       ]
     )
   }

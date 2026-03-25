@@ -42,12 +42,18 @@ public extension TKUIRoutingResultsCard {
       public let identifier: String
       public let title: String
       public let subtitle: String?
+      /// Insert this custom mode after the mode with the matching identifier.
+      ///
+      /// If `nil`, the mode is inserted at the beginning of the picker. If the
+      /// identifier cannot be found, the mode is appended at the end.
+      public let after: String?
       public let icon: TKImage
       
-      public init(identifier: String, title: String, subtitle: String? = nil, icon: TKImage) {
+      public init(identifier: String, title: String, subtitle: String? = nil, icon: TKImage, after: String? = nil) {
         self.identifier = identifier
         self.title = title
         self.subtitle = subtitle
+        self.after = after
         self.icon = icon
       }
       
@@ -71,6 +77,11 @@ public extension TKUIRoutingResultsCard {
     public var limitToModes: Set<String>? = nil
     
     /// Additional routing modes to inject into the runtime mode picker.
+    ///
+    /// Custom modes with `after == nil` are inserted at the beginning in the
+    /// order they are listed. Custom modes with `after` set are inserted after
+    /// the matching mode identifier when present, or appended if that anchor
+    /// does not exist.
     public var customModes: [CustomMode] = []
     
     /// Adjust the grouped backend routing requests derived from the current
@@ -190,14 +201,47 @@ extension TKUIRoutingResultsCard.Configuration {
   }
   
   func routingModes(in regions: [TKRegion]) -> [TKRegion.RoutingMode] {
-    let regionModes = TKRegionManager.sortedModes(in: regions)
-    guard !customModes.isEmpty else { return regionModes }
+    mergeCustomModes(into: TKRegionManager.sortedModes(in: regions))
+  }
+  
+  func mergeCustomModes(into routingModes: [TKRegion.RoutingMode]) -> [TKRegion.RoutingMode] {
+    var routingModes = routingModes
+    guard !customModes.isEmpty else { return routingModes }
     
-    var seen = Set(regionModes.map(\.identifier))
-    let injected = customModes
-      .map(\.routingMode)
-      .filter { seen.insert($0.identifier).inserted }
-    return regionModes + injected
+    var seen = Set(routingModes.map(\.identifier))
+    let injectedModes = customModes.filter { seen.insert($0.identifier).inserted }
+    
+    var insertionIndexAtStart = 0
+    for mode in injectedModes where mode.after == nil {
+      routingModes.insert(mode.routingMode, at: insertionIndexAtStart)
+      insertionIndexAtStart += 1
+    }
+    
+    var pendingAnchoredModes = injectedModes.filter { $0.after != nil }
+    while !pendingAnchoredModes.isEmpty {
+      var nextPending: [CustomMode] = []
+      var insertedAny = false
+      
+      for mode in pendingAnchoredModes {
+        guard let after = mode.after else { continue }
+        
+        if let anchorIndex = routingModes.lastIndex(where: { $0.identifier == after }) {
+          routingModes.insert(mode.routingMode, at: routingModes.index(after: anchorIndex))
+          insertedAny = true
+        } else {
+          nextPending.append(mode)
+        }
+      }
+      
+      if !insertedAny {
+        routingModes.append(contentsOf: nextPending.map(\.routingMode))
+        break
+      }
+      
+      pendingAnchoredModes = nextPending
+    }
+    
+    return routingModes
   }
   
   func routingModeIdentifiers(for selectedModeIdentifiers: Set<String>) -> Set<String> {
