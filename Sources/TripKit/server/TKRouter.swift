@@ -242,7 +242,11 @@ extension TKRouter {
       throw RoutingError.invalidRequest("No modes enabled")
     }
     
-    let groupedIdentifier = groupedModeIdentifiers ?? TKTransportMode.groupModeIdentifiers(enabledModes, includeGroupForAll: true)
+    let groupedIdentifier = groupedModeIdentifiers ?? TKTransportMode.groupModeIdentifiers(
+      enabledModes,
+      includeGroupForAll: true,
+      alwaysGroupedModeIdentifierPrefixes: TKRouter.modesToGroupInRequest ?? []
+    )
     
     let tripRequest: TripRequest = try request.performAndWait {
       let tripRequest = $0.toTripRequest()

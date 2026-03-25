@@ -26,6 +26,9 @@ public class TKRouter: NSObject {
   
   /// Optional setting to group certain modes always in a single `routing.json` when sending a
   /// multi-fetch request.
+  ///
+  /// If you're using `TKUIRoutingResultsCard`, prefer
+  /// `TKUIRoutingResultsCard.config.routingModeRequestGroupAdjuster`.
   public static var modesToGroupInRequest: [String]? = nil
   
   /// Optional server to use instead of ``TKServer/shared``.
@@ -99,7 +102,11 @@ extension TKRouter {
       return [response]
 
     } else {
-      let groupedIdentifier = TKTransportMode.groupModeIdentifiers(request.modes, includeGroupForAll: true)
+      let groupedIdentifier = TKTransportMode.groupModeIdentifiers(
+        request.modes,
+        includeGroupForAll: true,
+        alwaysGroupedModeIdentifierPrefixes: TKRouter.modesToGroupInRequest ?? []
+      )
       guard !groupedIdentifier.isEmpty else {
         throw RoutingError.invalidRequest("No modes enabled")
       }
@@ -258,8 +265,8 @@ extension TKTransportMode {
   ///   - modes: A set of all the identifiers to be grouped
   ///   - includeGroupForAll: If an extra group which has all the identifiers should be added
   /// - Returns: A set of a set of mode identifiers
-  public static func groupModeIdentifiers(_ modes: Set<String>, includeGroupForAll: Bool) -> Set<Set<String>> {
-    let identifiersToAlwaysGroup: [String] = TKRouter.modesToGroupInRequest ?? []
+  public static func groupModeIdentifiers(_ modes: Set<String>, includeGroupForAll: Bool, alwaysGroupedModeIdentifierPrefixes: [String] = []) -> Set<Set<String>> {
+    let identifiersToAlwaysGroup = alwaysGroupedModeIdentifierPrefixes
     var result: Set<Set<String>> = []
     var processedModes: Set<String> = []
     var specialGroups: [String: Set<String>] = [:]

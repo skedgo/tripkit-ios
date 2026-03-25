@@ -199,5 +199,45 @@ final class TKUIRoutingResultsViewModelTest: XCTestCase {
     )
   }
   
+  func testAlwaysGroupModeIdentifierPrefixesAdjusterMergesMatchingModes() {
+    TKUIRoutingResultsCard.config.routingModeRequestGroupAdjuster =
+      TKUIRoutingResultsCard.Configuration.alwaysGroupModeIdentifierPrefixes([
+        "pt_ltd_SCHOOLBUS"
+      ])
+    
+    let adjusted = TKUIRoutingResultsCard.config.routingModeRequestGroups(
+      for: [
+        "pt_pub",
+        "pt_ltd_SCHOOLBUS_1",
+        "pt_ltd_SCHOOLBUS_2",
+        "pt_ltd_SCHOOLBUS_3",
+        TKTransportMode.walking.modeIdentifier,
+        TKTransportMode.bicycle.modeIdentifier
+      ]
+    )
+    
+    XCTAssertEqual(
+      adjusted,
+      [
+        ["pt_pub"],
+        [
+          "pt_ltd_SCHOOLBUS_1",
+          "pt_ltd_SCHOOLBUS_2",
+          "pt_ltd_SCHOOLBUS_3"
+        ],
+        [TKTransportMode.walking.modeIdentifier],
+        [TKTransportMode.bicycle.modeIdentifier],
+        [
+          "pt_pub",
+          "pt_ltd_SCHOOLBUS_1",
+          "pt_ltd_SCHOOLBUS_2",
+          "pt_ltd_SCHOOLBUS_3",
+          TKTransportMode.walking.modeIdentifier,
+          TKTransportMode.bicycle.modeIdentifier
+        ]
+      ]
+    )
+  }
+  
 
 }

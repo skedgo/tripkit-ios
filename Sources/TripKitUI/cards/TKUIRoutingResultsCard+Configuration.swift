@@ -35,6 +35,8 @@ public extension TKUIRoutingResultsCard {
     
     static let empty = Configuration()
     
+    public typealias RoutingModeRequestGroupAdjuster = (Set<String>, Set<Set<String>>) -> Set<Set<String>>
+    
     /// Runtime-injected mode shown alongside the region's routing modes.
     public struct CustomMode {
       public let identifier: String
@@ -71,12 +73,23 @@ public extension TKUIRoutingResultsCard {
     /// Additional routing modes to inject into the runtime mode picker.
     public var customModes: [CustomMode] = []
     
-    /// Adjust grouped routing requests after the selected identifiers have been
-    /// translated into backend-recognised modes.
+    /// Adjust the grouped backend routing requests derived from the current
+    /// picker selection.
+    ///
+    /// The first set contains the selected picker identifiers exactly as chosen
+    /// by the user, including any injected custom mode identifiers.
+    ///
+    /// The second set contains the default backend request groups after custom
+    /// identifiers have been removed and the remaining backend identifiers have
+    /// been grouped via `TKTransportMode.groupModeIdentifiers(...)`.
+    ///
+    /// Return the complete set of backend request groups that should actually be
+    /// sent. Each inner set represents one routing request's mode identifiers.
     ///
     /// This can be used to inject extra modes into a mixed-modal request
-    /// without creating additional single-mode requests.
-    public var routingModeRequestGroupAdjuster: ((Set<String>, Set<Set<String>>) -> Set<Set<String>>)? = nil
+    /// without creating additional single-mode requests, or to merge several
+    /// backend identifiers into a single request.
+    public var routingModeRequestGroupAdjuster: RoutingModeRequestGroupAdjuster? = nil
     
     /// Set this to add a button for a trip group.
     ///
@@ -145,6 +158,33 @@ public extension TKUIRoutingResultsCard {
 }
 
 extension TKUIRoutingResultsCard.Configuration {
+  /// Returns an adjuster that merges all backend mode identifiers whose value
+  /// starts with one of the provided prefixes into a single request group per
+  /// prefix.
+  ///
+  /// This is useful for cases where several backend modes should behave like a
+  /// single logical mode in multi-fetch routing, for example school bus or DRT
+  /// families discovered at runtime.
+  public static func alwaysGroupModeIdentifierPrefixes(_ prefixes: [String]) -> RoutingModeRequestGroupAdjuster {
+    { _, defaultGroups in
+      merge(defaultGroups, byAlwaysGroupingMatchingPrefixes: prefixes)
+    }
+  }
+  
+  /// Returns an adjuster that applies multiple request-group adjusters in
+  /// sequence.
+  ///
+  /// This lets callers compose generic grouping rules, such as always-grouped
+  /// prefixes, with feature-specific rules such as injecting Park & Ride's
+  /// mixed-mode request.
+  public static func combineRoutingModeRequestGroupAdjusters(_ adjusters: [RoutingModeRequestGroupAdjuster]) -> RoutingModeRequestGroupAdjuster {
+    { selectedModeIdentifiers, defaultGroups in
+      adjusters.reduce(defaultGroups) { currentGroups, adjuster in
+        adjuster(selectedModeIdentifiers, currentGroups)
+      }
+    }
+  }
+  
   fileprivate var customModeIdentifiers: Set<String> {
     Set(customModes.map(\.identifier))
   }
@@ -170,5 +210,42 @@ extension TKUIRoutingResultsCard.Configuration {
     let routingModeIdentifiers = routingModeIdentifiers(for: selectedModeIdentifiers)
     let defaultGroups = TKTransportMode.groupModeIdentifiers(routingModeIdentifiers, includeGroupForAll: true)
     return routingModeRequestGroupAdjuster?(selectedModeIdentifiers, defaultGroups) ?? defaultGroups
+  }
+  
+  private static func merge(_ groups: Set<Set<String>>, byAlwaysGroupingMatchingPrefixes prefixes: [String]) -> Set<Set<String>> {
+    guard !prefixes.isEmpty else { return groups }
+    
+    let allIdentifiers = groups.reduce(into: Set<String>()) { result, group in
+      result.formUnion(group)
+    }
+    let allGroup = groups.first { $0 == allIdentifiers }
+    
+    var adjustedGroups = groups
+    
+    for prefix in prefixes {
+      let matchedIdentifiers = adjustedGroups.reduce(into: Set<String>()) { result, group in
+        result.formUnion(group.filter { $0.hasPrefix(prefix) })
+      }
+      guard !matchedIdentifiers.isEmpty else { continue }
+      
+      let groupsToAdjust = adjustedGroups.filter { group in
+        group != allGroup && !group.intersection(matchedIdentifiers).isEmpty
+      }
+      
+      guard !groupsToAdjust.isEmpty else { continue }
+      
+      adjustedGroups.subtract(groupsToAdjust)
+      
+      for group in groupsToAdjust {
+        let remainingIdentifiers = group.subtracting(matchedIdentifiers)
+        if !remainingIdentifiers.isEmpty {
+          adjustedGroups.insert(remainingIdentifiers)
+        }
+      }
+      
+      adjustedGroups.insert(matchedIdentifiers)
+    }
+    
+    return adjustedGroups
   }
 }

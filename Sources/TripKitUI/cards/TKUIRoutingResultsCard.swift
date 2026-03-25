@@ -430,8 +430,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     guard let request = request else { return }
    
     // Note: Only gets modes if picker is visible
-    let modes = modePicker?.pickedModes.map(\.identifier)
-      .map(Set.init)
+    let modes = modePicker
+      .map(\.pickedModes)
+      .map { Set($0.map(\.identifier)) }
       .map { TKUIRoutingResultsCard.config.routingModeRequestGroups(for: $0) }
       .flatMap { grouped in
         grouped.reduce(into: Set<String>()) { result, group in

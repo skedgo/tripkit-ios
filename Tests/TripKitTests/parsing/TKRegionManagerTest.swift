@@ -113,9 +113,6 @@ class TKRegionManagerTest: XCTestCase {
   }
   
   func testGroupingSchoolBusModes() {
-    TKRouter.modesToGroupInRequest = ["pt_ltd_SCHOOLBUS"]
-    defer { TKRouter.modesToGroupInRequest = nil }
-    
     let inputModes: Set<String> = [
       "pt_pub",
       "pt_ltd_SCHOOLBUS_1",
@@ -124,7 +121,11 @@ class TKRegionManagerTest: XCTestCase {
       "wa_wal",
       "cy_bic"]
     
-    let groupedModes = TKTransportMode.groupModeIdentifiers(inputModes, includeGroupForAll: false)
+    let groupedModes = TKTransportMode.groupModeIdentifiers(
+      inputModes,
+      includeGroupForAll: false,
+      alwaysGroupedModeIdentifierPrefixes: ["pt_ltd_SCHOOLBUS"]
+    )
     
     let expectedGroups: Set<Set<String>> = [
       ["pt_pub"],
