@@ -219,7 +219,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     if let initialModes = self.initialModes, !initialModes.isEmpty, let request = self.request {
       // Use same logic as mode picker: start, end, and spanning regions
       let regions = [request.startRegion, request.endRegion, request.spanningRegion].compactMap { $0 }
-      let availableModes = Set(TKRegionManager.sortedModes(in: regions).map(\.identifier))
+      let availableModes = Set(Self.config.routingModes(in: regions).map(\.identifier))
       let walkingModesInURL = initialModes.filter(TKTransportMode.modeIdentifierIsWalking)
       let modesToHide = availableModes.subtracting(initialModes)
       
@@ -430,9 +430,17 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     guard let request = request else { return }
    
     // Note: Only gets modes if picker is visible
-    let modes = modePicker?.pickedModes.map { $0.identifier }
+    let modes = modePicker
+      .map(\.pickedModes)
+      .map { Set($0.map(\.identifier)) }
+      .map { TKUIRoutingResultsCard.config.routingModeRequestGroups(for: $0) }
+      .flatMap { grouped in
+        grouped.reduce(into: Set<String>()) { result, group in
+          result.formUnion(group)
+        }
+      }
     
-    let url = TKRouter.routingRequestURL(for: request, modes: modes.flatMap(Set.init))
+    let url = TKRouter.routingRequestURL(for: request, modes: modes)
     UIPasteboard.general.string = url
   }
   
