@@ -29,8 +29,6 @@ jobs:
             xcode: "26.3"
           - os: macos-15
             xcode: "16.4"
-          - os: macos-14
-            xcode: "16.1" # sic, 16.2 not available on GitHub as of Jan 2025
 
     runs-on: ${{ matrix.os }}
 
