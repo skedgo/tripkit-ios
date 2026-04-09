@@ -1,0 +1,23 @@
+{
+  "embarkationStops": [
+    {
+      "stopCode": "046",
+      "services": [
+        {
+          "startTime": 1775711400,
+          "serviceTripID": "675194105_B506",
+          "serviceName": "Casuarina to Casuarina - via Wanguri, Lyons, Muirhead",
+          "serviceDirection": "Casuarina to Casuarina - via Wanguri, Lyons, Muirhead",
+          "serviceNumber": "24",
+          "operatorID": "au-nt-cdc-CDC",
+          "operator": "CDC",
+          "modeInfo": {
+            "identifier": "pt_pub_bus",
+            "alt": "bus",
+            "localIcon": "bus"
+          }
+        }
+      ]
+    }
+  ]
+}
