@@ -69,13 +69,6 @@
 			remoteGlobalIDString = 3AB6C61F1D1CD0060089F687;
 			remoteInfo = TripKit;
 		};
-		3ACF47102297EC820096860D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ACF47032297EC820096860D /* MiniMap.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A1498D61F0FD33F0061A0D0;
-			remoteInfo = MiniMap;
-		};
 		3ACF47B4229EF0000096860D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
@@ -144,19 +137,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A576B0D2E1B8F4F00291841 /* TripKitAPI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = TripKitAPI.podspec; sourceTree = "<group>"; };
 		3A6DF068202C8C340084CB2C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3A6DF069202C8C340084CB2C /* TripKitUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitUI.podspec; sourceTree = "<group>"; };
-		3A6DF06A202C8C340084CB2C /* TripKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKit.podspec; sourceTree = "<group>"; };
 		3A6DF084202C8DA30084CB2C /* TripKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DF167202C97F60084CB2C /* TripKitInterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitInterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = TripKitInterApp.podspec; sourceTree = "<group>"; };
 		3AB6C6201D1CD0060089F687 /* TripKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB6C62A1D1CD0060089F687 /* TripKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ACF47032297EC820096860D /* MiniMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MiniMap.xcodeproj; sourceTree = "<group>"; };
-		3ACF47062297EC820096860D /* MiniMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = MiniMap.xcworkspace; sourceTree = "<group>"; };
-		3ACF470E2297EC820096860D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		3ACF47142297ED920096860D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3ACF47A1229EEDFE0096860D /* TripKitUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripKitUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ADCB5F626CDFCC400E4C13A /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TripKitAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +191,6 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3A577CBD2E1B9B5B00291841 /* TripKitUIExample */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A577CCA2E1B9B5B00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitUIExample; sourceTree = "<group>"; };
-		3A577CD12E1B9B6000291841 /* MiniMap */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MiniMap; sourceTree = "<group>"; };
 		3A577D192E1B9B6A00291841 /* TripKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A577D5B2E1B9B6A00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitTests; sourceTree = "<group>"; };
 		3A577D932E1B9B6E00291841 /* TripKitUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3A577DC32E1B9B6F00291841 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TripKitUITests; sourceTree = "<group>"; };
 		3A8DD2F92E164D9F00FBE268 /* TripKit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TripKit; sourceTree = "<group>"; };
@@ -287,10 +271,6 @@
 			children = (
 				3A6DF068202C8C340084CB2C /* README.md */,
 				3ADCB5F626CDFCC400E4C13A /* Package.swift */,
-				3A576B0D2E1B8F4F00291841 /* TripKitAPI.podspec */,
-				3A6DF06A202C8C340084CB2C /* TripKit.podspec */,
-				3AA3CC8B202CABE900E54859 /* TripKitInterApp.podspec */,
-				3A6DF069202C8C340084CB2C /* TripKitUI.podspec */,
 			);
 			name = Metadata;
 			sourceTree = "<group>";
@@ -323,30 +303,9 @@
 		3ACF46FE2297EC820096860D /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				3ACF47022297EC820096860D /* MiniMap */,
 				3A577CBD2E1B9B5B00291841 /* TripKitUIExample */,
 			);
 			path = Examples;
-			sourceTree = "<group>";
-		};
-		3ACF47022297EC820096860D /* MiniMap */ = {
-			isa = PBXGroup;
-			children = (
-				3ACF47032297EC820096860D /* MiniMap.xcodeproj */,
-				3ACF47062297EC820096860D /* MiniMap.xcworkspace */,
-				3A577CD12E1B9B6000291841 /* MiniMap */,
-				3ACF470E2297EC820096860D /* Podfile */,
-				3ACF47142297ED920096860D /* README.md */,
-			);
-			path = MiniMap;
-			sourceTree = "<group>";
-		};
-		3ACF47042297EC820096860D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3ACF47112297EC820096860D /* MiniMap.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		3AFF25E926C6975F007809CD /* Sources */ = {
@@ -628,12 +587,6 @@
 			);
 			productRefGroup = 3AB6C6211D1CD0060089F687 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3ACF47042297EC820096860D /* Products */;
-					ProjectRef = 3ACF47032297EC820096860D /* MiniMap.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3AB6C61F1D1CD0060089F687 /* TripKit */,
@@ -645,16 +598,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3ACF47112297EC820096860D /* MiniMap.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = MiniMap.app;
-			remoteRef = 3ACF47102297EC820096860D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3A6DF082202C8DA30084CB2C /* Resources */ = {

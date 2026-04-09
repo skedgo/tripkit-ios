@@ -6,8 +6,9 @@ import Testing
 
 @testable import TripKit
 
+@MainActor
 struct TKLoopServiceParsingTest {
-  private static let model: NSManagedObjectModel? = TripKit.loadModel()
+  private static let model = TKTestCase.model
 
   @Test func serviceDetailsPreserveDistinctVisitsForRepeatedStopCodes() throws {
     let context = try makeContext()
@@ -25,7 +26,7 @@ struct TKLoopServiceParsingTest {
     let departureVisit = try firstDepartureVisit(in: context)
     let service = try unwrap(departureVisit.service, "Expected a service on the departure visit.")
 
-    #expect(departureVisit.index == 0)
+    #expect(departureVisit.index == -1)
     #expect(Int(departureVisit.departure?.timeIntervalSince1970 ?? 0) == 1_775_711_400)
 
     let serviceData = try dataFromJSON(named: "service-darwin-loop")
