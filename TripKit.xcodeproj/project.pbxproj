@@ -1512,8 +1512,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/skedgo/GeoMonitor";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

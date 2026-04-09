@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/skedgo/GeoMonitor.git",
       "state" : {
-        "revision" : "6bd6092fb4e85727d483fe244a11b882c2997f63",
-        "version" : "0.2.0"
+        "revision" : "170e4fdbabd291880de4017a1e396969930d82b7",
+        "version" : "0.3.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "d30a5fad881137e2267f96a8e3fc35c58999bb94",
-        "version" : "8.6.2"
+        "revision" : "c152c1915f60c51e4afa0752656993ee5b3c63db",
+        "version" : "8.8.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "5004a18539bd68905c5939aa893075f578f4f03d",
-        "version" : "6.9.1"
+        "revision" : "132aea4f236ccadc51590b38af0357a331d51fa2",
+        "version" : "6.10.2"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/skedgo/TGCardViewController.git",
       "state" : {
-        "revision" : "e5017f7988c5132ab2e4f6666ad350205ec29090",
-        "version" : "2.4.1"
+        "revision" : "776cc3bfe19f6c2debf8f0eff2e82c17980ade99",
+        "version" : "2.4.2"
       }
     }
   ],
