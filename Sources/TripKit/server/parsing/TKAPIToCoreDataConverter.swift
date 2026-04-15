@@ -291,16 +291,28 @@ extension Shape {
       
       // add the stops
       if let service = current {
-        // remember the existing visits
-        var existingVisitsByCode: [String: StopVisits] = [:]
+        // Remember the existing visits. We group repeated stop codes into a
+        // list sorted by visit index, so loop services consume matching visits
+        // in route order instead of reusing the same visit object each time.
+        var existingVisitsByCode: [String: [StopVisits]] = [:]
         let visits = (current?.visits ?? []).filter { !($0 is DLSEntry) }
         for visit in visits {
-          existingVisitsByCode[visit.stop.stopCode] = visit
+          existingVisitsByCode[visit.stop.stopCode, default: []].append(visit)
+        }
+        existingVisitsByCode = existingVisitsByCode.mapValues { $0.sorted() }
+
+        func nextExistingVisit(for stopCode: String) -> StopVisits? {
+          guard var candidates = existingVisitsByCode[stopCode], !candidates.isEmpty else {
+            return nil
+          }
+          let match = candidates.removeFirst()
+          existingVisitsByCode[stopCode] = candidates
+          return match
         }
         
         for apiStop in apiShape.stops {
           let visit: StopVisits
-          if let existing = existingVisitsByCode[apiStop.code] {
+          if let existing = nextExistingVisit(for: apiStop.code) {
             visit = existing
           } else {
             visit = StopVisits(context: context)
@@ -314,7 +326,7 @@ extension Shape {
           // hook-up to shape
           shape.addToVisits(visit)
           
-          if !existingVisitsByCode.keys.contains(apiStop.code) {
+          if visit.stop == nil {
             let coordinate = TKNamedCoordinate(latitude: apiStop.lat, longitude: apiStop.lng, name: apiStop.name, address: nil)
             let stop = StopLocation.fetchOrInsertStop(stopCode: apiStop.code, modeInfo: modeInfo, at: coordinate, in: context)
             stop.shortName = apiStop.shortName

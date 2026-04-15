@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "8CE3577A-9EDD-4B04-B109-3F97BFEF34FC",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "TripKitTests",
+        "name" : "TripKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "TripKitUITests",
+        "name" : "TripKitUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

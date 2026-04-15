@@ -1,0 +1,58 @@
+{
+  "shapes": [
+    {
+      "travelled": true,
+      "encodedWaypoints": "abc",
+      "serviceTripID": "675194105_B506",
+      "serviceName": "Casuarina to Casuarina - via Wanguri, Lyons, Muirhead",
+      "serviceDirection": "Casuarina to Casuarina - via Wanguri, Lyons, Muirhead",
+      "serviceNumber": "24",
+      "operator": "CDC",
+      "operatorID": "au-nt-cdc-CDC",
+      "routeID": "24",
+      "wheelchairAccessible": true,
+      "stops": [
+        {
+          "lat": -12.37375,
+          "lng": 130.88327,
+          "code": "046",
+          "name": "Trower Rd after Linton St",
+          "wheelchairAccessible": true,
+          "departure": 1775711400
+        },
+        {
+          "lat": -12.37213,
+          "lng": 130.88206,
+          "code": "047",
+          "name": "9 Scaturchio St",
+          "wheelchairAccessible": true,
+          "arrival": 1775711460,
+          "departure": 1775711460
+        },
+        {
+          "lat": -12.37693,
+          "lng": 130.88581,
+          "code": "144",
+          "name": "28 Vanderlin Dve",
+          "wheelchairAccessible": true,
+          "arrival": 1775712900,
+          "departure": 1775712900
+        },
+        {
+          "lat": -12.37375,
+          "lng": 130.88327,
+          "code": "046",
+          "name": "Trower Rd after Linton St",
+          "wheelchairAccessible": true,
+          "arrival": 1775712960,
+          "departure": 1775712960
+        }
+      ]
+    }
+  ],
+  "modeInfo": {
+    "identifier": "pt_pub_bus",
+    "alt": "bus",
+    "localIcon": "bus"
+  }
+}

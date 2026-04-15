@@ -22,7 +22,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.1.0")),
     .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "8.0.0")),
-    .package(url: "https://github.com/skedgo/GeoMonitor.git", .upToNextMinor(from: "0.2.0")),
+    .package(url: "https://github.com/skedgo/GeoMonitor.git", .upToNextMinor(from: "0.3.0")),
 //    .package(url: "https://github.com/skedgo/TGCardViewController.git", branch: "ios26"),
     .package(url: "https://github.com/skedgo/TGCardViewController.git", .upToNextMajor(from: "2.4.0")),
   ],

@@ -7,7 +7,7 @@ import Testing
 @testable import TripKit
 
 struct TKRealTimeHandlingTest {
-  private static let model: NSManagedObjectModel? = TripKit.loadModel()
+  private static let model = TKTestCase.model
   
   @Test func capableWithoutRealtimeDisplaysScheduled() throws {
     let context = try makeContext()

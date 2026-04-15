@@ -70,7 +70,7 @@ public class TKUITripMonitorManager: NSObject, ObservableObject {
     } onEvent: { [weak self] event in
       guard let self, let monitoredTrip = self.monitoredTrip else { return }
       switch event {
-      case .entered(let region, _):
+      case .entered(let region, _), .foreground(let region, _):
         guard let match = monitoredTrip.notifications.first(where: { $0.id == region.identifier }) else { return }
         self.notify(with: match, trigger: nil)  // Fire right away
       case .manual(let region, let location):

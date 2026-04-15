@@ -24,13 +24,11 @@ jobs:
       matrix:
         include:
           - os: macos-26
-            xcode: "26.1.1"
+            xcode: "26.4"
           - os: macos-15
-            xcode: "26.1.1"
+            xcode: "26.3"
           - os: macos-15
             xcode: "16.4"
-          - os: macos-14
-            xcode: "16.1" # sic, 16.2 not available on GitHub as of Jan 2025
 
     runs-on: ${{ matrix.os }}
 
@@ -38,7 +36,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: ${{ matrix.xcode }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build
         run: swift build --target TripKit
 
@@ -47,12 +45,12 @@ jobs:
 
     strategy:
       matrix:
-        swift: ["6.1", "6.0", "5.10"]
+        swift: ["6.2", "6.1", "6.0", "5.10"]
     container:
       image: swift:${{ matrix.swift }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build
         run: swift build --target TripKitAPI
 
@@ -63,13 +61,13 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Build TripKit Mac
         run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx | xcbeautify
       - name: Build TripKitUI iOS
-        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
       - name: Build TripKitInterApp iOS
-        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
 
   test_xcode:
     runs-on: macos-15
@@ -78,12 +76,12 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run tests
         env:
           TRIPGO_API_KEY: ${{ secrets.TRIPGO_API_KEY }}
         run: |
-          set -o pipefail && xcodebuild test -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+          set -o pipefail && xcodebuild test -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
 
   example_spm:
     runs-on: macos-15
@@ -92,6 +90,6 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build TripKitUIExample
-        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
