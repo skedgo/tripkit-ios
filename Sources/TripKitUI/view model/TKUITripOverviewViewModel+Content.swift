@@ -331,6 +331,13 @@ fileprivate extension TKSegment {
         }
         subtitle += platform
       }
+      
+      if let notes {
+        if !subtitle.isEmpty {
+          subtitle += "\n"
+        }
+        subtitle += notes
+      }
     }
     
     return TKUITripOverviewViewModel.StationaryItem(

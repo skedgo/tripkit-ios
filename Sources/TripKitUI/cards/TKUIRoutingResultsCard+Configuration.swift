@@ -35,6 +35,33 @@ public extension TKUIRoutingResultsCard {
     
     static let empty = Configuration()
     
+    public typealias RoutingModeRequestGroupAdjuster = (Set<String>, Set<Set<String>>) -> Set<Set<String>>
+    
+    /// Runtime-injected mode shown alongside the region's routing modes.
+    public struct CustomMode {
+      public let identifier: String
+      public let title: String
+      public let subtitle: String?
+      /// Insert this custom mode after the mode with the matching identifier.
+      ///
+      /// If `nil`, the mode is inserted at the beginning of the picker. If the
+      /// identifier cannot be found, the mode is appended at the end.
+      public let after: String?
+      public let icon: TKImage
+      
+      public init(identifier: String, title: String, subtitle: String? = nil, icon: TKImage, after: String? = nil) {
+        self.identifier = identifier
+        self.title = title
+        self.subtitle = subtitle
+        self.after = after
+        self.icon = icon
+      }
+      
+      fileprivate var routingMode: TKRegion.RoutingMode {
+        TKRegion.RoutingMode(identifier: identifier, title: title, subtitle: subtitle, icon: icon)
+      }
+    }
+    
     /// Set this to specify where the card should be placed when it's loaded.
     ///
     /// Defaults to `.peaking` position
@@ -48,6 +75,32 @@ public extension TKUIRoutingResultsCard {
     ///
     /// Defaults to nil, which means the SDK will read from `TKSettings`
     public var limitToModes: Set<String>? = nil
+    
+    /// Additional routing modes to inject into the runtime mode picker.
+    ///
+    /// Custom modes with `after == nil` are inserted at the beginning in the
+    /// order they are listed. Custom modes with `after` set are inserted after
+    /// the matching mode identifier when present, or appended if that anchor
+    /// does not exist.
+    public var customModes: [CustomMode] = []
+    
+    /// Adjust the grouped backend routing requests derived from the current
+    /// picker selection.
+    ///
+    /// The first set contains the selected picker identifiers exactly as chosen
+    /// by the user, including any injected custom mode identifiers.
+    ///
+    /// The second set contains the default backend request groups after custom
+    /// identifiers have been removed and the remaining backend identifiers have
+    /// been grouped via `TKTransportMode.groupModeIdentifiers(...)`.
+    ///
+    /// Return the complete set of backend request groups that should actually be
+    /// sent. Each inner set represents one routing request's mode identifiers.
+    ///
+    /// This can be used to inject extra modes into a mixed-modal request
+    /// without creating additional single-mode requests, or to merge several
+    /// backend identifiers into a single request.
+    public var routingModeRequestGroupAdjuster: RoutingModeRequestGroupAdjuster? = nil
     
     /// Set this to add a button for a trip group.
     ///
@@ -116,4 +169,130 @@ public extension TKUIRoutingResultsCard {
     
   }
 
+}
+
+extension TKUIRoutingResultsCard.Configuration {
+  /// Returns an adjuster that merges all backend mode identifiers whose value
+  /// starts with one of the provided prefixes into a single request group per
+  /// prefix.
+  ///
+  /// This is useful for cases where several backend modes should behave like a
+  /// single logical mode in multi-fetch routing, for example school bus or DRT
+  /// families discovered at runtime.
+  public static func alwaysGroupModeIdentifierPrefixes(_ prefixes: [String]) -> RoutingModeRequestGroupAdjuster {
+    { _, defaultGroups in
+      merge(defaultGroups, byAlwaysGroupingMatchingPrefixes: prefixes)
+    }
+  }
+  
+  /// Returns an adjuster that applies multiple request-group adjusters in
+  /// sequence.
+  ///
+  /// This lets callers compose generic grouping rules, such as always-grouped
+  /// prefixes, with feature-specific rules such as injecting Park & Ride's
+  /// mixed-mode request.
+  public static func combineRoutingModeRequestGroupAdjusters(_ adjusters: [RoutingModeRequestGroupAdjuster]) -> RoutingModeRequestGroupAdjuster {
+    { selectedModeIdentifiers, defaultGroups in
+      adjusters.reduce(defaultGroups) { currentGroups, adjuster in
+        adjuster(selectedModeIdentifiers, currentGroups)
+      }
+    }
+  }
+  
+  fileprivate var customModeIdentifiers: Set<String> {
+    Set(customModes.map(\.identifier))
+  }
+  
+  public func routingModes(in regions: [TKRegion]) -> [TKRegion.RoutingMode] {
+    mergeCustomModes(into: TKRegionManager.sortedModes(in: regions))
+  }
+  
+  func mergeCustomModes(into routingModes: [TKRegion.RoutingMode]) -> [TKRegion.RoutingMode] {
+    var routingModes = routingModes
+    guard !customModes.isEmpty else { return routingModes }
+    
+    var seen = Set(routingModes.map(\.identifier))
+    let injectedModes = customModes.filter { seen.insert($0.identifier).inserted }
+    
+    var insertionIndexAtStart = 0
+    for mode in injectedModes where mode.after == nil {
+      routingModes.insert(mode.routingMode, at: insertionIndexAtStart)
+      insertionIndexAtStart += 1
+    }
+    
+    var pendingAnchoredModes = injectedModes.filter { $0.after != nil }
+    while !pendingAnchoredModes.isEmpty {
+      var nextPending: [CustomMode] = []
+      var insertedAny = false
+      
+      for mode in pendingAnchoredModes {
+        guard let after = mode.after else { continue }
+        
+        if let anchorIndex = routingModes.lastIndex(where: { $0.identifier == after }) {
+          routingModes.insert(mode.routingMode, at: routingModes.index(after: anchorIndex))
+          insertedAny = true
+        } else {
+          nextPending.append(mode)
+        }
+      }
+      
+      if !insertedAny {
+        routingModes.append(contentsOf: nextPending.map(\.routingMode))
+        break
+      }
+      
+      pendingAnchoredModes = nextPending
+    }
+    
+    return routingModes
+  }
+  
+  func routingModeIdentifiers(for selectedModeIdentifiers: Set<String>) -> Set<String> {
+    var adjusted = selectedModeIdentifiers
+    adjusted.subtract(customModeIdentifiers)
+    return adjusted
+  }
+  
+  func routingModeRequestGroups(for selectedModeIdentifiers: Set<String>) -> Set<Set<String>> {
+    let routingModeIdentifiers = routingModeIdentifiers(for: selectedModeIdentifiers)
+    let defaultGroups = TKTransportMode.groupModeIdentifiers(routingModeIdentifiers, includeGroupForAll: true)
+    return routingModeRequestGroupAdjuster?(selectedModeIdentifiers, defaultGroups) ?? defaultGroups
+  }
+  
+  private static func merge(_ groups: Set<Set<String>>, byAlwaysGroupingMatchingPrefixes prefixes: [String]) -> Set<Set<String>> {
+    guard !prefixes.isEmpty else { return groups }
+    
+    let allIdentifiers = groups.reduce(into: Set<String>()) { result, group in
+      result.formUnion(group)
+    }
+    let allGroup = groups.first { $0 == allIdentifiers }
+    
+    var adjustedGroups = groups
+    
+    for prefix in prefixes {
+      let matchedIdentifiers = adjustedGroups.reduce(into: Set<String>()) { result, group in
+        result.formUnion(group.filter { $0.hasPrefix(prefix) })
+      }
+      guard !matchedIdentifiers.isEmpty else { continue }
+      
+      let groupsToAdjust = adjustedGroups.filter { group in
+        group != allGroup && !group.intersection(matchedIdentifiers).isEmpty
+      }
+      
+      guard !groupsToAdjust.isEmpty else { continue }
+      
+      adjustedGroups.subtract(groupsToAdjust)
+      
+      for group in groupsToAdjust {
+        let remainingIdentifiers = group.subtracting(matchedIdentifiers)
+        if !remainingIdentifiers.isEmpty {
+          adjustedGroups.insert(remainingIdentifiers)
+        }
+      }
+      
+      adjustedGroups.insert(matchedIdentifiers)
+    }
+    
+    return adjustedGroups
+  }
 }

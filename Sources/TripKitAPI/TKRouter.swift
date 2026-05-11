@@ -24,10 +24,6 @@ public class TKRouter: NSObject {
   /// Optional parameters to add to routing query. Only used by TripKit.
   public static var defaultParameters: [URLQueryItem]? = nil
   
-  /// Optional setting to group certain modes always in a single `routing.json` when sending a
-  /// multi-fetch request.
-  public static var modesToGroupInRequest: [String]? = nil
-  
   /// Optional server to use instead of ``TKServer/shared``.
   public var server: TKServer?
   
@@ -99,7 +95,10 @@ extension TKRouter {
       return [response]
 
     } else {
-      let groupedIdentifier = TKTransportMode.groupModeIdentifiers(request.modes, includeGroupForAll: true)
+      let groupedIdentifier = TKTransportMode.groupModeIdentifiers(
+        request.modes,
+        includeGroupForAll: true
+      )
       guard !groupedIdentifier.isEmpty else {
         throw RoutingError.invalidRequest("No modes enabled")
       }
@@ -259,10 +258,8 @@ extension TKTransportMode {
   ///   - includeGroupForAll: If an extra group which has all the identifiers should be added
   /// - Returns: A set of a set of mode identifiers
   public static func groupModeIdentifiers(_ modes: Set<String>, includeGroupForAll: Bool) -> Set<Set<String>> {
-    let identifiersToAlwaysGroup: [String] = TKRouter.modesToGroupInRequest ?? []
     var result: Set<Set<String>> = []
     var processedModes: Set<String> = []
-    var specialGroups: [String: Set<String>] = [:]
     var includesWalkOnly = false
     
     for mode in modes {
@@ -272,10 +269,6 @@ extension TKTransportMode {
         continue // don't add flights by themselves
       } else if mode == TKTransportMode.walking.modeIdentifier || mode == TKTransportMode.wheelchair.modeIdentifier {
         includesWalkOnly = true
-      } else if let forceGroup = identifiersToAlwaysGroup.first(where: { mode.hasPrefix($0) }) {
-        specialGroups[forceGroup, default: []].insert(mode)
-        processedModes.insert(mode)
-        continue
       }
       
       var group: Set<String> = [mode]
@@ -297,10 +290,6 @@ extension TKTransportMode {
       }
       
       processedModes.formUnion(group)
-    }
-    
-    for specials in specialGroups.values {
-      result.insert(specials)
     }
     
     if includeGroupForAll, result.count > 1 + (includesWalkOnly ? 1 : 0) {

@@ -119,14 +119,64 @@ class TKUIRoutingResultsViewModel {
     request = requestToShow
       .asDriver(onErrorDriveWith: .empty())
     
+    originDestination = originOrDestinationChanged
+      .map { (origin: $0.0.origin?.title, $0.0.destination?.title) }
+      .asDriver(onErrorDriveWith: .empty())
+
+    timeTitle = builderChanged
+      .map(\.timeString)
+      .asDriver(onErrorDriveWith: .empty())
+    
+    let availableFromRequest: Observable<AvailableModes> = requestChanged
+      .compactMap(Self.buildAvailableModes)
+      .distinctUntilChanged { $0.available == $1.available } // ignore any `enabled` changes in the mean-time
+    
+    let availableFromChange = inputs.changedModes.asObservable()
+      .withLatestFrom(requestToShow) { ($0, $1) }
+      .compactMap(Self.updateAvailableModes)
+    
+    let available = Observable.merge(availableFromRequest, availableFromChange)
+      .distinctUntilChanged()
+    
+    let selectedModeIdentifiers: Observable<Set<String>>
+    if let modes {
+      selectedModeIdentifiers = .just(modes)
+    } else {
+      selectedModeIdentifiers = available
+        .map(\.enabled)
+        .distinctUntilChanged()
+    }
+
+    let presentModes: Signal<TKUIRoutingResultsViewModel.Next>
+    if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
+      availableModes = .just(.none)
+
+      presentModes = inputs.tappedShowModes
+        .asObservable()
+        .withLatestFrom(requestChanged) { (_, request) -> Next in
+          .presentModeConfigurator(region: request.0.spanningRegion)
+        }
+        .asAssertingSignal()
+
+    } else {
+      presentModes = .never()
+
+      let showModes = inputs.tappedShowModes.scan(false) { acc, _ in !acc }.asObservable()
+      availableModes = Observable.combineLatest(available, showModes) { available, show in
+          show ? available : .none
+        }
+        .asDriver(onErrorDriveWith: .empty())
+    }
+
+
     let progress: Driver<TKUIResultsFetcher.Progress>
     if skipRequest {
       progress = .just(.finished)
     } else {
       progress = Self.fetch(
           for: updateableRequest,
+          selectedModes: selectedModeIdentifiers,
           skipInitial: initialRequest != nil,
-          limitTo: modes,
           errorPublisher: errorPublisher
         )
         .asDriver(onErrorDriveWith: .empty())
@@ -152,15 +202,7 @@ class TKUIRoutingResultsViewModel {
       .combineLatest(selection.asObservable(), sections.asObservable()) { $1.find($0) ?? $1.bestItem }
       .distinctUntilChanged()
       .asDriver(onErrorDriveWith: .empty())
-    
-    originDestination = originOrDestinationChanged
-      .map { (origin: $0.0.origin?.title, $0.0.destination?.title) }
-      .asDriver(onErrorDriveWith: .empty())
 
-    timeTitle = builderChanged
-      .map(\.timeString)
-      .asDriver(onErrorDriveWith: .empty())
-    
     originAnnotation = builderChanged
       .map { ($0.origin, $0.select == .origin) }
       .distinctUntilChanged { $0.0 === $1.0 }
@@ -178,42 +220,6 @@ class TKUIRoutingResultsViewModel {
       .map(Self.buildMapContent)
       .asDriver(onErrorDriveWith: .empty())
 
-    let availableFromRequest: Observable<AvailableModes> = requestChanged
-      .compactMap(Self.buildAvailableModes)
-      .distinctUntilChanged { $0.available == $1.available } // ignore any `enabled` changes in the mean-time
-    
-    let availableFromChange = inputs.changedModes.asObservable()
-      .withLatestFrom(requestToShow) { ($0, $1) }
-      .compactMap(Self.updateAvailableModes)
-    
-    let available = Observable.merge(availableFromRequest, availableFromChange)
-      .distinctUntilChanged()
-    
-    let presentModes: Signal<TKUIRoutingResultsViewModel.Next>
-    if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
-      availableModes = .just(.none)
-      
-      presentModes = inputs.tappedShowModes
-        .asObservable()
-        .withLatestFrom(requestChanged) { (_, request) -> Next in
-          .presentModeConfigurator(region: request.0.spanningRegion)
-        }
-        .asAssertingSignal()
-      
-    } else {
-      presentModes = .never()
-
-      let showModes = inputs.tappedShowModes.scan(false) { acc, _ in !acc }.asObservable()
-      availableModes = Observable.combineLatest(available, showModes) { available, show in
-          if show {
-            return available
-          } else {
-            return .none
-          }
-        }
-        .asDriver(onErrorDriveWith: .empty())
-    }
-    
     // Navigation
     
     let triggerAction = inputs.tappedSectionButton

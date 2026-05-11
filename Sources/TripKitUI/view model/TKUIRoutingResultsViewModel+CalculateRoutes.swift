@@ -174,14 +174,14 @@ extension TKUIRoutingResultsViewModel {
       origin = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
         .compactMap { [weak asObject] _ in asObject?.coordinate }
         .distinctUntilChanged(isCloseEnough)
-        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject, retryLimit: 3, delay: 1) }
+        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject) }
         .map { _ in (builder, Self.buildId(for: builder)) }
     }
     if let asObject = builder.destination {
       destination = asObject.rx.observeWeakly(CLLocationCoordinate2D.self, "coordinate")
         .compactMap { [weak asObject] _ in asObject?.coordinate }
         .distinctUntilChanged(isCloseEnough)
-        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject, retryLimit: 3, delay: 1) }
+        .flatMapLatest { [weak asObject] _ in RouteBuilder.needAddress(asObject) }
         .map { _ in (builder, Self.buildId(for: builder)) }
     }
     return Observable.merge(origin, destination)
@@ -212,21 +212,26 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
 
 extension TKUIRoutingResultsViewModel {
   
-  static func fetch(for request: Observable<TripRequest>, skipInitial: Bool, limitTo modes: Set<String>? = nil, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
-    return request
-      .filter { $0.managedObjectContext != nil }
-      .flatMapLatest { request -> Observable<TKUIResultsFetcher.Progress> in
+  static func fetch(for request: Observable<TripRequest>, selectedModes: Observable<Set<String>>, skipInitial: Bool, errorPublisher: PublishSubject<Error>) -> Observable<TKUIResultsFetcher.Progress> {
+    return Observable
+      .combineLatest(request, selectedModes)
+      .filter { $0.0.managedObjectContext != nil }
+      .flatMapLatest { request, selectedModes -> Observable<TKUIResultsFetcher.Progress> in
         if skipInitial, request.hasTrips, !request.expandForFavorite {
           return .just(.finished)
         }
-        
-        if let restricted = modes, !Set(restricted).isSubset(of: Set(request.spanningRegion.modeIdentifiers)) {
-          assertionFailure("Try to limit search results to modes that are not supported in the region.")
-        }
+
+        let routingModes = TKUIRoutingResultsCard.config.routingModeIdentifiers(for: selectedModes)
+        let routingModeRequestGroups = TKUIRoutingResultsCard.config.routingModeRequestGroups(for: selectedModes)
         
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKUIResultsFetcher
-          .streamTrips(for: request, modes: modes, classifier: TKMetricClassifier())
+          .streamTrips(
+            for: request,
+            modes: routingModes,
+            groupedModeIdentifiers: routingModeRequestGroups,
+            classifier: TKMetricClassifier()
+          )
           .do(onNext: { progress in
             if progress == .finished {
               try? request.managedObjectContext?.save()
@@ -327,33 +332,26 @@ extension TKUIRoutingResultsViewModel.RouteBuilder {
   }
   
   func reverseGeocodeLocations() -> Observable<(origin: String?, destination: String?)> {
-    let originObservable = Self.needAddress(origin, retryLimit: 5, delay: 5)
-    let destinationObservable = Self.needAddress(destination, retryLimit: 5, delay: 5)
+    let originObservable = Self.needAddress(origin)
+    let destinationObservable = Self.needAddress(destination)
     return Observable
       .combineLatest(originObservable, destinationObservable) { (origin: $0, destination: $1) }
       .distinctUntilChanged { $0.origin == $1.origin && $0.destination == $1.destination }
   }
   
-  static func needAddress(_ location: TKNamedCoordinate?, retryLimit: Int, delay: Int) -> Observable<String?> {
+  static func needAddress(_ location: TKNamedCoordinate?) -> Observable<String?> {
     if let from = location?.title, from != Loc.Location {
       return .just(from)
     } else if let location {
-      return Self.geocode(location, retryLimit: retryLimit, delay: delay).catchAndReturn(nil)
+      return Single.create {
+        try await location.needsAddress(includeName: true)
+        return location.title
+      }
+      .asObservable()
+      .catchAndReturn(nil)
     } else {
       return .just(nil)
     }
-  }
-  
-  private static func geocode(_ location: TKNamedCoordinate, retryLimit: Int, delay: Int) -> Observable<String?> {
-    return CLGeocoder().rx
-      .reverseGeocode(namedCoordinate: location)
-      .asObservable()
-      .retry { errors in
-        return errors.enumerated().flatMap { (index, error) -> Observable<Int> in
-          guard index < retryLimit else { throw error }
-          return Observable<Int>.timer(RxTimeInterval.seconds(delay), scheduler: MainScheduler.instance)
-        }
-      }
   }
   
   func generateRequest() -> TripRequest? {
@@ -434,31 +432,3 @@ extension TKUIRoutingResultsViewModel.RouteBuilder: Equatable {
       && lhs.mode == rhs.mode
   }
 }
-
-// MARK: -
-
-extension Reactive where Base: CLGeocoder {
-  
-  func reverseGeocode(namedCoordinate: TKNamedCoordinate) -> Single<String?> {
-    return Single.create { single in
-      let location = CLLocation(latitude: namedCoordinate.coordinate.latitude, longitude: namedCoordinate.coordinate.longitude)
-      
-      let geocoder = CLGeocoder()
-      geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-        if let error {
-          single(.failure(error))
-        } else {
-          if let first = placemarks?.first {
-            // TODO: Shouldn't always overwrite the name, e.g., if it's from a favourite
-            namedCoordinate.assignPlacemark(first, includeName: true)
-          }
-          single(.success(placemarks?.first?.name))
-        }
-      }
-      
-      return Disposables.create()
-    }
-  }
-  
-}
-
