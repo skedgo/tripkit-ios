@@ -65,9 +65,9 @@ jobs:
       - name: Build TripKit Mac
         run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKit" -sdk macosx | xcbeautify
       - name: Build TripKitUI iOS
-        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitUI" -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' | xcbeautify
       - name: Build TripKitInterApp iOS
-        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' | xcbeautify
 
   test_xcode:
     runs-on: macos-15
@@ -92,4 +92,4 @@ jobs:
           xcode-version: latest-stable
       - uses: actions/checkout@v6
       - name: Build TripKitUIExample
-        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
+        run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme TripKitUIExample -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' | xcbeautify

@@ -277,7 +277,9 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
 
       // Important to encode the underlying value to not trigger reverse-geocoding.
       _address = aDecoder.decodeObject(of: NSString.self, forKey: "address") as String?
-      _placemark = aDecoder.decodeObject(of: CLPlacemark.self, forKey: "placemark")
+      // CLPlacemark's secure-decoding allow-list has shifted across iOS versions;
+      // wrap so a Foundation-level decode failure doesn't take the whole row down.
+      _placemark = (try? aDecoder.decodeTopLevelObject(of: CLPlacemark.self, forKey: "placemark")) ?? nil
 
       isDraggable = aDecoder.decodeBool(forKey: "isDraggable")
       isSuburb = aDecoder.decodeBool(forKey: "isSuburb")
@@ -286,6 +288,9 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
           NSArray.self,
           NSString.self,
           NSNumber.self,
+          NSNull.self,
+          NSDate.self,
+          NSData.self,
         ], forKey: "data") as? [String: Any] ?? [:]
     }
   }
