@@ -222,6 +222,36 @@ final class TKUIRoutingResultsViewModelTest: XCTestCase {
     )
   }
   
+  /// Regression test for the iOS 26+ custom transport mode selector flow.
+  ///
+  /// When the routing results card observes a `TKSettings.hiddenModeIdentifiers`
+  /// change made externally (e.g. by `TransportModeSelectionView` opened via
+  /// `transportButtonHandler`), it must republish the *actual* enabled mode
+  /// identifiers so the view model's `availableFromChange` pipeline picks them
+  /// up. The previous behaviour of emitting `nil` was filtered out by
+  /// `updateAvailableModes`, leaving `selectedModeIdentifiers` stale and causing
+  /// the refreshed routes to still use the old mode set.
+  @MainActor
+  func testEnabledModeIdentifiersReflectsHiddenModeChanges() {
+    TKUIRoutingResultsCard.config.customModes = [
+      .init(identifier: "custom_a", title: "A", icon: .badgeHeart),
+      .init(identifier: "custom_b", title: "B", icon: .badgeHeart),
+      .init(identifier: "custom_c", title: "C", icon: .badgeHeart)
+    ]
+
+    TKSettings.hiddenModeIdentifiers = []
+    var enabled = Set(TKUIRoutingResultsCard.enabledModeIdentifiers(in: []))
+    XCTAssertTrue(enabled.contains("custom_a"))
+    XCTAssertTrue(enabled.contains("custom_b"))
+    XCTAssertTrue(enabled.contains("custom_c"))
+
+    TKSettings.hiddenModeIdentifiers = ["custom_b"]
+    enabled = Set(TKUIRoutingResultsCard.enabledModeIdentifiers(in: []))
+    XCTAssertTrue(enabled.contains("custom_a"))
+    XCTAssertFalse(enabled.contains("custom_b"))
+    XCTAssertTrue(enabled.contains("custom_c"))
+  }
+
   func testAlwaysGroupModeIdentifierPrefixesAdjusterMergesMatchingModes() {
     TKUIRoutingResultsCard.config.routingModeRequestGroupAdjuster =
       TKUIRoutingResultsCard.Configuration.alwaysGroupModeIdentifierPrefixes([
