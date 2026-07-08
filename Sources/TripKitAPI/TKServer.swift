@@ -80,16 +80,9 @@ public class TKServer {
     }
   }
   
-  public func baseURLs(for region: TKRegion?) -> [URL] {
-    if let dev = Self.customBaseURL.flatMap(URL.init) {
-      return [dev]
-    } else if let urls = region?.urls, !urls.isEmpty {
-      return urls
-    } else {
-      return [URL(string: "https://api.tripgo.com/v1/")!]
-    }
-  }
-  
+  /// Base URL to use for server calls, respecting any ``customBaseURL`` overwrite.
+  open var baseURL: URL { Self.fallbackBaseURL }
+
 }
 
 fileprivate extension String {
@@ -119,7 +112,6 @@ extension TKServer {
   
   public enum RequestError: Error {
     case invalidURL
-    case noBaseURLs
   }
   
   public enum ServerError: Error {
@@ -461,7 +453,6 @@ extension TKServer {
       method: method,
       parameters: parameters,
       headers: adjustedHeaders,
-      baseURLs: baseURLs(for: region).shuffled(),
       callbackOnMain: callbackOnMain,
       info: { uuid, info in
         switch info {
@@ -533,13 +524,11 @@ extension TKServer {
   
   private func hitSkedGo(
     path: String, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]?,
-    baseURLs: [URL],
     callbackOnMain: Bool,
     info: @escaping ((UUID, Info) -> Void),
-    completion: @escaping (Response<Data?>) -> Void,
-    previousResponse: Response<Data?>? = nil)
+    completion: @escaping (Response<Data?>) -> Void)
   {
-    
+
     func callback(_ response: Response<Data?>) {
       if callbackOnMain {
         DispatchQueue.main.async {
@@ -549,51 +538,18 @@ extension TKServer {
         completion(response)
       }
     }
-    
-    guard let baseURL = baseURLs.first else {
-      // no more server to try
-      if let previousResponse {
-        return callback(previousResponse)
-      } else {
-        assertionFailure("Don't call this without any URLs!")
-        return callback(.init(headers: [:], result: .failure(RequestError.noBaseURLs)))
-      }
-    }
 
     let request: URLRequest
     do {
-      request = try self.request(path: path, baseURL: baseURL, method: method, parameters: parameters, headers: headers)
+      request = try self.request(path: path, baseURL: self.baseURL, method: method, parameters: parameters, headers: headers)
     } catch {
       return callback(.init(headers: [:], result: .failure(error)))
     }
-    
-    let onFail = { [weak self] (previously: Response<Data?>) -> Void in
-      self?.hitSkedGo(
-        path: path, method: method, parameters: parameters, headers: headers,
-        baseURLs: Array(baseURLs.dropFirst()),
-        callbackOnMain: callbackOnMain, info: info, completion: completion,
-        previousResponse: previously
-      )
-    }
-    
+
     Self.hit(request, info: info) { response in
-      switch (response.statusCode ?? 0 >= 500, response.result) {
-      case (_, .success):
-        // All good, no need for failover
-        callback(response)
-        
-      case (true, _):
-        onFail(response)
-        
-      case (_, .failure(let error)):
-        if error is TKUserError {
-          callback(response) // servers can't recover from user errors
-        } else {
-          onFail(response)
-        }
-      }
+      callback(response)
     }
-    
+
   }
   
   private func hit(_ url: URL, method: HTTPMethod, parameters: [String: Any]?, headers: [String: String]?, info: @escaping ((UUID, Info) -> Void), completion: @escaping (Response<Data?>) -> Void) {
