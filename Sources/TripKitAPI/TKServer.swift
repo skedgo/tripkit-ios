@@ -55,8 +55,8 @@ public class TKServer {
     }
   }
   
-  /// Base URL to use for server calls when ``customBaseURL`` is not set and the server calls
-  /// do not specify a ``TKRegion``.
+  /// Base URL to use for server calls: the ``customBaseURL`` overwrite if set,
+  /// otherwise TripGo's default API endpoint.
   public static var fallbackBaseURL: URL {
     customBaseURL.flatMap(URL.init) ?? URL(string: "https://api.tripgo.com/v1/")!
   }
@@ -81,7 +81,7 @@ public class TKServer {
   }
   
   /// Base URL to use for server calls, respecting any ``customBaseURL`` overwrite.
-  open var baseURL: URL { Self.fallbackBaseURL }
+  public var baseURL: URL { Self.fallbackBaseURL }
 
 }
 
@@ -546,9 +546,7 @@ extension TKServer {
       return callback(.init(headers: [:], result: .failure(error)))
     }
 
-    Self.hit(request, info: info) { response in
-      callback(response)
-    }
+    Self.hit(request, info: info, completion: callback)
 
   }
   
