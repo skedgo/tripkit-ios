@@ -11,8 +11,6 @@ import Foundation
 extension TKServer {
   
   public func upload(imageData: Data, contentType: String) async throws {
-    let baseURL = baseURLs(for: nil).first!
-    
     let boundary = UUID().uuidString
     
     var request = URLRequest(url: baseURL.appendingPathComponent("data/user/image"))
