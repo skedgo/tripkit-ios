@@ -246,12 +246,18 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     
     if TKUIRoutingResultsCard.config.transportButtonHandler != nil {
       accessoryView.setTransport() // Apply fixed default style
-      
+
       NotificationCenter.default.rx.notification(UserDefaults.didChangeNotification)
         .map { _ in TKSettings.hiddenModeIdentifiers }
         .distinctUntilChanged()
         .subscribe(onNext: { [weak self] _ in
-          self?.changedModes.onNext(nil)
+          // Republish the enabled identifiers (not `nil`) so the view model's
+          // `availableFromChange` pipeline updates `selectedModeIdentifiers`;
+          // otherwise the next route refresh re-uses the modes that were
+          // enabled when the card was opened.
+          guard let self else { return }
+          let regions = [self.request?.startRegion, self.request?.endRegion, self.request?.spanningRegion].compactMap { $0 }
+          self.changedModes.onNext(Self.enabledModeIdentifiers(in: regions))
         })
         .disposed(by: disposeBag)
     }
@@ -659,8 +665,19 @@ extension TKUIRoutingResultsCard {
 
 // MARK: - Mode picker
 
+extension TKUIRoutingResultsCard {
+  /// The mode identifiers currently enabled in `TKSettings`, restricted to the
+  /// routing modes available in the supplied regions (plus any custom modes
+  /// registered on `config`). Used to republish the user's mode selection after
+  /// it has been changed via an external `transportButtonHandler` selector.
+  static func enabledModeIdentifiers(in regions: [TKRegion]) -> [String] {
+    let all = config.routingModes(in: regions).map(\.identifier)
+    return Array(TKSettings.adjustedEnabledModeIdentifiers(all))
+  }
+}
+
 private extension TKUIRoutingResultsCard {
-  
+
   func updateModePicker(_ modes: TKUIRoutingResultsViewModel.AvailableModes, in tableView: UITableView) {
     guard TKUIRoutingResultsCard.config.transportButtonHandler == nil else { return }
 
