@@ -55,7 +55,7 @@ jobs:
         run: swift build --target TripKitAPI
 
   build_xcode:
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
@@ -70,7 +70,7 @@ jobs:
         run: set -o pipefail && xcodebuild build -project TripKit.xcodeproj -scheme "TripKitInterApp" -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' | xcbeautify
 
   test_xcode:
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
@@ -84,7 +84,7 @@ jobs:
           set -o pipefail && xcodebuild test -project TripKit.xcodeproj -scheme "TripKit" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 17' | xcbeautify
 
   example_spm:
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
