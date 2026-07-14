@@ -194,11 +194,13 @@ public class TKUITripSegmentsView : UIView {
           newFrame = brandFrame
 
         } else {
-          // remote images that aren't templates look weird on the background colour
+          // Remote images that aren't templates (e.g. the black "R"/"S" region
+          // icons) are drawn as-is and can be invisible on the card's own
+          // background, so keep a white backing circle behind them. Only remove
+          // it if the image fails to load — the placeholder is shown then.
           let modeCircleBackground = asTemplate ? nil : addCircle(frame: newFrame)
           modeImageView.setImage(with: modeImageURL, asTemplate: asTemplate, placeholder: modeImage) { succeeded in
-            guard succeeded else { return }
-            modeCircleBackground?.removeFromSuperview()
+            if !succeeded { modeCircleBackground?.removeFromSuperview() }
           }
         }
         if !asTemplate {

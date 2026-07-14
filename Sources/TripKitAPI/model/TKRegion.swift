@@ -50,7 +50,6 @@ open class TKRegion : NSObject, Codable, @unchecked Sendable {
   /// A list of all the mode identifiers this region supports. This is sorted as defined by the server, as the server groups and sorts them in a sensible manner and we want to preserve this sorting.
   public let modeIdentifiers: [String]
 
-  public let urls: [URL]
   let encodedPolygon: String
   
 #if canImport(MapKit)
@@ -72,7 +71,6 @@ open class TKRegion : NSObject, Codable, @unchecked Sendable {
     self.code = code
     self.modeIdentifiers = modes
     self.cities = cities
-    self.urls = []
     self.encodedPolygon = ""
     self.simplePolygon = nil
     self.timeZone = .current
@@ -82,7 +80,6 @@ open class TKRegion : NSObject, Codable, @unchecked Sendable {
     encodedPolygon        = ""
     simplePolygon         = nil
     self.code             = code
-    urls                  = []
     timeZone              = .current
     cities                = []
     self.modeIdentifiers  = modes
@@ -95,7 +92,6 @@ open class TKRegion : NSObject, Codable, @unchecked Sendable {
     case code = "name"
     case cities
     case modeIdentifiers = "modes"
-    case urls
     case encodedPolygon = "polygon"
   }
   
@@ -104,8 +100,7 @@ open class TKRegion : NSObject, Codable, @unchecked Sendable {
     code = try container.decode(String.self, forKey: .code)
     cities = try container.decode([City].self, forKey: .cities)
     modeIdentifiers = try container.decode([String].self, forKey: .modeIdentifiers)
-    urls = try container.decode([URL].self, forKey: .urls)
-    
+
     encodedPolygon = try container.decode(String.self, forKey: .encodedPolygon)
     if encodedPolygon.count == 0 {
       throw TKRegionParserError.emptyPolygon
@@ -129,7 +124,6 @@ open class TKRegion : NSObject, Codable, @unchecked Sendable {
     try container.encode(code, forKey: .code)
     try container.encode(cities, forKey: .cities)
     try container.encode(modeIdentifiers, forKey: .modeIdentifiers)
-    try container.encode(urls, forKey: .urls)
     try container.encode(encodedPolygon, forKey: .encodedPolygon)
   }
 
