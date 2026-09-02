@@ -154,7 +154,10 @@ class TKUIRoutingResultsViewModel {
       presentModes = inputs.tappedShowModes
         .asObservable()
         .withLatestFrom(requestChanged) { (_, request) -> Next in
-          .presentModeConfigurator(region: request.0.spanningRegion)
+          // Prefer the resolved local region; `spanningRegion` is international
+          // while an endpoint is still unresolved, which would offer the wrong modes.
+          let regions = request.0.regionsForModeSelection
+          return .presentModeConfigurator(region: regions.count == 1 ? regions[0] : request.0.spanningRegion)
         }
         .asAssertingSignal()
 
