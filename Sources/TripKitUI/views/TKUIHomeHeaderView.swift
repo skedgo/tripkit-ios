@@ -12,7 +12,7 @@ import TripKit
 
 class TKUIHomeHeaderView: UIView {
   
-  var searchBar: UISearchBar!
+  var searchBar: TKUISearchBar!
   var directionsButton: UIButton?
   
   private var directionsWrapper: UIView?
@@ -40,7 +40,7 @@ class TKUIHomeHeaderView: UIView {
   
   private func didInit() {
     // The hierarchy
-    let searchBar = UISearchBar()
+    let searchBar = TKUISearchBar()
     searchBar.translatesAutoresizingMaskIntoConstraints = false
     searchBar.tintColor = .tkAppTintColor
     searchBar.searchBarStyle = .minimal // No background *around* the search bar

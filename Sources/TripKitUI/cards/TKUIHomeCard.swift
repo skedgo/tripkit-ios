@@ -259,6 +259,7 @@ extension TKUIHomeCard {
   
   private func exitSearchMode() {
     headerView.searchBar.text = nil
+    headerView.searchBar.showsCancelButton = false
     headerView.searchBar.resignFirstResponder()
     headerView.hideDirectionButton(false)
   }
@@ -389,7 +390,9 @@ extension TKUIHomeCard: UISearchBarDelegate {
   }
   
   public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    searchBar.showsCancelButton = false
+    // Keep the cancel button visible so users can still exit search after
+    // interactively scrolling the keyboard away (keyboardDismissMode = .onDrag).
+    // We explicitly clear it when actually leaving search mode.
   }
   
   public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -409,6 +412,7 @@ extension TKUIHomeCard: UISearchBarDelegate {
   private func clearSearchBar() {
     // Clear the text on search bar
     headerView.searchBar.text = ""
+    headerView.searchBar.showsCancelButton = false
     
     // Clear the results
     searchTextPublisher.onNext(("", forced: false))
