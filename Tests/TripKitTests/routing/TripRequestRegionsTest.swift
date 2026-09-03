@@ -6,8 +6,12 @@
 //  Copyright © 2026 SkedGo Pty Ltd. All rights reserved.
 //
 
-import XCTest
+#if canImport(Testing) && canImport(CoreData)
+
+import Foundation
+import CoreData
 import CoreLocation
+import Testing
 
 @testable import TripKitAPI
 @testable import TripKit
@@ -20,7 +24,10 @@ import CoreLocation
 /// its list from `spanningRegion`, which fell back to the international region
 /// for an unresolved origin, and `startRegion`/`endRegion` cached that empty
 /// lookup forever.
-class TripRequestRegionsTest: TKTestCase {
+@Suite(.serialized)
+@MainActor
+struct TripRequestRegionsTest {
+  private static let model = TKTestCase.model
 
   private let sydneyCBD = CLLocationCoordinate2D(latitude: -33.8688, longitude: 151.2093)
   private let northSydney = CLLocationCoordinate2D(latitude: -33.8398, longitude: 151.2095)
@@ -28,73 +35,113 @@ class TripRequestRegionsTest: TKTestCase {
   private let southPacific = CLLocationCoordinate2D(latitude: -40, longitude: -130)
   private let southPacificToo = CLLocationCoordinate2D(latitude: -41, longitude: -131)
 
-  override func setUp() async throws {
-    try await super.setUp()
+  private let context: NSManagedObjectContext
 
-    let data = try dataFromJSON(named: "regions")
+  init() async throws {
+    context = try Self.makeContext()
+
+    let data = try Self.dataFromJSON(named: "regions")
     let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
     await TKRegionManager.shared.updateRegions(from: response)
   }
 
-  private func request(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) -> TripRequest {
-    TripRequest.insert(
-      from: TKNamedCoordinate(coordinate: from),
-      to: TKNamedCoordinate(coordinate: to),
-      for: nil, timeType: .leaveASAP,
-      into: tripKitContext
-    )
-  }
-
-  func testResolvedEndpointsInSameRegion() {
+  @Test func resolvedEndpointsInSameRegion() {
     let request = request(from: sydneyCBD, to: northSydney)
-    XCTAssertEqual(request.startRegion?.code, "AU_NSW_Sydney")
-    XCTAssertEqual(request.endRegion?.code, "AU_NSW_Sydney")
-    XCTAssertEqual(request.spanningRegion.code, "AU_NSW_Sydney")
-    XCTAssertEqual(request.regionsForModeSelection.map(\.code), ["AU_NSW_Sydney"])
+    #expect(request.startRegion?.code == "AU_NSW_Sydney")
+    #expect(request.endRegion?.code == "AU_NSW_Sydney")
+    #expect(request.spanningRegion.code == "AU_NSW_Sydney")
+    #expect(request.regionsForModeSelection.map(\.code) == ["AU_NSW_Sydney"])
   }
 
-  func testResolvedEndpointsAcrossRegionsIncludeInternational() {
+  @Test func resolvedEndpointsAcrossRegionsIncludeInternational() {
     let request = request(from: sydneyCBD, to: melbourneCBD)
-    XCTAssertEqual(request.startRegion?.code, "AU_NSW_Sydney")
-    XCTAssertEqual(request.endRegion?.code, "AU_VIC_Melbourne")
-    XCTAssertTrue(request.spanningRegion.isInternational)
-    XCTAssertEqual(request.regionsForModeSelection.map(\.code), ["AU_NSW_Sydney", "AU_VIC_Melbourne", TKRegion.international.code])
+    #expect(request.startRegion?.code == "AU_NSW_Sydney")
+    #expect(request.endRegion?.code == "AU_VIC_Melbourne")
+    #expect(request.spanningRegion.isInternational)
+    #expect(request.regionsForModeSelection.map(\.code) == ["AU_NSW_Sydney", "AU_VIC_Melbourne", TKRegion.international.code])
   }
 
-  func testResolvedEndpointsOutsideAnyRegionFallBackToInternational() {
+  @Test func resolvedEndpointsOutsideAnyRegionFallBackToInternational() {
     let request = request(from: southPacific, to: southPacificToo)
-    XCTAssertNil(request.startRegion)
-    XCTAssertNil(request.endRegion)
-    XCTAssertEqual(request.regionsForModeSelection.map(\.code), [TKRegion.international.code])
+    #expect(request.startRegion == nil)
+    #expect(request.endRegion == nil)
+    #expect(request.regionsForModeSelection.map(\.code) == [TKRegion.international.code])
   }
 
-  func testUnresolvedOriginUsesDestinationRegionForModes() {
-    // The "Current Location" placeholder has an invalid coordinate until the
-    // fetcher fills it in. Without a known user location, the destination is
-    // all we can go by, and that's what the mode selection should use rather
-    // than the international fallback.
+  /// The "Current Location" placeholder has an invalid coordinate until the
+  /// fetcher fills it in. Without a known user location, the destination is
+  /// all we can go by, and that's what the mode selection should use rather
+  /// than the international fallback.
+  @Test func unresolvedOriginUsesDestinationRegionForModes() {
     let request = request(from: kCLLocationCoordinate2DInvalid, to: northSydney)
-    XCTAssertNil(request.startRegion)
-    XCTAssertNil(request.endRegion)
-    XCTAssertTrue(request.spanningRegion.isInternational, "Documents the fallback that the mode selection must not rely on")
-    XCTAssertEqual(request.regionsForModeSelection.map(\.code), ["AU_NSW_Sydney"])
+    #expect(request.startRegion == nil)
+    #expect(request.endRegion == nil)
+    #expect(request.spanningRegion.isInternational, "Documents the fallback that the mode selection must not rely on")
+    #expect(request.regionsForModeSelection.map(\.code) == ["AU_NSW_Sydney"])
   }
 
-  func testUnresolvedEndpointsYieldNoRegionsForModes() {
+  @Test func unresolvedEndpointsYieldNoRegionsForModes() {
     let request = request(from: kCLLocationCoordinate2DInvalid, to: kCLLocationCoordinate2DInvalid)
-    XCTAssertTrue(request.regionsForModeSelection.isEmpty)
+    #expect(request.regionsForModeSelection.isEmpty)
   }
 
-  func testEmptyRegionLookupIsNotCached() {
+  @Test func emptyRegionLookupIsNotCached() {
     let request = request(from: kCLLocationCoordinate2DInvalid, to: northSydney)
-    XCTAssertNil(request.startRegion, "Nothing to resolve yet")
+    #expect(request.startRegion == nil, "Nothing to resolve yet")
 
     // This is what `TKUIResultsFetcher` does once it has the user's location
     request.fromLocation = TKNamedCoordinate(coordinate: sydneyCBD)
 
-    XCTAssertEqual(request.startRegion?.code, "AU_NSW_Sydney")
-    XCTAssertEqual(request.endRegion?.code, "AU_NSW_Sydney")
-    XCTAssertEqual(request.regionsForModeSelection.map(\.code), ["AU_NSW_Sydney"])
+    #expect(request.startRegion?.code == "AU_NSW_Sydney")
+    #expect(request.endRegion?.code == "AU_NSW_Sydney")
+    #expect(request.regionsForModeSelection.map(\.code) == ["AU_NSW_Sydney"])
   }
 
 }
+
+private extension TripRequestRegionsTest {
+
+  enum SetupError: Error {
+    case missingModel
+    case missingFixture(String)
+  }
+
+  func request(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) -> TripRequest {
+    TripRequest.insert(
+      from: TKNamedCoordinate(coordinate: from),
+      to: TKNamedCoordinate(coordinate: to),
+      for: nil, timeType: .leaveASAP,
+      into: context
+    )
+  }
+
+  static func makeContext() throws -> NSManagedObjectContext {
+    guard let model else { throw SetupError.missingModel }
+
+    let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+    try coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+
+    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    context.persistentStoreCoordinator = coordinator
+    return context
+  }
+
+  static func dataFromJSON(named name: String) throws -> Data {
+    let thisSourceFile = URL(fileURLWithPath: #filePath)
+    let thisDirectory = thisSourceFile.deletingLastPathComponent()
+    let jsonPath = thisDirectory
+      .deletingLastPathComponent()
+      .appendingPathComponent("Data", isDirectory: true)
+      .appendingPathComponent(name)
+      .appendingPathExtension("json")
+
+    guard FileManager.default.fileExists(atPath: jsonPath.path) else {
+      throw SetupError.missingFixture(jsonPath.path)
+    }
+
+    return try Data(contentsOf: jsonPath)
+  }
+
+}
+
+#endif
