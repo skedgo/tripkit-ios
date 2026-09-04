@@ -120,18 +120,67 @@ extension TripRequest {
   
   /// The local region this trip starts in. Cannot be international and thus might be nil.
   public var startRegion: TKRegion? {
-    if localRegions == nil {
-      localRegions = determineRegions()
-    }
-    return localRegions?.first
+    resolvedLocalRegions().first
   }
   
   /// The local region this trip ends in. Cannot be international and thus might be nil.
   public var endRegion: TKRegion? {
-    if localRegions == nil {
-      localRegions = determineRegions()
+    resolvedLocalRegions().last
+  }
+  
+  /// How old the user's last known location may be to still scope the mode selection.
+  ///
+  /// Deliberately generous rather than matching the 90s that `TKLocationManager.fetch(within:)`
+  /// uses: when routing, the fetcher resolves the real location within seconds and the
+  /// selection then gets recomputed against it. This bound is for the consumers that have
+  /// no such correction behind them - the transport selector and the "showing x of y" footer
+  /// - so that a fix from an earlier session, possibly in another region, doesn't scope them.
+  private static let maximumFallbackLocationAge: TimeInterval = 15 * 60
+  
+  /// The regions to derive the selectable transport modes from.
+  ///
+  /// Unlike ``startRegion``, ``endRegion`` and ``spanningRegion``, this substitutes a
+  /// *recent* last known location of the user for an endpoint that hasn't been resolved
+  /// yet, e.g., the "Current Location" placeholder, whose coordinate only gets filled in
+  /// when routing.
+  /// It only falls back to the international region if both endpoints are known but not
+  /// covered by any local region. Returns an empty array if nothing can be determined yet.
+  public var regionsForModeSelection: [TKRegion] {
+    let fallback = TKLocationManager.shared.lastKnownUserLocation
+      .flatMap { abs($0.timestamp.timeIntervalSinceNow) <= Self.maximumFallbackLocationAge ? $0.coordinate : nil }
+    let start = fromLocation.coordinate.isValid ? fromLocation.coordinate : fallback
+    let end = toLocation.coordinate.isValid ? toLocation.coordinate : fallback
+    
+    switch (start, end) {
+    case let (.some(start), .some(end)):
+      let local = TKRegionManager.shared.localRegions(start: start, end: end)
+      if local.isEmpty {
+        return [TKRegion.international]
+      } else if local.count > 1 {
+        return local + [TKRegion.international]
+      } else {
+        return local
+      }
+      
+    case let (.some(known), .none), let (.none, .some(known)):
+      return TKRegionManager.shared.localRegions(containing: known).sorted { $0.code < $1.code }
+      
+    case (.none, .none):
+      return []
     }
-    return localRegions?.last
+  }
+  
+  /// Determines the local regions and caches the result, but only if it's non-empty as
+  /// an endpoint might still be unresolved, e.g., the "Current Location" placeholder.
+  private func resolvedLocalRegions() -> [TKRegion] {
+    if let localRegions {
+      return localRegions
+    }
+    let determined = determineRegions()
+    if !determined.isEmpty {
+      localRegions = determined
+    }
+    return determined
   }
   
   public var departureTimeZone: TimeZone? {

@@ -54,7 +54,16 @@ class TKUIRoutingResultsViewModel {
     self.init(builder: request.builder, initialRequest: request, editable: editable, limitTo: modes, inputs: inputs, mapInput: mapInput)
   }
   
+  /// Poked when the request's locations have been resolved, so that the mode
+  /// selection can be recomputed against them. Deliberately separate from
+  /// `changedModes`, which additionally forces a route refresh and would
+  /// therefore feed itself here.
+  private let locationsResolvedSubject: PublishSubject<Void>
+  
   private init(builder: RouteBuilder, initialRequest: TripRequest? = nil, editable: Bool, limitTo modes: Set<String>? = nil, inputs: UIInput, mapInput: MapInput) {
+    let locationsResolved = PublishSubject<Void>()
+    self.locationsResolvedSubject = locationsResolved
+    
     
     let builderChangedWithID = Self.watch(builder, inputs: inputs, mapInput: mapInput)
       .share(replay: 1, scope: .forever)
@@ -135,7 +144,23 @@ class TKUIRoutingResultsViewModel {
       .withLatestFrom(requestToShow) { ($0, $1) }
       .compactMap(Self.updateAvailableModes)
     
-    let available = Observable.merge(availableFromRequest, availableFromChange)
+    // Region lookups return nothing until the regions have loaded, which can be
+    // after the first request was built, e.g., on a cold start. Recompute then,
+    // as the modes are otherwise stuck on what could be determined without them.
+    let availableFromRegions = NotificationCenter.default.rx
+      .notification(.TKRegionManagerUpdatedRegions)
+      .withLatestFrom(requestChanged)
+      .compactMap(Self.buildAvailableModes)
+    
+    // A request that starts or ends at the user's current location only gets its
+    // real coordinates when `TKUIResultsFetcher` resolves them, which is after the
+    // modes were first derived - off the last known location, which can be older
+    // and in a different region. Recompute against the resolved coordinates.
+    let availableFromResolvedLocations = locationsResolved
+      .withLatestFrom(requestChanged)
+      .compactMap(Self.buildAvailableModes)
+    
+    let available = Observable.merge(availableFromRequest, availableFromChange, availableFromRegions, availableFromResolvedLocations)
       .distinctUntilChanged()
     
     let selectedModeIdentifiers: Observable<Set<String>>
@@ -154,7 +179,12 @@ class TKUIRoutingResultsViewModel {
       presentModes = inputs.tappedShowModes
         .asObservable()
         .withLatestFrom(requestChanged) { (_, request) -> Next in
-          .presentModeConfigurator(region: request.0.spanningRegion)
+          // All the regions the modes apply to, not one: scoping the selector to a
+          // single region offers the wrong list for a trip spanning regions, and
+          // `spanningRegion` is international both for those and while an endpoint is
+          // still unresolved. Only fall back to it when we know nothing at all.
+          let regions = request.0.regionsForModeSelection
+          return .presentModeConfigurator(regions: regions.isEmpty ? [request.0.spanningRegion] : regions)
         }
         .asAssertingSignal()
 
@@ -273,6 +303,16 @@ class TKUIRoutingResultsViewModel {
     next = Signal.merge(showSelection, presentSearch, presentTime, presentTimeAutomatically, presentModes, presentLocationInfo, triggerAction)
   }
   
+  /// Call once the request's locations have been resolved, i.e., when fetching has
+  /// progressed past `.locating`, so that the available modes get recomputed against
+  /// the resolved coordinates rather than the user's last known location.
+  ///
+  /// - warning: Don't use `changedModes` for this. That additionally forces a route
+  ///     refresh, which would emit progress again and feed straight back into here.
+  func locationsResolved() {
+    locationsResolvedSubject.onNext(())
+  }
+  
   let request: Driver<TripRequest>
   
   /// Whether the user is allowed to change the request
@@ -332,7 +372,7 @@ extension TKUIRoutingResultsViewModel {
     case showCustomItem(TKUIRoutingResultsCard.CustomItem)
     case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
     case showLocation(MKAnnotation, mode: SearchMode?)
-    case presentModeConfigurator(region: TKRegion)
+    case presentModeConfigurator(regions: [TKRegion])
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
     
