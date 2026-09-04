@@ -789,8 +789,8 @@ private extension TKUIRoutingResultsCard {
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       
-    case .presentModeConfigurator(let region):
-      TKUIRoutingResultsCard.config.transportButtonHandler?(self, region)
+    case .presentModeConfigurator(let regions):
+      TKUIRoutingResultsCard.config.transportButtonHandler?(self, regions)
       
     case .presentDatePicker(let time, let timeZone):
       showTimePicker(time: time, timeZone: timeZone)

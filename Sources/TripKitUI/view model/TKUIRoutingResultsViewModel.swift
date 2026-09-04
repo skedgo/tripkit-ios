@@ -179,10 +179,12 @@ class TKUIRoutingResultsViewModel {
       presentModes = inputs.tappedShowModes
         .asObservable()
         .withLatestFrom(requestChanged) { (_, request) -> Next in
-          // Prefer the resolved local region; `spanningRegion` is international
-          // while an endpoint is still unresolved, which would offer the wrong modes.
+          // All the regions the modes apply to, not one: scoping the selector to a
+          // single region offers the wrong list for a trip spanning regions, and
+          // `spanningRegion` is international both for those and while an endpoint is
+          // still unresolved. Only fall back to it when we know nothing at all.
           let regions = request.0.regionsForModeSelection
-          return .presentModeConfigurator(region: regions.count == 1 ? regions[0] : request.0.spanningRegion)
+          return .presentModeConfigurator(regions: regions.isEmpty ? [request.0.spanningRegion] : regions)
         }
         .asAssertingSignal()
 
@@ -370,7 +372,7 @@ extension TKUIRoutingResultsViewModel {
     case showCustomItem(TKUIRoutingResultsCard.CustomItem)
     case showSearch(origin: TKNamedCoordinate?, destination: TKNamedCoordinate?, mode: SearchMode)
     case showLocation(MKAnnotation, mode: SearchMode?)
-    case presentModeConfigurator(region: TKRegion)
+    case presentModeConfigurator(regions: [TKRegion])
     case presentDatePicker(time: RouteBuilder.Time, timeZone: TimeZone)
     case trigger(TKUIRoutingResultsCard.TripGroupAction, TripGroup)
     
