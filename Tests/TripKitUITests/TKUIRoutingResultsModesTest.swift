@@ -41,7 +41,11 @@ struct TKUIRoutingResultsModesTest {
     TKSettings.showWheelchairInformation = false
     TKSettings.hiddenModeIdentifiers = []
 
-    let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: Data(Self.sydneyOnlyRegions.utf8))
+    // Deliberately the *same* fixture the other region-dependent suites use.
+    // `TKRegionManager.shared` is global and suites run in parallel, so seeding a
+    // different subset here leaks into them - a Sydney-only set made
+    // `TripRequestRegionsTest`'s cross-region expectations fail on CI.
+    let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: Self.regionsFixture())
     await TKRegionManager.shared.updateRegions(from: response)
   }
 
@@ -111,10 +115,19 @@ private extension TKUIRoutingResultsModesTest {
     case missingModel
   }
 
-  /// The Sydney entry (and its modes) of the `regions.json` fixture in TripKitTests.
-  static let sydneyOnlyRegions = #"""
-{"hashCode":1,"regions":[{"name":"AU_NSW_Sydney","modes":["pt_pub","pt_ltd_SCHOOLBUS","cy_bic","ps_tax","me_car","me_mot","wa_wal"],"timezone":"Australia/Sydney","cities":[{"lat":-33.86749,"lng":151.20699,"identifier":"AU.NSW.Sydney","title":"Sydney, NSW, Australia","timezone":"Australia/Sydney","region":"AU_NSW_Sydney"},{"lat":-34.41567,"lng":150.88072,"identifier":"AU.NSW.Wollongong","title":"Wollongong, NSW, Australia","timezone":"Australia/Sydney","region":"AU_NSW_Sydney"},{"lat":-32.92676,"lng":151.77358,"identifier":"AU.NSW.Newcastle","title":"Newcastle, NSW, Australia","timezone":"Australia/Sydney","region":"AU_NSW_Sydney"},{"lat":-33.31281,"lng":151.30804,"identifier":"AU.NSW.Central-Coast","title":"Central Coast, NSW, Australia","timezone":"Australia/Sydney","region":"AU_NSW_Sydney"}],"polygon":"`e|pEggoq[?f``AaerM??mcjRnwyR??dbiP","urls":["https://darkages.skedgo.com/satapp","https://granduni.skedgo.com/satapp","https://energy.skedgo.com/satapp","https://hadron.skedgo.com/satapp","https://baryogenesis.skedgo.com/satapp","https://lepton.skedgo.com/satapp"]}],"modes":{"pt_pub":{"title":"Public transport","color":{"red":45,"green":197,"blue":104}},"pt_ltd_SCHOOLBUS":{"title":"School bus","subtitle":"Private transit","icon":"school-bus","color":{"red":45,"green":197,"blue":104},"implies":["pt_pub"],"isTemplate":true},"cy_bic":{"title":"Bicycle","color":{"red":0,"green":180,"blue":99}},"ps_tax":{"title":"Taxi","color":{"red":221,"green":202,"blue":62}},"me_car":{"title":"Car","color":{"red":66,"green":149,"blue":240}},"me_mot":{"title":"Motorbike","color":{"red":46,"green":196,"blue":199}},"wa_wal":{"title":"Walking","color":{"red":30,"green":199,"blue":99},"required":true}}}
-"""#
+  enum FixtureError: Error { case missing(String) }
+  
+  /// The shared `regions.json` fixture, which lives in the TripKitTests target.
+  static func regionsFixture() throws -> Data {
+    let url = URL(fileURLWithPath: #filePath)
+      .deletingLastPathComponent()          // TripKitUITests
+      .deletingLastPathComponent()          // Tests
+      .appendingPathComponent("TripKitTests/Data/regions.json")
+    guard FileManager.default.fileExists(atPath: url.path) else {
+      throw FixtureError.missing(url.path)
+    }
+    return try Data(contentsOf: url)
+  }
 
   func request(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) -> TripRequest {
     TripRequest.insert(
