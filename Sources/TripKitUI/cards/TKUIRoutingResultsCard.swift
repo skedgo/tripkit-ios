@@ -329,6 +329,20 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       })
       .disposed(by: disposeBag)
     
+    // A request that starts or ends at the user's current location has an
+    // unresolved coordinate until `TKUIResultsFetcher` fills it in, and the mode
+    // selection is derived *before* that happens - off the user's last known
+    // location, which can be older and in a different region. Leaving `.locating`
+    // means the request's coordinates are real now, so have them recomputed.
+    viewModel.fetchProgress
+      .map { $0 == .locating }
+      .distinctUntilChanged()
+      .filter { !$0 }
+      .drive(onNext: { [weak viewModel] _ in
+        viewModel?.locationsResolved()
+      })
+      .disposed(by: disposeBag)
+    
     // Monitor progress (note: without this, we won't fetch!)
     viewModel.fetchProgress
       .drive(onNext: { [weak self] progress in
