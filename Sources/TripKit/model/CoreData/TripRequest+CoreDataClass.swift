@@ -128,15 +128,26 @@ extension TripRequest {
     resolvedLocalRegions().last
   }
   
+  /// How old the user's last known location may be to still scope the mode selection.
+  ///
+  /// Deliberately generous rather than matching the 90s that `TKLocationManager.fetch(within:)`
+  /// uses: when routing, the fetcher resolves the real location within seconds and the
+  /// selection then gets recomputed against it. This bound is for the consumers that have
+  /// no such correction behind them - the transport selector and the "showing x of y" footer
+  /// - so that a fix from an earlier session, possibly in another region, doesn't scope them.
+  private static let maximumFallbackLocationAge: TimeInterval = 15 * 60
+  
   /// The regions to derive the selectable transport modes from.
   ///
-  /// Unlike ``startRegion``, ``endRegion`` and ``spanningRegion``, this substitutes the
-  /// user's last known location for an endpoint that hasn't been resolved yet, e.g., the
-  /// "Current Location" placeholder, whose coordinate only gets filled in when routing.
+  /// Unlike ``startRegion``, ``endRegion`` and ``spanningRegion``, this substitutes a
+  /// *recent* last known location of the user for an endpoint that hasn't been resolved
+  /// yet, e.g., the "Current Location" placeholder, whose coordinate only gets filled in
+  /// when routing.
   /// It only falls back to the international region if both endpoints are known but not
   /// covered by any local region. Returns an empty array if nothing can be determined yet.
   public var regionsForModeSelection: [TKRegion] {
-    let fallback = TKLocationManager.shared.lastKnownUserLocation?.coordinate
+    let fallback = TKLocationManager.shared.lastKnownUserLocation
+      .flatMap { abs($0.timestamp.timeIntervalSinceNow) <= Self.maximumFallbackLocationAge ? $0.coordinate : nil }
     let start = fromLocation.coordinate.isValid ? fromLocation.coordinate : fallback
     let end = toLocation.coordinate.isValid ? toLocation.coordinate : fallback
     
