@@ -186,7 +186,10 @@ extension TKUIRoutingResultsViewModel {
 
 extension TripRequest {
   var includedTransportModes: String {
-    let all = spanningRegion.modeIdentifiers
+    let regions = regionsForModeSelection
+    let all = regions.isEmpty
+      ? spanningRegion.modeIdentifiers
+      : Array(Set(regions.flatMap(\.modeIdentifiers)))
     let enabled = TKSettings.enabledModeIdentifiers(all)
     return Loc.Showing(enabled.count, ofTransportModes: all.count)
   }

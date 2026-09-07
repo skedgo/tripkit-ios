@@ -114,7 +114,12 @@ public extension TKUIRoutingResultsCard {
     public var contactCustomerSupport: ((TKUIRoutingResultsCard, SupportType) -> Void)?
     
     /// Set this to intercept taps on the transport button. Will then disable the mini transport picker buttons.
-    public var transportButtonHandler: ((TKUIRoutingResultsCard, TKRegion) -> Void)?
+    ///
+    /// The regions are those the request's modes apply to, which for a trip spanning
+    /// regions is more than one. Scope the selector to all of them - to a single one
+    /// and it offers the wrong modes, and persisting a selection made against that
+    /// wrong list corrupts the user's preferences for the modes it didn't include.
+    public var transportButtonHandler: ((TKUIRoutingResultsCard, [TKRegion]) -> Void)?
     
     /// Set this to use your own map manager. You can use this in combination
     /// with `TGCardViewController.builder` to use a map other than Apple's

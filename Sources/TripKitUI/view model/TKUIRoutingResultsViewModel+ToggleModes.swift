@@ -24,14 +24,18 @@ extension TKUIRoutingResultsViewModel {
   }
   
   private static func modes(for request: TripRequest) -> [TKRegion.RoutingMode] {
-    let regions = [request.startRegion, request.endRegion, request.spanningRegion].compactMap { $0 }
-    return TKUIRoutingResultsCard.config.routingModes(in: regions)
-
+    TKUIRoutingResultsCard.config.routingModes(in: request.regionsForModeSelection)
   }
   
   static func buildAvailableModes(for request: TripRequest, mutable: Bool) -> AvailableModes? {
     let all = modes(for: request)
-      
+    guard !all.isEmpty else {
+      // Can't tell yet which modes apply, e.g., as the origin is still the unresolved
+      // "Current Location" placeholder. Don't guess; the router then determines the
+      // modes from the request once its locations are resolved.
+      return AvailableModes.none
+    }
+    
     let enabledModes: Set<String>
     if mutable {
       enabledModes = TKSettings.adjustedEnabledModeIdentifiers(all.map(\.identifier))
@@ -43,11 +47,23 @@ extension TKUIRoutingResultsViewModel {
     return AvailableModes(available: all, enabled: enabledModes)
   }
   
+  /// - Parameters:
+  ///   - enabled: The identifiers the user picked in the card's own mode picker, which
+  ///       then get persisted to `TKSettings`. Pass `nil` to instead re-read the selection
+  ///       from `TKSettings` without writing anything back, e.g., after an external
+  ///       transport selector changed them.
+  ///   - request: The request to determine the available modes for.
   static func updateAvailableModes(enabled: [String]?, request: TripRequest?) -> AvailableModes? {
-    guard let enabled = enabled, let all = request.map(Self.modes(for:)) else { return nil }
-
-    let adjusted = TKSettings.updateAdjustedEnabledModeIdentifiers(enabled: enabled, all: all.map(\.identifier))
-    return AvailableModes(available: all, enabled: adjusted)
+    guard let all = request.map(Self.modes(for:)) else { return nil }
+    guard !all.isEmpty else { return AvailableModes.none }
+    
+    let identifiers = all.map(\.identifier)
+    if let enabled {
+      let adjusted = TKSettings.updateAdjustedEnabledModeIdentifiers(enabled: enabled, all: identifiers)
+      return AvailableModes(available: all, enabled: adjusted)
+    } else {
+      return AvailableModes(available: all, enabled: TKSettings.adjustedEnabledModeIdentifiers(identifiers))
+    }
   }
   
 }

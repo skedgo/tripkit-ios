@@ -221,8 +221,11 @@ extension TKUIRoutingResultsViewModel {
           return .just(.finished)
         }
 
-        let routingModes = TKUIRoutingResultsCard.config.routingModeIdentifiers(for: selectedModes)
-        let routingModeRequestGroups = TKUIRoutingResultsCard.config.routingModeRequestGroups(for: selectedModes)
+        // An empty selection means the applicable modes couldn't be determined yet, e.g.,
+        // as the origin is the unresolved "Current Location" placeholder. Leave it to the
+        // router then, which determines them from the request's resolved locations.
+        let routingModes = selectedModes.isEmpty ? nil : TKUIRoutingResultsCard.config.routingModeIdentifiers(for: selectedModes)
+        let routingModeRequestGroups = selectedModes.isEmpty ? nil : TKUIRoutingResultsCard.config.routingModeRequestGroups(for: selectedModes)
         
         // Fetch the trip and handle errors in here, to not abort the outer observable
         return TKUIResultsFetcher

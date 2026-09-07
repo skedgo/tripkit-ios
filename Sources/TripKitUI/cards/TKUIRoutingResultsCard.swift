@@ -218,8 +218,7 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     // Set initial mode selection from URL if provided (must be done before view model creation)
     if let initialModes = self.initialModes, !initialModes.isEmpty, let request = self.request {
       // Use same logic as mode picker: start, end, and spanning regions
-      let regions = [request.startRegion, request.endRegion, request.spanningRegion].compactMap { $0 }
-      let availableModes = Set(Self.config.routingModes(in: regions).map(\.identifier))
+      let availableModes = Set(Self.config.routingModes(in: request.regionsForModeSelection).map(\.identifier))
       let walkingModesInURL = initialModes.filter(TKTransportMode.modeIdentifierIsWalking)
       let modesToHide = availableModes.subtracting(initialModes)
       
@@ -249,15 +248,15 @@ public class TKUIRoutingResultsCard: TKUITableCard {
 
       NotificationCenter.default.rx.notification(UserDefaults.didChangeNotification)
         .map { _ in TKSettings.hiddenModeIdentifiers }
+        .startWith(TKSettings.hiddenModeIdentifiers)
         .distinctUntilChanged()
+        .skip(1) // Only actual changes, not the initial value or unrelated defaults writes
         .subscribe(onNext: { [weak self] _ in
-          // Republish the enabled identifiers (not `nil`) so the view model's
-          // `availableFromChange` pipeline updates `selectedModeIdentifiers`;
-          // otherwise the next route refresh re-uses the modes that were
-          // enabled when the card was opened.
-          guard let self else { return }
-          let regions = [self.request?.startRegion, self.request?.endRegion, self.request?.spanningRegion].compactMap { $0 }
-          self.changedModes.onNext(Self.enabledModeIdentifiers(in: regions))
+          // The external selector already persisted the change, so just have the view
+          // model re-read the selection from `TKSettings` (which is what `nil` means).
+          // That updates `selectedModeIdentifiers` and triggers a refresh. Don't derive
+          // the modes here from the card's request as it might not be resolved yet.
+          self?.changedModes.onNext(nil)
         })
         .disposed(by: disposeBag)
     }
@@ -327,6 +326,20 @@ public class TKUIRoutingResultsCard: TKUITableCard {
         if let errorView = self?.errorView {
           self?.offset(errorView, by: tableView.tableHeaderView?.frame.height ?? 0)
         }
+      })
+      .disposed(by: disposeBag)
+    
+    // A request that starts or ends at the user's current location has an
+    // unresolved coordinate until `TKUIResultsFetcher` fills it in, and the mode
+    // selection is derived *before* that happens - off the user's last known
+    // location, which can be older and in a different region. Leaving `.locating`
+    // means the request's coordinates are real now, so have them recomputed.
+    viewModel.fetchProgress
+      .map { $0 == .locating }
+      .distinctUntilChanged()
+      .filter { !$0 }
+      .drive(onNext: { [weak viewModel] _ in
+        viewModel?.locationsResolved()
       })
       .disposed(by: disposeBag)
     
@@ -668,8 +681,11 @@ extension TKUIRoutingResultsCard {
 extension TKUIRoutingResultsCard {
   /// The mode identifiers currently enabled in `TKSettings`, restricted to the
   /// routing modes available in the supplied regions (plus any custom modes
-  /// registered on `config`). Used to republish the user's mode selection after
-  /// it has been changed via an external `transportButtonHandler` selector.
+  /// registered on `config`).
+  ///
+  /// - warning: Only meaningful for resolved regions. Pass `request.regionsForModeSelection`
+  ///     rather than `startRegion`/`endRegion`/`spanningRegion`, which fall back to the
+  ///     international region while an endpoint is still unresolved.
   static func enabledModeIdentifiers(in regions: [TKRegion]) -> [String] {
     let all = config.routingModes(in: regions).map(\.identifier)
     return Array(TKSettings.adjustedEnabledModeIdentifiers(all))
@@ -773,8 +789,8 @@ private extension TKUIRoutingResultsCard {
     case let .showSearch(origin, destination, mode):
       showSearch(origin: origin, destination: destination, startMode: mode)
       
-    case .presentModeConfigurator(let region):
-      TKUIRoutingResultsCard.config.transportButtonHandler?(self, region)
+    case .presentModeConfigurator(let regions):
+      TKUIRoutingResultsCard.config.transportButtonHandler?(self, regions)
       
     case .presentDatePicker(let time, let timeZone):
       showTimePicker(time: time, timeZone: timeZone)
