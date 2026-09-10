@@ -1,0 +1,21 @@
+{
+  "realTimeStamp": 1789018687,
+  "lastMinute": false,
+  "last5Minutes": true,
+  "last15Minutes": true,
+  "services": [
+    {
+      "serviceTripID": "47197-10470:1000",
+      "startStopCode": "2000459",
+      "startTime": 1789019118,
+      "endStopCode": "2000450",
+      "endTime": 1789019657,
+      "realtimeVehicle": {
+        "lastUpdate": 1789018832,
+        "id": "47197-10470:1000",
+        "label": "X57-X58",
+        "location": { "lat": -33.87933, "lng": 151.20538, "bearing": 14 }
+      }
+    }
+  ]
+}

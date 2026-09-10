@@ -16,7 +16,10 @@ extension TKAPI {
   
   public struct LatestService: Codable {
     public let code: String
-    
+
+    /// Set when the request supplied a `startStopCode`; identifies which stop `startTime` is for.
+    public let startStopCode: String?
+
     @OptionalISO8601OrSecondsSince1970 public var startTime: Date?
     @OptionalISO8601OrSecondsSince1970 public var endTime: Date?
     
@@ -28,6 +31,7 @@ extension TKAPI {
 
     private enum CodingKeys: String, CodingKey {
       case code = "serviceTripID"
+      case startStopCode
       case startTime
       case endTime
       case stops
