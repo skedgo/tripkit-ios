@@ -44,86 +44,90 @@ public class TKRealTimeFetcher {
     )
   }
   
-  public static func update(_ entries: Set<DLSEntry>, in region: TKRegion, completion: @escaping (Result<Set<DLSEntry>, Error>) -> Void) {
+  /// The `serviceParas` to post, paired with what each answered service should update.
+  struct Updateables {
     var serviceParas: [[String: Any]] = []
-    var keysToUpdateables: [String: Updateable] = [:]
+    /// Keyed by `Service.code`; a value per updateable, since one service can appear at several stops.
+    var byServiceCode: [String: [Updateable]] = [:]
     var context: NSManagedObjectContext? = nil
-    for entry in entries {
-      guard let latest = latestParameters(for: entry) else { continue }
-      let service = latest.service
+
+    mutating func add(_ parameters: [String: Any], for service: Service, updating updateable: Updateable) {
       context = context ?? service.managedObjectContext
       assert(context == service.managedObjectContext)
-      serviceParas.append(latest.parameters)
-      keysToUpdateables[service.code] = .service(service)
+      serviceParas.append(parameters)
+      byServiceCode[service.code, default: []].append(updateable)
     }
-    
-    fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context) { result in
+  }
+
+  static func updateables(for entries: Set<DLSEntry>) -> Updateables {
+    var result = Updateables()
+    for entry in entries {
+      guard let latest = latestParameters(for: entry) else { continue }
+      result.add(latest.parameters, for: latest.service, updating: .visit(entry))
+    }
+    return result
+  }
+
+  static func updateables(for visits: Set<StopVisits>) -> Updateables {
+    var result = Updateables()
+    for visit in visits {
+      guard let latest = latestParameters(for: visit) else { continue }
+      result.add(latest.parameters, for: latest.service, updating: .visit(visit))
+    }
+    return result
+  }
+
+  static func updateables(for services: Set<Service>) -> Updateables {
+    var result = Updateables()
+    for service in services {
+      guard service.wantsRealTimeUpdates else { continue }
+      result.add([
+        "serviceTripID": service.code,
+        "operatorID": service.operatorID ?? "",
+        "operator": service.operatorName ?? "",
+      ], for: service, updating: .service(service))
+    }
+    return result
+  }
+
+  public static func update(_ entries: Set<DLSEntry>, in region: TKRegion, completion: @escaping (Result<Set<DLSEntry>, Error>) -> Void) {
+    fetchAndUpdate(updateables(for: entries), region: region) { result in
       completion(result.map { _ in entries })
     }
   }
   
   public static func update(_ visits: Set<StopVisits>, in region: TKRegion, completion: @escaping (Result<Set<StopVisits>, Error>) -> Void) {
-    var serviceParas: [[String: Any]] = []
-    var keysToUpdateables: [String: Updateable] = [:]
-    var context: NSManagedObjectContext? = nil
-    for visit in visits {
-      guard let latest = latestParameters(for: visit) else { continue }
-      let service = latest.service
-      context = context ?? service.managedObjectContext
-      assert(context == service.managedObjectContext)
-      serviceParas.append(latest.parameters)
-      keysToUpdateables[service.code] = .service(service)
-    }
-    
-    fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context) { result in
+    fetchAndUpdate(updateables(for: visits), region: region) { result in
       completion(result.map { _ in visits })
     }
   }
   
   public static func update(_ services: Set<Service>, in region: TKRegion, completion: @escaping (Result<Set<Service>, Error>) -> Void) {
-    var serviceParas: [[String: Any]] = []
-    var keysToUpdateables: [String: Updateable] = [:]
-    var context: NSManagedObjectContext? = nil
-    for service in services {
-      guard service.wantsRealTimeUpdates else { continue }
-      context = context ?? service.managedObjectContext
-      assert(context == service.managedObjectContext)
-
-      serviceParas.append([
-        "serviceTripID": service.code,
-        "operatorID": service.operatorID ?? "",
-        "operator": service.operatorName ?? "",
-      ])
-      keysToUpdateables[service.code] = .service(service)
-    }
-    
-    fetchAndUpdate(serviceParas: serviceParas, keysToUpdateables: keysToUpdateables, region: region, context: context) { result in
+    fetchAndUpdate(updateables(for: services), region: region) { result in
       completion(result.map { _ in services })
     }
   }
 
   private static func fetchAndUpdate(
-    serviceParas: [[String: Any]],
-    keysToUpdateables: [String: Updateable],
+    _ updateables: Updateables,
     region: TKRegion,
-    context: NSManagedObjectContext?,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-    guard !serviceParas.isEmpty, let context = context else {
+    guard !updateables.serviceParas.isEmpty, let context = updateables.context else {
       return completion(.success(()))
     }
     
     let paras: [String: Any] = [
       "region": region.code,
       "block": false,
-      "services": serviceParas
+      "services": updateables.serviceParas
     ]
     
     TKServer.shared.hit(TKAPI.LatestResponse.self, .POST, path: "latest.json", parameters: paras, region: region, callbackOnMain: false) { _, _, result in
       switch result {
       case .success(let response):
         context.perform {
-          update(keysToUpdateables: keysToUpdateables, from: response)
+          update(updateables: updateables, from: response)
           completion(.success(()))
         }
       case .failure(let error):
@@ -132,18 +136,31 @@ public class TKRealTimeFetcher {
     }
   }
   
-  private enum Updateable {
+  enum Updateable {
     case visit(StopVisits)
     case service(Service)
+
+    /// The server returns one entry per requested `startStopCode`, all sharing a `serviceTripID`,
+    /// so an entry that names a stop may only be applied to the visit at that stop.
+    func covers(stopCode: String) -> Bool {
+      switch self {
+      case .visit(let visit): return visit.stop?.stopCode == stopCode
+      case .service: return true
+      }
+    }
   }
   
-  private static func update(keysToUpdateables: [String: Updateable], from response: TKAPI.LatestResponse) {
+  static func update(updateables: Updateables, from response: TKAPI.LatestResponse) {
     
     for apiService in response.services {
-      guard let updatable = keysToUpdateables[apiService.code] else {
+      guard let candidates = updateables.byServiceCode[apiService.code] else {
         continue
       }
+      let updatables = apiService.startStopCode.map { stopCode in
+        candidates.filter { $0.covers(stopCode: stopCode) }
+      } ?? candidates
       
+      for updatable in updatables {
       let service: Service
       let visit: StopVisits?
       switch updatable {
@@ -214,6 +231,7 @@ public class TKRealTimeFetcher {
             visit.triggerRealTimeKVO()
           }
         }
+      }
       }
     }
   }
