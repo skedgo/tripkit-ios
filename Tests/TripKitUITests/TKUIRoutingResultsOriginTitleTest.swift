@@ -91,7 +91,68 @@ struct TKUIRoutingResultsOriginTitleTest {
     #expect(titles.values.last?.origin == "Explicit Origin", "A resolved, valid explicit origin must not be overridden")
   }
 
+  @Test func geocodingFailureKeepsCurrentLocationTitle() async throws {
+    TKNamedCoordinate.reverseGeocodeOverride = { _ in throw StubGeocodeError() }
+    defer { TKNamedCoordinate.reverseGeocodeOverride = nil }
+
+    let destination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: Self.disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: Self.disposeBag)
+
+    let request = try await Self.waitForFirst(requests)
+    // No name, mimicking TKUIResultsFetcher's default replacementHandler.
+    request.fromLocation = TKNamedCoordinate(coordinate: sydneyCBD)
+
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+    try await Task.sleep(for: .milliseconds(400)) // let the failing geocode round-trip complete
+
+    #expect(titles.values.count > countBeforeResolution, "Must still emit, even though geocoding failed")
+    #expect(titles.values.last?.origin == Loc.CurrentLocation)
+  }
+
+  @Test func geocodingSuccessShowsResolvedAddress() async throws {
+    let addressDictionary: [String: Any] = [
+      "Street": "1 Test St",
+      "City": "Sydney",
+      "State": "NSW",
+      "Country": "Australia",
+    ]
+    let mkPlacemark = MKPlacemark(coordinate: sydneyCBD, addressDictionary: addressDictionary)
+    let stubbedPlacemark = CLPlacemark(placemark: mkPlacemark)
+    let expectedAddress = try #require(TKAddressFormatter.singleLineAddress(for: stubbedPlacemark))
+
+    TKNamedCoordinate.reverseGeocodeOverride = { _ in stubbedPlacemark }
+    defer { TKNamedCoordinate.reverseGeocodeOverride = nil }
+
+    let destination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: Self.disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: Self.disposeBag)
+
+    let request = try await Self.waitForFirst(requests)
+    request.fromLocation = TKNamedCoordinate(coordinate: sydneyCBD)
+
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+    try await Task.sleep(for: .milliseconds(400)) // let the stubbed geocode round-trip complete
+
+    #expect(titles.values.count > countBeforeResolution)
+    #expect(titles.values.last?.origin == expectedAddress)
+  }
+
 }
+
+private struct StubGeocodeError: Error {}
 
 private extension TKUIRoutingResultsOriginTitleTest {
 
