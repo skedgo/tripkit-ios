@@ -28,6 +28,11 @@ struct TKUIRoutingResultsOriginTitleTest {
 
   private let sydneyCBD = CLLocationCoordinate2D(latitude: -33.8688, longitude: 151.2093)
 
+  // Instance, not static: Swift Testing creates a fresh struct per `@Test`, so
+  // this - and everything disposed into it - is torn down between tests
+  // rather than accumulating subscriptions across the whole suite.
+  private let disposeBag = DisposeBag()
+
   init() {
     TKUIRoutingResultsCard.config = .empty
   }
@@ -37,7 +42,7 @@ struct TKUIRoutingResultsOriginTitleTest {
     let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
 
     let recorder = Recorder<(origin: String?, destination: String?)>()
-    viewModel.originDestination.drive(onNext: { recorder.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.originDestination.drive(onNext: { recorder.append($0) }).disposed(by: disposeBag)
 
     #expect(recorder.values.first?.origin == Loc.CurrentLocation)
     #expect(recorder.values.first?.destination == "Central Station")
@@ -49,7 +54,7 @@ struct TKUIRoutingResultsOriginTitleTest {
     let viewModel = TKUIRoutingResultsViewModel(destination: destination, origin: placeholder, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
 
     let recorder = Recorder<(origin: String?, destination: String?)>()
-    viewModel.originDestination.drive(onNext: { recorder.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.originDestination.drive(onNext: { recorder.append($0) }).disposed(by: disposeBag)
 
     #expect(recorder.values.first?.origin == Loc.CurrentLocation)
   }
@@ -59,10 +64,10 @@ struct TKUIRoutingResultsOriginTitleTest {
     let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
 
     let titles = Recorder<(origin: String?, destination: String?)>()
-    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
 
     let requests = Recorder<TripRequest>()
-    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
 
     let request = try await Self.waitForFirst(requests)
     let resolvedOrigin = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Home")
@@ -81,7 +86,7 @@ struct TKUIRoutingResultsOriginTitleTest {
     let viewModel = TKUIRoutingResultsViewModel(destination: destination, origin: origin, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
 
     let titles = Recorder<(origin: String?, destination: String?)>()
-    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
 
     #expect(titles.values.first?.origin == "Explicit Origin")
 
@@ -99,10 +104,10 @@ struct TKUIRoutingResultsOriginTitleTest {
     let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
 
     let titles = Recorder<(origin: String?, destination: String?)>()
-    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
 
     let requests = Recorder<TripRequest>()
-    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
 
     let request = try await Self.waitForFirst(requests)
     // No name, mimicking TKUIResultsFetcher's default replacementHandler.
@@ -110,10 +115,9 @@ struct TKUIRoutingResultsOriginTitleTest {
 
     let countBeforeResolution = titles.values.count
     viewModel.locationsResolved()
-    try await Task.sleep(for: .milliseconds(400)) // let the failing geocode round-trip complete
 
-    #expect(titles.values.count > countBeforeResolution, "Must still emit, even though geocoding failed")
-    #expect(titles.values.last?.origin == Loc.CurrentLocation)
+    let updated = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(updated.last?.origin == Loc.CurrentLocation)
   }
 
   @Test func geocodingSuccessShowsResolvedAddress() async throws {
@@ -134,20 +138,91 @@ struct TKUIRoutingResultsOriginTitleTest {
     let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
 
     let titles = Recorder<(origin: String?, destination: String?)>()
-    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
 
     let requests = Recorder<TripRequest>()
-    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: Self.disposeBag)
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
 
     let request = try await Self.waitForFirst(requests)
     request.fromLocation = TKNamedCoordinate(coordinate: sydneyCBD)
 
     let countBeforeResolution = titles.values.count
     viewModel.locationsResolved()
-    try await Task.sleep(for: .milliseconds(400)) // let the stubbed geocode round-trip complete
 
-    #expect(titles.values.count > countBeforeResolution)
-    #expect(titles.values.last?.origin == expectedAddress)
+    let updated = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(updated.last?.origin == expectedAddress)
+  }
+
+  @Test func changingDateAfterResolutionDoesNotRevertOriginTitle() async throws {
+    // `changedDate` is driven manually so we can trigger a builder rebuild
+    // *after* resolution, the way picking a new time in the UI would.
+    let changedDate = PublishSubject<TKUIRoutingResultsViewModel.RouteBuilder.Time>()
+    let inputs: TKUIRoutingResultsViewModel.UIInput = (
+      selected: .empty(),
+      tappedSectionButton: .empty(),
+      tappedSearch: .empty(),
+      tappedDate: .empty(),
+      tappedShowModes: .empty(),
+      changedDate: changedDate.asAssertingSignal(),
+      changedModes: .empty(),
+      changedSortOrder: .empty(),
+      changedSearch: .empty()
+    )
+
+    let destination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    let request = try await Self.waitForFirst(requests)
+    request.fromLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Home")
+
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+    _ = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(titles.values.last?.origin == "Home")
+
+    // Rebuild the builder (and thus re-subscribe to the origin annotation's
+    // KVO, which re-emits its initial value) the way picking a new time does.
+    let requestCountBeforeDateChange = requests.values.count
+    changedDate.onNext(.leaveAfter(Date().addingTimeInterval(3600)))
+    _ = try await Self.waitForCount(requests, greaterThan: requestCountBeforeDateChange)
+
+    #expect(titles.values.last?.origin == "Home", "Picking a new time must not revert the resolved origin title back to the placeholder")
+  }
+
+  @Test func pickingNewOriginViaSearchUpdatesTitle() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs: TKUIRoutingResultsViewModel.UIInput = (
+      selected: .empty(),
+      tappedSectionButton: .empty(),
+      tappedSearch: .empty(),
+      tappedDate: .empty(),
+      tappedShowModes: .empty(),
+      changedDate: .empty(),
+      changedModes: .empty(),
+      changedSortOrder: .empty(),
+      changedSearch: changedSearch.asAssertingSignal()
+    )
+
+    let destination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    #expect(titles.values.first?.origin == Loc.CurrentLocation)
+
+    let newOrigin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "New Origin")
+    let countBeforeSearch = titles.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: newOrigin))
+
+    let updated = try await Self.waitForCount(titles, greaterThan: countBeforeSearch)
+    #expect(updated.last?.origin == "New Origin")
   }
 
 }
@@ -155,8 +230,6 @@ struct TKUIRoutingResultsOriginTitleTest {
 private struct StubGeocodeError: Error {}
 
 private extension TKUIRoutingResultsOriginTitleTest {
-
-  static let disposeBag = DisposeBag()
 
   static let emptyInputs: TKUIRoutingResultsViewModel.UIInput = (
     selected: .empty(),

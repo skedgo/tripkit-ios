@@ -134,6 +134,11 @@ class TKUIRoutingResultsViewModel {
     // the builder itself never sees the real coordinate, only the request does.
     let originTitleFromBuilder = originOrDestinationChanged
       .map { Self.originTitle(for: $0.0.origin) }
+      // Without this, any builder rebuild (e.g., picking a new time) re-subscribes
+      // to the origin annotation's KVO, which re-emits its initial value and would
+      // flip a resolved title (from `originTitleFromResolution`) back to the
+      // placeholder, since the builder's own origin never learns the resolved one.
+      .distinctUntilChanged()
 
     let originTitleFromResolution = locationsResolved
       .withLatestFrom(Observable.combineLatest(builderChanged, requestToShow))
