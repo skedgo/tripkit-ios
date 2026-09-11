@@ -80,7 +80,7 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
       assignPlacemark(best, includeName: includeName)
     }
   }
-
+  
   @objc public var locationID: String? = nil
   @objc public var timeZoneID: String? = nil
   
@@ -105,12 +105,12 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     }
     
     let coordinate = annotation.coordinate
-    guard let name = annotation.title ?? nil else {
+    if let name = annotation.title ?? nil,
+       let address = annotation.subtitle ?? nil {
+      return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address.nonEmpty)
+    } else {
       return TKNamedCoordinate(coordinate: coordinate)
     }
-    // No subtitle, e.g., the "Current Location" placeholder, still keeps the title as the name.
-    let address = annotation.subtitle ?? nil
-    return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address?.nonEmpty)
   }
   
   @objc public init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String? = nil, address: String? = nil) {
