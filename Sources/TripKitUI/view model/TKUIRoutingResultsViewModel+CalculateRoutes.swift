@@ -84,7 +84,20 @@ extension TKUIRoutingResultsViewModel {
 // MARK: - Builder
 
 extension TKUIRoutingResultsViewModel {
-  
+
+  /// Whether `origin` is the unresolved "Current Location" placeholder, i.e.,
+  /// nil (implicit origin) or has an invalid coordinate (explicit placeholder) -
+  /// matching the criterion `TKUIResultsFetcher` uses to decide whether to
+  /// localise the user.
+  static func usesCurrentLocationOrigin(_ origin: TKNamedCoordinate?) -> Bool {
+    guard let origin else { return true }
+    return !origin.coordinate.isValid
+  }
+
+  static func originTitle(for origin: TKNamedCoordinate?) -> String? {
+    usesCurrentLocationOrigin(origin) ? Loc.CurrentLocation : origin?.title
+  }
+
   static func buildId(for builder: RouteBuilder, force: Bool = false) -> String {
     guard !force else { return UUID().uuidString }
     var id: String

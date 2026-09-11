@@ -128,8 +128,28 @@ class TKUIRoutingResultsViewModel {
     request = requestToShow
       .asDriver(onErrorDriveWith: .empty())
     
-    originDestination = originOrDestinationChanged
-      .map { (origin: $0.0.origin?.title, $0.0.destination?.title) }
+    // The origin title reads "Current Location" for as long as the builder's
+    // origin is the unresolved placeholder (nil, or an invalid coordinate),
+    // and switches to the resolved address once `locationsResolved()` fires -
+    // the builder itself never sees the real coordinate, only the request does.
+    let originTitleFromBuilder = originOrDestinationChanged
+      .map { Self.originTitle(for: $0.0.origin) }
+
+    let originTitleFromResolution = locationsResolved
+      .withLatestFrom(Observable.combineLatest(builderChanged, requestToShow))
+      .filter { builder, _ in Self.usesCurrentLocationOrigin(builder.origin) }
+      .flatMapLatest { _, request -> Observable<String?> in
+        RouteBuilder.needAddress(request.fromLocation).map { $0 ?? Loc.CurrentLocation }
+      }
+
+    let originTitle = Observable.merge(originTitleFromBuilder, originTitleFromResolution)
+      .startWith(Self.originTitle(for: builder.origin))
+
+    let destinationTitle = originOrDestinationChanged
+      .map { $0.0.destination?.title }
+      .startWith(builder.destination?.title)
+
+    originDestination = Observable.combineLatest(originTitle, destinationTitle) { (origin: $0, destination: $1) }
       .asDriver(onErrorDriveWith: .empty())
 
     timeTitle = builderChanged
