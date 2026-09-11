@@ -1,10 +1,11 @@
 //
-//  TKUIRoutingResultsOriginTitleTest.swift
+//  TKUIRoutingResultsEndpointTitleTest.swift
 //  TripKitUITests
 //
-//  Regression tests for RM26188 — the results card title showed "From …"
-//  instead of "From Current Location" (and then the resolved address) when
-//  planning a trip from the user's current location.
+//  Regression tests for RM26188 — the results card title (and the query
+//  input's field text after "Change Route") showed "…"/"Location" instead of
+//  "Current Location" (and then the resolved address) for either endpoint of
+//  a trip planned from/to the user's current location.
 //
 
 #if canImport(Testing)
@@ -24,7 +25,7 @@ import RxCocoa
 
 @Suite(.serialized)
 @MainActor
-struct TKUIRoutingResultsOriginTitleTest {
+struct TKUIRoutingResultsEndpointTitleTest {
 
   private let sydneyCBD = CLLocationCoordinate2D(latitude: -33.8688, longitude: 151.2093)
 
@@ -225,23 +226,217 @@ struct TKUIRoutingResultsOriginTitleTest {
     #expect(updated.last?.origin == "New Origin")
   }
 
+  // MARK: - Destination endpoint (symmetric with origin)
+
+  @Test func placeholderDestinationStartsWithCurrentLocationTitle() {
+    let origin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Home")
+    let placeholder = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: placeholder, origin: origin, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
+
+    let recorder = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { recorder.append($0) }).disposed(by: disposeBag)
+
+    #expect(recorder.values.first?.destination == Loc.CurrentLocation)
+    #expect(recorder.values.first?.origin == "Home")
+  }
+
+  @Test func locationsResolvedUpdatesPlaceholderDestinationTitle() async throws {
+    let origin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Home")
+    let placeholder = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: placeholder, origin: origin, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    let request = try await Self.waitForFirst(requests)
+    request.toLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Work")
+
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+
+    let updated = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(updated.last?.destination == "Work")
+  }
+
+  @Test func placeholderDestinationGeocodingFailureKeepsCurrentLocationTitle() async throws {
+    TKNamedCoordinate.reverseGeocodeOverride = { _ in throw StubGeocodeError() }
+    defer { TKNamedCoordinate.reverseGeocodeOverride = nil }
+
+    let origin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Home")
+    let placeholder = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: placeholder, origin: origin, inputs: Self.emptyInputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    let request = try await Self.waitForFirst(requests)
+    // No name, mimicking TKUIResultsFetcher's default replacementHandler.
+    request.toLocation = TKNamedCoordinate(coordinate: sydneyCBD)
+
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+
+    let updated = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(updated.last?.destination == Loc.CurrentLocation)
+  }
+
+  // MARK: - Query input hand-off (`.showSearch`)
+
+  @Test func tappedSearchHandsOffCurrentLocationDestinationTitle() {
+    let tappedSearch = PublishSubject<Void>()
+    let inputs = Self.inputs(tappedSearch: tappedSearch.asAssertingSignal())
+
+    let origin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Home")
+    let placeholder = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: placeholder, origin: origin, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let nextEvents = Recorder<TKUIRoutingResultsViewModel.Next>()
+    viewModel.next.emit(onNext: { nextEvents.append($0) }).disposed(by: disposeBag)
+
+    tappedSearch.onNext(())
+
+    guard case .showSearch(_, let destination, _) = nextEvents.values.last else {
+      Issue.record("Expected a .showSearch event")
+      return
+    }
+    #expect(destination?.title == Loc.CurrentLocation)
+  }
+
+  @Test func tappedSearchHandsOffCurrentLocationOriginTitleBeforeAndAfterResolution() async throws {
+    let tappedSearch = PublishSubject<Void>()
+    let inputs = Self.inputs(tappedSearch: tappedSearch.asAssertingSignal())
+
+    let placeholder = TKLocationManager.shared.currentLocation
+    let destination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination, origin: placeholder, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let nextEvents = Recorder<TKUIRoutingResultsViewModel.Next>()
+    viewModel.next.emit(onNext: { nextEvents.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    tappedSearch.onNext(())
+    guard case .showSearch(let originBefore, _, _) = nextEvents.values.last else {
+      Issue.record("Expected a .showSearch event")
+      return
+    }
+    #expect(originBefore?.title == Loc.CurrentLocation)
+
+    // Resolve, and wait for the card title itself to move on to "Home" - the
+    // query input hand-off must still show the placeholder, not that address.
+    let request = try await Self.waitForFirst(requests)
+    request.fromLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Home")
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+    _ = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+
+    tappedSearch.onNext(())
+    guard case .showSearch(let originAfter, _, _) = nextEvents.values.last else {
+      Issue.record("Expected a second .showSearch event")
+      return
+    }
+    #expect(originAfter?.title == Loc.CurrentLocation)
+  }
+
+  // MARK: - "Change Route" → "Route" (`changedSearch` then `tappedSearch`)
+
+  @Test func changeRouteThenRouteKeepsCurrentLocationOriginTitle() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let tappedSearch = PublishSubject<Void>()
+    let inputs = Self.inputs(tappedSearch: tappedSearch.asAssertingSignal(), changedSearch: changedSearch.asAssertingSignal())
+
+    let destination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    // Named, not implicit: switching this to the placeholder is then a real
+    // title change ("Home" -> "Current Location"), not a same-value no-op that
+    // `distinctUntilChanged()` would (correctly) swallow.
+    let initialOrigin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Home")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination, origin: initialOrigin, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let nextEvents = Recorder<TKUIRoutingResultsViewModel.Next>()
+    viewModel.next.emit(onNext: { nextEvents.append($0) }).disposed(by: disposeBag)
+
+    let placeholder = TKLocationManager.shared.currentLocation
+    let countBeforeSearch = titles.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: placeholder))
+    let updatedTitles = try await Self.waitForCount(titles, greaterThan: countBeforeSearch)
+    #expect(updatedTitles.last?.origin == Loc.CurrentLocation)
+
+    tappedSearch.onNext(())
+    guard case .showSearch(let origin, _, _) = nextEvents.values.last else {
+      Issue.record("Expected a .showSearch event")
+      return
+    }
+    #expect(origin?.title == Loc.CurrentLocation)
+  }
+
+  @Test func changeRouteThenRouteKeepsCurrentLocationDestinationTitle() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let tappedSearch = PublishSubject<Void>()
+    let inputs = Self.inputs(tappedSearch: tappedSearch.asAssertingSignal(), changedSearch: changedSearch.asAssertingSignal())
+
+    let initialDestination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Central Station")
+    let origin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Home")
+    let viewModel = TKUIRoutingResultsViewModel(destination: initialDestination, origin: origin, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let nextEvents = Recorder<TKUIRoutingResultsViewModel.Next>()
+    viewModel.next.emit(onNext: { nextEvents.append($0) }).disposed(by: disposeBag)
+
+    let placeholder = TKLocationManager.shared.currentLocation
+    let countBeforeSearch = titles.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: placeholder))
+    let updatedTitles = try await Self.waitForCount(titles, greaterThan: countBeforeSearch)
+    #expect(updatedTitles.last?.destination == Loc.CurrentLocation)
+
+    tappedSearch.onNext(())
+    guard case .showSearch(_, let destination, _) = nextEvents.values.last else {
+      Issue.record("Expected a .showSearch event")
+      return
+    }
+    #expect(destination?.title == Loc.CurrentLocation)
+  }
+
 }
 
 private struct StubGeocodeError: Error {}
 
-private extension TKUIRoutingResultsOriginTitleTest {
+private extension TKUIRoutingResultsEndpointTitleTest {
 
-  static let emptyInputs: TKUIRoutingResultsViewModel.UIInput = (
-    selected: .empty(),
-    tappedSectionButton: .empty(),
-    tappedSearch: .empty(),
-    tappedDate: .empty(),
-    tappedShowModes: .empty(),
-    changedDate: .empty(),
-    changedModes: .empty(),
-    changedSortOrder: .empty(),
-    changedSearch: .empty()
-  )
+  static let emptyInputs: TKUIRoutingResultsViewModel.UIInput = inputs()
+
+  /// `emptyInputs` with just `tappedSearch`/`changedSearch` swapped for a
+  /// subject-backed signal a test can drive directly.
+  static func inputs(
+    tappedSearch: Signal<Void> = .empty(),
+    changedSearch: Signal<TKUIRoutingResultsViewModel.SearchResult> = .empty()
+  ) -> TKUIRoutingResultsViewModel.UIInput {
+    (
+      selected: .empty(),
+      tappedSectionButton: .empty(),
+      tappedSearch: tappedSearch,
+      tappedDate: .empty(),
+      tappedShowModes: .empty(),
+      changedDate: .empty(),
+      changedModes: .empty(),
+      changedSortOrder: .empty(),
+      changedSearch: changedSearch
+    )
+  }
 
   static let emptyMapInput: TKUIRoutingResultsViewModel.MapInput = (
     tappedMapRoute: .empty(),

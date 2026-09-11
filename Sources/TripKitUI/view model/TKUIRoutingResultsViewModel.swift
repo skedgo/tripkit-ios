@@ -128,26 +128,20 @@ class TKUIRoutingResultsViewModel {
     request = requestToShow
       .asDriver(onErrorDriveWith: .empty())
     
-    // The builder never sees the resolved current location, only the request
-    // does, so the title switches from the placeholder on `locationsResolved()`.
-    let originTitleFromBuilder = originOrDestinationChanged
-      .map { Self.originTitle(for: $0.0.origin) }
-      // Builder rebuilds (e.g., a new time) re-emit; don't flip a resolved title back
-      .distinctUntilChanged()
+    // A nil origin means "Current Location", so it counts as the placeholder too
+    let originTitle = Self.endpointTitle(
+      builderChanges: originOrDestinationChanged, locationsResolved: locationsResolved,
+      builderChanged: builderChanged, requestToShow: requestToShow,
+      endpoint: { $0.origin }, resolvedLocation: { $0.fromLocation }, allowsNil: true
+    )
+    .startWith(Self.title(for: builder.origin, allowsNil: true))
 
-    let originTitleFromResolution = locationsResolved
-      .withLatestFrom(Observable.combineLatest(builderChanged, requestToShow))
-      .filter { builder, _ in Self.usesCurrentLocationOrigin(builder.origin) }
-      .flatMapLatest { _, request -> Observable<String?> in
-        RouteBuilder.needAddress(request.fromLocation).map { $0 ?? Loc.CurrentLocation }
-      }
-
-    let originTitle = Observable.merge(originTitleFromBuilder, originTitleFromResolution)
-      .startWith(Self.originTitle(for: builder.origin))
-
-    let destinationTitle = originOrDestinationChanged
-      .map { $0.0.destination?.title }
-      .startWith(builder.destination?.title)
+    let destinationTitle = Self.endpointTitle(
+      builderChanges: originOrDestinationChanged, locationsResolved: locationsResolved,
+      builderChanged: builderChanged, requestToShow: requestToShow,
+      endpoint: { $0.destination }, resolvedLocation: { $0.toLocation }, allowsNil: false
+    )
+    .startWith(Self.title(for: builder.destination, allowsNil: false))
 
     originDestination = Observable.combineLatest(originTitle, destinationTitle) { (origin: $0, destination: $1) }
       .asDriver(onErrorDriveWith: .empty())
