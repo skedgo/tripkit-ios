@@ -91,12 +91,12 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
     }
     
     let coordinate = annotation.coordinate
-    if let name = annotation.title ?? nil,
-       let address = annotation.subtitle ?? nil {
-      return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address.nonEmpty)
-    } else {
+    guard let name = annotation.title ?? nil else {
       return TKNamedCoordinate(coordinate: coordinate)
     }
+    // No subtitle, e.g., the "Current Location" placeholder, still keeps the title as the name.
+    let address = annotation.subtitle ?? nil
+    return TKNamedCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, address: address?.nonEmpty)
   }
   
   @objc public init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, name: String? = nil, address: String? = nil) {
