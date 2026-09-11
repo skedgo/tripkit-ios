@@ -128,16 +128,11 @@ class TKUIRoutingResultsViewModel {
     request = requestToShow
       .asDriver(onErrorDriveWith: .empty())
     
-    // The origin title reads "Current Location" for as long as the builder's
-    // origin is the unresolved placeholder (nil, or an invalid coordinate),
-    // and switches to the resolved address once `locationsResolved()` fires -
-    // the builder itself never sees the real coordinate, only the request does.
+    // The builder never sees the resolved current location, only the request
+    // does, so the title switches from the placeholder on `locationsResolved()`.
     let originTitleFromBuilder = originOrDestinationChanged
       .map { Self.originTitle(for: $0.0.origin) }
-      // Without this, any builder rebuild (e.g., picking a new time) re-subscribes
-      // to the origin annotation's KVO, which re-emits its initial value and would
-      // flip a resolved title (from `originTitleFromResolution`) back to the
-      // placeholder, since the builder's own origin never learns the resolved one.
+      // Builder rebuilds (e.g., a new time) re-emit; don't flip a resolved title back
       .distinctUntilChanged()
 
     let originTitleFromResolution = locationsResolved
