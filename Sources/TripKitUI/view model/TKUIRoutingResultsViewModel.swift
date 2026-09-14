@@ -79,33 +79,36 @@ class TKUIRoutingResultsViewModel {
     // we generate a new request. However, we don't do this if the got
     // provided with a request and set to `editable == false`; in that
     // case we just display the results.
-    // Carries the builder id, so title resolution can spot a request that's still
-    // mid-debounce. One shared source; `generateRequest()` has side effects.
-    let requestChangedWithID: Observable<(TripRequest, mutable: Bool, id: String?)>
+    // Carries the builder a request came from, so title resolution can tell its
+    // endpoints are still current. One shared source; `generateRequest()` writes.
+    let requestChangedWithBuilder: Observable<(TripRequest, mutable: Bool, builder: RouteBuilder)>
     let skipRequest: Bool
     if !editable, let request = initialRequest, !request.tripGroups.isEmpty {
-      requestChangedWithID = .just( (request, mutable: false, id: Self.buildId(for: request.builder)) )
+      requestChangedWithBuilder = .just( (request, mutable: false, builder: request.builder) )
       skipRequest = true
 
     } else {
-      requestChangedWithID = Observable.merge(
+      requestChangedWithBuilder = Observable.merge(
         originOrDestinationChanged,
         builderChangedWithID
       )
         .distinctUntilChanged { $0.1 == $1.1 } // only generate a new request object if necessary
         .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
-        .map { ($0.0.generateRequest(), $0.1) }
-        .startWith( (initialRequest, initialRequest.map { Self.buildId(for: $0.builder) } ) )
-        .distinctUntilChanged { $0.1 == $1.1 } // ignore duplicated request objects (happens when initialRequest != nil)
-        .compactMap { request, id in request.map { ($0, id) } }
-        .map { ($0.0, mutable: true, id: $0.1) }
+        .map { (builder: $0.0, request: $0.0.generateRequest(), id: $0.1) }
+        .startWith( (builder: initialRequest?.builder, request: initialRequest, id: initialRequest.map { Self.buildId(for: $0.builder) } ) )
+        .distinctUntilChanged { $0.id == $1.id } // ignore duplicated request objects (happens when initialRequest != nil)
+        .compactMap { entry -> (RouteBuilder, TripRequest)? in
+          guard let builder = entry.builder, let request = entry.request else { return nil }
+          return (builder, request)
+        }
+        .map { ($0.1, mutable: true, builder: $0.0) }
         .share(replay: 1, scope: .forever)
       skipRequest = false
     }
 
-    let requestChanged: Observable<(TripRequest, mutable: Bool)> = requestChangedWithID.map { ($0.0, $0.1) }
+    let requestChanged: Observable<(TripRequest, mutable: Bool)> = requestChangedWithBuilder.map { ($0.0, $0.1) }
     let requestToShow = requestChanged.map(\.0)
-    let requestToShowWithID = requestChangedWithID.map { (request: $0.0, id: $0.2) }
+    let requestToShowWithBuilder = requestChangedWithBuilder.map { (request: $0.0, builder: $0.2) }
     let updateableRequest = requestChanged.compactMap { $0.1 == true ? $0.0 : nil }
 
     // This picks up CoreData changes of the trip group itself, but ...
@@ -135,14 +138,14 @@ class TKUIRoutingResultsViewModel {
     // A nil origin means "Current Location", so it counts as the placeholder too
     let originTitle = Self.endpointTitle(
       builderChanges: originOrDestinationChanged, locationsResolved: locationsResolved,
-      builderChangedWithID: builderChangedWithID, requestToShow: requestToShowWithID,
+      builderChangedWithID: builderChangedWithID, requestToShow: requestToShowWithBuilder,
       endpoint: { $0.origin }, resolvedLocation: { $0.fromLocation }, allowsNil: true
     )
     .startWith(Self.title(for: builder.origin, allowsNil: true))
 
     let destinationTitle = Self.endpointTitle(
       builderChanges: originOrDestinationChanged, locationsResolved: locationsResolved,
-      builderChangedWithID: builderChangedWithID, requestToShow: requestToShowWithID,
+      builderChangedWithID: builderChangedWithID, requestToShow: requestToShowWithBuilder,
       endpoint: { $0.destination }, resolvedLocation: { $0.toLocation }, allowsNil: false
     )
     .startWith(Self.title(for: builder.destination, allowsNil: false))

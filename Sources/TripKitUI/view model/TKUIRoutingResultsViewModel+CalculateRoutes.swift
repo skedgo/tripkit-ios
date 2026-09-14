@@ -113,7 +113,7 @@ extension TKUIRoutingResultsViewModel {
     builderChanges: Observable<(RouteBuilder, id: String)>,
     locationsResolved: Observable<Void>,
     builderChangedWithID: Observable<(RouteBuilder, id: String)>,
-    requestToShow: Observable<(request: TripRequest, id: String?)>,
+    requestToShow: Observable<(request: TripRequest, builder: RouteBuilder)>,
     endpoint: @escaping (RouteBuilder) -> TKNamedCoordinate?,
     resolvedLocation: @escaping (TripRequest) -> TKNamedCoordinate?,
     allowsNil: Bool
@@ -125,14 +125,15 @@ extension TKUIRoutingResultsViewModel {
 
     let fromResolution = locationsResolved
       .withLatestFrom(Observable.combineLatest(builderChangedWithID, requestToShow))
-      // The request pipeline is debounced, so right after a builder change it can
-      // still hold the PRE-change request; only resolve against a matching one.
-      .filter { builder, request in
-        guard let requestId = request.id, requestId == builder.id else { return false }
-        return Self.isUnresolvedCurrentLocation(endpoint(builder.0), allowsNil: allowsNil)
+      // The debounced pipeline can still hold the PRE-change request, and `buildId`
+      // embeds the current time, so compare the endpoints it was generated from.
+      .filter { current, generated in
+        current.0.origin === generated.builder.origin
+          && current.0.destination === generated.builder.destination
+          && Self.isUnresolvedCurrentLocation(endpoint(current.0), allowsNil: allowsNil)
       }
-      .flatMapLatest { _, request -> Observable<String?> in
-        RouteBuilder.needAddress(resolvedLocation(request.request)).map { $0 ?? Loc.CurrentLocation }
+      .flatMapLatest { _, generated -> Observable<String?> in
+        RouteBuilder.needAddress(resolvedLocation(generated.request)).map { $0 ?? Loc.CurrentLocation }
       }
 
     return Observable.merge(fromBuilder, fromResolution)

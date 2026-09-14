@@ -573,6 +573,109 @@ struct TKUIRoutingResultsEndpointTitleTest {
     #expect(finalTitles.last?.origin == "Resolved Origin")
   }
 
+  // MARK: - buildId drifting with wall-clock time must not block a real resolution
+  //
+  // `watch`'s scan computes a builder's id synchronously; `locationsChanged`
+  // computes its OWN id for the same builder once its (possibly async) reverse
+  // geocode completes. `.leaveASAP`'s date is `Date()` on every access, so if
+  // that second computation lands in a different wall-clock second, its id
+  // differs from the first even though nothing about the route changed - and
+  // it's the id `requestChanged` ends up carrying, since it's part of the
+  // debounced merge. Stubbing an artificial delay into the geocode is what
+  // makes this reproducible on demand rather than by chance.
+
+  @Test func destinationResolutionSucceedsDespiteBuildIdMovingWithWallClock() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(changedSearch: changedSearch.asAssertingSignal())
+
+    let dest1 = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "dest1")
+    let viewModel = TKUIRoutingResultsViewModel(destination: dest1, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    _ = try await Self.waitForFirst(requests)
+
+    // Unnamed (unlike the real "Current Location" placeholder) so
+    // `locationsChanged`'s reverse geocode - not just watch's scan - has to
+    // run, and we can control how long that takes.
+    TKNamedCoordinate.reverseGeocodeOverride = { _ in
+      try await Task.sleep(for: .milliseconds(1050))
+      return nil
+    }
+    defer { TKNamedCoordinate.reverseGeocodeOverride = nil }
+
+    let newOrigin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Manly")
+    let placeholder = TKNamedCoordinate(coordinate: .invalid)
+    let countBeforeSwap = requests.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: newOrigin))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: placeholder))
+
+    // First the quick request from watch's own synchronous id, then - once
+    // the stubbed geocode above finishes - a second one from locationsChanged's
+    // later, drifted id for the very same, unchanged builder.
+    _ = try await Self.waitForCount(requests, greaterThan: countBeforeSwap)
+    let updatedRequests = try await Self.waitForCount(requests, greaterThan: countBeforeSwap + 1, timeout: .seconds(3))
+    guard let newRequest = updatedRequests.last else {
+      Issue.record("Expected a second, later request once the stubbed geocode completed")
+      return
+    }
+
+    TKNamedCoordinate.reverseGeocodeOverride = nil // don't delay needAddress below
+    newRequest.toLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Destination")
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+    let finalTitles = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(finalTitles.last?.destination == "Resolved Destination")
+  }
+
+  @Test func originResolutionSucceedsDespiteBuildIdMovingWithWallClock() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(changedSearch: changedSearch.asAssertingSignal())
+
+    let origin1 = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "origin1")
+    let destination1 = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "destination1")
+    let viewModel = TKUIRoutingResultsViewModel(destination: destination1, origin: origin1, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    _ = try await Self.waitForFirst(requests)
+
+    // See destinationResolutionSucceedsDespiteBuildIdMovingWithWallClock() above.
+    TKNamedCoordinate.reverseGeocodeOverride = { _ in
+      try await Task.sleep(for: .milliseconds(1050))
+      return nil
+    }
+    defer { TKNamedCoordinate.reverseGeocodeOverride = nil }
+
+    let newDestination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Manly")
+    let placeholder = TKNamedCoordinate(coordinate: .invalid)
+    let countBeforeSwap = requests.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: newDestination))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: placeholder))
+
+    _ = try await Self.waitForCount(requests, greaterThan: countBeforeSwap)
+    let updatedRequests = try await Self.waitForCount(requests, greaterThan: countBeforeSwap + 1, timeout: .seconds(3))
+    guard let newRequest = updatedRequests.last else {
+      Issue.record("Expected a second, later request once the stubbed geocode completed")
+      return
+    }
+
+    TKNamedCoordinate.reverseGeocodeOverride = nil // don't delay needAddress below
+    newRequest.fromLocation = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Resolved Origin")
+    let countBeforeResolution = titles.values.count
+    viewModel.locationsResolved()
+    let finalTitles = try await Self.waitForCount(titles, greaterThan: countBeforeResolution)
+    #expect(finalTitles.last?.origin == "Resolved Origin")
+  }
+
 }
 
 private struct StubGeocodeError: Error {}
