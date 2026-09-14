@@ -79,14 +79,16 @@ class TKUIRoutingResultsViewModel {
     // we generate a new request. However, we don't do this if the got
     // provided with a request and set to `editable == false`; in that
     // case we just display the results.
-    let requestChanged: Observable<(TripRequest, mutable: Bool)>
+    // Carries the builder id, so title resolution can spot a request that's still
+    // mid-debounce. One shared source; `generateRequest()` has side effects.
+    let requestChangedWithID: Observable<(TripRequest, mutable: Bool, id: String?)>
     let skipRequest: Bool
     if !editable, let request = initialRequest, !request.tripGroups.isEmpty {
-      requestChanged = .just( (request, mutable: false) )
+      requestChangedWithID = .just( (request, mutable: false, id: Self.buildId(for: request.builder)) )
       skipRequest = true
-    
+
     } else {
-      requestChanged = Observable.merge(
+      requestChangedWithID = Observable.merge(
         originOrDestinationChanged,
         builderChangedWithID
       )
@@ -95,13 +97,15 @@ class TKUIRoutingResultsViewModel {
         .map { ($0.0.generateRequest(), $0.1) }
         .startWith( (initialRequest, initialRequest.map { Self.buildId(for: $0.builder) } ) )
         .distinctUntilChanged { $0.1 == $1.1 } // ignore duplicated request objects (happens when initialRequest != nil)
-        .compactMap { $0.0 }
-        .map { ($0, mutable: true) }
+        .compactMap { request, id in request.map { ($0, id) } }
+        .map { ($0.0, mutable: true, id: $0.1) }
         .share(replay: 1, scope: .forever)
       skipRequest = false
     }
 
+    let requestChanged: Observable<(TripRequest, mutable: Bool)> = requestChangedWithID.map { ($0.0, $0.1) }
     let requestToShow = requestChanged.map(\.0)
+    let requestToShowWithID = requestChangedWithID.map { (request: $0.0, id: $0.2) }
     let updateableRequest = requestChanged.compactMap { $0.1 == true ? $0.0 : nil }
 
     // This picks up CoreData changes of the trip group itself, but ...
@@ -131,14 +135,14 @@ class TKUIRoutingResultsViewModel {
     // A nil origin means "Current Location", so it counts as the placeholder too
     let originTitle = Self.endpointTitle(
       builderChanges: originOrDestinationChanged, locationsResolved: locationsResolved,
-      builderChanged: builderChanged, requestToShow: requestToShow,
+      builderChangedWithID: builderChangedWithID, requestToShow: requestToShowWithID,
       endpoint: { $0.origin }, resolvedLocation: { $0.fromLocation }, allowsNil: true
     )
     .startWith(Self.title(for: builder.origin, allowsNil: true))
 
     let destinationTitle = Self.endpointTitle(
       builderChanges: originOrDestinationChanged, locationsResolved: locationsResolved,
-      builderChanged: builderChanged, requestToShow: requestToShow,
+      builderChangedWithID: builderChangedWithID, requestToShow: requestToShowWithID,
       endpoint: { $0.destination }, resolvedLocation: { $0.toLocation }, allowsNil: false
     )
     .startWith(Self.title(for: builder.destination, allowsNil: false))

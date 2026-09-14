@@ -478,6 +478,101 @@ struct TKUIRoutingResultsEndpointTitleTest {
     #expect(finalTitles.last?.destination == "Resolved Destination")
   }
 
+  // MARK: - Stale pre-swap request racing locationsResolved()
+
+  @Test func staleRequestDuringSwapDoesNotRevertResolvedDestinationTitle() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(changedSearch: changedSearch.asAssertingSignal())
+
+    let dest1 = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "dest1")
+    let viewModel = TKUIRoutingResultsViewModel(destination: dest1, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    // Resolve the origin, like routing from current location and letting it settle.
+    let request = try await Self.waitForFirst(requests)
+    request.fromLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Origin")
+    let countBeforeOriginResolution = titles.values.count
+    viewModel.locationsResolved()
+    _ = try await Self.waitForCount(titles, greaterThan: countBeforeOriginResolution)
+    #expect(titles.values.last?.origin == "Resolved Origin")
+
+    // Swap + pick a new origin + Route: destination becomes the current-location
+    // placeholder, matching what the real query input substitutes for a nil origin.
+    let newOrigin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Manly")
+    let placeholder = TKLocationManager.shared.currentLocation
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: newOrigin))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: placeholder))
+
+    // Fire locationsResolved() before the 100ms debounce produces the new
+    // request - requestToShow is still the stale, pre-swap request here.
+    viewModel.locationsResolved()
+    #expect(titles.values.last?.destination == Loc.CurrentLocation, "A resolution racing the stale pre-swap request must not reintroduce dest1")
+
+    // Once the new request actually arrives and resolves, the title must follow it.
+    let requestCountBeforeSwap = requests.values.count
+    let updatedRequests = try await Self.waitForCount(requests, greaterThan: requestCountBeforeSwap)
+    guard let newRequest = updatedRequests.last else {
+      Issue.record("Expected a new request after the swap")
+      return
+    }
+    newRequest.toLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Destination")
+    let countBeforeFinalResolution = titles.values.count
+    viewModel.locationsResolved()
+    let finalTitles = try await Self.waitForCount(titles, greaterThan: countBeforeFinalResolution)
+    #expect(finalTitles.last?.destination == "Resolved Destination")
+  }
+
+  @Test func staleRequestDuringSwapDoesNotRevertResolvedOriginTitle() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(changedSearch: changedSearch.asAssertingSignal())
+
+    let origin1 = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "origin1")
+    let placeholderDestination = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: placeholderDestination, origin: origin1, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    // Resolve the destination, like routing to current location and letting it settle.
+    let request = try await Self.waitForFirst(requests)
+    request.toLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Destination")
+    let countBeforeDestinationResolution = titles.values.count
+    viewModel.locationsResolved()
+    _ = try await Self.waitForCount(titles, greaterThan: countBeforeDestinationResolution)
+    #expect(titles.values.last?.destination == "Resolved Destination")
+
+    // Swap + pick a new destination + Route: origin becomes the current-location placeholder.
+    let placeholder = TKLocationManager.shared.currentLocation
+    let newDestination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Manly")
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: newDestination))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: placeholder))
+
+    // Fire locationsResolved() before the 100ms debounce produces the new
+    // request - requestToShow is still the stale, pre-swap request here.
+    viewModel.locationsResolved()
+    #expect(titles.values.last?.origin == Loc.CurrentLocation, "A resolution racing the stale pre-swap request must not reintroduce origin1")
+
+    let requestCountBeforeSwap = requests.values.count
+    let updatedRequests = try await Self.waitForCount(requests, greaterThan: requestCountBeforeSwap)
+    guard let newRequest = updatedRequests.last else {
+      Issue.record("Expected a new request after the swap")
+      return
+    }
+    newRequest.fromLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Origin")
+    let countBeforeFinalResolution = titles.values.count
+    viewModel.locationsResolved()
+    let finalTitles = try await Self.waitForCount(titles, greaterThan: countBeforeFinalResolution)
+    #expect(finalTitles.last?.origin == "Resolved Origin")
+  }
+
 }
 
 private struct StubGeocodeError: Error {}
