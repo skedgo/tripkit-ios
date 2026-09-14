@@ -676,6 +676,84 @@ struct TKUIRoutingResultsEndpointTitleTest {
     #expect(finalTitles.last?.origin == "Resolved Origin")
   }
 
+  // MARK: - locationsResolved() firing before the title pipeline observes the new request
+
+  @Test func resolutionAppliesEvenWhenItRacesTheNewRequest() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(changedSearch: changedSearch.asAssertingSignal())
+
+    let dest1 = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "dest1")
+    let placeholderOrigin = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: dest1, origin: placeholderOrigin, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    // Subscribing to `request` before `originDestination` mirrors the card: its
+    // fetchProgress-driven locationsResolved() sees a new request before the
+    // title pipeline's own subscription does.
+    var sawFirstRequest = false
+    viewModel.request.drive(onNext: { request in
+      guard sawFirstRequest else { sawFirstRequest = true; return }
+      // Mimics override(currentLocation:), which mutates the request in place.
+      request.toLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Destination")
+      viewModel.locationsResolved()
+    }).disposed(by: disposeBag)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    _ = try await Self.waitForFirst(requests)
+
+    let newOrigin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Manly")
+    let placeholder = TKLocationManager.shared.currentLocation
+    let countBeforeSwap = requests.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: newOrigin))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: placeholder))
+
+    // Wait for the swap's request, not the title: the builder-driven title
+    // change lands synchronously and would let this pass before the async,
+    // debounced resolution this test is actually about even had a chance to run.
+    _ = try await Self.waitForCount(requests, greaterThan: countBeforeSwap)
+    #expect(titles.values.last?.destination == "Resolved Destination")
+  }
+
+  @Test func originResolutionAppliesEvenWhenItRacesTheNewRequest() async throws {
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(changedSearch: changedSearch.asAssertingSignal())
+
+    let origin1 = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "origin1")
+    let placeholderDestination = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: placeholderDestination, origin: origin1, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    var sawFirstRequest = false
+    viewModel.request.drive(onNext: { request in
+      guard sawFirstRequest else { sawFirstRequest = true; return }
+      request.fromLocation = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "Resolved Origin")
+      viewModel.locationsResolved()
+    }).disposed(by: disposeBag)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    _ = try await Self.waitForFirst(requests)
+
+    let newDestination = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Manly")
+    let placeholder = TKLocationManager.shared.currentLocation
+    let countBeforeSwap = requests.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: newDestination))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: placeholder))
+
+    // See resolutionAppliesEvenWhenItRacesTheNewRequest() above for why we wait
+    // on the request, not the title.
+    _ = try await Self.waitForCount(requests, greaterThan: countBeforeSwap)
+    let updated = titles.values
+    #expect(updated.last?.origin == "Resolved Origin")
+  }
+
 }
 
 private struct StubGeocodeError: Error {}

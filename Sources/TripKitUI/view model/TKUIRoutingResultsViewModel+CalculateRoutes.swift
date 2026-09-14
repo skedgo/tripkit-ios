@@ -123,17 +123,20 @@ extension TKUIRoutingResultsViewModel {
       // Builder rebuilds (e.g., a new time) re-emit; don't flip a resolved title back
       .distinctUntilChanged()
 
+    // The fetcher sees a resolved request before our own snapshot does, so wait for
+    // the matching request on the shared stream rather than trusting that snapshot.
     let fromResolution = locationsResolved
-      .withLatestFrom(Observable.combineLatest(builderChangedWithID, requestToShow))
-      // The debounced pipeline can still hold the PRE-change request, and `buildId`
-      // embeds the current time, so compare the endpoints it was generated from.
-      .filter { current, generated in
-        current.0.origin === generated.builder.origin
-          && current.0.destination === generated.builder.destination
-          && Self.isUnresolvedCurrentLocation(endpoint(current.0), allowsNil: allowsNil)
-      }
-      .flatMapLatest { _, generated -> Observable<String?> in
-        RouteBuilder.needAddress(resolvedLocation(generated.request)).map { $0 ?? Loc.CurrentLocation }
+      .withLatestFrom(builderChangedWithID)
+      .filter { builder, _ in Self.isUnresolvedCurrentLocation(endpoint(builder), allowsNil: allowsNil) }
+      .flatMapLatest { builder, _ -> Observable<String?> in
+        requestToShow
+          .filter { generated in
+            builder.origin === generated.builder.origin && builder.destination === generated.builder.destination
+          }
+          .take(1)
+          .flatMapLatest { generated in
+            RouteBuilder.needAddress(resolvedLocation(generated.request)).map { $0 ?? Loc.CurrentLocation }
+          }
       }
 
     return Observable.merge(fromBuilder, fromResolution)
