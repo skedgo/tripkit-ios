@@ -411,6 +411,73 @@ struct TKUIRoutingResultsEndpointTitleTest {
     #expect(destination?.title == Loc.CurrentLocation)
   }
 
+  // MARK: - "Swap" then "Route" (two changedSearch events in one turn)
+
+  @Test func swapThenRouteUpdatesStaleDestinationTitle() async throws {
+    let tappedSearch = PublishSubject<Void>()
+    let changedSearch = PublishSubject<TKUIRoutingResultsViewModel.SearchResult>()
+    let inputs = Self.inputs(tappedSearch: tappedSearch.asAssertingSignal(), changedSearch: changedSearch.asAssertingSignal())
+
+    let dest1 = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Dest One")
+    let placeholderAnnotation = TKLocationManager.shared.currentLocation
+    let viewModel = TKUIRoutingResultsViewModel(destination: dest1, origin: placeholderAnnotation, inputs: inputs, mapInput: Self.emptyMapInput)
+
+    let titles = Recorder<(origin: String?, destination: String?)>()
+    viewModel.originDestination.drive(onNext: { titles.append($0) }).disposed(by: disposeBag)
+
+    let nextEvents = Recorder<TKUIRoutingResultsViewModel.Next>()
+    viewModel.next.emit(onNext: { nextEvents.append($0) }).disposed(by: disposeBag)
+
+    let requests = Recorder<TripRequest>()
+    viewModel.request.drive(onNext: { requests.append($0) }).disposed(by: disposeBag)
+
+    // Route from current location, then let it resolve (repro steps 1-2).
+    let request = try await Self.waitForFirst(requests)
+    request.fromLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Origin")
+    let countBeforeOriginResolution = titles.values.count
+    viewModel.locationsResolved()
+    _ = try await Self.waitForCount(titles, greaterThan: countBeforeOriginResolution)
+    #expect(titles.values.last?.origin == "Resolved Origin")
+
+    // Open the query input (repro step 3) - this hands back exactly the
+    // placeholder object the builder holds as its origin.
+    tappedSearch.onNext(())
+    guard case .showSearch(let placeholderEndpoint, _, _) = nextEvents.values.last, let placeholder = placeholderEndpoint else {
+      Issue.record("Expected a .showSearch event with a placeholder origin")
+      return
+    }
+    #expect(placeholder.title == Loc.CurrentLocation)
+
+    // Swap, pick a new origin, and press Route (repro steps 4-6): the
+    // delegate pushes both changedSearch events back-to-back, origin first.
+    let newOrigin = TKNamedCoordinate(latitude: -33.8398, longitude: 151.2095, name: "New Origin")
+    let countBeforeRoute = titles.values.count
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .origin, location: newOrigin))
+    changedSearch.onNext(TKUIRoutingResultsViewModel.SearchResult(mode: .destination, location: placeholder))
+
+    // Both changedSearch events land synchronously here, before pop() would
+    // even run in the real delegate - no async gap for a stale value to persist.
+    #expect(titles.values.last?.origin == "New Origin")
+    #expect(titles.values.last?.destination == Loc.CurrentLocation, "Destination must show the placeholder, not the stale dest1 title")
+
+    let afterRoute = try await Self.waitForCount(titles, greaterThan: countBeforeRoute)
+    #expect(afterRoute.last?.origin == "New Origin")
+    #expect(afterRoute.last?.destination == Loc.CurrentLocation)
+
+    // Resolve the new destination too.
+    let requestCountBeforeRoute = requests.values.count
+    let updatedRequests = try await Self.waitForCount(requests, greaterThan: requestCountBeforeRoute)
+    guard let newRequest = updatedRequests.last else {
+      Issue.record("Expected a new request after the swap")
+      return
+    }
+    newRequest.toLocation = TKNamedCoordinate(latitude: sydneyCBD.latitude, longitude: sydneyCBD.longitude, name: "Resolved Destination")
+    let countBeforeDestinationResolution = titles.values.count
+    viewModel.locationsResolved()
+    let finalTitles = try await Self.waitForCount(titles, greaterThan: countBeforeDestinationResolution)
+    #expect(finalTitles.last?.destination == "Resolved Destination")
+  }
+
 }
 
 private struct StubGeocodeError: Error {}
