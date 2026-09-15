@@ -57,9 +57,20 @@ extension TKUIRoutingResultsViewModel {
     init(destination: MKAnnotation, origin: MKAnnotation? = nil) {
       self.mode = origin == nil ? .origin : .destination
       self.select = .destination
-      self.origin = origin.map(TKNamedCoordinate.namedCoordinate(for:))
-      self.destination = TKNamedCoordinate.namedCoordinate(for: destination)
+      self.origin = origin.map(Self.endpoint(for:))
+      self.destination = Self.endpoint(for: destination)
       self.time = TKUIRoutingResultsCard.config.timePickerConfig.allowsASAP ? .leaveASAP : nil
+    }
+
+    /// Keeps the placeholder's "Current Location" name, which the generic conversion
+    /// drops; its coordinate stays invalid so `TKUIResultsFetcher` still resolves it.
+    @MainActor
+    static func endpoint(for annotation: MKAnnotation) -> TKNamedCoordinate {
+      if annotation === TKLocationManager.shared.currentLocation {
+        return TKNamedCoordinate(name: Loc.CurrentLocation, address: nil)
+      } else {
+        return TKNamedCoordinate.namedCoordinate(for: annotation)
+      }
     }
     
     @MainActor
@@ -84,7 +95,53 @@ extension TKUIRoutingResultsViewModel {
 // MARK: - Builder
 
 extension TKUIRoutingResultsViewModel {
-  
+
+  /// Same criterion as `TKUIResultsFetcher` for when to localise the user; a nil
+  /// origin counts too, as `generateRequest()` substitutes the placeholder.
+  static func isUnresolvedCurrentLocation(_ endpoint: TKNamedCoordinate?, allowsNil: Bool) -> Bool {
+    guard let endpoint else { return allowsNil }
+    return !endpoint.coordinate.isValid
+  }
+
+  static func title(for endpoint: TKNamedCoordinate?, allowsNil: Bool) -> String? {
+    isUnresolvedCurrentLocation(endpoint, allowsNil: allowsNil) ? Loc.CurrentLocation : endpoint?.title
+  }
+
+  /// The builder never learns the resolved current location, only the request
+  /// does, so the title picks it up from there on `locationsResolved()`.
+  static func endpointTitle(
+    builderChanges: Observable<(RouteBuilder, id: String)>,
+    locationsResolved: Observable<Void>,
+    builderChangedWithID: Observable<(RouteBuilder, id: String)>,
+    requestToShow: Observable<(request: TripRequest, builder: RouteBuilder)>,
+    endpoint: @escaping (RouteBuilder) -> TKNamedCoordinate?,
+    resolvedLocation: @escaping (TripRequest) -> TKNamedCoordinate?,
+    allowsNil: Bool
+  ) -> Observable<String?> {
+    let fromBuilder = builderChanges
+      .map { Self.title(for: endpoint($0.0), allowsNil: allowsNil) }
+      // Builder rebuilds (e.g., a new time) re-emit; don't flip a resolved title back
+      .distinctUntilChanged()
+
+    // The fetcher sees a resolved request before our own snapshot does, so wait for
+    // the matching request on the shared stream rather than trusting that snapshot.
+    let fromResolution = locationsResolved
+      .withLatestFrom(builderChangedWithID)
+      .filter { builder, _ in Self.isUnresolvedCurrentLocation(endpoint(builder), allowsNil: allowsNil) }
+      .flatMapLatest { builder, _ -> Observable<String?> in
+        requestToShow
+          .filter { generated in
+            builder.origin === generated.builder.origin && builder.destination === generated.builder.destination
+          }
+          .take(1)
+          .flatMapLatest { generated in
+            RouteBuilder.needAddress(resolvedLocation(generated.request)).map { $0 ?? Loc.CurrentLocation }
+          }
+      }
+
+    return Observable.merge(fromBuilder, fromResolution)
+  }
+
   static func buildId(for builder: RouteBuilder, force: Bool = false) -> String {
     guard !force else { return UUID().uuidString }
     var id: String
@@ -146,9 +203,9 @@ extension TKUIRoutingResultsViewModel {
         
         if let search = change.search {
           if search.mode == .origin {
-            updated.origin = TKNamedCoordinate.namedCoordinate(for: search.location)
+            updated.origin = RouteBuilder.endpoint(for: search.location)
           } else {
-            updated.destination = TKNamedCoordinate.namedCoordinate(for: search.location)
+            updated.destination = RouteBuilder.endpoint(for: search.location)
           }
           updated.select = .none
         }

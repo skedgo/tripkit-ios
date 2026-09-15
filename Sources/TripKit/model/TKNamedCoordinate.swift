@@ -57,10 +57,24 @@ open class TKNamedCoordinate : NSObject, NSSecureCoding, Codable, TKClusterable 
 
   private var reverseGeocodingTask: Task<Void, Never>?
 
+#if DEBUG
+  /// Test-only seam to stub reverse geocoding instead of hitting the real `CLGeocoder`.
+  /// Reset this to `nil` in test teardown.
+  public static var reverseGeocodeOverride: ((CLLocation) async throws -> CLPlacemark?)? = nil
+#endif
+
   @MainActor
   public func needsAddress(includeName: Bool) async throws {
     guard _address == nil else { return }
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+#if DEBUG
+    if let override = TKNamedCoordinate.reverseGeocodeOverride {
+      if let best = try await override(location) {
+        assignPlacemark(best, includeName: includeName)
+      }
+      return
+    }
+#endif
     let geocoder = CLGeocoder()
     if let best = try await geocoder.reverseGeocodeLocation(location).first {
       assignPlacemark(best, includeName: includeName)
