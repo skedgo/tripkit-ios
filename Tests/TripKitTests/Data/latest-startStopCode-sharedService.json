@@ -1,0 +1,34 @@
+{
+  "realTimeStamp": 1789018352,
+  "lastMinute": false,
+  "last5Minutes": false,
+  "last15Minutes": true,
+  "services": [
+    {
+      "serviceTripID": "47197-10470:1000",
+      "startStopCode": "2000459",
+      "startTime": 1789019107,
+      "endStopCode": "2000450",
+      "endTime": 1789019644,
+      "realtimeVehicle": {
+        "lastUpdate": 1789018892,
+        "id": "47197-10470:1000",
+        "label": "X57-X58",
+        "location": { "lat": -33.87824, "lng": 151.20558, "bearing": 8 }
+      }
+    },
+    {
+      "serviceTripID": "47197-10470:1000",
+      "startStopCode": "2000457",
+      "startTime": 1789019222,
+      "endStopCode": "2000450",
+      "endTime": 1789019644,
+      "realtimeVehicle": {
+        "lastUpdate": 1789018892,
+        "id": "47197-10470:1000",
+        "label": "X57-X58",
+        "location": { "lat": -33.87824, "lng": 151.20558, "bearing": 8 }
+      }
+    }
+  ]
+}
