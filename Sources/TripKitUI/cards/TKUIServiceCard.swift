@@ -238,6 +238,11 @@ public struct TKUIServiceContent: View {
           .background(Color(.tkBackgroundNotClear))
           .cornerRadius(22)
         }
+      } else if let error = model.error {
+        TKUIServiceErrorView(error: error) {
+          Task { await model.populate() }
+        }
+
       } else {
         HStack {
           ProgressView()
@@ -261,8 +266,36 @@ public struct TKUIServiceContent: View {
       }
     }
     .task {
-      try? await model.populate()
+      await model.populate()
     }
+  }
+}
+
+private struct TKUIServiceErrorView: View {
+  let error: Error
+  let retry: () -> Void
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 8) {
+      Text(verbatim: Loc.Error)
+        .font(.headline)
+
+      Text(verbatim: error.localizedDescription)
+        .font(.subheadline)
+        .foregroundStyle(.secondary)
+        .fixedSize(horizontal: false, vertical: true)
+
+      Button(action: retry) {
+        Text(verbatim: Loc.Retry)
+      }
+      .buttonStyle(.bordered)
+      .tint(Color(.tkAppTintColor))
+      .padding(.top, 4)
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding()
+    .background(Color(.tkBackgroundNotClear))
+    .cornerRadius(22)
   }
 }
 
@@ -378,6 +411,15 @@ private struct TKUIServiceItemView: View {
 }
 
 #if DEBUG
+@available(iOS 17.0, *)
+#Preview("Failed to load") {
+  ScrollView {
+    TKUIServiceErrorView(error: NSError(code: 57123, message: "Could not find region for service '1234'.")) { }
+      .padding()
+  }
+  .background(Color(.tkBackgroundGrouped))
+}
+
 @available(iOS 18.0, *)
 #Preview {
   @Previewable @State var visit: StopVisits?
