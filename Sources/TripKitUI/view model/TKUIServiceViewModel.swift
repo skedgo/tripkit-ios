@@ -56,9 +56,22 @@ class TKUIServiceViewModel: ObservableObject {
   
   @Published var next: Next? = nil
   
+  /// User-relevant error, e.g., if the service content couldn't get downloaded.
+  /// Call `populate()` again to retry.
+  @Published private(set) var error: Error?
+  
   private var realTimeUpdateTask: Task<Void, Never>?
   
-  func populate() async throws {
+  func populate() async {
+    error = nil
+    do {
+      try await loadContent()
+    } catch {
+      self.error = error
+    }
+  }
+  
+  private func loadContent() async throws {
     // Immediately populate header
     let (embarkation, disembarkation) = try Self.getEmbarkation(for: dataInput)
     header = TKUIDepartureCellContent.build(embarkation: embarkation, disembarkation: disembarkation)
@@ -123,32 +136,33 @@ extension TKUIServiceViewModel {
     }
   }
   
-  @discardableResult
-  private static func populateService(for input: DataInput) async throws -> Bool {
+  private static func populateService(for input: DataInput) async throws {
     switch input {
     case .visits(let embarkation, _):
       if embarkation.service.hasServiceData {
-        return true
+        return
       } else if let region = embarkation.service.region {
-        let success = try await TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.departure ?? Date(), region: region)
-        return success
+        guard try await TKBuzzInfoProvider.downloadContent(of: embarkation.service, embarkationDate: embarkation.departure ?? Date(), region: region) else {
+          throw NSError(code: 57125, message: "Could not download details for service '\(embarkation.service.code)'.")
+        }
       } else {
-        return false
+        throw NSError(code: 57123, message: "Could not find region for service '\(embarkation.service.code)'.")
       }
       
     case .segment(let segment):
       guard let service = segment.service else {
         assertionFailure("Used an incompatible segment")
-        return false
+        throw NSError(code: 57124, message: "Could not find service for segment '\(segment.templateHashCode)'.")
       }
       
       if service.hasServiceData {
-        return true
+        return
       } else if let region = segment.startRegion {
-        let success = try await TKBuzzInfoProvider.downloadContent(of: service, embarkationDate: segment.departureTime, region: region)
-        return success
+        guard try await TKBuzzInfoProvider.downloadContent(of: service, embarkationDate: segment.departureTime, region: region) else {
+          throw NSError(code: 57125, message: "Could not download details for service '\(service.code)'.")
+        }
       } else {
-        return false
+        throw NSError(code: 57123, message: "Could not find region for service '\(service.code)'.")
       }
     }
   }
