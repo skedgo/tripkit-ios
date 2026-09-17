@@ -19,6 +19,8 @@
 		3A9A4AC12978F3360084168A /* GeoMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A4AC02978F3360084168A /* GeoMonitor */; };
 		3AB6C62B1D1CD0060089F687 /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3AD3BA9327422A4C00E33015 /* TGCardViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 3AD3BA9227422A4C00E33015 /* TGCardViewController */; };
+		3A0E11A02E68A00100000001 /* TripKitAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */; };
+		3A0E11A02E68A00100000002 /* TripKitAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AEC06912D2E3F45003C9A0B /* TripKitAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC06422D2E3E7D003C9A0B /* TripKitAPI.framework */; };
 		3AEC06962D2E3F7A003C9A0B /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
 		3AEC069B2D2E3F7F003C9A0B /* TripKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB6C6201D1CD0060089F687 /* TripKit.framework */; };
@@ -83,6 +85,13 @@
 			remoteGlobalIDString = 3A6DF083202C8DA30084CB2C;
 			remoteInfo = "TripKitUI-iOS";
 		};
+		3A0E11A02E68A00100000004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3AEC06412D2E3E7D003C9A0B;
+			remoteInfo = TripKitAPI;
+		};
 		3AEC06932D2E3F45003C9A0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AB6C6171D1CD0060089F687 /* Project object */;
@@ -130,6 +139,7 @@
 				3A1777AD232C17560093D495 /* TripKit.framework in Embed Frameworks */,
 				3A1777B0232C17570093D495 /* TripKitInterApp.framework in Embed Frameworks */,
 				3A1777B2232C17590093D495 /* TripKitUI.framework in Embed Frameworks */,
+				3A0E11A02E68A00100000002 /* TripKitAPI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +256,7 @@
 				3A1777AC232C17560093D495 /* TripKit.framework in Frameworks */,
 				3A1777B1232C17590093D495 /* TripKitUI.framework in Frameworks */,
 				3A1777AF232C17570093D495 /* TripKitInterApp.framework in Frameworks */,
+				3A0E11A02E68A00100000001 /* TripKitAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +492,7 @@
 				3A1777A7232BF3090093D495 /* PBXTargetDependency */,
 				3ACF47B5229EF0000096860D /* PBXTargetDependency */,
 				3ACF47B7229EF0000096860D /* PBXTargetDependency */,
+				3A0E11A02E68A00100000003 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3A577CBD2E1B9B5B00291841 /* TripKitUIExample */,
@@ -729,6 +741,11 @@
 			isa = PBXTargetDependency;
 			target = 3A6DF083202C8DA30084CB2C /* TripKitUI */;
 			targetProxy = 3ACF47B6229EF0000096860D /* PBXContainerItemProxy */;
+		};
+		3A0E11A02E68A00100000003 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3AEC06412D2E3E7D003C9A0B /* TripKitAPI */;
+			targetProxy = 3A0E11A02E68A00100000004 /* PBXContainerItemProxy */;
 		};
 		3AEC06942D2E3F45003C9A0B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
