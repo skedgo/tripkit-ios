@@ -37,6 +37,24 @@ public class TKTripGoGeocoder: NSObject {
   private var onCompletion: (String, (Result<[TKAutocompletionResult], Error>) -> Void)? = nil
 }
 
+extension TKTripGoGeocoder {
+  /// Widest diagonal of the visible map for which its centre is still a useful search bias.
+  ///
+  /// When we don't have the user's location the map shows the whole country, which puts its
+  /// centre hundreds of kilometres from them — in Australia, in the outback — and biasing to
+  /// that pushes the results they're after down the list.
+  private static let maxBiasDiagonal: CLLocationDistance = 200_000
+
+  /// The `near` parameter for a visible map region, or `nil` if the map is zoomed out too far
+  /// for its centre to be meaningful.
+  static func biasParameter(for region: MKCoordinateRegion) -> String? {
+    let center = region.center
+    guard center.isValid else { return nil }
+    guard let diagonal = region.topLeft.distance(from: region.bottomRight), diagonal <= maxBiasDiagonal else { return nil }
+    return "\(center.latitude),\(center.longitude)"
+  }
+}
+
 extension TKTripGoGeocoder: TKGeocoding {
   public func geocode(_ input: String, near mapRect: MKMapRect, completion: @escaping (Result<[TKNamedCoordinate], Error>) -> Void) {
     var paras: [String: Any] = [
@@ -46,9 +64,9 @@ extension TKTripGoGeocoder: TKGeocoding {
     ]
     
     let coordinateRegion: MKCoordinateRegion?
-    if !mapRect.isNull || !MKMapRectEqualToRect(mapRect, .world) {
+    if !mapRect.isNull {
       let region = MKCoordinateRegion(mapRect)
-      paras["near"] = region.center.isValid ? "\(region.center.latitude),\(region.center.longitude)" : nil
+      paras["near"] = Self.biasParameter(for: region)
       coordinateRegion = region
     } else {
       coordinateRegion = nil
@@ -93,7 +111,7 @@ extension TKTripGoGeocoder: TKAutocompleting {
     ]
     
     let coordinateRegion = MKCoordinateRegion(mapRect)
-    paras["near"] = coordinateRegion.center.isValid ? "\(coordinateRegion.center.latitude),\(coordinateRegion.center.longitude)" : nil
+    paras["near"] = Self.biasParameter(for: coordinateRegion)
 
     let region = TKRegionManager.shared.region(containing: coordinateRegion)
     let modes = TKSettings.enabledModeIdentifiers(region.modeIdentifiers)
