@@ -45,7 +45,9 @@ class TKUIServiceMapManager: TKUIMapManager {
     viewModel.$realTimeUpdate
       .sink { [weak self] update in
         switch update {
-        case .updated: self?.updateDynamicAnnotations(animated: true)
+        case .updated:
+          self?.updateDynamicAnnotations(animated: true)
+          self?.updateSemaphores()
         case .idle, .updating: break // nothing to do
         @unknown default: assertionFailure("Please update TripKit dependency.")
         }
@@ -59,12 +61,11 @@ class TKUIServiceMapManager: TKUIMapManager {
     super.cleanUp(mapView, animated: animated)
   }
   
-  override func updateDynamicAnnotations(animated: Bool) {
-    super.updateDynamicAnnotations(animated: animated)
-    
-    // Also trigger KVO for embarkations
-    (embarkation as? TKUIServiceViewModel.ServiceEmbarkation)?.triggerRealTimeKVO()
-    (disembarkation as? TKUIServiceViewModel.ServiceEmbarkation)?.triggerRealTimeKVO()
+  /// `TKUISemaphoreView` redraws its time when notified about its annotation
+  private func updateSemaphores() {
+    for semaphore in [embarkation, disembarkation].compactMap(\.self) {
+      NotificationCenter.default.post(name: .TKUIUpdatedRealTimeData, object: semaphore)
+    }
   }
   
   private func select(_ annotation: TKUIIdentifiableAnnotation) {

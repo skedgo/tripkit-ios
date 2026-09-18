@@ -89,11 +89,11 @@ class TKUIServiceViewModel: ObservableObject {
       while !Task.isCancelled {
         guard let self, let embarkation, let region = embarkation.stop?.region else { return }
         self.realTimeUpdate = .updating
-        let _ = try? await TKRealTimeFetcher.update([embarkation.service], in: region)
+        let updated = (try? await TKRealTimeFetcher.update([embarkation.service], in: region)) != nil
         
         self.rebuild(embarkation: embarkation, disembarkation: disembarkation)
         
-        self.realTimeUpdate = .idle
+        self.realTimeUpdate = updated ? .updated(()) : .idle
         try? await Task.sleep(for: .seconds(10))
       }
     }
