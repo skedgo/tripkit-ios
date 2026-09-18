@@ -89,6 +89,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="actionButton" destination="efv-Cp-q6O" id="Jw6-I5-PHQ"/>
+                <outlet property="segmentBelowTitleConstraint" destination="vcV-gE-m03" id="Wd7-pK-3sN"/>
                 <outlet property="segmentToActionConstraint" destination="Gej-ex-mY7" id="frG-7w-ODn"/>
                 <outlet property="segmentTrailingConstraint" destination="i3x-g7-jRq" id="tcK-2H-qVJ"/>
                 <outlet property="segmentView" destination="y8N-RR-3eg" id="ttV-Do-af5"/>
