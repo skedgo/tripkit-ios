@@ -33,7 +33,9 @@ public class TKUITripCell: UITableViewCell {
   /// from the view while deactivated.
   @IBOutlet var segmentBelowTitleConstraint: NSLayoutConstraint!
   
-  private lazy var segmentAtTopConstraint = segmentView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
+  /// Mirrors the xib's 4pt inset below the segments, rather than using the top
+  /// layout margin, which only makes sense with the title above.
+  private lazy var segmentAtTopConstraint = segmentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4)
   
   private(set) var disposeBag = DisposeBag()
   
