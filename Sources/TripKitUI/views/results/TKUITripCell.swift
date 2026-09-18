@@ -28,6 +28,13 @@ public class TKUITripCell: UITableViewCell {
   @IBOutlet var segmentToActionConstraint: NSLayoutConstraint!
   @IBOutlet var actionButton: UIButton!
   
+  /// Swapped for `segmentAtTopConstraint` when the trip hides its times, so the
+  /// hidden title stack doesn't leave its gap behind. Strong, as it's removed
+  /// from the view while deactivated.
+  @IBOutlet var segmentBelowTitleConstraint: NSLayoutConstraint!
+  
+  private lazy var segmentAtTopConstraint = segmentView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
+  
   private(set) var disposeBag = DisposeBag()
   
   private var formatter: Formatter?
@@ -89,6 +96,10 @@ public class TKUITripCell: UITableViewCell {
     subtitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
     subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     subtitleLabel.textColor = .tkLabelSecondary
+    
+    titleStackView.isHidden = model.hideExactTimes
+    NSLayoutConstraint.deactivate([model.hideExactTimes ? segmentBelowTitleConstraint : segmentAtTopConstraint])
+    NSLayoutConstraint.activate([model.hideExactTimes ? segmentAtTopConstraint : segmentBelowTitleConstraint])
     
     segmentView.isCanceled = model.isCancelled
     segmentView.configure(model.segments)

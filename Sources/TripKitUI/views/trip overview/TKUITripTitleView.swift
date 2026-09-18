@@ -75,6 +75,10 @@ extension TKUITripTitleView {
     timeSubtitleLabel.text = model.secondaryTimeString
     timeSubtitleLabel.textColor = .tkLabelSecondary
 
+    // Hide rather than just empty it, so the enclosing stack also drops the
+    // spacing it'd otherwise keep above the segments.
+    timeStack.isHidden = model.hideExactTimes
+    
     segmentView.isCanceled = model.isCancelled
     segmentView.configure(model.segments)
     

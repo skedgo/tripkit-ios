@@ -65,6 +65,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="actionButton" destination="Xwk-Vd-RlZ" id="pex-Km-Z0T"/>
+                <outlet property="segmentsBelowTimesConstraint" destination="fsq-kI-DIe" id="Qm3-hT-x7b"/>
                 <outlet property="segmentsView" destination="Gkn-IV-uTT" id="Luj-iF-mF1"/>
                 <outlet property="subtitleLabel" destination="q1V-wN-NwE" id="0dK-AM-oM0"/>
                 <outlet property="titleLabel" destination="jdz-Jn-Qbi" id="n6d-0Y-1jl"/>
