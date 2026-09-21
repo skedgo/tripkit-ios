@@ -136,10 +136,6 @@ extension TKUIServiceViewModel {
       self.action = action
     }
     
-    func triggerRealTimeKVO() {
-      visit.triggerRealTimeKVO()
-    }
-    
     // MARK: - MKAnnotation
     
     var coordinate: CLLocationCoordinate2D { return visit.coordinate }
