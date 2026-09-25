@@ -22,6 +22,13 @@ class TKUITripModeByModeHeader: UIView {
   @IBOutlet var segmentsView: TKUITripSegmentsView!
   @IBOutlet var actionButton: UIButton!
   
+  /// Swapped for `segmentsAtTopConstraint` when the trip hides its times, as
+  /// the labels aren't in a stack view that would collapse the gap for us.
+  /// Strong, as it's removed from the view while deactivated.
+  @IBOutlet var segmentsBelowTimesConstraint: NSLayoutConstraint!
+  
+  private lazy var segmentsAtTopConstraint = segmentsView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8)
+  
   var tapHandler: (Int) -> Void = { _ in }
   var actionHandler: () -> Void = {}
   
@@ -74,6 +81,12 @@ class TKUITripModeByModeHeader: UIView {
     let cellModel = TKUITripCell.Model(trip, allowFading: false)
     titleLabel.text = cellModel.primaryTimeString
     subtitleLabel.text = cellModel.secondaryTimeString
+    
+    let hideTimes = cellModel.hideExactTimes
+    titleLabel.isHidden = hideTimes
+    subtitleLabel.isHidden = hideTimes
+    NSLayoutConstraint.deactivate([hideTimes ? segmentsBelowTimesConstraint : segmentsAtTopConstraint])
+    NSLayoutConstraint.activate([hideTimes ? segmentsAtTopConstraint : segmentsBelowTimesConstraint])
     
     if let action = cellModel.primaryAction {
       actionButton.setTitle(action, for: .normal)
