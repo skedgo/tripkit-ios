@@ -1,0 +1,232 @@
+{
+  "realtimeVehicle": {
+    "location": {
+      "lat": -33.81686,
+      "lng": 151.2433,
+      "bearing": 339
+    },
+    "occupancy": "MANY_SEATS_AVAILABLE",
+    "id": "2146945",
+    "components": [
+      [
+        {
+          "wifi": false,
+          "occupancy": "MANY_SEATS_AVAILABLE",
+          "wheelchairSeats": 1,
+          "airConditioned": true,
+          "model": "Custom Denning~ELEMENT2PANTOGRAPH~Custom Bus~ELEMENT2PANTOGRAPH",
+          "wheelchairAccessible": true
+        }
+      ]
+    ],
+    "label": "8955",
+    "lastUpdate": 1789684871,
+    "wifi": false
+  },
+  "type": "bus",
+  "shapes": [
+    {
+      "encodedWaypoints": "lmhmEmwjz[|@mCb@u@R]Ze@b@a@p@g@^SXQv@e@x@_@x@]~@g@NLVTPVr@fAz@nAvB`DJ\\n@e@bAy@hBuAsBqEcBiDIBKCEK?KDKmAkCgAwBQ_@pB}AbDgCnAeAp@e@|@gHf@wDJ{@t@_GNORUlAc@`Ae@T[HIRSVWFE\\SRMTI^Ob@G^G`@GXAP@^?z@FVD`@JPDXBP@`@DX@b@AXC`@J^Np@Nn@Tr@VNDTJRJLJHLPRzC~D^~@HTFCH?FD@J\\\\n@^n@^l@\\p@Z^R`A^`A^bAZp@Tt@PdAVbANtAf@JDNJNDF@NDF?J?N?JCHAJEHENILIJMHGJSVc@Ja@Hm@TgANs@Rq@Rq@Rs@To@FOFq@@W?MCMEUEcABe@B[D[HK`E_E`A{DzAaGPUPKLEJEJCLAJ?J?L@JDPFJHXTHLNX@JDL@L@R?VANALELMXEHIFOLSFQFMBS@SAK?MCWIW?S?Q@K@QDQDOLaAzDaE|DILEZCZCd@DbADT@L@d@In@GNSp@Ur@Sn@Qr@Qr@SdAKn@M`@Ub@KRGFOJKHOJIDMDG@MDMAK?I?MEGAOEQIIGsAe@gASeAUs@Sq@QcA_@aA]aAa@a@Qm@[o@_@q@[m@a@_@YGFI@EIG]c@iA{C_EQSKMMIQOUIOEq@Uq@Wq@Qa@K_@M[@c@@Y?a@EOAWCQCc@MWEYCa@A_@AQ?Y@a@D_@Da@Ja@LMD]P[REDYVSPIJUZaAd@kA`@UVMNw@~Fa@xCCVMbA_AdHmA~@s@j@IFyC~BoB|AxAvCnAjCHCH@DH@JEH~ApDtBlEaDdCMHm@f@K]wBaD}@qAq@gASUUSQM}@d@w@\\{@`@y@`@WRa@Rm@f@e@b@EZ??",
+      "serviceColor": {
+        "red": 0,
+        "green": 181,
+        "blue": 239
+      },
+      "serviceDirection": "Manly via North Head",
+      "stops": [
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209579",
+          "bearing": 166,
+          "departure": 1789684920,
+          "lat": -33.79943,
+          "lng": 151.28456,
+          "pickUpOnly": true,
+          "name": "Manly Wharf"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209592",
+          "bearing": 69,
+          "arrival": 1789685100,
+          "departure": 1789685100,
+          "lat": -33.80411,
+          "lng": 151.28566,
+          "pickUpOnly": false,
+          "name": "Stuart St opp Cove Ave"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209589",
+          "bearing": 134,
+          "arrival": 1789685160,
+          "departure": 1789685160,
+          "lat": -33.80268,
+          "lng": 151.28935,
+          "pickUpOnly": false,
+          "name": "Addison Rd at Darley Rd"
+        },
+        {
+          "dropOffOnly": false,
+          "code": "209590",
+          "bearing": 105,
+          "arrival": 1789685161,
+          "departure": 1789685161,
+          "lat": -33.80437,
+          "lng": 151.29109,
+          "name": "Darley Rd opp Marshall St",
+          "pickUpOnly": false
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209570",
+          "bearing": 141,
+          "arrival": 1789685220,
+          "departure": 1789685220,
+          "lat": -33.8052,
+          "lng": 151.29403,
+          "pickUpOnly": false,
+          "name": "Manly Hospital, Darley Rd"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209587",
+          "bearing": 209,
+          "arrival": 1789685280,
+          "departure": 1789685280,
+          "lat": -33.80857,
+          "lng": 151.29669,
+          "pickUpOnly": false,
+          "name": "North Head Scenic Rd opp Collins Beach Rd"
+        },
+        {
+          "dropOffOnly": false,
+          "code": "2095100",
+          "bearing": 151,
+          "arrival": 1789685340,
+          "departure": 1789685340,
+          "lat": -33.81219,
+          "lng": 151.29466,
+          "name": "North Head Scenic Dr opp Quarantine Station",
+          "pickUpOnly": false
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209583",
+          "bearing": 302,
+          "arrival": 1789685580,
+          "departure": 1789685580,
+          "lat": -33.82113,
+          "lng": 151.29957,
+          "pickUpOnly": false,
+          "name": "Fairfax walk, North Head Scenic Dr"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209577",
+          "bearing": 353,
+          "arrival": 1789685700,
+          "departure": 1789685700,
+          "lat": -33.8184,
+          "lng": 151.29502,
+          "pickUpOnly": false,
+          "name": "North Head Scenic Dr opp North Head Sanctuary"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209515",
+          "bearing": 354,
+          "arrival": 1789685880,
+          "departure": 1789685880,
+          "lat": -33.81226,
+          "lng": 151.29426,
+          "pickUpOnly": false,
+          "name": "Quarantine Station, North Head Scenic Dr"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209584",
+          "bearing": 293,
+          "arrival": 1789686060,
+          "departure": 1789686060,
+          "lat": -33.80522,
+          "lng": 151.29343,
+          "pickUpOnly": false,
+          "name": "Darley Rd opp Manly Hospital"
+        },
+        {
+          "dropOffOnly": false,
+          "code": "209591",
+          "bearing": 283,
+          "arrival": 1789686120,
+          "departure": 1789686120,
+          "lat": -33.80405,
+          "lng": 151.29064,
+          "name": "Darley Rd opp Vivian St",
+          "pickUpOnly": false
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209582",
+          "bearing": 261,
+          "arrival": 1789686180,
+          "departure": 1789686180,
+          "lat": -33.8035,
+          "lng": 151.28822,
+          "pickUpOnly": false,
+          "name": "Addison Rd at Osborne Rd"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209585",
+          "bearing": 6,
+          "arrival": 1789686240,
+          "departure": 1789686240,
+          "lat": -33.80394,
+          "lng": 151.28533,
+          "pickUpOnly": false,
+          "name": "Stuart St at Cove Ave"
+        },
+        {
+          "wheelchairAccessible": true,
+          "dropOffOnly": false,
+          "code": "209586",
+          "arrival": 1789686360,
+          "lat": -33.80013,
+          "lng": 151.28573,
+          "pickUpOnly": false,
+          "name": "Manly Wharf Hotel, East Esplanade"
+        }
+      ],
+      "operatorID": "au-nsw-keolis-2508",
+      "travelled": true,
+      "operator": "Keolis Downer Northern Beaches",
+      "serviceTripID": "2146945",
+      "serviceName": "Manly to North Head (Loop Service)",
+      "routeID": "2508_161",
+      "serviceNumber": "161",
+      "wheelchairAccessible": true
+    }
+  ],
+  "modeInfo": {
+    "alt": "bus",
+    "identifier": "pt_pub_bus",
+    "localIcon": "bus",
+    "color": {
+      "red": 1,
+      "green": 158,
+      "blue": 212
+    }
+  }
+}

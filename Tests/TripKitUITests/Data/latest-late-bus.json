@@ -1,0 +1,127 @@
+{
+  "last15Minutes": true,
+  "realTimeStamp": 1789684800,
+  "lastMinute": false,
+  "last5Minutes": true,
+  "services": [
+    {
+      "stops": [
+        {
+          "arrival": 1789685177,
+          "stopCode": "209579",
+          "departure": 1789685177,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685357,
+          "stopCode": "209592",
+          "departure": 1789685357,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685417,
+          "stopCode": "209589",
+          "departure": 1789685417,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685418,
+          "stopCode": "209590",
+          "departure": 1789685418,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685477,
+          "stopCode": "209570",
+          "departure": 1789685477,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685537,
+          "stopCode": "209587",
+          "departure": 1789685537,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685597,
+          "stopCode": "2095100",
+          "departure": 1789685597,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685837,
+          "stopCode": "209583",
+          "departure": 1789685837,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789685957,
+          "stopCode": "209577",
+          "departure": 1789685957,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789686137,
+          "stopCode": "209515",
+          "departure": 1789686137,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789686317,
+          "stopCode": "209584",
+          "departure": 1789686317,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789686377,
+          "stopCode": "209591",
+          "departure": 1789686377,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789686437,
+          "stopCode": "209582",
+          "departure": 1789686437,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789686497,
+          "stopCode": "209585",
+          "departure": 1789686497,
+          "lastUpdate": 1789684991
+        },
+        {
+          "arrival": 1789686617,
+          "stopCode": "209586",
+          "departure": 1789686617,
+          "lastUpdate": 1789684991
+        }
+      ],
+      "serviceTripID": "2146945",
+      "realtimeVehicle": {
+        "location": {
+          "lat": -33.81067,
+          "lng": 151.2446,
+          "bearing": 44
+        },
+        "occupancy": "MANY_SEATS_AVAILABLE",
+        "id": "2146945",
+        "components": [
+          [
+            {
+              "wifi": false,
+              "occupancy": "MANY_SEATS_AVAILABLE",
+              "wheelchairSeats": 1,
+              "airConditioned": true,
+              "model": "Custom Denning~ELEMENT2PANTOGRAPH~Custom Bus~ELEMENT2PANTOGRAPH",
+              "wheelchairAccessible": true
+            }
+          ]
+        ],
+        "label": "8955",
+        "lastUpdate": 1789684991,
+        "wifi": false
+      }
+    }
+  ]
+}
