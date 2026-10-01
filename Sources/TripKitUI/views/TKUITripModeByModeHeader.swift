@@ -66,7 +66,8 @@ class TKUITripModeByModeHeader: UIView {
     segmentIndices = segments.map(\.index)
     
     let selectedHeaderIndex = segmentIndices.firstIndex { $0 >= index } // exact segment might not be available!
-    segmentsView.configure(segments, allowInfoIcons: false)
+    let mainSegment = trip.mainSegment
+    segmentsView.configure(segments, mainSegmentIndex: segments.firstIndex { $0 === mainSegment }, allowInfoIcons: false)
     segmentsView.selectSegment(atIndex: selectedHeaderIndex ?? 0)
     
     let tapper = UITapGestureRecognizer(target: self, action: #selector(segmentTapped))
