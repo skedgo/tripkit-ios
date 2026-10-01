@@ -298,8 +298,9 @@ public class TKUIRoutingResultsCard: TKUITableCard {
     viewModel.selectedItem
       .drive(onNext: { [weak self] in
         guard let indexPath = self?.dataSource.indexPath(of: $0) else { return }
-        if let visible = tableView.indexPathsForVisibleRows, visible.contains(indexPath) { return }
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        // Highlight it, but only scroll to it if it isn't already visible
+        let isVisible = tableView.indexPathsForVisibleRows?.contains(indexPath) == true
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: isVisible ? .none : .top)
       })
       .disposed(by: disposeBag)
 
