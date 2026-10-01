@@ -86,6 +86,24 @@ extension UIColor {
     }
   }()
   
+  /// The background colour for cards. On iOS 26 this is a subtle, opaque
+  /// background rather than just the card's glass, which can be hard to read
+  /// when there's a busy map beneath. Content such as cells should then use
+  /// `.tkBackgroundNotClear` to stand out from it.
+  ///
+  /// On iOS 27+, cards show in a system sheet, which keeps its glass when
+  /// collapsed and fades in `TGCardStyle.expandedBackgroundColor` when raised,
+  /// so this is clear there.
+  @objc public static var tkBackgroundCard: UIColor = {
+    if #available(iOS 27.0, *) {
+      .tkBackground
+    } else if #available(iOS 26.0, *) {
+      .tkBackgroundSecondary
+    } else {
+      .tkBackground
+    }
+  }()
+  
   /// The background colour for separators
   @objc public static var tkBarSecondary: UIColor = .tripgoBarSecondary
   
