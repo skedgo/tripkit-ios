@@ -53,7 +53,7 @@ public protocol TKUITripSegmentDisplayable {
   var tripSegmentTimesAreRealTime: Bool { get }
   
   /// Distance covered by the segment, shown for non-transit segments by
-  /// `TKUITripSegmentsView` in its `.inline` layout
+  /// `TKUITripSegmentsView`
   var tripSegmentDistanceInMetres: Double? { get }
   
   /// Wheelchair accessibility of the segment. If it doesn't apply, just return `.unknown`,
