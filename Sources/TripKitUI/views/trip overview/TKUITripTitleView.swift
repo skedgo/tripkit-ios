@@ -52,7 +52,11 @@ class TKUITripTitleView: UIView {
   }
   
   func update(preferredContentSizeCategory: UIContentSizeCategory) {
-    timeStack.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
+    // Always below each other, as the times can be long, e.g., with a weekday
+    // and time zones, and the duration shouldn't get truncated
+    timeStack.axis = .vertical
+    timeStack.alignment = .leading
+    timeStack.spacing = 2
   }
 
 }
@@ -80,7 +84,7 @@ extension TKUITripTitleView {
     timeStack.isHidden = model.hideExactTimes
     
     segmentView.isCanceled = model.isCancelled
-    segmentView.configure(model.segments)
+    segmentView.configure(model.segments, mainSegmentIndex: model.mainSegmentIndex)
     
     let alpha: CGFloat = model.showFaded ? 0.2 : 1
     timeTitleLabel.alpha = alpha

@@ -52,6 +52,10 @@ public protocol TKUITripSegmentDisplayable {
   
   var tripSegmentTimesAreRealTime: Bool { get }
   
+  /// Distance covered by the segment, shown for non-transit segments by
+  /// `TKUITripSegmentsView` in its `.inline` layout
+  var tripSegmentDistanceInMetres: Double? { get }
+  
   /// Wheelchair accessibility of the segment. If it doesn't apply, just return `.unknown`,
   /// as an `.unknown` value will always be ignored.
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { get }
@@ -73,6 +77,7 @@ public extension TKUITripSegmentDisplayable {
   var tripSegmentFixedDepartureTime: Date? { nil }
   var tripSegmentTimeZone: TimeZone? { nil }
   var tripSegmentTimesAreRealTime: Bool { false }
+  var tripSegmentDistanceInMetres: Double? { nil }
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { .unknown }
   var tripSegmentBicycleAccessibility: TKBicycleAccessibility? { nil }
 }

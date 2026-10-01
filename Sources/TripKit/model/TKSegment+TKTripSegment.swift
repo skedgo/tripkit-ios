@@ -92,6 +92,10 @@ extension TKSegment {
     return timesAreRealTime
   }
   
+  public var tripSegmentDistanceInMetres: Double? {
+    distanceInMetres?.doubleValue
+  }
+  
   public var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility {
     return self.wheelchairAccessibility ?? .unknown
   }
