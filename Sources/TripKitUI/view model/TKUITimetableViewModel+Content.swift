@@ -282,6 +282,13 @@ extension TKUITimetableViewModel {
           .asObservable()
           .map { _ in .updated(()) }
           .startWith(.updating)
+          .catch { error in
+            // Real-time is a background refresh of departures that are
+            // already shown, so don't bother the user, and keep the timer
+            // going to try again on the next cycle.
+            TKLog.info("Real-time update of departures failed: \(error)")
+            return .just(.idle)
+          }
       }
       .startWith(.idle)
   }
