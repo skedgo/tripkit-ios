@@ -94,10 +94,7 @@ class TKUITimetableViewModel: NSObject {
     titles = Driver.just(TKUITimetableViewModel.titles(from: data))
     
     realTimeUpdate = TKUITimetableViewModel.fetchRealtimeUpdates(departures: departures)
-      .asDriver(onErrorRecover: { error in
-        errorPublisher.onNext(error)
-        return .empty()
-      })
+      .asDriver(onErrorDriveWith: .empty())
 
     error = errorPublisher.asSignal { .just($0) }
     
