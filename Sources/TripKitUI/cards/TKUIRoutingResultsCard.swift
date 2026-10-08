@@ -747,7 +747,9 @@ private extension TKUIRoutingResultsCard {
   
   func buildModePicker() -> RoutingModePicker {
     let modePicker = RoutingModePicker()
-    modePicker.containerView = controller?.view
+    // The tooltip is constrained to views in the card, so it needs to be in the
+    // same hierarchy, which is a sheet when the cards are shown in one.
+    modePicker.containerView = controller?.cardOverlayView
     modePicker.backgroundColor = .tkBackgroundGrouped
     
     modePicker.rx_pickedModes
@@ -843,7 +845,7 @@ extension TKUIRoutingResultsCard: TKUIRoutingQueryInputCardDelegate {
 private extension TKUIRoutingResultsCard {
   
   func findOverlay() -> UIView? {
-    if let presentee = controller?.presentedViewController {
+    if let presentee = controller?.presentedOverlayViewController {
       return presentee.view
     } else if #unavailable(iOS 26.0), let sheet = controller?.view.subviews.first(where: { $0 is TKUISheet }) {
       return sheet
@@ -919,7 +921,7 @@ extension TKUIRoutingResultsCard: TKUITimePickerSheetDelegate {
       self.changedTime.onNext(selection)
     }
     
-    if controller?.presentedViewController != nil {
+    if controller?.presentedOverlayViewController != nil {
       controller?.dismiss(animated: true, completion: onDismissal)
     } else {
       // e.g., on iPad where it's displayed as a popover
