@@ -142,6 +142,9 @@ public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
         self?.scrollToEmbarkation(animated: false)
       }
     }
+    rectStorage.didChangeLayout = { [weak self] in
+      self?.updateBottomRoom()
+    }
     
     scrollView.delegate = self
   }
@@ -163,21 +166,73 @@ public class TKUIServiceCard: TGHostingCard<TKUIServiceContent> {
   
   private func scrollToEmbarkation(animated: Bool) {
     guard let scrollView, let rect = rectStorage.infoFrame else { return }
-    scrollView.setContentOffset(rect.origin, animated: animated)
+    
+    // Only scroll vertically, as the content fits horizontally
+    let offset = CGPoint(x: scrollView.contentOffset.x, y: rect.minY)
+    guard updateBottomRoom() else {
+      scrollView.setContentOffset(offset, animated: animated)
+      return
+    }
+    
+    // Wait for the room to get added
+    DispatchQueue.main.async { [weak scrollView] in
+      guard let scrollView else { return }
+      scrollView.layoutIfNeeded()
+      scrollView.setContentOffset(offset, animated: animated)
+    }
+  }
+  
+  /// Adds room below the last stops, so that the embarkation can get to the
+  /// top, even if it's one of the last stops.
+  ///
+  /// - Returns: Whether the room changed
+  @discardableResult
+  private func updateBottomRoom() -> Bool {
+    guard
+      let scrollView,
+      let rect = rectStorage.infoFrame,
+      rectStorage.contentHeight > 0
+    else { return false }
+    
+    let viewportHeight = scrollView.bounds.height - scrollView.adjustedContentInset.top - scrollView.adjustedContentInset.bottom
+    let room = max(0, viewportHeight - (rectStorage.contentHeight - rect.minY)).rounded()
+    guard abs(room - rectStorage.bottomRoom) > 1 else { return false }
+    
+    rectStorage.bottomRoom = room
+    return true
   }
   
 }
 
-private class RectStorage {
+private class RectStorage: ObservableObject {
+  /// Where the info about the embarkation is. Not observed, as it's set from
+  /// the content's layout.
   var infoFrame: CGRect? {
     didSet {
       if oldValue == nil, infoFrame != nil {
         didSetInitialFrame()
+      } else if infoFrame != oldValue {
+        didChangeLayout()
       }
     }
   }
   
+  /// The height of the content, without `bottomRoom`. Not observed, as it's
+  /// set from the content's layout.
+  var contentHeight: CGFloat = 0 {
+    didSet {
+      if abs(contentHeight - oldValue) > 0.5 {
+        didChangeLayout()
+      }
+    }
+  }
+  
+  /// Room below the last stops, so that the embarkation can get to the top of
+  /// the scroll view, even if it's one of the last stops
+  @Published var bottomRoom: CGFloat = 0
+  
   var didSetInitialFrame: () -> Void = { }
+  var didChangeLayout: () -> Void = { }
 }
 
 // MARK: - UIScrollViewDelegate
@@ -199,7 +254,12 @@ extension TKUIServiceCard: UIScrollViewDelegate {
 
 public struct TKUIServiceContent: View {
   @ObservedObject var model: TKUIServiceViewModel
-  fileprivate weak var rectWrapper: RectStorage?
+  fileprivate init(model: TKUIServiceViewModel, rectWrapper: RectStorage = RectStorage()) {
+    self.model = model
+    self.rectWrapper = rectWrapper
+  }
+  
+  @ObservedObject fileprivate var rectWrapper: RectStorage
   
   public var body: some View {
     VStack(alignment: .leading) {
@@ -254,8 +314,15 @@ public struct TKUIServiceContent: View {
     .padding()
     .coordinateSpace(name: "content-stack")
     .onPreferenceChange(RectPreferenceKey.self) { rect in
-      rectWrapper?.infoFrame = rect
+      rectWrapper.infoFrame = rect
     }
+    .background(GeometryReader { proxy in
+      Color.clear.preference(key: ContentHeightPreferenceKey.self, value: proxy.size.height)
+    })
+    .onPreferenceChange(ContentHeightPreferenceKey.self) { height in
+      rectWrapper.contentHeight = height
+    }
+    .padding(.bottom, rectWrapper.bottomRoom)
     .modify { view in
       if #available(iOS 26.0, *) {
         view
@@ -296,6 +363,13 @@ private struct TKUIServiceErrorView: View {
     .padding()
     .background(Color(.tkBackgroundNotClear))
     .cornerRadius(22)
+  }
+}
+
+private struct ContentHeightPreferenceKey: PreferenceKey {
+  static var defaultValue: CGFloat = 0
+  static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+    value = max(value, nextValue())
   }
 }
 
