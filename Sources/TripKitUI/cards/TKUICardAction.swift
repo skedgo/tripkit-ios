@@ -177,9 +177,9 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   /// positive `priority`, such as for sharing or adding a favourite.
   ///
   /// On devices with a vertical bar, such as the iPhone Duo's outer display,
-  /// a card's action row hands its plain actions to the card's `barActions`,
-  /// which show icon-only in that bar, while the other actions stay in the
-  /// row with their colours and titles.
+  /// a card's action row hands its plain actions to the card's
+  /// `verticalBarActions`, which show icon-only in that bar, while the other
+  /// actions stay in the row with their colours and titles.
   public var isPlain: Bool {
     style == .normal && priority <= 0
   }

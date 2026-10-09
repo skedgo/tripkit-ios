@@ -35,7 +35,7 @@ public class TKUISegmentDirectionsCard: TGHostingCard<TKUISegmentDirectionsConte
   private let disposeBag = DisposeBag()
   
   /// Hands plain actions to a vertical bar, see `TKUICardAction.isPlain`
-  private var barActionsBinding: TKUICardBarActionsBinding<TKUISegmentDirectionsCard, TKSegment>?
+  private var verticalBarActionsBinding: TKUICardVerticalBarActionsBinding<TKUISegmentDirectionsCard, TKSegment>?
   
   var tripMapManager: TKUITripMapManager {
     guard let tripper = mapManager as? TKUITripMapManager else { preconditionFailure() }
@@ -60,7 +60,7 @@ public class TKUISegmentDirectionsCard: TGHostingCard<TKUISegmentDirectionsConte
     wrapper.card = self
     
     if let factory = Self.config.actionFactory {
-      barActionsBinding = TKUICardBarActionsBinding(
+      verticalBarActionsBinding = TKUICardVerticalBarActionsBinding(
         actions: TKUICardActionsViewFactory.sort(actions: factory(segment)),
         card: self, model: segment, visibility: actionsVisibility
       )
@@ -97,7 +97,7 @@ public struct TKUISegmentDirectionsContent: View {
   public var body: some View {
     VStack(alignment: .leading) {
       if let factory = TKUISegmentDirectionsCard.config.actionFactory {
-        TKUIBarAwareCardActions(
+        TKUIVerticalBarAwareCardActions(
           actions: TKUICardActionsViewFactory.sort(actions: factory(model.segment)),
           normalStyle: TKUICustomization.shared.cardActionNormalStyle,
           visibility: actionsVisibility

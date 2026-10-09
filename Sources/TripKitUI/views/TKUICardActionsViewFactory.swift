@@ -18,9 +18,9 @@ public enum TKUICardActionsViewFactory {
   
   /// Creates a view that lays out the buttons described by `actions` horizontally
   ///
-  /// The plain actions are also handed to the card's `barActions`. While the
-  /// card controller shows those, e.g., in the vertical bar of an iPhone Duo,
-  /// the view leaves them out, and collapses if that leaves it empty.
+  /// The plain actions are also handed to the card's `verticalBarActions`.
+  /// While the card controller shows those in the vertical bar of an iPhone
+  /// Duo, the view leaves them out, and collapses if that leaves it empty.
   ///
   /// - SeeAlso: `TKUICardAction.isPlain`
   ///
@@ -36,9 +36,9 @@ public enum TKUICardActionsViewFactory {
   public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, padding: Edge.Set = []) -> UIView {
     
     let sorted = sort(actions: actions)
-    let binding = TKUICardBarActionsBinding(actions: sorted, card: card, model: model)
+    let binding = TKUICardVerticalBarActionsBinding(actions: sorted, card: card, model: model)
     let rowView: UIView = UIHostingController(
-      rootView: TKUIBarAwareCardActions(
+      rootView: TKUIVerticalBarAwareCardActions(
         actions: sorted,
         normalStyle: TKUICustomization.shared.cardActionNormalStyle,
         visibility: binding.visibility

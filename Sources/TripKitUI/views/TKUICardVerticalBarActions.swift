@@ -1,5 +1,5 @@
 //
-//  TKUICardBarActions.swift
+//  TKUICardVerticalBarActions.swift
 //  TripKitUI-iOS
 //
 //  Created by Adrian Schönig on 9/10/2026.
@@ -22,12 +22,12 @@ final class TKUICardActionsVisibility: ObservableObject {
   @Published var hidesPlainActions: Bool
 }
 
-/// Hands a card's plain actions to its `barActions`, keeps those up to date as
+/// Hands a card's plain actions to its `verticalBarActions`, keeps those up to date as
 /// the actions change, and tracks whether the card controller shows them.
 ///
 /// - SeeAlso: `TKUICardAction.isPlain`
 @MainActor
-final class TKUICardBarActionsBinding<C, M> where C: TGCard {
+final class TKUICardVerticalBarActionsBinding<C, M> where C: TGCard {
   
   /// - Parameters:
   ///   - actions: All the actions of the row, sorted. Only the plain ones are
@@ -42,8 +42,8 @@ final class TKUICardBarActionsBinding<C, M> where C: TGCard {
     self.visibility = visibility
     
     let plain = actions.filter(\.isPlain)
-    barActions = plain.map { Self.barAction(for: $0, content: $0.content, card: card, model: model) }
-    card.barActions = barActions
+    verticalBarActions = plain.map { Self.verticalBarAction(for: $0, content: $0.content, card: card, model: model) }
+    card.verticalBarActions = verticalBarActions
     
     // Update the bar's button when an action changes, e.g., when toggling a
     // favourite. This fires before `content` changes, so use the new value.
@@ -52,27 +52,27 @@ final class TKUICardBarActionsBinding<C, M> where C: TGCard {
         .dropFirst()
         .sink { [weak self, weak card] content in
           guard let self, let card else { return }
-          barActions[index] = Self.barAction(for: action, content: content, card: card, model: model)
-          card.barActions = barActions
+          verticalBarActions[index] = Self.verticalBarAction(for: action, content: content, card: card, model: model)
+          card.verticalBarActions = verticalBarActions
         }
         .store(in: &cancellables)
     }
     
-    visibility.hidesPlainActions = card.showsBarActions
-    observation = card.observe(\.showsBarActions, options: [.new]) { [weak visibility] card, _ in
+    visibility.hidesPlainActions = card.showsVerticalBarActions
+    observation = card.observe(\.showsVerticalBarActions, options: [.new]) { [weak visibility] card, _ in
       MainActor.assumeIsolated {
-        guard let visibility, visibility.hidesPlainActions != card.showsBarActions else { return }
-        visibility.hidesPlainActions = card.showsBarActions
+        guard let visibility, visibility.hidesPlainActions != card.showsVerticalBarActions else { return }
+        visibility.hidesPlainActions = card.showsVerticalBarActions
       }
     }
   }
   
   let visibility: TKUICardActionsVisibility
-  private var barActions: [UIAction]
+  private var verticalBarActions: [UIAction]
   private var cancellables = Set<AnyCancellable>()
   private var observation: NSKeyValueObservation?
   
-  private static func barAction(for action: TKUICardAction<C, M>, content: TKUICardActionContent, card: C, model: M) -> UIAction {
+  private static func verticalBarAction(for action: TKUICardAction<C, M>, content: TKUICardActionContent, card: C, model: M) -> UIAction {
     var attributes: UIMenuElement.Attributes = []
     if !content.isEnabled || content.isInProgress {
       attributes.insert(.disabled)
@@ -104,7 +104,7 @@ final class TKUICardActionsView: UIView {
   ///   - binding: Kept alive for as long as this view
   ///   - collapsesWithPlainActions: Whether to collapse when the plain actions
   ///     are left out, i.e., when all actions are plain ones
-  init<C, M>(content: UIView, binding: TKUICardBarActionsBinding<C, M>, collapsesWithPlainActions: Bool) {
+  init<C, M>(content: UIView, binding: TKUICardVerticalBarActionsBinding<C, M>, collapsesWithPlainActions: Bool) {
     self.binding = binding
     super.init(frame: content.frame)
     
