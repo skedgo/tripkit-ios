@@ -61,6 +61,22 @@ struct TKUIScrollingCardActions<C, M>: View where C: TGCard {
   }
 }
 
+/// Leaves out the plain actions while the card controller shows them in a
+/// vertical bar instead.
+struct TKUIBarAwareCardActions<C, M>: View where C: TGCard {
+  let actions: [TKUICardAction<C, M>]
+  let normalStyle: TKUICardActionNormalStyle
+  @ObservedObject var visibility: TKUICardActionsVisibility
+  let handler: (TKUICardAction<C, M>) -> Void
+  
+  var body: some View {
+    let shown = visibility.hidesPlainActions ? actions.filter { !$0.isPlain } : actions
+    if !shown.isEmpty {
+      TKUIAdaptiveCardActions(actions: shown, normalStyle: normalStyle, handler: handler)
+    }
+  }
+}
+
 struct TKUIAdaptiveCardActions<C, M>: View where C: TGCard {
   let actions: [TKUICardAction<C, M>]
   let normalStyle: TKUICardActionNormalStyle
