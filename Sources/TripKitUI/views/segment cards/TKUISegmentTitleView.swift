@@ -103,7 +103,12 @@ public class TKUISegmentTitleView: UIView, TGPreferrableView {
         actionsView.bottomAnchor.constraint(equalTo: actionsWrapper.bottomAnchor)
       ])
       
-      showActionsWrapper(true)
+      // The row collapses if all its actions move to a vertical bar
+      let barAware = actionsView as? TKUICardActionsView
+      showActionsWrapper(!(barAware?.isCollapsed ?? false))
+      barAware?.onCollapsedChange = { [weak self] collapsed in
+        self?.showActionsWrapper(!collapsed)
+      }
     }
   }
   

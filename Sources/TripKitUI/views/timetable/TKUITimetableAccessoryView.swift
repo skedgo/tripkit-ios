@@ -61,10 +61,9 @@ class TKUITimetableAccessoryView: UIView {
     serviceCollectionView.dataSource = self
     serviceCollectionLayout.delegate = self
     
-    customActionView.isHidden = true
-    customActionViewToBottomBarConstraint.isActive = false
-    serviceCollectionToCustomActionViewConstraint.isActive = false
-    serviceCollectionToBottomBarConstraint.isActive = true
+    // Keep these alive, as the outlets are weak and they get toggled
+    customActionConstraints = [customActionViewToBottomBarConstraint, serviceCollectionToCustomActionViewConstraint, serviceCollectionToBottomBarConstraint]
+    showCustomActionView(false)
 
     
     if #available(iOS 26.0, *) {
@@ -96,31 +95,46 @@ class TKUITimetableAccessoryView: UIView {
   func setCustomActions(_ actions: [TKUITimetableCard.Action], for model: [TKUIStopAnnotation], card: TKUITimetableCard) {
     customActionView.subviews.forEach { $0.removeFromSuperview() }
     
-    // We deal with empty actions separately here, since it's best to
-    // deactivate constraints first before activating. Otherwise, AL
-    // will complain about unable to satisfy simultaneously
-    if actions.isEmpty {
-      customActionView.isHidden = true
-      serviceCollectionToCustomActionViewConstraint.isActive = false
-      customActionViewToBottomBarConstraint.isActive = false
-      serviceCollectionToBottomBarConstraint.isActive = true
-    } else {
-      customActionView.isHidden = false
+    guard !actions.isEmpty else {
+      showCustomActionView(false)
+      return
+    }
+    
+    let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: card, model: model, container: customActionView)
+    actionsView.backgroundColor = .tkBackground
+    customActionView.addSubview(actionsView)
+    
+    actionsView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      actionsView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
+      actionsView.topAnchor.constraint(equalTo: customActionView.topAnchor),
+      actionsView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
+      actionsView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
+    ])
+    
+    // The row collapses if all its actions move to a vertical bar
+    let barAware = actionsView as? TKUICardActionsView
+    showCustomActionView(!(barAware?.isCollapsed ?? false))
+    barAware?.onCollapsedChange = { [weak self] collapsed in
+      self?.showCustomActionView(!collapsed)
+    }
+  }
+  
+  private var customActionConstraints: [NSLayoutConstraint] = []
+  
+  private func showCustomActionView(_ show: Bool) {
+    customActionView.isHidden = !show
+    
+    // Deactivate constraints first before activating. Otherwise, AL will
+    // complain about unable to satisfy simultaneously.
+    if show {
       serviceCollectionToBottomBarConstraint.isActive = false
       serviceCollectionToCustomActionViewConstraint.isActive = true
       customActionViewToBottomBarConstraint.isActive = true
-      
-      let actionsView = TKUICardActionsViewFactory.build(actions: actions, card: card, model: model, container: customActionView)
-      actionsView.backgroundColor = .tkBackground
-      customActionView.addSubview(actionsView)
-      
-      actionsView.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-        actionsView.leadingAnchor.constraint(equalTo: customActionView.leadingAnchor),
-        actionsView.topAnchor.constraint(equalTo: customActionView.topAnchor),
-        actionsView.trailingAnchor.constraint(equalTo: customActionView.trailingAnchor),
-        actionsView.bottomAnchor.constraint(equalTo: customActionView.bottomAnchor)
-      ])
+    } else {
+      serviceCollectionToCustomActionViewConstraint.isActive = false
+      customActionViewToBottomBarConstraint.isActive = false
+      serviceCollectionToBottomBarConstraint.isActive = true
     }
   }
   
