@@ -18,6 +18,12 @@ public enum TKUICardActionsViewFactory {
   
   /// Creates a view that lays out the buttons described by `actions` horizontally
   ///
+  /// The plain actions are also handed to the card's `barActions`. While the
+  /// card controller shows those, e.g., in the vertical bar of an iPhone Duo,
+  /// the view leaves them out, and collapses if that leaves it empty.
+  ///
+  /// - SeeAlso: `TKUICardAction.isPlain`
+  ///
   /// - Parameters:
   ///   - actions: Actions to display, displayed in same order as provided
   ///   - card: Card where this view will be embedded, will be passed to each action on tap
@@ -30,10 +36,12 @@ public enum TKUICardActionsViewFactory {
   public static func build<C, M>(actions: [TKUICardAction<C, M>], card: C, model: M, container: UIView, padding: Edge.Set = []) -> UIView {
     
     let sorted = sort(actions: actions)
-    let actionsView: UIView = UIHostingController(
-      rootView: TKUIAdaptiveCardActions(
+    let binding = TKUICardBarActionsBinding(actions: sorted, card: card, model: model)
+    let rowView: UIView = UIHostingController(
+      rootView: TKUIBarAwareCardActions(
         actions: sorted,
-        normalStyle: TKUICustomization.shared.cardActionNormalStyle
+        normalStyle: TKUICustomization.shared.cardActionNormalStyle,
+        visibility: binding.visibility
       ) { [weak card, model, weak container] action in
         guard let card, let container else { return }
         _ = action.handler(action, card, model, container)
@@ -41,6 +49,11 @@ public enum TKUICardActionsViewFactory {
       .padding(padding)
     ).view
     
+    let actionsView = TKUICardActionsView(
+      content: rowView,
+      binding: binding,
+      collapsesWithPlainActions: sorted.allSatisfy(\.isPlain)
+    )
     actionsView.tintColor = TKColor.tkAppTintColor
     return actionsView
   }
