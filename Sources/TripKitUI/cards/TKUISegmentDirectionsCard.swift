@@ -34,6 +34,9 @@ public class TKUISegmentDirectionsCard: TGHostingCard<TKUISegmentDirectionsConte
   
   private let disposeBag = DisposeBag()
   
+  /// Hands plain actions to a vertical bar, see `TKUICardAction.isPlain`
+  private var verticalBarActionsBinding: TKUICardVerticalBarActionsBinding<TKUISegmentDirectionsCard, TKSegment>?
+  
   var tripMapManager: TKUITripMapManager {
     guard let tripper = mapManager as? TKUITripMapManager else { preconditionFailure() }
     return tripper
@@ -46,14 +49,22 @@ public class TKUISegmentDirectionsCard: TGHostingCard<TKUISegmentDirectionsConte
     titleView.configure(for: segment)
     
     let wrapper = CardHolder()
+    let actionsVisibility = TKUICardActionsVisibility()
     
     super.init(
       title: .custom(titleView, dismissButton: titleView.dismissButton),
-      rootView: TKUISegmentDirectionsContent(model: .init(segment: segment), wrapper: wrapper),
+      rootView: TKUISegmentDirectionsContent(model: .init(segment: segment), wrapper: wrapper, actionsVisibility: actionsVisibility),
       mapManager: mapManager
     )
     
     wrapper.card = self
+    
+    if let factory = Self.config.actionFactory {
+      verticalBarActionsBinding = TKUICardVerticalBarActionsBinding(
+        actions: TKUICardActionsViewFactory.sort(actions: factory(segment)),
+        card: self, model: segment, visibility: actionsVisibility
+      )
+    }
     
     titleView.applyStyleToCloseButton(style)
   }
@@ -81,11 +92,16 @@ fileprivate class CardHolder {
 public struct TKUISegmentDirectionsContent: View {
   @ObservedObject var model: TKUISegmentDirectionsViewModel
   fileprivate let wrapper: CardHolder
+  @ObservedObject var actionsVisibility: TKUICardActionsVisibility
   
   public var body: some View {
     VStack(alignment: .leading) {
       if let factory = TKUISegmentDirectionsCard.config.actionFactory {
-        TKUICardActionsViewFactory.build(actions: factory(model.segment)) { action in
+        TKUIVerticalBarAwareCardActions(
+          actions: TKUICardActionsViewFactory.sort(actions: factory(model.segment)),
+          normalStyle: TKUICustomization.shared.cardActionNormalStyle,
+          visibility: actionsVisibility
+        ) { action in
           guard let card = wrapper.card else { return }
           _ = action.handler(action, card, model.segment, nil)
         }

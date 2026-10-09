@@ -172,6 +172,17 @@ open class TKUICardAction<Card, Model>: ObservableObject where Card: TGCard {
   /// If multiple actions have the same priority, then `.bold` style is
   /// preferred and otherwise by insertion order.
   public var priority: Int
+  
+  /// Whether this is a plain action, i.e., one with the `.normal` style and no
+  /// positive `priority`, such as for sharing or adding a favourite.
+  ///
+  /// On devices with a vertical bar, such as the iPhone Duo's outer display,
+  /// a card's action row hands its plain actions to the card's
+  /// `verticalBarActions`, which show icon-only in that bar, while the other
+  /// actions stay in the row with their colours and titles.
+  public var isPlain: Bool {
+    style == .normal && priority <= 0
+  }
 
   /// Handler executed when user taps on the button, providing the
   /// corresponding card and model instance. Should return whether the button
