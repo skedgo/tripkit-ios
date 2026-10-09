@@ -29,6 +29,11 @@ public class TKUICustomization {
   public var cardStyle: TGCardStyle = {
     var style = TGCardStyle.default
     style.backgroundColor = .tkBackground
+    if #available(iOS 26.0, *) {
+      // Raised cards get the colour that's below tiles, so that cells stand
+      // out, rather than the map shining through the material
+      style.expandedBackgroundColor = .tkBackgroundSecondary
+    }
     style.grabHandleColor = .tkLabelTertiary
     style.titleTextColor = .tkLabelPrimary
     style.subtitleTextColor = .tkLabelSecondary
