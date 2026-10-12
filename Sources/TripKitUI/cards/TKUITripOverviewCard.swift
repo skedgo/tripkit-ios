@@ -343,7 +343,7 @@ extension TKUITripOverviewCard {
   
   private func showFooter(notifications: Set<TKAPI.TripNotification.MessageKind>, dataSources: [TKAPI.DataAttribution], in tableView: UITableView) {
     
-    let stackView = UIStackView()
+    let stackView = TKUITableFooterStackView()
     stackView.axis = .vertical
     stackView.isUserInteractionEnabled = true
     stackView.distribution = .equalSpacing
@@ -397,22 +397,16 @@ extension TKUITripOverviewCard {
       let wrapper = UIView()
       wrapper.addSubview(label)
       NSLayoutConstraint.activate([
-        label.leadingAnchor.constraint(equalTo: wrapper.leadingAnchor, constant: 16),
+        label.leadingAnchor.constraint(equalTo: wrapper.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         label.topAnchor.constraint(equalTo: wrapper.topAnchor, constant: 4),
-        wrapper.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 16),
+        wrapper.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 16),
         wrapper.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 4)
       ])
 
       stackView.addArrangedSubview(wrapper)
     }
     
-    stackView.widthAnchor.constraint(lessThanOrEqualToConstant: tableView.frame.width).isActive = true
-    stackView.setNeedsLayout()
-    stackView.layoutIfNeeded()
-    let newSize = stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-    
-    stackView.frame.size.height = newSize.height
-
+    stackView.frame.size = CGSize(width: tableView.frame.width, height: stackView.fittingHeight(forWidth: tableView.frame.width))
     tableView.tableFooterView = stackView
   }
   
@@ -528,4 +522,35 @@ extension TKUITripOverviewCard {
     return actionsView
   }
 
+}
+
+// MARK: -
+
+/// A table footer that keeps its height fitting its content, e.g., when its
+/// width or safe area changes and its labels wrap differently
+private final class TKUITableFooterStackView: UIStackView {
+  
+  private var widthConstraint: NSLayoutConstraint?
+  
+  func fittingHeight(forWidth width: CGFloat) -> CGFloat {
+    if let widthConstraint {
+      widthConstraint.constant = width
+    } else {
+      let constraint = widthAnchor.constraint(lessThanOrEqualToConstant: width)
+      constraint.isActive = true
+      widthConstraint = constraint
+    }
+    return systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    guard let tableView = superview as? UITableView, tableView.tableFooterView === self else { return }
+    let height = fittingHeight(forWidth: bounds.width)
+    guard abs(height - bounds.height) > 0.5 else { return }
+    frame.size.height = height
+    tableView.tableFooterView = self // makes the table pick up the new height
+  }
+  
 }
