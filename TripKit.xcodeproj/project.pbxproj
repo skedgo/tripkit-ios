@@ -1447,8 +1447,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/skedgo/TGCardViewController.git";
 			requirement = {
-				branch = "feature/26329-system-sheets";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.0;
 			};
 		};
 		F18615CC2973E07E00632FD4 /* XCRemoteSwiftPackageReference "GeoMonitor" */ = {
