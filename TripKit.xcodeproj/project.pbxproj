@@ -1448,7 +1448,7 @@
 			repositoryURL = "https://github.com/skedgo/TGCardViewController.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.0;
+				minimumVersion = 2.6.0;
 			};
 		};
 		F18615CC2973E07E00632FD4 /* XCRemoteSwiftPackageReference "GeoMonitor" */ = {
