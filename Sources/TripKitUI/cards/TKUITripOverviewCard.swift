@@ -75,7 +75,6 @@ public class TKUITripOverviewCard: TKUITableCard {
   // we model it as an observable sequence.
   private let presentedTripPublisher = PublishSubject<Trip>()
   
-  private var titleView: TKUITripTitleView?
   private weak var tableView: UITableView?
   
   private lazy var notificationFooterView = TKUINotificationView.newInstance()
@@ -88,7 +87,6 @@ public class TKUITripOverviewCard: TKUITableCard {
     
     let tripTitle = TKUITripTitleView.newInstance()
     tripTitle.configure(with: .init(trip, allowFading: false))
-    self.titleView = tripTitle
     
     let style: UITableView.Style
     if #available(iOS 26.0, *) {
@@ -218,14 +216,6 @@ public class TKUITripOverviewCard: TKUITableCard {
       .disposed(by: disposeBag)
   }
   
-  public override func willAppear(animated: Bool) {
-    super.willAppear(animated: animated)
-
-    if let controller {
-      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
-    }
-  }
-  
   public override func didAppear(animated: Bool) {
     super.didAppear(animated: animated)
    
@@ -244,14 +234,6 @@ public class TKUITripOverviewCard: TKUITableCard {
     tripMapManager?.annotationSelectionEnabled = false
     
     TKUIEventCallback.handler(.cardAppeared(self))
-  }
-
-  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    super.traitCollectionDidChange(previousTraitCollection)
-    
-    if let controller {
-      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
-    }
   }
 
   public override func willDisappear(animated: Bool) {
