@@ -28,7 +28,7 @@ public class TKUICustomization {
   /// The style to use for any of TGCardViewController-based controllers
   public var cardStyle: TGCardStyle = {
     var style = TGCardStyle.default
-    style.backgroundColor = .tkBackground
+    style.backgroundColor = .tkBackgroundCard
     if #available(iOS 26.0, *) {
       // Raised cards in a system sheet get the colour that's below tiles, so
       // that cells stand out, rather than the map shining through the glass

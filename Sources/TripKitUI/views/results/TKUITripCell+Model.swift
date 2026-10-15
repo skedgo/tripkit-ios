@@ -22,7 +22,14 @@ extension TKUITripCell {
     let showFaded: Bool
     let isCancelled: Bool
     let hideExactTimes: Bool
+    
+    /// How many calendar days the trip is from the requested time, e.g., `1` for
+    /// a trip on the day after, which can happen for services that don't run
+    /// every day.
+    var dayOffset: Int = 0
+    
     let segments: [TKUITripSegmentDisplayable]
+    var mainSegmentIndex: Int? = nil
     var primaryAction: String?
     var accessibilityLabel: String?
   }
@@ -32,6 +39,8 @@ extension TKUITripCell {
 extension TKUITripCell.Model {
   @MainActor
   init(_ trip: Trip, allowFading: Bool, isArriveBefore: Bool? = nil) {
+    let segments = trip.segments(with: .inSummary)
+    let mainSegment = trip.mainSegment
     let primaryAction = TKUITripOverviewCard.config.tripActionsFactory?(trip).first(where: { $0.priority >= TKUITripOverviewCard.DefaultActionPriority.book.rawValue })
     
     self.init(
@@ -44,10 +53,23 @@ extension TKUITripCell.Model {
       showFaded: allowFading && trip.showFaded,
       isCancelled: trip.isCanceled,
       hideExactTimes: trip.hideExactTimes,
-      segments: trip.segments(with: .inSummary),
+      dayOffset: Self.dayOffset(of: trip, isArriveBefore: isArriveBefore ?? trip.isArriveBefore),
+      segments: segments,
+      mainSegmentIndex: segments.firstIndex { $0 === mainSegment },
       primaryAction: primaryAction?.title,
       accessibilityLabel: trip.accessibilityLabel
     )
+  }
+  
+  @MainActor
+  private static func dayOffset(of trip: Trip, isArriveBefore: Bool) -> Int {
+    guard trip.departureTimeIsFixed, let request = trip.request else { return 0 }
+    let requested = request.time ?? Date() // nil for "leave now"
+    if isArriveBefore {
+      return TKUITripCell.Formatter.dayOffset(of: trip.arrivalTime, from: requested, in: trip.arrivalTimeZone ?? trip.departureTimeZone)
+    } else {
+      return TKUITripCell.Formatter.dayOffset(of: trip.departureTime, from: requested, in: trip.departureTimeZone)
+    }
   }
   
   var primaryTimeString: String? {
@@ -58,8 +80,15 @@ extension TKUITripCell.Model {
       departureTimeZone: departureTimeZone,
       arrivalTimeZone: arrivalTimeZone,
       focusOnDuration: focusOnDuration,
-      isArriveBefore: isArriveBefore
+      isArriveBefore: isArriveBefore,
+      showWeekday: dayOffset != 0
     )
+  }
+  
+  /// E.g., "+1 day", if the trip isn't on the same day as the requested time
+  var dayOffsetString: String? {
+    guard !hideExactTimes else { return nil }
+    return TKUITripCell.Formatter.dayOffsetString(dayOffset)
   }
   
   var secondaryTimeString: String? {
