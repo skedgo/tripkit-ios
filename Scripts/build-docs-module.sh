@@ -72,26 +72,32 @@ echo "Building DocC documentation for $MODULE_NAME..."
 # Build the DocC archive
 # We use DOCC_HOSTING_BASE_PATH to ensure all modules use the same base path for cross-references
 echo "📦 Building DocC archive for $MODULE_NAME (Hosting Base Path: $HOSTING_BASE_PATH)..."
+# A generic destination avoids depending on a specific simulator being
+# available (and CoreSimulator answering) on the build machine.
+DOCBUILD_ARGS=(
+    docbuild -scheme "$MODULE_NAME"
+    -destination 'generic/platform=iOS Simulator'
+    -derivedDataPath ./build
+    DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH"
+    DOCC_CATALOG_INCLUDE_EXTENSION_SYMBOL_GRAPHS=YES
+    DOCC_EXTRACT_EXTENSION_SYMBOLS=YES
+    DOCC_CATALOG_IDENTIFIER="$MODULE_NAME"
+    DOCC_INCLUDE_DOCUMENTATION_CATALOGS=YES
+)
+BUILD_RESULT=0
 if [ "$VERBOSE" = true ]; then
-    xcodebuild docbuild -scheme "$MODULE_NAME" \
-        -destination 'platform=iOS Simulator,name=iPhone 16' \
-        -derivedDataPath ./build \
-        DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH" \
-        DOCC_CATALOG_INCLUDE_EXTENSION_SYMBOL_GRAPHS=YES \
-        DOCC_EXTRACT_EXTENSION_SYMBOLS=YES \
-        DOCC_CATALOG_IDENTIFIER="$MODULE_NAME" \
-        DOCC_INCLUDE_DOCUMENTATION_CATALOGS=YES
-    BUILD_RESULT=$?
+    xcodebuild "${DOCBUILD_ARGS[@]}" || BUILD_RESULT=$?
 else
-    xcodebuild docbuild -scheme "$MODULE_NAME" \
-        -destination 'platform=iOS Simulator,name=iPhone 16' \
-        -derivedDataPath ./build \
-        DOCC_HOSTING_BASE_PATH="$HOSTING_BASE_PATH" \
-        DOCC_CATALOG_INCLUDE_EXTENSION_SYMBOL_GRAPHS=YES \
-        DOCC_EXTRACT_EXTENSION_SYMBOLS=YES \
-        DOCC_CATALOG_IDENTIFIER="$MODULE_NAME" \
-        DOCC_INCLUDE_DOCUMENTATION_CATALOGS=YES > /dev/null 2>&1
-    BUILD_RESULT=$?
+    # Keep the output out of the way, but print its tail if the build fails
+    mkdir -p ./build
+    BUILD_LOG="./build/docbuild-$MODULE_NAME.log"
+    if ! xcodebuild "${DOCBUILD_ARGS[@]}" > "$BUILD_LOG" 2>&1; then
+        BUILD_RESULT=1
+        echo "xcodebuild failed. Errors in $BUILD_LOG:"
+        grep -E "(^xcodebuild: error:| error: )" "$BUILD_LOG" | head -n 20 || true
+        echo "Last 80 lines of $BUILD_LOG:"
+        tail -n 80 "$BUILD_LOG"
+    fi
 fi
 
 if [ $BUILD_RESULT -eq 0 ]; then
