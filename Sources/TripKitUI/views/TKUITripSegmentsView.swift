@@ -47,9 +47,10 @@ public class TKUITripSegmentsView : UIView {
   
   /// Shows the segments on one line, with chevrons between them. Transit
   /// segments get their route number and departure time as badges, other
-  /// segments their title or distance. If that doesn't fit, only the main
-  /// segment keeps its time, then only the main segment keeps its details, and
-  /// finally only the mode icons remain.
+  /// segments their title or distance. If that doesn't fit, it steps down to
+  /// all route numbers with only the main segment's time, then only the main
+  /// segment's route number and time, and finally only the mode icons. Non-
+  /// transit segments of multi-modal trips always show their minutes.
   ///
   /// - Parameters:
   ///   - segments: Segments to display
@@ -60,7 +61,7 @@ public class TKUITripSegmentsView : UIView {
     self.reconfigure = { [weak self] in
       self?.configure(segments, mainSegmentIndex: mainSegmentIndex, allowInfoIcons: allowInfoIcons)
     }
-    configure(segments, details: .all, allowInfoIcons: allowInfoIcons)
+    configure(segments, details: .everything, allowInfoIcons: allowInfoIcons)
   }
   
   public func selectSegment(atIndex index: Int) {
@@ -136,17 +137,18 @@ public class TKUITripSegmentsView : UIView {
   private enum Details: CaseIterable {
     /// Route number and time for every transit segment, title or distance for
     /// every other segment
-    case all
+    case everything
     
     /// Route number for every transit segment, but time, title or distance
     /// only for the main segment
-    case mainSegmentTimeOnly
+    case allRoutesMainTime
     
-    /// Route number and time, title or distance only for the main segment
-    case mainSegmentOnly
+    /// Route number and time, title or distance only for the main segment;
+    /// other segments only show their mode icon
+    case mainRouteAndTime
     
     /// Just the mode icons
-    case none
+    case icons
     
     var next: Details? {
       let all = Self.allCases
@@ -230,6 +232,30 @@ public class TKUITripSegmentsView : UIView {
 
       let (_, iconFrame) = addModeImages(for: segment, modeImage: modeImage, x: x, maxHeight: maxHeight, alpha: alpha, allowInfoIcons: allowInfoIcons)
       x = iconFrame.maxX
+      
+      let color = segment.tripSegmentModeColor
+      let fixedTime = segment.tripSegmentFixedDepartureTime
+      let isTransit = color != nil || fixedTime != nil
+      
+      // Minutes for walking, driving, etc., at the icon's bottom right, if
+      // there are other segments, too, at every level of details
+      if !isTransit, segments.count > 1, let duration = segment.tripSegmentDuration {
+        let minutes = max(1, Int((duration / 60).rounded()))
+        let label = TKUIStyledLabel()
+        label.font = Self.minutesFont
+        label.text = minutes.formatted()
+        label.textColor = darkTextColor
+        label.sizeToFit()
+        label.autoresizingMask = mask
+        label.alpha = alpha
+        // Tucked into the walking icon's corner, as that image has some space
+        // on its sides, but next to wider icons such as bicycles and cars
+        let offset: CGFloat = segment.tripSegmentIsWalking ? -3 : 1
+        label.frame.origin = .init(x: iconFrame.maxX + offset, y: (iconFrame.maxY - label.frame.height + 2).rounded())
+        addSubview(label)
+        // A bit more space, so that the minutes don't run into a distance
+        x = label.frame.maxX + 2
+      }
 
       // 3. Details: Route number and departure time for transit, otherwise
       //    the title or the distance
@@ -238,18 +264,16 @@ public class TKUITripSegmentsView : UIView {
       let showRoute: Bool
       let showDetails: Bool
       switch details {
-      case .all:                 (showRoute, showDetails) = (true, true)
-      case .mainSegmentTimeOnly: (showRoute, showDetails) = (true, isMain)
-      case .mainSegmentOnly:     (showRoute, showDetails) = (isMain, isMain)
-      case .none:                (showRoute, showDetails) = (false, false)
+      case .everything:        (showRoute, showDetails) = (true, true)
+      case .allRoutesMainTime: (showRoute, showDetails) = (true, isMain)
+      case .mainRouteAndTime:  (showRoute, showDetails) = (isMain, isMain)
+      case .icons:             (showRoute, showDetails) = (false, false)
       }
 
-      let color = segment.tripSegmentModeColor
-      let fixedTime = segment.tripSegmentFixedDepartureTime
       let title = segment.tripSegmentModeTitle.flatMap { $0.isEmpty ? nil : $0 }
       let lineHeight = textFont.lineHeight
 
-      if color != nil || fixedTime != nil {
+      if isTransit {
         if showRoute {
           if let title {
             let background = color ?? .tkLabelPrimary
@@ -297,7 +321,7 @@ public class TKUITripSegmentsView : UIView {
       maxX = x
       nextX = x + Self.spacing
       count += 1
-      if details == .all {
+      if details == .everything {
         // Ask for the space for everything, even if we then show less
         desiredSize = .init(width: maxX, height: maxHeight)
       }
@@ -433,6 +457,8 @@ public class TKUITripSegmentsView : UIView {
     }
   }
 
+  private static let minutesFont = TKStyleManager.semiboldCustomFont(forTextStyle: .caption2)
+  
   private static let chevronImage: UIImage? = UIImage(
     systemName: "chevron.right",
     withConfiguration: UIImage.SymbolConfiguration(font: TKStyleManager.semiboldCustomFont(forTextStyle: .caption2))

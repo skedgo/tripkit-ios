@@ -96,6 +96,13 @@ extension TKSegment {
     distanceInMetres?.doubleValue
   }
   
+  public var tripSegmentIsWalking: Bool { isWalking }
+  
+  public var tripSegmentDuration: TimeInterval? {
+    guard !isPublicTransport, template?.hideExactTimes != true else { return nil }
+    return finalSegmentIncludingContinuation().arrivalTime.timeIntervalSince(departureTime)
+  }
+  
   public var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility {
     return self.wheelchairAccessibility ?? .unknown
   }

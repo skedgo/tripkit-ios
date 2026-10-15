@@ -56,6 +56,15 @@ public protocol TKUITripSegmentDisplayable {
   /// `TKUITripSegmentsView`
   var tripSegmentDistanceInMetres: Double? { get }
   
+  /// How long the segment takes, shown as minutes next to the mode icon of
+  /// non-transit segments by `TKUITripSegmentsView`, if there are other
+  /// segments, too
+  var tripSegmentDuration: TimeInterval? { get }
+  
+  /// Whether the segment is walking, whose mode icon has some space on its
+  /// sides, which `TKUITripSegmentsView` tucks the minutes into
+  var tripSegmentIsWalking: Bool { get }
+  
   /// Wheelchair accessibility of the segment. If it doesn't apply, just return `.unknown`,
   /// as an `.unknown` value will always be ignored.
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { get }
@@ -78,6 +87,8 @@ public extension TKUITripSegmentDisplayable {
   var tripSegmentTimeZone: TimeZone? { nil }
   var tripSegmentTimesAreRealTime: Bool { false }
   var tripSegmentDistanceInMetres: Double? { nil }
+  var tripSegmentDuration: TimeInterval? { nil }
+  var tripSegmentIsWalking: Bool { false }
   var tripSegmentWheelchairAccessibility: TKWheelchairAccessibility { .unknown }
   var tripSegmentBicycleAccessibility: TKBicycleAccessibility? { nil }
 }
