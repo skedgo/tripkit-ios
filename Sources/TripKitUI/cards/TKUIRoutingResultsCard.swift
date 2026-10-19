@@ -295,13 +295,21 @@ public class TKUIRoutingResultsCard: TKUITableCard {
       })
     .disposed(by: disposeBag)
 
-    viewModel.selectedItem
-      .drive(onNext: { [weak self] in
-        guard let indexPath = self?.dataSource.indexPath(of: $0) else { return }
-        if let visible = tableView.indexPathsForVisibleRows, visible.contains(indexPath) { return }
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-      })
-      .disposed(by: disposeBag)
+    // Updating the table's rows, e.g., when expanding or collapsing a section,
+    // can drop its selection, so re-apply it after each update, but only
+    // scroll to it when the selection changed.
+    Driver.merge(
+      viewModel.selectedItem.map { ($0, true) },
+      viewModel.sections.withLatestFrom(viewModel.selectedItem).map { ($0, false) }
+    )
+    .drive(onNext: { [weak self] item, scroll in
+      guard let indexPath = self?.dataSource.indexPath(of: item) else { return }
+      if !scroll, tableView.indexPathForSelectedRow == indexPath { return }
+      // Highlight it, but only scroll to it if it isn't already visible
+      let isVisible = tableView.indexPathsForVisibleRows?.contains(indexPath) == true
+      tableView.selectRow(at: indexPath, animated: scroll, scrollPosition: !scroll || isVisible ? .none : .top)
+    })
+    .disposed(by: disposeBag)
 
     viewModel.originDestination
       .drive(onNext: { [weak self] input in

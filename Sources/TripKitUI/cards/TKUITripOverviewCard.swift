@@ -75,7 +75,6 @@ public class TKUITripOverviewCard: TKUITableCard {
   // we model it as an observable sequence.
   private let presentedTripPublisher = PublishSubject<Trip>()
   
-  private var titleView: TKUITripTitleView?
   private weak var tableView: UITableView?
   
   private lazy var notificationFooterView = TKUINotificationView.newInstance()
@@ -88,7 +87,6 @@ public class TKUITripOverviewCard: TKUITableCard {
     
     let tripTitle = TKUITripTitleView.newInstance()
     tripTitle.configure(with: .init(trip, allowFading: false))
-    self.titleView = tripTitle
     
     let style: UITableView.Style
     if #available(iOS 26.0, *) {
@@ -183,13 +181,21 @@ public class TKUITripOverviewCard: TKUITableCard {
       .emit(onNext: { [weak self] in self?.controller?.show($0) })
       .disposed(by: disposeBag)
 
-    // We check if the view is visible before showing attribution
-    // and card actions view, otherwise we'd get AL warnings due
-    // to the table view hasn't had the correct size when the card's
-    // `didBuild(tableView:cardView)` is called.
+    // We wait for the table view to have a width before showing attribution
+    // and card actions view, otherwise we'd get AL warnings due to the table
+    // view not having the correct size when the card's
+    // `didBuild(tableView:cardView)` is called. We don't wait for the card to
+    // appear, as trips in a page card are visible while scrolling to them,
+    // before they appear. We also rebuild them whenever the card appears.
     
-    isVisible.asDriver(onErrorJustReturn: true)
-      .filter { $0 }
+    let hasWidth = tableView.rx.observe(CGRect.self, #keyPath(UIView.bounds))
+      .filter { ($0?.width ?? 0) > 0 }
+      .take(1)
+      .map { _ in true }
+    let canShowHeaderAndFooter = Observable.merge(hasWidth, isVisible.filter { $0 })
+      .asDriver(onErrorJustReturn: true)
+    
+    canShowHeaderAndFooter
       .withLatestFrom(viewModel.actions)
       .drive(onNext: { [weak self] actions in
         tableView.tableHeaderView = self?.buildActionsView(from: actions.0, trip: actions.1)
@@ -197,8 +203,7 @@ public class TKUITripOverviewCard: TKUITableCard {
       .disposed(by: disposeBag)
 
     let footerContent = Driver.combineLatest(viewModel.dataSources, viewModel.notificationKinds)
-    isVisible.asDriver(onErrorJustReturn: true)
-      .filter { $0 }
+    canShowHeaderAndFooter
       .withLatestFrom(footerContent)
       .drive(onNext: { [weak self] dataSources, notificationKinds in
         self?.showFooter(notifications: notificationKinds, dataSources: dataSources, in: tableView)
@@ -216,14 +221,6 @@ public class TKUITripOverviewCard: TKUITableCard {
         }
       })
       .disposed(by: disposeBag)
-  }
-  
-  public override func willAppear(animated: Bool) {
-    super.willAppear(animated: animated)
-
-    if let controller {
-      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
-    }
   }
   
   public override func didAppear(animated: Bool) {
@@ -244,14 +241,6 @@ public class TKUITripOverviewCard: TKUITableCard {
     tripMapManager?.annotationSelectionEnabled = false
     
     TKUIEventCallback.handler(.cardAppeared(self))
-  }
-
-  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    super.traitCollectionDidChange(previousTraitCollection)
-    
-    if let controller {
-      titleView?.update(preferredContentSizeCategory: controller.traitCollection.preferredContentSizeCategory)
-    }
   }
 
   public override func willDisappear(animated: Bool) {

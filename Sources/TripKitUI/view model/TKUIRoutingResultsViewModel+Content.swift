@@ -349,8 +349,25 @@ extension Array where Element == TKUIRoutingResultsViewModel.Section {
     return nil
   }
   
+  /// The item to select by default, which matches what the map selects by
+  /// default (see `buildMapContent`): the visible trip of the preferred trip
+  /// group, falling back to that of the first group.
+  ///
+  /// - note: This isn't necessarily the first item of a section, as the items
+  ///   are sorted by time, while a group's visible trip is its best-scored one,
+  ///   or the one the user last looked at.
   var bestItem: TKUIRoutingResultsViewModel.Item? {
-    return first?.items.first // Assuming we're sorting by best
+    let items = flatMap(\.items)
+    guard let firstTrip = items.lazy.compactMap(\.trip).first else {
+      return first?.items.first
+    }
+    
+    let preferred = firstTrip.request?.preferredGroup.flatMap { group in
+      items.contains { $0.trip?.tripGroup == group } ? group : nil
+    }
+    let group = preferred ?? firstTrip.tripGroup
+    return items.first { $0.trip != nil && $0.trip == group.visibleTrip }
+      ?? items.first { $0.trip?.tripGroup == group } // visible trip can be collapsed
   }
 }
 

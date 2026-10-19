@@ -37,6 +37,12 @@ public class TKUITripCell: UITableViewCell {
   /// layout margin, which only makes sense with the title above.
   private lazy var segmentAtTopConstraint = segmentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4)
   
+  /// Shows, e.g., "+1 day" next to the title, if the trip isn't on the requested day
+  private let dayOffsetLabel = PaddedLabel()
+  
+  /// Keeps the subtitle trailing, while the day offset sticks to the title
+  private let titleSpacer = UIView()
+  
   private(set) var disposeBag = DisposeBag()
   
   private var formatter: Formatter?
@@ -49,6 +55,23 @@ public class TKUITripCell: UITableViewCell {
     titleLabel.maximumContentSizeCategory = .accessibilityLarge
     subtitleLabel.maximumContentSizeCategory = .accessibilityLarge
     
+    dayOffsetLabel.font = TKStyleManager.customFont(forTextStyle: .footnote)
+    dayOffsetLabel.textColor = .tkLabelSecondary
+    dayOffsetLabel.backgroundColor = .tkBackgroundSecondary
+    dayOffsetLabel.layer.cornerRadius = 6
+    dayOffsetLabel.clipsToBounds = true
+    dayOffsetLabel.maximumContentSizeCategory = .accessibilityLarge
+    dayOffsetLabel.setContentHuggingPriority(.required, for: .horizontal)
+    dayOffsetLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+    dayOffsetLabel.isHidden = true
+    
+    titleSpacer.setContentHuggingPriority(.defaultLow - 1, for: .horizontal)
+    titleSpacer.setContentCompressionResistancePriority(.defaultLow - 1, for: .horizontal)
+    titleLabel.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
+    titleStackView.insertArrangedSubview(dayOffsetLabel, at: 1)
+    titleStackView.insertArrangedSubview(titleSpacer, at: 2)
+    titleStackView.setCustomSpacing(8, after: titleLabel)
+    
     actionButton.titleLabel?.font = TKStyleManager.boldCustomFont(forTextStyle: .footnote)
     actionButton.tintColor = .tkAppTintColor
     
@@ -56,11 +79,6 @@ public class TKUITripCell: UITableViewCell {
     selectionIndicator.backgroundColor = .tkAppTintColor
     
     separatorView.backgroundColor = .tkSeparatorSubtle
-    
-    // Allow showing it, which won't mean it'll always show it
-    // - just if something is known to be inaccessible
-    segmentView.allowWheelchairIcon = true
-    segmentView.allowBicycleAccessibilityIcon = true
   }
   
   public override func prepareForReuse() {
@@ -71,7 +89,21 @@ public class TKUITripCell: UITableViewCell {
 
   override public func setSelected(_ selected: Bool, animated: Bool) {
     // Not calling super, to not highlight background
-    selectionIndicator.isHidden = !selected
+    if #available(iOS 26.0, *) {
+      // Outline the whole cell, which follows the corners of its section
+      selectionIndicator.isHidden = true
+      layer.borderWidth = selected ? 2 : 0
+      layer.borderColor = UIColor.tkAppTintColor.resolvedColor(with: traitCollection).cgColor
+    } else {
+      selectionIndicator.isHidden = !selected
+    }
+  }
+  
+  public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    if #available(iOS 26.0, *) {
+      layer.borderColor = UIColor.tkAppTintColor.resolvedColor(with: traitCollection).cgColor
+    }
   }
   
   override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -82,7 +114,10 @@ public class TKUITripCell: UITableViewCell {
   }
   
   func update(preferredContentSizeCategory: UIContentSizeCategory) {
-    titleStackView.axis = preferredContentSizeCategory.isAccessibilityCategory ? .vertical : .horizontal
+    let isVertical = preferredContentSizeCategory.isAccessibilityCategory
+    titleStackView.axis = isVertical ? .vertical : .horizontal
+    titleStackView.alignment = isVertical ? .leading : .center
+    titleSpacer.isHidden = isVertical
   }
 
 
@@ -91,23 +126,27 @@ public class TKUITripCell: UITableViewCell {
   func configure(_ model: Model, preferredContentSizeCategory: UIContentSizeCategory) {
     update(preferredContentSizeCategory: preferredContentSizeCategory)
     
-    titleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.primaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    titleLabel.text = model.primaryTimeString
     titleLabel.font = TKStyleManager.semiboldCustomFont(forTextStyle: .headline)
     titleLabel.textColor = .tkLabelPrimary
     
-    subtitleLabel.text = model.hideExactTimes ? nil : TKUITripCell.Formatter.secondaryTimeString(departure: model.departure, arrival: model.arrival, departureTimeZone: model.departureTimeZone, arrivalTimeZone: model.arrivalTimeZone, focusOnDuration: model.focusOnDuration, isArriveBefore: model.isArriveBefore)
+    subtitleLabel.text = model.secondaryTimeString
     subtitleLabel.font = TKStyleManager.customFont(forTextStyle: .subheadline)
     subtitleLabel.textColor = .tkLabelSecondary
+    
+    dayOffsetLabel.text = model.dayOffsetString
+    dayOffsetLabel.isHidden = model.dayOffsetString == nil
     
     titleStackView.isHidden = model.hideExactTimes
     NSLayoutConstraint.deactivate([model.hideExactTimes ? segmentBelowTitleConstraint : segmentAtTopConstraint])
     NSLayoutConstraint.activate([model.hideExactTimes ? segmentAtTopConstraint : segmentBelowTitleConstraint])
     
     segmentView.isCanceled = model.isCancelled
-    segmentView.configure(model.segments)
+    segmentView.configure(model.segments, mainSegmentIndex: model.mainSegmentIndex)
     
     let alpha: CGFloat = model.showFaded ? 0.2 : 1
     titleLabel.alpha = alpha
+    dayOffsetLabel.alpha = alpha
     segmentView.alpha = alpha
     actionButton.alpha = alpha
     
@@ -123,7 +162,27 @@ public class TKUITripCell: UITableViewCell {
       segmentToActionConstraint.priority = .defaultLow
     }
     
-    accessibilityLabel = model.accessibilityLabel
+    accessibilityLabel = [model.accessibilityLabel, model.dayOffsetString].compactMap { $0 }.joined(separator: ", ")
   }
     
+}
+
+extension TKUITripCell {
+  
+  /// A label with some padding around its text, so that it can have a background
+  fileprivate class PaddedLabel: UILabel {
+    
+    var insets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
+    
+    override func drawText(in rect: CGRect) {
+      super.drawText(in: rect.inset(by: insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+      let size = super.intrinsicContentSize
+      return CGSize(width: size.width + insets.left + insets.right, height: size.height + insets.top + insets.bottom)
+    }
+    
+  }
+  
 }

@@ -213,7 +213,7 @@ extension Trip {
   
   public var mainSegment: TKSegment {
     let hash = mainSegmentHashCode
-    if hash > 0 {
+    if hash != 0 { // can be negative
       for segment in segments where segment.templateHashCode == hash {
         return segment
       }
