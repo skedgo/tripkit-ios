@@ -30,10 +30,18 @@ struct TKRegionManagerTest {
     #expect(TKRegionManager.shared.regions.count == 195)
   }
 
+  /// Replaces the regions with none at all, so this can't use `shared`: other
+  /// suites run in parallel and rely on it having regions.
   @Test func savingToCache() async throws {
-    // First read the good data
-    let data = TKRegionManager.readLocalCache()
-    #expect(data != nil)
+    let cacheURL = FileManager.default.temporaryDirectory
+      .appendingPathComponent("regions-\(UUID().uuidString).json")
+    defer { try? FileManager.default.removeItem(at: cacheURL) }
+    let manager = TKRegionManager(cacheURL: cacheURL)
+
+    // First save the good data
+    let goodResponse = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
+    await manager.updateRegions(from: goodResponse)
+    #expect(try Self.cachedRegionCount(at: cacheURL) == 195)
 
     // Then save empty regions data
     let rubbish = try JSONDecoder().decode(TKAPI.RegionsResponse.self, withJSONObject: [
@@ -41,17 +49,16 @@ struct TKRegionManagerTest {
       "modes": [String: AnyHashable](),
       "hashCode": 0
     ] as [String : Any])
-    let rubbishData = try JSONEncoder().encode(rubbish)
-    await TKRegionManager.shared.updateRegions(from: rubbish)
-    TKRegionManager.saveToCache(rubbishData)
-    #expect(TKRegionManager.shared.hasRegions)
-    #expect(TKRegionManager.shared.regions.count == 0)
+    await manager.updateRegions(from: rubbish)
+    #expect(manager.hasRegions)
+    #expect(manager.regions.count == 0)
+    #expect(try Self.cachedRegionCount(at: cacheURL) == 0)
 
     // Then read the good data in again
-    let cachedResponse = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
-    await TKRegionManager.shared.updateRegions(from: cachedResponse)
-    #expect(TKRegionManager.shared.hasRegions)
-    #expect(TKRegionManager.shared.regions.count == 195)
+    await manager.updateRegions(from: goodResponse)
+    #expect(manager.hasRegions)
+    #expect(manager.regions.count == 195)
+    #expect(try Self.cachedRegionCount(at: cacheURL) == 195)
   }
 
   @Test func sortingModes() {
@@ -112,6 +119,11 @@ struct TKRegionManagerTest {
 }
 
 private extension TKRegionManagerTest {
+
+  static func cachedRegionCount(at url: URL) throws -> Int? {
+    let cached = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: Data(contentsOf: url))
+    return cached.regions?.count
+  }
 
   static func dataFromJSON(named name: String) throws -> Data {
     let thisSourceFile = URL(fileURLWithPath: #filePath)
