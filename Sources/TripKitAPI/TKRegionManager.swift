@@ -48,6 +48,8 @@ public class TKRegionManager: NSObject {
     super.init()
   }
 
+  /// Loads the regions from the cache, unless there already are regions as
+  /// those can only be newer than what's cached.
   @MainActor
   public func loadRegionsFromCache() async {
     do {
@@ -56,7 +58,8 @@ public class TKRegionManager: NSObject {
         guard let data = try? Data(contentsOf: url) else { return nil }
         return try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
       }.value
-      if let response {
+      // Checked after reading, as regions can get set while we were reading
+      if let response, !hasRegions {
         updateRegions(from: response)
       }
 

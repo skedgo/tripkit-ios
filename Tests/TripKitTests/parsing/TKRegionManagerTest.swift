@@ -33,8 +33,7 @@ struct TKRegionManagerTest {
   /// Replaces the regions with none at all, so this can't use `shared`: other
   /// suites run in parallel and rely on it having regions.
   @Test func savingToCache() async throws {
-    let cacheURL = FileManager.default.temporaryDirectory
-      .appendingPathComponent("regions-\(UUID().uuidString).json")
+    let cacheURL = Self.temporaryCacheURL()
     defer { try? FileManager.default.removeItem(at: cacheURL) }
     let manager = TKRegionManager(cacheURL: cacheURL)
 
@@ -44,12 +43,7 @@ struct TKRegionManagerTest {
     #expect(try Self.cachedRegionCount(at: cacheURL) == 195)
 
     // Then save empty regions data
-    let rubbish = try JSONDecoder().decode(TKAPI.RegionsResponse.self, withJSONObject: [
-      "regions": [AnyHashable](),
-      "modes": [String: AnyHashable](),
-      "hashCode": 0
-    ] as [String : Any])
-    await manager.updateRegions(from: rubbish)
+    await manager.updateRegions(from: try Self.emptyResponse())
     #expect(manager.hasRegions)
     #expect(manager.regions.count == 0)
     #expect(try Self.cachedRegionCount(at: cacheURL) == 0)
@@ -59,6 +53,27 @@ struct TKRegionManagerTest {
     #expect(manager.hasRegions)
     #expect(manager.regions.count == 195)
     #expect(try Self.cachedRegionCount(at: cacheURL) == 195)
+  }
+
+  /// A read of the cache can finish after newer regions got set in the
+  /// meantime, e.g., the one `shared` starts on creation, and must not replace
+  /// them with its older ones.
+  @Test func loadingFromCacheKeepsNewerRegions() async throws {
+    let cacheURL = Self.temporaryCacheURL()
+    defer { try? FileManager.default.removeItem(at: cacheURL) }
+    let manager = TKRegionManager(cacheURL: cacheURL)
+
+    let goodResponse = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
+    await manager.updateRegions(from: goodResponse)
+    let goodCache = try Data(contentsOf: cacheURL)
+
+    await manager.updateRegions(from: try Self.emptyResponse())
+    #expect(manager.regions.count == 0)
+
+    // Stands in for a read that started before the update above
+    try goodCache.write(to: cacheURL)
+    await manager.loadRegionsFromCache()
+    #expect(manager.regions.count == 0)
   }
 
   @Test func sortingModes() {
@@ -119,6 +134,18 @@ struct TKRegionManagerTest {
 }
 
 private extension TKRegionManagerTest {
+
+  static func temporaryCacheURL() -> URL {
+    FileManager.default.temporaryDirectory.appendingPathComponent("regions-\(UUID().uuidString).json")
+  }
+
+  static func emptyResponse() throws -> TKAPI.RegionsResponse {
+    try JSONDecoder().decode(TKAPI.RegionsResponse.self, withJSONObject: [
+      "regions": [AnyHashable](),
+      "modes": [String: AnyHashable](),
+      "hashCode": 0
+    ] as [String : Any])
+  }
 
   static func cachedRegionCount(at url: URL) throws -> Int? {
     let cached = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: Data(contentsOf: url))
