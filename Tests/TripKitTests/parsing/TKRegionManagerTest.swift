@@ -6,38 +6,35 @@
 //  Copyright © 2017 SkedGo. All rights reserved.
 //
 
-import XCTest
+#if canImport(Testing)
+
+import Foundation
+import Testing
 
 @testable import TripKitAPI
 @testable import TripKit
 
-class TKRegionManagerTest: XCTestCase {
-  
-  var regionData: Data! = nil
-  
-  override func setUp() async throws {
-    try await super.setUp()
-    
-    regionData = try dataFromJSON(named: "regions")
+@Suite(.serialized)
+struct TKRegionManagerTest {
+
+  private let regionData: Data
+
+  init() async throws {
+    regionData = try Self.dataFromJSON(named: "regions")
     let response = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
     await TKRegionManager.shared.updateRegions(from: response)
   }
-  
-  override func tearDown() {
-    regionData = nil
-    super.tearDown()
+
+  @Test func parsing() {
+    #expect(TKRegionManager.shared.hasRegions)
+    #expect(TKRegionManager.shared.regions.count == 195)
   }
-  
-  func testParsing() {
-    XCTAssert(TKRegionManager.shared.hasRegions)
-    XCTAssertEqual(TKRegionManager.shared.regions.count, 195)
-  }
-  
-  func testSavingToCache() async throws {
+
+  @Test func savingToCache() async throws {
     // First read the good data
     let data = TKRegionManager.readLocalCache()
-    XCTAssertNotNil(data)
-    
+    #expect(data != nil)
+
     // Then save empty regions data
     let rubbish = try JSONDecoder().decode(TKAPI.RegionsResponse.self, withJSONObject: [
       "regions": [AnyHashable](),
@@ -47,17 +44,17 @@ class TKRegionManagerTest: XCTestCase {
     let rubbishData = try JSONEncoder().encode(rubbish)
     await TKRegionManager.shared.updateRegions(from: rubbish)
     TKRegionManager.saveToCache(rubbishData)
-    XCTAssert(TKRegionManager.shared.hasRegions)
-    XCTAssertEqual(TKRegionManager.shared.regions.count, 0)
+    #expect(TKRegionManager.shared.hasRegions)
+    #expect(TKRegionManager.shared.regions.count == 0)
 
     // Then read the good data in again
     let cachedResponse = try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: regionData)
     await TKRegionManager.shared.updateRegions(from: cachedResponse)
-    XCTAssert(TKRegionManager.shared.hasRegions)
-    XCTAssertEqual(TKRegionManager.shared.regions.count, 195)
+    #expect(TKRegionManager.shared.hasRegions)
+    #expect(TKRegionManager.shared.regions.count == 195)
   }
-  
-  func testSortingModes() throws {
+
+  @Test func sortingModes() {
     let group1 = [
       "in_air",
       "pt_pub",
@@ -70,7 +67,7 @@ class TKRegionManagerTest: XCTestCase {
       "cy_bic-s_bysykkelen",
       "wa_wal"
     ]
-    
+
     let group2 = [
       "in_air",
       "pt_pub",
@@ -84,20 +81,20 @@ class TKRegionManagerTest: XCTestCase {
       "cy_bic-s",
       "wa_wal"
     ]
-    
+
     let group3 = [
       "pt_pub",
       "me_car",
       "me_mot"
     ]
-    
+
     func toRoutingModes(_ identifiers: [String]) -> [TKRegion.RoutingMode] {
       identifiers.map(TKRegion.RoutingMode.buildForTesting)
     }
-    
+
     let sorted = TKRegionManager.sortedFlattenedModes([toRoutingModes(group1), toRoutingModes(group2), toRoutingModes(group3)]).map { $0.identifier }
-    
-    XCTAssertEqual(sorted, [
+
+    #expect(sorted == [
       "in_air",
       "pt_pub",
       "pt_ltd_SCHOOLBUS",
@@ -111,5 +108,22 @@ class TKRegionManagerTest: XCTestCase {
       "wa_wal"
     ])
   }
-  
+
 }
+
+private extension TKRegionManagerTest {
+
+  static func dataFromJSON(named name: String) throws -> Data {
+    let thisSourceFile = URL(fileURLWithPath: #filePath)
+    let thisDirectory = thisSourceFile.deletingLastPathComponent()
+    let jsonPath = thisDirectory
+      .deletingLastPathComponent()
+      .appendingPathComponent("Data", isDirectory: true)
+      .appendingPathComponent(name)
+      .appendingPathExtension("json")
+    return try Data(contentsOf: jsonPath)
+  }
+
+}
+
+#endif
