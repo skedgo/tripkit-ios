@@ -19,30 +19,41 @@ public extension NSNotification.Name {
 }
 
 public class TKRegionManager: NSObject {
-  public static let shared = TKRegionManager()
-  
+  public static let shared: TKRegionManager = {
+    let manager = TKRegionManager(cacheURL: TKRegionManager.cacheURL)
+    Task {
+      await manager.loadRegionsFromCache()
+    }
+    return manager
+  }()
+
   private var response: TKAPI.RegionsResponse? {
     didSet {
       _requiredForModes = nil
     }
   }
-  
+
   private var _requiredForModes: [String: [String]]?
-  
+
   var fetchTask: Task<Void, Error>? = nil
 
-  private override init() {
+  /// Where this manager persists its regions to
+  private let storageURL: URL
+
+  /// Creates a manager that's independent of `shared`, so that tests can
+  /// change its regions without affecting any other test. It only uses the
+  /// provided cache and doesn't load from it by itself.
+  init(cacheURL: URL) {
+    storageURL = cacheURL
     super.init()
-    Task {
-      await loadRegionsFromCache()
-    }
   }
-  
+
   @MainActor
   public func loadRegionsFromCache() async {
     do {
+      let url = storageURL
       let response = try await Task<TKAPI.RegionsResponse?, Error>.detached(priority: .utility) {
-        guard let data = TKRegionManager.readLocalCache() else { return nil }
+        guard let data = try? Data(contentsOf: url) else { return nil }
         return try JSONDecoder().decode(TKAPI.RegionsResponse.self, from: data)
       }.value
       if let response {
@@ -95,7 +106,7 @@ extension TKRegionManager {
     NotificationCenter.default.post(name: .TKRegionManagerUpdatedRegions, object: self)
     
     if let encoded = try? JSONEncoder().encode(response) {
-      TKRegionManager.saveToCache(encoded)
+      try? encoded.write(to: storageURL)
     }
   }
   
