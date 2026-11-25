@@ -368,9 +368,14 @@ extension TKBooking {
     /// Number of tickets to pre-select, can also be used to define how many tickets to purchase for this fare
     public var amount: Int?
 
+    /// Minimum number of tickets that need to be purchased of this fare, *if
+    /// this fare is selected*. This doesn't require selecting the fare, i.e.,
+    /// a quantity of zero is always valid.
+    public var min: Int?
+
     /// Maximum number of tickets that can be purchased of this fare
     public var max: Int?
-    
+
     /// list of riders under the fare for filtering purposes
     @DefaultEmptyArray public var riders: [TKBooking.Rider]
     
@@ -391,6 +396,7 @@ extension TKBooking {
       case price
       case currencyCode = "currency"
       case amount = "value"
+      case min
       case max
       case riders
       case status
