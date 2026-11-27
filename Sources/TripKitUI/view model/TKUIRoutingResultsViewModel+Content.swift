@@ -142,7 +142,7 @@ extension TKUIRoutingResultsViewModel {
       } else if items.count > 2 {
         let good = items
           .filter { $0.trip != nil }
-          .filter { !$0.trip!.showFaded }
+          .filter { !$0.trip!.isFaded }
         if good.isEmpty {
           show = Array(items.prefix(2))
         } else {
@@ -198,14 +198,6 @@ extension TripRequest {
 extension TripGroup {
   var badge: TKMetricClassifier.Classification? {
     return TKMetricClassifier.classification(for: self)
-  }
-}
-
-extension Trip {
-  var showFaded: Bool {
-    return missedBookingWindow     // shuttle, etc., departing too soon
-      || isCanceled
-      || calculateOffset() < -60  // doesn't match query
   }
 }
 

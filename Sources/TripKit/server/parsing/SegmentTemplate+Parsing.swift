@@ -94,8 +94,10 @@ extension SegmentTemplate {
       
       start = start ?? model.from.map { TKNamedCoordinate($0) }
       start?.address = model.from?.address
+      start?.timeZoneID = model.from?.timeZone
       end = end ?? model.to.map { TKNamedCoordinate($0) }
       end?.address = model.to?.address
+      end?.timeZoneID = model.to?.timeZone
       template.startLocation = start
       template.endLocation = end
     }

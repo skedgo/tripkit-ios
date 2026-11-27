@@ -90,21 +90,24 @@ extension TKAPI {
     public var bearing: Direction? = nil
     public var name: String? = nil
     public var address: String? = nil
-    
-    public init(latitude: Degrees, longitude: Degrees, bearing: Direction? = nil, name: String? = nil, address: String? = nil) {
+    public var timeZone: String? = nil
+
+    public init(latitude: Degrees, longitude: Degrees, bearing: Direction? = nil, name: String? = nil, address: String? = nil, timeZone: String? = nil) {
       self.latitude = latitude
       self.longitude = longitude
       self.bearing = bearing
       self.name = name
       self.address = address
+      self.timeZone = timeZone
     }
-    
+
     public enum CodingKeys: String, CodingKey {
       case latitude = "lat"
       case longitude = "lng"
       case bearing
       case name
       case address
+      case timeZone = "timezone"
     }
   }
   

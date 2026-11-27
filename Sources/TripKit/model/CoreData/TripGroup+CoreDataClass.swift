@@ -55,8 +55,9 @@ extension TripGroup {
   }
   
   func adjustVisibleTrip() {
-    /// Use the trip with the lowest score, that's not impossible
-    self.visibleTrip = trips.min()
+    /// Use the trip with the lowest score, that's not impossible, preferring
+    /// ones that aren't faded, as the results only list those for a group
+    self.visibleTrip = trips.filter { !$0.isFaded }.min() ?? trips.min()
   }
   
   var usedModeIdentifiers: Set<String> {

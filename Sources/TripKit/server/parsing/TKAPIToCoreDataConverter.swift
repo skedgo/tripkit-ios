@@ -38,7 +38,7 @@ extension StopLocation {
 
     self.wheelchairAccessibility = TKWheelchairAccessibility(bool: model.wheelchairAccessible)
 
-    location = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    location = TKNamedCoordinate(model)
     stopModeInfo = model.modeInfo
     
     var addedStop = false
@@ -64,19 +64,26 @@ extension StopLocation {
 extension TKAPIToCoreDataConverter {
   
   fileprivate static func insertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
-    let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    let coordinate = TKNamedCoordinate(model)
     let newStop = StopLocation.insertStop(stopCode: model.code, modeInfo: model.modeInfo, at: coordinate, in: context)
     _ = newStop.update(from: model)
     return newStop
   }
 
   static func fetchOrInsertNewStopLocation(from model: TKAPI.Stop, into context: NSManagedObjectContext) -> StopLocation {
-    let coordinate = TKNamedCoordinate(latitude: model.lat, longitude: model.lng, name: model.name, address: model.services)
+    let coordinate = TKNamedCoordinate(model)
     let newStop = StopLocation.fetchOrInsertStop(stopCode: model.code, modeInfo: model.modeInfo, at: coordinate, in: context)
     _ = newStop.update(from: model)
     return newStop
   }
 
+}
+
+extension TKNamedCoordinate {
+  fileprivate convenience init(_ stop: TKAPI.Stop) {
+    self.init(latitude: stop.lat, longitude: stop.lng, name: stop.name, address: stop.services)
+    timeZoneID = stop.timeZoneName
+  }
 }
 
 // MARK: - Services

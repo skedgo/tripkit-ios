@@ -184,11 +184,11 @@ extension TripRequest {
   }
   
   public var departureTimeZone: TimeZone? {
-    TKRegionManager.shared.timeZone(for: fromLocation.coordinate)
+    fromLocation.timeZone ?? TKRegionManager.shared.timeZone(for: fromLocation.coordinate)
   }
-  
+
   public var arrivalTimeZone: TimeZone? {
-    TKRegionManager.shared.timeZone(for: toLocation.coordinate)
+    toLocation.timeZone ?? TKRegionManager.shared.timeZone(for: toLocation.coordinate)
   }
   
   private func determineRegions() -> [TKRegion] {
