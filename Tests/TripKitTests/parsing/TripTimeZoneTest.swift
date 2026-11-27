@@ -6,63 +6,106 @@
 //  Copyright © 2026 SkedGo Pty Ltd. All rights reserved.
 //
 
-import XCTest
-import CoreLocation
+#if canImport(Testing) && canImport(CoreData)
+
+import Foundation
+import CoreData
+import Testing
 
 @testable import TripKit
 
-/// Trip and segment times need to be shown in the time zone that the routing
-/// response states, rather than one inferred from the loaded regions, which
-/// can be missing the trip's region and then fell back to the device's.
-class TripTimeZoneTest: TKTestCase {
+/// Times need to be shown in the time zone that the response states, rather
+/// than one inferred from the loaded regions, which can be missing the region
+/// and then fell back to the device's.
+@MainActor
+struct TripTimeZoneTest {
+  private static let model = TKTestCase.model
 
-  func testTimesUseTimeZoneFromResponse() throws {
-    // No region uses Eucla and no device is set to it, so neither a region
-    // lookup nor the fallback to `.current` can produce it.
-    let eucla = try XCTUnwrap(TimeZone(identifier: "Australia/Eucla"))
-    let json = try String(decoding: dataFromJSON(named: "routing-pt-darwin"), as: UTF8.self)
-      .replacingOccurrences(of: "Australia/Darwin", with: eucla.identifier)
-    let response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: Data(json.utf8))
+  // No region uses Eucla and no device is set to it, so neither a region
+  // lookup nor the fallback to `.current` can produce it.
+  private let eucla = TimeZone(identifier: "Australia/Eucla")!
+
+  @Test func tripTimesUseTimeZoneFromResponse() async throws {
+    let context = try makeContext()
+    let response = try JSONDecoder().decode(
+      TKAPI.RoutingResponse.self,
+      from: dataFromJSON(named: "routing-pt-darwin", replacing: "Australia/Darwin")
+    )
 
     // Like `TKRouter`, add to a request whose endpoints have no time zone
     let request = TripRequest.insert(
       from: TKNamedCoordinate(coordinate: .init(latitude: -12.4789, longitude: 130.98686)),
       to: TKNamedCoordinate(coordinate: .init(latitude: -12.5474, longitude: 131.122982)),
-      for: nil, timeType: .leaveASAP, into: tripKitContext
+      for: nil, timeType: .leaveASAP, into: context
     )
-    let added = expectation(description: "Trips added")
-    var trips: [Trip] = []
-    TKRoutingParser.add(response, to: request, merge: false) { result in
-      trips = (try? result.get()) ?? []
-      added.fulfill()
+    let trips = try await withCheckedThrowingContinuation { continuation in
+      TKRoutingParser.add(response, to: request, merge: false) { continuation.resume(with: $0) }
     }
-    wait(for: [added], timeout: 5)
 
-    XCTAssertEqual(trips.count, 14)
+    #expect(trips.count == 14)
     for trip in trips {
-      XCTAssertEqual(trip.departureTimeZone, eucla)
-      XCTAssertEqual(trip.arrivalTimeZone, eucla)
+      #expect(trip.departureTimeZone == eucla)
+      #expect(trip.arrivalTimeZone == eucla)
       for segment in trip.segments {
-        XCTAssertEqual(segment.timeZone, eucla, "Wrong time zone for \(segment.order) segment")
+        #expect(segment.timeZone == eucla, "Wrong time zone for \(segment.order) segment")
       }
     }
   }
 
-  func testStopsUseTimeZoneFromResponse() throws {
-    let eucla = try XCTUnwrap(TimeZone(identifier: "Australia/Eucla"))
-    let json = try String(decoding: dataFromJSON(named: "departures-parentStop"), as: UTF8.self)
-      .replacingOccurrences(of: "Australia/Sydney", with: eucla.identifier)
-    let departures = try JSONDecoder().decode(TKAPI.Departures.self, from: Data(json.utf8))
+  @Test func stopsUseTimeZoneFromResponse() throws {
+    let context = try makeContext()
+    let departures = try JSONDecoder().decode(
+      TKAPI.Departures.self,
+      from: dataFromJSON(named: "departures-parentStop", replacing: "Australia/Sydney")
+    )
 
-    let parent = StopLocation.fetchOrInsertStop(stopCode: "201510", in: tripKitContext)
+    let parent = StopLocation.fetchOrInsertStop(stopCode: "201510", in: context)
     _ = TKDeparturesProvider.addDepartures(departures, to: [parent])
 
-    XCTAssertEqual(parent.timeZone, eucla)
+    #expect(parent.timeZone == eucla)
     let children = parent.children ?? []
-    XCTAssertEqual(children.count, 12)
+    #expect(children.count == 12)
     for child in children {
-      XCTAssertEqual(child.timeZone, eucla, "Wrong time zone for stop \(child.stopCode)")
+      #expect(child.timeZone == eucla, "Wrong time zone for stop \(child.stopCode)")
     }
   }
-
 }
+
+private extension TripTimeZoneTest {
+
+  enum SetupError: Error {
+    case missingModel
+    case missingFixture(String)
+  }
+
+  func makeContext() throws -> NSManagedObjectContext {
+    guard let model = Self.model else { throw SetupError.missingModel }
+
+    let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+    try coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+
+    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    context.persistentStoreCoordinator = coordinator
+    return context
+  }
+
+  /// Loads a fixture with its time zone swapped for Eucla
+  func dataFromJSON(named name: String, replacing timeZoneID: String) throws -> Data {
+    let jsonPath = URL(fileURLWithPath: #filePath)
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .appendingPathComponent("Data", isDirectory: true)
+      .appendingPathComponent(name)
+      .appendingPathExtension("json")
+
+    guard FileManager.default.fileExists(atPath: jsonPath.path) else {
+      throw SetupError.missingFixture(jsonPath.path)
+    }
+
+    let json = try String(decoding: Data(contentsOf: jsonPath), as: UTF8.self)
+      .replacingOccurrences(of: timeZoneID, with: eucla.identifier)
+    return Data(json.utf8)
+  }
+}
+
+#endif
