@@ -96,7 +96,8 @@ extension TKRoutingParser {
       }
     }
     
-    request.tripGroups.first?.adjustVisibleTrip()
+    // Visible trips depend on the request's time, which only got set now
+    request.tripGroups.forEach { $0.adjustVisibleTrip() }
     return true
   }
   
