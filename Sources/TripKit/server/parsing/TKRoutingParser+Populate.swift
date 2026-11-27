@@ -87,9 +87,10 @@ extension TKRoutingParser {
     }
     
     if arriveBy == nil && leaveAfter == nil {
-      if let trip = request.trips.first {
-        let firstRegular = matchingSegment(in: trip, order: .regular, first: true)
-        request.departureTime = firstRegular.departureTime
+      // The earliest trip, as trips leaving before the request's time are faded
+      let departures = request.trips.map { matchingSegment(in: $0, order: .regular, first: true).departureTime }
+      if let earliest = departures.min() {
+        request.departureTime = earliest
         request.type = .leaveAfter
       } else {
         request.type = .leaveASAP

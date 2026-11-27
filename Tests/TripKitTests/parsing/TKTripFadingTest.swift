@@ -59,6 +59,18 @@ struct TKTripFadingTest {
     #expect(!fadedIDs.contains("44699b7d-987f-49aa-825e-2266760bdc9b"))
   }
 
+  /// Without a query time, the request leaves after the earliest trip, so that
+  /// none of them count as too early, rather than after an arbitrary one.
+  @Test func requestWithoutQueryTimeFadesNoTrips() throws {
+    let response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: dataFromJSON(named: "routing-with-stops"))
+    #expect(response.query == nil)
+    let request = try TKRoutingParser.addBlocking(response, into: makeContext())
+
+    #expect(request.trips.count == 16)
+    #expect(request.trips.filter(\.isFaded).isEmpty)
+    #expect(request.departureTime == request.trips.map(\.departureTime).min())
+  }
+
   /// Groups show their best unfaded trip, like the results list's rows do,
   /// rather than the faded 15:45 bus that has the lowest score of all.
   @Test func visibleTripsAreNotFaded() throws {
