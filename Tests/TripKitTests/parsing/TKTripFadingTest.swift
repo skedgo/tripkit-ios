@@ -58,6 +58,19 @@ struct TKTripFadingTest {
     // The 16:10 departure that day
     #expect(!fadedIDs.contains("44699b7d-987f-49aa-825e-2266760bdc9b"))
   }
+
+  /// Groups show their best unfaded trip, like the results list's rows do,
+  /// rather than the faded 15:45 bus that has the lowest score of all.
+  @Test func visibleTripsAreNotFaded() throws {
+    let response = try JSONDecoder().decode(TKAPI.RoutingResponse.self, from: dataFromJSON(named: "routing-pt-darwin"))
+    let request = try TKRoutingParser.addBlocking(response, into: makeContext())
+
+    let visibleIDs = Set(request.tripGroups.compactMap(\.visibleTrip?.tripId))
+    #expect(visibleIDs == [
+      "44699b7d-987f-49aa-825e-2266760bdc9b", // 16:10 on Dec 3, route 447
+      "7ed3a884-60c6-4ce3-a57e-c93f904ce36f", // 15:45 on Dec 4, route 450
+    ])
+  }
 }
 
 private extension TKTripFadingTest {
