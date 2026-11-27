@@ -50,7 +50,7 @@ extension TKUITripCell.Model {
       arrivalTimeZone: trip.arrivalTimeZone ?? trip.departureTimeZone,
       focusOnDuration: !trip.departureTimeIsFixed,
       isArriveBefore: isArriveBefore ?? trip.isArriveBefore,
-      showFaded: allowFading && trip.showFaded,
+      showFaded: allowFading && trip.isFaded,
       isCancelled: trip.isCanceled,
       hideExactTimes: trip.hideExactTimes,
       dayOffset: Self.dayOffset(of: trip, isArriveBefore: isArriveBefore ?? trip.isArriveBefore),

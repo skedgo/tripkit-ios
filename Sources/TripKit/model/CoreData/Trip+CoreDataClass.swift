@@ -115,16 +115,21 @@ extension Trip {
   public func calculateOffset() -> TimeInterval {
     switch request.type {
     case .arriveBefore:
-      return request.arrivalTime?.timeIntervalSince(arrivalTime) ?? 0
-      
+      return TKTripFading.queryOffset(departure: departureTime, arrival: arrivalTime, leaveAfter: nil, arriveBy: request.arrivalTime ?? arrivalTime)
+
     case .leaveAfter:
-      return departureTime.timeIntervalSince(request.departureTime ?? departureTime)
-      
+      return TKTripFading.queryOffset(departure: departureTime, arrival: arrivalTime, leaveAfter: request.departureTime ?? departureTime, arriveBy: nil)
+
     case .leaveASAP, .none:
-      return departureTime.timeIntervalSinceNow
+      return TKTripFading.queryOffset(departure: departureTime, arrival: arrivalTime, leaveAfter: nil, arriveBy: nil)
     }
   }
-  
+
+  /// Whether results show this trip greyed out, see `TKTripFading`
+  public var isFaded: Bool {
+    TKTripFading.isFaded(queryOffset: calculateOffset(), isCanceled: isCanceled, missedBookingWindow: missedBookingWindow)
+  }
+
   /// Trip duration, i.e., time between departure and arrival.
   @discardableResult
   func calculateDuration() -> TimeInterval {
