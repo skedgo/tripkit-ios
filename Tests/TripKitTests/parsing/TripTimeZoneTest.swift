@@ -48,4 +48,21 @@ class TripTimeZoneTest: TKTestCase {
     }
   }
 
+  func testStopsUseTimeZoneFromResponse() throws {
+    let eucla = try XCTUnwrap(TimeZone(identifier: "Australia/Eucla"))
+    let json = try String(decoding: dataFromJSON(named: "departures-parentStop"), as: UTF8.self)
+      .replacingOccurrences(of: "Australia/Sydney", with: eucla.identifier)
+    let departures = try JSONDecoder().decode(TKAPI.Departures.self, from: Data(json.utf8))
+
+    let parent = StopLocation.fetchOrInsertStop(stopCode: "201510", in: tripKitContext)
+    _ = TKDeparturesProvider.addDepartures(departures, to: [parent])
+
+    XCTAssertEqual(parent.timeZone, eucla)
+    let children = parent.children ?? []
+    XCTAssertEqual(children.count, 12)
+    for child in children {
+      XCTAssertEqual(child.timeZone, eucla, "Wrong time zone for stop \(child.stopCode)")
+    }
+  }
+
 }
