@@ -29,5 +29,6 @@ extension TKNamedCoordinate {
       name: remote.name,
       address: remote.address
     )
+    timeZoneID = remote.timeZone
   }
 }

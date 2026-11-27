@@ -550,8 +550,23 @@ extension TKSegment {
     // Also Title?! We used to do that via ObjC
   }
   
+  /// The time zones that the routing response stated for the start and end
+  var responseStartTimeZone: TimeZone? { (start as? TKNamedCoordinate)?.timeZone }
+  var responseEndTimeZone: TimeZone? { (end as? TKNamedCoordinate)?.timeZone }
+
+  /// Prefers the response's time zone, as the loaded regions can be missing this
+  /// segment's region, e.g., while they're still loading.
   @objc
   public var timeZone: TimeZone {
+    if let responseStartTimeZone {
+      return responseStartTimeZone
+    }
+    // Terminals sit at the request's locations, which might not have one
+    switch order {
+    case .start: if let trip { return trip.departureTimeZone }
+    case .end: if let trip { return trip.arrivalTimeZone ?? trip.departureTimeZone }
+    default: break
+    }
     guard let coordinate = start?.coordinate else { return .current }
     return TKRegionManager.shared.timeZone(for: coordinate) ?? .current
   }

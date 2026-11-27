@@ -79,11 +79,11 @@ extension Trip {
   }
   
   public var departureTimeZone: TimeZone {
-    return request.departureTimeZone ?? .current
+    segments.lazy.compactMap(\.responseStartTimeZone).first ?? request.departureTimeZone ?? .current
   }
-  
+
   public var arrivalTimeZone: TimeZone? {
-    return request.arrivalTimeZone
+    segments.reversed().lazy.compactMap(\.responseEndTimeZone).first ?? request.arrivalTimeZone
   }
   
   public var isArriveBefore: Bool {
